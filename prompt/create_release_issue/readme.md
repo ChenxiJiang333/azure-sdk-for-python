@@ -1,0 +1,2 @@
+- Before use prompt, update `PACKAGE-NAME` with yours
+- After done, remember update `Xxx` to your target tag
