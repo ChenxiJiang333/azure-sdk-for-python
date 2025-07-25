@@ -1,6 +1,7 @@
 **Context**
 
 - PACKAGE: "Xxx"
+- ENABLECHANGELOG: "false",
 - FULL PACKAGE: "azure-mgmt-{PACKAGE}"
 - REST repo: "C:/dev/azure-rest-api-specs"
 - SDK repo: "C:/dev/azure-sdk-for-python"
@@ -18,16 +19,17 @@
 git reset --hard HEAD && git checkout origin/main && git pull origin main
 ```
 - step into SDK repo
-- if current branch name is not "{PACKAGE}-migration", run `git checkout origin/main && git pull origin main` then checkout a new branch named "{{PACKAGE}}-migration"
-- Search "{FULL PACKAGE}" by fetch remote url `https://github.com/Azure/azure-rest-api-specs`. If there is file named "readme.python.md" that contains "{FULL PACKAGE}", remember the URL of the file. Parse URL to get README with reference of format "https://github.com/Azure/azure-rest-api-specs/{README}/readme.python.md"
+- if current branch name is not "{PACKAGE}-migration", run `git checkout origin/main && git pull origin main` then checkout a new branch named "{PACKAGE}-migration"
+- Search "{FULL PACKAGE}" in all "readme.python.md" files of REST REPO. If there is one contains the target string "{FULL PACKAGE}", remember the PATH of the file. Parse PATH to get README with reference of format "{REST REPO}/{README}/readme.python.md"
 - create "generate_input_swagger.json" at VENV path. Fill in key and value with following sample
 ```json
 {
   "specFolder": "{REST REPO}",
-  "headSha": "{HeadSha}",
+  "headSha": ,
   "repoHttpsUrl": "https://github.com/Azure/azure-rest-api-specs",
+  "enableChangelog": {ENABLECHANGELOG},
   "relatedReadmeMdFiles": [
-    "{README}"
+    "{README}/readme.md"
   ]
 }
 ```
@@ -40,7 +42,7 @@ git reset --hard HEAD && git checkout origin/main && git pull origin main
 - run `git status` for users to see status
 - run
 ```bash
-git add -u && git commit -m "generate from swagger"
+git add . && git commit -m "generate from swagger"
 ```
 
 
