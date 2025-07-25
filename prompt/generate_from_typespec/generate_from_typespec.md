@@ -1,14 +1,11 @@
-**DO**
-- DO Follow this guidance exactly without following other guidance
-
 **Context**
 
-REST repo: "C:/dev/azure-rest-api-specs"
-SDK repo: "C:/dev/azure-sdk-for-python"
-VENV path: "C:/dev/azure-sdk-for-python/.venv"
-PULL REQUEST: "https://github.com/Azure/azure-rest-api-specs/pull/35579"
-HeadSha: latest complete commit id of PULL REQUEST
-TSP PATH: path where tsp file. You can get it from PULL REQUEST (e.g. "specification/servicelinker/ServiceLinker.Management")
+- REST repo: "C:/dev/azure-rest-api-specs"
+- SDK repo: "C:/dev/azure-sdk-for-python"
+- VENV path: "C:/dev/azure-sdk-for-python/.venv"
+- PULL REQUEST: "https://github.com/Azure/azure-rest-api-specs/pull/35579"
+- HeadSha: latest complete commit id of PULL REQUEST
+- TSP PATH: path where tsp file. You can get it from PULL REQUEST (e.g. "specification/servicelinker/ServiceLinker.Management")
 
 # Generate from swagger step by step
 - step into REST repo then clean repo with `git reset --hard HEAD`
