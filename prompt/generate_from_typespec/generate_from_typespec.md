@@ -3,6 +3,7 @@
 - REST repo: "C:/dev/azure-rest-api-specs"
 - SDK repo: "C:/dev/azure-sdk-for-python"
 - VENV path: "C:/dev/azure-sdk-for-python/.venv"
+- ENABLECHANGELOG: true,
 - PULL REQUEST: "https://github.com/Azure/azure-rest-api-specs/pull/35579"
 - HeadSha: latest complete commit id of PULL REQUEST
 - TSP PATH: path where tsp file. You can get it from PULL REQUEST (e.g. "specification/servicelinker/ServiceLinker.Management")
@@ -11,15 +12,16 @@
 - step into REST repo then clean repo with `git reset --hard HEAD`
 - checkout the source branch of PULL REQUEST
 - step into sdk repo then clean repo with `git reset --hard HEAD`
-- if current branch name is not "{{SERVICE}}-migration", run "git checkout origin/main && git pull origin main" then checkout a new branch named "{{SERVICE}}-migration"
-- create "generate_input_typespec.json" at VENV path. Fill in key and value with following sample
+- if current branch name is not "{{SERVICE}}-migration", run `git checkout origin/main && git pull origin main` then checkout a new branch named "{{SERVICE}}-migration"
+- create `generate_input_typespec.json` at VENV path. Fill in key and value with following sample
 ```json
 {
-  "specFolder": "{{REST REPO}}",
-  "headSha": "{{HeadSha}}",
+  "specFolder": "{REST REPO}",
+  "headSha": ,
   "repoHttpsUrl": "https://github.com/Azure/azure-rest-api-specs",
-  "relatedTypeSpecProjectFolder": [
-    "{{TSP PATH}}"
+  "enableChangelog": {ENABLECHANGELOG},
+  "relatedReadmeMdFiles": [
+    "{README}/readme.md"
   ]
 }
 ```
