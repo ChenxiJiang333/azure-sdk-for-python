@@ -1,3 +1,3 @@
 - run it in `C:/dev/azure-sdk-for-python`
 - update `PULL REQUEST` with yours
-- update `ENABLECHANGELOG` to true if you want to generate changelog
+- update `ENABLECHANGELOG` to false if you `don't want to generate changelog`
