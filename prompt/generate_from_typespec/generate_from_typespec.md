@@ -39,5 +39,5 @@ git add . && git commit -m "generate from typespec"
 - activate virtual environment of VENV path then run run command "tox run -c ../../../eng/tox/tox.ini --root . -e breaking -- --source-report code_report_swagger.json --target-report code_report_typespec.json" then extract changelog from output which has format `(Xxx): ...`. Abondon `(Xxx): ` for each item of changelog then fill `CHANGELOG.md` with proper format.
 - run
 ```bash
-git add . && git commit -m "changelog"
+git add . && git commit -m "changelog" && git push msyyc HEAD
 ```
