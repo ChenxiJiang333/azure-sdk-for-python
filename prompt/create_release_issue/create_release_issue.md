@@ -12,7 +12,7 @@ Generate issue title and issue body for users
 
 ```
 {TARGET-URL}
-Readme Tag: Xxx
+->Readme Tag: Xxx
 ## Release request for <i>Release for {SERVICE-NAME}</i>
 **Requested by @msyyc**
 **Link**: [{TARGET-URL}]({TARGET-URL})  
