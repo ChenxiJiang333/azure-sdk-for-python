@@ -1,13 +1,14 @@
 **Context**
 
-REST repo: "C:/dev/azure-rest-api-specs"
-SDK repo: "C:/dev/azure-sdk-for-python"
-VENV path: "C:/dev/azure-sdk-for-python/.venv"
-HeadSha: latest commit id of REST repo
-SERVICE: "devtestlabs"
-README: "specification/devtestlabs/resource-manager/readme.md"
+- REST repo: "C:/dev/azure-rest-api-specs"
+- SDK repo: "C:/dev/azure-sdk-for-python"
+- VENV path: "C:/dev/azure-sdk-for-python/.venv"
+- HeadSha: latest commit id of REST repo
+- SERVICE: "devtestlabs"
+- README: "specification/devtestlabs/resource-manager/readme.md"
 
 **DO**
+
 - Follow this guidance exactly
 
 # Generate from swagger step by step
