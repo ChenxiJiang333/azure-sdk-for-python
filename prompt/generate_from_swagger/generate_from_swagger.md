@@ -1,7 +1,7 @@
 **Context**
 
 - PACKAGE: "Xxx"
-- ENABLECHANGELOG: "false",
+- ENABLECHANGELOG: false,
 - FULL PACKAGE: "azure-mgmt-{PACKAGE}"
 - REST repo: "C:/dev/azure-rest-api-specs"
 - SDK repo: "C:/dev/azure-sdk-for-python"
