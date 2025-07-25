@@ -15,7 +15,7 @@
 - step into REST repo then clean repo with `git reset --hard HEAD`
 - checkout origin/main and pull latest main branch
 - step into sdk repo then clean repo with `git reset --hard HEAD`
-- if current branch name doesn't end with "-migration", checkout origin/main and pull latest main branch then checkout a new branch named "{{SERVICE}}-migration"
+- if current branch name is not "{{SERVICE}}-migration", run "git checkout origin/main && git pull origin main" then checkout a new branch named "{{SERVICE}}-migration"
 - create "generate_input_swagger.json" at VENV path. Fill in key and value with following sample
 ```json
 {
