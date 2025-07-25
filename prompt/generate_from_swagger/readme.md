@@ -1,2 +1,3 @@
 - run it in `C:/dev/azure-sdk-for-python`
 - update `PACKAGE` with yours
+- update `ENABLECHANGELOG` to true if you want to generate changelog
