@@ -9,9 +9,17 @@
 - TSP PATH: path where tsp file. You can get it from PULL REQUEST (e.g. "specification/servicelinker/ServiceLinker.Management")
 
 # Generate from swagger step by step
-- step into REST repo then clean repo with `git reset --hard HEAD`
+- step into REST repo then run
+```bash
+git reset --hard HEAD
+git clean -fd
+```
 - checkout the source branch of PULL REQUEST
-- step into sdk repo then clean repo with `git reset --hard HEAD`
+- step into sdk repo then run
+```bash
+git reset --hard HEAD
+git clean -fd
+```
 - if current branch name is not "{{SERVICE}}-migration", run `git checkout origin/main && git pull origin main` then checkout a new branch named "{{SERVICE}}-migration"
 - create `generate_input_typespec.json` at VENV path. Fill in key and value with following sample
 ```json
