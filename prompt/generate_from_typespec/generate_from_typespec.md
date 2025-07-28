@@ -25,7 +25,7 @@ git clean -fd
 ```json
 {
   "specFolder": "{REST REPO}",
-  "headSha": ,
+  "headSha": {HeadSha},
   "repoHttpsUrl": "https://github.com/Azure/azure-rest-api-specs",
   "enableChangelog": {ENABLECHANGELOG},
   "relatedTypeSpecProjectFolder": [
