@@ -26,6 +26,7 @@ git clean -fd
 {
   "specFolder": "{REST REPO}",
   "headSha": {HeadSha},
+  "runMode": "auto-release",
   "repoHttpsUrl": "https://github.com/Azure/azure-rest-api-specs",
   "enableChangelog": {ENABLECHANGELOG},
   "relatedTypeSpecProjectFolder": [
