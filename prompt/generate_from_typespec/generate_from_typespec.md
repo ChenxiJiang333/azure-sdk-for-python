@@ -28,8 +28,8 @@ git clean -fd
   "headSha": ,
   "repoHttpsUrl": "https://github.com/Azure/azure-rest-api-specs",
   "enableChangelog": {ENABLECHANGELOG},
-  "relatedReadmeMdFiles": [
-    "{README}/readme.md"
+  "relatedTypeSpecProjectFolder": [
+    "{TSP PATH}"
   ]
 }
 ```
