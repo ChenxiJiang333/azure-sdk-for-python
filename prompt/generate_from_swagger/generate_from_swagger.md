@@ -25,7 +25,7 @@ git reset --hard HEAD && git checkout origin/main && git pull origin main
 ```json
 {
   "specFolder": "{REST REPO}",
-  "headSha": {HeadSha},
+  "headSha": "{HeadSha}",
   "runMode": "auto-release",
   "repoHttpsUrl": "https://github.com/Azure/azure-rest-api-specs",
   "enableChangelog": {ENABLECHANGELOG},
