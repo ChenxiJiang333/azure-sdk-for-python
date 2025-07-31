@@ -12,7 +12,7 @@ When migrating to the hybrid operation design, expect these breaking changes:
 
 | Change                                                                              | Impact                                                    | Quick Fix                                                                         |
 | ----------------------------------------------------------------------------------- | --------------------------------------------------------- | --------------------------------------------------------------------------------- |
-| [Query/Header Parameters](#query/header-parameters-requiring-keywords) | Query and header signatures changed from positional to keyword-only | Convert all positional parameters to keyword arguments |
+| [Query/Header Parameters](#queryheader-parameters-requiring-keywords) | Query and header signatures changed from positional to keyword-only | Convert all positional parameters to keyword arguments |
 | [ETag Parameters](#etag-parameters-restructured) | header signatures `if_match`/`if_none_match` restructured to `etag/match_condition` | Replace `if_match="etag"` with `etag="etag", match_condition=MatchConditions.IfModified` |
 
 ## Detailed Breaking Changes
