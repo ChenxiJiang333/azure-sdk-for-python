@@ -112,9 +112,9 @@ fleet = client.fleets.begin_create_or_update(
 **MatchConditions enum values:**
 - `MatchConditions.IfNotModified` - Equivalent to `if_match` (update only if resource's specified version hasn't been modified)
 - `MatchConditions.IfModified` - Equivalent to `if_none_match` (update only if resource's specified version has been modified)  
-- `MatchConditions.IfPresent` - Update only if resource's specified version exists
-- `MatchConditions.IfMissing` - Update only if resource's specified version doesn't exist
-- `MatchConditions.Unconditionally` - Perform the operation regardless of resource state (no conditional headers sent)
+- `MatchConditions.IfPresent` - Update only if the etag exists
+- `MatchConditions.IfMissing` - Update only if the etag doesn't exist
+- `MatchConditions.Unconditionally` - Perform the operation regardless of etag state
 
 **Migration steps:**
 
@@ -126,9 +126,7 @@ fleet = client.fleets.begin_create_or_update(
 
 Our operations prioritize consistency with the underlying REST API:
 
-- **Improved Code Readability**: Operation calls become self-documenting when parameters are named.
-- **Prevents Parameter Order Mistakes**: Keyword-only parameters eliminate failures caused by passing arguments in the wrong order.
-- **Expanded Conditional Support**: Provide new conditions for more resource management scenarios, for example, use `MatchConditions.IfMissing="*"` to prevent creating resources in upsert.
-- **Semantic Clarity**: Self-documenting enum names directly express the developer's intent without understanding HTTP header semantics.
+- **Aligned Parameters**: Keyword-only parameters eliminate bugs caused by passing arguments in wrong order.
+- **Expanded Conditional Support**: Support more conditional operations to eliminate extra method calls.
 
 If you encounter issues not covered here, please file an issue on [GitHub](https://github.com/microsoft/typespec/issues) with tag `emitter:client:python`.
