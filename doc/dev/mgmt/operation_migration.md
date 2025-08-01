@@ -11,7 +11,7 @@ When migrating to the operation design, expect these breaking changes:
 | Change                                                                              | Impact                                                    | Quick Fix                                                                         |
 | ----------------------------------------------------------------------------------- | --------------------------------------------------------- | --------------------------------------------------------------------------------- |
 | [Query/Header Parameters](#queryheader-parameters-requiring-keywords) | Query and header signatures changed from positional to keyword-only | Convert all positional parameters to keyword arguments |
-| [Conditional Operation](#conditional-operation-parameters-changed) | header signatures `if_match`/`if_none_match` is replaced by `etag`/`match_condition` | Replace `if_match="etag"` with `etag="etag", match_condition=MatchConditions.IfNotModified` |
+| [Conditional Operation](#conditional-operation-parameters-changed) | header signatures `if_match`/`if_none_match` is replaced by `etag`/`match_condition` | Replace `if_match="etag"` with `etag=<specific etag>, match_condition=MatchConditions.IfNotModified`  Replace `if_none_match=<specific etag>` with `etag=<specific etag>, match_condition=MatchConditions.IfModified` |
 
 ## Detailed Breaking Changes
 
