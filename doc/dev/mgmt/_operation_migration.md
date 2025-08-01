@@ -1,19 +1,17 @@
-# Azure SDK Migration Guide: New Hybrid Operation Design Generation Breaking Changes
+# Azure SDK Migration Guide: New Operation Design Generation Breaking Changes
 
-The direct link to this page can be found at aka.ms/azsdk/python/migrate/hybrid-operations
+The direct link to this page can be found at aka.ms/azsdk/python/migrate/operations
 
 This guide covers the breaking changes you'll encounter when upgrading to our new operation design and how to fix them in your code.
 
-Our new hybrid operations are named as such because they have a dual dictionary and operation nature.
-
 ## Summary of Breaking Changes
 
-When migrating to the hybrid operation design, expect these breaking changes:
+When migrating to the operation design, expect these breaking changes:
 
 | Change                                                                              | Impact                                                    | Quick Fix                                                                         |
 | ----------------------------------------------------------------------------------- | --------------------------------------------------------- | --------------------------------------------------------------------------------- |
 | [Query/Header Parameters](#queryheader-parameters-requiring-keywords) | Query and header signatures changed from positional to keyword-only | Convert all positional parameters to keyword arguments |
-| [ETag Parameters](#etag-parameters-restructured) | header signatures `if_match`/`if_none_match` restructured to `etag/match_condition` | Replace `if_match="etag"` with `etag="etag", match_condition=MatchConditions.IfNotModified` |
+| [Conditional Operations](#conditional-operation-parameters-changed) | header signatures `if_match`/`if_none_match` is replaced by `etag/match_condition` | Replace `if_match="etag"` with `etag="etag", match_condition=MatchConditions.IfNotModified` |
 
 ## Detailed Breaking Changes
 
@@ -69,9 +67,9 @@ environments = client.organization_operations.list_environments(
 
 - Convert all positional parameters to keyword arguments
 
-### ETag Parameters Restructured
+### Conditional Operation Parameters Changed
 
-**What changed**: Conditional request headers `if_match` and `if_none_match` have been replaced with more semantic `etag` and `match_condition` parameters that use enum values for better type safety.
+**What changed**: Conditional operation headers `if_match` and `if_none_match` have been replaced with more semantic `etag` and `match_condition` parameters that use enum values to describe match conditions.
 
 **What will break**:
 
@@ -84,6 +82,7 @@ from azure.mgmt.containerservicefleet import ContainerServiceFleetManagementClie
 
 client = ContainerServiceFleetManagementClient(credential, subscription_id)
 
+# Only update if a resource's previous version matches this value
 fleet = client.fleets.begin_create_or_update(
     resource_group_name="rg",
     fleet_name="fleet1", 
@@ -96,37 +95,40 @@ fleet = client.fleets.begin_create_or_update(
 
 ```python
 from azure.mgmt.containerservicefleet import ContainerServiceFleetManagementClient
-from azure.core.matching import MatchConditions
+from azure.core import MatchConditions
 
 client = ContainerServiceFleetManagementClient(credential, subscription_id)
 
-# New ETag parameters with enum
+# Use enums to describe match conditions
 fleet = client.fleets.begin_create_or_update(
     resource_group_name="rg",
     fleet_name="fleet1",
     resource=fleet_operation,
     etag="etag-value",
-    match_condition=MatchConditions.IfModified
+    match_condition=MatchConditions.IfNotModified
 )
 ```
 
+**MatchConditions enum values:**
+- `MatchConditions.IfNotModified` - Equivalent to `if_match` (update only if resource's specified version hasn't been modified)
+- `MatchConditions.IfModified` - Equivalent to `if_none_match` (update only if resource's specified version has been modified)  
+- `MatchConditions.IfPresent` - Update only if resource's specified version exists
+- `MatchConditions.IfMissing` - Update only if resource's specified version doesn't exist
+- `MatchConditions.Unconditionally` - Perform the operation regardless of resource state (no conditional headers sent)
+
 **Migration steps:**
 
-- Import `MatchConditions` from `azure.core.matching`
+- Import `MatchConditions` from `azure.core`
 - Replace `if_match="etag-value"` with `etag="etag-value", match_condition=MatchConditions.IfNotModified`
 - Replace `if_none_match="etag-value"` with `etag="etag-value", match_condition=MatchConditions.IfModified`
 
-**MatchConditions enum values:**
-- `MatchConditions.IfNotModified` - Equivalent to `if_match` (update only if resource hasn't changed)
-- `MatchConditions.IfModified` - Equivalent to `if_none_match` (update only if resource has changed)  
-- `MatchConditions.IfPresent` - Update only if resource exists
-- `MatchConditions.IfMissing` - Update only if resource doesn't exist
-
 ## Why These Changes?
 
-Our hybrid operations prioritize consistency with the underlying REST API:
+Our operations prioritize consistency with the underlying REST API:
 
-- **Improved Code Readability**: Method calls become self-documenting when parameters are named.
-- **Prevents Parameter Order Mistakes**: Keyword-only parameters eliminate bugs caused by passing arguments in the wrong order.
+- **Improved Code Readability**: Operation calls become self-documenting when parameters are named.
+- **Prevents Parameter Order Mistakes**: Keyword-only parameters eliminate failures caused by passing arguments in the wrong order.
+- **Expanded Conditional Support**: Provide new conditions for more resource management scenarios, for example, use `MatchConditions.IfMissing="*"` to prevent creating resources in upsert.
+- **Semantic Clarity**: Self-documenting enum names directly express the developer's intent without understanding HTTP header semantics.
 
 If you encounter issues not covered here, please file an issue on [GitHub](https://github.com/microsoft/typespec/issues) with tag `emitter:client:python`.
