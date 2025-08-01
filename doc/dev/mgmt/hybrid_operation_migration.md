@@ -13,7 +13,7 @@ When migrating to the hybrid operation design, expect these breaking changes:
 | Change                                                                              | Impact                                                    | Quick Fix                                                                         |
 | ----------------------------------------------------------------------------------- | --------------------------------------------------------- | --------------------------------------------------------------------------------- |
 | [Query/Header Parameters](#queryheader-parameters-requiring-keywords) | Query and header signatures changed from positional to keyword-only | Convert all positional parameters to keyword arguments |
-| [ETag Parameters](#etag-parameters-restructured) | header signatures `if_match`/`if_none_match` restructured to `etag/match_condition` | Replace `if_match="etag"` with `etag="etag", match_condition=MatchConditions.IfModified` |
+| [ETag Parameters](#etag-parameters-restructured) | header signatures `if_match`/`if_none_match` restructured to `etag/match_condition` | Replace `if_match="etag"` with `etag="etag", match_condition=MatchConditions.IfNotModified` |
 
 ## Detailed Breaking Changes
 
@@ -113,12 +113,12 @@ fleet = client.fleets.begin_create_or_update(
 **Migration steps:**
 
 - Import `MatchConditions` from `azure.core.matching`
-- Replace `if_match="etag-value"` with `etag="etag-value", match_condition=MatchConditions.IfModified`
-- Replace `if_none_match="etag-value"` with `etag="etag-value", match_condition=MatchConditions.IfNotModified`
+- Replace `if_match="etag-value"` with `etag="etag-value", match_condition=MatchConditions.IfNotModified`
+- Replace `if_none_match="etag-value"` with `etag="etag-value", match_condition=MatchConditions.IfModified`
 
 **MatchConditions enum values:**
-- `MatchConditions.IfModified` - Equivalent to `if_match` (update only if resource hasn't changed)
-- `MatchConditions.IfNotModified` - Equivalent to `if_none_match` (update only if resource has changed)  
+- `MatchConditions.IfNotModified` - Equivalent to `if_match` (update only if resource hasn't changed)
+- `MatchConditions.IfModified` - Equivalent to `if_none_match` (update only if resource has changed)  
 - `MatchConditions.IfPresent` - Update only if resource exists
 - `MatchConditions.IfMissing` - Update only if resource doesn't exist
 
