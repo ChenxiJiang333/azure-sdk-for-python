@@ -47,19 +47,19 @@
         },
         {
             "question": "Secret env var handling",
-            "reason": "No outcomes for more than a month."
+            "reason": "No outcome for more than a month."
         },
         {
             "question": "Output breaking change after bumping `azure-keyvault-keys`",
-            "reason": "No outcomes for more than a month."
+            "reason": "No outcome for more than a month."
         },
         {
             "question": "Playback mode not working in the pipeline",
-            "reason": "No outcomes for more than a month."
+            "reason": "No outcome for more than a month."
         },
         {
             "question": "Streaming response timeouts when using azure-ai-agents library",
-            "reason": "No outcomes for more than a month."
+            "reason": "No outcome for more than a month."
         }
     ]
 }
