@@ -1,0 +1,65 @@
+
+{
+    "skip": [
+        {
+            "question": "[Test] 'The date for the changelog being released must be the latest in the file.'",
+            "reason": "Built for Q&A Bot test."
+        },
+        {
+            "question": "BreakingChange-Python-SDK review",
+            "reason": "Review request."
+        },
+        {
+            "question": "Generate code cause too-many-locals and Unused import urllib.parse",
+            "reason": "Bug issue."
+        },
+        {
+            "question": "Code generator on python validates versions by comparing literals.",
+            "reason": "Bug issue."
+        },
+        {
+            "question": "How to make code gen to generate `AgentsOperations` instead of `AgentsClientOperationsMixin`",
+            "reason": "Bug issue."
+        },
+        {
+            "question": "API View Displays Incorrect Python Package Name",
+            "reason": "Bug issue."
+        },
+        {
+            "question": "Incorrect client used in generated samples",
+            "reason": "Bug issue."
+        },
+        {
+            "question": "Merge to main pipeline fail for macos311 without showing errors",
+            "reason": "Bug issue."
+        },
+        {
+            "question": "Unable to Trigger SDK Generation Pipeline",
+            "reason": "No further resolution needed."
+        },
+        {
+            "question": "Releasing Python SDK",
+            "reason": "No further resolution needed."
+        },
+        {
+            "question": "Updating python repo to Ubuntu-24.04",
+            "reason": "No further resolution needed."
+        },
+        {
+            "question": "Secret env var handling",
+            "reason": "No outcomes for more than a month."
+        },
+        {
+            "question": "Output breaking change after bumping `azure-keyvault-keys`",
+            "reason": "No outcomes for more than a month."
+        },
+        {
+            "question": "Playback mode not working in the pipeline",
+            "reason": "No outcomes for more than a month."
+        },
+        {
+            "question": "Streaming response timeouts when using azure-ai-agents library",
+            "reason": "No outcomes for more than a month."
+        }
+    ]
+}
