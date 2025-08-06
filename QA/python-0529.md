@@ -2,7 +2,7 @@
 
 ## question 
 Hi there, I am trying to try to use the (Azure Monitor OTEL Exporter)[https://github.com/Azure/azure-sdk-for-python/tree/main/sdk/monitor/azure-monitor-opentelemetry-exporter#microsoft-opentelemetry-exporter-for-azure-monitor] for a python application, and I am having trouble getting data flow when I follow the examples of setting up the exporter. I tried to copy the (hello world sample code)[https://github.com/Azure/azure-sdk-for-python/tree/main/sdk/monitor/azure-monitor-opentelemetry-exporter#export-hello-world-trace] and put my connection string, and I'm still not seeing any tracing data land in my traces table in my App Insights instance. Could I get some help here to figure out what is going on, or where the sample code might not be functional?
- 
+
 I tried to look through the debug logs:
 ```
 2025-05-20 22:57:57,387 DEBUG urllib3.connectionpool Starting new HTTP connection (1): 169.254.169.254:80
@@ -228,3 +228,100 @@ So. For you. I would recommend the following to unblock yourself.
 ```
 
 Once you successfully record new recordings, test-proxy push and your Tag will be properly populated.
+
+# Question Regarding Regression in Python SDK v11.0.0 for Container Registry
+
+## question
+Hi Language - Python, I'm from the Azure Container Registry team, and we have a question regarding one of the recent SDK releases.
+
+The release in question is v11.0.0 ([AutoRelease] t2-containerregistry-2024-12-10-60943(can only be merged by SDK owner) by azure-sdk · Pull Request #38810 · Azure/azure-sdk-for-python), which was generated based on this Swagger PR Savaradh containerregistry microsoft.container registry 2024 11 01 preview new by savaradh · Pull Request #31612 · Azure/azure-rest-api-specs
+
+We recently noticed a regression in version 11.0.0: Previously, the _create_initial method returned a deserialized Task object, but in v11.0.0, it now returns a streamed response. This change was not mentioned in the changelog. 
+
+Additionally, our Swagger PR did not modify the 2019-06-01-preview/containerregistry_build.json file, so we're unsure why the SDK PR includes changes to these operation files.
+
+In the "removed" lines (lines 503-507 in red), there was code that did:
+```
+if response.status_code == 200:
+    deserialized = self._deserialize("Task", pipeline_response)
+if response.status_code == 201:  
+    deserialized = self._deserialize("Task", pipeline_response)
+```
+But in the current version (line 496 in green), it's doing:
+```
+deserialized = response.stream_download(self._client._pipeline, decompress=_decompress)
+```
+
+Could someone help us understand the root cause of this issue? Any insights would be greatly appreciated. Thanks
+
+## answer
+This was a change made in the code generator a while ago, and it's basically an implementation detail change in the public generated code. `_create_initial` is a private method that is used to set up the initial call to start the polling in `begin_create`. We just switched over our initial calls to not do premature deserialization, and there is 0 customer impact. Hope this clears stuff up!
+
+# OOB Stable Python SDK
+
+## question
+Hi Language - Python team, I'm trying to release Python SDK here: https://github.com/Azure/sdk-release-request/issues/6124 which is required to test and release Azure CLI module. Given that CLI has a deadline of next week for code complete, I have a couple of questions around this:
+
+1. Can this SDK be released out of band ASAP?
+2. For future iterations, what's the process we should take to align with CLI releases, so that we have enough time to release SDKs and then release CLI as well?
+Thanks
+
+## answer
+1. SDK team will release this package in advance to unblock CLI. Add Chenxi Jiang (WICRESOFT NORTH AMERICA LTD) for awareness.
+2. If CLI module depends on SDK, it is better to make release request issue earlier so that SDK team could prepare the release in advance.
+
+# GA review
+
+## question
+Hi all, we're looking to release our first stable Python SDK in (Deid GA release by jovinson-ms · Pull Request #40850 · Azure/azure-sdk-for-python)[https://github.com/Azure/azure-sdk-for-python/pull/40850]. Would appreciate a look at the APIView, as we pulled in some suggested client customization from Java and .NET reviews but would like feedback on whether they are idiomatic to Python.
+
+## answer
+Hi, I would recommend making a post in the (Language - Python - Reviews)[https://teams.microsoft.com/l/channel/19%3A4175567f1e154a80ab5b88cbd22ea92f%40thread.skype/Language%20-%20Python%20-%20Reviews?groupId=3e17dcb0-4257-4a30-b843-77f47f1d4121&tenantId=72f988bf-86f1-41af-91ab-2d7cd011db47] channel
+
+# Changelog release requirements
+
+## question
+Hi all, I'm trying to release our data plane SDK's first stable version in (Deid GA release by jovinson-ms · Pull Request #40850 · Azure/azure-sdk-for-python)[https://github.com/Azure/azure-sdk-for-python/pull/40850]. I'm getting (build failures on changelog validation)[https://dev.azure.com/azure-sdk/public/_build/results?buildId=4824427&view=logs&j=b70e5e73-bbb6-5567-0939-8415943fadb9&t=ac8f4042-9b76-5db4-27b1-2a4abaa9bb3c&l=101]. Looking through the docs, I don't see any changelog update process for data plane in contrast to the control plane automation. Can someone help me understand what the process is here?
+
+## answer
+You didn't update the base version of the package! Appears to still be `1.0.0b1`
+I believe it should be `1.0.0` to match the changelog you added
+
+# CSpell config
+
+## question
+Hi all, I know there are common CSpell config settings as .vscode/cspell.json. I also see a few package-level cspell config files checked in: (Code search results)[https://github.com/search?q=repo%3AAzure%2Fazure-sdk-for-python+path%3Acspell.json&type=code]. Is there some config that needs to be set for pipelines to use local cspell config?
+
+## answer
+We haven't done this in the SDK repos yet but we intend to allow folks to inherit from the root file.  Similar to https://github.com/Azure/azure-rest-api-specs/blob/main/specification/communication/cspell.yaml where it imports the root cspell config. So as long as you inherit it should work.
+
+# Disable Pylint checks on .pyi files
+
+## question
+Hi all,
+ 
+Storage is adding .pyi files for each of our clients to move `kwargs` to named keywords without having to make massive changes to our runtime code. We have noticed that pylint still runs on these .pyi files and a lot of the checks just don't make sense there, for example `super-init-not-called`. Obviously super init would not be called in a stub.
+
+Example PR: ([Storage] [Named Keywords] [Blob] `_container_client.pyi` and aio by weirongw23-msft · Pull Request #41030 · Azure/azure-sdk-for-python)[https://github.com/Azure/azure-sdk-for-python/pull/41030/files]
+
+This is causing us to have to put in a bunch of pylint disables. Curious on everyone's thoughts on simply disabling pylint on stub files entirely?
+
+## answer
+You could consider using `Unpack` with `TypedDict` to handle the typing of kwargs? In the long term it would probably be a lower maintenance solution (it also allows the addition of documentation in intellisense prompts - which the current pyi file doesn't seem to have). 
+Here's an example if you want to have a read through:
+(azure-sdk-for-python/sdk/projects/azure-projects/azure/projects/resources/storage/_resource.py at main · Azure/azure-sdk-for-python)[https://github.com/Azure/azure-sdk-for-python/blob/main/sdk/projects/azure-projects/azure/projects/resources/storage/_resource.py#L237-L243]
+
+# Python Storage SDK - `walk_blobs` API
+
+## question
+Hi Anna and Kashif Khan,
+ 
+(A customer mentioned)[https://github.com/Azure/azure-sdk-for-python/issues/40873] that `walk_blobs` API could return `BlobPrefix` where the current rtype is just `BlobProperties`. Based on this feedback, it appears that `walk_blob` needs to have rtype `BlobProperties | BlobPrefix` ((PR)[https://github.com/Azure/azure-sdk-for-python/pull/40931]). However, this would be a breaking change to our customers, and it would be harder to work with as the customer needs to type check themselves, so not great.
+ 
+In .NET, `GetBlobsByHierarchy` (returns a custom type)[https://github.com/Azure/azure-sdk-for-net/blob/6ee19685b3c1ecc7f9d7b6318954b12708dcc179/sdk/storage/Azure.Storage.Blobs/src/BlobContainerClient.cs#L2713-L2773] of `Pageable<BlobHierarchyItem>` which has a Boolean value to check whether the item is `BlobPrefix` or `BlobProperties`.
+ 
+We'd like some feedback on how to best proceed here. Thanks!
+
+## answer
+To clarify, changing the type hint is not a breaking change, just annoying to work with a Union return type. The other options of introducing a wrapper class however, would be breaking obviously.
+If this is already acting that way at runtime, it means people already use `isintance` or `try/except AttributeError` anyway, so the `Union` still make things better.

@@ -94,3 +94,11 @@ Once this PR passes:
 https://github.com/Azure/azure-sdk-for-python/pull/41724
 
 You can pull from main and try regenerating. Let me know if you see any diffs in regeneration and if these diffs work out for you.
+
+# Releasing Python SDK
+
+## question
+Hello Language - Python, I wanted to release a new version of my team's SDK in GA using the release planner, I wanted to ask if I had to manually run the ADO pipeline for it here (Run release SDK pipeline)[https://eng.ms/docs/products/azure-developer-experience/develop/sdk-release/sdk-release-pipeline]
+
+## answer
+Since this is an ARM service, you should talk to Yuchao about the process

@@ -7,10 +7,30 @@
         },
         {
             "question": "BreakingChange-Python-SDK review",
-            "reason": "Review request."
+            "reason": "BreakingChange review request."
+        },
+        {
+            "question": "https://teams.microsoft.com/l/message/19:b97d98e6d22c41e0970a1150b484d935@thread.skype/1747406803200?tenantId=72f988bf-86f1-41af-91ab-2d7cd011db47&groupId=3e17dcb0-4257-4a30-b843-77f47f1d4121&parentMessageId=1747406803200&teamName=Azure%20SDK&channelName=Language%20-%20Python&createdTime=1747406803200",
+            "reason": "BreakingChange review request."
+        },
+        {
+            "question": "Need Breaking change approval for Python",
+            "reason": "BreakingChange review request."
+        },
+        {
+            "question": "Hanging on: urllib3.connectionpool: Starting new HTTPS connection (1)",
+            "reason": "Bug issue."
+        },
+        {
+            "question": "Python generator produces mismatched model-alias in `_operations.py` after adding ServicePatterns module",
+            "reason": "Bug issue."
         },
         {
             "question": "Generate code cause too-many-locals and Unused import urllib.parse",
+            "reason": "Bug issue."
+        },
+        {
+            "question": "Python sdk generation failure post merging the latest changes from main",
             "reason": "Bug issue."
         },
         {
@@ -46,12 +66,20 @@
             "reason": "No further resolution needed."
         },
         {
-            "question": "Releasing Python SDK",
+            "question": "Updating python repo to Ubuntu-24.04",
             "reason": "No further resolution needed."
         },
         {
-            "question": "Updating python repo to Ubuntu-24.04",
-            "reason": "No further resolution needed."
+            "question": "Fail to record test only async",
+            "reason": "No clear resolution."
+        },
+        {
+            "question": "Streaming response timeouts when using azure-ai-agents library",
+            "reason": "No clear resolution."
+        },
+        {
+            "question": "Security CodeQL items from Azure SDK",
+            "reason": "No clear resolution."
         },
         {
             "question": "Secret env var handling",
@@ -63,10 +91,6 @@
         },
         {
             "question": "Playback mode not working in the pipeline",
-            "reason": "No outcome for more than a month."
-        },
-        {
-            "question": "Streaming response timeouts when using azure-ai-agents library",
             "reason": "No outcome for more than a month."
         }
     ]
