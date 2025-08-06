@@ -19,47 +19,43 @@
         },
         {
             "question": "Hanging on: urllib3.connectionpool: Starting new HTTPS connection (1)",
-            "reason": "Bug issue."
+            "reason": "Bug report."
         },
         {
             "question": "Python generator produces mismatched model-alias in `_operations.py` after adding ServicePatterns module",
-            "reason": "Bug issue."
+            "reason": "Bug report."
         },
         {
             "question": "Generate code cause too-many-locals and Unused import urllib.parse",
-            "reason": "Bug issue."
+            "reason": "Bug report."
         },
         {
             "question": "Python sdk generation failure post merging the latest changes from main",
-            "reason": "Bug issue."
+            "reason": "Bug report."
         },
         {
             "question": "Code generator on python validates versions by comparing literals.",
-            "reason": "Bug issue."
+            "reason": "Bug report."
         },
         {
             "question": "How to make code gen to generate `AgentsOperations` instead of `AgentsClientOperationsMixin`",
-            "reason": "Bug issue."
+            "reason": "Bug report."
         },
         {
             "question": "API View Displays Incorrect Python Package Name",
-            "reason": "Bug issue."
+            "reason": "Bug report."
         },
         {
             "question": "Incorrect client used in generated samples",
-            "reason": "Bug issue."
+            "reason": "Bug report."
         },
         {
-            "question": "Merge to main pipeline fail for macos311 without showing errors",
-            "reason": "Bug issue."
-        },
-                {
             "question": "Generated code does not output the raw error.",
-            "reason": "Bug issue."
+            "reason": "Bug report."
         },
         {
             "question": "tsp-client update failed when generating Python SDK",
-            "reason": "Bug issue."
+            "reason": "Bug report."
         },
         {
             "question": "Unable to Trigger SDK Generation Pipeline",
@@ -67,6 +63,10 @@
         },
         {
             "question": "Updating python repo to Ubuntu-24.04",
+            "reason": "No further resolution needed."
+        },
+        {
+            "question": "Merge to main pipeline fail for macos311 without showing errors",
             "reason": "No further resolution needed."
         },
         {
