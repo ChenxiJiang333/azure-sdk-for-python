@@ -11,7 +11,7 @@ azure/ai/agents/aio/operations/_operations.py:4090: [R0914(too-many-locals), Age
 azure/ai/agents/aio/operations/_operations.py:4475: [R0914(too-many-locals), AgentsClientOperationsMixin.update_agent] Too many local variables (27/25)
 azure/ai/agents/aio/operations/_operations.py:4815: [R0914(too-many-locals), AgentsClientOperationsMixin.create_thread_and_run] Too many local variables (32/25)
 azure/ai/agents/aio/operations/_operations.py:26: [W0611(unused-import), ] Unused import urllib.parse
- 
+
 The _operations.py is straightly created by code gen.  Need advise how to fix them..
 
 ## answer
@@ -41,18 +41,24 @@ This should address the `too-many-locals` and `unused import urllib.parse` warni
 Hi Language - Python,
 Wondering why this pipeline is failing: https://dev.azure.com/azure-sdk/internal/_build/results?buildId=4959365&view=logs&j=447d33cb-e696-5bdf-6dab-daffaacae469
 The pr checks were successfull…
+```
+_ ERROR collecting sdk/healthinsights/azure-healthinsights-cancerprofiling/tests/test_cancer_profiling.py _
+ImportError while importing test module '/mnt/vss/_work/1/s/sdk/healthinsights/azure-healthinsights-cancerprofiling/tests/test_cancer_profiling.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+.tox/mindependency/lib/python3.13/site-packages/azure/core/rest/__init__.py:27: in <module>
+    from ._rest_py3 import (
+.tox/mindependency/lib/python3.13/site-packages/azure/core/rest/_rest_py3.py:40: in <module>
+    from ._helpers import (
+.tox/mindependency/lib/python3.13/site-packages/azure/core/rest/_helpers.py:28: in <module>
+    import cgi
+E   ModuleNotFoundError: No module named 'cgi'
+```
 
 ## answer
-Your nightly/internal pipeline is failing due to a Python 3.13 error that’s been happening for the past couple months. The root cause is that `azure-healthinsights-cancerprofiling` specifies too old of a minimum version of `azure-core` for Python 3.13, where `cgi` was removed.
+Your PR checks passed because you only changed `azure-healthinsights-radiologyinsights`, and the `pull request` build is scoped to only that package. However, `internal` builds are service-wide, so they include all packages in the `healthinsights` folder, even those do not have a release stage. That's why the failure is only on the `internal` build.
 
-Your PR checks passed because you only changed `azure-healthinsights-radiologyinsights`, and the pull request build is scoped to only that package. However, internal builds are service-wide, so they include all packages in the `healthinsights` folder, even those not being released. That's why the failure surfaced internally.
-
-To unblock you, I ran a build that artificially limits the build scope to only `azure-healthinsights-radiologyinsights`, which should allow you to release successfully.
-
-If `azure-healthinsights-cancerprofiling` is deprecated and not going to be released again, we should follow the deprecation process as outlined here:
-https://github.com/Azure/azure-sdk-for-python/blob/main/doc/deprecation_process.md
-
-If we might need to release it again someday, we should fix the dependencies to keep it from falling into bitrot.
+To unblock you, please run a build that artificially limits the build scope to only `azure-healthinsights-radiologyinsights` by adding variable `BuildTargetingString` with value `azure-healthinsights-radiologyinsights`.
 
 # Testing SDK PRs
 
@@ -88,4 +94,11 @@ Once this PR passes:
 https://github.com/Azure/azure-sdk-for-python/pull/41724
 
 You can pull from main and try regenerating. Let me know if you see any diffs in regeneration and if these diffs work out for you.
- 
+
+# Releasing Python SDK
+
+## question
+Hello Language - Python, I wanted to release a new version of my team's SDK in GA using the release planner, I wanted to ask if I had to manually run the ADO pipeline for it here (Run release SDK pipeline)[https://eng.ms/docs/products/azure-developer-experience/develop/sdk-release/sdk-release-pipeline]
+
+## answer
+Since this is an ARM service, you should talk to Yuchao about the process

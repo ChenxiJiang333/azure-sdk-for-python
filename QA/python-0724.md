@@ -83,12 +83,12 @@ I've checked my Python installation `ensurepip` is satisfied, tried manually del
 But the issue still persists. Has anyone encountered this before or could share some insights? Any help would be much appreciated. Thank you!
 
 ## answer
-Maybe you could try install "uv" (here is guidance [Installation | uv](https://docs.astral.sh/uv/getting-started/installation/)) and sync with latest main branch of python sdk repo then try again.
+Maybe you could try install "uv" (here is guidance [Installation | uv](https://docs.astral.sh/uv/getting-started/installation/)) as a workaround and sync with latest main branch of python sdk repo then try again. I have created an issue ([python] install failure with `pip` · Issue #8113 · microsoft/typespec)[https://github.com/microsoft/typespec/issues/8113] to track it.
 
-# "The date for the changelog being released must be the latest in the file."
+# The date for the changelog being released must be the latest in the file.
 
 ## question 
-We have this PR to Main branch that updates CHANGELOG.md: https://github.com/Azure/azure-sdk-for-python/pull/42064 . The change looks correct to me... adding `## 1.0.0b13 (Unreleased)`. Yet the PR build pipeline has an error in the Analyze job titled "Verify ChangeLogEntries": https://dev.azure.com/azure-sdk/public/_build/results?buildId=5108808&view=logs&j=b70e5e73-bbb6-5567-0939-8415943fadb9&t=ac8f4042-9b76-5db4-27b1-2a4abaa9bb3c  :
+We have this PR to Main branch that updates CHANGELOG.md: https://github.com/Azure/azure-sdk-for-python/pull/42064 . The change looks correct to me... adding `## 1.0.0b13 (Unreleased)`. Yet the PR build pipeline has an error in the Analyze job titled "Verify ChangeLogEntries":
 ```
 [debug]Verifying as a release build because the changelog entry has a valid date.
 ##[error]Invalid date [ 2025-06-23 ]. The date for the changelog being released must be the latest in the file.
@@ -104,10 +104,7 @@ We have this PR to Main branch that updates CHANGELOG.md: https://github.com/Azu
 Finishing: Verify ChangeLogEntries
 ```
  
-##[error]Invalid date [ 2025-06-23 ]. The date for the changelog being released must be the latest in the file.
- 
 Any idea why? Seems like a tool bug to me.
 
 ## answer
 The error occurred because the changelog entry for version `1.0.0b13 (Unreleased)` was added without updating the `_version.py` file. the tool gets the version from there and tries to validate the change log entry for that version. In this case it sees that version isn't the latest version in the changelog and complains (granted the error message could be better). However, the version update is what is missing. Also, looks like a lot of version increment PRs have been getting ignored. It might be worth taking these PR and then pulling them into your feature branches. However if you don't plan to use them then just close them.
- 
