@@ -18,4 +18,4 @@ git pull origin main
 - run `npx npm-check-updates --packageFile eng/emitter-package.json`
 - run `tsp-client generate-lock-file`
 - commit changes about `emitter-package.json` and `emitter-package-lock.json`
-- create PR with New Branch, PR Title
+- create PR with New Branch, PR Title and concise PR body
