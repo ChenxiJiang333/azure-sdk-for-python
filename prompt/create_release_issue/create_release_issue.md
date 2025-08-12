@@ -5,6 +5,7 @@ Generate issue title and issue body for users
 **Context**
 
 - PACKAGE-NAME: "azure-mgmt-authorization"
+- TAG: Xxx
 - REST-REPO-URL: "https://github.com/Azure/azure-rest-api-specs"
 - ISSUE-TITLE-TEMPLATE: `[resource manager] Python: Release request for Release for {SERVICE-NAME} (convert to singleapi)`
 - CURRENT-DATE: {current Month/DAY+4/Year} (e.g. 07/24/2025)
@@ -12,12 +13,12 @@ Generate issue title and issue body for users
 
 ```
 {TARGET-URL}
-->Readme Tag: Xxx
+->Readme Tag: {TAG}
 ## Release request for <i>Release for {SERVICE-NAME}</i>
 **Requested by @msyyc**
 **Link**: [{TARGET-URL}]({TARGET-URL})  
 **Namespace Approval Issue**:
-**Readme Tag**: Xxx
+**Readme Tag**: {TAG}
 **Target release date**: No later than {CURRENT-DATE} 
 ```
 
