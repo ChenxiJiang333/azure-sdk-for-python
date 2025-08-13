@@ -34,7 +34,7 @@ git clean -fd
   ]
 }
 ```
-- remove entire folder `node_modules` at root folder of SDK repo if exists
+- IF folder `node_modules` exists at root folder of SDK repo, DELETE whole folder
 - activate virtual environment of VENV path then run "python -m packaging_tools.sdk_generator .venv/generate_input_typespec.json .venv/generate_output.json" at root folder of SDK repo
 - get "path" and "packageName" from generate_output.json
 - step into folder {{path}}/{{packageName}} of SDK repo
