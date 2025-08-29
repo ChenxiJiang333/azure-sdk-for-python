@@ -1,0 +1,1 @@
+- work in `C:/dev/typespec`
