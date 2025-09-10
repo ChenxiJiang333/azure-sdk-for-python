@@ -18,6 +18,6 @@ Create a new PR to bump dependencies
 - run `npm run change:add` and select `Bump dependencies" then input message "bump typespec"
 - run `npm run format && git status`
 - step into REPO
-- run `git add -u && git commit -m "add changelog" && git push origin HEAD`
+- run `git add .chronus && git commit -m "add changelog" && git push origin HEAD`
 - create new PR with title `[python] bump typespec dependencies`.
    **NOTE**: DO NOT add PR description.
