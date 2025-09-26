@@ -73,7 +73,7 @@ Summary:Your observation suggests that the recording support via the .assets fol
 
 Confirming Actual Release Date Based on Changelog?
 
-## answer
+## question
 
 Hi team,
 Quick question — in the PR for our package (`azure-mgmt-hdinsight`), the CHANGELOG.md lists the release date as `2025-10-19` for version `9.1.0b2`.
