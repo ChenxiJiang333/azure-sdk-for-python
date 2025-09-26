@@ -71,7 +71,7 @@ If migrated and still no .assets folder is created, verify that your test enviro
 
 Summary:Your observation suggests that the recording support via the .assets folder is not yet active for your branch or package in the azure-sdk-for-python-pr repo. This could be due to the migration not being completed, or the package not being configured for out-of-repo recordings yet. Please check the migration status or reach out to the repo maintainers for confirmation.
 
-Confirming Actual Release Date Based on Changelog?
+# Confirming Actual Release Date Based on Changelog?
 
 ## question
 
