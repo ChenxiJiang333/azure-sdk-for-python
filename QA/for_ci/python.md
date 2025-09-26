@@ -70,3 +70,19 @@ If not migrated, refer to the recording migration guide for the migration proces
 If migrated and still no .assets folder is created, verify that your test environment and variables are set up as required (including git version and credentials), and consult the test proxy troubleshooting guide.
 
 Summary:Your observation suggests that the recording support via the .assets folder is not yet active for your branch or package in the azure-sdk-for-python-pr repo. This could be due to the migration not being completed, or the package not being configured for out-of-repo recordings yet. Please check the migration status or reach out to the repo maintainers for confirmation.
+
+Confirming Actual Release Date Based on Changelog?
+
+## answer
+
+Hi team,
+Quick question — in the PR for our package (`azure-mgmt-hdinsight`), the CHANGELOG.md lists the release date as `2025-10-19` for version `9.1.0b2`.
+Just wanted to confirm: Is the actual release date determined by the date shown in the changelog?
+If not, how can I find out the actual release date?
+Thanks!
+
+## answer
+
+The release date shown in the CHANGELOG.md (e.g., 2025-10-19 for version 9.1.0b2) is not what actually determines the official release date of the package. The date in the changelog is meant to document when the release was prepared and what changes are included, but the actual release date is determined by when the package is published to PyPI (or the official distribution channel) after the release process is completed.
+As part of the Azure SDK release process, maintainers are instructed to ensure the changelog is accurate and matches the release, but the true release date is when the package is published, not the date listed in the changelog.
+So, you should not rely solely on the date in the changelog as the authoritative release date. Always refer to the package's publication timestamp on PyPI or the Azure SDK release tracking tools for the actual release date.
