@@ -7,7 +7,7 @@ Generate issue title and issue body for users
 - PACKAGE-NAME: "azure-mgmt-authorization"
 - TAG: Xxx
 - REST-REPO-URL: "https://github.com/Azure/azure-rest-api-specs"
-- ISSUE-TITLE-TEMPLATE: `[resource manager] Python: Release request for Release for {SERVICE-NAME} (convert to singleapi)`
+- ISSUE-TITLE-TEMPLATE: `[resource manager] Python: Release request for {SERVICE-NAME} (Python only)`
 - CURRENT-DATE: {current Month/DAY+4/Year} (e.g. 07/24/2025)
 - ISSUE-BODY-TEMPLATE:
 
