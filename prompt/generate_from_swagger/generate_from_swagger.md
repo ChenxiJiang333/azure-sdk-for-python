@@ -16,7 +16,7 @@
 
 - step into REST repo then run
 ```bash
-git reset --hard HEAD && git checkout origin/main && git pull origin main
+git checkout . && git clean -fd && git checkout origin/main && git pull origin main
 ```
 - step into SDK repo
 - if current branch name is not "{PACKAGE}-migration", run `git checkout origin/main && git pull origin main` then checkout a new branch named "{PACKAGE}-migration"
