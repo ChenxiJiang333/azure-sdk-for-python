@@ -34,7 +34,7 @@ git checkout . && git clean -fd && git checkout origin/main && git pull origin m
   ]
 }
 ```
-- activate virtual environment of VENV path then run `python -m packaging_tools.sdk_generator .venv/generate_input_swagger.json .venv/generate_output.json` at root folder of SDK repo
+- activate virtual environment of VENV path then run `sdk_generator .venv/generate_input_swagger.json .venv/generate_output.json` at root folder of SDK repo
 - get "path" and "packageName" from generate_output.json
 - step into folder {{path}}/{{packageName}} of SDK repo
 - if .tox exist under this folder, clean .tox
