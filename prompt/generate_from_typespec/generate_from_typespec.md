@@ -32,7 +32,7 @@ git checkout . && git clean -fd
   ]
 }
 ```
-- activate virtual environment of VENV path then run "python -m packaging_tools.sdk_generator .venv/generate_input_typespec.json .venv/generate_output.json" at root folder of SDK repo
+- activate virtual environment of VENV path then run "sdk_generator .venv/generate_input_typespec.json .venv/generate_output.json" at root folder of SDK repo
 - get "path" and "packageName" from generate_output.json
 - step into folder {{path}}/{{packageName}} of SDK repo
 - IF folder .tox exist under this folder, delete .tox
