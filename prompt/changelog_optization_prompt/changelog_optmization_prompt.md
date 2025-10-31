@@ -82,3 +82,55 @@ When both insertion and deletion of parameters occur together, merge them into a
 ```
 `A` renamed its instance variable `B` to `C`
 ```
+
+### 5. Grouping Moved Instance Variables Under a New Container Property
+
+When a model introduces a new container property (commonly named `properties`) and multiple instance variables of that model are subsequently reported as "deleted or renamed", treat these as a structural move rather than separate deletions. Consolidate the repeated deletion/rename lines into a single, clearer entry indicating that the variables were moved under the new property.
+
+**Before:**
+```
+   - Model `A` added property `properties`
+   - Model `A` deleted or renamed its instance variable `a`
+   - Model `A` deleted or renamed its instance variable `b`
+   - Model `A` deleted or renamed its instance variable `c`
+```
+
+**After:**
+```
+   - Model `A` added property `properties`
+   - Model `A` moved instance variable `a`, `b` and `c` under property `properties`
+```
+
+### 6. Hybrid Model Migration Note
+
+When a CHANGELOG contains one or more entries in the `### Breaking Changes` section of the form:
+```
+Model `X` deleted or renamed its instance variable `y`
+```
+this often indicates a transition to new "hybrid models" (models that behave both like dictionaries and typed models). In such cases, insert the following standardized migration note as the FIRST bullet (or line) directly under the `### Breaking Changes` heading:
+
+```
+This version introduces new hybrid models which have dual dictionary and model nature. Please follow https://aka.ms/azsdk/python/migrate/hybrid-models for migration.
+```
+
+Rules / Constraints:
+1. Add the note only if at least one matching instance-variable deletion/rename line exists.
+2. Do not add the note if it already exists (avoid duplicates).
+3. Preserve the original ordering of the existing breaking change entries after inserting the note.
+
+**Before:**
+```
+### Breaking Changes
+- Model `A` deleted or renamed its instance variable `a`
+- Model `B` deleted or renamed its instance variable `b`
+```
+
+**After:**
+```
+### Breaking Changes
+- This version introduces new hybrid models which have dual dictionary and model nature. Please follow https://aka.ms/azsdk/python/migrate/hybrid-models for migration.
+- Model `A` deleted or renamed its instance variable `a`
+- Model `B` deleted or renamed its instance variable `b`
+```
+
+If multiple such lines are present, the note is still inserted only once.
