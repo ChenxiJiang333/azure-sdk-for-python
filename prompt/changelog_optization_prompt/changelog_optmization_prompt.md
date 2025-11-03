@@ -18,6 +18,7 @@ CHANGELOG_CONTENT
 
 Standardize the naming of operation groups for consistency.
 
+#### 1.1 Added Operation Group
 **Before:**
 ```
 Added model ...Operations
@@ -26,6 +27,17 @@ Added model ...Operations
 **After:**
 ```
 Added operation group ...Operations
+```
+
+#### 1.2 Added Method
+**Before:**
+```
+Model ...Operations added method `...`
+```
+
+**After:**
+```
+Operation group ...Operations added method `...`
 ```
 
 ### 2. Parameter Default Value Changes
@@ -134,3 +146,42 @@ Rules / Constraints:
 ```
 
 If multiple such lines are present, the note is still inserted only once.
+
+### 7. Hybrid Operation Migration Note
+
+When a method adds keyword-only ... `etag` and `match_condition` and (in the same CHANGELOG block) deletes or renames positional_or_keyword ... `if_match` and `if_none_match`, treat this as a single migration. Replace the individual add/remove lines with one concise entry.
+Also, insert a hybrid operation migration note as the FIRST bullet (or line) directly under the `### Breaking Changes` heading, following the same rules/constraints of hybrid model migration note:
+
+**Before:**
+```
+   - Operation group `A` added parameter `etag` in method `...`
+   - Operation group `A` added parameter `match_condition` in method `...`
+   - Method `...` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+   - Method `...` deleted or renamed its parameter `if_none_match` of kind `positional_or_keyword`
+```
+
+**After:**
+```
+   - For the method breakings, please refer to https://aka.ms/azsdk/python/migrate/operations for migration.
+   - Method `...` replaced positional_or_keyword ... `if_match`/`if_none_match` to keyword_only ... `etag`/`match_condition`
+```
+
+Sometimes only the parameter `if_match` is removed (and `if_none_match` is not), in this case, use the single-parameter declaration below:
+**Before:**
+```
+   - Operation group `A` added parameter `etag` in method `...`
+   - Operation group `A` added parameter `match_condition` in method `...`
+   - Method `...` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+```
+
+**After:**
+```
+   - For the method breakings, please refer to https://aka.ms/azsdk/python/migrate/operations for migration.
+   - Method `...` replaced positional_or_keyword ... `if_match` to keyword_only ... `etag`/`match_condition`
+```
+
+It's often along with an entry in the `### Breaking Changes` section like:
+```
+- Method `...` re-ordered its parameters from `['self', '...', '...', '...', '...', 'if_match', 'if_none_match', 'kwargs']` to `['self', '...', '...', '...', '...', 'etag', 'match_condition', 'kwargs']`
+```
+Consider it as a fake `re-ordered` report and remove it. Don't change other `re-order` reports if it does not represent an operation migration.
