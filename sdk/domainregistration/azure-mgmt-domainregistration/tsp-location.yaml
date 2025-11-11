@@ -1,0 +1,4 @@
+directory: specification/domainregistration/DomainRegistration.Management
+commit: 6539401b58d326bc975e91645102bbe09dd747c8
+repo: Azure/azure-rest-api-specs
+additionalDirectories: 
