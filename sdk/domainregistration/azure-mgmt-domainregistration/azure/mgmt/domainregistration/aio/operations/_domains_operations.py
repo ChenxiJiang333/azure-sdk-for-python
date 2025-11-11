@@ -86,7 +86,7 @@ class DomainsOperations:
 
         Description for Check if a domain is available for registration.
 
-        :param identifier: Name of the domain. Required.
+        :param identifier: The request body. Required.
         :type identifier: ~azure.mgmt.domainregistration.models.NameIdentifier
         :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
          Default value is "application/json".
@@ -104,7 +104,7 @@ class DomainsOperations:
 
         Description for Check if a domain is available for registration.
 
-        :param identifier: Name of the domain. Required.
+        :param identifier: The request body. Required.
         :type identifier: IO[bytes]
         :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
          Default value is "application/json".
@@ -122,7 +122,7 @@ class DomainsOperations:
 
         Description for Check if a domain is available for registration.
 
-        :param identifier: Name of the domain. Is either a NameIdentifier type or a IO[bytes] type.
+        :param identifier: The request body. Is either a NameIdentifier type or a IO[bytes] type.
          Required.
         :type identifier: ~azure.mgmt.domainregistration.models.NameIdentifier or IO[bytes]
         :return: DomainAvailabilityCheckResult or the result of cls(response)
@@ -322,7 +322,7 @@ class DomainsOperations:
 
         Description for Get domain name recommendations based on keywords.
 
-        :param parameters: Search parameters for domain name recommendations. Required.
+        :param parameters: The request body. Required.
         :type parameters: ~azure.mgmt.domainregistration.models.DomainRecommendationSearchParameters
         :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
          Default value is "application/json".
@@ -341,7 +341,7 @@ class DomainsOperations:
 
         Description for Get domain name recommendations based on keywords.
 
-        :param parameters: Search parameters for domain name recommendations. Required.
+        :param parameters: The request body. Required.
         :type parameters: IO[bytes]
         :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
          Default value is "application/json".
@@ -360,8 +360,8 @@ class DomainsOperations:
 
         Description for Get domain name recommendations based on keywords.
 
-        :param parameters: Search parameters for domain name recommendations. Is either a
-         DomainRecommendationSearchParameters type or a IO[bytes] type. Required.
+        :param parameters: The request body. Is either a DomainRecommendationSearchParameters type or a
+         IO[bytes] type. Required.
         :type parameters: ~azure.mgmt.domainregistration.models.DomainRecommendationSearchParameters or
          IO[bytes]
         :return: An iterator like instance of either NameIdentifier or the result of cls(response)
@@ -453,7 +453,8 @@ class DomainsOperations:
 
         Description for Get all domains in a resource group.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :return: An iterator like instance of either Domain or the result of cls(response)
         :rtype: ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.domainregistration.models.Domain]
@@ -533,7 +534,8 @@ class DomainsOperations:
 
         Description for Get a domain.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param domain_name: Name of the domain. Required.
         :type domain_name: str
@@ -640,10 +642,14 @@ class DomainsOperations:
             error = self._deserialize.failsafe_deserialize(_models.DefaultErrorResponse, pipeline_response)
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
+        response_headers = {}
+        if response.status_code == 202:
+            response_headers["Location"] = self._deserialize("str", response.headers.get("Location"))
+
         deserialized = response.stream_download(self._client._pipeline, decompress=_decompress)
 
         if cls:
-            return cls(pipeline_response, deserialized, {})  # type: ignore
+            return cls(pipeline_response, deserialized, response_headers)  # type: ignore
 
         return deserialized  # type: ignore
 
@@ -661,7 +667,8 @@ class DomainsOperations:
 
         Description for Creates or updates a domain.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param domain_name: Name of the domain. Required.
         :type domain_name: str
@@ -690,7 +697,8 @@ class DomainsOperations:
 
         Description for Creates or updates a domain.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param domain_name: Name of the domain. Required.
         :type domain_name: str
@@ -713,7 +721,8 @@ class DomainsOperations:
 
         Description for Creates or updates a domain.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param domain_name: Name of the domain. Required.
         :type domain_name: str
@@ -756,7 +765,9 @@ class DomainsOperations:
             return deserialized
 
         if polling is True:
-            polling_method: AsyncPollingMethod = cast(AsyncPollingMethod, AsyncARMPolling(lro_delay, **kwargs))
+            polling_method: AsyncPollingMethod = cast(
+                AsyncPollingMethod, AsyncARMPolling(lro_delay, lro_options={"final-state-via": "location"}, **kwargs)
+            )
         elif polling is False:
             polling_method = cast(AsyncPollingMethod, AsyncNoPolling())
         else:
@@ -772,66 +783,6 @@ class DomainsOperations:
             self._client, raw_result, get_long_running_output, polling_method  # type: ignore
         )
 
-    @distributed_trace_async
-    async def delete(
-        self, resource_group_name: str, domain_name: str, force_hard_delete_domain: Optional[bool] = None, **kwargs: Any
-    ) -> None:
-        """Delete a domain.
-
-        Description for Delete a domain.
-
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
-        :type resource_group_name: str
-        :param domain_name: Name of the domain. Required.
-        :type domain_name: str
-        :param force_hard_delete_domain: Specify :code:`<code>true</code>` to delete the domain
-         immediately. The default is :code:`<code>false</code>` which deletes the domain after 24 hours.
-         Default value is None.
-        :type force_hard_delete_domain: bool
-        :return: None or the result of cls(response)
-        :rtype: None
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        error_map: MutableMapping = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        _headers = kwargs.pop("headers", {}) or {}
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
-        cls: ClsType[None] = kwargs.pop("cls", None)
-
-        _request = build_delete_request(
-            resource_group_name=resource_group_name,
-            domain_name=domain_name,
-            subscription_id=self._config.subscription_id,
-            force_hard_delete_domain=force_hard_delete_domain,
-            api_version=api_version,
-            headers=_headers,
-            params=_params,
-        )
-        _request.url = self._client.format_url(_request.url)
-
-        _stream = False
-        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            _request, stream=_stream, **kwargs
-        )
-
-        response = pipeline_response.http_response
-
-        if response.status_code not in [200, 204]:
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = self._deserialize.failsafe_deserialize(_models.DefaultErrorResponse, pipeline_response)
-            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
-
-        if cls:
-            return cls(pipeline_response, None, {})  # type: ignore
-
     @overload
     async def update(
         self,
@@ -846,7 +797,8 @@ class DomainsOperations:
 
         Description for Creates or updates a domain.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param domain_name: Name of the domain. Required.
         :type domain_name: str
@@ -874,7 +826,8 @@ class DomainsOperations:
 
         Description for Creates or updates a domain.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param domain_name: Name of the domain. Required.
         :type domain_name: str
@@ -900,7 +853,8 @@ class DomainsOperations:
 
         Description for Creates or updates a domain.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param domain_name: Name of the domain. Required.
         :type domain_name: str
@@ -959,12 +913,77 @@ class DomainsOperations:
             error = self._deserialize.failsafe_deserialize(_models.DefaultErrorResponse, pipeline_response)
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
+        response_headers = {}
+        if response.status_code == 202:
+            response_headers["Retry-After"] = self._deserialize("int", response.headers.get("Retry-After"))
+
         deserialized = self._deserialize("Domain", pipeline_response.http_response)
 
         if cls:
-            return cls(pipeline_response, deserialized, {})  # type: ignore
+            return cls(pipeline_response, deserialized, response_headers)  # type: ignore
 
         return deserialized  # type: ignore
+
+    @distributed_trace_async
+    async def delete(
+        self, resource_group_name: str, domain_name: str, force_hard_delete_domain: Optional[bool] = None, **kwargs: Any
+    ) -> None:
+        """Delete a domain.
+
+        Description for Delete a domain.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param domain_name: Name of the domain. Required.
+        :type domain_name: str
+        :param force_hard_delete_domain: Specify :code:`<code>true</code>` to delete the domain
+         immediately. The default is :code:`<code>false</code>` which deletes the domain after 24 hours.
+         Default value is None.
+        :type force_hard_delete_domain: bool
+        :return: None or the result of cls(response)
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        _request = build_delete_request(
+            resource_group_name=resource_group_name,
+            domain_name=domain_name,
+            subscription_id=self._config.subscription_id,
+            force_hard_delete_domain=force_hard_delete_domain,
+            api_version=api_version,
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200, 204]:
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            error = self._deserialize.failsafe_deserialize(_models.DefaultErrorResponse, pipeline_response)
+            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
+
+        if cls:
+            return cls(pipeline_response, None, {})  # type: ignore
 
     @distributed_trace
     def list_ownership_identifiers(
@@ -974,9 +993,10 @@ class DomainsOperations:
 
         Description for Lists domain ownership identifiers.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
-        :param domain_name: Name of domain. Required.
+        :param domain_name: Name of the domain. Required.
         :type domain_name: str
         :return: An iterator like instance of either DomainOwnershipIdentifier or the result of
          cls(response)
@@ -1061,9 +1081,10 @@ class DomainsOperations:
 
         Description for Get ownership identifier for domain.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
-        :param domain_name: Name of domain. Required.
+        :param domain_name: Name of the domain. Required.
         :type domain_name: str
         :param name: Name of identifier. Required.
         :type name: str
@@ -1132,9 +1153,10 @@ class DomainsOperations:
         Description for Creates an ownership identifier for a domain or updates identifier details for
         an existing identifier.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
-        :param domain_name: Name of domain. Required.
+        :param domain_name: Name of the domain. Required.
         :type domain_name: str
         :param name: Name of identifier. Required.
         :type name: str
@@ -1167,9 +1189,10 @@ class DomainsOperations:
         Description for Creates an ownership identifier for a domain or updates identifier details for
         an existing identifier.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
-        :param domain_name: Name of domain. Required.
+        :param domain_name: Name of the domain. Required.
         :type domain_name: str
         :param name: Name of identifier. Required.
         :type name: str
@@ -1199,9 +1222,10 @@ class DomainsOperations:
         Description for Creates an ownership identifier for a domain or updates identifier details for
         an existing identifier.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
-        :param domain_name: Name of domain. Required.
+        :param domain_name: Name of the domain. Required.
         :type domain_name: str
         :param name: Name of identifier. Required.
         :type name: str
@@ -1269,64 +1293,6 @@ class DomainsOperations:
 
         return deserialized  # type: ignore
 
-    @distributed_trace_async
-    async def delete_ownership_identifier(
-        self, resource_group_name: str, domain_name: str, name: str, **kwargs: Any
-    ) -> None:
-        """Delete ownership identifier for domain.
-
-        Description for Delete ownership identifier for domain.
-
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
-        :type resource_group_name: str
-        :param domain_name: Name of domain. Required.
-        :type domain_name: str
-        :param name: Name of identifier. Required.
-        :type name: str
-        :return: None or the result of cls(response)
-        :rtype: None
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        error_map: MutableMapping = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        _headers = kwargs.pop("headers", {}) or {}
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
-        cls: ClsType[None] = kwargs.pop("cls", None)
-
-        _request = build_delete_ownership_identifier_request(
-            resource_group_name=resource_group_name,
-            domain_name=domain_name,
-            name=name,
-            subscription_id=self._config.subscription_id,
-            api_version=api_version,
-            headers=_headers,
-            params=_params,
-        )
-        _request.url = self._client.format_url(_request.url)
-
-        _stream = False
-        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            _request, stream=_stream, **kwargs
-        )
-
-        response = pipeline_response.http_response
-
-        if response.status_code not in [200, 204]:
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = self._deserialize.failsafe_deserialize(_models.DefaultErrorResponse, pipeline_response)
-            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
-
-        if cls:
-            return cls(pipeline_response, None, {})  # type: ignore
-
     @overload
     async def update_ownership_identifier(
         self,
@@ -1344,9 +1310,10 @@ class DomainsOperations:
         Description for Creates an ownership identifier for a domain or updates identifier details for
         an existing identifier.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
-        :param domain_name: Name of domain. Required.
+        :param domain_name: Name of the domain. Required.
         :type domain_name: str
         :param name: Name of identifier. Required.
         :type name: str
@@ -1379,9 +1346,10 @@ class DomainsOperations:
         Description for Creates an ownership identifier for a domain or updates identifier details for
         an existing identifier.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
-        :param domain_name: Name of domain. Required.
+        :param domain_name: Name of the domain. Required.
         :type domain_name: str
         :param name: Name of identifier. Required.
         :type name: str
@@ -1411,9 +1379,10 @@ class DomainsOperations:
         Description for Creates an ownership identifier for a domain or updates identifier details for
         an existing identifier.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
-        :param domain_name: Name of domain. Required.
+        :param domain_name: Name of the domain. Required.
         :type domain_name: str
         :param name: Name of identifier. Required.
         :type name: str
@@ -1482,12 +1451,72 @@ class DomainsOperations:
         return deserialized  # type: ignore
 
     @distributed_trace_async
+    async def delete_ownership_identifier(
+        self, resource_group_name: str, domain_name: str, name: str, **kwargs: Any
+    ) -> None:
+        """Delete ownership identifier for domain.
+
+        Description for Delete ownership identifier for domain.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param domain_name: Name of the domain. Required.
+        :type domain_name: str
+        :param name: Name of identifier. Required.
+        :type name: str
+        :return: None or the result of cls(response)
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        _request = build_delete_ownership_identifier_request(
+            resource_group_name=resource_group_name,
+            domain_name=domain_name,
+            name=name,
+            subscription_id=self._config.subscription_id,
+            api_version=api_version,
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200, 204]:
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            error = self._deserialize.failsafe_deserialize(_models.DefaultErrorResponse, pipeline_response)
+            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
+
+        if cls:
+            return cls(pipeline_response, None, {})  # type: ignore
+
+    @distributed_trace_async
     async def renew(self, resource_group_name: str, domain_name: str, **kwargs: Any) -> None:
         """Renew a domain.
 
         Description for Renew a domain.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param domain_name: Name of the domain. Required.
         :type domain_name: str
@@ -1531,8 +1560,12 @@ class DomainsOperations:
             error = self._deserialize.failsafe_deserialize(_models.DefaultErrorResponse, pipeline_response)
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
+        response_headers = {}
+        if response.status_code == 202:
+            response_headers["Retry-After"] = self._deserialize("int", response.headers.get("Retry-After"))
+
         if cls:
-            return cls(pipeline_response, None, {})  # type: ignore
+            return cls(pipeline_response, None, response_headers)  # type: ignore
 
     @distributed_trace_async
     async def transfer_out(self, resource_group_name: str, domain_name: str, **kwargs: Any) -> _models.Domain:
@@ -1540,9 +1573,10 @@ class DomainsOperations:
 
         Transfer out domain to another registrar.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
-        :param domain_name: Name of domain. Required.
+        :param domain_name: Name of the domain. Required.
         :type domain_name: str
         :return: Domain or the result of cls(response)
         :rtype: ~azure.mgmt.domainregistration.models.Domain

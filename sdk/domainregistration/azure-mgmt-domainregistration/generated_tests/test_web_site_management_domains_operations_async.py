@@ -192,6 +192,14 @@ class TestWebSiteManagementDomainsOperationsAsync(AzureMgmtRecordedTestCase):
                     "provisioningState": "str",
                     "readyForDnsRecordManagement": bool,
                     "registrationStatus": "str",
+                    "systemData": {
+                        "createdAt": "2020-02-20 00:00:00",
+                        "createdBy": "str",
+                        "createdByType": "str",
+                        "lastModifiedAt": "2020-02-20 00:00:00",
+                        "lastModifiedBy": "str",
+                        "lastModifiedByType": "str",
+                    },
                     "tags": {"str": "str"},
                     "targetDnsType": "str",
                     "type": "str",
@@ -199,18 +207,6 @@ class TestWebSiteManagementDomainsOperationsAsync(AzureMgmtRecordedTestCase):
                 api_version="2024-11-01",
             )
         ).result()  # call '.result()' to poll until service return final result
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_domains_delete(self, resource_group):
-        response = await self.client.domains.delete(
-            resource_group_name=resource_group.name,
-            domain_name="str",
-            api_version="2024-11-01",
-        )
 
         # please add some check logic here by yourself
         # ...
@@ -332,6 +328,18 @@ class TestWebSiteManagementDomainsOperationsAsync(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
+    async def test_domains_delete(self, resource_group):
+        response = await self.client.domains.delete(
+            resource_group_name=resource_group.name,
+            domain_name="str",
+            api_version="2024-11-01",
+        )
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
     async def test_domains_list_ownership_identifiers(self, resource_group):
         response = self.client.domains.list_ownership_identifiers(
             resource_group_name=resource_group.name,
@@ -367,21 +375,16 @@ class TestWebSiteManagementDomainsOperationsAsync(AzureMgmtRecordedTestCase):
                 "kind": "str",
                 "name": "str",
                 "ownershipId": "str",
+                "systemData": {
+                    "createdAt": "2020-02-20 00:00:00",
+                    "createdBy": "str",
+                    "createdByType": "str",
+                    "lastModifiedAt": "2020-02-20 00:00:00",
+                    "lastModifiedBy": "str",
+                    "lastModifiedByType": "str",
+                },
                 "type": "str",
             },
-            api_version="2024-11-01",
-        )
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_domains_delete_ownership_identifier(self, resource_group):
-        response = await self.client.domains.delete_ownership_identifier(
-            resource_group_name=resource_group.name,
-            domain_name="str",
-            name="str",
             api_version="2024-11-01",
         )
 
@@ -400,8 +403,29 @@ class TestWebSiteManagementDomainsOperationsAsync(AzureMgmtRecordedTestCase):
                 "kind": "str",
                 "name": "str",
                 "ownershipId": "str",
+                "systemData": {
+                    "createdAt": "2020-02-20 00:00:00",
+                    "createdBy": "str",
+                    "createdByType": "str",
+                    "lastModifiedAt": "2020-02-20 00:00:00",
+                    "lastModifiedBy": "str",
+                    "lastModifiedByType": "str",
+                },
                 "type": "str",
             },
+            api_version="2024-11-01",
+        )
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
+    async def test_domains_delete_ownership_identifier(self, resource_group):
+        response = await self.client.domains.delete_ownership_identifier(
+            resource_group_name=resource_group.name,
+            domain_name="str",
+            name="str",
             api_version="2024-11-01",
         )
 

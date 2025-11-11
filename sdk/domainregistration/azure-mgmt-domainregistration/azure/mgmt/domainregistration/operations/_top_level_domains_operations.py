@@ -50,7 +50,7 @@ def build_list_request(subscription_id: str, **kwargs: Any) -> HttpRequest:
         "template_url", "/subscriptions/{subscriptionId}/providers/Microsoft.DomainRegistration/topLevelDomains"
     )
     path_format_arguments = {
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str", min_length=1),
     }
 
     _url: str = _url.format(**path_format_arguments)  # type: ignore
@@ -76,8 +76,8 @@ def build_get_request(name: str, subscription_id: str, **kwargs: Any) -> HttpReq
         "template_url", "/subscriptions/{subscriptionId}/providers/Microsoft.DomainRegistration/topLevelDomains/{name}"
     )
     path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str", min_length=1),
         "name": _SERIALIZER.url("name", name, "str"),
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
     }
 
     _url: str = _url.format(**path_format_arguments)  # type: ignore
@@ -105,8 +105,8 @@ def build_list_agreements_request(name: str, subscription_id: str, **kwargs: Any
         "/subscriptions/{subscriptionId}/providers/Microsoft.DomainRegistration/topLevelDomains/{name}/listAgreements",
     )
     path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str", min_length=1),
         "name": _SERIALIZER.url("name", name, "str"),
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
     }
 
     _url: str = _url.format(**path_format_arguments)  # type: ignore

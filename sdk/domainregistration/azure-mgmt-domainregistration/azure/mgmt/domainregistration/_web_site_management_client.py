@@ -39,8 +39,7 @@ class WebSiteManagementClient:
     :vartype top_level_domains: azure.mgmt.domainregistration.operations.TopLevelDomainsOperations
     :param credential: Credential needed for the client to connect to Azure. Required.
     :type credential: ~azure.core.credentials.TokenCredential
-    :param subscription_id: Your Azure subscription ID. This is a GUID-formatted string (e.g.
-     00000000-0000-0000-0000-000000000000). Required.
+    :param subscription_id: The ID of the target subscription. Required.
     :type subscription_id: str
     :param base_url: Service URL. Default value is None.
     :type base_url: str

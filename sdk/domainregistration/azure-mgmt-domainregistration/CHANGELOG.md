@@ -1,5 +1,7 @@
 # Release History
 
-## 1.0.0b1 (2025-10-23)
+## 1.0.0b1 (2025-11-11)
 
-skip changelog generation
+### Other Changes
+
+  - Initial version

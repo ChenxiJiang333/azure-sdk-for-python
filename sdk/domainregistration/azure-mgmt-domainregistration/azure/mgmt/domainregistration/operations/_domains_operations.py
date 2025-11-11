@@ -56,7 +56,7 @@ def build_check_availability_request(subscription_id: str, **kwargs: Any) -> Htt
         "template_url", "/subscriptions/{subscriptionId}/providers/Microsoft.DomainRegistration/checkDomainAvailability"
     )
     path_format_arguments = {
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str", min_length=1),
     }
 
     _url: str = _url.format(**path_format_arguments)  # type: ignore
@@ -82,7 +82,7 @@ def build_list_request(subscription_id: str, **kwargs: Any) -> HttpRequest:
     # Construct URL
     _url = kwargs.pop("template_url", "/subscriptions/{subscriptionId}/providers/Microsoft.DomainRegistration/domains")
     path_format_arguments = {
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str", min_length=1),
     }
 
     _url: str = _url.format(**path_format_arguments)  # type: ignore
@@ -110,7 +110,7 @@ def build_get_control_center_sso_request_request(  # pylint: disable=name-too-lo
         "template_url", "/subscriptions/{subscriptionId}/providers/Microsoft.DomainRegistration/generateSsoRequest"
     )
     path_format_arguments = {
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str", min_length=1),
     }
 
     _url: str = _url.format(**path_format_arguments)  # type: ignore
@@ -138,7 +138,7 @@ def build_list_recommendations_request(subscription_id: str, **kwargs: Any) -> H
         "/subscriptions/{subscriptionId}/providers/Microsoft.DomainRegistration/listDomainRecommendations",
     )
     path_format_arguments = {
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str", min_length=1),
     }
 
     _url: str = _url.format(**path_format_arguments)  # type: ignore
@@ -167,15 +167,10 @@ def build_list_by_resource_group_request(resource_group_name: str, subscription_
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DomainRegistration/domains",
     )
     path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str", min_length=1),
         "resourceGroupName": _SERIALIZER.url(
-            "resource_group_name",
-            resource_group_name,
-            "str",
-            max_length=90,
-            min_length=1,
-            pattern=r"^[-\w\._\(\)]+[^\.]$",
+            "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
     }
 
     _url: str = _url.format(**path_format_arguments)  # type: ignore
@@ -202,16 +197,11 @@ def build_get_request(resource_group_name: str, domain_name: str, subscription_i
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DomainRegistration/domains/{domainName}",
     )
     path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str", min_length=1),
         "resourceGroupName": _SERIALIZER.url(
-            "resource_group_name",
-            resource_group_name,
-            "str",
-            max_length=90,
-            min_length=1,
-            pattern=r"^[-\w\._\(\)]+[^\.]$",
+            "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
-        "domainName": _SERIALIZER.url("domain_name", domain_name, "str"),
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
+        "domainName": _SERIALIZER.url("domain_name", domain_name, "str", pattern=r"[a-zA-Z0-9][a-zA-Z0-9\.-]+"),
     }
 
     _url: str = _url.format(**path_format_arguments)  # type: ignore
@@ -241,16 +231,11 @@ def build_create_or_update_request(
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DomainRegistration/domains/{domainName}",
     )
     path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str", min_length=1),
         "resourceGroupName": _SERIALIZER.url(
-            "resource_group_name",
-            resource_group_name,
-            "str",
-            max_length=90,
-            min_length=1,
-            pattern=r"^[-\w\._\(\)]+[^\.]$",
+            "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
         "domainName": _SERIALIZER.url("domain_name", domain_name, "str", pattern=r"[a-zA-Z0-9][a-zA-Z0-9\.-]+"),
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
     }
 
     _url: str = _url.format(**path_format_arguments)  # type: ignore
@@ -264,6 +249,42 @@ def build_create_or_update_request(
     _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
 
     return HttpRequest(method="PUT", url=_url, params=_params, headers=_headers, **kwargs)
+
+
+def build_update_request(
+    resource_group_name: str, domain_name: str, subscription_id: str, **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2024-11-01"))
+    content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+    accept = _headers.pop("Accept", "application/json")
+
+    # Construct URL
+    _url = kwargs.pop(
+        "template_url",
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DomainRegistration/domains/{domainName}",
+    )
+    path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str", min_length=1),
+        "resourceGroupName": _SERIALIZER.url(
+            "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
+        ),
+        "domainName": _SERIALIZER.url("domain_name", domain_name, "str", pattern=r"[a-zA-Z0-9][a-zA-Z0-9\.-]+"),
+    }
+
+    _url: str = _url.format(**path_format_arguments)  # type: ignore
+
+    # Construct parameters
+    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
+
+    # Construct headers
+    if content_type is not None:
+        _headers["Content-Type"] = _SERIALIZER.header("content_type", content_type, "str")
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(method="PATCH", url=_url, params=_params, headers=_headers, **kwargs)
 
 
 def build_delete_request(
@@ -286,72 +307,26 @@ def build_delete_request(
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DomainRegistration/domains/{domainName}",
     )
     path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str", min_length=1),
         "resourceGroupName": _SERIALIZER.url(
-            "resource_group_name",
-            resource_group_name,
-            "str",
-            max_length=90,
-            min_length=1,
-            pattern=r"^[-\w\._\(\)]+[^\.]$",
+            "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
-        "domainName": _SERIALIZER.url("domain_name", domain_name, "str"),
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
+        "domainName": _SERIALIZER.url("domain_name", domain_name, "str", pattern=r"[a-zA-Z0-9][a-zA-Z0-9\.-]+"),
     }
 
     _url: str = _url.format(**path_format_arguments)  # type: ignore
 
     # Construct parameters
+    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
     if force_hard_delete_domain is not None:
         _params["forceHardDeleteDomain"] = _SERIALIZER.query(
             "force_hard_delete_domain", force_hard_delete_domain, "bool"
         )
-    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
 
     # Construct headers
     _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
 
     return HttpRequest(method="DELETE", url=_url, params=_params, headers=_headers, **kwargs)
-
-
-def build_update_request(
-    resource_group_name: str, domain_name: str, subscription_id: str, **kwargs: Any
-) -> HttpRequest:
-    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2024-11-01"))
-    content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
-    accept = _headers.pop("Accept", "application/json")
-
-    # Construct URL
-    _url = kwargs.pop(
-        "template_url",
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DomainRegistration/domains/{domainName}",
-    )
-    path_format_arguments = {
-        "resourceGroupName": _SERIALIZER.url(
-            "resource_group_name",
-            resource_group_name,
-            "str",
-            max_length=90,
-            min_length=1,
-            pattern=r"^[-\w\._\(\)]+[^\.]$",
-        ),
-        "domainName": _SERIALIZER.url("domain_name", domain_name, "str", pattern=r"[a-zA-Z0-9][a-zA-Z0-9\.-]+"),
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
-    }
-
-    _url: str = _url.format(**path_format_arguments)  # type: ignore
-
-    # Construct parameters
-    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
-
-    # Construct headers
-    if content_type is not None:
-        _headers["Content-Type"] = _SERIALIZER.header("content_type", content_type, "str")
-    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
-
-    return HttpRequest(method="PATCH", url=_url, params=_params, headers=_headers, **kwargs)
 
 
 def build_list_ownership_identifiers_request(
@@ -369,16 +344,11 @@ def build_list_ownership_identifiers_request(
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DomainRegistration/domains/{domainName}/domainOwnershipIdentifiers",
     )
     path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str", min_length=1),
         "resourceGroupName": _SERIALIZER.url(
-            "resource_group_name",
-            resource_group_name,
-            "str",
-            max_length=90,
-            min_length=1,
-            pattern=r"^[-\w\._\(\)]+[^\.]$",
+            "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
-        "domainName": _SERIALIZER.url("domain_name", domain_name, "str"),
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
+        "domainName": _SERIALIZER.url("domain_name", domain_name, "str", pattern=r"[a-zA-Z0-9][a-zA-Z0-9\.-]+"),
     }
 
     _url: str = _url.format(**path_format_arguments)  # type: ignore
@@ -407,17 +377,12 @@ def build_get_ownership_identifier_request(
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DomainRegistration/domains/{domainName}/domainOwnershipIdentifiers/{name}",
     )
     path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str", min_length=1),
         "resourceGroupName": _SERIALIZER.url(
-            "resource_group_name",
-            resource_group_name,
-            "str",
-            max_length=90,
-            min_length=1,
-            pattern=r"^[-\w\._\(\)]+[^\.]$",
+            "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
-        "domainName": _SERIALIZER.url("domain_name", domain_name, "str"),
+        "domainName": _SERIALIZER.url("domain_name", domain_name, "str", pattern=r"[a-zA-Z0-9][a-zA-Z0-9\.-]+"),
         "name": _SERIALIZER.url("name", name, "str"),
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
     }
 
     _url: str = _url.format(**path_format_arguments)  # type: ignore
@@ -447,17 +412,12 @@ def build_create_or_update_ownership_identifier_request(  # pylint: disable=name
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DomainRegistration/domains/{domainName}/domainOwnershipIdentifiers/{name}",
     )
     path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str", min_length=1),
         "resourceGroupName": _SERIALIZER.url(
-            "resource_group_name",
-            resource_group_name,
-            "str",
-            max_length=90,
-            min_length=1,
-            pattern=r"^[-\w\._\(\)]+[^\.]$",
+            "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
-        "domainName": _SERIALIZER.url("domain_name", domain_name, "str"),
+        "domainName": _SERIALIZER.url("domain_name", domain_name, "str", pattern=r"[a-zA-Z0-9][a-zA-Z0-9\.-]+"),
         "name": _SERIALIZER.url("name", name, "str"),
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
     }
 
     _url: str = _url.format(**path_format_arguments)  # type: ignore
@@ -471,45 +431,6 @@ def build_create_or_update_ownership_identifier_request(  # pylint: disable=name
     _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
 
     return HttpRequest(method="PUT", url=_url, params=_params, headers=_headers, **kwargs)
-
-
-def build_delete_ownership_identifier_request(  # pylint: disable=name-too-long
-    resource_group_name: str, domain_name: str, name: str, subscription_id: str, **kwargs: Any
-) -> HttpRequest:
-    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2024-11-01"))
-    accept = _headers.pop("Accept", "application/json")
-
-    # Construct URL
-    _url = kwargs.pop(
-        "template_url",
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DomainRegistration/domains/{domainName}/domainOwnershipIdentifiers/{name}",
-    )
-    path_format_arguments = {
-        "resourceGroupName": _SERIALIZER.url(
-            "resource_group_name",
-            resource_group_name,
-            "str",
-            max_length=90,
-            min_length=1,
-            pattern=r"^[-\w\._\(\)]+[^\.]$",
-        ),
-        "domainName": _SERIALIZER.url("domain_name", domain_name, "str"),
-        "name": _SERIALIZER.url("name", name, "str"),
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
-    }
-
-    _url: str = _url.format(**path_format_arguments)  # type: ignore
-
-    # Construct parameters
-    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
-
-    # Construct headers
-    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
-
-    return HttpRequest(method="DELETE", url=_url, params=_params, headers=_headers, **kwargs)
 
 
 def build_update_ownership_identifier_request(  # pylint: disable=name-too-long
@@ -528,17 +449,12 @@ def build_update_ownership_identifier_request(  # pylint: disable=name-too-long
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DomainRegistration/domains/{domainName}/domainOwnershipIdentifiers/{name}",
     )
     path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str", min_length=1),
         "resourceGroupName": _SERIALIZER.url(
-            "resource_group_name",
-            resource_group_name,
-            "str",
-            max_length=90,
-            min_length=1,
-            pattern=r"^[-\w\._\(\)]+[^\.]$",
+            "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
-        "domainName": _SERIALIZER.url("domain_name", domain_name, "str"),
+        "domainName": _SERIALIZER.url("domain_name", domain_name, "str", pattern=r"[a-zA-Z0-9][a-zA-Z0-9\.-]+"),
         "name": _SERIALIZER.url("name", name, "str"),
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
     }
 
     _url: str = _url.format(**path_format_arguments)  # type: ignore
@@ -554,6 +470,40 @@ def build_update_ownership_identifier_request(  # pylint: disable=name-too-long
     return HttpRequest(method="PATCH", url=_url, params=_params, headers=_headers, **kwargs)
 
 
+def build_delete_ownership_identifier_request(  # pylint: disable=name-too-long
+    resource_group_name: str, domain_name: str, name: str, subscription_id: str, **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2024-11-01"))
+    accept = _headers.pop("Accept", "application/json")
+
+    # Construct URL
+    _url = kwargs.pop(
+        "template_url",
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DomainRegistration/domains/{domainName}/domainOwnershipIdentifiers/{name}",
+    )
+    path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str", min_length=1),
+        "resourceGroupName": _SERIALIZER.url(
+            "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
+        ),
+        "domainName": _SERIALIZER.url("domain_name", domain_name, "str", pattern=r"[a-zA-Z0-9][a-zA-Z0-9\.-]+"),
+        "name": _SERIALIZER.url("name", name, "str"),
+    }
+
+    _url: str = _url.format(**path_format_arguments)  # type: ignore
+
+    # Construct parameters
+    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
+
+    # Construct headers
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(method="DELETE", url=_url, params=_params, headers=_headers, **kwargs)
+
+
 def build_renew_request(resource_group_name: str, domain_name: str, subscription_id: str, **kwargs: Any) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
@@ -567,16 +517,11 @@ def build_renew_request(resource_group_name: str, domain_name: str, subscription
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DomainRegistration/domains/{domainName}/renew",
     )
     path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str", min_length=1),
         "resourceGroupName": _SERIALIZER.url(
-            "resource_group_name",
-            resource_group_name,
-            "str",
-            max_length=90,
-            min_length=1,
-            pattern=r"^[-\w\._\(\)]+[^\.]$",
+            "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
-        "domainName": _SERIALIZER.url("domain_name", domain_name, "str"),
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
+        "domainName": _SERIALIZER.url("domain_name", domain_name, "str", pattern=r"[a-zA-Z0-9][a-zA-Z0-9\.-]+"),
     }
 
     _url: str = _url.format(**path_format_arguments)  # type: ignore
@@ -605,16 +550,11 @@ def build_transfer_out_request(
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DomainRegistration/domains/{domainName}/transferOut",
     )
     path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str", min_length=1),
         "resourceGroupName": _SERIALIZER.url(
-            "resource_group_name",
-            resource_group_name,
-            "str",
-            max_length=90,
-            min_length=1,
-            pattern=r"^[-\w\._\(\)]+[^\.]$",
+            "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
-        "domainName": _SERIALIZER.url("domain_name", domain_name, "str"),
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
+        "domainName": _SERIALIZER.url("domain_name", domain_name, "str", pattern=r"[a-zA-Z0-9][a-zA-Z0-9\.-]+"),
     }
 
     _url: str = _url.format(**path_format_arguments)  # type: ignore
@@ -655,7 +595,7 @@ class DomainsOperations:
 
         Description for Check if a domain is available for registration.
 
-        :param identifier: Name of the domain. Required.
+        :param identifier: The request body. Required.
         :type identifier: ~azure.mgmt.domainregistration.models.NameIdentifier
         :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
          Default value is "application/json".
@@ -673,7 +613,7 @@ class DomainsOperations:
 
         Description for Check if a domain is available for registration.
 
-        :param identifier: Name of the domain. Required.
+        :param identifier: The request body. Required.
         :type identifier: IO[bytes]
         :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
          Default value is "application/json".
@@ -691,7 +631,7 @@ class DomainsOperations:
 
         Description for Check if a domain is available for registration.
 
-        :param identifier: Name of the domain. Is either a NameIdentifier type or a IO[bytes] type.
+        :param identifier: The request body. Is either a NameIdentifier type or a IO[bytes] type.
          Required.
         :type identifier: ~azure.mgmt.domainregistration.models.NameIdentifier or IO[bytes]
         :return: DomainAvailabilityCheckResult or the result of cls(response)
@@ -891,7 +831,7 @@ class DomainsOperations:
 
         Description for Get domain name recommendations based on keywords.
 
-        :param parameters: Search parameters for domain name recommendations. Required.
+        :param parameters: The request body. Required.
         :type parameters: ~azure.mgmt.domainregistration.models.DomainRecommendationSearchParameters
         :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
          Default value is "application/json".
@@ -909,7 +849,7 @@ class DomainsOperations:
 
         Description for Get domain name recommendations based on keywords.
 
-        :param parameters: Search parameters for domain name recommendations. Required.
+        :param parameters: The request body. Required.
         :type parameters: IO[bytes]
         :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
          Default value is "application/json".
@@ -927,8 +867,8 @@ class DomainsOperations:
 
         Description for Get domain name recommendations based on keywords.
 
-        :param parameters: Search parameters for domain name recommendations. Is either a
-         DomainRecommendationSearchParameters type or a IO[bytes] type. Required.
+        :param parameters: The request body. Is either a DomainRecommendationSearchParameters type or a
+         IO[bytes] type. Required.
         :type parameters: ~azure.mgmt.domainregistration.models.DomainRecommendationSearchParameters or
          IO[bytes]
         :return: An iterator like instance of either NameIdentifier or the result of cls(response)
@@ -1019,7 +959,8 @@ class DomainsOperations:
 
         Description for Get all domains in a resource group.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :return: An iterator like instance of either Domain or the result of cls(response)
         :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.domainregistration.models.Domain]
@@ -1099,7 +1040,8 @@ class DomainsOperations:
 
         Description for Get a domain.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param domain_name: Name of the domain. Required.
         :type domain_name: str
@@ -1206,10 +1148,14 @@ class DomainsOperations:
             error = self._deserialize.failsafe_deserialize(_models.DefaultErrorResponse, pipeline_response)
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
+        response_headers = {}
+        if response.status_code == 202:
+            response_headers["Location"] = self._deserialize("str", response.headers.get("Location"))
+
         deserialized = response.stream_download(self._client._pipeline, decompress=_decompress)
 
         if cls:
-            return cls(pipeline_response, deserialized, {})  # type: ignore
+            return cls(pipeline_response, deserialized, response_headers)  # type: ignore
 
         return deserialized  # type: ignore
 
@@ -1227,7 +1173,8 @@ class DomainsOperations:
 
         Description for Creates or updates a domain.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param domain_name: Name of the domain. Required.
         :type domain_name: str
@@ -1255,7 +1202,8 @@ class DomainsOperations:
 
         Description for Creates or updates a domain.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param domain_name: Name of the domain. Required.
         :type domain_name: str
@@ -1277,7 +1225,8 @@ class DomainsOperations:
 
         Description for Creates or updates a domain.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param domain_name: Name of the domain. Required.
         :type domain_name: str
@@ -1319,7 +1268,9 @@ class DomainsOperations:
             return deserialized
 
         if polling is True:
-            polling_method: PollingMethod = cast(PollingMethod, ARMPolling(lro_delay, **kwargs))
+            polling_method: PollingMethod = cast(
+                PollingMethod, ARMPolling(lro_delay, lro_options={"final-state-via": "location"}, **kwargs)
+            )
         elif polling is False:
             polling_method = cast(PollingMethod, NoPolling())
         else:
@@ -1335,66 +1286,6 @@ class DomainsOperations:
             self._client, raw_result, get_long_running_output, polling_method  # type: ignore
         )
 
-    @distributed_trace
-    def delete(  # pylint: disable=inconsistent-return-statements
-        self, resource_group_name: str, domain_name: str, force_hard_delete_domain: Optional[bool] = None, **kwargs: Any
-    ) -> None:
-        """Delete a domain.
-
-        Description for Delete a domain.
-
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
-        :type resource_group_name: str
-        :param domain_name: Name of the domain. Required.
-        :type domain_name: str
-        :param force_hard_delete_domain: Specify :code:`<code>true</code>` to delete the domain
-         immediately. The default is :code:`<code>false</code>` which deletes the domain after 24 hours.
-         Default value is None.
-        :type force_hard_delete_domain: bool
-        :return: None or the result of cls(response)
-        :rtype: None
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        error_map: MutableMapping = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        _headers = kwargs.pop("headers", {}) or {}
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
-        cls: ClsType[None] = kwargs.pop("cls", None)
-
-        _request = build_delete_request(
-            resource_group_name=resource_group_name,
-            domain_name=domain_name,
-            subscription_id=self._config.subscription_id,
-            force_hard_delete_domain=force_hard_delete_domain,
-            api_version=api_version,
-            headers=_headers,
-            params=_params,
-        )
-        _request.url = self._client.format_url(_request.url)
-
-        _stream = False
-        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            _request, stream=_stream, **kwargs
-        )
-
-        response = pipeline_response.http_response
-
-        if response.status_code not in [200, 204]:
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = self._deserialize.failsafe_deserialize(_models.DefaultErrorResponse, pipeline_response)
-            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
-
-        if cls:
-            return cls(pipeline_response, None, {})  # type: ignore
-
     @overload
     def update(
         self,
@@ -1409,7 +1300,8 @@ class DomainsOperations:
 
         Description for Creates or updates a domain.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param domain_name: Name of the domain. Required.
         :type domain_name: str
@@ -1437,7 +1329,8 @@ class DomainsOperations:
 
         Description for Creates or updates a domain.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param domain_name: Name of the domain. Required.
         :type domain_name: str
@@ -1463,7 +1356,8 @@ class DomainsOperations:
 
         Description for Creates or updates a domain.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param domain_name: Name of the domain. Required.
         :type domain_name: str
@@ -1522,12 +1416,77 @@ class DomainsOperations:
             error = self._deserialize.failsafe_deserialize(_models.DefaultErrorResponse, pipeline_response)
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
+        response_headers = {}
+        if response.status_code == 202:
+            response_headers["Retry-After"] = self._deserialize("int", response.headers.get("Retry-After"))
+
         deserialized = self._deserialize("Domain", pipeline_response.http_response)
 
         if cls:
-            return cls(pipeline_response, deserialized, {})  # type: ignore
+            return cls(pipeline_response, deserialized, response_headers)  # type: ignore
 
         return deserialized  # type: ignore
+
+    @distributed_trace
+    def delete(  # pylint: disable=inconsistent-return-statements
+        self, resource_group_name: str, domain_name: str, force_hard_delete_domain: Optional[bool] = None, **kwargs: Any
+    ) -> None:
+        """Delete a domain.
+
+        Description for Delete a domain.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param domain_name: Name of the domain. Required.
+        :type domain_name: str
+        :param force_hard_delete_domain: Specify :code:`<code>true</code>` to delete the domain
+         immediately. The default is :code:`<code>false</code>` which deletes the domain after 24 hours.
+         Default value is None.
+        :type force_hard_delete_domain: bool
+        :return: None or the result of cls(response)
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        _request = build_delete_request(
+            resource_group_name=resource_group_name,
+            domain_name=domain_name,
+            subscription_id=self._config.subscription_id,
+            force_hard_delete_domain=force_hard_delete_domain,
+            api_version=api_version,
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200, 204]:
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            error = self._deserialize.failsafe_deserialize(_models.DefaultErrorResponse, pipeline_response)
+            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
+
+        if cls:
+            return cls(pipeline_response, None, {})  # type: ignore
 
     @distributed_trace
     def list_ownership_identifiers(
@@ -1537,9 +1496,10 @@ class DomainsOperations:
 
         Description for Lists domain ownership identifiers.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
-        :param domain_name: Name of domain. Required.
+        :param domain_name: Name of the domain. Required.
         :type domain_name: str
         :return: An iterator like instance of either DomainOwnershipIdentifier or the result of
          cls(response)
@@ -1624,9 +1584,10 @@ class DomainsOperations:
 
         Description for Get ownership identifier for domain.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
-        :param domain_name: Name of domain. Required.
+        :param domain_name: Name of the domain. Required.
         :type domain_name: str
         :param name: Name of identifier. Required.
         :type name: str
@@ -1695,9 +1656,10 @@ class DomainsOperations:
         Description for Creates an ownership identifier for a domain or updates identifier details for
         an existing identifier.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
-        :param domain_name: Name of domain. Required.
+        :param domain_name: Name of the domain. Required.
         :type domain_name: str
         :param name: Name of identifier. Required.
         :type name: str
@@ -1730,9 +1692,10 @@ class DomainsOperations:
         Description for Creates an ownership identifier for a domain or updates identifier details for
         an existing identifier.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
-        :param domain_name: Name of domain. Required.
+        :param domain_name: Name of the domain. Required.
         :type domain_name: str
         :param name: Name of identifier. Required.
         :type name: str
@@ -1762,9 +1725,10 @@ class DomainsOperations:
         Description for Creates an ownership identifier for a domain or updates identifier details for
         an existing identifier.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
-        :param domain_name: Name of domain. Required.
+        :param domain_name: Name of the domain. Required.
         :type domain_name: str
         :param name: Name of identifier. Required.
         :type name: str
@@ -1832,64 +1796,6 @@ class DomainsOperations:
 
         return deserialized  # type: ignore
 
-    @distributed_trace
-    def delete_ownership_identifier(  # pylint: disable=inconsistent-return-statements
-        self, resource_group_name: str, domain_name: str, name: str, **kwargs: Any
-    ) -> None:
-        """Delete ownership identifier for domain.
-
-        Description for Delete ownership identifier for domain.
-
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
-        :type resource_group_name: str
-        :param domain_name: Name of domain. Required.
-        :type domain_name: str
-        :param name: Name of identifier. Required.
-        :type name: str
-        :return: None or the result of cls(response)
-        :rtype: None
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        error_map: MutableMapping = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        _headers = kwargs.pop("headers", {}) or {}
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
-        cls: ClsType[None] = kwargs.pop("cls", None)
-
-        _request = build_delete_ownership_identifier_request(
-            resource_group_name=resource_group_name,
-            domain_name=domain_name,
-            name=name,
-            subscription_id=self._config.subscription_id,
-            api_version=api_version,
-            headers=_headers,
-            params=_params,
-        )
-        _request.url = self._client.format_url(_request.url)
-
-        _stream = False
-        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            _request, stream=_stream, **kwargs
-        )
-
-        response = pipeline_response.http_response
-
-        if response.status_code not in [200, 204]:
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = self._deserialize.failsafe_deserialize(_models.DefaultErrorResponse, pipeline_response)
-            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
-
-        if cls:
-            return cls(pipeline_response, None, {})  # type: ignore
-
     @overload
     def update_ownership_identifier(
         self,
@@ -1907,9 +1813,10 @@ class DomainsOperations:
         Description for Creates an ownership identifier for a domain or updates identifier details for
         an existing identifier.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
-        :param domain_name: Name of domain. Required.
+        :param domain_name: Name of the domain. Required.
         :type domain_name: str
         :param name: Name of identifier. Required.
         :type name: str
@@ -1942,9 +1849,10 @@ class DomainsOperations:
         Description for Creates an ownership identifier for a domain or updates identifier details for
         an existing identifier.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
-        :param domain_name: Name of domain. Required.
+        :param domain_name: Name of the domain. Required.
         :type domain_name: str
         :param name: Name of identifier. Required.
         :type name: str
@@ -1974,9 +1882,10 @@ class DomainsOperations:
         Description for Creates an ownership identifier for a domain or updates identifier details for
         an existing identifier.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
-        :param domain_name: Name of domain. Required.
+        :param domain_name: Name of the domain. Required.
         :type domain_name: str
         :param name: Name of identifier. Required.
         :type name: str
@@ -2045,6 +1954,65 @@ class DomainsOperations:
         return deserialized  # type: ignore
 
     @distributed_trace
+    def delete_ownership_identifier(  # pylint: disable=inconsistent-return-statements
+        self, resource_group_name: str, domain_name: str, name: str, **kwargs: Any
+    ) -> None:
+        """Delete ownership identifier for domain.
+
+        Description for Delete ownership identifier for domain.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param domain_name: Name of the domain. Required.
+        :type domain_name: str
+        :param name: Name of identifier. Required.
+        :type name: str
+        :return: None or the result of cls(response)
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        _request = build_delete_ownership_identifier_request(
+            resource_group_name=resource_group_name,
+            domain_name=domain_name,
+            name=name,
+            subscription_id=self._config.subscription_id,
+            api_version=api_version,
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200, 204]:
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            error = self._deserialize.failsafe_deserialize(_models.DefaultErrorResponse, pipeline_response)
+            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
+
+        if cls:
+            return cls(pipeline_response, None, {})  # type: ignore
+
+    @distributed_trace
     def renew(  # pylint: disable=inconsistent-return-statements
         self, resource_group_name: str, domain_name: str, **kwargs: Any
     ) -> None:
@@ -2052,7 +2020,8 @@ class DomainsOperations:
 
         Description for Renew a domain.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param domain_name: Name of the domain. Required.
         :type domain_name: str
@@ -2096,8 +2065,12 @@ class DomainsOperations:
             error = self._deserialize.failsafe_deserialize(_models.DefaultErrorResponse, pipeline_response)
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
+        response_headers = {}
+        if response.status_code == 202:
+            response_headers["Retry-After"] = self._deserialize("int", response.headers.get("Retry-After"))
+
         if cls:
-            return cls(pipeline_response, None, {})  # type: ignore
+            return cls(pipeline_response, None, response_headers)  # type: ignore
 
     @distributed_trace
     def transfer_out(self, resource_group_name: str, domain_name: str, **kwargs: Any) -> _models.Domain:
@@ -2105,9 +2078,10 @@ class DomainsOperations:
 
         Transfer out domain to another registrar.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
-        :param domain_name: Name of domain. Required.
+        :param domain_name: Name of the domain. Required.
         :type domain_name: str
         :return: Domain or the result of cls(response)
         :rtype: ~azure.mgmt.domainregistration.models.Domain
