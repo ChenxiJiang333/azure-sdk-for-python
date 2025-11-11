@@ -55,7 +55,7 @@ def build_list_request(subscription_id: str, **kwargs: Any) -> HttpRequest:
         "template_url", "/subscriptions/{subscriptionId}/providers/Microsoft.CertificateRegistration/certificateOrders"
     )
     path_format_arguments = {
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str", min_length=1),
     }
 
     _url: str = _url.format(**path_format_arguments)  # type: ignore
@@ -85,7 +85,7 @@ def build_validate_purchase_information_request(  # pylint: disable=name-too-lon
         "/subscriptions/{subscriptionId}/providers/Microsoft.CertificateRegistration/validateCertificateRegistrationInformation",
     )
     path_format_arguments = {
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str", min_length=1),
     }
 
     _url: str = _url.format(**path_format_arguments)  # type: ignore
@@ -114,15 +114,10 @@ def build_list_by_resource_group_request(resource_group_name: str, subscription_
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CertificateRegistration/certificateOrders",
     )
     path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str", min_length=1),
         "resourceGroupName": _SERIALIZER.url(
-            "resource_group_name",
-            resource_group_name,
-            "str",
-            max_length=90,
-            min_length=1,
-            pattern=r"^[-\w\._\(\)]+[^\.]$",
+            "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
     }
 
     _url: str = _url.format(**path_format_arguments)  # type: ignore
@@ -151,16 +146,11 @@ def build_get_request(
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CertificateRegistration/certificateOrders/{certificateOrderName}",
     )
     path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str", min_length=1),
         "resourceGroupName": _SERIALIZER.url(
-            "resource_group_name",
-            resource_group_name,
-            "str",
-            max_length=90,
-            min_length=1,
-            pattern=r"^[-\w\._\(\)]+[^\.]$",
+            "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
         "certificateOrderName": _SERIALIZER.url("certificate_order_name", certificate_order_name, "str"),
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
     }
 
     _url: str = _url.format(**path_format_arguments)  # type: ignore
@@ -190,16 +180,11 @@ def build_create_or_update_request(
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CertificateRegistration/certificateOrders/{certificateOrderName}",
     )
     path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str", min_length=1),
         "resourceGroupName": _SERIALIZER.url(
-            "resource_group_name",
-            resource_group_name,
-            "str",
-            max_length=90,
-            min_length=1,
-            pattern=r"^[-\w\._\(\)]+[^\.]$",
+            "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
         "certificateOrderName": _SERIALIZER.url("certificate_order_name", certificate_order_name, "str"),
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
     }
 
     _url: str = _url.format(**path_format_arguments)  # type: ignore
@@ -213,44 +198,6 @@ def build_create_or_update_request(
     _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
 
     return HttpRequest(method="PUT", url=_url, params=_params, headers=_headers, **kwargs)
-
-
-def build_delete_request(
-    resource_group_name: str, certificate_order_name: str, subscription_id: str, **kwargs: Any
-) -> HttpRequest:
-    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2024-11-01"))
-    accept = _headers.pop("Accept", "application/json")
-
-    # Construct URL
-    _url = kwargs.pop(
-        "template_url",
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CertificateRegistration/certificateOrders/{certificateOrderName}",
-    )
-    path_format_arguments = {
-        "resourceGroupName": _SERIALIZER.url(
-            "resource_group_name",
-            resource_group_name,
-            "str",
-            max_length=90,
-            min_length=1,
-            pattern=r"^[-\w\._\(\)]+[^\.]$",
-        ),
-        "certificateOrderName": _SERIALIZER.url("certificate_order_name", certificate_order_name, "str"),
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
-    }
-
-    _url: str = _url.format(**path_format_arguments)  # type: ignore
-
-    # Construct parameters
-    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
-
-    # Construct headers
-    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
-
-    return HttpRequest(method="DELETE", url=_url, params=_params, headers=_headers, **kwargs)
 
 
 def build_update_request(
@@ -269,16 +216,11 @@ def build_update_request(
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CertificateRegistration/certificateOrders/{certificateOrderName}",
     )
     path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str", min_length=1),
         "resourceGroupName": _SERIALIZER.url(
-            "resource_group_name",
-            resource_group_name,
-            "str",
-            max_length=90,
-            min_length=1,
-            pattern=r"^[-\w\._\(\)]+[^\.]$",
+            "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
         "certificateOrderName": _SERIALIZER.url("certificate_order_name", certificate_order_name, "str"),
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
     }
 
     _url: str = _url.format(**path_format_arguments)  # type: ignore
@@ -292,6 +234,39 @@ def build_update_request(
     _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
 
     return HttpRequest(method="PATCH", url=_url, params=_params, headers=_headers, **kwargs)
+
+
+def build_delete_request(
+    resource_group_name: str, certificate_order_name: str, subscription_id: str, **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2024-11-01"))
+    accept = _headers.pop("Accept", "application/json")
+
+    # Construct URL
+    _url = kwargs.pop(
+        "template_url",
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CertificateRegistration/certificateOrders/{certificateOrderName}",
+    )
+    path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str", min_length=1),
+        "resourceGroupName": _SERIALIZER.url(
+            "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
+        ),
+        "certificateOrderName": _SERIALIZER.url("certificate_order_name", certificate_order_name, "str"),
+    }
+
+    _url: str = _url.format(**path_format_arguments)  # type: ignore
+
+    # Construct parameters
+    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
+
+    # Construct headers
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(method="DELETE", url=_url, params=_params, headers=_headers, **kwargs)
 
 
 def build_list_certificates_request(
@@ -309,16 +284,11 @@ def build_list_certificates_request(
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CertificateRegistration/certificateOrders/{certificateOrderName}/certificates",
     )
     path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str", min_length=1),
         "resourceGroupName": _SERIALIZER.url(
-            "resource_group_name",
-            resource_group_name,
-            "str",
-            max_length=90,
-            min_length=1,
-            pattern=r"^[-\w\._\(\)]+[^\.]$",
+            "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
         "certificateOrderName": _SERIALIZER.url("certificate_order_name", certificate_order_name, "str"),
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
     }
 
     _url: str = _url.format(**path_format_arguments)  # type: ignore
@@ -347,17 +317,12 @@ def build_get_certificate_request(
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CertificateRegistration/certificateOrders/{certificateOrderName}/certificates/{name}",
     )
     path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str", min_length=1),
         "resourceGroupName": _SERIALIZER.url(
-            "resource_group_name",
-            resource_group_name,
-            "str",
-            max_length=90,
-            min_length=1,
-            pattern=r"^[-\w\._\(\)]+[^\.]$",
+            "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
         "certificateOrderName": _SERIALIZER.url("certificate_order_name", certificate_order_name, "str"),
         "name": _SERIALIZER.url("name", name, "str"),
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
     }
 
     _url: str = _url.format(**path_format_arguments)  # type: ignore
@@ -387,17 +352,12 @@ def build_create_or_update_certificate_request(  # pylint: disable=name-too-long
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CertificateRegistration/certificateOrders/{certificateOrderName}/certificates/{name}",
     )
     path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str", min_length=1),
         "resourceGroupName": _SERIALIZER.url(
-            "resource_group_name",
-            resource_group_name,
-            "str",
-            max_length=90,
-            min_length=1,
-            pattern=r"^[-\w\._\(\)]+[^\.]$",
+            "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
         "certificateOrderName": _SERIALIZER.url("certificate_order_name", certificate_order_name, "str"),
         "name": _SERIALIZER.url("name", name, "str"),
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
     }
 
     _url: str = _url.format(**path_format_arguments)  # type: ignore
@@ -411,45 +371,6 @@ def build_create_or_update_certificate_request(  # pylint: disable=name-too-long
     _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
 
     return HttpRequest(method="PUT", url=_url, params=_params, headers=_headers, **kwargs)
-
-
-def build_delete_certificate_request(
-    resource_group_name: str, certificate_order_name: str, name: str, subscription_id: str, **kwargs: Any
-) -> HttpRequest:
-    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2024-11-01"))
-    accept = _headers.pop("Accept", "application/json")
-
-    # Construct URL
-    _url = kwargs.pop(
-        "template_url",
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CertificateRegistration/certificateOrders/{certificateOrderName}/certificates/{name}",
-    )
-    path_format_arguments = {
-        "resourceGroupName": _SERIALIZER.url(
-            "resource_group_name",
-            resource_group_name,
-            "str",
-            max_length=90,
-            min_length=1,
-            pattern=r"^[-\w\._\(\)]+[^\.]$",
-        ),
-        "certificateOrderName": _SERIALIZER.url("certificate_order_name", certificate_order_name, "str"),
-        "name": _SERIALIZER.url("name", name, "str"),
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
-    }
-
-    _url: str = _url.format(**path_format_arguments)  # type: ignore
-
-    # Construct parameters
-    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
-
-    # Construct headers
-    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
-
-    return HttpRequest(method="DELETE", url=_url, params=_params, headers=_headers, **kwargs)
 
 
 def build_update_certificate_request(
@@ -468,17 +389,12 @@ def build_update_certificate_request(
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CertificateRegistration/certificateOrders/{certificateOrderName}/certificates/{name}",
     )
     path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str", min_length=1),
         "resourceGroupName": _SERIALIZER.url(
-            "resource_group_name",
-            resource_group_name,
-            "str",
-            max_length=90,
-            min_length=1,
-            pattern=r"^[-\w\._\(\)]+[^\.]$",
+            "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
         "certificateOrderName": _SERIALIZER.url("certificate_order_name", certificate_order_name, "str"),
         "name": _SERIALIZER.url("name", name, "str"),
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
     }
 
     _url: str = _url.format(**path_format_arguments)  # type: ignore
@@ -492,6 +408,40 @@ def build_update_certificate_request(
     _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
 
     return HttpRequest(method="PATCH", url=_url, params=_params, headers=_headers, **kwargs)
+
+
+def build_delete_certificate_request(
+    resource_group_name: str, certificate_order_name: str, name: str, subscription_id: str, **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2024-11-01"))
+    accept = _headers.pop("Accept", "application/json")
+
+    # Construct URL
+    _url = kwargs.pop(
+        "template_url",
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CertificateRegistration/certificateOrders/{certificateOrderName}/certificates/{name}",
+    )
+    path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str", min_length=1),
+        "resourceGroupName": _SERIALIZER.url(
+            "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
+        ),
+        "certificateOrderName": _SERIALIZER.url("certificate_order_name", certificate_order_name, "str"),
+        "name": _SERIALIZER.url("name", name, "str"),
+    }
+
+    _url: str = _url.format(**path_format_arguments)  # type: ignore
+
+    # Construct parameters
+    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
+
+    # Construct headers
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(method="DELETE", url=_url, params=_params, headers=_headers, **kwargs)
 
 
 def build_reissue_request(
@@ -510,16 +460,11 @@ def build_reissue_request(
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CertificateRegistration/certificateOrders/{certificateOrderName}/reissue",
     )
     path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str", min_length=1),
         "resourceGroupName": _SERIALIZER.url(
-            "resource_group_name",
-            resource_group_name,
-            "str",
-            max_length=90,
-            min_length=1,
-            pattern=r"^[-\w\._\(\)]+[^\.]$",
+            "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
         "certificateOrderName": _SERIALIZER.url("certificate_order_name", certificate_order_name, "str"),
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
     }
 
     _url: str = _url.format(**path_format_arguments)  # type: ignore
@@ -551,16 +496,11 @@ def build_renew_request(
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CertificateRegistration/certificateOrders/{certificateOrderName}/renew",
     )
     path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str", min_length=1),
         "resourceGroupName": _SERIALIZER.url(
-            "resource_group_name",
-            resource_group_name,
-            "str",
-            max_length=90,
-            min_length=1,
-            pattern=r"^[-\w\._\(\)]+[^\.]$",
+            "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
         "certificateOrderName": _SERIALIZER.url("certificate_order_name", certificate_order_name, "str"),
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
     }
 
     _url: str = _url.format(**path_format_arguments)  # type: ignore
@@ -591,16 +531,11 @@ def build_resend_email_request(
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CertificateRegistration/certificateOrders/{certificateOrderName}/resendEmail",
     )
     path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str", min_length=1),
         "resourceGroupName": _SERIALIZER.url(
-            "resource_group_name",
-            resource_group_name,
-            "str",
-            max_length=90,
-            min_length=1,
-            pattern=r"^[-\w\._\(\)]+[^\.]$",
+            "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
         "certificateOrderName": _SERIALIZER.url("certificate_order_name", certificate_order_name, "str"),
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
     }
 
     _url: str = _url.format(**path_format_arguments)  # type: ignore
@@ -630,16 +565,11 @@ def build_resend_request_emails_request(
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CertificateRegistration/certificateOrders/{certificateOrderName}/resendRequestEmails",
     )
     path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str", min_length=1),
         "resourceGroupName": _SERIALIZER.url(
-            "resource_group_name",
-            resource_group_name,
-            "str",
-            max_length=90,
-            min_length=1,
-            pattern=r"^[-\w\._\(\)]+[^\.]$",
+            "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
         "certificateOrderName": _SERIALIZER.url("certificate_order_name", certificate_order_name, "str"),
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
     }
 
     _url: str = _url.format(**path_format_arguments)  # type: ignore
@@ -650,6 +580,72 @@ def build_resend_request_emails_request(
     # Construct headers
     if content_type is not None:
         _headers["Content-Type"] = _SERIALIZER.header("content_type", content_type, "str")
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(method="POST", url=_url, params=_params, headers=_headers, **kwargs)
+
+
+def build_retrieve_certificate_actions_request(  # pylint: disable=name-too-long
+    resource_group_name: str, name: str, subscription_id: str, **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2024-11-01"))
+    accept = _headers.pop("Accept", "application/json")
+
+    # Construct URL
+    _url = kwargs.pop(
+        "template_url",
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CertificateRegistration/certificateOrders/{name}/retrieveCertificateActions",
+    )
+    path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str", min_length=1),
+        "resourceGroupName": _SERIALIZER.url(
+            "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
+        ),
+        "name": _SERIALIZER.url("name", name, "str"),
+    }
+
+    _url: str = _url.format(**path_format_arguments)  # type: ignore
+
+    # Construct parameters
+    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
+
+    # Construct headers
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(method="POST", url=_url, params=_params, headers=_headers, **kwargs)
+
+
+def build_retrieve_certificate_email_history_request(  # pylint: disable=name-too-long
+    resource_group_name: str, name: str, subscription_id: str, **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2024-11-01"))
+    accept = _headers.pop("Accept", "application/json")
+
+    # Construct URL
+    _url = kwargs.pop(
+        "template_url",
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CertificateRegistration/certificateOrders/{name}/retrieveEmailHistory",
+    )
+    path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str", min_length=1),
+        "resourceGroupName": _SERIALIZER.url(
+            "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
+        ),
+        "name": _SERIALIZER.url("name", name, "str"),
+    }
+
+    _url: str = _url.format(**path_format_arguments)  # type: ignore
+
+    # Construct parameters
+    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
+
+    # Construct headers
     _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
 
     return HttpRequest(method="POST", url=_url, params=_params, headers=_headers, **kwargs)
@@ -671,16 +667,11 @@ def build_retrieve_site_seal_request(
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CertificateRegistration/certificateOrders/{certificateOrderName}/retrieveSiteSeal",
     )
     path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str", min_length=1),
         "resourceGroupName": _SERIALIZER.url(
-            "resource_group_name",
-            resource_group_name,
-            "str",
-            max_length=90,
-            min_length=1,
-            pattern=r"^[-\w\._\(\)]+[^\.]$",
+            "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
         "certificateOrderName": _SERIALIZER.url("certificate_order_name", certificate_order_name, "str"),
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
     }
 
     _url: str = _url.format(**path_format_arguments)  # type: ignore
@@ -711,92 +702,11 @@ def build_verify_domain_ownership_request(
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CertificateRegistration/certificateOrders/{certificateOrderName}/verifyDomainOwnership",
     )
     path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str", min_length=1),
         "resourceGroupName": _SERIALIZER.url(
-            "resource_group_name",
-            resource_group_name,
-            "str",
-            max_length=90,
-            min_length=1,
-            pattern=r"^[-\w\._\(\)]+[^\.]$",
+            "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
         "certificateOrderName": _SERIALIZER.url("certificate_order_name", certificate_order_name, "str"),
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
-    }
-
-    _url: str = _url.format(**path_format_arguments)  # type: ignore
-
-    # Construct parameters
-    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
-
-    # Construct headers
-    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
-
-    return HttpRequest(method="POST", url=_url, params=_params, headers=_headers, **kwargs)
-
-
-def build_retrieve_certificate_actions_request(  # pylint: disable=name-too-long
-    resource_group_name: str, name: str, subscription_id: str, **kwargs: Any
-) -> HttpRequest:
-    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2024-11-01"))
-    accept = _headers.pop("Accept", "application/json")
-
-    # Construct URL
-    _url = kwargs.pop(
-        "template_url",
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CertificateRegistration/certificateOrders/{name}/retrieveCertificateActions",
-    )
-    path_format_arguments = {
-        "resourceGroupName": _SERIALIZER.url(
-            "resource_group_name",
-            resource_group_name,
-            "str",
-            max_length=90,
-            min_length=1,
-            pattern=r"^[-\w\._\(\)]+[^\.]$",
-        ),
-        "name": _SERIALIZER.url("name", name, "str"),
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
-    }
-
-    _url: str = _url.format(**path_format_arguments)  # type: ignore
-
-    # Construct parameters
-    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
-
-    # Construct headers
-    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
-
-    return HttpRequest(method="POST", url=_url, params=_params, headers=_headers, **kwargs)
-
-
-def build_retrieve_certificate_email_history_request(  # pylint: disable=name-too-long
-    resource_group_name: str, name: str, subscription_id: str, **kwargs: Any
-) -> HttpRequest:
-    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2024-11-01"))
-    accept = _headers.pop("Accept", "application/json")
-
-    # Construct URL
-    _url = kwargs.pop(
-        "template_url",
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CertificateRegistration/certificateOrders/{name}/retrieveEmailHistory",
-    )
-    path_format_arguments = {
-        "resourceGroupName": _SERIALIZER.url(
-            "resource_group_name",
-            resource_group_name,
-            "str",
-            max_length=90,
-            min_length=1,
-            pattern=r"^[-\w\._\(\)]+[^\.]$",
-        ),
-        "name": _SERIALIZER.url("name", name, "str"),
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
     }
 
     _url: str = _url.format(**path_format_arguments)  # type: ignore
@@ -920,7 +830,7 @@ class AppServiceCertificateOrdersOperations:  # pylint: disable=too-many-public-
 
         Description for Validate information for a certificate order.
 
-        :param app_service_certificate_order: Information for a certificate order. Required.
+        :param app_service_certificate_order: The request body. Required.
         :type app_service_certificate_order:
          ~azure.mgmt.certificateregistration.models.AppServiceCertificateOrder
         :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
@@ -939,7 +849,7 @@ class AppServiceCertificateOrdersOperations:  # pylint: disable=too-many-public-
 
         Description for Validate information for a certificate order.
 
-        :param app_service_certificate_order: Information for a certificate order. Required.
+        :param app_service_certificate_order: The request body. Required.
         :type app_service_certificate_order: IO[bytes]
         :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
          Default value is "application/json".
@@ -957,8 +867,8 @@ class AppServiceCertificateOrdersOperations:  # pylint: disable=too-many-public-
 
         Description for Validate information for a certificate order.
 
-        :param app_service_certificate_order: Information for a certificate order. Is either a
-         AppServiceCertificateOrder type or a IO[bytes] type. Required.
+        :param app_service_certificate_order: The request body. Is either a AppServiceCertificateOrder
+         type or a IO[bytes] type. Required.
         :type app_service_certificate_order:
          ~azure.mgmt.certificateregistration.models.AppServiceCertificateOrder or IO[bytes]
         :return: None or the result of cls(response)
@@ -1022,7 +932,8 @@ class AppServiceCertificateOrdersOperations:  # pylint: disable=too-many-public-
 
         Description for Get certificate orders in a resource group.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :return: An iterator like instance of either AppServiceCertificateOrder or the result of
          cls(response)
@@ -1106,7 +1017,8 @@ class AppServiceCertificateOrdersOperations:  # pylint: disable=too-many-public-
 
         Description for Get a certificate order.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param certificate_order_name: Name of the certificate order.. Required.
         :type certificate_order_name: str
@@ -1217,10 +1129,14 @@ class AppServiceCertificateOrdersOperations:  # pylint: disable=too-many-public-
             error = self._deserialize.failsafe_deserialize(_models.DefaultErrorResponse, pipeline_response)
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
+        response_headers = {}
+        if response.status_code == 201:
+            response_headers["Location"] = self._deserialize("str", response.headers.get("Location"))
+
         deserialized = response.stream_download(self._client._pipeline, decompress=_decompress)
 
         if cls:
-            return cls(pipeline_response, deserialized, {})  # type: ignore
+            return cls(pipeline_response, deserialized, response_headers)  # type: ignore
 
         return deserialized  # type: ignore
 
@@ -1238,9 +1154,10 @@ class AppServiceCertificateOrdersOperations:  # pylint: disable=too-many-public-
 
         Description for Create or update a certificate purchase order.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
-        :param certificate_order_name: Name of the certificate order. Required.
+        :param certificate_order_name: Name of the certificate order.. Required.
         :type certificate_order_name: str
         :param certificate_distinguished_name: Distinguished name to use for the certificate order.
          Required.
@@ -1270,9 +1187,10 @@ class AppServiceCertificateOrdersOperations:  # pylint: disable=too-many-public-
 
         Description for Create or update a certificate purchase order.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
-        :param certificate_order_name: Name of the certificate order. Required.
+        :param certificate_order_name: Name of the certificate order.. Required.
         :type certificate_order_name: str
         :param certificate_distinguished_name: Distinguished name to use for the certificate order.
          Required.
@@ -1299,9 +1217,10 @@ class AppServiceCertificateOrdersOperations:  # pylint: disable=too-many-public-
 
         Description for Create or update a certificate purchase order.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
-        :param certificate_order_name: Name of the certificate order. Required.
+        :param certificate_order_name: Name of the certificate order.. Required.
         :type certificate_order_name: str
         :param certificate_distinguished_name: Distinguished name to use for the certificate order. Is
          either a AppServiceCertificateOrder type or a IO[bytes] type. Required.
@@ -1344,7 +1263,9 @@ class AppServiceCertificateOrdersOperations:  # pylint: disable=too-many-public-
             return deserialized
 
         if polling is True:
-            polling_method: PollingMethod = cast(PollingMethod, ARMPolling(lro_delay, **kwargs))
+            polling_method: PollingMethod = cast(
+                PollingMethod, ARMPolling(lro_delay, lro_options={"final-state-via": "location"}, **kwargs)
+            )
         elif polling is False:
             polling_method = cast(PollingMethod, NoPolling())
         else:
@@ -1360,61 +1281,6 @@ class AppServiceCertificateOrdersOperations:  # pylint: disable=too-many-public-
             self._client, raw_result, get_long_running_output, polling_method  # type: ignore
         )
 
-    @distributed_trace
-    def delete(  # pylint: disable=inconsistent-return-statements
-        self, resource_group_name: str, certificate_order_name: str, **kwargs: Any
-    ) -> None:
-        """Delete an existing certificate order.
-
-        Description for Delete an existing certificate order.
-
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
-        :type resource_group_name: str
-        :param certificate_order_name: Name of the certificate order. Required.
-        :type certificate_order_name: str
-        :return: None or the result of cls(response)
-        :rtype: None
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        error_map: MutableMapping = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        _headers = kwargs.pop("headers", {}) or {}
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
-        cls: ClsType[None] = kwargs.pop("cls", None)
-
-        _request = build_delete_request(
-            resource_group_name=resource_group_name,
-            certificate_order_name=certificate_order_name,
-            subscription_id=self._config.subscription_id,
-            api_version=api_version,
-            headers=_headers,
-            params=_params,
-        )
-        _request.url = self._client.format_url(_request.url)
-
-        _stream = False
-        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            _request, stream=_stream, **kwargs
-        )
-
-        response = pipeline_response.http_response
-
-        if response.status_code not in [200, 204]:
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = self._deserialize.failsafe_deserialize(_models.DefaultErrorResponse, pipeline_response)
-            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
-
-        if cls:
-            return cls(pipeline_response, None, {})  # type: ignore
-
     @overload
     def update(
         self,
@@ -1429,9 +1295,10 @@ class AppServiceCertificateOrdersOperations:  # pylint: disable=too-many-public-
 
         Description for Create or update a certificate purchase order.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
-        :param certificate_order_name: Name of the certificate order. Required.
+        :param certificate_order_name: Name of the certificate order.. Required.
         :type certificate_order_name: str
         :param certificate_distinguished_name: Distinguished name to use for the certificate order.
          Required.
@@ -1459,9 +1326,10 @@ class AppServiceCertificateOrdersOperations:  # pylint: disable=too-many-public-
 
         Description for Create or update a certificate purchase order.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
-        :param certificate_order_name: Name of the certificate order. Required.
+        :param certificate_order_name: Name of the certificate order.. Required.
         :type certificate_order_name: str
         :param certificate_distinguished_name: Distinguished name to use for the certificate order.
          Required.
@@ -1486,9 +1354,10 @@ class AppServiceCertificateOrdersOperations:  # pylint: disable=too-many-public-
 
         Description for Create or update a certificate purchase order.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
-        :param certificate_order_name: Name of the certificate order. Required.
+        :param certificate_order_name: Name of the certificate order.. Required.
         :type certificate_order_name: str
         :param certificate_distinguished_name: Distinguished name to use for the certificate order. Is
          either a AppServiceCertificateOrderPatchResource type or a IO[bytes] type. Required.
@@ -1554,6 +1423,62 @@ class AppServiceCertificateOrdersOperations:  # pylint: disable=too-many-public-
         return deserialized  # type: ignore
 
     @distributed_trace
+    def delete(  # pylint: disable=inconsistent-return-statements
+        self, resource_group_name: str, certificate_order_name: str, **kwargs: Any
+    ) -> None:
+        """Delete an existing certificate order.
+
+        Description for Delete an existing certificate order.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param certificate_order_name: Name of the certificate order.. Required.
+        :type certificate_order_name: str
+        :return: None or the result of cls(response)
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        _request = build_delete_request(
+            resource_group_name=resource_group_name,
+            certificate_order_name=certificate_order_name,
+            subscription_id=self._config.subscription_id,
+            api_version=api_version,
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200, 204]:
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            error = self._deserialize.failsafe_deserialize(_models.DefaultErrorResponse, pipeline_response)
+            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
+
+        if cls:
+            return cls(pipeline_response, None, {})  # type: ignore
+
+    @distributed_trace
     def list_certificates(
         self, resource_group_name: str, certificate_order_name: str, **kwargs: Any
     ) -> ItemPaged["_models.AppServiceCertificateResource"]:
@@ -1561,9 +1486,10 @@ class AppServiceCertificateOrdersOperations:  # pylint: disable=too-many-public-
 
         Description for List all certificates associated with a certificate order.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
-        :param certificate_order_name: Name of the certificate order. Required.
+        :param certificate_order_name: Name of the certificate order.. Required.
         :type certificate_order_name: str
         :return: An iterator like instance of either AppServiceCertificateResource or the result of
          cls(response)
@@ -1648,9 +1574,10 @@ class AppServiceCertificateOrdersOperations:  # pylint: disable=too-many-public-
 
         Description for Get the certificate associated with a certificate order.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
-        :param certificate_order_name: Name of the certificate order. Required.
+        :param certificate_order_name: Name of the certificate order.. Required.
         :type certificate_order_name: str
         :param name: Name of the certificate. Required.
         :type name: str
@@ -1764,10 +1691,14 @@ class AppServiceCertificateOrdersOperations:  # pylint: disable=too-many-public-
             error = self._deserialize.failsafe_deserialize(_models.DefaultErrorResponse, pipeline_response)
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
+        response_headers = {}
+        if response.status_code == 201:
+            response_headers["Location"] = self._deserialize("str", response.headers.get("Location"))
+
         deserialized = response.stream_download(self._client._pipeline, decompress=_decompress)
 
         if cls:
-            return cls(pipeline_response, deserialized, {})  # type: ignore
+            return cls(pipeline_response, deserialized, response_headers)  # type: ignore
 
         return deserialized  # type: ignore
 
@@ -1786,9 +1717,10 @@ class AppServiceCertificateOrdersOperations:  # pylint: disable=too-many-public-
 
         Description for Creates or updates a certificate and associates with key vault secret.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
-        :param certificate_order_name: Name of the certificate order. Required.
+        :param certificate_order_name: Name of the certificate order.. Required.
         :type certificate_order_name: str
         :param name: Name of the certificate. Required.
         :type name: str
@@ -1820,9 +1752,10 @@ class AppServiceCertificateOrdersOperations:  # pylint: disable=too-many-public-
 
         Description for Creates or updates a certificate and associates with key vault secret.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
-        :param certificate_order_name: Name of the certificate order. Required.
+        :param certificate_order_name: Name of the certificate order.. Required.
         :type certificate_order_name: str
         :param name: Name of the certificate. Required.
         :type name: str
@@ -1851,9 +1784,10 @@ class AppServiceCertificateOrdersOperations:  # pylint: disable=too-many-public-
 
         Description for Creates or updates a certificate and associates with key vault secret.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
-        :param certificate_order_name: Name of the certificate order. Required.
+        :param certificate_order_name: Name of the certificate order.. Required.
         :type certificate_order_name: str
         :param name: Name of the certificate. Required.
         :type name: str
@@ -1899,7 +1833,9 @@ class AppServiceCertificateOrdersOperations:  # pylint: disable=too-many-public-
             return deserialized
 
         if polling is True:
-            polling_method: PollingMethod = cast(PollingMethod, ARMPolling(lro_delay, **kwargs))
+            polling_method: PollingMethod = cast(
+                PollingMethod, ARMPolling(lro_delay, lro_options={"final-state-via": "location"}, **kwargs)
+            )
         elif polling is False:
             polling_method = cast(PollingMethod, NoPolling())
         else:
@@ -1914,64 +1850,6 @@ class AppServiceCertificateOrdersOperations:  # pylint: disable=too-many-public-
         return LROPoller[_models.AppServiceCertificateResource](
             self._client, raw_result, get_long_running_output, polling_method  # type: ignore
         )
-
-    @distributed_trace
-    def delete_certificate(  # pylint: disable=inconsistent-return-statements
-        self, resource_group_name: str, certificate_order_name: str, name: str, **kwargs: Any
-    ) -> None:
-        """Delete the certificate associated with a certificate order.
-
-        Description for Delete the certificate associated with a certificate order.
-
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
-        :type resource_group_name: str
-        :param certificate_order_name: Name of the certificate order. Required.
-        :type certificate_order_name: str
-        :param name: Name of the certificate. Required.
-        :type name: str
-        :return: None or the result of cls(response)
-        :rtype: None
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        error_map: MutableMapping = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        _headers = kwargs.pop("headers", {}) or {}
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
-        cls: ClsType[None] = kwargs.pop("cls", None)
-
-        _request = build_delete_certificate_request(
-            resource_group_name=resource_group_name,
-            certificate_order_name=certificate_order_name,
-            name=name,
-            subscription_id=self._config.subscription_id,
-            api_version=api_version,
-            headers=_headers,
-            params=_params,
-        )
-        _request.url = self._client.format_url(_request.url)
-
-        _stream = False
-        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            _request, stream=_stream, **kwargs
-        )
-
-        response = pipeline_response.http_response
-
-        if response.status_code not in [200, 204]:
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = self._deserialize.failsafe_deserialize(_models.DefaultErrorResponse, pipeline_response)
-            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
-
-        if cls:
-            return cls(pipeline_response, None, {})  # type: ignore
 
     @overload
     def update_certificate(
@@ -1988,9 +1866,10 @@ class AppServiceCertificateOrdersOperations:  # pylint: disable=too-many-public-
 
         Description for Creates or updates a certificate and associates with key vault secret.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
-        :param certificate_order_name: Name of the certificate order. Required.
+        :param certificate_order_name: Name of the certificate order.. Required.
         :type certificate_order_name: str
         :param name: Name of the certificate. Required.
         :type name: str
@@ -2020,9 +1899,10 @@ class AppServiceCertificateOrdersOperations:  # pylint: disable=too-many-public-
 
         Description for Creates or updates a certificate and associates with key vault secret.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
-        :param certificate_order_name: Name of the certificate order. Required.
+        :param certificate_order_name: Name of the certificate order.. Required.
         :type certificate_order_name: str
         :param name: Name of the certificate. Required.
         :type name: str
@@ -2049,9 +1929,10 @@ class AppServiceCertificateOrdersOperations:  # pylint: disable=too-many-public-
 
         Description for Creates or updates a certificate and associates with key vault secret.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
-        :param certificate_order_name: Name of the certificate order. Required.
+        :param certificate_order_name: Name of the certificate order.. Required.
         :type certificate_order_name: str
         :param name: Name of the certificate. Required.
         :type name: str
@@ -2119,6 +2000,65 @@ class AppServiceCertificateOrdersOperations:  # pylint: disable=too-many-public-
 
         return deserialized  # type: ignore
 
+    @distributed_trace
+    def delete_certificate(  # pylint: disable=inconsistent-return-statements
+        self, resource_group_name: str, certificate_order_name: str, name: str, **kwargs: Any
+    ) -> None:
+        """Delete the certificate associated with a certificate order.
+
+        Description for Delete the certificate associated with a certificate order.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param certificate_order_name: Name of the certificate order.. Required.
+        :type certificate_order_name: str
+        :param name: Name of the certificate. Required.
+        :type name: str
+        :return: None or the result of cls(response)
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        _request = build_delete_certificate_request(
+            resource_group_name=resource_group_name,
+            certificate_order_name=certificate_order_name,
+            name=name,
+            subscription_id=self._config.subscription_id,
+            api_version=api_version,
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200, 204]:
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            error = self._deserialize.failsafe_deserialize(_models.DefaultErrorResponse, pipeline_response)
+            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
+
+        if cls:
+            return cls(pipeline_response, None, {})  # type: ignore
+
     @overload
     def reissue(
         self,
@@ -2133,9 +2073,10 @@ class AppServiceCertificateOrdersOperations:  # pylint: disable=too-many-public-
 
         Description for Reissue an existing certificate order.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
-        :param certificate_order_name: Name of the certificate order. Required.
+        :param certificate_order_name: Name of the certificate order.. Required.
         :type certificate_order_name: str
         :param reissue_certificate_order_request: Parameters for the reissue. Required.
         :type reissue_certificate_order_request:
@@ -2162,9 +2103,10 @@ class AppServiceCertificateOrdersOperations:  # pylint: disable=too-many-public-
 
         Description for Reissue an existing certificate order.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
-        :param certificate_order_name: Name of the certificate order. Required.
+        :param certificate_order_name: Name of the certificate order.. Required.
         :type certificate_order_name: str
         :param reissue_certificate_order_request: Parameters for the reissue. Required.
         :type reissue_certificate_order_request: IO[bytes]
@@ -2188,9 +2130,10 @@ class AppServiceCertificateOrdersOperations:  # pylint: disable=too-many-public-
 
         Description for Reissue an existing certificate order.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
-        :param certificate_order_name: Name of the certificate order. Required.
+        :param certificate_order_name: Name of the certificate order.. Required.
         :type certificate_order_name: str
         :param reissue_certificate_order_request: Parameters for the reissue. Is either a
          ReissueCertificateOrderRequest type or a IO[bytes] type. Required.
@@ -2265,9 +2208,10 @@ class AppServiceCertificateOrdersOperations:  # pylint: disable=too-many-public-
 
         Description for Renew an existing certificate order.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
-        :param certificate_order_name: Name of the certificate order. Required.
+        :param certificate_order_name: Name of the certificate order.. Required.
         :type certificate_order_name: str
         :param renew_certificate_order_request: Renew parameters. Required.
         :type renew_certificate_order_request:
@@ -2294,9 +2238,10 @@ class AppServiceCertificateOrdersOperations:  # pylint: disable=too-many-public-
 
         Description for Renew an existing certificate order.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
-        :param certificate_order_name: Name of the certificate order. Required.
+        :param certificate_order_name: Name of the certificate order.. Required.
         :type certificate_order_name: str
         :param renew_certificate_order_request: Renew parameters. Required.
         :type renew_certificate_order_request: IO[bytes]
@@ -2320,9 +2265,10 @@ class AppServiceCertificateOrdersOperations:  # pylint: disable=too-many-public-
 
         Description for Renew an existing certificate order.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
-        :param certificate_order_name: Name of the certificate order. Required.
+        :param certificate_order_name: Name of the certificate order.. Required.
         :type certificate_order_name: str
         :param renew_certificate_order_request: Renew parameters. Is either a
          RenewCertificateOrderRequest type or a IO[bytes] type. Required.
@@ -2391,9 +2337,10 @@ class AppServiceCertificateOrdersOperations:  # pylint: disable=too-many-public-
 
         Description for Resend certificate email.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
-        :param certificate_order_name: Name of the certificate order. Required.
+        :param certificate_order_name: Name of the certificate order.. Required.
         :type certificate_order_name: str
         :return: None or the result of cls(response)
         :rtype: None
@@ -2453,9 +2400,10 @@ class AppServiceCertificateOrdersOperations:  # pylint: disable=too-many-public-
         Resend domain verification ownership email containing steps on how to verify a domain for a
         given certificate order.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
-        :param certificate_order_name: Name of the certificate order. Required.
+        :param certificate_order_name: Name of the certificate order.. Required.
         :type certificate_order_name: str
         :param name_identifier: Email address. Required.
         :type name_identifier: ~azure.mgmt.certificateregistration.models.NameIdentifier
@@ -2482,9 +2430,10 @@ class AppServiceCertificateOrdersOperations:  # pylint: disable=too-many-public-
         Resend domain verification ownership email containing steps on how to verify a domain for a
         given certificate order.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
-        :param certificate_order_name: Name of the certificate order. Required.
+        :param certificate_order_name: Name of the certificate order.. Required.
         :type certificate_order_name: str
         :param name_identifier: Email address. Required.
         :type name_identifier: IO[bytes]
@@ -2509,9 +2458,10 @@ class AppServiceCertificateOrdersOperations:  # pylint: disable=too-many-public-
         Resend domain verification ownership email containing steps on how to verify a domain for a
         given certificate order.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
-        :param certificate_order_name: Name of the certificate order. Required.
+        :param certificate_order_name: Name of the certificate order.. Required.
         :type certificate_order_name: str
         :param name_identifier: Email address. Is either a NameIdentifier type or a IO[bytes] type.
          Required.
@@ -2571,6 +2521,126 @@ class AppServiceCertificateOrdersOperations:  # pylint: disable=too-many-public-
         if cls:
             return cls(pipeline_response, None, {})  # type: ignore
 
+    @distributed_trace
+    def retrieve_certificate_actions(
+        self, resource_group_name: str, name: str, **kwargs: Any
+    ) -> List[_models.CertificateOrderAction]:
+        """Retrieve the list of certificate actions.
+
+        Description for Retrieve the list of certificate actions.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param name: Name of the certificate order.. Required.
+        :type name: str
+        :return: list of CertificateOrderAction or the result of cls(response)
+        :rtype: list[~azure.mgmt.certificateregistration.models.CertificateOrderAction]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
+        cls: ClsType[List[_models.CertificateOrderAction]] = kwargs.pop("cls", None)
+
+        _request = build_retrieve_certificate_actions_request(
+            resource_group_name=resource_group_name,
+            name=name,
+            subscription_id=self._config.subscription_id,
+            api_version=api_version,
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            error = self._deserialize.failsafe_deserialize(_models.DefaultErrorResponse, pipeline_response)
+            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
+
+        deserialized = self._deserialize("[CertificateOrderAction]", pipeline_response.http_response)
+
+        if cls:
+            return cls(pipeline_response, deserialized, {})  # type: ignore
+
+        return deserialized  # type: ignore
+
+    @distributed_trace
+    def retrieve_certificate_email_history(
+        self, resource_group_name: str, name: str, **kwargs: Any
+    ) -> List[_models.CertificateEmail]:
+        """Retrieve email history.
+
+        Description for Retrieve email history.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param name: Name of the certificate order.. Required.
+        :type name: str
+        :return: list of CertificateEmail or the result of cls(response)
+        :rtype: list[~azure.mgmt.certificateregistration.models.CertificateEmail]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
+        cls: ClsType[List[_models.CertificateEmail]] = kwargs.pop("cls", None)
+
+        _request = build_retrieve_certificate_email_history_request(
+            resource_group_name=resource_group_name,
+            name=name,
+            subscription_id=self._config.subscription_id,
+            api_version=api_version,
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            error = self._deserialize.failsafe_deserialize(_models.DefaultErrorResponse, pipeline_response)
+            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
+
+        deserialized = self._deserialize("[CertificateEmail]", pipeline_response.http_response)
+
+        if cls:
+            return cls(pipeline_response, deserialized, {})  # type: ignore
+
+        return deserialized  # type: ignore
+
     @overload
     def retrieve_site_seal(
         self,
@@ -2591,9 +2661,10 @@ class AppServiceCertificateOrdersOperations:  # pylint: disable=too-many-public-
         pop-up page display when a user clicks on the site seal. The site seal images are expected to
         be static images and hosted by the reseller, to minimize delays for customer page load times.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
-        :param certificate_order_name: Name of the certificate order. Required.
+        :param certificate_order_name: Name of the certificate order.. Required.
         :type certificate_order_name: str
         :param site_seal_request: Site seal request. Required.
         :type site_seal_request: ~azure.mgmt.certificateregistration.models.SiteSealRequest
@@ -2625,9 +2696,10 @@ class AppServiceCertificateOrdersOperations:  # pylint: disable=too-many-public-
         pop-up page display when a user clicks on the site seal. The site seal images are expected to
         be static images and hosted by the reseller, to minimize delays for customer page load times.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
-        :param certificate_order_name: Name of the certificate order. Required.
+        :param certificate_order_name: Name of the certificate order.. Required.
         :type certificate_order_name: str
         :param site_seal_request: Site seal request. Required.
         :type site_seal_request: IO[bytes]
@@ -2657,9 +2729,10 @@ class AppServiceCertificateOrdersOperations:  # pylint: disable=too-many-public-
         pop-up page display when a user clicks on the site seal. The site seal images are expected to
         be static images and hosted by the reseller, to minimize delays for customer page load times.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
-        :param certificate_order_name: Name of the certificate order. Required.
+        :param certificate_order_name: Name of the certificate order.. Required.
         :type certificate_order_name: str
         :param site_seal_request: Site seal request. Is either a SiteSealRequest type or a IO[bytes]
          type. Required.
@@ -2732,9 +2805,10 @@ class AppServiceCertificateOrdersOperations:  # pylint: disable=too-many-public-
 
         Description for Verify domain ownership for this certificate order.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
-        :param certificate_order_name: Name of the certificate order. Required.
+        :param certificate_order_name: Name of the certificate order.. Required.
         :type certificate_order_name: str
         :return: None or the result of cls(response)
         :rtype: None
@@ -2778,121 +2852,3 @@ class AppServiceCertificateOrdersOperations:  # pylint: disable=too-many-public-
 
         if cls:
             return cls(pipeline_response, None, {})  # type: ignore
-
-    @distributed_trace
-    def retrieve_certificate_actions(
-        self, resource_group_name: str, name: str, **kwargs: Any
-    ) -> List[_models.CertificateOrderAction]:
-        """Retrieve the list of certificate actions.
-
-        Description for Retrieve the list of certificate actions.
-
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
-        :type resource_group_name: str
-        :param name: Name of the certificate order. Required.
-        :type name: str
-        :return: list of CertificateOrderAction or the result of cls(response)
-        :rtype: list[~azure.mgmt.certificateregistration.models.CertificateOrderAction]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        error_map: MutableMapping = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        _headers = kwargs.pop("headers", {}) or {}
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
-        cls: ClsType[List[_models.CertificateOrderAction]] = kwargs.pop("cls", None)
-
-        _request = build_retrieve_certificate_actions_request(
-            resource_group_name=resource_group_name,
-            name=name,
-            subscription_id=self._config.subscription_id,
-            api_version=api_version,
-            headers=_headers,
-            params=_params,
-        )
-        _request.url = self._client.format_url(_request.url)
-
-        _stream = False
-        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            _request, stream=_stream, **kwargs
-        )
-
-        response = pipeline_response.http_response
-
-        if response.status_code not in [200]:
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = self._deserialize.failsafe_deserialize(_models.DefaultErrorResponse, pipeline_response)
-            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
-
-        deserialized = self._deserialize("[CertificateOrderAction]", pipeline_response.http_response)
-
-        if cls:
-            return cls(pipeline_response, deserialized, {})  # type: ignore
-
-        return deserialized  # type: ignore
-
-    @distributed_trace
-    def retrieve_certificate_email_history(
-        self, resource_group_name: str, name: str, **kwargs: Any
-    ) -> List[_models.CertificateEmail]:
-        """Retrieve email history.
-
-        Description for Retrieve email history.
-
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
-        :type resource_group_name: str
-        :param name: Name of the certificate order. Required.
-        :type name: str
-        :return: list of CertificateEmail or the result of cls(response)
-        :rtype: list[~azure.mgmt.certificateregistration.models.CertificateEmail]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        error_map: MutableMapping = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        _headers = kwargs.pop("headers", {}) or {}
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
-        cls: ClsType[List[_models.CertificateEmail]] = kwargs.pop("cls", None)
-
-        _request = build_retrieve_certificate_email_history_request(
-            resource_group_name=resource_group_name,
-            name=name,
-            subscription_id=self._config.subscription_id,
-            api_version=api_version,
-            headers=_headers,
-            params=_params,
-        )
-        _request.url = self._client.format_url(_request.url)
-
-        _stream = False
-        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            _request, stream=_stream, **kwargs
-        )
-
-        response = pipeline_response.http_response
-
-        if response.status_code not in [200]:
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = self._deserialize.failsafe_deserialize(_models.DefaultErrorResponse, pipeline_response)
-            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
-
-        deserialized = self._deserialize("[CertificateEmail]", pipeline_response.http_response)
-
-        if cls:
-            return cls(pipeline_response, deserialized, {})  # type: ignore
-
-        return deserialized  # type: ignore
