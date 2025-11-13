@@ -10,7 +10,7 @@ bump typespec-python for emitter-package.json
 **STEPS**:
 - step into SDK repo then run:
 ```bash
-git reset --hard HEAD && git clean -fd && git checkout origin/main && git pull origin main
+git reset HEAD && git checkout . && git clean -fd && git checkout origin/main && git pull origin main
 ```
 - checkout New Branch named `bump-typespec-python-{Typespec Python Version}`
 - run `npx npm-check-updates --packageFile eng/emitter-package.json`
