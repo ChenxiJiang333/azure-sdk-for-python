@@ -1,11 +1,7 @@
 {
+  "apiVersion": "2023-04-01",
   "commit": "997c275ac301ec7752c0dcd72aa95724586384ac",
   "repository_url": "https://github.com/Azure/azure-rest-api-specs",
-  "autorest": "3.10.2",
-  "use": [
-    "@autorest/python@6.42.0",
-    "@autorest/modelerfour@4.27.0"
-  ],
-  "autorest_command": "autorest specification/managementgroups/resource-manager/Microsoft.Management/ManagementGroups/readme.md --generate-sample=True --generate-test=True --include-x-ms-examples-original-file=True --package-mode=azure-mgmt --python --python-sdks-folder=D:\\spec-config\\azure-sdk-for-python\\sdk --use=@autorest/python@6.42.0 --use=@autorest/modelerfour@4.27.0 --version=3.10.2 --version-tolerant=False",
-  "readme": "specification/managementgroups/resource-manager/Microsoft.Management/ManagementGroups/readme.md"
+  "typespec_src": "specification/managementgroups/ManagementGroups.Management",
+  "emitterVersion": "0.53.2"
 }

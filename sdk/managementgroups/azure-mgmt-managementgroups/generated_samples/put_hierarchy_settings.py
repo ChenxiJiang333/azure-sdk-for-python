@@ -15,7 +15,7 @@ from azure.mgmt.managementgroups import ManagementClient
     pip install azure-identity
     pip install azure-mgmt-managementgroups
 # USAGE
-    python put_management_group.py
+    python put_hierarchy_settings.py
 
     Before run the sample, please set the values of the client ID, tenant ID and client secret
     of the AAD application as environment variables: AZURE_CLIENT_ID, AZURE_TENANT_ID,
@@ -30,17 +30,18 @@ def main():
         subscription_id="SUBSCRIPTION_ID",
     )
 
-    client.management_groups.begin_create_or_update(
-        group_id="ChildGroup",
-        create_management_group_request={
+    response = client.hierarchy_settings.create_or_update(
+        group_id="root",
+        create_tenant_settings_request={
             "properties": {
-                "details": {"parent": {"id": "/providers/Microsoft.Management/managementGroups/RootGroup"}},
-                "displayName": "ChildGroup",
+                "defaultManagementGroup": "/providers/Microsoft.Management/managementGroups/DefaultGroup",
+                "requireAuthorizationForGroupCreation": True,
             }
         },
-    ).result()
+    )
+    print(response)
 
 
-# x-ms-original-file: 2023-04-01/PutManagementGroup.json
+# x-ms-original-file: 2023-04-01/PutHierarchySettings.json
 if __name__ == "__main__":
     main()
