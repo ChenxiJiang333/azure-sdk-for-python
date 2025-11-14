@@ -42,3 +42,25 @@ class PrivateEndpointServiceConnectionStatus(str, Enum, metaclass=CaseInsensitiv
     PENDING = "Pending"
     APPROVED = "Approved"
     REJECTED = "Rejected"
+
+
+class PublicNetworkAccessType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Controls whether traffic from the public network is allowed to access the Attestation Provider
+    APIs.
+    """
+
+    ENABLED = "Enabled"
+    """Enables public network connectivity to the Attestation Provider REST APIs."""
+    DISABLED = "Disabled"
+    """Disables public network connectivity to the Attestation Provider REST APIs."""
+
+
+class TpmAttestationAuthenticationType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """The setting that controls whether authentication is enabled or disabled for TPM Attestation
+    REST APIs.
+    """
+
+    ENABLED = "Enabled"
+    """Enables the requirement of authentication for TPM Attestation REST APIs."""
+    DISABLED = "Disabled"
+    """Disables the requirement of authentication for TPM Attestation REST APIs."""
