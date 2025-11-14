@@ -1,5 +1,22 @@
 # Release History
 
+## 2.0.0b2 (2025-11-14)
+
+### Breaking Changes
+
+  - Deleted or renamed client `AttestationManagementClient`
+  - Method `AttestationProvidersOperations.list` changed from asynchronous to synchronous
+  - Method `AttestationProvidersOperations.list_by_resource_group` changed from asynchronous to synchronous
+  - Method `Operations.list` changed from asynchronous to synchronous
+  - Model `AttestationProvider` added property `properties`
+  - Model `AttestationProvider` moved instance variable `trust_model`, `status`, `attest_uri`, `public_network_access`, `private_endpoint_connections` and `tpm_attestation_authentication` under property `properties`
+  - Model `PrivateEndpointConnection` added property `properties`
+  - Model `PrivateEndpointConnection` moved instance variable `private_endpoint`, `private_link_service_connection_state` and `provisioning_state` under property `properties`
+  - Model `PrivateLinkResource` added property `properties`
+  - Model `PrivateLinkResource` moved instance variable `group_id`, `required_members` and `required_zone_names` under property `properties`
+  - Model `JsonWebKeySet` renamed its instance variable `keys` to `keys_property`
+  - Deleted or renamed model `OperationList`
+
 ## 2.0.0b1 (2022-10-28)
 
 ### Features Added
