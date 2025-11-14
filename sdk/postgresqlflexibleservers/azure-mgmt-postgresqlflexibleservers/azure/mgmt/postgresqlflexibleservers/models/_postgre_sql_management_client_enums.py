@@ -10,22 +10,8 @@ from enum import Enum
 from azure.core import CaseInsensitiveEnumMeta
 
 
-class ActiveDirectoryAuthEnum(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """If Enabled, Microsoft Entra authentication is enabled."""
-
-    ENABLED = "Enabled"
-    DISABLED = "Disabled"
-
-
-class ArmServerKeyType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """Data encryption type to depict if it is System Managed vs Azure Key vault."""
-
-    SYSTEM_MANAGED = "SystemManaged"
-    AZURE_KEY_VAULT = "AzureKeyVault"
-
-
-class AzureManagedDiskPerformanceTiers(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """Name of storage tier for IOPS."""
+class AzureManagedDiskPerformanceTier(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Storage tier of a server."""
 
     P1 = "P1"
     P2 = "P2"
@@ -43,8 +29,15 @@ class AzureManagedDiskPerformanceTiers(str, Enum, metaclass=CaseInsensitiveEnumM
     P80 = "P80"
 
 
-class CancelEnum(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """To trigger cancel for entire migration we need to send this flag as True."""
+class BackupType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Type of backup."""
+
+    FULL = "Full"
+    CUSTOMER_ON_DEMAND = "Customer On-Demand"
+
+
+class Cancel(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Indicates if cancel must be triggered for the entire migration."""
 
     TRUE = "True"
     FALSE = "False"
@@ -67,12 +60,14 @@ class CheckNameAvailabilityReason(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 
 
 class ConfigurationDataType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """Data type of the configuration."""
+    """Data type of the configuration (also known as server parameter)."""
 
     BOOLEAN = "Boolean"
     NUMERIC = "Numeric"
     INTEGER = "Integer"
     ENUMERATION = "Enumeration"
+    STRING = "String"
+    SET = "Set"
 
 
 class CreatedByType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
@@ -85,7 +80,7 @@ class CreatedByType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 
 
 class CreateMode(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """The mode to create a new PostgreSQL server."""
+    """Creation mode of a new server."""
 
     DEFAULT = "Default"
     CREATE = "Create"
@@ -96,11 +91,27 @@ class CreateMode(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     REVIVE_DROPPED = "ReviveDropped"
 
 
-class CreateModeForUpdate(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """The mode to update a new PostgreSQL server."""
+class CreateModeForPatch(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Update mode of an existing server."""
 
     DEFAULT = "Default"
     UPDATE = "Update"
+
+
+class DataEncryptionType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Data encryption type used by a server."""
+
+    SYSTEM_MANAGED = "SystemManaged"
+    AZURE_KEY_VAULT = "AzureKeyVault"
+
+
+class EncryptionKeyStatus(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Status of key used by a server configured with data encryption based on customer managed key,
+    to encrypt the primary storage associated to the server.
+    """
+
+    VALID = "Valid"
+    INVALID = "Invalid"
 
 
 class ExecutionStatus(str, Enum, metaclass=CaseInsensitiveEnumMeta):
@@ -121,50 +132,63 @@ class FailoverMode(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     FORCED_SWITCHOVER = "ForcedSwitchover"
 
 
-class FastProvisioningSupportedEnum(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """Gets a value indicating whether fast provisioning is supported. "Enabled" means fast
-    provisioning is supported. "Disabled" stands for fast provisioning is not supported. Will be
-    deprecated in future, please look to Supported Features for "FastProvisioning".
+class FastProvisioningSupport(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Indicates if fast provisioning is supported. 'Enabled' means fast provisioning is supported.
+    'Disabled' stands for fast provisioning is not supported. Will be deprecated in the future.
+    Look to Supported Features for 'FastProvisioning'.
     """
 
     ENABLED = "Enabled"
     DISABLED = "Disabled"
 
 
-class GeoBackupSupportedEnum(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """Determines if geo-backup is supported in this region. "Enabled" means geo-backup is supported.
-    "Disabled" stands for geo-back is not supported. Will be deprecated in future, please look to
-    Supported Features for "GeoBackup".
+class FeatureStatus(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Status of the feature. Indicates if the feature is enabled or not."""
+
+    ENABLED = "Enabled"
+    DISABLED = "Disabled"
+
+
+class GeographicallyRedundantBackup(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Indicates if the server is configured to create geographically redundant backups."""
+
+    ENABLED = "Enabled"
+    DISABLED = "Disabled"
+
+
+class GeographicallyRedundantBackupSupport(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Indicates if geographically redundant backups are supported in this location. 'Enabled' means
+    geographically redundant backups are supported. 'Disabled' stands for geographically redundant
+    backup is not supported. Will be deprecated in the future. Look to Supported Features for
+    'GeoBackup'.
     """
 
     ENABLED = "Enabled"
     DISABLED = "Disabled"
-
-
-class GeoRedundantBackupEnum(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """A value indicating whether Geo-Redundant backup is enabled on the server."""
-
-    ENABLED = "Enabled"
-    DISABLED = "Disabled"
-
-
-class HaMode(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """HA mode supported for a server."""
-
-    SAME_ZONE = "SameZone"
-    ZONE_REDUNDANT = "ZoneRedundant"
 
 
 class HighAvailabilityMode(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """The HA mode for the server."""
+    """Modes of high availability supported for this compute."""
 
-    DISABLED = "Disabled"
     ZONE_REDUNDANT = "ZoneRedundant"
     SAME_ZONE = "SameZone"
 
 
+class HighAvailabilityState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Possible states of the standby server created when high availability is set to SameZone or
+    ZoneRedundant.
+    """
+
+    NOT_ENABLED = "NotEnabled"
+    CREATING_STANDBY = "CreatingStandby"
+    REPLICATING_DATA = "ReplicatingData"
+    FAILING_OVER = "FailingOver"
+    HEALTHY = "Healthy"
+    REMOVING_STANDBY = "RemovingStandby"
+
+
 class IdentityType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """the types of identities associated with this resource."""
+    """Types of identities associated with a server."""
 
     NONE = "None"
     USER_ASSIGNED = "UserAssigned"
@@ -172,29 +196,39 @@ class IdentityType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     SYSTEM_ASSIGNED_USER_ASSIGNED = "SystemAssigned,UserAssigned"
 
 
-class KeyStatusEnum(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """Primary encryption key status for Data encryption enabled server."""
+class LocationRestricted(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Indicates if this location is restricted. 'Enabled' means location is restricted. 'Disabled'
+    stands for location is not restricted. Will be deprecated in the future. Look to Supported
+    Features for 'Restricted'.
+    """
 
-    VALID = "Valid"
-    INVALID = "Invalid"
-
-
-class LogicalReplicationOnSourceDbEnum(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """Indicates whether to setup LogicalReplicationOnSourceDb, if needed."""
-
-    TRUE = "True"
-    FALSE = "False"
+    ENABLED = "Enabled"
+    DISABLED = "Disabled"
 
 
-class MigrateRolesEnum(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """To migrate roles and permissions we need to send this flag as True."""
+class LogicalReplicationOnSourceServer(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Indicates whether to setup logical replication on source server, if needed."""
 
     TRUE = "True"
     FALSE = "False"
 
 
-class MigrationDbState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """Migration db state of an individual database."""
+class MicrosoftEntraAuth(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Indicates if the server supports Microsoft Entra authentication."""
+
+    ENABLED = "Enabled"
+    DISABLED = "Disabled"
+
+
+class MigrateRolesAndPermissions(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Indicates if roles and permissions must be migrated."""
+
+    TRUE = "True"
+    FALSE = "False"
+
+
+class MigrationDatabaseState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Migration state of a database."""
 
     IN_PROGRESS = "InProgress"
     WAITING_FOR_CUTOVER_TRIGGER = "WaitingForCutoverTrigger"
@@ -202,14 +236,6 @@ class MigrationDbState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     CANCELED = "Canceled"
     SUCCEEDED = "Succeeded"
     CANCELING = "Canceling"
-
-
-class MigrationDetailsLevel(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """Migration details level."""
-
-    DEFAULT = "Default"
-    SUMMARY = "Summary"
-    FULL = "Full"
 
 
 class MigrationListFilter(str, Enum, metaclass=CaseInsensitiveEnumMeta):
@@ -220,7 +246,7 @@ class MigrationListFilter(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 
 
 class MigrationMode(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """There are two types of migration modes Online and Offline."""
+    """Mode used to perform the migration: Online or Offline."""
 
     OFFLINE = "Offline"
     ONLINE = "Online"
@@ -234,7 +260,7 @@ class MigrationNameAvailabilityReason(str, Enum, metaclass=CaseInsensitiveEnumMe
 
 
 class MigrationOption(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """Supported types of migration request include Validate, Migrate and ValidateAndMigrate."""
+    """Supported option for a migration."""
 
     VALIDATE = "Validate"
     MIGRATE = "Migrate"
@@ -242,7 +268,7 @@ class MigrationOption(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 
 
 class MigrationState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """Migration state."""
+    """State of migration."""
 
     IN_PROGRESS = "InProgress"
     WAITING_FOR_USER_ACTION = "WaitingForUserAction"
@@ -253,8 +279,8 @@ class MigrationState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     CLEANING_UP = "CleaningUp"
 
 
-class MigrationSubState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """Migration sub state."""
+class MigrationSubstate(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Substate of migration."""
 
     PERFORMING_PRE_REQUISITE_STEPS = "PerformingPreRequisiteSteps"
     WAITING_FOR_LOGICAL_REPLICATION_SETUP_REQUEST_ON_SOURCE_DB = "WaitingForLogicalReplicationSetupRequestOnSourceDB"
@@ -270,11 +296,12 @@ class MigrationSubState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     VALIDATION_IN_PROGRESS = "ValidationInProgress"
 
 
-class OnlineResizeSupportedEnum(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """A value indicating whether online resize is supported in this region for the given
-    subscription. "Enabled" means storage online resize is supported. "Disabled" means storage
-    online resize is not supported. Will be deprecated in future, please look to Supported Features
-    for "OnlineResize".
+class OnlineStorageResizeSupport(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Indicates if resizing the storage, without interrupting the operation of the database engine,
+    is supported in this location for the given subscription. 'Enabled' means resizing the storage
+    without interrupting the operation of the database engine is supported. 'Disabled' means
+    resizing the storage without interrupting the operation of the database engine is not
+    supported. Will be deprecated in the future. Look to Supported Features for 'OnlineResize'.
     """
 
     ENABLED = "Enabled"
@@ -282,44 +309,62 @@ class OnlineResizeSupportedEnum(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 
 
 class OperationOrigin(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """The intended executor of the operation."""
+    """Intended executor of the operation."""
 
     NOT_SPECIFIED = "NotSpecified"
     USER = "user"
     SYSTEM = "system"
 
 
-class Origin(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """Backup type."""
-
-    FULL = "Full"
-    CUSTOMER_ON_DEMAND = "Customer On-Demand"
-
-
-class OverwriteDbsInTargetEnum(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """Indicates whether the databases on the target server can be overwritten, if already present. If
-    set to False, the migration workflow will wait for a confirmation, if it detects that the
-    database already exists.
+class OverwriteDatabasesOnTargetServer(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Indicates if databases on the target server can be overwritten when already present. If set to
+    'False', when the migration workflow detects that the database already exists on the target
+    server, it will wait for a confirmation.
     """
 
     TRUE = "True"
     FALSE = "False"
 
 
-class PasswordAuthEnum(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """If Enabled, Password authentication is enabled."""
+class PasswordBasedAuth(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Indicates if the server supports password based authentication."""
 
     ENABLED = "Enabled"
     DISABLED = "Disabled"
 
 
+class PostgresMajorVersion(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Major version of PostgreSQL database engine."""
+
+    EIGHTEEN = "18"
+    SEVENTEEN = "17"
+    SIXTEEN = "16"
+    FIFTEEN = "15"
+    FOURTEEN = "14"
+    THIRTEEN = "13"
+    TWELVE = "12"
+    ELEVEN = "11"
+
+
+class PostgreSqlFlexibleServerHighAvailabilityMode(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """High availability mode for a server."""
+
+    DISABLED = "Disabled"
+    ZONE_REDUNDANT = "ZoneRedundant"
+    SAME_ZONE = "SameZone"
+
+
 class PrincipalType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """The principal type used to represent the type of Microsoft Entra Administrator."""
+    """Type of Microsoft Entra principal to which the server administrator is associated."""
 
     UNKNOWN = "Unknown"
+    """The principal type is not known or not specified."""
     USER = "User"
+    """A Microsoft Entra user."""
     GROUP = "Group"
+    """A Microsoft Entra group."""
     SERVICE_PRINCIPAL = "ServicePrincipal"
+    """A Microsoft Entra service principal, typically representing an application or service identity"""
 
 
 class PrivateEndpointConnectionProvisioningState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
@@ -340,17 +385,29 @@ class PrivateEndpointServiceConnectionStatus(str, Enum, metaclass=CaseInsensitiv
 
 
 class ReadReplicaPromoteMode(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """Sets the promote mode for a replica server. This is a write only property."""
+    """Type of operation to apply on the read replica. This property is write only. Standalone means
+    that the read replica will be promoted to a standalone server, and will become a completely
+    independent entity from the replication set. Switchover means that the read replica will roles
+    with the primary server.
+    """
 
-    STANDALONE = "standalone"
-    SWITCHOVER = "switchover"
+    STANDALONE = "Standalone"
+    """Read replica will become an independent server."""
+    SWITCHOVER = "Switchover"
+    """Read replica will swap roles with primary server."""
 
 
-class RecommendationType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """RecommendationType."""
+class ReadReplicaPromoteOption(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Data synchronization option to use when processing the operation specified in the promoteMode
+    property. This property is write only.
+    """
 
-    CREATE_INDEX = "CreateIndex"
-    DROP_INDEX = "DropIndex"
+    PLANNED = "Planned"
+    """The operation will wait for data in the read replica to be fully synchronized with its source
+    server, before it initiates the operation."""
+    FORCED = "Forced"
+    """The operation will not wait for data in the read replica to be synchronized with its source
+    server, before it initiates the operation."""
 
 
 class RecommendationTypeEnum(str, Enum, metaclass=CaseInsensitiveEnumMeta):
@@ -359,17 +416,20 @@ class RecommendationTypeEnum(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     CREATE_INDEX = "CreateIndex"
     DROP_INDEX = "DropIndex"
     RE_INDEX = "ReIndex"
+    ANALYZE_TABLE = "AnalyzeTable"
 
 
-class ReplicationPromoteOption(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """Sets the promote options for a replica server. This is a write only property."""
+class RecommendationTypeParameterEnum(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """RecommendationTypeParameterEnum."""
 
-    PLANNED = "planned"
-    FORCED = "forced"
+    CREATE_INDEX = "CreateIndex"
+    DROP_INDEX = "DropIndex"
+    RE_INDEX = "ReIndex"
+    ANALYZE_TABLE = "AnalyzeTable"
 
 
 class ReplicationRole(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """Used to indicate role of the server in replication set."""
+    """Role of the server in a replication set."""
 
     NONE = "None"
     PRIMARY = "Primary"
@@ -378,48 +438,37 @@ class ReplicationRole(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 
 
 class ReplicationState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """Gets the replication state of a replica server. This property is returned only for replicas api
-    call. Supported values are Active, Catchup, Provisioning, Updating, Broken, Reconfiguring.
+    """Indicates the replication state of a read replica. This property is returned only when the
+    target server is a read replica. Possible  values are Active, Broken, Catchup, Provisioning,
+    Reconfiguring, and Updating.
     """
 
     ACTIVE = "Active"
+    """The read replica server is fully synchronized and actively replicating data from the primary
+    server."""
     CATCHUP = "Catchup"
+    """The read replica server is behind the primary server and is currently catching up with pending
+    changes."""
     PROVISIONING = "Provisioning"
+    """The read replica server is being created and is in process of getting initialized."""
     UPDATING = "Updating"
+    """The read replica server is undergoing some changes it can be changing compute size of promoting
+    it to primary server."""
     BROKEN = "Broken"
+    """Replication has failed or been interrupted."""
     RECONFIGURING = "Reconfiguring"
-
-
-class RestrictedEnum(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """A value indicating whether this region is restricted. "Enabled" means region is restricted.
-    "Disabled" stands for region is not restricted. Will be deprecated in future, please look to
-    Supported Features for "Restricted".
-    """
-
-    ENABLED = "Enabled"
-    DISABLED = "Disabled"
-
-
-class ServerHAState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """A state of a HA server that is visible to user."""
-
-    NOT_ENABLED = "NotEnabled"
-    CREATING_STANDBY = "CreatingStandby"
-    REPLICATING_DATA = "ReplicatingData"
-    FAILING_OVER = "FailingOver"
-    HEALTHY = "Healthy"
-    REMOVING_STANDBY = "RemovingStandby"
+    """The read replica server is being reconfigured, possibly due to changes in source or settings."""
 
 
 class ServerPublicNetworkAccessState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """public network access is enabled or not."""
+    """Indicates if public network access is enabled or not."""
 
     ENABLED = "Enabled"
     DISABLED = "Disabled"
 
 
 class ServerState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """A state of a server that is visible to user."""
+    """Possible states of a server."""
 
     READY = "Ready"
     DROPPING = "Dropping"
@@ -433,20 +482,8 @@ class ServerState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     PROVISIONING = "Provisioning"
 
 
-class ServerVersion(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """The version of a server."""
-
-    SEVENTEEN = "17"
-    SIXTEEN = "16"
-    FIFTEEN = "15"
-    FOURTEEN = "14"
-    THIRTEEN = "13"
-    TWELVE = "12"
-    ELEVEN = "11"
-
-
 class SkuTier(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """The tier of the particular SKU, e.g. Burstable."""
+    """Tier of the compute assigned to a server."""
 
     BURSTABLE = "Burstable"
     GENERAL_PURPOSE = "GeneralPurpose"
@@ -454,11 +491,11 @@ class SkuTier(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 
 
 class SourceType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """Migration source server type : OnPremises, AWS, GCP, AzureVM, PostgreSQLSingleServer, AWS_RDS,
-    AWS_AURORA, AWS_EC2, GCP_CloudSQL, GCP_AlloyDB, GCP_Compute, EDB, EDB_Oracle_Server,
-    EDB_PostgreSQL, PostgreSQLFlexibleServer, PostgreSQLCosmosDB, Huawei_RDS, Huawei_Compute,
-    Heroku_PostgreSQL, Crunchy_PostgreSQL, ApsaraDB_RDS, Digital_Ocean_Droplets,
-    Digital_Ocean_PostgreSQL, or Supabase_PostgreSQL.
+    """Source server type used for the migration: ApsaraDB_RDS, AWS, AWS_AURORA, AWS_EC2, AWS_RDS,
+    AzureVM, Crunchy_PostgreSQL, Digital_Ocean_Droplets, Digital_Ocean_PostgreSQL, EDB,
+    EDB_Oracle_Server, EDB_PostgreSQL, GCP, GCP_AlloyDB, GCP_CloudSQL, GCP_Compute,
+    Heroku_PostgreSQL, Huawei_Compute, Huawei_RDS, OnPremises, PostgreSQLCosmosDB,
+    PostgreSQLFlexibleServer, PostgreSQLSingleServer, or Supabase_PostgreSQL.
     """
 
     ON_PREMISES = "OnPremises"
@@ -488,8 +525,8 @@ class SourceType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 
 
 class SslMode(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """Supported SSL modes for migration. VerifyFull is the recommended SSL mode for Single server
-    migration. Prefer, Require are recommended SSL modes for other source types.
+    """SSL mode used by a migration. Default SSL mode for 'PostgreSQLSingleServer' is 'VerifyFull'.
+    Default SSL mode for other source types is 'Prefer'.
     """
 
     PREFER = "Prefer"
@@ -498,24 +535,26 @@ class SslMode(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     VERIFY_FULL = "VerifyFull"
 
 
-class StartDataMigrationEnum(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """Indicates whether the data migration should start right away."""
+class StartDataMigration(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Indicates if data migration must start right away."""
 
     TRUE = "True"
     FALSE = "False"
 
 
 class StorageAutoGrow(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """Flag to enable / disable Storage Auto grow for flexible server."""
+    """Flag to enable or disable the automatic growth of storage size of a server when available space
+    is nearing zero and conditions allow for automatically growing storage size.
+    """
 
     ENABLED = "Enabled"
     DISABLED = "Disabled"
 
 
-class StorageAutoGrowthSupportedEnum(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """A value indicating whether storage auto-grow is supported in this region. "Enabled" means
-    storage auto-grow is supported. "Disabled" stands for storage auto-grow is not supported. Will
-    be deprecated in future, please look to Supported Features for "StorageAutoGrowth".
+class StorageAutoGrowthSupport(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Indicates if storage autogrow is supported in this location. 'Enabled' means storage autogrow
+    is supported. 'Disabled' stands for storage autogrow is not supported. Will be deprecated in
+    the future. Look to Supported Features for 'StorageAutoGrowth'.
     """
 
     ENABLED = "Enabled"
@@ -523,20 +562,13 @@ class StorageAutoGrowthSupportedEnum(str, Enum, metaclass=CaseInsensitiveEnumMet
 
 
 class StorageType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """Storage type for the server. Allowed values are Premium_LRS, PremiumV2_LRS, and UltraSSD_LRS.
-    Default is Premium_LRS if not specified.
+    """Type of storage assigned to a server. Allowed values are Premium_LRS, PremiumV2_LRS, or
+    UltraSSD_LRS. If not specified, it defaults to Premium_LRS.
     """
 
     PREMIUM_LRS = "Premium_LRS"
     PREMIUM_V2_LRS = "PremiumV2_LRS"
     ULTRA_SSD_LRS = "UltraSSD_LRS"
-
-
-class SupportedFeatureStatusEnum(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """Status of feature."""
-
-    ENABLED = "Enabled"
-    DISABLED = "Disabled"
 
 
 class ThreatProtectionName(str, Enum, metaclass=CaseInsensitiveEnumMeta):
@@ -546,26 +578,26 @@ class ThreatProtectionName(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 
 
 class ThreatProtectionState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """Specifies the state of the Threat Protection, whether it is enabled or disabled or a state has
-    not been applied yet on the specific server.
+    """Specifies the state of the advanced threat protection, whether it is enabled, disabled, or a
+    state has not been applied yet on the server.
     """
 
     ENABLED = "Enabled"
     DISABLED = "Disabled"
 
 
-class TriggerCutoverEnum(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """To trigger cutover for entire migration we need to send this flag as True."""
+class TriggerCutover(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Indicates if cutover must be triggered for the entire migration."""
 
     TRUE = "True"
     FALSE = "False"
 
 
-class TuningOptionEnum(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """TuningOptionEnum."""
+class TuningOptionParameterEnum(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """TuningOptionParameterEnum."""
 
     INDEX = "index"
-    CONFIGURATION = "configuration"
+    TABLE = "table"
 
 
 class ValidationState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
@@ -577,26 +609,31 @@ class ValidationState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 
 
 class VirtualEndpointType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """The endpoint type for the virtual endpoint."""
+    """Type of endpoint for the virtual endpoints."""
 
     READ_WRITE = "ReadWrite"
 
 
-class ZoneRedundantHaAndGeoBackupSupportedEnum(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """A value indicating whether Zone Redundant HA and Geo-backup is supported in this region.
-    "Enabled" means zone redundant HA and geo-backup is supported. "Disabled" stands for zone
-    redundant HA and geo-backup is not supported. Will be deprecated in future, please look to
-    Supported Features for "ZoneRedundantHaAndGeoBackup".
+class ZoneRedundantHighAvailabilityAndGeographicallyRedundantBackupSupport(
+    str, Enum, metaclass=CaseInsensitiveEnumMeta
+):
+    """Indicates if high availability with zone redundancy is supported in conjunction with
+    geographically redundant backups in this location. 'Enabled' means high availability with zone
+    redundancy is supported in conjunction with geographically redundant backups is supported.
+    'Disabled' stands for high availability with zone redundancy is supported in conjunction with
+    geographically redundant backups is not supported. Will be deprecated in the future. Look to
+    Supported Features for 'ZoneRedundantHaAndGeoBackup'.
     """
 
     ENABLED = "Enabled"
     DISABLED = "Disabled"
 
 
-class ZoneRedundantHaSupportedEnum(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """A value indicating whether Zone Redundant HA is supported in this region. "Enabled" means zone
-    redundant HA is supported. "Disabled" stands for zone redundant HA is not supported. Will be
-    deprecated in future, please look to Supported Features for "ZoneRedundantHa".
+class ZoneRedundantHighAvailabilitySupport(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Indicates if high availability with zone redundancy is supported in this location. 'Enabled'
+    means high availability with zone redundancy is supported. 'Disabled' stands for high
+    availability with zone redundancy is not supported. Will be deprecated in the future. Look to
+    Supported Features for  'ZoneRedundantHa'.
     """
 
     ENABLED = "Enabled"
