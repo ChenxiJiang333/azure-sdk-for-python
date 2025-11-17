@@ -4,7 +4,39 @@
 
 ### Breaking Changes
 
-
+  - Deleted or renamed client `PostgreSQLManagementClient`
+  - Model `AdministratorMicrosoftEntra` moved instance variable `principal_type`, `principal_name`, `object_id` and `tenant_id` under property `properties`
+  - Model `AdministratorMicrosoftEntraAdd` moved instance variable `principal_type`, `principal_name` and `tenant_id` under property `properties`
+  - Model `AdvancedThreatProtectionSettingsModel` moved instance variable `state` and `creation_time` under property `properties`
+  - Model `BackupAutomaticAndOnDemand` moved instance variable `backup_type`, `completed_time` and `source` under property `properties`
+  - Model `BackupsLongTermRetentionOperation` moved instance variable `datasource_size_in_bytes`, `data_transferred_in_bytes`, `backup_name`, `backup_metadata`, `status`, `start_time`, `end_time`, `percent_complete`, `error_code` and `error_message` under property `properties`
+  - Model `BackupsLongTermRetentionResponse` moved instance variable `datasource_size_in_bytes`, `data_transferred_in_bytes`, `backup_name`, `backup_metadata`, `status`, `start_time`, `end_time`, `percent_complete`, `error_code` and `error_message` under property `properties`
+  - Model `CapturedLog` moved instance variable `created_time`, `last_modified_time`, `size_in_kb`, `type_properties_type` and `url` under property `properties`
+  - Model `Configuration` moved instance variable `value`, `description`, `default_value`, `data_type`, `allowed_values`, `source`, `is_dynamic_config`, `is_read_only`, `is_config_pending_restart`, `unit` and `documentation_link` under property `properties`
+  - Model `ConfigurationForUpdate` moved instance variable `value`, `description`, `default_value`, `data_type`, `allowed_values`, `source`, `is_dynamic_config`, `is_read_only`, `is_config_pending_restart`, `unit` and `documentation_link` under property `properties`
+  - Model `Database` moved instance variable `charset` and `collation` under property `properties`
+  - Model `FirewallRule` moved instance variable `start_ip_address` and `end_ip_address` under property `properties`
+  - Model `LtrPreBackupResponse` moved instance variable `number_of_containers` under property `properties`
+  - Model `Migration` moved instance variable `migration_id`, `current_status`, `migration_instance_resource_id`, `migration_mode`, `migration_option`, `source_type`, `ssl_mode`, `source_db_server_metadata`, `target_db_server_metadata`, `source_db_server_resource_id`, `source_db_server_fully_qualified_domain_name`, `target_db_server_resource_id`, `target_db_server_fully_qualified_domain_name`, `secret_parameters`, `dbs_to_migrate`, `setup_logical_replication_on_source_db_if_needed`, `overwrite_dbs_in_target`, `migration_window_start_time_in_utc`, `migration_window_end_time_in_utc`, `migrate_roles`, `start_data_migration`, `trigger_cutover`, `dbs_to_trigger_cutover_on`, `cancel` and `dbs_to_cancel_migration_on` under property `properties`
+  - Model `MigrationResourceForPatch` moved instance variable `source_db_server_resource_id`, `source_db_server_fully_qualified_domain_name`, `target_db_server_fully_qualified_domain_name`, `secret_parameters`, `dbs_to_migrate`, `setup_logical_replication_on_source_db_if_needed`, `overwrite_dbs_in_target`, `migration_window_start_time_in_utc`, `migrate_roles`, `start_data_migration`, `trigger_cutover`, `dbs_to_trigger_cutover_on`, `cancel`, `dbs_to_cancel_migration_on` and `migration_mode` under property `properties`
+  - Model `ObjectRecommendation` moved instance variable `initial_recommended_time`, `last_recommended_time`, `times_recommended`, `improved_query_ids`, `recommendation_reason`, `current_state`, `recommendation_type`, `implementation_details`, `analyzed_workload`, `estimated_impact` and `details` under property `properties`
+  - Model `PrivateEndpointConnection` moved instance variable `group_ids`, `private_endpoint`, `private_link_service_connection_state` and `provisioning_state` under property `properties`
+  - Model `PrivateLinkResource` moved instance variable `group_id`, `required_members` and `required_zone_names` under property `properties`
+  - Model `Server` moved instance variable `administrator_login`, `administrator_login_password`, `version`, `minor_version`, `state`, `fully_qualified_domain_name`, `storage`, `auth_config`, `data_encryption`, `backup`, `network`, `high_availability`, `maintenance_window`, `source_server_resource_id`, `point_in_time_utc`, `availability_zone`, `replication_role`, `replica_capacity`, `replica`, `create_mode`, `private_endpoint_connections` and `cluster` under property `properties`
+  - Model `ServerForPatch` moved instance variable `administrator_login`, `administrator_login_password`, `version`, `storage`, `backup`, `high_availability`, `maintenance_window`, `auth_config`, `data_encryption`, `availability_zone`, `create_mode`, `replication_role`, `replica`, `network` and `cluster` under property `properties`
+  - Model `VirtualEndpoint` moved instance variable `endpoint_type`, `members` and `virtual_endpoints` under property `properties`
+  - Model `VirtualEndpointResourceForPatch` moved instance variable `endpoint_type`, `members` and `virtual_endpoints` under property `properties`
+  - Deleted model `AdministratorMicrosoftEntraList`/`AdvancedThreatProtectionSettingsList`/`BackupAutomaticAndOnDemandList`/`CapabilityList`/`CapturedLogList`/`ConfigurationList`/`DatabaseList`/`FirewallRuleList`/`LtrServerBackupOperationList`/`MigrationList`/`ObjectRecommendationList`/`OperationList`/`PrivateEndpointConnectionList`/`PrivateLinkResourceList`/`QuotaUsageList`/`ServerList`/`TuningOptionsList`/`VirtualEndpointsList` which actually were not used by SDK users
+  - Method `MigrationsOperations.list_by_target_server` changed its parameter `migration_list_filter` from `positional_or_keyword` to `keyword_only`
+  - Method `TuningOptionsOperations.list_recommendations` changed its parameter `recommendation_type` from `positional_or_keyword` to `keyword_only`
+  - Renamed enum value `PostgresMajorVersion.EIGHTEEN` to `ENUM_18`
+  - Renamed enum value `PostgresMajorVersion.ELEVEN` to `ENUM_11`
+  - Renamed enum value `PostgresMajorVersion.FIFTEEN` to `ENUM_15`
+  - Renamed enum value `PostgresMajorVersion.FOURTEEN` to `ENUM_14`
+  - Renamed enum value `PostgresMajorVersion.SEVENTEEN` to `ENUM_17`
+  - Renamed enum value `PostgresMajorVersion.SIXTEEN` to `ENUM_16`
+  - Renamed enum value `PostgresMajorVersion.THIRTEEN` to `ENUM_13`
+  - Renamed enum value `PostgresMajorVersion.TWELVE` to `ENUM_12`
 
 ## 2.0.0 (2025-11-14)
 
