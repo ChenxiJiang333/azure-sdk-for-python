@@ -26,7 +26,7 @@ Generate issue title and issue body for users
 
 1. Search PACKAGE-NAME with REST-REPO-URL. If there is file named "readme.python.md" that contains PACKAGE-NAME, remember the README URL of the file
 2. Get SERVICE-NAME which is next part of "specification" in README URL
-3. TARGET-URL is parent url of README URL
+3. TARGET-URL is parent directory of README URL
 4. Output issue title with ISSUE-TITLE-TEMPLATE
 5. Output issue title with ISSUE-BODY-TEMPLATE
 6. Hint user to mark issue with label `ManagementPlane, Python, assigned, auto-link, auto-ask-check`
