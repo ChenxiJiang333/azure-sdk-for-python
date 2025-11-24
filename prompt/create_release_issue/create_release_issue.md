@@ -29,3 +29,4 @@ Generate issue title and issue body for users
 3. TARGET-URL is parent url of README URL
 4. Output issue title with ISSUE-TITLE-TEMPLATE
 5. Output issue title with ISSUE-BODY-TEMPLATE
+6. Hint user to mark issue with label `ManagementPlane, Python, assigned, auto-link, auto-ask-check`
