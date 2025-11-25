@@ -4,19 +4,9 @@
 
 ### Breaking Changes
 
-  - Deleted or renamed model `ManagementGroupsAPI`
+  - Renamed client name `ManagementGroupsAPI` to `ManagementGroupsMgmtClient`
   - Deleted or renamed model `AzureAsyncOperationResults`
   - Method `ManagementGroupSubscriptionsOperations.get_subscription` renamed its parameter from `subscription_id` to `group_id`
-  - Method `EntitiesOperations.list` parameter `cache_control` changed default value from `str` to `none`
-  - Method `ManagementGroupSubscriptionsOperations.create` parameter `cache_control` changed default value from `str` to `none`
-  - Method `ManagementGroupSubscriptionsOperations.delete` parameter `cache_control` changed default value from `str` to `none`
-  - Method `ManagementGroupSubscriptionsOperations.get_subscription` parameter `cache_control` changed default value from `str` to `none`
-  - Method `ManagementGroupsOperations.begin_create_or_update` parameter `cache_control` changed default value from `str` to `none`
-  - Method `ManagementGroupsOperations.begin_delete` parameter `cache_control` changed default value from `str` to `none`
-  - Method `ManagementGroupsOperations.get` parameter `cache_control` changed default value from `str` to `none`
-  - Method `ManagementGroupsOperations.list` parameter `cache_control` changed default value from `str` to `none`
-  - Method `ManagementGroupsOperations.update` parameter `cache_control` changed default value from `str` to `none`
-  - Method `HierarchySettingsOperations.list` changed from `asynchronous` to `synchronous`
   - Deleted model `HierarchySettingsList`/`ListSubscriptionUnderManagementGroup` which actually were not used by SDK users
   - Model `CreateManagementGroupRequest` moved instance variables `tenant_id`, `display_name`, `details` and `children` under property `properties`
   - Model `CreateOrUpdateSettingsRequest` moved instance variables `require_authorization_for_group_creation` and `default_management_group` under property `properties`
@@ -48,6 +38,7 @@
   - Method `ManagementGroupsOperations.list` changed its parameter `cache_control` from `positional_or_keyword` to `keyword_only`
   - Method `ManagementGroupsOperations.list` changed its parameter `skiptoken` from `positional_or_keyword` to `keyword_only`
   - Method `ManagementGroupsOperations.update` changed its parameter `cache_control` from `positional_or_keyword` to `keyword_only`
+
 
 ## 1.1.0b2 (2024-11-05)
 
