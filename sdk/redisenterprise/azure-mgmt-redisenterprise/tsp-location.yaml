@@ -1,0 +1,4 @@
+directory: specification/redisenterprise/RedisEnterprise.Management
+commit: 2d90c756f74050a9bbb85d3395a94acadf1a1d27
+repo: Azure/azure-rest-api-specs
+additionalDirectories: 

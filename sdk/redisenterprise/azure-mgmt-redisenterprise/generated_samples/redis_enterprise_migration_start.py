@@ -16,7 +16,7 @@ from azure.mgmt.redisenterprise import CacheClient
     pip install azure-identity
     pip install azure-mgmt-redisenterprise
 # USAGE
-    python redis_enterprise_databases_force_link.py
+    python redis_enterprise_migration_start.py
 
     Before run the sample, please set the values of the client ID, tenant ID and client secret
     of the AAD application as environment variables: AZURE_CLIENT_ID, AZURE_TENANT_ID,
@@ -31,26 +31,21 @@ def main():
         subscription_id="SUBSCRIPTION_ID",
     )
 
-    client.databases.begin_force_link_to_replication_group(
+    response = client.migration.begin_start(
         resource_group_name="rg1",
         cluster_name="cache1",
-        database_name="default",
         parameters={
-            "geoReplication": {
-                "groupNickname": "groupName",
-                "linkedDatabases": [
-                    {
-                        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Cache/redisEnterprise/cache1/databases/default"
-                    },
-                    {
-                        "id": "/subscriptions/11111111-1111-1111-1111-111111111111/resourceGroups/rg2/providers/Microsoft.Cache/redisEnterprise/cache2/databases/default"
-                    },
-                ],
+            "properties": {
+                "skipDataMigration": True,
+                "sourceResourceId": "/subscriptions/e7b5a9d2-6b6a-4d2f-9143-20d9a10f5b8f/resourceGroups/rg1/providers/Microsoft.Cache/redis/cache1",
+                "sourceType": "AzureCacheForRedis",
+                "switchDns": True,
             }
         },
     ).result()
+    print(response)
 
 
-# x-ms-original-file: 2025-08-01-preview/RedisEnterpriseDatabasesForceLink.json
+# x-ms-original-file: 2025-08-01-preview/RedisEnterpriseMigrationStart.json
 if __name__ == "__main__":
     main()
