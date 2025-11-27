@@ -18,14 +18,14 @@ from azure.mgmt.core.policies import AsyncARMAutoResourceProviderRegistrationPol
 from azure.mgmt.core.tools import get_arm_endpoints
 
 from .._utils.serialization import Deserializer, Serializer
-from ._configuration import ManagementClientConfiguration
+from ._configuration import ManagementGroupsMgmtClientConfiguration
 from .operations import (
     EntitiesOperations,
     HierarchySettingsOperations,
     ManagementGroupSubscriptionsOperations,
     ManagementGroupsOperations,
     Operations,
-    _ManagementClientOperationsMixin,
+    _ManagementGroupsMgmtClientOperationsMixin,
 )
 
 if TYPE_CHECKING:
@@ -33,7 +33,7 @@ if TYPE_CHECKING:
     from azure.core.credentials_async import AsyncTokenCredential
 
 
-class ManagementClient(_ManagementClientOperationsMixin):
+class ManagementGroupsMgmtClient(_ManagementGroupsMgmtClientOperationsMixin):
     """The Azure Management Groups API enables consolidation of multiple
     subscriptions/resources into an organizational hierarchy and centrally
     manage access control, policies, alerting and reporting for those resources.
@@ -53,7 +53,7 @@ class ManagementClient(_ManagementClientOperationsMixin):
     :vartype entities: azure.mgmt.managementgroups.aio.operations.EntitiesOperations
     :param credential: Credential used to authenticate requests to the service. Required.
     :type credential: ~azure.core.credentials_async.AsyncTokenCredential
-    :param subscription_id: Subscription ID. Required.
+    :param subscription_id: The subscription ID. Required.
     :type subscription_id: str
     :param base_url: Service host. Default value is None.
     :type base_url: str
@@ -82,7 +82,7 @@ class ManagementClient(_ManagementClientOperationsMixin):
         if not base_url:
             base_url = _endpoints["resource_manager"]
         credential_scopes = kwargs.pop("credential_scopes", _endpoints["credential_scopes"])
-        self._config = ManagementClientConfiguration(
+        self._config = ManagementGroupsMgmtClientConfiguration(
             credential=credential,
             subscription_id=subscription_id,
             base_url=cast(str, base_url),

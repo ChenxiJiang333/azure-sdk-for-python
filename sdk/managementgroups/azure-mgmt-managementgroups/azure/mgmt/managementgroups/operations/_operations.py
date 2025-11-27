@@ -33,7 +33,7 @@ from azure.mgmt.core.exceptions import ARMErrorFormat
 from azure.mgmt.core.polling.arm_polling import ARMPolling
 
 from .. import models as _models
-from .._configuration import ManagementClientConfiguration
+from .._configuration import ManagementGroupsMgmtClientConfiguration
 from .._utils.model_base import SdkJSONEncoder, _deserialize, _failsafe_deserialize
 from .._utils.serialization import Deserializer, Serializer
 from .._utils.utils import ClientMixinABC
@@ -73,7 +73,7 @@ def build_management_groups_get_request(
     recurse: Optional[bool] = None,
     filter: Optional[str] = None,
     cache_control: Optional[str] = None,
-    **kwargs: Any
+    **kwargs: Any,
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
@@ -374,87 +374,69 @@ def build_hierarchy_settings_delete_request(group_id: str, **kwargs: Any) -> Htt
 
 
 def build_management_group_subscriptions_get_subscription_request(  # pylint: disable=name-too-long
-    group_id: str, subscription_id: str, *, cache_control: Optional[str] = None, **kwargs: Any
+    group_id: str, *, cache_control: Optional[str] = None, **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2023-04-01"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
     _url = "/providers/Microsoft.Management/managementGroups/{groupId}/subscriptions/{subscriptionId}"
     path_format_arguments = {
         "groupId": _SERIALIZER.url("group_id", group_id, "str"),
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
     }
 
     _url: str = _url.format(**path_format_arguments)  # type: ignore
-
-    # Construct parameters
-    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
 
     # Construct headers
     if cache_control is not None:
         _headers["Cache-Control"] = _SERIALIZER.header("cache_control", cache_control, "str")
     _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
 
-    return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
+    return HttpRequest(method="GET", url=_url, headers=_headers, **kwargs)
 
 
 def build_management_group_subscriptions_create_request(  # pylint: disable=name-too-long
-    group_id: str, subscription_id: str, *, cache_control: Optional[str] = None, **kwargs: Any
+    group_id: str, *, cache_control: Optional[str] = None, **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2023-04-01"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
     _url = "/providers/Microsoft.Management/managementGroups/{groupId}/subscriptions/{subscriptionId}"
     path_format_arguments = {
         "groupId": _SERIALIZER.url("group_id", group_id, "str"),
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
     }
 
     _url: str = _url.format(**path_format_arguments)  # type: ignore
-
-    # Construct parameters
-    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
 
     # Construct headers
     if cache_control is not None:
         _headers["Cache-Control"] = _SERIALIZER.header("cache_control", cache_control, "str")
     _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
 
-    return HttpRequest(method="PUT", url=_url, params=_params, headers=_headers, **kwargs)
+    return HttpRequest(method="PUT", url=_url, headers=_headers, **kwargs)
 
 
 def build_management_group_subscriptions_delete_request(  # pylint: disable=name-too-long
-    group_id: str, subscription_id: str, *, cache_control: Optional[str] = None, **kwargs: Any
+    group_id: str, *, cache_control: Optional[str] = None, **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2023-04-01"))
     # Construct URL
     _url = "/providers/Microsoft.Management/managementGroups/{groupId}/subscriptions/{subscriptionId}"
     path_format_arguments = {
         "groupId": _SERIALIZER.url("group_id", group_id, "str"),
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
     }
 
     _url: str = _url.format(**path_format_arguments)  # type: ignore
-
-    # Construct parameters
-    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
 
     # Construct headers
     if cache_control is not None:
         _headers["Cache-Control"] = _SERIALIZER.header("cache_control", cache_control, "str")
 
-    return HttpRequest(method="DELETE", url=_url, params=_params, headers=_headers, **kwargs)
+    return HttpRequest(method="DELETE", url=_url, headers=_headers, **kwargs)
 
 
 def build_management_group_subscriptions_get_subscriptions_under_management_group_request(  # pylint: disable=name-too-long
@@ -496,7 +478,7 @@ def build_entities_list_request(
     view: Optional[Union[str, _models.EntityViewParameterType]] = None,
     group_name: Optional[str] = None,
     cache_control: Optional[str] = None,
-    **kwargs: Any
+    **kwargs: Any,
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
@@ -534,7 +516,9 @@ def build_entities_list_request(
     return HttpRequest(method="POST", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_management_check_name_availability_request(**kwargs: Any) -> HttpRequest:  # pylint: disable=name-too-long
+def build_management_groups_mgmt_check_name_availability_request(  # pylint: disable=name-too-long
+    **kwargs: Any,
+) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
@@ -556,7 +540,9 @@ def build_management_check_name_availability_request(**kwargs: Any) -> HttpReque
     return HttpRequest(method="POST", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_management_start_tenant_backfill_request(**kwargs: Any) -> HttpRequest:  # pylint: disable=name-too-long
+def build_management_groups_mgmt_start_tenant_backfill_request(  # pylint: disable=name-too-long
+    **kwargs: Any,
+) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
@@ -575,7 +561,9 @@ def build_management_start_tenant_backfill_request(**kwargs: Any) -> HttpRequest
     return HttpRequest(method="POST", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_management_tenant_backfill_status_request(**kwargs: Any) -> HttpRequest:  # pylint: disable=name-too-long
+def build_management_groups_mgmt_tenant_backfill_status_request(  # pylint: disable=name-too-long
+    **kwargs: Any,
+) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
@@ -600,14 +588,16 @@ class Operations:
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.managementgroups.ManagementClient`'s
+        :class:`~azure.mgmt.managementgroups.ManagementGroupsMgmtClient`'s
         :attr:`operations` attribute.
     """
 
     def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client: PipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: ManagementClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._config: ManagementGroupsMgmtClientConfiguration = (
+            input_args.pop(0) if input_args else kwargs.pop("config")
+        )
         self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
@@ -701,14 +691,16 @@ class ManagementGroupsOperations:
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.managementgroups.ManagementClient`'s
+        :class:`~azure.mgmt.managementgroups.ManagementGroupsMgmtClient`'s
         :attr:`management_groups` attribute.
     """
 
     def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client: PipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: ManagementClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._config: ManagementGroupsMgmtClientConfiguration = (
+            input_args.pop(0) if input_args else kwargs.pop("config")
+        )
         self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
@@ -721,7 +713,7 @@ class ManagementGroupsOperations:
         recurse: Optional[bool] = None,
         filter: Optional[str] = None,
         cache_control: Optional[str] = None,
-        **kwargs: Any
+        **kwargs: Any,
     ) -> _models.ManagementGroup:
         """Get the details of the management group.
 
@@ -807,7 +799,7 @@ class ManagementGroupsOperations:
         create_management_group_request: Union[_models.CreateManagementGroupRequest, JSON, IO[bytes]],
         *,
         cache_control: Optional[str] = None,
-        **kwargs: Any
+        **kwargs: Any,
     ) -> Iterator[bytes]:
         error_map: MutableMapping = {
             401: ClientAuthenticationError,
@@ -882,7 +874,7 @@ class ManagementGroupsOperations:
         *,
         cache_control: Optional[str] = None,
         content_type: str = "application/json",
-        **kwargs: Any
+        **kwargs: Any,
     ) -> LROPoller[None]:
         """Create or update a management group.
         If a management group is already created and a subsequent create request is issued with
@@ -912,7 +904,7 @@ class ManagementGroupsOperations:
         *,
         cache_control: Optional[str] = None,
         content_type: str = "application/json",
-        **kwargs: Any
+        **kwargs: Any,
     ) -> LROPoller[None]:
         """Create or update a management group.
         If a management group is already created and a subsequent create request is issued with
@@ -941,7 +933,7 @@ class ManagementGroupsOperations:
         *,
         cache_control: Optional[str] = None,
         content_type: str = "application/json",
-        **kwargs: Any
+        **kwargs: Any,
     ) -> LROPoller[None]:
         """Create or update a management group.
         If a management group is already created and a subsequent create request is issued with
@@ -969,7 +961,7 @@ class ManagementGroupsOperations:
         create_management_group_request: Union[_models.CreateManagementGroupRequest, JSON, IO[bytes]],
         *,
         cache_control: Optional[str] = None,
-        **kwargs: Any
+        **kwargs: Any,
     ) -> LROPoller[None]:
         """Create or update a management group.
         If a management group is already created and a subsequent create request is issued with
@@ -1005,7 +997,7 @@ class ManagementGroupsOperations:
                 cls=lambda x, y, z: x,
                 headers=_headers,
                 params=_params,
-                **kwargs
+                **kwargs,
             )
             raw_result.http_response.read()  # type: ignore
         kwargs.pop("error_map", None)
@@ -1043,7 +1035,7 @@ class ManagementGroupsOperations:
         *,
         cache_control: Optional[str] = None,
         content_type: str = "application/json",
-        **kwargs: Any
+        **kwargs: Any,
     ) -> _models.ManagementGroup:
         """Update a management group.
 
@@ -1070,7 +1062,7 @@ class ManagementGroupsOperations:
         *,
         cache_control: Optional[str] = None,
         content_type: str = "application/json",
-        **kwargs: Any
+        **kwargs: Any,
     ) -> _models.ManagementGroup:
         """Update a management group.
 
@@ -1097,7 +1089,7 @@ class ManagementGroupsOperations:
         *,
         cache_control: Optional[str] = None,
         content_type: str = "application/json",
-        **kwargs: Any
+        **kwargs: Any,
     ) -> _models.ManagementGroup:
         """Update a management group.
 
@@ -1123,7 +1115,7 @@ class ManagementGroupsOperations:
         patch_group_request: Union[_models.PatchManagementGroupRequest, JSON, IO[bytes]],
         *,
         cache_control: Optional[str] = None,
-        **kwargs: Any
+        **kwargs: Any,
     ) -> _models.ManagementGroup:
         """Update a management group.
 
@@ -1287,7 +1279,7 @@ class ManagementGroupsOperations:
                 cls=lambda x, y, z: x,
                 headers=_headers,
                 params=_params,
-                **kwargs
+                **kwargs,
             )
             raw_result.http_response.read()  # type: ignore
         kwargs.pop("error_map", None)
@@ -1519,14 +1511,16 @@ class HierarchySettingsOperations:
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.managementgroups.ManagementClient`'s
+        :class:`~azure.mgmt.managementgroups.ManagementGroupsMgmtClient`'s
         :attr:`hierarchy_settings` attribute.
     """
 
     def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client: PipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: ManagementClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._config: ManagementGroupsMgmtClientConfiguration = (
+            input_args.pop(0) if input_args else kwargs.pop("config")
+        )
         self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
@@ -1686,7 +1680,7 @@ class HierarchySettingsOperations:
         create_tenant_settings_request: _models.CreateOrUpdateSettingsRequest,
         *,
         content_type: str = "application/json",
-        **kwargs: Any
+        **kwargs: Any,
     ) -> _models.HierarchySettings:
         """Creates or updates the hierarchy settings defined at the Management Group level.
 
@@ -1710,7 +1704,7 @@ class HierarchySettingsOperations:
         create_tenant_settings_request: JSON,
         *,
         content_type: str = "application/json",
-        **kwargs: Any
+        **kwargs: Any,
     ) -> _models.HierarchySettings:
         """Creates or updates the hierarchy settings defined at the Management Group level.
 
@@ -1733,7 +1727,7 @@ class HierarchySettingsOperations:
         create_tenant_settings_request: IO[bytes],
         *,
         content_type: str = "application/json",
-        **kwargs: Any
+        **kwargs: Any,
     ) -> _models.HierarchySettings:
         """Creates or updates the hierarchy settings defined at the Management Group level.
 
@@ -1754,7 +1748,7 @@ class HierarchySettingsOperations:
         self,
         group_id: str,
         create_tenant_settings_request: Union[_models.CreateOrUpdateSettingsRequest, JSON, IO[bytes]],
-        **kwargs: Any
+        **kwargs: Any,
     ) -> _models.HierarchySettings:
         """Creates or updates the hierarchy settings defined at the Management Group level.
 
@@ -1836,7 +1830,7 @@ class HierarchySettingsOperations:
         create_tenant_settings_request: _models.CreateOrUpdateSettingsRequest,
         *,
         content_type: str = "application/json",
-        **kwargs: Any
+        **kwargs: Any,
     ) -> _models.HierarchySettings:
         """Updates the hierarchy settings defined at the Management Group level.
 
@@ -1860,7 +1854,7 @@ class HierarchySettingsOperations:
         create_tenant_settings_request: JSON,
         *,
         content_type: str = "application/json",
-        **kwargs: Any
+        **kwargs: Any,
     ) -> _models.HierarchySettings:
         """Updates the hierarchy settings defined at the Management Group level.
 
@@ -1883,7 +1877,7 @@ class HierarchySettingsOperations:
         create_tenant_settings_request: IO[bytes],
         *,
         content_type: str = "application/json",
-        **kwargs: Any
+        **kwargs: Any,
     ) -> _models.HierarchySettings:
         """Updates the hierarchy settings defined at the Management Group level.
 
@@ -1904,7 +1898,7 @@ class HierarchySettingsOperations:
         self,
         group_id: str,
         create_tenant_settings_request: Union[_models.CreateOrUpdateSettingsRequest, JSON, IO[bytes]],
-        **kwargs: Any
+        **kwargs: Any,
     ) -> _models.HierarchySettings:
         """Updates the hierarchy settings defined at the Management Group level.
 
@@ -2035,14 +2029,16 @@ class ManagementGroupSubscriptionsOperations:
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.managementgroups.ManagementClient`'s
+        :class:`~azure.mgmt.managementgroups.ManagementGroupsMgmtClient`'s
         :attr:`management_group_subscriptions` attribute.
     """
 
     def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client: PipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: ManagementClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._config: ManagementGroupsMgmtClientConfiguration = (
+            input_args.pop(0) if input_args else kwargs.pop("config")
+        )
         self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
@@ -2077,9 +2073,7 @@ class ManagementGroupSubscriptionsOperations:
 
         _request = build_management_group_subscriptions_get_subscription_request(
             group_id=group_id,
-            subscription_id=self._config.subscription_id,
             cache_control=cache_control,
-            api_version=self._config.api_version,
             headers=_headers,
             params=_params,
         )
@@ -2146,9 +2140,7 @@ class ManagementGroupSubscriptionsOperations:
 
         _request = build_management_group_subscriptions_create_request(
             group_id=group_id,
-            subscription_id=self._config.subscription_id,
             cache_control=cache_control,
-            api_version=self._config.api_version,
             headers=_headers,
             params=_params,
         )
@@ -2214,9 +2206,7 @@ class ManagementGroupSubscriptionsOperations:
 
         _request = build_management_group_subscriptions_delete_request(
             group_id=group_id,
-            subscription_id=self._config.subscription_id,
             cache_control=cache_control,
-            api_version=self._config.api_version,
             headers=_headers,
             params=_params,
         )
@@ -2343,14 +2333,16 @@ class EntitiesOperations:
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.managementgroups.ManagementClient`'s
+        :class:`~azure.mgmt.managementgroups.ManagementGroupsMgmtClient`'s
         :attr:`entities` attribute.
     """
 
     def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client: PipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: ManagementClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._config: ManagementGroupsMgmtClientConfiguration = (
+            input_args.pop(0) if input_args else kwargs.pop("config")
+        )
         self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
@@ -2367,7 +2359,7 @@ class EntitiesOperations:
         view: Optional[Union[str, _models.EntityViewParameterType]] = None,
         group_name: Optional[str] = None,
         cache_control: Optional[str] = None,
-        **kwargs: Any
+        **kwargs: Any,
     ) -> ItemPaged["_models.EntityInfo"]:
         """List all entities (Management Groups, Subscriptions, etc.) for the authenticated user.
 
@@ -2511,8 +2503,8 @@ class EntitiesOperations:
         return ItemPaged(get_next, extract_data)
 
 
-class _ManagementClientOperationsMixin(
-    ClientMixinABC[PipelineClient[HttpRequest, HttpResponse], ManagementClientConfiguration]
+class _ManagementGroupsMgmtClientOperationsMixin(
+    ClientMixinABC[PipelineClient[HttpRequest, HttpResponse], ManagementGroupsMgmtClientConfiguration]
 ):
 
     @overload
@@ -2521,7 +2513,7 @@ class _ManagementClientOperationsMixin(
         check_name_availability_request: _models.CheckNameAvailabilityRequest,
         *,
         content_type: str = "application/json",
-        **kwargs: Any
+        **kwargs: Any,
     ) -> _models.CheckNameAvailabilityResult:
         """Checks if the specified management group name is valid and unique.
 
@@ -2575,7 +2567,7 @@ class _ManagementClientOperationsMixin(
     def check_name_availability(
         self,
         check_name_availability_request: Union[_models.CheckNameAvailabilityRequest, JSON, IO[bytes]],
-        **kwargs: Any
+        **kwargs: Any,
     ) -> _models.CheckNameAvailabilityResult:
         """Checks if the specified management group name is valid and unique.
 
@@ -2609,7 +2601,7 @@ class _ManagementClientOperationsMixin(
         else:
             _content = json.dumps(check_name_availability_request, cls=SdkJSONEncoder, exclude_readonly=True)  # type: ignore
 
-        _request = build_management_check_name_availability_request(
+        _request = build_management_groups_mgmt_check_name_availability_request(
             content_type=content_type,
             api_version=self._config.api_version,
             content=_content,
@@ -2670,7 +2662,7 @@ class _ManagementClientOperationsMixin(
 
         cls: ClsType[_models.TenantBackfillStatusResult] = kwargs.pop("cls", None)
 
-        _request = build_management_start_tenant_backfill_request(
+        _request = build_management_groups_mgmt_start_tenant_backfill_request(
             api_version=self._config.api_version,
             headers=_headers,
             params=_params,
@@ -2729,7 +2721,7 @@ class _ManagementClientOperationsMixin(
 
         cls: ClsType[_models.TenantBackfillStatusResult] = kwargs.pop("cls", None)
 
-        _request = build_management_tenant_backfill_status_request(
+        _request = build_management_groups_mgmt_tenant_backfill_status_request(
             api_version=self._config.api_version,
             headers=_headers,
             params=_params,

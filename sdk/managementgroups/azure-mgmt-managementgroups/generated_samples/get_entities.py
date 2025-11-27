@@ -8,7 +8,7 @@
 
 from azure.identity import DefaultAzureCredential
 
-from azure.mgmt.managementgroups import ManagementClient
+from azure.mgmt.managementgroups import ManagementGroupsMgmtClient
 
 """
 # PREREQUISITES
@@ -25,7 +25,7 @@ from azure.mgmt.managementgroups import ManagementClient
 
 
 def main():
-    client = ManagementClient(
+    client = ManagementGroupsMgmtClient(
         credential=DefaultAzureCredential(),
         subscription_id="SUBSCRIPTION_ID",
     )

@@ -44,7 +44,6 @@ from ...operations._operations import (
     build_hierarchy_settings_get_request,
     build_hierarchy_settings_list_request,
     build_hierarchy_settings_update_request,
-    build_management_check_name_availability_request,
     build_management_group_subscriptions_create_request,
     build_management_group_subscriptions_delete_request,
     build_management_group_subscriptions_get_subscription_request,
@@ -54,12 +53,13 @@ from ...operations._operations import (
     build_management_groups_get_descendants_request,
     build_management_groups_get_request,
     build_management_groups_list_request,
+    build_management_groups_mgmt_check_name_availability_request,
+    build_management_groups_mgmt_start_tenant_backfill_request,
+    build_management_groups_mgmt_tenant_backfill_status_request,
     build_management_groups_update_request,
-    build_management_start_tenant_backfill_request,
-    build_management_tenant_backfill_status_request,
     build_operations_list_request,
 )
-from .._configuration import ManagementClientConfiguration
+from .._configuration import ManagementGroupsMgmtClientConfiguration
 
 T = TypeVar("T")
 ClsType = Optional[Callable[[PipelineResponse[HttpRequest, AsyncHttpResponse], T, dict[str, Any]], Any]]
@@ -73,14 +73,16 @@ class Operations:
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.managementgroups.aio.ManagementClient`'s
+        :class:`~azure.mgmt.managementgroups.aio.ManagementGroupsMgmtClient`'s
         :attr:`operations` attribute.
     """
 
     def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client: AsyncPipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: ManagementClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._config: ManagementGroupsMgmtClientConfiguration = (
+            input_args.pop(0) if input_args else kwargs.pop("config")
+        )
         self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
@@ -174,14 +176,16 @@ class ManagementGroupsOperations:
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.managementgroups.aio.ManagementClient`'s
+        :class:`~azure.mgmt.managementgroups.aio.ManagementGroupsMgmtClient`'s
         :attr:`management_groups` attribute.
     """
 
     def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client: AsyncPipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: ManagementClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._config: ManagementGroupsMgmtClientConfiguration = (
+            input_args.pop(0) if input_args else kwargs.pop("config")
+        )
         self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
@@ -998,14 +1002,16 @@ class HierarchySettingsOperations:
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.managementgroups.aio.ManagementClient`'s
+        :class:`~azure.mgmt.managementgroups.aio.ManagementGroupsMgmtClient`'s
         :attr:`hierarchy_settings` attribute.
     """
 
     def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client: AsyncPipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: ManagementClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._config: ManagementGroupsMgmtClientConfiguration = (
+            input_args.pop(0) if input_args else kwargs.pop("config")
+        )
         self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
@@ -1515,14 +1521,16 @@ class ManagementGroupSubscriptionsOperations:
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.managementgroups.aio.ManagementClient`'s
+        :class:`~azure.mgmt.managementgroups.aio.ManagementGroupsMgmtClient`'s
         :attr:`management_group_subscriptions` attribute.
     """
 
     def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client: AsyncPipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: ManagementClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._config: ManagementGroupsMgmtClientConfiguration = (
+            input_args.pop(0) if input_args else kwargs.pop("config")
+        )
         self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
@@ -1557,9 +1565,7 @@ class ManagementGroupSubscriptionsOperations:
 
         _request = build_management_group_subscriptions_get_subscription_request(
             group_id=group_id,
-            subscription_id=self._config.subscription_id,
             cache_control=cache_control,
-            api_version=self._config.api_version,
             headers=_headers,
             params=_params,
         )
@@ -1626,9 +1632,7 @@ class ManagementGroupSubscriptionsOperations:
 
         _request = build_management_group_subscriptions_create_request(
             group_id=group_id,
-            subscription_id=self._config.subscription_id,
             cache_control=cache_control,
-            api_version=self._config.api_version,
             headers=_headers,
             params=_params,
         )
@@ -1692,9 +1696,7 @@ class ManagementGroupSubscriptionsOperations:
 
         _request = build_management_group_subscriptions_delete_request(
             group_id=group_id,
-            subscription_id=self._config.subscription_id,
             cache_control=cache_control,
-            api_version=self._config.api_version,
             headers=_headers,
             params=_params,
         )
@@ -1821,14 +1823,16 @@ class EntitiesOperations:
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.managementgroups.aio.ManagementClient`'s
+        :class:`~azure.mgmt.managementgroups.aio.ManagementGroupsMgmtClient`'s
         :attr:`entities` attribute.
     """
 
     def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client: AsyncPipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: ManagementClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._config: ManagementGroupsMgmtClientConfiguration = (
+            input_args.pop(0) if input_args else kwargs.pop("config")
+        )
         self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
@@ -1989,8 +1993,8 @@ class EntitiesOperations:
         return AsyncItemPaged(get_next, extract_data)
 
 
-class _ManagementClientOperationsMixin(
-    ClientMixinABC[AsyncPipelineClient[HttpRequest, AsyncHttpResponse], ManagementClientConfiguration]
+class _ManagementGroupsMgmtClientOperationsMixin(
+    ClientMixinABC[AsyncPipelineClient[HttpRequest, AsyncHttpResponse], ManagementGroupsMgmtClientConfiguration]
 ):
 
     @overload
@@ -2087,7 +2091,7 @@ class _ManagementClientOperationsMixin(
         else:
             _content = json.dumps(check_name_availability_request, cls=SdkJSONEncoder, exclude_readonly=True)  # type: ignore
 
-        _request = build_management_check_name_availability_request(
+        _request = build_management_groups_mgmt_check_name_availability_request(
             content_type=content_type,
             api_version=self._config.api_version,
             content=_content,
@@ -2148,7 +2152,7 @@ class _ManagementClientOperationsMixin(
 
         cls: ClsType[_models.TenantBackfillStatusResult] = kwargs.pop("cls", None)
 
-        _request = build_management_start_tenant_backfill_request(
+        _request = build_management_groups_mgmt_start_tenant_backfill_request(
             api_version=self._config.api_version,
             headers=_headers,
             params=_params,
@@ -2207,7 +2211,7 @@ class _ManagementClientOperationsMixin(
 
         cls: ClsType[_models.TenantBackfillStatusResult] = kwargs.pop("cls", None)
 
-        _request = build_management_tenant_backfill_status_request(
+        _request = build_management_groups_mgmt_tenant_backfill_status_request(
             api_version=self._config.api_version,
             headers=_headers,
             params=_params,

@@ -18,15 +18,15 @@ if TYPE_CHECKING:
     from azure.core.credentials_async import AsyncTokenCredential
 
 
-class ManagementClientConfiguration:  # pylint: disable=too-many-instance-attributes
-    """Configuration for ManagementClient.
+class ManagementGroupsMgmtClientConfiguration:  # pylint: disable=too-many-instance-attributes
+    """Configuration for ManagementGroupsMgmtClient.
 
     Note that all parameters used to create this instance are saved as instance
     attributes.
 
     :param credential: Credential used to authenticate requests to the service. Required.
     :type credential: ~azure.core.credentials_async.AsyncTokenCredential
-    :param subscription_id: Subscription ID. Required.
+    :param subscription_id: The subscription ID. Required.
     :type subscription_id: str
     :param base_url: Service host. Default value is "https://management.azure.com".
     :type base_url: str

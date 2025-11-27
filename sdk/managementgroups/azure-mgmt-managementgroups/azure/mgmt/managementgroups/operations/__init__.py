@@ -17,7 +17,7 @@ from ._operations import ManagementGroupsOperations  # type: ignore
 from ._operations import HierarchySettingsOperations  # type: ignore
 from ._operations import ManagementGroupSubscriptionsOperations  # type: ignore
 from ._operations import EntitiesOperations  # type: ignore
-from ._operations import _ManagementClientOperationsMixin  # type: ignore # pylint: disable=unused-import
+from ._operations import _ManagementGroupsMgmtClientOperationsMixin  # type: ignore # pylint: disable=unused-import
 
 from ._patch import __all__ as _patch_all
 from ._patch import *

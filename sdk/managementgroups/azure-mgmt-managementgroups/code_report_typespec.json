@@ -1,7 +1,7 @@
 {
   "azure.mgmt.managementgroups": {
     "class_nodes": {
-      "ManagementClient": {
+      "ManagementGroupsMgmtClient": {
         "type": null,
         "methods": {
           "__init__": {
@@ -203,7 +203,7 @@
   },
   "azure.mgmt.managementgroups.aio": {
     "class_nodes": {
-      "ManagementClient": {
+      "ManagementGroupsMgmtClient": {
         "type": null,
         "methods": {
           "__init__": {

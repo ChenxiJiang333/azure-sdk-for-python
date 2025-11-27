@@ -6,22 +6,23 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 import pytest
-from azure.mgmt.managementgroups import ManagementClient
+from azure.mgmt.managementgroups.aio import ManagementGroupsMgmtClient
 
-from devtools_testutils import AzureMgmtRecordedTestCase, RandomNameResourceGroupPreparer, recorded_by_proxy
+from devtools_testutils import AzureMgmtRecordedTestCase, RandomNameResourceGroupPreparer
+from devtools_testutils.aio import recorded_by_proxy_async
 
 AZURE_LOCATION = "eastus"
 
 
 @pytest.mark.skip("you may need to update the auto-generated test case before run it")
-class TestManagement(AzureMgmtRecordedTestCase):
+class TestManagementGroupsMgmtAsync(AzureMgmtRecordedTestCase):
     def setup_method(self, method):
-        self.client = self.create_mgmt_client(ManagementClient)
+        self.client = self.create_mgmt_client(ManagementGroupsMgmtClient, is_async=True)
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_check_name_availability(self, resource_group):
-        response = self.client.check_name_availability(
+    @recorded_by_proxy_async
+    async def test_check_name_availability(self, resource_group):
+        response = await self.client.check_name_availability(
             check_name_availability_request={"name": "str", "type": "Microsoft.Management/managementGroups"},
         )
 
@@ -29,17 +30,17 @@ class TestManagement(AzureMgmtRecordedTestCase):
         # ...
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_start_tenant_backfill(self, resource_group):
-        response = self.client.start_tenant_backfill()
+    @recorded_by_proxy_async
+    async def test_start_tenant_backfill(self, resource_group):
+        response = await self.client.start_tenant_backfill()
 
         # please add some check logic here by yourself
         # ...
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_tenant_backfill_status(self, resource_group):
-        response = self.client.tenant_backfill_status()
+    @recorded_by_proxy_async
+    async def test_tenant_backfill_status(self, resource_group):
+        response = await self.client.tenant_backfill_status()
 
         # please add some check logic here by yourself
         # ...

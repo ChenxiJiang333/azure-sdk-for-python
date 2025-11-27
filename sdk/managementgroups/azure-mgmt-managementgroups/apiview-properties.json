@@ -83,11 +83,11 @@
         "azure.mgmt.managementgroups.aio.operations.ManagementGroupSubscriptionsOperations.get_subscriptions_under_management_group": "Microsoft.Management.SubscriptionUnderManagementGroups.getSubscriptionsUnderManagementGroup",
         "azure.mgmt.managementgroups.operations.EntitiesOperations.list": "Microsoft.Management.EntitiesOperationGroup.list",
         "azure.mgmt.managementgroups.aio.operations.EntitiesOperations.list": "Microsoft.Management.EntitiesOperationGroup.list",
-        "azure.mgmt.managementgroups.ManagementClient.check_name_availability": "Microsoft.Management.checkNameAvailability",
-        "azure.mgmt.managementgroups.aio.ManagementClient.check_name_availability": "Microsoft.Management.checkNameAvailability",
-        "azure.mgmt.managementgroups.ManagementClient.start_tenant_backfill": "Microsoft.Management.startTenantBackfill",
-        "azure.mgmt.managementgroups.aio.ManagementClient.start_tenant_backfill": "Microsoft.Management.startTenantBackfill",
-        "azure.mgmt.managementgroups.ManagementClient.tenant_backfill_status": "Microsoft.Management.tenantBackfillStatus",
-        "azure.mgmt.managementgroups.aio.ManagementClient.tenant_backfill_status": "Microsoft.Management.tenantBackfillStatus"
+        "azure.mgmt.managementgroups.ManagementGroupsMgmtClient.check_name_availability": "Microsoft.Management.checkNameAvailability",
+        "azure.mgmt.managementgroups.aio.ManagementGroupsMgmtClient.check_name_availability": "Microsoft.Management.checkNameAvailability",
+        "azure.mgmt.managementgroups.ManagementGroupsMgmtClient.start_tenant_backfill": "Microsoft.Management.startTenantBackfill",
+        "azure.mgmt.managementgroups.aio.ManagementGroupsMgmtClient.start_tenant_backfill": "Microsoft.Management.startTenantBackfill",
+        "azure.mgmt.managementgroups.ManagementGroupsMgmtClient.tenant_backfill_status": "Microsoft.Management.tenantBackfillStatus",
+        "azure.mgmt.managementgroups.aio.ManagementGroupsMgmtClient.tenant_backfill_status": "Microsoft.Management.tenantBackfillStatus"
     }
 }

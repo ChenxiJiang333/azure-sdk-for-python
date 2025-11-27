@@ -6,7 +6,7 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 import pytest
-from azure.mgmt.managementgroups import ManagementClient
+from azure.mgmt.managementgroups import ManagementGroupsMgmtClient
 
 from devtools_testutils import AzureMgmtRecordedTestCase, RandomNameResourceGroupPreparer, recorded_by_proxy
 
@@ -14,46 +14,62 @@ AZURE_LOCATION = "eastus"
 
 
 @pytest.mark.skip("you may need to update the auto-generated test case before run it")
-class TestManagementManagementGroupSubscriptionsOperations(AzureMgmtRecordedTestCase):
+class TestManagementGroupsMgmtHierarchySettingsOperations(AzureMgmtRecordedTestCase):
     def setup_method(self, method):
-        self.client = self.create_mgmt_client(ManagementClient)
+        self.client = self.create_mgmt_client(ManagementGroupsMgmtClient)
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_management_group_subscriptions_get_subscription(self, resource_group):
-        response = self.client.management_group_subscriptions.get_subscription(
-            group_id="str",
-        )
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_management_group_subscriptions_create(self, resource_group):
-        response = self.client.management_group_subscriptions.create(
-            group_id="str",
-        )
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_management_group_subscriptions_delete(self, resource_group):
-        response = self.client.management_group_subscriptions.delete(
-            group_id="str",
-        )
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_management_group_subscriptions_get_subscriptions_under_management_group(self, resource_group):
-        response = self.client.management_group_subscriptions.get_subscriptions_under_management_group(
+    def test_hierarchy_settings_list(self, resource_group):
+        response = self.client.hierarchy_settings.list(
             group_id="str",
         )
         result = [r for r in response]
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
+    def test_hierarchy_settings_get(self, resource_group):
+        response = self.client.hierarchy_settings.get(
+            group_id="str",
+        )
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
+    def test_hierarchy_settings_create_or_update(self, resource_group):
+        response = self.client.hierarchy_settings.create_or_update(
+            group_id="str",
+            create_tenant_settings_request={
+                "properties": {"defaultManagementGroup": "str", "requireAuthorizationForGroupCreation": bool}
+            },
+        )
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
+    def test_hierarchy_settings_update(self, resource_group):
+        response = self.client.hierarchy_settings.update(
+            group_id="str",
+            create_tenant_settings_request={
+                "properties": {"defaultManagementGroup": "str", "requireAuthorizationForGroupCreation": bool}
+            },
+        )
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
+    def test_hierarchy_settings_delete(self, resource_group):
+        response = self.client.hierarchy_settings.delete(
+            group_id="str",
+        )
+
         # please add some check logic here by yourself
         # ...
