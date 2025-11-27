@@ -33,7 +33,7 @@ from azure.mgmt.core.exceptions import ARMErrorFormat
 from azure.mgmt.core.polling.arm_polling import ARMPolling
 
 from .. import models as _models
-from .._configuration import CacheClientConfiguration
+from .._configuration import RedisEnterpriseManagementClientConfiguration
 from .._utils.model_base import SdkJSONEncoder, _deserialize, _failsafe_deserialize
 from .._utils.serialization import Deserializer, Serializer
 
@@ -1071,14 +1071,16 @@ class Operations:
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.redisenterprise.CacheClient`'s
+        :class:`~azure.mgmt.redisenterprise.RedisEnterpriseManagementClient`'s
         :attr:`operations` attribute.
     """
 
     def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client: PipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: CacheClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._config: RedisEnterpriseManagementClientConfiguration = (
+            input_args.pop(0) if input_args else kwargs.pop("config")
+        )
         self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
@@ -1172,14 +1174,16 @@ class DatabasesOperations:  # pylint: disable=too-many-public-methods
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.redisenterprise.CacheClient`'s
+        :class:`~azure.mgmt.redisenterprise.RedisEnterpriseManagementClient`'s
         :attr:`databases` attribute.
     """
 
     def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client: PipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: CacheClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._config: RedisEnterpriseManagementClientConfiguration = (
+            input_args.pop(0) if input_args else kwargs.pop("config")
+        )
         self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
@@ -3702,21 +3706,23 @@ class PrivateEndpointConnectionsOperations:
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.redisenterprise.CacheClient`'s
+        :class:`~azure.mgmt.redisenterprise.RedisEnterpriseManagementClient`'s
         :attr:`private_endpoint_connections` attribute.
     """
 
     def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client: PipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: CacheClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._config: RedisEnterpriseManagementClientConfiguration = (
+            input_args.pop(0) if input_args else kwargs.pop("config")
+        )
         self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
     @distributed_trace
     def get(
         self, resource_group_name: str, cluster_name: str, private_endpoint_connection_name: str, **kwargs: Any
-    ) -> _models.PrivateEndpointConnectionRedisenterpriseResource:
+    ) -> _models.PrivateEndpointConnection:
         """Gets the specified private endpoint connection associated with the Redis Enterprise cluster.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
@@ -3729,9 +3735,9 @@ class PrivateEndpointConnectionsOperations:
         :param private_endpoint_connection_name: The name of the private endpoint connection associated
          with the Azure resource. Required.
         :type private_endpoint_connection_name: str
-        :return: PrivateEndpointConnectionRedisenterpriseResource. The
-         PrivateEndpointConnectionRedisenterpriseResource is compatible with MutableMapping
-        :rtype: ~azure.mgmt.redisenterprise.models.PrivateEndpointConnectionRedisenterpriseResource
+        :return: PrivateEndpointConnection. The PrivateEndpointConnection is compatible with
+         MutableMapping
+        :rtype: ~azure.mgmt.redisenterprise.models.PrivateEndpointConnection
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         error_map: MutableMapping = {
@@ -3745,7 +3751,7 @@ class PrivateEndpointConnectionsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = kwargs.pop("params", {}) or {}
 
-        cls: ClsType[_models.PrivateEndpointConnectionRedisenterpriseResource] = kwargs.pop("cls", None)
+        cls: ClsType[_models.PrivateEndpointConnection] = kwargs.pop("cls", None)
 
         _request = build_private_endpoint_connections_get_request(
             resource_group_name=resource_group_name,
@@ -3781,7 +3787,7 @@ class PrivateEndpointConnectionsOperations:
         if _stream:
             deserialized = response.iter_bytes()
         else:
-            deserialized = _deserialize(_models.PrivateEndpointConnectionRedisenterpriseResource, response.json())
+            deserialized = _deserialize(_models.PrivateEndpointConnection, response.json())
 
         if cls:
             return cls(pipeline_response, deserialized, {})  # type: ignore
@@ -3793,7 +3799,7 @@ class PrivateEndpointConnectionsOperations:
         resource_group_name: str,
         cluster_name: str,
         private_endpoint_connection_name: str,
-        properties: Union[_models.PrivateEndpointConnectionRedisenterpriseResource, JSON, IO[bytes]],
+        properties: Union[_models.PrivateEndpointConnection, JSON, IO[bytes]],
         **kwargs: Any
     ) -> Iterator[bytes]:
         error_map: MutableMapping = {
@@ -3866,7 +3872,7 @@ class PrivateEndpointConnectionsOperations:
         resource_group_name: str,
         cluster_name: str,
         private_endpoint_connection_name: str,
-        properties: _models.PrivateEndpointConnectionRedisenterpriseResource,
+        properties: _models.PrivateEndpointConnection,
         *,
         content_type: str = "application/json",
         **kwargs: Any
@@ -3885,8 +3891,7 @@ class PrivateEndpointConnectionsOperations:
          with the Azure resource. Required.
         :type private_endpoint_connection_name: str
         :param properties: The private endpoint connection properties. Required.
-        :type properties:
-         ~azure.mgmt.redisenterprise.models.PrivateEndpointConnectionRedisenterpriseResource
+        :type properties: ~azure.mgmt.redisenterprise.models.PrivateEndpointConnection
         :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
          Default value is "application/json".
         :paramtype content_type: str
@@ -3969,7 +3974,7 @@ class PrivateEndpointConnectionsOperations:
         resource_group_name: str,
         cluster_name: str,
         private_endpoint_connection_name: str,
-        properties: Union[_models.PrivateEndpointConnectionRedisenterpriseResource, JSON, IO[bytes]],
+        properties: Union[_models.PrivateEndpointConnection, JSON, IO[bytes]],
         **kwargs: Any
     ) -> LROPoller[None]:
         """Updates the state of the specified private endpoint connection associated with the Redis
@@ -3986,9 +3991,8 @@ class PrivateEndpointConnectionsOperations:
          with the Azure resource. Required.
         :type private_endpoint_connection_name: str
         :param properties: The private endpoint connection properties. Is one of the following types:
-         PrivateEndpointConnectionRedisenterpriseResource, JSON, IO[bytes] Required.
-        :type properties:
-         ~azure.mgmt.redisenterprise.models.PrivateEndpointConnectionRedisenterpriseResource or JSON or
+         PrivateEndpointConnection, JSON, IO[bytes] Required.
+        :type properties: ~azure.mgmt.redisenterprise.models.PrivateEndpointConnection or JSON or
          IO[bytes]
         :return: An instance of LROPoller that returns None
         :rtype: ~azure.core.polling.LROPoller[None]
@@ -4170,7 +4174,7 @@ class PrivateEndpointConnectionsOperations:
     @distributed_trace
     def list(
         self, resource_group_name: str, cluster_name: str, **kwargs: Any
-    ) -> ItemPaged["_models.PrivateEndpointConnection"]:
+    ) -> ItemPaged["_models.ArmPrivateEndpointConnection"]:
         """Lists all the private endpoint connections associated with the Redis Enterprise cluster.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
@@ -4180,15 +4184,15 @@ class PrivateEndpointConnectionsOperations:
          long. Allowed characters(A-Z, a-z, 0-9) and hyphen(-). There can be no leading nor trailing nor
          consecutive hyphens. Required.
         :type cluster_name: str
-        :return: An iterator like instance of PrivateEndpointConnection
+        :return: An iterator like instance of ArmPrivateEndpointConnection
         :rtype:
-         ~azure.core.paging.ItemPaged[~azure.mgmt.redisenterprise.models.PrivateEndpointConnection]
+         ~azure.core.paging.ItemPaged[~azure.mgmt.redisenterprise.models.ArmPrivateEndpointConnection]
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         _headers = kwargs.pop("headers", {}) or {}
         _params = kwargs.pop("params", {}) or {}
 
-        cls: ClsType[List[_models.PrivateEndpointConnection]] = kwargs.pop("cls", None)
+        cls: ClsType[List[_models.ArmPrivateEndpointConnection]] = kwargs.pop("cls", None)
 
         error_map: MutableMapping = {
             401: ClientAuthenticationError,
@@ -4240,7 +4244,7 @@ class PrivateEndpointConnectionsOperations:
 
         def extract_data(pipeline_response):
             deserialized = pipeline_response.http_response.json()
-            list_of_elem = _deserialize(List[_models.PrivateEndpointConnection], deserialized.get("value", []))
+            list_of_elem = _deserialize(List[_models.ArmPrivateEndpointConnection], deserialized.get("value", []))
             if cls:
                 list_of_elem = cls(list_of_elem)  # type: ignore
             return deserialized.get("nextLink") or None, iter(list_of_elem)
@@ -4270,14 +4274,16 @@ class RedisEnterpriseOperations:
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.redisenterprise.CacheClient`'s
+        :class:`~azure.mgmt.redisenterprise.RedisEnterpriseManagementClient`'s
         :attr:`redis_enterprise` attribute.
     """
 
     def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client: PipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: CacheClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._config: RedisEnterpriseManagementClientConfiguration = (
+            input_args.pop(0) if input_args else kwargs.pop("config")
+        )
         self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
@@ -5196,14 +5202,16 @@ class PrivateLinkResourcesOperations:
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.redisenterprise.CacheClient`'s
+        :class:`~azure.mgmt.redisenterprise.RedisEnterpriseManagementClient`'s
         :attr:`private_link_resources` attribute.
     """
 
     def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client: PipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: CacheClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._config: RedisEnterpriseManagementClientConfiguration = (
+            input_args.pop(0) if input_args else kwargs.pop("config")
+        )
         self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
@@ -5309,14 +5317,16 @@ class AccessPolicyAssignmentOperations:
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.redisenterprise.CacheClient`'s
+        :class:`~azure.mgmt.redisenterprise.RedisEnterpriseManagementClient`'s
         :attr:`access_policy_assignment` attribute.
     """
 
     def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client: PipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: CacheClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._config: RedisEnterpriseManagementClientConfiguration = (
+            input_args.pop(0) if input_args else kwargs.pop("config")
+        )
         self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
@@ -5929,14 +5939,16 @@ class MigrationOperations:
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.redisenterprise.CacheClient`'s
+        :class:`~azure.mgmt.redisenterprise.RedisEnterpriseManagementClient`'s
         :attr:`migration` attribute.
     """
 
     def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client: PipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: CacheClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._config: RedisEnterpriseManagementClientConfiguration = (
+            input_args.pop(0) if input_args else kwargs.pop("config")
+        )
         self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
@@ -6476,14 +6488,16 @@ class OperationsStatusOperations:
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.redisenterprise.CacheClient`'s
+        :class:`~azure.mgmt.redisenterprise.RedisEnterpriseManagementClient`'s
         :attr:`operations_status` attribute.
     """
 
     def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client: PipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: CacheClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._config: RedisEnterpriseManagementClientConfiguration = (
+            input_args.pop(0) if input_args else kwargs.pop("config")
+        )
         self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 

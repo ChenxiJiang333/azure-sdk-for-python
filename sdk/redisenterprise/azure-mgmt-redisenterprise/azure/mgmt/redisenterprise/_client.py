@@ -17,7 +17,7 @@ from azure.mgmt.core import ARMPipelineClient
 from azure.mgmt.core.policies import ARMAutoResourceProviderRegistrationPolicy
 from azure.mgmt.core.tools import get_arm_endpoints
 
-from ._configuration import CacheClientConfiguration
+from ._configuration import RedisEnterpriseManagementClientConfiguration
 from ._utils.serialization import Deserializer, Serializer
 from .operations import (
     AccessPolicyAssignmentOperations,
@@ -35,7 +35,7 @@ if TYPE_CHECKING:
     from azure.core.credentials import TokenCredential
 
 
-class CacheClient:  # pylint: disable=too-many-instance-attributes
+class RedisEnterpriseManagementClient:  # pylint: disable=too-many-instance-attributes
     """REST API for managing Redis Enterprise resources in Azure.
 
     :ivar operations: Operations operations
@@ -89,7 +89,7 @@ class CacheClient:  # pylint: disable=too-many-instance-attributes
         if not base_url:
             base_url = _endpoints["resource_manager"]
         credential_scopes = kwargs.pop("credential_scopes", _endpoints["credential_scopes"])
-        self._config = CacheClientConfiguration(
+        self._config = RedisEnterpriseManagementClientConfiguration(
             credential=credential,
             subscription_id=subscription_id,
             base_url=cast(str, base_url),

@@ -8,7 +8,7 @@
 
 from azure.identity import DefaultAzureCredential
 
-from azure.mgmt.redisenterprise import CacheClient
+from azure.mgmt.redisenterprise import RedisEnterpriseManagementClient
 
 """
 # PREREQUISITES
@@ -25,7 +25,7 @@ from azure.mgmt.redisenterprise import CacheClient
 
 
 def main():
-    client = CacheClient(
+    client = RedisEnterpriseManagementClient(
         credential=DefaultAzureCredential(),
         subscription_id="SUBSCRIPTION_ID",
     )

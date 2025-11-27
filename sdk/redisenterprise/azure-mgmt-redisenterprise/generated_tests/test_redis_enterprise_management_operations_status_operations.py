@@ -6,23 +6,22 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 import pytest
-from azure.mgmt.redisenterprise.aio import CacheClient
+from azure.mgmt.redisenterprise import RedisEnterpriseManagementClient
 
-from devtools_testutils import AzureMgmtRecordedTestCase, RandomNameResourceGroupPreparer
-from devtools_testutils.aio import recorded_by_proxy_async
+from devtools_testutils import AzureMgmtRecordedTestCase, RandomNameResourceGroupPreparer, recorded_by_proxy
 
 AZURE_LOCATION = "eastus"
 
 
 @pytest.mark.skip("you may need to update the auto-generated test case before run it")
-class TestCacheOperationsStatusOperationsAsync(AzureMgmtRecordedTestCase):
+class TestRedisEnterpriseManagementOperationsStatusOperations(AzureMgmtRecordedTestCase):
     def setup_method(self, method):
-        self.client = self.create_mgmt_client(CacheClient, is_async=True)
+        self.client = self.create_mgmt_client(RedisEnterpriseManagementClient)
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_operations_status_get(self, resource_group):
-        response = await self.client.operations_status.get(
+    @recorded_by_proxy
+    def test_operations_status_get(self, resource_group):
+        response = self.client.operations_status.get(
             location="str",
             operation_id="str",
         )

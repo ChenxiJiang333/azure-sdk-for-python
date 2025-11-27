@@ -214,6 +214,47 @@ class AccessPolicyAssignmentPropertiesUser(_Model):
         super().__init__(*args, **kwargs)
 
 
+class ArmPrivateEndpointConnection(Resource):
+    """The private endpoint connection resource.
+
+    :ivar id: Fully qualified resource ID for the resource. Ex -
+     /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}.
+    :vartype id: str
+    :ivar name: The name of the resource.
+    :vartype name: str
+    :ivar type: The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or
+     "Microsoft.Storage/storageAccounts".
+    :vartype type: str
+    :ivar system_data: Azure Resource Manager metadata containing createdBy and modifiedBy
+     information.
+    :vartype system_data: ~azure.mgmt.redisenterprise.models.SystemData
+    :ivar properties: The private endpoint connection properties.
+    :vartype properties: ~azure.mgmt.redisenterprise.models.PrivateEndpointConnectionProperties
+    """
+
+    properties: Optional["_models.PrivateEndpointConnectionProperties"] = rest_field(
+        visibility=["read", "create", "update", "delete", "query"]
+    )
+    """The private endpoint connection properties."""
+
+    @overload
+    def __init__(
+        self,
+        *,
+        properties: Optional["_models.PrivateEndpointConnectionProperties"] = None,
+    ) -> None: ...
+
+    @overload
+    def __init__(self, mapping: Mapping[str, Any]) -> None:
+        """
+        :param mapping: raw JSON to initialize the model.
+        :type mapping: Mapping[str, Any]
+        """
+
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
+        super().__init__(*args, **kwargs)
+
+
 class MigrationProperties(_Model):
     """Properties for Redis Enterprise migration operation.
 
@@ -527,7 +568,7 @@ class ClusterProperties(_Model):
     :ivar private_endpoint_connections: List of private endpoint connections associated with the
      specified Redis Enterprise cluster.
     :vartype private_endpoint_connections:
-     list[~azure.mgmt.redisenterprise.models.PrivateEndpointConnectionRedisenterpriseResource]
+     list[~azure.mgmt.redisenterprise.models.PrivateEndpointConnection]
     """
 
     high_availability: Optional[Union[str, "_models.HighAvailability"]] = rest_field(
@@ -572,8 +613,8 @@ class ClusterProperties(_Model):
      \"ScalingFailed\", and \"Moving\"."""
     redis_version: Optional[str] = rest_field(name="redisVersion", visibility=["read"])
     """Version of redis the cluster supports, e.g. '6'."""
-    private_endpoint_connections: Optional[list["_models.PrivateEndpointConnectionRedisenterpriseResource"]] = (
-        rest_field(name="privateEndpointConnections", visibility=["read"])
+    private_endpoint_connections: Optional[list["_models.PrivateEndpointConnection"]] = rest_field(
+        name="privateEndpointConnections", visibility=["read"]
     )
     """List of private endpoint connections associated with the specified Redis Enterprise cluster."""
 
@@ -632,7 +673,7 @@ class ClusterCreateProperties(ClusterProperties):
     :ivar private_endpoint_connections: List of private endpoint connections associated with the
      specified Redis Enterprise cluster.
     :vartype private_endpoint_connections:
-     list[~azure.mgmt.redisenterprise.models.PrivateEndpointConnectionRedisenterpriseResource]
+     list[~azure.mgmt.redisenterprise.models.PrivateEndpointConnection]
     :ivar public_network_access: Whether or not public network traffic can access the Redis
      cluster. Only 'Enabled' or 'Disabled' can be set. null is returned only for clusters created
      using an old API version which do not have this property and cannot be set. Required. Known
@@ -910,7 +951,7 @@ class ClusterUpdateProperties(ClusterProperties):
     :ivar private_endpoint_connections: List of private endpoint connections associated with the
      specified Redis Enterprise cluster.
     :vartype private_endpoint_connections:
-     list[~azure.mgmt.redisenterprise.models.PrivateEndpointConnectionRedisenterpriseResource]
+     list[~azure.mgmt.redisenterprise.models.PrivateEndpointConnection]
     :ivar public_network_access: Whether or not public network traffic can access the Redis
      cluster. Only 'Enabled' or 'Disabled' can be set. null is returned only for clusters created
      using an old API version which do not have this property and cannot be set. Known values are:
@@ -2143,100 +2184,6 @@ class PrivateEndpoint(_Model):
 
 
 class PrivateEndpointConnection(Resource):
-    """The private endpoint connection resource.
-
-    :ivar id: Fully qualified resource ID for the resource. Ex -
-     /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}.
-    :vartype id: str
-    :ivar name: The name of the resource.
-    :vartype name: str
-    :ivar type: The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or
-     "Microsoft.Storage/storageAccounts".
-    :vartype type: str
-    :ivar system_data: Azure Resource Manager metadata containing createdBy and modifiedBy
-     information.
-    :vartype system_data: ~azure.mgmt.redisenterprise.models.SystemData
-    :ivar properties: The private endpoint connection properties.
-    :vartype properties: ~azure.mgmt.redisenterprise.models.PrivateEndpointConnectionProperties
-    """
-
-    properties: Optional["_models.PrivateEndpointConnectionProperties"] = rest_field(
-        visibility=["read", "create", "update", "delete", "query"]
-    )
-    """The private endpoint connection properties."""
-
-    @overload
-    def __init__(
-        self,
-        *,
-        properties: Optional["_models.PrivateEndpointConnectionProperties"] = None,
-    ) -> None: ...
-
-    @overload
-    def __init__(self, mapping: Mapping[str, Any]) -> None:
-        """
-        :param mapping: raw JSON to initialize the model.
-        :type mapping: Mapping[str, Any]
-        """
-
-    def __init__(self, *args: Any, **kwargs: Any) -> None:
-        super().__init__(*args, **kwargs)
-
-
-class PrivateEndpointConnectionProperties(_Model):
-    """Properties of the private endpoint connection.
-
-    :ivar group_ids: The group ids for the private endpoint resource.
-    :vartype group_ids: list[str]
-    :ivar private_endpoint: The private endpoint resource.
-    :vartype private_endpoint: ~azure.mgmt.redisenterprise.models.PrivateEndpoint
-    :ivar private_link_service_connection_state: A collection of information about the state of the
-     connection between service consumer and provider. Required.
-    :vartype private_link_service_connection_state:
-     ~azure.mgmt.redisenterprise.models.PrivateLinkServiceConnectionState
-    :ivar provisioning_state: The provisioning state of the private endpoint connection resource.
-     Known values are: "Succeeded", "Creating", "Deleting", and "Failed".
-    :vartype provisioning_state: str or
-     ~azure.mgmt.redisenterprise.models.PrivateEndpointConnectionProvisioningState
-    """
-
-    group_ids: Optional[list[str]] = rest_field(name="groupIds", visibility=["read"])
-    """The group ids for the private endpoint resource."""
-    private_endpoint: Optional["_models.PrivateEndpoint"] = rest_field(
-        name="privateEndpoint", visibility=["read", "create", "update", "delete", "query"]
-    )
-    """The private endpoint resource."""
-    private_link_service_connection_state: "_models.PrivateLinkServiceConnectionState" = rest_field(
-        name="privateLinkServiceConnectionState", visibility=["read", "create", "update", "delete", "query"]
-    )
-    """A collection of information about the state of the connection between service consumer and
-     provider. Required."""
-    provisioning_state: Optional[Union[str, "_models.PrivateEndpointConnectionProvisioningState"]] = rest_field(
-        name="provisioningState", visibility=["read"]
-    )
-    """The provisioning state of the private endpoint connection resource. Known values are:
-     \"Succeeded\", \"Creating\", \"Deleting\", and \"Failed\"."""
-
-    @overload
-    def __init__(
-        self,
-        *,
-        private_link_service_connection_state: "_models.PrivateLinkServiceConnectionState",
-        private_endpoint: Optional["_models.PrivateEndpoint"] = None,
-    ) -> None: ...
-
-    @overload
-    def __init__(self, mapping: Mapping[str, Any]) -> None:
-        """
-        :param mapping: raw JSON to initialize the model.
-        :type mapping: Mapping[str, Any]
-        """
-
-    def __init__(self, *args: Any, **kwargs: Any) -> None:
-        super().__init__(*args, **kwargs)
-
-
-class PrivateEndpointConnectionRedisenterpriseResource(Resource):  # pylint: disable=name-too-long
     """The Private Endpoint Connection resource.
 
     :ivar id: Fully qualified resource ID for the resource. Ex -
@@ -2295,6 +2242,59 @@ class PrivateEndpointConnectionRedisenterpriseResource(Resource):  # pylint: dis
             setattr(self.properties, key, value)
         else:
             super().__setattr__(key, value)
+
+
+class PrivateEndpointConnectionProperties(_Model):
+    """Properties of the private endpoint connection.
+
+    :ivar group_ids: The group ids for the private endpoint resource.
+    :vartype group_ids: list[str]
+    :ivar private_endpoint: The private endpoint resource.
+    :vartype private_endpoint: ~azure.mgmt.redisenterprise.models.PrivateEndpoint
+    :ivar private_link_service_connection_state: A collection of information about the state of the
+     connection between service consumer and provider. Required.
+    :vartype private_link_service_connection_state:
+     ~azure.mgmt.redisenterprise.models.PrivateLinkServiceConnectionState
+    :ivar provisioning_state: The provisioning state of the private endpoint connection resource.
+     Known values are: "Succeeded", "Creating", "Deleting", and "Failed".
+    :vartype provisioning_state: str or
+     ~azure.mgmt.redisenterprise.models.PrivateEndpointConnectionProvisioningState
+    """
+
+    group_ids: Optional[list[str]] = rest_field(name="groupIds", visibility=["read"])
+    """The group ids for the private endpoint resource."""
+    private_endpoint: Optional["_models.PrivateEndpoint"] = rest_field(
+        name="privateEndpoint", visibility=["read", "create", "update", "delete", "query"]
+    )
+    """The private endpoint resource."""
+    private_link_service_connection_state: "_models.PrivateLinkServiceConnectionState" = rest_field(
+        name="privateLinkServiceConnectionState", visibility=["read", "create", "update", "delete", "query"]
+    )
+    """A collection of information about the state of the connection between service consumer and
+     provider. Required."""
+    provisioning_state: Optional[Union[str, "_models.PrivateEndpointConnectionProvisioningState"]] = rest_field(
+        name="provisioningState", visibility=["read"]
+    )
+    """The provisioning state of the private endpoint connection resource. Known values are:
+     \"Succeeded\", \"Creating\", \"Deleting\", and \"Failed\"."""
+
+    @overload
+    def __init__(
+        self,
+        *,
+        private_link_service_connection_state: "_models.PrivateLinkServiceConnectionState",
+        private_endpoint: Optional["_models.PrivateEndpoint"] = None,
+    ) -> None: ...
+
+    @overload
+    def __init__(self, mapping: Mapping[str, Any]) -> None:
+        """
+        :param mapping: raw JSON to initialize the model.
+        :type mapping: Mapping[str, Any]
+        """
+
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
+        super().__init__(*args, **kwargs)
 
 
 class PrivateLinkResource(Resource):
