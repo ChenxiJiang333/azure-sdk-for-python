@@ -4,8 +4,8 @@
 
 ### Breaking Changes
 
-  - Deleted or renamed enum value `Term.P1_Y`
-  - Deleted or renamed enum value `Term.P3_Y`
+  - Enum `Term` renamed value `P1_Y` to `P1Y`
+  - Enum `Term` renamed value `P3_Y` to `P3Y`
   - Model `BudgetComparisonExpression` renamed its instance variable `values` to `values_property`
   - Model `SourceCostAllocationResource` renamed its instance variable `values` to `values_property`
   - Model `TargetCostAllocationResource` renamed its instance variable `values` to `values_property`
