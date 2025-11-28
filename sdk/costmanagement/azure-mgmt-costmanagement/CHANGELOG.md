@@ -1,199 +1,33 @@
 # Release History
 
-## 5.0.0 (2025-11-28)
-
-### Features Added
-
-  - Model `CostManagementClient` added parameter `cloud_setting` in method `__init__`
-  - Client `CostManagementClient` added method `send_request`
-  - Client `CostManagementClient` added operation group `budgets`
-  - Client `CostManagementClient` added operation group `settings`
-  - Client `CostManagementClient` added operation group `cost_allocation_rules`
-  - Client `CostManagementClient` added operation group `generate_benefit_utilization_summaries_report`
-  - Model `Alert` added property `system_data`
-  - Model `BenefitRecommendationModel` added property `system_data`
-  - Model `BenefitResource` added property `system_data`
-  - Model `BenefitUtilizationSummary` added property `system_data`
-  - Model `CommonExportProperties` added property `data_overwrite_behavior`
-  - Model `CommonExportProperties` added property `compression_mode`
-  - Model `CommonExportProperties` added property `export_description`
-  - Model `CommonExportProperties` added property `system_suspension_context`
-  - Model `CostDetailsOperationResults` added property `manifest`
-  - Model `CostDetailsOperationResults` added property `system_data`
-  - Model `Export` added property `properties`
-  - Model `Export` added property `identity`
-  - Model `Export` added property `location`
-  - Model `Export` added property `system_data`
-  - Model `ExportDatasetConfiguration` added property `data_version`
-  - Model `ExportDatasetConfiguration` added property `filters`
-  - Model `ExportDeliveryDestination` added property `type`
-  - Model `ExportProperties` added property `data_overwrite_behavior`
-  - Model `ExportProperties` added property `compression_mode`
-  - Model `ExportProperties` added property `export_description`
-  - Model `ExportProperties` added property `system_suspension_context`
-  - Enum `ExportType` added member `FOCUS_COST`
-  - Enum `ExportType` added member `PRICE_SHEET`
-  - Enum `ExportType` added member `RESERVATION_DETAILS`
-  - Enum `ExportType` added member `RESERVATION_RECOMMENDATIONS`
-  - Enum `ExportType` added member `RESERVATION_TRANSACTIONS`
-  - Model `ForecastComparisonExpression` added property `values_property`
-  - Model `ForecastResult` added property `properties`
-  - Enum `FormatType` added member `PARQUET`
-  - Model `GenerateDetailedCostReportOperationResult` added property `properties`
-  - Model `GenerateDetailedCostReportOperationResult` added property `system_data`
-  - Model `GenerateDetailedCostReportOperationStatuses` added property `properties`
-  - Model `GenerateDetailedCostReportOperationStatuses` added property `system_data`
-  - Enum `GranularityType` added member `MONTHLY`
-  - Model `IncludedQuantityUtilizationSummary` added property `properties`
-  - Model `IncludedQuantityUtilizationSummary` added property `system_data`
-  - Model `OperationStatus` added property `properties`
-  - Model `ProxyResource` added property `system_data`
-  - Model `QueryComparisonExpression` added property `values_property`
-  - Model `QueryResult` added property `properties`
-  - Model `ReportConfigComparisonExpression` added property `values_property`
-  - Model `Resource` added property `system_data`
-  - Model `SavingsPlanUtilizationSummary` added property `properties`
-  - Model `SavingsPlanUtilizationSummary` added property `system_data`
-  - Enum `TimeframeType` added member `THE_CURRENT_MONTH`
-  - Model `View` added property `system_data`
-  - Added model `ArmErrorResponse`
-  - Added model `AsyncOperationStatusProperties`
-  - Added model `BenefitUtilizationSummariesOperationStatus`
-  - Added model `BenefitUtilizationSummariesRequest`
-  - Added enum `BenefitUtilizationSummaryReportSchema`
-  - Added model `Budget`
-  - Added model `BudgetComparisonExpression`
-  - Added model `BudgetFilter`
-  - Added model `BudgetFilterProperties`
-  - Added enum `BudgetNotificationOperatorType`
-  - Added enum `BudgetOperatorType`
-  - Added model `BudgetProperties`
-  - Added model `BudgetTimePeriod`
-  - Added enum `CategoryType`
-  - Added enum `CompressionModeType`
-  - Added enum `CostAllocationPolicyType`
-  - Added model `CostAllocationProportion`
-  - Added model `CostAllocationResource`
-  - Added enum `CostAllocationResourceType`
-  - Added model `CostAllocationRuleCheckNameAvailabilityRequest`
-  - Added model `CostAllocationRuleCheckNameAvailabilityResponse`
-  - Added model `CostAllocationRuleDefinition`
-  - Added model `CostAllocationRuleDetails`
-  - Added model `CostAllocationRuleProperties`
-  - Added enum `CultureCode`
-  - Added model `CurrentSpend`
-  - Added enum `DataOverwriteBehaviorType`
-  - Added enum `DestinationType`
-  - Added model `ErrorAdditionalInfo`
-  - Added model `ErrorDetail`
-  - Added model `ExportRunRequest`
-  - Added model `ExportSuspensionContext`
-  - Added model `ExtensionResource`
-  - Added enum `FilterItemNames`
-  - Added model `FilterItems`
-  - Added model `ForecastProperties`
-  - Added model `ForecastSpend`
-  - Added enum `Frequency`
-  - Added enum `KpiTypeType`
-  - Added model `MCAPriceSheetProperties`
-  - Added model `Notification`
-  - Added enum `PivotTypeType`
-  - Added model `PricesheetDownloadProperties`
-  - Added model `QueryProperties`
-  - Added enum `Reason`
-  - Added model `ReportConfigDefinition`
-  - Added model `ReportManifest`
-  - Added model `ReportURL`
-  - Added model `RequestContext`
-  - Added enum `RuleStatus`
-  - Added model `Setting`
-  - Added enum `SettingType`
-  - Added enum `SettingsKind`
-  - Added model `SourceCostAllocationResource`
-  - Added model `SystemAssignedServiceIdentity`
-  - Added enum `SystemAssignedServiceIdentityType`
-  - Added model `TagInheritanceProperties`
-  - Added model `TagInheritanceSetting`
-  - Added model `TargetCostAllocationResource`
-  - Added enum `ThresholdType`
-  - Added enum `TimeGrainType`
-  - Model `PriceSheetOperations` added method `begin_download_by_billing_account`
-  - Model `PriceSheetOperations` added method `begin_download_by_invoice`
-  - Model `ScheduledActionsOperations` added parameter `etag` in method `create_or_update`
-  - Model `ScheduledActionsOperations` added parameter `match_condition` in method `create_or_update`
-  - Model `ScheduledActionsOperations` added parameter `etag` in method `create_or_update_by_scope`
-  - Model `ScheduledActionsOperations` added parameter `match_condition` in method `create_or_update_by_scope`
-  - Added model `BudgetsOperations`
-  - Added model `CostAllocationRulesOperations`
-  - Added model `GenerateBenefitUtilizationSummariesReportOperations`
-  - Added model `SettingsOperations`
+## 6.0.0 (2025-11-28)
 
 ### Breaking Changes
 
-  - Method `AlertsOperations.list` changed from `asynchronous` to `synchronous`
-  - Method `ExportsOperations.list` changed from `asynchronous` to `synchronous`
-  - Model `CostDetailsOperationResults` deleted or renamed its instance variable `manifest_version`
-  - Model `CostDetailsOperationResults` deleted or renamed its instance variable `data_format`
-  - Model `CostDetailsOperationResults` deleted or renamed its instance variable `byte_count`
-  - Model `CostDetailsOperationResults` deleted or renamed its instance variable `blob_count`
-  - Model `CostDetailsOperationResults` deleted or renamed its instance variable `compress_data`
-  - Model `CostDetailsOperationResults` deleted or renamed its instance variable `blobs`
-  - Model `CostDetailsOperationResults` deleted or renamed its instance variable `request_scope`
-  - Model `CostDetailsOperationResults` deleted or renamed its instance variable `request_body`
-  - Model `DismissAlertPayload` deleted or renamed its instance variable `definition`
-  - Model `DismissAlertPayload` deleted or renamed its instance variable `description`
-  - Model `DismissAlertPayload` deleted or renamed its instance variable `source`
-  - Model `DismissAlertPayload` deleted or renamed its instance variable `details`
-  - Model `DismissAlertPayload` deleted or renamed its instance variable `cost_entity_id`
-  - Model `DismissAlertPayload` deleted or renamed its instance variable `status`
-  - Model `DismissAlertPayload` deleted or renamed its instance variable `creation_time`
-  - Model `DismissAlertPayload` deleted or renamed its instance variable `close_time`
-  - Model `DismissAlertPayload` deleted or renamed its instance variable `modification_time`
-  - Model `DismissAlertPayload` deleted or renamed its instance variable `status_modification_user_name`
-  - Model `DismissAlertPayload` deleted or renamed its instance variable `status_modification_time`
-  - Model `Export` deleted or renamed its instance variable `format`
-  - Model `Export` deleted or renamed its instance variable `delivery_info`
-  - Model `Export` deleted or renamed its instance variable `definition`
-  - Model `Export` deleted or renamed its instance variable `run_history`
-  - Model `Export` deleted or renamed its instance variable `partition_data`
-  - Model `Export` deleted or renamed its instance variable `next_run_time_estimate`
-  - Model `Export` deleted or renamed its instance variable `schedule`
-  - Model `ForecastComparisonExpression` deleted or renamed its instance variable `values`
-  - Model `ForecastResult` deleted or renamed its instance variable `next_link`
-  - Model `ForecastResult` deleted or renamed its instance variable `columns`
-  - Model `ForecastResult` deleted or renamed its instance variable `rows`
-  - Model `GenerateDetailedCostReportOperationResult` deleted or renamed its instance variable `expiry_time`
-  - Model `GenerateDetailedCostReportOperationResult` deleted or renamed its instance variable `valid_till`
-  - Model `GenerateDetailedCostReportOperationResult` deleted or renamed its instance variable `download_url`
-  - Model `GenerateDetailedCostReportOperationStatuses` deleted or renamed its instance variable `expiry_time`
-  - Model `GenerateDetailedCostReportOperationStatuses` deleted or renamed its instance variable `valid_till`
-  - Model `GenerateDetailedCostReportOperationStatuses` deleted or renamed its instance variable `download_url`
-  - Model `IncludedQuantityUtilizationSummary` deleted or renamed its instance variable `arm_sku_name`
-  - Model `IncludedQuantityUtilizationSummary` deleted or renamed its instance variable `benefit_id`
-  - Model `IncludedQuantityUtilizationSummary` deleted or renamed its instance variable `benefit_order_id`
-  - Model `IncludedQuantityUtilizationSummary` deleted or renamed its instance variable `benefit_type`
-  - Model `IncludedQuantityUtilizationSummary` deleted or renamed its instance variable `usage_date`
-  - Model `IncludedQuantityUtilizationSummary` deleted or renamed its instance variable `utilization_percentage`
-  - Model `OperationStatus` deleted or renamed its instance variable `report_url`
-  - Model `OperationStatus` deleted or renamed its instance variable `valid_until`
-  - Model `QueryComparisonExpression` deleted or renamed its instance variable `values`
-  - Model `QueryResult` deleted or renamed its instance variable `next_link`
-  - Model `QueryResult` deleted or renamed its instance variable `columns`
-  - Model `QueryResult` deleted or renamed its instance variable `rows`
-  - Model `ReportConfigComparisonExpression` deleted or renamed its instance variable `values`
-  - Model `SavingsPlanUtilizationSummary` deleted or renamed its instance variable `arm_sku_name`
-  - Model `SavingsPlanUtilizationSummary` deleted or renamed its instance variable `benefit_id`
-  - Model `SavingsPlanUtilizationSummary` deleted or renamed its instance variable `benefit_order_id`
-  - Model `SavingsPlanUtilizationSummary` deleted or renamed its instance variable `benefit_type`
-  - Model `SavingsPlanUtilizationSummary` deleted or renamed its instance variable `usage_date`
-  - Model `SavingsPlanUtilizationSummary` deleted or renamed its instance variable `avg_utilization_percentage`
-  - Model `SavingsPlanUtilizationSummary` deleted or renamed its instance variable `min_utilization_percentage`
-  - Model `SavingsPlanUtilizationSummary` deleted or renamed its instance variable `max_utilization_percentage`
   - Deleted or renamed enum value `Term.P1_Y`
   - Deleted or renamed enum value `Term.P3_Y`
-  - Deleted or renamed model `KpiType`
-  - Deleted or renamed model `PivotType`
-  - Deleted or renamed model `ScheduledActionProxyResource`
+  - Model `BudgetComparisonExpression` renamed its instance variable `values` to `values_property`
+  - Model `SourceCostAllocationResource` renamed its instance variable `values` to `values_property`
+  - Model `TargetCostAllocationResource` renamed its instance variable `values` to `values_property`
+  - Model `ForecastComparisonExpression` renamed its instance variable `values` to `values_property`
+  - Model `ReportConfigComparisonExpression` renamed its instance variable `values` to `values_property`
+  - Model `QueryComparisonExpression` renamed its instance variable `values` to `values_property`
+  - Model `Alert` moved instance variable `definition`, `description`, `source`, `details`, `cost_entity_id`, `status`, `creation_time`, `close_time`, `modification_time`, `status_modification_user_name` and `status_modification_time` under property `properties`
+  - Model `Budget` moved instance variable `category`, `amount`, `time_grain`, `time_period`, `filter`, `current_spend`, `notifications` and `forecast_spend` under property `properties`
+  - Model `CostDetailsOperationResults` moved instance variable `manifest_version`, `data_format`, `byte_count`, `blob_count`, `compress_data`, `blobs`, `request_scope` and `request_body` under property `properties`
+  - Model `Dimension` moved instance variable `description`, `filter_enabled`, `grouping_enabled`, `data`, `total`, `category`, `usage_start`, `usage_end` and `next_link` under property `properties`
+  - Model `DismissAlertPayload` moved instance variable `definition`, `description`, `source`, `details`, `cost_entity_id`, `status`, `creation_time`, `close_time`, `modification_time`, `status_modification_user_name` and `status_modification_time` under property `properties`
+  - Model `Export` moved instance variable `format`, `delivery_info`, `definition`, `run_history`, `partition_data`, `data_overwrite_behavior`, `compression_mode`, `export_description`, `next_run_time_estimate`, `system_suspension_context` and `schedule` under property `properties`
+  - Model `ExportRun` moved instance variable `execution_type`, `status`, `submitted_by`, `submitted_time`, `processing_start_time`, `processing_end_time`, `start_date`, `end_date`, `file_name`, `manifest_file`, `run_settings` and `error` under property `properties`
+  - Model `ForecastResult` moved instance variable `next_link`, `columns` and `rows` under property `properties`
+  - Model `GenerateDetailedCostReportOperationResult` moved instance variable `expiry_time`, `valid_till` and `download_url` under property `properties`
+  - Model `GenerateDetailedCostReportOperationStatuses` moved instance variable `expiry_time`, `valid_till` and `download_url` under property `properties`
+  - Model `IncludedQuantityUtilizationSummary` moved instance variable `arm_sku_name`, `benefit_id`, `benefit_order_id`, `benefit_type`, `usage_date` and `utilization_percentage` under property `properties`
+  - Model `OperationStatus` moved instance variable `report_url` and `valid_until` under property `properties`
+  - Model `QueryResult` moved instance variable `next_link`, `columns` and `rows` under property `properties`
+  - Model `SavingsPlanUtilizationSummary` moved instance variable `arm_sku_name`, `benefit_id`, `benefit_order_id`, `benefit_type`, `usage_date`, `avg_utilization_percentage`, `min_utilization_percentage` and `max_utilization_percentage` under property `properties`
+  - Model `ScheduledAction` moved instance variable `display_name`, `file_destination`, `notification`, `notification_email`, `schedule`, `scope`, `status` and `view_id` under property `properties`
+  - Model `View` moved instance variable `display_name`, `scope`, `created_on`, `modified_on`, `date_range`, `currency`, `chart`, `accumulated`, `metric`, `kpis`, `pivots`, `type_properties_query_type`, `timeframe`, `time_period`, `data_set` and `include_monetary_commitment` under property `properties`
   - Method `BenefitRecommendationsOperations.list` changed its parameter `orderby` from `positional_or_keyword` to `keyword_only`
   - Method `BenefitRecommendationsOperations.list` changed its parameter `expand` from `positional_or_keyword` to `keyword_only`
   - Method `BenefitUtilizationSummariesOperations.list_by_billing_account_id` changed its parameter `grain_parameter` from `positional_or_keyword` to `keyword_only`
@@ -210,11 +44,12 @@
   - Method `GenerateReservationDetailsReportOperations.begin_by_billing_account_id` changed its parameter `end_date` from `positional_or_keyword` to `keyword_only`
   - Method `GenerateReservationDetailsReportOperations.begin_by_billing_profile_id` changed its parameter `start_date` from `positional_or_keyword` to `keyword_only`
   - Method `GenerateReservationDetailsReportOperations.begin_by_billing_profile_id` changed its parameter `end_date` from `positional_or_keyword` to `keyword_only`
-  - Deleted or renamed method `PriceSheetOperations.begin_download`
   - Method `ScheduledActionsOperations.create_or_update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
   - Method `ScheduledActionsOperations.create_or_update_by_scope` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
-  - Method `GenerateDetailedCostReportOperationStatusOperations.get` re-ordered its parameters from `['self', 'operation_id', 'scope', 'kwargs']` to `['self', 'scope', 'operation_id', 'kwargs']`
-  - Method `GenerateDetailedCostReportOperationResultsOperations.begin_get` re-ordered its parameters from `['self', 'operation_id', 'scope', 'kwargs']` to `['self', 'scope', 'operation_id', 'kwargs']`
+  - Method `AlertsOperations.list` changed from `asynchronous` to `synchronous`
+  - Method `ExportsOperations.list` changed from `asynchronous` to `synchronous`
+  - Method `SettingsOperations.list` changed from `asynchronous` to `synchronous`
+  - Deleted model `CostAllocationRuleList`/`EAPriceSheetProperties`/`EAPricesheetDownloadProperties`/`ErrorResponseAutoGenerated`/`KpiType`/`PivotType`/`ScheduledActionProxyResource`/`SettingTypeAutoGenerated` which actually were not used by SDK users
 
 ## 5.0.0 (2025-11-28)
 
