@@ -1,3 +1,4 @@
+# pylint: disable=line-too-long,useless-suppression
 # coding=utf-8
 # --------------------------------------------------------------------------
 # Copyright (c) Microsoft Corporation. All rights reserved.
@@ -7,6 +8,7 @@
 # --------------------------------------------------------------------------
 
 from azure.identity import DefaultAzureCredential
+
 from azure.mgmt.costmanagement import CostManagementClient
 
 """
@@ -29,12 +31,12 @@ def main():
     )
 
     response = client.generate_detailed_cost_report_operation_results.begin_get(
-        operation_id="00000000-0000-0000-0000-000000000000",
         scope="subscriptions/00000000-0000-0000-0000-000000000000",
+        operation_id="00000000-0000-0000-0000-000000000000",
     ).result()
     print(response)
 
 
-# x-ms-original-file: specification/cost-management/resource-manager/Microsoft.CostManagement/stable/2022-10-01/examples/GenerateDetailedCostReportOperationResultsBySubscriptionScope.json
+# x-ms-original-file: specification/cost-management/resource-manager/Microsoft.CostManagement/CostManagement/stable/2025-03-01/examples/GenerateDetailedCostReportOperationResultsBySubscriptionScope.json
 if __name__ == "__main__":
     main()
