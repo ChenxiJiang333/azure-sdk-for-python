@@ -4,8 +4,8 @@ Help user bump dependency "@typespec/http-client-python" for `Azure/autorest.pyt
 
 **Context**
 
-BASE_BRANCH: "main"
-CURRENT_DATE: current date (e.g. "2025-01-01")
+- BASE_BRANCH: "main"
+- CURRENT_DATE: current date (e.g. "2025-01-01")
 
 # Step
 1. Step into root folder of "Azure/autorest.python" repo
