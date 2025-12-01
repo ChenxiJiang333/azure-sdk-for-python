@@ -1,1 +1,0 @@
-- replace `HTTP-CLIENT-PYTHON-PR` and `TYPESPEC-PYTHON-PR` with yours
