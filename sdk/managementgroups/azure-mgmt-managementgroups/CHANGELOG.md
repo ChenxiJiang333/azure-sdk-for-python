@@ -5,17 +5,17 @@
 ### Breaking Changes
 
   - Renamed client name `ManagementGroupsAPI` to `ManagementGroupsMgmtClient`
-  - Deleted or renamed model `AzureAsyncOperationResults`.
-  - Deleted model `HierarchySettingsList`/`ListSubscriptionUnderManagementGroup` which actually were not used by SDK users.
-  - Model `CreateManagementGroupRequest` moved instance variables `tenant_id`, `display_name`, `details`, and `children` under property `properties`.
-  - Model `CreateOrUpdateSettingsRequest` moved instance variables `require_authorization_for_group_creation` and `default_management_group` under property `properties`.
-  - Model `DescendantInfo` moved instance variables `display_name` and `parent` under property `properties`.
-  - Model `EntityInfo` moved instance variables `tenant_id`, `display_name`, `parent`, `permissions`, `inherited_permissions`, `number_of_descendants`, `number_of_children`, `number_of_child_groups`, `parent_display_name_chain`, and `parent_name_chain` under property `properties`.
-  - Model `HierarchySettings` moved instance variables `tenant_id`, `require_authorization_for_group_creation`, and `default_management_group` under property `properties`.
-  - Model `HierarchySettingsInfo` moved instance variables `tenant_id`, `require_authorization_for_group_creation`, and `default_management_group` under property `properties`.
-  - Model `ManagementGroup` moved instance variables `tenant_id`, `display_name`, `details`, and `children` under property `properties`.
-  - Model `ManagementGroupInfo` moved instance variables `tenant_id` and `display_name` under property `properties`.
-  - Model `SubscriptionUnderManagementGroup` moved instance variables `tenant`, `display_name`, `parent`, and `state` under property `properties`.
+  - Deleted or renamed model `AzureAsyncOperationResults`
+  - Deleted model `HierarchySettingsList`/`ListSubscriptionUnderManagementGroup` which actually were not used by SDK users
+  - Model `CreateManagementGroupRequest` moved instance variables `tenant_id`, `display_name`, `details` and `children` under property `properties`
+  - Model `CreateOrUpdateSettingsRequest` moved instance variables `require_authorization_for_group_creation` and `default_management_group` under property `properties`
+  - Model `DescendantInfo` moved instance variables `display_name` and `parent` under property `properties`
+  - Model `EntityInfo` moved instance variables `tenant_id`, `display_name`, `parent`, `permissions`, `inherited_permissions`, `number_of_descendants`, `number_of_children`, `number_of_child_groups`, `parent_display_name_chain` and `parent_name_chain` under property `properties`
+  - Model `HierarchySettings` moved instance variables `tenant_id`, `require_authorization_for_group_creation` and `default_management_group` under property `properties`
+  - Model `HierarchySettingsInfo` moved instance variables `tenant_id`, `require_authorization_for_group_creation` and `default_management_group` under property `properties`
+  - Model `ManagementGroup` moved instance variables `tenant_id`, `display_name`, `details` and `children` under property `properties`
+  - Model `ManagementGroupInfo` moved instance variables `tenant_id` and `display_name` under property `properties`
+  - Model `SubscriptionUnderManagementGroup` moved instance variables `tenant`, `display_name`, `parent` and `state` under property `properties`
   - Method `EntitiesOperations.list` changed its parameter `skiptoken` from `positional_or_keyword` to `keyword_only`
   - Method `EntitiesOperations.list` changed its parameter `select` from `positional_or_keyword` to `keyword_only`
   - Method `EntitiesOperations.list` changed its parameter `search` from `positional_or_keyword` to `keyword_only`
@@ -25,13 +25,10 @@
   - Method `EntitiesOperations.list` changed its parameter `cache_control` from `positional_or_keyword` to `keyword_only`
   - Method `ManagementGroupSubscriptionsOperations.create` parameter `cache_control` changed default value from `str` to `none`
   - Method `ManagementGroupSubscriptionsOperations.create` changed its parameter `cache_control` from `positional_or_keyword` to `keyword_only`
-  - Method `ManagementGroupSubscriptionsOperations.create` deleted or renamed its parameter `subscription_id` of kind `positional_or_keyword`
   - Method `ManagementGroupSubscriptionsOperations.delete` parameter `cache_control` changed default value from `str` to `none`
   - Method `ManagementGroupSubscriptionsOperations.delete` changed its parameter `cache_control` from `positional_or_keyword` to `keyword_only`
-  - Method `ManagementGroupSubscriptionsOperations.delete` deleted or renamed its parameter `subscription_id` of kind `positional_or_keyword`
   - Method `ManagementGroupSubscriptionsOperations.get_subscription` parameter `cache_control` changed default value from `str` to `none`
   - Method `ManagementGroupSubscriptionsOperations.get_subscription` changed its parameter `cache_control` from `positional_or_keyword` to `keyword_only`
-  - Method `ManagementGroupSubscriptionsOperations.get_subscription` deleted or renamed its parameter `subscription_id` of kind `positional_or_keyword`
   - Method `ManagementGroupSubscriptionsOperations.get_subscriptions_under_management_group` changed its parameter `skiptoken` from `positional_or_keyword` to `keyword_only`
   - Method `ManagementGroupsOperations.begin_create_or_update` parameter `cache_control` changed default value from `str` to `none`
   - Method `ManagementGroupsOperations.begin_create_or_update` changed its parameter `cache_control` from `positional_or_keyword` to `keyword_only`
@@ -43,7 +40,11 @@
   - Method `ManagementGroupsOperations.get` changed its parameter `cache_control` from `positional_or_keyword` to `keyword_only`
   - Method `ManagementGroupsOperations.get_descendants` changed its parameter `skiptoken` from `positional_or_keyword` to `keyword_only`
   - Method `ManagementGroupsOperations.list` parameter `cache_control` changed default value from `str` to `none`
-  - Method `HierarchySettingsOperations.list` changed from asynchronous to synchronous.
+  - Method `ManagementGroupsOperations.list` changed its parameter `cache_control` from `positional_or_keyword` to `keyword_only`
+  - Method `ManagementGroupsOperations.list` changed its parameter `skiptoken` from `positional_or_keyword` to `keyword_only`
+  - Method `ManagementGroupsOperations.update` parameter `cache_control` changed default value from `str` to `none`
+  - Method `ManagementGroupsOperations.update` changed its parameter `cache_control` from `positional_or_keyword` to `keyword_only`
+  - Method `HierarchySettingsOperations.list` changed from `asynchronous` to `synchronous`
 
 ## 1.1.0b2 (2024-11-05)
 
