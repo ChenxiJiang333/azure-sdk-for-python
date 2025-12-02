@@ -27,7 +27,6 @@ from azure.mgmt.managementgroups import ManagementGroupsMgmtClient
 def main():
     client = ManagementGroupsMgmtClient(
         credential=DefaultAzureCredential(),
-        subscription_id="SUBSCRIPTION_ID",
     )
 
     client.management_groups.begin_delete(

@@ -23,6 +23,7 @@ class TestManagementGroupsMgmtManagementGroupSubscriptionsOperations(AzureMgmtRe
     def test_management_group_subscriptions_get_subscription(self, resource_group):
         response = self.client.management_group_subscriptions.get_subscription(
             group_id="str",
+            subscription_id="str",
         )
 
         # please add some check logic here by yourself
@@ -33,6 +34,7 @@ class TestManagementGroupsMgmtManagementGroupSubscriptionsOperations(AzureMgmtRe
     def test_management_group_subscriptions_create(self, resource_group):
         response = self.client.management_group_subscriptions.create(
             group_id="str",
+            subscription_id="str",
         )
 
         # please add some check logic here by yourself
@@ -43,6 +45,7 @@ class TestManagementGroupsMgmtManagementGroupSubscriptionsOperations(AzureMgmtRe
     def test_management_group_subscriptions_delete(self, resource_group):
         response = self.client.management_group_subscriptions.delete(
             group_id="str",
+            subscription_id="str",
         )
 
         # please add some check logic here by yourself

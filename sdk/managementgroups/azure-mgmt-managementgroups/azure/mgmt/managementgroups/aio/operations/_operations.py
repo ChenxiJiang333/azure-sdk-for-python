@@ -162,7 +162,10 @@ class Operations:
 
             if response.status_code not in [200]:
                 map_error(status_code=response.status_code, response=response, error_map=error_map)
-                error = _failsafe_deserialize(_models.ErrorResponse, response)
+                error = _failsafe_deserialize(
+                    _models.ErrorResponse,
+                    response,
+                )
                 raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
             return pipeline_response
@@ -265,7 +268,10 @@ class ManagementGroupsOperations:
                 except (StreamConsumedError, StreamClosedError):
                     pass
             map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = _failsafe_deserialize(_models.ErrorResponse, response)
+            error = _failsafe_deserialize(
+                _models.ErrorResponse,
+                response,
+            )
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
         if _stream:
@@ -334,7 +340,10 @@ class ManagementGroupsOperations:
             except (StreamConsumedError, StreamClosedError):
                 pass
             map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = _failsafe_deserialize(_models.ErrorResponse, response)
+            error = _failsafe_deserialize(
+                _models.ErrorResponse,
+                response,
+            )
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
         response_headers = {}
@@ -666,7 +675,10 @@ class ManagementGroupsOperations:
                 except (StreamConsumedError, StreamClosedError):
                     pass
             map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = _failsafe_deserialize(_models.ErrorResponse, response)
+            error = _failsafe_deserialize(
+                _models.ErrorResponse,
+                response,
+            )
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
         if _stream:
@@ -720,7 +732,10 @@ class ManagementGroupsOperations:
             except (StreamConsumedError, StreamClosedError):
                 pass
             map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = _failsafe_deserialize(_models.ErrorResponse, response)
+            error = _failsafe_deserialize(
+                _models.ErrorResponse,
+                response,
+            )
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
         response_headers = {}
@@ -891,7 +906,10 @@ class ManagementGroupsOperations:
 
             if response.status_code not in [200]:
                 map_error(status_code=response.status_code, response=response, error_map=error_map)
-                error = _failsafe_deserialize(_models.ErrorResponse, response)
+                error = _failsafe_deserialize(
+                    _models.ErrorResponse,
+                    response,
+                )
                 raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
             return pipeline_response
@@ -988,7 +1006,10 @@ class ManagementGroupsOperations:
 
             if response.status_code not in [200]:
                 map_error(status_code=response.status_code, response=response, error_map=error_map)
-                error = _failsafe_deserialize(_models.ErrorResponse, response)
+                error = _failsafe_deserialize(
+                    _models.ErrorResponse,
+                    response,
+                )
                 raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
             return pipeline_response
@@ -1096,7 +1117,10 @@ class HierarchySettingsOperations:
 
             if response.status_code not in [200]:
                 map_error(status_code=response.status_code, response=response, error_map=error_map)
-                error = _failsafe_deserialize(_models.ErrorResponse, response)
+                error = _failsafe_deserialize(
+                    _models.ErrorResponse,
+                    response,
+                )
                 raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
             return pipeline_response
@@ -1152,7 +1176,10 @@ class HierarchySettingsOperations:
                 except (StreamConsumedError, StreamClosedError):
                     pass
             map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = _failsafe_deserialize(_models.ErrorResponse, response)
+            error = _failsafe_deserialize(
+                _models.ErrorResponse,
+                response,
+            )
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
         if _stream:
@@ -1302,7 +1329,10 @@ class HierarchySettingsOperations:
                 except (StreamConsumedError, StreamClosedError):
                     pass
             map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = _failsafe_deserialize(_models.ErrorResponse, response)
+            error = _failsafe_deserialize(
+                _models.ErrorResponse,
+                response,
+            )
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
         if _stream:
@@ -1452,7 +1482,10 @@ class HierarchySettingsOperations:
                 except (StreamConsumedError, StreamClosedError):
                     pass
             map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = _failsafe_deserialize(_models.ErrorResponse, response)
+            error = _failsafe_deserialize(
+                _models.ErrorResponse,
+                response,
+            )
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
         if _stream:
@@ -1508,7 +1541,10 @@ class HierarchySettingsOperations:
 
         if response.status_code not in [200]:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = _failsafe_deserialize(_models.ErrorResponse, response)
+            error = _failsafe_deserialize(
+                _models.ErrorResponse,
+                response,
+            )
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
         if cls:
@@ -1536,12 +1572,14 @@ class ManagementGroupSubscriptionsOperations:
 
     @distributed_trace_async
     async def get_subscription(
-        self, group_id: str, *, cache_control: Optional[str] = None, **kwargs: Any
+        self, group_id: str, subscription_id: str, *, cache_control: Optional[str] = None, **kwargs: Any
     ) -> _models.SubscriptionUnderManagementGroup:
         """Retrieves details about given subscription which is associated with the management group.
 
         :param group_id: Management Group ID. Required.
         :type group_id: str
+        :param subscription_id: Subscription ID. Required.
+        :type subscription_id: str
         :keyword cache_control: Indicates whether the request should utilize any caches. Populate the
          header with 'no-cache' value to bypass existing caches. Default value is None.
         :paramtype cache_control: str
@@ -1565,7 +1603,9 @@ class ManagementGroupSubscriptionsOperations:
 
         _request = build_management_group_subscriptions_get_subscription_request(
             group_id=group_id,
+            subscription_id=subscription_id,
             cache_control=cache_control,
+            api_version=self._config.api_version,
             headers=_headers,
             params=_params,
         )
@@ -1588,7 +1628,10 @@ class ManagementGroupSubscriptionsOperations:
                 except (StreamConsumedError, StreamClosedError):
                     pass
             map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = _failsafe_deserialize(_models.ErrorResponse, response)
+            error = _failsafe_deserialize(
+                _models.ErrorResponse,
+                response,
+            )
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
         if _stream:
@@ -1603,12 +1646,14 @@ class ManagementGroupSubscriptionsOperations:
 
     @distributed_trace_async
     async def create(
-        self, group_id: str, *, cache_control: Optional[str] = None, **kwargs: Any
+        self, group_id: str, subscription_id: str, *, cache_control: Optional[str] = None, **kwargs: Any
     ) -> _models.SubscriptionUnderManagementGroup:
         """Associates existing subscription with the management group.
 
         :param group_id: Management Group ID. Required.
         :type group_id: str
+        :param subscription_id: Subscription ID. Required.
+        :type subscription_id: str
         :keyword cache_control: Indicates whether the request should utilize any caches. Populate the
          header with 'no-cache' value to bypass existing caches. Default value is None.
         :paramtype cache_control: str
@@ -1632,7 +1677,9 @@ class ManagementGroupSubscriptionsOperations:
 
         _request = build_management_group_subscriptions_create_request(
             group_id=group_id,
+            subscription_id=subscription_id,
             cache_control=cache_control,
+            api_version=self._config.api_version,
             headers=_headers,
             params=_params,
         )
@@ -1655,7 +1702,10 @@ class ManagementGroupSubscriptionsOperations:
                 except (StreamConsumedError, StreamClosedError):
                     pass
             map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = _failsafe_deserialize(_models.ErrorResponse, response)
+            error = _failsafe_deserialize(
+                _models.ErrorResponse,
+                response,
+            )
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
         if _stream:
@@ -1669,11 +1719,15 @@ class ManagementGroupSubscriptionsOperations:
         return deserialized  # type: ignore
 
     @distributed_trace_async
-    async def delete(self, group_id: str, *, cache_control: Optional[str] = None, **kwargs: Any) -> None:
+    async def delete(
+        self, group_id: str, subscription_id: str, *, cache_control: Optional[str] = None, **kwargs: Any
+    ) -> None:
         """De-associates subscription from the management group.
 
         :param group_id: Management Group ID. Required.
         :type group_id: str
+        :param subscription_id: Subscription ID. Required.
+        :type subscription_id: str
         :keyword cache_control: Indicates whether the request should utilize any caches. Populate the
          header with 'no-cache' value to bypass existing caches. Default value is None.
         :paramtype cache_control: str
@@ -1696,7 +1750,9 @@ class ManagementGroupSubscriptionsOperations:
 
         _request = build_management_group_subscriptions_delete_request(
             group_id=group_id,
+            subscription_id=subscription_id,
             cache_control=cache_control,
+            api_version=self._config.api_version,
             headers=_headers,
             params=_params,
         )
@@ -1714,7 +1770,10 @@ class ManagementGroupSubscriptionsOperations:
 
         if response.status_code not in [200, 204]:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = _failsafe_deserialize(_models.ErrorResponse, response)
+            error = _failsafe_deserialize(
+                _models.ErrorResponse,
+                response,
+            )
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
         if cls:
@@ -1809,7 +1868,10 @@ class ManagementGroupSubscriptionsOperations:
 
             if response.status_code not in [200]:
                 map_error(status_code=response.status_code, response=response, error_map=error_map)
-                error = _failsafe_deserialize(_models.ErrorResponse, response)
+                error = _failsafe_deserialize(
+                    _models.ErrorResponse,
+                    response,
+                )
                 raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
             return pipeline_response
@@ -1985,7 +2047,10 @@ class EntitiesOperations:
 
             if response.status_code not in [200]:
                 map_error(status_code=response.status_code, response=response, error_map=error_map)
-                error = _failsafe_deserialize(_models.ErrorResponse, response)
+                error = _failsafe_deserialize(
+                    _models.ErrorResponse,
+                    response,
+                )
                 raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
             return pipeline_response
@@ -2117,7 +2182,10 @@ class _ManagementGroupsMgmtClientOperationsMixin(
                 except (StreamConsumedError, StreamClosedError):
                     pass
             map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = _failsafe_deserialize(_models.ErrorResponse, response)
+            error = _failsafe_deserialize(
+                _models.ErrorResponse,
+                response,
+            )
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
         if _stream:
@@ -2176,7 +2244,10 @@ class _ManagementGroupsMgmtClientOperationsMixin(
                 except (StreamConsumedError, StreamClosedError):
                     pass
             map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = _failsafe_deserialize(_models.ErrorResponse, response)
+            error = _failsafe_deserialize(
+                _models.ErrorResponse,
+                response,
+            )
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
         if _stream:
@@ -2235,7 +2306,10 @@ class _ManagementGroupsMgmtClientOperationsMixin(
                 except (StreamConsumedError, StreamClosedError):
                     pass
             map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = _failsafe_deserialize(_models.ErrorResponse, response)
+            error = _failsafe_deserialize(
+                _models.ErrorResponse,
+                response,
+            )
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
         if _stream:

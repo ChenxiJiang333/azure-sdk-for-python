@@ -53,8 +53,6 @@ class ManagementGroupsMgmtClient(_ManagementGroupsMgmtClientOperationsMixin):
     :vartype entities: azure.mgmt.managementgroups.aio.operations.EntitiesOperations
     :param credential: Credential used to authenticate requests to the service. Required.
     :type credential: ~azure.core.credentials_async.AsyncTokenCredential
-    :param subscription_id: The subscription ID. Required.
-    :type subscription_id: str
     :param base_url: Service host. Default value is None.
     :type base_url: str
     :keyword cloud_setting: The cloud setting for which to get the ARM endpoint. Default value is
@@ -70,7 +68,6 @@ class ManagementGroupsMgmtClient(_ManagementGroupsMgmtClientOperationsMixin):
     def __init__(
         self,
         credential: "AsyncTokenCredential",
-        subscription_id: str,
         base_url: Optional[str] = None,
         *,
         cloud_setting: Optional["AzureClouds"] = None,
@@ -84,7 +81,6 @@ class ManagementGroupsMgmtClient(_ManagementGroupsMgmtClientOperationsMixin):
         credential_scopes = kwargs.pop("credential_scopes", _endpoints["credential_scopes"])
         self._config = ManagementGroupsMgmtClientConfiguration(
             credential=credential,
-            subscription_id=subscription_id,
             base_url=cast(str, base_url),
             cloud_setting=cloud_setting,
             credential_scopes=credential_scopes,

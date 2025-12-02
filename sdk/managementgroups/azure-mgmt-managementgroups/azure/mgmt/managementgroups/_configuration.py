@@ -26,8 +26,6 @@ class ManagementGroupsMgmtClientConfiguration:  # pylint: disable=too-many-insta
 
     :param credential: Credential used to authenticate requests to the service. Required.
     :type credential: ~azure.core.credentials.TokenCredential
-    :param subscription_id: The subscription ID. Required.
-    :type subscription_id: str
     :param base_url: Service host. Default value is "https://management.azure.com".
     :type base_url: str
     :param cloud_setting: The cloud setting for which to get the ARM endpoint. Default value is
@@ -41,7 +39,6 @@ class ManagementGroupsMgmtClientConfiguration:  # pylint: disable=too-many-insta
     def __init__(
         self,
         credential: "TokenCredential",
-        subscription_id: str,
         base_url: str = "https://management.azure.com",
         cloud_setting: Optional["AzureClouds"] = None,
         **kwargs: Any
@@ -50,11 +47,8 @@ class ManagementGroupsMgmtClientConfiguration:  # pylint: disable=too-many-insta
 
         if credential is None:
             raise ValueError("Parameter 'credential' must not be None.")
-        if subscription_id is None:
-            raise ValueError("Parameter 'subscription_id' must not be None.")
 
         self.credential = credential
-        self.subscription_id = subscription_id
         self.base_url = base_url
         self.cloud_setting = cloud_setting
         self.api_version = api_version

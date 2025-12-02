@@ -1,6 +1,6 @@
 {
   "apiVersion": "2023-04-01",
-  "commit": "df79d9fff036dc80c6a14834faf7549c01163ec0",
+  "commit": "91269cd706c7f808aa53054660af8d195d7d037a",
   "repository_url": "https://github.com/Azure/azure-rest-api-specs",
   "typespec_src": "specification/managementgroups/ManagementGroups.Management",
   "emitterVersion": "0.53.2"

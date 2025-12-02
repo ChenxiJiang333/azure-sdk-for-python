@@ -27,11 +27,11 @@ from azure.mgmt.managementgroups import ManagementGroupsMgmtClient
 def main():
     client = ManagementGroupsMgmtClient(
         credential=DefaultAzureCredential(),
-        subscription_id="SUBSCRIPTION_ID",
     )
 
     response = client.management_group_subscriptions.create(
         group_id="Group",
+        subscription_id="728bcbe4-8d56-4510-86c2-4921b8beefbc",
     )
     print(response)
 

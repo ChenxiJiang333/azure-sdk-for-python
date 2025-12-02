@@ -27,7 +27,6 @@ from azure.mgmt.managementgroups import ManagementGroupsMgmtClient
 def main():
     client = ManagementGroupsMgmtClient(
         credential=DefaultAzureCredential(),
-        subscription_id="SUBSCRIPTION_ID",
     )
 
     response = client.management_group_subscriptions.get_subscriptions_under_management_group(

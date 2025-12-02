@@ -14,10 +14,6 @@
                 "default": null,
                 "param_type": "positional_or_keyword"
               },
-              "subscription_id": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              },
               "base_url": {
                 "default": "none",
                 "param_type": "positional_or_keyword"
@@ -213,10 +209,6 @@
                 "param_type": "positional_or_keyword"
               },
               "credential": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              },
-              "subscription_id": {
                 "default": null,
                 "param_type": "positional_or_keyword"
               },
@@ -790,6 +782,10 @@
                 "default": null,
                 "param_type": "positional_or_keyword"
               },
+              "subscription_id": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
               "cache_control": {
                 "default": "none",
                 "param_type": "keyword_only"
@@ -812,6 +808,10 @@
                 "default": null,
                 "param_type": "positional_or_keyword"
               },
+              "subscription_id": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
               "cache_control": {
                 "default": "none",
                 "param_type": "keyword_only"
@@ -831,6 +831,10 @@
                 "param_type": "positional_or_keyword"
               },
               "group_id": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "subscription_id": {
                 "default": null,
                 "param_type": "positional_or_keyword"
               },
@@ -9602,6 +9606,10 @@
                 "default": null,
                 "param_type": "positional_or_keyword"
               },
+              "subscription_id": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
               "cache_control": {
                 "default": "none",
                 "param_type": "keyword_only"
@@ -9624,6 +9632,10 @@
                 "default": null,
                 "param_type": "positional_or_keyword"
               },
+              "subscription_id": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
               "cache_control": {
                 "default": "none",
                 "param_type": "keyword_only"
@@ -9643,6 +9655,10 @@
                 "param_type": "positional_or_keyword"
               },
               "group_id": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "subscription_id": {
                 "default": null,
                 "param_type": "positional_or_keyword"
               },
