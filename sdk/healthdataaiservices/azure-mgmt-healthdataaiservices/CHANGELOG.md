@@ -1,5 +1,18 @@
 # Release History
 
+## 1.0.0b2 (2025-12-03)
+
+### Features Added
+
+  - Initial preview release of the Azure Health Data AI Services Management SDK
+  - Support for managing Deid Services resources
+  - Support for private endpoint connections
+  - Support for private link resources
+
+### Breaking Changes
+
+  - This is a preview release and APIs may change in future versions
+
 ## 1.0.0 (2024-11-21)
 
 ### Breaking Changes
