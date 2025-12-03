@@ -7,75 +7,99 @@
 # --------------------------------------------------------------------------
 
 from copy import deepcopy
-from typing import Any, TYPE_CHECKING
+from typing import Any, Optional, TYPE_CHECKING, cast
 from typing_extensions import Self
 
 from azure.core.pipeline import policies
 from azure.core.rest import HttpRequest, HttpResponse
+from azure.core.settings import settings
 from azure.mgmt.core import ARMPipelineClient
 from azure.mgmt.core.policies import ARMAutoResourceProviderRegistrationPolicy
+from azure.mgmt.core.tools import get_arm_endpoints
 
 from . import models as _models
 from ._configuration import AzureStackHCIClientConfiguration
-from ._serialization import Deserializer, Serializer
+from ._utils.serialization import Deserializer, Serializer
 from .operations import (
     ArcSettingsOperations,
     ClustersOperations,
     DeploymentSettingsOperations,
+    EdgeDeviceJobsOperations,
     EdgeDevicesOperations,
     ExtensionsOperations,
+    KubernetesVersionsOperations,
     OffersOperations,
     Operations,
+    OsImagesOperations,
+    PlatformUpdatesOperations,
     PublishersOperations,
     SecuritySettingsOperations,
     SkusOperations,
+    UpdateContentsOperations,
     UpdateRunsOperations,
     UpdateSummariesOperations,
     UpdatesOperations,
+    ValidatedSolutionRecipesOperations,
 )
 
 if TYPE_CHECKING:
-    # pylint: disable=unused-import,ungrouped-imports
+    from azure.core import AzureClouds
     from azure.core.credentials import TokenCredential
 
 
-class AzureStackHCIClient:  # pylint: disable=client-accepts-api-version-keyword,too-many-instance-attributes
+class AzureStackHCIClient:  # pylint: disable=too-many-instance-attributes
     """Azure Stack HCI management service.
 
-    :ivar arc_settings: ArcSettingsOperations operations
-    :vartype arc_settings: azure.mgmt.azurestackhci.operations.ArcSettingsOperations
-    :ivar clusters: ClustersOperations operations
-    :vartype clusters: azure.mgmt.azurestackhci.operations.ClustersOperations
-    :ivar deployment_settings: DeploymentSettingsOperations operations
-    :vartype deployment_settings: azure.mgmt.azurestackhci.operations.DeploymentSettingsOperations
     :ivar edge_devices: EdgeDevicesOperations operations
     :vartype edge_devices: azure.mgmt.azurestackhci.operations.EdgeDevicesOperations
-    :ivar extensions: ExtensionsOperations operations
-    :vartype extensions: azure.mgmt.azurestackhci.operations.ExtensionsOperations
-    :ivar offers: OffersOperations operations
-    :vartype offers: azure.mgmt.azurestackhci.operations.OffersOperations
+    :ivar edge_device_jobs: EdgeDeviceJobsOperations operations
+    :vartype edge_device_jobs: azure.mgmt.azurestackhci.operations.EdgeDeviceJobsOperations
     :ivar operations: Operations operations
     :vartype operations: azure.mgmt.azurestackhci.operations.Operations
+    :ivar clusters: ClustersOperations operations
+    :vartype clusters: azure.mgmt.azurestackhci.operations.ClustersOperations
+    :ivar kubernetes_versions: KubernetesVersionsOperations operations
+    :vartype kubernetes_versions: azure.mgmt.azurestackhci.operations.KubernetesVersionsOperations
+    :ivar os_images: OsImagesOperations operations
+    :vartype os_images: azure.mgmt.azurestackhci.operations.OsImagesOperations
+    :ivar platform_updates: PlatformUpdatesOperations operations
+    :vartype platform_updates: azure.mgmt.azurestackhci.operations.PlatformUpdatesOperations
+    :ivar update_contents: UpdateContentsOperations operations
+    :vartype update_contents: azure.mgmt.azurestackhci.operations.UpdateContentsOperations
+    :ivar validated_solution_recipes: ValidatedSolutionRecipesOperations operations
+    :vartype validated_solution_recipes:
+     azure.mgmt.azurestackhci.operations.ValidatedSolutionRecipesOperations
+    :ivar arc_settings: ArcSettingsOperations operations
+    :vartype arc_settings: azure.mgmt.azurestackhci.operations.ArcSettingsOperations
+    :ivar extensions: ExtensionsOperations operations
+    :vartype extensions: azure.mgmt.azurestackhci.operations.ExtensionsOperations
+    :ivar deployment_settings: DeploymentSettingsOperations operations
+    :vartype deployment_settings: azure.mgmt.azurestackhci.operations.DeploymentSettingsOperations
+    :ivar offers: OffersOperations operations
+    :vartype offers: azure.mgmt.azurestackhci.operations.OffersOperations
     :ivar publishers: PublishersOperations operations
     :vartype publishers: azure.mgmt.azurestackhci.operations.PublishersOperations
-    :ivar security_settings: SecuritySettingsOperations operations
-    :vartype security_settings: azure.mgmt.azurestackhci.operations.SecuritySettingsOperations
     :ivar skus: SkusOperations operations
     :vartype skus: azure.mgmt.azurestackhci.operations.SkusOperations
-    :ivar update_runs: UpdateRunsOperations operations
-    :vartype update_runs: azure.mgmt.azurestackhci.operations.UpdateRunsOperations
+    :ivar security_settings: SecuritySettingsOperations operations
+    :vartype security_settings: azure.mgmt.azurestackhci.operations.SecuritySettingsOperations
     :ivar update_summaries: UpdateSummariesOperations operations
     :vartype update_summaries: azure.mgmt.azurestackhci.operations.UpdateSummariesOperations
     :ivar updates: UpdatesOperations operations
     :vartype updates: azure.mgmt.azurestackhci.operations.UpdatesOperations
+    :ivar update_runs: UpdateRunsOperations operations
+    :vartype update_runs: azure.mgmt.azurestackhci.operations.UpdateRunsOperations
     :param credential: Credential needed for the client to connect to Azure. Required.
     :type credential: ~azure.core.credentials.TokenCredential
     :param subscription_id: The ID of the target subscription. The value must be an UUID. Required.
     :type subscription_id: str
-    :param base_url: Service URL. Default value is "https://management.azure.com".
+    :param base_url: Service URL. Default value is None.
     :type base_url: str
-    :keyword api_version: Api Version. Default value is "2024-04-01". Note that overriding this
-     default value may result in unsupported behavior.
+    :keyword cloud_setting: The cloud setting for which to get the ARM endpoint. Default value is
+     None.
+    :paramtype cloud_setting: ~azure.core.AzureClouds
+    :keyword api_version: Api Version. Default value is "2025-11-01-preview". Note that overriding
+     this default value may result in unsupported behavior.
     :paramtype api_version: str
     :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
      Retry-After header is present.
@@ -85,12 +109,24 @@ class AzureStackHCIClient:  # pylint: disable=client-accepts-api-version-keyword
         self,
         credential: "TokenCredential",
         subscription_id: str,
-        base_url: str = "https://management.azure.com",
+        base_url: Optional[str] = None,
+        *,
+        cloud_setting: Optional["AzureClouds"] = None,
         **kwargs: Any
     ) -> None:
+        _cloud = cloud_setting or settings.current.azure_cloud  # type: ignore
+        _endpoints = get_arm_endpoints(_cloud)
+        if not base_url:
+            base_url = _endpoints["resource_manager"]
+        credential_scopes = kwargs.pop("credential_scopes", _endpoints["credential_scopes"])
         self._config = AzureStackHCIClientConfiguration(
-            credential=credential, subscription_id=subscription_id, **kwargs
+            credential=credential,
+            subscription_id=subscription_id,
+            cloud_setting=cloud_setting,
+            credential_scopes=credential_scopes,
+            **kwargs
         )
+
         _policies = kwargs.pop("policies", None)
         if _policies is None:
             _policies = [
@@ -109,31 +145,43 @@ class AzureStackHCIClient:  # pylint: disable=client-accepts-api-version-keyword
                 policies.SensitiveHeaderCleanupPolicy(**kwargs) if self._config.redirect_policy else None,
                 self._config.http_logging_policy,
             ]
-        self._client: ARMPipelineClient = ARMPipelineClient(base_url=base_url, policies=_policies, **kwargs)
+        self._client: ARMPipelineClient = ARMPipelineClient(base_url=cast(str, base_url), policies=_policies, **kwargs)
 
         client_models = {k: v for k, v in _models.__dict__.items() if isinstance(v, type)}
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
         self._serialize.client_side_validation = False
-        self.arc_settings = ArcSettingsOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.edge_devices = EdgeDevicesOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.edge_device_jobs = EdgeDeviceJobsOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.operations = Operations(self._client, self._config, self._serialize, self._deserialize)
         self.clusters = ClustersOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.kubernetes_versions = KubernetesVersionsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.os_images = OsImagesOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.platform_updates = PlatformUpdatesOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.update_contents = UpdateContentsOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.validated_solution_recipes = ValidatedSolutionRecipesOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.arc_settings = ArcSettingsOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.extensions = ExtensionsOperations(self._client, self._config, self._serialize, self._deserialize)
         self.deployment_settings = DeploymentSettingsOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
-        self.edge_devices = EdgeDevicesOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.extensions = ExtensionsOperations(self._client, self._config, self._serialize, self._deserialize)
         self.offers = OffersOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.operations = Operations(self._client, self._config, self._serialize, self._deserialize)
         self.publishers = PublishersOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.skus = SkusOperations(self._client, self._config, self._serialize, self._deserialize)
         self.security_settings = SecuritySettingsOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
-        self.skus = SkusOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.update_runs = UpdateRunsOperations(self._client, self._config, self._serialize, self._deserialize)
         self.update_summaries = UpdateSummariesOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
         self.updates = UpdatesOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.update_runs = UpdateRunsOperations(self._client, self._config, self._serialize, self._deserialize)
 
     def _send_request(self, request: HttpRequest, *, stream: bool = False, **kwargs: Any) -> HttpResponse:
         """Runs the network request through the client's chained policies.

@@ -1,3 +1,4 @@
+# pylint: disable=line-too-long,useless-suppression
 # coding=utf-8
 # --------------------------------------------------------------------------
 # Copyright (c) Microsoft Corporation. All rights reserved.
@@ -96,12 +97,14 @@ def main():
                                 },
                                 "infrastructureNetwork": [
                                     {
+                                        "dnsServerConfig": "UseDnsServer",
                                         "dnsServers": ["10.57.50.90"],
                                         "gateway": "255.255.248.0",
                                         "ipPools": [{"endingAddress": "10.57.48.66", "startingAddress": "10.57.48.60"}],
                                         "subnetMask": "255.255.248.0",
                                     }
                                 ],
+                                "isManagementCluster": True,
                                 "namingPrefix": "ms169",
                                 "observability": {
                                     "episodicDataUpload": True,
@@ -180,6 +183,6 @@ def main():
     print(response)
 
 
-# x-ms-original-file: specification/azurestackhci/resource-manager/Microsoft.AzureStackHCI/StackHCI/stable/2024-04-01/examples/PutDeploymentSettings.json
+# x-ms-original-file: specification/azurestackhci/resource-manager/Microsoft.AzureStackHCI/StackHCI/preview/2025-11-01-preview/examples/PutDeploymentSettings.json
 if __name__ == "__main__":
     main()

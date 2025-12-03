@@ -1,5 +1,126 @@
 # Release History
 
+## 8.0.0b5 (2025-12-03)
+
+### Features Added
+
+  - Model `AzureStackHCIClient` added parameter `cloud_setting` in method `__init__`
+  - Client `AzureStackHCIClient` added operation group `edge_device_jobs`
+  - Client `AzureStackHCIClient` added operation group `kubernetes_versions`
+  - Client `AzureStackHCIClient` added operation group `os_images`
+  - Client `AzureStackHCIClient` added operation group `platform_updates`
+  - Client `AzureStackHCIClient` added operation group `update_contents`
+  - Client `AzureStackHCIClient` added operation group `validated_solution_recipes`
+  - Model `Cluster` added property `kind`
+  - Model `Cluster` added property `support_status`
+  - Model `Cluster` added property `ring`
+  - Model `Cluster` added property `is_management_cluster`
+  - Model `Cluster` added property `secrets_locations`
+  - Model `Cluster` added property `cluster_pattern`
+  - Model `Cluster` added property `local_availability_zones`
+  - Model `Cluster` added property `identity_provider`
+  - Model `ClusterReportedProperties` added property `msi_expiration_time_stamp`
+  - Model `ClusterReportedProperties` added property `hardware_class`
+  - Model `DeploymentCluster` added property `hardware_class`
+  - Model `DeploymentCluster` added property `cluster_pattern`
+  - Model `DeploymentData` added property `identity_provider`
+  - Model `DeploymentData` added property `is_management_cluster`
+  - Model `DeploymentData` added property `local_availability_zones`
+  - Model `DeploymentData` added property `assembly_info`
+  - Model `HciNicDetail` added property `rdma_capability`
+  - Model `HciReportedProperties` added property `storage_profile`
+  - Model `HciReportedProperties` added property `hardware_profile`
+  - Model `InfrastructureNetwork` added property `dns_server_config`
+  - Model `InfrastructureNetwork` added property `dns_zones`
+  - Added model `AssemblyInfo`
+  - Added model `AssemblyInfoPayload`
+  - Added model `ChangeRingRequest`
+  - Added model `ChangeRingRequestProperties`
+  - Added enum `ClusterPattern`
+  - Added model `CollectLogJobProperties`
+  - Added model `ContentPayload`
+  - Added enum `DeviceLogCollectionStatus`
+  - Added enum `DnsServerConfig`
+  - Added model `DnsZones`
+  - Added model `EdgeDeviceJob`
+  - Added model `EdgeDeviceJobListResult`
+  - Added model `EdgeDeviceJobProperties`
+  - Added enum `EdgeDeviceJobType`
+  - Added enum `EdgeDeviceKind`
+  - Added enum `EdgeSolutionType`
+  - Added enum `HardwareClass`
+  - Added model `HciCollectLogJobProperties`
+  - Added model `HciEdgeDeviceJob`
+  - Added model `HciEdgeDeviceJobProperties`
+  - Added enum `HciEdgeDeviceJobType`
+  - Added model `HciHardwareProfile`
+  - Added model `HciRemoteSupportJobProperties`
+  - Added model `HciStorageProfile`
+  - Added enum `IdentityProvider`
+  - Added model `JobReportedProperties`
+  - Added enum `JobStatus`
+  - Added model `KubernetesVersion`
+  - Added model `KubernetesVersionListResult`
+  - Added model `KubernetesVersionProperties`
+  - Added model `LocalAvailabilityZones`
+  - Added model `LogCollectionJobSession`
+  - Added model `LogCollectionReportedProperties`
+  - Added model `OsImage`
+  - Added model `OsImageListResult`
+  - Added model `OsImageProperties`
+  - Added model `PlatformPayload`
+  - Added model `PlatformUpdate`
+  - Added model `PlatformUpdateDetails`
+  - Added model `PlatformUpdateListResult`
+  - Added model `PlatformUpdateProperties`
+  - Added enum `RdmaCapability`
+  - Added model `ReconcileArcSettingsRequest`
+  - Added model `ReconcileArcSettingsRequestProperties`
+  - Added enum `RemoteSupportAccessLevel`
+  - Added model `RemoteSupportJobNodeSettings`
+  - Added model `RemoteSupportJobProperties`
+  - Added model `RemoteSupportJobReportedProperties`
+  - Added model `RemoteSupportSession`
+  - Added model `SecretsLocationDetails`
+  - Added model `SecretsLocationsChangeRequest`
+  - Added enum `SecretsType`
+  - Added enum `SupportStatus`
+  - Added model `UpdateContent`
+  - Added model `UpdateContentListResult`
+  - Added model `UpdateContentProperties`
+  - Added model `ValidatedSolutionRecipe`
+  - Added model `ValidatedSolutionRecipeCapabilities`
+  - Added model `ValidatedSolutionRecipeCapability`
+  - Added model `ValidatedSolutionRecipeComponent`
+  - Added model `ValidatedSolutionRecipeComponentMetadata`
+  - Added model `ValidatedSolutionRecipeComponentPayload`
+  - Added model `ValidatedSolutionRecipeContent`
+  - Added model `ValidatedSolutionRecipeInfo`
+  - Added model `ValidatedSolutionRecipeListResult`
+  - Added model `ValidatedSolutionRecipeProperties`
+  - Model `ArcSettingsOperations` added method `begin_reconcile`
+  - Model `ClustersOperations` added method `begin_change_ring`
+  - Model `ClustersOperations` added method `begin_update_secrets_locations`
+  - Added model `EdgeDeviceJobsOperations`
+  - Added model `KubernetesVersionsOperations`
+  - Added model `OsImagesOperations`
+  - Added model `PlatformUpdatesOperations`
+  - Added model `UpdateContentsOperations`
+  - Added model `ValidatedSolutionRecipesOperations`
+
+### Breaking Changes
+
+  - Method `Operations.list` changed from `asynchronous` to `synchronous`
+  - Method `ClusterList.__init__` removed default value `None` from its parameter `value`
+  - Method `DeploymentSetting.__init__` parameter `deployment_mode` changed default value from `str` to `none`
+  - Method `DeploymentSetting.__init__` parameter `operation_type` changed default value from `str` to `none`
+  - Deleted or renamed enum value `Status.FAILED`
+  - Deleted or renamed enum value `Status.IN_PROGRESS`
+  - Deleted or renamed enum value `Status.SUCCEEDED`
+  - Method `UpdateList.__init__` removed default value `None` from its parameter `value`
+  - Method `UpdateRunList.__init__` removed default value `None` from its parameter `value`
+  - Method `UpdateSummariesList.__init__` removed default value `None` from its parameter `value`
+
 ## 8.0.0b4 (2024-08-26)
 
 ### Features Added
