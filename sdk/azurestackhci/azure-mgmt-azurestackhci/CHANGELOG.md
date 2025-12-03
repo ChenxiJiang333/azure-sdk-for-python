@@ -1,5 +1,62 @@
 # Release History
 
+## swagger to typespec
+
+### Breaking Changes
+
+  - Deleted model `CollectLogJobProperties`
+  - Deleted model `EdgeDeviceJobProperties`
+  - Deleted enum `EdgeDeviceJobType`
+  - Deleted enum `EdgeSolutionType`
+  - Deleted model `JobReportedProperties`
+  - Deleted model `RemoteSupportJobProperties`
+  - Method `Operations.list` changed from `asynchronous` to `synchronous`
+  - Model `ArcIdentityResponse` moved instance variable `arc_application_client_id`, `arc_application_tenant_id`, `arc_service_principal_object_id` and `arc_application_object_id` under property `properties`
+  - Model `ArcSetting` moved instance variable `provisioning_state`, `arc_instance_resource_group`, `arc_application_client_id`, `arc_application_tenant_id`, `arc_service_principal_object_id`, `arc_application_object_id`, `aggregate_state`, `per_node_details`, `connectivity_properties` and `default_extensions` under property `properties`
+  - Model `ArcSettingsPatch` moved instance variable `connectivity_properties` under property `properties`
+  - Model `Cluster` moved instance variable `principal_id`, `tenant_id`, `type_identity_type` and `user_assigned_identities` under property `identity`
+  - Model `Cluster` moved instance variable `provisioning_state`, `status`, `connectivity_status`, `cloud_id`, `cloud_management_endpoint`, `aad_client_id`, `aad_tenant_id`, `aad_application_object_id`, `aad_service_principal_object_id`, `software_assurance_properties`, `is_management_cluster`, `log_collection_properties`, `remote_support_properties`, `desired_properties`, `reported_properties`, `isolated_vm_attestation_configuration`, `trial_days_remaining`, `billing_model`, `registration_timestamp`, `last_sync_timestamp`, `last_billing_timestamp`, `service_endpoint`, `resource_provider_object_id`, `secrets_locations`, `cluster_pattern`, `local_availability_zones` and `identity_provider` under property `properties`
+  - Model `ClusterIdentityResponse` moved instance variable `aad_client_id`, `aad_tenant_id`, `aad_service_principal_object_id` and `aad_application_object_id` under property `properties`
+  - Model `ClusterPatch` moved instance variable `principal_id`, `tenant_id`, `type` and `user_assigned_identities` under property `identity`
+  - Model `ClusterPatch` moved instance variable `cloud_management_endpoint`, `aad_client_id`, `aad_tenant_id` and `desired_properties` under property `properties`
+  - Model `DeploymentSetting` moved instance variable `provisioning_state`, `arc_node_resource_ids`, `deployment_mode`, `operation_type`, `deployment_configuration` and `reported_properties` under property `properties`
+  - Model `Extension` moved instance variable `provisioning_state`, `aggregate_state`, `per_node_extension_details`, `managed_by`, `force_update_tag`, `publisher`, `type_properties_extension_parameters_type`, `type_handler_version`, `auto_upgrade_minor_version`, `settings`, `protected_settings` and `enable_automatic_upgrade` under property `properties`
+  - Model `ExtensionPatch` moved instance variable `extension_parameters` under property `properties`
+  - Model `Offer` moved instance variable `provisioning_state`, `publisher_id`, `content`, `content_version` and `sku_mappings` under property `properties`
+  - Model `Publisher` moved instance variable `provisioning_state` under property `properties`
+  - Model `SecuritySetting` moved instance variable `secured_core_compliance_assignment`, `wdac_compliance_assignment`, `smb_encryption_for_intra_cluster_traffic_compliance_assignment`, `security_compliance_status` and `provisioning_state` under property `properties`
+  - Model `Sku` moved instance variable `provisioning_state`, `publisher_id`, `offer_id`, `content`, `content_version` and `sku_mappings` under property `properties`
+  - Model `Update` moved instance variable `provisioning_state`, `installed_date`, `description`, `min_sbe_version_required`, `state`, `prerequisites`, `component_versions`, `reboot_required`, `health_state`, `health_check_result`, `health_check_date`, `package_path`, `package_size_in_mb`, `display_name`, `version`, `publisher`, `release_link`, `availability_type`, `package_type`, `progress_percentage` and `notify_message` under property `properties`
+  - Model `UpdateRun` moved instance variable `provisioning_state`, `time_started`, `last_updated_time`, `duration`, `state`, `name_properties_progress_name`, `description`, `error_message`, `status`, `start_time_utc`, `end_time_utc`, `last_updated_time_utc`, `expected_execution_time` and `steps` under property `properties`
+  - Model `UpdateSummaries` moved instance variable `provisioning_state`, `oem_family`, `current_oem_version`, `hardware_model`, `package_versions`, `current_version`, `current_sbe_version`, `last_updated`, `last_checked`, `health_state`, `health_check_result`, `health_check_date` and `state` under property `properties`
+  - Deleted model `ArcSettingList`/`ClusterList`/`ExtensionList`/`OfferList`/`PublisherList`/`SkuList`/`UpdateList`/`UpdateRunList`/`UpdateSummariesList` which actually were not used by SDK users
+  - Method `DeploymentSettingsOperations.begin_create_or_update` removed default value `None` from its parameter `deployment_settings_name`
+  - Method `DeploymentSettingsOperations.begin_delete` removed default value `None` from its parameter `deployment_settings_name`
+  - Method `DeploymentSettingsOperations.get` removed default value `None` from its parameter `deployment_settings_name`
+  - Method `EdgeDeviceJobsOperations.begin_create_or_update` removed default value `None` from its parameter `edge_device_name`
+  - Method `EdgeDeviceJobsOperations.begin_delete` removed default value `None` from its parameter `edge_device_name`
+  - Method `EdgeDeviceJobsOperations.get` removed default value `None` from its parameter `edge_device_name`
+  - Method `EdgeDeviceJobsOperations.list_by_edge_device` removed default value `None` from its parameter `edge_device_name`
+  - Method `EdgeDevicesOperations.begin_create_or_update` removed default value `None` from its parameter `edge_device_name`
+  - Method `EdgeDevicesOperations.begin_delete` removed default value `None` from its parameter `edge_device_name`
+  - Method `EdgeDevicesOperations.begin_validate` removed default value `None` from its parameter `edge_device_name`
+  - Method `EdgeDevicesOperations.get` removed default value `None` from its parameter `edge_device_name`
+  - Method `OffersOperations.get` changed its parameter `expand` from `positional_or_keyword` to `keyword_only`
+  - Method `OffersOperations.list_by_cluster` changed its parameter `expand` from `positional_or_keyword` to `keyword_only`
+  - Method `OffersOperations.list_by_publisher` changed its parameter `expand` from `positional_or_keyword` to `keyword_only`
+  - Method `SecuritySettingsOperations.begin_create_or_update` removed default value `None` from its parameter `security_settings_name`
+  - Method `SecuritySettingsOperations.begin_delete` removed default value `None` from its parameter `security_settings_name`
+  - Method `SecuritySettingsOperations.get` removed default value `None` from its parameter `security_settings_name`
+  - Method `SkusOperations.get` changed its parameter `expand` from `positional_or_keyword` to `keyword_only`
+  - Method `SkusOperations.list_by_offer` changed its parameter `expand` from `positional_or_keyword` to `keyword_only`
+  - Method `EdgeDevicesOperations.begin_create_or_update` re-ordered its parameters from `['self', 'resource_uri', 'resource', 'edge_device_name', 'kwargs']` to `['self', 'resource_uri', 'edge_device_name', 'resource', 'kwargs']`
+  - Method `EdgeDevicesOperations.begin_validate` re-ordered its parameters from `['self', 'resource_uri', 'validate_request', 'edge_device_name', 'kwargs']` to `['self', 'resource_uri', 'edge_device_name', 'validate_request', 'kwargs']`
+  - Method `EdgeDeviceJobsOperations.begin_create_or_update` re-ordered its parameters from `['self', 'resource_uri', 'jobs_name', 'resource', 'edge_device_name', 'kwargs']` to `['self', 'resource_uri', 'edge_device_name', 'jobs_name', 'resource', 'kwargs']`
+  - Method `EdgeDeviceJobsOperations.begin_delete` re-ordered its parameters from `['self', 'resource_uri', 'jobs_name', 'edge_device_name', 'kwargs']` to `['self', 'resource_uri', 'edge_device_name', 'jobs_name', 'kwargs']`
+  - Method `EdgeDeviceJobsOperations.get` re-ordered its parameters from `['self', 'resource_uri', 'jobs_name', 'edge_device_name', 'kwargs']` to `['self', 'resource_uri', 'edge_device_name', 'jobs_name', 'kwargs']`
+  - Method `DeploymentSettingsOperations.begin_create_or_update` re-ordered its parameters from `['self', 'resource_group_name', 'cluster_name', 'resource', 'deployment_settings_name', 'kwargs']` to `['self', 'resource_group_name', 'cluster_name', 'deployment_settings_name', 'resource', 'kwargs']`
+  - Method `SecuritySettingsOperations.begin_create_or_update` re-ordered its parameters from `['self', 'resource_group_name', 'cluster_name', 'resource', 'security_settings_name', 'kwargs']` to `['self', 'resource_group_name', 'cluster_name', 'security_settings_name', 'resource', 'kwargs']`
+
 ## 8.0.0b5 (2025-12-03)
 
 ### Features Added
