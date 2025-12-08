@@ -26,8 +26,7 @@ class CertificateRegistrationMgmtClientConfiguration:  # pylint: disable=too-man
 
     :param credential: Credential needed for the client to connect to Azure. Required.
     :type credential: ~azure.core.credentials.TokenCredential
-    :param subscription_id: Your Azure subscription ID. This is a GUID-formatted string (e.g.
-     00000000-0000-0000-0000-000000000000). Required.
+    :param subscription_id: The ID of the target subscription. Required.
     :type subscription_id: str
     :param cloud_setting: The cloud setting for which to get the ARM endpoint. Default value is
      None.

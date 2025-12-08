@@ -86,6 +86,14 @@ class TestCertificateRegistrationMgmtAppServiceCertificateOrdersOperations(Azure
                     "version": 0,
                 },
                 "status": "str",
+                "systemData": {
+                    "createdAt": "2020-02-20 00:00:00",
+                    "createdBy": "str",
+                    "createdByType": "str",
+                    "lastModifiedAt": "2020-02-20 00:00:00",
+                    "lastModifiedBy": "str",
+                    "lastModifiedByType": "str",
+                },
                 "tags": {"str": "str"},
                 "type": "str",
                 "validityInYears": 1,
@@ -179,24 +187,20 @@ class TestCertificateRegistrationMgmtAppServiceCertificateOrdersOperations(Azure
                     "version": 0,
                 },
                 "status": "str",
+                "systemData": {
+                    "createdAt": "2020-02-20 00:00:00",
+                    "createdBy": "str",
+                    "createdByType": "str",
+                    "lastModifiedAt": "2020-02-20 00:00:00",
+                    "lastModifiedBy": "str",
+                    "lastModifiedByType": "str",
+                },
                 "tags": {"str": "str"},
                 "type": "str",
                 "validityInYears": 1,
             },
             api_version="2024-11-01",
         ).result()  # call '.result()' to poll until service return final result
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_app_service_certificate_orders_delete(self, resource_group):
-        response = self.client.app_service_certificate_orders.delete(
-            resource_group_name=resource_group.name,
-            certificate_order_name="str",
-            api_version="2024-11-01",
-        )
 
         # please add some check logic here by yourself
         # ...
@@ -271,6 +275,18 @@ class TestCertificateRegistrationMgmtAppServiceCertificateOrdersOperations(Azure
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
+    def test_app_service_certificate_orders_delete(self, resource_group):
+        response = self.client.app_service_certificate_orders.delete(
+            resource_group_name=resource_group.name,
+            certificate_order_name="str",
+            api_version="2024-11-01",
+        )
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
     def test_app_service_certificate_orders_list_certificates(self, resource_group):
         response = self.client.app_service_certificate_orders.list_certificates(
             resource_group_name=resource_group.name,
@@ -309,24 +325,19 @@ class TestCertificateRegistrationMgmtAppServiceCertificateOrdersOperations(Azure
                 "kind": "str",
                 "name": "str",
                 "provisioningState": "str",
+                "systemData": {
+                    "createdAt": "2020-02-20 00:00:00",
+                    "createdBy": "str",
+                    "createdByType": "str",
+                    "lastModifiedAt": "2020-02-20 00:00:00",
+                    "lastModifiedBy": "str",
+                    "lastModifiedByType": "str",
+                },
                 "tags": {"str": "str"},
                 "type": "str",
             },
             api_version="2024-11-01",
         ).result()  # call '.result()' to poll until service return final result
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_app_service_certificate_orders_delete_certificate(self, resource_group):
-        response = self.client.app_service_certificate_orders.delete_certificate(
-            resource_group_name=resource_group.name,
-            certificate_order_name="str",
-            name="str",
-            api_version="2024-11-01",
-        )
 
         # please add some check logic here by yourself
         # ...
@@ -347,6 +358,19 @@ class TestCertificateRegistrationMgmtAppServiceCertificateOrdersOperations(Azure
                 "provisioningState": "str",
                 "type": "str",
             },
+            api_version="2024-11-01",
+        )
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
+    def test_app_service_certificate_orders_delete_certificate(self, resource_group):
+        response = self.client.app_service_certificate_orders.delete_certificate(
+            resource_group_name=resource_group.name,
+            certificate_order_name="str",
+            name="str",
             api_version="2024-11-01",
         )
 
@@ -423,6 +447,30 @@ class TestCertificateRegistrationMgmtAppServiceCertificateOrdersOperations(Azure
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
+    def test_app_service_certificate_orders_retrieve_certificate_actions(self, resource_group):
+        response = self.client.app_service_certificate_orders.retrieve_certificate_actions(
+            resource_group_name=resource_group.name,
+            name="str",
+            api_version="2024-11-01",
+        )
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
+    def test_app_service_certificate_orders_retrieve_certificate_email_history(self, resource_group):
+        response = self.client.app_service_certificate_orders.retrieve_certificate_email_history(
+            resource_group_name=resource_group.name,
+            name="str",
+            api_version="2024-11-01",
+        )
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
     def test_app_service_certificate_orders_retrieve_site_seal(self, resource_group):
         response = self.client.app_service_certificate_orders.retrieve_site_seal(
             resource_group_name=resource_group.name,
@@ -440,30 +488,6 @@ class TestCertificateRegistrationMgmtAppServiceCertificateOrdersOperations(Azure
         response = self.client.app_service_certificate_orders.verify_domain_ownership(
             resource_group_name=resource_group.name,
             certificate_order_name="str",
-            api_version="2024-11-01",
-        )
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_app_service_certificate_orders_retrieve_certificate_actions(self, resource_group):
-        response = self.client.app_service_certificate_orders.retrieve_certificate_actions(
-            resource_group_name=resource_group.name,
-            name="str",
-            api_version="2024-11-01",
-        )
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_app_service_certificate_orders_retrieve_certificate_email_history(self, resource_group):
-        response = self.client.app_service_certificate_orders.retrieve_certificate_email_history(
-            resource_group_name=resource_group.name,
-            name="str",
             api_version="2024-11-01",
         )
 

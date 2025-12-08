@@ -69,10 +69,10 @@ class CertificateOrdersDiagnosticsOperations:
 
         Description for Microsoft.CertificateRegistration to get the list of detectors for this RP.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
-        :type resource_group_name: str
-        :param certificate_order_name: The certificate order name for which the response is needed.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
+        :type resource_group_name: str
+        :param certificate_order_name: Name of the certificate order.. Required.
         :type certificate_order_name: str
         :return: An iterator like instance of either DetectorResponse or the result of cls(response)
         :rtype:
@@ -167,10 +167,10 @@ class CertificateOrdersDiagnosticsOperations:
         Description for Microsoft.CertificateRegistration call to get a detector response from App
         Lens.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
-        :type resource_group_name: str
-        :param certificate_order_name: The certificate order name for which the response is needed.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
+        :type resource_group_name: str
+        :param certificate_order_name: Name of the certificate order.. Required.
         :type certificate_order_name: str
         :param detector_name: The detector name which needs to be run. Required.
         :type detector_name: str

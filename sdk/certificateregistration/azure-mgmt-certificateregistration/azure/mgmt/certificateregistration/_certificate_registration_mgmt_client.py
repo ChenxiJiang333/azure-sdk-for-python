@@ -34,19 +34,18 @@ if TYPE_CHECKING:
 class CertificateRegistrationMgmtClient:
     """Certificate Registration Client.
 
+    :ivar certificate_registration_provider: CertificateRegistrationProviderOperations operations
+    :vartype certificate_registration_provider:
+     azure.mgmt.certificateregistration.operations.CertificateRegistrationProviderOperations
     :ivar app_service_certificate_orders: AppServiceCertificateOrdersOperations operations
     :vartype app_service_certificate_orders:
      azure.mgmt.certificateregistration.operations.AppServiceCertificateOrdersOperations
     :ivar certificate_orders_diagnostics: CertificateOrdersDiagnosticsOperations operations
     :vartype certificate_orders_diagnostics:
      azure.mgmt.certificateregistration.operations.CertificateOrdersDiagnosticsOperations
-    :ivar certificate_registration_provider: CertificateRegistrationProviderOperations operations
-    :vartype certificate_registration_provider:
-     azure.mgmt.certificateregistration.operations.CertificateRegistrationProviderOperations
     :param credential: Credential needed for the client to connect to Azure. Required.
     :type credential: ~azure.core.credentials.TokenCredential
-    :param subscription_id: Your Azure subscription ID. This is a GUID-formatted string (e.g.
-     00000000-0000-0000-0000-000000000000). Required.
+    :param subscription_id: The ID of the target subscription. Required.
     :type subscription_id: str
     :param base_url: Service URL. Default value is None.
     :type base_url: str
@@ -106,13 +105,13 @@ class CertificateRegistrationMgmtClient:
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
         self._serialize.client_side_validation = False
+        self.certificate_registration_provider = CertificateRegistrationProviderOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
         self.app_service_certificate_orders = AppServiceCertificateOrdersOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
         self.certificate_orders_diagnostics = CertificateOrdersDiagnosticsOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
-        self.certificate_registration_provider = CertificateRegistrationProviderOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
 

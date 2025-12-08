@@ -54,16 +54,11 @@ def build_list_app_service_certificate_order_detector_response_request(  # pylin
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CertificateRegistration/certificateOrders/{certificateOrderName}/detectors",
     )
     path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str", min_length=1),
         "resourceGroupName": _SERIALIZER.url(
-            "resource_group_name",
-            resource_group_name,
-            "str",
-            max_length=90,
-            min_length=1,
-            pattern=r"^[-\w\._\(\)]+[^\.]$",
+            "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
         "certificateOrderName": _SERIALIZER.url("certificate_order_name", certificate_order_name, "str"),
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
     }
 
     _url: str = _url.format(**path_format_arguments)  # type: ignore
@@ -100,29 +95,24 @@ def build_get_app_service_certificate_order_detector_response_request(  # pylint
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CertificateRegistration/certificateOrders/{certificateOrderName}/detectors/{detectorName}",
     )
     path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str", min_length=1),
         "resourceGroupName": _SERIALIZER.url(
-            "resource_group_name",
-            resource_group_name,
-            "str",
-            max_length=90,
-            min_length=1,
-            pattern=r"^[-\w\._\(\)]+[^\.]$",
+            "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
         "certificateOrderName": _SERIALIZER.url("certificate_order_name", certificate_order_name, "str"),
         "detectorName": _SERIALIZER.url("detector_name", detector_name, "str"),
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
     }
 
     _url: str = _url.format(**path_format_arguments)  # type: ignore
 
     # Construct parameters
+    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
     if start_time is not None:
         _params["startTime"] = _SERIALIZER.query("start_time", start_time, "iso-8601")
     if end_time is not None:
         _params["endTime"] = _SERIALIZER.query("end_time", end_time, "iso-8601")
     if time_grain is not None:
         _params["timeGrain"] = _SERIALIZER.query("time_grain", time_grain, "str", pattern=r"PT[1-9][0-9]+[SMH]")
-    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
 
     # Construct headers
     _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
@@ -159,10 +149,10 @@ class CertificateOrdersDiagnosticsOperations:
 
         Description for Microsoft.CertificateRegistration to get the list of detectors for this RP.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
-        :type resource_group_name: str
-        :param certificate_order_name: The certificate order name for which the response is needed.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
+        :type resource_group_name: str
+        :param certificate_order_name: Name of the certificate order.. Required.
         :type certificate_order_name: str
         :return: An iterator like instance of either DetectorResponse or the result of cls(response)
         :rtype:
@@ -257,10 +247,10 @@ class CertificateOrdersDiagnosticsOperations:
         Description for Microsoft.CertificateRegistration call to get a detector response from App
         Lens.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
-        :type resource_group_name: str
-        :param certificate_order_name: The certificate order name for which the response is needed.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
+        :type resource_group_name: str
+        :param certificate_order_name: Name of the certificate order.. Required.
         :type certificate_order_name: str
         :param detector_name: The detector name which needs to be run. Required.
         :type detector_name: str
