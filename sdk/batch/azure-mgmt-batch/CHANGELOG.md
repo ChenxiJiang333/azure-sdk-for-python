@@ -1,5 +1,39 @@
 # Release History
 
+## tsp migration
+
+### Breaking Changes
+
+  - Deleted or renamed client `BatchManagementClient`
+  - Model `Application` moved instance variables `display_name`, `allow_updates`, `default_version` under property `properties`
+  - Model `ApplicationPackage` moved instance variables `state`, `format`, `storage_url`, `storage_url_expiry`, `last_activation_time` under property `properties`
+  - Model `BatchAccount` moved instance variables `account_endpoint`, `node_management_endpoint`, `provisioning_state`, `pool_allocation_mode`, `key_vault_reference`, `public_network_access`, `network_profile`, `private_endpoint_connections`, `auto_storage`, `encryption`, `dedicated_core_quota`, `low_priority_core_quota`, `dedicated_core_quota_per_vm_family`, `dedicated_core_quota_per_vm_family_enforced`, `pool_quota`, `active_job_and_job_schedule_quota`, `allowed_authentication_modes` under property `properties`
+  - Model `BatchAccountCreateParameters` moved instance variables `auto_storage`, `pool_allocation_mode`, `key_vault_reference`, `public_network_access`, `network_profile`, `encryption` and `allowed_authentication_modes` under property `properties`
+  - Model `BatchAccountUpdateParameters` moved instance variables `auto_storage`, `encryption`, `allowed_authentication_modes`, `public_network_access` and `network_profile` under property `properties`
+  - Model `Certificate` moved instance variables `thumbprint_algorithm`, `thumbprint`, `format`, `provisioning_state`, `provisioning_state_transition_time`, `previous_provisioning_state`, `previous_provisioning_state_transition_time`, `public_data` and `delete_certificate_error` under property `properties`
+  - Model `CertificateCreateOrUpdateParameters` moved instance variables `thumbprint_algorithm`, `thumbprint`, `format`, `data` and `password` under property `properties`
+  - Model `DetectorResponse` moved instance variable `value` under property `properties`
+  - Model `Pool` moved instance variables including `display_name`, `last_modified`, `creation_time`, `provisioning_state`, `provisioning_state_transition_time`, `allocation_state`, `allocation_state_transition_time`, `vm_size`, `deployment_configuration`, `current_dedicated_nodes`, `current_low_priority_nodes`, `scale_settings`, `auto_scale_run`, `inter_node_communication`, `network_configuration`, `task_slots_per_node`, `task_scheduling_policy`, `user_accounts`, `metadata`, `start_task`, `certificates`, `application_packages`, `application_licenses`, `resize_operation_status`, `mount_configuration`, `target_node_communication_mode`, `current_node_communication_mode`, `upgrade_policy`, `resource_tags` under property `properties`
+  - Model `PrivateEndpointConnection` moved instance variables `provisioning_state`, `private_endpoint`, `group_ids`, `private_link_service_connection_state` under property `properties`
+  - Model `PrivateLinkResource` moved instance variables `group_id`, `required_members`, `required_zone_names` under property `properties`
+  - Deleted model `AccessRulePropertiesSubscriptionsItem`/`ListApplicationPackagesResult`/`ListApplicationsResult`/`ListCertificatesResult`/`ListPoolsResult`/`ListPrivateEndpointConnectionsResult`/`ListPrivateLinkResourcesResult`/`OutboundEnvironmentEndpointCollection`/`SupportedSkusResult` which actually were not used by SDK users
+  - Method `CertificateOperations.create` replaced its parameter `if_match`/`if_none_match` to `etag`/`match_condition`
+  - Method `CertificateOperations.update` replaced its parameter `if_match` to `etag`/`match_condition`
+  - Method `PoolOperations.create` replaced its parameter `if_match`/`if_none_match` to `etag`/`match_condition`
+  - Method `PoolOperations.update` replaced its parameter `if_match` to `etag`/`match_condition`
+  - Method `PrivateEndpointConnectionOperations.begin_update` replaced its parameter `if_match` to `etag`/`match_condition`
+  - Method `ApplicationOperations.create` removed default value `None` from its parameter `parameters`
+  - Method `ApplicationOperations.list` changed its parameter `maxresults` from `positional_or_keyword` to `keyword_only`
+  - Method `ApplicationPackageOperations.create` removed default value `None` from its parameter `parameters`
+  - Method `ApplicationPackageOperations.list` changed its parameter `maxresults` from `positional_or_keyword` to `keyword_only`
+  - Method `CertificateOperations.list_by_batch_account` changed its parameter `maxresults` from `positional_or_keyword` to `keyword_only`
+  - Method `CertificateOperations.list_by_batch_account` changed its parameter `select` from `positional_or_keyword` to `keyword_only`
+  - Method `LocationOperations.list_supported_virtual_machine_skus` changed its parameter `maxresults` from `positional_or_keyword` to `keyword_only`
+  - Method `PoolOperations.list_by_batch_account` changed its parameter `maxresults` from `positional_or_keyword` to `keyword_only`
+  - Method `PoolOperations.list_by_batch_account` changed its parameter `select` from `positional_or_keyword` to `keyword_only`
+  - Method `PrivateEndpointConnectionOperations.list_by_batch_account` changed its parameter `maxresults` from `positional_or_keyword` to `keyword_only`
+  - Method `PrivateLinkResourceOperations.list_by_batch_account` changed its parameter `maxresults` from `positional_or_keyword` to `keyword_only`
+
 ## 19.0.0 (2025-12-08)
 
 ### Features Added
