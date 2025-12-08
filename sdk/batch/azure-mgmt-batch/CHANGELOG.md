@@ -1,5 +1,92 @@
 # Release History
 
+## 19.0.0 (2025-12-08)
+
+### Features Added
+
+  - Model `BatchAccountCreateParameters` added property `properties`
+  - Model `BatchAccountUpdateParameters` added property `properties`
+  - Model `Certificate` added property `properties`
+  - Model `CertificateCreateOrUpdateParameters` added property `properties`
+  - Model `CheckNameAvailabilityParameters` added property `type`
+  - Model `IPRule` added property `action`
+  - Added model `AccessRulePropertiesSubscription`
+  - Added model `BatchAccountCreateProperties`
+  - Added model `BatchAccountUpdateProperties`
+  - Added model `CloudError`
+  - Added enum `DiffDiskPlacement`
+  - Added enum `IPRuleAction`
+  - Added enum `ResourceType`
+  - Model `CertificateOperations` added parameter `etag` in method `create`
+  - Model `CertificateOperations` added parameter `match_condition` in method `create`
+  - Model `CertificateOperations` added parameter `etag` in method `update`
+  - Model `CertificateOperations` added parameter `match_condition` in method `update`
+  - Model `PoolOperations` added parameter `etag` in method `create`
+  - Model `PoolOperations` added parameter `match_condition` in method `create`
+  - Model `PoolOperations` added parameter `etag` in method `update`
+  - Model `PoolOperations` added parameter `match_condition` in method `update`
+  - Model `PrivateEndpointConnectionOperations` added parameter `etag` in method `begin_update`
+  - Model `PrivateEndpointConnectionOperations` added parameter `match_condition` in method `begin_update`
+
+### Breaking Changes
+
+  - Deleted or renamed client `BatchManagementClient`
+  - Model `BatchAccountCreateParameters` deleted or renamed its instance variable `auto_storage`
+  - Model `BatchAccountCreateParameters` deleted or renamed its instance variable `pool_allocation_mode`
+  - Model `BatchAccountCreateParameters` deleted or renamed its instance variable `key_vault_reference`
+  - Model `BatchAccountCreateParameters` deleted or renamed its instance variable `public_network_access`
+  - Model `BatchAccountCreateParameters` deleted or renamed its instance variable `network_profile`
+  - Model `BatchAccountCreateParameters` deleted or renamed its instance variable `encryption`
+  - Model `BatchAccountCreateParameters` deleted or renamed its instance variable `allowed_authentication_modes`
+  - Model `BatchAccountUpdateParameters` deleted or renamed its instance variable `auto_storage`
+  - Model `BatchAccountUpdateParameters` deleted or renamed its instance variable `encryption`
+  - Model `BatchAccountUpdateParameters` deleted or renamed its instance variable `allowed_authentication_modes`
+  - Model `BatchAccountUpdateParameters` deleted or renamed its instance variable `public_network_access`
+  - Model `BatchAccountUpdateParameters` deleted or renamed its instance variable `network_profile`
+  - Model `Certificate` deleted or renamed its instance variable `thumbprint_algorithm`
+  - Model `Certificate` deleted or renamed its instance variable `thumbprint`
+  - Model `Certificate` deleted or renamed its instance variable `format`
+  - Model `Certificate` deleted or renamed its instance variable `provisioning_state`
+  - Model `Certificate` deleted or renamed its instance variable `provisioning_state_transition_time`
+  - Model `Certificate` deleted or renamed its instance variable `previous_provisioning_state`
+  - Model `Certificate` deleted or renamed its instance variable `previous_provisioning_state_transition_time`
+  - Model `Certificate` deleted or renamed its instance variable `public_data`
+  - Model `Certificate` deleted or renamed its instance variable `delete_certificate_error`
+  - Model `CertificateCreateOrUpdateParameters` deleted or renamed its instance variable `thumbprint_algorithm`
+  - Model `CertificateCreateOrUpdateParameters` deleted or renamed its instance variable `thumbprint`
+  - Model `CertificateCreateOrUpdateParameters` deleted or renamed its instance variable `format`
+  - Model `CertificateCreateOrUpdateParameters` deleted or renamed its instance variable `data`
+  - Model `CertificateCreateOrUpdateParameters` deleted or renamed its instance variable `password`
+  - Deleted or renamed model `AccessRulePropertiesSubscriptionsItem`
+  - Deleted or renamed model `ListApplicationPackagesResult`
+  - Deleted or renamed model `ListApplicationsResult`
+  - Deleted or renamed model `ListCertificatesResult`
+  - Deleted or renamed model `ListPoolsResult`
+  - Deleted or renamed model `ListPrivateEndpointConnectionsResult`
+  - Deleted or renamed model `ListPrivateLinkResourcesResult`
+  - Deleted or renamed model `OutboundEnvironmentEndpointCollection`
+  - Deleted or renamed model `SupportedSkusResult`
+  - Method `ApplicationOperations.create` removed default value `None` from its parameter `parameters`
+  - Method `ApplicationOperations.list` changed its parameter `maxresults` from `positional_or_keyword` to `keyword_only`
+  - Method `ApplicationPackageOperations.create` removed default value `None` from its parameter `parameters`
+  - Method `ApplicationPackageOperations.list` changed its parameter `maxresults` from `positional_or_keyword` to `keyword_only`
+  - Method `CertificateOperations.create` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+  - Method `CertificateOperations.create` deleted or renamed its parameter `if_none_match` of kind `positional_or_keyword`
+  - Method `CertificateOperations.list_by_batch_account` changed its parameter `maxresults` from `positional_or_keyword` to `keyword_only`
+  - Method `CertificateOperations.list_by_batch_account` changed its parameter `select` from `positional_or_keyword` to `keyword_only`
+  - Method `CertificateOperations.update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+  - Method `LocationOperations.list_supported_virtual_machine_skus` changed its parameter `maxresults` from `positional_or_keyword` to `keyword_only`
+  - Method `PoolOperations.create` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+  - Method `PoolOperations.create` deleted or renamed its parameter `if_none_match` of kind `positional_or_keyword`
+  - Method `PoolOperations.list_by_batch_account` changed its parameter `maxresults` from `positional_or_keyword` to `keyword_only`
+  - Method `PoolOperations.list_by_batch_account` changed its parameter `select` from `positional_or_keyword` to `keyword_only`
+  - Method `PoolOperations.update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+  - Method `PrivateEndpointConnectionOperations.begin_update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+  - Method `PrivateEndpointConnectionOperations.list_by_batch_account` changed its parameter `maxresults` from `positional_or_keyword` to `keyword_only`
+  - Method `PrivateLinkResourceOperations.list_by_batch_account` changed its parameter `maxresults` from `positional_or_keyword` to `keyword_only`
+  - Method `CertificateOperations.create` re-ordered its parameters from `['self', 'resource_group_name', 'account_name', 'certificate_name', 'parameters', 'if_match', 'if_none_match', 'kwargs']` to `['self', 'resource_group_name', 'account_name', 'certificate_name', 'parameters', 'etag', 'match_condition', 'kwargs']`
+  - Method `PoolOperations.create` re-ordered its parameters from `['self', 'resource_group_name', 'account_name', 'pool_name', 'parameters', 'if_match', 'if_none_match', 'kwargs']` to `['self', 'resource_group_name', 'account_name', 'pool_name', 'parameters', 'etag', 'match_condition', 'kwargs']`
+
 ## 18.0.0 (2024-09-25)
 
 ### Features Added
