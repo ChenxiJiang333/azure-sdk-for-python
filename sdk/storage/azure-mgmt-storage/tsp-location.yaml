@@ -1,0 +1,4 @@
+directory: specification/storage/Storage.Management
+commit: 075afd9b4185327321b99fc2b9b29d8ac1af5a82
+repo: Azure/azure-rest-api-specs
+additionalDirectories: 
