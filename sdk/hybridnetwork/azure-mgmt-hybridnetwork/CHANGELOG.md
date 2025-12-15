@@ -4,6 +4,48 @@
 
 ### Features Added
 
+  - Model `ArmResourceDefinitionResourceElementTemplateDetails` added property `type`
+  - Model `ArtifactStorePropertiesFormat` added property `backing_resource_public_network_access`
+  - Model `HelmMappingRuleProfile` added property `values_property`
+  - Model `NetworkFunctionDefinitionResourceElementTemplateDetails` added property `type`
+  - Enum `ProvisioningState` added member `CANCELLING`
+  - Added model `ArtifactStoreNetworkFabricControllerEndPoints`
+  - Added model `ArtifactStorePrivateEndPointsFormat`
+  - Added model `AzureArcK8sClusterNFVIDetails`
+  - Added enum `BackingResourcePublicNetworkAccess`
+  - Added model `CancelInformation`
+  - Added enum `LongRunningOperation`
+  - Added enum `NfviType`
+  - Added model `VirtualNetworkFunctionNetworkFunctionDefinitionVersion`
+  - Model `ArtifactStoresOperations` added method `begin_add_network_fabric_controller_end_points`
+  - Model `ArtifactStoresOperations` added method `begin_approve_private_end_points`
+  - Model `ArtifactStoresOperations` added method `begin_delete_network_fabric_controller_end_points`
+  - Model `ArtifactStoresOperations` added method `begin_list_network_fabric_controller_private_end_points`
+  - Model `ArtifactStoresOperations` added method `begin_list_private_end_points`
+  - Model `ArtifactStoresOperations` added method `begin_remove_private_end_points`
+  - Model `ArtifactStoresOperations` added method `list_network_fabric_controller_private_end_points`
+  - Model `ArtifactStoresOperations` added method `list_private_end_points`
+  - Model `SiteNetworkServicesOperations` added method `begin_cancel_operation`
+
+### Breaking Changes
+
+  - Deleted or renamed client `HybridNetworkManagementClient`
+  - Model `HelmMappingRuleProfile` deleted or renamed its instance variable `values`
+  - Deleted or renamed model `AzureArcK8SClusterNFVIDetails`
+  - Deleted or renamed model `ConfigurationGenerationType`
+  - Deleted or renamed model `CustomLocationResourceId`
+  - Deleted or renamed model `NFVIType`
+  - Deleted or renamed model `ProxyArtifactOverview`
+  - Deleted or renamed model `ProxyArtifactOverviewPropertiesFormat`
+  - Deleted or renamed model `VirtualNetworkFunctionDefinitionVersion`
+  - Method `ProxyArtifactOperations.begin_update_state` changed its parameter `artifact_name` from `positional_or_keyword` to `keyword_only`
+  - Method `ProxyArtifactOperations.get` changed its parameter `artifact_name` from `positional_or_keyword` to `keyword_only`
+  - Method `ProxyArtifactOperations.begin_update_state` re-ordered its parameters from `['self', 'resource_group_name', 'publisher_name', 'artifact_store_name', 'artifact_name', 'artifact_version_name', 'parameters', 'kwargs']` to `['self', 'resource_group_name', 'publisher_name', 'artifact_store_name', 'artifact_version_name', 'parameters', 'artifact_name', 'kwargs']`
+
+## 3.0.0 (2025-12-15)
+
+### Features Added
+
   - Added operation ArtifactStoresOperations.begin_add_network_fabric_controller_end_points
   - Added operation ArtifactStoresOperations.begin_approve_private_end_points
   - Added operation ArtifactStoresOperations.begin_delete_network_fabric_controller_end_points
