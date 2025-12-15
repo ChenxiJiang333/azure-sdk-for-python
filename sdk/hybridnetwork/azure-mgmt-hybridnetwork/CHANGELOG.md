@@ -1,5 +1,17 @@
 # Release History
 
+## tsp migration
+
+### Breaking Changes
+  - Deleted or renamed client `HybridNetworkManagementClient`
+  - Model `HelmMappingRuleProfile` renamed its instance variable `values` to `values_property`
+  - Deleted model `ArtifactStoreNetworkFabricControllerEndPointsList` which actually was not used by SDK users
+  - Deleted or renamed model `AzureArcK8SClusterNFVIDetails`
+  - Deleted or renamed model `VirtualNetworkFunctionDefinitionVersion`
+  - Method `ProxyArtifactOperations.begin_update_state` changed its parameter `artifact_name` from `positional_or_keyword` to `keyword_only`
+  - Method `ProxyArtifactOperations.get` changed its parameter `artifact_name` from `positional_or_keyword` to `keyword_only`
+  - Method `ProxyArtifactOperations.begin_update_state` re-ordered its parameters from `['self', 'resource_group_name', 'publisher_name', 'artifact_store_name', 'artifact_name', 'artifact_version_name', 'parameters', 'kwargs']` to `['self', 'resource_group_name', 'publisher_name', 'artifact_store_name', 'artifact_version_name', 'parameters', 'artifact_name', 'kwargs']`
+
 ## 3.0.0 (2025-12-15)
 
 ### Features Added
