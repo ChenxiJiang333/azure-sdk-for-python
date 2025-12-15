@@ -6,7 +6,7 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 import pytest
-from azure.mgmt.hybridnetwork import HybridNetworkClient
+from azure.mgmt.hybridnetwork import HybridNetworkManagementClient
 
 from devtools_testutils import AzureMgmtRecordedTestCase, RandomNameResourceGroupPreparer, recorded_by_proxy
 
@@ -14,16 +14,16 @@ AZURE_LOCATION = "eastus"
 
 
 @pytest.mark.skip("you may need to update the auto-generated test case before run it")
-class TestHybridNetworkPublishersOperations(AzureMgmtRecordedTestCase):
+class TestHybridNetworkManagementConfigurationGroupValuesOperations(AzureMgmtRecordedTestCase):
     def setup_method(self, method):
-        self.client = self.create_mgmt_client(HybridNetworkClient)
+        self.client = self.create_mgmt_client(HybridNetworkManagementClient)
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_publishers_get(self, resource_group):
-        response = self.client.publishers.get(
+    def test_configuration_group_values_get(self, resource_group):
+        response = self.client.configuration_group_values.get(
             resource_group_name=resource_group.name,
-            publisher_name="str",
+            configuration_group_value_name="str",
         )
 
         # please add some check logic here by yourself
@@ -31,10 +31,26 @@ class TestHybridNetworkPublishersOperations(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_publishers_begin_create_or_update(self, resource_group):
-        response = self.client.publishers.begin_create_or_update(
+    def test_configuration_group_values_begin_create_or_update(self, resource_group):
+        response = self.client.configuration_group_values.begin_create_or_update(
             resource_group_name=resource_group.name,
-            publisher_name="str",
+            configuration_group_value_name="str",
+            parameters={
+                "location": "str",
+                "id": "str",
+                "name": "str",
+                "properties": "configuration_group_value_properties_format",
+                "systemData": {
+                    "createdAt": "2020-02-20 00:00:00",
+                    "createdBy": "str",
+                    "createdByType": "str",
+                    "lastModifiedAt": "2020-02-20 00:00:00",
+                    "lastModifiedBy": "str",
+                    "lastModifiedByType": "str",
+                },
+                "tags": {"str": "str"},
+                "type": "str",
+            },
         ).result()  # call '.result()' to poll until service return final result
 
         # please add some check logic here by yourself
@@ -42,10 +58,11 @@ class TestHybridNetworkPublishersOperations(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_publishers_update(self, resource_group):
-        response = self.client.publishers.update(
+    def test_configuration_group_values_update_tags(self, resource_group):
+        response = self.client.configuration_group_values.update_tags(
             resource_group_name=resource_group.name,
-            publisher_name="str",
+            configuration_group_value_name="str",
+            parameters={"tags": {"str": "str"}},
         )
 
         # please add some check logic here by yourself
@@ -53,10 +70,10 @@ class TestHybridNetworkPublishersOperations(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_publishers_begin_delete(self, resource_group):
-        response = self.client.publishers.begin_delete(
+    def test_configuration_group_values_begin_delete(self, resource_group):
+        response = self.client.configuration_group_values.begin_delete(
             resource_group_name=resource_group.name,
-            publisher_name="str",
+            configuration_group_value_name="str",
         ).result()  # call '.result()' to poll until service return final result
 
         # please add some check logic here by yourself
@@ -64,8 +81,8 @@ class TestHybridNetworkPublishersOperations(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_publishers_list_by_resource_group(self, resource_group):
-        response = self.client.publishers.list_by_resource_group(
+    def test_configuration_group_values_list_by_resource_group(self, resource_group):
+        response = self.client.configuration_group_values.list_by_resource_group(
             resource_group_name=resource_group.name,
         )
         result = [r for r in response]
@@ -74,8 +91,8 @@ class TestHybridNetworkPublishersOperations(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_publishers_list_by_subscription(self, resource_group):
-        response = self.client.publishers.list_by_subscription()
+    def test_configuration_group_values_list_by_subscription(self, resource_group):
+        response = self.client.configuration_group_values.list_by_subscription()
         result = [r for r in response]
         # please add some check logic here by yourself
         # ...

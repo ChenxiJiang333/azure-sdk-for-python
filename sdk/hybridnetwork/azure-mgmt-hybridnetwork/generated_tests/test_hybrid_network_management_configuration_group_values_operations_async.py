@@ -6,7 +6,7 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 import pytest
-from azure.mgmt.hybridnetwork.aio import HybridNetworkClient
+from azure.mgmt.hybridnetwork.aio import HybridNetworkManagementClient
 
 from devtools_testutils import AzureMgmtRecordedTestCase, RandomNameResourceGroupPreparer
 from devtools_testutils.aio import recorded_by_proxy_async
@@ -15,17 +15,16 @@ AZURE_LOCATION = "eastus"
 
 
 @pytest.mark.skip("you may need to update the auto-generated test case before run it")
-class TestHybridNetworkConfigurationGroupSchemasOperationsAsync(AzureMgmtRecordedTestCase):
+class TestHybridNetworkManagementConfigurationGroupValuesOperationsAsync(AzureMgmtRecordedTestCase):
     def setup_method(self, method):
-        self.client = self.create_mgmt_client(HybridNetworkClient, is_async=True)
+        self.client = self.create_mgmt_client(HybridNetworkManagementClient, is_async=True)
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_configuration_group_schemas_get(self, resource_group):
-        response = await self.client.configuration_group_schemas.get(
+    async def test_configuration_group_values_get(self, resource_group):
+        response = await self.client.configuration_group_values.get(
             resource_group_name=resource_group.name,
-            publisher_name="str",
-            configuration_group_schema_name="str",
+            configuration_group_value_name="str",
         )
 
         # please add some check logic here by yourself
@@ -33,22 +32,16 @@ class TestHybridNetworkConfigurationGroupSchemasOperationsAsync(AzureMgmtRecorde
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_configuration_group_schemas_begin_create_or_update(self, resource_group):
+    async def test_configuration_group_values_begin_create_or_update(self, resource_group):
         response = await (
-            await self.client.configuration_group_schemas.begin_create_or_update(
+            await self.client.configuration_group_values.begin_create_or_update(
                 resource_group_name=resource_group.name,
-                publisher_name="str",
-                configuration_group_schema_name="str",
+                configuration_group_value_name="str",
                 parameters={
                     "location": "str",
                     "id": "str",
                     "name": "str",
-                    "properties": {
-                        "description": "str",
-                        "provisioningState": "str",
-                        "schemaDefinition": "str",
-                        "versionState": "str",
-                    },
+                    "properties": "configuration_group_value_properties_format",
                     "systemData": {
                         "createdAt": "2020-02-20 00:00:00",
                         "createdBy": "str",
@@ -68,11 +61,10 @@ class TestHybridNetworkConfigurationGroupSchemasOperationsAsync(AzureMgmtRecorde
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_configuration_group_schemas_update(self, resource_group):
-        response = await self.client.configuration_group_schemas.update(
+    async def test_configuration_group_values_update_tags(self, resource_group):
+        response = await self.client.configuration_group_values.update_tags(
             resource_group_name=resource_group.name,
-            publisher_name="str",
-            configuration_group_schema_name="str",
+            configuration_group_value_name="str",
             parameters={"tags": {"str": "str"}},
         )
 
@@ -81,12 +73,11 @@ class TestHybridNetworkConfigurationGroupSchemasOperationsAsync(AzureMgmtRecorde
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_configuration_group_schemas_begin_delete(self, resource_group):
+    async def test_configuration_group_values_begin_delete(self, resource_group):
         response = await (
-            await self.client.configuration_group_schemas.begin_delete(
+            await self.client.configuration_group_values.begin_delete(
                 resource_group_name=resource_group.name,
-                publisher_name="str",
-                configuration_group_schema_name="str",
+                configuration_group_value_name="str",
             )
         ).result()  # call '.result()' to poll until service return final result
 
@@ -95,10 +86,9 @@ class TestHybridNetworkConfigurationGroupSchemasOperationsAsync(AzureMgmtRecorde
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_configuration_group_schemas_list_by_publisher(self, resource_group):
-        response = self.client.configuration_group_schemas.list_by_publisher(
+    async def test_configuration_group_values_list_by_resource_group(self, resource_group):
+        response = self.client.configuration_group_values.list_by_resource_group(
             resource_group_name=resource_group.name,
-            publisher_name="str",
         )
         result = [r async for r in response]
         # please add some check logic here by yourself
@@ -106,15 +96,8 @@ class TestHybridNetworkConfigurationGroupSchemasOperationsAsync(AzureMgmtRecorde
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_configuration_group_schemas_begin_update_state(self, resource_group):
-        response = await (
-            await self.client.configuration_group_schemas.begin_update_state(
-                resource_group_name=resource_group.name,
-                publisher_name="str",
-                configuration_group_schema_name="str",
-                parameters={"versionState": "str"},
-            )
-        ).result()  # call '.result()' to poll until service return final result
-
+    async def test_configuration_group_values_list_by_subscription(self, resource_group):
+        response = self.client.configuration_group_values.list_by_subscription()
+        result = [r async for r in response]
         # please add some check logic here by yourself
         # ...

@@ -6,7 +6,7 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 import pytest
-from azure.mgmt.hybridnetwork import HybridNetworkClient
+from azure.mgmt.hybridnetwork import HybridNetworkManagementClient
 
 from devtools_testutils import AzureMgmtRecordedTestCase, RandomNameResourceGroupPreparer, recorded_by_proxy
 
@@ -14,18 +14,16 @@ AZURE_LOCATION = "eastus"
 
 
 @pytest.mark.skip("you may need to update the auto-generated test case before run it")
-class TestHybridNetworkNetworkServiceDesignVersionsOperations(AzureMgmtRecordedTestCase):
+class TestHybridNetworkManagementSiteNetworkServicesOperations(AzureMgmtRecordedTestCase):
     def setup_method(self, method):
-        self.client = self.create_mgmt_client(HybridNetworkClient)
+        self.client = self.create_mgmt_client(HybridNetworkManagementClient)
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_network_service_design_versions_get(self, resource_group):
-        response = self.client.network_service_design_versions.get(
+    def test_site_network_services_get(self, resource_group):
+        response = self.client.site_network_services.get(
             resource_group_name=resource_group.name,
-            publisher_name="str",
-            network_service_design_group_name="str",
-            network_service_design_version_name="str",
+            site_network_service_name="str",
         )
 
         # please add some check logic here by yourself
@@ -33,24 +31,35 @@ class TestHybridNetworkNetworkServiceDesignVersionsOperations(AzureMgmtRecordedT
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_network_service_design_versions_begin_create_or_update(self, resource_group):
-        response = self.client.network_service_design_versions.begin_create_or_update(
+    def test_site_network_services_begin_create_or_update(self, resource_group):
+        response = self.client.site_network_services.begin_create_or_update(
             resource_group_name=resource_group.name,
-            publisher_name="str",
-            network_service_design_group_name="str",
-            network_service_design_version_name="str",
+            site_network_service_name="str",
             parameters={
                 "location": "str",
                 "id": "str",
+                "identity": {
+                    "type": "str",
+                    "principalId": "str",
+                    "tenantId": "str",
+                    "userAssignedIdentities": {"str": {"clientId": "str", "principalId": "str"}},
+                },
                 "name": "str",
                 "properties": {
-                    "configurationGroupSchemaReferences": {"str": {"id": "str"}},
-                    "description": "str",
-                    "nfvisFromSite": {"str": {"name": "str", "type": "str"}},
+                    "desiredStateConfigurationGroupValueReferences": {"str": {"id": "str"}},
+                    "lastStateConfigurationGroupValueReferences": {"str": {"id": "str"}},
+                    "lastStateNetworkServiceDesignVersionName": "str",
+                    "managedResourceGroupConfiguration": {"location": "str", "name": "str"},
+                    "networkServiceDesignGroupName": "str",
+                    "networkServiceDesignVersionName": "str",
+                    "networkServiceDesignVersionOfferingLocation": "str",
+                    "networkServiceDesignVersionResourceReference": "deployment_resource_id_reference",
                     "provisioningState": "str",
-                    "resourceElementTemplates": ["resource_element_template"],
-                    "versionState": "str",
+                    "publisherName": "str",
+                    "publisherScope": "str",
+                    "siteReference": {"id": "str"},
                 },
+                "sku": {"name": "str", "tier": "str"},
                 "systemData": {
                     "createdAt": "2020-02-20 00:00:00",
                     "createdBy": "str",
@@ -69,12 +78,10 @@ class TestHybridNetworkNetworkServiceDesignVersionsOperations(AzureMgmtRecordedT
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_network_service_design_versions_update(self, resource_group):
-        response = self.client.network_service_design_versions.update(
+    def test_site_network_services_update_tags(self, resource_group):
+        response = self.client.site_network_services.update_tags(
             resource_group_name=resource_group.name,
-            publisher_name="str",
-            network_service_design_group_name="str",
-            network_service_design_version_name="str",
+            site_network_service_name="str",
             parameters={"tags": {"str": "str"}},
         )
 
@@ -83,12 +90,10 @@ class TestHybridNetworkNetworkServiceDesignVersionsOperations(AzureMgmtRecordedT
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_network_service_design_versions_begin_delete(self, resource_group):
-        response = self.client.network_service_design_versions.begin_delete(
+    def test_site_network_services_begin_delete(self, resource_group):
+        response = self.client.site_network_services.begin_delete(
             resource_group_name=resource_group.name,
-            publisher_name="str",
-            network_service_design_group_name="str",
-            network_service_design_version_name="str",
+            site_network_service_name="str",
         ).result()  # call '.result()' to poll until service return final result
 
         # please add some check logic here by yourself
@@ -96,11 +101,9 @@ class TestHybridNetworkNetworkServiceDesignVersionsOperations(AzureMgmtRecordedT
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_network_service_design_versions_list_by_network_service_design_group(self, resource_group):
-        response = self.client.network_service_design_versions.list_by_network_service_design_group(
+    def test_site_network_services_list_by_resource_group(self, resource_group):
+        response = self.client.site_network_services.list_by_resource_group(
             resource_group_name=resource_group.name,
-            publisher_name="str",
-            network_service_design_group_name="str",
         )
         result = [r for r in response]
         # please add some check logic here by yourself
@@ -108,13 +111,17 @@ class TestHybridNetworkNetworkServiceDesignVersionsOperations(AzureMgmtRecordedT
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_network_service_design_versions_begin_update_state(self, resource_group):
-        response = self.client.network_service_design_versions.begin_update_state(
-            resource_group_name=resource_group.name,
-            publisher_name="str",
-            network_service_design_group_name="str",
-            network_service_design_version_name="str",
-            parameters={"versionState": "str"},
+    def test_site_network_services_list_by_subscription(self, resource_group):
+        response = self.client.site_network_services.list_by_subscription()
+        result = [r for r in response]
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
+    def test_site_network_services_begin_cancel_operation(self, resource_group):
+        response = self.client.site_network_services.begin_cancel_operation(
+            parameters={"siteNetworkServiceReference": {"id": "str"}, "longRunningOperation": "str"},
         ).result()  # call '.result()' to poll until service return final result
 
         # please add some check logic here by yourself

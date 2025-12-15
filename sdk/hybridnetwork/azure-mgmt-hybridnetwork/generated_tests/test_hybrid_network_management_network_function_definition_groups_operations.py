@@ -6,7 +6,7 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 import pytest
-from azure.mgmt.hybridnetwork import HybridNetworkClient
+from azure.mgmt.hybridnetwork import HybridNetworkManagementClient
 
 from devtools_testutils import AzureMgmtRecordedTestCase, RandomNameResourceGroupPreparer, recorded_by_proxy
 
@@ -14,17 +14,17 @@ AZURE_LOCATION = "eastus"
 
 
 @pytest.mark.skip("you may need to update the auto-generated test case before run it")
-class TestHybridNetworkNetworkServiceDesignGroupsOperations(AzureMgmtRecordedTestCase):
+class TestHybridNetworkManagementNetworkFunctionDefinitionGroupsOperations(AzureMgmtRecordedTestCase):
     def setup_method(self, method):
-        self.client = self.create_mgmt_client(HybridNetworkClient)
+        self.client = self.create_mgmt_client(HybridNetworkManagementClient)
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_network_service_design_groups_get(self, resource_group):
-        response = self.client.network_service_design_groups.get(
+    def test_network_function_definition_groups_get(self, resource_group):
+        response = self.client.network_function_definition_groups.get(
             resource_group_name=resource_group.name,
             publisher_name="str",
-            network_service_design_group_name="str",
+            network_function_definition_group_name="str",
         )
 
         # please add some check logic here by yourself
@@ -32,11 +32,11 @@ class TestHybridNetworkNetworkServiceDesignGroupsOperations(AzureMgmtRecordedTes
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_network_service_design_groups_begin_create_or_update(self, resource_group):
-        response = self.client.network_service_design_groups.begin_create_or_update(
+    def test_network_function_definition_groups_begin_create_or_update(self, resource_group):
+        response = self.client.network_function_definition_groups.begin_create_or_update(
             resource_group_name=resource_group.name,
             publisher_name="str",
-            network_service_design_group_name="str",
+            network_function_definition_group_name="str",
             parameters={
                 "location": "str",
                 "id": "str",
@@ -60,11 +60,11 @@ class TestHybridNetworkNetworkServiceDesignGroupsOperations(AzureMgmtRecordedTes
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_network_service_design_groups_update(self, resource_group):
-        response = self.client.network_service_design_groups.update(
+    def test_network_function_definition_groups_update(self, resource_group):
+        response = self.client.network_function_definition_groups.update(
             resource_group_name=resource_group.name,
             publisher_name="str",
-            network_service_design_group_name="str",
+            network_function_definition_group_name="str",
             parameters={"tags": {"str": "str"}},
         )
 
@@ -73,11 +73,11 @@ class TestHybridNetworkNetworkServiceDesignGroupsOperations(AzureMgmtRecordedTes
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_network_service_design_groups_begin_delete(self, resource_group):
-        response = self.client.network_service_design_groups.begin_delete(
+    def test_network_function_definition_groups_begin_delete(self, resource_group):
+        response = self.client.network_function_definition_groups.begin_delete(
             resource_group_name=resource_group.name,
             publisher_name="str",
-            network_service_design_group_name="str",
+            network_function_definition_group_name="str",
         ).result()  # call '.result()' to poll until service return final result
 
         # please add some check logic here by yourself
@@ -85,8 +85,8 @@ class TestHybridNetworkNetworkServiceDesignGroupsOperations(AzureMgmtRecordedTes
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_network_service_design_groups_list_by_publisher(self, resource_group):
-        response = self.client.network_service_design_groups.list_by_publisher(
+    def test_network_function_definition_groups_list_by_publisher(self, resource_group):
+        response = self.client.network_function_definition_groups.list_by_publisher(
             resource_group_name=resource_group.name,
             publisher_name="str",
         )

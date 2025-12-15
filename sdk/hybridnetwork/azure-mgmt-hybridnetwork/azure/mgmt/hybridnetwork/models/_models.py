@@ -798,7 +798,7 @@ class NFVIs(_Model):
     """The NFVI object.
 
     You probably want to use the sub-classes and not this class directly. Known sub-classes are:
-    AzureArcK8sClusterNFVIDetails, AzureCoreNFVIDetails, AzureOperatorNexusClusterNFVIDetails
+    AzureArcK8SClusterNFVIDetails, AzureCoreNFVIDetails, AzureOperatorNexusClusterNFVIDetails
 
     :ivar name: Name of the nfvi.
     :vartype name: str
@@ -833,7 +833,7 @@ class NFVIs(_Model):
         super().__init__(*args, **kwargs)
 
 
-class AzureArcK8sClusterNFVIDetails(NFVIs, discriminator="AzureArcKubernetes"):
+class AzureArcK8SClusterNFVIDetails(NFVIs, discriminator="AzureArcKubernetes"):
     """The AzureArcK8sCluster NFVI detail.
 
     :ivar name: Name of the nfvi.
@@ -2563,8 +2563,7 @@ class NetworkFunctionDefinitionVersionPropertiesFormat(_Model):  # pylint: disab
     """Network function definition version properties.
 
     You probably want to use the sub-classes and not this class directly. Known sub-classes are:
-    ContainerizedNetworkFunctionDefinitionVersion,
-    VirtualNetworkFunctionNetworkFunctionDefinitionVersion
+    ContainerizedNetworkFunctionDefinitionVersion, VirtualNetworkFunctionDefinitionVersion
 
     :ivar provisioning_state: The provisioning state of the network function definition version
      resource. Known values are: "Unknown", "Succeeded", "Accepted", "Deleting", "Failed",
@@ -5470,9 +5469,9 @@ class VhdImageMappingRuleProfile(_Model):
         super().__init__(*args, **kwargs)
 
 
-class VirtualNetworkFunctionNetworkFunctionDefinitionVersion(
+class VirtualNetworkFunctionDefinitionVersion(
     NetworkFunctionDefinitionVersionPropertiesFormat, discriminator="VirtualNetworkFunction"
-):  # pylint: disable=name-too-long
+):
     """Virtual network function network function definition version properties.
 
     :ivar provisioning_state: The provisioning state of the network function definition version

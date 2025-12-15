@@ -6,7 +6,7 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 import pytest
-from azure.mgmt.hybridnetwork.aio import HybridNetworkClient
+from azure.mgmt.hybridnetwork.aio import HybridNetworkManagementClient
 
 from devtools_testutils import AzureMgmtRecordedTestCase, RandomNameResourceGroupPreparer
 from devtools_testutils.aio import recorded_by_proxy_async
@@ -15,17 +15,18 @@ AZURE_LOCATION = "eastus"
 
 
 @pytest.mark.skip("you may need to update the auto-generated test case before run it")
-class TestHybridNetworkNetworkFunctionDefinitionGroupsOperationsAsync(AzureMgmtRecordedTestCase):
+class TestHybridNetworkManagementArtifactManifestsOperationsAsync(AzureMgmtRecordedTestCase):
     def setup_method(self, method):
-        self.client = self.create_mgmt_client(HybridNetworkClient, is_async=True)
+        self.client = self.create_mgmt_client(HybridNetworkManagementClient, is_async=True)
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_network_function_definition_groups_get(self, resource_group):
-        response = await self.client.network_function_definition_groups.get(
+    async def test_artifact_manifests_get(self, resource_group):
+        response = await self.client.artifact_manifests.get(
             resource_group_name=resource_group.name,
             publisher_name="str",
-            network_function_definition_group_name="str",
+            artifact_store_name="str",
+            artifact_manifest_name="str",
         )
 
         # please add some check logic here by yourself
@@ -33,17 +34,22 @@ class TestHybridNetworkNetworkFunctionDefinitionGroupsOperationsAsync(AzureMgmtR
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_network_function_definition_groups_begin_create_or_update(self, resource_group):
+    async def test_artifact_manifests_begin_create_or_update(self, resource_group):
         response = await (
-            await self.client.network_function_definition_groups.begin_create_or_update(
+            await self.client.artifact_manifests.begin_create_or_update(
                 resource_group_name=resource_group.name,
                 publisher_name="str",
-                network_function_definition_group_name="str",
+                artifact_store_name="str",
+                artifact_manifest_name="str",
                 parameters={
                     "location": "str",
                     "id": "str",
                     "name": "str",
-                    "properties": {"description": "str", "provisioningState": "str"},
+                    "properties": {
+                        "artifactManifestState": "str",
+                        "artifacts": [{"artifactName": "str", "artifactType": "str", "artifactVersion": "str"}],
+                        "provisioningState": "str",
+                    },
                     "systemData": {
                         "createdAt": "2020-02-20 00:00:00",
                         "createdBy": "str",
@@ -63,11 +69,12 @@ class TestHybridNetworkNetworkFunctionDefinitionGroupsOperationsAsync(AzureMgmtR
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_network_function_definition_groups_update(self, resource_group):
-        response = await self.client.network_function_definition_groups.update(
+    async def test_artifact_manifests_update(self, resource_group):
+        response = await self.client.artifact_manifests.update(
             resource_group_name=resource_group.name,
             publisher_name="str",
-            network_function_definition_group_name="str",
+            artifact_store_name="str",
+            artifact_manifest_name="str",
             parameters={"tags": {"str": "str"}},
         )
 
@@ -76,12 +83,13 @@ class TestHybridNetworkNetworkFunctionDefinitionGroupsOperationsAsync(AzureMgmtR
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_network_function_definition_groups_begin_delete(self, resource_group):
+    async def test_artifact_manifests_begin_delete(self, resource_group):
         response = await (
-            await self.client.network_function_definition_groups.begin_delete(
+            await self.client.artifact_manifests.begin_delete(
                 resource_group_name=resource_group.name,
                 publisher_name="str",
-                network_function_definition_group_name="str",
+                artifact_store_name="str",
+                artifact_manifest_name="str",
             )
         ).result()  # call '.result()' to poll until service return final result
 
@@ -90,11 +98,41 @@ class TestHybridNetworkNetworkFunctionDefinitionGroupsOperationsAsync(AzureMgmtR
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_network_function_definition_groups_list_by_publisher(self, resource_group):
-        response = self.client.network_function_definition_groups.list_by_publisher(
+    async def test_artifact_manifests_list_by_artifact_store(self, resource_group):
+        response = self.client.artifact_manifests.list_by_artifact_store(
             resource_group_name=resource_group.name,
             publisher_name="str",
+            artifact_store_name="str",
         )
         result = [r async for r in response]
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
+    async def test_artifact_manifests_list_credential(self, resource_group):
+        response = await self.client.artifact_manifests.list_credential(
+            resource_group_name=resource_group.name,
+            publisher_name="str",
+            artifact_store_name="str",
+            artifact_manifest_name="str",
+        )
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
+    async def test_artifact_manifests_begin_update_state(self, resource_group):
+        response = await (
+            await self.client.artifact_manifests.begin_update_state(
+                resource_group_name=resource_group.name,
+                publisher_name="str",
+                artifact_store_name="str",
+                artifact_manifest_name="str",
+                parameters={"artifactManifestState": "str"},
+            )
+        ).result()  # call '.result()' to poll until service return final result
+
         # please add some check logic here by yourself
         # ...

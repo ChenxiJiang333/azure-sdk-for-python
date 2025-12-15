@@ -122,7 +122,7 @@ from ...operations._operations import (
     build_sites_list_by_subscription_request,
     build_sites_update_tags_request,
 )
-from .._configuration import HybridNetworkClientConfiguration
+from .._configuration import HybridNetworkManagementClientConfiguration
 
 T = TypeVar("T")
 ClsType = Optional[Callable[[PipelineResponse[HttpRequest, AsyncHttpResponse], T, dict[str, Any]], Any]]
@@ -136,14 +136,16 @@ class Operations:
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.hybridnetwork.aio.HybridNetworkClient`'s
+        :class:`~azure.mgmt.hybridnetwork.aio.HybridNetworkManagementClient`'s
         :attr:`operations` attribute.
     """
 
     def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client: AsyncPipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: HybridNetworkClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._config: HybridNetworkManagementClientConfiguration = (
+            input_args.pop(0) if input_args else kwargs.pop("config")
+        )
         self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
@@ -240,14 +242,16 @@ class ConfigurationGroupSchemasOperations:
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.hybridnetwork.aio.HybridNetworkClient`'s
+        :class:`~azure.mgmt.hybridnetwork.aio.HybridNetworkManagementClient`'s
         :attr:`configuration_group_schemas` attribute.
     """
 
     def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client: AsyncPipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: HybridNetworkClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._config: HybridNetworkManagementClientConfiguration = (
+            input_args.pop(0) if input_args else kwargs.pop("config")
+        )
         self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
@@ -1254,14 +1258,16 @@ class PublishersOperations:
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.hybridnetwork.aio.HybridNetworkClient`'s
+        :class:`~azure.mgmt.hybridnetwork.aio.HybridNetworkManagementClient`'s
         :attr:`publishers` attribute.
     """
 
     def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client: AsyncPipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: HybridNetworkClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._config: HybridNetworkManagementClientConfiguration = (
+            input_args.pop(0) if input_args else kwargs.pop("config")
+        )
         self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
@@ -2053,14 +2059,16 @@ class ConfigurationGroupValuesOperations:
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.hybridnetwork.aio.HybridNetworkClient`'s
+        :class:`~azure.mgmt.hybridnetwork.aio.HybridNetworkManagementClient`'s
         :attr:`configuration_group_values` attribute.
     """
 
     def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client: AsyncPipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: HybridNetworkClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._config: HybridNetworkManagementClientConfiguration = (
+            input_args.pop(0) if input_args else kwargs.pop("config")
+        )
         self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
@@ -2852,14 +2860,16 @@ class NetworkFunctionsOperations:
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.hybridnetwork.aio.HybridNetworkClient`'s
+        :class:`~azure.mgmt.hybridnetwork.aio.HybridNetworkManagementClient`'s
         :attr:`network_functions` attribute.
     """
 
     def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client: AsyncPipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: HybridNetworkClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._config: HybridNetworkManagementClientConfiguration = (
+            input_args.pop(0) if input_args else kwargs.pop("config")
+        )
         self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
@@ -3869,14 +3879,16 @@ class ComponentsOperations:
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.hybridnetwork.aio.HybridNetworkClient`'s
+        :class:`~azure.mgmt.hybridnetwork.aio.HybridNetworkManagementClient`'s
         :attr:`components` attribute.
     """
 
     def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client: AsyncPipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: HybridNetworkClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._config: HybridNetworkManagementClientConfiguration = (
+            input_args.pop(0) if input_args else kwargs.pop("config")
+        )
         self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
@@ -4057,14 +4069,16 @@ class NetworkFunctionDefinitionGroupsOperations:  # pylint: disable=name-too-lon
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.hybridnetwork.aio.HybridNetworkClient`'s
+        :class:`~azure.mgmt.hybridnetwork.aio.HybridNetworkManagementClient`'s
         :attr:`network_function_definition_groups` attribute.
     """
 
     def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client: AsyncPipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: HybridNetworkClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._config: HybridNetworkManagementClientConfiguration = (
+            input_args.pop(0) if input_args else kwargs.pop("config")
+        )
         self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
@@ -4827,14 +4841,16 @@ class NetworkFunctionDefinitionVersionsOperations:  # pylint: disable=name-too-l
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.hybridnetwork.aio.HybridNetworkClient`'s
+        :class:`~azure.mgmt.hybridnetwork.aio.HybridNetworkManagementClient`'s
         :attr:`network_function_definition_versions` attribute.
     """
 
     def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client: AsyncPipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: HybridNetworkClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._config: HybridNetworkManagementClientConfiguration = (
+            input_args.pop(0) if input_args else kwargs.pop("config")
+        )
         self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
@@ -5958,14 +5974,16 @@ class NetworkServiceDesignGroupsOperations:
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.hybridnetwork.aio.HybridNetworkClient`'s
+        :class:`~azure.mgmt.hybridnetwork.aio.HybridNetworkManagementClient`'s
         :attr:`network_service_design_groups` attribute.
     """
 
     def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client: AsyncPipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: HybridNetworkClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._config: HybridNetworkManagementClientConfiguration = (
+            input_args.pop(0) if input_args else kwargs.pop("config")
+        )
         self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
@@ -6727,14 +6745,16 @@ class NetworkServiceDesignVersionsOperations:
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.hybridnetwork.aio.HybridNetworkClient`'s
+        :class:`~azure.mgmt.hybridnetwork.aio.HybridNetworkManagementClient`'s
         :attr:`network_service_design_versions` attribute.
     """
 
     def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client: AsyncPipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: HybridNetworkClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._config: HybridNetworkManagementClientConfiguration = (
+            input_args.pop(0) if input_args else kwargs.pop("config")
+        )
         self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
@@ -7854,14 +7874,16 @@ class ArtifactStoresOperations:  # pylint: disable=too-many-public-methods
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.hybridnetwork.aio.HybridNetworkClient`'s
+        :class:`~azure.mgmt.hybridnetwork.aio.HybridNetworkManagementClient`'s
         :attr:`artifact_stores` attribute.
     """
 
     def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client: AsyncPipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: HybridNetworkClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._config: HybridNetworkManagementClientConfiguration = (
+            input_args.pop(0) if input_args else kwargs.pop("config")
+        )
         self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
@@ -10033,14 +10055,16 @@ class ProxyArtifactOperations:
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.hybridnetwork.aio.HybridNetworkClient`'s
+        :class:`~azure.mgmt.hybridnetwork.aio.HybridNetworkManagementClient`'s
         :attr:`proxy_artifact` attribute.
     """
 
     def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client: AsyncPipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: HybridNetworkClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._config: HybridNetworkManagementClientConfiguration = (
+            input_args.pop(0) if input_args else kwargs.pop("config")
+        )
         self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
@@ -10543,14 +10567,16 @@ class ArtifactManifestsOperations:
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.hybridnetwork.aio.HybridNetworkClient`'s
+        :class:`~azure.mgmt.hybridnetwork.aio.HybridNetworkManagementClient`'s
         :attr:`artifact_manifests` attribute.
     """
 
     def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client: AsyncPipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: HybridNetworkClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._config: HybridNetworkManagementClientConfiguration = (
+            input_args.pop(0) if input_args else kwargs.pop("config")
+        )
         self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
@@ -11694,14 +11720,16 @@ class SitesOperations:
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.hybridnetwork.aio.HybridNetworkClient`'s
+        :class:`~azure.mgmt.hybridnetwork.aio.HybridNetworkManagementClient`'s
         :attr:`sites` attribute.
     """
 
     def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client: AsyncPipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: HybridNetworkClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._config: HybridNetworkManagementClientConfiguration = (
+            input_args.pop(0) if input_args else kwargs.pop("config")
+        )
         self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
@@ -12471,14 +12499,16 @@ class SiteNetworkServicesOperations:
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.hybridnetwork.aio.HybridNetworkClient`'s
+        :class:`~azure.mgmt.hybridnetwork.aio.HybridNetworkManagementClient`'s
         :attr:`site_network_services` attribute.
     """
 
     def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client: AsyncPipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: HybridNetworkClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._config: HybridNetworkManagementClientConfiguration = (
+            input_args.pop(0) if input_args else kwargs.pop("config")
+        )
         self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 

@@ -18,8 +18,8 @@ if TYPE_CHECKING:
     from azure.core.credentials_async import AsyncTokenCredential
 
 
-class HybridNetworkClientConfiguration:  # pylint: disable=too-many-instance-attributes
-    """Configuration for HybridNetworkClient.
+class HybridNetworkManagementClientConfiguration:  # pylint: disable=too-many-instance-attributes,name-too-long
+    """Configuration for HybridNetworkManagementClient.
 
     Note that all parameters used to create this instance are saved as instance
     attributes.

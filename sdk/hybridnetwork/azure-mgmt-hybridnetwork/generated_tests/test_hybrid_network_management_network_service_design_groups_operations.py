@@ -6,7 +6,7 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 import pytest
-from azure.mgmt.hybridnetwork import HybridNetworkClient
+from azure.mgmt.hybridnetwork import HybridNetworkManagementClient
 
 from devtools_testutils import AzureMgmtRecordedTestCase, RandomNameResourceGroupPreparer, recorded_by_proxy
 
@@ -14,16 +14,17 @@ AZURE_LOCATION = "eastus"
 
 
 @pytest.mark.skip("you may need to update the auto-generated test case before run it")
-class TestHybridNetworkNetworkFunctionsOperations(AzureMgmtRecordedTestCase):
+class TestHybridNetworkManagementNetworkServiceDesignGroupsOperations(AzureMgmtRecordedTestCase):
     def setup_method(self, method):
-        self.client = self.create_mgmt_client(HybridNetworkClient)
+        self.client = self.create_mgmt_client(HybridNetworkManagementClient)
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_network_functions_get(self, resource_group):
-        response = self.client.network_functions.get(
+    def test_network_service_design_groups_get(self, resource_group):
+        response = self.client.network_service_design_groups.get(
             resource_group_name=resource_group.name,
-            network_function_name="str",
+            publisher_name="str",
+            network_service_design_group_name="str",
         )
 
         # please add some check logic here by yourself
@@ -31,22 +32,16 @@ class TestHybridNetworkNetworkFunctionsOperations(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_network_functions_begin_create_or_update(self, resource_group):
-        response = self.client.network_functions.begin_create_or_update(
+    def test_network_service_design_groups_begin_create_or_update(self, resource_group):
+        response = self.client.network_service_design_groups.begin_create_or_update(
             resource_group_name=resource_group.name,
-            network_function_name="str",
+            publisher_name="str",
+            network_service_design_group_name="str",
             parameters={
                 "location": "str",
-                "etag": "str",
                 "id": "str",
-                "identity": {
-                    "type": "str",
-                    "principalId": "str",
-                    "tenantId": "str",
-                    "userAssignedIdentities": {"str": {"clientId": "str", "principalId": "str"}},
-                },
                 "name": "str",
-                "properties": "network_function_properties_format",
+                "properties": {"description": "str", "provisioningState": "str"},
                 "systemData": {
                     "createdAt": "2020-02-20 00:00:00",
                     "createdBy": "str",
@@ -65,10 +60,11 @@ class TestHybridNetworkNetworkFunctionsOperations(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_network_functions_update_tags(self, resource_group):
-        response = self.client.network_functions.update_tags(
+    def test_network_service_design_groups_update(self, resource_group):
+        response = self.client.network_service_design_groups.update(
             resource_group_name=resource_group.name,
-            network_function_name="str",
+            publisher_name="str",
+            network_service_design_group_name="str",
             parameters={"tags": {"str": "str"}},
         )
 
@@ -77,10 +73,11 @@ class TestHybridNetworkNetworkFunctionsOperations(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_network_functions_begin_delete(self, resource_group):
-        response = self.client.network_functions.begin_delete(
+    def test_network_service_design_groups_begin_delete(self, resource_group):
+        response = self.client.network_service_design_groups.begin_delete(
             resource_group_name=resource_group.name,
-            network_function_name="str",
+            publisher_name="str",
+            network_service_design_group_name="str",
         ).result()  # call '.result()' to poll until service return final result
 
         # please add some check logic here by yourself
@@ -88,38 +85,11 @@ class TestHybridNetworkNetworkFunctionsOperations(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_network_functions_list_by_resource_group(self, resource_group):
-        response = self.client.network_functions.list_by_resource_group(
+    def test_network_service_design_groups_list_by_publisher(self, resource_group):
+        response = self.client.network_service_design_groups.list_by_publisher(
             resource_group_name=resource_group.name,
+            publisher_name="str",
         )
         result = [r for r in response]
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_network_functions_list_by_subscription(self, resource_group):
-        response = self.client.network_functions.list_by_subscription()
-        result = [r for r in response]
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_network_functions_begin_execute_request(self, resource_group):
-        response = self.client.network_functions.begin_execute_request(
-            resource_group_name=resource_group.name,
-            network_function_name="str",
-            parameters={
-                "requestMetadata": {
-                    "httpMethod": "str",
-                    "relativePath": "str",
-                    "serializedBody": "str",
-                    "apiVersion": "str",
-                },
-                "serviceEndpoint": "str",
-            },
-        ).result()  # call '.result()' to poll until service return final result
-
         # please add some check logic here by yourself
         # ...

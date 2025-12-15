@@ -6,7 +6,7 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 import pytest
-from azure.mgmt.hybridnetwork.aio import HybridNetworkClient
+from azure.mgmt.hybridnetwork.aio import HybridNetworkManagementClient
 
 from devtools_testutils import AzureMgmtRecordedTestCase, RandomNameResourceGroupPreparer
 from devtools_testutils.aio import recorded_by_proxy_async
@@ -15,18 +15,17 @@ AZURE_LOCATION = "eastus"
 
 
 @pytest.mark.skip("you may need to update the auto-generated test case before run it")
-class TestHybridNetworkArtifactManifestsOperationsAsync(AzureMgmtRecordedTestCase):
+class TestHybridNetworkManagementConfigurationGroupSchemasOperationsAsync(AzureMgmtRecordedTestCase):
     def setup_method(self, method):
-        self.client = self.create_mgmt_client(HybridNetworkClient, is_async=True)
+        self.client = self.create_mgmt_client(HybridNetworkManagementClient, is_async=True)
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_artifact_manifests_get(self, resource_group):
-        response = await self.client.artifact_manifests.get(
+    async def test_configuration_group_schemas_get(self, resource_group):
+        response = await self.client.configuration_group_schemas.get(
             resource_group_name=resource_group.name,
             publisher_name="str",
-            artifact_store_name="str",
-            artifact_manifest_name="str",
+            configuration_group_schema_name="str",
         )
 
         # please add some check logic here by yourself
@@ -34,21 +33,21 @@ class TestHybridNetworkArtifactManifestsOperationsAsync(AzureMgmtRecordedTestCas
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_artifact_manifests_begin_create_or_update(self, resource_group):
+    async def test_configuration_group_schemas_begin_create_or_update(self, resource_group):
         response = await (
-            await self.client.artifact_manifests.begin_create_or_update(
+            await self.client.configuration_group_schemas.begin_create_or_update(
                 resource_group_name=resource_group.name,
                 publisher_name="str",
-                artifact_store_name="str",
-                artifact_manifest_name="str",
+                configuration_group_schema_name="str",
                 parameters={
                     "location": "str",
                     "id": "str",
                     "name": "str",
                     "properties": {
-                        "artifactManifestState": "str",
-                        "artifacts": [{"artifactName": "str", "artifactType": "str", "artifactVersion": "str"}],
+                        "description": "str",
                         "provisioningState": "str",
+                        "schemaDefinition": "str",
+                        "versionState": "str",
                     },
                     "systemData": {
                         "createdAt": "2020-02-20 00:00:00",
@@ -69,12 +68,11 @@ class TestHybridNetworkArtifactManifestsOperationsAsync(AzureMgmtRecordedTestCas
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_artifact_manifests_update(self, resource_group):
-        response = await self.client.artifact_manifests.update(
+    async def test_configuration_group_schemas_update(self, resource_group):
+        response = await self.client.configuration_group_schemas.update(
             resource_group_name=resource_group.name,
             publisher_name="str",
-            artifact_store_name="str",
-            artifact_manifest_name="str",
+            configuration_group_schema_name="str",
             parameters={"tags": {"str": "str"}},
         )
 
@@ -83,13 +81,12 @@ class TestHybridNetworkArtifactManifestsOperationsAsync(AzureMgmtRecordedTestCas
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_artifact_manifests_begin_delete(self, resource_group):
+    async def test_configuration_group_schemas_begin_delete(self, resource_group):
         response = await (
-            await self.client.artifact_manifests.begin_delete(
+            await self.client.configuration_group_schemas.begin_delete(
                 resource_group_name=resource_group.name,
                 publisher_name="str",
-                artifact_store_name="str",
-                artifact_manifest_name="str",
+                configuration_group_schema_name="str",
             )
         ).result()  # call '.result()' to poll until service return final result
 
@@ -98,11 +95,10 @@ class TestHybridNetworkArtifactManifestsOperationsAsync(AzureMgmtRecordedTestCas
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_artifact_manifests_list_by_artifact_store(self, resource_group):
-        response = self.client.artifact_manifests.list_by_artifact_store(
+    async def test_configuration_group_schemas_list_by_publisher(self, resource_group):
+        response = self.client.configuration_group_schemas.list_by_publisher(
             resource_group_name=resource_group.name,
             publisher_name="str",
-            artifact_store_name="str",
         )
         result = [r async for r in response]
         # please add some check logic here by yourself
@@ -110,27 +106,13 @@ class TestHybridNetworkArtifactManifestsOperationsAsync(AzureMgmtRecordedTestCas
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_artifact_manifests_list_credential(self, resource_group):
-        response = await self.client.artifact_manifests.list_credential(
-            resource_group_name=resource_group.name,
-            publisher_name="str",
-            artifact_store_name="str",
-            artifact_manifest_name="str",
-        )
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_artifact_manifests_begin_update_state(self, resource_group):
+    async def test_configuration_group_schemas_begin_update_state(self, resource_group):
         response = await (
-            await self.client.artifact_manifests.begin_update_state(
+            await self.client.configuration_group_schemas.begin_update_state(
                 resource_group_name=resource_group.name,
                 publisher_name="str",
-                artifact_store_name="str",
-                artifact_manifest_name="str",
-                parameters={"artifactManifestState": "str"},
+                configuration_group_schema_name="str",
+                parameters={"versionState": "str"},
             )
         ).result()  # call '.result()' to poll until service return final result
 

@@ -8,7 +8,7 @@
 
 from azure.identity import DefaultAzureCredential
 
-from azure.mgmt.hybridnetwork import HybridNetworkClient
+from azure.mgmt.hybridnetwork import HybridNetworkManagementClient
 
 """
 # PREREQUISITES
@@ -25,7 +25,7 @@ from azure.mgmt.hybridnetwork import HybridNetworkClient
 
 
 def main():
-    client = HybridNetworkClient(
+    client = HybridNetworkManagementClient(
         credential=DefaultAzureCredential(),
         subscription_id="SUBSCRIPTION_ID",
     )

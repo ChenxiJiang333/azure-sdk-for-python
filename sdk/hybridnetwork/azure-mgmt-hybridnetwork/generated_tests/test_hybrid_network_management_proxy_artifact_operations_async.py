@@ -6,53 +6,56 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 import pytest
-from azure.mgmt.hybridnetwork import HybridNetworkClient
+from azure.mgmt.hybridnetwork.aio import HybridNetworkManagementClient
 
-from devtools_testutils import AzureMgmtRecordedTestCase, RandomNameResourceGroupPreparer, recorded_by_proxy
+from devtools_testutils import AzureMgmtRecordedTestCase, RandomNameResourceGroupPreparer
+from devtools_testutils.aio import recorded_by_proxy_async
 
 AZURE_LOCATION = "eastus"
 
 
 @pytest.mark.skip("you may need to update the auto-generated test case before run it")
-class TestHybridNetworkProxyArtifactOperations(AzureMgmtRecordedTestCase):
+class TestHybridNetworkManagementProxyArtifactOperationsAsync(AzureMgmtRecordedTestCase):
     def setup_method(self, method):
-        self.client = self.create_mgmt_client(HybridNetworkClient)
+        self.client = self.create_mgmt_client(HybridNetworkManagementClient, is_async=True)
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_proxy_artifact_list(self, resource_group):
+    @recorded_by_proxy_async
+    async def test_proxy_artifact_list(self, resource_group):
         response = self.client.proxy_artifact.list(
             resource_group_name=resource_group.name,
             publisher_name="str",
             artifact_store_name="str",
         )
-        result = [r for r in response]
+        result = [r async for r in response]
         # please add some check logic here by yourself
         # ...
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_proxy_artifact_get(self, resource_group):
+    @recorded_by_proxy_async
+    async def test_proxy_artifact_get(self, resource_group):
         response = self.client.proxy_artifact.get(
             resource_group_name=resource_group.name,
             publisher_name="str",
             artifact_store_name="str",
             artifact_name="str",
         )
-        result = [r for r in response]
+        result = [r async for r in response]
         # please add some check logic here by yourself
         # ...
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_proxy_artifact_begin_update_state(self, resource_group):
-        response = self.client.proxy_artifact.begin_update_state(
-            resource_group_name=resource_group.name,
-            publisher_name="str",
-            artifact_store_name="str",
-            artifact_version_name="str",
-            parameters={"properties": {"artifactState": "str"}},
-            artifact_name="str",
+    @recorded_by_proxy_async
+    async def test_proxy_artifact_begin_update_state(self, resource_group):
+        response = await (
+            await self.client.proxy_artifact.begin_update_state(
+                resource_group_name=resource_group.name,
+                publisher_name="str",
+                artifact_store_name="str",
+                artifact_version_name="str",
+                parameters={"properties": {"artifactState": "str"}},
+                artifact_name="str",
+            )
         ).result()  # call '.result()' to poll until service return final result
 
         # please add some check logic here by yourself

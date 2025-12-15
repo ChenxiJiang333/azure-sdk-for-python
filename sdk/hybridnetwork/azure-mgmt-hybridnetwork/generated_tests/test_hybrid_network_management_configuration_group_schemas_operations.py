@@ -6,7 +6,7 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 import pytest
-from azure.mgmt.hybridnetwork import HybridNetworkClient
+from azure.mgmt.hybridnetwork import HybridNetworkManagementClient
 
 from devtools_testutils import AzureMgmtRecordedTestCase, RandomNameResourceGroupPreparer, recorded_by_proxy
 
@@ -14,16 +14,17 @@ AZURE_LOCATION = "eastus"
 
 
 @pytest.mark.skip("you may need to update the auto-generated test case before run it")
-class TestHybridNetworkSitesOperations(AzureMgmtRecordedTestCase):
+class TestHybridNetworkManagementConfigurationGroupSchemasOperations(AzureMgmtRecordedTestCase):
     def setup_method(self, method):
-        self.client = self.create_mgmt_client(HybridNetworkClient)
+        self.client = self.create_mgmt_client(HybridNetworkManagementClient)
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_sites_get(self, resource_group):
-        response = self.client.sites.get(
+    def test_configuration_group_schemas_get(self, resource_group):
+        response = self.client.configuration_group_schemas.get(
             resource_group_name=resource_group.name,
-            site_name="str",
+            publisher_name="str",
+            configuration_group_schema_name="str",
         )
 
         # please add some check logic here by yourself
@@ -31,18 +32,20 @@ class TestHybridNetworkSitesOperations(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_sites_begin_create_or_update(self, resource_group):
-        response = self.client.sites.begin_create_or_update(
+    def test_configuration_group_schemas_begin_create_or_update(self, resource_group):
+        response = self.client.configuration_group_schemas.begin_create_or_update(
             resource_group_name=resource_group.name,
-            site_name="str",
+            publisher_name="str",
+            configuration_group_schema_name="str",
             parameters={
                 "location": "str",
                 "id": "str",
                 "name": "str",
                 "properties": {
-                    "nfvis": ["nfvis"],
+                    "description": "str",
                     "provisioningState": "str",
-                    "siteNetworkServiceReferences": [{"id": "str"}],
+                    "schemaDefinition": "str",
+                    "versionState": "str",
                 },
                 "systemData": {
                     "createdAt": "2020-02-20 00:00:00",
@@ -62,10 +65,11 @@ class TestHybridNetworkSitesOperations(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_sites_update_tags(self, resource_group):
-        response = self.client.sites.update_tags(
+    def test_configuration_group_schemas_update(self, resource_group):
+        response = self.client.configuration_group_schemas.update(
             resource_group_name=resource_group.name,
-            site_name="str",
+            publisher_name="str",
+            configuration_group_schema_name="str",
             parameters={"tags": {"str": "str"}},
         )
 
@@ -74,10 +78,11 @@ class TestHybridNetworkSitesOperations(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_sites_begin_delete(self, resource_group):
-        response = self.client.sites.begin_delete(
+    def test_configuration_group_schemas_begin_delete(self, resource_group):
+        response = self.client.configuration_group_schemas.begin_delete(
             resource_group_name=resource_group.name,
-            site_name="str",
+            publisher_name="str",
+            configuration_group_schema_name="str",
         ).result()  # call '.result()' to poll until service return final result
 
         # please add some check logic here by yourself
@@ -85,9 +90,10 @@ class TestHybridNetworkSitesOperations(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_sites_list_by_resource_group(self, resource_group):
-        response = self.client.sites.list_by_resource_group(
+    def test_configuration_group_schemas_list_by_publisher(self, resource_group):
+        response = self.client.configuration_group_schemas.list_by_publisher(
             resource_group_name=resource_group.name,
+            publisher_name="str",
         )
         result = [r for r in response]
         # please add some check logic here by yourself
@@ -95,8 +101,13 @@ class TestHybridNetworkSitesOperations(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_sites_list_by_subscription(self, resource_group):
-        response = self.client.sites.list_by_subscription()
-        result = [r for r in response]
+    def test_configuration_group_schemas_begin_update_state(self, resource_group):
+        response = self.client.configuration_group_schemas.begin_update_state(
+            resource_group_name=resource_group.name,
+            publisher_name="str",
+            configuration_group_schema_name="str",
+            parameters={"versionState": "str"},
+        ).result()  # call '.result()' to poll until service return final result
+
         # please add some check logic here by yourself
         # ...
