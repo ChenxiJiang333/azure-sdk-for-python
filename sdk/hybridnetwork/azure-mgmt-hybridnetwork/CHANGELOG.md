@@ -1,5 +1,36 @@
 # Release History
 
+## 3.0.0 (2025-12-15)
+
+### Features Added
+
+  - Added operation ArtifactStoresOperations.begin_add_network_fabric_controller_end_points
+  - Added operation ArtifactStoresOperations.begin_approve_private_end_points
+  - Added operation ArtifactStoresOperations.begin_delete_network_fabric_controller_end_points
+  - Added operation ArtifactStoresOperations.begin_list_network_fabric_controller_private_end_points
+  - Added operation ArtifactStoresOperations.begin_list_private_end_points
+  - Added operation ArtifactStoresOperations.begin_remove_private_end_points
+  - Added operation SiteNetworkServicesOperations.begin_cancel_operation
+  - Model ArtifactStorePropertiesFormat has a new parameter backing_resource_public_network_access
+
+### Breaking Changes
+
+  - Parameter value of model ArtifactManifestListResult is now required
+  - Parameter value of model ArtifactStoreListResult is now required
+  - Parameter value of model ComponentListResult is now required
+  - Parameter value of model ConfigurationGroupSchemaListResult is now required
+  - Parameter value of model ConfigurationGroupValueListResult is now required
+  - Parameter value of model NetworkFunctionDefinitionGroupListResult is now required
+  - Parameter value of model NetworkFunctionDefinitionVersionListResult is now required
+  - Parameter value of model NetworkFunctionListResult is now required
+  - Parameter value of model NetworkServiceDesignGroupListResult is now required
+  - Parameter value of model NetworkServiceDesignVersionListResult is now required
+  - Parameter value of model ProxyArtifactOverviewListResult is now required
+  - Parameter value of model ProxyArtifactVersionsOverviewListResult is now required
+  - Parameter value of model PublisherListResult is now required
+  - Parameter value of model SiteListResult is now required
+  - Parameter value of model SiteNetworkServiceListResult is now required
+
 ## 2.0.0 (2023-11-20)
 
 ### Features Added

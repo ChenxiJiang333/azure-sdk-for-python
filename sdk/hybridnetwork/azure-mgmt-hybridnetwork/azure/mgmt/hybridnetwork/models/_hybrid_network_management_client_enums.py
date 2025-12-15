@@ -92,11 +92,11 @@ class AzureOperatorNexusArtifactType(str, Enum, metaclass=CaseInsensitiveEnumMet
     ARM_TEMPLATE = "ArmTemplate"
 
 
-class ConfigurationGenerationType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """The configuration generation type."""
+class BackingResourcePublicNetworkAccess(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """The backing resource network access type."""
 
-    UNKNOWN = "Unknown"
-    HANDLEBAR_TEMPLATE = "HandlebarTemplate"
+    ENABLED = "Enabled"
+    DISABLED = "Disabled"
 
 
 class ConfigurationGroupValueConfigurationType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
@@ -150,6 +150,13 @@ class IdType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     SECRET = "Secret"
 
 
+class LongRunningOperation(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """The type of long-running operation the user wants to cancel, such as 'Put'."""
+
+    UNKNOWN = "Unknown"
+    PUT = "Put"
+
+
 class ManagedServiceIdentityType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Type of managed service identity (where both SystemAssigned and UserAssigned types are
     allowed).
@@ -177,7 +184,7 @@ class NetworkFunctionType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     CONTAINERIZED_NETWORK_FUNCTION = "ContainerizedNetworkFunction"
 
 
-class NFVIType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+class NfviType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The NFVI type."""
 
     UNKNOWN = "Unknown"
@@ -226,6 +233,7 @@ class ProvisioningState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     CANCELED = "Canceled"
     DELETED = "Deleted"
     CONVERGING = "Converging"
+    CANCELLING = "Cancelling"
 
 
 class PublisherScope(str, Enum, metaclass=CaseInsensitiveEnumMeta):
