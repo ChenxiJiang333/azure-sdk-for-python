@@ -4,14 +4,11 @@
 
 ### Breaing Changes
 
-  - Renamed client name `BillingBenefitsRP` to BillingBenefitsClient
-  - Renamed enum value `BillingPlan.P1_M` to `P1M`
-  - Renamed enum value `Term.P1_Y` to `P1Y`
-  - Renamed enum value `Term.P3_Y` to `P3Y`
-  - Renamed enum value `Term.P5_Y` to `P5Y`
-  - Renamed method `SavingsPlanOperations.update` to `begin_update`
-  - Renamed operation group `BillingBenefitsRPOperationsMixin` to `BenefitOperations`
+  - Method `BillingBenefitsRP.__init__` inserted a `positional_or_keyword` parameter `subscription_id`
   - Rnamed model `SavingsPlanPurchaseValidateRequest` to `BenefitValidateRequest`
+  - Renamed method `SavingsPlanOperations.update` to `begin_update`
+  - Replace method `BillingBenefitsRP.validate_purchase` with `BenefitOperations.validate`
+  - Renamed operation group `BillingBenefitsRPOperationsMixin` to `BenefitOperations`
 
   - Model `PurchaseRequest` moved instance variable `display_name`/`billing_scope_id`/`term`/`billing_plan`/`applied_scope_type`/`commitment`/`effective_date_time`/`renew`/`applied_scope_properties` under property `properties`
   - Model `ReservationOrderAliasRequest` moved instance variable `display_name`/`billing_scope_id`/`term`/`billing_plan`/`applied_scope_type`/`applied_scope_properties`/`quantity`/`renew`/`reserved_resource_type`/`review_date_time`/`reserved_resource_properties` under property `properties`
