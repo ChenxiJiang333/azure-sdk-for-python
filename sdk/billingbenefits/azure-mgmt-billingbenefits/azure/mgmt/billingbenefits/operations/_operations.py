@@ -33,7 +33,7 @@ from azure.mgmt.core.exceptions import ARMErrorFormat
 from azure.mgmt.core.polling.arm_polling import ARMPolling
 
 from .. import models as _models
-from .._configuration import BillingBenefitsClientConfiguration
+from .._configuration import BillingBenefitsRPConfiguration
 from .._utils.model_base import SdkJSONEncoder, _deserialize, _failsafe_deserialize
 from .._utils.serialization import Deserializer, Serializer
 
@@ -1700,14 +1700,14 @@ class Operations:
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.billingbenefits.BillingBenefitsClient`'s
+        :class:`~azure.mgmt.billingbenefits.BillingBenefitsRP`'s
         :attr:`operations` attribute.
     """
 
     def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client: PipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: BillingBenefitsClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._config: BillingBenefitsRPConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
         self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
@@ -1804,14 +1804,14 @@ class DiscountsOperations:
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.billingbenefits.BillingBenefitsClient`'s
+        :class:`~azure.mgmt.billingbenefits.BillingBenefitsRP`'s
         :attr:`discounts` attribute.
     """
 
     def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client: PipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: BillingBenefitsClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._config: BillingBenefitsRPConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
         self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
@@ -2567,14 +2567,14 @@ class ContributorsOperationGroupOperations:
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.billingbenefits.BillingBenefitsClient`'s
+        :class:`~azure.mgmt.billingbenefits.BillingBenefitsRP`'s
         :attr:`contributors_operation_group` attribute.
     """
 
     def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client: PipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: BillingBenefitsClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._config: BillingBenefitsRPConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
         self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
@@ -2680,14 +2680,14 @@ class CreditsOperationGroupOperations:
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.billingbenefits.BillingBenefitsClient`'s
+        :class:`~azure.mgmt.billingbenefits.BillingBenefitsRP`'s
         :attr:`credits_operation_group` attribute.
     """
 
     def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client: PipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: BillingBenefitsClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._config: BillingBenefitsRPConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
         self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
@@ -2788,14 +2788,14 @@ class ConditionalCreditsOperationGroupOperations:  # pylint: disable=name-too-lo
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.billingbenefits.BillingBenefitsClient`'s
+        :class:`~azure.mgmt.billingbenefits.BillingBenefitsRP`'s
         :attr:`conditional_credits_operation_group` attribute.
     """
 
     def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client: PipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: BillingBenefitsClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._config: BillingBenefitsRPConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
         self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
@@ -2896,14 +2896,14 @@ class ConditionalCreditContributorsOperationGroupOperations:  # pylint: disable=
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.billingbenefits.BillingBenefitsClient`'s
+        :class:`~azure.mgmt.billingbenefits.BillingBenefitsRP`'s
         :attr:`conditional_credit_contributors_operation_group` attribute.
     """
 
     def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client: PipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: BillingBenefitsClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._config: BillingBenefitsRPConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
         self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
@@ -3010,14 +3010,14 @@ class MaccsOperations:
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.billingbenefits.BillingBenefitsClient`'s
+        :class:`~azure.mgmt.billingbenefits.BillingBenefitsRP`'s
         :attr:`maccs` attribute.
     """
 
     def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client: PipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: BillingBenefitsClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._config: BillingBenefitsRPConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
         self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
@@ -4332,14 +4332,14 @@ class ContributorsOperations:
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.billingbenefits.BillingBenefitsClient`'s
+        :class:`~azure.mgmt.billingbenefits.BillingBenefitsRP`'s
         :attr:`contributors` attribute.
     """
 
     def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client: PipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: BillingBenefitsClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._config: BillingBenefitsRPConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
         self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
@@ -4521,14 +4521,14 @@ class CreditsOperations:
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.billingbenefits.BillingBenefitsClient`'s
+        :class:`~azure.mgmt.billingbenefits.BillingBenefitsRP`'s
         :attr:`credits` attribute.
     """
 
     def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client: PipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: BillingBenefitsClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._config: BillingBenefitsRPConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
         self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
@@ -5526,14 +5526,14 @@ class ConditionalCreditsOperations:
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.billingbenefits.BillingBenefitsClient`'s
+        :class:`~azure.mgmt.billingbenefits.BillingBenefitsRP`'s
         :attr:`conditional_credits` attribute.
     """
 
     def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client: PipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: BillingBenefitsClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._config: BillingBenefitsRPConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
         self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
@@ -6532,14 +6532,14 @@ class ConditionalCreditContributorsOperations:
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.billingbenefits.BillingBenefitsClient`'s
+        :class:`~azure.mgmt.billingbenefits.BillingBenefitsRP`'s
         :attr:`conditional_credit_contributors` attribute.
     """
 
     def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client: PipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: BillingBenefitsClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._config: BillingBenefitsRPConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
         self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
@@ -6723,14 +6723,14 @@ class SavingsPlanOrderAliasOperations:
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.billingbenefits.BillingBenefitsClient`'s
+        :class:`~azure.mgmt.billingbenefits.BillingBenefitsRP`'s
         :attr:`savings_plan_order_alias` attribute.
     """
 
     def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client: PipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: BillingBenefitsClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._config: BillingBenefitsRPConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
         self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
@@ -7028,14 +7028,14 @@ class SavingsPlanOrderOperations:
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.billingbenefits.BillingBenefitsClient`'s
+        :class:`~azure.mgmt.billingbenefits.BillingBenefitsRP`'s
         :attr:`savings_plan_order` attribute.
     """
 
     def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client: PipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: BillingBenefitsClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._config: BillingBenefitsRPConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
         self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
@@ -7261,14 +7261,14 @@ class SavingsPlanOperations:
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.billingbenefits.BillingBenefitsClient`'s
+        :class:`~azure.mgmt.billingbenefits.BillingBenefitsRP`'s
         :attr:`savings_plan` attribute.
     """
 
     def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client: PipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: BillingBenefitsClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._config: BillingBenefitsRPConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
         self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
@@ -7953,14 +7953,14 @@ class ReservationOrderAliasOperations:
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.billingbenefits.BillingBenefitsClient`'s
+        :class:`~azure.mgmt.billingbenefits.BillingBenefitsRP`'s
         :attr:`reservation_order_alias` attribute.
     """
 
     def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client: PipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: BillingBenefitsClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._config: BillingBenefitsRPConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
         self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
@@ -8251,14 +8251,14 @@ class DiscountOperations:
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.billingbenefits.BillingBenefitsClient`'s
+        :class:`~azure.mgmt.billingbenefits.BillingBenefitsRP`'s
         :attr:`discount` attribute.
     """
 
     def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client: PipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: BillingBenefitsClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._config: BillingBenefitsRPConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
         self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
@@ -8574,14 +8574,14 @@ class BenefitOperations:
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.billingbenefits.BillingBenefitsClient`'s
+        :class:`~azure.mgmt.billingbenefits.BillingBenefitsRP`'s
         :attr:`benefit` attribute.
     """
 
     def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client: PipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: BillingBenefitsClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._config: BillingBenefitsRPConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
         self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
@@ -8716,14 +8716,14 @@ class SellerResourceOperations:
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.billingbenefits.BillingBenefitsClient`'s
+        :class:`~azure.mgmt.billingbenefits.BillingBenefitsRP`'s
         :attr:`seller_resource` attribute.
     """
 
     def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client: PipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: BillingBenefitsClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._config: BillingBenefitsRPConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
         self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
@@ -8854,14 +8854,14 @@ class ApplicableMaccsOperations:
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.billingbenefits.BillingBenefitsClient`'s
+        :class:`~azure.mgmt.billingbenefits.BillingBenefitsRP`'s
         :attr:`applicable_maccs` attribute.
     """
 
     def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client: PipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: BillingBenefitsClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._config: BillingBenefitsRPConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
         self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
@@ -8962,14 +8962,14 @@ class SourcesOperations:
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.billingbenefits.BillingBenefitsClient`'s
+        :class:`~azure.mgmt.billingbenefits.BillingBenefitsRP`'s
         :attr:`sources` attribute.
     """
 
     def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client: PipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: BillingBenefitsClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._config: BillingBenefitsRPConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
         self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 

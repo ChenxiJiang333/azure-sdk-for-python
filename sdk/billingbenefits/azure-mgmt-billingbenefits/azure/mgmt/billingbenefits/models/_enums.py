@@ -49,7 +49,7 @@ class BenefitType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 class BillingPlan(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Represents the billing plan in ISO 8601 format. Required only for monthly billing plans."""
 
-    P1M = "P1M"
+    P1_M = "P1M"
 
 
 class CommitmentGrain(str, Enum, metaclass=CaseInsensitiveEnumMeta):
@@ -401,6 +401,6 @@ class SkuTier(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 class Term(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Represent benefit term in ISO 8601 format."""
 
-    P1Y = "P1Y"
-    P3Y = "P3Y"
-    P5Y = "P5Y"
+    P1_Y = "P1Y"
+    P3_Y = "P3Y"
+    P5_Y = "P5Y"

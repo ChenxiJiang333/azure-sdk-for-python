@@ -8,7 +8,7 @@
 
 from azure.identity import DefaultAzureCredential
 
-from azure.mgmt.billingbenefits import BillingBenefitsClient
+from azure.mgmt.billingbenefits import BillingBenefitsRP
 
 """
 # PREREQUISITES
@@ -25,7 +25,7 @@ from azure.mgmt.billingbenefits import BillingBenefitsClient
 
 
 def main():
-    client = BillingBenefitsClient(
+    client = BillingBenefitsRP(
         credential=DefaultAzureCredential(),
         subscription_id="SUBSCRIPTION_ID",
     )

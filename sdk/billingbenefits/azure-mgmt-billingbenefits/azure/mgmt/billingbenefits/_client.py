@@ -17,7 +17,7 @@ from azure.mgmt.core import ARMPipelineClient
 from azure.mgmt.core.policies import ARMAutoResourceProviderRegistrationPolicy
 from azure.mgmt.core.tools import get_arm_endpoints
 
-from ._configuration import BillingBenefitsClientConfiguration
+from ._configuration import BillingBenefitsRPConfiguration
 from ._utils.serialization import Deserializer, Serializer
 from .operations import (
     ApplicableMaccsOperations,
@@ -47,7 +47,7 @@ if TYPE_CHECKING:
     from azure.core.credentials import TokenCredential
 
 
-class BillingBenefitsClient:  # pylint: disable=too-many-instance-attributes
+class BillingBenefitsRP:  # pylint: disable=too-many-instance-attributes
     """Azure Benefits RP let users create and manage benefits.
 
     :ivar operations: Operations operations
@@ -135,7 +135,7 @@ class BillingBenefitsClient:  # pylint: disable=too-many-instance-attributes
         if not base_url:
             base_url = _endpoints["resource_manager"]
         credential_scopes = kwargs.pop("credential_scopes", _endpoints["credential_scopes"])
-        self._config = BillingBenefitsClientConfiguration(
+        self._config = BillingBenefitsRPConfiguration(
             credential=credential,
             subscription_id=subscription_id,
             base_url=cast(str, base_url),

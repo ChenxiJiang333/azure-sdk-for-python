@@ -1,7 +1,7 @@
 {
   "azure.mgmt.billingbenefits": {
     "class_nodes": {
-      "BillingBenefitsClient": {
+      "BillingBenefitsRP": {
         "type": null,
         "methods": {
           "__init__": {
@@ -142,7 +142,7 @@
   },
   "azure.mgmt.billingbenefits.aio": {
     "class_nodes": {
-      "BillingBenefitsClient": {
+      "BillingBenefitsRP": {
         "type": null,
         "methods": {
           "__init__": {
@@ -5587,7 +5587,7 @@
         "type": "Enum",
         "methods": {},
         "properties": {
-          "P1M": "P1M"
+          "P1_M": "P1_M"
         }
       },
       "BillingPlanInformation": {
@@ -27819,9 +27819,9 @@
         "type": "Enum",
         "methods": {},
         "properties": {
-          "P1Y": "P1Y",
-          "P3Y": "P3Y",
-          "P5Y": "P5Y"
+          "P1_Y": "P1_Y",
+          "P3_Y": "P3_Y",
+          "P5_Y": "P5_Y"
         }
       },
       "TrackedResource": {
