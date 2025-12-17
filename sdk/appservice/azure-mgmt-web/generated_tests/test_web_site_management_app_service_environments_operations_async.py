@@ -71,6 +71,14 @@ class TestWebSiteManagementAppServiceEnvironmentsOperationsAsync(AzureMgmtRecord
                         "name": "str",
                         "provisioningDetails": "str",
                         "provisioningState": "str",
+                        "systemData": {
+                            "createdAt": "2020-02-20 00:00:00",
+                            "createdBy": "str",
+                            "createdByType": "str",
+                            "lastModifiedAt": "2020-02-20 00:00:00",
+                            "lastModifiedBy": "str",
+                            "lastModifiedByType": "str",
+                        },
                         "type": "str",
                     },
                     "dedicatedHostCount": 0,
@@ -96,12 +104,28 @@ class TestWebSiteManagementAppServiceEnvironmentsOperationsAsync(AzureMgmtRecord
                         "linuxOutboundIpAddresses": ["str"],
                         "name": "str",
                         "remoteDebugEnabled": bool,
+                        "systemData": {
+                            "createdAt": "2020-02-20 00:00:00",
+                            "createdBy": "str",
+                            "createdByType": "str",
+                            "lastModifiedAt": "2020-02-20 00:00:00",
+                            "lastModifiedBy": "str",
+                            "lastModifiedByType": "str",
+                        },
                         "type": "str",
                         "windowsOutboundIpAddresses": ["str"],
                     },
                     "provisioningState": "str",
                     "status": "str",
                     "suspended": bool,
+                    "systemData": {
+                        "createdAt": "2020-02-20 00:00:00",
+                        "createdBy": "str",
+                        "createdByType": "str",
+                        "lastModifiedAt": "2020-02-20 00:00:00",
+                        "lastModifiedBy": "str",
+                        "lastModifiedByType": "str",
+                    },
                     "tags": {"str": "str"},
                     "type": "str",
                     "upgradeAvailability": "str",
@@ -110,20 +134,6 @@ class TestWebSiteManagementAppServiceEnvironmentsOperationsAsync(AzureMgmtRecord
                     "virtualNetwork": {"id": "str", "name": "str", "subnet": "str", "type": "str"},
                     "zoneRedundant": bool,
                 },
-                api_version="2025-03-01",
-            )
-        ).result()  # call '.result()' to poll until service return final result
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_app_service_environments_begin_delete(self, resource_group):
-        response = await (
-            await self.client.app_service_environments.begin_delete(
-                resource_group_name=resource_group.name,
-                name="str",
                 api_version="2025-03-01",
             )
         ).result()  # call '.result()' to poll until service return final result
@@ -148,6 +158,14 @@ class TestWebSiteManagementAppServiceEnvironmentsOperationsAsync(AzureMgmtRecord
                     "name": "str",
                     "provisioningDetails": "str",
                     "provisioningState": "str",
+                    "systemData": {
+                        "createdAt": "2020-02-20 00:00:00",
+                        "createdBy": "str",
+                        "createdByType": "str",
+                        "lastModifiedAt": "2020-02-20 00:00:00",
+                        "lastModifiedBy": "str",
+                        "lastModifiedByType": "str",
+                    },
                     "type": "str",
                 },
                 "dedicatedHostCount": 0,
@@ -173,6 +191,14 @@ class TestWebSiteManagementAppServiceEnvironmentsOperationsAsync(AzureMgmtRecord
                     "linuxOutboundIpAddresses": ["str"],
                     "name": "str",
                     "remoteDebugEnabled": bool,
+                    "systemData": {
+                        "createdAt": "2020-02-20 00:00:00",
+                        "createdBy": "str",
+                        "createdByType": "str",
+                        "lastModifiedAt": "2020-02-20 00:00:00",
+                        "lastModifiedBy": "str",
+                        "lastModifiedByType": "str",
+                    },
                     "type": "str",
                     "windowsOutboundIpAddresses": ["str"],
                 },
@@ -188,6 +214,20 @@ class TestWebSiteManagementAppServiceEnvironmentsOperationsAsync(AzureMgmtRecord
             },
             api_version="2025-03-01",
         )
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
+    async def test_app_service_environments_begin_delete(self, resource_group):
+        response = await (
+            await self.client.app_service_environments.begin_delete(
+                resource_group_name=resource_group.name,
+                name="str",
+                api_version="2025-03-01",
+            )
+        ).result()  # call '.result()' to poll until service return final result
 
         # please add some check logic here by yourself
         # ...
@@ -258,6 +298,14 @@ class TestWebSiteManagementAppServiceEnvironmentsOperationsAsync(AzureMgmtRecord
                 "name": "str",
                 "provisioningDetails": "str",
                 "provisioningState": "str",
+                "systemData": {
+                    "createdAt": "2020-02-20 00:00:00",
+                    "createdBy": "str",
+                    "createdByType": "str",
+                    "lastModifiedAt": "2020-02-20 00:00:00",
+                    "lastModifiedBy": "str",
+                    "lastModifiedByType": "str",
+                },
                 "type": "str",
             },
             api_version="2025-03-01",
@@ -307,6 +355,14 @@ class TestWebSiteManagementAppServiceEnvironmentsOperationsAsync(AzureMgmtRecord
                 "linuxOutboundIpAddresses": ["str"],
                 "name": "str",
                 "remoteDebugEnabled": bool,
+                "systemData": {
+                    "createdAt": "2020-02-20 00:00:00",
+                    "createdBy": "str",
+                    "createdByType": "str",
+                    "lastModifiedAt": "2020-02-20 00:00:00",
+                    "lastModifiedBy": "str",
+                    "lastModifiedByType": "str",
+                },
                 "type": "str",
                 "windowsOutboundIpAddresses": ["str"],
             },
@@ -322,19 +378,6 @@ class TestWebSiteManagementAppServiceEnvironmentsOperationsAsync(AzureMgmtRecord
         response = await self.client.app_service_environments.list_diagnostics(
             resource_group_name=resource_group.name,
             name="str",
-            api_version="2025-03-01",
-        )
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_app_service_environments_get_diagnostics_item(self, resource_group):
-        response = await self.client.app_service_environments.get_diagnostics_item(
-            resource_group_name=resource_group.name,
-            name="str",
-            diagnostics_name="str",
             api_version="2025-03-01",
         )
 
@@ -406,6 +449,14 @@ class TestWebSiteManagementAppServiceEnvironmentsOperationsAsync(AzureMgmtRecord
                         },
                         "tier": "str",
                     },
+                    "systemData": {
+                        "createdAt": "2020-02-20 00:00:00",
+                        "createdBy": "str",
+                        "createdByType": "str",
+                        "lastModifiedAt": "2020-02-20 00:00:00",
+                        "lastModifiedBy": "str",
+                        "lastModifiedByType": "str",
+                    },
                     "type": "str",
                     "workerCount": 0,
                     "workerSize": "str",
@@ -440,6 +491,14 @@ class TestWebSiteManagementAppServiceEnvironmentsOperationsAsync(AzureMgmtRecord
                     "skuCapacity": {"default": 0, "elasticMaximum": 0, "maximum": 0, "minimum": 0, "scaleType": "str"},
                     "tier": "str",
                 },
+                "systemData": {
+                    "createdAt": "2020-02-20 00:00:00",
+                    "createdBy": "str",
+                    "createdByType": "str",
+                    "lastModifiedAt": "2020-02-20 00:00:00",
+                    "lastModifiedBy": "str",
+                    "lastModifiedByType": "str",
+                },
                 "type": "str",
                 "workerCount": 0,
                 "workerSize": "str",
@@ -448,19 +507,6 @@ class TestWebSiteManagementAppServiceEnvironmentsOperationsAsync(AzureMgmtRecord
             api_version="2025-03-01",
         )
 
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_app_service_environments_list_multi_role_pool_instance_metric_definitions(self, resource_group):
-        response = self.client.app_service_environments.list_multi_role_pool_instance_metric_definitions(
-            resource_group_name=resource_group.name,
-            name="str",
-            instance="str",
-            api_version="2025-03-01",
-        )
-        result = [r async for r in response]
         # please add some check logic here by yourself
         # ...
 
@@ -485,32 +531,6 @@ class TestWebSiteManagementAppServiceEnvironmentsOperationsAsync(AzureMgmtRecord
             api_version="2025-03-01",
         )
         result = [r async for r in response]
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_app_service_environments_test_upgrade_available_notification(self, resource_group):
-        response = await self.client.app_service_environments.test_upgrade_available_notification(
-            resource_group_name=resource_group.name,
-            name="str",
-            api_version="2025-03-01",
-        )
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_app_service_environments_begin_upgrade(self, resource_group):
-        response = await (
-            await self.client.app_service_environments.begin_upgrade(
-                resource_group_name=resource_group.name,
-                name="str",
-                api_version="2025-03-01",
-            )
-        ).result()  # call '.result()' to poll until service return final result
-
         # please add some check logic here by yourself
         # ...
 
@@ -595,6 +615,14 @@ class TestWebSiteManagementAppServiceEnvironmentsOperationsAsync(AzureMgmtRecord
                         "status": "str",
                     },
                     "provisioningState": "str",
+                    "systemData": {
+                        "createdAt": "2020-02-20 00:00:00",
+                        "createdBy": "str",
+                        "createdByType": "str",
+                        "lastModifiedAt": "2020-02-20 00:00:00",
+                        "lastModifiedBy": "str",
+                        "lastModifiedByType": "str",
+                    },
                     "type": "str",
                 },
                 api_version="2025-03-01",
@@ -697,6 +725,32 @@ class TestWebSiteManagementAppServiceEnvironmentsOperationsAsync(AzureMgmtRecord
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
+    async def test_app_service_environments_test_upgrade_available_notification(self, resource_group):
+        response = await self.client.app_service_environments.test_upgrade_available_notification(
+            resource_group_name=resource_group.name,
+            name="str",
+            api_version="2025-03-01",
+        )
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
+    async def test_app_service_environments_begin_upgrade(self, resource_group):
+        response = await (
+            await self.client.app_service_environments.begin_upgrade(
+                resource_group_name=resource_group.name,
+                name="str",
+                api_version="2025-03-01",
+            )
+        ).result()  # call '.result()' to poll until service return final result
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
     async def test_app_service_environments_list_usages(self, resource_group):
         response = self.client.app_service_environments.list_usages(
             resource_group_name=resource_group.name,
@@ -762,6 +816,14 @@ class TestWebSiteManagementAppServiceEnvironmentsOperationsAsync(AzureMgmtRecord
                         },
                         "tier": "str",
                     },
+                    "systemData": {
+                        "createdAt": "2020-02-20 00:00:00",
+                        "createdBy": "str",
+                        "createdByType": "str",
+                        "lastModifiedAt": "2020-02-20 00:00:00",
+                        "lastModifiedBy": "str",
+                        "lastModifiedByType": "str",
+                    },
                     "type": "str",
                     "workerCount": 0,
                     "workerSize": "str",
@@ -797,6 +859,14 @@ class TestWebSiteManagementAppServiceEnvironmentsOperationsAsync(AzureMgmtRecord
                     "skuCapacity": {"default": 0, "elasticMaximum": 0, "maximum": 0, "minimum": 0, "scaleType": "str"},
                     "tier": "str",
                 },
+                "systemData": {
+                    "createdAt": "2020-02-20 00:00:00",
+                    "createdBy": "str",
+                    "createdByType": "str",
+                    "lastModifiedAt": "2020-02-20 00:00:00",
+                    "lastModifiedBy": "str",
+                    "lastModifiedByType": "str",
+                },
                 "type": "str",
                 "workerCount": 0,
                 "workerSize": "str",
@@ -805,20 +875,6 @@ class TestWebSiteManagementAppServiceEnvironmentsOperationsAsync(AzureMgmtRecord
             api_version="2025-03-01",
         )
 
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_app_service_environments_list_worker_pool_instance_metric_definitions(self, resource_group):
-        response = self.client.app_service_environments.list_worker_pool_instance_metric_definitions(
-            resource_group_name=resource_group.name,
-            name="str",
-            worker_pool_name="str",
-            instance="str",
-            api_version="2025-03-01",
-        )
-        result = [r async for r in response]
         # please add some check logic here by yourself
         # ...
 
@@ -855,6 +911,46 @@ class TestWebSiteManagementAppServiceEnvironmentsOperationsAsync(AzureMgmtRecord
             resource_group_name=resource_group.name,
             name="str",
             worker_pool_name="str",
+            api_version="2025-03-01",
+        )
+        result = [r async for r in response]
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
+    async def test_app_service_environments_get_diagnostics_item(self, resource_group):
+        response = await self.client.app_service_environments.get_diagnostics_item(
+            resource_group_name=resource_group.name,
+            name="str",
+            diagnostics_name="str",
+            api_version="2025-03-01",
+        )
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
+    async def test_app_service_environments_list_multi_role_pool_instance_metric_definitions(self, resource_group):
+        response = self.client.app_service_environments.list_multi_role_pool_instance_metric_definitions(
+            resource_group_name=resource_group.name,
+            name="str",
+            instance="str",
+            api_version="2025-03-01",
+        )
+        result = [r async for r in response]
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
+    async def test_app_service_environments_list_worker_pool_instance_metric_definitions(self, resource_group):
+        response = self.client.app_service_environments.list_worker_pool_instance_metric_definitions(
+            resource_group_name=resource_group.name,
+            name="str",
+            worker_pool_name="str",
+            instance="str",
             api_version="2025-03-01",
         )
         result = [r async for r in response]

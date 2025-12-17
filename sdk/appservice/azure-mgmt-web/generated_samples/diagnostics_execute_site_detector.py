@@ -34,8 +34,8 @@ def main():
     response = client.diagnostics.execute_site_detector(
         resource_group_name="Sample-WestUSResourceGroup",
         site_name="SampleApp",
-        detector_name="sitecrashes",
         diagnostic_category="availability",
+        detector_name="sitecrashes",
     )
     print(response)
 

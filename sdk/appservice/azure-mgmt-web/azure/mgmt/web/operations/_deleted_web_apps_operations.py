@@ -7,6 +7,7 @@
 # --------------------------------------------------------------------------
 from collections.abc import MutableMapping
 from typing import Any, Callable, Optional, TypeVar
+import urllib.parse
 
 from azure.core import PipelineClient
 from azure.core.exceptions import (
@@ -72,8 +73,8 @@ def build_list_by_location_request(location: str, subscription_id: str, **kwargs
         "template_url", "/subscriptions/{subscriptionId}/providers/Microsoft.Web/locations/{location}/deletedSites"
     )
     path_format_arguments = {
-        "location": _SERIALIZER.url("location", location, "str"),
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
+        "location": _SERIALIZER.url("location", location, "str", min_length=1),
     }
 
     _url: str = _url.format(**path_format_arguments)  # type: ignore
@@ -102,9 +103,9 @@ def build_get_deleted_web_app_by_location_request(  # pylint: disable=name-too-l
         "/subscriptions/{subscriptionId}/providers/Microsoft.Web/locations/{location}/deletedSites/{deletedSiteId}",
     )
     path_format_arguments = {
-        "location": _SERIALIZER.url("location", location, "str"),
-        "deletedSiteId": _SERIALIZER.url("deleted_site_id", deleted_site_id, "str"),
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
+        "location": _SERIALIZER.url("location", location, "str", min_length=1),
+        "deletedSiteId": _SERIALIZER.url("deleted_site_id", deleted_site_id, "str"),
     }
 
     _url: str = _url.format(**path_format_arguments)  # type: ignore
@@ -150,7 +151,7 @@ class DeletedWebAppsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-03-01"))
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
         cls: ClsType[_models.DeletedWebAppCollection] = kwargs.pop("cls", None)
 
         error_map: MutableMapping = {
@@ -173,7 +174,18 @@ class DeletedWebAppsOperations:
                 _request.url = self._client.format_url(_request.url)
 
             else:
-                _request = HttpRequest("GET", next_link)
+                # make call to next link with the client's api-version
+                _parsed_next_link = urllib.parse.urlparse(next_link)
+                _next_request_params = case_insensitive_dict(
+                    {
+                        key: [urllib.parse.quote(v) for v in value]
+                        for key, value in urllib.parse.parse_qs(_parsed_next_link.query).items()
+                    }
+                )
+                _next_request_params["api-version"] = self._config.api_version
+                _request = HttpRequest(
+                    "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
+                )
                 _request.url = self._client.format_url(_request.url)
                 _request.method = "GET"
             return _request
@@ -212,7 +224,7 @@ class DeletedWebAppsOperations:
 
         Description for Get all deleted apps for a subscription at location.
 
-        :param location: Required.
+        :param location: The name of the Azure region. Required.
         :type location: str
         :return: An iterator like instance of either DeletedSite or the result of cls(response)
         :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.web.models.DeletedSite]
@@ -221,7 +233,7 @@ class DeletedWebAppsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-03-01"))
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
         cls: ClsType[_models.DeletedWebAppCollection] = kwargs.pop("cls", None)
 
         error_map: MutableMapping = {
@@ -245,7 +257,18 @@ class DeletedWebAppsOperations:
                 _request.url = self._client.format_url(_request.url)
 
             else:
-                _request = HttpRequest("GET", next_link)
+                # make call to next link with the client's api-version
+                _parsed_next_link = urllib.parse.urlparse(next_link)
+                _next_request_params = case_insensitive_dict(
+                    {
+                        key: [urllib.parse.quote(v) for v in value]
+                        for key, value in urllib.parse.parse_qs(_parsed_next_link.query).items()
+                    }
+                )
+                _next_request_params["api-version"] = self._config.api_version
+                _request = HttpRequest(
+                    "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
+                )
                 _request.url = self._client.format_url(_request.url)
                 _request.method = "GET"
             return _request
@@ -286,7 +309,7 @@ class DeletedWebAppsOperations:
 
         Description for Get deleted app for a subscription at location.
 
-        :param location: Required.
+        :param location: The name of the Azure region. Required.
         :type location: str
         :param deleted_site_id: The numeric ID of the deleted app, e.g. 12345. Required.
         :type deleted_site_id: str
@@ -305,7 +328,7 @@ class DeletedWebAppsOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-03-01"))
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
         cls: ClsType[_models.DeletedSite] = kwargs.pop("cls", None)
 
         _request = build_get_deleted_web_app_by_location_request(

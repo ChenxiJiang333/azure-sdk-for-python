@@ -9,6 +9,7 @@
 from collections.abc import MutableMapping
 import datetime
 from typing import Any, Callable, Optional, TypeVar
+import urllib.parse
 
 from azure.core import PipelineClient
 from azure.core.exceptions import (
@@ -53,16 +54,11 @@ def build_list_hosting_environment_detector_responses_request(  # pylint: disabl
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/detectors",
     )
     path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
         "resourceGroupName": _SERIALIZER.url(
-            "resource_group_name",
-            resource_group_name,
-            "str",
-            max_length=90,
-            min_length=1,
-            pattern=r"^[-\w\._\(\)]+[^\.]$",
+            "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
         "name": _SERIALIZER.url("name", name, "str"),
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
     }
 
     _url: str = _url.format(**path_format_arguments)  # type: ignore
@@ -99,29 +95,24 @@ def build_get_hosting_environment_detector_response_request(  # pylint: disable=
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/detectors/{detectorName}",
     )
     path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
         "resourceGroupName": _SERIALIZER.url(
-            "resource_group_name",
-            resource_group_name,
-            "str",
-            max_length=90,
-            min_length=1,
-            pattern=r"^[-\w\._\(\)]+[^\.]$",
+            "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
         "name": _SERIALIZER.url("name", name, "str"),
         "detectorName": _SERIALIZER.url("detector_name", detector_name, "str"),
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
     }
 
     _url: str = _url.format(**path_format_arguments)  # type: ignore
 
     # Construct parameters
+    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
     if start_time is not None:
         _params["startTime"] = _SERIALIZER.query("start_time", start_time, "iso-8601")
     if end_time is not None:
         _params["endTime"] = _SERIALIZER.query("end_time", end_time, "iso-8601")
     if time_grain is not None:
         _params["timeGrain"] = _SERIALIZER.query("time_grain", time_grain, "str", pattern=r"PT[1-9][0-9]+[SMH]")
-    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
 
     # Construct headers
     _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
@@ -144,16 +135,11 @@ def build_list_site_detector_responses_request(  # pylint: disable=name-too-long
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/detectors",
     )
     path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
         "resourceGroupName": _SERIALIZER.url(
-            "resource_group_name",
-            resource_group_name,
-            "str",
-            max_length=90,
-            min_length=1,
-            pattern=r"^[-\w\._\(\)]+[^\.]$",
+            "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
         "siteName": _SERIALIZER.url("site_name", site_name, "str"),
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
     }
 
     _url: str = _url.format(**path_format_arguments)  # type: ignore
@@ -190,29 +176,24 @@ def build_get_site_detector_response_request(
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/detectors/{detectorName}",
     )
     path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
         "resourceGroupName": _SERIALIZER.url(
-            "resource_group_name",
-            resource_group_name,
-            "str",
-            max_length=90,
-            min_length=1,
-            pattern=r"^[-\w\._\(\)]+[^\.]$",
+            "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
         "siteName": _SERIALIZER.url("site_name", site_name, "str"),
         "detectorName": _SERIALIZER.url("detector_name", detector_name, "str"),
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
     }
 
     _url: str = _url.format(**path_format_arguments)  # type: ignore
 
     # Construct parameters
+    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
     if start_time is not None:
         _params["startTime"] = _SERIALIZER.query("start_time", start_time, "iso-8601")
     if end_time is not None:
         _params["endTime"] = _SERIALIZER.query("end_time", end_time, "iso-8601")
     if time_grain is not None:
         _params["timeGrain"] = _SERIALIZER.query("time_grain", time_grain, "str", pattern=r"PT[1-9][0-9]+[SMH]")
-    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
 
     # Construct headers
     _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
@@ -235,16 +216,11 @@ def build_list_site_diagnostic_categories_request(  # pylint: disable=name-too-l
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/diagnostics",
     )
     path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
         "resourceGroupName": _SERIALIZER.url(
-            "resource_group_name",
-            resource_group_name,
-            "str",
-            max_length=90,
-            min_length=1,
-            pattern=r"^[-\w\._\(\)]+[^\.]$",
+            "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
         "siteName": _SERIALIZER.url("site_name", site_name, "str"),
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
     }
 
     _url: str = _url.format(**path_format_arguments)  # type: ignore
@@ -273,17 +249,12 @@ def build_get_site_diagnostic_category_request(  # pylint: disable=name-too-long
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/diagnostics/{diagnosticCategory}",
     )
     path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
         "resourceGroupName": _SERIALIZER.url(
-            "resource_group_name",
-            resource_group_name,
-            "str",
-            max_length=90,
-            min_length=1,
-            pattern=r"^[-\w\._\(\)]+[^\.]$",
+            "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
         "siteName": _SERIALIZER.url("site_name", site_name, "str"),
         "diagnosticCategory": _SERIALIZER.url("diagnostic_category", diagnostic_category, "str"),
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
     }
 
     _url: str = _url.format(**path_format_arguments)  # type: ignore
@@ -312,17 +283,12 @@ def build_list_site_analyses_request(
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/diagnostics/{diagnosticCategory}/analyses",
     )
     path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
         "resourceGroupName": _SERIALIZER.url(
-            "resource_group_name",
-            resource_group_name,
-            "str",
-            max_length=90,
-            min_length=1,
-            pattern=r"^[-\w\._\(\)]+[^\.]$",
+            "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
         "siteName": _SERIALIZER.url("site_name", site_name, "str"),
         "diagnosticCategory": _SERIALIZER.url("diagnostic_category", diagnostic_category, "str"),
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
     }
 
     _url: str = _url.format(**path_format_arguments)  # type: ignore
@@ -356,18 +322,13 @@ def build_get_site_analysis_request(
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/diagnostics/{diagnosticCategory}/analyses/{analysisName}",
     )
     path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
         "resourceGroupName": _SERIALIZER.url(
-            "resource_group_name",
-            resource_group_name,
-            "str",
-            max_length=90,
-            min_length=1,
-            pattern=r"^[-\w\._\(\)]+[^\.]$",
+            "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
         "siteName": _SERIALIZER.url("site_name", site_name, "str"),
         "diagnosticCategory": _SERIALIZER.url("diagnostic_category", diagnostic_category, "str"),
         "analysisName": _SERIALIZER.url("analysis_name", analysis_name, "str"),
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
     }
 
     _url: str = _url.format(**path_format_arguments)  # type: ignore
@@ -405,30 +366,25 @@ def build_execute_site_analysis_request(
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/diagnostics/{diagnosticCategory}/analyses/{analysisName}/execute",
     )
     path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
         "resourceGroupName": _SERIALIZER.url(
-            "resource_group_name",
-            resource_group_name,
-            "str",
-            max_length=90,
-            min_length=1,
-            pattern=r"^[-\w\._\(\)]+[^\.]$",
+            "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
         "siteName": _SERIALIZER.url("site_name", site_name, "str"),
         "diagnosticCategory": _SERIALIZER.url("diagnostic_category", diagnostic_category, "str"),
         "analysisName": _SERIALIZER.url("analysis_name", analysis_name, "str"),
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
     }
 
     _url: str = _url.format(**path_format_arguments)  # type: ignore
 
     # Construct parameters
+    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
     if start_time is not None:
         _params["startTime"] = _SERIALIZER.query("start_time", start_time, "iso-8601")
     if end_time is not None:
         _params["endTime"] = _SERIALIZER.query("end_time", end_time, "iso-8601")
     if time_grain is not None:
         _params["timeGrain"] = _SERIALIZER.query("time_grain", time_grain, "str", pattern=r"PT[1-9][0-9]+[SMH]")
-    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
 
     # Construct headers
     _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
@@ -451,17 +407,12 @@ def build_list_site_detectors_request(
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/diagnostics/{diagnosticCategory}/detectors",
     )
     path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
         "resourceGroupName": _SERIALIZER.url(
-            "resource_group_name",
-            resource_group_name,
-            "str",
-            max_length=90,
-            min_length=1,
-            pattern=r"^[-\w\._\(\)]+[^\.]$",
+            "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
         "siteName": _SERIALIZER.url("site_name", site_name, "str"),
         "diagnosticCategory": _SERIALIZER.url("diagnostic_category", diagnostic_category, "str"),
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
     }
 
     _url: str = _url.format(**path_format_arguments)  # type: ignore
@@ -495,18 +446,13 @@ def build_get_site_detector_request(
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/diagnostics/{diagnosticCategory}/detectors/{detectorName}",
     )
     path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
         "resourceGroupName": _SERIALIZER.url(
-            "resource_group_name",
-            resource_group_name,
-            "str",
-            max_length=90,
-            min_length=1,
-            pattern=r"^[-\w\._\(\)]+[^\.]$",
+            "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
         "siteName": _SERIALIZER.url("site_name", site_name, "str"),
         "diagnosticCategory": _SERIALIZER.url("diagnostic_category", diagnostic_category, "str"),
         "detectorName": _SERIALIZER.url("detector_name", detector_name, "str"),
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
     }
 
     _url: str = _url.format(**path_format_arguments)  # type: ignore
@@ -523,8 +469,8 @@ def build_get_site_detector_request(
 def build_execute_site_detector_request(
     resource_group_name: str,
     site_name: str,
-    detector_name: str,
     diagnostic_category: str,
+    detector_name: str,
     subscription_id: str,
     *,
     start_time: Optional[datetime.datetime] = None,
@@ -544,30 +490,25 @@ def build_execute_site_detector_request(
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/diagnostics/{diagnosticCategory}/detectors/{detectorName}/execute",
     )
     path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
         "resourceGroupName": _SERIALIZER.url(
-            "resource_group_name",
-            resource_group_name,
-            "str",
-            max_length=90,
-            min_length=1,
-            pattern=r"^[-\w\._\(\)]+[^\.]$",
+            "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
         "siteName": _SERIALIZER.url("site_name", site_name, "str"),
-        "detectorName": _SERIALIZER.url("detector_name", detector_name, "str"),
         "diagnosticCategory": _SERIALIZER.url("diagnostic_category", diagnostic_category, "str"),
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
+        "detectorName": _SERIALIZER.url("detector_name", detector_name, "str"),
     }
 
     _url: str = _url.format(**path_format_arguments)  # type: ignore
 
     # Construct parameters
+    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
     if start_time is not None:
         _params["startTime"] = _SERIALIZER.query("start_time", start_time, "iso-8601")
     if end_time is not None:
         _params["endTime"] = _SERIALIZER.query("end_time", end_time, "iso-8601")
     if time_grain is not None:
         _params["timeGrain"] = _SERIALIZER.query("time_grain", time_grain, "str", pattern=r"PT[1-9][0-9]+[SMH]")
-    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
 
     # Construct headers
     _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
@@ -590,17 +531,12 @@ def build_list_site_detector_responses_slot_request(  # pylint: disable=name-too
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/slots/{slot}/detectors",
     )
     path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
         "resourceGroupName": _SERIALIZER.url(
-            "resource_group_name",
-            resource_group_name,
-            "str",
-            max_length=90,
-            min_length=1,
-            pattern=r"^[-\w\._\(\)]+[^\.]$",
+            "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
         "siteName": _SERIALIZER.url("site_name", site_name, "str"),
         "slot": _SERIALIZER.url("slot", slot, "str"),
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
     }
 
     _url: str = _url.format(**path_format_arguments)  # type: ignore
@@ -617,8 +553,8 @@ def build_list_site_detector_responses_slot_request(  # pylint: disable=name-too
 def build_get_site_detector_response_slot_request(  # pylint: disable=name-too-long
     resource_group_name: str,
     site_name: str,
-    detector_name: str,
     slot: str,
+    detector_name: str,
     subscription_id: str,
     *,
     start_time: Optional[datetime.datetime] = None,
@@ -638,30 +574,25 @@ def build_get_site_detector_response_slot_request(  # pylint: disable=name-too-l
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/slots/{slot}/detectors/{detectorName}",
     )
     path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
         "resourceGroupName": _SERIALIZER.url(
-            "resource_group_name",
-            resource_group_name,
-            "str",
-            max_length=90,
-            min_length=1,
-            pattern=r"^[-\w\._\(\)]+[^\.]$",
+            "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
         "siteName": _SERIALIZER.url("site_name", site_name, "str"),
-        "detectorName": _SERIALIZER.url("detector_name", detector_name, "str"),
         "slot": _SERIALIZER.url("slot", slot, "str"),
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
+        "detectorName": _SERIALIZER.url("detector_name", detector_name, "str"),
     }
 
     _url: str = _url.format(**path_format_arguments)  # type: ignore
 
     # Construct parameters
+    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
     if start_time is not None:
         _params["startTime"] = _SERIALIZER.query("start_time", start_time, "iso-8601")
     if end_time is not None:
         _params["endTime"] = _SERIALIZER.query("end_time", end_time, "iso-8601")
     if time_grain is not None:
         _params["timeGrain"] = _SERIALIZER.query("time_grain", time_grain, "str", pattern=r"PT[1-9][0-9]+[SMH]")
-    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
 
     # Construct headers
     _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
@@ -684,17 +615,12 @@ def build_list_site_diagnostic_categories_slot_request(  # pylint: disable=name-
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/slots/{slot}/diagnostics",
     )
     path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
         "resourceGroupName": _SERIALIZER.url(
-            "resource_group_name",
-            resource_group_name,
-            "str",
-            max_length=90,
-            min_length=1,
-            pattern=r"^[-\w\._\(\)]+[^\.]$",
+            "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
         "siteName": _SERIALIZER.url("site_name", site_name, "str"),
         "slot": _SERIALIZER.url("slot", slot, "str"),
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
     }
 
     _url: str = _url.format(**path_format_arguments)  # type: ignore
@@ -709,7 +635,7 @@ def build_list_site_diagnostic_categories_slot_request(  # pylint: disable=name-
 
 
 def build_get_site_diagnostic_category_slot_request(  # pylint: disable=name-too-long
-    resource_group_name: str, site_name: str, diagnostic_category: str, slot: str, subscription_id: str, **kwargs: Any
+    resource_group_name: str, site_name: str, slot: str, diagnostic_category: str, subscription_id: str, **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
@@ -723,18 +649,13 @@ def build_get_site_diagnostic_category_slot_request(  # pylint: disable=name-too
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/slots/{slot}/diagnostics/{diagnosticCategory}",
     )
     path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
         "resourceGroupName": _SERIALIZER.url(
-            "resource_group_name",
-            resource_group_name,
-            "str",
-            max_length=90,
-            min_length=1,
-            pattern=r"^[-\w\._\(\)]+[^\.]$",
+            "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
         "siteName": _SERIALIZER.url("site_name", site_name, "str"),
-        "diagnosticCategory": _SERIALIZER.url("diagnostic_category", diagnostic_category, "str"),
         "slot": _SERIALIZER.url("slot", slot, "str"),
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
+        "diagnosticCategory": _SERIALIZER.url("diagnostic_category", diagnostic_category, "str"),
     }
 
     _url: str = _url.format(**path_format_arguments)  # type: ignore
@@ -749,7 +670,7 @@ def build_get_site_diagnostic_category_slot_request(  # pylint: disable=name-too
 
 
 def build_list_site_analyses_slot_request(
-    resource_group_name: str, site_name: str, diagnostic_category: str, slot: str, subscription_id: str, **kwargs: Any
+    resource_group_name: str, site_name: str, slot: str, diagnostic_category: str, subscription_id: str, **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
@@ -763,18 +684,13 @@ def build_list_site_analyses_slot_request(
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/slots/{slot}/diagnostics/{diagnosticCategory}/analyses",
     )
     path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
         "resourceGroupName": _SERIALIZER.url(
-            "resource_group_name",
-            resource_group_name,
-            "str",
-            max_length=90,
-            min_length=1,
-            pattern=r"^[-\w\._\(\)]+[^\.]$",
+            "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
         "siteName": _SERIALIZER.url("site_name", site_name, "str"),
-        "diagnosticCategory": _SERIALIZER.url("diagnostic_category", diagnostic_category, "str"),
         "slot": _SERIALIZER.url("slot", slot, "str"),
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
+        "diagnosticCategory": _SERIALIZER.url("diagnostic_category", diagnostic_category, "str"),
     }
 
     _url: str = _url.format(**path_format_arguments)  # type: ignore
@@ -791,9 +707,9 @@ def build_list_site_analyses_slot_request(
 def build_get_site_analysis_slot_request(
     resource_group_name: str,
     site_name: str,
+    slot: str,
     diagnostic_category: str,
     analysis_name: str,
-    slot: str,
     subscription_id: str,
     **kwargs: Any
 ) -> HttpRequest:
@@ -809,19 +725,14 @@ def build_get_site_analysis_slot_request(
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/slots/{slot}/diagnostics/{diagnosticCategory}/analyses/{analysisName}",
     )
     path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
         "resourceGroupName": _SERIALIZER.url(
-            "resource_group_name",
-            resource_group_name,
-            "str",
-            max_length=90,
-            min_length=1,
-            pattern=r"^[-\w\._\(\)]+[^\.]$",
+            "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
         "siteName": _SERIALIZER.url("site_name", site_name, "str"),
+        "slot": _SERIALIZER.url("slot", slot, "str"),
         "diagnosticCategory": _SERIALIZER.url("diagnostic_category", diagnostic_category, "str"),
         "analysisName": _SERIALIZER.url("analysis_name", analysis_name, "str"),
-        "slot": _SERIALIZER.url("slot", slot, "str"),
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
     }
 
     _url: str = _url.format(**path_format_arguments)  # type: ignore
@@ -838,9 +749,9 @@ def build_get_site_analysis_slot_request(
 def build_execute_site_analysis_slot_request(
     resource_group_name: str,
     site_name: str,
+    slot: str,
     diagnostic_category: str,
     analysis_name: str,
-    slot: str,
     subscription_id: str,
     *,
     start_time: Optional[datetime.datetime] = None,
@@ -860,31 +771,26 @@ def build_execute_site_analysis_slot_request(
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/slots/{slot}/diagnostics/{diagnosticCategory}/analyses/{analysisName}/execute",
     )
     path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
         "resourceGroupName": _SERIALIZER.url(
-            "resource_group_name",
-            resource_group_name,
-            "str",
-            max_length=90,
-            min_length=1,
-            pattern=r"^[-\w\._\(\)]+[^\.]$",
+            "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
         "siteName": _SERIALIZER.url("site_name", site_name, "str"),
+        "slot": _SERIALIZER.url("slot", slot, "str"),
         "diagnosticCategory": _SERIALIZER.url("diagnostic_category", diagnostic_category, "str"),
         "analysisName": _SERIALIZER.url("analysis_name", analysis_name, "str"),
-        "slot": _SERIALIZER.url("slot", slot, "str"),
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
     }
 
     _url: str = _url.format(**path_format_arguments)  # type: ignore
 
     # Construct parameters
+    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
     if start_time is not None:
         _params["startTime"] = _SERIALIZER.query("start_time", start_time, "iso-8601")
     if end_time is not None:
         _params["endTime"] = _SERIALIZER.query("end_time", end_time, "iso-8601")
     if time_grain is not None:
         _params["timeGrain"] = _SERIALIZER.query("time_grain", time_grain, "str", pattern=r"PT[1-9][0-9]+[SMH]")
-    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
 
     # Construct headers
     _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
@@ -893,7 +799,7 @@ def build_execute_site_analysis_slot_request(
 
 
 def build_list_site_detectors_slot_request(
-    resource_group_name: str, site_name: str, diagnostic_category: str, slot: str, subscription_id: str, **kwargs: Any
+    resource_group_name: str, site_name: str, slot: str, diagnostic_category: str, subscription_id: str, **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
@@ -907,18 +813,13 @@ def build_list_site_detectors_slot_request(
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/slots/{slot}/diagnostics/{diagnosticCategory}/detectors",
     )
     path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
         "resourceGroupName": _SERIALIZER.url(
-            "resource_group_name",
-            resource_group_name,
-            "str",
-            max_length=90,
-            min_length=1,
-            pattern=r"^[-\w\._\(\)]+[^\.]$",
+            "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
         "siteName": _SERIALIZER.url("site_name", site_name, "str"),
-        "diagnosticCategory": _SERIALIZER.url("diagnostic_category", diagnostic_category, "str"),
         "slot": _SERIALIZER.url("slot", slot, "str"),
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
+        "diagnosticCategory": _SERIALIZER.url("diagnostic_category", diagnostic_category, "str"),
     }
 
     _url: str = _url.format(**path_format_arguments)  # type: ignore
@@ -935,9 +836,9 @@ def build_list_site_detectors_slot_request(
 def build_get_site_detector_slot_request(
     resource_group_name: str,
     site_name: str,
+    slot: str,
     diagnostic_category: str,
     detector_name: str,
-    slot: str,
     subscription_id: str,
     **kwargs: Any
 ) -> HttpRequest:
@@ -953,19 +854,14 @@ def build_get_site_detector_slot_request(
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/slots/{slot}/diagnostics/{diagnosticCategory}/detectors/{detectorName}",
     )
     path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
         "resourceGroupName": _SERIALIZER.url(
-            "resource_group_name",
-            resource_group_name,
-            "str",
-            max_length=90,
-            min_length=1,
-            pattern=r"^[-\w\._\(\)]+[^\.]$",
+            "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
         "siteName": _SERIALIZER.url("site_name", site_name, "str"),
+        "slot": _SERIALIZER.url("slot", slot, "str"),
         "diagnosticCategory": _SERIALIZER.url("diagnostic_category", diagnostic_category, "str"),
         "detectorName": _SERIALIZER.url("detector_name", detector_name, "str"),
-        "slot": _SERIALIZER.url("slot", slot, "str"),
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
     }
 
     _url: str = _url.format(**path_format_arguments)  # type: ignore
@@ -982,9 +878,9 @@ def build_get_site_detector_slot_request(
 def build_execute_site_detector_slot_request(
     resource_group_name: str,
     site_name: str,
-    detector_name: str,
-    diagnostic_category: str,
     slot: str,
+    diagnostic_category: str,
+    detector_name: str,
     subscription_id: str,
     *,
     start_time: Optional[datetime.datetime] = None,
@@ -1004,31 +900,26 @@ def build_execute_site_detector_slot_request(
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{siteName}/slots/{slot}/diagnostics/{diagnosticCategory}/detectors/{detectorName}/execute",
     )
     path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
         "resourceGroupName": _SERIALIZER.url(
-            "resource_group_name",
-            resource_group_name,
-            "str",
-            max_length=90,
-            min_length=1,
-            pattern=r"^[-\w\._\(\)]+[^\.]$",
+            "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
         "siteName": _SERIALIZER.url("site_name", site_name, "str"),
-        "detectorName": _SERIALIZER.url("detector_name", detector_name, "str"),
-        "diagnosticCategory": _SERIALIZER.url("diagnostic_category", diagnostic_category, "str"),
         "slot": _SERIALIZER.url("slot", slot, "str"),
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
+        "diagnosticCategory": _SERIALIZER.url("diagnostic_category", diagnostic_category, "str"),
+        "detectorName": _SERIALIZER.url("detector_name", detector_name, "str"),
     }
 
     _url: str = _url.format(**path_format_arguments)  # type: ignore
 
     # Construct parameters
+    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
     if start_time is not None:
         _params["startTime"] = _SERIALIZER.query("start_time", start_time, "iso-8601")
     if end_time is not None:
         _params["endTime"] = _SERIALIZER.query("end_time", end_time, "iso-8601")
     if time_grain is not None:
         _params["timeGrain"] = _SERIALIZER.query("time_grain", time_grain, "str", pattern=r"PT[1-9][0-9]+[SMH]")
-    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
 
     # Construct headers
     _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
@@ -1063,9 +954,10 @@ class DiagnosticsOperations:  # pylint: disable=too-many-public-methods
 
         Description for List Hosting Environment Detector Responses.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
-        :param name: Site Name. Required.
+        :param name: App Service Environment Name. Required.
         :type name: str
         :return: An iterator like instance of either DetectorResponse or the result of cls(response)
         :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.web.models.DetectorResponse]
@@ -1074,7 +966,7 @@ class DiagnosticsOperations:  # pylint: disable=too-many-public-methods
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-03-01"))
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
         cls: ClsType[_models.DetectorResponseCollection] = kwargs.pop("cls", None)
 
         error_map: MutableMapping = {
@@ -1099,7 +991,18 @@ class DiagnosticsOperations:  # pylint: disable=too-many-public-methods
                 _request.url = self._client.format_url(_request.url)
 
             else:
-                _request = HttpRequest("GET", next_link)
+                # make call to next link with the client's api-version
+                _parsed_next_link = urllib.parse.urlparse(next_link)
+                _next_request_params = case_insensitive_dict(
+                    {
+                        key: [urllib.parse.quote(v) for v in value]
+                        for key, value in urllib.parse.parse_qs(_parsed_next_link.query).items()
+                    }
+                )
+                _next_request_params["api-version"] = self._config.api_version
+                _request = HttpRequest(
+                    "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
+                )
                 _request.url = self._client.format_url(_request.url)
                 _request.method = "GET"
             return _request
@@ -1147,7 +1050,8 @@ class DiagnosticsOperations:  # pylint: disable=too-many-public-methods
 
         Description for Get Hosting Environment Detector Response.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param name: App Service Environment Name. Required.
         :type name: str
@@ -1174,7 +1078,7 @@ class DiagnosticsOperations:  # pylint: disable=too-many-public-methods
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-03-01"))
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
         cls: ClsType[_models.DetectorResponse] = kwargs.pop("cls", None)
 
         _request = build_get_hosting_environment_detector_response_request(
@@ -1221,7 +1125,8 @@ class DiagnosticsOperations:  # pylint: disable=too-many-public-methods
 
         Description for List Site Detector Responses.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param site_name: Site Name. Required.
         :type site_name: str
@@ -1232,7 +1137,7 @@ class DiagnosticsOperations:  # pylint: disable=too-many-public-methods
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-03-01"))
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
         cls: ClsType[_models.DetectorResponseCollection] = kwargs.pop("cls", None)
 
         error_map: MutableMapping = {
@@ -1257,7 +1162,18 @@ class DiagnosticsOperations:  # pylint: disable=too-many-public-methods
                 _request.url = self._client.format_url(_request.url)
 
             else:
-                _request = HttpRequest("GET", next_link)
+                # make call to next link with the client's api-version
+                _parsed_next_link = urllib.parse.urlparse(next_link)
+                _next_request_params = case_insensitive_dict(
+                    {
+                        key: [urllib.parse.quote(v) for v in value]
+                        for key, value in urllib.parse.parse_qs(_parsed_next_link.query).items()
+                    }
+                )
+                _next_request_params["api-version"] = self._config.api_version
+                _request = HttpRequest(
+                    "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
+                )
                 _request.url = self._client.format_url(_request.url)
                 _request.method = "GET"
             return _request
@@ -1305,7 +1221,8 @@ class DiagnosticsOperations:  # pylint: disable=too-many-public-methods
 
         Description for Get site detector response.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param site_name: Site Name. Required.
         :type site_name: str
@@ -1332,7 +1249,7 @@ class DiagnosticsOperations:  # pylint: disable=too-many-public-methods
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-03-01"))
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
         cls: ClsType[_models.DetectorResponse] = kwargs.pop("cls", None)
 
         _request = build_get_site_detector_response_request(
@@ -1379,7 +1296,8 @@ class DiagnosticsOperations:  # pylint: disable=too-many-public-methods
 
         Description for Get Diagnostics Categories.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param site_name: Site Name. Required.
         :type site_name: str
@@ -1390,7 +1308,7 @@ class DiagnosticsOperations:  # pylint: disable=too-many-public-methods
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-03-01"))
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
         cls: ClsType[_models.DiagnosticCategoryCollection] = kwargs.pop("cls", None)
 
         error_map: MutableMapping = {
@@ -1415,7 +1333,18 @@ class DiagnosticsOperations:  # pylint: disable=too-many-public-methods
                 _request.url = self._client.format_url(_request.url)
 
             else:
-                _request = HttpRequest("GET", next_link)
+                # make call to next link with the client's api-version
+                _parsed_next_link = urllib.parse.urlparse(next_link)
+                _next_request_params = case_insensitive_dict(
+                    {
+                        key: [urllib.parse.quote(v) for v in value]
+                        for key, value in urllib.parse.parse_qs(_parsed_next_link.query).items()
+                    }
+                )
+                _next_request_params["api-version"] = self._config.api_version
+                _request = HttpRequest(
+                    "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
+                )
                 _request.url = self._client.format_url(_request.url)
                 _request.method = "GET"
             return _request
@@ -1456,7 +1385,8 @@ class DiagnosticsOperations:  # pylint: disable=too-many-public-methods
 
         Description for Get Diagnostics Category.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param site_name: Site Name. Required.
         :type site_name: str
@@ -1477,7 +1407,7 @@ class DiagnosticsOperations:  # pylint: disable=too-many-public-methods
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-03-01"))
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
         cls: ClsType[_models.DiagnosticCategory] = kwargs.pop("cls", None)
 
         _request = build_get_site_diagnostic_category_request(
@@ -1521,7 +1451,8 @@ class DiagnosticsOperations:  # pylint: disable=too-many-public-methods
 
         Description for Get Site Analyses.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param site_name: Site Name. Required.
         :type site_name: str
@@ -1534,7 +1465,7 @@ class DiagnosticsOperations:  # pylint: disable=too-many-public-methods
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-03-01"))
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
         cls: ClsType[_models.DiagnosticAnalysisCollection] = kwargs.pop("cls", None)
 
         error_map: MutableMapping = {
@@ -1560,7 +1491,18 @@ class DiagnosticsOperations:  # pylint: disable=too-many-public-methods
                 _request.url = self._client.format_url(_request.url)
 
             else:
-                _request = HttpRequest("GET", next_link)
+                # make call to next link with the client's api-version
+                _parsed_next_link = urllib.parse.urlparse(next_link)
+                _next_request_params = case_insensitive_dict(
+                    {
+                        key: [urllib.parse.quote(v) for v in value]
+                        for key, value in urllib.parse.parse_qs(_parsed_next_link.query).items()
+                    }
+                )
+                _next_request_params["api-version"] = self._config.api_version
+                _request = HttpRequest(
+                    "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
+                )
                 _request.url = self._client.format_url(_request.url)
                 _request.method = "GET"
             return _request
@@ -1601,7 +1543,8 @@ class DiagnosticsOperations:  # pylint: disable=too-many-public-methods
 
         Description for Get Site Analysis.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param site_name: Site Name. Required.
         :type site_name: str
@@ -1624,7 +1567,7 @@ class DiagnosticsOperations:  # pylint: disable=too-many-public-methods
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-03-01"))
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
         cls: ClsType[_models.AnalysisDefinition] = kwargs.pop("cls", None)
 
         _request = build_get_site_analysis_request(
@@ -1677,13 +1620,14 @@ class DiagnosticsOperations:  # pylint: disable=too-many-public-methods
 
         Description for Execute Analysis.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param site_name: Site Name. Required.
         :type site_name: str
-        :param diagnostic_category: Category Name. Required.
+        :param diagnostic_category: Diagnostic Category. Required.
         :type diagnostic_category: str
-        :param analysis_name: Analysis Resource Name. Required.
+        :param analysis_name: Analysis Name. Required.
         :type analysis_name: str
         :param start_time: Start Time. Default value is None.
         :type start_time: ~datetime.datetime
@@ -1706,7 +1650,7 @@ class DiagnosticsOperations:  # pylint: disable=too-many-public-methods
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-03-01"))
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
         cls: ClsType[_models.DiagnosticAnalysis] = kwargs.pop("cls", None)
 
         _request = build_execute_site_analysis_request(
@@ -1754,7 +1698,8 @@ class DiagnosticsOperations:  # pylint: disable=too-many-public-methods
 
         Description for Get Detectors.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param site_name: Site Name. Required.
         :type site_name: str
@@ -1768,7 +1713,7 @@ class DiagnosticsOperations:  # pylint: disable=too-many-public-methods
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-03-01"))
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
         cls: ClsType[_models.DiagnosticDetectorCollection] = kwargs.pop("cls", None)
 
         error_map: MutableMapping = {
@@ -1794,7 +1739,18 @@ class DiagnosticsOperations:  # pylint: disable=too-many-public-methods
                 _request.url = self._client.format_url(_request.url)
 
             else:
-                _request = HttpRequest("GET", next_link)
+                # make call to next link with the client's api-version
+                _parsed_next_link = urllib.parse.urlparse(next_link)
+                _next_request_params = case_insensitive_dict(
+                    {
+                        key: [urllib.parse.quote(v) for v in value]
+                        for key, value in urllib.parse.parse_qs(_parsed_next_link.query).items()
+                    }
+                )
+                _next_request_params["api-version"] = self._config.api_version
+                _request = HttpRequest(
+                    "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
+                )
                 _request.url = self._client.format_url(_request.url)
                 _request.method = "GET"
             return _request
@@ -1835,7 +1791,8 @@ class DiagnosticsOperations:  # pylint: disable=too-many-public-methods
 
         Description for Get Detector.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param site_name: Site Name. Required.
         :type site_name: str
@@ -1858,7 +1815,7 @@ class DiagnosticsOperations:  # pylint: disable=too-many-public-methods
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-03-01"))
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
         cls: ClsType[_models.DetectorDefinitionResource] = kwargs.pop("cls", None)
 
         _request = build_get_site_detector_request(
@@ -1900,8 +1857,8 @@ class DiagnosticsOperations:  # pylint: disable=too-many-public-methods
         self,
         resource_group_name: str,
         site_name: str,
-        detector_name: str,
         diagnostic_category: str,
+        detector_name: str,
         start_time: Optional[datetime.datetime] = None,
         end_time: Optional[datetime.datetime] = None,
         time_grain: Optional[str] = None,
@@ -1911,14 +1868,15 @@ class DiagnosticsOperations:  # pylint: disable=too-many-public-methods
 
         Description for Execute Detector.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param site_name: Site Name. Required.
         :type site_name: str
-        :param detector_name: Detector Resource Name. Required.
-        :type detector_name: str
-        :param diagnostic_category: Category Name. Required.
+        :param diagnostic_category: Diagnostic Category. Required.
         :type diagnostic_category: str
+        :param detector_name: Detector Name. Required.
+        :type detector_name: str
         :param start_time: Start Time. Default value is None.
         :type start_time: ~datetime.datetime
         :param end_time: End Time. Default value is None.
@@ -1940,14 +1898,14 @@ class DiagnosticsOperations:  # pylint: disable=too-many-public-methods
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-03-01"))
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
         cls: ClsType[_models.DiagnosticDetectorResponse] = kwargs.pop("cls", None)
 
         _request = build_execute_site_detector_request(
             resource_group_name=resource_group_name,
             site_name=site_name,
-            detector_name=detector_name,
             diagnostic_category=diagnostic_category,
+            detector_name=detector_name,
             subscription_id=self._config.subscription_id,
             start_time=start_time,
             end_time=end_time,
@@ -1988,7 +1946,8 @@ class DiagnosticsOperations:  # pylint: disable=too-many-public-methods
 
         Description for List Site Detector Responses.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param site_name: Site Name. Required.
         :type site_name: str
@@ -2001,7 +1960,7 @@ class DiagnosticsOperations:  # pylint: disable=too-many-public-methods
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-03-01"))
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
         cls: ClsType[_models.DetectorResponseCollection] = kwargs.pop("cls", None)
 
         error_map: MutableMapping = {
@@ -2027,7 +1986,18 @@ class DiagnosticsOperations:  # pylint: disable=too-many-public-methods
                 _request.url = self._client.format_url(_request.url)
 
             else:
-                _request = HttpRequest("GET", next_link)
+                # make call to next link with the client's api-version
+                _parsed_next_link = urllib.parse.urlparse(next_link)
+                _next_request_params = case_insensitive_dict(
+                    {
+                        key: [urllib.parse.quote(v) for v in value]
+                        for key, value in urllib.parse.parse_qs(_parsed_next_link.query).items()
+                    }
+                )
+                _next_request_params["api-version"] = self._config.api_version
+                _request = HttpRequest(
+                    "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
+                )
                 _request.url = self._client.format_url(_request.url)
                 _request.method = "GET"
             return _request
@@ -2065,8 +2035,8 @@ class DiagnosticsOperations:  # pylint: disable=too-many-public-methods
         self,
         resource_group_name: str,
         site_name: str,
-        detector_name: str,
         slot: str,
+        detector_name: str,
         start_time: Optional[datetime.datetime] = None,
         end_time: Optional[datetime.datetime] = None,
         time_grain: Optional[str] = None,
@@ -2076,14 +2046,15 @@ class DiagnosticsOperations:  # pylint: disable=too-many-public-methods
 
         Description for Get site detector response.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param site_name: Site Name. Required.
         :type site_name: str
-        :param detector_name: Detector Resource Name. Required.
-        :type detector_name: str
         :param slot: Slot Name. Required.
         :type slot: str
+        :param detector_name: Detector Resource Name. Required.
+        :type detector_name: str
         :param start_time: Start Time. Default value is None.
         :type start_time: ~datetime.datetime
         :param end_time: End Time. Default value is None.
@@ -2105,14 +2076,14 @@ class DiagnosticsOperations:  # pylint: disable=too-many-public-methods
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-03-01"))
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
         cls: ClsType[_models.DetectorResponse] = kwargs.pop("cls", None)
 
         _request = build_get_site_detector_response_slot_request(
             resource_group_name=resource_group_name,
             site_name=site_name,
-            detector_name=detector_name,
             slot=slot,
+            detector_name=detector_name,
             subscription_id=self._config.subscription_id,
             start_time=start_time,
             end_time=end_time,
@@ -2153,7 +2124,8 @@ class DiagnosticsOperations:  # pylint: disable=too-many-public-methods
 
         Description for Get Diagnostics Categories.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param site_name: Site Name. Required.
         :type site_name: str
@@ -2166,7 +2138,7 @@ class DiagnosticsOperations:  # pylint: disable=too-many-public-methods
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-03-01"))
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
         cls: ClsType[_models.DiagnosticCategoryCollection] = kwargs.pop("cls", None)
 
         error_map: MutableMapping = {
@@ -2192,7 +2164,18 @@ class DiagnosticsOperations:  # pylint: disable=too-many-public-methods
                 _request.url = self._client.format_url(_request.url)
 
             else:
-                _request = HttpRequest("GET", next_link)
+                # make call to next link with the client's api-version
+                _parsed_next_link = urllib.parse.urlparse(next_link)
+                _next_request_params = case_insensitive_dict(
+                    {
+                        key: [urllib.parse.quote(v) for v in value]
+                        for key, value in urllib.parse.parse_qs(_parsed_next_link.query).items()
+                    }
+                )
+                _next_request_params["api-version"] = self._config.api_version
+                _request = HttpRequest(
+                    "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
+                )
                 _request.url = self._client.format_url(_request.url)
                 _request.method = "GET"
             return _request
@@ -2227,20 +2210,21 @@ class DiagnosticsOperations:  # pylint: disable=too-many-public-methods
 
     @distributed_trace
     def get_site_diagnostic_category_slot(
-        self, resource_group_name: str, site_name: str, diagnostic_category: str, slot: str, **kwargs: Any
+        self, resource_group_name: str, site_name: str, slot: str, diagnostic_category: str, **kwargs: Any
     ) -> _models.DiagnosticCategory:
         """Get Diagnostics Category.
 
         Description for Get Diagnostics Category.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param site_name: Site Name. Required.
         :type site_name: str
-        :param diagnostic_category: Diagnostic Category. Required.
-        :type diagnostic_category: str
         :param slot: Slot Name. Required.
         :type slot: str
+        :param diagnostic_category: Diagnostic Category. Required.
+        :type diagnostic_category: str
         :return: DiagnosticCategory or the result of cls(response)
         :rtype: ~azure.mgmt.web.models.DiagnosticCategory
         :raises ~azure.core.exceptions.HttpResponseError:
@@ -2256,14 +2240,14 @@ class DiagnosticsOperations:  # pylint: disable=too-many-public-methods
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-03-01"))
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
         cls: ClsType[_models.DiagnosticCategory] = kwargs.pop("cls", None)
 
         _request = build_get_site_diagnostic_category_slot_request(
             resource_group_name=resource_group_name,
             site_name=site_name,
-            diagnostic_category=diagnostic_category,
             slot=slot,
+            diagnostic_category=diagnostic_category,
             subscription_id=self._config.subscription_id,
             api_version=api_version,
             headers=_headers,
@@ -2295,20 +2279,21 @@ class DiagnosticsOperations:  # pylint: disable=too-many-public-methods
 
     @distributed_trace
     def list_site_analyses_slot(
-        self, resource_group_name: str, site_name: str, diagnostic_category: str, slot: str, **kwargs: Any
+        self, resource_group_name: str, site_name: str, slot: str, diagnostic_category: str, **kwargs: Any
     ) -> ItemPaged["_models.AnalysisDefinition"]:
         """Get Site Analyses.
 
         Description for Get Site Analyses.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param site_name: Site Name. Required.
         :type site_name: str
+        :param slot: Slot - optional. Required.
+        :type slot: str
         :param diagnostic_category: Diagnostic Category. Required.
         :type diagnostic_category: str
-        :param slot: Slot Name. Required.
-        :type slot: str
         :return: An iterator like instance of either AnalysisDefinition or the result of cls(response)
         :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.web.models.AnalysisDefinition]
         :raises ~azure.core.exceptions.HttpResponseError:
@@ -2316,7 +2301,7 @@ class DiagnosticsOperations:  # pylint: disable=too-many-public-methods
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-03-01"))
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
         cls: ClsType[_models.DiagnosticAnalysisCollection] = kwargs.pop("cls", None)
 
         error_map: MutableMapping = {
@@ -2333,8 +2318,8 @@ class DiagnosticsOperations:  # pylint: disable=too-many-public-methods
                 _request = build_list_site_analyses_slot_request(
                     resource_group_name=resource_group_name,
                     site_name=site_name,
-                    diagnostic_category=diagnostic_category,
                     slot=slot,
+                    diagnostic_category=diagnostic_category,
                     subscription_id=self._config.subscription_id,
                     api_version=api_version,
                     headers=_headers,
@@ -2343,7 +2328,18 @@ class DiagnosticsOperations:  # pylint: disable=too-many-public-methods
                 _request.url = self._client.format_url(_request.url)
 
             else:
-                _request = HttpRequest("GET", next_link)
+                # make call to next link with the client's api-version
+                _parsed_next_link = urllib.parse.urlparse(next_link)
+                _next_request_params = case_insensitive_dict(
+                    {
+                        key: [urllib.parse.quote(v) for v in value]
+                        for key, value in urllib.parse.parse_qs(_parsed_next_link.query).items()
+                    }
+                )
+                _next_request_params["api-version"] = self._config.api_version
+                _request = HttpRequest(
+                    "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
+                )
                 _request.url = self._client.format_url(_request.url)
                 _request.method = "GET"
             return _request
@@ -2381,25 +2377,26 @@ class DiagnosticsOperations:  # pylint: disable=too-many-public-methods
         self,
         resource_group_name: str,
         site_name: str,
+        slot: str,
         diagnostic_category: str,
         analysis_name: str,
-        slot: str,
         **kwargs: Any
     ) -> _models.AnalysisDefinition:
         """Get Site Analysis.
 
         Description for Get Site Analysis.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param site_name: Site Name. Required.
         :type site_name: str
+        :param slot: Slot - optional. Required.
+        :type slot: str
         :param diagnostic_category: Diagnostic Category. Required.
         :type diagnostic_category: str
         :param analysis_name: Analysis Name. Required.
         :type analysis_name: str
-        :param slot: Slot - optional. Required.
-        :type slot: str
         :return: AnalysisDefinition or the result of cls(response)
         :rtype: ~azure.mgmt.web.models.AnalysisDefinition
         :raises ~azure.core.exceptions.HttpResponseError:
@@ -2415,15 +2412,15 @@ class DiagnosticsOperations:  # pylint: disable=too-many-public-methods
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-03-01"))
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
         cls: ClsType[_models.AnalysisDefinition] = kwargs.pop("cls", None)
 
         _request = build_get_site_analysis_slot_request(
             resource_group_name=resource_group_name,
             site_name=site_name,
+            slot=slot,
             diagnostic_category=diagnostic_category,
             analysis_name=analysis_name,
-            slot=slot,
             subscription_id=self._config.subscription_id,
             api_version=api_version,
             headers=_headers,
@@ -2458,9 +2455,9 @@ class DiagnosticsOperations:  # pylint: disable=too-many-public-methods
         self,
         resource_group_name: str,
         site_name: str,
+        slot: str,
         diagnostic_category: str,
         analysis_name: str,
-        slot: str,
         start_time: Optional[datetime.datetime] = None,
         end_time: Optional[datetime.datetime] = None,
         time_grain: Optional[str] = None,
@@ -2470,16 +2467,17 @@ class DiagnosticsOperations:  # pylint: disable=too-many-public-methods
 
         Description for Execute Analysis.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param site_name: Site Name. Required.
         :type site_name: str
-        :param diagnostic_category: Category Name. Required.
-        :type diagnostic_category: str
-        :param analysis_name: Analysis Resource Name. Required.
-        :type analysis_name: str
-        :param slot: Slot Name. Required.
+        :param slot: Slot - optional. Required.
         :type slot: str
+        :param diagnostic_category: Diagnostic Category. Required.
+        :type diagnostic_category: str
+        :param analysis_name: Analysis Name. Required.
+        :type analysis_name: str
         :param start_time: Start Time. Default value is None.
         :type start_time: ~datetime.datetime
         :param end_time: End Time. Default value is None.
@@ -2501,15 +2499,15 @@ class DiagnosticsOperations:  # pylint: disable=too-many-public-methods
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-03-01"))
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
         cls: ClsType[_models.DiagnosticAnalysis] = kwargs.pop("cls", None)
 
         _request = build_execute_site_analysis_slot_request(
             resource_group_name=resource_group_name,
             site_name=site_name,
+            slot=slot,
             diagnostic_category=diagnostic_category,
             analysis_name=analysis_name,
-            slot=slot,
             subscription_id=self._config.subscription_id,
             start_time=start_time,
             end_time=end_time,
@@ -2544,20 +2542,21 @@ class DiagnosticsOperations:  # pylint: disable=too-many-public-methods
 
     @distributed_trace
     def list_site_detectors_slot(
-        self, resource_group_name: str, site_name: str, diagnostic_category: str, slot: str, **kwargs: Any
+        self, resource_group_name: str, site_name: str, slot: str, diagnostic_category: str, **kwargs: Any
     ) -> ItemPaged["_models.DetectorDefinitionResource"]:
         """Get Detectors.
 
         Description for Get Detectors.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param site_name: Site Name. Required.
         :type site_name: str
-        :param diagnostic_category: Diagnostic Category. Required.
-        :type diagnostic_category: str
         :param slot: Slot Name. Required.
         :type slot: str
+        :param diagnostic_category: Diagnostic Category. Required.
+        :type diagnostic_category: str
         :return: An iterator like instance of either DetectorDefinitionResource or the result of
          cls(response)
         :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.web.models.DetectorDefinitionResource]
@@ -2566,7 +2565,7 @@ class DiagnosticsOperations:  # pylint: disable=too-many-public-methods
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-03-01"))
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
         cls: ClsType[_models.DiagnosticDetectorCollection] = kwargs.pop("cls", None)
 
         error_map: MutableMapping = {
@@ -2583,8 +2582,8 @@ class DiagnosticsOperations:  # pylint: disable=too-many-public-methods
                 _request = build_list_site_detectors_slot_request(
                     resource_group_name=resource_group_name,
                     site_name=site_name,
-                    diagnostic_category=diagnostic_category,
                     slot=slot,
+                    diagnostic_category=diagnostic_category,
                     subscription_id=self._config.subscription_id,
                     api_version=api_version,
                     headers=_headers,
@@ -2593,7 +2592,18 @@ class DiagnosticsOperations:  # pylint: disable=too-many-public-methods
                 _request.url = self._client.format_url(_request.url)
 
             else:
-                _request = HttpRequest("GET", next_link)
+                # make call to next link with the client's api-version
+                _parsed_next_link = urllib.parse.urlparse(next_link)
+                _next_request_params = case_insensitive_dict(
+                    {
+                        key: [urllib.parse.quote(v) for v in value]
+                        for key, value in urllib.parse.parse_qs(_parsed_next_link.query).items()
+                    }
+                )
+                _next_request_params["api-version"] = self._config.api_version
+                _request = HttpRequest(
+                    "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
+                )
                 _request.url = self._client.format_url(_request.url)
                 _request.method = "GET"
             return _request
@@ -2631,25 +2641,26 @@ class DiagnosticsOperations:  # pylint: disable=too-many-public-methods
         self,
         resource_group_name: str,
         site_name: str,
+        slot: str,
         diagnostic_category: str,
         detector_name: str,
-        slot: str,
         **kwargs: Any
     ) -> _models.DetectorDefinitionResource:
         """Get Detector.
 
         Description for Get Detector.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param site_name: Site Name. Required.
         :type site_name: str
+        :param slot: Slot Name. Required.
+        :type slot: str
         :param diagnostic_category: Diagnostic Category. Required.
         :type diagnostic_category: str
         :param detector_name: Detector Name. Required.
         :type detector_name: str
-        :param slot: Slot Name. Required.
-        :type slot: str
         :return: DetectorDefinitionResource or the result of cls(response)
         :rtype: ~azure.mgmt.web.models.DetectorDefinitionResource
         :raises ~azure.core.exceptions.HttpResponseError:
@@ -2665,15 +2676,15 @@ class DiagnosticsOperations:  # pylint: disable=too-many-public-methods
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-03-01"))
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
         cls: ClsType[_models.DetectorDefinitionResource] = kwargs.pop("cls", None)
 
         _request = build_get_site_detector_slot_request(
             resource_group_name=resource_group_name,
             site_name=site_name,
+            slot=slot,
             diagnostic_category=diagnostic_category,
             detector_name=detector_name,
-            slot=slot,
             subscription_id=self._config.subscription_id,
             api_version=api_version,
             headers=_headers,
@@ -2708,9 +2719,9 @@ class DiagnosticsOperations:  # pylint: disable=too-many-public-methods
         self,
         resource_group_name: str,
         site_name: str,
-        detector_name: str,
-        diagnostic_category: str,
         slot: str,
+        diagnostic_category: str,
+        detector_name: str,
         start_time: Optional[datetime.datetime] = None,
         end_time: Optional[datetime.datetime] = None,
         time_grain: Optional[str] = None,
@@ -2720,16 +2731,17 @@ class DiagnosticsOperations:  # pylint: disable=too-many-public-methods
 
         Description for Execute Detector.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param site_name: Site Name. Required.
         :type site_name: str
-        :param detector_name: Detector Resource Name. Required.
-        :type detector_name: str
-        :param diagnostic_category: Category Name. Required.
-        :type diagnostic_category: str
         :param slot: Slot Name. Required.
         :type slot: str
+        :param diagnostic_category: Diagnostic Category. Required.
+        :type diagnostic_category: str
+        :param detector_name: Detector Name. Required.
+        :type detector_name: str
         :param start_time: Start Time. Default value is None.
         :type start_time: ~datetime.datetime
         :param end_time: End Time. Default value is None.
@@ -2751,15 +2763,15 @@ class DiagnosticsOperations:  # pylint: disable=too-many-public-methods
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-03-01"))
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
         cls: ClsType[_models.DiagnosticDetectorResponse] = kwargs.pop("cls", None)
 
         _request = build_execute_site_detector_slot_request(
             resource_group_name=resource_group_name,
             site_name=site_name,
-            detector_name=detector_name,
-            diagnostic_category=diagnostic_category,
             slot=slot,
+            diagnostic_category=diagnostic_category,
+            detector_name=detector_name,
             subscription_id=self._config.subscription_id,
             start_time=start_time,
             end_time=end_time,

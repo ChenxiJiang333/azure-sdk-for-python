@@ -7,6 +7,7 @@
 # --------------------------------------------------------------------------
 from collections.abc import MutableMapping
 from typing import Any, Callable, Optional, TypeVar
+import urllib.parse
 
 from azure.core import AsyncPipelineClient
 from azure.core.async_paging import AsyncItemPaged, AsyncList
@@ -70,7 +71,8 @@ class WorkflowRunActionRepetitionsRequestHistoriesOperations:  # pylint: disable
     ) -> AsyncItemPaged["_models.RequestHistory"]:
         """List a workflow run repetition request history.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param name: Site name. Required.
         :type name: str
@@ -89,7 +91,7 @@ class WorkflowRunActionRepetitionsRequestHistoriesOperations:  # pylint: disable
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-03-01"))
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
         cls: ClsType[_models.RequestHistoryListResult] = kwargs.pop("cls", None)
 
         error_map: MutableMapping = {
@@ -118,7 +120,18 @@ class WorkflowRunActionRepetitionsRequestHistoriesOperations:  # pylint: disable
                 _request.url = self._client.format_url(_request.url)
 
             else:
-                _request = HttpRequest("GET", next_link)
+                # make call to next link with the client's api-version
+                _parsed_next_link = urllib.parse.urlparse(next_link)
+                _next_request_params = case_insensitive_dict(
+                    {
+                        key: [urllib.parse.quote(v) for v in value]
+                        for key, value in urllib.parse.parse_qs(_parsed_next_link.query).items()
+                    }
+                )
+                _next_request_params["api-version"] = self._config.api_version
+                _request = HttpRequest(
+                    "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
+                )
                 _request.url = self._client.format_url(_request.url)
                 _request.method = "GET"
             return _request
@@ -165,7 +178,8 @@ class WorkflowRunActionRepetitionsRequestHistoriesOperations:  # pylint: disable
     ) -> _models.RequestHistory:
         """Gets a workflow run repetition request history.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param name: Site name. Required.
         :type name: str
@@ -177,7 +191,7 @@ class WorkflowRunActionRepetitionsRequestHistoriesOperations:  # pylint: disable
         :type action_name: str
         :param repetition_name: The workflow repetition. Required.
         :type repetition_name: str
-        :param request_history_name: The request history name. Required.
+        :param request_history_name: The workflow repetition. Required.
         :type request_history_name: str
         :return: RequestHistory or the result of cls(response)
         :rtype: ~azure.mgmt.web.models.RequestHistory
@@ -194,7 +208,7 @@ class WorkflowRunActionRepetitionsRequestHistoriesOperations:  # pylint: disable
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-03-01"))
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
         cls: ClsType[_models.RequestHistory] = kwargs.pop("cls", None)
 
         _request = build_get_request(

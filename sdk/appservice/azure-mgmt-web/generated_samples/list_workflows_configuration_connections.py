@@ -31,10 +31,9 @@ def main():
         subscription_id="34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
     )
 
-    response = client.web_apps.list_workflows_connections_slot(
+    response = client.web_apps.list_workflows_connections(
         resource_group_name="testrg123",
         name="testsite2",
-        slot="staging",
     )
     print(response)
 

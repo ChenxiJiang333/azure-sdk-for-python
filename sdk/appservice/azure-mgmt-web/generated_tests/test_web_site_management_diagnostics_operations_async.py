@@ -168,8 +168,8 @@ class TestWebSiteManagementDiagnosticsOperationsAsync(AzureMgmtRecordedTestCase)
         response = await self.client.diagnostics.execute_site_detector(
             resource_group_name=resource_group.name,
             site_name="str",
-            detector_name="str",
             diagnostic_category="str",
+            detector_name="str",
             api_version="2025-03-01",
         )
 
@@ -195,8 +195,8 @@ class TestWebSiteManagementDiagnosticsOperationsAsync(AzureMgmtRecordedTestCase)
         response = await self.client.diagnostics.get_site_detector_response_slot(
             resource_group_name=resource_group.name,
             site_name="str",
-            detector_name="str",
             slot="str",
+            detector_name="str",
             api_version="2025-03-01",
         )
 
@@ -222,8 +222,8 @@ class TestWebSiteManagementDiagnosticsOperationsAsync(AzureMgmtRecordedTestCase)
         response = await self.client.diagnostics.get_site_diagnostic_category_slot(
             resource_group_name=resource_group.name,
             site_name="str",
-            diagnostic_category="str",
             slot="str",
+            diagnostic_category="str",
             api_version="2025-03-01",
         )
 
@@ -236,8 +236,8 @@ class TestWebSiteManagementDiagnosticsOperationsAsync(AzureMgmtRecordedTestCase)
         response = self.client.diagnostics.list_site_analyses_slot(
             resource_group_name=resource_group.name,
             site_name="str",
-            diagnostic_category="str",
             slot="str",
+            diagnostic_category="str",
             api_version="2025-03-01",
         )
         result = [r async for r in response]
@@ -250,9 +250,9 @@ class TestWebSiteManagementDiagnosticsOperationsAsync(AzureMgmtRecordedTestCase)
         response = await self.client.diagnostics.get_site_analysis_slot(
             resource_group_name=resource_group.name,
             site_name="str",
+            slot="str",
             diagnostic_category="str",
             analysis_name="str",
-            slot="str",
             api_version="2025-03-01",
         )
 
@@ -265,9 +265,9 @@ class TestWebSiteManagementDiagnosticsOperationsAsync(AzureMgmtRecordedTestCase)
         response = await self.client.diagnostics.execute_site_analysis_slot(
             resource_group_name=resource_group.name,
             site_name="str",
+            slot="str",
             diagnostic_category="str",
             analysis_name="str",
-            slot="str",
             api_version="2025-03-01",
         )
 
@@ -280,8 +280,8 @@ class TestWebSiteManagementDiagnosticsOperationsAsync(AzureMgmtRecordedTestCase)
         response = self.client.diagnostics.list_site_detectors_slot(
             resource_group_name=resource_group.name,
             site_name="str",
-            diagnostic_category="str",
             slot="str",
+            diagnostic_category="str",
             api_version="2025-03-01",
         )
         result = [r async for r in response]
@@ -294,9 +294,9 @@ class TestWebSiteManagementDiagnosticsOperationsAsync(AzureMgmtRecordedTestCase)
         response = await self.client.diagnostics.get_site_detector_slot(
             resource_group_name=resource_group.name,
             site_name="str",
+            slot="str",
             diagnostic_category="str",
             detector_name="str",
-            slot="str",
             api_version="2025-03-01",
         )
 
@@ -309,9 +309,9 @@ class TestWebSiteManagementDiagnosticsOperationsAsync(AzureMgmtRecordedTestCase)
         response = await self.client.diagnostics.execute_site_detector_slot(
             resource_group_name=resource_group.name,
             site_name="str",
-            detector_name="str",
-            diagnostic_category="str",
             slot="str",
+            diagnostic_category="str",
+            detector_name="str",
             api_version="2025-03-01",
         )
 

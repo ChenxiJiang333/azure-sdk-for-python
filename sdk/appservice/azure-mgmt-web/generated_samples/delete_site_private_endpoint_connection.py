@@ -31,7 +31,7 @@ def main():
         subscription_id="34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
     )
 
-    response = client.static_sites.begin_delete_private_endpoint_connection(
+    response = client.web_apps.begin_delete_private_endpoint_connection(
         resource_group_name="rg",
         name="testSite",
         private_endpoint_connection_name="connection",

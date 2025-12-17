@@ -66,7 +66,8 @@ class WorkflowsOperations:
     ) -> None:
         """Regenerates the callback URL access key for request triggers.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param name: Site name. Required.
         :type name: str
@@ -95,7 +96,8 @@ class WorkflowsOperations:
     ) -> None:
         """Regenerates the callback URL access key for request triggers.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param name: Site name. Required.
         :type name: str
@@ -122,7 +124,8 @@ class WorkflowsOperations:
     ) -> None:
         """Regenerates the callback URL access key for request triggers.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param name: Site name. Required.
         :type name: str
@@ -146,7 +149,7 @@ class WorkflowsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-03-01"))
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
         cls: ClsType[None] = kwargs.pop("cls", None)
 
@@ -203,7 +206,8 @@ class WorkflowsOperations:
     ) -> None:
         """Validates the workflow definition.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param name: Site name. Required.
         :type name: str
@@ -232,7 +236,8 @@ class WorkflowsOperations:
     ) -> None:
         """Validates the workflow definition.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param name: Site name. Required.
         :type name: str
@@ -259,7 +264,8 @@ class WorkflowsOperations:
     ) -> None:
         """Validates the workflow definition.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param name: Site name. Required.
         :type name: str
@@ -282,7 +288,7 @@ class WorkflowsOperations:
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-03-01"))
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
         cls: ClsType[None] = kwargs.pop("cls", None)
 

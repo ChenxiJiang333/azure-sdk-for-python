@@ -211,6 +211,14 @@ class TestWebSiteManagementStaticSitesOperations(AzureMgmtRecordedTestCase):
                     "tier": "str",
                 },
                 "stagingEnvironmentPolicy": "str",
+                "systemData": {
+                    "createdAt": "2020-02-20 00:00:00",
+                    "createdBy": "str",
+                    "createdByType": "str",
+                    "lastModifiedAt": "2020-02-20 00:00:00",
+                    "lastModifiedBy": "str",
+                    "lastModifiedByType": "str",
+                },
                 "tags": {"str": "str"},
                 "templateProperties": {
                     "description": "str",
@@ -232,18 +240,6 @@ class TestWebSiteManagementStaticSitesOperations(AzureMgmtRecordedTestCase):
                     }
                 ],
             },
-            api_version="2025-03-01",
-        ).result()  # call '.result()' to poll until service return final result
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_static_sites_begin_delete_static_site(self, resource_group):
-        response = self.client.static_sites.begin_delete_static_site(
-            resource_group_name=resource_group.name,
-            name="str",
             api_version="2025-03-01",
         ).result()  # call '.result()' to poll until service return final result
 
@@ -391,11 +387,22 @@ class TestWebSiteManagementStaticSitesOperations(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_static_sites_list_static_site_users(self, resource_group):
-        response = self.client.static_sites.list_static_site_users(
+    def test_static_sites_begin_delete_static_site(self, resource_group):
+        response = self.client.static_sites.begin_delete_static_site(
             resource_group_name=resource_group.name,
             name="str",
-            authprovider="str",
+            api_version="2025-03-01",
+        ).result()  # call '.result()' to poll until service return final result
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
+    def test_static_sites_list_basic_auth(self, resource_group):
+        response = self.client.static_sites.list_basic_auth(
+            resource_group_name=resource_group.name,
+            name="str",
             api_version="2025-03-01",
         )
         result = [r for r in response]
@@ -404,12 +411,11 @@ class TestWebSiteManagementStaticSitesOperations(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_static_sites_delete_static_site_user(self, resource_group):
-        response = self.client.static_sites.delete_static_site_user(
+    def test_static_sites_get_basic_auth(self, resource_group):
+        response = self.client.static_sites.get_basic_auth(
             resource_group_name=resource_group.name,
             name="str",
-            authprovider="str",
-            userid="str",
+            basic_auth_name="str",
             api_version="2025-03-01",
         )
 
@@ -418,21 +424,29 @@ class TestWebSiteManagementStaticSitesOperations(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_static_sites_update_static_site_user(self, resource_group):
-        response = self.client.static_sites.update_static_site_user(
+    def test_static_sites_create_or_update_basic_auth(self, resource_group):
+        response = self.client.static_sites.create_or_update_basic_auth(
             resource_group_name=resource_group.name,
             name="str",
-            authprovider="str",
-            userid="str",
-            static_site_user_envelope={
-                "displayName": "str",
+            basic_auth_name="str",
+            basic_auth_envelope={
+                "applicableEnvironmentsMode": "str",
+                "environments": ["str"],
                 "id": "str",
                 "kind": "str",
                 "name": "str",
-                "provider": "str",
-                "roles": "str",
+                "password": "str",
+                "secretState": "str",
+                "secretUrl": "str",
+                "systemData": {
+                    "createdAt": "2020-02-20 00:00:00",
+                    "createdBy": "str",
+                    "createdByType": "str",
+                    "lastModifiedAt": "2020-02-20 00:00:00",
+                    "lastModifiedBy": "str",
+                    "lastModifiedByType": "str",
+                },
                 "type": "str",
-                "userId": "str",
             },
             api_version="2025-03-01",
         )
@@ -550,22 +564,16 @@ class TestWebSiteManagementStaticSitesOperations(AzureMgmtRecordedTestCase):
                 "name": "str",
                 "region": "str",
                 "resourceId": "str",
+                "systemData": {
+                    "createdAt": "2020-02-20 00:00:00",
+                    "createdBy": "str",
+                    "createdByType": "str",
+                    "lastModifiedAt": "2020-02-20 00:00:00",
+                    "lastModifiedBy": "str",
+                    "lastModifiedByType": "str",
+                },
                 "type": "str",
             },
-            api_version="2025-03-01",
-        )
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_static_sites_delete_build_database_connection(self, resource_group):
-        response = self.client.static_sites.delete_build_database_connection(
-            resource_group_name=resource_group.name,
-            name="str",
-            environment_name="str",
-            database_connection_name="str",
             api_version="2025-03-01",
         )
 
@@ -586,6 +594,20 @@ class TestWebSiteManagementStaticSitesOperations(AzureMgmtRecordedTestCase):
                 "region": "str",
                 "resourceId": "str",
             },
+            api_version="2025-03-01",
+        )
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
+    def test_static_sites_delete_build_database_connection(self, resource_group):
+        response = self.client.static_sites.delete_build_database_connection(
+            resource_group_name=resource_group.name,
+            name="str",
+            environment_name="str",
+            database_connection_name="str",
             api_version="2025-03-01",
         )
 
@@ -616,6 +638,111 @@ class TestWebSiteManagementStaticSitesOperations(AzureMgmtRecordedTestCase):
             api_version="2025-03-01",
         )
         result = [r for r in response]
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
+    def test_static_sites_get_linked_backends_for_build(self, resource_group):
+        response = self.client.static_sites.get_linked_backends_for_build(
+            resource_group_name=resource_group.name,
+            name="str",
+            environment_name="str",
+            api_version="2025-03-01",
+        )
+        result = [r for r in response]
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
+    def test_static_sites_get_linked_backend_for_build(self, resource_group):
+        response = self.client.static_sites.get_linked_backend_for_build(
+            resource_group_name=resource_group.name,
+            name="str",
+            environment_name="str",
+            linked_backend_name="str",
+            api_version="2025-03-01",
+        )
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
+    def test_static_sites_begin_link_backend_to_build(self, resource_group):
+        response = self.client.static_sites.begin_link_backend_to_build(
+            resource_group_name=resource_group.name,
+            name="str",
+            environment_name="str",
+            linked_backend_name="str",
+            static_site_linked_backend_envelope={
+                "backendResourceId": "str",
+                "createdOn": "2020-02-20 00:00:00",
+                "id": "str",
+                "kind": "str",
+                "name": "str",
+                "provisioningState": "str",
+                "region": "str",
+                "systemData": {
+                    "createdAt": "2020-02-20 00:00:00",
+                    "createdBy": "str",
+                    "createdByType": "str",
+                    "lastModifiedAt": "2020-02-20 00:00:00",
+                    "lastModifiedBy": "str",
+                    "lastModifiedByType": "str",
+                },
+                "type": "str",
+            },
+            api_version="2025-03-01",
+        ).result()  # call '.result()' to poll until service return final result
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
+    def test_static_sites_unlink_backend_from_build(self, resource_group):
+        response = self.client.static_sites.unlink_backend_from_build(
+            resource_group_name=resource_group.name,
+            name="str",
+            environment_name="str",
+            linked_backend_name="str",
+            api_version="2025-03-01",
+        )
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
+    def test_static_sites_begin_validate_backend_for_build(self, resource_group):
+        response = self.client.static_sites.begin_validate_backend_for_build(
+            resource_group_name=resource_group.name,
+            name="str",
+            environment_name="str",
+            linked_backend_name="str",
+            static_site_linked_backend_envelope={
+                "backendResourceId": "str",
+                "createdOn": "2020-02-20 00:00:00",
+                "id": "str",
+                "kind": "str",
+                "name": "str",
+                "provisioningState": "str",
+                "region": "str",
+                "systemData": {
+                    "createdAt": "2020-02-20 00:00:00",
+                    "createdBy": "str",
+                    "createdByType": "str",
+                    "lastModifiedAt": "2020-02-20 00:00:00",
+                    "lastModifiedBy": "str",
+                    "lastModifiedByType": "str",
+                },
+                "type": "str",
+            },
+            api_version="2025-03-01",
+        ).result()  # call '.result()' to poll until service return final result
+
         # please add some check logic here by yourself
         # ...
 
@@ -700,6 +827,14 @@ class TestWebSiteManagementStaticSitesOperations(AzureMgmtRecordedTestCase):
                 "id": "str",
                 "kind": "str",
                 "name": "str",
+                "systemData": {
+                    "createdAt": "2020-02-20 00:00:00",
+                    "createdBy": "str",
+                    "createdByType": "str",
+                    "lastModifiedAt": "2020-02-20 00:00:00",
+                    "lastModifiedBy": "str",
+                    "lastModifiedByType": "str",
+                },
                 "type": "str",
             },
             api_version="2025-03-01",
@@ -753,55 +888,6 @@ class TestWebSiteManagementStaticSitesOperations(AzureMgmtRecordedTestCase):
             resource_group_name=resource_group.name,
             name="str",
             app_settings={"id": "str", "kind": "str", "name": "str", "properties": {"str": "str"}, "type": "str"},
-            api_version="2025-03-01",
-        )
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_static_sites_list_basic_auth(self, resource_group):
-        response = self.client.static_sites.list_basic_auth(
-            resource_group_name=resource_group.name,
-            name="str",
-            api_version="2025-03-01",
-        )
-        result = [r for r in response]
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_static_sites_get_basic_auth(self, resource_group):
-        response = self.client.static_sites.get_basic_auth(
-            resource_group_name=resource_group.name,
-            name="str",
-            basic_auth_name="str",
-            api_version="2025-03-01",
-        )
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_static_sites_create_or_update_basic_auth(self, resource_group):
-        response = self.client.static_sites.create_or_update_basic_auth(
-            resource_group_name=resource_group.name,
-            name="str",
-            basic_auth_name="str",
-            basic_auth_envelope={
-                "applicableEnvironmentsMode": "str",
-                "environments": ["str"],
-                "id": "str",
-                "kind": "str",
-                "name": "str",
-                "password": "str",
-                "secretState": "str",
-                "secretUrl": "str",
-                "type": "str",
-            },
             api_version="2025-03-01",
         )
 
@@ -877,11 +963,23 @@ class TestWebSiteManagementStaticSitesOperations(AzureMgmtRecordedTestCase):
             name="str",
             domain_name="str",
             static_site_custom_domain_request_properties_envelope={
+                "createdOn": "2020-02-20 00:00:00",
+                "domainName": "str",
+                "errorMessage": "str",
                 "id": "str",
                 "kind": "str",
                 "name": "str",
+                "status": "str",
+                "systemData": {
+                    "createdAt": "2020-02-20 00:00:00",
+                    "createdBy": "str",
+                    "createdByType": "str",
+                    "lastModifiedAt": "2020-02-20 00:00:00",
+                    "lastModifiedBy": "str",
+                    "lastModifiedByType": "str",
+                },
                 "type": "str",
-                "validationMethod": "cname-delegation",
+                "validationToken": "str",
             },
             api_version="2025-03-01",
         ).result()  # call '.result()' to poll until service return final result
@@ -963,21 +1061,16 @@ class TestWebSiteManagementStaticSitesOperations(AzureMgmtRecordedTestCase):
                 "name": "str",
                 "region": "str",
                 "resourceId": "str",
+                "systemData": {
+                    "createdAt": "2020-02-20 00:00:00",
+                    "createdBy": "str",
+                    "createdByType": "str",
+                    "lastModifiedAt": "2020-02-20 00:00:00",
+                    "lastModifiedBy": "str",
+                    "lastModifiedByType": "str",
+                },
                 "type": "str",
             },
-            api_version="2025-03-01",
-        )
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_static_sites_delete_database_connection(self, resource_group):
-        response = self.client.static_sites.delete_database_connection(
-            resource_group_name=resource_group.name,
-            name="str",
-            database_connection_name="str",
             api_version="2025-03-01",
         )
 
@@ -997,6 +1090,19 @@ class TestWebSiteManagementStaticSitesOperations(AzureMgmtRecordedTestCase):
                 "region": "str",
                 "resourceId": "str",
             },
+            api_version="2025-03-01",
+        )
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
+    def test_static_sites_delete_database_connection(self, resource_group):
+        response = self.client.static_sites.delete_database_connection(
+            resource_group_name=resource_group.name,
+            name="str",
+            database_connection_name="str",
             api_version="2025-03-01",
         )
 
@@ -1037,6 +1143,106 @@ class TestWebSiteManagementStaticSitesOperations(AzureMgmtRecordedTestCase):
             api_version="2025-03-01",
         )
         result = [r for r in response]
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
+    def test_static_sites_get_linked_backends(self, resource_group):
+        response = self.client.static_sites.get_linked_backends(
+            resource_group_name=resource_group.name,
+            name="str",
+            api_version="2025-03-01",
+        )
+        result = [r for r in response]
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
+    def test_static_sites_get_linked_backend(self, resource_group):
+        response = self.client.static_sites.get_linked_backend(
+            resource_group_name=resource_group.name,
+            name="str",
+            linked_backend_name="str",
+            api_version="2025-03-01",
+        )
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
+    def test_static_sites_begin_link_backend(self, resource_group):
+        response = self.client.static_sites.begin_link_backend(
+            resource_group_name=resource_group.name,
+            name="str",
+            linked_backend_name="str",
+            static_site_linked_backend_envelope={
+                "backendResourceId": "str",
+                "createdOn": "2020-02-20 00:00:00",
+                "id": "str",
+                "kind": "str",
+                "name": "str",
+                "provisioningState": "str",
+                "region": "str",
+                "systemData": {
+                    "createdAt": "2020-02-20 00:00:00",
+                    "createdBy": "str",
+                    "createdByType": "str",
+                    "lastModifiedAt": "2020-02-20 00:00:00",
+                    "lastModifiedBy": "str",
+                    "lastModifiedByType": "str",
+                },
+                "type": "str",
+            },
+            api_version="2025-03-01",
+        ).result()  # call '.result()' to poll until service return final result
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
+    def test_static_sites_unlink_backend(self, resource_group):
+        response = self.client.static_sites.unlink_backend(
+            resource_group_name=resource_group.name,
+            name="str",
+            linked_backend_name="str",
+            api_version="2025-03-01",
+        )
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
+    def test_static_sites_begin_validate_backend(self, resource_group):
+        response = self.client.static_sites.begin_validate_backend(
+            resource_group_name=resource_group.name,
+            name="str",
+            linked_backend_name="str",
+            static_site_linked_backend_envelope={
+                "backendResourceId": "str",
+                "createdOn": "2020-02-20 00:00:00",
+                "id": "str",
+                "kind": "str",
+                "name": "str",
+                "provisioningState": "str",
+                "region": "str",
+                "systemData": {
+                    "createdAt": "2020-02-20 00:00:00",
+                    "createdBy": "str",
+                    "createdByType": "str",
+                    "lastModifiedAt": "2020-02-20 00:00:00",
+                    "lastModifiedBy": "str",
+                    "lastModifiedByType": "str",
+                },
+                "type": "str",
+            },
+            api_version="2025-03-01",
+        ).result()  # call '.result()' to poll until service return final result
+
         # please add some check logic here by yourself
         # ...
 
@@ -1128,6 +1334,14 @@ class TestWebSiteManagementStaticSitesOperations(AzureMgmtRecordedTestCase):
                 "privateEndpoint": {"id": "str"},
                 "privateLinkServiceConnectionState": {"actionsRequired": "str", "description": "str", "status": "str"},
                 "provisioningState": "str",
+                "systemData": {
+                    "createdAt": "2020-02-20 00:00:00",
+                    "createdBy": "str",
+                    "createdByType": "str",
+                    "lastModifiedAt": "2020-02-20 00:00:00",
+                    "lastModifiedBy": "str",
+                    "lastModifiedByType": "str",
+                },
                 "type": "str",
             },
             api_version="2025-03-01",
@@ -1232,6 +1446,14 @@ class TestWebSiteManagementStaticSitesOperations(AzureMgmtRecordedTestCase):
                 "id": "str",
                 "kind": "str",
                 "name": "str",
+                "systemData": {
+                    "createdAt": "2020-02-20 00:00:00",
+                    "createdBy": "str",
+                    "createdByType": "str",
+                    "lastModifiedAt": "2020-02-20 00:00:00",
+                    "lastModifiedBy": "str",
+                    "lastModifiedByType": "str",
+                },
                 "type": "str",
             },
             api_version="2025-03-01",
@@ -1278,57 +1500,11 @@ class TestWebSiteManagementStaticSitesOperations(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_static_sites_begin_validate_backend(self, resource_group):
-        response = self.client.static_sites.begin_validate_backend(
+    def test_static_sites_list_static_site_users(self, resource_group):
+        response = self.client.static_sites.list_static_site_users(
             resource_group_name=resource_group.name,
             name="str",
-            linked_backend_name="str",
-            static_site_linked_backend_envelope={
-                "backendResourceId": "str",
-                "createdOn": "2020-02-20 00:00:00",
-                "id": "str",
-                "kind": "str",
-                "name": "str",
-                "provisioningState": "str",
-                "region": "str",
-                "type": "str",
-            },
-            api_version="2025-03-01",
-        ).result()  # call '.result()' to poll until service return final result
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_static_sites_begin_validate_backend_for_build(self, resource_group):
-        response = self.client.static_sites.begin_validate_backend_for_build(
-            resource_group_name=resource_group.name,
-            name="str",
-            environment_name="str",
-            linked_backend_name="str",
-            static_site_linked_backend_envelope={
-                "backendResourceId": "str",
-                "createdOn": "2020-02-20 00:00:00",
-                "id": "str",
-                "kind": "str",
-                "name": "str",
-                "provisioningState": "str",
-                "region": "str",
-                "type": "str",
-            },
-            api_version="2025-03-01",
-        ).result()  # call '.result()' to poll until service return final result
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_static_sites_get_linked_backends(self, resource_group):
-        response = self.client.static_sites.get_linked_backends(
-            resource_group_name=resource_group.name,
-            name="str",
+            authprovider="str",
             api_version="2025-03-01",
         )
         result = [r for r in response]
@@ -1337,60 +1513,22 @@ class TestWebSiteManagementStaticSitesOperations(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_static_sites_get_linked_backends_for_build(self, resource_group):
-        response = self.client.static_sites.get_linked_backends_for_build(
+    def test_static_sites_update_static_site_user(self, resource_group):
+        response = self.client.static_sites.update_static_site_user(
             resource_group_name=resource_group.name,
             name="str",
-            environment_name="str",
-            api_version="2025-03-01",
-        )
-        result = [r for r in response]
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_static_sites_get_linked_backend(self, resource_group):
-        response = self.client.static_sites.get_linked_backend(
-            resource_group_name=resource_group.name,
-            name="str",
-            linked_backend_name="str",
-            api_version="2025-03-01",
-        )
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_static_sites_begin_link_backend(self, resource_group):
-        response = self.client.static_sites.begin_link_backend(
-            resource_group_name=resource_group.name,
-            name="str",
-            linked_backend_name="str",
-            static_site_linked_backend_envelope={
-                "backendResourceId": "str",
-                "createdOn": "2020-02-20 00:00:00",
+            authprovider="str",
+            userid="str",
+            static_site_user_envelope={
+                "displayName": "str",
                 "id": "str",
                 "kind": "str",
                 "name": "str",
-                "provisioningState": "str",
-                "region": "str",
+                "provider": "str",
+                "roles": "str",
                 "type": "str",
+                "userId": "str",
             },
-            api_version="2025-03-01",
-        ).result()  # call '.result()' to poll until service return final result
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_static_sites_unlink_backend(self, resource_group):
-        response = self.client.static_sites.unlink_backend(
-            resource_group_name=resource_group.name,
-            name="str",
-            linked_backend_name="str",
             api_version="2025-03-01",
         )
 
@@ -1399,50 +1537,12 @@ class TestWebSiteManagementStaticSitesOperations(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_static_sites_get_linked_backend_for_build(self, resource_group):
-        response = self.client.static_sites.get_linked_backend_for_build(
+    def test_static_sites_delete_static_site_user(self, resource_group):
+        response = self.client.static_sites.delete_static_site_user(
             resource_group_name=resource_group.name,
             name="str",
-            environment_name="str",
-            linked_backend_name="str",
-            api_version="2025-03-01",
-        )
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_static_sites_begin_link_backend_to_build(self, resource_group):
-        response = self.client.static_sites.begin_link_backend_to_build(
-            resource_group_name=resource_group.name,
-            name="str",
-            environment_name="str",
-            linked_backend_name="str",
-            static_site_linked_backend_envelope={
-                "backendResourceId": "str",
-                "createdOn": "2020-02-20 00:00:00",
-                "id": "str",
-                "kind": "str",
-                "name": "str",
-                "provisioningState": "str",
-                "region": "str",
-                "type": "str",
-            },
-            api_version="2025-03-01",
-        ).result()  # call '.result()' to poll until service return final result
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_static_sites_unlink_backend_from_build(self, resource_group):
-        response = self.client.static_sites.unlink_backend_from_build(
-            resource_group_name=resource_group.name,
-            name="str",
-            environment_name="str",
-            linked_backend_name="str",
+            authprovider="str",
+            userid="str",
             api_version="2025-03-01",
         )
 

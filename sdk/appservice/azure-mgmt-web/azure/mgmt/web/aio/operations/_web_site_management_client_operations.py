@@ -9,6 +9,7 @@
 from collections.abc import MutableMapping
 from io import IOBase
 from typing import Any, Callable, IO, Optional, TypeVar, Union, overload
+import urllib.parse
 
 from azure.core import AsyncPipelineClient
 from azure.core.async_paging import AsyncItemPaged, AsyncList
@@ -82,7 +83,7 @@ class _WebSiteManagementClientOperationsMixin(
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-03-01"))
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
         cls: ClsType[_models.User] = kwargs.pop("cls", None)
 
         _request = build_get_publishing_user_request(
@@ -174,7 +175,7 @@ class _WebSiteManagementClientOperationsMixin(
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-03-01"))
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
         cls: ClsType[_models.User] = kwargs.pop("cls", None)
 
@@ -231,7 +232,7 @@ class _WebSiteManagementClientOperationsMixin(
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-03-01"))
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
         cls: ClsType[_models.SourceControlCollection] = kwargs.pop("cls", None)
 
         error_map: MutableMapping = {
@@ -253,7 +254,18 @@ class _WebSiteManagementClientOperationsMixin(
                 _request.url = self._client.format_url(_request.url)
 
             else:
-                _request = HttpRequest("GET", next_link)
+                # make call to next link with the client's api-version
+                _parsed_next_link = urllib.parse.urlparse(next_link)
+                _next_request_params = case_insensitive_dict(
+                    {
+                        key: [urllib.parse.quote(v) for v in value]
+                        for key, value in urllib.parse.parse_qs(_parsed_next_link.query).items()
+                    }
+                )
+                _next_request_params["api-version"] = self._config.api_version
+                _request = HttpRequest(
+                    "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
+                )
                 _request.url = self._client.format_url(_request.url)
                 _request.method = "GET"
             return _request
@@ -309,7 +321,7 @@ class _WebSiteManagementClientOperationsMixin(
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-03-01"))
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
         cls: ClsType[_models.SourceControl] = kwargs.pop("cls", None)
 
         _request = build_get_source_control_request(
@@ -420,7 +432,7 @@ class _WebSiteManagementClientOperationsMixin(
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-03-01"))
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
         cls: ClsType[_models.SourceControl] = kwargs.pop("cls", None)
 
@@ -466,6 +478,86 @@ class _WebSiteManagementClientOperationsMixin(
         return deserialized  # type: ignore
 
     @distributed_trace
+    def list_ase_regions(self, **kwargs: Any) -> AsyncItemPaged["_models.AseRegion"]:
+        """Get a list of available ASE regions and its supported Skus.
+
+        Description for get a list of available ASE regions and its supported Skus.
+
+        :return: An iterator like instance of either AseRegion or the result of cls(response)
+        :rtype: ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.web.models.AseRegion]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
+        cls: ClsType[_models.AseRegionCollection] = kwargs.pop("cls", None)
+
+        error_map: MutableMapping = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        def prepare_request(next_link=None):
+            if not next_link:
+
+                _request = build_list_ase_regions_request(
+                    subscription_id=self._config.subscription_id,
+                    api_version=api_version,
+                    headers=_headers,
+                    params=_params,
+                )
+                _request.url = self._client.format_url(_request.url)
+
+            else:
+                # make call to next link with the client's api-version
+                _parsed_next_link = urllib.parse.urlparse(next_link)
+                _next_request_params = case_insensitive_dict(
+                    {
+                        key: [urllib.parse.quote(v) for v in value]
+                        for key, value in urllib.parse.parse_qs(_parsed_next_link.query).items()
+                    }
+                )
+                _next_request_params["api-version"] = self._config.api_version
+                _request = HttpRequest(
+                    "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
+                )
+                _request.url = self._client.format_url(_request.url)
+                _request.method = "GET"
+            return _request
+
+        async def extract_data(pipeline_response):
+            deserialized = self._deserialize("AseRegionCollection", pipeline_response)
+            list_of_elem = deserialized.value
+            if cls:
+                list_of_elem = cls(list_of_elem)  # type: ignore
+            return deserialized.next_link or None, AsyncList(list_of_elem)
+
+        async def get_next(next_link=None):
+            _request = prepare_request(next_link)
+
+            _stream = False
+            pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+                _request, stream=_stream, **kwargs
+            )
+            response = pipeline_response.http_response
+
+            if response.status_code not in [200]:
+                map_error(status_code=response.status_code, response=response, error_map=error_map)
+                error = self._deserialize.failsafe_deserialize(
+                    _models.DefaultErrorResponse,
+                    pipeline_response,
+                )
+                raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
+
+            return pipeline_response
+
+        return AsyncItemPaged(get_next, extract_data)
+
+    @distributed_trace
     def list_billing_meters(
         self, billing_location: Optional[str] = None, os_type: Optional[str] = None, **kwargs: Any
     ) -> AsyncItemPaged["_models.BillingMeter"]:
@@ -484,7 +576,7 @@ class _WebSiteManagementClientOperationsMixin(
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-03-01"))
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
         cls: ClsType[_models.BillingMeterCollection] = kwargs.pop("cls", None)
 
         error_map: MutableMapping = {
@@ -509,7 +601,18 @@ class _WebSiteManagementClientOperationsMixin(
                 _request.url = self._client.format_url(_request.url)
 
             else:
-                _request = HttpRequest("GET", next_link)
+                # make call to next link with the client's api-version
+                _parsed_next_link = urllib.parse.urlparse(next_link)
+                _next_request_params = case_insensitive_dict(
+                    {
+                        key: [urllib.parse.quote(v) for v in value]
+                        for key, value in urllib.parse.parse_qs(_parsed_next_link.query).items()
+                    }
+                )
+                _next_request_params["api-version"] = self._config.api_version
+                _request = HttpRequest(
+                    "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
+                )
                 _request.url = self._client.format_url(_request.url)
                 _request.method = "GET"
             return _request
@@ -542,32 +645,53 @@ class _WebSiteManagementClientOperationsMixin(
 
         return AsyncItemPaged(get_next, extract_data)
 
-    @distributed_trace_async
+    @overload
     async def check_name_availability(
-        self,
-        name: str,
-        type: Union[str, _models.CheckNameResourceTypes],
-        is_fqdn: Optional[bool] = None,
-        environment_id: Optional[str] = None,
-        **kwargs: Any
+        self, request: _models.ResourceNameAvailabilityRequest, *, content_type: str = "application/json", **kwargs: Any
     ) -> _models.ResourceNameAvailability:
         """Check if a resource name is available.
 
         Description for Check if a resource name is available.
 
-        :param name: Resource name to verify. Required.
-        :type name: str
-        :param type: Resource type used for verification. Known values are: "Site", "Slot",
-         "HostingEnvironment", "PublishingUser", "Microsoft.Web/sites", "Microsoft.Web/sites/slots",
-         "Microsoft.Web/hostingEnvironments", and "Microsoft.Web/publishingUsers". Required.
-        :type type: str or ~azure.mgmt.web.models.CheckNameResourceTypes
-        :param is_fqdn: Is fully qualified domain name. Default value is None.
-        :type is_fqdn: bool
-        :param environment_id: Azure Resource Manager ID of the customer's selected Container Apps
-         Environment on which to host the Function app. This must be of the form
-         /subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.App/managedEnvironments/{managedEnvironmentName}.
-         Default value is None.
-        :type environment_id: str
+        :param request: The request body. Required.
+        :type request: ~azure.mgmt.web.models.ResourceNameAvailabilityRequest
+        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :return: ResourceNameAvailability or the result of cls(response)
+        :rtype: ~azure.mgmt.web.models.ResourceNameAvailability
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+
+    @overload
+    async def check_name_availability(
+        self, request: IO[bytes], *, content_type: str = "application/json", **kwargs: Any
+    ) -> _models.ResourceNameAvailability:
+        """Check if a resource name is available.
+
+        Description for Check if a resource name is available.
+
+        :param request: The request body. Required.
+        :type request: IO[bytes]
+        :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :return: ResourceNameAvailability or the result of cls(response)
+        :rtype: ~azure.mgmt.web.models.ResourceNameAvailability
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+
+    @distributed_trace_async
+    async def check_name_availability(
+        self, request: Union[_models.ResourceNameAvailabilityRequest, IO[bytes]], **kwargs: Any
+    ) -> _models.ResourceNameAvailability:
+        """Check if a resource name is available.
+
+        Description for Check if a resource name is available.
+
+        :param request: The request body. Is either a ResourceNameAvailabilityRequest type or a
+         IO[bytes] type. Required.
+        :type request: ~azure.mgmt.web.models.ResourceNameAvailabilityRequest or IO[bytes]
         :return: ResourceNameAvailability or the result of cls(response)
         :rtype: ~azure.mgmt.web.models.ResourceNameAvailability
         :raises ~azure.core.exceptions.HttpResponseError:
@@ -583,20 +707,24 @@ class _WebSiteManagementClientOperationsMixin(
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-03-01"))
-        content_type: str = kwargs.pop("content_type", _headers.pop("Content-Type", "application/json"))
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
         cls: ClsType[_models.ResourceNameAvailability] = kwargs.pop("cls", None)
 
-        _request = _models.ResourceNameAvailabilityRequest(
-            environment_id=environment_id, is_fqdn=is_fqdn, name=name, type=type
-        )
-        _json = self._serialize.body(_request, "ResourceNameAvailabilityRequest")
+        content_type = content_type or "application/json"
+        _json = None
+        _content = None
+        if isinstance(request, (IOBase, bytes)):
+            _content = request
+        else:
+            _json = self._serialize.body(request, "ResourceNameAvailabilityRequest")
 
         _request = build_check_name_availability_request(
             subscription_id=self._config.subscription_id,
             api_version=api_version,
             content_type=content_type,
             json=_json,
+            content=_content,
             headers=_headers,
             params=_params,
         )
@@ -641,7 +769,7 @@ class _WebSiteManagementClientOperationsMixin(
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-03-01"))
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
         cls: ClsType[_models.CustomHostnameSitesCollection] = kwargs.pop("cls", None)
 
         error_map: MutableMapping = {
@@ -665,7 +793,18 @@ class _WebSiteManagementClientOperationsMixin(
                 _request.url = self._client.format_url(_request.url)
 
             else:
-                _request = HttpRequest("GET", next_link)
+                # make call to next link with the client's api-version
+                _parsed_next_link = urllib.parse.urlparse(next_link)
+                _next_request_params = case_insensitive_dict(
+                    {
+                        key: [urllib.parse.quote(v) for v in value]
+                        for key, value in urllib.parse.parse_qs(_parsed_next_link.query).items()
+                    }
+                )
+                _next_request_params["api-version"] = self._config.api_version
+                _request = HttpRequest(
+                    "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
+                )
                 _request.url = self._client.format_url(_request.url)
                 _request.method = "GET"
             return _request
@@ -719,7 +858,7 @@ class _WebSiteManagementClientOperationsMixin(
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-03-01"))
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
         cls: ClsType[_models.DeploymentLocations] = kwargs.pop("cls", None)
 
         _request = build_get_subscription_deployment_locations_request(
@@ -751,75 +890,6 @@ class _WebSiteManagementClientOperationsMixin(
             return cls(pipeline_response, deserialized, {})  # type: ignore
 
         return deserialized  # type: ignore
-
-    @distributed_trace
-    def list_ase_regions(self, **kwargs: Any) -> AsyncItemPaged["_models.AseRegion"]:
-        """Get a list of available ASE regions and its supported Skus.
-
-        Description for get a list of available ASE regions and its supported Skus.
-
-        :return: An iterator like instance of either AseRegion or the result of cls(response)
-        :rtype: ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.web.models.AseRegion]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        _headers = kwargs.pop("headers", {}) or {}
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-03-01"))
-        cls: ClsType[_models.AseRegionCollection] = kwargs.pop("cls", None)
-
-        error_map: MutableMapping = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        def prepare_request(next_link=None):
-            if not next_link:
-
-                _request = build_list_ase_regions_request(
-                    subscription_id=self._config.subscription_id,
-                    api_version=api_version,
-                    headers=_headers,
-                    params=_params,
-                )
-                _request.url = self._client.format_url(_request.url)
-
-            else:
-                _request = HttpRequest("GET", next_link)
-                _request.url = self._client.format_url(_request.url)
-                _request.method = "GET"
-            return _request
-
-        async def extract_data(pipeline_response):
-            deserialized = self._deserialize("AseRegionCollection", pipeline_response)
-            list_of_elem = deserialized.value
-            if cls:
-                list_of_elem = cls(list_of_elem)  # type: ignore
-            return deserialized.next_link or None, AsyncList(list_of_elem)
-
-        async def get_next(next_link=None):
-            _request = prepare_request(next_link)
-
-            _stream = False
-            pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
-                _request, stream=_stream, **kwargs
-            )
-            response = pipeline_response.http_response
-
-            if response.status_code not in [200]:
-                map_error(status_code=response.status_code, response=response, error_map=error_map)
-                error = self._deserialize.failsafe_deserialize(
-                    _models.DefaultErrorResponse,
-                    pipeline_response,
-                )
-                raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
-
-            return pipeline_response
-
-        return AsyncItemPaged(get_next, extract_data)
 
     @distributed_trace
     def list_geo_regions(
@@ -860,7 +930,7 @@ class _WebSiteManagementClientOperationsMixin(
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-03-01"))
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
         cls: ClsType[_models.GeoRegionCollection] = kwargs.pop("cls", None)
 
         error_map: MutableMapping = {
@@ -888,7 +958,18 @@ class _WebSiteManagementClientOperationsMixin(
                 _request.url = self._client.format_url(_request.url)
 
             else:
-                _request = HttpRequest("GET", next_link)
+                # make call to next link with the client's api-version
+                _parsed_next_link = urllib.parse.urlparse(next_link)
+                _next_request_params = case_insensitive_dict(
+                    {
+                        key: [urllib.parse.quote(v) for v in value]
+                        for key, value in urllib.parse.parse_qs(_parsed_next_link.query).items()
+                    }
+                )
+                _next_request_params["api-version"] = self._config.api_version
+                _request = HttpRequest(
+                    "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
+                )
                 _request.url = self._client.format_url(_request.url)
                 _request.method = "GET"
             return _request
@@ -929,7 +1010,7 @@ class _WebSiteManagementClientOperationsMixin(
 
         Description for List all apps that are assigned to a hostname.
 
-        :param name_identifier: Hostname information. Required.
+        :param name_identifier: The request body. Required.
         :type name_identifier: ~azure.mgmt.web.models.NameIdentifier
         :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
          Default value is "application/json".
@@ -947,7 +1028,7 @@ class _WebSiteManagementClientOperationsMixin(
 
         Description for List all apps that are assigned to a hostname.
 
-        :param name_identifier: Hostname information. Required.
+        :param name_identifier: The request body. Required.
         :type name_identifier: IO[bytes]
         :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
          Default value is "application/json".
@@ -965,8 +1046,8 @@ class _WebSiteManagementClientOperationsMixin(
 
         Description for List all apps that are assigned to a hostname.
 
-        :param name_identifier: Hostname information. Is either a NameIdentifier type or a IO[bytes]
-         type. Required.
+        :param name_identifier: The request body. Is either a NameIdentifier type or a IO[bytes] type.
+         Required.
         :type name_identifier: ~azure.mgmt.web.models.NameIdentifier or IO[bytes]
         :return: An iterator like instance of either Identifier or the result of cls(response)
         :rtype: ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.web.models.Identifier]
@@ -975,7 +1056,7 @@ class _WebSiteManagementClientOperationsMixin(
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-03-01"))
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
         cls: ClsType[_models.IdentifierCollection] = kwargs.pop("cls", None)
 
@@ -1009,7 +1090,18 @@ class _WebSiteManagementClientOperationsMixin(
                 _request.url = self._client.format_url(_request.url)
 
             else:
-                _request = HttpRequest("GET", next_link)
+                # make call to next link with the client's api-version
+                _parsed_next_link = urllib.parse.urlparse(next_link)
+                _next_request_params = case_insensitive_dict(
+                    {
+                        key: [urllib.parse.quote(v) for v in value]
+                        for key, value in urllib.parse.parse_qs(_parsed_next_link.query).items()
+                    }
+                )
+                _next_request_params["api-version"] = self._config.api_version
+                _request = HttpRequest(
+                    "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
+                )
                 _request.url = self._client.format_url(_request.url)
                 _request.method = "GET"
             return _request
@@ -1042,35 +1134,64 @@ class _WebSiteManagementClientOperationsMixin(
 
         return AsyncItemPaged(get_next, extract_data)
 
-    @distributed_trace_async
+    @overload
     async def regional_check_name_availability(
         self,
         location: str,
-        name: str,
-        type: Union[str, _models.CheckNameResourceTypes],
-        resource_group_name: Optional[str] = None,
-        auto_generated_domain_name_label_scope: Optional[str] = None,
+        request: _models.DnlResourceNameAvailabilityRequest,
+        *,
+        content_type: str = "application/json",
         **kwargs: Any
     ) -> _models.DnlResourceNameAvailability:
         """Check if a resource name is available for DNL sites.
 
         Check if a resource name is available for DNL sites.
 
-        :param location: Required.
+        :param location: The name of the Azure region. Required.
         :type location: str
-        :param name: Resource name to verify. Required.
-        :type name: str
-        :param type: Resource type used for verification. Known values are: "Site", "Slot",
-         "HostingEnvironment", "PublishingUser", "Microsoft.Web/sites", "Microsoft.Web/sites/slots",
-         "Microsoft.Web/hostingEnvironments", and "Microsoft.Web/publishingUsers". Required.
-        :type type: str or ~azure.mgmt.web.models.CheckNameResourceTypes
-        :param resource_group_name: Resource group name. Default value is None.
-        :type resource_group_name: str
-        :param auto_generated_domain_name_label_scope: Indicates the endpoint name reuse scope.The
-         default value is TenantReuse.
-         Supported values are TenantReuse, SubscriptionReuse, ResourceGroupReuse, NoReuse. Default
-         value is None.
-        :type auto_generated_domain_name_label_scope: str
+        :param request: The request body. Required.
+        :type request: ~azure.mgmt.web.models.DnlResourceNameAvailabilityRequest
+        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :return: DnlResourceNameAvailability or the result of cls(response)
+        :rtype: ~azure.mgmt.web.models.DnlResourceNameAvailability
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+
+    @overload
+    async def regional_check_name_availability(
+        self, location: str, request: IO[bytes], *, content_type: str = "application/json", **kwargs: Any
+    ) -> _models.DnlResourceNameAvailability:
+        """Check if a resource name is available for DNL sites.
+
+        Check if a resource name is available for DNL sites.
+
+        :param location: The name of the Azure region. Required.
+        :type location: str
+        :param request: The request body. Required.
+        :type request: IO[bytes]
+        :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :return: DnlResourceNameAvailability or the result of cls(response)
+        :rtype: ~azure.mgmt.web.models.DnlResourceNameAvailability
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+
+    @distributed_trace_async
+    async def regional_check_name_availability(
+        self, location: str, request: Union[_models.DnlResourceNameAvailabilityRequest, IO[bytes]], **kwargs: Any
+    ) -> _models.DnlResourceNameAvailability:
+        """Check if a resource name is available for DNL sites.
+
+        Check if a resource name is available for DNL sites.
+
+        :param location: The name of the Azure region. Required.
+        :type location: str
+        :param request: The request body. Is either a DnlResourceNameAvailabilityRequest type or a
+         IO[bytes] type. Required.
+        :type request: ~azure.mgmt.web.models.DnlResourceNameAvailabilityRequest or IO[bytes]
         :return: DnlResourceNameAvailability or the result of cls(response)
         :rtype: ~azure.mgmt.web.models.DnlResourceNameAvailability
         :raises ~azure.core.exceptions.HttpResponseError:
@@ -1086,17 +1207,17 @@ class _WebSiteManagementClientOperationsMixin(
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-03-01"))
-        content_type: str = kwargs.pop("content_type", _headers.pop("Content-Type", "application/json"))
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
         cls: ClsType[_models.DnlResourceNameAvailability] = kwargs.pop("cls", None)
 
-        _request = _models.DnlResourceNameAvailabilityRequest(
-            auto_generated_domain_name_label_scope=auto_generated_domain_name_label_scope,
-            name=name,
-            resource_group_name=resource_group_name,
-            type=type,
-        )
-        _json = self._serialize.body(_request, "DnlResourceNameAvailabilityRequest")
+        content_type = content_type or "application/json"
+        _json = None
+        _content = None
+        if isinstance(request, (IOBase, bytes)):
+            _content = request
+        else:
+            _json = self._serialize.body(request, "DnlResourceNameAvailabilityRequest")
 
         _request = build_regional_check_name_availability_request(
             location=location,
@@ -1104,6 +1225,7 @@ class _WebSiteManagementClientOperationsMixin(
             api_version=api_version,
             content_type=content_type,
             json=_json,
+            content=_content,
             headers=_headers,
             params=_params,
         )
@@ -1144,7 +1266,7 @@ class _WebSiteManagementClientOperationsMixin(
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-03-01"))
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
         cls: ClsType[_models.PremierAddOnOfferCollection] = kwargs.pop("cls", None)
 
         error_map: MutableMapping = {
@@ -1167,7 +1289,18 @@ class _WebSiteManagementClientOperationsMixin(
                 _request.url = self._client.format_url(_request.url)
 
             else:
-                _request = HttpRequest("GET", next_link)
+                # make call to next link with the client's api-version
+                _parsed_next_link = urllib.parse.urlparse(next_link)
+                _next_request_params = case_insensitive_dict(
+                    {
+                        key: [urllib.parse.quote(v) for v in value]
+                        for key, value in urllib.parse.parse_qs(_parsed_next_link.query).items()
+                    }
+                )
+                _next_request_params["api-version"] = self._config.api_version
+                _request = HttpRequest(
+                    "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
+                )
                 _request.url = self._client.format_url(_request.url)
                 _request.method = "GET"
             return _request
@@ -1221,7 +1354,7 @@ class _WebSiteManagementClientOperationsMixin(
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-03-01"))
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
         cls: ClsType[_models.SkuInfos] = kwargs.pop("cls", None)
 
         _request = build_list_skus_request(
@@ -1264,7 +1397,7 @@ class _WebSiteManagementClientOperationsMixin(
         Description for Verifies if this VNET is compatible with an App Service Environment by
         analyzing the Network Security Group rules.
 
-        :param parameters: VNET information. Required.
+        :param parameters: The request body. Required.
         :type parameters: ~azure.mgmt.web.models.VnetParameters
         :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
          Default value is "application/json".
@@ -1284,7 +1417,7 @@ class _WebSiteManagementClientOperationsMixin(
         Description for Verifies if this VNET is compatible with an App Service Environment by
         analyzing the Network Security Group rules.
 
-        :param parameters: VNET information. Required.
+        :param parameters: The request body. Required.
         :type parameters: IO[bytes]
         :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
          Default value is "application/json".
@@ -1304,7 +1437,7 @@ class _WebSiteManagementClientOperationsMixin(
         Description for Verifies if this VNET is compatible with an App Service Environment by
         analyzing the Network Security Group rules.
 
-        :param parameters: VNET information. Is either a VnetParameters type or a IO[bytes] type.
+        :param parameters: The request body. Is either a VnetParameters type or a IO[bytes] type.
          Required.
         :type parameters: ~azure.mgmt.web.models.VnetParameters or IO[bytes]
         :return: VnetValidationFailureDetails or the result of cls(response)
@@ -1322,7 +1455,7 @@ class _WebSiteManagementClientOperationsMixin(
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-03-01"))
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
         cls: ClsType[_models.VnetValidationFailureDetails] = kwargs.pop("cls", None)
 
@@ -1380,7 +1513,8 @@ class _WebSiteManagementClientOperationsMixin(
 
         Description for Move resources between resource groups.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param move_resource_envelope: Object that represents the resource to move. Required.
         :type move_resource_envelope: ~azure.mgmt.web.models.CsmMoveResourceEnvelope
@@ -1405,7 +1539,8 @@ class _WebSiteManagementClientOperationsMixin(
 
         Description for Move resources between resource groups.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param move_resource_envelope: Object that represents the resource to move. Required.
         :type move_resource_envelope: IO[bytes]
@@ -1428,7 +1563,8 @@ class _WebSiteManagementClientOperationsMixin(
 
         Description for Move resources between resource groups.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param move_resource_envelope: Object that represents the resource to move. Is either a
          CsmMoveResourceEnvelope type or a IO[bytes] type. Required.
@@ -1448,7 +1584,7 @@ class _WebSiteManagementClientOperationsMixin(
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-03-01"))
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
         cls: ClsType[None] = kwargs.pop("cls", None)
 
@@ -1503,7 +1639,8 @@ class _WebSiteManagementClientOperationsMixin(
 
         Description for Validate if a resource can be created.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param validate_request: Request with the resources to validate. Required.
         :type validate_request: ~azure.mgmt.web.models.ValidateRequest
@@ -1528,7 +1665,8 @@ class _WebSiteManagementClientOperationsMixin(
 
         Description for Validate if a resource can be created.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param validate_request: Request with the resources to validate. Required.
         :type validate_request: IO[bytes]
@@ -1548,7 +1686,8 @@ class _WebSiteManagementClientOperationsMixin(
 
         Description for Validate if a resource can be created.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param validate_request: Request with the resources to validate. Is either a ValidateRequest
          type or a IO[bytes] type. Required.
@@ -1568,7 +1707,7 @@ class _WebSiteManagementClientOperationsMixin(
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-03-01"))
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
         cls: ClsType[_models.ValidateResponse] = kwargs.pop("cls", None)
 
@@ -1627,7 +1766,8 @@ class _WebSiteManagementClientOperationsMixin(
 
         Description for Validate whether a resource can be moved.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param move_resource_envelope: Object that represents the resource to move. Required.
         :type move_resource_envelope: ~azure.mgmt.web.models.CsmMoveResourceEnvelope
@@ -1652,7 +1792,8 @@ class _WebSiteManagementClientOperationsMixin(
 
         Description for Validate whether a resource can be moved.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param move_resource_envelope: Object that represents the resource to move. Required.
         :type move_resource_envelope: IO[bytes]
@@ -1675,7 +1816,8 @@ class _WebSiteManagementClientOperationsMixin(
 
         Description for Validate whether a resource can be moved.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param move_resource_envelope: Object that represents the resource to move. Is either a
          CsmMoveResourceEnvelope type or a IO[bytes] type. Required.
@@ -1695,7 +1837,7 @@ class _WebSiteManagementClientOperationsMixin(
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-03-01"))
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
         cls: ClsType[None] = kwargs.pop("cls", None)
 

@@ -34,8 +34,8 @@ def main():
     response = client.web_apps.get_private_endpoint_connection_slot(
         resource_group_name="rg",
         name="testSite",
-        private_endpoint_connection_name="connection",
         slot="stage",
+        private_endpoint_connection_name="connection",
     )
     print(response)
 

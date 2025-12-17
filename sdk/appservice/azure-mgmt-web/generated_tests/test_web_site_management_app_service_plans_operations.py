@@ -65,7 +65,7 @@ class TestWebSiteManagementAppServicePlansOperations(AzureMgmtRecordedTestCase):
                 "freeOfferExpirationTime": "2020-02-20 00:00:00",
                 "geoRegion": "str",
                 "hostingEnvironmentProfile": {"id": "str", "name": "str", "type": "str"},
-                "hyperV": False,
+                "hyperV": bool,
                 "id": "str",
                 "identity": {
                     "principalId": "str",
@@ -76,7 +76,7 @@ class TestWebSiteManagementAppServicePlansOperations(AzureMgmtRecordedTestCase):
                 "installScripts": [{"name": "str", "source": {"sourceUri": "str", "type": "str"}}],
                 "isCustomMode": bool,
                 "isSpot": bool,
-                "isXenon": False,
+                "isXenon": bool,
                 "kind": "str",
                 "kubeEnvironmentProfile": {"id": "str", "name": "str", "type": "str"},
                 "maximumElasticWorkerCount": 0,
@@ -85,7 +85,7 @@ class TestWebSiteManagementAppServicePlansOperations(AzureMgmtRecordedTestCase):
                 "network": {"virtualNetworkSubnetId": "str"},
                 "numberOfSites": 0,
                 "numberOfWorkers": 0,
-                "perSiteScaling": False,
+                "perSiteScaling": bool,
                 "planDefaultIdentity": {"identityType": "str", "userAssignedIdentityResourceId": "str"},
                 "provisioningState": "str",
                 "rdpEnabled": bool,
@@ -96,7 +96,7 @@ class TestWebSiteManagementAppServicePlansOperations(AzureMgmtRecordedTestCase):
                         "type": "str",
                     }
                 ],
-                "reserved": False,
+                "reserved": bool,
                 "resourceGroup": "str",
                 "sku": {
                     "capabilities": [{"name": "str", "reason": "str", "value": "str"}],
@@ -120,27 +120,23 @@ class TestWebSiteManagementAppServicePlansOperations(AzureMgmtRecordedTestCase):
                     }
                 ],
                 "subscription": "str",
+                "systemData": {
+                    "createdAt": "2020-02-20 00:00:00",
+                    "createdBy": "str",
+                    "createdByType": "str",
+                    "lastModifiedAt": "2020-02-20 00:00:00",
+                    "lastModifiedBy": "str",
+                    "lastModifiedByType": "str",
+                },
                 "tags": {"str": "str"},
                 "targetWorkerCount": 0,
                 "targetWorkerSizeId": 0,
                 "type": "str",
                 "workerTierName": "str",
-                "zoneRedundant": False,
+                "zoneRedundant": bool,
             },
             api_version="2025-03-01",
         ).result()  # call '.result()' to poll until service return final result
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_app_service_plans_delete(self, resource_group):
-        response = self.client.app_service_plans.delete(
-            resource_group_name=resource_group.name,
-            name="str",
-            api_version="2025-03-01",
-        )
 
         # please add some check logic here by yourself
         # ...
@@ -186,6 +182,18 @@ class TestWebSiteManagementAppServicePlansOperations(AzureMgmtRecordedTestCase):
                 "workerTierName": "str",
                 "zoneRedundant": False,
             },
+            api_version="2025-03-01",
+        )
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
+    def test_app_service_plans_delete(self, resource_group):
+        response = self.client.app_service_plans.delete(
+            resource_group_name=resource_group.name,
+            name="str",
             api_version="2025-03-01",
         )
 
@@ -407,6 +415,14 @@ class TestWebSiteManagementAppServicePlansOperations(AzureMgmtRecordedTestCase):
                 "id": "str",
                 "kind": "str",
                 "name": "str",
+                "systemData": {
+                    "createdAt": "2020-02-20 00:00:00",
+                    "createdBy": "str",
+                    "createdByType": "str",
+                    "lastModifiedAt": "2020-02-20 00:00:00",
+                    "lastModifiedBy": "str",
+                    "lastModifiedByType": "str",
+                },
                 "type": "str",
                 "vnetName": "str",
                 "vpnPackageUri": "str",
@@ -459,22 +475,16 @@ class TestWebSiteManagementAppServicePlansOperations(AzureMgmtRecordedTestCase):
                 "name": "str",
                 "routeType": "str",
                 "startAddress": "str",
+                "systemData": {
+                    "createdAt": "2020-02-20 00:00:00",
+                    "createdBy": "str",
+                    "createdByType": "str",
+                    "lastModifiedAt": "2020-02-20 00:00:00",
+                    "lastModifiedBy": "str",
+                    "lastModifiedByType": "str",
+                },
                 "type": "str",
             },
-            api_version="2025-03-01",
-        )
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_app_service_plans_delete_vnet_route(self, resource_group):
-        response = self.client.app_service_plans.delete_vnet_route(
-            resource_group_name=resource_group.name,
-            name="str",
-            vnet_name="str",
-            route_name="str",
             api_version="2025-03-01",
         )
 
@@ -496,8 +506,30 @@ class TestWebSiteManagementAppServicePlansOperations(AzureMgmtRecordedTestCase):
                 "name": "str",
                 "routeType": "str",
                 "startAddress": "str",
+                "systemData": {
+                    "createdAt": "2020-02-20 00:00:00",
+                    "createdBy": "str",
+                    "createdByType": "str",
+                    "lastModifiedAt": "2020-02-20 00:00:00",
+                    "lastModifiedBy": "str",
+                    "lastModifiedByType": "str",
+                },
                 "type": "str",
             },
+            api_version="2025-03-01",
+        )
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
+    def test_app_service_plans_delete_vnet_route(self, resource_group):
+        response = self.client.app_service_plans.delete_vnet_route(
+            resource_group_name=resource_group.name,
+            name="str",
+            vnet_name="str",
+            route_name="str",
             api_version="2025-03-01",
         )
 

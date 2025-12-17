@@ -34,8 +34,8 @@ def main():
     response = client.web_apps.begin_delete_private_endpoint_connection_slot(
         resource_group_name="rg",
         name="testSite",
-        private_endpoint_connection_name="connection",
         slot="stage",
+        private_endpoint_connection_name="connection",
     ).result()
     print(response)
 

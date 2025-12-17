@@ -9,6 +9,7 @@
 from collections.abc import MutableMapping
 from io import IOBase
 from typing import Any, AsyncIterator, Callable, IO, Optional, TypeVar, Union, cast, overload
+import urllib.parse
 
 from azure.core import AsyncPipelineClient
 from azure.core.async_paging import AsyncItemPaged, AsyncList
@@ -67,7 +68,6 @@ from ...operations._app_service_plans_operations import (
 )
 from .._configuration import WebSiteManagementClientConfiguration
 
-JSON = MutableMapping[str, Any]
 T = TypeVar("T")
 ClsType = Optional[Callable[[PipelineResponse[HttpRequest, AsyncHttpResponse], T, dict[str, Any]], Any]]
 List = list
@@ -100,7 +100,7 @@ class AppServicePlansOperations:  # pylint: disable=too-many-public-methods
 
         :param detailed: Specify :code:`<code>true</code>` to return all App Service plan properties.
          The default is :code:`<code>false</code>`, which returns a subset of the properties.
-          Retrieval of all properties may increase the API latency. Default value is None.
+         Retrieval of all properties may increase the API latency. Default value is None.
         :type detailed: bool
         :return: An iterator like instance of either AppServicePlan or the result of cls(response)
         :rtype: ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.web.models.AppServicePlan]
@@ -109,7 +109,7 @@ class AppServicePlansOperations:  # pylint: disable=too-many-public-methods
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-03-01"))
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
         cls: ClsType[_models.AppServicePlanCollection] = kwargs.pop("cls", None)
 
         error_map: MutableMapping = {
@@ -133,7 +133,18 @@ class AppServicePlansOperations:  # pylint: disable=too-many-public-methods
                 _request.url = self._client.format_url(_request.url)
 
             else:
-                _request = HttpRequest("GET", next_link)
+                # make call to next link with the client's api-version
+                _parsed_next_link = urllib.parse.urlparse(next_link)
+                _next_request_params = case_insensitive_dict(
+                    {
+                        key: [urllib.parse.quote(v) for v in value]
+                        for key, value in urllib.parse.parse_qs(_parsed_next_link.query).items()
+                    }
+                )
+                _next_request_params["api-version"] = self._config.api_version
+                _request = HttpRequest(
+                    "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
+                )
                 _request.url = self._client.format_url(_request.url)
                 _request.method = "GET"
             return _request
@@ -174,7 +185,8 @@ class AppServicePlansOperations:  # pylint: disable=too-many-public-methods
 
         Description for Get all App Service plans in a resource group.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :return: An iterator like instance of either AppServicePlan or the result of cls(response)
         :rtype: ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.web.models.AppServicePlan]
@@ -183,7 +195,7 @@ class AppServicePlansOperations:  # pylint: disable=too-many-public-methods
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-03-01"))
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
         cls: ClsType[_models.AppServicePlanCollection] = kwargs.pop("cls", None)
 
         error_map: MutableMapping = {
@@ -207,7 +219,18 @@ class AppServicePlansOperations:  # pylint: disable=too-many-public-methods
                 _request.url = self._client.format_url(_request.url)
 
             else:
-                _request = HttpRequest("GET", next_link)
+                # make call to next link with the client's api-version
+                _parsed_next_link = urllib.parse.urlparse(next_link)
+                _next_request_params = case_insensitive_dict(
+                    {
+                        key: [urllib.parse.quote(v) for v in value]
+                        for key, value in urllib.parse.parse_qs(_parsed_next_link.query).items()
+                    }
+                )
+                _next_request_params["api-version"] = self._config.api_version
+                _request = HttpRequest(
+                    "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
+                )
                 _request.url = self._client.format_url(_request.url)
                 _request.method = "GET"
             return _request
@@ -246,7 +269,8 @@ class AppServicePlansOperations:  # pylint: disable=too-many-public-methods
 
         Description for Get an App Service plan.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param name: Name of the App Service plan. Required.
         :type name: str
@@ -265,7 +289,7 @@ class AppServicePlansOperations:  # pylint: disable=too-many-public-methods
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-03-01"))
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
         cls: ClsType[_models.AppServicePlan] = kwargs.pop("cls", None)
 
         _request = build_get_request(
@@ -318,7 +342,7 @@ class AppServicePlansOperations:  # pylint: disable=too-many-public-methods
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-03-01"))
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
         cls: ClsType[AsyncIterator[bytes]] = kwargs.pop("cls", None)
 
@@ -363,10 +387,14 @@ class AppServicePlansOperations:  # pylint: disable=too-many-public-methods
             )
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
+        response_headers = {}
+        if response.status_code == 202:
+            response_headers["Location"] = self._deserialize("str", response.headers.get("Location"))
+
         deserialized = response.stream_download(self._client._pipeline, decompress=_decompress)
 
         if cls:
-            return cls(pipeline_response, deserialized, {})  # type: ignore
+            return cls(pipeline_response, deserialized, response_headers)  # type: ignore
 
         return deserialized  # type: ignore
 
@@ -384,7 +412,8 @@ class AppServicePlansOperations:  # pylint: disable=too-many-public-methods
 
         Description for Creates or updates an App Service Plan.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param name: Name of the App Service plan. Required.
         :type name: str
@@ -413,7 +442,8 @@ class AppServicePlansOperations:  # pylint: disable=too-many-public-methods
 
         Description for Creates or updates an App Service Plan.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param name: Name of the App Service plan. Required.
         :type name: str
@@ -440,7 +470,8 @@ class AppServicePlansOperations:  # pylint: disable=too-many-public-methods
 
         Description for Creates or updates an App Service Plan.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param name: Name of the App Service plan. Required.
         :type name: str
@@ -455,7 +486,7 @@ class AppServicePlansOperations:  # pylint: disable=too-many-public-methods
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-03-01"))
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
         cls: ClsType[_models.AppServicePlan] = kwargs.pop("cls", None)
         polling: Union[bool, AsyncPollingMethod] = kwargs.pop("polling", True)
@@ -483,7 +514,9 @@ class AppServicePlansOperations:  # pylint: disable=too-many-public-methods
             return deserialized
 
         if polling is True:
-            polling_method: AsyncPollingMethod = cast(AsyncPollingMethod, AsyncARMPolling(lro_delay, **kwargs))
+            polling_method: AsyncPollingMethod = cast(
+                AsyncPollingMethod, AsyncARMPolling(lro_delay, lro_options={"final-state-via": "location"}, **kwargs)
+            )
         elif polling is False:
             polling_method = cast(AsyncPollingMethod, AsyncNoPolling())
         else:
@@ -499,62 +532,6 @@ class AppServicePlansOperations:  # pylint: disable=too-many-public-methods
             self._client, raw_result, get_long_running_output, polling_method  # type: ignore
         )
 
-    @distributed_trace_async
-    async def delete(self, resource_group_name: str, name: str, **kwargs: Any) -> None:
-        """Delete an App Service plan.
-
-        Description for Delete an App Service plan.
-
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
-        :type resource_group_name: str
-        :param name: Name of the App Service plan. Required.
-        :type name: str
-        :return: None or the result of cls(response)
-        :rtype: None
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        error_map: MutableMapping = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        _headers = kwargs.pop("headers", {}) or {}
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-03-01"))
-        cls: ClsType[None] = kwargs.pop("cls", None)
-
-        _request = build_delete_request(
-            resource_group_name=resource_group_name,
-            name=name,
-            subscription_id=self._config.subscription_id,
-            api_version=api_version,
-            headers=_headers,
-            params=_params,
-        )
-        _request.url = self._client.format_url(_request.url)
-
-        _stream = False
-        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            _request, stream=_stream, **kwargs
-        )
-
-        response = pipeline_response.http_response
-
-        if response.status_code not in [200, 204]:
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = self._deserialize.failsafe_deserialize(
-                _models.DefaultErrorResponse,
-                pipeline_response,
-            )
-            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
-
-        if cls:
-            return cls(pipeline_response, None, {})  # type: ignore
-
     @overload
     async def update(
         self,
@@ -569,7 +546,8 @@ class AppServicePlansOperations:  # pylint: disable=too-many-public-methods
 
         Description for Creates or updates an App Service Plan.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param name: Name of the App Service plan. Required.
         :type name: str
@@ -597,7 +575,8 @@ class AppServicePlansOperations:  # pylint: disable=too-many-public-methods
 
         Description for Creates or updates an App Service Plan.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param name: Name of the App Service plan. Required.
         :type name: str
@@ -623,7 +602,8 @@ class AppServicePlansOperations:  # pylint: disable=too-many-public-methods
 
         Description for Creates or updates an App Service Plan.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param name: Name of the App Service plan. Required.
         :type name: str
@@ -645,7 +625,7 @@ class AppServicePlansOperations:  # pylint: disable=too-many-public-methods
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-03-01"))
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
         cls: ClsType[_models.AppServicePlan] = kwargs.pop("cls", None)
 
@@ -693,12 +673,70 @@ class AppServicePlansOperations:  # pylint: disable=too-many-public-methods
         return deserialized  # type: ignore
 
     @distributed_trace_async
+    async def delete(self, resource_group_name: str, name: str, **kwargs: Any) -> None:
+        """Delete an App Service plan.
+
+        Description for Delete an App Service plan.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param name: Name of the App Service plan. Required.
+        :type name: str
+        :return: None or the result of cls(response)
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        _request = build_delete_request(
+            resource_group_name=resource_group_name,
+            name=name,
+            subscription_id=self._config.subscription_id,
+            api_version=api_version,
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200, 204]:
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            error = self._deserialize.failsafe_deserialize(
+                _models.DefaultErrorResponse,
+                pipeline_response,
+            )
+            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
+
+        if cls:
+            return cls(pipeline_response, None, {})  # type: ignore
+
+    @distributed_trace_async
     async def list_capabilities(self, resource_group_name: str, name: str, **kwargs: Any) -> List[_models.Capability]:
         """List all capabilities of an App Service plan.
 
         Description for List all capabilities of an App Service plan.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param name: Name of the App Service plan. Required.
         :type name: str
@@ -717,7 +755,7 @@ class AppServicePlansOperations:  # pylint: disable=too-many-public-methods
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-03-01"))
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
         cls: ClsType[List[_models.Capability]] = kwargs.pop("cls", None)
 
         _request = build_list_capabilities_request(
@@ -760,7 +798,8 @@ class AppServicePlansOperations:  # pylint: disable=too-many-public-methods
 
         Description for Get the RDP password for an IsCustomMode ServerFarm.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param name: Name of the App Service plan. Required.
         :type name: str
@@ -779,7 +818,7 @@ class AppServicePlansOperations:  # pylint: disable=too-many-public-methods
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-03-01"))
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
         cls: ClsType[_models.ServerFarmRdpDetails] = kwargs.pop("cls", None)
 
         _request = build_get_server_farm_rdp_password_request(
@@ -822,7 +861,8 @@ class AppServicePlansOperations:  # pylint: disable=too-many-public-methods
 
         Description for Retrieve a Hybrid Connection in use in an App Service plan.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param name: Name of the App Service plan. Required.
         :type name: str
@@ -845,7 +885,7 @@ class AppServicePlansOperations:  # pylint: disable=too-many-public-methods
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-03-01"))
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
         cls: ClsType[_models.HybridConnection] = kwargs.pop("cls", None)
 
         _request = build_get_hybrid_connection_request(
@@ -890,7 +930,8 @@ class AppServicePlansOperations:  # pylint: disable=too-many-public-methods
 
         Description for Delete a Hybrid Connection in use in an App Service plan.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param name: Name of the App Service plan. Required.
         :type name: str
@@ -913,7 +954,7 @@ class AppServicePlansOperations:  # pylint: disable=too-many-public-methods
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-03-01"))
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
         cls: ClsType[None] = kwargs.pop("cls", None)
 
         _request = build_delete_hybrid_connection_request(
@@ -954,13 +995,14 @@ class AppServicePlansOperations:  # pylint: disable=too-many-public-methods
 
         Description for Get the send key name and value of a Hybrid Connection.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param name: Name of the App Service plan. Required.
         :type name: str
-        :param namespace_name: The name of the Service Bus namespace. Required.
+        :param namespace_name: Name of the Service Bus namespace. Required.
         :type namespace_name: str
-        :param relay_name: The name of the Service Bus relay. Required.
+        :param relay_name: Name of the Service Bus relay. Required.
         :type relay_name: str
         :return: HybridConnectionKey or the result of cls(response)
         :rtype: ~azure.mgmt.web.models.HybridConnectionKey
@@ -977,7 +1019,7 @@ class AppServicePlansOperations:  # pylint: disable=too-many-public-methods
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-03-01"))
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
         cls: ClsType[_models.HybridConnectionKey] = kwargs.pop("cls", None)
 
         _request = build_list_hybrid_connection_keys_request(
@@ -1022,13 +1064,14 @@ class AppServicePlansOperations:  # pylint: disable=too-many-public-methods
 
         Description for Get all apps that use a Hybrid Connection in an App Service Plan.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param name: Name of the App Service plan. Required.
         :type name: str
-        :param namespace_name: Name of the Hybrid Connection namespace. Required.
+        :param namespace_name: Name of the Service Bus namespace. Required.
         :type namespace_name: str
-        :param relay_name: Name of the Hybrid Connection relay. Required.
+        :param relay_name: Name of the Service Bus relay. Required.
         :type relay_name: str
         :return: An iterator like instance of either str or the result of cls(response)
         :rtype: ~azure.core.async_paging.AsyncItemPaged[str]
@@ -1037,7 +1080,7 @@ class AppServicePlansOperations:  # pylint: disable=too-many-public-methods
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-03-01"))
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
         cls: ClsType[_models.ResourceCollection] = kwargs.pop("cls", None)
 
         error_map: MutableMapping = {
@@ -1064,7 +1107,18 @@ class AppServicePlansOperations:  # pylint: disable=too-many-public-methods
                 _request.url = self._client.format_url(_request.url)
 
             else:
-                _request = HttpRequest("GET", next_link)
+                # make call to next link with the client's api-version
+                _parsed_next_link = urllib.parse.urlparse(next_link)
+                _next_request_params = case_insensitive_dict(
+                    {
+                        key: [urllib.parse.quote(v) for v in value]
+                        for key, value in urllib.parse.parse_qs(_parsed_next_link.query).items()
+                    }
+                )
+                _next_request_params["api-version"] = self._config.api_version
+                _request = HttpRequest(
+                    "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
+                )
                 _request.url = self._client.format_url(_request.url)
                 _request.method = "GET"
             return _request
@@ -1105,7 +1159,8 @@ class AppServicePlansOperations:  # pylint: disable=too-many-public-methods
 
         Description for Get the maximum number of Hybrid Connections allowed in an App Service plan.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param name: Name of the App Service plan. Required.
         :type name: str
@@ -1124,7 +1179,7 @@ class AppServicePlansOperations:  # pylint: disable=too-many-public-methods
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-03-01"))
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
         cls: ClsType[_models.HybridConnectionLimits] = kwargs.pop("cls", None)
 
         _request = build_get_hybrid_connection_plan_limit_request(
@@ -1167,7 +1222,8 @@ class AppServicePlansOperations:  # pylint: disable=too-many-public-methods
 
         Description for Retrieve all Hybrid Connections in use in an App Service plan.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param name: Name of the App Service plan. Required.
         :type name: str
@@ -1178,7 +1234,7 @@ class AppServicePlansOperations:  # pylint: disable=too-many-public-methods
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-03-01"))
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
         cls: ClsType[_models.HybridConnectionCollection] = kwargs.pop("cls", None)
 
         error_map: MutableMapping = {
@@ -1203,7 +1259,18 @@ class AppServicePlansOperations:  # pylint: disable=too-many-public-methods
                 _request.url = self._client.format_url(_request.url)
 
             else:
-                _request = HttpRequest("GET", next_link)
+                # make call to next link with the client's api-version
+                _parsed_next_link = urllib.parse.urlparse(next_link)
+                _next_request_params = case_insensitive_dict(
+                    {
+                        key: [urllib.parse.quote(v) for v in value]
+                        for key, value in urllib.parse.parse_qs(_parsed_next_link.query).items()
+                    }
+                )
+                _next_request_params["api-version"] = self._config.api_version
+                _request = HttpRequest(
+                    "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
+                )
                 _request.url = self._client.format_url(_request.url)
                 _request.method = "GET"
             return _request
@@ -1244,7 +1311,8 @@ class AppServicePlansOperations:  # pylint: disable=too-many-public-methods
 
         Description for Get the instance details for an app service plan.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param name: Name of the App Service plan. Required.
         :type name: str
@@ -1263,7 +1331,7 @@ class AppServicePlansOperations:  # pylint: disable=too-many-public-methods
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-03-01"))
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
         cls: ClsType[_models.ServerFarmInstanceDetails] = kwargs.pop("cls", None)
 
         _request = build_get_server_farm_instance_details_request(
@@ -1306,7 +1374,8 @@ class AppServicePlansOperations:  # pylint: disable=too-many-public-methods
 
         Description for Restart all apps in an App Service plan.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param name: Name of the App Service plan. Required.
         :type name: str
@@ -1330,7 +1399,7 @@ class AppServicePlansOperations:  # pylint: disable=too-many-public-methods
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-03-01"))
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
         cls: ClsType[None] = kwargs.pop("cls", None)
 
         _request = build_restart_web_apps_request(
@@ -1376,7 +1445,8 @@ class AppServicePlansOperations:  # pylint: disable=too-many-public-methods
 
         Description for Get all apps associated with an App Service plan.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param name: Name of the App Service plan. Required.
         :type name: str
@@ -1397,7 +1467,7 @@ class AppServicePlansOperations:  # pylint: disable=too-many-public-methods
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-03-01"))
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
         cls: ClsType[_models.WebAppCollection] = kwargs.pop("cls", None)
 
         error_map: MutableMapping = {
@@ -1425,7 +1495,18 @@ class AppServicePlansOperations:  # pylint: disable=too-many-public-methods
                 _request.url = self._client.format_url(_request.url)
 
             else:
-                _request = HttpRequest("GET", next_link)
+                # make call to next link with the client's api-version
+                _parsed_next_link = urllib.parse.urlparse(next_link)
+                _next_request_params = case_insensitive_dict(
+                    {
+                        key: [urllib.parse.quote(v) for v in value]
+                        for key, value in urllib.parse.parse_qs(_parsed_next_link.query).items()
+                    }
+                )
+                _next_request_params["api-version"] = self._config.api_version
+                _request = HttpRequest(
+                    "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
+                )
                 _request.url = self._client.format_url(_request.url)
                 _request.method = "GET"
             return _request
@@ -1459,17 +1540,18 @@ class AppServicePlansOperations:  # pylint: disable=too-many-public-methods
         return AsyncItemPaged(get_next, extract_data)
 
     @distributed_trace_async
-    async def get_server_farm_skus(self, resource_group_name: str, name: str, **kwargs: Any) -> JSON:
+    async def get_server_farm_skus(self, resource_group_name: str, name: str, **kwargs: Any) -> Any:
         """Gets all selectable SKUs for a given App Service Plan.
 
         Description for Gets all selectable SKUs for a given App Service Plan.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
-        :param name: Name of App Service Plan. Required.
+        :param name: Name of the App Service plan. Required.
         :type name: str
-        :return: JSON or the result of cls(response)
-        :rtype: JSON
+        :return: any or the result of cls(response)
+        :rtype: any
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         error_map: MutableMapping = {
@@ -1483,8 +1565,8 @@ class AppServicePlansOperations:  # pylint: disable=too-many-public-methods
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-03-01"))
-        cls: ClsType[JSON] = kwargs.pop("cls", None)
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
+        cls: ClsType[Any] = kwargs.pop("cls", None)
 
         _request = build_get_server_farm_skus_request(
             resource_group_name=resource_group_name,
@@ -1526,9 +1608,10 @@ class AppServicePlansOperations:  # pylint: disable=too-many-public-methods
 
         Description for Gets server farm usage information.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
-        :param name: Name of App Service Plan. Required.
+        :param name: Name of the App Service plan. Required.
         :type name: str
         :param filter: Return only usages/metrics specified in the filter. Filter conforms to odata
          syntax. Example: $filter=(name.value eq 'Metric1' or name.value eq 'Metric2'). Default value is
@@ -1541,7 +1624,7 @@ class AppServicePlansOperations:  # pylint: disable=too-many-public-methods
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-03-01"))
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
         cls: ClsType[_models.CsmUsageQuotaCollection] = kwargs.pop("cls", None)
 
         error_map: MutableMapping = {
@@ -1567,7 +1650,18 @@ class AppServicePlansOperations:  # pylint: disable=too-many-public-methods
                 _request.url = self._client.format_url(_request.url)
 
             else:
-                _request = HttpRequest("GET", next_link)
+                # make call to next link with the client's api-version
+                _parsed_next_link = urllib.parse.urlparse(next_link)
+                _next_request_params = case_insensitive_dict(
+                    {
+                        key: [urllib.parse.quote(v) for v in value]
+                        for key, value in urllib.parse.parse_qs(_parsed_next_link.query).items()
+                    }
+                )
+                _next_request_params["api-version"] = self._config.api_version
+                _request = HttpRequest(
+                    "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
+                )
                 _request.url = self._client.format_url(_request.url)
                 _request.method = "GET"
             return _request
@@ -1606,7 +1700,8 @@ class AppServicePlansOperations:  # pylint: disable=too-many-public-methods
 
         Description for Get all Virtual Networks associated with an App Service plan.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param name: Name of the App Service plan. Required.
         :type name: str
@@ -1625,7 +1720,7 @@ class AppServicePlansOperations:  # pylint: disable=too-many-public-methods
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-03-01"))
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
         cls: ClsType[List[_models.VnetInfoResource]] = kwargs.pop("cls", None)
 
         _request = build_list_vnets_request(
@@ -1668,7 +1763,8 @@ class AppServicePlansOperations:  # pylint: disable=too-many-public-methods
 
         Description for Get a Virtual Network associated with an App Service plan.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param name: Name of the App Service plan. Required.
         :type name: str
@@ -1689,7 +1785,7 @@ class AppServicePlansOperations:  # pylint: disable=too-many-public-methods
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-03-01"))
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
         cls: ClsType[_models.VnetInfoResource] = kwargs.pop("cls", None)
 
         _request = build_get_vnet_from_server_farm_request(
@@ -1733,7 +1829,8 @@ class AppServicePlansOperations:  # pylint: disable=too-many-public-methods
 
         Description for Get a Virtual Network gateway.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param name: Name of the App Service plan. Required.
         :type name: str
@@ -1756,7 +1853,7 @@ class AppServicePlansOperations:  # pylint: disable=too-many-public-methods
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-03-01"))
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
         cls: ClsType[_models.VnetGateway] = kwargs.pop("cls", None)
 
         _request = build_get_vnet_gateway_request(
@@ -1809,7 +1906,8 @@ class AppServicePlansOperations:  # pylint: disable=too-many-public-methods
 
         Description for Update a Virtual Network gateway.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param name: Name of the App Service plan. Required.
         :type name: str
@@ -1843,7 +1941,8 @@ class AppServicePlansOperations:  # pylint: disable=too-many-public-methods
 
         Description for Update a Virtual Network gateway.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param name: Name of the App Service plan. Required.
         :type name: str
@@ -1875,7 +1974,8 @@ class AppServicePlansOperations:  # pylint: disable=too-many-public-methods
 
         Description for Update a Virtual Network gateway.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param name: Name of the App Service plan. Required.
         :type name: str
@@ -1901,7 +2001,7 @@ class AppServicePlansOperations:  # pylint: disable=too-many-public-methods
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-03-01"))
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
         cls: ClsType[_models.VnetGateway] = kwargs.pop("cls", None)
 
@@ -1959,7 +2059,8 @@ class AppServicePlansOperations:  # pylint: disable=too-many-public-methods
         Description for Get all routes that are associated with a Virtual Network in an App Service
         plan.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param name: Name of the App Service plan. Required.
         :type name: str
@@ -1980,7 +2081,7 @@ class AppServicePlansOperations:  # pylint: disable=too-many-public-methods
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-03-01"))
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
         cls: ClsType[List[_models.VnetRoute]] = kwargs.pop("cls", None)
 
         _request = build_list_routes_for_vnet_request(
@@ -2024,7 +2125,8 @@ class AppServicePlansOperations:  # pylint: disable=too-many-public-methods
 
         Description for Get a Virtual Network route in an App Service plan.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param name: Name of the App Service plan. Required.
         :type name: str
@@ -2047,7 +2149,7 @@ class AppServicePlansOperations:  # pylint: disable=too-many-public-methods
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-03-01"))
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
         cls: ClsType[List[_models.VnetRoute]] = kwargs.pop("cls", None)
 
         _request = build_get_route_for_vnet_request(
@@ -2100,7 +2202,8 @@ class AppServicePlansOperations:  # pylint: disable=too-many-public-methods
 
         Description for Create or update a Virtual Network route in an App Service plan.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param name: Name of the App Service plan. Required.
         :type name: str
@@ -2134,7 +2237,8 @@ class AppServicePlansOperations:  # pylint: disable=too-many-public-methods
 
         Description for Create or update a Virtual Network route in an App Service plan.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param name: Name of the App Service plan. Required.
         :type name: str
@@ -2166,7 +2270,8 @@ class AppServicePlansOperations:  # pylint: disable=too-many-public-methods
 
         Description for Create or update a Virtual Network route in an App Service plan.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param name: Name of the App Service plan. Required.
         :type name: str
@@ -2192,7 +2297,7 @@ class AppServicePlansOperations:  # pylint: disable=too-many-public-methods
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-03-01"))
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
         cls: ClsType[_models.VnetRoute] = kwargs.pop("cls", None)
 
@@ -2241,70 +2346,6 @@ class AppServicePlansOperations:  # pylint: disable=too-many-public-methods
 
         return deserialized  # type: ignore
 
-    @distributed_trace_async
-    async def delete_vnet_route(
-        self, resource_group_name: str, name: str, vnet_name: str, route_name: str, **kwargs: Any
-    ) -> None:
-        """Delete a Virtual Network route in an App Service plan.
-
-        Description for Delete a Virtual Network route in an App Service plan.
-
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
-        :type resource_group_name: str
-        :param name: Name of the App Service plan. Required.
-        :type name: str
-        :param vnet_name: Name of the Virtual Network. Required.
-        :type vnet_name: str
-        :param route_name: Name of the Virtual Network route. Required.
-        :type route_name: str
-        :return: None or the result of cls(response)
-        :rtype: None
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        error_map: MutableMapping = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        _headers = kwargs.pop("headers", {}) or {}
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-03-01"))
-        cls: ClsType[None] = kwargs.pop("cls", None)
-
-        _request = build_delete_vnet_route_request(
-            resource_group_name=resource_group_name,
-            name=name,
-            vnet_name=vnet_name,
-            route_name=route_name,
-            subscription_id=self._config.subscription_id,
-            api_version=api_version,
-            headers=_headers,
-            params=_params,
-        )
-        _request.url = self._client.format_url(_request.url)
-
-        _stream = False
-        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            _request, stream=_stream, **kwargs
-        )
-
-        response = pipeline_response.http_response
-
-        if response.status_code not in [200]:
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = self._deserialize.failsafe_deserialize(
-                _models.DefaultErrorResponse,
-                pipeline_response,
-            )
-            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
-
-        if cls:
-            return cls(pipeline_response, None, {})  # type: ignore
-
     @overload
     async def update_vnet_route(
         self,
@@ -2321,7 +2362,8 @@ class AppServicePlansOperations:  # pylint: disable=too-many-public-methods
 
         Description for Create or update a Virtual Network route in an App Service plan.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param name: Name of the App Service plan. Required.
         :type name: str
@@ -2355,7 +2397,8 @@ class AppServicePlansOperations:  # pylint: disable=too-many-public-methods
 
         Description for Create or update a Virtual Network route in an App Service plan.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param name: Name of the App Service plan. Required.
         :type name: str
@@ -2387,7 +2430,8 @@ class AppServicePlansOperations:  # pylint: disable=too-many-public-methods
 
         Description for Create or update a Virtual Network route in an App Service plan.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param name: Name of the App Service plan. Required.
         :type name: str
@@ -2413,7 +2457,7 @@ class AppServicePlansOperations:  # pylint: disable=too-many-public-methods
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-03-01"))
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
         cls: ClsType[_models.VnetRoute] = kwargs.pop("cls", None)
 
@@ -2463,14 +2507,80 @@ class AppServicePlansOperations:  # pylint: disable=too-many-public-methods
         return deserialized  # type: ignore
 
     @distributed_trace_async
+    async def delete_vnet_route(
+        self, resource_group_name: str, name: str, vnet_name: str, route_name: str, **kwargs: Any
+    ) -> None:
+        """Delete a Virtual Network route in an App Service plan.
+
+        Description for Delete a Virtual Network route in an App Service plan.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param name: Name of the App Service plan. Required.
+        :type name: str
+        :param vnet_name: Name of the Virtual Network. Required.
+        :type vnet_name: str
+        :param route_name: Name of the Virtual Network route. Required.
+        :type route_name: str
+        :return: None or the result of cls(response)
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        _request = build_delete_vnet_route_request(
+            resource_group_name=resource_group_name,
+            name=name,
+            vnet_name=vnet_name,
+            route_name=route_name,
+            subscription_id=self._config.subscription_id,
+            api_version=api_version,
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            error = self._deserialize.failsafe_deserialize(
+                _models.DefaultErrorResponse,
+                pipeline_response,
+            )
+            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
+
+        if cls:
+            return cls(pipeline_response, None, {})  # type: ignore
+
+    @distributed_trace_async
     async def reboot_worker(self, resource_group_name: str, name: str, worker_name: str, **kwargs: Any) -> None:
         """Reboot a worker machine in an App Service plan.
 
         Description for Reboot a worker machine in an App Service plan.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
-        :param name: Name of the App Service plan. Required.
+        :param name: App Service plan. Required.
         :type name: str
         :param worker_name: Name of worker machine, which typically starts with RD. Required.
         :type worker_name: str
@@ -2489,7 +2599,7 @@ class AppServicePlansOperations:  # pylint: disable=too-many-public-methods
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-03-01"))
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
         cls: ClsType[None] = kwargs.pop("cls", None)
 
         _request = build_reboot_worker_request(
@@ -2529,11 +2639,12 @@ class AppServicePlansOperations:  # pylint: disable=too-many-public-methods
 
         Description for Recycles a managed instance worker machine.
 
-        :param resource_group_name: Name of the resource group to which the resource belongs. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
-        :param name: Name of the App Service plan. Required.
+        :param name: App Service plan. Required.
         :type name: str
-        :param worker_name: Name of worker machine. Required.
+        :param worker_name: Name of worker machine, which typically starts with RD. Required.
         :type worker_name: str
         :return: Operation or the result of cls(response)
         :rtype: ~azure.mgmt.web.models.Operation
@@ -2550,7 +2661,7 @@ class AppServicePlansOperations:  # pylint: disable=too-many-public-methods
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-03-01"))
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
         cls: ClsType[_models.Operation] = kwargs.pop("cls", None)
 
         _request = build_recycle_managed_instance_worker_request(

@@ -81,23 +81,19 @@ class TestWebSiteManagementCertificatesOperations(AzureMgmtRecordedTestCase):
                 "serverFarmId": "str",
                 "siteName": "str",
                 "subjectName": "str",
+                "systemData": {
+                    "createdAt": "2020-02-20 00:00:00",
+                    "createdBy": "str",
+                    "createdByType": "str",
+                    "lastModifiedAt": "2020-02-20 00:00:00",
+                    "lastModifiedBy": "str",
+                    "lastModifiedByType": "str",
+                },
                 "tags": {"str": "str"},
                 "thumbprint": "str",
                 "type": "str",
                 "valid": bool,
             },
-            api_version="2025-03-01",
-        )
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_certificates_delete(self, resource_group):
-        response = self.client.certificates.delete(
-            resource_group_name=resource_group.name,
-            name="str",
             api_version="2025-03-01",
         )
 
@@ -137,6 +133,18 @@ class TestWebSiteManagementCertificatesOperations(AzureMgmtRecordedTestCase):
                 "type": "str",
                 "valid": bool,
             },
+            api_version="2025-03-01",
+        )
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
+    def test_certificates_delete(self, resource_group):
+        response = self.client.certificates.delete(
+            resource_group_name=resource_group.name,
+            name="str",
             api_version="2025-03-01",
         )
 

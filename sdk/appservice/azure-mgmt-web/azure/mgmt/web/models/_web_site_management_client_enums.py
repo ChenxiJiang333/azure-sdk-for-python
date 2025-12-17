@@ -59,7 +59,7 @@ class AutoHealActionType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 
 
 class AzureResourceType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """Type of the Azure resource the hostname is assigned to."""
+    """Azure resource type."""
 
     WEBSITE = "Website"
     TRAFFIC_MANAGER = "TrafficManager"
@@ -144,47 +144,6 @@ class BuiltInAuthenticationProvider(str, Enum, metaclass=CaseInsensitiveEnumMeta
     MICROSOFT_ACCOUNT = "MicrosoftAccount"
     TWITTER = "Twitter"
     GITHUB = "Github"
-
-
-class CertificateOrderActionType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """Action type."""
-
-    CERTIFICATE_ISSUED = "CertificateIssued"
-    CERTIFICATE_ORDER_CANCELED = "CertificateOrderCanceled"
-    CERTIFICATE_ORDER_CREATED = "CertificateOrderCreated"
-    CERTIFICATE_REVOKED = "CertificateRevoked"
-    DOMAIN_VALIDATION_COMPLETE = "DomainValidationComplete"
-    FRAUD_DETECTED = "FraudDetected"
-    ORG_NAME_CHANGE = "OrgNameChange"
-    ORG_VALIDATION_COMPLETE = "OrgValidationComplete"
-    SAN_DROP = "SanDrop"
-    FRAUD_CLEARED = "FraudCleared"
-    CERTIFICATE_EXPIRED = "CertificateExpired"
-    CERTIFICATE_EXPIRATION_WARNING = "CertificateExpirationWarning"
-    FRAUD_DOCUMENTATION_REQUIRED = "FraudDocumentationRequired"
-    UNKNOWN = "Unknown"
-
-
-class CertificateOrderStatus(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """Current order status."""
-
-    PENDINGISSUANCE = "Pendingissuance"
-    ISSUED = "Issued"
-    REVOKED = "Revoked"
-    CANCELED = "Canceled"
-    DENIED = "Denied"
-    PENDINGREVOCATION = "Pendingrevocation"
-    PENDING_REKEY = "PendingRekey"
-    UNUSED = "Unused"
-    EXPIRED = "Expired"
-    NOT_SUBMITTED = "NotSubmitted"
-
-
-class CertificateProductType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """Certificate product type."""
-
-    STANDARD_DOMAIN_VALIDATED_SSL = "StandardDomainValidatedSsl"
-    STANDARD_DOMAIN_VALIDATED_WILD_CARD_SSL = "StandardDomainValidatedWildCardSsl"
 
 
 class Channels(str, Enum, metaclass=CaseInsensitiveEnumMeta):
@@ -274,6 +233,15 @@ class CookieExpirationConvention(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     IDENTITY_PROVIDER_DERIVED = "IdentityProviderDerived"
 
 
+class CreatedByType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """The type of identity that created the resource."""
+
+    USER = "User"
+    APPLICATION = "Application"
+    MANAGED_IDENTITY = "ManagedIdentity"
+    KEY = "Key"
+
+
 class CustomDnsSuffixProvisioningState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """CustomDnsSuffixProvisioningState."""
 
@@ -296,7 +264,7 @@ class CustomDomainStatus(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 
 
 class CustomHostNameDnsRecordType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """Type of the DNS record."""
+    """Custom DNS record type."""
 
     C_NAME = "CName"
     A = "A"
@@ -379,55 +347,12 @@ class DetectorType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     CATEGORY_OVERVIEW = "CategoryOverview"
 
 
-class DnsType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """Current DNS type."""
-
-    AZURE_DNS = "AzureDns"
-    DEFAULT_DOMAIN_REGISTRAR_DNS = "DefaultDomainRegistrarDns"
-
-
 class DnsVerificationTestResult(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """DNS verification test result."""
 
     PASSED = "Passed"
     FAILED = "Failed"
     SKIPPED = "Skipped"
-
-
-class DomainStatus(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """Domain registration status."""
-
-    ACTIVE = "Active"
-    AWAITING = "Awaiting"
-    CANCELLED = "Cancelled"
-    CONFISCATED = "Confiscated"
-    DISABLED = "Disabled"
-    EXCLUDED = "Excluded"
-    EXPIRED = "Expired"
-    FAILED = "Failed"
-    HELD = "Held"
-    LOCKED = "Locked"
-    PARKED = "Parked"
-    PENDING = "Pending"
-    RESERVED = "Reserved"
-    REVERTED = "Reverted"
-    SUSPENDED = "Suspended"
-    TRANSFERRED = "Transferred"
-    UNKNOWN = "Unknown"
-    UNLOCKED = "Unlocked"
-    UNPARKED = "Unparked"
-    UPDATED = "Updated"
-    JSON_CONVERTER_FAILED = "JsonConverterFailed"
-
-
-class DomainType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """Valid values are Regular domain: Azure will charge the full price of domain registration,
-    SoftDeleted: Purchasing this domain will simply restore it and this operation will not cost
-    anything.
-    """
-
-    REGULAR = "Regular"
-    SOFT_DELETED = "SoftDeleted"
 
 
 class EnterpriseGradeCdnStatus(str, Enum, metaclass=CaseInsensitiveEnumMeta):
@@ -487,7 +412,7 @@ class HostingEnvironmentStatus(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 
 
 class HostNameType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """Type of the hostname."""
+    """Hostname type."""
 
     VERIFIED = "Verified"
     MANAGED = "Managed"
@@ -631,12 +556,12 @@ class ManagedPipelineMode(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 
 
 class ManagedServiceIdentityType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """ManagedServiceIdentityType."""
+    """Type of managed service identity."""
 
-    NONE = "None"
     SYSTEM_ASSIGNED = "SystemAssigned"
     USER_ASSIGNED = "UserAssigned"
     SYSTEM_ASSIGNED_USER_ASSIGNED = "SystemAssigned, UserAssigned"
+    NONE = "None"
 
 
 class MSDeployLogEntryType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
@@ -723,7 +648,7 @@ class ProviderStackOsType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 
 
 class ProvisioningState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """Status of certificate order."""
+    """Provisioning state of the App Service Plan."""
 
     SUCCEEDED = "Succeeded"
     FAILED = "Failed"
@@ -830,14 +755,6 @@ class ResolveStatus(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     OTHER_REASONS = "OtherReasons"
     FETCH_TIMED_OUT = "FetchTimedOut"
     UNAUTHORIZED_CLIENT = "UnauthorizedClient"
-
-
-class ResourceNotRenewableReason(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """ResourceNotRenewableReason."""
-
-    REGISTRATION_STATUS_NOT_SUPPORTED_FOR_RENEWAL = "RegistrationStatusNotSupportedForRenewal"
-    EXPIRATION_NOT_IN_RENEWAL_TIME_RANGE = "ExpirationNotInRenewalTimeRange"
-    SUBSCRIPTION_NOT_ACTIVE = "SubscriptionNotActive"
 
 
 class ResourceScopeType(str, Enum, metaclass=CaseInsensitiveEnumMeta):

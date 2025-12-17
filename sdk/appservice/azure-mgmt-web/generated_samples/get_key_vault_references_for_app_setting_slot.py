@@ -34,8 +34,8 @@ def main():
     response = client.web_apps.get_app_setting_key_vault_reference_slot(
         resource_group_name="testrg123",
         name="testc6282",
-        app_setting_key="setting",
         slot="stage",
+        app_setting_key="setting",
     )
     print(response)
 

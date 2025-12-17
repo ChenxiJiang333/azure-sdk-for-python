@@ -47,8 +47,8 @@ def build_get_deleted_web_app_request(deleted_site_id: str, subscription_id: str
         "template_url", "/subscriptions/{subscriptionId}/providers/Microsoft.Web/deletedSites/{deletedSiteId}"
     )
     path_format_arguments = {
-        "deletedSiteId": _SERIALIZER.url("deleted_site_id", deleted_site_id, "str"),
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
+        "deletedSiteId": _SERIALIZER.url("deleted_site_id", deleted_site_id, "str"),
     }
 
     _url: str = _url.format(**path_format_arguments)  # type: ignore
@@ -76,8 +76,8 @@ def build_get_deleted_web_app_snapshots_request(  # pylint: disable=name-too-lon
         "template_url", "/subscriptions/{subscriptionId}/providers/Microsoft.Web/deletedSites/{deletedSiteId}/snapshots"
     )
     path_format_arguments = {
-        "deletedSiteId": _SERIALIZER.url("deleted_site_id", deleted_site_id, "str"),
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
+        "deletedSiteId": _SERIALIZER.url("deleted_site_id", deleted_site_id, "str"),
     }
 
     _url: str = _url.format(**path_format_arguments)  # type: ignore
@@ -106,7 +106,7 @@ def build_get_subscription_operation_with_async_response_request(  # pylint: dis
         "/subscriptions/{subscriptionId}/providers/Microsoft.Web/locations/{location}/operations/{operationId}",
     )
     path_format_arguments = {
-        "location": _SERIALIZER.url("location", location, "str"),
+        "location": _SERIALIZER.url("location", location, "str", min_length=1),
         "operationId": _SERIALIZER.url("operation_id", operation_id, "str"),
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
     }
@@ -164,7 +164,7 @@ class GlobalOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-03-01"))
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
         cls: ClsType[_models.DeletedSite] = kwargs.pop("cls", None)
 
         _request = build_get_deleted_web_app_request(
@@ -221,7 +221,7 @@ class GlobalOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-03-01"))
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
         cls: ClsType[List[_models.Snapshot]] = kwargs.pop("cls", None)
 
         _request = build_get_deleted_web_app_snapshots_request(
@@ -263,7 +263,7 @@ class GlobalOperations:
 
         Description for Gets an operation in a subscription and given region.
 
-        :param location: Location name. Required.
+        :param location: The name of the Azure region. Required.
         :type location: str
         :param operation_id: Operation Id. Required.
         :type operation_id: str
@@ -282,7 +282,7 @@ class GlobalOperations:
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-03-01"))
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
         cls: ClsType[None] = kwargs.pop("cls", None)
 
         _request = build_get_subscription_operation_with_async_response_request(

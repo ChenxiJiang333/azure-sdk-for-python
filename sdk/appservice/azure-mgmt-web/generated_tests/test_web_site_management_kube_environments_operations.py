@@ -91,21 +91,17 @@ class TestWebSiteManagementKubeEnvironmentsOperations(AzureMgmtRecordedTestCase)
                 "name": "str",
                 "provisioningState": "str",
                 "staticIp": "str",
+                "systemData": {
+                    "createdAt": "2020-02-20 00:00:00",
+                    "createdBy": "str",
+                    "createdByType": "str",
+                    "lastModifiedAt": "2020-02-20 00:00:00",
+                    "lastModifiedBy": "str",
+                    "lastModifiedByType": "str",
+                },
                 "tags": {"str": "str"},
                 "type": "str",
             },
-            api_version="2025-03-01",
-        ).result()  # call '.result()' to poll until service return final result
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_kube_environments_begin_delete(self, resource_group):
-        response = self.client.kube_environments.begin_delete(
-            resource_group_name=resource_group.name,
-            name="str",
             api_version="2025-03-01",
         ).result()  # call '.result()' to poll until service return final result
 
@@ -153,6 +149,18 @@ class TestWebSiteManagementKubeEnvironmentsOperations(AzureMgmtRecordedTestCase)
             },
             api_version="2025-03-01",
         )
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
+    def test_kube_environments_begin_delete(self, resource_group):
+        response = self.client.kube_environments.begin_delete(
+            resource_group_name=resource_group.name,
+            name="str",
+            api_version="2025-03-01",
+        ).result()  # call '.result()' to poll until service return final result
 
         # please add some check logic here by yourself
         # ...
