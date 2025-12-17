@@ -1,5 +1,31 @@
 # Release History
 
+## tsp migration
+
+### Breaing Changes
+
+  - Deleted or renamed model `BillingBenefitsRP`
+  - Deleted or renamed enum value `BillingPlan.P1_M`
+  - Model `PurchaseRequest` moved instance variable `display_name`/`billing_scope_id`/`term`/`billing_plan`/`applied_scope_type`/`commitment`/`effective_date_time`/`renew`/`applied_scope_properties` under property `properties`
+  - Model `ReservationOrderAliasRequest` moved instance variable `display_name`/`billing_scope_id`/`term`/`billing_plan`/`applied_scope_type`/`applied_scope_properties`/`quantity`/`renew`/`reserved_resource_type`/`review_date_time`/`reserved_resource_properties` under property `properties`
+  - Model `ReservationOrderAliasResponse` moved instance variable `display_name`/`reservation_order_id`/`provisioning_state`/`billing_scope_id`/`term`/`billing_plan`/`applied_scope_type`/`applied_scope_properties`/`quantity`/`renew`/`reserved_resource_type`/`review_date_time`/`reserved_resource_properties` under property `properties`
+  - Model `RoleAssignmentEntity` moved instance variable `principal_id`/`role_definition_id`/`scope` under property `properties`
+  - Model `SavingsPlanModel` moved instance variable `display_name`/`provisioning_state`/`display_provisioning_state`/`billing_scope_id`/`billing_profile_id`/`customer_id`/`billing_account_id`/`term`/`billing_plan`/`applied_scope_type`/`user_friendly_applied_scope_type`/`applied_scope_properties`/`commitment`/`effective_date_time`/`expiry_date_time`/`purchase_date_time`/`benefit_start_time`/`extended_status_info`/`renew`/`utilization`/`renew_source`/`renew_destination`/`renew_properties` under property `properties`
+  - Model `SavingsPlanOrderAliasModel` moved instance variable `display_name`/`savings_plan_order_id`/`provisioning_state`/`billing_scope_id`/`term`/`billing_plan`/`applied_scope_type`/`applied_scope_properties`/`commitment` under property `properties`
+  - Model `SavingsPlanOrderModel` moved instance variable `display_name`/`provisioning_state`/`billing_scope_id`/`billing_profile_id`/`customer_id`/`billing_account_id`/`term`/`billing_plan`/`expiry_date_time`/`benefit_start_time`/`plan_information`/`savings_plans`/`extended_status_info` under property `properties`
+  - Deleted or renamed enum value `Term.P1_Y`
+  - Deleted or renamed enum value `Term.P3_Y`
+  - Deleted or renamed enum value `Term.P5_Y`
+  - Deleted or renamed model `BillingInformation`
+  - Deleted or renamed model `OperationResultError`
+  - Deleted or renamed model `PricingCurrencyDuration`
+  - Deleted or renamed model `PricingCurrencyTotal`
+  - Deleted model `SavingsPlanModelList`/`SavingsPlanOrderModelList` which actually were not used by SDK users
+  - Deleted or renamed model `SavingsPlanPurchaseValidateRequest`
+  - Method `SavingsPlanOperations.list_all` changed its parameter `orderby`/`refresh_summary`/`skiptoken`/`selected_state`/`take` from `positional_or_keyword` to `keyword_only`
+  - Deleted or renamed method `SavingsPlanOperations.update`
+  - Deleted or renamed model `BillingBenefitsRPOperationsMixin`
+
 ## 1.0.0b2 (2025-12-17)
 
 ### Features Added
