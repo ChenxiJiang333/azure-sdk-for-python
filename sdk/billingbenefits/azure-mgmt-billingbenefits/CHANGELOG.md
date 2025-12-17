@@ -11,6 +11,7 @@
   - Renamed enum value `Term.P5_Y` to `P5Y`
   - Renamed method `SavingsPlanOperations.update` to `begin_update`
   - Renamed operation group `BillingBenefitsRPOperationsMixin` to `BenefitOperations`
+  - Rnamed model `SavingsPlanPurchaseValidateRequest` to `BenefitValidateRequest`
 
   - Model `PurchaseRequest` moved instance variable `display_name`/`billing_scope_id`/`term`/`billing_plan`/`applied_scope_type`/`commitment`/`effective_date_time`/`renew`/`applied_scope_properties` under property `properties`
   - Model `ReservationOrderAliasRequest` moved instance variable `display_name`/`billing_scope_id`/`term`/`billing_plan`/`applied_scope_type`/`applied_scope_properties`/`quantity`/`renew`/`reserved_resource_type`/`review_date_time`/`reserved_resource_properties` under property `properties`
@@ -22,7 +23,7 @@
   - Method `SavingsPlanOperations.list_all` changed its parameter `orderby`/`refresh_summary`/`skiptoken`/`selected_state`/`take` from `positional_or_keyword` to `keyword_only`
 
 ### Other Changes
-  - Deleted model `BillingInformation`/`OperationResultError`/`PricingCurrencyDuration`/`PricingCurrencyTotal`/`SavingsPlanPurchaseValidateRequest`/`SavingsPlanModelList`/`SavingsPlanOrderModelList` which actually were not used by SDK users
+  - Deleted model `BillingInformation`/`OperationResultError`/`PricingCurrencyDuration`/`PricingCurrencyTotal`/`SavingsPlanModelList`/`SavingsPlanOrderModelList` which actually were not used by SDK users
 
 ## 1.0.0b2 (2025-12-17)
 
