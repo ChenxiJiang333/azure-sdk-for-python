@@ -6,7 +6,7 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 import pytest
-from azure.mgmt.batch import BatchClient
+from azure.mgmt.batch import BatchManagementClient
 
 from devtools_testutils import AzureMgmtRecordedTestCase, RandomNameResourceGroupPreparer, recorded_by_proxy
 
@@ -14,17 +14,15 @@ AZURE_LOCATION = "eastus"
 
 
 @pytest.mark.skip("you may need to update the auto-generated test case before run it")
-class TestBatchPrivateLinkResourceOperations(AzureMgmtRecordedTestCase):
+class TestBatchManagementLocationOperations(AzureMgmtRecordedTestCase):
     def setup_method(self, method):
-        self.client = self.create_mgmt_client(BatchClient)
+        self.client = self.create_mgmt_client(BatchManagementClient)
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_private_link_resource_get(self, resource_group):
-        response = self.client.private_link_resource.get(
-            resource_group_name=resource_group.name,
-            account_name="str",
-            private_link_resource_name="str",
+    def test_location_get_quotas(self, resource_group):
+        response = self.client.location.get_quotas(
+            location_name="str",
         )
 
         # please add some check logic here by yourself
@@ -32,11 +30,21 @@ class TestBatchPrivateLinkResourceOperations(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_private_link_resource_list_by_batch_account(self, resource_group):
-        response = self.client.private_link_resource.list_by_batch_account(
-            resource_group_name=resource_group.name,
-            account_name="str",
+    def test_location_list_supported_virtual_machine_skus(self, resource_group):
+        response = self.client.location.list_supported_virtual_machine_skus(
+            location_name="str",
         )
         result = [r for r in response]
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
+    def test_location_check_name_availability(self, resource_group):
+        response = self.client.location.check_name_availability(
+            location_name="str",
+            parameters={"name": "str", "type": "str"},
+        )
+
         # please add some check logic here by yourself
         # ...

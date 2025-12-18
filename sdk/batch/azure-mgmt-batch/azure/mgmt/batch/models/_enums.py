@@ -308,7 +308,7 @@ class IPRuleAction(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The action when client IP address is matched."""
 
     ALLOW = "Allow"
-    """Deny client access."""
+    """Allow access for the matched client IP address."""
 
 
 class IssueType(str, Enum, metaclass=CaseInsensitiveEnumMeta):

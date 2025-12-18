@@ -15,7 +15,7 @@ from azure.mgmt.batch import BatchManagementClient
     pip install azure-identity
     pip install azure-mgmt-batch
 # USAGE
-    python nsp_configuration_get.py
+    python application_package_create.py
 
     Before run the sample, please set the values of the client ID, tenant ID and client secret
     of the AAD application as environment variables: AZURE_CLIENT_ID, AZURE_TENANT_ID,
@@ -30,14 +30,15 @@ def main():
         subscription_id="SUBSCRIPTION_ID",
     )
 
-    response = client.network_security_perimeter.get_configuration(
+    response = client.application_package.create(
         resource_group_name="default-azurebatch-japaneast",
         account_name="sampleacct",
-        network_security_perimeter_configuration_name="00000000-0000-0000-0000-000000000000.sampleassociation",
+        application_name="app1",
+        version_name="1",
     )
     print(response)
 
 
-# x-ms-original-file: 2024-07-01/NspConfigurationGet.json
+# x-ms-original-file: 2024-07-01/ApplicationPackageCreate.json
 if __name__ == "__main__":
     main()

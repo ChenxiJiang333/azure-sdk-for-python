@@ -8,7 +8,7 @@
 
 from azure.identity import DefaultAzureCredential
 
-from azure.mgmt.batch import BatchClient
+from azure.mgmt.batch import BatchManagementClient
 
 """
 # PREREQUISITES
@@ -25,7 +25,7 @@ from azure.mgmt.batch import BatchClient
 
 
 def main():
-    client = BatchClient(
+    client = BatchManagementClient(
         credential=DefaultAzureCredential(),
         subscription_id="SUBSCRIPTION_ID",
     )
@@ -34,7 +34,6 @@ def main():
         resource_group_name="default-azurebatch-japaneast",
         account_name="sampleacct",
         application_name="app1",
-        parameters={"properties": {"allowUpdates": False, "displayName": "myAppName"}},
     )
     print(response)
 

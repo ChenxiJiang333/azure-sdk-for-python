@@ -18,8 +18,8 @@ if TYPE_CHECKING:
     from azure.core.credentials_async import AsyncTokenCredential
 
 
-class BatchClientConfiguration:  # pylint: disable=too-many-instance-attributes
-    """Configuration for BatchClient.
+class BatchManagementClientConfiguration:  # pylint: disable=too-many-instance-attributes
+    """Configuration for BatchManagementClient.
 
     Note that all parameters used to create this instance are saved as instance
     attributes.

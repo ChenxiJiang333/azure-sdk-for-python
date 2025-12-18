@@ -34,16 +34,26 @@
   - Method `PrivateEndpointConnectionOperations.list_by_batch_account` changed its parameter `maxresults` from `positional_or_keyword` to `keyword_only`
   - Method `PrivateLinkResourceOperations.list_by_batch_account` changed its parameter `maxresults` from `positional_or_keyword` to `keyword_only`
 
-## 19.0.0 (2025-12-08)
+## 19.0.0 (2025-12-18)
 
 ### Features Added
 
+  - Model `BatchManagementClient` added parameter `cloud_setting` in method `__init__`
+  - Client `BatchManagementClient` added method `send_request`
+  - Model `Application` added property `system_data`
+  - Model `ApplicationPackage` added property `system_data`
+  - Model `BatchAccount` added property `system_data`
   - Model `BatchAccountCreateParameters` added property `properties`
   - Model `BatchAccountUpdateParameters` added property `properties`
   - Model `Certificate` added property `properties`
+  - Model `Certificate` added property `system_data`
   - Model `CertificateCreateOrUpdateParameters` added property `properties`
   - Model `CheckNameAvailabilityParameters` added property `type`
+  - Model `DetectorResponse` added property `system_data`
   - Model `IPRule` added property `action`
+  - Model `Pool` added property `system_data`
+  - Model `PrivateEndpointConnection` added property `system_data`
+  - Model `PrivateLinkResource` added property `system_data`
   - Added model `AccessRulePropertiesSubscription`
   - Added model `BatchAccountCreateProperties`
   - Added model `BatchAccountUpdateProperties`
@@ -51,6 +61,7 @@
   - Added enum `DiffDiskPlacement`
   - Added enum `IPRuleAction`
   - Added enum `ResourceType`
+  - Added model `TrackedResource`
   - Model `CertificateOperations` added parameter `etag` in method `create`
   - Model `CertificateOperations` added parameter `match_condition` in method `create`
   - Model `CertificateOperations` added parameter `etag` in method `update`
@@ -64,7 +75,6 @@
 
 ### Breaking Changes
 
-  - Deleted or renamed client `BatchManagementClient`
   - Model `BatchAccountCreateParameters` deleted or renamed its instance variable `auto_storage`
   - Model `BatchAccountCreateParameters` deleted or renamed its instance variable `pool_allocation_mode`
   - Model `BatchAccountCreateParameters` deleted or renamed its instance variable `key_vault_reference`
@@ -92,6 +102,7 @@
   - Model `CertificateCreateOrUpdateParameters` deleted or renamed its instance variable `data`
   - Model `CertificateCreateOrUpdateParameters` deleted or renamed its instance variable `password`
   - Deleted or renamed model `AccessRulePropertiesSubscriptionsItem`
+  - Deleted or renamed model `AzureResource`
   - Deleted or renamed model `ListApplicationPackagesResult`
   - Deleted or renamed model `ListApplicationsResult`
   - Deleted or renamed model `ListCertificatesResult`
@@ -100,9 +111,7 @@
   - Deleted or renamed model `ListPrivateLinkResourcesResult`
   - Deleted or renamed model `OutboundEnvironmentEndpointCollection`
   - Deleted or renamed model `SupportedSkusResult`
-  - Method `ApplicationOperations.create` removed default value `None` from its parameter `parameters`
   - Method `ApplicationOperations.list` changed its parameter `maxresults` from `positional_or_keyword` to `keyword_only`
-  - Method `ApplicationPackageOperations.create` removed default value `None` from its parameter `parameters`
   - Method `ApplicationPackageOperations.list` changed its parameter `maxresults` from `positional_or_keyword` to `keyword_only`
   - Method `CertificateOperations.create` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
   - Method `CertificateOperations.create` deleted or renamed its parameter `if_none_match` of kind `positional_or_keyword`
@@ -118,8 +127,8 @@
   - Method `PrivateEndpointConnectionOperations.begin_update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
   - Method `PrivateEndpointConnectionOperations.list_by_batch_account` changed its parameter `maxresults` from `positional_or_keyword` to `keyword_only`
   - Method `PrivateLinkResourceOperations.list_by_batch_account` changed its parameter `maxresults` from `positional_or_keyword` to `keyword_only`
-  - Method `CertificateOperations.create` re-ordered its parameters from `['self', 'resource_group_name', 'account_name', 'certificate_name', 'parameters', 'if_match', 'if_none_match', 'kwargs']` to `['self', 'resource_group_name', 'account_name', 'certificate_name', 'parameters', 'etag', 'match_condition', 'kwargs']`
   - Method `PoolOperations.create` re-ordered its parameters from `['self', 'resource_group_name', 'account_name', 'pool_name', 'parameters', 'if_match', 'if_none_match', 'kwargs']` to `['self', 'resource_group_name', 'account_name', 'pool_name', 'parameters', 'etag', 'match_condition', 'kwargs']`
+  - Method `CertificateOperations.create` re-ordered its parameters from `['self', 'resource_group_name', 'account_name', 'certificate_name', 'parameters', 'if_match', 'if_none_match', 'kwargs']` to `['self', 'resource_group_name', 'account_name', 'certificate_name', 'parameters', 'etag', 'match_condition', 'kwargs']`
 
 ## 18.0.0 (2024-09-25)
 

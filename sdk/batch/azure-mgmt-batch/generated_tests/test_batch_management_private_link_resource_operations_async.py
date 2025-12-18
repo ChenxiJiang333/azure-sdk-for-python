@@ -6,7 +6,7 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 import pytest
-from azure.mgmt.batch.aio import BatchClient
+from azure.mgmt.batch.aio import BatchManagementClient
 
 from devtools_testutils import AzureMgmtRecordedTestCase, RandomNameResourceGroupPreparer
 from devtools_testutils.aio import recorded_by_proxy_async
@@ -15,17 +15,17 @@ AZURE_LOCATION = "eastus"
 
 
 @pytest.mark.skip("you may need to update the auto-generated test case before run it")
-class TestBatchNetworkSecurityPerimeterOperationsAsync(AzureMgmtRecordedTestCase):
+class TestBatchManagementPrivateLinkResourceOperationsAsync(AzureMgmtRecordedTestCase):
     def setup_method(self, method):
-        self.client = self.create_mgmt_client(BatchClient, is_async=True)
+        self.client = self.create_mgmt_client(BatchManagementClient, is_async=True)
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_network_security_perimeter_get_configuration(self, resource_group):
-        response = await self.client.network_security_perimeter.get_configuration(
+    async def test_private_link_resource_get(self, resource_group):
+        response = await self.client.private_link_resource.get(
             resource_group_name=resource_group.name,
             account_name="str",
-            network_security_perimeter_configuration_name="str",
+            private_link_resource_name="str",
         )
 
         # please add some check logic here by yourself
@@ -33,25 +33,11 @@ class TestBatchNetworkSecurityPerimeterOperationsAsync(AzureMgmtRecordedTestCase
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_network_security_perimeter_list_configurations(self, resource_group):
-        response = self.client.network_security_perimeter.list_configurations(
+    async def test_private_link_resource_list_by_batch_account(self, resource_group):
+        response = self.client.private_link_resource.list_by_batch_account(
             resource_group_name=resource_group.name,
             account_name="str",
         )
         result = [r async for r in response]
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_network_security_perimeter_begin_reconcile_configuration(self, resource_group):
-        response = await (
-            await self.client.network_security_perimeter.begin_reconcile_configuration(
-                resource_group_name=resource_group.name,
-                account_name="str",
-                network_security_perimeter_configuration_name="str",
-            )
-        ).result()  # call '.result()' to poll until service return final result
-
         # please add some check logic here by yourself
         # ...

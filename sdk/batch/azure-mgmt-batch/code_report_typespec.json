@@ -1,7 +1,7 @@
 {
   "azure.mgmt.batch": {
     "class_nodes": {
-      "BatchClient": {
+      "BatchManagementClient": {
         "type": null,
         "methods": {
           "__init__": {
@@ -1163,42 +1163,10 @@
                     "default": null,
                     "param_type": "positional_or_keyword"
                   },
-                  "tags": {
-                    "type": "Optional[dict[str, str]]",
-                    "default": null,
-                    "param_type": "keyword_only"
-                  },
                   "properties": {
                     "type": "Optional[_models.ApplicationProperties]",
                     "default": null,
                     "param_type": "keyword_only"
-                  }
-                },
-                "is_async": false,
-                "return_type": null
-              },
-              {
-                "parameters": {
-                  "self": {
-                    "type": null,
-                    "default": null,
-                    "param_type": "positional_or_keyword"
-                  },
-                  "mapping": {
-                    "type": "Mapping[str, Any]",
-                    "default": null,
-                    "param_type": "positional_or_keyword"
-                  }
-                },
-                "is_async": false,
-                "return_type": null
-              },
-              {
-                "parameters": {
-                  "self": {
-                    "type": null,
-                    "default": null,
-                    "param_type": "positional_or_keyword"
                   },
                   "tags": {
                     "type": "Optional[dict[str, str]]",
@@ -1376,11 +1344,12 @@
         },
         "properties": {
           "properties": "Optional",
+          "etag": "Optional",
+          "tags": "Optional",
           "id": "Optional",
           "name": "Optional",
           "type": "Optional",
-          "etag": "Optional",
-          "tags": "Optional"
+          "system_data": "Optional"
         }
       },
       "ApplicationPackage": {
@@ -1410,42 +1379,10 @@
                     "default": null,
                     "param_type": "positional_or_keyword"
                   },
-                  "tags": {
-                    "type": "Optional[dict[str, str]]",
-                    "default": null,
-                    "param_type": "keyword_only"
-                  },
                   "properties": {
                     "type": "Optional[_models.ApplicationPackageProperties]",
                     "default": null,
                     "param_type": "keyword_only"
-                  }
-                },
-                "is_async": false,
-                "return_type": null
-              },
-              {
-                "parameters": {
-                  "self": {
-                    "type": null,
-                    "default": null,
-                    "param_type": "positional_or_keyword"
-                  },
-                  "mapping": {
-                    "type": "Mapping[str, Any]",
-                    "default": null,
-                    "param_type": "positional_or_keyword"
-                  }
-                },
-                "is_async": false,
-                "return_type": null
-              },
-              {
-                "parameters": {
-                  "self": {
-                    "type": null,
-                    "default": null,
-                    "param_type": "positional_or_keyword"
                   },
                   "tags": {
                     "type": "Optional[dict[str, str]]",
@@ -1623,11 +1560,12 @@
         },
         "properties": {
           "properties": "Optional",
+          "etag": "Optional",
+          "tags": "Optional",
           "id": "Optional",
           "name": "Optional",
           "type": "Optional",
-          "etag": "Optional",
-          "tags": "Optional"
+          "system_data": "Optional"
         }
       },
       "ApplicationPackageProperties": {
@@ -4640,182 +4578,6 @@
           "tags": "Optional"
         }
       },
-      "AzureResource": {
-        "type": null,
-        "methods": {
-          "__init__": {
-            "parameters": {
-              "self": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              },
-              "args": {
-                "default": null,
-                "param_type": "var_positional"
-              },
-              "kwargs": {
-                "default": null,
-                "param_type": "var_keyword"
-              }
-            },
-            "is_async": false,
-            "overloads": []
-          },
-          "as_dict": {
-            "parameters": {
-              "self": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              },
-              "exclude_readonly": {
-                "default": "bool",
-                "param_type": "keyword_only"
-              }
-            },
-            "is_async": false,
-            "overloads": []
-          },
-          "clear": {
-            "parameters": {
-              "self": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              }
-            },
-            "is_async": false,
-            "overloads": []
-          },
-          "copy": {
-            "parameters": {
-              "self": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              }
-            },
-            "is_async": false,
-            "overloads": []
-          },
-          "get": {
-            "parameters": {
-              "self": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              },
-              "key": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              },
-              "default": {
-                "default": "none",
-                "param_type": "positional_or_keyword"
-              }
-            },
-            "is_async": false,
-            "overloads": []
-          },
-          "items": {
-            "parameters": {
-              "self": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              }
-            },
-            "is_async": false,
-            "overloads": []
-          },
-          "keys": {
-            "parameters": {
-              "self": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              }
-            },
-            "is_async": false,
-            "overloads": []
-          },
-          "pop": {
-            "parameters": {
-              "self": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              },
-              "key": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              },
-              "default": {
-                "default": "object",
-                "param_type": "positional_or_keyword"
-              }
-            },
-            "is_async": false,
-            "overloads": []
-          },
-          "popitem": {
-            "parameters": {
-              "self": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              }
-            },
-            "is_async": false,
-            "overloads": []
-          },
-          "setdefault": {
-            "parameters": {
-              "self": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              },
-              "key": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              },
-              "default": {
-                "default": "object",
-                "param_type": "positional_or_keyword"
-              }
-            },
-            "is_async": false,
-            "overloads": []
-          },
-          "update": {
-            "parameters": {
-              "self": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              },
-              "args": {
-                "default": null,
-                "param_type": "var_positional"
-              },
-              "kwargs": {
-                "default": null,
-                "param_type": "var_keyword"
-              }
-            },
-            "is_async": false,
-            "overloads": []
-          },
-          "values": {
-            "parameters": {
-              "self": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              }
-            },
-            "is_async": false,
-            "overloads": []
-          }
-        },
-        "properties": {
-          "id": "Optional",
-          "name": "Optional",
-          "type": "Optional",
-          "location": "Optional",
-          "tags": "Optional"
-        }
-      },
       "BatchAccount": {
         "type": null,
         "methods": {
@@ -4843,6 +4605,16 @@
                     "default": null,
                     "param_type": "positional_or_keyword"
                   },
+                  "location": {
+                    "type": "str",
+                    "default": null,
+                    "param_type": "keyword_only"
+                  },
+                  "tags": {
+                    "type": "Optional[dict[str, str]]",
+                    "default": null,
+                    "param_type": "keyword_only"
+                  },
                   "properties": {
                     "type": "Optional[_models.BatchAccountProperties]",
                     "default": null,
@@ -4850,6 +4622,43 @@
                   },
                   "identity": {
                     "type": "Optional[_models.BatchAccountIdentity]",
+                    "default": null,
+                    "param_type": "keyword_only"
+                  }
+                },
+                "is_async": false,
+                "return_type": null
+              },
+              {
+                "parameters": {
+                  "self": {
+                    "type": null,
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "mapping": {
+                    "type": "Mapping[str, Any]",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  }
+                },
+                "is_async": false,
+                "return_type": null
+              },
+              {
+                "parameters": {
+                  "self": {
+                    "type": null,
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "location": {
+                    "type": "str",
+                    "default": null,
+                    "param_type": "keyword_only"
+                  },
+                  "tags": {
+                    "type": "Optional[dict[str, str]]",
                     "default": null,
                     "param_type": "keyword_only"
                   }
@@ -5025,11 +4834,12 @@
         "properties": {
           "properties": "Optional",
           "identity": "Optional",
+          "tags": "Optional",
+          "location": null,
           "id": "Optional",
           "name": "Optional",
           "type": "Optional",
-          "location": "Optional",
-          "tags": "Optional"
+          "system_data": "Optional"
         }
       },
       "BatchAccountCreateParameters": {
@@ -7455,42 +7265,10 @@
                     "default": null,
                     "param_type": "positional_or_keyword"
                   },
-                  "tags": {
-                    "type": "Optional[dict[str, str]]",
-                    "default": null,
-                    "param_type": "keyword_only"
-                  },
                   "properties": {
                     "type": "Optional[_models.CertificateProperties]",
                     "default": null,
                     "param_type": "keyword_only"
-                  }
-                },
-                "is_async": false,
-                "return_type": null
-              },
-              {
-                "parameters": {
-                  "self": {
-                    "type": null,
-                    "default": null,
-                    "param_type": "positional_or_keyword"
-                  },
-                  "mapping": {
-                    "type": "Mapping[str, Any]",
-                    "default": null,
-                    "param_type": "positional_or_keyword"
-                  }
-                },
-                "is_async": false,
-                "return_type": null
-              },
-              {
-                "parameters": {
-                  "self": {
-                    "type": null,
-                    "default": null,
-                    "param_type": "positional_or_keyword"
                   },
                   "tags": {
                     "type": "Optional[dict[str, str]]",
@@ -7668,11 +7446,12 @@
         },
         "properties": {
           "properties": "Optional",
+          "etag": "Optional",
+          "tags": "Optional",
           "id": "Optional",
           "name": "Optional",
           "type": "Optional",
-          "etag": "Optional",
-          "tags": "Optional"
+          "system_data": "Optional"
         }
       },
       "CertificateBaseProperties": {
@@ -11805,42 +11584,10 @@
                     "default": null,
                     "param_type": "positional_or_keyword"
                   },
-                  "tags": {
-                    "type": "Optional[dict[str, str]]",
-                    "default": null,
-                    "param_type": "keyword_only"
-                  },
                   "properties": {
                     "type": "Optional[_models.DetectorResponseProperties]",
                     "default": null,
                     "param_type": "keyword_only"
-                  }
-                },
-                "is_async": false,
-                "return_type": null
-              },
-              {
-                "parameters": {
-                  "self": {
-                    "type": null,
-                    "default": null,
-                    "param_type": "positional_or_keyword"
-                  },
-                  "mapping": {
-                    "type": "Mapping[str, Any]",
-                    "default": null,
-                    "param_type": "positional_or_keyword"
-                  }
-                },
-                "is_async": false,
-                "return_type": null
-              },
-              {
-                "parameters": {
-                  "self": {
-                    "type": null,
-                    "default": null,
-                    "param_type": "positional_or_keyword"
                   },
                   "tags": {
                     "type": "Optional[dict[str, str]]",
@@ -12018,11 +11765,12 @@
         },
         "properties": {
           "properties": "Optional",
+          "etag": "Optional",
+          "tags": "Optional",
           "id": "Optional",
           "name": "Optional",
           "type": "Optional",
-          "etag": "Optional",
-          "tags": "Optional"
+          "system_data": "Optional"
         }
       },
       "DetectorResponseProperties": {
@@ -20198,11 +19946,6 @@
                     "default": null,
                     "param_type": "positional_or_keyword"
                   },
-                  "tags": {
-                    "type": "Optional[dict[str, str]]",
-                    "default": null,
-                    "param_type": "keyword_only"
-                  },
                   "properties": {
                     "type": "Optional[_models.PoolProperties]",
                     "default": null,
@@ -20212,33 +19955,6 @@
                     "type": "Optional[_models.BatchPoolIdentity]",
                     "default": null,
                     "param_type": "keyword_only"
-                  }
-                },
-                "is_async": false,
-                "return_type": null
-              },
-              {
-                "parameters": {
-                  "self": {
-                    "type": null,
-                    "default": null,
-                    "param_type": "positional_or_keyword"
-                  },
-                  "mapping": {
-                    "type": "Mapping[str, Any]",
-                    "default": null,
-                    "param_type": "positional_or_keyword"
-                  }
-                },
-                "is_async": false,
-                "return_type": null
-              },
-              {
-                "parameters": {
-                  "self": {
-                    "type": null,
-                    "default": null,
-                    "param_type": "positional_or_keyword"
                   },
                   "tags": {
                     "type": "Optional[dict[str, str]]",
@@ -20417,11 +20133,12 @@
         "properties": {
           "properties": "Optional",
           "identity": "Optional",
+          "etag": "Optional",
+          "tags": "Optional",
           "id": "Optional",
           "name": "Optional",
           "type": "Optional",
-          "etag": "Optional",
-          "tags": "Optional"
+          "system_data": "Optional"
         }
       },
       "PoolAllocationMode": {
@@ -21311,42 +21028,10 @@
                     "default": null,
                     "param_type": "positional_or_keyword"
                   },
-                  "tags": {
-                    "type": "Optional[dict[str, str]]",
-                    "default": null,
-                    "param_type": "keyword_only"
-                  },
                   "properties": {
                     "type": "Optional[_models.PrivateEndpointConnectionProperties]",
                     "default": null,
                     "param_type": "keyword_only"
-                  }
-                },
-                "is_async": false,
-                "return_type": null
-              },
-              {
-                "parameters": {
-                  "self": {
-                    "type": null,
-                    "default": null,
-                    "param_type": "positional_or_keyword"
-                  },
-                  "mapping": {
-                    "type": "Mapping[str, Any]",
-                    "default": null,
-                    "param_type": "positional_or_keyword"
-                  }
-                },
-                "is_async": false,
-                "return_type": null
-              },
-              {
-                "parameters": {
-                  "self": {
-                    "type": null,
-                    "default": null,
-                    "param_type": "positional_or_keyword"
                   },
                   "tags": {
                     "type": "Optional[dict[str, str]]",
@@ -21524,11 +21209,12 @@
         },
         "properties": {
           "properties": "Optional",
+          "etag": "Optional",
+          "tags": "Optional",
           "id": "Optional",
           "name": "Optional",
           "type": "Optional",
-          "etag": "Optional",
-          "tags": "Optional"
+          "system_data": "Optional"
         }
       },
       "PrivateEndpointConnectionProperties": {
@@ -21825,42 +21511,10 @@
                     "default": null,
                     "param_type": "positional_or_keyword"
                   },
-                  "tags": {
-                    "type": "Optional[dict[str, str]]",
-                    "default": null,
-                    "param_type": "keyword_only"
-                  },
                   "properties": {
                     "type": "Optional[_models.PrivateLinkResourceProperties]",
                     "default": null,
                     "param_type": "keyword_only"
-                  }
-                },
-                "is_async": false,
-                "return_type": null
-              },
-              {
-                "parameters": {
-                  "self": {
-                    "type": null,
-                    "default": null,
-                    "param_type": "positional_or_keyword"
-                  },
-                  "mapping": {
-                    "type": "Mapping[str, Any]",
-                    "default": null,
-                    "param_type": "positional_or_keyword"
-                  }
-                },
-                "is_async": false,
-                "return_type": null
-              },
-              {
-                "parameters": {
-                  "self": {
-                    "type": null,
-                    "default": null,
-                    "param_type": "positional_or_keyword"
                   },
                   "tags": {
                     "type": "Optional[dict[str, str]]",
@@ -22038,11 +21692,12 @@
         },
         "properties": {
           "properties": "Optional",
+          "etag": "Optional",
+          "tags": "Optional",
           "id": "Optional",
           "name": "Optional",
           "type": "Optional",
-          "etag": "Optional",
-          "tags": "Optional"
+          "system_data": "Optional"
         }
       },
       "PrivateLinkResourceProperties": {
@@ -26936,6 +26591,221 @@
           "node_fill_type": "Union"
         }
       },
+      "TrackedResource": {
+        "type": null,
+        "methods": {
+          "__init__": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "args": {
+                "default": null,
+                "param_type": "var_positional"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": [
+              {
+                "parameters": {
+                  "self": {
+                    "type": null,
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "location": {
+                    "type": "str",
+                    "default": null,
+                    "param_type": "keyword_only"
+                  },
+                  "tags": {
+                    "type": "Optional[dict[str, str]]",
+                    "default": null,
+                    "param_type": "keyword_only"
+                  }
+                },
+                "is_async": false,
+                "return_type": null
+              },
+              {
+                "parameters": {
+                  "self": {
+                    "type": null,
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "mapping": {
+                    "type": "Mapping[str, Any]",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  }
+                },
+                "is_async": false,
+                "return_type": null
+              }
+            ]
+          },
+          "as_dict": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "exclude_readonly": {
+                "default": "bool",
+                "param_type": "keyword_only"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "clear": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "copy": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "get": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "key": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "default": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "items": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "keys": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "pop": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "key": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "default": {
+                "default": "object",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "popitem": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "setdefault": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "key": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "default": {
+                "default": "object",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "update": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "args": {
+                "default": null,
+                "param_type": "var_positional"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "values": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          }
+        },
+        "properties": {
+          "tags": "Optional",
+          "location": null,
+          "id": "Optional",
+          "name": "Optional",
+          "type": "Optional",
+          "system_data": "Optional"
+        }
+      },
       "UefiSettings": {
         "type": null,
         "methods": {
@@ -29390,7 +29260,7 @@
                 "param_type": "positional_or_keyword"
               },
               "parameters": {
-                "default": null,
+                "default": "none",
                 "param_type": "positional_or_keyword"
               },
               "kwargs": {
@@ -29423,7 +29293,7 @@
                     "param_type": "positional_or_keyword"
                   },
                   "parameters": {
-                    "type": "Application",
+                    "type": "Optional[Application]",
                     "default": null,
                     "param_type": "positional_or_keyword"
                   },
@@ -29459,7 +29329,7 @@
                     "param_type": "positional_or_keyword"
                   },
                   "parameters": {
-                    "type": "JSON",
+                    "type": "Optional[JSON]",
                     "default": null,
                     "param_type": "positional_or_keyword"
                   },
@@ -29495,7 +29365,7 @@
                     "param_type": "positional_or_keyword"
                   },
                   "parameters": {
-                    "type": "IO[bytes]",
+                    "type": "Optional[IO[bytes]]",
                     "default": null,
                     "param_type": "positional_or_keyword"
                   },
@@ -29932,7 +29802,7 @@
                 "param_type": "positional_or_keyword"
               },
               "parameters": {
-                "default": null,
+                "default": "none",
                 "param_type": "positional_or_keyword"
               },
               "kwargs": {
@@ -29970,7 +29840,7 @@
                     "param_type": "positional_or_keyword"
                   },
                   "parameters": {
-                    "type": "ApplicationPackage",
+                    "type": "Optional[ApplicationPackage]",
                     "default": null,
                     "param_type": "positional_or_keyword"
                   },
@@ -30011,7 +29881,7 @@
                     "param_type": "positional_or_keyword"
                   },
                   "parameters": {
-                    "type": "JSON",
+                    "type": "Optional[JSON]",
                     "default": null,
                     "param_type": "positional_or_keyword"
                   },
@@ -30052,7 +29922,7 @@
                     "param_type": "positional_or_keyword"
                   },
                   "parameters": {
-                    "type": "IO[bytes]",
+                    "type": "Optional[IO[bytes]]",
                     "default": null,
                     "param_type": "positional_or_keyword"
                   },
@@ -32405,7 +32275,7 @@
   },
   "azure.mgmt.batch.aio": {
     "class_nodes": {
-      "BatchClient": {
+      "BatchManagementClient": {
         "type": null,
         "methods": {
           "__init__": {
@@ -32552,7 +32422,7 @@
                 "param_type": "positional_or_keyword"
               },
               "parameters": {
-                "default": null,
+                "default": "none",
                 "param_type": "positional_or_keyword"
               },
               "kwargs": {
@@ -32585,7 +32455,7 @@
                     "param_type": "positional_or_keyword"
                   },
                   "parameters": {
-                    "type": "Application",
+                    "type": "Optional[Application]",
                     "default": null,
                     "param_type": "positional_or_keyword"
                   },
@@ -32621,7 +32491,7 @@
                     "param_type": "positional_or_keyword"
                   },
                   "parameters": {
-                    "type": "JSON",
+                    "type": "Optional[JSON]",
                     "default": null,
                     "param_type": "positional_or_keyword"
                   },
@@ -32657,7 +32527,7 @@
                     "param_type": "positional_or_keyword"
                   },
                   "parameters": {
-                    "type": "IO[bytes]",
+                    "type": "Optional[IO[bytes]]",
                     "default": null,
                     "param_type": "positional_or_keyword"
                   },
@@ -33094,7 +32964,7 @@
                 "param_type": "positional_or_keyword"
               },
               "parameters": {
-                "default": null,
+                "default": "none",
                 "param_type": "positional_or_keyword"
               },
               "kwargs": {
@@ -33132,7 +33002,7 @@
                     "param_type": "positional_or_keyword"
                   },
                   "parameters": {
-                    "type": "ApplicationPackage",
+                    "type": "Optional[ApplicationPackage]",
                     "default": null,
                     "param_type": "positional_or_keyword"
                   },
@@ -33173,7 +33043,7 @@
                     "param_type": "positional_or_keyword"
                   },
                   "parameters": {
-                    "type": "JSON",
+                    "type": "Optional[JSON]",
                     "default": null,
                     "param_type": "positional_or_keyword"
                   },
@@ -33214,7 +33084,7 @@
                     "param_type": "positional_or_keyword"
                   },
                   "parameters": {
-                    "type": "IO[bytes]",
+                    "type": "Optional[IO[bytes]]",
                     "default": null,
                     "param_type": "positional_or_keyword"
                   },

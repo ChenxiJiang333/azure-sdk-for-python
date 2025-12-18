@@ -17,7 +17,7 @@ from azure.mgmt.core import ARMPipelineClient
 from azure.mgmt.core.policies import ARMAutoResourceProviderRegistrationPolicy
 from azure.mgmt.core.tools import get_arm_endpoints
 
-from ._configuration import BatchClientConfiguration
+from ._configuration import BatchManagementClientConfiguration
 from ._utils.serialization import Deserializer, Serializer
 from .operations import (
     ApplicationOperations,
@@ -37,7 +37,7 @@ if TYPE_CHECKING:
     from azure.core.credentials import TokenCredential
 
 
-class BatchClient:  # pylint: disable=too-many-instance-attributes
+class BatchManagementClient:  # pylint: disable=too-many-instance-attributes
     """The Batch Management Client.
 
     :ivar operations: Operations operations
@@ -93,7 +93,7 @@ class BatchClient:  # pylint: disable=too-many-instance-attributes
         if not base_url:
             base_url = _endpoints["resource_manager"]
         credential_scopes = kwargs.pop("credential_scopes", _endpoints["credential_scopes"])
-        self._config = BatchClientConfiguration(
+        self._config = BatchManagementClientConfiguration(
             credential=credential,
             subscription_id=subscription_id,
             base_url=cast(str, base_url),

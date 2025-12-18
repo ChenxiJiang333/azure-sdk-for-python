@@ -6,7 +6,7 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 import pytest
-from azure.mgmt.batch import BatchClient
+from azure.mgmt.batch import BatchManagementClient
 
 from devtools_testutils import AzureMgmtRecordedTestCase, RandomNameResourceGroupPreparer, recorded_by_proxy
 
@@ -14,17 +14,18 @@ AZURE_LOCATION = "eastus"
 
 
 @pytest.mark.skip("you may need to update the auto-generated test case before run it")
-class TestBatchApplicationOperations(AzureMgmtRecordedTestCase):
+class TestBatchManagementApplicationPackageOperations(AzureMgmtRecordedTestCase):
     def setup_method(self, method):
-        self.client = self.create_mgmt_client(BatchClient)
+        self.client = self.create_mgmt_client(BatchManagementClient)
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_application_get(self, resource_group):
-        response = self.client.application.get(
+    def test_application_package_get(self, resource_group):
+        response = self.client.application_package.get(
             resource_group_name=resource_group.name,
             account_name="str",
             application_name="str",
+            version_name="str",
         )
 
         # please add some check logic here by yourself
@@ -32,19 +33,12 @@ class TestBatchApplicationOperations(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_application_create(self, resource_group):
-        response = self.client.application.create(
+    def test_application_package_create(self, resource_group):
+        response = self.client.application_package.create(
             resource_group_name=resource_group.name,
             account_name="str",
             application_name="str",
-            parameters={
-                "etag": "str",
-                "id": "str",
-                "name": "str",
-                "properties": {"allowUpdates": bool, "defaultVersion": "str", "displayName": "str"},
-                "tags": {"str": "str"},
-                "type": "str",
-            },
+            version_name="str",
         )
 
         # please add some check logic here by yourself
@@ -52,19 +46,12 @@ class TestBatchApplicationOperations(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_application_update(self, resource_group):
-        response = self.client.application.update(
+    def test_application_package_delete(self, resource_group):
+        response = self.client.application_package.delete(
             resource_group_name=resource_group.name,
             account_name="str",
             application_name="str",
-            parameters={
-                "etag": "str",
-                "id": "str",
-                "name": "str",
-                "properties": {"allowUpdates": bool, "defaultVersion": "str", "displayName": "str"},
-                "tags": {"str": "str"},
-                "type": "str",
-            },
+            version_name="str",
         )
 
         # please add some check logic here by yourself
@@ -72,23 +59,26 @@ class TestBatchApplicationOperations(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_application_delete(self, resource_group):
-        response = self.client.application.delete(
+    def test_application_package_list(self, resource_group):
+        response = self.client.application_package.list(
             resource_group_name=resource_group.name,
             account_name="str",
             application_name="str",
-        )
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_application_list(self, resource_group):
-        response = self.client.application.list(
-            resource_group_name=resource_group.name,
-            account_name="str",
         )
         result = [r for r in response]
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
+    def test_application_package_activate(self, resource_group):
+        response = self.client.application_package.activate(
+            resource_group_name=resource_group.name,
+            account_name="str",
+            application_name="str",
+            version_name="str",
+            parameters={"format": "str"},
+        )
+
         # please add some check logic here by yourself
         # ...

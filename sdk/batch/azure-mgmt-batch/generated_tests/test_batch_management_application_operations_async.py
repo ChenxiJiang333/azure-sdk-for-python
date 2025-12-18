@@ -6,7 +6,7 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 import pytest
-from azure.mgmt.batch.aio import BatchClient
+from azure.mgmt.batch.aio import BatchManagementClient
 
 from devtools_testutils import AzureMgmtRecordedTestCase, RandomNameResourceGroupPreparer
 from devtools_testutils.aio import recorded_by_proxy_async
@@ -15,9 +15,9 @@ AZURE_LOCATION = "eastus"
 
 
 @pytest.mark.skip("you may need to update the auto-generated test case before run it")
-class TestBatchApplicationOperationsAsync(AzureMgmtRecordedTestCase):
+class TestBatchManagementApplicationOperationsAsync(AzureMgmtRecordedTestCase):
     def setup_method(self, method):
-        self.client = self.create_mgmt_client(BatchClient, is_async=True)
+        self.client = self.create_mgmt_client(BatchManagementClient, is_async=True)
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
@@ -38,14 +38,6 @@ class TestBatchApplicationOperationsAsync(AzureMgmtRecordedTestCase):
             resource_group_name=resource_group.name,
             account_name="str",
             application_name="str",
-            parameters={
-                "etag": "str",
-                "id": "str",
-                "name": "str",
-                "properties": {"allowUpdates": bool, "defaultVersion": "str", "displayName": "str"},
-                "tags": {"str": "str"},
-                "type": "str",
-            },
         )
 
         # please add some check logic here by yourself
@@ -63,6 +55,14 @@ class TestBatchApplicationOperationsAsync(AzureMgmtRecordedTestCase):
                 "id": "str",
                 "name": "str",
                 "properties": {"allowUpdates": bool, "defaultVersion": "str", "displayName": "str"},
+                "systemData": {
+                    "createdAt": "2020-02-20 00:00:00",
+                    "createdBy": "str",
+                    "createdByType": "str",
+                    "lastModifiedAt": "2020-02-20 00:00:00",
+                    "lastModifiedBy": "str",
+                    "lastModifiedByType": "str",
+                },
                 "tags": {"str": "str"},
                 "type": "str",
             },

@@ -181,71 +181,81 @@ class ActivateApplicationPackageParameters(_Model):
         super().__init__(*args, **kwargs)
 
 
-class AzureProxyResource(_Model):
-    """A definition of an Azure resource.
+class Resource(_Model):
+    """Resource.
 
-    :ivar id: The ID of the resource.
+    :ivar id: Fully qualified resource ID for the resource. Ex -
+     /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}.
     :vartype id: str
     :ivar name: The name of the resource.
     :vartype name: str
-    :ivar type: The type of the resource.
+    :ivar type: The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or
+     "Microsoft.Storage/storageAccounts".
     :vartype type: str
-    :ivar etag: The ETag of the resource, used for concurrency statements.
-    :vartype etag: str
-    :ivar tags: The tags of the resource.
-    :vartype tags: dict[str, str]
+    :ivar system_data: Azure Resource Manager metadata containing createdBy and modifiedBy
+     information.
+    :vartype system_data: ~azure.mgmt.batch.models.SystemData
     """
 
     id: Optional[str] = rest_field(visibility=["read"])
-    """The ID of the resource."""
+    """Fully qualified resource ID for the resource. Ex -
+     /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}."""
     name: Optional[str] = rest_field(visibility=["read"])
     """The name of the resource."""
     type: Optional[str] = rest_field(visibility=["read"])
-    """The type of the resource."""
-    etag: Optional[str] = rest_field(visibility=["read"])
-    """The ETag of the resource, used for concurrency statements."""
-    tags: Optional[dict[str, str]] = rest_field(visibility=["read", "create", "update", "delete", "query"])
-    """The tags of the resource."""
-
-    @overload
-    def __init__(
-        self,
-        *,
-        tags: Optional[dict[str, str]] = None,
-    ) -> None: ...
-
-    @overload
-    def __init__(self, mapping: Mapping[str, Any]) -> None:
-        """
-        :param mapping: raw JSON to initialize the model.
-        :type mapping: Mapping[str, Any]
-        """
-
-    def __init__(self, *args: Any, **kwargs: Any) -> None:
-        super().__init__(*args, **kwargs)
+    """The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or
+     \"Microsoft.Storage/storageAccounts\"."""
+    system_data: Optional["_models.SystemData"] = rest_field(name="systemData", visibility=["read"])
+    """Azure Resource Manager metadata containing createdBy and modifiedBy information."""
 
 
-class Application(AzureProxyResource):
-    """Contains information about an application in a Batch account.
+class ProxyResource(Resource):
+    """Proxy Resource.
 
-    :ivar id: The ID of the resource.
+    :ivar id: Fully qualified resource ID for the resource. Ex -
+     /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}.
     :vartype id: str
     :ivar name: The name of the resource.
     :vartype name: str
-    :ivar type: The type of the resource.
+    :ivar type: The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or
+     "Microsoft.Storage/storageAccounts".
     :vartype type: str
+    :ivar system_data: Azure Resource Manager metadata containing createdBy and modifiedBy
+     information.
+    :vartype system_data: ~azure.mgmt.batch.models.SystemData
+    """
+
+
+class Application(ProxyResource):
+    """Contains information about an application in a Batch account.
+
+    :ivar id: Fully qualified resource ID for the resource. Ex -
+     /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}.
+    :vartype id: str
+    :ivar name: The name of the resource.
+    :vartype name: str
+    :ivar type: The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or
+     "Microsoft.Storage/storageAccounts".
+    :vartype type: str
+    :ivar system_data: Azure Resource Manager metadata containing createdBy and modifiedBy
+     information.
+    :vartype system_data: ~azure.mgmt.batch.models.SystemData
+    :ivar properties: The properties associated with the Application.
+    :vartype properties: ~azure.mgmt.batch.models.ApplicationProperties
     :ivar etag: The ETag of the resource, used for concurrency statements.
     :vartype etag: str
     :ivar tags: The tags of the resource.
     :vartype tags: dict[str, str]
-    :ivar properties: The properties associated with the Application.
-    :vartype properties: ~azure.mgmt.batch.models.ApplicationProperties
     """
 
     properties: Optional["_models.ApplicationProperties"] = rest_field(
         visibility=["read", "create", "update", "delete", "query"]
     )
     """The properties associated with the Application."""
+    etag: Optional[str] = rest_field(visibility=["read"])
+    """The ETag of the resource, used for concurrency statements."""
+    tags: Optional[dict[str, str]] = rest_field(visibility=["read", "create", "update", "delete", "query"])
+    """The tags of the resource."""
 
     __flattened_items = ["display_name", "allow_updates", "default_version"]
 
@@ -253,8 +263,8 @@ class Application(AzureProxyResource):
     def __init__(
         self,
         *,
-        tags: Optional[dict[str, str]] = None,
         properties: Optional["_models.ApplicationProperties"] = None,
+        tags: Optional[dict[str, str]] = None,
     ) -> None: ...
 
     @overload
@@ -286,27 +296,36 @@ class Application(AzureProxyResource):
             super().__setattr__(key, value)
 
 
-class ApplicationPackage(AzureProxyResource):
+class ApplicationPackage(ProxyResource):
     """An application package which represents a particular version of an application.
 
-    :ivar id: The ID of the resource.
+    :ivar id: Fully qualified resource ID for the resource. Ex -
+     /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}.
     :vartype id: str
     :ivar name: The name of the resource.
     :vartype name: str
-    :ivar type: The type of the resource.
+    :ivar type: The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or
+     "Microsoft.Storage/storageAccounts".
     :vartype type: str
+    :ivar system_data: Azure Resource Manager metadata containing createdBy and modifiedBy
+     information.
+    :vartype system_data: ~azure.mgmt.batch.models.SystemData
+    :ivar properties: The properties associated with the Application Package.
+    :vartype properties: ~azure.mgmt.batch.models.ApplicationPackageProperties
     :ivar etag: The ETag of the resource, used for concurrency statements.
     :vartype etag: str
     :ivar tags: The tags of the resource.
     :vartype tags: dict[str, str]
-    :ivar properties: The properties associated with the Application Package.
-    :vartype properties: ~azure.mgmt.batch.models.ApplicationPackageProperties
     """
 
     properties: Optional["_models.ApplicationPackageProperties"] = rest_field(
         visibility=["read", "create", "update", "delete", "query"]
     )
     """The properties associated with the Application Package."""
+    etag: Optional[str] = rest_field(visibility=["read"])
+    """The ETag of the resource, used for concurrency statements."""
+    tags: Optional[dict[str, str]] = rest_field(visibility=["read", "create", "update", "delete", "query"])
+    """The tags of the resource."""
 
     __flattened_items = ["state", "format", "storage_url", "storage_url_expiry", "last_activation_time"]
 
@@ -314,8 +333,8 @@ class ApplicationPackage(AzureProxyResource):
     def __init__(
         self,
         *,
-        tags: Optional[dict[str, str]] = None,
         properties: Optional["_models.ApplicationPackageProperties"] = None,
+        tags: Optional[dict[str, str]] = None,
     ) -> None: ...
 
     @overload
@@ -906,17 +925,17 @@ class AzureFileShareConfiguration(_Model):
         super().__init__(*args, **kwargs)
 
 
-class AzureResource(_Model):
+class AzureProxyResource(_Model):
     """A definition of an Azure resource.
 
     :ivar id: The ID of the resource.
     :vartype id: str
-    :ivar name: The name of the Batch account.
+    :ivar name: The name of the resource.
     :vartype name: str
     :ivar type: The type of the resource.
     :vartype type: str
-    :ivar location: The location of the resource.
-    :vartype location: str
+    :ivar etag: The ETag of the resource, used for concurrency statements.
+    :vartype etag: str
     :ivar tags: The tags of the resource.
     :vartype tags: dict[str, str]
     """
@@ -924,28 +943,94 @@ class AzureResource(_Model):
     id: Optional[str] = rest_field(visibility=["read"])
     """The ID of the resource."""
     name: Optional[str] = rest_field(visibility=["read"])
-    """The name of the Batch account."""
+    """The name of the resource."""
     type: Optional[str] = rest_field(visibility=["read"])
     """The type of the resource."""
-    location: Optional[str] = rest_field(visibility=["read"])
-    """The location of the resource."""
-    tags: Optional[dict[str, str]] = rest_field(visibility=["read"])
+    etag: Optional[str] = rest_field(visibility=["read"])
+    """The ETag of the resource, used for concurrency statements."""
+    tags: Optional[dict[str, str]] = rest_field(visibility=["read", "create", "update", "delete", "query"])
     """The tags of the resource."""
 
+    @overload
+    def __init__(
+        self,
+        *,
+        tags: Optional[dict[str, str]] = None,
+    ) -> None: ...
 
-class BatchAccount(AzureResource):
+    @overload
+    def __init__(self, mapping: Mapping[str, Any]) -> None:
+        """
+        :param mapping: raw JSON to initialize the model.
+        :type mapping: Mapping[str, Any]
+        """
+
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
+        super().__init__(*args, **kwargs)
+
+
+class TrackedResource(Resource):
+    """Tracked Resource.
+
+    :ivar id: Fully qualified resource ID for the resource. Ex -
+     /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}.
+    :vartype id: str
+    :ivar name: The name of the resource.
+    :vartype name: str
+    :ivar type: The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or
+     "Microsoft.Storage/storageAccounts".
+    :vartype type: str
+    :ivar system_data: Azure Resource Manager metadata containing createdBy and modifiedBy
+     information.
+    :vartype system_data: ~azure.mgmt.batch.models.SystemData
+    :ivar tags: Resource tags.
+    :vartype tags: dict[str, str]
+    :ivar location: The geo-location where the resource lives. Required.
+    :vartype location: str
+    """
+
+    tags: Optional[dict[str, str]] = rest_field(visibility=["read", "create", "update", "delete", "query"])
+    """Resource tags."""
+    location: str = rest_field(visibility=["read", "create"])
+    """The geo-location where the resource lives. Required."""
+
+    @overload
+    def __init__(
+        self,
+        *,
+        location: str,
+        tags: Optional[dict[str, str]] = None,
+    ) -> None: ...
+
+    @overload
+    def __init__(self, mapping: Mapping[str, Any]) -> None:
+        """
+        :param mapping: raw JSON to initialize the model.
+        :type mapping: Mapping[str, Any]
+        """
+
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
+        super().__init__(*args, **kwargs)
+
+
+class BatchAccount(TrackedResource):
     """Contains information about an Azure Batch account.
 
-    :ivar id: The ID of the resource.
+    :ivar id: Fully qualified resource ID for the resource. Ex -
+     /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}.
     :vartype id: str
-    :ivar name: The name of the Batch account.
+    :ivar name: The name of the resource.
     :vartype name: str
-    :ivar type: The type of the resource.
+    :ivar type: The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or
+     "Microsoft.Storage/storageAccounts".
     :vartype type: str
-    :ivar location: The location of the resource.
-    :vartype location: str
-    :ivar tags: The tags of the resource.
+    :ivar system_data: Azure Resource Manager metadata containing createdBy and modifiedBy
+     information.
+    :vartype system_data: ~azure.mgmt.batch.models.SystemData
+    :ivar tags: Resource tags.
     :vartype tags: dict[str, str]
+    :ivar location: The geo-location where the resource lives. Required.
+    :vartype location: str
     :ivar properties: The properties associated with the account.
     :vartype properties: ~azure.mgmt.batch.models.BatchAccountProperties
     :ivar identity: The identity of the Batch account.
@@ -985,6 +1070,8 @@ class BatchAccount(AzureResource):
     def __init__(
         self,
         *,
+        location: str,
+        tags: Optional[dict[str, str]] = None,
         properties: Optional["_models.BatchAccountProperties"] = None,
         identity: Optional["_models.BatchAccountIdentity"] = None,
     ) -> None: ...
@@ -1599,27 +1686,36 @@ class BatchPoolIdentity(_Model):
         super().__init__(*args, **kwargs)
 
 
-class Certificate(AzureProxyResource):
+class Certificate(ProxyResource):
     """Contains information about a certificate.
 
-    :ivar id: The ID of the resource.
+    :ivar id: Fully qualified resource ID for the resource. Ex -
+     /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}.
     :vartype id: str
     :ivar name: The name of the resource.
     :vartype name: str
-    :ivar type: The type of the resource.
+    :ivar type: The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or
+     "Microsoft.Storage/storageAccounts".
     :vartype type: str
+    :ivar system_data: Azure Resource Manager metadata containing createdBy and modifiedBy
+     information.
+    :vartype system_data: ~azure.mgmt.batch.models.SystemData
+    :ivar properties: The properties associated with the certificate.
+    :vartype properties: ~azure.mgmt.batch.models.CertificateProperties
     :ivar etag: The ETag of the resource, used for concurrency statements.
     :vartype etag: str
     :ivar tags: The tags of the resource.
     :vartype tags: dict[str, str]
-    :ivar properties: The properties associated with the certificate.
-    :vartype properties: ~azure.mgmt.batch.models.CertificateProperties
     """
 
     properties: Optional["_models.CertificateProperties"] = rest_field(
         visibility=["read", "create", "update", "delete", "query"]
     )
     """The properties associated with the certificate."""
+    etag: Optional[str] = rest_field(visibility=["read"])
+    """The ETag of the resource, used for concurrency statements."""
+    tags: Optional[dict[str, str]] = rest_field(visibility=["read", "create", "update", "delete", "query"])
+    """The tags of the resource."""
 
     __flattened_items = [
         "thumbprint_algorithm",
@@ -1637,8 +1733,8 @@ class Certificate(AzureProxyResource):
     def __init__(
         self,
         *,
-        tags: Optional[dict[str, str]] = None,
         properties: Optional["_models.CertificateProperties"] = None,
+        tags: Optional[dict[str, str]] = None,
     ) -> None: ...
 
     @overload
@@ -2430,27 +2526,36 @@ class DeploymentConfiguration(_Model):
         super().__init__(*args, **kwargs)
 
 
-class DetectorResponse(AzureProxyResource):
+class DetectorResponse(ProxyResource):
     """Contains the information for a detector.
 
-    :ivar id: The ID of the resource.
+    :ivar id: Fully qualified resource ID for the resource. Ex -
+     /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}.
     :vartype id: str
     :ivar name: The name of the resource.
     :vartype name: str
-    :ivar type: The type of the resource.
+    :ivar type: The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or
+     "Microsoft.Storage/storageAccounts".
     :vartype type: str
+    :ivar system_data: Azure Resource Manager metadata containing createdBy and modifiedBy
+     information.
+    :vartype system_data: ~azure.mgmt.batch.models.SystemData
+    :ivar properties: The properties associated with the detector.
+    :vartype properties: ~azure.mgmt.batch.models.DetectorResponseProperties
     :ivar etag: The ETag of the resource, used for concurrency statements.
     :vartype etag: str
     :ivar tags: The tags of the resource.
     :vartype tags: dict[str, str]
-    :ivar properties: The properties associated with the detector.
-    :vartype properties: ~azure.mgmt.batch.models.DetectorResponseProperties
     """
 
     properties: Optional["_models.DetectorResponseProperties"] = rest_field(
         visibility=["read", "create", "update", "delete", "query"]
     )
     """The properties associated with the detector."""
+    etag: Optional[str] = rest_field(visibility=["read"])
+    """The ETag of the resource, used for concurrency statements."""
+    tags: Optional[dict[str, str]] = rest_field(visibility=["read", "create", "update", "delete", "query"])
+    """The tags of the resource."""
 
     __flattened_items = ["value"]
 
@@ -2458,8 +2563,8 @@ class DetectorResponse(AzureProxyResource):
     def __init__(
         self,
         *,
-        tags: Optional[dict[str, str]] = None,
         properties: Optional["_models.DetectorResponseProperties"] = None,
+        tags: Optional[dict[str, str]] = None,
     ) -> None: ...
 
     @overload
@@ -2811,9 +2916,9 @@ class FixedScaleSettings(_Model):
     :ivar target_low_priority_nodes: The desired number of Spot/low-priority compute nodes in the
      pool.
     :vartype target_low_priority_nodes: int
-    :ivar node_deallocation_option: Determines what to do with a node and its running task(s) after
-     it has been selected for deallocation. Known values are: "Requeue", "Terminate",
-     "TaskCompletion", and "RetainedData".
+    :ivar node_deallocation_option: Determines what to do with a node and its running task(s) if
+     the pool size is decreasing. Known values are: "Requeue", "Terminate", "TaskCompletion", and
+     "RetainedData".
     :vartype node_deallocation_option: str or
      ~azure.mgmt.batch.models.ComputeNodeDeallocationOption
     """
@@ -2833,9 +2938,8 @@ class FixedScaleSettings(_Model):
     node_deallocation_option: Optional[Union[str, "_models.ComputeNodeDeallocationOption"]] = rest_field(
         name="nodeDeallocationOption", visibility=["create", "update"]
     )
-    """Determines what to do with a node and its running task(s) after it has been selected for
-     deallocation. Known values are: \"Requeue\", \"Terminate\", \"TaskCompletion\", and
-     \"RetainedData\"."""
+    """Determines what to do with a node and its running task(s) if the pool size is decreasing. Known
+     values are: \"Requeue\", \"Terminate\", \"TaskCompletion\", and \"RetainedData\"."""
 
     @overload
     def __init__(
@@ -3467,51 +3571,6 @@ class NetworkSecurityPerimeter(_Model):
         super().__init__(*args, **kwargs)
 
 
-class Resource(_Model):
-    """Resource.
-
-    :ivar id: Fully qualified resource ID for the resource. Ex -
-     /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}.
-    :vartype id: str
-    :ivar name: The name of the resource.
-    :vartype name: str
-    :ivar type: The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or
-     "Microsoft.Storage/storageAccounts".
-    :vartype type: str
-    :ivar system_data: Azure Resource Manager metadata containing createdBy and modifiedBy
-     information.
-    :vartype system_data: ~azure.mgmt.batch.models.SystemData
-    """
-
-    id: Optional[str] = rest_field(visibility=["read"])
-    """Fully qualified resource ID for the resource. Ex -
-     /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}."""
-    name: Optional[str] = rest_field(visibility=["read"])
-    """The name of the resource."""
-    type: Optional[str] = rest_field(visibility=["read"])
-    """The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or
-     \"Microsoft.Storage/storageAccounts\"."""
-    system_data: Optional["_models.SystemData"] = rest_field(name="systemData", visibility=["read"])
-    """Azure Resource Manager metadata containing createdBy and modifiedBy information."""
-
-
-class ProxyResource(Resource):
-    """Proxy Resource.
-
-    :ivar id: Fully qualified resource ID for the resource. Ex -
-     /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}.
-    :vartype id: str
-    :ivar name: The name of the resource.
-    :vartype name: str
-    :ivar type: The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or
-     "Microsoft.Storage/storageAccounts".
-    :vartype type: str
-    :ivar system_data: Azure Resource Manager metadata containing createdBy and modifiedBy
-     information.
-    :vartype system_data: ~azure.mgmt.batch.models.SystemData
-    """
-
-
 class NetworkSecurityPerimeterConfiguration(ProxyResource):
     """Network security perimeter (NSP) configuration resource.
 
@@ -3914,23 +3973,28 @@ class OutboundEnvironmentEndpoint(_Model):
     """The endpoints for this service to which the Batch service makes outbound calls."""
 
 
-class Pool(AzureProxyResource):
+class Pool(ProxyResource):
     """Contains information about a pool.
 
-    :ivar id: The ID of the resource.
+    :ivar id: Fully qualified resource ID for the resource. Ex -
+     /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}.
     :vartype id: str
     :ivar name: The name of the resource.
     :vartype name: str
-    :ivar type: The type of the resource.
+    :ivar type: The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or
+     "Microsoft.Storage/storageAccounts".
     :vartype type: str
-    :ivar etag: The ETag of the resource, used for concurrency statements.
-    :vartype etag: str
-    :ivar tags: The tags of the resource.
-    :vartype tags: dict[str, str]
+    :ivar system_data: Azure Resource Manager metadata containing createdBy and modifiedBy
+     information.
+    :vartype system_data: ~azure.mgmt.batch.models.SystemData
     :ivar properties: The properties associated with the pool.
     :vartype properties: ~azure.mgmt.batch.models.PoolProperties
     :ivar identity: The type of identity used for the Batch Pool.
     :vartype identity: ~azure.mgmt.batch.models.BatchPoolIdentity
+    :ivar etag: The ETag of the resource, used for concurrency statements.
+    :vartype etag: str
+    :ivar tags: The tags of the resource.
+    :vartype tags: dict[str, str]
     """
 
     properties: Optional["_models.PoolProperties"] = rest_field(
@@ -3941,6 +4005,10 @@ class Pool(AzureProxyResource):
         visibility=["read", "create", "update", "delete", "query"]
     )
     """The type of identity used for the Batch Pool."""
+    etag: Optional[str] = rest_field(visibility=["read"])
+    """The ETag of the resource, used for concurrency statements."""
+    tags: Optional[dict[str, str]] = rest_field(visibility=["read", "create", "update", "delete", "query"])
+    """The tags of the resource."""
 
     __flattened_items = [
         "display_name",
@@ -3978,9 +4046,9 @@ class Pool(AzureProxyResource):
     def __init__(
         self,
         *,
-        tags: Optional[dict[str, str]] = None,
         properties: Optional["_models.PoolProperties"] = None,
         identity: Optional["_models.BatchPoolIdentity"] = None,
+        tags: Optional[dict[str, str]] = None,
     ) -> None: ...
 
     @overload
@@ -4277,27 +4345,36 @@ class PrivateEndpoint(_Model):
      /subscriptions/{subscription}/resourceGroups/{group}/providers/Microsoft.Network/privateEndpoints/{privateEndpoint}."""
 
 
-class PrivateEndpointConnection(AzureProxyResource):
+class PrivateEndpointConnection(ProxyResource):
     """Contains information about a private link resource.
 
-    :ivar id: The ID of the resource.
+    :ivar id: Fully qualified resource ID for the resource. Ex -
+     /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}.
     :vartype id: str
     :ivar name: The name of the resource.
     :vartype name: str
-    :ivar type: The type of the resource.
+    :ivar type: The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or
+     "Microsoft.Storage/storageAccounts".
     :vartype type: str
+    :ivar system_data: Azure Resource Manager metadata containing createdBy and modifiedBy
+     information.
+    :vartype system_data: ~azure.mgmt.batch.models.SystemData
+    :ivar properties: The properties associated with the private endpoint connection.
+    :vartype properties: ~azure.mgmt.batch.models.PrivateEndpointConnectionProperties
     :ivar etag: The ETag of the resource, used for concurrency statements.
     :vartype etag: str
     :ivar tags: The tags of the resource.
     :vartype tags: dict[str, str]
-    :ivar properties: The properties associated with the private endpoint connection.
-    :vartype properties: ~azure.mgmt.batch.models.PrivateEndpointConnectionProperties
     """
 
     properties: Optional["_models.PrivateEndpointConnectionProperties"] = rest_field(
         visibility=["read", "create", "update", "delete", "query"]
     )
     """The properties associated with the private endpoint connection."""
+    etag: Optional[str] = rest_field(visibility=["read"])
+    """The ETag of the resource, used for concurrency statements."""
+    tags: Optional[dict[str, str]] = rest_field(visibility=["read", "create", "update", "delete", "query"])
+    """The tags of the resource."""
 
     __flattened_items = ["provisioning_state", "private_endpoint", "group_ids", "private_link_service_connection_state"]
 
@@ -4305,8 +4382,8 @@ class PrivateEndpointConnection(AzureProxyResource):
     def __init__(
         self,
         *,
-        tags: Optional[dict[str, str]] = None,
         properties: Optional["_models.PrivateEndpointConnectionProperties"] = None,
+        tags: Optional[dict[str, str]] = None,
     ) -> None: ...
 
     @overload
@@ -4387,27 +4464,36 @@ class PrivateEndpointConnectionProperties(_Model):
         super().__init__(*args, **kwargs)
 
 
-class PrivateLinkResource(AzureProxyResource):
+class PrivateLinkResource(ProxyResource):
     """Contains information about a private link resource.
 
-    :ivar id: The ID of the resource.
+    :ivar id: Fully qualified resource ID for the resource. Ex -
+     /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}.
     :vartype id: str
     :ivar name: The name of the resource.
     :vartype name: str
-    :ivar type: The type of the resource.
+    :ivar type: The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or
+     "Microsoft.Storage/storageAccounts".
     :vartype type: str
+    :ivar system_data: Azure Resource Manager metadata containing createdBy and modifiedBy
+     information.
+    :vartype system_data: ~azure.mgmt.batch.models.SystemData
+    :ivar properties: The properties associated with the private link resource.
+    :vartype properties: ~azure.mgmt.batch.models.PrivateLinkResourceProperties
     :ivar etag: The ETag of the resource, used for concurrency statements.
     :vartype etag: str
     :ivar tags: The tags of the resource.
     :vartype tags: dict[str, str]
-    :ivar properties: The properties associated with the private link resource.
-    :vartype properties: ~azure.mgmt.batch.models.PrivateLinkResourceProperties
     """
 
     properties: Optional["_models.PrivateLinkResourceProperties"] = rest_field(
         visibility=["read", "create", "update", "delete", "query"]
     )
     """The properties associated with the private link resource."""
+    etag: Optional[str] = rest_field(visibility=["read"])
+    """The ETag of the resource, used for concurrency statements."""
+    tags: Optional[dict[str, str]] = rest_field(visibility=["read", "create", "update", "delete", "query"])
+    """The tags of the resource."""
 
     __flattened_items = ["group_id", "required_members", "required_zone_names"]
 
@@ -4415,8 +4501,8 @@ class PrivateLinkResource(AzureProxyResource):
     def __init__(
         self,
         *,
-        tags: Optional[dict[str, str]] = None,
         properties: Optional["_models.PrivateLinkResourceProperties"] = None,
+        tags: Optional[dict[str, str]] = None,
     ) -> None: ...
 
     @overload

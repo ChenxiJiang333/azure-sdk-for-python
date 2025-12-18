@@ -6,22 +6,23 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 import pytest
-from azure.mgmt.batch import BatchClient
+from azure.mgmt.batch.aio import BatchManagementClient
 
-from devtools_testutils import AzureMgmtRecordedTestCase, RandomNameResourceGroupPreparer, recorded_by_proxy
+from devtools_testutils import AzureMgmtRecordedTestCase, RandomNameResourceGroupPreparer
+from devtools_testutils.aio import recorded_by_proxy_async
 
 AZURE_LOCATION = "eastus"
 
 
 @pytest.mark.skip("you may need to update the auto-generated test case before run it")
-class TestBatchLocationOperations(AzureMgmtRecordedTestCase):
+class TestBatchManagementLocationOperationsAsync(AzureMgmtRecordedTestCase):
     def setup_method(self, method):
-        self.client = self.create_mgmt_client(BatchClient)
+        self.client = self.create_mgmt_client(BatchManagementClient, is_async=True)
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_location_get_quotas(self, resource_group):
-        response = self.client.location.get_quotas(
+    @recorded_by_proxy_async
+    async def test_location_get_quotas(self, resource_group):
+        response = await self.client.location.get_quotas(
             location_name="str",
         )
 
@@ -29,19 +30,19 @@ class TestBatchLocationOperations(AzureMgmtRecordedTestCase):
         # ...
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_location_list_supported_virtual_machine_skus(self, resource_group):
+    @recorded_by_proxy_async
+    async def test_location_list_supported_virtual_machine_skus(self, resource_group):
         response = self.client.location.list_supported_virtual_machine_skus(
             location_name="str",
         )
-        result = [r for r in response]
+        result = [r async for r in response]
         # please add some check logic here by yourself
         # ...
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_location_check_name_availability(self, resource_group):
-        response = self.client.location.check_name_availability(
+    @recorded_by_proxy_async
+    async def test_location_check_name_availability(self, resource_group):
+        response = await self.client.location.check_name_availability(
             location_name="str",
             parameters={"name": "str", "type": "str"},
         )

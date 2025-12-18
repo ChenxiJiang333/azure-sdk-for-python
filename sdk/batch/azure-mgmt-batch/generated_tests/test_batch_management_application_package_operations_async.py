@@ -6,7 +6,7 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 import pytest
-from azure.mgmt.batch.aio import BatchClient
+from azure.mgmt.batch.aio import BatchManagementClient
 
 from devtools_testutils import AzureMgmtRecordedTestCase, RandomNameResourceGroupPreparer
 from devtools_testutils.aio import recorded_by_proxy_async
@@ -15,9 +15,9 @@ AZURE_LOCATION = "eastus"
 
 
 @pytest.mark.skip("you may need to update the auto-generated test case before run it")
-class TestBatchApplicationPackageOperationsAsync(AzureMgmtRecordedTestCase):
+class TestBatchManagementApplicationPackageOperationsAsync(AzureMgmtRecordedTestCase):
     def setup_method(self, method):
-        self.client = self.create_mgmt_client(BatchClient, is_async=True)
+        self.client = self.create_mgmt_client(BatchManagementClient, is_async=True)
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
@@ -40,20 +40,6 @@ class TestBatchApplicationPackageOperationsAsync(AzureMgmtRecordedTestCase):
             account_name="str",
             application_name="str",
             version_name="str",
-            parameters={
-                "etag": "str",
-                "id": "str",
-                "name": "str",
-                "properties": {
-                    "format": "str",
-                    "lastActivationTime": "2020-02-20 00:00:00",
-                    "state": "str",
-                    "storageUrl": "str",
-                    "storageUrlExpiry": "2020-02-20 00:00:00",
-                },
-                "tags": {"str": "str"},
-                "type": "str",
-            },
         )
 
         # please add some check logic here by yourself

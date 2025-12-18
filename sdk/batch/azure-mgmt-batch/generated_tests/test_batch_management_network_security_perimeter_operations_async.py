@@ -6,7 +6,7 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 import pytest
-from azure.mgmt.batch.aio import BatchClient
+from azure.mgmt.batch.aio import BatchManagementClient
 
 from devtools_testutils import AzureMgmtRecordedTestCase, RandomNameResourceGroupPreparer
 from devtools_testutils.aio import recorded_by_proxy_async
@@ -15,15 +15,17 @@ AZURE_LOCATION = "eastus"
 
 
 @pytest.mark.skip("you may need to update the auto-generated test case before run it")
-class TestBatchLocationOperationsAsync(AzureMgmtRecordedTestCase):
+class TestBatchManagementNetworkSecurityPerimeterOperationsAsync(AzureMgmtRecordedTestCase):
     def setup_method(self, method):
-        self.client = self.create_mgmt_client(BatchClient, is_async=True)
+        self.client = self.create_mgmt_client(BatchManagementClient, is_async=True)
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_location_get_quotas(self, resource_group):
-        response = await self.client.location.get_quotas(
-            location_name="str",
+    async def test_network_security_perimeter_get_configuration(self, resource_group):
+        response = await self.client.network_security_perimeter.get_configuration(
+            resource_group_name=resource_group.name,
+            account_name="str",
+            network_security_perimeter_configuration_name="str",
         )
 
         # please add some check logic here by yourself
@@ -31,9 +33,10 @@ class TestBatchLocationOperationsAsync(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_location_list_supported_virtual_machine_skus(self, resource_group):
-        response = self.client.location.list_supported_virtual_machine_skus(
-            location_name="str",
+    async def test_network_security_perimeter_list_configurations(self, resource_group):
+        response = self.client.network_security_perimeter.list_configurations(
+            resource_group_name=resource_group.name,
+            account_name="str",
         )
         result = [r async for r in response]
         # please add some check logic here by yourself
@@ -41,11 +44,14 @@ class TestBatchLocationOperationsAsync(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_location_check_name_availability(self, resource_group):
-        response = await self.client.location.check_name_availability(
-            location_name="str",
-            parameters={"name": "str", "type": "str"},
-        )
+    async def test_network_security_perimeter_begin_reconcile_configuration(self, resource_group):
+        response = await (
+            await self.client.network_security_perimeter.begin_reconcile_configuration(
+                resource_group_name=resource_group.name,
+                account_name="str",
+                network_security_perimeter_configuration_name="str",
+            )
+        ).result()  # call '.result()' to poll until service return final result
 
         # please add some check logic here by yourself
         # ...

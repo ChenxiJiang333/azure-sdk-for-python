@@ -87,7 +87,7 @@ from ...operations._operations import (
     build_private_link_resource_get_request,
     build_private_link_resource_list_by_batch_account_request,
 )
-from .._configuration import BatchClientConfiguration
+from .._configuration import BatchManagementClientConfiguration
 
 T = TypeVar("T")
 ClsType = Optional[Callable[[PipelineResponse[HttpRequest, AsyncHttpResponse], T, dict[str, Any]], Any]]
@@ -101,14 +101,14 @@ class Operations:
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.batch.aio.BatchClient`'s
+        :class:`~azure.mgmt.batch.aio.BatchManagementClient`'s
         :attr:`operations` attribute.
     """
 
     def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client: AsyncPipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: BatchClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._config: BatchManagementClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
         self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
@@ -205,14 +205,14 @@ class BatchAccountOperations:
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.batch.aio.BatchClient`'s
+        :class:`~azure.mgmt.batch.aio.BatchManagementClient`'s
         :attr:`batch_account` attribute.
     """
 
     def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client: AsyncPipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: BatchClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._config: BatchManagementClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
         self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
@@ -223,7 +223,12 @@ class BatchAccountOperations:
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param account_name: The name of the Batch account. Required.
+        :param account_name: A name for the Batch account which must be unique within the region. Batch
+         account names must be between 3 and 24 characters in length and must use only numbers and
+         lowercase letters. This name is used as part of the DNS name that is used to access the Batch
+         service in the region in which the account is created. For example:
+         `http://accountname.region.batch.azure.com/ <http://accountname.region.batch.azure.com/>`_.
+         Required.
         :type account_name: str
         :return: BatchAccount. The BatchAccount is compatible with MutableMapping
         :rtype: ~azure.mgmt.batch.models.BatchAccount
@@ -375,7 +380,12 @@ class BatchAccountOperations:
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param account_name: The name of the Batch account. Required.
+        :param account_name: A name for the Batch account which must be unique within the region. Batch
+         account names must be between 3 and 24 characters in length and must use only numbers and
+         lowercase letters. This name is used as part of the DNS name that is used to access the Batch
+         service in the region in which the account is created. For example:
+         `http://accountname.region.batch.azure.com/ <http://accountname.region.batch.azure.com/>`_.
+         Required.
         :type account_name: str
         :param parameters: Additional parameters for account creation. Required.
         :type parameters: ~azure.mgmt.batch.models.BatchAccountCreateParameters
@@ -404,7 +414,12 @@ class BatchAccountOperations:
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param account_name: The name of the Batch account. Required.
+        :param account_name: A name for the Batch account which must be unique within the region. Batch
+         account names must be between 3 and 24 characters in length and must use only numbers and
+         lowercase letters. This name is used as part of the DNS name that is used to access the Batch
+         service in the region in which the account is created. For example:
+         `http://accountname.region.batch.azure.com/ <http://accountname.region.batch.azure.com/>`_.
+         Required.
         :type account_name: str
         :param parameters: Additional parameters for account creation. Required.
         :type parameters: JSON
@@ -433,7 +448,12 @@ class BatchAccountOperations:
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param account_name: The name of the Batch account. Required.
+        :param account_name: A name for the Batch account which must be unique within the region. Batch
+         account names must be between 3 and 24 characters in length and must use only numbers and
+         lowercase letters. This name is used as part of the DNS name that is used to access the Batch
+         service in the region in which the account is created. For example:
+         `http://accountname.region.batch.azure.com/ <http://accountname.region.batch.azure.com/>`_.
+         Required.
         :type account_name: str
         :param parameters: Additional parameters for account creation. Required.
         :type parameters: IO[bytes]
@@ -460,7 +480,12 @@ class BatchAccountOperations:
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param account_name: The name of the Batch account. Required.
+        :param account_name: A name for the Batch account which must be unique within the region. Batch
+         account names must be between 3 and 24 characters in length and must use only numbers and
+         lowercase letters. This name is used as part of the DNS name that is used to access the Batch
+         service in the region in which the account is created. For example:
+         `http://accountname.region.batch.azure.com/ <http://accountname.region.batch.azure.com/>`_.
+         Required.
         :type account_name: str
         :param parameters: Additional parameters for account creation. Is one of the following types:
          BatchAccountCreateParameters, JSON, IO[bytes] Required.
@@ -537,7 +562,12 @@ class BatchAccountOperations:
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param account_name: The name of the Batch account. Required.
+        :param account_name: A name for the Batch account which must be unique within the region. Batch
+         account names must be between 3 and 24 characters in length and must use only numbers and
+         lowercase letters. This name is used as part of the DNS name that is used to access the Batch
+         service in the region in which the account is created. For example:
+         `http://accountname.region.batch.azure.com/ <http://accountname.region.batch.azure.com/>`_.
+         Required.
         :type account_name: str
         :param parameters: Additional parameters for account update. Required.
         :type parameters: ~azure.mgmt.batch.models.BatchAccountUpdateParameters
@@ -564,7 +594,12 @@ class BatchAccountOperations:
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param account_name: The name of the Batch account. Required.
+        :param account_name: A name for the Batch account which must be unique within the region. Batch
+         account names must be between 3 and 24 characters in length and must use only numbers and
+         lowercase letters. This name is used as part of the DNS name that is used to access the Batch
+         service in the region in which the account is created. For example:
+         `http://accountname.region.batch.azure.com/ <http://accountname.region.batch.azure.com/>`_.
+         Required.
         :type account_name: str
         :param parameters: Additional parameters for account update. Required.
         :type parameters: JSON
@@ -591,7 +626,12 @@ class BatchAccountOperations:
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param account_name: The name of the Batch account. Required.
+        :param account_name: A name for the Batch account which must be unique within the region. Batch
+         account names must be between 3 and 24 characters in length and must use only numbers and
+         lowercase letters. This name is used as part of the DNS name that is used to access the Batch
+         service in the region in which the account is created. For example:
+         `http://accountname.region.batch.azure.com/ <http://accountname.region.batch.azure.com/>`_.
+         Required.
         :type account_name: str
         :param parameters: Additional parameters for account update. Required.
         :type parameters: IO[bytes]
@@ -616,7 +656,12 @@ class BatchAccountOperations:
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param account_name: The name of the Batch account. Required.
+        :param account_name: A name for the Batch account which must be unique within the region. Batch
+         account names must be between 3 and 24 characters in length and must use only numbers and
+         lowercase letters. This name is used as part of the DNS name that is used to access the Batch
+         service in the region in which the account is created. For example:
+         `http://accountname.region.batch.azure.com/ <http://accountname.region.batch.azure.com/>`_.
+         Required.
         :type account_name: str
         :param parameters: Additional parameters for account update. Is one of the following types:
          BatchAccountUpdateParameters, JSON, IO[bytes] Required.
@@ -756,7 +801,12 @@ class BatchAccountOperations:
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param account_name: The name of the Batch account. Required.
+        :param account_name: A name for the Batch account which must be unique within the region. Batch
+         account names must be between 3 and 24 characters in length and must use only numbers and
+         lowercase letters. This name is used as part of the DNS name that is used to access the Batch
+         service in the region in which the account is created. For example:
+         `http://accountname.region.batch.azure.com/ <http://accountname.region.batch.azure.com/>`_.
+         Required.
         :type account_name: str
         :return: An instance of AsyncLROPoller that returns None
         :rtype: ~azure.core.polling.AsyncLROPoller[None]
@@ -992,7 +1042,12 @@ class BatchAccountOperations:
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param account_name: The name of the Batch account. Required.
+        :param account_name: A name for the Batch account which must be unique within the region. Batch
+         account names must be between 3 and 24 characters in length and must use only numbers and
+         lowercase letters. This name is used as part of the DNS name that is used to access the Batch
+         service in the region in which the account is created. For example:
+         `http://accountname.region.batch.azure.com/ <http://accountname.region.batch.azure.com/>`_.
+         Required.
         :type account_name: str
         :return: None
         :rtype: None
@@ -1062,7 +1117,12 @@ class BatchAccountOperations:
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param account_name: The name of the Batch account. Required.
+        :param account_name: A name for the Batch account which must be unique within the region. Batch
+         account names must be between 3 and 24 characters in length and must use only numbers and
+         lowercase letters. This name is used as part of the DNS name that is used to access the Batch
+         service in the region in which the account is created. For example:
+         `http://accountname.region.batch.azure.com/ <http://accountname.region.batch.azure.com/>`_.
+         Required.
         :type account_name: str
         :param parameters: The type of key to regenerate. Required.
         :type parameters: ~azure.mgmt.batch.models.BatchAccountRegenerateKeyParameters
@@ -1094,7 +1154,12 @@ class BatchAccountOperations:
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param account_name: The name of the Batch account. Required.
+        :param account_name: A name for the Batch account which must be unique within the region. Batch
+         account names must be between 3 and 24 characters in length and must use only numbers and
+         lowercase letters. This name is used as part of the DNS name that is used to access the Batch
+         service in the region in which the account is created. For example:
+         `http://accountname.region.batch.azure.com/ <http://accountname.region.batch.azure.com/>`_.
+         Required.
         :type account_name: str
         :param parameters: The type of key to regenerate. Required.
         :type parameters: JSON
@@ -1126,7 +1191,12 @@ class BatchAccountOperations:
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param account_name: The name of the Batch account. Required.
+        :param account_name: A name for the Batch account which must be unique within the region. Batch
+         account names must be between 3 and 24 characters in length and must use only numbers and
+         lowercase letters. This name is used as part of the DNS name that is used to access the Batch
+         service in the region in which the account is created. For example:
+         `http://accountname.region.batch.azure.com/ <http://accountname.region.batch.azure.com/>`_.
+         Required.
         :type account_name: str
         :param parameters: The type of key to regenerate. Required.
         :type parameters: IO[bytes]
@@ -1156,7 +1226,12 @@ class BatchAccountOperations:
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param account_name: The name of the Batch account. Required.
+        :param account_name: A name for the Batch account which must be unique within the region. Batch
+         account names must be between 3 and 24 characters in length and must use only numbers and
+         lowercase letters. This name is used as part of the DNS name that is used to access the Batch
+         service in the region in which the account is created. For example:
+         `http://accountname.region.batch.azure.com/ <http://accountname.region.batch.azure.com/>`_.
+         Required.
         :type account_name: str
         :param parameters: The type of key to regenerate. Is one of the following types:
          BatchAccountRegenerateKeyParameters, JSON, IO[bytes] Required.
@@ -1244,7 +1319,12 @@ class BatchAccountOperations:
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param account_name: The name of the Batch account. Required.
+        :param account_name: A name for the Batch account which must be unique within the region. Batch
+         account names must be between 3 and 24 characters in length and must use only numbers and
+         lowercase letters. This name is used as part of the DNS name that is used to access the Batch
+         service in the region in which the account is created. For example:
+         `http://accountname.region.batch.azure.com/ <http://accountname.region.batch.azure.com/>`_.
+         Required.
         :type account_name: str
         :return: BatchAccountKeys. The BatchAccountKeys is compatible with MutableMapping
         :rtype: ~azure.mgmt.batch.models.BatchAccountKeys
@@ -1321,7 +1401,12 @@ class BatchAccountOperations:
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param account_name: The name of the Batch account. Required.
+        :param account_name: A name for the Batch account which must be unique within the region. Batch
+         account names must be between 3 and 24 characters in length and must use only numbers and
+         lowercase letters. This name is used as part of the DNS name that is used to access the Batch
+         service in the region in which the account is created. For example:
+         `http://accountname.region.batch.azure.com/ <http://accountname.region.batch.azure.com/>`_.
+         Required.
         :type account_name: str
         :return: An iterator like instance of OutboundEnvironmentEndpoint
         :rtype:
@@ -1418,7 +1503,12 @@ class BatchAccountOperations:
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param account_name: The name of the Batch account. Required.
+        :param account_name: A name for the Batch account which must be unique within the region. Batch
+         account names must be between 3 and 24 characters in length and must use only numbers and
+         lowercase letters. This name is used as part of the DNS name that is used to access the Batch
+         service in the region in which the account is created. For example:
+         `http://accountname.region.batch.azure.com/ <http://accountname.region.batch.azure.com/>`_.
+         Required.
         :type account_name: str
         :param detector_id: The name of the detector. Required.
         :type detector_id: str
@@ -1492,7 +1582,12 @@ class BatchAccountOperations:
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param account_name: The name of the Batch account. Required.
+        :param account_name: A name for the Batch account which must be unique within the region. Batch
+         account names must be between 3 and 24 characters in length and must use only numbers and
+         lowercase letters. This name is used as part of the DNS name that is used to access the Batch
+         service in the region in which the account is created. For example:
+         `http://accountname.region.batch.azure.com/ <http://accountname.region.batch.azure.com/>`_.
+         Required.
         :type account_name: str
         :return: An iterator like instance of DetectorResponse
         :rtype: ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.batch.models.DetectorResponse]
@@ -1586,14 +1681,14 @@ class ApplicationPackageOperations:
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.batch.aio.BatchClient`'s
+        :class:`~azure.mgmt.batch.aio.BatchManagementClient`'s
         :attr:`application_package` attribute.
     """
 
     def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client: AsyncPipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: BatchClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._config: BatchManagementClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
         self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
@@ -1606,7 +1701,12 @@ class ApplicationPackageOperations:
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param account_name: The name of the Batch account. Required.
+        :param account_name: A name for the Batch account which must be unique within the region. Batch
+         account names must be between 3 and 24 characters in length and must use only numbers and
+         lowercase letters. This name is used as part of the DNS name that is used to access the Batch
+         service in the region in which the account is created. For example:
+         `http://accountname.region.batch.azure.com/ <http://accountname.region.batch.azure.com/>`_.
+         Required.
         :type account_name: str
         :param application_name: The name of the application. This must be unique within the account.
          Required.
@@ -1682,7 +1782,7 @@ class ApplicationPackageOperations:
         account_name: str,
         application_name: str,
         version_name: str,
-        parameters: _models.ApplicationPackage,
+        parameters: Optional[_models.ApplicationPackage] = None,
         *,
         content_type: str = "application/json",
         **kwargs: Any
@@ -1695,14 +1795,19 @@ class ApplicationPackageOperations:
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param account_name: The name of the Batch account. Required.
+        :param account_name: A name for the Batch account which must be unique within the region. Batch
+         account names must be between 3 and 24 characters in length and must use only numbers and
+         lowercase letters. This name is used as part of the DNS name that is used to access the Batch
+         service in the region in which the account is created. For example:
+         `http://accountname.region.batch.azure.com/ <http://accountname.region.batch.azure.com/>`_.
+         Required.
         :type account_name: str
         :param application_name: The name of the application. This must be unique within the account.
          Required.
         :type application_name: str
         :param version_name: The version of the application. Required.
         :type version_name: str
-        :param parameters: The parameters for the request. Required.
+        :param parameters: The parameters for the request. Default value is None.
         :type parameters: ~azure.mgmt.batch.models.ApplicationPackage
         :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
          Default value is "application/json".
@@ -1719,7 +1824,7 @@ class ApplicationPackageOperations:
         account_name: str,
         application_name: str,
         version_name: str,
-        parameters: JSON,
+        parameters: Optional[JSON] = None,
         *,
         content_type: str = "application/json",
         **kwargs: Any
@@ -1732,14 +1837,19 @@ class ApplicationPackageOperations:
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param account_name: The name of the Batch account. Required.
+        :param account_name: A name for the Batch account which must be unique within the region. Batch
+         account names must be between 3 and 24 characters in length and must use only numbers and
+         lowercase letters. This name is used as part of the DNS name that is used to access the Batch
+         service in the region in which the account is created. For example:
+         `http://accountname.region.batch.azure.com/ <http://accountname.region.batch.azure.com/>`_.
+         Required.
         :type account_name: str
         :param application_name: The name of the application. This must be unique within the account.
          Required.
         :type application_name: str
         :param version_name: The version of the application. Required.
         :type version_name: str
-        :param parameters: The parameters for the request. Required.
+        :param parameters: The parameters for the request. Default value is None.
         :type parameters: JSON
         :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
          Default value is "application/json".
@@ -1756,7 +1866,7 @@ class ApplicationPackageOperations:
         account_name: str,
         application_name: str,
         version_name: str,
-        parameters: IO[bytes],
+        parameters: Optional[IO[bytes]] = None,
         *,
         content_type: str = "application/json",
         **kwargs: Any
@@ -1769,14 +1879,19 @@ class ApplicationPackageOperations:
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param account_name: The name of the Batch account. Required.
+        :param account_name: A name for the Batch account which must be unique within the region. Batch
+         account names must be between 3 and 24 characters in length and must use only numbers and
+         lowercase letters. This name is used as part of the DNS name that is used to access the Batch
+         service in the region in which the account is created. For example:
+         `http://accountname.region.batch.azure.com/ <http://accountname.region.batch.azure.com/>`_.
+         Required.
         :type account_name: str
         :param application_name: The name of the application. This must be unique within the account.
          Required.
         :type application_name: str
         :param version_name: The version of the application. Required.
         :type version_name: str
-        :param parameters: The parameters for the request. Required.
+        :param parameters: The parameters for the request. Default value is None.
         :type parameters: IO[bytes]
         :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
          Default value is "application/json".
@@ -1793,7 +1908,7 @@ class ApplicationPackageOperations:
         account_name: str,
         application_name: str,
         version_name: str,
-        parameters: Union[_models.ApplicationPackage, JSON, IO[bytes]],
+        parameters: Optional[Union[_models.ApplicationPackage, JSON, IO[bytes]]] = None,
         **kwargs: Any
     ) -> _models.ApplicationPackage:
         """Creates an application package record. The record contains a storageUrl where the package
@@ -1804,7 +1919,12 @@ class ApplicationPackageOperations:
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param account_name: The name of the Batch account. Required.
+        :param account_name: A name for the Batch account which must be unique within the region. Batch
+         account names must be between 3 and 24 characters in length and must use only numbers and
+         lowercase letters. This name is used as part of the DNS name that is used to access the Batch
+         service in the region in which the account is created. For example:
+         `http://accountname.region.batch.azure.com/ <http://accountname.region.batch.azure.com/>`_.
+         Required.
         :type account_name: str
         :param application_name: The name of the application. This must be unique within the account.
          Required.
@@ -1812,7 +1932,7 @@ class ApplicationPackageOperations:
         :param version_name: The version of the application. Required.
         :type version_name: str
         :param parameters: The parameters for the request. Is one of the following types:
-         ApplicationPackage, JSON, IO[bytes] Required.
+         ApplicationPackage, JSON, IO[bytes] Default value is None.
         :type parameters: ~azure.mgmt.batch.models.ApplicationPackage or JSON or IO[bytes]
         :return: ApplicationPackage. The ApplicationPackage is compatible with MutableMapping
         :rtype: ~azure.mgmt.batch.models.ApplicationPackage
@@ -1830,14 +1950,18 @@ class ApplicationPackageOperations:
         _params = kwargs.pop("params", {}) or {}
 
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        content_type = content_type if parameters else None
         cls: ClsType[_models.ApplicationPackage] = kwargs.pop("cls", None)
 
-        content_type = content_type or "application/json"
+        content_type = content_type or "application/json" if parameters else None
         _content = None
         if isinstance(parameters, (IOBase, bytes)):
             _content = parameters
         else:
-            _content = json.dumps(parameters, cls=SdkJSONEncoder, exclude_readonly=True)  # type: ignore
+            if parameters is not None:
+                _content = json.dumps(parameters, cls=SdkJSONEncoder, exclude_readonly=True)  # type: ignore
+            else:
+                _content = None
 
         _request = build_application_package_create_request(
             resource_group_name=resource_group_name,
@@ -1895,7 +2019,12 @@ class ApplicationPackageOperations:
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param account_name: The name of the Batch account. Required.
+        :param account_name: A name for the Batch account which must be unique within the region. Batch
+         account names must be between 3 and 24 characters in length and must use only numbers and
+         lowercase letters. This name is used as part of the DNS name that is used to access the Batch
+         service in the region in which the account is created. For example:
+         `http://accountname.region.batch.azure.com/ <http://accountname.region.batch.azure.com/>`_.
+         Required.
         :type account_name: str
         :param application_name: The name of the application. This must be unique within the account.
          Required.
@@ -1967,7 +2096,12 @@ class ApplicationPackageOperations:
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param account_name: The name of the Batch account. Required.
+        :param account_name: A name for the Batch account which must be unique within the region. Batch
+         account names must be between 3 and 24 characters in length and must use only numbers and
+         lowercase letters. This name is used as part of the DNS name that is used to access the Batch
+         service in the region in which the account is created. For example:
+         `http://accountname.region.batch.azure.com/ <http://accountname.region.batch.azure.com/>`_.
+         Required.
         :type account_name: str
         :param application_name: The name of the application. This must be unique within the account.
          Required.
@@ -2081,7 +2215,12 @@ class ApplicationPackageOperations:
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param account_name: The name of the Batch account. Required.
+        :param account_name: A name for the Batch account which must be unique within the region. Batch
+         account names must be between 3 and 24 characters in length and must use only numbers and
+         lowercase letters. This name is used as part of the DNS name that is used to access the Batch
+         service in the region in which the account is created. For example:
+         `http://accountname.region.batch.azure.com/ <http://accountname.region.batch.azure.com/>`_.
+         Required.
         :type account_name: str
         :param application_name: The name of the application. This must be unique within the account.
          Required.
@@ -2117,7 +2256,12 @@ class ApplicationPackageOperations:
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param account_name: The name of the Batch account. Required.
+        :param account_name: A name for the Batch account which must be unique within the region. Batch
+         account names must be between 3 and 24 characters in length and must use only numbers and
+         lowercase letters. This name is used as part of the DNS name that is used to access the Batch
+         service in the region in which the account is created. For example:
+         `http://accountname.region.batch.azure.com/ <http://accountname.region.batch.azure.com/>`_.
+         Required.
         :type account_name: str
         :param application_name: The name of the application. This must be unique within the account.
          Required.
@@ -2153,7 +2297,12 @@ class ApplicationPackageOperations:
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param account_name: The name of the Batch account. Required.
+        :param account_name: A name for the Batch account which must be unique within the region. Batch
+         account names must be between 3 and 24 characters in length and must use only numbers and
+         lowercase letters. This name is used as part of the DNS name that is used to access the Batch
+         service in the region in which the account is created. For example:
+         `http://accountname.region.batch.azure.com/ <http://accountname.region.batch.azure.com/>`_.
+         Required.
         :type account_name: str
         :param application_name: The name of the application. This must be unique within the account.
          Required.
@@ -2187,7 +2336,12 @@ class ApplicationPackageOperations:
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param account_name: The name of the Batch account. Required.
+        :param account_name: A name for the Batch account which must be unique within the region. Batch
+         account names must be between 3 and 24 characters in length and must use only numbers and
+         lowercase letters. This name is used as part of the DNS name that is used to access the Batch
+         service in the region in which the account is created. For example:
+         `http://accountname.region.batch.azure.com/ <http://accountname.region.batch.azure.com/>`_.
+         Required.
         :type account_name: str
         :param application_name: The name of the application. This must be unique within the account.
          Required.
@@ -2277,14 +2431,14 @@ class ApplicationOperations:
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.batch.aio.BatchClient`'s
+        :class:`~azure.mgmt.batch.aio.BatchManagementClient`'s
         :attr:`application` attribute.
     """
 
     def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client: AsyncPipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: BatchClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._config: BatchManagementClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
         self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
@@ -2297,7 +2451,12 @@ class ApplicationOperations:
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param account_name: The name of the Batch account. Required.
+        :param account_name: A name for the Batch account which must be unique within the region. Batch
+         account names must be between 3 and 24 characters in length and must use only numbers and
+         lowercase letters. This name is used as part of the DNS name that is used to access the Batch
+         service in the region in which the account is created. For example:
+         `http://accountname.region.batch.azure.com/ <http://accountname.region.batch.azure.com/>`_.
+         Required.
         :type account_name: str
         :param application_name: The name of the application. This must be unique within the account.
          Required.
@@ -2369,7 +2528,7 @@ class ApplicationOperations:
         resource_group_name: str,
         account_name: str,
         application_name: str,
-        parameters: _models.Application,
+        parameters: Optional[_models.Application] = None,
         *,
         content_type: str = "application/json",
         **kwargs: Any
@@ -2379,12 +2538,17 @@ class ApplicationOperations:
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param account_name: The name of the Batch account. Required.
+        :param account_name: A name for the Batch account which must be unique within the region. Batch
+         account names must be between 3 and 24 characters in length and must use only numbers and
+         lowercase letters. This name is used as part of the DNS name that is used to access the Batch
+         service in the region in which the account is created. For example:
+         `http://accountname.region.batch.azure.com/ <http://accountname.region.batch.azure.com/>`_.
+         Required.
         :type account_name: str
         :param application_name: The name of the application. This must be unique within the account.
          Required.
         :type application_name: str
-        :param parameters: The parameters for the request. Required.
+        :param parameters: The parameters for the request. Default value is None.
         :type parameters: ~azure.mgmt.batch.models.Application
         :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
          Default value is "application/json".
@@ -2400,7 +2564,7 @@ class ApplicationOperations:
         resource_group_name: str,
         account_name: str,
         application_name: str,
-        parameters: JSON,
+        parameters: Optional[JSON] = None,
         *,
         content_type: str = "application/json",
         **kwargs: Any
@@ -2410,12 +2574,17 @@ class ApplicationOperations:
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param account_name: The name of the Batch account. Required.
+        :param account_name: A name for the Batch account which must be unique within the region. Batch
+         account names must be between 3 and 24 characters in length and must use only numbers and
+         lowercase letters. This name is used as part of the DNS name that is used to access the Batch
+         service in the region in which the account is created. For example:
+         `http://accountname.region.batch.azure.com/ <http://accountname.region.batch.azure.com/>`_.
+         Required.
         :type account_name: str
         :param application_name: The name of the application. This must be unique within the account.
          Required.
         :type application_name: str
-        :param parameters: The parameters for the request. Required.
+        :param parameters: The parameters for the request. Default value is None.
         :type parameters: JSON
         :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
          Default value is "application/json".
@@ -2431,7 +2600,7 @@ class ApplicationOperations:
         resource_group_name: str,
         account_name: str,
         application_name: str,
-        parameters: IO[bytes],
+        parameters: Optional[IO[bytes]] = None,
         *,
         content_type: str = "application/json",
         **kwargs: Any
@@ -2441,12 +2610,17 @@ class ApplicationOperations:
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param account_name: The name of the Batch account. Required.
+        :param account_name: A name for the Batch account which must be unique within the region. Batch
+         account names must be between 3 and 24 characters in length and must use only numbers and
+         lowercase letters. This name is used as part of the DNS name that is used to access the Batch
+         service in the region in which the account is created. For example:
+         `http://accountname.region.batch.azure.com/ <http://accountname.region.batch.azure.com/>`_.
+         Required.
         :type account_name: str
         :param application_name: The name of the application. This must be unique within the account.
          Required.
         :type application_name: str
-        :param parameters: The parameters for the request. Required.
+        :param parameters: The parameters for the request. Default value is None.
         :type parameters: IO[bytes]
         :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
          Default value is "application/json".
@@ -2462,7 +2636,7 @@ class ApplicationOperations:
         resource_group_name: str,
         account_name: str,
         application_name: str,
-        parameters: Union[_models.Application, JSON, IO[bytes]],
+        parameters: Optional[Union[_models.Application, JSON, IO[bytes]]] = None,
         **kwargs: Any
     ) -> _models.Application:
         """Adds an application to the specified Batch account.
@@ -2470,13 +2644,18 @@ class ApplicationOperations:
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param account_name: The name of the Batch account. Required.
+        :param account_name: A name for the Batch account which must be unique within the region. Batch
+         account names must be between 3 and 24 characters in length and must use only numbers and
+         lowercase letters. This name is used as part of the DNS name that is used to access the Batch
+         service in the region in which the account is created. For example:
+         `http://accountname.region.batch.azure.com/ <http://accountname.region.batch.azure.com/>`_.
+         Required.
         :type account_name: str
         :param application_name: The name of the application. This must be unique within the account.
          Required.
         :type application_name: str
         :param parameters: The parameters for the request. Is one of the following types: Application,
-         JSON, IO[bytes] Required.
+         JSON, IO[bytes] Default value is None.
         :type parameters: ~azure.mgmt.batch.models.Application or JSON or IO[bytes]
         :return: Application. The Application is compatible with MutableMapping
         :rtype: ~azure.mgmt.batch.models.Application
@@ -2494,14 +2673,18 @@ class ApplicationOperations:
         _params = kwargs.pop("params", {}) or {}
 
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        content_type = content_type if parameters else None
         cls: ClsType[_models.Application] = kwargs.pop("cls", None)
 
-        content_type = content_type or "application/json"
+        content_type = content_type or "application/json" if parameters else None
         _content = None
         if isinstance(parameters, (IOBase, bytes)):
             _content = parameters
         else:
-            _content = json.dumps(parameters, cls=SdkJSONEncoder, exclude_readonly=True)  # type: ignore
+            if parameters is not None:
+                _content = json.dumps(parameters, cls=SdkJSONEncoder, exclude_readonly=True)  # type: ignore
+            else:
+                _content = None
 
         _request = build_application_create_request(
             resource_group_name=resource_group_name,
@@ -2565,7 +2748,12 @@ class ApplicationOperations:
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param account_name: The name of the Batch account. Required.
+        :param account_name: A name for the Batch account which must be unique within the region. Batch
+         account names must be between 3 and 24 characters in length and must use only numbers and
+         lowercase letters. This name is used as part of the DNS name that is used to access the Batch
+         service in the region in which the account is created. For example:
+         `http://accountname.region.batch.azure.com/ <http://accountname.region.batch.azure.com/>`_.
+         Required.
         :type account_name: str
         :param application_name: The name of the application. This must be unique within the account.
          Required.
@@ -2596,7 +2784,12 @@ class ApplicationOperations:
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param account_name: The name of the Batch account. Required.
+        :param account_name: A name for the Batch account which must be unique within the region. Batch
+         account names must be between 3 and 24 characters in length and must use only numbers and
+         lowercase letters. This name is used as part of the DNS name that is used to access the Batch
+         service in the region in which the account is created. For example:
+         `http://accountname.region.batch.azure.com/ <http://accountname.region.batch.azure.com/>`_.
+         Required.
         :type account_name: str
         :param application_name: The name of the application. This must be unique within the account.
          Required.
@@ -2627,7 +2820,12 @@ class ApplicationOperations:
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param account_name: The name of the Batch account. Required.
+        :param account_name: A name for the Batch account which must be unique within the region. Batch
+         account names must be between 3 and 24 characters in length and must use only numbers and
+         lowercase letters. This name is used as part of the DNS name that is used to access the Batch
+         service in the region in which the account is created. For example:
+         `http://accountname.region.batch.azure.com/ <http://accountname.region.batch.azure.com/>`_.
+         Required.
         :type account_name: str
         :param application_name: The name of the application. This must be unique within the account.
          Required.
@@ -2656,7 +2854,12 @@ class ApplicationOperations:
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param account_name: The name of the Batch account. Required.
+        :param account_name: A name for the Batch account which must be unique within the region. Batch
+         account names must be between 3 and 24 characters in length and must use only numbers and
+         lowercase letters. This name is used as part of the DNS name that is used to access the Batch
+         service in the region in which the account is created. For example:
+         `http://accountname.region.batch.azure.com/ <http://accountname.region.batch.azure.com/>`_.
+         Required.
         :type account_name: str
         :param application_name: The name of the application. This must be unique within the account.
          Required.
@@ -2742,7 +2945,12 @@ class ApplicationOperations:
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param account_name: The name of the Batch account. Required.
+        :param account_name: A name for the Batch account which must be unique within the region. Batch
+         account names must be between 3 and 24 characters in length and must use only numbers and
+         lowercase letters. This name is used as part of the DNS name that is used to access the Batch
+         service in the region in which the account is created. For example:
+         `http://accountname.region.batch.azure.com/ <http://accountname.region.batch.azure.com/>`_.
+         Required.
         :type account_name: str
         :param application_name: The name of the application. This must be unique within the account.
          Required.
@@ -2805,7 +3013,12 @@ class ApplicationOperations:
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param account_name: The name of the Batch account. Required.
+        :param account_name: A name for the Batch account which must be unique within the region. Batch
+         account names must be between 3 and 24 characters in length and must use only numbers and
+         lowercase letters. This name is used as part of the DNS name that is used to access the Batch
+         service in the region in which the account is created. For example:
+         `http://accountname.region.batch.azure.com/ <http://accountname.region.batch.azure.com/>`_.
+         Required.
         :type account_name: str
         :keyword maxresults: The maximum number of items to return in the response. Default value is
          None.
@@ -2903,14 +3116,14 @@ class CertificateOperations:
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.batch.aio.BatchClient`'s
+        :class:`~azure.mgmt.batch.aio.BatchManagementClient`'s
         :attr:`certificate` attribute.
     """
 
     def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client: AsyncPipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: BatchClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._config: BatchManagementClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
         self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
@@ -2927,7 +3140,12 @@ class CertificateOperations:
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param account_name: The name of the Batch account. Required.
+        :param account_name: A name for the Batch account which must be unique within the region. Batch
+         account names must be between 3 and 24 characters in length and must use only numbers and
+         lowercase letters. This name is used as part of the DNS name that is used to access the Batch
+         service in the region in which the account is created. For example:
+         `http://accountname.region.batch.azure.com/ <http://accountname.region.batch.azure.com/>`_.
+         Required.
         :type account_name: str
         :param certificate_name: The identifier for the certificate. This must be made up of algorithm
          and thumbprint separated by a dash, and must match the certificate data in the request. For
@@ -3019,7 +3237,12 @@ class CertificateOperations:
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param account_name: The name of the Batch account. Required.
+        :param account_name: A name for the Batch account which must be unique within the region. Batch
+         account names must be between 3 and 24 characters in length and must use only numbers and
+         lowercase letters. This name is used as part of the DNS name that is used to access the Batch
+         service in the region in which the account is created. For example:
+         `http://accountname.region.batch.azure.com/ <http://accountname.region.batch.azure.com/>`_.
+         Required.
         :type account_name: str
         :param certificate_name: The identifier for the certificate. This must be made up of algorithm
          and thumbprint separated by a dash, and must match the certificate data in the request. For
@@ -3062,7 +3285,12 @@ class CertificateOperations:
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param account_name: The name of the Batch account. Required.
+        :param account_name: A name for the Batch account which must be unique within the region. Batch
+         account names must be between 3 and 24 characters in length and must use only numbers and
+         lowercase letters. This name is used as part of the DNS name that is used to access the Batch
+         service in the region in which the account is created. For example:
+         `http://accountname.region.batch.azure.com/ <http://accountname.region.batch.azure.com/>`_.
+         Required.
         :type account_name: str
         :param certificate_name: The identifier for the certificate. This must be made up of algorithm
          and thumbprint separated by a dash, and must match the certificate data in the request. For
@@ -3105,7 +3333,12 @@ class CertificateOperations:
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param account_name: The name of the Batch account. Required.
+        :param account_name: A name for the Batch account which must be unique within the region. Batch
+         account names must be between 3 and 24 characters in length and must use only numbers and
+         lowercase letters. This name is used as part of the DNS name that is used to access the Batch
+         service in the region in which the account is created. For example:
+         `http://accountname.region.batch.azure.com/ <http://accountname.region.batch.azure.com/>`_.
+         Required.
         :type account_name: str
         :param certificate_name: The identifier for the certificate. This must be made up of algorithm
          and thumbprint separated by a dash, and must match the certificate data in the request. For
@@ -3147,7 +3380,12 @@ class CertificateOperations:
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param account_name: The name of the Batch account. Required.
+        :param account_name: A name for the Batch account which must be unique within the region. Batch
+         account names must be between 3 and 24 characters in length and must use only numbers and
+         lowercase letters. This name is used as part of the DNS name that is used to access the Batch
+         service in the region in which the account is created. For example:
+         `http://accountname.region.batch.azure.com/ <http://accountname.region.batch.azure.com/>`_.
+         Required.
         :type account_name: str
         :param certificate_name: The identifier for the certificate. This must be made up of algorithm
          and thumbprint separated by a dash, and must match the certificate data in the request. For
@@ -3266,7 +3504,12 @@ class CertificateOperations:
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param account_name: The name of the Batch account. Required.
+        :param account_name: A name for the Batch account which must be unique within the region. Batch
+         account names must be between 3 and 24 characters in length and must use only numbers and
+         lowercase letters. This name is used as part of the DNS name that is used to access the Batch
+         service in the region in which the account is created. For example:
+         `http://accountname.region.batch.azure.com/ <http://accountname.region.batch.azure.com/>`_.
+         Required.
         :type account_name: str
         :param certificate_name: The identifier for the certificate. This must be made up of algorithm
          and thumbprint separated by a dash, and must match the certificate data in the request. For
@@ -3309,7 +3552,12 @@ class CertificateOperations:
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param account_name: The name of the Batch account. Required.
+        :param account_name: A name for the Batch account which must be unique within the region. Batch
+         account names must be between 3 and 24 characters in length and must use only numbers and
+         lowercase letters. This name is used as part of the DNS name that is used to access the Batch
+         service in the region in which the account is created. For example:
+         `http://accountname.region.batch.azure.com/ <http://accountname.region.batch.azure.com/>`_.
+         Required.
         :type account_name: str
         :param certificate_name: The identifier for the certificate. This must be made up of algorithm
          and thumbprint separated by a dash, and must match the certificate data in the request. For
@@ -3352,7 +3600,12 @@ class CertificateOperations:
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param account_name: The name of the Batch account. Required.
+        :param account_name: A name for the Batch account which must be unique within the region. Batch
+         account names must be between 3 and 24 characters in length and must use only numbers and
+         lowercase letters. This name is used as part of the DNS name that is used to access the Batch
+         service in the region in which the account is created. For example:
+         `http://accountname.region.batch.azure.com/ <http://accountname.region.batch.azure.com/>`_.
+         Required.
         :type account_name: str
         :param certificate_name: The identifier for the certificate. This must be made up of algorithm
          and thumbprint separated by a dash, and must match the certificate data in the request. For
@@ -3394,7 +3647,12 @@ class CertificateOperations:
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param account_name: The name of the Batch account. Required.
+        :param account_name: A name for the Batch account which must be unique within the region. Batch
+         account names must be between 3 and 24 characters in length and must use only numbers and
+         lowercase letters. This name is used as part of the DNS name that is used to access the Batch
+         service in the region in which the account is created. For example:
+         `http://accountname.region.batch.azure.com/ <http://accountname.region.batch.azure.com/>`_.
+         Required.
         :type account_name: str
         :param certificate_name: The identifier for the certificate. This must be made up of algorithm
          and thumbprint separated by a dash, and must match the certificate data in the request. For
@@ -3565,7 +3823,12 @@ class CertificateOperations:
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param account_name: The name of the Batch account. Required.
+        :param account_name: A name for the Batch account which must be unique within the region. Batch
+         account names must be between 3 and 24 characters in length and must use only numbers and
+         lowercase letters. This name is used as part of the DNS name that is used to access the Batch
+         service in the region in which the account is created. For example:
+         `http://accountname.region.batch.azure.com/ <http://accountname.region.batch.azure.com/>`_.
+         Required.
         :type account_name: str
         :param certificate_name: The identifier for the certificate. This must be made up of algorithm
          and thumbprint separated by a dash, and must match the certificate data in the request. For
@@ -3640,7 +3903,12 @@ class CertificateOperations:
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param account_name: The name of the Batch account. Required.
+        :param account_name: A name for the Batch account which must be unique within the region. Batch
+         account names must be between 3 and 24 characters in length and must use only numbers and
+         lowercase letters. This name is used as part of the DNS name that is used to access the Batch
+         service in the region in which the account is created. For example:
+         `http://accountname.region.batch.azure.com/ <http://accountname.region.batch.azure.com/>`_.
+         Required.
         :type account_name: str
         :keyword maxresults: The maximum number of items to return in the response. Default value is
          None.
@@ -3761,7 +4029,12 @@ class CertificateOperations:
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param account_name: The name of the Batch account. Required.
+        :param account_name: A name for the Batch account which must be unique within the region. Batch
+         account names must be between 3 and 24 characters in length and must use only numbers and
+         lowercase letters. This name is used as part of the DNS name that is used to access the Batch
+         service in the region in which the account is created. For example:
+         `http://accountname.region.batch.azure.com/ <http://accountname.region.batch.azure.com/>`_.
+         Required.
         :type account_name: str
         :param certificate_name: The identifier for the certificate. This must be made up of algorithm
          and thumbprint separated by a dash, and must match the certificate data in the request. For
@@ -3838,14 +4111,14 @@ class PrivateLinkResourceOperations:
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.batch.aio.BatchClient`'s
+        :class:`~azure.mgmt.batch.aio.BatchManagementClient`'s
         :attr:`private_link_resource` attribute.
     """
 
     def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client: AsyncPipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: BatchClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._config: BatchManagementClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
         self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
@@ -3858,7 +4131,12 @@ class PrivateLinkResourceOperations:
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param account_name: The name of the Batch account. Required.
+        :param account_name: A name for the Batch account which must be unique within the region. Batch
+         account names must be between 3 and 24 characters in length and must use only numbers and
+         lowercase letters. This name is used as part of the DNS name that is used to access the Batch
+         service in the region in which the account is created. For example:
+         `http://accountname.region.batch.azure.com/ <http://accountname.region.batch.azure.com/>`_.
+         Required.
         :type account_name: str
         :param private_link_resource_name: The private link resource name. This must be unique within
          the account. Required.
@@ -3933,7 +4211,12 @@ class PrivateLinkResourceOperations:
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param account_name: The name of the Batch account. Required.
+        :param account_name: A name for the Batch account which must be unique within the region. Batch
+         account names must be between 3 and 24 characters in length and must use only numbers and
+         lowercase letters. This name is used as part of the DNS name that is used to access the Batch
+         service in the region in which the account is created. For example:
+         `http://accountname.region.batch.azure.com/ <http://accountname.region.batch.azure.com/>`_.
+         Required.
         :type account_name: str
         :keyword maxresults: The maximum number of items to return in the response. Default value is
          None.
@@ -4031,14 +4314,14 @@ class PrivateEndpointConnectionOperations:
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.batch.aio.BatchClient`'s
+        :class:`~azure.mgmt.batch.aio.BatchManagementClient`'s
         :attr:`private_endpoint_connection` attribute.
     """
 
     def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client: AsyncPipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: BatchClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._config: BatchManagementClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
         self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
@@ -4051,7 +4334,12 @@ class PrivateEndpointConnectionOperations:
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param account_name: The name of the Batch account. Required.
+        :param account_name: A name for the Batch account which must be unique within the region. Batch
+         account names must be between 3 and 24 characters in length and must use only numbers and
+         lowercase letters. This name is used as part of the DNS name that is used to access the Batch
+         service in the region in which the account is created. For example:
+         `http://accountname.region.batch.azure.com/ <http://accountname.region.batch.azure.com/>`_.
+         Required.
         :type account_name: str
         :param private_endpoint_connection_name: The private endpoint connection name. This must be
          unique within the account. Required.
@@ -4226,7 +4514,12 @@ class PrivateEndpointConnectionOperations:
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param account_name: The name of the Batch account. Required.
+        :param account_name: A name for the Batch account which must be unique within the region. Batch
+         account names must be between 3 and 24 characters in length and must use only numbers and
+         lowercase letters. This name is used as part of the DNS name that is used to access the Batch
+         service in the region in which the account is created. For example:
+         `http://accountname.region.batch.azure.com/ <http://accountname.region.batch.azure.com/>`_.
+         Required.
         :type account_name: str
         :param private_endpoint_connection_name: The private endpoint connection name. This must be
          unique within the account. Required.
@@ -4266,7 +4559,12 @@ class PrivateEndpointConnectionOperations:
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param account_name: The name of the Batch account. Required.
+        :param account_name: A name for the Batch account which must be unique within the region. Batch
+         account names must be between 3 and 24 characters in length and must use only numbers and
+         lowercase letters. This name is used as part of the DNS name that is used to access the Batch
+         service in the region in which the account is created. For example:
+         `http://accountname.region.batch.azure.com/ <http://accountname.region.batch.azure.com/>`_.
+         Required.
         :type account_name: str
         :param private_endpoint_connection_name: The private endpoint connection name. This must be
          unique within the account. Required.
@@ -4306,7 +4604,12 @@ class PrivateEndpointConnectionOperations:
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param account_name: The name of the Batch account. Required.
+        :param account_name: A name for the Batch account which must be unique within the region. Batch
+         account names must be between 3 and 24 characters in length and must use only numbers and
+         lowercase letters. This name is used as part of the DNS name that is used to access the Batch
+         service in the region in which the account is created. For example:
+         `http://accountname.region.batch.azure.com/ <http://accountname.region.batch.azure.com/>`_.
+         Required.
         :type account_name: str
         :param private_endpoint_connection_name: The private endpoint connection name. This must be
          unique within the account. Required.
@@ -4345,7 +4648,12 @@ class PrivateEndpointConnectionOperations:
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param account_name: The name of the Batch account. Required.
+        :param account_name: A name for the Batch account which must be unique within the region. Batch
+         account names must be between 3 and 24 characters in length and must use only numbers and
+         lowercase letters. This name is used as part of the DNS name that is used to access the Batch
+         service in the region in which the account is created. For example:
+         `http://accountname.region.batch.azure.com/ <http://accountname.region.batch.azure.com/>`_.
+         Required.
         :type account_name: str
         :param private_endpoint_connection_name: The private endpoint connection name. This must be
          unique within the account. Required.
@@ -4492,7 +4800,12 @@ class PrivateEndpointConnectionOperations:
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param account_name: The name of the Batch account. Required.
+        :param account_name: A name for the Batch account which must be unique within the region. Batch
+         account names must be between 3 and 24 characters in length and must use only numbers and
+         lowercase letters. This name is used as part of the DNS name that is used to access the Batch
+         service in the region in which the account is created. For example:
+         `http://accountname.region.batch.azure.com/ <http://accountname.region.batch.azure.com/>`_.
+         Required.
         :type account_name: str
         :param private_endpoint_connection_name: The private endpoint connection name. This must be
          unique within the account. Required.
@@ -4555,7 +4868,12 @@ class PrivateEndpointConnectionOperations:
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param account_name: The name of the Batch account. Required.
+        :param account_name: A name for the Batch account which must be unique within the region. Batch
+         account names must be between 3 and 24 characters in length and must use only numbers and
+         lowercase letters. This name is used as part of the DNS name that is used to access the Batch
+         service in the region in which the account is created. For example:
+         `http://accountname.region.batch.azure.com/ <http://accountname.region.batch.azure.com/>`_.
+         Required.
         :type account_name: str
         :keyword maxresults: The maximum number of items to return in the response. Default value is
          None.
@@ -4654,14 +4972,14 @@ class PoolOperations:
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.batch.aio.BatchClient`'s
+        :class:`~azure.mgmt.batch.aio.BatchManagementClient`'s
         :attr:`pool` attribute.
     """
 
     def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client: AsyncPipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: BatchClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._config: BatchManagementClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
         self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
@@ -4672,7 +4990,12 @@ class PoolOperations:
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param account_name: The name of the Batch account. Required.
+        :param account_name: A name for the Batch account which must be unique within the region. Batch
+         account names must be between 3 and 24 characters in length and must use only numbers and
+         lowercase letters. This name is used as part of the DNS name that is used to access the Batch
+         service in the region in which the account is created. For example:
+         `http://accountname.region.batch.azure.com/ <http://accountname.region.batch.azure.com/>`_.
+         Required.
         :type account_name: str
         :param pool_name: The pool name. This must be unique within the account. Required.
         :type pool_name: str
@@ -4758,7 +5081,12 @@ class PoolOperations:
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param account_name: The name of the Batch account. Required.
+        :param account_name: A name for the Batch account which must be unique within the region. Batch
+         account names must be between 3 and 24 characters in length and must use only numbers and
+         lowercase letters. This name is used as part of the DNS name that is used to access the Batch
+         service in the region in which the account is created. For example:
+         `http://accountname.region.batch.azure.com/ <http://accountname.region.batch.azure.com/>`_.
+         Required.
         :type account_name: str
         :param pool_name: The pool name. This must be unique within the account. Required.
         :type pool_name: str
@@ -4795,7 +5123,12 @@ class PoolOperations:
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param account_name: The name of the Batch account. Required.
+        :param account_name: A name for the Batch account which must be unique within the region. Batch
+         account names must be between 3 and 24 characters in length and must use only numbers and
+         lowercase letters. This name is used as part of the DNS name that is used to access the Batch
+         service in the region in which the account is created. For example:
+         `http://accountname.region.batch.azure.com/ <http://accountname.region.batch.azure.com/>`_.
+         Required.
         :type account_name: str
         :param pool_name: The pool name. This must be unique within the account. Required.
         :type pool_name: str
@@ -4832,7 +5165,12 @@ class PoolOperations:
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param account_name: The name of the Batch account. Required.
+        :param account_name: A name for the Batch account which must be unique within the region. Batch
+         account names must be between 3 and 24 characters in length and must use only numbers and
+         lowercase letters. This name is used as part of the DNS name that is used to access the Batch
+         service in the region in which the account is created. For example:
+         `http://accountname.region.batch.azure.com/ <http://accountname.region.batch.azure.com/>`_.
+         Required.
         :type account_name: str
         :param pool_name: The pool name. This must be unique within the account. Required.
         :type pool_name: str
@@ -4868,7 +5206,12 @@ class PoolOperations:
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param account_name: The name of the Batch account. Required.
+        :param account_name: A name for the Batch account which must be unique within the region. Batch
+         account names must be between 3 and 24 characters in length and must use only numbers and
+         lowercase letters. This name is used as part of the DNS name that is used to access the Batch
+         service in the region in which the account is created. For example:
+         `http://accountname.region.batch.azure.com/ <http://accountname.region.batch.azure.com/>`_.
+         Required.
         :type account_name: str
         :param pool_name: The pool name. This must be unique within the account. Required.
         :type pool_name: str
@@ -4980,7 +5323,12 @@ class PoolOperations:
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param account_name: The name of the Batch account. Required.
+        :param account_name: A name for the Batch account which must be unique within the region. Batch
+         account names must be between 3 and 24 characters in length and must use only numbers and
+         lowercase letters. This name is used as part of the DNS name that is used to access the Batch
+         service in the region in which the account is created. For example:
+         `http://accountname.region.batch.azure.com/ <http://accountname.region.batch.azure.com/>`_.
+         Required.
         :type account_name: str
         :param pool_name: The pool name. This must be unique within the account. Required.
         :type pool_name: str
@@ -5018,7 +5366,12 @@ class PoolOperations:
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param account_name: The name of the Batch account. Required.
+        :param account_name: A name for the Batch account which must be unique within the region. Batch
+         account names must be between 3 and 24 characters in length and must use only numbers and
+         lowercase letters. This name is used as part of the DNS name that is used to access the Batch
+         service in the region in which the account is created. For example:
+         `http://accountname.region.batch.azure.com/ <http://accountname.region.batch.azure.com/>`_.
+         Required.
         :type account_name: str
         :param pool_name: The pool name. This must be unique within the account. Required.
         :type pool_name: str
@@ -5056,7 +5409,12 @@ class PoolOperations:
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param account_name: The name of the Batch account. Required.
+        :param account_name: A name for the Batch account which must be unique within the region. Batch
+         account names must be between 3 and 24 characters in length and must use only numbers and
+         lowercase letters. This name is used as part of the DNS name that is used to access the Batch
+         service in the region in which the account is created. For example:
+         `http://accountname.region.batch.azure.com/ <http://accountname.region.batch.azure.com/>`_.
+         Required.
         :type account_name: str
         :param pool_name: The pool name. This must be unique within the account. Required.
         :type pool_name: str
@@ -5093,7 +5451,12 @@ class PoolOperations:
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param account_name: The name of the Batch account. Required.
+        :param account_name: A name for the Batch account which must be unique within the region. Batch
+         account names must be between 3 and 24 characters in length and must use only numbers and
+         lowercase letters. This name is used as part of the DNS name that is used to access the Batch
+         service in the region in which the account is created. For example:
+         `http://accountname.region.batch.azure.com/ <http://accountname.region.batch.azure.com/>`_.
+         Required.
         :type account_name: str
         :param pool_name: The pool name. This must be unique within the account. Required.
         :type pool_name: str
@@ -5258,7 +5621,12 @@ class PoolOperations:
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param account_name: The name of the Batch account. Required.
+        :param account_name: A name for the Batch account which must be unique within the region. Batch
+         account names must be between 3 and 24 characters in length and must use only numbers and
+         lowercase letters. This name is used as part of the DNS name that is used to access the Batch
+         service in the region in which the account is created. For example:
+         `http://accountname.region.batch.azure.com/ <http://accountname.region.batch.azure.com/>`_.
+         Required.
         :type account_name: str
         :param pool_name: The pool name. This must be unique within the account. Required.
         :type pool_name: str
@@ -5327,7 +5695,12 @@ class PoolOperations:
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param account_name: The name of the Batch account. Required.
+        :param account_name: A name for the Batch account which must be unique within the region. Batch
+         account names must be between 3 and 24 characters in length and must use only numbers and
+         lowercase letters. This name is used as part of the DNS name that is used to access the Batch
+         service in the region in which the account is created. For example:
+         `http://accountname.region.batch.azure.com/ <http://accountname.region.batch.azure.com/>`_.
+         Required.
         :type account_name: str
         :keyword maxresults: The maximum number of items to return in the response. Default value is
          None.
@@ -5447,7 +5820,12 @@ class PoolOperations:
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param account_name: The name of the Batch account. Required.
+        :param account_name: A name for the Batch account which must be unique within the region. Batch
+         account names must be between 3 and 24 characters in length and must use only numbers and
+         lowercase letters. This name is used as part of the DNS name that is used to access the Batch
+         service in the region in which the account is created. For example:
+         `http://accountname.region.batch.azure.com/ <http://accountname.region.batch.azure.com/>`_.
+         Required.
         :type account_name: str
         :param pool_name: The pool name. This must be unique within the account. Required.
         :type pool_name: str
@@ -5531,7 +5909,12 @@ class PoolOperations:
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param account_name: The name of the Batch account. Required.
+        :param account_name: A name for the Batch account which must be unique within the region. Batch
+         account names must be between 3 and 24 characters in length and must use only numbers and
+         lowercase letters. This name is used as part of the DNS name that is used to access the Batch
+         service in the region in which the account is created. For example:
+         `http://accountname.region.batch.azure.com/ <http://accountname.region.batch.azure.com/>`_.
+         Required.
         :type account_name: str
         :param pool_name: The pool name. This must be unique within the account. Required.
         :type pool_name: str
@@ -5606,14 +5989,14 @@ class NetworkSecurityPerimeterOperations:
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.batch.aio.BatchClient`'s
+        :class:`~azure.mgmt.batch.aio.BatchManagementClient`'s
         :attr:`network_security_perimeter` attribute.
     """
 
     def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client: AsyncPipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: BatchClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._config: BatchManagementClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
         self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
@@ -5630,9 +6013,14 @@ class NetworkSecurityPerimeterOperations:
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param account_name: The name of the Batch account. Required.
+        :param account_name: A name for the Batch account which must be unique within the region. Batch
+         account names must be between 3 and 24 characters in length and must use only numbers and
+         lowercase letters. This name is used as part of the DNS name that is used to access the Batch
+         service in the region in which the account is created. For example:
+         `http://accountname.region.batch.azure.com/ <http://accountname.region.batch.azure.com/>`_.
+         Required.
         :type account_name: str
-        :param network_security_perimeter_configuration_name: The name for Network Security Perimeter
+        :param network_security_perimeter_configuration_name: The name for a network security perimeter
          configuration. Required.
         :type network_security_perimeter_configuration_name: str
         :return: NetworkSecurityPerimeterConfiguration. The NetworkSecurityPerimeterConfiguration is
@@ -5706,7 +6094,12 @@ class NetworkSecurityPerimeterOperations:
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param account_name: The name of the Batch account. Required.
+        :param account_name: A name for the Batch account which must be unique within the region. Batch
+         account names must be between 3 and 24 characters in length and must use only numbers and
+         lowercase letters. This name is used as part of the DNS name that is used to access the Batch
+         service in the region in which the account is created. For example:
+         `http://accountname.region.batch.azure.com/ <http://accountname.region.batch.azure.com/>`_.
+         Required.
         :type account_name: str
         :return: An iterator like instance of NetworkSecurityPerimeterConfiguration
         :rtype:
@@ -5873,9 +6266,14 @@ class NetworkSecurityPerimeterOperations:
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param account_name: The name of the Batch account. Required.
+        :param account_name: A name for the Batch account which must be unique within the region. Batch
+         account names must be between 3 and 24 characters in length and must use only numbers and
+         lowercase letters. This name is used as part of the DNS name that is used to access the Batch
+         service in the region in which the account is created. For example:
+         `http://accountname.region.batch.azure.com/ <http://accountname.region.batch.azure.com/>`_.
+         Required.
         :type account_name: str
-        :param network_security_perimeter_configuration_name: The name for Network Security Perimeter
+        :param network_security_perimeter_configuration_name: The name for a network security perimeter
          configuration. Required.
         :type network_security_perimeter_configuration_name: str
         :return: An instance of AsyncLROPoller that returns None
@@ -5934,14 +6332,14 @@ class LocationOperations:
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.batch.aio.BatchClient`'s
+        :class:`~azure.mgmt.batch.aio.BatchManagementClient`'s
         :attr:`location` attribute.
     """
 
     def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client: AsyncPipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: BatchClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._config: BatchManagementClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
         self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
@@ -6123,7 +6521,7 @@ class LocationOperations:
 
         :param location_name: The desired region for the name check. Required.
         :type location_name: str
-        :param parameters: The request body. Required.
+        :param parameters: Properties needed to check the availability of a name. Required.
         :type parameters: ~azure.mgmt.batch.models.CheckNameAvailabilityParameters
         :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
          Default value is "application/json".
@@ -6142,7 +6540,7 @@ class LocationOperations:
 
         :param location_name: The desired region for the name check. Required.
         :type location_name: str
-        :param parameters: The request body. Required.
+        :param parameters: Properties needed to check the availability of a name. Required.
         :type parameters: JSON
         :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
          Default value is "application/json".
@@ -6161,7 +6559,7 @@ class LocationOperations:
 
         :param location_name: The desired region for the name check. Required.
         :type location_name: str
-        :param parameters: The request body. Required.
+        :param parameters: Properties needed to check the availability of a name. Required.
         :type parameters: IO[bytes]
         :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
          Default value is "application/json".
@@ -6183,8 +6581,8 @@ class LocationOperations:
 
         :param location_name: The desired region for the name check. Required.
         :type location_name: str
-        :param parameters: The request body. Is one of the following types:
-         CheckNameAvailabilityParameters, JSON, IO[bytes] Required.
+        :param parameters: Properties needed to check the availability of a name. Is one of the
+         following types: CheckNameAvailabilityParameters, JSON, IO[bytes] Required.
         :type parameters: ~azure.mgmt.batch.models.CheckNameAvailabilityParameters or JSON or IO[bytes]
         :return: CheckNameAvailabilityResult. The CheckNameAvailabilityResult is compatible with
          MutableMapping

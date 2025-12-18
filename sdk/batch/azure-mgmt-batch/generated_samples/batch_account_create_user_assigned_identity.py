@@ -9,7 +9,7 @@
 
 from azure.identity import DefaultAzureCredential
 
-from azure.mgmt.batch import BatchClient
+from azure.mgmt.batch import BatchManagementClient
 
 """
 # PREREQUISITES
@@ -26,7 +26,7 @@ from azure.mgmt.batch import BatchClient
 
 
 def main():
-    client = BatchClient(
+    client = BatchManagementClient(
         credential=DefaultAzureCredential(),
         subscription_id="SUBSCRIPTION_ID",
     )

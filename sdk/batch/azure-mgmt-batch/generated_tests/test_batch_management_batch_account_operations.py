@@ -6,23 +6,22 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 import pytest
-from azure.mgmt.batch.aio import BatchClient
+from azure.mgmt.batch import BatchManagementClient
 
-from devtools_testutils import AzureMgmtRecordedTestCase, RandomNameResourceGroupPreparer
-from devtools_testutils.aio import recorded_by_proxy_async
+from devtools_testutils import AzureMgmtRecordedTestCase, RandomNameResourceGroupPreparer, recorded_by_proxy
 
 AZURE_LOCATION = "eastus"
 
 
 @pytest.mark.skip("you may need to update the auto-generated test case before run it")
-class TestBatchBatchAccountOperationsAsync(AzureMgmtRecordedTestCase):
+class TestBatchManagementBatchAccountOperations(AzureMgmtRecordedTestCase):
     def setup_method(self, method):
-        self.client = self.create_mgmt_client(BatchClient, is_async=True)
+        self.client = self.create_mgmt_client(BatchManagementClient)
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_batch_account_get(self, resource_group):
-        response = await self.client.batch_account.get(
+    @recorded_by_proxy
+    def test_batch_account_get(self, resource_group):
+        response = self.client.batch_account.get(
             resource_group_name=resource_group.name,
             account_name="str",
         )
@@ -31,51 +30,49 @@ class TestBatchBatchAccountOperationsAsync(AzureMgmtRecordedTestCase):
         # ...
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_batch_account_begin_create(self, resource_group):
-        response = await (
-            await self.client.batch_account.begin_create(
-                resource_group_name=resource_group.name,
-                account_name="str",
-                parameters={
-                    "location": "str",
-                    "identity": {
-                        "type": "str",
-                        "principalId": "str",
-                        "tenantId": "str",
-                        "userAssignedIdentities": {"str": {"clientId": "str", "principalId": "str"}},
-                    },
-                    "properties": {
-                        "allowedAuthenticationModes": ["str"],
-                        "autoStorage": {
-                            "storageAccountId": "str",
-                            "authenticationMode": "str",
-                            "nodeIdentityReference": {"resourceId": "str"},
-                        },
-                        "encryption": {"keySource": "str", "keyVaultProperties": {"keyIdentifier": "str"}},
-                        "keyVaultReference": {"id": "str", "url": "str"},
-                        "networkProfile": {
-                            "accountAccess": {"defaultAction": "str", "ipRules": [{"action": "str", "value": "str"}]},
-                            "nodeManagementAccess": {
-                                "defaultAction": "str",
-                                "ipRules": [{"action": "str", "value": "str"}],
-                            },
-                        },
-                        "poolAllocationMode": "str",
-                        "publicNetworkAccess": "str",
-                    },
-                    "tags": {"str": "str"},
+    @recorded_by_proxy
+    def test_batch_account_begin_create(self, resource_group):
+        response = self.client.batch_account.begin_create(
+            resource_group_name=resource_group.name,
+            account_name="str",
+            parameters={
+                "location": "str",
+                "identity": {
+                    "type": "str",
+                    "principalId": "str",
+                    "tenantId": "str",
+                    "userAssignedIdentities": {"str": {"clientId": "str", "principalId": "str"}},
                 },
-            )
+                "properties": {
+                    "allowedAuthenticationModes": ["str"],
+                    "autoStorage": {
+                        "storageAccountId": "str",
+                        "authenticationMode": "str",
+                        "nodeIdentityReference": {"resourceId": "str"},
+                    },
+                    "encryption": {"keySource": "str", "keyVaultProperties": {"keyIdentifier": "str"}},
+                    "keyVaultReference": {"id": "str", "url": "str"},
+                    "networkProfile": {
+                        "accountAccess": {"defaultAction": "str", "ipRules": [{"action": "str", "value": "str"}]},
+                        "nodeManagementAccess": {
+                            "defaultAction": "str",
+                            "ipRules": [{"action": "str", "value": "str"}],
+                        },
+                    },
+                    "poolAllocationMode": "str",
+                    "publicNetworkAccess": "str",
+                },
+                "tags": {"str": "str"},
+            },
         ).result()  # call '.result()' to poll until service return final result
 
         # please add some check logic here by yourself
         # ...
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_batch_account_update(self, resource_group):
-        response = await self.client.batch_account.update(
+    @recorded_by_proxy
+    def test_batch_account_update(self, resource_group):
+        response = self.client.batch_account.update(
             resource_group_name=resource_group.name,
             account_name="str",
             parameters={
@@ -110,40 +107,38 @@ class TestBatchBatchAccountOperationsAsync(AzureMgmtRecordedTestCase):
         # ...
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_batch_account_begin_delete(self, resource_group):
-        response = await (
-            await self.client.batch_account.begin_delete(
-                resource_group_name=resource_group.name,
-                account_name="str",
-            )
+    @recorded_by_proxy
+    def test_batch_account_begin_delete(self, resource_group):
+        response = self.client.batch_account.begin_delete(
+            resource_group_name=resource_group.name,
+            account_name="str",
         ).result()  # call '.result()' to poll until service return final result
 
         # please add some check logic here by yourself
         # ...
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_batch_account_list_by_resource_group(self, resource_group):
+    @recorded_by_proxy
+    def test_batch_account_list_by_resource_group(self, resource_group):
         response = self.client.batch_account.list_by_resource_group(
             resource_group_name=resource_group.name,
         )
-        result = [r async for r in response]
+        result = [r for r in response]
         # please add some check logic here by yourself
         # ...
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_batch_account_list(self, resource_group):
+    @recorded_by_proxy
+    def test_batch_account_list(self, resource_group):
         response = self.client.batch_account.list()
-        result = [r async for r in response]
+        result = [r for r in response]
         # please add some check logic here by yourself
         # ...
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_batch_account_synchronize_auto_storage_keys(self, resource_group):
-        response = await self.client.batch_account.synchronize_auto_storage_keys(
+    @recorded_by_proxy
+    def test_batch_account_synchronize_auto_storage_keys(self, resource_group):
+        response = self.client.batch_account.synchronize_auto_storage_keys(
             resource_group_name=resource_group.name,
             account_name="str",
         )
@@ -152,9 +147,9 @@ class TestBatchBatchAccountOperationsAsync(AzureMgmtRecordedTestCase):
         # ...
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_batch_account_regenerate_key(self, resource_group):
-        response = await self.client.batch_account.regenerate_key(
+    @recorded_by_proxy
+    def test_batch_account_regenerate_key(self, resource_group):
+        response = self.client.batch_account.regenerate_key(
             resource_group_name=resource_group.name,
             account_name="str",
             parameters={"keyName": "str"},
@@ -164,9 +159,9 @@ class TestBatchBatchAccountOperationsAsync(AzureMgmtRecordedTestCase):
         # ...
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_batch_account_get_keys(self, resource_group):
-        response = await self.client.batch_account.get_keys(
+    @recorded_by_proxy
+    def test_batch_account_get_keys(self, resource_group):
+        response = self.client.batch_account.get_keys(
             resource_group_name=resource_group.name,
             account_name="str",
         )
@@ -175,20 +170,20 @@ class TestBatchBatchAccountOperationsAsync(AzureMgmtRecordedTestCase):
         # ...
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_batch_account_list_outbound_network_dependencies_endpoints(self, resource_group):
+    @recorded_by_proxy
+    def test_batch_account_list_outbound_network_dependencies_endpoints(self, resource_group):
         response = self.client.batch_account.list_outbound_network_dependencies_endpoints(
             resource_group_name=resource_group.name,
             account_name="str",
         )
-        result = [r async for r in response]
+        result = [r for r in response]
         # please add some check logic here by yourself
         # ...
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_batch_account_get_detector(self, resource_group):
-        response = await self.client.batch_account.get_detector(
+    @recorded_by_proxy
+    def test_batch_account_get_detector(self, resource_group):
+        response = self.client.batch_account.get_detector(
             resource_group_name=resource_group.name,
             account_name="str",
             detector_id="str",
@@ -198,12 +193,12 @@ class TestBatchBatchAccountOperationsAsync(AzureMgmtRecordedTestCase):
         # ...
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_batch_account_list_detectors(self, resource_group):
+    @recorded_by_proxy
+    def test_batch_account_list_detectors(self, resource_group):
         response = self.client.batch_account.list_detectors(
             resource_group_name=resource_group.name,
             account_name="str",
         )
-        result = [r async for r in response]
+        result = [r for r in response]
         # please add some check logic here by yourself
         # ...

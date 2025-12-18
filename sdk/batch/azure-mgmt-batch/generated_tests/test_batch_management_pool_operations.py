@@ -6,7 +6,7 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 import pytest
-from azure.mgmt.batch import BatchClient
+from azure.mgmt.batch import BatchManagementClient
 
 from devtools_testutils import AzureMgmtRecordedTestCase, RandomNameResourceGroupPreparer, recorded_by_proxy
 
@@ -14,9 +14,9 @@ AZURE_LOCATION = "eastus"
 
 
 @pytest.mark.skip("you may need to update the auto-generated test case before run it")
-class TestBatchPoolOperations(AzureMgmtRecordedTestCase):
+class TestBatchManagementPoolOperations(AzureMgmtRecordedTestCase):
     def setup_method(self, method):
-        self.client = self.create_mgmt_client(BatchClient)
+        self.client = self.create_mgmt_client(BatchManagementClient)
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
@@ -263,6 +263,14 @@ class TestBatchPoolOperations(AzureMgmtRecordedTestCase):
                     ],
                     "vmSize": "str",
                 },
+                "systemData": {
+                    "createdAt": "2020-02-20 00:00:00",
+                    "createdBy": "str",
+                    "createdByType": "str",
+                    "lastModifiedAt": "2020-02-20 00:00:00",
+                    "lastModifiedBy": "str",
+                    "lastModifiedByType": "str",
+                },
                 "tags": {"str": "str"},
                 "type": "str",
             },
@@ -503,6 +511,14 @@ class TestBatchPoolOperations(AzureMgmtRecordedTestCase):
                         }
                     ],
                     "vmSize": "str",
+                },
+                "systemData": {
+                    "createdAt": "2020-02-20 00:00:00",
+                    "createdBy": "str",
+                    "createdByType": "str",
+                    "lastModifiedAt": "2020-02-20 00:00:00",
+                    "lastModifiedBy": "str",
+                    "lastModifiedByType": "str",
                 },
                 "tags": {"str": "str"},
                 "type": "str",
