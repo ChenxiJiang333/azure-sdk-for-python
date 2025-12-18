@@ -4,7 +4,6 @@
 
 ### Breaking Changes
 
-  - Renamed model `AzureResource` to `TrackedResource`
   - Model `Application` moved instance variables `display_name`, `allow_updates`, `default_version` under property `properties`
   - Model `ApplicationPackage` moved instance variables `state`, `format`, `storage_url`, `storage_url_expiry`, `last_activation_time` under property `properties`
   - Model `BatchAccount` moved instance variables `account_endpoint`, `node_management_endpoint`, `provisioning_state`, `pool_allocation_mode`, `key_vault_reference`, `public_network_access`, `network_profile`, `private_endpoint_connections`, `auto_storage`, `encryption`, `dedicated_core_quota`, `low_priority_core_quota`, `dedicated_core_quota_per_vm_family`, `dedicated_core_quota_per_vm_family_enforced`, `pool_quota`, `active_job_and_job_schedule_quota`, `allowed_authentication_modes` under property `properties`
