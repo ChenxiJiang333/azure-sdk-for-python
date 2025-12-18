@@ -381,6 +381,10 @@ def _make_proxy_decorator(transports):
 
             return test_variables
 
+        # Prevent pytest from unwrapping back to the original signature and demanding fixtures
+        if hasattr(record_wrap, "__wrapped__"):
+            delattr(record_wrap, "__wrapped__")
+
         return record_wrap
 
     return _decorator
