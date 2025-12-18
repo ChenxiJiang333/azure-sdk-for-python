@@ -22,7 +22,7 @@
         "azure.mgmt.batch.models.AzureBlobFileSystemConfiguration": "Microsoft.Batch.AzureBlobFileSystemConfiguration",
         "azure.mgmt.batch.models.AzureFileShareConfiguration": "Microsoft.Batch.AzureFileShareConfiguration",
         "azure.mgmt.batch.models.AzureProxyResource": "Microsoft.Batch.AzureProxyResource",
-        "azure.mgmt.batch.models.TrackedResource": "Azure.ResourceManager.CommonTypes.TrackedResource",
+        "azure.mgmt.batch.models.AzureResource": "Azure.ResourceManager.CommonTypes.TrackedResource",
         "azure.mgmt.batch.models.BatchAccount": "Microsoft.Batch.BatchAccount",
         "azure.mgmt.batch.models.BatchAccountCreateParameters": "Microsoft.Batch.BatchAccountCreateParameters",
         "azure.mgmt.batch.models.BatchAccountCreateProperties": "Microsoft.Batch.BatchAccountCreateProperties",

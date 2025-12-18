@@ -969,7 +969,7 @@ class AzureProxyResource(_Model):
         super().__init__(*args, **kwargs)
 
 
-class TrackedResource(Resource):
+class AzureResource(Resource):
     """Tracked Resource.
 
     :ivar id: Fully qualified resource ID for the resource. Ex -
@@ -1013,7 +1013,7 @@ class TrackedResource(Resource):
         super().__init__(*args, **kwargs)
 
 
-class BatchAccount(TrackedResource):
+class BatchAccount(AzureResource):
     """Contains information about an Azure Batch account.
 
     :ivar id: Fully qualified resource ID for the resource. Ex -

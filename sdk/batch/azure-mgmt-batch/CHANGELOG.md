@@ -45,6 +45,7 @@
   - Client `BatchManagementClient` added method `send_request`
   - Model `Application` added property `system_data`
   - Model `ApplicationPackage` added property `system_data`
+  - Model `AzureResource` added property `system_data`
   - Model `BatchAccount` added property `system_data`
   - Model `BatchAccountCreateParameters` added property `properties`
   - Model `BatchAccountUpdateParameters` added property `properties`
@@ -64,7 +65,6 @@
   - Added enum `DiffDiskPlacement`
   - Added enum `IPRuleAction`
   - Added enum `ResourceType`
-  - Added model `TrackedResource`
   - Model `CertificateOperations` added parameter `etag` in method `create`
   - Model `CertificateOperations` added parameter `match_condition` in method `create`
   - Model `CertificateOperations` added parameter `etag` in method `update`
@@ -105,7 +105,6 @@
   - Model `CertificateCreateOrUpdateParameters` deleted or renamed its instance variable `data`
   - Model `CertificateCreateOrUpdateParameters` deleted or renamed its instance variable `password`
   - Deleted or renamed model `AccessRulePropertiesSubscriptionsItem`
-  - Deleted or renamed model `AzureResource`
   - Deleted or renamed model `ListApplicationPackagesResult`
   - Deleted or renamed model `ListApplicationsResult`
   - Deleted or renamed model `ListCertificatesResult`
