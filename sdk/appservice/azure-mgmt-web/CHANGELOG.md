@@ -1,36 +1,16 @@
 # Release History
 
-## 10.2.0 (2025-12-22)
-
-change log generation was timeout!!! You need to write it manually!!!
-
 ## tsp migration
 
 ### Breaking Changes
 
-  - Deleted or renamed client `WebSiteManagementClient`
-  - Deleted or renamed enum value `SupportedTlsVersions.ONE0`
-  - Deleted or renamed enum value `SupportedTlsVersions.ONE1`
-  - Deleted or renamed enum value `SupportedTlsVersions.ONE2`
-  - Deleted or renamed enum value `SupportedTlsVersions.ONE3`
-  - Deleted or renamed enum value `TlsCipherSuites.TLS_AES128_GCM_SHA256`
-  - Deleted or renamed enum value `TlsCipherSuites.TLS_AES256_GCM_SHA384`
-  - Deleted or renamed enum value `TlsCipherSuites.TLS_ECDHE_ECDSA_WITH_AES128_CBC_SHA256`
-  - Deleted or renamed enum value `TlsCipherSuites.TLS_ECDHE_ECDSA_WITH_AES128_GCM_SHA256`
-  - Deleted or renamed enum value `TlsCipherSuites.TLS_ECDHE_ECDSA_WITH_AES256_GCM_SHA384`
-  - Deleted or renamed enum value `TlsCipherSuites.TLS_ECDHE_RSA_WITH_AES128_CBC_SHA`
-  - Deleted or renamed enum value `TlsCipherSuites.TLS_ECDHE_RSA_WITH_AES128_CBC_SHA256`
-  - Deleted or renamed enum value `TlsCipherSuites.TLS_ECDHE_RSA_WITH_AES128_GCM_SHA256`
-  - Deleted or renamed enum value `TlsCipherSuites.TLS_ECDHE_RSA_WITH_AES256_CBC_SHA`
-  - Deleted or renamed enum value `TlsCipherSuites.TLS_ECDHE_RSA_WITH_AES256_CBC_SHA384`
-  - Deleted or renamed enum value `TlsCipherSuites.TLS_ECDHE_RSA_WITH_AES256_GCM_SHA384`
-  - Deleted or renamed enum value `TlsCipherSuites.TLS_RSA_WITH_AES128_CBC_SHA`
-  - Deleted or renamed enum value `TlsCipherSuites.TLS_RSA_WITH_AES128_CBC_SHA256`
-  - Deleted or renamed enum value `TlsCipherSuites.TLS_RSA_WITH_AES128_GCM_SHA256`
-  - Deleted or renamed enum value `TlsCipherSuites.TLS_RSA_WITH_AES256_CBC_SHA`
-  - Deleted or renamed enum value `TlsCipherSuites.TLS_RSA_WITH_AES256_CBC_SHA256`
-  - Deleted or renamed enum value `TlsCipherSuites.TLS_RSA_WITH_AES256_GCM_SHA384`
-  - Deleted or renamed method `WebAppsOperations.begin_swap_slot`
+  - Client `WebSiteManagementClient` deleted or renamed instance variable `url`
+  - Client method `WebSiteManagementClient.get_publishing_user` moved to UsersOperations
+  - Client method `WebSiteManagementClient.get_source_control` moved to SourceControlsOperations
+  - Client method `WebSiteManagementClient.list_source_controls` moved to SourceControlsOperations
+  - Client method `WebSiteManagementClient.update_publishing_user` moved to UsersOperations
+  - Client method `WebSiteManagementClient.update_source_control` moved to SourceControlsOperations
+
   - Method `RecommendationsOperations.disable_all_for_hosting_environment` re-ordered its parameters from `['self', 'resource_group_name', 'environment_name', 'hosting_environment_name', 'kwargs']` to `['self', 'resource_group_name', 'hosting_environment_name', 'environment_name', 'kwargs']`
   - Method `RecommendationsOperations.reset_all_filters_for_hosting_environment` re-ordered its parameters from `['self', 'resource_group_name', 'environment_name', 'hosting_environment_name', 'kwargs']` to `['self', 'resource_group_name', 'hosting_environment_name', 'environment_name', 'kwargs']`
   - Method `WebAppsOperations.begin_migrate_storage` re-ordered its parameters from `['self', 'resource_group_name', 'name', 'subscription_name', 'migration_options', 'kwargs']` to `['self', 'resource_group_name', 'name', 'migration_options', 'subscription_name', 'kwargs']`
