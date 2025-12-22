@@ -20,9 +20,7 @@
   - Method `PoolOperations.create` replaced its parameter `if_match`/`if_none_match` to `etag`/`match_condition`
   - Method `PoolOperations.update` replaced its parameter `if_match` to `etag`/`match_condition`
   - Method `PrivateEndpointConnectionOperations.begin_update` replaced its parameter `if_match` to `etag`/`match_condition`
-  - Method `ApplicationOperations.create` removed default value `None` from its parameter `parameters`
   - Method `ApplicationOperations.list` changed its parameter `maxresults` from `positional_or_keyword` to `keyword_only`
-  - Method `ApplicationPackageOperations.create` removed default value `None` from its parameter `parameters`
   - Method `ApplicationPackageOperations.list` changed its parameter `maxresults` from `positional_or_keyword` to `keyword_only`
   - Method `CertificateOperations.list_by_batch_account` changed its parameter `maxresults` from `positional_or_keyword` to `keyword_only`
   - Method `CertificateOperations.list_by_batch_account` changed its parameter `select` from `positional_or_keyword` to `keyword_only`
