@@ -8228,7 +8228,7 @@ class DiagnosticMetricSet(_Model):
     time_grain: Optional[str] = rest_field(name="timeGrain", visibility=["read", "create", "update", "delete", "query"])
     """Presented time grain. Supported grains at the moment are PT1M, PT1H, P1D."""
     values_property: Optional[list["_models.DiagnosticMetricSample"]] = rest_field(
-        name="values", visibility=["read", "create", "update", "delete", "query"]
+        name="values", visibility=["read", "create", "update", "delete", "query"], original_tsp_name="values"
     )
     """Collection of metric values for the selected period based on the
      {Microsoft.Web.Hosting.Administration.DiagnosticMetricSet.TimeGrain}."""
@@ -11669,56 +11669,56 @@ class IpAddressRange(_Model):
 class IpSecurityRestriction(_Model):
     """IP security restriction on an app.
 
-        :ivar ip_address: IP address the security restriction is valid for.
-         It can be in form of pure ipv4 address (required SubnetMask property) or
-         CIDR notation such as ipv4/mask (leading bit match). For CIDR,
-         SubnetMask property must not be specified.
-        :vartype ip_address: str
-        :ivar subnet_mask: Subnet mask for the range of IP addresses the restriction is valid for.
-        :vartype subnet_mask: str
-        :ivar vnet_subnet_resource_id: Virtual network resource id.
-        :vartype vnet_subnet_resource_id: str
-        :ivar vnet_traffic_tag: (internal) Vnet traffic tag.
-        :vartype vnet_traffic_tag: int
-        :ivar subnet_traffic_tag: (internal) Subnet traffic tag.
-        :vartype subnet_traffic_tag: int
-        :ivar action: Allow or Deny access for this IP range.
-        :vartype action: str
-        :ivar tag: Defines what this IP filter will be used for. This is to support IP filtering on
-         proxies. Known values are: "Default", "XffProxy", and "ServiceTag".
-        :vartype tag: str or ~azure.mgmt.web.models.IpFilterTag
-        :ivar priority: Priority of IP restriction rule.
-        :vartype priority: int
-        :ivar name: IP restriction rule name.
-        :vartype name: str
-        :ivar description: IP restriction rule description.
-        :vartype description: str
-        :ivar headers: IP restriction rule headers.
-    X-Forwarded-Host
-        (`https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Forwarded-Host#Examples
-        <https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Forwarded-Host#Examples>`_).
-    The matching logic is ..
+    :ivar ip_address: IP address the security restriction is valid for.
+     It can be in form of pure ipv4 address (required SubnetMask property) or
+     CIDR notation such as ipv4/mask (leading bit match). For CIDR,
+     SubnetMask property must not be specified.
+    :vartype ip_address: str
+    :ivar subnet_mask: Subnet mask for the range of IP addresses the restriction is valid for.
+    :vartype subnet_mask: str
+    :ivar vnet_subnet_resource_id: Virtual network resource id.
+    :vartype vnet_subnet_resource_id: str
+    :ivar vnet_traffic_tag: (internal) Vnet traffic tag.
+    :vartype vnet_traffic_tag: int
+    :ivar subnet_traffic_tag: (internal) Subnet traffic tag.
+    :vartype subnet_traffic_tag: int
+    :ivar action: Allow or Deny access for this IP range.
+    :vartype action: str
+    :ivar tag: Defines what this IP filter will be used for. This is to support IP filtering on
+     proxies. Known values are: "Default", "XffProxy", and "ServiceTag".
+    :vartype tag: str or ~azure.mgmt.web.models.IpFilterTag
+    :ivar priority: Priority of IP restriction rule.
+    :vartype priority: int
+    :ivar name: IP restriction rule name.
+    :vartype name: str
+    :ivar description: IP restriction rule description.
+    :vartype description: str
+    :ivar headers: IP restriction rule headers.
+     X-Forwarded-Host
+     (`https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Forwarded-Host#Examples
+     <https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Forwarded-Host#Examples>`_).
+     The matching logic is ..
 
-         * If the property is null or empty (default), all hosts(or lack of) are allowed.
-         * A value is compared using ordinal-ignore-case (excluding port number).
-         * Subdomain wildcards are permitted but don't match the root domain. For example,
-           *.contoso.com matches the subdomain foo.contoso.com
-    but not the root domain contoso.com or multi-level foo.bar.contoso.com
-         * Unicode host names are allowed but are converted to Punycode for matching.
+     * If the property is null or empty (default), all hosts(or lack of) are allowed.
+     * A value is compared using ordinal-ignore-case (excluding port number).
+     * Subdomain wildcards are permitted but don't match the root domain. For example,
+       *.contoso.com matches the subdomain foo.contoso.com
+     but not the root domain contoso.com or multi-level foo.bar.contoso.com
+     * Unicode host names are allowed but are converted to Punycode for matching.
 
-    X-Forwarded-For
-        (`https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Forwarded-For#Examples
-        <https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Forwarded-For#Examples>`_).
-    The matching logic is ..
+     X-Forwarded-For
+     (`https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Forwarded-For#Examples
+     <https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Forwarded-For#Examples>`_).
+     The matching logic is ..
 
-         * If the property is null or empty (default), any forwarded-for chains (or lack of) are
-           allowed.
-         * If any address (excluding port number) in the chain (comma separated) matches the CIDR
-           defined by the property.
+     * If the property is null or empty (default), any forwarded-for chains (or lack of) are
+       allowed.
+     * If any address (excluding port number) in the chain (comma separated) matches the CIDR
+       defined by the property.
 
-    X-Azure-FDID and X-FD-HealthProbe.
-    The matching logic is exact match.
-        :vartype headers: dict[str, list[str]]
+     X-Azure-FDID and X-FD-HealthProbe.
+     The matching logic is exact match.
+    :vartype headers: dict[str, list[str]]
     """
 
     ip_address: Optional[str] = rest_field(name="ipAddress", visibility=["read", "create", "update", "delete", "query"])
@@ -11757,30 +11757,30 @@ class IpSecurityRestriction(_Model):
     """IP restriction rule description."""
     headers: Optional[dict[str, list[str]]] = rest_field(visibility=["read", "create", "update", "delete", "query"])
     """IP restriction rule headers.
- X-Forwarded-Host
-     (`https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Forwarded-Host#Examples
-     <https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Forwarded-Host#Examples>`_).
- The matching logic is ..
+      X-Forwarded-Host
+      (`https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Forwarded-Host#Examples
+      <https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Forwarded-Host#Examples>`_).
+      The matching logic is ..
  
       * If the property is null or empty (default), all hosts(or lack of) are allowed.
       * A value is compared using ordinal-ignore-case (excluding port number).
       * Subdomain wildcards are permitted but don't match the root domain. For example,
         *.contoso.com matches the subdomain foo.contoso.com
- but not the root domain contoso.com or multi-level foo.bar.contoso.com
+      but not the root domain contoso.com or multi-level foo.bar.contoso.com
       * Unicode host names are allowed but are converted to Punycode for matching.
  
- X-Forwarded-For
-     (`https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Forwarded-For#Examples
-     <https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Forwarded-For#Examples>`_).
- The matching logic is ..
+      X-Forwarded-For
+      (`https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Forwarded-For#Examples
+      <https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Forwarded-For#Examples>`_).
+      The matching logic is ..
  
       * If the property is null or empty (default), any forwarded-for chains (or lack of) are
         allowed.
       * If any address (excluding port number) in the chain (comma separated) matches the CIDR
         defined by the property.
  
- X-Azure-FDID and X-FD-HealthProbe.
- The matching logic is exact match."""
+      X-Azure-FDID and X-FD-HealthProbe.
+      The matching logic is exact match."""
 
     @overload
     def __init__(
@@ -14411,7 +14411,7 @@ class PerfMonSet(_Model):
     time_grain: Optional[str] = rest_field(name="timeGrain", visibility=["read", "create", "update", "delete", "query"])
     """Presented time grain."""
     values_property: Optional[list["_models.PerfMonSample"]] = rest_field(
-        name="values", visibility=["read", "create", "update", "delete", "query"]
+        name="values", visibility=["read", "create", "update", "delete", "query"], original_tsp_name="values"
     )
     """Collection of workers that are active during this time."""
 

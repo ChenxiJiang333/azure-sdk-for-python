@@ -18,7 +18,7 @@ from azure.mgmt.core.policies import AsyncARMAutoResourceProviderRegistrationPol
 from azure.mgmt.core.tools import get_arm_endpoints
 
 from .._utils.serialization import Deserializer, Serializer
-from ._configuration import WebClientConfiguration
+from ._configuration import WebSiteManagementClientConfiguration
 from .operations import (
     AppServiceEnvironmentsOperations,
     AppServicePlansOperations,
@@ -45,7 +45,7 @@ from .operations import (
     WorkflowTriggersOperations,
     WorkflowVersionsOperations,
     WorkflowsOperations,
-    _WebClientOperationsMixin,
+    _WebSiteManagementClientOperationsMixin,
 )
 
 if TYPE_CHECKING:
@@ -53,8 +53,8 @@ if TYPE_CHECKING:
     from azure.core.credentials_async import AsyncTokenCredential
 
 
-class WebClient(_WebClientOperationsMixin):  # pylint: disable=too-many-instance-attributes
-    """WebClient.
+class WebSiteManagementClient(_WebSiteManagementClientOperationsMixin):  # pylint: disable=too-many-instance-attributes
+    """WebSiteManagementClient.
 
     :ivar app_service_environments: AppServiceEnvironmentsOperations operations
     :vartype app_service_environments:
@@ -145,7 +145,7 @@ class WebClient(_WebClientOperationsMixin):  # pylint: disable=too-many-instance
         if not base_url:
             base_url = _endpoints["resource_manager"]
         credential_scopes = kwargs.pop("credential_scopes", _endpoints["credential_scopes"])
-        self._config = WebClientConfiguration(
+        self._config = WebSiteManagementClientConfiguration(
             credential=credential,
             subscription_id=subscription_id,
             base_url=cast(str, base_url),

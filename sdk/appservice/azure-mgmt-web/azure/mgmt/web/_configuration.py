@@ -18,8 +18,8 @@ if TYPE_CHECKING:
     from azure.core.credentials import TokenCredential
 
 
-class WebClientConfiguration:  # pylint: disable=too-many-instance-attributes
-    """Configuration for WebClient.
+class WebSiteManagementClientConfiguration:  # pylint: disable=too-many-instance-attributes
+    """Configuration for WebSiteManagementClient.
 
     Note that all parameters used to create this instance are saved as instance
     attributes.

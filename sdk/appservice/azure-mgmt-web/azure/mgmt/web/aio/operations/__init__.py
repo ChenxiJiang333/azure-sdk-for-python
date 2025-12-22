@@ -37,7 +37,7 @@ from ._operations import WorkflowsOperations  # type: ignore
 from ._operations import WorkflowRunActionRepetitionsOperations  # type: ignore
 from ._operations import WorkflowRunActionRepetitionsRequestHistoriesOperations  # type: ignore
 from ._operations import GetUsagesInLocationOperations  # type: ignore
-from ._operations import _WebClientOperationsMixin  # type: ignore # pylint: disable=unused-import
+from ._operations import _WebSiteManagementClientOperationsMixin  # type: ignore # pylint: disable=unused-import
 
 from ._patch import __all__ as _patch_all
 from ._patch import *

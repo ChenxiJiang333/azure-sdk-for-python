@@ -640,7 +640,7 @@ from ...operations._operations import (
     build_web_apps_stop_slot_request,
     build_web_apps_stop_web_site_network_trace_request,
     build_web_apps_stop_web_site_network_trace_slot_request,
-    build_web_apps_swap_slot_slot_request,
+    build_web_apps_swap_slot_request,
     build_web_apps_swap_slot_with_production_request,
     build_web_apps_sync_function_triggers_request,
     build_web_apps_sync_function_triggers_slot_request,
@@ -692,20 +692,20 @@ from ...operations._operations import (
     build_web_apps_update_vnet_connection_gateway_slot_request,
     build_web_apps_update_vnet_connection_request,
     build_web_apps_update_vnet_connection_slot_request,
-    build_web_check_name_availability_request,
-    build_web_get_subscription_deployment_locations_request,
-    build_web_list_ase_regions_request,
-    build_web_list_billing_meters_request,
-    build_web_list_custom_host_name_sites_request,
-    build_web_list_geo_regions_request,
-    build_web_list_premier_add_on_offers_request,
-    build_web_list_site_identifiers_assigned_to_host_name_request,
-    build_web_list_skus_request,
-    build_web_move_request,
-    build_web_regional_check_name_availability_request,
-    build_web_validate_move_request,
-    build_web_validate_request,
-    build_web_verify_hosting_environment_vnet_request,
+    build_web_site_management_check_name_availability_request,
+    build_web_site_management_get_subscription_deployment_locations_request,
+    build_web_site_management_list_ase_regions_request,
+    build_web_site_management_list_billing_meters_request,
+    build_web_site_management_list_custom_host_name_sites_request,
+    build_web_site_management_list_geo_regions_request,
+    build_web_site_management_list_premier_add_on_offers_request,
+    build_web_site_management_list_site_identifiers_assigned_to_host_name_request,
+    build_web_site_management_list_skus_request,
+    build_web_site_management_move_request,
+    build_web_site_management_regional_check_name_availability_request,
+    build_web_site_management_validate_move_request,
+    build_web_site_management_validate_request,
+    build_web_site_management_verify_hosting_environment_vnet_request,
     build_workflow_run_action_repetitions_get_request,
     build_workflow_run_action_repetitions_list_expression_traces_request,
     build_workflow_run_action_repetitions_list_request,
@@ -732,7 +732,7 @@ from ...operations._operations import (
     build_workflows_regenerate_access_key_request,
     build_workflows_validate_request,
 )
-from .._configuration import WebClientConfiguration
+from .._configuration import WebSiteManagementClientConfiguration
 
 JSON = MutableMapping[str, Any]
 T = TypeVar("T")
@@ -746,14 +746,14 @@ class AppServiceEnvironmentsOperations:  # pylint: disable=too-many-public-metho
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.web.aio.WebClient`'s
+        :class:`~azure.mgmt.web.aio.WebSiteManagementClient`'s
         :attr:`app_service_environments` attribute.
     """
 
     def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client: AsyncPipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: WebClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._config: WebSiteManagementClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
         self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
@@ -6828,14 +6828,14 @@ class RecommendationsOperations:
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.web.aio.WebClient`'s
+        :class:`~azure.mgmt.web.aio.WebSiteManagementClient`'s
         :attr:`recommendations` attribute.
     """
 
     def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client: AsyncPipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: WebClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._config: WebSiteManagementClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
         self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
@@ -8071,14 +8071,14 @@ class StaticSitesOperations:  # pylint: disable=too-many-public-methods
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.web.aio.WebClient`'s
+        :class:`~azure.mgmt.web.aio.WebSiteManagementClient`'s
         :attr:`static_sites` attribute.
     """
 
     def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client: AsyncPipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: WebClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._config: WebSiteManagementClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
         self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
@@ -18288,14 +18288,14 @@ class WebAppsOperations:  # pylint: disable=too-many-public-methods
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.web.aio.WebClient`'s
+        :class:`~azure.mgmt.web.aio.WebSiteManagementClient`'s
         :attr:`web_apps` attribute.
     """
 
     def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client: AsyncPipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: WebClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._config: WebSiteManagementClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
         self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
@@ -25396,7 +25396,7 @@ class WebAppsOperations:  # pylint: disable=too-many-public-methods
 
         return AsyncItemPaged(get_next, extract_data)
 
-    async def _swap_slot_slot_initial(
+    async def _swap_slot_initial(
         self,
         resource_group_name: str,
         name: str,
@@ -25425,7 +25425,7 @@ class WebAppsOperations:  # pylint: disable=too-many-public-methods
         else:
             _content = json.dumps(slot_swap_entity, cls=SdkJSONEncoder, exclude_readonly=True)  # type: ignore
 
-        _request = build_web_apps_swap_slot_slot_request(
+        _request = build_web_apps_swap_slot_request(
             resource_group_name=resource_group_name,
             name=name,
             slot=slot,
@@ -25473,7 +25473,7 @@ class WebAppsOperations:  # pylint: disable=too-many-public-methods
         return deserialized  # type: ignore
 
     @overload
-    async def begin_swap_slot_slot(
+    async def begin_swap_slot(
         self,
         resource_group_name: str,
         name: str,
@@ -25506,7 +25506,7 @@ class WebAppsOperations:  # pylint: disable=too-many-public-methods
         """
 
     @overload
-    async def begin_swap_slot_slot(
+    async def begin_swap_slot(
         self,
         resource_group_name: str,
         name: str,
@@ -25539,7 +25539,7 @@ class WebAppsOperations:  # pylint: disable=too-many-public-methods
         """
 
     @overload
-    async def begin_swap_slot_slot(
+    async def begin_swap_slot(
         self,
         resource_group_name: str,
         name: str,
@@ -25572,7 +25572,7 @@ class WebAppsOperations:  # pylint: disable=too-many-public-methods
         """
 
     @distributed_trace_async
-    async def begin_swap_slot_slot(
+    async def begin_swap_slot(
         self,
         resource_group_name: str,
         name: str,
@@ -25608,7 +25608,7 @@ class WebAppsOperations:  # pylint: disable=too-many-public-methods
         lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
         cont_token: Optional[str] = kwargs.pop("continuation_token", None)
         if cont_token is None:
-            raw_result = await self._swap_slot_slot_initial(
+            raw_result = await self._swap_slot_initial(
                 resource_group_name=resource_group_name,
                 name=name,
                 slot=slot,
@@ -66528,14 +66528,14 @@ class AppServicePlansOperations:  # pylint: disable=too-many-public-methods
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.web.aio.WebClient`'s
+        :class:`~azure.mgmt.web.aio.WebSiteManagementClient`'s
         :attr:`app_service_plans` attribute.
     """
 
     def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client: AsyncPipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: WebClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._config: WebSiteManagementClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
         self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
@@ -69554,14 +69554,14 @@ class CertificatesOperations:
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.web.aio.WebClient`'s
+        :class:`~azure.mgmt.web.aio.WebSiteManagementClient`'s
         :attr:`certificates` attribute.
     """
 
     def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client: AsyncPipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: WebClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._config: WebSiteManagementClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
         self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
@@ -70243,14 +70243,14 @@ class SiteCertificatesOperations:
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.web.aio.WebClient`'s
+        :class:`~azure.mgmt.web.aio.WebSiteManagementClient`'s
         :attr:`site_certificates` attribute.
     """
 
     def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client: AsyncPipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: WebClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._config: WebSiteManagementClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
         self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
@@ -71541,14 +71541,14 @@ class GlobalOperations:
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.web.aio.WebClient`'s
+        :class:`~azure.mgmt.web.aio.WebSiteManagementClient`'s
         :attr:`global_operations` attribute.
     """
 
     def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client: AsyncPipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: WebClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._config: WebSiteManagementClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
         self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
@@ -71753,14 +71753,14 @@ class DiagnosticsOperations:  # pylint: disable=too-many-public-methods
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.web.aio.WebClient`'s
+        :class:`~azure.mgmt.web.aio.WebSiteManagementClient`'s
         :attr:`diagnostics` attribute.
     """
 
     def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client: AsyncPipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: WebClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._config: WebSiteManagementClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
         self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
@@ -73851,14 +73851,14 @@ class KubeEnvironmentsOperations:
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.web.aio.WebClient`'s
+        :class:`~azure.mgmt.web.aio.WebSiteManagementClient`'s
         :attr:`kube_environments` attribute.
     """
 
     def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client: AsyncPipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: WebClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._config: WebSiteManagementClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
         self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
@@ -74666,14 +74666,14 @@ class UsersOperations:
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.web.aio.WebClient`'s
+        :class:`~azure.mgmt.web.aio.WebSiteManagementClient`'s
         :attr:`users` attribute.
     """
 
     def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client: AsyncPipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: WebClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._config: WebSiteManagementClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
         self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
@@ -74879,14 +74879,14 @@ class SourceControlsOperations:
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.web.aio.WebClient`'s
+        :class:`~azure.mgmt.web.aio.WebSiteManagementClient`'s
         :attr:`source_controls` attribute.
     """
 
     def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client: AsyncPipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: WebClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._config: WebSiteManagementClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
         self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
@@ -75202,14 +75202,14 @@ class WorkflowRunsOperations:
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.web.aio.WebClient`'s
+        :class:`~azure.mgmt.web.aio.WebSiteManagementClient`'s
         :attr:`workflow_runs` attribute.
     """
 
     def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client: AsyncPipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: WebClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._config: WebSiteManagementClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
         self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
@@ -75475,14 +75475,14 @@ class WorkflowRunActionsOperations:
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.web.aio.WebClient`'s
+        :class:`~azure.mgmt.web.aio.WebSiteManagementClient`'s
         :attr:`workflow_run_actions` attribute.
     """
 
     def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client: AsyncPipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: WebClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._config: WebSiteManagementClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
         self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
@@ -75795,14 +75795,14 @@ class WorkflowRunActionScopeRepetitionsOperations:  # pylint: disable=name-too-l
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.web.aio.WebClient`'s
+        :class:`~azure.mgmt.web.aio.WebSiteManagementClient`'s
         :attr:`workflow_run_action_scope_repetitions` attribute.
     """
 
     def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client: AsyncPipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: WebClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._config: WebSiteManagementClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
         self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
@@ -76012,14 +76012,14 @@ class WorkflowTriggersOperations:
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.web.aio.WebClient`'s
+        :class:`~azure.mgmt.web.aio.WebSiteManagementClient`'s
         :attr:`workflow_triggers` attribute.
     """
 
     def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client: AsyncPipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: WebClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._config: WebSiteManagementClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
         self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
@@ -76501,14 +76501,14 @@ class WorkflowTriggerHistoriesOperations:
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.web.aio.WebClient`'s
+        :class:`~azure.mgmt.web.aio.WebSiteManagementClient`'s
         :attr:`workflow_trigger_histories` attribute.
     """
 
     def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client: AsyncPipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: WebClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._config: WebSiteManagementClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
         self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
@@ -76866,14 +76866,14 @@ class WorkflowVersionsOperations:
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.web.aio.WebClient`'s
+        :class:`~azure.mgmt.web.aio.WebSiteManagementClient`'s
         :attr:`workflow_versions` attribute.
     """
 
     def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client: AsyncPipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: WebClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._config: WebSiteManagementClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
         self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
@@ -77063,14 +77063,14 @@ class ProviderOperations:
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.web.aio.WebClient`'s
+        :class:`~azure.mgmt.web.aio.WebSiteManagementClient`'s
         :attr:`provider` attribute.
     """
 
     def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client: AsyncPipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: WebClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._config: WebSiteManagementClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
         self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
@@ -77744,14 +77744,14 @@ class DeletedWebAppsOperations:
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.web.aio.WebClient`'s
+        :class:`~azure.mgmt.web.aio.WebSiteManagementClient`'s
         :attr:`deleted_web_apps` attribute.
     """
 
     def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client: AsyncPipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: WebClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._config: WebSiteManagementClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
         self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
@@ -78015,14 +78015,14 @@ class ResourceHealthMetadataOperations:
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.web.aio.WebClient`'s
+        :class:`~azure.mgmt.web.aio.WebSiteManagementClient`'s
         :attr:`resource_health_metadata` attribute.
     """
 
     def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client: AsyncPipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: WebClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._config: WebSiteManagementClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
         self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
@@ -78568,14 +78568,14 @@ class WorkflowsOperations:
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.web.aio.WebClient`'s
+        :class:`~azure.mgmt.web.aio.WebSiteManagementClient`'s
         :attr:`workflows` attribute.
     """
 
     def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client: AsyncPipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: WebClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._config: WebSiteManagementClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
         self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
@@ -78926,14 +78926,14 @@ class WorkflowRunActionRepetitionsOperations:
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.web.aio.WebClient`'s
+        :class:`~azure.mgmt.web.aio.WebSiteManagementClient`'s
         :attr:`workflow_run_action_repetitions` attribute.
     """
 
     def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client: AsyncPipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: WebClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._config: WebSiteManagementClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
         self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
@@ -79258,14 +79258,14 @@ class WorkflowRunActionRepetitionsRequestHistoriesOperations:  # pylint: disable
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.web.aio.WebClient`'s
+        :class:`~azure.mgmt.web.aio.WebSiteManagementClient`'s
         :attr:`workflow_run_action_repetitions_request_histories` attribute.
     """
 
     def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client: AsyncPipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: WebClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._config: WebSiteManagementClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
         self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
@@ -79485,14 +79485,14 @@ class GetUsagesInLocationOperations:
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.web.aio.WebClient`'s
+        :class:`~azure.mgmt.web.aio.WebSiteManagementClient`'s
         :attr:`get_usages_in_location` attribute.
     """
 
     def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client: AsyncPipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: WebClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._config: WebSiteManagementClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
         self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
@@ -79590,8 +79590,8 @@ class GetUsagesInLocationOperations:
         return AsyncItemPaged(get_next, extract_data)
 
 
-class _WebClientOperationsMixin(
-    ClientMixinABC[AsyncPipelineClient[HttpRequest, AsyncHttpResponse], WebClientConfiguration]
+class _WebSiteManagementClientOperationsMixin(
+    ClientMixinABC[AsyncPipelineClient[HttpRequest, AsyncHttpResponse], WebSiteManagementClientConfiguration]
 ):
 
     @overload
@@ -79715,7 +79715,7 @@ class _WebClientOperationsMixin(
         else:
             _content = json.dumps(move_resource_envelope, cls=SdkJSONEncoder, exclude_readonly=True)  # type: ignore
 
-        _request = build_web_validate_move_request(
+        _request = build_web_site_management_validate_move_request(
             resource_group_name=resource_group_name,
             subscription_id=self._config.subscription_id,
             content_type=content_type,
@@ -79859,7 +79859,7 @@ class _WebClientOperationsMixin(
         else:
             _content = json.dumps(validate_request, cls=SdkJSONEncoder, exclude_readonly=True)  # type: ignore
 
-        _request = build_web_validate_request(
+        _request = build_web_site_management_validate_request(
             resource_group_name=resource_group_name,
             subscription_id=self._config.subscription_id,
             content_type=content_type,
@@ -79926,7 +79926,7 @@ class _WebClientOperationsMixin(
 
         cls: ClsType[_models.DeploymentLocations] = kwargs.pop("cls", None)
 
-        _request = build_web_get_subscription_deployment_locations_request(
+        _request = build_web_site_management_get_subscription_deployment_locations_request(
             subscription_id=self._config.subscription_id,
             api_version=self._config.api_version,
             headers=_headers,
@@ -79993,7 +79993,7 @@ class _WebClientOperationsMixin(
         def prepare_request(next_link=None):
             if not next_link:
 
-                _request = build_web_list_ase_regions_request(
+                _request = build_web_site_management_list_ase_regions_request(
                     subscription_id=self._config.subscription_id,
                     api_version=self._config.api_version,
                     headers=_headers,
@@ -80088,7 +80088,7 @@ class _WebClientOperationsMixin(
         def prepare_request(next_link=None):
             if not next_link:
 
-                _request = build_web_list_billing_meters_request(
+                _request = build_web_site_management_list_billing_meters_request(
                     subscription_id=self._config.subscription_id,
                     billing_location=billing_location,
                     os_type=os_type,
@@ -80247,7 +80247,7 @@ class _WebClientOperationsMixin(
         else:
             _content = json.dumps(request, cls=SdkJSONEncoder, exclude_readonly=True)  # type: ignore
 
-        _request = build_web_check_name_availability_request(
+        _request = build_web_site_management_check_name_availability_request(
             subscription_id=self._config.subscription_id,
             content_type=content_type,
             api_version=self._config.api_version,
@@ -80320,7 +80320,7 @@ class _WebClientOperationsMixin(
         def prepare_request(next_link=None):
             if not next_link:
 
-                _request = build_web_list_custom_host_name_sites_request(
+                _request = build_web_site_management_list_custom_host_name_sites_request(
                     subscription_id=self._config.subscription_id,
                     hostname=hostname,
                     api_version=self._config.api_version,
@@ -80437,7 +80437,7 @@ class _WebClientOperationsMixin(
         def prepare_request(next_link=None):
             if not next_link:
 
-                _request = build_web_list_geo_regions_request(
+                _request = build_web_site_management_list_geo_regions_request(
                     subscription_id=self._config.subscription_id,
                     sku=sku,
                     linux_workers_enabled=linux_workers_enabled,
@@ -80597,7 +80597,7 @@ class _WebClientOperationsMixin(
         def prepare_request(next_link=None):
             if not next_link:
 
-                _request = build_web_list_site_identifiers_assigned_to_host_name_request(
+                _request = build_web_site_management_list_site_identifiers_assigned_to_host_name_request(
                     subscription_id=self._config.subscription_id,
                     content_type=content_type,
                     api_version=self._config.api_version,
@@ -80769,7 +80769,7 @@ class _WebClientOperationsMixin(
         else:
             _content = json.dumps(request, cls=SdkJSONEncoder, exclude_readonly=True)  # type: ignore
 
-        _request = build_web_regional_check_name_availability_request(
+        _request = build_web_site_management_regional_check_name_availability_request(
             location=location,
             subscription_id=self._config.subscription_id,
             content_type=content_type,
@@ -80839,7 +80839,7 @@ class _WebClientOperationsMixin(
         def prepare_request(next_link=None):
             if not next_link:
 
-                _request = build_web_list_premier_add_on_offers_request(
+                _request = build_web_site_management_list_premier_add_on_offers_request(
                     subscription_id=self._config.subscription_id,
                     api_version=self._config.api_version,
                     headers=_headers,
@@ -80925,7 +80925,7 @@ class _WebClientOperationsMixin(
 
         cls: ClsType[_models.SkuInfos] = kwargs.pop("cls", None)
 
-        _request = build_web_list_skus_request(
+        _request = build_web_site_management_list_skus_request(
             subscription_id=self._config.subscription_id,
             api_version=self._config.api_version,
             headers=_headers,
@@ -81068,7 +81068,7 @@ class _WebClientOperationsMixin(
         else:
             _content = json.dumps(parameters, cls=SdkJSONEncoder, exclude_readonly=True)  # type: ignore
 
-        _request = build_web_verify_hosting_environment_vnet_request(
+        _request = build_web_site_management_verify_hosting_environment_vnet_request(
             subscription_id=self._config.subscription_id,
             content_type=content_type,
             api_version=self._config.api_version,
@@ -81232,7 +81232,7 @@ class _WebClientOperationsMixin(
         else:
             _content = json.dumps(move_resource_envelope, cls=SdkJSONEncoder, exclude_readonly=True)  # type: ignore
 
-        _request = build_web_move_request(
+        _request = build_web_site_management_move_request(
             resource_group_name=resource_group_name,
             subscription_id=self._config.subscription_id,
             content_type=content_type,

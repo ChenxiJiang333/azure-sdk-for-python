@@ -1,5 +1,9 @@
 # Release History
 
+## 10.2.0 (2025-12-22)
+
+change log generation was timeout!!! You need to write it manually!!!
+
 ## tsp migration
 
 ### Breaking Changes

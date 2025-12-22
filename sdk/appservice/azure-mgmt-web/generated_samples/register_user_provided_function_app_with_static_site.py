@@ -9,7 +9,7 @@
 
 from azure.identity import DefaultAzureCredential
 
-from azure.mgmt.web import WebClient
+from azure.mgmt.web import WebSiteManagementClient
 
 """
 # PREREQUISITES
@@ -26,7 +26,7 @@ from azure.mgmt.web import WebClient
 
 
 def main():
-    client = WebClient(
+    client = WebSiteManagementClient(
         credential=DefaultAzureCredential(),
         subscription_id="SUBSCRIPTION_ID",
     )
