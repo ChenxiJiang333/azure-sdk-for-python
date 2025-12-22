@@ -25,11 +25,14 @@ from .operations import (
     DeploymentSettingsOperations,
     EdgeDeviceJobsOperations,
     EdgeDevicesOperations,
+    EdgeMachineJobsOperations,
+    EdgeMachinesOperations,
     ExtensionsOperations,
     KubernetesVersionsOperations,
     OffersOperations,
     Operations,
     OsImagesOperations,
+    OwnershipVouchersOperations,
     PlatformUpdatesOperations,
     PublishersOperations,
     SecuritySettingsOperations,
@@ -86,6 +89,12 @@ class AzureStackHCIClient:  # pylint: disable=too-many-instance-attributes
     :ivar validated_solution_recipes: ValidatedSolutionRecipesOperations operations
     :vartype validated_solution_recipes:
      azure.mgmt.azurestackhci.operations.ValidatedSolutionRecipesOperations
+    :ivar edge_machines: EdgeMachinesOperations operations
+    :vartype edge_machines: azure.mgmt.azurestackhci.operations.EdgeMachinesOperations
+    :ivar edge_machine_jobs: EdgeMachineJobsOperations operations
+    :vartype edge_machine_jobs: azure.mgmt.azurestackhci.operations.EdgeMachineJobsOperations
+    :ivar ownership_vouchers: OwnershipVouchersOperations operations
+    :vartype ownership_vouchers: azure.mgmt.azurestackhci.operations.OwnershipVouchersOperations
     :ivar update_summaries: UpdateSummariesOperations operations
     :vartype update_summaries: azure.mgmt.azurestackhci.operations.UpdateSummariesOperations
     :param credential: Credential used to authenticate requests to the service. Required.
@@ -98,7 +107,7 @@ class AzureStackHCIClient:  # pylint: disable=too-many-instance-attributes
      None.
     :paramtype cloud_setting: ~azure.core.AzureClouds
     :keyword api_version: The API version to use for this operation. Default value is
-     "2025-11-01-preview". Note that overriding this default value may result in unsupported
+     "2025-12-01-preview". Note that overriding this default value may result in unsupported
      behavior.
     :paramtype api_version: str
     :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
@@ -178,6 +187,13 @@ class AzureStackHCIClient:  # pylint: disable=too-many-instance-attributes
         self.update_runs = UpdateRunsOperations(self._client, self._config, self._serialize, self._deserialize)
         self.updates = UpdatesOperations(self._client, self._config, self._serialize, self._deserialize)
         self.validated_solution_recipes = ValidatedSolutionRecipesOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.edge_machines = EdgeMachinesOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.edge_machine_jobs = EdgeMachineJobsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.ownership_vouchers = OwnershipVouchersOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
         self.update_summaries = UpdateSummariesOperations(

@@ -33,11 +33,10 @@ def main():
 
     client.edge_device_jobs.begin_delete(
         resource_uri="subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/ArcInstance-rg/providers/Microsoft.HybridCompute/machines/Node-1",
-        edge_device_name="lAq",
         jobs_name="Ihlm3R-bZ4vTC4ABA456",
     ).result()
 
 
-# x-ms-original-file: 2025-11-01-preview/EdgeDeviceJobs_Delete.json
+# x-ms-original-file: 2025-12-01-preview/EdgeDeviceJobs_Delete.json
 if __name__ == "__main__":
     main()

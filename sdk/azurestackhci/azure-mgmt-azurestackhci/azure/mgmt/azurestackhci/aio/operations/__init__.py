@@ -30,6 +30,9 @@ from ._operations import SkusOperations  # type: ignore
 from ._operations import UpdateRunsOperations  # type: ignore
 from ._operations import UpdatesOperations  # type: ignore
 from ._operations import ValidatedSolutionRecipesOperations  # type: ignore
+from ._operations import EdgeMachinesOperations  # type: ignore
+from ._operations import EdgeMachineJobsOperations  # type: ignore
+from ._operations import OwnershipVouchersOperations  # type: ignore
 from ._operations import UpdateSummariesOperations  # type: ignore
 
 from ._patch import __all__ as _patch_all
@@ -55,6 +58,9 @@ __all__ = [
     "UpdateRunsOperations",
     "UpdatesOperations",
     "ValidatedSolutionRecipesOperations",
+    "EdgeMachinesOperations",
+    "EdgeMachineJobsOperations",
+    "OwnershipVouchersOperations",
     "UpdateSummariesOperations",
 ]
 __all__.extend([p for p in _patch_all if p not in __all__])  # pyright: ignore

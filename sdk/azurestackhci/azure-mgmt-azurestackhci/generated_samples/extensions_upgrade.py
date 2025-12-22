@@ -39,6 +39,6 @@ def main():
     ).result()
 
 
-# x-ms-original-file: 2025-11-01-preview/Extensions_Upgrade.json
+# x-ms-original-file: 2025-12-01-preview/Extensions_Upgrade.json
 if __name__ == "__main__":
     main()

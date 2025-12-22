@@ -33,7 +33,6 @@ def main():
     response = client.security_settings.begin_create_or_update(
         resource_group_name="test-rg",
         cluster_name="myCluster",
-        security_settings_name="default",
         resource={
             "properties": {
                 "securedCoreComplianceAssignment": "Audit",
@@ -45,6 +44,6 @@ def main():
     print(response)
 
 
-# x-ms-original-file: 2025-11-01-preview/PutSecuritySettings.json
+# x-ms-original-file: 2025-12-01-preview/PutSecuritySettings.json
 if __name__ == "__main__":
     main()

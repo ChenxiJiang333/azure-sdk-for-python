@@ -38,7 +38,6 @@ class TestAzureStackHCISecuritySettingsOperationsAsync(AzureMgmtRecordedTestCase
             await self.client.security_settings.begin_create_or_update(
                 resource_group_name=resource_group.name,
                 cluster_name="str",
-                security_settings_name="str",
                 resource={
                     "id": "str",
                     "name": "str",
@@ -65,6 +64,7 @@ class TestAzureStackHCISecuritySettingsOperationsAsync(AzureMgmtRecordedTestCase
                     },
                     "type": "str",
                 },
+                security_settings_name="str",
             )
         ).result()  # call '.result()' to poll until service return final result
 

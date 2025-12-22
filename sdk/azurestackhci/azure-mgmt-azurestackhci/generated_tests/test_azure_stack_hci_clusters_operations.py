@@ -55,6 +55,11 @@ class TestAzureStackHCIClustersOperations(AzureMgmtRecordedTestCase):
                     "cloudId": "str",
                     "cloudManagementEndpoint": "str",
                     "clusterPattern": "str",
+                    "confidentialVmProperties": {
+                        "confidentialVmIntent": "str",
+                        "confidentialVmStatus": "str",
+                        "confidentialVmStatusSummary": "str",
+                    },
                     "connectivityStatus": "str",
                     "desiredProperties": {"diagnosticLevel": "str", "windowsServerSubscription": "str"},
                     "identityProvider": "str",
@@ -147,6 +152,12 @@ class TestAzureStackHCIClustersOperations(AzureMgmtRecordedTestCase):
                     },
                     "resourceProviderObjectId": "str",
                     "ring": "str",
+                    "sdnProperties": {
+                        "sdnApiAddress": "str",
+                        "sdnDomainName": "str",
+                        "sdnIntegrationIntent": "str",
+                        "sdnStatus": "str",
+                    },
                     "secretsLocations": [{"secretsLocation": "str", "secretsType": "str"}],
                     "serviceEndpoint": "str",
                     "softwareAssuranceProperties": {

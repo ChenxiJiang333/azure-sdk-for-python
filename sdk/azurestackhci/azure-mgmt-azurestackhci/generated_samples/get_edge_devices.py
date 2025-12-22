@@ -33,11 +33,10 @@ def main():
 
     response = client.edge_devices.get(
         resource_uri="subscriptions/fd3c3665-1729-4b7b-9a38-238e83b0f98b/resourceGroups/ArcInstance-rg/providers/Microsoft.HybridCompute/machines/Node-1",
-        edge_device_name="default",
     )
     print(response)
 
 
-# x-ms-original-file: 2025-11-01-preview/GetEdgeDevices.json
+# x-ms-original-file: 2025-12-01-preview/GetEdgeDevices.json
 if __name__ == "__main__":
     main()

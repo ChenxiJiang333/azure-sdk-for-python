@@ -33,10 +33,9 @@ def main():
     client.security_settings.begin_delete(
         resource_group_name="test-rg",
         cluster_name="myCluster",
-        security_settings_name="default",
     ).result()
 
 
-# x-ms-original-file: 2025-11-01-preview/DeleteSecuritySettings.json
+# x-ms-original-file: 2025-12-01-preview/DeleteSecuritySettings.json
 if __name__ == "__main__":
     main()

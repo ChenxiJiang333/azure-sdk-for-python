@@ -24,8 +24,8 @@ class TestAzureStackHCIEdgeDeviceJobsOperationsAsync(AzureMgmtRecordedTestCase):
     async def test_edge_device_jobs_get(self, resource_group):
         response = await self.client.edge_device_jobs.get(
             resource_uri="str",
-            edge_device_name="str",
             jobs_name="str",
+            edge_device_name="str",
         )
 
         # please add some check logic here by yourself
@@ -37,7 +37,6 @@ class TestAzureStackHCIEdgeDeviceJobsOperationsAsync(AzureMgmtRecordedTestCase):
         response = await (
             await self.client.edge_device_jobs.begin_create_or_update(
                 resource_uri="str",
-                edge_device_name="str",
                 jobs_name="str",
                 resource={
                     "kind": "HCI",
@@ -54,6 +53,7 @@ class TestAzureStackHCIEdgeDeviceJobsOperationsAsync(AzureMgmtRecordedTestCase):
                     },
                     "type": "str",
                 },
+                edge_device_name="str",
             )
         ).result()  # call '.result()' to poll until service return final result
 
@@ -66,8 +66,8 @@ class TestAzureStackHCIEdgeDeviceJobsOperationsAsync(AzureMgmtRecordedTestCase):
         response = await (
             await self.client.edge_device_jobs.begin_delete(
                 resource_uri="str",
-                edge_device_name="str",
                 jobs_name="str",
+                edge_device_name="str",
             )
         ).result()  # call '.result()' to poll until service return final result
 

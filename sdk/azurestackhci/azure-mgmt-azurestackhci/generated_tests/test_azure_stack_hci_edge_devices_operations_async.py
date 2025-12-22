@@ -36,7 +36,6 @@ class TestAzureStackHCIEdgeDevicesOperationsAsync(AzureMgmtRecordedTestCase):
         response = await (
             await self.client.edge_devices.begin_create_or_update(
                 resource_uri="str",
-                edge_device_name="str",
                 resource={
                     "kind": "HCI",
                     "id": "str",
@@ -60,6 +59,10 @@ class TestAzureStackHCIEdgeDevicesOperationsAsync(AzureMgmtRecordedTestCase):
                         },
                         "provisioningState": "str",
                         "reportedProperties": {
+                            "confidentialVmProfile": {
+                                "igvmStatus": "str",
+                                "statusDetails": [{"code": "str", "message": "str"}],
+                            },
                             "deviceState": "str",
                             "extensionProfile": {
                                 "extensions": [
@@ -74,6 +77,7 @@ class TestAzureStackHCIEdgeDevicesOperationsAsync(AzureMgmtRecordedTestCase):
                                 ]
                             },
                             "hardwareProfile": {"processorType": "str"},
+                            "lastSyncTimestamp": "2020-02-20 00:00:00",
                             "networkProfile": {
                                 "hostNetwork": {
                                     "enableStorageAutoIp": bool,
@@ -141,6 +145,7 @@ class TestAzureStackHCIEdgeDevicesOperationsAsync(AzureMgmtRecordedTestCase):
                                         "vlanId": "str",
                                     }
                                 ],
+                                "sdnProperties": {"sdnApiAddress": "str", "sdnDomainName": "str", "sdnStatus": "str"},
                                 "switchDetails": [
                                     {
                                         "extensions": [
@@ -166,6 +171,7 @@ class TestAzureStackHCIEdgeDevicesOperationsAsync(AzureMgmtRecordedTestCase):
                     },
                     "type": "str",
                 },
+                edge_device_name="str",
             )
         ).result()  # call '.result()' to poll until service return final result
 
@@ -201,8 +207,8 @@ class TestAzureStackHCIEdgeDevicesOperationsAsync(AzureMgmtRecordedTestCase):
         response = await (
             await self.client.edge_devices.begin_validate(
                 resource_uri="str",
-                edge_device_name="str",
                 validate_request={"edgeDeviceIds": ["str"], "additionalInfo": "str"},
+                edge_device_name="str",
             )
         ).result()  # call '.result()' to poll until service return final result
 

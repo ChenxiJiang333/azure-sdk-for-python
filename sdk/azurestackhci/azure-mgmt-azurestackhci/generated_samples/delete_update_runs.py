@@ -38,6 +38,6 @@ def main():
     ).result()
 
 
-# x-ms-original-file: 2025-11-01-preview/DeleteUpdateRuns.json
+# x-ms-original-file: 2025-12-01-preview/DeleteUpdateRuns.json
 if __name__ == "__main__":
     main()

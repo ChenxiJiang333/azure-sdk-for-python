@@ -46,6 +46,6 @@ def main():
     print(response)
 
 
-# x-ms-original-file: 2025-11-01-preview/reconcileArcSettings.json
+# x-ms-original-file: 2025-12-01-preview/reconcileArcSettings.json
 if __name__ == "__main__":
     main()

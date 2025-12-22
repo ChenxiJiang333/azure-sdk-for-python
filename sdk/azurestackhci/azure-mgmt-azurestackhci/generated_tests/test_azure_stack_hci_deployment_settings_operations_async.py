@@ -38,7 +38,6 @@ class TestAzureStackHCIDeploymentSettingsOperationsAsync(AzureMgmtRecordedTestCa
             await self.client.deployment_settings.begin_create_or_update(
                 resource_group_name=resource_group.name,
                 cluster_name="str",
-                deployment_settings_name="str",
                 resource={
                     "id": "str",
                     "name": "str",
@@ -219,6 +218,7 @@ class TestAzureStackHCIDeploymentSettingsOperationsAsync(AzureMgmtRecordedTestCa
                     },
                     "type": "str",
                 },
+                deployment_settings_name="str",
             )
         ).result()  # call '.result()' to poll until service return final result
 

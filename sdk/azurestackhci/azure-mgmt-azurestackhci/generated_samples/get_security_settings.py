@@ -33,11 +33,10 @@ def main():
     response = client.security_settings.get(
         resource_group_name="test-rg",
         cluster_name="myCluster",
-        security_settings_name="default",
     )
     print(response)
 
 
-# x-ms-original-file: 2025-11-01-preview/GetSecuritySettings.json
+# x-ms-original-file: 2025-12-01-preview/GetSecuritySettings.json
 if __name__ == "__main__":
     main()

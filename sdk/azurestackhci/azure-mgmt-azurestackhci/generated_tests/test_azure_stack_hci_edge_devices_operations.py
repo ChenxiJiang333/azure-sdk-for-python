@@ -34,7 +34,6 @@ class TestAzureStackHCIEdgeDevicesOperations(AzureMgmtRecordedTestCase):
     def test_edge_devices_begin_create_or_update(self, resource_group):
         response = self.client.edge_devices.begin_create_or_update(
             resource_uri="str",
-            edge_device_name="str",
             resource={
                 "kind": "HCI",
                 "id": "str",
@@ -58,6 +57,10 @@ class TestAzureStackHCIEdgeDevicesOperations(AzureMgmtRecordedTestCase):
                     },
                     "provisioningState": "str",
                     "reportedProperties": {
+                        "confidentialVmProfile": {
+                            "igvmStatus": "str",
+                            "statusDetails": [{"code": "str", "message": "str"}],
+                        },
                         "deviceState": "str",
                         "extensionProfile": {
                             "extensions": [
@@ -72,6 +75,7 @@ class TestAzureStackHCIEdgeDevicesOperations(AzureMgmtRecordedTestCase):
                             ]
                         },
                         "hardwareProfile": {"processorType": "str"},
+                        "lastSyncTimestamp": "2020-02-20 00:00:00",
                         "networkProfile": {
                             "hostNetwork": {
                                 "enableStorageAutoIp": bool,
@@ -139,6 +143,7 @@ class TestAzureStackHCIEdgeDevicesOperations(AzureMgmtRecordedTestCase):
                                     "vlanId": "str",
                                 }
                             ],
+                            "sdnProperties": {"sdnApiAddress": "str", "sdnDomainName": "str", "sdnStatus": "str"},
                             "switchDetails": [
                                 {
                                     "extensions": [
@@ -164,6 +169,7 @@ class TestAzureStackHCIEdgeDevicesOperations(AzureMgmtRecordedTestCase):
                 },
                 "type": "str",
             },
+            edge_device_name="str",
         ).result()  # call '.result()' to poll until service return final result
 
         # please add some check logic here by yourself
@@ -195,8 +201,8 @@ class TestAzureStackHCIEdgeDevicesOperations(AzureMgmtRecordedTestCase):
     def test_edge_devices_begin_validate(self, resource_group):
         response = self.client.edge_devices.begin_validate(
             resource_uri="str",
-            edge_device_name="str",
             validate_request={"edgeDeviceIds": ["str"], "additionalInfo": "str"},
+            edge_device_name="str",
         ).result()  # call '.result()' to poll until service return final result
 
         # please add some check logic here by yourself

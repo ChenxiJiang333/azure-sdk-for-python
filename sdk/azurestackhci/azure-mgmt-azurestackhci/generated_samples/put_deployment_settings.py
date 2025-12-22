@@ -34,7 +34,6 @@ def main():
     response = client.deployment_settings.begin_create_or_update(
         resource_group_name="test-rg",
         cluster_name="myCluster",
-        deployment_settings_name="default",
         resource={
             "properties": {
                 "arcNodeResourceIds": [
@@ -184,6 +183,6 @@ def main():
     print(response)
 
 
-# x-ms-original-file: 2025-11-01-preview/PutDeploymentSettings.json
+# x-ms-original-file: 2025-12-01-preview/PutDeploymentSettings.json
 if __name__ == "__main__":
     main()

@@ -36,7 +36,6 @@ class TestAzureStackHCIDeploymentSettingsOperations(AzureMgmtRecordedTestCase):
         response = self.client.deployment_settings.begin_create_or_update(
             resource_group_name=resource_group.name,
             cluster_name="str",
-            deployment_settings_name="str",
             resource={
                 "id": "str",
                 "name": "str",
@@ -209,6 +208,7 @@ class TestAzureStackHCIDeploymentSettingsOperations(AzureMgmtRecordedTestCase):
                 },
                 "type": "str",
             },
+            deployment_settings_name="str",
         ).result()  # call '.result()' to poll until service return final result
 
         # please add some check logic here by yourself

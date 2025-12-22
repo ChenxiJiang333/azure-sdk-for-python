@@ -23,8 +23,8 @@ class TestAzureStackHCIEdgeDeviceJobsOperations(AzureMgmtRecordedTestCase):
     def test_edge_device_jobs_get(self, resource_group):
         response = self.client.edge_device_jobs.get(
             resource_uri="str",
-            edge_device_name="str",
             jobs_name="str",
+            edge_device_name="str",
         )
 
         # please add some check logic here by yourself
@@ -35,7 +35,6 @@ class TestAzureStackHCIEdgeDeviceJobsOperations(AzureMgmtRecordedTestCase):
     def test_edge_device_jobs_begin_create_or_update(self, resource_group):
         response = self.client.edge_device_jobs.begin_create_or_update(
             resource_uri="str",
-            edge_device_name="str",
             jobs_name="str",
             resource={
                 "kind": "HCI",
@@ -52,6 +51,7 @@ class TestAzureStackHCIEdgeDeviceJobsOperations(AzureMgmtRecordedTestCase):
                 },
                 "type": "str",
             },
+            edge_device_name="str",
         ).result()  # call '.result()' to poll until service return final result
 
         # please add some check logic here by yourself
@@ -62,8 +62,8 @@ class TestAzureStackHCIEdgeDeviceJobsOperations(AzureMgmtRecordedTestCase):
     def test_edge_device_jobs_begin_delete(self, resource_group):
         response = self.client.edge_device_jobs.begin_delete(
             resource_uri="str",
-            edge_device_name="str",
             jobs_name="str",
+            edge_device_name="str",
         ).result()  # call '.result()' to poll until service return final result
 
         # please add some check logic here by yourself
