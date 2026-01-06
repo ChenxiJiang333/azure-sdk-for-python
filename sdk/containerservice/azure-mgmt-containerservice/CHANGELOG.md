@@ -1,8 +1,45 @@
-# Release History
+## tsp migration
 
-## 41.0.0b4 (2026-01-06)
+### Breaking Changes
 
-change log generation failed!!! You need to write it manually!!!
+- This version introduces new hybrid models which have dual dictionary and model nature. Please follow https://aka.ms/azsdk/python/migrate/hybrid-models for migration.
+- For the method breakings, please refer to https://aka.ms/azsdk/python/migrate/operations for migration.
+- Model `ManagedClusterLoadBalancerProfileManagedOutboundIPs` renamed its instance variable `count_ipv6` to `count_i_pv6`
+
+- Method `ManagedClustersOperations.begin_create_or_update` re-ordered its parameters from `['self', 'resource_group_name', 'resource_name', 'parameters', 'if_match', 'if_none_match', 'kwargs']` to `['self', 'resource_group_name', 'resource_name', 'parameters', 'etag', 'match_condition', 'kwargs']`
+- Method `AgentPoolsOperations.begin_create_or_update` re-ordered its parameters from `['self', 'resource_group_name', 'resource_name', 'agent_pool_name', 'parameters', 'if_match', 'if_none_match', 'kwargs']` to `['self', 'resource_group_name', 'resource_name', 'agent_pool_name', 'parameters', 'etag', 'match_condition', 'kwargs']`
+
+- Model `KubernetesVersionListResult` renamed its instance variable `values` to `values_property`
+- Model `LabelSelectorRequirement` renamed its instance variable `values` to `values_property`
+- Model `AgentPoolAvailableVersions` moved instance variable `agent_pool_versions` under a new container property
+- Model `ManagedClusterAccessProfile` moved its instance variable `kube_config` under a new container property
+- Model `AgentPool` moved instance variables `e_tag`, `count`, `vm_size`, `os_disk_size_gb`, `os_disk_type`, `kubelet_disk_type`, `workload_runtime`, `message_of_the_day`, `vnet_subnet_id`, `pod_subnet_id`, `pod_ip_allocation_mode`, `max_pods`, `os_type`, `os_sku`, `max_count`, `min_count`, `enable_auto_scaling`, `scale_down_mode`, `type_properties_type`, `mode`, `orchestrator_version`, `current_orchestrator_version`, `node_image_version`, `upgrade_strategy`, `upgrade_settings`, `upgrade_settings_blue_green`, `provisioning_state`, `power_state`, `availability_zones`, `enable_node_public_ip`, `node_public_ip_prefix_id`, `scale_set_priority`, `scale_set_eviction_policy`, `spot_max_price`, `tags`, `node_labels`, `node_taints`, `node_initialization_taints`, `proximity_placement_group_id`, `kubelet_config`, `linux_os_config`, `enable_encryption_at_host`, `enable_ultra_ssd`, `enable_fips`, `gpu_instance_profile`, `creation_data`, `capacity_reservation_group_id`, `host_group_id`, `windows_profile`, `network_profile`, `security_profile`, `gpu_profile`, `artifact_streaming_profile`, `virtual_machines_profile`, `virtual_machine_nodes_status`, `gateway_profile`, `status`, `local_dns_profile` and `node_customization_profile` under a new container property
+- Model `AgentPoolUpgradeProfile` moved instance variables `kubernetes_version`, `os_type`, `upgrades`, `components_by_releases`, `recently_used_versions` and `latest_node_image_version` under a new container property
+- Model `LoadBalancer` moved instance variables `primary_agent_pool_name`, `allow_service_placement`, `service_label_selector`, `service_namespace_selector`, `node_selector` and `provisioning_state` under a new container property
+- Model `MaintenanceConfiguration` moved instance variables `time_in_week`, `not_allowed_time` and `maintenance_window` under a new container property
+- Model `ManagedCluster` moved instance variables `provisioning_state`, `power_state`, `creation_data`, `max_agent_pools`, `kubernetes_version`, `current_kubernetes_version`, `dns_prefix`, `fqdn_subdomain`, `fqdn`, `private_fqdn`, `azure_portal_fqdn`, `agent_pool_profiles`, `linux_profile`, `windows_profile`, `service_principal_profile`, `addon_profiles`, `pod_identity_profile`, `oidc_issuer_profile`, `node_resource_group`, `node_resource_group_profile`, `enable_rbac`, `support_plan`, `enable_namespace_resources`, `network_profile`, `aad_profile`, `auto_upgrade_profile`, `upgrade_settings`, `auto_scaler_profile`, `api_server_access_profile`, `disk_encryption_set_id`, `identity_profile`, `private_link_resources`, `disable_local_accounts`, `http_proxy_config`, `security_profile`, `storage_profile`, `ingress_profile`, `public_network_access`, `workload_auto_scaler_profile`, `azure_monitor_profile`, `service_mesh_profile`, `resource_uid`, `metrics_profile`, `ai_toolchain_operator_profile`, `node_provisioning_profile`, `bootstrap_profile`, `scheduler_profile`, `hosted_system_profile` and `status` under a new container property
+- Model `ManagedClusterSnapshot` moved instance variables `creation_data`, `snapshot_type` and `managed_cluster_properties_read_only` under a new container property
+- Model `ManagedClusterUpgradeProfile` moved instance variables `control_plane_profile` and `agent_pool_profiles` under a new container property
+- Model `OperationValue` moved instance variables `operation`, `resource`, `description` and `provider` under a new container property
+- Model `PrivateEndpointConnection` moved instance variables `provisioning_state`, `private_endpoint` and `private_link_service_connection_state` under a new container property
+- Model `RunCommandResult` moved instance variables `provisioning_state`, `exit_code`, `started_at`, `finished_at`, `logs` and `reason` under a new container property
+- Model `Snapshot` moved instance variables `creation_data`, `snapshot_type`, `kubernetes_version`, `node_image_version`, `os_type`, `os_sku`, `vm_size` and `enable_fips` under a new container property
+- Model `TrustedAccessRoleBinding` moved instance variables `provisioning_state`, `source_resource_id` and `roles` under a new container property
+- Method `AgentPoolsOperations.begin_create_or_update` replaced positional_or_keyword parameters `if_match`/`if_none_match` with keyword_only parameters `etag`/`match_condition`
+- Method `AgentPoolsOperations.begin_delete` replaced `positional_or_keyword` parameter `if_match` with keyword_only parameters `etag`/`match_condition`
+- Method `MachinesOperations.begin_create_or_update` replaced positional_or_keyword parameters `if_match`/`if_none_match` with keyword_only parameters `etag`/`match_condition`
+- Method `ManagedClustersOperations.begin_create_or_update` replaced positional_or_keyword parameters `if_match`/`if_none_match` with keyword_only parameters `etag`/`match_condition`
+- Method `ManagedClustersOperations.begin_delete` replaced `positional_or_keyword` parameter `if_match` with keyword_only parameters `etag`/`match_condition`
+- Method `ManagedClustersOperations.begin_update_tags` replaced `positional_or_keyword` parameter `if_match` with keyword_only parameters `etag`/`match_condition`
+- Method `AgentPoolsOperations.begin_delete` changed its parameter `ignore_pod_disruption_budget` from `positional_or_keyword` to `keyword_only`
+- Method `ManagedClustersOperations.begin_delete` changed its parameter `ignore_pod_disruption_budget` from `positional_or_keyword` to `keyword_only`
+- Method `ManagedClustersOperations.list_cluster_admin_credentials` changed its parameter `server_fqdn` from `positional_or_keyword` to `keyword_only`
+- Method `ManagedClustersOperations.list_cluster_monitoring_user_credentials` changed its parameter `server_fqdn` from `positional_or_keyword` to `keyword_only`
+- Method `ManagedClustersOperations.list_cluster_user_credentials` changed its parameters `server_fqdn`/`format` from `positional_or_keyword` to `keyword_only`
+
+### Other Changes
+
+- Deleted models `GuardrailsAvailableVersionsList`/`MeshRevisionProfileList`/`MeshUpgradeProfileList`/`OperationStatusResultList`/`OutboundEnvironmentEndpointCollection`/`SafeguardsAvailableVersionsList`/`SubResource` which actually were not used by SDK users
 
 ## 41.0.0b3 (2025-12-22)
 
