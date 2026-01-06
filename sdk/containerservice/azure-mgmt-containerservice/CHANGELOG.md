@@ -1,14 +1,6 @@
 ## tsp migration
 
-## 41.0.0b4 (2026-01-06)
-
-change log generation failed!!! You need to write it manually!!!
-
 ### Breaking Changes
-
-- This version introduces new hybrid models which have dual dictionary and model nature. Please follow https://aka.ms/azsdk/python/migrate/hybrid-models for migration.
-- For the method breakings, please refer to https://aka.ms/azsdk/python/migrate/operations for migration.
-- Model `ManagedClusterLoadBalancerProfileManagedOutboundIPs` renamed its instance variable `count_ipv6` to `count_i_pv6`
 
 - Method `ManagedClustersOperations.begin_create_or_update` re-ordered its parameters from `['self', 'resource_group_name', 'resource_name', 'parameters', 'if_match', 'if_none_match', 'kwargs']` to `['self', 'resource_group_name', 'resource_name', 'parameters', 'etag', 'match_condition', 'kwargs']`
 - Method `AgentPoolsOperations.begin_create_or_update` re-ordered its parameters from `['self', 'resource_group_name', 'resource_name', 'agent_pool_name', 'parameters', 'if_match', 'if_none_match', 'kwargs']` to `['self', 'resource_group_name', 'resource_name', 'agent_pool_name', 'parameters', 'etag', 'match_condition', 'kwargs']`
