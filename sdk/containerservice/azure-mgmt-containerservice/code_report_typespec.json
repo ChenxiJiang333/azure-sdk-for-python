@@ -35746,7 +35746,7 @@
                     "default": null,
                     "param_type": "keyword_only"
                   },
-                  "count_i_pv6": {
+                  "count_ipv6": {
                     "type": "Optional[int]",
                     "default": null,
                     "param_type": "keyword_only"
@@ -35922,7 +35922,7 @@
         },
         "properties": {
           "count": "Optional",
-          "count_i_pv6": "Optional"
+          "count_ipv6": "Optional"
         }
       },
       "ManagedClusterLoadBalancerProfileOutboundIPPrefixes": {

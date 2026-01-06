@@ -1,5 +1,9 @@
 ## tsp migration
 
+## 41.0.0b4 (2026-01-06)
+
+change log generation failed!!! You need to write it manually!!!
+
 ### Breaking Changes
 
 - This version introduces new hybrid models which have dual dictionary and model nature. Please follow https://aka.ms/azsdk/python/migrate/hybrid-models for migration.

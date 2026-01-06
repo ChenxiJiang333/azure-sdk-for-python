@@ -7375,18 +7375,16 @@ class ManagedClusterLoadBalancerProfileManagedOutboundIPs(_Model):  # pylint: di
      load balancer. Allowed values must be in the range of 1 to 100 (inclusive). The default value
      is 1.
     :vartype count: int
-    :ivar count_i_pv6: The desired number of IPv6 outbound IPs created/managed by Azure for the
+    :ivar count_ipv6: The desired number of IPv6 outbound IPs created/managed by Azure for the
      cluster load balancer. Allowed values must be in the range of 1 to 100 (inclusive). The default
      value is 0 for single-stack and 1 for dual-stack.
-    :vartype count_i_pv6: int
+    :vartype count_ipv6: int
     """
 
     count: Optional[int] = rest_field(visibility=["read", "create", "update", "delete", "query"])
     """The desired number of IPv4 outbound IPs created/managed by Azure for the cluster load balancer.
      Allowed values must be in the range of 1 to 100 (inclusive). The default value is 1."""
-    count_i_pv6: Optional[int] = rest_field(
-        name="countIPv6", visibility=["read", "create", "update", "delete", "query"]
-    )
+    count_ipv6: Optional[int] = rest_field(name="countIPv6", visibility=["read", "create", "update", "delete", "query"])
     """The desired number of IPv6 outbound IPs created/managed by Azure for the cluster load balancer.
      Allowed values must be in the range of 1 to 100 (inclusive). The default value is 0 for
      single-stack and 1 for dual-stack."""
@@ -7396,7 +7394,7 @@ class ManagedClusterLoadBalancerProfileManagedOutboundIPs(_Model):  # pylint: di
         self,
         *,
         count: Optional[int] = None,
-        count_i_pv6: Optional[int] = None,
+        count_ipv6: Optional[int] = None,
     ) -> None: ...
 
     @overload
