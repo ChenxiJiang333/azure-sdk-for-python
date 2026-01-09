@@ -2,6 +2,10 @@
 
 ## 1.1.0b2 (2026-01-09)
 
+change log generation failed!!! You need to write it manually!!!
+
+## 1.1.0b2 (2026-01-09)
+
 ### Features Added
 
   - Added operation group FeaturesOperations
