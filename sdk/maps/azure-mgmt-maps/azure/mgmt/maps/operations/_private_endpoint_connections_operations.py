@@ -8,7 +8,7 @@
 # --------------------------------------------------------------------------
 from collections.abc import MutableMapping
 from io import IOBase
-from typing import Any, Callable, IO, Optional, TypeVar, Union, overload
+from typing import Any, Callable, IO, Iterator, Optional, TypeVar, Union, cast, overload
 import urllib.parse
 
 from azure.core import PipelineClient
@@ -18,14 +18,18 @@ from azure.core.exceptions import (
     ResourceExistsError,
     ResourceNotFoundError,
     ResourceNotModifiedError,
+    StreamClosedError,
+    StreamConsumedError,
     map_error,
 )
 from azure.core.paging import ItemPaged
 from azure.core.pipeline import PipelineResponse
+from azure.core.polling import LROPoller, NoPolling, PollingMethod
 from azure.core.rest import HttpRequest, HttpResponse
 from azure.core.tracing.decorator import distributed_trace
 from azure.core.utils import case_insensitive_dict
 from azure.mgmt.core.exceptions import ARMErrorFormat
+from azure.mgmt.core.polling.arm_polling import ARMPolling
 
 from .. import models as _models
 from .._configuration import AzureMapsManagementClientConfiguration
@@ -50,7 +54,7 @@ def build_list_by_account_request(
     # Construct URL
     _url = kwargs.pop(
         "template_url",
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Maps/accounts/{accountName}/creators",
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Maps/accounts/{accountName}/privateEndpointConnections",
     )
     path_format_arguments = {
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
@@ -72,7 +76,11 @@ def build_list_by_account_request(
 
 
 def build_get_request(
-    resource_group_name: str, account_name: str, creator_name: str, subscription_id: str, **kwargs: Any
+    resource_group_name: str,
+    account_name: str,
+    private_endpoint_connection_name: str,
+    subscription_id: str,
+    **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
@@ -83,7 +91,7 @@ def build_get_request(
     # Construct URL
     _url = kwargs.pop(
         "template_url",
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Maps/accounts/{accountName}/creators/{creatorName}",
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Maps/accounts/{accountName}/privateEndpointConnections/{privateEndpointConnectionName}",
     )
     path_format_arguments = {
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
@@ -91,7 +99,9 @@ def build_get_request(
             "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
         "accountName": _SERIALIZER.url("account_name", account_name, "str", min_length=1, pattern=r"^[^%&:\\/#?]+$"),
-        "creatorName": _SERIALIZER.url("creator_name", creator_name, "str", min_length=1, pattern=r"^[^%&:\\/#?]+$"),
+        "privateEndpointConnectionName": _SERIALIZER.url(
+            "private_endpoint_connection_name", private_endpoint_connection_name, "str"
+        ),
     }
 
     _url: str = _url.format(**path_format_arguments)  # type: ignore
@@ -105,8 +115,12 @@ def build_get_request(
     return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_create_or_update_request(
-    resource_group_name: str, account_name: str, creator_name: str, subscription_id: str, **kwargs: Any
+def build_create_request(
+    resource_group_name: str,
+    account_name: str,
+    private_endpoint_connection_name: str,
+    subscription_id: str,
+    **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
@@ -118,7 +132,7 @@ def build_create_or_update_request(
     # Construct URL
     _url = kwargs.pop(
         "template_url",
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Maps/accounts/{accountName}/creators/{creatorName}",
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Maps/accounts/{accountName}/privateEndpointConnections/{privateEndpointConnectionName}",
     )
     path_format_arguments = {
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
@@ -126,7 +140,9 @@ def build_create_or_update_request(
             "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
         "accountName": _SERIALIZER.url("account_name", account_name, "str", min_length=1, pattern=r"^[^%&:\\/#?]+$"),
-        "creatorName": _SERIALIZER.url("creator_name", creator_name, "str", min_length=1, pattern=r"^[^%&:\\/#?]+$"),
+        "privateEndpointConnectionName": _SERIALIZER.url(
+            "private_endpoint_connection_name", private_endpoint_connection_name, "str"
+        ),
     }
 
     _url: str = _url.format(**path_format_arguments)  # type: ignore
@@ -142,45 +158,12 @@ def build_create_or_update_request(
     return HttpRequest(method="PUT", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_update_request(
-    resource_group_name: str, account_name: str, creator_name: str, subscription_id: str, **kwargs: Any
-) -> HttpRequest:
-    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-10-01-preview"))
-    content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
-    accept = _headers.pop("Accept", "application/json")
-
-    # Construct URL
-    _url = kwargs.pop(
-        "template_url",
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Maps/accounts/{accountName}/creators/{creatorName}",
-    )
-    path_format_arguments = {
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
-        "resourceGroupName": _SERIALIZER.url(
-            "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
-        ),
-        "accountName": _SERIALIZER.url("account_name", account_name, "str", min_length=1, pattern=r"^[^%&:\\/#?]+$"),
-        "creatorName": _SERIALIZER.url("creator_name", creator_name, "str", min_length=1, pattern=r"^[^%&:\\/#?]+$"),
-    }
-
-    _url: str = _url.format(**path_format_arguments)  # type: ignore
-
-    # Construct parameters
-    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
-
-    # Construct headers
-    if content_type is not None:
-        _headers["Content-Type"] = _SERIALIZER.header("content_type", content_type, "str")
-    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
-
-    return HttpRequest(method="PATCH", url=_url, params=_params, headers=_headers, **kwargs)
-
-
 def build_delete_request(
-    resource_group_name: str, account_name: str, creator_name: str, subscription_id: str, **kwargs: Any
+    resource_group_name: str,
+    account_name: str,
+    private_endpoint_connection_name: str,
+    subscription_id: str,
+    **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
@@ -191,7 +174,7 @@ def build_delete_request(
     # Construct URL
     _url = kwargs.pop(
         "template_url",
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Maps/accounts/{accountName}/creators/{creatorName}",
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Maps/accounts/{accountName}/privateEndpointConnections/{privateEndpointConnectionName}",
     )
     path_format_arguments = {
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
@@ -199,7 +182,9 @@ def build_delete_request(
             "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
         "accountName": _SERIALIZER.url("account_name", account_name, "str", min_length=1, pattern=r"^[^%&:\\/#?]+$"),
-        "creatorName": _SERIALIZER.url("creator_name", creator_name, "str", min_length=1, pattern=r"^[^%&:\\/#?]+$"),
+        "privateEndpointConnectionName": _SERIALIZER.url(
+            "private_endpoint_connection_name", private_endpoint_connection_name, "str"
+        ),
     }
 
     _url: str = _url.format(**path_format_arguments)  # type: ignore
@@ -213,14 +198,14 @@ def build_delete_request(
     return HttpRequest(method="DELETE", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-class CreatorsOperations:
+class PrivateEndpointConnectionsOperations:
     """
     .. warning::
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
         :class:`~azure.mgmt.maps.AzureMapsManagementClient`'s
-        :attr:`creators` attribute.
+        :attr:`private_endpoint_connections` attribute.
     """
 
     models = _models
@@ -235,23 +220,24 @@ class CreatorsOperations:
     @distributed_trace
     def list_by_account(
         self, resource_group_name: str, account_name: str, **kwargs: Any
-    ) -> ItemPaged["_models.Creator"]:
-        """Get all Creator instances for an Azure Maps Account.
+    ) -> ItemPaged["_models.PrivateEndpointConnection"]:
+        """Get a private endpoint connections on the Maps Account.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
         :param account_name: The name of the Maps Account. Required.
         :type account_name: str
-        :return: An iterator like instance of either Creator or the result of cls(response)
-        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.maps.models.Creator]
+        :return: An iterator like instance of either PrivateEndpointConnection or the result of
+         cls(response)
+        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.maps.models.PrivateEndpointConnection]
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         _headers = kwargs.pop("headers", {}) or {}
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
         api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
-        cls: ClsType[_models.CreatorList] = kwargs.pop("cls", None)
+        cls: ClsType[_models.PrivateEndpointConnectionList] = kwargs.pop("cls", None)
 
         error_map: MutableMapping = {
             401: ClientAuthenticationError,
@@ -292,7 +278,7 @@ class CreatorsOperations:
             return _request
 
         def extract_data(pipeline_response):
-            deserialized = self._deserialize("CreatorList", pipeline_response)
+            deserialized = self._deserialize("PrivateEndpointConnectionList", pipeline_response)
             list_of_elem = deserialized.value
             if cls:
                 list_of_elem = cls(list_of_elem)  # type: ignore
@@ -320,18 +306,21 @@ class CreatorsOperations:
         return ItemPaged(get_next, extract_data)
 
     @distributed_trace
-    def get(self, resource_group_name: str, account_name: str, creator_name: str, **kwargs: Any) -> _models.Creator:
-        """Get a Maps Creator resource.
+    def get(
+        self, resource_group_name: str, account_name: str, private_endpoint_connection_name: str, **kwargs: Any
+    ) -> _models.PrivateEndpointConnection:
+        """Gets the specified private endpoint connection associated with the Maps Account.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
         :param account_name: The name of the Maps Account. Required.
         :type account_name: str
-        :param creator_name: The name of the Maps Creator instance. Required.
-        :type creator_name: str
-        :return: Creator or the result of cls(response)
-        :rtype: ~azure.mgmt.maps.models.Creator
+        :param private_endpoint_connection_name: The name of the private endpoint connection associated
+         with the Azure resource. Required.
+        :type private_endpoint_connection_name: str
+        :return: PrivateEndpointConnection or the result of cls(response)
+        :rtype: ~azure.mgmt.maps.models.PrivateEndpointConnection
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         error_map: MutableMapping = {
@@ -346,12 +335,12 @@ class CreatorsOperations:
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
         api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
-        cls: ClsType[_models.Creator] = kwargs.pop("cls", None)
+        cls: ClsType[_models.PrivateEndpointConnection] = kwargs.pop("cls", None)
 
         _request = build_get_request(
             resource_group_name=resource_group_name,
             account_name=account_name,
-            creator_name=creator_name,
+            private_endpoint_connection_name=private_endpoint_connection_name,
             subscription_id=self._config.subscription_id,
             api_version=api_version,
             headers=_headers,
@@ -374,104 +363,21 @@ class CreatorsOperations:
             )
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
-        deserialized = self._deserialize("Creator", pipeline_response.http_response)
+        deserialized = self._deserialize("PrivateEndpointConnection", pipeline_response.http_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})  # type: ignore
 
         return deserialized  # type: ignore
 
-    @overload
-    def create_or_update(
+    def _create_initial(
         self,
         resource_group_name: str,
         account_name: str,
-        creator_name: str,
-        creator_resource: _models.Creator,
-        *,
-        content_type: str = "application/json",
+        private_endpoint_connection_name: str,
+        properties: Union[_models.PrivateEndpointConnection, IO[bytes]],
         **kwargs: Any
-    ) -> _models.Creator:
-        """Create or update a Maps Creator resource. Creator resource will manage Azure resources required
-        to populate a custom set of mapping data. It requires an account to exist before it can be
-        created.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param account_name: The name of the Maps Account. Required.
-        :type account_name: str
-        :param creator_name: The name of the Maps Creator instance. Required.
-        :type creator_name: str
-        :param creator_resource: The new or updated parameters for the Creator resource. Required.
-        :type creator_resource: ~azure.mgmt.maps.models.Creator
-        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
-         Default value is "application/json".
-        :paramtype content_type: str
-        :return: Creator or the result of cls(response)
-        :rtype: ~azure.mgmt.maps.models.Creator
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-
-    @overload
-    def create_or_update(
-        self,
-        resource_group_name: str,
-        account_name: str,
-        creator_name: str,
-        creator_resource: IO[bytes],
-        *,
-        content_type: str = "application/json",
-        **kwargs: Any
-    ) -> _models.Creator:
-        """Create or update a Maps Creator resource. Creator resource will manage Azure resources required
-        to populate a custom set of mapping data. It requires an account to exist before it can be
-        created.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param account_name: The name of the Maps Account. Required.
-        :type account_name: str
-        :param creator_name: The name of the Maps Creator instance. Required.
-        :type creator_name: str
-        :param creator_resource: The new or updated parameters for the Creator resource. Required.
-        :type creator_resource: IO[bytes]
-        :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
-         Default value is "application/json".
-        :paramtype content_type: str
-        :return: Creator or the result of cls(response)
-        :rtype: ~azure.mgmt.maps.models.Creator
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-
-    @distributed_trace
-    def create_or_update(
-        self,
-        resource_group_name: str,
-        account_name: str,
-        creator_name: str,
-        creator_resource: Union[_models.Creator, IO[bytes]],
-        **kwargs: Any
-    ) -> _models.Creator:
-        """Create or update a Maps Creator resource. Creator resource will manage Azure resources required
-        to populate a custom set of mapping data. It requires an account to exist before it can be
-        created.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param account_name: The name of the Maps Account. Required.
-        :type account_name: str
-        :param creator_name: The name of the Maps Creator instance. Required.
-        :type creator_name: str
-        :param creator_resource: The new or updated parameters for the Creator resource. Is either a
-         Creator type or a IO[bytes] type. Required.
-        :type creator_resource: ~azure.mgmt.maps.models.Creator or IO[bytes]
-        :return: Creator or the result of cls(response)
-        :rtype: ~azure.mgmt.maps.models.Creator
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
+    ) -> Iterator[bytes]:
         error_map: MutableMapping = {
             401: ClientAuthenticationError,
             404: ResourceNotFoundError,
@@ -485,20 +391,20 @@ class CreatorsOperations:
 
         api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
-        cls: ClsType[_models.Creator] = kwargs.pop("cls", None)
+        cls: ClsType[Iterator[bytes]] = kwargs.pop("cls", None)
 
         content_type = content_type or "application/json"
         _json = None
         _content = None
-        if isinstance(creator_resource, (IOBase, bytes)):
-            _content = creator_resource
+        if isinstance(properties, (IOBase, bytes)):
+            _content = properties
         else:
-            _json = self._serialize.body(creator_resource, "Creator")
+            _json = self._serialize.body(properties, "PrivateEndpointConnection")
 
-        _request = build_create_or_update_request(
+        _request = build_create_request(
             resource_group_name=resource_group_name,
             account_name=account_name,
-            creator_name=creator_name,
+            private_endpoint_connection_name=private_endpoint_connection_name,
             subscription_id=self._config.subscription_id,
             api_version=api_version,
             content_type=content_type,
@@ -509,7 +415,8 @@ class CreatorsOperations:
         )
         _request.url = self._client.format_url(_request.url)
 
-        _stream = False
+        _decompress = kwargs.pop("decompress", True)
+        _stream = True
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
             _request, stream=_stream, **kwargs
         )
@@ -517,6 +424,10 @@ class CreatorsOperations:
         response = pipeline_response.http_response
 
         if response.status_code not in [200, 201]:
+            try:
+                response.read()  # Load the body in memory and close the socket
+            except (StreamConsumedError, StreamClosedError):
+                pass
             map_error(status_code=response.status_code, response=response, error_map=error_map)
             error = self._deserialize.failsafe_deserialize(
                 _models.ErrorResponse,
@@ -524,177 +435,167 @@ class CreatorsOperations:
             )
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
-        deserialized = self._deserialize("Creator", pipeline_response.http_response)
+        response_headers = {}
+        if response.status_code == 201:
+            response_headers["Azure-AsyncOperation"] = self._deserialize(
+                "str", response.headers.get("Azure-AsyncOperation")
+            )
+            response_headers["Retry-After"] = self._deserialize("int", response.headers.get("Retry-After"))
+
+        deserialized = response.stream_download(self._client._pipeline, decompress=_decompress)
 
         if cls:
-            return cls(pipeline_response, deserialized, {})  # type: ignore
+            return cls(pipeline_response, deserialized, response_headers)  # type: ignore
 
         return deserialized  # type: ignore
 
     @overload
-    def update(
+    def begin_create(
         self,
         resource_group_name: str,
         account_name: str,
-        creator_name: str,
-        creator_update_parameters: _models.CreatorUpdateParameters,
+        private_endpoint_connection_name: str,
+        properties: _models.PrivateEndpointConnection,
         *,
         content_type: str = "application/json",
         **kwargs: Any
-    ) -> _models.Creator:
-        """Updates the Maps Creator resource. Only a subset of the parameters may be updated after
-        creation, such as Tags.
+    ) -> LROPoller[_models.PrivateEndpointConnection]:
+        """Create or update the state of specified private endpoint connection associated with the Maps
+        account.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
         :param account_name: The name of the Maps Account. Required.
         :type account_name: str
-        :param creator_name: The name of the Maps Creator instance. Required.
-        :type creator_name: str
-        :param creator_update_parameters: The update parameters for Maps Creator. Required.
-        :type creator_update_parameters: ~azure.mgmt.maps.models.CreatorUpdateParameters
+        :param private_endpoint_connection_name: The name of the private endpoint connection associated
+         with the Azure resource. Required.
+        :type private_endpoint_connection_name: str
+        :param properties: The private endpoint connection properties. Required.
+        :type properties: ~azure.mgmt.maps.models.PrivateEndpointConnection
         :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
          Default value is "application/json".
         :paramtype content_type: str
-        :return: Creator or the result of cls(response)
-        :rtype: ~azure.mgmt.maps.models.Creator
+        :return: An instance of LROPoller that returns either PrivateEndpointConnection or the result
+         of cls(response)
+        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.maps.models.PrivateEndpointConnection]
         :raises ~azure.core.exceptions.HttpResponseError:
         """
 
     @overload
-    def update(
+    def begin_create(
         self,
         resource_group_name: str,
         account_name: str,
-        creator_name: str,
-        creator_update_parameters: IO[bytes],
+        private_endpoint_connection_name: str,
+        properties: IO[bytes],
         *,
         content_type: str = "application/json",
         **kwargs: Any
-    ) -> _models.Creator:
-        """Updates the Maps Creator resource. Only a subset of the parameters may be updated after
-        creation, such as Tags.
+    ) -> LROPoller[_models.PrivateEndpointConnection]:
+        """Create or update the state of specified private endpoint connection associated with the Maps
+        account.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
         :param account_name: The name of the Maps Account. Required.
         :type account_name: str
-        :param creator_name: The name of the Maps Creator instance. Required.
-        :type creator_name: str
-        :param creator_update_parameters: The update parameters for Maps Creator. Required.
-        :type creator_update_parameters: IO[bytes]
+        :param private_endpoint_connection_name: The name of the private endpoint connection associated
+         with the Azure resource. Required.
+        :type private_endpoint_connection_name: str
+        :param properties: The private endpoint connection properties. Required.
+        :type properties: IO[bytes]
         :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
          Default value is "application/json".
         :paramtype content_type: str
-        :return: Creator or the result of cls(response)
-        :rtype: ~azure.mgmt.maps.models.Creator
+        :return: An instance of LROPoller that returns either PrivateEndpointConnection or the result
+         of cls(response)
+        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.maps.models.PrivateEndpointConnection]
         :raises ~azure.core.exceptions.HttpResponseError:
         """
 
     @distributed_trace
-    def update(
+    def begin_create(
         self,
         resource_group_name: str,
         account_name: str,
-        creator_name: str,
-        creator_update_parameters: Union[_models.CreatorUpdateParameters, IO[bytes]],
+        private_endpoint_connection_name: str,
+        properties: Union[_models.PrivateEndpointConnection, IO[bytes]],
         **kwargs: Any
-    ) -> _models.Creator:
-        """Updates the Maps Creator resource. Only a subset of the parameters may be updated after
-        creation, such as Tags.
+    ) -> LROPoller[_models.PrivateEndpointConnection]:
+        """Create or update the state of specified private endpoint connection associated with the Maps
+        account.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
         :param account_name: The name of the Maps Account. Required.
         :type account_name: str
-        :param creator_name: The name of the Maps Creator instance. Required.
-        :type creator_name: str
-        :param creator_update_parameters: The update parameters for Maps Creator. Is either a
-         CreatorUpdateParameters type or a IO[bytes] type. Required.
-        :type creator_update_parameters: ~azure.mgmt.maps.models.CreatorUpdateParameters or IO[bytes]
-        :return: Creator or the result of cls(response)
-        :rtype: ~azure.mgmt.maps.models.Creator
+        :param private_endpoint_connection_name: The name of the private endpoint connection associated
+         with the Azure resource. Required.
+        :type private_endpoint_connection_name: str
+        :param properties: The private endpoint connection properties. Is either a
+         PrivateEndpointConnection type or a IO[bytes] type. Required.
+        :type properties: ~azure.mgmt.maps.models.PrivateEndpointConnection or IO[bytes]
+        :return: An instance of LROPoller that returns either PrivateEndpointConnection or the result
+         of cls(response)
+        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.maps.models.PrivateEndpointConnection]
         :raises ~azure.core.exceptions.HttpResponseError:
         """
-        error_map: MutableMapping = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
         api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
-        cls: ClsType[_models.Creator] = kwargs.pop("cls", None)
-
-        content_type = content_type or "application/json"
-        _json = None
-        _content = None
-        if isinstance(creator_update_parameters, (IOBase, bytes)):
-            _content = creator_update_parameters
-        else:
-            _json = self._serialize.body(creator_update_parameters, "CreatorUpdateParameters")
-
-        _request = build_update_request(
-            resource_group_name=resource_group_name,
-            account_name=account_name,
-            creator_name=creator_name,
-            subscription_id=self._config.subscription_id,
-            api_version=api_version,
-            content_type=content_type,
-            json=_json,
-            content=_content,
-            headers=_headers,
-            params=_params,
-        )
-        _request.url = self._client.format_url(_request.url)
-
-        _stream = False
-        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            _request, stream=_stream, **kwargs
-        )
-
-        response = pipeline_response.http_response
-
-        if response.status_code not in [200]:
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = self._deserialize.failsafe_deserialize(
-                _models.ErrorResponse,
-                pipeline_response,
+        cls: ClsType[_models.PrivateEndpointConnection] = kwargs.pop("cls", None)
+        polling: Union[bool, PollingMethod] = kwargs.pop("polling", True)
+        lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
+        cont_token: Optional[str] = kwargs.pop("continuation_token", None)
+        if cont_token is None:
+            raw_result = self._create_initial(
+                resource_group_name=resource_group_name,
+                account_name=account_name,
+                private_endpoint_connection_name=private_endpoint_connection_name,
+                properties=properties,
+                api_version=api_version,
+                content_type=content_type,
+                cls=lambda x, y, z: x,
+                headers=_headers,
+                params=_params,
+                **kwargs
             )
-            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
+            raw_result.http_response.read()  # type: ignore
+        kwargs.pop("error_map", None)
 
-        deserialized = self._deserialize("Creator", pipeline_response.http_response)
+        def get_long_running_output(pipeline_response):
+            deserialized = self._deserialize("PrivateEndpointConnection", pipeline_response.http_response)
+            if cls:
+                return cls(pipeline_response, deserialized, {})  # type: ignore
+            return deserialized
 
-        if cls:
-            return cls(pipeline_response, deserialized, {})  # type: ignore
+        if polling is True:
+            polling_method: PollingMethod = cast(
+                PollingMethod, ARMPolling(lro_delay, lro_options={"final-state-via": "azure-async-operation"}, **kwargs)
+            )
+        elif polling is False:
+            polling_method = cast(PollingMethod, NoPolling())
+        else:
+            polling_method = polling
+        if cont_token:
+            return LROPoller[_models.PrivateEndpointConnection].from_continuation_token(
+                polling_method=polling_method,
+                continuation_token=cont_token,
+                client=self._client,
+                deserialization_callback=get_long_running_output,
+            )
+        return LROPoller[_models.PrivateEndpointConnection](
+            self._client, raw_result, get_long_running_output, polling_method  # type: ignore
+        )
 
-        return deserialized  # type: ignore
-
-    @distributed_trace
-    def delete(  # pylint: disable=inconsistent-return-statements
-        self, resource_group_name: str, account_name: str, creator_name: str, **kwargs: Any
-    ) -> None:
-        """Delete a Maps Creator resource.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param account_name: The name of the Maps Account. Required.
-        :type account_name: str
-        :param creator_name: The name of the Maps Creator instance. Required.
-        :type creator_name: str
-        :return: None or the result of cls(response)
-        :rtype: None
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
+    def _delete_initial(
+        self, resource_group_name: str, account_name: str, private_endpoint_connection_name: str, **kwargs: Any
+    ) -> Iterator[bytes]:
         error_map: MutableMapping = {
             401: ClientAuthenticationError,
             404: ResourceNotFoundError,
@@ -707,12 +608,12 @@ class CreatorsOperations:
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
         api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
-        cls: ClsType[None] = kwargs.pop("cls", None)
+        cls: ClsType[Iterator[bytes]] = kwargs.pop("cls", None)
 
         _request = build_delete_request(
             resource_group_name=resource_group_name,
             account_name=account_name,
-            creator_name=creator_name,
+            private_endpoint_connection_name=private_endpoint_connection_name,
             subscription_id=self._config.subscription_id,
             api_version=api_version,
             headers=_headers,
@@ -720,14 +621,19 @@ class CreatorsOperations:
         )
         _request.url = self._client.format_url(_request.url)
 
-        _stream = False
+        _decompress = kwargs.pop("decompress", True)
+        _stream = True
         pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
             _request, stream=_stream, **kwargs
         )
 
         response = pipeline_response.http_response
 
-        if response.status_code not in [200, 204]:
+        if response.status_code not in [202, 204]:
+            try:
+                response.read()  # Load the body in memory and close the socket
+            except (StreamConsumedError, StreamClosedError):
+                pass
             map_error(status_code=response.status_code, response=response, error_map=error_map)
             error = self._deserialize.failsafe_deserialize(
                 _models.ErrorResponse,
@@ -735,5 +641,78 @@ class CreatorsOperations:
             )
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
+        response_headers = {}
+        if response.status_code == 202:
+            response_headers["Azure-AsyncOperation"] = self._deserialize(
+                "str", response.headers.get("Azure-AsyncOperation")
+            )
+            response_headers["Location"] = self._deserialize("str", response.headers.get("Location"))
+            response_headers["Retry-After"] = self._deserialize("int", response.headers.get("Retry-After"))
+
+        deserialized = response.stream_download(self._client._pipeline, decompress=_decompress)
+
         if cls:
-            return cls(pipeline_response, None, {})  # type: ignore
+            return cls(pipeline_response, deserialized, response_headers)  # type: ignore
+
+        return deserialized  # type: ignore
+
+    @distributed_trace
+    def begin_delete(
+        self, resource_group_name: str, account_name: str, private_endpoint_connection_name: str, **kwargs: Any
+    ) -> LROPoller[None]:
+        """Deletes the specified private endpoint connection associated with the Maps Account.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param account_name: The name of the Maps Account. Required.
+        :type account_name: str
+        :param private_endpoint_connection_name: The name of the private endpoint connection associated
+         with the Azure resource. Required.
+        :type private_endpoint_connection_name: str
+        :return: An instance of LROPoller that returns either None or the result of cls(response)
+        :rtype: ~azure.core.polling.LROPoller[None]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
+        cls: ClsType[None] = kwargs.pop("cls", None)
+        polling: Union[bool, PollingMethod] = kwargs.pop("polling", True)
+        lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
+        cont_token: Optional[str] = kwargs.pop("continuation_token", None)
+        if cont_token is None:
+            raw_result = self._delete_initial(
+                resource_group_name=resource_group_name,
+                account_name=account_name,
+                private_endpoint_connection_name=private_endpoint_connection_name,
+                api_version=api_version,
+                cls=lambda x, y, z: x,
+                headers=_headers,
+                params=_params,
+                **kwargs
+            )
+            raw_result.http_response.read()  # type: ignore
+        kwargs.pop("error_map", None)
+
+        def get_long_running_output(pipeline_response):  # pylint: disable=inconsistent-return-statements
+            if cls:
+                return cls(pipeline_response, None, {})  # type: ignore
+
+        if polling is True:
+            polling_method: PollingMethod = cast(
+                PollingMethod, ARMPolling(lro_delay, lro_options={"final-state-via": "location"}, **kwargs)
+            )
+        elif polling is False:
+            polling_method = cast(PollingMethod, NoPolling())
+        else:
+            polling_method = polling
+        if cont_token:
+            return LROPoller[None].from_continuation_token(
+                polling_method=polling_method,
+                continuation_token=cont_token,
+                client=self._client,
+                deserialization_callback=get_long_running_output,
+            )
+        return LROPoller[None](self._client, raw_result, get_long_running_output, polling_method)  # type: ignore
