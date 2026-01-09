@@ -166,7 +166,7 @@
                 "param_type": "keyword_only"
               },
               "aggregation_granularity": {
-                "default": "str",
+                "default": "none",
                 "param_type": "keyword_only"
               },
               "continuation_token_parameter": {
@@ -200,7 +200,7 @@
                 "param_type": "keyword_only"
               },
               "aggregation_granularity": {
-                "default": "str",
+                "default": "none",
                 "param_type": "keyword_only"
               },
               "continuation_token_parameter": {
@@ -1674,7 +1674,7 @@
           "effective_date": "Optional"
         }
       },
-      "OfferTermInfoEnum": {
+      "OfferTermInfoName": {
         "type": "Enum",
         "methods": {},
         "properties": {
@@ -2872,7 +2872,7 @@
                 "param_type": "keyword_only"
               },
               "aggregation_granularity": {
-                "default": "str",
+                "default": "none",
                 "param_type": "keyword_only"
               },
               "continuation_token_parameter": {
@@ -2906,7 +2906,7 @@
                 "param_type": "keyword_only"
               },
               "aggregation_granularity": {
-                "default": "str",
+                "default": "none",
                 "param_type": "keyword_only"
               },
               "continuation_token_parameter": {

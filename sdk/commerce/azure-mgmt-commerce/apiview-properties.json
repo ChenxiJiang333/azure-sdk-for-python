@@ -12,7 +12,7 @@
         "azure.mgmt.commerce.models.UsageAggregation": "Microsoft.Commerce.UsageAggregation",
         "azure.mgmt.commerce.models.UsageSample": "Microsoft.Commerce.UsageSample",
         "azure.mgmt.commerce.models.AggregationGranularity": "Microsoft.Commerce.AggregationGranularity",
-        "azure.mgmt.commerce.models.OfferTermInfoEnum": "Microsoft.Commerce.OfferTermInfoName",
+        "azure.mgmt.commerce.models.OfferTermInfoName": "Microsoft.Commerce.OfferTermInfoName",
         "azure.mgmt.commerce.operations.UsageAggregatesOperations.list": "Microsoft.Commerce.UsageAggregatesOperationGroup.list",
         "azure.mgmt.commerce.aio.operations.UsageAggregatesOperations.list": "Microsoft.Commerce.UsageAggregatesOperationGroup.list",
         "azure.mgmt.commerce.operations.UsageAggregatesOperations.begin_list": "Microsoft.Commerce.UsageAggregatesOperationGroup.list",

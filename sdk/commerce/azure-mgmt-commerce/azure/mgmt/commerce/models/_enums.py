@@ -19,7 +19,7 @@ class AggregationGranularity(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Hourly"""
 
 
-class OfferTermInfoEnum(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+class OfferTermInfoName(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Name of the offer term."""
 
     RECURRING_CHARGE = "Recurring Charge"

@@ -1,5 +1,9 @@
 ## tsp migration
 
+## 6.1.0b2 (2026-01-09)
+
+change log generation failed!!! You need to write it manually!!!
+
 ### Breaking Changes
 
 - Model `UsageAggregation` moved instance variable `subscription_id`, `meter_id`, `usage_start_time`, `usage_end_time`, `quantity`, `unit`, `meter_name`, `meter_category`, `meter_sub_category`, `meter_region`, `info_fields` and `instance_data` under property `properties`

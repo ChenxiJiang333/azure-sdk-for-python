@@ -13,7 +13,7 @@ import decimal
 from typing import Any, Literal, Mapping, Optional, TYPE_CHECKING, overload
 
 from .._utils.model_base import Model as _Model, rest_discriminator, rest_field
-from ._enums import OfferTermInfoEnum
+from ._enums import OfferTermInfoName
 
 if TYPE_CHECKING:
     from .. import models as _models
@@ -182,7 +182,7 @@ class OfferTermInfo(_Model):
 
     :ivar name: Name of the offer term. Required. Known values are: "Recurring Charge", "Monetary
      Commitment", and "Monetary Credit".
-    :vartype name: str or ~azure.mgmt.commerce.models.OfferTermInfoEnum
+    :vartype name: str or ~azure.mgmt.commerce.models.OfferTermInfoName
     :ivar effective_date: Indicates the date from which the offer term is effective.
     :vartype effective_date: ~datetime.datetime
     """
@@ -240,7 +240,7 @@ class MonetaryCommitment(OfferTermInfo, discriminator="Monetary Commitment"):
         name="ExcludedMeterIds", visibility=["read", "create", "update", "delete", "query"]
     )
     """An array of meter ids that are excluded from the given offer terms."""
-    name: Literal[OfferTermInfoEnum.MONETARY_COMMITMENT] = rest_discriminator(name="Name", visibility=["read", "create", "update", "delete", "query"])  # type: ignore
+    name: Literal[OfferTermInfoName.MONETARY_COMMITMENT] = rest_discriminator(name="Name", visibility=["read", "create", "update", "delete", "query"])  # type: ignore
     """Name of the offer term. Required. Monetary Commitment"""
 
     @overload
@@ -261,7 +261,7 @@ class MonetaryCommitment(OfferTermInfo, discriminator="Monetary Commitment"):
 
     def __init__(self, *args: Any, **kwargs: Any) -> None:
         super().__init__(*args, **kwargs)
-        self.name = OfferTermInfoEnum.MONETARY_COMMITMENT  # type: ignore
+        self.name = OfferTermInfoName.MONETARY_COMMITMENT  # type: ignore
 
 
 class MonetaryCredit(OfferTermInfo, discriminator="Monetary Credit"):
@@ -285,7 +285,7 @@ class MonetaryCredit(OfferTermInfo, discriminator="Monetary Credit"):
         name="ExcludedMeterIds", visibility=["read", "create", "update", "delete", "query"]
     )
     """An array of meter ids that are excluded from the given offer terms."""
-    name: Literal[OfferTermInfoEnum.MONETARY_CREDIT] = rest_discriminator(name="Name", visibility=["read", "create", "update", "delete", "query"])  # type: ignore
+    name: Literal[OfferTermInfoName.MONETARY_CREDIT] = rest_discriminator(name="Name", visibility=["read", "create", "update", "delete", "query"])  # type: ignore
     """Name of the offer term. Required. Monetary Credit"""
 
     @overload
@@ -306,7 +306,7 @@ class MonetaryCredit(OfferTermInfo, discriminator="Monetary Credit"):
 
     def __init__(self, *args: Any, **kwargs: Any) -> None:
         super().__init__(*args, **kwargs)
-        self.name = OfferTermInfoEnum.MONETARY_CREDIT  # type: ignore
+        self.name = OfferTermInfoName.MONETARY_CREDIT  # type: ignore
 
 
 class RecurringCharge(OfferTermInfo, discriminator="Recurring Charge"):
@@ -324,7 +324,7 @@ class RecurringCharge(OfferTermInfo, discriminator="Recurring Charge"):
         name="RecurringCharge", visibility=["read", "create", "update", "delete", "query"]
     )
     """The amount of recurring charge as per the offer term."""
-    name: Literal[OfferTermInfoEnum.RECURRING_CHARGE] = rest_discriminator(name="Name", visibility=["read", "create", "update", "delete", "query"])  # type: ignore
+    name: Literal[OfferTermInfoName.RECURRING_CHARGE] = rest_discriminator(name="Name", visibility=["read", "create", "update", "delete", "query"])  # type: ignore
     """Name of the offer term. Required. Recurring Charge"""
 
     @overload
@@ -344,7 +344,7 @@ class RecurringCharge(OfferTermInfo, discriminator="Recurring Charge"):
 
     def __init__(self, *args: Any, **kwargs: Any) -> None:
         super().__init__(*args, **kwargs)
-        self.name = OfferTermInfoEnum.RECURRING_CHARGE  # type: ignore
+        self.name = OfferTermInfoName.RECURRING_CHARGE  # type: ignore
 
 
 class ResourceRateCardInfo(_Model):
