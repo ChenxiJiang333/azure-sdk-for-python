@@ -4,6 +4,10 @@
 
 change log generation failed!!! You need to write it manually!!!
 
+## 5.1.0b1 (2026-01-09)
+
+change log generation failed!!! You need to write it manually!!!
+
 ## 5.0.0 (2025-04-21)
 
 ### Features Added

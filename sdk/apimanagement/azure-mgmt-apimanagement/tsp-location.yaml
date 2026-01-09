@@ -1,0 +1,4 @@
+directory: specification/apimanagement/resource-manager/Microsoft.ApiManagement/ApiManagement
+commit: 3ff8984b0edbe7755ec0afc20191d269371715f1
+repo: Azure/azure-rest-api-specs
+additionalDirectories: 
