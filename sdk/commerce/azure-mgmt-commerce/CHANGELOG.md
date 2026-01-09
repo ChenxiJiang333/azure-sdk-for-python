@@ -1,5 +1,9 @@
 # Release History
 
+## 6.1.0b2 (2026-01-09)
+
+change log generation failed!!! You need to write it manually!!!
+
 ## 6.1.0b1 (2023-02-10)
 
 ### Other Changes

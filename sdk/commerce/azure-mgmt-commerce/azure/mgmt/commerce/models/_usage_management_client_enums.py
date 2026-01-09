@@ -14,12 +14,17 @@ class AggregationGranularity(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """AggregationGranularity."""
 
     DAILY = "Daily"
+    """Daily"""
     HOURLY = "Hourly"
+    """Hourly"""
 
 
-class OfferTermInfoEnum(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+class OfferTermInfoName(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Name of the offer term."""
 
     RECURRING_CHARGE = "Recurring Charge"
+    """Recurring Charge"""
     MONETARY_COMMITMENT = "Monetary Commitment"
+    """Monetary Commitment"""
     MONETARY_CREDIT = "Monetary Credit"
+    """Monetary Credit"""
