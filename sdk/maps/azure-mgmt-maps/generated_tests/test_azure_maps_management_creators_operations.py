@@ -6,7 +6,7 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 import pytest
-from azure.mgmt.maps import MapsClient
+from azure.mgmt.maps import AzureMapsManagementClient
 
 from devtools_testutils import AzureMgmtRecordedTestCase, RandomNameResourceGroupPreparer, recorded_by_proxy
 
@@ -14,17 +14,17 @@ AZURE_LOCATION = "eastus"
 
 
 @pytest.mark.skip("you may need to update the auto-generated test case before run it")
-class TestMapsPrivateEndpointConnectionsOperations(AzureMgmtRecordedTestCase):
+class TestAzureMapsManagementCreatorsOperations(AzureMgmtRecordedTestCase):
     def setup_method(self, method):
-        self.client = self.create_mgmt_client(MapsClient)
+        self.client = self.create_mgmt_client(AzureMapsManagementClient)
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_private_endpoint_connections_get(self, resource_group):
-        response = self.client.private_endpoint_connections.get(
+    def test_creators_get(self, resource_group):
+        response = self.client.creators.get(
             resource_group_name=resource_group.name,
             account_name="str",
-            private_endpoint_connection_name="str",
+            creator_name="str",
         )
 
         # please add some check logic here by yourself
@@ -32,24 +32,21 @@ class TestMapsPrivateEndpointConnectionsOperations(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_private_endpoint_connections_begin_create(self, resource_group):
-        response = self.client.private_endpoint_connections.begin_create(
+    def test_creators_create_or_update(self, resource_group):
+        response = self.client.creators.create_or_update(
             resource_group_name=resource_group.name,
             account_name="str",
-            private_endpoint_connection_name="str",
-            properties={
+            creator_name="str",
+            creator_resource={
+                "location": "str",
+                "properties": {
+                    "storageUnits": 0,
+                    "consumedStorageUnitSizeInBytes": 0,
+                    "provisioningState": "str",
+                    "totalStorageUnitSizeInBytes": 0,
+                },
                 "id": "str",
                 "name": "str",
-                "properties": {
-                    "privateLinkServiceConnectionState": {
-                        "actionsRequired": "str",
-                        "description": "str",
-                        "status": "str",
-                    },
-                    "groupIds": ["str"],
-                    "privateEndpoint": {"id": "str"},
-                    "provisioningState": "str",
-                },
                 "systemData": {
                     "createdAt": "2020-02-20 00:00:00",
                     "createdBy": "str",
@@ -58,29 +55,51 @@ class TestMapsPrivateEndpointConnectionsOperations(AzureMgmtRecordedTestCase):
                     "lastModifiedBy": "str",
                     "lastModifiedByType": "str",
                 },
+                "tags": {"str": "str"},
                 "type": "str",
             },
-        ).result()  # call '.result()' to poll until service return final result
+        )
 
         # please add some check logic here by yourself
         # ...
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_private_endpoint_connections_begin_delete(self, resource_group):
-        response = self.client.private_endpoint_connections.begin_delete(
+    def test_creators_update(self, resource_group):
+        response = self.client.creators.update(
             resource_group_name=resource_group.name,
             account_name="str",
-            private_endpoint_connection_name="str",
-        ).result()  # call '.result()' to poll until service return final result
+            creator_name="str",
+            creator_update_parameters={
+                "properties": {
+                    "storageUnits": 0,
+                    "consumedStorageUnitSizeInBytes": 0,
+                    "provisioningState": "str",
+                    "totalStorageUnitSizeInBytes": 0,
+                },
+                "tags": {"str": "str"},
+            },
+        )
 
         # please add some check logic here by yourself
         # ...
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_private_endpoint_connections_list_by_account(self, resource_group):
-        response = self.client.private_endpoint_connections.list_by_account(
+    def test_creators_delete(self, resource_group):
+        response = self.client.creators.delete(
+            resource_group_name=resource_group.name,
+            account_name="str",
+            creator_name="str",
+        )
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
+    def test_creators_list_by_account(self, resource_group):
+        response = self.client.creators.list_by_account(
             resource_group_name=resource_group.name,
             account_name="str",
         )

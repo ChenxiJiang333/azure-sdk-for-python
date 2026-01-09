@@ -6,7 +6,7 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 import pytest
-from azure.mgmt.maps import MapsClient
+from azure.mgmt.maps import AzureMapsManagementClient
 
 from devtools_testutils import AzureMgmtRecordedTestCase, RandomNameResourceGroupPreparer, recorded_by_proxy
 
@@ -14,17 +14,14 @@ AZURE_LOCATION = "eastus"
 
 
 @pytest.mark.skip("you may need to update the auto-generated test case before run it")
-class TestMapsOperationResultOperations(AzureMgmtRecordedTestCase):
+class TestAzureMapsManagementMapsOperations(AzureMgmtRecordedTestCase):
     def setup_method(self, method):
-        self.client = self.create_mgmt_client(MapsClient)
+        self.client = self.create_mgmt_client(AzureMapsManagementClient)
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_operation_result_begin_get(self, resource_group):
-        response = self.client.operation_result.begin_get(
-            location="str",
-            operation_id="str",
-        ).result()  # call '.result()' to poll until service return final result
-
+    def test_maps_list_operations(self, resource_group):
+        response = self.client.maps.list_operations()
+        result = [r for r in response]
         # please add some check logic here by yourself
         # ...

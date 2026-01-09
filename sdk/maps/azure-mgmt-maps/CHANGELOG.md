@@ -1,12 +1,41 @@
+## tsp migration
+
+### Breaking Changes
+
+- Deleted or renamed client `AzureMapsManagementClient`
+- Deleted or renamed model `EncryptionCustomerManagedKeyEncryption`
+- Deleted or renamed model `EncryptionCustomerManagedKeyEncryptionKeyIdentity`
+- Deleted or renamed model `EncryptionCustomerManagedKeyEncryptionKeyIdentityType`
+
+- Model `CreatorUpdateParameters` deleted or renamed its instance variable `provisioning_state`
+- Model `CreatorUpdateParameters` deleted or renamed its instance variable `storage_units`
+- Model `CreatorUpdateParameters` deleted or renamed its instance variable `total_storage_unit_size_in_bytes`
+- Model `CreatorUpdateParameters` deleted or renamed its instance variable `consumed_storage_unit_size_in_bytes`
+- Model `MapsAccountUpdateParameters` deleted or renamed its instance variable `unique_id`
+- Model `MapsAccountUpdateParameters` deleted or renamed its instance variable `disable_local_auth`
+- Model `MapsAccountUpdateParameters` deleted or renamed its instance variable `provisioning_state`
+- Model `MapsAccountUpdateParameters` deleted or renamed its instance variable `linked_resources`
+- Model `MapsAccountUpdateParameters` deleted or renamed its instance variable `cors`
+- Model `MapsAccountUpdateParameters` deleted or renamed its instance variable `encryption`
+- Model `MapsAccountUpdateParameters` deleted or renamed its instance variable `locations`
+- Model `MapsAccountUpdateParameters` deleted or renamed its instance variable `private_endpoint_connections`
+- Model `MapsAccountUpdateParameters` deleted or renamed its instance variable `public_network_access`
+- Model `PrivateEndpointConnection` deleted or renamed its instance variable `group_ids`
+- Model `PrivateEndpointConnection` deleted or renamed its instance variable `private_endpoint`
+- Model `PrivateEndpointConnection` deleted or renamed its instance variable `private_link_service_connection_state`
+- Model `PrivateEndpointConnection` deleted or renamed its instance variable `provisioning_state`
+- Model `PrivateLinkResource` deleted or renamed its instance variable `group_id`
+- Model `PrivateLinkResource` deleted or renamed its instance variable `required_members`
+- Model `PrivateLinkResource` deleted or renamed its instance variable `required_zone_names`
+
+- Renamed method `OperationResultOperations.get` to `begin_get`
+
+- Deleted or renamed model `CreatorList`
+- Deleted or renamed model `PrivateEndpointConnectionList`
+- Deleted or renamed model `PrivateLinkResourceList`
+- Deleted or renamed model `MapsAccounts`
+
 # Release History
-
-## 2.2.0b1 (2026-01-09)
-
-change log generation failed!!! You need to write it manually!!!
-
-## 2.2.0b1 (2026-01-09)
-
-change log generation failed!!! You need to write it manually!!!
 
 ## 2.1.0 (2023-09-11)
 

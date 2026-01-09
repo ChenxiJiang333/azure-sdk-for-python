@@ -9,7 +9,7 @@
 
 from azure.identity import DefaultAzureCredential
 
-from azure.mgmt.maps import MapsClient
+from azure.mgmt.maps import AzureMapsManagementClient
 
 """
 # PREREQUISITES
@@ -26,7 +26,7 @@ from azure.mgmt.maps import MapsClient
 
 
 def main():
-    client = MapsClient(
+    client = AzureMapsManagementClient(
         credential=DefaultAzureCredential(),
         subscription_id="SUBSCRIPTION_ID",
     )

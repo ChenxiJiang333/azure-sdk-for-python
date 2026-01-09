@@ -6,23 +6,22 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 import pytest
-from azure.mgmt.maps.aio import MapsClient
+from azure.mgmt.maps import AzureMapsManagementClient
 
-from devtools_testutils import AzureMgmtRecordedTestCase, RandomNameResourceGroupPreparer
-from devtools_testutils.aio import recorded_by_proxy_async
+from devtools_testutils import AzureMgmtRecordedTestCase, RandomNameResourceGroupPreparer, recorded_by_proxy
 
 AZURE_LOCATION = "eastus"
 
 
 @pytest.mark.skip("you may need to update the auto-generated test case before run it")
-class TestMapsAccountsOperationsAsync(AzureMgmtRecordedTestCase):
+class TestAzureMapsManagementAccountsOperations(AzureMgmtRecordedTestCase):
     def setup_method(self, method):
-        self.client = self.create_mgmt_client(MapsClient, is_async=True)
+        self.client = self.create_mgmt_client(AzureMapsManagementClient)
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_accounts_get(self, resource_group):
-        response = await self.client.accounts.get(
+    @recorded_by_proxy
+    def test_accounts_get(self, resource_group):
+        response = self.client.accounts.get(
             resource_group_name=resource_group.name,
             account_name="str",
         )
@@ -31,9 +30,9 @@ class TestMapsAccountsOperationsAsync(AzureMgmtRecordedTestCase):
         # ...
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_accounts_create_or_update(self, resource_group):
-        response = await self.client.accounts.create_or_update(
+    @recorded_by_proxy
+    def test_accounts_create_or_update(self, resource_group):
+        response = self.client.accounts.create_or_update(
             resource_group_name=resource_group.name,
             account_name="str",
             maps_account={
@@ -111,9 +110,9 @@ class TestMapsAccountsOperationsAsync(AzureMgmtRecordedTestCase):
         # ...
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_accounts_update(self, resource_group):
-        response = await self.client.accounts.update(
+    @recorded_by_proxy
+    def test_accounts_update(self, resource_group):
+        response = self.client.accounts.update(
             resource_group_name=resource_group.name,
             account_name="str",
             maps_account_update_parameters={
@@ -179,9 +178,9 @@ class TestMapsAccountsOperationsAsync(AzureMgmtRecordedTestCase):
         # ...
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_accounts_delete(self, resource_group):
-        response = await self.client.accounts.delete(
+    @recorded_by_proxy
+    def test_accounts_delete(self, resource_group):
+        response = self.client.accounts.delete(
             resource_group_name=resource_group.name,
             account_name="str",
         )
@@ -190,27 +189,27 @@ class TestMapsAccountsOperationsAsync(AzureMgmtRecordedTestCase):
         # ...
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_accounts_list_by_resource_group(self, resource_group):
+    @recorded_by_proxy
+    def test_accounts_list_by_resource_group(self, resource_group):
         response = self.client.accounts.list_by_resource_group(
             resource_group_name=resource_group.name,
         )
-        result = [r async for r in response]
+        result = [r for r in response]
         # please add some check logic here by yourself
         # ...
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_accounts_list_by_subscription(self, resource_group):
+    @recorded_by_proxy
+    def test_accounts_list_by_subscription(self, resource_group):
         response = self.client.accounts.list_by_subscription()
-        result = [r async for r in response]
+        result = [r for r in response]
         # please add some check logic here by yourself
         # ...
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_accounts_list_sas(self, resource_group):
-        response = await self.client.accounts.list_sas(
+    @recorded_by_proxy
+    def test_accounts_list_sas(self, resource_group):
+        response = self.client.accounts.list_sas(
             resource_group_name=resource_group.name,
             account_name="str",
             maps_account_sas_parameters={
@@ -227,9 +226,9 @@ class TestMapsAccountsOperationsAsync(AzureMgmtRecordedTestCase):
         # ...
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_accounts_list_keys(self, resource_group):
-        response = await self.client.accounts.list_keys(
+    @recorded_by_proxy
+    def test_accounts_list_keys(self, resource_group):
+        response = self.client.accounts.list_keys(
             resource_group_name=resource_group.name,
             account_name="str",
         )
@@ -238,9 +237,9 @@ class TestMapsAccountsOperationsAsync(AzureMgmtRecordedTestCase):
         # ...
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_accounts_regenerate_keys(self, resource_group):
-        response = await self.client.accounts.regenerate_keys(
+    @recorded_by_proxy
+    def test_accounts_regenerate_keys(self, resource_group):
+        response = self.client.accounts.regenerate_keys(
             resource_group_name=resource_group.name,
             account_name="str",
             key_specification={"keyType": "str"},

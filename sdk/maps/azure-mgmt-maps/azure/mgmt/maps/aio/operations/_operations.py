@@ -61,7 +61,7 @@ from ...operations._operations import (
     build_private_link_resources_get_request,
     build_private_link_resources_list_by_account_request,
 )
-from .._configuration import MapsClientConfiguration
+from .._configuration import AzureMapsManagementClientConfiguration
 
 JSON = MutableMapping[str, Any]
 T = TypeVar("T")
@@ -74,14 +74,14 @@ class AccountsOperations:
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.maps.aio.MapsClient`'s
+        :class:`~azure.mgmt.maps.aio.AzureMapsManagementClient`'s
         :attr:`accounts` attribute.
     """
 
     def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client: AsyncPipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: MapsClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._config: AzureMapsManagementClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
         self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
@@ -1189,14 +1189,14 @@ class CreatorsOperations:
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.maps.aio.MapsClient`'s
+        :class:`~azure.mgmt.maps.aio.AzureMapsManagementClient`'s
         :attr:`creators` attribute.
     """
 
     def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client: AsyncPipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: MapsClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._config: AzureMapsManagementClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
         self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
@@ -1814,14 +1814,14 @@ class PrivateLinkResourcesOperations:
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.maps.aio.MapsClient`'s
+        :class:`~azure.mgmt.maps.aio.AzureMapsManagementClient`'s
         :attr:`private_link_resources` attribute.
     """
 
     def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client: AsyncPipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: MapsClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._config: AzureMapsManagementClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
         self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
@@ -2002,14 +2002,14 @@ class PrivateEndpointConnectionsOperations:
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.maps.aio.MapsClient`'s
+        :class:`~azure.mgmt.maps.aio.AzureMapsManagementClient`'s
         :attr:`private_endpoint_connections` attribute.
     """
 
     def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client: AsyncPipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: MapsClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._config: AzureMapsManagementClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
         self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
@@ -2578,14 +2578,14 @@ class MapsOperations:
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.maps.aio.MapsClient`'s
+        :class:`~azure.mgmt.maps.aio.AzureMapsManagementClient`'s
         :attr:`maps` attribute.
     """
 
     def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client: AsyncPipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: MapsClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._config: AzureMapsManagementClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
         self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
@@ -2682,14 +2682,14 @@ class OperationResultOperations:
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.maps.aio.MapsClient`'s
+        :class:`~azure.mgmt.maps.aio.AzureMapsManagementClient`'s
         :attr:`operation_result` attribute.
     """
 
     def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client: AsyncPipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: MapsClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._config: AzureMapsManagementClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
         self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
@@ -2814,14 +2814,14 @@ class OperationStatusOperations:
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.maps.aio.MapsClient`'s
+        :class:`~azure.mgmt.maps.aio.AzureMapsManagementClient`'s
         :attr:`operation_status` attribute.
     """
 
     def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client: AsyncPipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: MapsClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._config: AzureMapsManagementClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
         self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 

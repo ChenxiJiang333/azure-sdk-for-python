@@ -32,6 +32,17 @@ class CreatedByType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The entity was created by a key."""
 
 
+class EncryptionCustomerManagedKeyEncryptionKeyIdentityType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """The type of identity to use."""
+
+    SYSTEM_ASSIGNED_IDENTITY = "systemAssignedIdentity"
+    """System assigned identity"""
+    USER_ASSIGNED_IDENTITY = "userAssignedIdentity"
+    """User assigned identity"""
+    DELEGATED_RESOURCE_IDENTITY = "delegatedResourceIdentity"
+    """Delegated identity"""
+
+
 class InfrastructureEncryption(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """(Optional) Discouraged to include in resource definition. Only needed where it is possible to
     disable platform (AKA infrastructure) encryption. Azure SQL TDE is an example of this. Values
@@ -42,17 +53,6 @@ class InfrastructureEncryption(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Encryption is enabled"""
     DISABLED = "disabled"
     """Encryption is disabled"""
-
-
-class KeyEncryptionKeyIdentityType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """The type of identity to use."""
-
-    SYSTEM_ASSIGNED_IDENTITY = "systemAssignedIdentity"
-    """System assigned identity"""
-    USER_ASSIGNED_IDENTITY = "userAssignedIdentity"
-    """User assigned identity"""
-    DELEGATED_RESOURCE_IDENTITY = "delegatedResourceIdentity"
-    """Delegated identity"""
 
 
 class KeyType(str, Enum, metaclass=CaseInsensitiveEnumMeta):

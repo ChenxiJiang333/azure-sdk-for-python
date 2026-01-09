@@ -17,7 +17,7 @@ from azure.mgmt.core import ARMPipelineClient
 from azure.mgmt.core.policies import ARMAutoResourceProviderRegistrationPolicy
 from azure.mgmt.core.tools import get_arm_endpoints
 
-from ._configuration import MapsClientConfiguration
+from ._configuration import AzureMapsManagementClientConfiguration
 from ._utils.serialization import Deserializer, Serializer
 from .operations import (
     AccountsOperations,
@@ -34,7 +34,7 @@ if TYPE_CHECKING:
     from azure.core.credentials import TokenCredential
 
 
-class MapsClient:  # pylint: disable=too-many-instance-attributes
+class AzureMapsManagementClient:  # pylint: disable=too-many-instance-attributes
     """Resource Provider.
 
     :ivar accounts: AccountsOperations operations
@@ -84,7 +84,7 @@ class MapsClient:  # pylint: disable=too-many-instance-attributes
         if not base_url:
             base_url = _endpoints["resource_manager"]
         credential_scopes = kwargs.pop("credential_scopes", _endpoints["credential_scopes"])
-        self._config = MapsClientConfiguration(
+        self._config = AzureMapsManagementClientConfiguration(
             credential=credential,
             subscription_id=subscription_id,
             base_url=cast(str, base_url),

@@ -6,28 +6,25 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 import pytest
-from azure.mgmt.maps.aio import MapsClient
+from azure.mgmt.maps import AzureMapsManagementClient
 
-from devtools_testutils import AzureMgmtRecordedTestCase, RandomNameResourceGroupPreparer
-from devtools_testutils.aio import recorded_by_proxy_async
+from devtools_testutils import AzureMgmtRecordedTestCase, RandomNameResourceGroupPreparer, recorded_by_proxy
 
 AZURE_LOCATION = "eastus"
 
 
 @pytest.mark.skip("you may need to update the auto-generated test case before run it")
-class TestMapsOperationResultOperationsAsync(AzureMgmtRecordedTestCase):
+class TestAzureMapsManagementOperationStatusOperations(AzureMgmtRecordedTestCase):
     def setup_method(self, method):
-        self.client = self.create_mgmt_client(MapsClient, is_async=True)
+        self.client = self.create_mgmt_client(AzureMapsManagementClient)
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_operation_result_begin_get(self, resource_group):
-        response = await (
-            await self.client.operation_result.begin_get(
-                location="str",
-                operation_id="str",
-            )
-        ).result()  # call '.result()' to poll until service return final result
+    @recorded_by_proxy
+    def test_operation_status_get(self, resource_group):
+        response = self.client.operation_status.get(
+            location="str",
+            operation_id="str",
+        )
 
         # please add some check logic here by yourself
         # ...

@@ -6,7 +6,7 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 import pytest
-from azure.mgmt.maps.aio import MapsClient
+from azure.mgmt.maps.aio import AzureMapsManagementClient
 
 from devtools_testutils import AzureMgmtRecordedTestCase, RandomNameResourceGroupPreparer
 from devtools_testutils.aio import recorded_by_proxy_async
@@ -15,29 +15,17 @@ AZURE_LOCATION = "eastus"
 
 
 @pytest.mark.skip("you may need to update the auto-generated test case before run it")
-class TestMapsPrivateLinkResourcesOperationsAsync(AzureMgmtRecordedTestCase):
+class TestAzureMapsManagementOperationStatusOperationsAsync(AzureMgmtRecordedTestCase):
     def setup_method(self, method):
-        self.client = self.create_mgmt_client(MapsClient, is_async=True)
+        self.client = self.create_mgmt_client(AzureMapsManagementClient, is_async=True)
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_private_link_resources_get(self, resource_group):
-        response = await self.client.private_link_resources.get(
-            resource_group_name=resource_group.name,
-            account_name="str",
-            private_link_resource_name="str",
+    async def test_operation_status_get(self, resource_group):
+        response = await self.client.operation_status.get(
+            location="str",
+            operation_id="str",
         )
 
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_private_link_resources_list_by_account(self, resource_group):
-        response = self.client.private_link_resources.list_by_account(
-            resource_group_name=resource_group.name,
-            account_name="str",
-        )
-        result = [r async for r in response]
         # please add some check logic here by yourself
         # ...
