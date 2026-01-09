@@ -7,7 +7,7 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 from collections.abc import MutableMapping
-from typing import Any, Callable, Dict, Iterable, Iterator, Optional, TypeVar, Union, cast
+from typing import Any, Callable, Iterator, Optional, TypeVar, Union, cast
 import urllib.parse
 
 from azure.core import PipelineClient
@@ -35,7 +35,8 @@ from .._configuration import SearchManagementClientConfiguration
 from .._utils.serialization import Deserializer, Serializer
 
 T = TypeVar("T")
-ClsType = Optional[Callable[[PipelineResponse[HttpRequest, HttpResponse], T, Dict[str, Any]], Any]]
+ClsType = Optional[Callable[[PipelineResponse[HttpRequest, HttpResponse], T, dict[str, Any]], Any]]
+List = list
 
 _SERIALIZER = Serializer()
 _SERIALIZER.client_side_validation = False
@@ -56,11 +57,13 @@ def build_list_by_service_request(
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{searchServiceName}/networkSecurityPerimeterConfigurations",
     )
     path_format_arguments = {
-        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
+        "resourceGroupName": _SERIALIZER.url(
+            "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
+        ),
         "searchServiceName": _SERIALIZER.url(
             "search_service_name", search_service_name, "str", pattern=r"^(?=.{2,60}$)[a-z0-9][a-z0-9]+(-[a-z0-9]+)*$"
         ),
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
     }
 
     _url: str = _url.format(**path_format_arguments)  # type: ignore
@@ -89,7 +92,10 @@ def build_get_request(
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{searchServiceName}/networkSecurityPerimeterConfigurations/{nspConfigName}",
     )
     path_format_arguments = {
-        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
+        "resourceGroupName": _SERIALIZER.url(
+            "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
+        ),
         "searchServiceName": _SERIALIZER.url(
             "search_service_name", search_service_name, "str", pattern=r"^(?=.{2,60}$)[a-z0-9][a-z0-9]+(-[a-z0-9]+)*$"
         ),
@@ -101,7 +107,6 @@ def build_get_request(
             min_length=38,
             pattern=r"^[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}\.[a-z][a-z0-9]*$",
         ),
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
     }
 
     _url: str = _url.format(**path_format_arguments)  # type: ignore
@@ -130,7 +135,10 @@ def build_reconcile_request(
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{searchServiceName}/networkSecurityPerimeterConfigurations/{nspConfigName}/reconcile",
     )
     path_format_arguments = {
-        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
+        "resourceGroupName": _SERIALIZER.url(
+            "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
+        ),
         "searchServiceName": _SERIALIZER.url(
             "search_service_name", search_service_name, "str", pattern=r"^(?=.{2,60}$)[a-z0-9][a-z0-9]+(-[a-z0-9]+)*$"
         ),
@@ -142,7 +150,6 @@ def build_reconcile_request(
             min_length=38,
             pattern=r"^[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}\.[a-z][a-z0-9]*$",
         ),
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
     }
 
     _url: str = _url.format(**path_format_arguments)  # type: ignore
@@ -168,7 +175,7 @@ class NetworkSecurityPerimeterConfigurationsOperations:  # pylint: disable=name-
 
     models = _models
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client: PipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
         self._config: SearchManagementClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
@@ -178,11 +185,11 @@ class NetworkSecurityPerimeterConfigurationsOperations:  # pylint: disable=name-
     @distributed_trace
     def list_by_service(
         self, resource_group_name: str, search_service_name: str, **kwargs: Any
-    ) -> Iterable["_models.NetworkSecurityPerimeterConfiguration"]:
+    ) -> ItemPaged["_models.NetworkSecurityPerimeterConfiguration"]:
         """Gets a list of network security perimeter configurations for a search service.
 
-        :param resource_group_name: The name of the resource group within the current subscription. You
-         can obtain this value from the Azure Resource Manager API or the portal. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param search_service_name: The name of the Azure AI Search service associated with the
          specified resource group. Required.
@@ -267,8 +274,8 @@ class NetworkSecurityPerimeterConfigurationsOperations:  # pylint: disable=name-
     ) -> _models.NetworkSecurityPerimeterConfiguration:
         """Gets a network security perimeter configuration.
 
-        :param resource_group_name: The name of the resource group within the current subscription. You
-         can obtain this value from the Azure Resource Manager API or the portal. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param search_service_name: The name of the Azure AI Search service associated with the
          specified resource group. Required.
@@ -384,8 +391,8 @@ class NetworkSecurityPerimeterConfigurationsOperations:  # pylint: disable=name-
         This triggers a manual resync with network security perimeter configurations by ensuring the
         search service carries the latest configuration.
 
-        :param resource_group_name: The name of the resource group within the current subscription. You
-         can obtain this value from the Azure Resource Manager API or the portal. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param search_service_name: The name of the Azure AI Search service associated with the
          specified resource group. Required.

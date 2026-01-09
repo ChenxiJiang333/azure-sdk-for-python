@@ -21,6 +21,31 @@ class TestSearchManagementPrivateEndpointConnectionsOperationsAsync(AzureMgmtRec
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
+    async def test_private_endpoint_connections_list_by_service(self, resource_group):
+        response = self.client.private_endpoint_connections.list_by_service(
+            resource_group_name=resource_group.name,
+            search_service_name="str",
+            api_version="2025-05-01",
+        )
+        result = [r async for r in response]
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
+    async def test_private_endpoint_connections_get(self, resource_group):
+        response = await self.client.private_endpoint_connections.get(
+            resource_group_name=resource_group.name,
+            search_service_name="str",
+            private_endpoint_connection_name="str",
+            api_version="2025-05-01",
+        )
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
     async def test_private_endpoint_connections_update(self, resource_group):
         response = await self.client.private_endpoint_connections.update(
             resource_group_name=resource_group.name,
@@ -57,19 +82,6 @@ class TestSearchManagementPrivateEndpointConnectionsOperationsAsync(AzureMgmtRec
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_private_endpoint_connections_get(self, resource_group):
-        response = await self.client.private_endpoint_connections.get(
-            resource_group_name=resource_group.name,
-            search_service_name="str",
-            private_endpoint_connection_name="str",
-            api_version="2025-05-01",
-        )
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
     async def test_private_endpoint_connections_delete(self, resource_group):
         response = await self.client.private_endpoint_connections.delete(
             resource_group_name=resource_group.name,
@@ -78,17 +90,5 @@ class TestSearchManagementPrivateEndpointConnectionsOperationsAsync(AzureMgmtRec
             api_version="2025-05-01",
         )
 
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_private_endpoint_connections_list_by_service(self, resource_group):
-        response = self.client.private_endpoint_connections.list_by_service(
-            resource_group_name=resource_group.name,
-            search_service_name="str",
-            api_version="2025-05-01",
-        )
-        result = [r async for r in response]
         # please add some check logic here by yourself
         # ...

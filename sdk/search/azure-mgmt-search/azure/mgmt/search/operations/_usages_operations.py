@@ -6,7 +6,7 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 from collections.abc import MutableMapping
-from typing import Any, Callable, Dict, Iterable, Optional, TypeVar
+from typing import Any, Callable, Optional, TypeVar
 import urllib.parse
 
 from azure.core import PipelineClient
@@ -30,7 +30,8 @@ from .._configuration import SearchManagementClientConfiguration
 from .._utils.serialization import Deserializer, Serializer
 
 T = TypeVar("T")
-ClsType = Optional[Callable[[PipelineResponse[HttpRequest, HttpResponse], T, Dict[str, Any]], Any]]
+ClsType = Optional[Callable[[PipelineResponse[HttpRequest, HttpResponse], T, dict[str, Any]], Any]]
+List = list
 
 _SERIALIZER = Serializer()
 _SERIALIZER.client_side_validation = False
@@ -50,8 +51,8 @@ def build_list_by_subscription_request(
         "template_url", "/subscriptions/{subscriptionId}/providers/Microsoft.Search/locations/{location}/usages"
     )
     path_format_arguments = {
-        "location": _SERIALIZER.url("location", location, "str"),
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
+        "location": _SERIALIZER.url("location", location, "str", min_length=1),
     }
 
     _url: str = _url.format(**path_format_arguments)  # type: ignore
@@ -79,7 +80,7 @@ class UsagesOperations:
 
     models = _models
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client: PipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
         self._config: SearchManagementClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
@@ -88,21 +89,19 @@ class UsagesOperations:
 
     @distributed_trace
     def list_by_subscription(
-        self,
-        location: str,
-        search_management_request_options: Optional[_models.SearchManagementRequestOptions] = None,
-        **kwargs: Any
-    ) -> Iterable["_models.QuotaUsageResult"]:
+        self, location: str, client_request_id: Optional[str] = None, **kwargs: Any
+    ) -> ItemPaged["_models.QuotaUsageResult"]:
         """Get a list of all Azure AI Search quota usages across the subscription.
 
         .. seealso::
            - https://aka.ms/search-manage
 
-        :param location: The unique location name for a Microsoft Azure geographic region. Required.
+        :param location: The name of the Azure region. Required.
         :type location: str
-        :param search_management_request_options: Parameter group. Default value is None.
-        :type search_management_request_options:
-         ~azure.mgmt.search.models.SearchManagementRequestOptions
+        :param client_request_id: A client-generated GUID value that identifies this request. If
+         specified, this will be included in response information as a way to track the request. Default
+         value is None.
+        :type client_request_id: str
         :return: An iterator like instance of either QuotaUsageResult or the result of cls(response)
         :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.search.models.QuotaUsageResult]
         :raises ~azure.core.exceptions.HttpResponseError:
@@ -123,14 +122,11 @@ class UsagesOperations:
 
         def prepare_request(next_link=None):
             if not next_link:
-                _client_request_id = None
-                if search_management_request_options is not None:
-                    _client_request_id = search_management_request_options.client_request_id
 
                 _request = build_list_by_subscription_request(
                     location=location,
                     subscription_id=self._config.subscription_id,
-                    client_request_id=_client_request_id,
+                    client_request_id=client_request_id,
                     api_version=api_version,
                     headers=_headers,
                     params=_params,

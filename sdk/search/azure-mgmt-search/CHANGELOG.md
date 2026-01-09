@@ -1,5 +1,62 @@
 # Release History
 
+## 10.0.0 (2026-01-09)
+
+### Features Added
+
+  - Model PrivateLinkResourcesResult has a new parameter next_link
+  - Operation AdminKeysOperations.get has a new optional parameter client_request_id
+  - Operation AdminKeysOperations.regenerate has a new optional parameter client_request_id
+  - Operation PrivateEndpointConnectionsOperations.delete has a new optional parameter client_request_id
+  - Operation PrivateEndpointConnectionsOperations.get has a new optional parameter client_request_id
+  - Operation PrivateEndpointConnectionsOperations.list_by_service has a new optional parameter client_request_id
+  - Operation PrivateEndpointConnectionsOperations.update has a new optional parameter client_request_id
+  - Operation PrivateLinkResourcesOperations.list_supported has a new optional parameter client_request_id
+  - Operation QueryKeysOperations.create has a new optional parameter client_request_id
+  - Operation QueryKeysOperations.delete has a new optional parameter client_request_id
+  - Operation QueryKeysOperations.list_by_search_service has a new optional parameter client_request_id
+  - Operation ServicesOperations.begin_create_or_update has a new optional parameter client_request_id
+  - Operation ServicesOperations.check_name_availability has a new optional parameter client_request_id
+  - Operation ServicesOperations.delete has a new optional parameter client_request_id
+  - Operation ServicesOperations.get has a new optional parameter client_request_id
+  - Operation ServicesOperations.list_by_resource_group has a new optional parameter client_request_id
+  - Operation ServicesOperations.list_by_subscription has a new optional parameter client_request_id
+  - Operation ServicesOperations.update has a new optional parameter client_request_id
+  - Operation SharedPrivateLinkResourcesOperations.begin_create_or_update has a new optional parameter client_request_id
+  - Operation SharedPrivateLinkResourcesOperations.begin_delete has a new optional parameter client_request_id
+  - Operation SharedPrivateLinkResourcesOperations.get has a new optional parameter client_request_id
+  - Operation SharedPrivateLinkResourcesOperations.list_by_service has a new optional parameter client_request_id
+  - Operation UsagesOperations.list_by_subscription has a new optional parameter client_request_id
+
+### Breaking Changes
+
+  - Operation AdminKeysOperations.get no longer has parameter search_management_request_options
+  - Operation AdminKeysOperations.regenerate no longer has parameter search_management_request_options
+  - Operation PrivateEndpointConnectionsOperations.delete no longer has parameter search_management_request_options
+  - Operation PrivateEndpointConnectionsOperations.get no longer has parameter search_management_request_options
+  - Operation PrivateEndpointConnectionsOperations.list_by_service no longer has parameter search_management_request_options
+  - Operation PrivateEndpointConnectionsOperations.update no longer has parameter search_management_request_options
+  - Operation PrivateLinkResourcesOperations.list_supported no longer has parameter search_management_request_options
+  - Operation QueryKeysOperations.create no longer has parameter search_management_request_options
+  - Operation QueryKeysOperations.delete no longer has parameter search_management_request_options
+  - Operation QueryKeysOperations.list_by_search_service no longer has parameter search_management_request_options
+  - Operation ServicesOperations.begin_create_or_update no longer has parameter search_management_request_options
+  - Operation ServicesOperations.check_name_availability has a new required parameter check_name_availability_input
+  - Operation ServicesOperations.check_name_availability no longer has parameter name
+  - Operation ServicesOperations.check_name_availability no longer has parameter search_management_request_options
+  - Operation ServicesOperations.delete no longer has parameter search_management_request_options
+  - Operation ServicesOperations.get no longer has parameter search_management_request_options
+  - Operation ServicesOperations.list_by_resource_group no longer has parameter search_management_request_options
+  - Operation ServicesOperations.list_by_subscription no longer has parameter search_management_request_options
+  - Operation ServicesOperations.update no longer has parameter search_management_request_options
+  - Operation SharedPrivateLinkResourcesOperations.begin_create_or_update no longer has parameter search_management_request_options
+  - Operation SharedPrivateLinkResourcesOperations.begin_delete no longer has parameter search_management_request_options
+  - Operation SharedPrivateLinkResourcesOperations.get no longer has parameter search_management_request_options
+  - Operation SharedPrivateLinkResourcesOperations.list_by_service no longer has parameter search_management_request_options
+  - Operation UsagesOperations.list_by_subscription no longer has parameter search_management_request_options
+  - Parameter value of model NetworkSecurityPerimeterConfigurationListResult is now required
+  - Removed operation group SearchManagementClientOperationsMixin
+
 ## 9.2.0 (2025-07-21)
 
 ### Features Added

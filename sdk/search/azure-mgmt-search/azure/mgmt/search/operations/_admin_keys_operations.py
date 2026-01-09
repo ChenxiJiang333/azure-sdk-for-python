@@ -7,7 +7,7 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 from collections.abc import MutableMapping
-from typing import Any, Callable, Dict, Optional, TypeVar, Union
+from typing import Any, Callable, Optional, TypeVar, Union
 
 from azure.core import PipelineClient
 from azure.core.exceptions import (
@@ -29,7 +29,8 @@ from .._configuration import SearchManagementClientConfiguration
 from .._utils.serialization import Deserializer, Serializer
 
 T = TypeVar("T")
-ClsType = Optional[Callable[[PipelineResponse[HttpRequest, HttpResponse], T, Dict[str, Any]], Any]]
+ClsType = Optional[Callable[[PipelineResponse[HttpRequest, HttpResponse], T, dict[str, Any]], Any]]
+List = list
 
 _SERIALIZER = Serializer()
 _SERIALIZER.client_side_validation = False
@@ -55,11 +56,13 @@ def build_get_request(
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{searchServiceName}/listAdminKeys",
     )
     path_format_arguments = {
-        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
+        "resourceGroupName": _SERIALIZER.url(
+            "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
+        ),
         "searchServiceName": _SERIALIZER.url(
             "search_service_name", search_service_name, "str", pattern=r"^(?=.{2,60}$)[a-z0-9][a-z0-9]+(-[a-z0-9]+)*$"
         ),
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
     }
 
     _url: str = _url.format(**path_format_arguments)  # type: ignore
@@ -93,15 +96,17 @@ def build_regenerate_request(
     # Construct URL
     _url = kwargs.pop(
         "template_url",
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Search/searchServices/{searchServiceName}/regenerateAdminKey/{keyKind}",
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Search/searchServices/{searchServiceName}/regenerateAdminKey/{keyKind}",
     )
     path_format_arguments = {
-        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
+        "resourceGroupName": _SERIALIZER.url(
+            "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
+        ),
         "searchServiceName": _SERIALIZER.url(
             "search_service_name", search_service_name, "str", pattern=r"^(?=.{2,60}$)[a-z0-9][a-z0-9]+(-[a-z0-9]+)*$"
         ),
         "keyKind": _SERIALIZER.url("key_kind", key_kind, "str"),
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
     }
 
     _url: str = _url.format(**path_format_arguments)  # type: ignore
@@ -129,7 +134,7 @@ class AdminKeysOperations:
 
     models = _models
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client: PipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
         self._config: SearchManagementClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
@@ -138,26 +143,23 @@ class AdminKeysOperations:
 
     @distributed_trace
     def get(
-        self,
-        resource_group_name: str,
-        search_service_name: str,
-        search_management_request_options: Optional[_models.SearchManagementRequestOptions] = None,
-        **kwargs: Any
+        self, resource_group_name: str, search_service_name: str, client_request_id: Optional[str] = None, **kwargs: Any
     ) -> _models.AdminKeyResult:
         """Gets the primary and secondary admin API keys for the specified Azure AI Search service.
 
         .. seealso::
            - https://aka.ms/search-manage
 
-        :param resource_group_name: The name of the resource group within the current subscription. You
-         can obtain this value from the Azure Resource Manager API or the portal. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param search_service_name: The name of the Azure AI Search service associated with the
          specified resource group. Required.
         :type search_service_name: str
-        :param search_management_request_options: Parameter group. Default value is None.
-        :type search_management_request_options:
-         ~azure.mgmt.search.models.SearchManagementRequestOptions
+        :param client_request_id: A client-generated GUID value that identifies this request. If
+         specified, this will be included in response information as a way to track the request. Default
+         value is None.
+        :type client_request_id: str
         :return: AdminKeyResult or the result of cls(response)
         :rtype: ~azure.mgmt.search.models.AdminKeyResult
         :raises ~azure.core.exceptions.HttpResponseError:
@@ -176,15 +178,11 @@ class AdminKeysOperations:
         api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
         cls: ClsType[_models.AdminKeyResult] = kwargs.pop("cls", None)
 
-        _client_request_id = None
-        if search_management_request_options is not None:
-            _client_request_id = search_management_request_options.client_request_id
-
         _request = build_get_request(
             resource_group_name=resource_group_name,
             search_service_name=search_service_name,
             subscription_id=self._config.subscription_id,
-            client_request_id=_client_request_id,
+            client_request_id=client_request_id,
             api_version=api_version,
             headers=_headers,
             params=_params,
@@ -215,7 +213,7 @@ class AdminKeysOperations:
         resource_group_name: str,
         search_service_name: str,
         key_kind: Union[str, _models.AdminKeyKind],
-        search_management_request_options: Optional[_models.SearchManagementRequestOptions] = None,
+        client_request_id: Optional[str] = None,
         **kwargs: Any
     ) -> _models.AdminKeyResult:
         """Regenerates either the primary or secondary admin API key. You can only regenerate one key at a
@@ -224,8 +222,8 @@ class AdminKeysOperations:
         .. seealso::
            - https://aka.ms/search-manage
 
-        :param resource_group_name: The name of the resource group within the current subscription. You
-         can obtain this value from the Azure Resource Manager API or the portal. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param search_service_name: The name of the Azure AI Search service associated with the
          specified resource group. Required.
@@ -233,9 +231,10 @@ class AdminKeysOperations:
         :param key_kind: Specifies which key to regenerate. Valid values include 'primary' and
          'secondary'. Known values are: "primary" and "secondary". Required.
         :type key_kind: str or ~azure.mgmt.search.models.AdminKeyKind
-        :param search_management_request_options: Parameter group. Default value is None.
-        :type search_management_request_options:
-         ~azure.mgmt.search.models.SearchManagementRequestOptions
+        :param client_request_id: A client-generated GUID value that identifies this request. If
+         specified, this will be included in response information as a way to track the request. Default
+         value is None.
+        :type client_request_id: str
         :return: AdminKeyResult or the result of cls(response)
         :rtype: ~azure.mgmt.search.models.AdminKeyResult
         :raises ~azure.core.exceptions.HttpResponseError:
@@ -254,16 +253,12 @@ class AdminKeysOperations:
         api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
         cls: ClsType[_models.AdminKeyResult] = kwargs.pop("cls", None)
 
-        _client_request_id = None
-        if search_management_request_options is not None:
-            _client_request_id = search_management_request_options.client_request_id
-
         _request = build_regenerate_request(
             resource_group_name=resource_group_name,
             search_service_name=search_service_name,
             key_kind=key_kind,
             subscription_id=self._config.subscription_id,
-            client_request_id=_client_request_id,
+            client_request_id=client_request_id,
             api_version=api_version,
             headers=_headers,
             params=_params,

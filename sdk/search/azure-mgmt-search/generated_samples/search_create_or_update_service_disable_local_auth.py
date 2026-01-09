@@ -28,7 +28,7 @@ from azure.mgmt.search import SearchManagementClient
 def main():
     client = SearchManagementClient(
         credential=DefaultAzureCredential(),
-        subscription_id="subid",
+        subscription_id="00000000-0000-0000-0000-000000000000",
     )
 
     response = client.services.begin_create_or_update(
@@ -37,9 +37,9 @@ def main():
         service={
             "location": "westus",
             "properties": {
-                "computeType": "default",
+                "computeType": "Default",
                 "disableLocalAuth": True,
-                "hostingMode": "default",
+                "hostingMode": "Default",
                 "partitionCount": 1,
                 "replicaCount": 3,
             },
@@ -50,6 +50,6 @@ def main():
     print(response)
 
 
-# x-ms-original-file: specification/search/resource-manager/Microsoft.Search/stable/2025-05-01/examples/SearchCreateOrUpdateServiceDisableLocalAuth.json
+# x-ms-original-file: specification/search/resource-manager/Microsoft.Search/Search/stable/2025-05-01/examples/SearchCreateOrUpdateServiceDisableLocalAuth.json
 if __name__ == "__main__":
     main()

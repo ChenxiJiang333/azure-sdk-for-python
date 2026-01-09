@@ -7,7 +7,7 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 from collections.abc import MutableMapping
-from typing import Any, Callable, Dict, Iterable, Optional, TypeVar
+from typing import Any, Callable, Optional, TypeVar
 import urllib.parse
 
 from azure.core import PipelineClient
@@ -31,7 +31,8 @@ from .._configuration import SearchManagementClientConfiguration
 from .._utils.serialization import Deserializer, Serializer
 
 T = TypeVar("T")
-ClsType = Optional[Callable[[PipelineResponse[HttpRequest, HttpResponse], T, Dict[str, Any]], Any]]
+ClsType = Optional[Callable[[PipelineResponse[HttpRequest, HttpResponse], T, dict[str, Any]], Any]]
+List = list
 
 _SERIALIZER = Serializer()
 _SERIALIZER.client_side_validation = False
@@ -58,7 +59,9 @@ def build_list_supported_request(
     )
     path_format_arguments = {
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
-        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
+        "resourceGroupName": _SERIALIZER.url(
+            "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
+        ),
         "searchServiceName": _SERIALIZER.url(
             "search_service_name", search_service_name, "str", pattern=r"^(?=.{2,60}$)[a-z0-9][a-z0-9]+(-[a-z0-9]+)*$"
         ),
@@ -89,7 +92,7 @@ class PrivateLinkResourcesOperations:
 
     models = _models
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client: PipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
         self._config: SearchManagementClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
@@ -98,26 +101,23 @@ class PrivateLinkResourcesOperations:
 
     @distributed_trace
     def list_supported(
-        self,
-        resource_group_name: str,
-        search_service_name: str,
-        search_management_request_options: Optional[_models.SearchManagementRequestOptions] = None,
-        **kwargs: Any
-    ) -> Iterable["_models.PrivateLinkResource"]:
+        self, resource_group_name: str, search_service_name: str, client_request_id: Optional[str] = None, **kwargs: Any
+    ) -> ItemPaged["_models.PrivateLinkResource"]:
         """Gets a list of all supported private link resource types for the given service.
 
         .. seealso::
            - https://aka.ms/search-manage
 
-        :param resource_group_name: The name of the resource group within the current subscription. You
-         can obtain this value from the Azure Resource Manager API or the portal. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param search_service_name: The name of the Azure AI Search service associated with the
          specified resource group. Required.
         :type search_service_name: str
-        :param search_management_request_options: Parameter group. Default value is None.
-        :type search_management_request_options:
-         ~azure.mgmt.search.models.SearchManagementRequestOptions
+        :param client_request_id: A client-generated GUID value that identifies this request. If
+         specified, this will be included in response information as a way to track the request. Default
+         value is None.
+        :type client_request_id: str
         :return: An iterator like instance of either PrivateLinkResource or the result of cls(response)
         :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.search.models.PrivateLinkResource]
         :raises ~azure.core.exceptions.HttpResponseError:
@@ -138,15 +138,12 @@ class PrivateLinkResourcesOperations:
 
         def prepare_request(next_link=None):
             if not next_link:
-                _client_request_id = None
-                if search_management_request_options is not None:
-                    _client_request_id = search_management_request_options.client_request_id
 
                 _request = build_list_supported_request(
                     resource_group_name=resource_group_name,
                     search_service_name=search_service_name,
                     subscription_id=self._config.subscription_id,
-                    client_request_id=_client_request_id,
+                    client_request_id=client_request_id,
                     api_version=api_version,
                     headers=_headers,
                     params=_params,
@@ -175,7 +172,7 @@ class PrivateLinkResourcesOperations:
             list_of_elem = deserialized.value
             if cls:
                 list_of_elem = cls(list_of_elem)  # type: ignore
-            return None, iter(list_of_elem)
+            return deserialized.next_link or None, iter(list_of_elem)
 
         def get_next(next_link=None):
             _request = prepare_request(next_link)

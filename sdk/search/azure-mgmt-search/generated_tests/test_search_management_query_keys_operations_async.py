@@ -21,6 +21,18 @@ class TestSearchManagementQueryKeysOperationsAsync(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
+    async def test_query_keys_list_by_search_service(self, resource_group):
+        response = self.client.query_keys.list_by_search_service(
+            resource_group_name=resource_group.name,
+            search_service_name="str",
+            api_version="2025-05-01",
+        )
+        result = [r async for r in response]
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
     async def test_query_keys_create(self, resource_group):
         response = await self.client.query_keys.create(
             resource_group_name=resource_group.name,
@@ -29,18 +41,6 @@ class TestSearchManagementQueryKeysOperationsAsync(AzureMgmtRecordedTestCase):
             api_version="2025-05-01",
         )
 
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_query_keys_list_by_search_service(self, resource_group):
-        response = self.client.query_keys.list_by_search_service(
-            resource_group_name=resource_group.name,
-            search_service_name="str",
-            api_version="2025-05-01",
-        )
-        result = [r async for r in response]
         # please add some check logic here by yourself
         # ...
 

@@ -21,6 +21,31 @@ class TestSearchManagementSharedPrivateLinkResourcesOperationsAsync(AzureMgmtRec
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
+    async def test_shared_private_link_resources_list_by_service(self, resource_group):
+        response = self.client.shared_private_link_resources.list_by_service(
+            resource_group_name=resource_group.name,
+            search_service_name="str",
+            api_version="2025-05-01",
+        )
+        result = [r async for r in response]
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
+    async def test_shared_private_link_resources_get(self, resource_group):
+        response = await self.client.shared_private_link_resources.get(
+            resource_group_name=resource_group.name,
+            search_service_name="str",
+            shared_private_link_resource_name="str",
+            api_version="2025-05-01",
+        )
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
     async def test_shared_private_link_resources_begin_create_or_update(self, resource_group):
         response = await (
             await self.client.shared_private_link_resources.begin_create_or_update(
@@ -57,19 +82,6 @@ class TestSearchManagementSharedPrivateLinkResourcesOperationsAsync(AzureMgmtRec
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_shared_private_link_resources_get(self, resource_group):
-        response = await self.client.shared_private_link_resources.get(
-            resource_group_name=resource_group.name,
-            search_service_name="str",
-            shared_private_link_resource_name="str",
-            api_version="2025-05-01",
-        )
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
     async def test_shared_private_link_resources_begin_delete(self, resource_group):
         response = await (
             await self.client.shared_private_link_resources.begin_delete(
@@ -80,17 +92,5 @@ class TestSearchManagementSharedPrivateLinkResourcesOperationsAsync(AzureMgmtRec
             )
         ).result()  # call '.result()' to poll until service return final result
 
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_shared_private_link_resources_list_by_service(self, resource_group):
-        response = self.client.shared_private_link_resources.list_by_service(
-            resource_group_name=resource_group.name,
-            search_service_name="str",
-            api_version="2025-05-01",
-        )
-        result = [r async for r in response]
         # please add some check logic here by yourself
         # ...

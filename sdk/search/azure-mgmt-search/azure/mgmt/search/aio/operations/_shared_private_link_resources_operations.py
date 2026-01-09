@@ -7,7 +7,7 @@
 # --------------------------------------------------------------------------
 from collections.abc import MutableMapping
 from io import IOBase
-from typing import Any, AsyncIterable, AsyncIterator, Callable, Dict, IO, Optional, TypeVar, Union, cast, overload
+from typing import Any, AsyncIterator, Callable, IO, Optional, TypeVar, Union, cast, overload
 import urllib.parse
 
 from azure.core import AsyncPipelineClient
@@ -42,7 +42,8 @@ from ...operations._shared_private_link_resources_operations import (
 from .._configuration import SearchManagementClientConfiguration
 
 T = TypeVar("T")
-ClsType = Optional[Callable[[PipelineResponse[HttpRequest, AsyncHttpResponse], T, Dict[str, Any]], Any]]
+ClsType = Optional[Callable[[PipelineResponse[HttpRequest, AsyncHttpResponse], T, dict[str, Any]], Any]]
+List = list
 
 
 class SharedPrivateLinkResourcesOperations:
@@ -64,489 +65,25 @@ class SharedPrivateLinkResourcesOperations:
         self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
-    async def _create_or_update_initial(
-        self,
-        resource_group_name: str,
-        search_service_name: str,
-        shared_private_link_resource_name: str,
-        shared_private_link_resource: Union[_models.SharedPrivateLinkResource, IO[bytes]],
-        search_management_request_options: Optional[_models.SearchManagementRequestOptions] = None,
-        **kwargs: Any
-    ) -> AsyncIterator[bytes]:
-        error_map: MutableMapping = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
-        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
-        cls: ClsType[AsyncIterator[bytes]] = kwargs.pop("cls", None)
-
-        _client_request_id = None
-        if search_management_request_options is not None:
-            _client_request_id = search_management_request_options.client_request_id
-        content_type = content_type or "application/json"
-        _json = None
-        _content = None
-        if isinstance(shared_private_link_resource, (IOBase, bytes)):
-            _content = shared_private_link_resource
-        else:
-            _json = self._serialize.body(shared_private_link_resource, "SharedPrivateLinkResource")
-
-        _request = build_create_or_update_request(
-            resource_group_name=resource_group_name,
-            search_service_name=search_service_name,
-            shared_private_link_resource_name=shared_private_link_resource_name,
-            subscription_id=self._config.subscription_id,
-            client_request_id=_client_request_id,
-            api_version=api_version,
-            content_type=content_type,
-            json=_json,
-            content=_content,
-            headers=_headers,
-            params=_params,
-        )
-        _request.url = self._client.format_url(_request.url)
-
-        _decompress = kwargs.pop("decompress", True)
-        _stream = True
-        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            _request, stream=_stream, **kwargs
-        )
-
-        response = pipeline_response.http_response
-
-        if response.status_code not in [200, 202]:
-            try:
-                await response.read()  # Load the body in memory and close the socket
-            except (StreamConsumedError, StreamClosedError):
-                pass
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
-            raise HttpResponseError(response=response, error_format=ARMErrorFormat)
-
-        deserialized = response.stream_download(self._client._pipeline, decompress=_decompress)
-
-        if cls:
-            return cls(pipeline_response, deserialized, {})  # type: ignore
-
-        return deserialized  # type: ignore
-
-    @overload
-    async def begin_create_or_update(
-        self,
-        resource_group_name: str,
-        search_service_name: str,
-        shared_private_link_resource_name: str,
-        shared_private_link_resource: _models.SharedPrivateLinkResource,
-        search_management_request_options: Optional[_models.SearchManagementRequestOptions] = None,
-        *,
-        content_type: str = "application/json",
-        **kwargs: Any
-    ) -> AsyncLROPoller[_models.SharedPrivateLinkResource]:
-        """Initiates the creation or update of a shared private link resource managed by the search
-        service in the given resource group.
-
-        .. seealso::
-           - https://aka.ms/search-manage
-
-        :param resource_group_name: The name of the resource group within the current subscription. You
-         can obtain this value from the Azure Resource Manager API or the portal. Required.
-        :type resource_group_name: str
-        :param search_service_name: The name of the Azure AI Search service associated with the
-         specified resource group. Required.
-        :type search_service_name: str
-        :param shared_private_link_resource_name: The name of the shared private link resource managed
-         by the Azure AI Search service within the specified resource group. Required.
-        :type shared_private_link_resource_name: str
-        :param shared_private_link_resource: The definition of the shared private link resource to
-         create or update. Required.
-        :type shared_private_link_resource: ~azure.mgmt.search.models.SharedPrivateLinkResource
-        :param search_management_request_options: Parameter group. Default value is None.
-        :type search_management_request_options:
-         ~azure.mgmt.search.models.SearchManagementRequestOptions
-        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
-         Default value is "application/json".
-        :paramtype content_type: str
-        :return: An instance of AsyncLROPoller that returns either SharedPrivateLinkResource or the
-         result of cls(response)
-        :rtype: ~azure.core.polling.AsyncLROPoller[~azure.mgmt.search.models.SharedPrivateLinkResource]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-
-    @overload
-    async def begin_create_or_update(
-        self,
-        resource_group_name: str,
-        search_service_name: str,
-        shared_private_link_resource_name: str,
-        shared_private_link_resource: IO[bytes],
-        search_management_request_options: Optional[_models.SearchManagementRequestOptions] = None,
-        *,
-        content_type: str = "application/json",
-        **kwargs: Any
-    ) -> AsyncLROPoller[_models.SharedPrivateLinkResource]:
-        """Initiates the creation or update of a shared private link resource managed by the search
-        service in the given resource group.
-
-        .. seealso::
-           - https://aka.ms/search-manage
-
-        :param resource_group_name: The name of the resource group within the current subscription. You
-         can obtain this value from the Azure Resource Manager API or the portal. Required.
-        :type resource_group_name: str
-        :param search_service_name: The name of the Azure AI Search service associated with the
-         specified resource group. Required.
-        :type search_service_name: str
-        :param shared_private_link_resource_name: The name of the shared private link resource managed
-         by the Azure AI Search service within the specified resource group. Required.
-        :type shared_private_link_resource_name: str
-        :param shared_private_link_resource: The definition of the shared private link resource to
-         create or update. Required.
-        :type shared_private_link_resource: IO[bytes]
-        :param search_management_request_options: Parameter group. Default value is None.
-        :type search_management_request_options:
-         ~azure.mgmt.search.models.SearchManagementRequestOptions
-        :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
-         Default value is "application/json".
-        :paramtype content_type: str
-        :return: An instance of AsyncLROPoller that returns either SharedPrivateLinkResource or the
-         result of cls(response)
-        :rtype: ~azure.core.polling.AsyncLROPoller[~azure.mgmt.search.models.SharedPrivateLinkResource]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-
-    @distributed_trace_async
-    async def begin_create_or_update(
-        self,
-        resource_group_name: str,
-        search_service_name: str,
-        shared_private_link_resource_name: str,
-        shared_private_link_resource: Union[_models.SharedPrivateLinkResource, IO[bytes]],
-        search_management_request_options: Optional[_models.SearchManagementRequestOptions] = None,
-        **kwargs: Any
-    ) -> AsyncLROPoller[_models.SharedPrivateLinkResource]:
-        """Initiates the creation or update of a shared private link resource managed by the search
-        service in the given resource group.
-
-        .. seealso::
-           - https://aka.ms/search-manage
-
-        :param resource_group_name: The name of the resource group within the current subscription. You
-         can obtain this value from the Azure Resource Manager API or the portal. Required.
-        :type resource_group_name: str
-        :param search_service_name: The name of the Azure AI Search service associated with the
-         specified resource group. Required.
-        :type search_service_name: str
-        :param shared_private_link_resource_name: The name of the shared private link resource managed
-         by the Azure AI Search service within the specified resource group. Required.
-        :type shared_private_link_resource_name: str
-        :param shared_private_link_resource: The definition of the shared private link resource to
-         create or update. Is either a SharedPrivateLinkResource type or a IO[bytes] type. Required.
-        :type shared_private_link_resource: ~azure.mgmt.search.models.SharedPrivateLinkResource or
-         IO[bytes]
-        :param search_management_request_options: Parameter group. Default value is None.
-        :type search_management_request_options:
-         ~azure.mgmt.search.models.SearchManagementRequestOptions
-        :return: An instance of AsyncLROPoller that returns either SharedPrivateLinkResource or the
-         result of cls(response)
-        :rtype: ~azure.core.polling.AsyncLROPoller[~azure.mgmt.search.models.SharedPrivateLinkResource]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
-        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
-        cls: ClsType[_models.SharedPrivateLinkResource] = kwargs.pop("cls", None)
-        polling: Union[bool, AsyncPollingMethod] = kwargs.pop("polling", True)
-        lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
-        cont_token: Optional[str] = kwargs.pop("continuation_token", None)
-        if cont_token is None:
-            raw_result = await self._create_or_update_initial(
-                resource_group_name=resource_group_name,
-                search_service_name=search_service_name,
-                shared_private_link_resource_name=shared_private_link_resource_name,
-                shared_private_link_resource=shared_private_link_resource,
-                search_management_request_options=search_management_request_options,
-                api_version=api_version,
-                content_type=content_type,
-                cls=lambda x, y, z: x,
-                headers=_headers,
-                params=_params,
-                **kwargs
-            )
-            await raw_result.http_response.read()  # type: ignore
-        kwargs.pop("error_map", None)
-
-        def get_long_running_output(pipeline_response):
-            deserialized = self._deserialize("SharedPrivateLinkResource", pipeline_response.http_response)
-            if cls:
-                return cls(pipeline_response, deserialized, {})  # type: ignore
-            return deserialized
-
-        if polling is True:
-            polling_method: AsyncPollingMethod = cast(
-                AsyncPollingMethod,
-                AsyncARMPolling(lro_delay, lro_options={"final-state-via": "azure-async-operation"}, **kwargs),
-            )
-        elif polling is False:
-            polling_method = cast(AsyncPollingMethod, AsyncNoPolling())
-        else:
-            polling_method = polling
-        if cont_token:
-            return AsyncLROPoller[_models.SharedPrivateLinkResource].from_continuation_token(
-                polling_method=polling_method,
-                continuation_token=cont_token,
-                client=self._client,
-                deserialization_callback=get_long_running_output,
-            )
-        return AsyncLROPoller[_models.SharedPrivateLinkResource](
-            self._client, raw_result, get_long_running_output, polling_method  # type: ignore
-        )
-
-    @distributed_trace_async
-    async def get(
-        self,
-        resource_group_name: str,
-        search_service_name: str,
-        shared_private_link_resource_name: str,
-        search_management_request_options: Optional[_models.SearchManagementRequestOptions] = None,
-        **kwargs: Any
-    ) -> _models.SharedPrivateLinkResource:
-        """Gets the details of the shared private link resource managed by the search service in the given
-        resource group.
-
-        .. seealso::
-           - https://aka.ms/search-manage
-
-        :param resource_group_name: The name of the resource group within the current subscription. You
-         can obtain this value from the Azure Resource Manager API or the portal. Required.
-        :type resource_group_name: str
-        :param search_service_name: The name of the Azure AI Search service associated with the
-         specified resource group. Required.
-        :type search_service_name: str
-        :param shared_private_link_resource_name: The name of the shared private link resource managed
-         by the Azure AI Search service within the specified resource group. Required.
-        :type shared_private_link_resource_name: str
-        :param search_management_request_options: Parameter group. Default value is None.
-        :type search_management_request_options:
-         ~azure.mgmt.search.models.SearchManagementRequestOptions
-        :return: SharedPrivateLinkResource or the result of cls(response)
-        :rtype: ~azure.mgmt.search.models.SharedPrivateLinkResource
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        error_map: MutableMapping = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        _headers = kwargs.pop("headers", {}) or {}
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
-        cls: ClsType[_models.SharedPrivateLinkResource] = kwargs.pop("cls", None)
-
-        _client_request_id = None
-        if search_management_request_options is not None:
-            _client_request_id = search_management_request_options.client_request_id
-
-        _request = build_get_request(
-            resource_group_name=resource_group_name,
-            search_service_name=search_service_name,
-            shared_private_link_resource_name=shared_private_link_resource_name,
-            subscription_id=self._config.subscription_id,
-            client_request_id=_client_request_id,
-            api_version=api_version,
-            headers=_headers,
-            params=_params,
-        )
-        _request.url = self._client.format_url(_request.url)
-
-        _stream = False
-        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            _request, stream=_stream, **kwargs
-        )
-
-        response = pipeline_response.http_response
-
-        if response.status_code not in [200]:
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
-            raise HttpResponseError(response=response, error_format=ARMErrorFormat)
-
-        deserialized = self._deserialize("SharedPrivateLinkResource", pipeline_response.http_response)
-
-        if cls:
-            return cls(pipeline_response, deserialized, {})  # type: ignore
-
-        return deserialized  # type: ignore
-
-    async def _delete_initial(
-        self,
-        resource_group_name: str,
-        search_service_name: str,
-        shared_private_link_resource_name: str,
-        search_management_request_options: Optional[_models.SearchManagementRequestOptions] = None,
-        **kwargs: Any
-    ) -> AsyncIterator[bytes]:
-        error_map: MutableMapping = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        _headers = kwargs.pop("headers", {}) or {}
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
-        cls: ClsType[AsyncIterator[bytes]] = kwargs.pop("cls", None)
-
-        _client_request_id = None
-        if search_management_request_options is not None:
-            _client_request_id = search_management_request_options.client_request_id
-
-        _request = build_delete_request(
-            resource_group_name=resource_group_name,
-            search_service_name=search_service_name,
-            shared_private_link_resource_name=shared_private_link_resource_name,
-            subscription_id=self._config.subscription_id,
-            client_request_id=_client_request_id,
-            api_version=api_version,
-            headers=_headers,
-            params=_params,
-        )
-        _request.url = self._client.format_url(_request.url)
-
-        _decompress = kwargs.pop("decompress", True)
-        _stream = True
-        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            _request, stream=_stream, **kwargs
-        )
-
-        response = pipeline_response.http_response
-
-        if response.status_code not in [202, 204, 404]:
-            try:
-                await response.read()  # Load the body in memory and close the socket
-            except (StreamConsumedError, StreamClosedError):
-                pass
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
-            raise HttpResponseError(response=response, error_format=ARMErrorFormat)
-
-        deserialized = response.stream_download(self._client._pipeline, decompress=_decompress)
-
-        if cls:
-            return cls(pipeline_response, deserialized, {})  # type: ignore
-
-        return deserialized  # type: ignore
-
-    @distributed_trace_async
-    async def begin_delete(
-        self,
-        resource_group_name: str,
-        search_service_name: str,
-        shared_private_link_resource_name: str,
-        search_management_request_options: Optional[_models.SearchManagementRequestOptions] = None,
-        **kwargs: Any
-    ) -> AsyncLROPoller[None]:
-        """Initiates the deletion of the shared private link resource from the search service.
-
-        .. seealso::
-           - https://aka.ms/search-manage
-
-        :param resource_group_name: The name of the resource group within the current subscription. You
-         can obtain this value from the Azure Resource Manager API or the portal. Required.
-        :type resource_group_name: str
-        :param search_service_name: The name of the Azure AI Search service associated with the
-         specified resource group. Required.
-        :type search_service_name: str
-        :param shared_private_link_resource_name: The name of the shared private link resource managed
-         by the Azure AI Search service within the specified resource group. Required.
-        :type shared_private_link_resource_name: str
-        :param search_management_request_options: Parameter group. Default value is None.
-        :type search_management_request_options:
-         ~azure.mgmt.search.models.SearchManagementRequestOptions
-        :return: An instance of AsyncLROPoller that returns either None or the result of cls(response)
-        :rtype: ~azure.core.polling.AsyncLROPoller[None]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        _headers = kwargs.pop("headers", {}) or {}
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
-        cls: ClsType[None] = kwargs.pop("cls", None)
-        polling: Union[bool, AsyncPollingMethod] = kwargs.pop("polling", True)
-        lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
-        cont_token: Optional[str] = kwargs.pop("continuation_token", None)
-        if cont_token is None:
-            raw_result = await self._delete_initial(
-                resource_group_name=resource_group_name,
-                search_service_name=search_service_name,
-                shared_private_link_resource_name=shared_private_link_resource_name,
-                search_management_request_options=search_management_request_options,
-                api_version=api_version,
-                cls=lambda x, y, z: x,
-                headers=_headers,
-                params=_params,
-                **kwargs
-            )
-            await raw_result.http_response.read()  # type: ignore
-        kwargs.pop("error_map", None)
-
-        def get_long_running_output(pipeline_response):  # pylint: disable=inconsistent-return-statements
-            if cls:
-                return cls(pipeline_response, None, {})  # type: ignore
-
-        if polling is True:
-            polling_method: AsyncPollingMethod = cast(
-                AsyncPollingMethod,
-                AsyncARMPolling(lro_delay, lro_options={"final-state-via": "azure-async-operation"}, **kwargs),
-            )
-        elif polling is False:
-            polling_method = cast(AsyncPollingMethod, AsyncNoPolling())
-        else:
-            polling_method = polling
-        if cont_token:
-            return AsyncLROPoller[None].from_continuation_token(
-                polling_method=polling_method,
-                continuation_token=cont_token,
-                client=self._client,
-                deserialization_callback=get_long_running_output,
-            )
-        return AsyncLROPoller[None](self._client, raw_result, get_long_running_output, polling_method)  # type: ignore
-
     @distributed_trace
     def list_by_service(
-        self,
-        resource_group_name: str,
-        search_service_name: str,
-        search_management_request_options: Optional[_models.SearchManagementRequestOptions] = None,
-        **kwargs: Any
-    ) -> AsyncIterable["_models.SharedPrivateLinkResource"]:
+        self, resource_group_name: str, search_service_name: str, client_request_id: Optional[str] = None, **kwargs: Any
+    ) -> AsyncItemPaged["_models.SharedPrivateLinkResource"]:
         """Gets a list of all shared private link resources managed by the given service.
 
         .. seealso::
            - https://aka.ms/search-manage
 
-        :param resource_group_name: The name of the resource group within the current subscription. You
-         can obtain this value from the Azure Resource Manager API or the portal. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param search_service_name: The name of the Azure AI Search service associated with the
          specified resource group. Required.
         :type search_service_name: str
-        :param search_management_request_options: Parameter group. Default value is None.
-        :type search_management_request_options:
-         ~azure.mgmt.search.models.SearchManagementRequestOptions
+        :param client_request_id: A client-generated GUID value that identifies this request. If
+         specified, this will be included in response information as a way to track the request. Default
+         value is None.
+        :type client_request_id: str
         :return: An iterator like instance of either SharedPrivateLinkResource or the result of
          cls(response)
         :rtype:
@@ -569,15 +106,12 @@ class SharedPrivateLinkResourcesOperations:
 
         def prepare_request(next_link=None):
             if not next_link:
-                _client_request_id = None
-                if search_management_request_options is not None:
-                    _client_request_id = search_management_request_options.client_request_id
 
                 _request = build_list_by_service_request(
                     resource_group_name=resource_group_name,
                     search_service_name=search_service_name,
                     subscription_id=self._config.subscription_id,
-                    client_request_id=_client_request_id,
+                    client_request_id=client_request_id,
                     api_version=api_version,
                     headers=_headers,
                     params=_params,
@@ -624,3 +158,471 @@ class SharedPrivateLinkResourcesOperations:
             return pipeline_response
 
         return AsyncItemPaged(get_next, extract_data)
+
+    @distributed_trace_async
+    async def get(
+        self,
+        resource_group_name: str,
+        search_service_name: str,
+        shared_private_link_resource_name: str,
+        client_request_id: Optional[str] = None,
+        **kwargs: Any
+    ) -> _models.SharedPrivateLinkResource:
+        """Gets the details of the shared private link resource managed by the search service in the given
+        resource group.
+
+        .. seealso::
+           - https://aka.ms/search-manage
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param search_service_name: The name of the Azure AI Search service associated with the
+         specified resource group. Required.
+        :type search_service_name: str
+        :param shared_private_link_resource_name: The name of the shared private link resource managed
+         by the Azure AI Search service within the specified resource group. Required.
+        :type shared_private_link_resource_name: str
+        :param client_request_id: A client-generated GUID value that identifies this request. If
+         specified, this will be included in response information as a way to track the request. Default
+         value is None.
+        :type client_request_id: str
+        :return: SharedPrivateLinkResource or the result of cls(response)
+        :rtype: ~azure.mgmt.search.models.SharedPrivateLinkResource
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
+        cls: ClsType[_models.SharedPrivateLinkResource] = kwargs.pop("cls", None)
+
+        _request = build_get_request(
+            resource_group_name=resource_group_name,
+            search_service_name=search_service_name,
+            shared_private_link_resource_name=shared_private_link_resource_name,
+            subscription_id=self._config.subscription_id,
+            client_request_id=client_request_id,
+            api_version=api_version,
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            raise HttpResponseError(response=response, error_format=ARMErrorFormat)
+
+        deserialized = self._deserialize("SharedPrivateLinkResource", pipeline_response.http_response)
+
+        if cls:
+            return cls(pipeline_response, deserialized, {})  # type: ignore
+
+        return deserialized  # type: ignore
+
+    async def _create_or_update_initial(
+        self,
+        resource_group_name: str,
+        search_service_name: str,
+        shared_private_link_resource_name: str,
+        shared_private_link_resource: Union[_models.SharedPrivateLinkResource, IO[bytes]],
+        client_request_id: Optional[str] = None,
+        **kwargs: Any
+    ) -> AsyncIterator[bytes]:
+        error_map: MutableMapping = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[AsyncIterator[bytes]] = kwargs.pop("cls", None)
+
+        content_type = content_type or "application/json"
+        _json = None
+        _content = None
+        if isinstance(shared_private_link_resource, (IOBase, bytes)):
+            _content = shared_private_link_resource
+        else:
+            _json = self._serialize.body(shared_private_link_resource, "SharedPrivateLinkResource")
+
+        _request = build_create_or_update_request(
+            resource_group_name=resource_group_name,
+            search_service_name=search_service_name,
+            shared_private_link_resource_name=shared_private_link_resource_name,
+            subscription_id=self._config.subscription_id,
+            client_request_id=client_request_id,
+            api_version=api_version,
+            content_type=content_type,
+            json=_json,
+            content=_content,
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _decompress = kwargs.pop("decompress", True)
+        _stream = True
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200, 202]:
+            try:
+                await response.read()  # Load the body in memory and close the socket
+            except (StreamConsumedError, StreamClosedError):
+                pass
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            raise HttpResponseError(response=response, error_format=ARMErrorFormat)
+
+        response_headers = {}
+        if response.status_code == 202:
+            response_headers["Azure-AsyncOperation"] = self._deserialize(
+                "str", response.headers.get("Azure-AsyncOperation")
+            )
+
+        deserialized = response.stream_download(self._client._pipeline, decompress=_decompress)
+
+        if cls:
+            return cls(pipeline_response, deserialized, response_headers)  # type: ignore
+
+        return deserialized  # type: ignore
+
+    @overload
+    async def begin_create_or_update(
+        self,
+        resource_group_name: str,
+        search_service_name: str,
+        shared_private_link_resource_name: str,
+        shared_private_link_resource: _models.SharedPrivateLinkResource,
+        client_request_id: Optional[str] = None,
+        *,
+        content_type: str = "application/json",
+        **kwargs: Any
+    ) -> AsyncLROPoller[_models.SharedPrivateLinkResource]:
+        """Initiates the creation or update of a shared private link resource managed by the search
+        service in the given resource group.
+
+        .. seealso::
+           - https://aka.ms/search-manage
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param search_service_name: The name of the Azure AI Search service associated with the
+         specified resource group. Required.
+        :type search_service_name: str
+        :param shared_private_link_resource_name: The name of the shared private link resource managed
+         by the Azure AI Search service within the specified resource group. Required.
+        :type shared_private_link_resource_name: str
+        :param shared_private_link_resource: The definition of the shared private link resource to
+         create or update. Required.
+        :type shared_private_link_resource: ~azure.mgmt.search.models.SharedPrivateLinkResource
+        :param client_request_id: A client-generated GUID value that identifies this request. If
+         specified, this will be included in response information as a way to track the request. Default
+         value is None.
+        :type client_request_id: str
+        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :return: An instance of AsyncLROPoller that returns either SharedPrivateLinkResource or the
+         result of cls(response)
+        :rtype: ~azure.core.polling.AsyncLROPoller[~azure.mgmt.search.models.SharedPrivateLinkResource]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+
+    @overload
+    async def begin_create_or_update(
+        self,
+        resource_group_name: str,
+        search_service_name: str,
+        shared_private_link_resource_name: str,
+        shared_private_link_resource: IO[bytes],
+        client_request_id: Optional[str] = None,
+        *,
+        content_type: str = "application/json",
+        **kwargs: Any
+    ) -> AsyncLROPoller[_models.SharedPrivateLinkResource]:
+        """Initiates the creation or update of a shared private link resource managed by the search
+        service in the given resource group.
+
+        .. seealso::
+           - https://aka.ms/search-manage
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param search_service_name: The name of the Azure AI Search service associated with the
+         specified resource group. Required.
+        :type search_service_name: str
+        :param shared_private_link_resource_name: The name of the shared private link resource managed
+         by the Azure AI Search service within the specified resource group. Required.
+        :type shared_private_link_resource_name: str
+        :param shared_private_link_resource: The definition of the shared private link resource to
+         create or update. Required.
+        :type shared_private_link_resource: IO[bytes]
+        :param client_request_id: A client-generated GUID value that identifies this request. If
+         specified, this will be included in response information as a way to track the request. Default
+         value is None.
+        :type client_request_id: str
+        :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :return: An instance of AsyncLROPoller that returns either SharedPrivateLinkResource or the
+         result of cls(response)
+        :rtype: ~azure.core.polling.AsyncLROPoller[~azure.mgmt.search.models.SharedPrivateLinkResource]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+
+    @distributed_trace_async
+    async def begin_create_or_update(
+        self,
+        resource_group_name: str,
+        search_service_name: str,
+        shared_private_link_resource_name: str,
+        shared_private_link_resource: Union[_models.SharedPrivateLinkResource, IO[bytes]],
+        client_request_id: Optional[str] = None,
+        **kwargs: Any
+    ) -> AsyncLROPoller[_models.SharedPrivateLinkResource]:
+        """Initiates the creation or update of a shared private link resource managed by the search
+        service in the given resource group.
+
+        .. seealso::
+           - https://aka.ms/search-manage
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param search_service_name: The name of the Azure AI Search service associated with the
+         specified resource group. Required.
+        :type search_service_name: str
+        :param shared_private_link_resource_name: The name of the shared private link resource managed
+         by the Azure AI Search service within the specified resource group. Required.
+        :type shared_private_link_resource_name: str
+        :param shared_private_link_resource: The definition of the shared private link resource to
+         create or update. Is either a SharedPrivateLinkResource type or a IO[bytes] type. Required.
+        :type shared_private_link_resource: ~azure.mgmt.search.models.SharedPrivateLinkResource or
+         IO[bytes]
+        :param client_request_id: A client-generated GUID value that identifies this request. If
+         specified, this will be included in response information as a way to track the request. Default
+         value is None.
+        :type client_request_id: str
+        :return: An instance of AsyncLROPoller that returns either SharedPrivateLinkResource or the
+         result of cls(response)
+        :rtype: ~azure.core.polling.AsyncLROPoller[~azure.mgmt.search.models.SharedPrivateLinkResource]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[_models.SharedPrivateLinkResource] = kwargs.pop("cls", None)
+        polling: Union[bool, AsyncPollingMethod] = kwargs.pop("polling", True)
+        lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
+        cont_token: Optional[str] = kwargs.pop("continuation_token", None)
+        if cont_token is None:
+            raw_result = await self._create_or_update_initial(
+                resource_group_name=resource_group_name,
+                search_service_name=search_service_name,
+                shared_private_link_resource_name=shared_private_link_resource_name,
+                shared_private_link_resource=shared_private_link_resource,
+                client_request_id=client_request_id,
+                api_version=api_version,
+                content_type=content_type,
+                cls=lambda x, y, z: x,
+                headers=_headers,
+                params=_params,
+                **kwargs
+            )
+            await raw_result.http_response.read()  # type: ignore
+        kwargs.pop("error_map", None)
+
+        def get_long_running_output(pipeline_response):
+            deserialized = self._deserialize("SharedPrivateLinkResource", pipeline_response.http_response)
+            if cls:
+                return cls(pipeline_response, deserialized, {})  # type: ignore
+            return deserialized
+
+        if polling is True:
+            polling_method: AsyncPollingMethod = cast(
+                AsyncPollingMethod,
+                AsyncARMPolling(lro_delay, lro_options={"final-state-via": "azure-async-operation"}, **kwargs),
+            )
+        elif polling is False:
+            polling_method = cast(AsyncPollingMethod, AsyncNoPolling())
+        else:
+            polling_method = polling
+        if cont_token:
+            return AsyncLROPoller[_models.SharedPrivateLinkResource].from_continuation_token(
+                polling_method=polling_method,
+                continuation_token=cont_token,
+                client=self._client,
+                deserialization_callback=get_long_running_output,
+            )
+        return AsyncLROPoller[_models.SharedPrivateLinkResource](
+            self._client, raw_result, get_long_running_output, polling_method  # type: ignore
+        )
+
+    async def _delete_initial(
+        self,
+        resource_group_name: str,
+        search_service_name: str,
+        shared_private_link_resource_name: str,
+        client_request_id: Optional[str] = None,
+        **kwargs: Any
+    ) -> AsyncIterator[bytes]:
+        error_map: MutableMapping = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
+        cls: ClsType[AsyncIterator[bytes]] = kwargs.pop("cls", None)
+
+        _request = build_delete_request(
+            resource_group_name=resource_group_name,
+            search_service_name=search_service_name,
+            shared_private_link_resource_name=shared_private_link_resource_name,
+            subscription_id=self._config.subscription_id,
+            client_request_id=client_request_id,
+            api_version=api_version,
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _decompress = kwargs.pop("decompress", True)
+        _stream = True
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [202, 204, 404]:
+            try:
+                await response.read()  # Load the body in memory and close the socket
+            except (StreamConsumedError, StreamClosedError):
+                pass
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            raise HttpResponseError(response=response, error_format=ARMErrorFormat)
+
+        response_headers = {}
+        if response.status_code == 202:
+            response_headers["Azure-AsyncOperation"] = self._deserialize(
+                "str", response.headers.get("Azure-AsyncOperation")
+            )
+            response_headers["Retry-After"] = self._deserialize("int", response.headers.get("Retry-After"))
+
+        deserialized = response.stream_download(self._client._pipeline, decompress=_decompress)
+
+        if cls:
+            return cls(pipeline_response, deserialized, response_headers)  # type: ignore
+
+        return deserialized  # type: ignore
+
+    @distributed_trace_async
+    async def begin_delete(
+        self,
+        resource_group_name: str,
+        search_service_name: str,
+        shared_private_link_resource_name: str,
+        client_request_id: Optional[str] = None,
+        **kwargs: Any
+    ) -> AsyncLROPoller[None]:
+        """Initiates the deletion of the shared private link resource from the search service.
+
+        .. seealso::
+           - https://aka.ms/search-manage
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param search_service_name: The name of the Azure AI Search service associated with the
+         specified resource group. Required.
+        :type search_service_name: str
+        :param shared_private_link_resource_name: The name of the shared private link resource managed
+         by the Azure AI Search service within the specified resource group. Required.
+        :type shared_private_link_resource_name: str
+        :param client_request_id: A client-generated GUID value that identifies this request. If
+         specified, this will be included in response information as a way to track the request. Default
+         value is None.
+        :type client_request_id: str
+        :return: An instance of AsyncLROPoller that returns either None or the result of cls(response)
+        :rtype: ~azure.core.polling.AsyncLROPoller[None]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
+        cls: ClsType[None] = kwargs.pop("cls", None)
+        polling: Union[bool, AsyncPollingMethod] = kwargs.pop("polling", True)
+        lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
+        cont_token: Optional[str] = kwargs.pop("continuation_token", None)
+        if cont_token is None:
+            raw_result = await self._delete_initial(
+                resource_group_name=resource_group_name,
+                search_service_name=search_service_name,
+                shared_private_link_resource_name=shared_private_link_resource_name,
+                client_request_id=client_request_id,
+                api_version=api_version,
+                cls=lambda x, y, z: x,
+                headers=_headers,
+                params=_params,
+                **kwargs
+            )
+            await raw_result.http_response.read()  # type: ignore
+        kwargs.pop("error_map", None)
+
+        def get_long_running_output(pipeline_response):  # pylint: disable=inconsistent-return-statements
+            if cls:
+                return cls(pipeline_response, None, {})  # type: ignore
+
+        if polling is True:
+            polling_method: AsyncPollingMethod = cast(
+                AsyncPollingMethod,
+                AsyncARMPolling(lro_delay, lro_options={"final-state-via": "azure-async-operation"}, **kwargs),
+            )
+        elif polling is False:
+            polling_method = cast(AsyncPollingMethod, AsyncNoPolling())
+        else:
+            polling_method = polling
+        if cont_token:
+            return AsyncLROPoller[None].from_continuation_token(
+                polling_method=polling_method,
+                continuation_token=cont_token,
+                client=self._client,
+                deserialization_callback=get_long_running_output,
+            )
+        return AsyncLROPoller[None](self._client, raw_result, get_long_running_output, polling_method)  # type: ignore

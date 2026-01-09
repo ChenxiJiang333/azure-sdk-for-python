@@ -6,7 +6,7 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 from collections.abc import MutableMapping
-from typing import Any, AsyncIterable, Callable, Dict, Optional, TypeVar
+from typing import Any, Callable, Optional, TypeVar
 import urllib.parse
 
 from azure.core import AsyncPipelineClient
@@ -31,7 +31,8 @@ from ...operations._usages_operations import build_list_by_subscription_request
 from .._configuration import SearchManagementClientConfiguration
 
 T = TypeVar("T")
-ClsType = Optional[Callable[[PipelineResponse[HttpRequest, AsyncHttpResponse], T, Dict[str, Any]], Any]]
+ClsType = Optional[Callable[[PipelineResponse[HttpRequest, AsyncHttpResponse], T, dict[str, Any]], Any]]
+List = list
 
 
 class UsagesOperations:
@@ -55,21 +56,19 @@ class UsagesOperations:
 
     @distributed_trace
     def list_by_subscription(
-        self,
-        location: str,
-        search_management_request_options: Optional[_models.SearchManagementRequestOptions] = None,
-        **kwargs: Any
-    ) -> AsyncIterable["_models.QuotaUsageResult"]:
+        self, location: str, client_request_id: Optional[str] = None, **kwargs: Any
+    ) -> AsyncItemPaged["_models.QuotaUsageResult"]:
         """Get a list of all Azure AI Search quota usages across the subscription.
 
         .. seealso::
            - https://aka.ms/search-manage
 
-        :param location: The unique location name for a Microsoft Azure geographic region. Required.
+        :param location: The name of the Azure region. Required.
         :type location: str
-        :param search_management_request_options: Parameter group. Default value is None.
-        :type search_management_request_options:
-         ~azure.mgmt.search.models.SearchManagementRequestOptions
+        :param client_request_id: A client-generated GUID value that identifies this request. If
+         specified, this will be included in response information as a way to track the request. Default
+         value is None.
+        :type client_request_id: str
         :return: An iterator like instance of either QuotaUsageResult or the result of cls(response)
         :rtype: ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.search.models.QuotaUsageResult]
         :raises ~azure.core.exceptions.HttpResponseError:
@@ -90,14 +89,11 @@ class UsagesOperations:
 
         def prepare_request(next_link=None):
             if not next_link:
-                _client_request_id = None
-                if search_management_request_options is not None:
-                    _client_request_id = search_management_request_options.client_request_id
 
                 _request = build_list_by_subscription_request(
                     location=location,
                     subscription_id=self._config.subscription_id,
-                    client_request_id=_client_request_id,
+                    client_request_id=client_request_id,
                     api_version=api_version,
                     headers=_headers,
                     params=_params,

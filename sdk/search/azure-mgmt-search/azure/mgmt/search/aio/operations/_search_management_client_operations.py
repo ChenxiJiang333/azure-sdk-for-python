@@ -7,7 +7,7 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 from collections.abc import MutableMapping
-from typing import Any, Callable, Dict, Optional, TypeVar
+from typing import Any, Callable, Optional, TypeVar
 
 from azure.core import AsyncPipelineClient
 from azure.core.exceptions import (
@@ -30,31 +30,31 @@ from ...operations._search_management_client_operations import build_usage_by_su
 from .._configuration import SearchManagementClientConfiguration
 
 T = TypeVar("T")
-ClsType = Optional[Callable[[PipelineResponse[HttpRequest, AsyncHttpResponse], T, Dict[str, Any]], Any]]
+ClsType = Optional[Callable[[PipelineResponse[HttpRequest, AsyncHttpResponse], T, dict[str, Any]], Any]]
+List = list
 
 
-class SearchManagementClientOperationsMixin(ClientMixinABC[AsyncPipelineClient, SearchManagementClientConfiguration]):
+class _SearchManagementClientOperationsMixin(
+    ClientMixinABC[AsyncPipelineClient[HttpRequest, AsyncHttpResponse], SearchManagementClientConfiguration]
+):
 
     @distributed_trace_async
     async def usage_by_subscription_sku(
-        self,
-        location: str,
-        sku_name: str,
-        search_management_request_options: Optional[_models.SearchManagementRequestOptions] = None,
-        **kwargs: Any
+        self, location: str, sku_name: str, client_request_id: Optional[str] = None, **kwargs: Any
     ) -> _models.QuotaUsageResult:
         """Gets the quota usage for a search SKU in the given subscription.
 
         .. seealso::
            - https://aka.ms/search-manage
 
-        :param location: The unique location name for a Microsoft Azure geographic region. Required.
+        :param location: The name of the Azure region. Required.
         :type location: str
         :param sku_name: The unique SKU name that identifies a billable tier. Required.
         :type sku_name: str
-        :param search_management_request_options: Parameter group. Default value is None.
-        :type search_management_request_options:
-         ~azure.mgmt.search.models.SearchManagementRequestOptions
+        :param client_request_id: A client-generated GUID value that identifies this request. If
+         specified, this will be included in response information as a way to track the request. Default
+         value is None.
+        :type client_request_id: str
         :return: QuotaUsageResult or the result of cls(response)
         :rtype: ~azure.mgmt.search.models.QuotaUsageResult
         :raises ~azure.core.exceptions.HttpResponseError:
@@ -73,15 +73,11 @@ class SearchManagementClientOperationsMixin(ClientMixinABC[AsyncPipelineClient, 
         api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
         cls: ClsType[_models.QuotaUsageResult] = kwargs.pop("cls", None)
 
-        _client_request_id = None
-        if search_management_request_options is not None:
-            _client_request_id = search_management_request_options.client_request_id
-
         _request = build_usage_by_subscription_sku_request(
             location=location,
             sku_name=sku_name,
             subscription_id=self._config.subscription_id,
-            client_request_id=_client_request_id,
+            client_request_id=client_request_id,
             api_version=api_version,
             headers=_headers,
             params=_params,

@@ -21,6 +21,50 @@ class TestSearchManagementServicesOperationsAsync(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
+    async def test_services_check_name_availability(self, resource_group):
+        response = await self.client.services.check_name_availability(
+            check_name_availability_input={"name": "str", "type": "searchServices"},
+            api_version="2025-05-01",
+        )
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
+    async def test_services_list_by_subscription(self, resource_group):
+        response = self.client.services.list_by_subscription(
+            api_version="2025-05-01",
+        )
+        result = [r async for r in response]
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
+    async def test_services_list_by_resource_group(self, resource_group):
+        response = self.client.services.list_by_resource_group(
+            resource_group_name=resource_group.name,
+            api_version="2025-05-01",
+        )
+        result = [r async for r in response]
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
+    async def test_services_get(self, resource_group):
+        response = await self.client.services.get(
+            resource_group_name=resource_group.name,
+            search_service_name="str",
+            api_version="2025-05-01",
+        )
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
     async def test_services_begin_create_or_update(self, resource_group):
         response = await (
             await self.client.services.begin_create_or_update(
@@ -35,7 +79,7 @@ class TestSearchManagementServicesOperationsAsync(AzureMgmtRecordedTestCase):
                     "eTag": "str",
                     "encryptionWithCmk": {"encryptionComplianceStatus": "str", "enforcement": "str"},
                     "endpoint": "str",
-                    "hostingMode": "default",
+                    "hostingMode": "str",
                     "id": "str",
                     "identity": {
                         "type": "str",
@@ -72,7 +116,7 @@ class TestSearchManagementServicesOperationsAsync(AzureMgmtRecordedTestCase):
                         }
                     ],
                     "provisioningState": "str",
-                    "publicNetworkAccess": "enabled",
+                    "publicNetworkAccess": "str",
                     "replicaCount": 1,
                     "semanticSearch": "str",
                     "serviceUpgradedAt": "2020-02-20 00:00:00",
@@ -135,7 +179,7 @@ class TestSearchManagementServicesOperationsAsync(AzureMgmtRecordedTestCase):
                 "eTag": "str",
                 "encryptionWithCmk": {"encryptionComplianceStatus": "str", "enforcement": "str"},
                 "endpoint": "str",
-                "hostingMode": "default",
+                "hostingMode": "str",
                 "id": "str",
                 "identity": {
                     "type": "str",
@@ -173,7 +217,7 @@ class TestSearchManagementServicesOperationsAsync(AzureMgmtRecordedTestCase):
                     }
                 ],
                 "provisioningState": "str",
-                "publicNetworkAccess": "enabled",
+                "publicNetworkAccess": "str",
                 "replicaCount": 1,
                 "semanticSearch": "str",
                 "serviceUpgradedAt": "2020-02-20 00:00:00",
@@ -223,56 +267,11 @@ class TestSearchManagementServicesOperationsAsync(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_services_get(self, resource_group):
-        response = await self.client.services.get(
-            resource_group_name=resource_group.name,
-            search_service_name="str",
-            api_version="2025-05-01",
-        )
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
     async def test_services_delete(self, resource_group):
         response = await self.client.services.delete(
             resource_group_name=resource_group.name,
             search_service_name="str",
             api_version="2025-05-01",
-        )
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_services_list_by_resource_group(self, resource_group):
-        response = self.client.services.list_by_resource_group(
-            resource_group_name=resource_group.name,
-            api_version="2025-05-01",
-        )
-        result = [r async for r in response]
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_services_list_by_subscription(self, resource_group):
-        response = self.client.services.list_by_subscription(
-            api_version="2025-05-01",
-        )
-        result = [r async for r in response]
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_services_check_name_availability(self, resource_group):
-        response = await self.client.services.check_name_availability(
-            name="str",
-            api_version="2025-05-01",
-            type="searchServices",
         )
 
         # please add some check logic here by yourself

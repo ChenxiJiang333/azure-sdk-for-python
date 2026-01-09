@@ -1,3 +1,4 @@
+# pylint: disable=too-many-lines
 # coding=utf-8
 # --------------------------------------------------------------------------
 # Copyright (c) Microsoft Corporation. All rights reserved.
@@ -7,20 +8,7 @@
 # --------------------------------------------------------------------------
 from collections.abc import MutableMapping
 from io import IOBase
-from typing import (
-    Any,
-    AsyncIterable,
-    AsyncIterator,
-    Callable,
-    Dict,
-    IO,
-    Literal,
-    Optional,
-    TypeVar,
-    Union,
-    cast,
-    overload,
-)
+from typing import Any, AsyncIterator, Callable, IO, Optional, TypeVar, Union, cast, overload
 import urllib.parse
 
 from azure.core import AsyncPipelineClient
@@ -59,7 +47,8 @@ from ...operations._services_operations import (
 from .._configuration import SearchManagementClientConfiguration
 
 T = TypeVar("T")
-ClsType = Optional[Callable[[PipelineResponse[HttpRequest, AsyncHttpResponse], T, Dict[str, Any]], Any]]
+ClsType = Optional[Callable[[PipelineResponse[HttpRequest, AsyncHttpResponse], T, dict[str, Any]], Any]]
+List = list
 
 
 class ServicesOperations:
@@ -81,12 +70,389 @@ class ServicesOperations:
         self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
+    @overload
+    async def check_name_availability(
+        self,
+        check_name_availability_input: _models.CheckNameAvailabilityInput,
+        client_request_id: Optional[str] = None,
+        *,
+        content_type: str = "application/json",
+        **kwargs: Any
+    ) -> _models.CheckNameAvailabilityOutput:
+        """Checks whether or not the given search service name is available for use. Search service names
+        must be globally unique since they are part of the service URI (https://\\
+        :code:`<name>`.search.windows.net).
+
+        .. seealso::
+           - https://aka.ms/search-manage
+
+        :param check_name_availability_input: The request body. Required.
+        :type check_name_availability_input: ~azure.mgmt.search.models.CheckNameAvailabilityInput
+        :param client_request_id: A client-generated GUID value that identifies this request. If
+         specified, this will be included in response information as a way to track the request. Default
+         value is None.
+        :type client_request_id: str
+        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :return: CheckNameAvailabilityOutput or the result of cls(response)
+        :rtype: ~azure.mgmt.search.models.CheckNameAvailabilityOutput
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+
+    @overload
+    async def check_name_availability(
+        self,
+        check_name_availability_input: IO[bytes],
+        client_request_id: Optional[str] = None,
+        *,
+        content_type: str = "application/json",
+        **kwargs: Any
+    ) -> _models.CheckNameAvailabilityOutput:
+        """Checks whether or not the given search service name is available for use. Search service names
+        must be globally unique since they are part of the service URI (https://\\
+        :code:`<name>`.search.windows.net).
+
+        .. seealso::
+           - https://aka.ms/search-manage
+
+        :param check_name_availability_input: The request body. Required.
+        :type check_name_availability_input: IO[bytes]
+        :param client_request_id: A client-generated GUID value that identifies this request. If
+         specified, this will be included in response information as a way to track the request. Default
+         value is None.
+        :type client_request_id: str
+        :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :return: CheckNameAvailabilityOutput or the result of cls(response)
+        :rtype: ~azure.mgmt.search.models.CheckNameAvailabilityOutput
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+
+    @distributed_trace_async
+    async def check_name_availability(
+        self,
+        check_name_availability_input: Union[_models.CheckNameAvailabilityInput, IO[bytes]],
+        client_request_id: Optional[str] = None,
+        **kwargs: Any
+    ) -> _models.CheckNameAvailabilityOutput:
+        """Checks whether or not the given search service name is available for use. Search service names
+        must be globally unique since they are part of the service URI (https://\\
+        :code:`<name>`.search.windows.net).
+
+        .. seealso::
+           - https://aka.ms/search-manage
+
+        :param check_name_availability_input: The request body. Is either a CheckNameAvailabilityInput
+         type or a IO[bytes] type. Required.
+        :type check_name_availability_input: ~azure.mgmt.search.models.CheckNameAvailabilityInput or
+         IO[bytes]
+        :param client_request_id: A client-generated GUID value that identifies this request. If
+         specified, this will be included in response information as a way to track the request. Default
+         value is None.
+        :type client_request_id: str
+        :return: CheckNameAvailabilityOutput or the result of cls(response)
+        :rtype: ~azure.mgmt.search.models.CheckNameAvailabilityOutput
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[_models.CheckNameAvailabilityOutput] = kwargs.pop("cls", None)
+
+        content_type = content_type or "application/json"
+        _json = None
+        _content = None
+        if isinstance(check_name_availability_input, (IOBase, bytes)):
+            _content = check_name_availability_input
+        else:
+            _json = self._serialize.body(check_name_availability_input, "CheckNameAvailabilityInput")
+
+        _request = build_check_name_availability_request(
+            subscription_id=self._config.subscription_id,
+            client_request_id=client_request_id,
+            api_version=api_version,
+            content_type=content_type,
+            json=_json,
+            content=_content,
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            raise HttpResponseError(response=response, error_format=ARMErrorFormat)
+
+        deserialized = self._deserialize("CheckNameAvailabilityOutput", pipeline_response.http_response)
+
+        if cls:
+            return cls(pipeline_response, deserialized, {})  # type: ignore
+
+        return deserialized  # type: ignore
+
+    @distributed_trace
+    def list_by_subscription(
+        self, client_request_id: Optional[str] = None, **kwargs: Any
+    ) -> AsyncItemPaged["_models.SearchService"]:
+        """Gets a list of all Search services in the given subscription.
+
+        .. seealso::
+           - https://aka.ms/search-manage
+
+        :param client_request_id: A client-generated GUID value that identifies this request. If
+         specified, this will be included in response information as a way to track the request. Default
+         value is None.
+        :type client_request_id: str
+        :return: An iterator like instance of either SearchService or the result of cls(response)
+        :rtype: ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.search.models.SearchService]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
+        cls: ClsType[_models.SearchServiceListResult] = kwargs.pop("cls", None)
+
+        error_map: MutableMapping = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        def prepare_request(next_link=None):
+            if not next_link:
+
+                _request = build_list_by_subscription_request(
+                    subscription_id=self._config.subscription_id,
+                    client_request_id=client_request_id,
+                    api_version=api_version,
+                    headers=_headers,
+                    params=_params,
+                )
+                _request.url = self._client.format_url(_request.url)
+
+            else:
+                # make call to next link with the client's api-version
+                _parsed_next_link = urllib.parse.urlparse(next_link)
+                _next_request_params = case_insensitive_dict(
+                    {
+                        key: [urllib.parse.quote(v) for v in value]
+                        for key, value in urllib.parse.parse_qs(_parsed_next_link.query).items()
+                    }
+                )
+                _next_request_params["api-version"] = self._config.api_version
+                _request = HttpRequest(
+                    "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
+                )
+                _request.url = self._client.format_url(_request.url)
+                _request.method = "GET"
+            return _request
+
+        async def extract_data(pipeline_response):
+            deserialized = self._deserialize("SearchServiceListResult", pipeline_response)
+            list_of_elem = deserialized.value
+            if cls:
+                list_of_elem = cls(list_of_elem)  # type: ignore
+            return deserialized.next_link or None, AsyncList(list_of_elem)
+
+        async def get_next(next_link=None):
+            _request = prepare_request(next_link)
+
+            _stream = False
+            pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
+                _request, stream=_stream, **kwargs
+            )
+            response = pipeline_response.http_response
+
+            if response.status_code not in [200]:
+                map_error(status_code=response.status_code, response=response, error_map=error_map)
+                raise HttpResponseError(response=response, error_format=ARMErrorFormat)
+
+            return pipeline_response
+
+        return AsyncItemPaged(get_next, extract_data)
+
+    @distributed_trace
+    def list_by_resource_group(
+        self, resource_group_name: str, client_request_id: Optional[str] = None, **kwargs: Any
+    ) -> AsyncItemPaged["_models.SearchService"]:
+        """Gets a list of all Search services in the given resource group.
+
+        .. seealso::
+           - https://aka.ms/search-manage
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param client_request_id: A client-generated GUID value that identifies this request. If
+         specified, this will be included in response information as a way to track the request. Default
+         value is None.
+        :type client_request_id: str
+        :return: An iterator like instance of either SearchService or the result of cls(response)
+        :rtype: ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.search.models.SearchService]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
+        cls: ClsType[_models.SearchServiceListResult] = kwargs.pop("cls", None)
+
+        error_map: MutableMapping = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        def prepare_request(next_link=None):
+            if not next_link:
+
+                _request = build_list_by_resource_group_request(
+                    resource_group_name=resource_group_name,
+                    subscription_id=self._config.subscription_id,
+                    client_request_id=client_request_id,
+                    api_version=api_version,
+                    headers=_headers,
+                    params=_params,
+                )
+                _request.url = self._client.format_url(_request.url)
+
+            else:
+                # make call to next link with the client's api-version
+                _parsed_next_link = urllib.parse.urlparse(next_link)
+                _next_request_params = case_insensitive_dict(
+                    {
+                        key: [urllib.parse.quote(v) for v in value]
+                        for key, value in urllib.parse.parse_qs(_parsed_next_link.query).items()
+                    }
+                )
+                _next_request_params["api-version"] = self._config.api_version
+                _request = HttpRequest(
+                    "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
+                )
+                _request.url = self._client.format_url(_request.url)
+                _request.method = "GET"
+            return _request
+
+        async def extract_data(pipeline_response):
+            deserialized = self._deserialize("SearchServiceListResult", pipeline_response)
+            list_of_elem = deserialized.value
+            if cls:
+                list_of_elem = cls(list_of_elem)  # type: ignore
+            return deserialized.next_link or None, AsyncList(list_of_elem)
+
+        async def get_next(next_link=None):
+            _request = prepare_request(next_link)
+
+            _stream = False
+            pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
+                _request, stream=_stream, **kwargs
+            )
+            response = pipeline_response.http_response
+
+            if response.status_code not in [200]:
+                map_error(status_code=response.status_code, response=response, error_map=error_map)
+                raise HttpResponseError(response=response, error_format=ARMErrorFormat)
+
+            return pipeline_response
+
+        return AsyncItemPaged(get_next, extract_data)
+
+    @distributed_trace_async
+    async def get(
+        self, resource_group_name: str, search_service_name: str, client_request_id: Optional[str] = None, **kwargs: Any
+    ) -> _models.SearchService:
+        """Gets the search service with the given name in the given resource group.
+
+        .. seealso::
+           - https://aka.ms/search-manage
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param search_service_name: The name of the Azure AI Search service associated with the
+         specified resource group. Required.
+        :type search_service_name: str
+        :param client_request_id: A client-generated GUID value that identifies this request. If
+         specified, this will be included in response information as a way to track the request. Default
+         value is None.
+        :type client_request_id: str
+        :return: SearchService or the result of cls(response)
+        :rtype: ~azure.mgmt.search.models.SearchService
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
+        cls: ClsType[_models.SearchService] = kwargs.pop("cls", None)
+
+        _request = build_get_request(
+            resource_group_name=resource_group_name,
+            search_service_name=search_service_name,
+            subscription_id=self._config.subscription_id,
+            client_request_id=client_request_id,
+            api_version=api_version,
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            raise HttpResponseError(response=response, error_format=ARMErrorFormat)
+
+        deserialized = self._deserialize("SearchService", pipeline_response.http_response)
+
+        if cls:
+            return cls(pipeline_response, deserialized, {})  # type: ignore
+
+        return deserialized  # type: ignore
+
     async def _create_or_update_initial(
         self,
         resource_group_name: str,
         search_service_name: str,
         service: Union[_models.SearchService, IO[bytes]],
-        search_management_request_options: Optional[_models.SearchManagementRequestOptions] = None,
+        client_request_id: Optional[str] = None,
         **kwargs: Any
     ) -> AsyncIterator[bytes]:
         error_map: MutableMapping = {
@@ -104,9 +470,6 @@ class ServicesOperations:
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
         cls: ClsType[AsyncIterator[bytes]] = kwargs.pop("cls", None)
 
-        _client_request_id = None
-        if search_management_request_options is not None:
-            _client_request_id = search_management_request_options.client_request_id
         content_type = content_type or "application/json"
         _json = None
         _content = None
@@ -119,7 +482,7 @@ class ServicesOperations:
             resource_group_name=resource_group_name,
             search_service_name=search_service_name,
             subscription_id=self._config.subscription_id,
-            client_request_id=_client_request_id,
+            client_request_id=client_request_id,
             api_version=api_version,
             content_type=content_type,
             json=_json,
@@ -145,10 +508,15 @@ class ServicesOperations:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
             raise HttpResponseError(response=response, error_format=ARMErrorFormat)
 
+        response_headers = {}
+        if response.status_code == 201:
+            response_headers["Location"] = self._deserialize("str", response.headers.get("Location"))
+            response_headers["Retry-After"] = self._deserialize("int", response.headers.get("Retry-After"))
+
         deserialized = response.stream_download(self._client._pipeline, decompress=_decompress)
 
         if cls:
-            return cls(pipeline_response, deserialized, {})  # type: ignore
+            return cls(pipeline_response, deserialized, response_headers)  # type: ignore
 
         return deserialized  # type: ignore
 
@@ -158,7 +526,7 @@ class ServicesOperations:
         resource_group_name: str,
         search_service_name: str,
         service: _models.SearchService,
-        search_management_request_options: Optional[_models.SearchManagementRequestOptions] = None,
+        client_request_id: Optional[str] = None,
         *,
         content_type: str = "application/json",
         **kwargs: Any
@@ -169,21 +537,18 @@ class ServicesOperations:
         .. seealso::
            - https://aka.ms/search-manage
 
-        :param resource_group_name: The name of the resource group within the current subscription. You
-         can obtain this value from the Azure Resource Manager API or the portal. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
-        :param search_service_name: The name of the Azure AI Search service to create or update. Search
-         service names must only contain lowercase letters, digits or dashes, cannot use dash as the
-         first two or last one characters, cannot contain consecutive dashes, and must be between 2 and
-         60 characters in length. Search service names must be unique since they are part of the service
-         URI (https://\\ :code:`<name>`.search.windows.net). You cannot change the service name after
-         the service is created. Required.
+        :param search_service_name: The name of the Azure AI Search service associated with the
+         specified resource group. Required.
         :type search_service_name: str
         :param service: The definition of the search service to create or update. Required.
         :type service: ~azure.mgmt.search.models.SearchService
-        :param search_management_request_options: Parameter group. Default value is None.
-        :type search_management_request_options:
-         ~azure.mgmt.search.models.SearchManagementRequestOptions
+        :param client_request_id: A client-generated GUID value that identifies this request. If
+         specified, this will be included in response information as a way to track the request. Default
+         value is None.
+        :type client_request_id: str
         :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
          Default value is "application/json".
         :paramtype content_type: str
@@ -199,7 +564,7 @@ class ServicesOperations:
         resource_group_name: str,
         search_service_name: str,
         service: IO[bytes],
-        search_management_request_options: Optional[_models.SearchManagementRequestOptions] = None,
+        client_request_id: Optional[str] = None,
         *,
         content_type: str = "application/json",
         **kwargs: Any
@@ -210,21 +575,18 @@ class ServicesOperations:
         .. seealso::
            - https://aka.ms/search-manage
 
-        :param resource_group_name: The name of the resource group within the current subscription. You
-         can obtain this value from the Azure Resource Manager API or the portal. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
-        :param search_service_name: The name of the Azure AI Search service to create or update. Search
-         service names must only contain lowercase letters, digits or dashes, cannot use dash as the
-         first two or last one characters, cannot contain consecutive dashes, and must be between 2 and
-         60 characters in length. Search service names must be unique since they are part of the service
-         URI (https://\\ :code:`<name>`.search.windows.net). You cannot change the service name after
-         the service is created. Required.
+        :param search_service_name: The name of the Azure AI Search service associated with the
+         specified resource group. Required.
         :type search_service_name: str
         :param service: The definition of the search service to create or update. Required.
         :type service: IO[bytes]
-        :param search_management_request_options: Parameter group. Default value is None.
-        :type search_management_request_options:
-         ~azure.mgmt.search.models.SearchManagementRequestOptions
+        :param client_request_id: A client-generated GUID value that identifies this request. If
+         specified, this will be included in response information as a way to track the request. Default
+         value is None.
+        :type client_request_id: str
         :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
          Default value is "application/json".
         :paramtype content_type: str
@@ -240,7 +602,7 @@ class ServicesOperations:
         resource_group_name: str,
         search_service_name: str,
         service: Union[_models.SearchService, IO[bytes]],
-        search_management_request_options: Optional[_models.SearchManagementRequestOptions] = None,
+        client_request_id: Optional[str] = None,
         **kwargs: Any
     ) -> AsyncLROPoller[_models.SearchService]:
         """Creates or updates a search service in the given resource group. If the search service already
@@ -249,22 +611,19 @@ class ServicesOperations:
         .. seealso::
            - https://aka.ms/search-manage
 
-        :param resource_group_name: The name of the resource group within the current subscription. You
-         can obtain this value from the Azure Resource Manager API or the portal. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
-        :param search_service_name: The name of the Azure AI Search service to create or update. Search
-         service names must only contain lowercase letters, digits or dashes, cannot use dash as the
-         first two or last one characters, cannot contain consecutive dashes, and must be between 2 and
-         60 characters in length. Search service names must be unique since they are part of the service
-         URI (https://\\ :code:`<name>`.search.windows.net). You cannot change the service name after
-         the service is created. Required.
+        :param search_service_name: The name of the Azure AI Search service associated with the
+         specified resource group. Required.
         :type search_service_name: str
         :param service: The definition of the search service to create or update. Is either a
          SearchService type or a IO[bytes] type. Required.
         :type service: ~azure.mgmt.search.models.SearchService or IO[bytes]
-        :param search_management_request_options: Parameter group. Default value is None.
-        :type search_management_request_options:
-         ~azure.mgmt.search.models.SearchManagementRequestOptions
+        :param client_request_id: A client-generated GUID value that identifies this request. If
+         specified, this will be included in response information as a way to track the request. Default
+         value is None.
+        :type client_request_id: str
         :return: An instance of AsyncLROPoller that returns either SearchService or the result of
          cls(response)
         :rtype: ~azure.core.polling.AsyncLROPoller[~azure.mgmt.search.models.SearchService]
@@ -284,7 +643,7 @@ class ServicesOperations:
                 resource_group_name=resource_group_name,
                 search_service_name=search_service_name,
                 service=service,
-                search_management_request_options=search_management_request_options,
+                client_request_id=client_request_id,
                 api_version=api_version,
                 content_type=content_type,
                 cls=lambda x, y, z: x,
@@ -302,7 +661,9 @@ class ServicesOperations:
             return deserialized
 
         if polling is True:
-            polling_method: AsyncPollingMethod = cast(AsyncPollingMethod, AsyncARMPolling(lro_delay, **kwargs))
+            polling_method: AsyncPollingMethod = cast(
+                AsyncPollingMethod, AsyncARMPolling(lro_delay, lro_options={"final-state-via": "location"}, **kwargs)
+            )
         elif polling is False:
             polling_method = cast(AsyncPollingMethod, AsyncNoPolling())
         else:
@@ -324,7 +685,7 @@ class ServicesOperations:
         resource_group_name: str,
         search_service_name: str,
         service: _models.SearchServiceUpdate,
-        search_management_request_options: Optional[_models.SearchManagementRequestOptions] = None,
+        client_request_id: Optional[str] = None,
         *,
         content_type: str = "application/json",
         **kwargs: Any
@@ -334,16 +695,18 @@ class ServicesOperations:
         .. seealso::
            - https://aka.ms/search-manage
 
-        :param resource_group_name: The name of the resource group within the current subscription. You
-         can obtain this value from the Azure Resource Manager API or the portal. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
-        :param search_service_name: The name of the Azure AI Search service to update. Required.
+        :param search_service_name: The name of the Azure AI Search service associated with the
+         specified resource group. Required.
         :type search_service_name: str
         :param service: The definition of the search service to update. Required.
         :type service: ~azure.mgmt.search.models.SearchServiceUpdate
-        :param search_management_request_options: Parameter group. Default value is None.
-        :type search_management_request_options:
-         ~azure.mgmt.search.models.SearchManagementRequestOptions
+        :param client_request_id: A client-generated GUID value that identifies this request. If
+         specified, this will be included in response information as a way to track the request. Default
+         value is None.
+        :type client_request_id: str
         :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
          Default value is "application/json".
         :paramtype content_type: str
@@ -358,7 +721,7 @@ class ServicesOperations:
         resource_group_name: str,
         search_service_name: str,
         service: IO[bytes],
-        search_management_request_options: Optional[_models.SearchManagementRequestOptions] = None,
+        client_request_id: Optional[str] = None,
         *,
         content_type: str = "application/json",
         **kwargs: Any
@@ -368,16 +731,18 @@ class ServicesOperations:
         .. seealso::
            - https://aka.ms/search-manage
 
-        :param resource_group_name: The name of the resource group within the current subscription. You
-         can obtain this value from the Azure Resource Manager API or the portal. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
-        :param search_service_name: The name of the Azure AI Search service to update. Required.
+        :param search_service_name: The name of the Azure AI Search service associated with the
+         specified resource group. Required.
         :type search_service_name: str
         :param service: The definition of the search service to update. Required.
         :type service: IO[bytes]
-        :param search_management_request_options: Parameter group. Default value is None.
-        :type search_management_request_options:
-         ~azure.mgmt.search.models.SearchManagementRequestOptions
+        :param client_request_id: A client-generated GUID value that identifies this request. If
+         specified, this will be included in response information as a way to track the request. Default
+         value is None.
+        :type client_request_id: str
         :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
          Default value is "application/json".
         :paramtype content_type: str
@@ -392,7 +757,7 @@ class ServicesOperations:
         resource_group_name: str,
         search_service_name: str,
         service: Union[_models.SearchServiceUpdate, IO[bytes]],
-        search_management_request_options: Optional[_models.SearchManagementRequestOptions] = None,
+        client_request_id: Optional[str] = None,
         **kwargs: Any
     ) -> _models.SearchService:
         """Updates an existing search service in the given resource group.
@@ -400,17 +765,19 @@ class ServicesOperations:
         .. seealso::
            - https://aka.ms/search-manage
 
-        :param resource_group_name: The name of the resource group within the current subscription. You
-         can obtain this value from the Azure Resource Manager API or the portal. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
-        :param search_service_name: The name of the Azure AI Search service to update. Required.
+        :param search_service_name: The name of the Azure AI Search service associated with the
+         specified resource group. Required.
         :type search_service_name: str
         :param service: The definition of the search service to update. Is either a SearchServiceUpdate
          type or a IO[bytes] type. Required.
         :type service: ~azure.mgmt.search.models.SearchServiceUpdate or IO[bytes]
-        :param search_management_request_options: Parameter group. Default value is None.
-        :type search_management_request_options:
-         ~azure.mgmt.search.models.SearchManagementRequestOptions
+        :param client_request_id: A client-generated GUID value that identifies this request. If
+         specified, this will be included in response information as a way to track the request. Default
+         value is None.
+        :type client_request_id: str
         :return: SearchService or the result of cls(response)
         :rtype: ~azure.mgmt.search.models.SearchService
         :raises ~azure.core.exceptions.HttpResponseError:
@@ -430,9 +797,6 @@ class ServicesOperations:
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
         cls: ClsType[_models.SearchService] = kwargs.pop("cls", None)
 
-        _client_request_id = None
-        if search_management_request_options is not None:
-            _client_request_id = search_management_request_options.client_request_id
         content_type = content_type or "application/json"
         _json = None
         _content = None
@@ -445,7 +809,7 @@ class ServicesOperations:
             resource_group_name=resource_group_name,
             search_service_name=search_service_name,
             subscription_id=self._config.subscription_id,
-            client_request_id=_client_request_id,
+            client_request_id=client_request_id,
             api_version=api_version,
             content_type=content_type,
             json=_json,
@@ -474,100 +838,24 @@ class ServicesOperations:
         return deserialized  # type: ignore
 
     @distributed_trace_async
-    async def get(
-        self,
-        resource_group_name: str,
-        search_service_name: str,
-        search_management_request_options: Optional[_models.SearchManagementRequestOptions] = None,
-        **kwargs: Any
-    ) -> _models.SearchService:
-        """Gets the search service with the given name in the given resource group.
-
-        .. seealso::
-           - https://aka.ms/search-manage
-
-        :param resource_group_name: The name of the resource group within the current subscription. You
-         can obtain this value from the Azure Resource Manager API or the portal. Required.
-        :type resource_group_name: str
-        :param search_service_name: The name of the Azure AI Search service associated with the
-         specified resource group. Required.
-        :type search_service_name: str
-        :param search_management_request_options: Parameter group. Default value is None.
-        :type search_management_request_options:
-         ~azure.mgmt.search.models.SearchManagementRequestOptions
-        :return: SearchService or the result of cls(response)
-        :rtype: ~azure.mgmt.search.models.SearchService
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        error_map: MutableMapping = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        _headers = kwargs.pop("headers", {}) or {}
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
-        cls: ClsType[_models.SearchService] = kwargs.pop("cls", None)
-
-        _client_request_id = None
-        if search_management_request_options is not None:
-            _client_request_id = search_management_request_options.client_request_id
-
-        _request = build_get_request(
-            resource_group_name=resource_group_name,
-            search_service_name=search_service_name,
-            subscription_id=self._config.subscription_id,
-            client_request_id=_client_request_id,
-            api_version=api_version,
-            headers=_headers,
-            params=_params,
-        )
-        _request.url = self._client.format_url(_request.url)
-
-        _stream = False
-        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            _request, stream=_stream, **kwargs
-        )
-
-        response = pipeline_response.http_response
-
-        if response.status_code not in [200]:
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
-            raise HttpResponseError(response=response, error_format=ARMErrorFormat)
-
-        deserialized = self._deserialize("SearchService", pipeline_response.http_response)
-
-        if cls:
-            return cls(pipeline_response, deserialized, {})  # type: ignore
-
-        return deserialized  # type: ignore
-
-    @distributed_trace_async
     async def delete(
-        self,
-        resource_group_name: str,
-        search_service_name: str,
-        search_management_request_options: Optional[_models.SearchManagementRequestOptions] = None,
-        **kwargs: Any
+        self, resource_group_name: str, search_service_name: str, client_request_id: Optional[str] = None, **kwargs: Any
     ) -> None:
         """Deletes a search service in the given resource group, along with its associated resources.
 
         .. seealso::
            - https://aka.ms/search-manage
 
-        :param resource_group_name: The name of the resource group within the current subscription. You
-         can obtain this value from the Azure Resource Manager API or the portal. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param search_service_name: The name of the Azure AI Search service associated with the
          specified resource group. Required.
         :type search_service_name: str
-        :param search_management_request_options: Parameter group. Default value is None.
-        :type search_management_request_options:
-         ~azure.mgmt.search.models.SearchManagementRequestOptions
+        :param client_request_id: A client-generated GUID value that identifies this request. If
+         specified, this will be included in response information as a way to track the request. Default
+         value is None.
+        :type client_request_id: str
         :return: None or the result of cls(response)
         :rtype: None
         :raises ~azure.core.exceptions.HttpResponseError:
@@ -586,15 +874,11 @@ class ServicesOperations:
         api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
         cls: ClsType[None] = kwargs.pop("cls", None)
 
-        _client_request_id = None
-        if search_management_request_options is not None:
-            _client_request_id = search_management_request_options.client_request_id
-
         _request = build_delete_request(
             resource_group_name=resource_group_name,
             search_service_name=search_service_name,
             subscription_id=self._config.subscription_id,
-            client_request_id=_client_request_id,
+            client_request_id=client_request_id,
             api_version=api_version,
             headers=_headers,
             params=_params,
@@ -614,261 +898,6 @@ class ServicesOperations:
 
         if cls:
             return cls(pipeline_response, None, {})  # type: ignore
-
-    @distributed_trace
-    def list_by_resource_group(
-        self,
-        resource_group_name: str,
-        search_management_request_options: Optional[_models.SearchManagementRequestOptions] = None,
-        **kwargs: Any
-    ) -> AsyncIterable["_models.SearchService"]:
-        """Gets a list of all Search services in the given resource group.
-
-        .. seealso::
-           - https://aka.ms/search-manage
-
-        :param resource_group_name: The name of the resource group within the current subscription. You
-         can obtain this value from the Azure Resource Manager API or the portal. Required.
-        :type resource_group_name: str
-        :param search_management_request_options: Parameter group. Default value is None.
-        :type search_management_request_options:
-         ~azure.mgmt.search.models.SearchManagementRequestOptions
-        :return: An iterator like instance of either SearchService or the result of cls(response)
-        :rtype: ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.search.models.SearchService]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        _headers = kwargs.pop("headers", {}) or {}
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
-        cls: ClsType[_models.SearchServiceListResult] = kwargs.pop("cls", None)
-
-        error_map: MutableMapping = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        def prepare_request(next_link=None):
-            if not next_link:
-                _client_request_id = None
-                if search_management_request_options is not None:
-                    _client_request_id = search_management_request_options.client_request_id
-
-                _request = build_list_by_resource_group_request(
-                    resource_group_name=resource_group_name,
-                    subscription_id=self._config.subscription_id,
-                    client_request_id=_client_request_id,
-                    api_version=api_version,
-                    headers=_headers,
-                    params=_params,
-                )
-                _request.url = self._client.format_url(_request.url)
-
-            else:
-                # make call to next link with the client's api-version
-                _parsed_next_link = urllib.parse.urlparse(next_link)
-                _next_request_params = case_insensitive_dict(
-                    {
-                        key: [urllib.parse.quote(v) for v in value]
-                        for key, value in urllib.parse.parse_qs(_parsed_next_link.query).items()
-                    }
-                )
-                _next_request_params["api-version"] = self._config.api_version
-                _request = HttpRequest(
-                    "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
-                )
-                _request.url = self._client.format_url(_request.url)
-                _request.method = "GET"
-            return _request
-
-        async def extract_data(pipeline_response):
-            deserialized = self._deserialize("SearchServiceListResult", pipeline_response)
-            list_of_elem = deserialized.value
-            if cls:
-                list_of_elem = cls(list_of_elem)  # type: ignore
-            return deserialized.next_link or None, AsyncList(list_of_elem)
-
-        async def get_next(next_link=None):
-            _request = prepare_request(next_link)
-
-            _stream = False
-            pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-                _request, stream=_stream, **kwargs
-            )
-            response = pipeline_response.http_response
-
-            if response.status_code not in [200]:
-                map_error(status_code=response.status_code, response=response, error_map=error_map)
-                raise HttpResponseError(response=response, error_format=ARMErrorFormat)
-
-            return pipeline_response
-
-        return AsyncItemPaged(get_next, extract_data)
-
-    @distributed_trace
-    def list_by_subscription(
-        self, search_management_request_options: Optional[_models.SearchManagementRequestOptions] = None, **kwargs: Any
-    ) -> AsyncIterable["_models.SearchService"]:
-        """Gets a list of all Search services in the given subscription.
-
-        .. seealso::
-           - https://aka.ms/search-manage
-
-        :param search_management_request_options: Parameter group. Default value is None.
-        :type search_management_request_options:
-         ~azure.mgmt.search.models.SearchManagementRequestOptions
-        :return: An iterator like instance of either SearchService or the result of cls(response)
-        :rtype: ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.search.models.SearchService]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        _headers = kwargs.pop("headers", {}) or {}
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
-        cls: ClsType[_models.SearchServiceListResult] = kwargs.pop("cls", None)
-
-        error_map: MutableMapping = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        def prepare_request(next_link=None):
-            if not next_link:
-                _client_request_id = None
-                if search_management_request_options is not None:
-                    _client_request_id = search_management_request_options.client_request_id
-
-                _request = build_list_by_subscription_request(
-                    subscription_id=self._config.subscription_id,
-                    client_request_id=_client_request_id,
-                    api_version=api_version,
-                    headers=_headers,
-                    params=_params,
-                )
-                _request.url = self._client.format_url(_request.url)
-
-            else:
-                # make call to next link with the client's api-version
-                _parsed_next_link = urllib.parse.urlparse(next_link)
-                _next_request_params = case_insensitive_dict(
-                    {
-                        key: [urllib.parse.quote(v) for v in value]
-                        for key, value in urllib.parse.parse_qs(_parsed_next_link.query).items()
-                    }
-                )
-                _next_request_params["api-version"] = self._config.api_version
-                _request = HttpRequest(
-                    "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
-                )
-                _request.url = self._client.format_url(_request.url)
-                _request.method = "GET"
-            return _request
-
-        async def extract_data(pipeline_response):
-            deserialized = self._deserialize("SearchServiceListResult", pipeline_response)
-            list_of_elem = deserialized.value
-            if cls:
-                list_of_elem = cls(list_of_elem)  # type: ignore
-            return deserialized.next_link or None, AsyncList(list_of_elem)
-
-        async def get_next(next_link=None):
-            _request = prepare_request(next_link)
-
-            _stream = False
-            pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-                _request, stream=_stream, **kwargs
-            )
-            response = pipeline_response.http_response
-
-            if response.status_code not in [200]:
-                map_error(status_code=response.status_code, response=response, error_map=error_map)
-                raise HttpResponseError(response=response, error_format=ARMErrorFormat)
-
-            return pipeline_response
-
-        return AsyncItemPaged(get_next, extract_data)
-
-    @distributed_trace_async
-    async def check_name_availability(
-        self,
-        name: str,
-        search_management_request_options: Optional[_models.SearchManagementRequestOptions] = None,
-        **kwargs: Any
-    ) -> _models.CheckNameAvailabilityOutput:
-        """Checks whether or not the given search service name is available for use. Search service names
-        must be globally unique since they are part of the service URI (https://\\
-        :code:`<name>`.search.windows.net).
-
-        .. seealso::
-           - https://aka.ms/search-manage
-
-        :param name: The search service name to validate. Search service names must only contain
-         lowercase letters, digits or dashes, cannot use dash as the first two or last one characters,
-         cannot contain consecutive dashes, and must be between 2 and 60 characters in length. Required.
-        :type name: str
-        :param search_management_request_options: Parameter group. Default value is None.
-        :type search_management_request_options:
-         ~azure.mgmt.search.models.SearchManagementRequestOptions
-        :return: CheckNameAvailabilityOutput or the result of cls(response)
-        :rtype: ~azure.mgmt.search.models.CheckNameAvailabilityOutput
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        error_map: MutableMapping = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
-        content_type: str = kwargs.pop("content_type", _headers.pop("Content-Type", "application/json"))
-        type: Literal["searchServices"] = kwargs.pop("type", "searchServices")
-        cls: ClsType[_models.CheckNameAvailabilityOutput] = kwargs.pop("cls", None)
-
-        _client_request_id = None
-        if search_management_request_options is not None:
-            _client_request_id = search_management_request_options.client_request_id
-        _check_name_availability_input = _models.CheckNameAvailabilityInput(name=name, type=type)
-        _json = self._serialize.body(_check_name_availability_input, "CheckNameAvailabilityInput")
-
-        _request = build_check_name_availability_request(
-            subscription_id=self._config.subscription_id,
-            client_request_id=_client_request_id,
-            api_version=api_version,
-            content_type=content_type,
-            json=_json,
-            headers=_headers,
-            params=_params,
-        )
-        _request.url = self._client.format_url(_request.url)
-
-        _stream = False
-        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            _request, stream=_stream, **kwargs
-        )
-
-        response = pipeline_response.http_response
-
-        if response.status_code not in [200]:
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
-            raise HttpResponseError(response=response, error_format=ARMErrorFormat)
-
-        deserialized = self._deserialize("CheckNameAvailabilityOutput", pipeline_response.http_response)
-
-        if cls:
-            return cls(pipeline_response, deserialized, {})  # type: ignore
-
-        return deserialized  # type: ignore
 
     async def _upgrade_initial(
         self, resource_group_name: str, search_service_name: str, **kwargs: Any
@@ -916,6 +945,7 @@ class ServicesOperations:
         response_headers = {}
         if response.status_code == 202:
             response_headers["Location"] = self._deserialize("str", response.headers.get("Location"))
+            response_headers["Retry-After"] = self._deserialize("int", response.headers.get("Retry-After"))
 
         deserialized = response.stream_download(self._client._pipeline, decompress=_decompress)
 
@@ -930,8 +960,8 @@ class ServicesOperations:
     ) -> AsyncLROPoller[_models.SearchService]:
         """Upgrades the Azure AI Search service to the latest version available.
 
-        :param resource_group_name: The name of the resource group within the current subscription. You
-         can obtain this value from the Azure Resource Manager API or the portal. Required.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
         :type resource_group_name: str
         :param search_service_name: The name of the Azure AI Search service associated with the
          specified resource group. Required.

@@ -28,7 +28,7 @@ from azure.mgmt.search import SearchManagementClient
 def main():
     client = SearchManagementClient(
         credential=DefaultAzureCredential(),
-        subscription_id="subid",
+        subscription_id="00000000-0000-0000-0000-000000000000",
     )
 
     client.query_keys.delete(
@@ -38,6 +38,6 @@ def main():
     )
 
 
-# x-ms-original-file: specification/search/resource-manager/Microsoft.Search/stable/2025-05-01/examples/SearchDeleteQueryKey.json
+# x-ms-original-file: specification/search/resource-manager/Microsoft.Search/Search/stable/2025-05-01/examples/SearchDeleteQueryKey.json
 if __name__ == "__main__":
     main()

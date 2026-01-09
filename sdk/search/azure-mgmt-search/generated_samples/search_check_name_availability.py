@@ -16,7 +16,7 @@ from azure.mgmt.search import SearchManagementClient
     pip install azure-identity
     pip install azure-mgmt-search
 # USAGE
-    python search_create_or_update_service_to_allow_access_from_private_endpoints.py
+    python search_check_name_availability.py
 
     Before run the sample, please set the values of the client ID, tenant ID and client secret
     of the AAD application as environment variables: AZURE_CLIENT_ID, AZURE_TENANT_ID,
@@ -31,25 +31,12 @@ def main():
         subscription_id="00000000-0000-0000-0000-000000000000",
     )
 
-    response = client.services.begin_create_or_update(
-        resource_group_name="rg1",
-        search_service_name="mysearchservice",
-        service={
-            "location": "westus",
-            "properties": {
-                "computeType": "Default",
-                "hostingMode": "Default",
-                "partitionCount": 1,
-                "publicNetworkAccess": "Disabled",
-                "replicaCount": 3,
-            },
-            "sku": {"name": "standard"},
-            "tags": {"app-name": "My e-commerce app"},
-        },
-    ).result()
+    response = client.services.check_name_availability(
+        check_name_availability_input={"name": "mysearchservice", "type": "searchServices"},
+    )
     print(response)
 
 
-# x-ms-original-file: specification/search/resource-manager/Microsoft.Search/Search/stable/2025-05-01/examples/SearchCreateOrUpdateServiceToAllowAccessFromPrivateEndpoints.json
+# x-ms-original-file: specification/search/resource-manager/Microsoft.Search/Search/stable/2025-05-01/examples/SearchCheckNameAvailability.json
 if __name__ == "__main__":
     main()

@@ -28,17 +28,17 @@ from azure.mgmt.search import SearchManagementClient
 def main():
     client = SearchManagementClient(
         credential=DefaultAzureCredential(),
-        subscription_id="subid",
+        subscription_id="00000000-0000-0000-0000-000000000000",
     )
 
     response = client.services.update(
         resource_group_name="rg1",
         search_service_name="mysearchservice",
-        service={"properties": {"partitionCount": 1, "publicNetworkAccess": "disabled", "replicaCount": 1}},
+        service={"properties": {"partitionCount": 1, "publicNetworkAccess": "Disabled", "replicaCount": 1}},
     )
     print(response)
 
 
-# x-ms-original-file: specification/search/resource-manager/Microsoft.Search/stable/2025-05-01/examples/SearchUpdateServiceToAllowAccessFromPrivateEndpoints.json
+# x-ms-original-file: specification/search/resource-manager/Microsoft.Search/Search/stable/2025-05-01/examples/SearchUpdateServiceToAllowAccessFromPrivateEndpoints.json
 if __name__ == "__main__":
     main()

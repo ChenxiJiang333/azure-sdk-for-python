@@ -27,49 +27,52 @@ from .operations import (
     PrivateEndpointConnectionsOperations,
     PrivateLinkResourcesOperations,
     QueryKeysOperations,
-    SearchManagementClientOperationsMixin,
     ServicesOperations,
     SharedPrivateLinkResourcesOperations,
     UsagesOperations,
+    _SearchManagementClientOperationsMixin,
 )
 
 if TYPE_CHECKING:
+    from azure.core import AzureClouds
     from azure.core.credentials_async import AsyncTokenCredential
 
 
-class SearchManagementClient(SearchManagementClientOperationsMixin):  # pylint: disable=too-many-instance-attributes
+class SearchManagementClient(_SearchManagementClientOperationsMixin):  # pylint: disable=too-many-instance-attributes
     """Client that can be used to manage Azure AI Search services and API keys.
 
     :ivar operations: Operations operations
     :vartype operations: azure.mgmt.search.aio.operations.Operations
+    :ivar services: ServicesOperations operations
+    :vartype services: azure.mgmt.search.aio.operations.ServicesOperations
+    :ivar usages: UsagesOperations operations
+    :vartype usages: azure.mgmt.search.aio.operations.UsagesOperations
     :ivar admin_keys: AdminKeysOperations operations
     :vartype admin_keys: azure.mgmt.search.aio.operations.AdminKeysOperations
     :ivar query_keys: QueryKeysOperations operations
     :vartype query_keys: azure.mgmt.search.aio.operations.QueryKeysOperations
-    :ivar services: ServicesOperations operations
-    :vartype services: azure.mgmt.search.aio.operations.ServicesOperations
-    :ivar private_link_resources: PrivateLinkResourcesOperations operations
-    :vartype private_link_resources:
-     azure.mgmt.search.aio.operations.PrivateLinkResourcesOperations
-    :ivar private_endpoint_connections: PrivateEndpointConnectionsOperations operations
-    :vartype private_endpoint_connections:
-     azure.mgmt.search.aio.operations.PrivateEndpointConnectionsOperations
-    :ivar shared_private_link_resources: SharedPrivateLinkResourcesOperations operations
-    :vartype shared_private_link_resources:
-     azure.mgmt.search.aio.operations.SharedPrivateLinkResourcesOperations
-    :ivar usages: UsagesOperations operations
-    :vartype usages: azure.mgmt.search.aio.operations.UsagesOperations
     :ivar network_security_perimeter_configurations:
      NetworkSecurityPerimeterConfigurationsOperations operations
     :vartype network_security_perimeter_configurations:
      azure.mgmt.search.aio.operations.NetworkSecurityPerimeterConfigurationsOperations
+    :ivar private_endpoint_connections: PrivateEndpointConnectionsOperations operations
+    :vartype private_endpoint_connections:
+     azure.mgmt.search.aio.operations.PrivateEndpointConnectionsOperations
+    :ivar private_link_resources: PrivateLinkResourcesOperations operations
+    :vartype private_link_resources:
+     azure.mgmt.search.aio.operations.PrivateLinkResourcesOperations
+    :ivar shared_private_link_resources: SharedPrivateLinkResourcesOperations operations
+    :vartype shared_private_link_resources:
+     azure.mgmt.search.aio.operations.SharedPrivateLinkResourcesOperations
     :param credential: Credential needed for the client to connect to Azure. Required.
     :type credential: ~azure.core.credentials_async.AsyncTokenCredential
-    :param subscription_id: The unique identifier for a Microsoft Azure subscription. You can
-     obtain this value from the Azure Resource Manager API or the portal. Required.
+    :param subscription_id: The ID of the target subscription. The value must be an UUID. Required.
     :type subscription_id: str
     :param base_url: Service URL. Default value is None.
     :type base_url: str
+    :keyword cloud_setting: The cloud setting for which to get the ARM endpoint. Default value is
+     None.
+    :paramtype cloud_setting: ~azure.core.AzureClouds
     :keyword api_version: Api Version. Default value is "2025-05-01". Note that overriding this
      default value may result in unsupported behavior.
     :paramtype api_version: str
@@ -78,15 +81,25 @@ class SearchManagementClient(SearchManagementClientOperationsMixin):  # pylint: 
     """
 
     def __init__(
-        self, credential: "AsyncTokenCredential", subscription_id: str, base_url: Optional[str] = None, **kwargs: Any
+        self,
+        credential: "AsyncTokenCredential",
+        subscription_id: str,
+        base_url: Optional[str] = None,
+        *,
+        cloud_setting: Optional["AzureClouds"] = None,
+        **kwargs: Any
     ) -> None:
-        _cloud = kwargs.pop("cloud_setting", None) or settings.current.azure_cloud  # type: ignore
+        _cloud = cloud_setting or settings.current.azure_cloud  # type: ignore
         _endpoints = get_arm_endpoints(_cloud)
         if not base_url:
             base_url = _endpoints["resource_manager"]
         credential_scopes = kwargs.pop("credential_scopes", _endpoints["credential_scopes"])
         self._config = SearchManagementClientConfiguration(
-            credential=credential, subscription_id=subscription_id, credential_scopes=credential_scopes, **kwargs
+            credential=credential,
+            subscription_id=subscription_id,
+            cloud_setting=cloud_setting,
+            credential_scopes=credential_scopes,
+            **kwargs
         )
 
         _policies = kwargs.pop("policies", None)
@@ -116,20 +129,20 @@ class SearchManagementClient(SearchManagementClientOperationsMixin):  # pylint: 
         self._deserialize = Deserializer(client_models)
         self._serialize.client_side_validation = False
         self.operations = Operations(self._client, self._config, self._serialize, self._deserialize)
+        self.services = ServicesOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.usages = UsagesOperations(self._client, self._config, self._serialize, self._deserialize)
         self.admin_keys = AdminKeysOperations(self._client, self._config, self._serialize, self._deserialize)
         self.query_keys = QueryKeysOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.services = ServicesOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.private_link_resources = PrivateLinkResourcesOperations(
+        self.network_security_perimeter_configurations = NetworkSecurityPerimeterConfigurationsOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
         self.private_endpoint_connections = PrivateEndpointConnectionsOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
-        self.shared_private_link_resources = SharedPrivateLinkResourcesOperations(
+        self.private_link_resources = PrivateLinkResourcesOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
-        self.usages = UsagesOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.network_security_perimeter_configurations = NetworkSecurityPerimeterConfigurationsOperations(
+        self.shared_private_link_resources = SharedPrivateLinkResourcesOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
 

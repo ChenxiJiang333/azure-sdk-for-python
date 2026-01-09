@@ -52,9 +52,9 @@ class ComputeType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     Confidential Compute.
     """
 
-    DEFAULT = "default"
+    DEFAULT = "Default"
     """Create the service with the Default Compute."""
-    CONFIDENTIAL = "confidential"
+    CONFIDENTIAL = "Confidential"
     """Create the service with Azure Confidential Compute."""
 
 
@@ -70,13 +70,13 @@ class CreatedByType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 class HostingMode(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Applicable only for the standard3 SKU. You can set this property to enable up to 3 high density
     partitions that allow up to 1000 indexes, which is much higher than the maximum indexes allowed
-    for any other SKU. For the standard3 SKU, the value is either 'default' or 'highDensity'. For
-    all other SKUs, this value must be 'default'.
+    for any other SKU. For the standard3 SKU, the value is either 'Default' or 'HighDensity'. For
+    all other SKUs, this value must be 'Default'.
     """
 
-    DEFAULT = "default"
+    DEFAULT = "Default"
     """The limit on number of indexes is determined by the default limits for the SKU."""
-    HIGH_DENSITY = "highDensity"
+    HIGH_DENSITY = "HighDensity"
     """Only application for standard3 SKU, where the search service can have up to 1000 indexes."""
 
 
@@ -192,17 +192,17 @@ class ProvisioningState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 
 
 class PublicNetworkAccess(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """This value can be set to 'enabled' to avoid breaking changes on existing customer resources and
-    templates. If set to 'disabled', traffic over public interface is not allowed, and private
+    """This value can be set to 'Enabled' to avoid breaking changes on existing customer resources and
+    templates. If set to 'Disabled', traffic over public interface is not allowed, and private
     endpoint connections would be the exclusive access method.
     """
 
-    ENABLED = "enabled"
+    ENABLED = "Enabled"
     """The search service is accessible from traffic originating from the public internet."""
-    DISABLED = "disabled"
+    DISABLED = "Disabled"
     """The search service is not accessible from traffic originating from the public internet. Access
     is only permitted over approved private endpoint connections."""
-    SECURED_BY_PERIMETER = "securedByPerimeter"
+    SECURED_BY_PERIMETER = "SecuredByPerimeter"
     """The network security perimeter configuration rules allow or disallow public network access to
     the resource. Requires an associated network security perimeter."""
 
