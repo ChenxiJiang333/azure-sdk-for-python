@@ -1,3 +1,4 @@
+# pylint: disable=line-too-long,useless-suppression
 # coding=utf-8
 # --------------------------------------------------------------------------
 # Copyright (c) Microsoft Corporation. All rights reserved.
@@ -7,6 +8,7 @@
 # --------------------------------------------------------------------------
 
 from azure.identity import DefaultAzureCredential
+
 from azure.mgmt.purview import PurviewManagementClient
 
 """
@@ -32,11 +34,19 @@ def main():
     response = client.accounts.begin_update(
         resource_group_name="SampleResourceGroup",
         account_name="account1",
-        account_update_parameters={"tags": {"newTag": "New tag value."}},
+        account_update_parameters={
+            "properties": {
+                "cloudConnectors": {},
+                "ingestionStorage": {"publicNetworkAccess": "Disabled"},
+                "managedResourcesPublicNetworkAccess": "Disabled",
+                "publicNetworkAccess": "Disabled",
+            },
+            "tags": {"newTag": "New tag value."},
+        },
     ).result()
     print(response)
 
 
-# x-ms-original-file: specification/purview/resource-manager/Microsoft.Purview/stable/2021-07-01/examples/Accounts_Update.json
+# x-ms-original-file: specification/purview/resource-manager/Microsoft.Purview/Purview/preview/2024-04-01-preview/examples/Accounts_Update.json
 if __name__ == "__main__":
     main()
