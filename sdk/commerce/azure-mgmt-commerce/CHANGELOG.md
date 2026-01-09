@@ -1,15 +1,8 @@
 ## tsp migration
 
-## 6.1.0b2 (2026-01-09)
-
-change log generation failed!!! You need to write it manually!!!
-
 ### Breaking Changes
 
 - Model `UsageAggregation` moved instance variable `subscription_id`, `meter_id`, `usage_start_time`, `usage_end_time`, `quantity`, `unit`, `meter_name`, `meter_category`, `meter_sub_category`, `meter_region`, `info_fields` and `instance_data` under property `properties`
-- Renamed model `OfferTermInfoName` to `OfferTermInfoEnum`
-- Deleted or renamed model `RateCardQueryParameters`
-- Method `UsageAggregatesOperations.list` parameter `aggregation_granularity` changed default value from `None` to `str`
 - Method `UsageAggregatesOperations.list` changed its parameter `reported_start_time`/`reported_end_time`/`show_details`/`aggregation_granularity`/`continuation_token_parameter` from `positional_or_keyword` to `keyword_only`
 
 ### Other Changes
