@@ -2,38 +2,35 @@
 
 ### Breaking Changes
 
+- Renamed method `OperationResultOperations.get` to `begin_get`
+- Model `CreatorUpdateParameters` moved instance variable `provisioning_state`, `storage_units`, `total_storage_unit_size_in_bytes` and `consumed_storage_unit_size_in_bytes` under property `properties`
+- Model `MapsAccountUpdateParameters` moved instance variable `unique_id`, `disable_local_auth`, `provisioning_state`, `linked_resources`, `cors`, `encryption`, `locations`, `private_endpoint_connections` and `public_network_access` under property `properties`
+- Model `PrivateEndpointConnection` moved instance variable `group_ids`, `private_endpoint`, `private_link_service_connection_state` and `provisioning_state` under property `properties`
+- Model `PrivateLinkResource` moved instance variable `group_id`, `required_members` and `required_zone_names` under property `properties`
+
+### Other Changes
+
+- Deleted model `CreatorList`/`MapsAccounts`/`PrivateEndpointConnectionList`/`PrivateLinkResourceList` which actually were not used by SDK users
+
+## tsp migration
+
+### Breaking Changes
+
 - Deleted or renamed client `AzureMapsManagementClient`
 - Deleted or renamed model `EncryptionCustomerManagedKeyEncryption`
 - Deleted or renamed model `EncryptionCustomerManagedKeyEncryptionKeyIdentity`
 - Deleted or renamed model `EncryptionCustomerManagedKeyEncryptionKeyIdentityType`
 
-- Model `CreatorUpdateParameters` deleted or renamed its instance variable `provisioning_state`
-- Model `CreatorUpdateParameters` deleted or renamed its instance variable `storage_units`
-- Model `CreatorUpdateParameters` deleted or renamed its instance variable `total_storage_unit_size_in_bytes`
-- Model `CreatorUpdateParameters` deleted or renamed its instance variable `consumed_storage_unit_size_in_bytes`
-- Model `MapsAccountUpdateParameters` deleted or renamed its instance variable `unique_id`
-- Model `MapsAccountUpdateParameters` deleted or renamed its instance variable `disable_local_auth`
-- Model `MapsAccountUpdateParameters` deleted or renamed its instance variable `provisioning_state`
-- Model `MapsAccountUpdateParameters` deleted or renamed its instance variable `linked_resources`
-- Model `MapsAccountUpdateParameters` deleted or renamed its instance variable `cors`
-- Model `MapsAccountUpdateParameters` deleted or renamed its instance variable `encryption`
-- Model `MapsAccountUpdateParameters` deleted or renamed its instance variable `locations`
-- Model `MapsAccountUpdateParameters` deleted or renamed its instance variable `private_endpoint_connections`
-- Model `MapsAccountUpdateParameters` deleted or renamed its instance variable `public_network_access`
-- Model `PrivateEndpointConnection` deleted or renamed its instance variable `group_ids`
-- Model `PrivateEndpointConnection` deleted or renamed its instance variable `private_endpoint`
-- Model `PrivateEndpointConnection` deleted or renamed its instance variable `private_link_service_connection_state`
-- Model `PrivateEndpointConnection` deleted or renamed its instance variable `provisioning_state`
-- Model `PrivateLinkResource` deleted or renamed its instance variable `group_id`
-- Model `PrivateLinkResource` deleted or renamed its instance variable `required_members`
-- Model `PrivateLinkResource` deleted or renamed its instance variable `required_zone_names`
+- Model `CreatorUpdateParameters` moved instance variable `provisioning_state`, `storage_units`, `total_storage_unit_size_in_bytes` and `consumed_storage_unit_size_in_bytes` under property `properties`
+- Model `MapsAccountUpdateParameters` moved instance variable `unique_id`, `disable_local_auth`, `provisioning_state`, `linked_resources`, `cors`, `encryption`, `locations`, `private_endpoint_connections` and `public_network_access` under property `properties`
+- Model `PrivateEndpointConnection` moved instance variable `group_ids`, `private_endpoint`, `private_link_service_connection_state` and `provisioning_state` under property `properties`
+- Model `PrivateLinkResource` moved instance variable `group_id`, `required_members` and `required_zone_names` under property `properties`
 
 - Renamed method `OperationResultOperations.get` to `begin_get`
 
-- Deleted or renamed model `CreatorList`
-- Deleted or renamed model `PrivateEndpointConnectionList`
-- Deleted or renamed model `PrivateLinkResourceList`
-- Deleted or renamed model `MapsAccounts`
+### Other Changes
+
+- Deleted model `CreatorList`/`MapsAccounts`/`PrivateEndpointConnectionList`/`PrivateLinkResourceList` which actually were not used by SDK users
 
 # Release History
 
