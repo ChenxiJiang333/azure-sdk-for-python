@@ -26,23 +26,9 @@ class TestApiManagementGatewayCertificateAuthorityOperationsAsync(AzureMgmtRecor
             resource_group_name=resource_group.name,
             service_name="str",
             gateway_id="str",
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
         result = [r async for r in response]
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_gateway_certificate_authority_get_entity_tag(self, resource_group):
-        response = await self.client.gateway_certificate_authority.get_entity_tag(
-            resource_group_name=resource_group.name,
-            service_name="str",
-            gateway_id="str",
-            certificate_id="str",
-            api_version="2024-05-01",
-        )
-
         # please add some check logic here by yourself
         # ...
 
@@ -54,7 +40,7 @@ class TestApiManagementGatewayCertificateAuthorityOperationsAsync(AzureMgmtRecor
             service_name="str",
             gateway_id="str",
             certificate_id="str",
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself
@@ -68,8 +54,21 @@ class TestApiManagementGatewayCertificateAuthorityOperationsAsync(AzureMgmtRecor
             service_name="str",
             gateway_id="str",
             certificate_id="str",
-            parameters={"id": "str", "isTrusted": bool, "name": "str", "type": "str"},
-            api_version="2024-05-01",
+            parameters={
+                "id": "str",
+                "isTrusted": bool,
+                "name": "str",
+                "systemData": {
+                    "createdAt": "2020-02-20 00:00:00",
+                    "createdBy": "str",
+                    "createdByType": "str",
+                    "lastModifiedAt": "2020-02-20 00:00:00",
+                    "lastModifiedBy": "str",
+                    "lastModifiedByType": "str",
+                },
+                "type": "str",
+            },
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself
@@ -84,7 +83,21 @@ class TestApiManagementGatewayCertificateAuthorityOperationsAsync(AzureMgmtRecor
             gateway_id="str",
             certificate_id="str",
             if_match="str",
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
+        )
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
+    async def test_gateway_certificate_authority_get_entity_tag(self, resource_group):
+        response = await self.client.gateway_certificate_authority.get_entity_tag(
+            resource_group_name=resource_group.name,
+            service_name="str",
+            gateway_id="str",
+            certificate_id="str",
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself

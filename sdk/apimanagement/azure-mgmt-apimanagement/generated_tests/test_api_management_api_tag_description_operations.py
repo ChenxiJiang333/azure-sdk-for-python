@@ -25,23 +25,9 @@ class TestApiManagementApiTagDescriptionOperations(AzureMgmtRecordedTestCase):
             resource_group_name=resource_group.name,
             service_name="str",
             api_id="str",
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
         result = [r for r in response]
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_api_tag_description_get_entity_tag(self, resource_group):
-        response = self.client.api_tag_description.get_entity_tag(
-            resource_group_name=resource_group.name,
-            service_name="str",
-            api_id="str",
-            tag_description_id="str",
-            api_version="2024-05-01",
-        )
-
         # please add some check logic here by yourself
         # ...
 
@@ -53,7 +39,7 @@ class TestApiManagementApiTagDescriptionOperations(AzureMgmtRecordedTestCase):
             service_name="str",
             api_id="str",
             tag_description_id="str",
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself
@@ -68,7 +54,7 @@ class TestApiManagementApiTagDescriptionOperations(AzureMgmtRecordedTestCase):
             api_id="str",
             tag_description_id="str",
             parameters={"description": "str", "externalDocsDescription": "str", "externalDocsUrl": "str"},
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself
@@ -83,7 +69,21 @@ class TestApiManagementApiTagDescriptionOperations(AzureMgmtRecordedTestCase):
             api_id="str",
             tag_description_id="str",
             if_match="str",
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
+        )
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
+    def test_api_tag_description_get_entity_tag(self, resource_group):
+        response = self.client.api_tag_description.get_entity_tag(
+            resource_group_name=resource_group.name,
+            service_name="str",
+            api_id="str",
+            tag_description_id="str",
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself

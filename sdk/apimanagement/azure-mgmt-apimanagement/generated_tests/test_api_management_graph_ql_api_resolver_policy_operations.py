@@ -26,24 +26,9 @@ class TestApiManagementGraphQLApiResolverPolicyOperations(AzureMgmtRecordedTestC
             service_name="str",
             api_id="str",
             resolver_id="str",
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
         result = [r for r in response]
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_graph_ql_api_resolver_policy_get_entity_tag(self, resource_group):
-        response = self.client.graph_ql_api_resolver_policy.get_entity_tag(
-            resource_group_name=resource_group.name,
-            service_name="str",
-            api_id="str",
-            resolver_id="str",
-            policy_id="str",
-            api_version="2024-05-01",
-        )
-
         # please add some check logic here by yourself
         # ...
 
@@ -56,7 +41,7 @@ class TestApiManagementGraphQLApiResolverPolicyOperations(AzureMgmtRecordedTestC
             api_id="str",
             resolver_id="str",
             policy_id="str",
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself
@@ -71,8 +56,22 @@ class TestApiManagementGraphQLApiResolverPolicyOperations(AzureMgmtRecordedTestC
             api_id="str",
             resolver_id="str",
             policy_id="str",
-            parameters={"format": "xml", "id": "str", "name": "str", "type": "str", "value": "str"},
-            api_version="2024-05-01",
+            parameters={
+                "format": "str",
+                "id": "str",
+                "name": "str",
+                "systemData": {
+                    "createdAt": "2020-02-20 00:00:00",
+                    "createdBy": "str",
+                    "createdByType": "str",
+                    "lastModifiedAt": "2020-02-20 00:00:00",
+                    "lastModifiedBy": "str",
+                    "lastModifiedByType": "str",
+                },
+                "type": "str",
+                "value": "str",
+            },
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself
@@ -88,7 +87,22 @@ class TestApiManagementGraphQLApiResolverPolicyOperations(AzureMgmtRecordedTestC
             resolver_id="str",
             policy_id="str",
             if_match="str",
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
+        )
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
+    def test_graph_ql_api_resolver_policy_get_entity_tag(self, resource_group):
+        response = self.client.graph_ql_api_resolver_policy.get_entity_tag(
+            resource_group_name=resource_group.name,
+            service_name="str",
+            api_id="str",
+            resolver_id="str",
+            policy_id="str",
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself

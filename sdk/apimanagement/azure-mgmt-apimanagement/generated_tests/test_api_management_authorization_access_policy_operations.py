@@ -26,7 +26,7 @@ class TestApiManagementAuthorizationAccessPolicyOperations(AzureMgmtRecordedTest
             service_name="str",
             authorization_provider_id="str",
             authorization_id="str",
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
         result = [r for r in response]
         # please add some check logic here by yourself
@@ -41,7 +41,7 @@ class TestApiManagementAuthorizationAccessPolicyOperations(AzureMgmtRecordedTest
             authorization_provider_id="str",
             authorization_id="str",
             authorization_access_policy_id="str",
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself
@@ -61,10 +61,18 @@ class TestApiManagementAuthorizationAccessPolicyOperations(AzureMgmtRecordedTest
                 "id": "str",
                 "name": "str",
                 "objectId": "str",
+                "systemData": {
+                    "createdAt": "2020-02-20 00:00:00",
+                    "createdBy": "str",
+                    "createdByType": "str",
+                    "lastModifiedAt": "2020-02-20 00:00:00",
+                    "lastModifiedBy": "str",
+                    "lastModifiedByType": "str",
+                },
                 "tenantId": "str",
                 "type": "str",
             },
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself
@@ -80,7 +88,7 @@ class TestApiManagementAuthorizationAccessPolicyOperations(AzureMgmtRecordedTest
             authorization_id="str",
             authorization_access_policy_id="str",
             if_match="str",
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself

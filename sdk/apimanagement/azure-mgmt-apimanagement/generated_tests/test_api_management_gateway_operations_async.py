@@ -25,22 +25,9 @@ class TestApiManagementGatewayOperationsAsync(AzureMgmtRecordedTestCase):
         response = self.client.gateway.list_by_service(
             resource_group_name=resource_group.name,
             service_name="str",
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
         result = [r async for r in response]
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_gateway_get_entity_tag(self, resource_group):
-        response = await self.client.gateway.get_entity_tag(
-            resource_group_name=resource_group.name,
-            service_name="str",
-            gateway_id="str",
-            api_version="2024-05-01",
-        )
-
         # please add some check logic here by yourself
         # ...
 
@@ -51,7 +38,7 @@ class TestApiManagementGatewayOperationsAsync(AzureMgmtRecordedTestCase):
             resource_group_name=resource_group.name,
             service_name="str",
             gateway_id="str",
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself
@@ -67,11 +54,25 @@ class TestApiManagementGatewayOperationsAsync(AzureMgmtRecordedTestCase):
             parameters={
                 "description": "str",
                 "id": "str",
+                "identity": {
+                    "type": "str",
+                    "principalId": "str",
+                    "tenantId": "str",
+                    "userAssignedIdentities": {"str": {"clientId": "str", "principalId": "str"}},
+                },
                 "locationData": {"name": "str", "city": "str", "countryOrRegion": "str", "district": "str"},
                 "name": "str",
+                "systemData": {
+                    "createdAt": "2020-02-20 00:00:00",
+                    "createdBy": "str",
+                    "createdByType": "str",
+                    "lastModifiedAt": "2020-02-20 00:00:00",
+                    "lastModifiedBy": "str",
+                    "lastModifiedByType": "str",
+                },
                 "type": "str",
             },
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself
@@ -88,11 +89,25 @@ class TestApiManagementGatewayOperationsAsync(AzureMgmtRecordedTestCase):
             parameters={
                 "description": "str",
                 "id": "str",
+                "identity": {
+                    "type": "str",
+                    "principalId": "str",
+                    "tenantId": "str",
+                    "userAssignedIdentities": {"str": {"clientId": "str", "principalId": "str"}},
+                },
                 "locationData": {"name": "str", "city": "str", "countryOrRegion": "str", "district": "str"},
                 "name": "str",
+                "systemData": {
+                    "createdAt": "2020-02-20 00:00:00",
+                    "createdBy": "str",
+                    "createdByType": "str",
+                    "lastModifiedAt": "2020-02-20 00:00:00",
+                    "lastModifiedBy": "str",
+                    "lastModifiedByType": "str",
+                },
                 "type": "str",
             },
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself
@@ -106,7 +121,7 @@ class TestApiManagementGatewayOperationsAsync(AzureMgmtRecordedTestCase):
             service_name="str",
             gateway_id="str",
             if_match="str",
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself
@@ -114,26 +129,12 @@ class TestApiManagementGatewayOperationsAsync(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_gateway_list_keys(self, resource_group):
-        response = await self.client.gateway.list_keys(
+    async def test_gateway_get_entity_tag(self, resource_group):
+        response = await self.client.gateway.get_entity_tag(
             resource_group_name=resource_group.name,
             service_name="str",
             gateway_id="str",
-            api_version="2024-05-01",
-        )
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_gateway_regenerate_key(self, resource_group):
-        response = await self.client.gateway.regenerate_key(
-            resource_group_name=resource_group.name,
-            service_name="str",
-            gateway_id="str",
-            parameters={"keyType": "str"},
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself
@@ -147,7 +148,7 @@ class TestApiManagementGatewayOperationsAsync(AzureMgmtRecordedTestCase):
             service_name="str",
             gateway_id="str",
             parameters={"expiry": "2020-02-20 00:00:00", "keyType": "str"},
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself
@@ -160,7 +161,7 @@ class TestApiManagementGatewayOperationsAsync(AzureMgmtRecordedTestCase):
             resource_group_name=resource_group.name,
             service_name="str",
             gateway_id="str",
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself
@@ -174,7 +175,20 @@ class TestApiManagementGatewayOperationsAsync(AzureMgmtRecordedTestCase):
             service_name="str",
             gateway_id="str",
             parameters={"apiId": "str", "purposes": ["str"], "credentialsExpireAfter": "1 day, 0:00:00"},
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
+        )
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
+    async def test_gateway_list_keys(self, resource_group):
+        response = await self.client.gateway.list_keys(
+            resource_group_name=resource_group.name,
+            service_name="str",
+            gateway_id="str",
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself
@@ -188,7 +202,21 @@ class TestApiManagementGatewayOperationsAsync(AzureMgmtRecordedTestCase):
             service_name="str",
             gateway_id="str",
             parameters={"traceId": "str"},
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
+        )
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
+    async def test_gateway_regenerate_key(self, resource_group):
+        response = await self.client.gateway.regenerate_key(
+            resource_group_name=resource_group.name,
+            service_name="str",
+            gateway_id="str",
+            parameters={"keyType": "str"},
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself

@@ -20,6 +20,39 @@ class TestApiManagementApiGatewayOperations(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
+    def test_api_gateway_list(self, resource_group):
+        response = self.client.api_gateway.list(
+            api_version="2025-03-01-preview",
+        )
+        result = [r for r in response]
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
+    def test_api_gateway_list_by_resource_group(self, resource_group):
+        response = self.client.api_gateway.list_by_resource_group(
+            resource_group_name=resource_group.name,
+            api_version="2025-03-01-preview",
+        )
+        result = [r for r in response]
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
+    def test_api_gateway_get(self, resource_group):
+        response = self.client.api_gateway.get(
+            resource_group_name=resource_group.name,
+            gateway_name="str",
+            api_version="2025-03-01-preview",
+        )
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
     def test_api_gateway_begin_create_or_update(self, resource_group):
         response = self.client.api_gateway.begin_create_or_update(
             resource_group_name=resource_group.name,
@@ -48,7 +81,7 @@ class TestApiManagementApiGatewayOperations(AzureMgmtRecordedTestCase):
                 "type": "str",
                 "virtualNetworkType": "str",
             },
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         ).result()  # call '.result()' to poll until service return final result
 
         # please add some check logic here by yourself
@@ -75,20 +108,8 @@ class TestApiManagementApiGatewayOperations(AzureMgmtRecordedTestCase):
                 "type": "str",
                 "virtualNetworkType": "str",
             },
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         ).result()  # call '.result()' to poll until service return final result
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_api_gateway_get(self, resource_group):
-        response = self.client.api_gateway.get(
-            resource_group_name=resource_group.name,
-            gateway_name="str",
-            api_version="2024-05-01",
-        )
 
         # please add some check logic here by yourself
         # ...
@@ -99,29 +120,8 @@ class TestApiManagementApiGatewayOperations(AzureMgmtRecordedTestCase):
         response = self.client.api_gateway.begin_delete(
             resource_group_name=resource_group.name,
             gateway_name="str",
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         ).result()  # call '.result()' to poll until service return final result
 
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_api_gateway_list_by_resource_group(self, resource_group):
-        response = self.client.api_gateway.list_by_resource_group(
-            resource_group_name=resource_group.name,
-            api_version="2024-05-01",
-        )
-        result = [r for r in response]
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_api_gateway_list(self, resource_group):
-        response = self.client.api_gateway.list(
-            api_version="2024-05-01",
-        )
-        result = [r for r in response]
         # please add some check logic here by yourself
         # ...

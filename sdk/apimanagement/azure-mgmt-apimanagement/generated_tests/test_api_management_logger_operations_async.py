@@ -25,22 +25,9 @@ class TestApiManagementLoggerOperationsAsync(AzureMgmtRecordedTestCase):
         response = self.client.logger.list_by_service(
             resource_group_name=resource_group.name,
             service_name="str",
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
         result = [r async for r in response]
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_logger_get_entity_tag(self, resource_group):
-        response = await self.client.logger.get_entity_tag(
-            resource_group_name=resource_group.name,
-            service_name="str",
-            logger_id="str",
-            api_version="2024-05-01",
-        )
-
         # please add some check logic here by yourself
         # ...
 
@@ -51,7 +38,7 @@ class TestApiManagementLoggerOperationsAsync(AzureMgmtRecordedTestCase):
             resource_group_name=resource_group.name,
             service_name="str",
             logger_id="str",
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself
@@ -72,9 +59,17 @@ class TestApiManagementLoggerOperationsAsync(AzureMgmtRecordedTestCase):
                 "loggerType": "str",
                 "name": "str",
                 "resourceId": "str",
+                "systemData": {
+                    "createdAt": "2020-02-20 00:00:00",
+                    "createdBy": "str",
+                    "createdByType": "str",
+                    "lastModifiedAt": "2020-02-20 00:00:00",
+                    "lastModifiedBy": "str",
+                    "lastModifiedByType": "str",
+                },
                 "type": "str",
             },
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself
@@ -89,7 +84,7 @@ class TestApiManagementLoggerOperationsAsync(AzureMgmtRecordedTestCase):
             logger_id="str",
             if_match="str",
             parameters={"credentials": {"str": "str"}, "description": "str", "isBuffered": bool, "loggerType": "str"},
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself
@@ -103,7 +98,20 @@ class TestApiManagementLoggerOperationsAsync(AzureMgmtRecordedTestCase):
             service_name="str",
             logger_id="str",
             if_match="str",
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
+        )
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
+    async def test_logger_get_entity_tag(self, resource_group):
+        response = await self.client.logger.get_entity_tag(
+            resource_group_name=resource_group.name,
+            service_name="str",
+            logger_id="str",
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself

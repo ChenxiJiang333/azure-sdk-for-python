@@ -24,22 +24,9 @@ class TestApiManagementUserOperations(AzureMgmtRecordedTestCase):
         response = self.client.user.list_by_service(
             resource_group_name=resource_group.name,
             service_name="str",
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
         result = [r for r in response]
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_user_get_entity_tag(self, resource_group):
-        response = self.client.user.get_entity_tag(
-            resource_group_name=resource_group.name,
-            service_name="str",
-            user_id="str",
-            api_version="2024-05-01",
-        )
-
         # please add some check logic here by yourself
         # ...
 
@@ -50,7 +37,7 @@ class TestApiManagementUserOperations(AzureMgmtRecordedTestCase):
             resource_group_name=resource_group.name,
             service_name="str",
             user_id="str",
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself
@@ -72,9 +59,9 @@ class TestApiManagementUserOperations(AzureMgmtRecordedTestCase):
                 "lastName": "str",
                 "note": "str",
                 "password": "str",
-                "state": "active",
+                "state": "str",
             },
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself
@@ -95,9 +82,9 @@ class TestApiManagementUserOperations(AzureMgmtRecordedTestCase):
                 "lastName": "str",
                 "note": "str",
                 "password": "str",
-                "state": "active",
+                "state": "str",
             },
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself
@@ -111,8 +98,21 @@ class TestApiManagementUserOperations(AzureMgmtRecordedTestCase):
             service_name="str",
             user_id="str",
             if_match="str",
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         ).result()  # call '.result()' to poll until service return final result
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
+    def test_user_get_entity_tag(self, resource_group):
+        response = self.client.user.get_entity_tag(
+            resource_group_name=resource_group.name,
+            service_name="str",
+            user_id="str",
+            api_version="2025-03-01-preview",
+        )
 
         # please add some check logic here by yourself
         # ...
@@ -124,7 +124,7 @@ class TestApiManagementUserOperations(AzureMgmtRecordedTestCase):
             resource_group_name=resource_group.name,
             service_name="str",
             user_id="str",
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself
@@ -138,7 +138,7 @@ class TestApiManagementUserOperations(AzureMgmtRecordedTestCase):
             service_name="str",
             user_id="str",
             parameters={"expiry": "2020-02-20 00:00:00", "keyType": "str"},
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself

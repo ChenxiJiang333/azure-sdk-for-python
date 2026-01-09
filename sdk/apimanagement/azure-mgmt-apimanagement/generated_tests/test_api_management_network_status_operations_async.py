@@ -21,11 +21,12 @@ class TestApiManagementNetworkStatusOperationsAsync(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_network_status_list_by_service(self, resource_group):
-        response = await self.client.network_status.list_by_service(
+    async def test_network_status_list_by_location(self, resource_group):
+        response = await self.client.network_status.list_by_location(
             resource_group_name=resource_group.name,
             service_name="str",
-            api_version="2024-05-01",
+            location_name="str",
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself
@@ -33,12 +34,11 @@ class TestApiManagementNetworkStatusOperationsAsync(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_network_status_list_by_location(self, resource_group):
-        response = await self.client.network_status.list_by_location(
+    async def test_network_status_list_by_service(self, resource_group):
+        response = await self.client.network_status.list_by_service(
             resource_group_name=resource_group.name,
             service_name="str",
-            location_name="str",
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself

@@ -24,22 +24,9 @@ class TestApiManagementPortalRevisionOperations(AzureMgmtRecordedTestCase):
         response = self.client.portal_revision.list_by_service(
             resource_group_name=resource_group.name,
             service_name="str",
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
         result = [r for r in response]
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_portal_revision_get_entity_tag(self, resource_group):
-        response = self.client.portal_revision.get_entity_tag(
-            resource_group_name=resource_group.name,
-            service_name="str",
-            portal_revision_id="str",
-            api_version="2024-05-01",
-        )
-
         # please add some check logic here by yourself
         # ...
 
@@ -50,7 +37,7 @@ class TestApiManagementPortalRevisionOperations(AzureMgmtRecordedTestCase):
             resource_group_name=resource_group.name,
             service_name="str",
             portal_revision_id="str",
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself
@@ -72,10 +59,18 @@ class TestApiManagementPortalRevisionOperations(AzureMgmtRecordedTestCase):
                 "provisioningState": "str",
                 "status": "str",
                 "statusDetails": "str",
+                "systemData": {
+                    "createdAt": "2020-02-20 00:00:00",
+                    "createdBy": "str",
+                    "createdByType": "str",
+                    "lastModifiedAt": "2020-02-20 00:00:00",
+                    "lastModifiedBy": "str",
+                    "lastModifiedByType": "str",
+                },
                 "type": "str",
                 "updatedDateTime": "2020-02-20 00:00:00",
             },
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         ).result()  # call '.result()' to poll until service return final result
 
         # please add some check logic here by yourself
@@ -98,11 +93,32 @@ class TestApiManagementPortalRevisionOperations(AzureMgmtRecordedTestCase):
                 "provisioningState": "str",
                 "status": "str",
                 "statusDetails": "str",
+                "systemData": {
+                    "createdAt": "2020-02-20 00:00:00",
+                    "createdBy": "str",
+                    "createdByType": "str",
+                    "lastModifiedAt": "2020-02-20 00:00:00",
+                    "lastModifiedBy": "str",
+                    "lastModifiedByType": "str",
+                },
                 "type": "str",
                 "updatedDateTime": "2020-02-20 00:00:00",
             },
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         ).result()  # call '.result()' to poll until service return final result
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
+    def test_portal_revision_get_entity_tag(self, resource_group):
+        response = self.client.portal_revision.get_entity_tag(
+            resource_group_name=resource_group.name,
+            service_name="str",
+            portal_revision_id="str",
+            api_version="2025-03-01-preview",
+        )
 
         # please add some check logic here by yourself
         # ...

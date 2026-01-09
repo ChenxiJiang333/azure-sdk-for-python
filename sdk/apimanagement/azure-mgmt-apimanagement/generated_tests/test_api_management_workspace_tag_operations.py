@@ -25,23 +25,9 @@ class TestApiManagementWorkspaceTagOperations(AzureMgmtRecordedTestCase):
             resource_group_name=resource_group.name,
             service_name="str",
             workspace_id="str",
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
         result = [r for r in response]
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_workspace_tag_get_entity_state(self, resource_group):
-        response = self.client.workspace_tag.get_entity_state(
-            resource_group_name=resource_group.name,
-            service_name="str",
-            workspace_id="str",
-            tag_id="str",
-            api_version="2024-05-01",
-        )
-
         # please add some check logic here by yourself
         # ...
 
@@ -53,7 +39,7 @@ class TestApiManagementWorkspaceTagOperations(AzureMgmtRecordedTestCase):
             service_name="str",
             workspace_id="str",
             tag_id="str",
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself
@@ -68,7 +54,7 @@ class TestApiManagementWorkspaceTagOperations(AzureMgmtRecordedTestCase):
             workspace_id="str",
             tag_id="str",
             parameters={"displayName": "str"},
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself
@@ -84,7 +70,7 @@ class TestApiManagementWorkspaceTagOperations(AzureMgmtRecordedTestCase):
             tag_id="str",
             if_match="str",
             parameters={"displayName": "str"},
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself
@@ -99,7 +85,21 @@ class TestApiManagementWorkspaceTagOperations(AzureMgmtRecordedTestCase):
             workspace_id="str",
             tag_id="str",
             if_match="str",
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
+        )
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
+    def test_workspace_tag_get_entity_state(self, resource_group):
+        response = self.client.workspace_tag.get_entity_state(
+            resource_group_name=resource_group.name,
+            service_name="str",
+            workspace_id="str",
+            tag_id="str",
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself

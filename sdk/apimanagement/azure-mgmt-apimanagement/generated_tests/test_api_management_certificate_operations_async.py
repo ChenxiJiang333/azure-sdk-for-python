@@ -25,22 +25,9 @@ class TestApiManagementCertificateOperationsAsync(AzureMgmtRecordedTestCase):
         response = self.client.certificate.list_by_service(
             resource_group_name=resource_group.name,
             service_name="str",
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
         result = [r async for r in response]
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_certificate_get_entity_tag(self, resource_group):
-        response = await self.client.certificate.get_entity_tag(
-            resource_group_name=resource_group.name,
-            service_name="str",
-            certificate_id="str",
-            api_version="2024-05-01",
-        )
-
         # please add some check logic here by yourself
         # ...
 
@@ -51,7 +38,7 @@ class TestApiManagementCertificateOperationsAsync(AzureMgmtRecordedTestCase):
             resource_group_name=resource_group.name,
             service_name="str",
             certificate_id="str",
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself
@@ -69,7 +56,7 @@ class TestApiManagementCertificateOperationsAsync(AzureMgmtRecordedTestCase):
                 "keyVault": {"identityClientId": "str", "secretIdentifier": "str"},
                 "password": "str",
             },
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself
@@ -83,7 +70,20 @@ class TestApiManagementCertificateOperationsAsync(AzureMgmtRecordedTestCase):
             service_name="str",
             certificate_id="str",
             if_match="str",
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
+        )
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
+    async def test_certificate_get_entity_tag(self, resource_group):
+        response = await self.client.certificate.get_entity_tag(
+            resource_group_name=resource_group.name,
+            service_name="str",
+            certificate_id="str",
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself
@@ -96,7 +96,7 @@ class TestApiManagementCertificateOperationsAsync(AzureMgmtRecordedTestCase):
             resource_group_name=resource_group.name,
             service_name="str",
             certificate_id="str",
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself

@@ -26,23 +26,9 @@ class TestApiManagementGroupUserOperationsAsync(AzureMgmtRecordedTestCase):
             resource_group_name=resource_group.name,
             service_name="str",
             group_id="str",
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
         result = [r async for r in response]
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_group_user_check_entity_exists(self, resource_group):
-        response = await self.client.group_user.check_entity_exists(
-            resource_group_name=resource_group.name,
-            service_name="str",
-            group_id="str",
-            user_id="str",
-            api_version="2024-05-01",
-        )
-
         # please add some check logic here by yourself
         # ...
 
@@ -54,7 +40,7 @@ class TestApiManagementGroupUserOperationsAsync(AzureMgmtRecordedTestCase):
             service_name="str",
             group_id="str",
             user_id="str",
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself
@@ -68,7 +54,21 @@ class TestApiManagementGroupUserOperationsAsync(AzureMgmtRecordedTestCase):
             service_name="str",
             group_id="str",
             user_id="str",
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
+        )
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
+    async def test_group_user_check_entity_exists(self, resource_group):
+        response = await self.client.group_user.check_entity_exists(
+            resource_group_name=resource_group.name,
+            service_name="str",
+            group_id="str",
+            user_id="str",
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself

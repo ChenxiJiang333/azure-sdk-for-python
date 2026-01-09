@@ -25,23 +25,9 @@ class TestApiManagementWorkspaceBackendOperations(AzureMgmtRecordedTestCase):
             resource_group_name=resource_group.name,
             service_name="str",
             workspace_id="str",
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
         result = [r for r in response]
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_workspace_backend_get_entity_tag(self, resource_group):
-        response = self.client.workspace_backend.get_entity_tag(
-            resource_group_name=resource_group.name,
-            service_name="str",
-            workspace_id="str",
-            backend_id="str",
-            api_version="2024-05-01",
-        )
-
         # please add some check logic here by yourself
         # ...
 
@@ -53,7 +39,7 @@ class TestApiManagementWorkspaceBackendOperations(AzureMgmtRecordedTestCase):
             service_name="str",
             workspace_id="str",
             backend_id="str",
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself
@@ -68,6 +54,7 @@ class TestApiManagementWorkspaceBackendOperations(AzureMgmtRecordedTestCase):
             workspace_id="str",
             backend_id="str",
             parameters={
+                "azureRegion": "str",
                 "circuitBreaker": {
                     "rules": [
                         {
@@ -79,6 +66,7 @@ class TestApiManagementWorkspaceBackendOperations(AzureMgmtRecordedTestCase):
                                 "percentage": 0,
                                 "statusCodeRanges": [{"max": 0, "min": 0}],
                             },
+                            "failureResponse": {"statusCode": 0},
                             "name": "str",
                             "tripDuration": "1 day, 0:00:00",
                         }
@@ -94,7 +82,11 @@ class TestApiManagementWorkspaceBackendOperations(AzureMgmtRecordedTestCase):
                 "description": "str",
                 "id": "str",
                 "name": "str",
-                "pool": {"services": [{"id": "str", "priority": 0, "weight": 0}]},
+                "pool": {
+                    "failureResponse": {"statusCode": 0},
+                    "services": [{"id": "str", "preferredCarbonEmission": "str", "priority": 0, "weight": 0}],
+                    "sessionAffinity": {"sessionId": {"name": "str", "source": "str"}},
+                },
                 "properties": {
                     "serviceFabricCluster": {
                         "managementEndpoints": ["str"],
@@ -108,12 +100,25 @@ class TestApiManagementWorkspaceBackendOperations(AzureMgmtRecordedTestCase):
                 "protocol": "str",
                 "proxy": {"url": "str", "password": "str", "username": "str"},
                 "resourceId": "str",
+                "systemData": {
+                    "createdAt": "2020-02-20 00:00:00",
+                    "createdBy": "str",
+                    "createdByType": "str",
+                    "lastModifiedAt": "2020-02-20 00:00:00",
+                    "lastModifiedBy": "str",
+                    "lastModifiedByType": "str",
+                },
                 "title": "str",
-                "tls": {"validateCertificateChain": True, "validateCertificateName": True},
+                "tls": {
+                    "serverCertificateThumbprints": ["str"],
+                    "serverX509Names": [{"issuerCertificateThumbprint": "str", "name": "str"}],
+                    "validateCertificateChain": True,
+                    "validateCertificateName": True,
+                },
                 "type": "str",
                 "url": "str",
             },
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself
@@ -129,6 +134,7 @@ class TestApiManagementWorkspaceBackendOperations(AzureMgmtRecordedTestCase):
             backend_id="str",
             if_match="str",
             parameters={
+                "azureRegion": "str",
                 "circuitBreaker": {
                     "rules": [
                         {
@@ -140,6 +146,7 @@ class TestApiManagementWorkspaceBackendOperations(AzureMgmtRecordedTestCase):
                                 "percentage": 0,
                                 "statusCodeRanges": [{"max": 0, "min": 0}],
                             },
+                            "failureResponse": {"statusCode": 0},
                             "name": "str",
                             "tripDuration": "1 day, 0:00:00",
                         }
@@ -153,7 +160,11 @@ class TestApiManagementWorkspaceBackendOperations(AzureMgmtRecordedTestCase):
                     "query": {"str": ["str"]},
                 },
                 "description": "str",
-                "pool": {"services": [{"id": "str", "priority": 0, "weight": 0}]},
+                "pool": {
+                    "failureResponse": {"statusCode": 0},
+                    "services": [{"id": "str", "preferredCarbonEmission": "str", "priority": 0, "weight": 0}],
+                    "sessionAffinity": {"sessionId": {"name": "str", "source": "str"}},
+                },
                 "properties": {
                     "serviceFabricCluster": {
                         "managementEndpoints": ["str"],
@@ -168,11 +179,16 @@ class TestApiManagementWorkspaceBackendOperations(AzureMgmtRecordedTestCase):
                 "proxy": {"url": "str", "password": "str", "username": "str"},
                 "resourceId": "str",
                 "title": "str",
-                "tls": {"validateCertificateChain": True, "validateCertificateName": True},
+                "tls": {
+                    "serverCertificateThumbprints": ["str"],
+                    "serverX509Names": [{"issuerCertificateThumbprint": "str", "name": "str"}],
+                    "validateCertificateChain": True,
+                    "validateCertificateName": True,
+                },
                 "type": "str",
                 "url": "str",
             },
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself
@@ -187,7 +203,21 @@ class TestApiManagementWorkspaceBackendOperations(AzureMgmtRecordedTestCase):
             workspace_id="str",
             backend_id="str",
             if_match="str",
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
+        )
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
+    def test_workspace_backend_get_entity_tag(self, resource_group):
+        response = self.client.workspace_backend.get_entity_tag(
+            resource_group_name=resource_group.name,
+            service_name="str",
+            workspace_id="str",
+            backend_id="str",
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself

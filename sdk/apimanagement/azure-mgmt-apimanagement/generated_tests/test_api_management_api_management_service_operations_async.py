@@ -21,44 +21,54 @@ class TestApiManagementApiManagementServiceOperationsAsync(AzureMgmtRecordedTest
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_api_management_service_begin_restore(self, resource_group):
-        response = await (
-            await self.client.api_management_service.begin_restore(
-                resource_group_name=resource_group.name,
-                service_name="str",
-                parameters={
-                    "backupName": "str",
-                    "containerName": "str",
-                    "storageAccount": "str",
-                    "accessKey": "str",
-                    "accessType": "AccessKey",
-                    "clientId": "str",
-                },
-                api_version="2024-05-01",
-            )
-        ).result()  # call '.result()' to poll until service return final result
+    async def test_api_management_service_check_name_availability(self, resource_group):
+        response = await self.client.api_management_service.check_name_availability(
+            parameters={"name": "str"},
+            api_version="2025-03-01-preview",
+        )
 
         # please add some check logic here by yourself
         # ...
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_api_management_service_begin_backup(self, resource_group):
-        response = await (
-            await self.client.api_management_service.begin_backup(
-                resource_group_name=resource_group.name,
-                service_name="str",
-                parameters={
-                    "backupName": "str",
-                    "containerName": "str",
-                    "storageAccount": "str",
-                    "accessKey": "str",
-                    "accessType": "AccessKey",
-                    "clientId": "str",
-                },
-                api_version="2024-05-01",
-            )
-        ).result()  # call '.result()' to poll until service return final result
+    async def test_api_management_service_get_domain_ownership_identifier(self, resource_group):
+        response = await self.client.api_management_service.get_domain_ownership_identifier(
+            api_version="2025-03-01-preview",
+        )
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
+    async def test_api_management_service_list(self, resource_group):
+        response = self.client.api_management_service.list(
+            api_version="2025-03-01-preview",
+        )
+        result = [r async for r in response]
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
+    async def test_api_management_service_list_by_resource_group(self, resource_group):
+        response = self.client.api_management_service.list_by_resource_group(
+            resource_group_name=resource_group.name,
+            api_version="2025-03-01-preview",
+        )
+        result = [r async for r in response]
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
+    async def test_api_management_service_get(self, resource_group):
+        response = await self.client.api_management_service.get(
+            resource_group_name=resource_group.name,
+            service_name="str",
+            api_version="2025-03-01-preview",
+        )
 
         # please add some check logic here by yourself
         # ...
@@ -104,10 +114,10 @@ class TestApiManagementApiManagementServiceOperationsAsync(AzureMgmtRecordedTest
                             "encodedCertificate": "str",
                         }
                     ],
-                    "configurationApi": {"legacyApi": "Enabled"},
+                    "configurationApi": {"legacyApi": "str"},
                     "createdAtUtc": "2020-02-20 00:00:00",
                     "customProperties": {"str": "str"},
-                    "developerPortalStatus": "Enabled",
+                    "developerPortalStatus": "str",
                     "developerPortalUrl": "str",
                     "disableGateway": False,
                     "enableClientCertificate": False,
@@ -136,7 +146,7 @@ class TestApiManagementApiManagementServiceOperationsAsync(AzureMgmtRecordedTest
                         "tenantId": "str",
                         "userAssignedIdentities": {"str": {"clientId": "str", "principalId": "str"}},
                     },
-                    "legacyPortalStatus": "Enabled",
+                    "legacyPortalStatus": "str",
                     "managementApiUrl": "str",
                     "name": "str",
                     "natGatewayState": "str",
@@ -164,6 +174,7 @@ class TestApiManagementApiManagementServiceOperationsAsync(AzureMgmtRecordedTest
                     "publicIPAddresses": ["str"],
                     "publicIpAddressId": "str",
                     "publicNetworkAccess": "str",
+                    "releaseChannel": "str",
                     "restore": False,
                     "scmUrl": "str",
                     "systemData": {
@@ -179,9 +190,10 @@ class TestApiManagementApiManagementServiceOperationsAsync(AzureMgmtRecordedTest
                     "type": "str",
                     "virtualNetworkConfiguration": {"subnetResourceId": "str", "subnetname": "str", "vnetid": "str"},
                     "virtualNetworkType": "str",
+                    "zoneRedundant": False,
                     "zones": ["str"],
                 },
-                api_version="2024-05-01",
+                api_version="2025-03-01-preview",
             )
         ).result()  # call '.result()' to poll until service return final result
 
@@ -225,10 +237,10 @@ class TestApiManagementApiManagementServiceOperationsAsync(AzureMgmtRecordedTest
                             "encodedCertificate": "str",
                         }
                     ],
-                    "configurationApi": {"legacyApi": "Enabled"},
+                    "configurationApi": {"legacyApi": "str"},
                     "createdAtUtc": "2020-02-20 00:00:00",
                     "customProperties": {"str": "str"},
-                    "developerPortalStatus": "Enabled",
+                    "developerPortalStatus": "str",
                     "developerPortalUrl": "str",
                     "disableGateway": False,
                     "enableClientCertificate": False,
@@ -257,7 +269,7 @@ class TestApiManagementApiManagementServiceOperationsAsync(AzureMgmtRecordedTest
                         "tenantId": "str",
                         "userAssignedIdentities": {"str": {"clientId": "str", "principalId": "str"}},
                     },
-                    "legacyPortalStatus": "Enabled",
+                    "legacyPortalStatus": "str",
                     "managementApiUrl": "str",
                     "name": "str",
                     "natGatewayState": "str",
@@ -287,6 +299,7 @@ class TestApiManagementApiManagementServiceOperationsAsync(AzureMgmtRecordedTest
                     "publicNetworkAccess": "str",
                     "publisherEmail": "str",
                     "publisherName": "str",
+                    "releaseChannel": "str",
                     "restore": False,
                     "scmUrl": "str",
                     "sku": {"capacity": 0, "name": "str"},
@@ -295,23 +308,12 @@ class TestApiManagementApiManagementServiceOperationsAsync(AzureMgmtRecordedTest
                     "type": "str",
                     "virtualNetworkConfiguration": {"subnetResourceId": "str", "subnetname": "str", "vnetid": "str"},
                     "virtualNetworkType": "str",
+                    "zoneRedundant": False,
                     "zones": ["str"],
                 },
-                api_version="2024-05-01",
+                api_version="2025-03-01-preview",
             )
         ).result()  # call '.result()' to poll until service return final result
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_api_management_service_get(self, resource_group):
-        response = await self.client.api_management_service.get(
-            resource_group_name=resource_group.name,
-            service_name="str",
-            api_version="2024-05-01",
-        )
 
         # please add some check logic here by yourself
         # ...
@@ -323,77 +325,9 @@ class TestApiManagementApiManagementServiceOperationsAsync(AzureMgmtRecordedTest
             await self.client.api_management_service.begin_delete(
                 resource_group_name=resource_group.name,
                 service_name="str",
-                api_version="2024-05-01",
+                api_version="2025-03-01-preview",
             )
         ).result()  # call '.result()' to poll until service return final result
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_api_management_service_begin_migrate_to_stv2(self, resource_group):
-        response = await (
-            await self.client.api_management_service.begin_migrate_to_stv2(
-                resource_group_name=resource_group.name,
-                service_name="str",
-                api_version="2024-05-01",
-            )
-        ).result()  # call '.result()' to poll until service return final result
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_api_management_service_list_by_resource_group(self, resource_group):
-        response = self.client.api_management_service.list_by_resource_group(
-            resource_group_name=resource_group.name,
-            api_version="2024-05-01",
-        )
-        result = [r async for r in response]
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_api_management_service_list(self, resource_group):
-        response = self.client.api_management_service.list(
-            api_version="2024-05-01",
-        )
-        result = [r async for r in response]
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_api_management_service_get_sso_token(self, resource_group):
-        response = await self.client.api_management_service.get_sso_token(
-            resource_group_name=resource_group.name,
-            service_name="str",
-            api_version="2024-05-01",
-        )
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_api_management_service_check_name_availability(self, resource_group):
-        response = await self.client.api_management_service.check_name_availability(
-            parameters={"name": "str"},
-            api_version="2024-05-01",
-        )
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_api_management_service_get_domain_ownership_identifier(self, resource_group):
-        response = await self.client.api_management_service.get_domain_ownership_identifier(
-            api_version="2024-05-01",
-        )
 
         # please add some check logic here by yourself
         # ...
@@ -405,7 +339,91 @@ class TestApiManagementApiManagementServiceOperationsAsync(AzureMgmtRecordedTest
             await self.client.api_management_service.begin_apply_network_configuration_updates(
                 resource_group_name=resource_group.name,
                 service_name="str",
-                api_version="2024-05-01",
+                api_version="2025-03-01-preview",
+            )
+        ).result()  # call '.result()' to poll until service return final result
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
+    async def test_api_management_service_begin_backup(self, resource_group):
+        response = await (
+            await self.client.api_management_service.begin_backup(
+                resource_group_name=resource_group.name,
+                service_name="str",
+                parameters={
+                    "backupName": "str",
+                    "containerName": "str",
+                    "storageAccount": "str",
+                    "accessKey": "str",
+                    "accessType": "str",
+                    "clientId": "str",
+                },
+                api_version="2025-03-01-preview",
+            )
+        ).result()  # call '.result()' to poll until service return final result
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
+    async def test_api_management_service_get_sso_token(self, resource_group):
+        response = await self.client.api_management_service.get_sso_token(
+            resource_group_name=resource_group.name,
+            service_name="str",
+            api_version="2025-03-01-preview",
+        )
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
+    async def test_api_management_service_begin_migrate_to_stv2(self, resource_group):
+        response = await (
+            await self.client.api_management_service.begin_migrate_to_stv2(
+                resource_group_name=resource_group.name,
+                service_name="str",
+                api_version="2025-03-01-preview",
+            )
+        ).result()  # call '.result()' to poll until service return final result
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
+    async def test_api_management_service_begin_refresh_hostnames(self, resource_group):
+        response = await (
+            await self.client.api_management_service.begin_refresh_hostnames(
+                resource_group_name=resource_group.name,
+                service_name="str",
+                api_version="2025-03-01-preview",
+            )
+        ).result()  # call '.result()' to poll until service return final result
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
+    async def test_api_management_service_begin_restore(self, resource_group):
+        response = await (
+            await self.client.api_management_service.begin_restore(
+                resource_group_name=resource_group.name,
+                service_name="str",
+                parameters={
+                    "backupName": "str",
+                    "containerName": "str",
+                    "storageAccount": "str",
+                    "accessKey": "str",
+                    "accessType": "str",
+                    "clientId": "str",
+                },
+                api_version="2025-03-01-preview",
             )
         ).result()  # call '.result()' to poll until service return final result
 

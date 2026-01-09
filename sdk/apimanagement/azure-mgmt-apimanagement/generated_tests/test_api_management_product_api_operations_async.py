@@ -26,23 +26,9 @@ class TestApiManagementProductApiOperationsAsync(AzureMgmtRecordedTestCase):
             resource_group_name=resource_group.name,
             service_name="str",
             product_id="str",
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
         result = [r async for r in response]
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_product_api_check_entity_exists(self, resource_group):
-        response = await self.client.product_api.check_entity_exists(
-            resource_group_name=resource_group.name,
-            service_name="str",
-            product_id="str",
-            api_id="str",
-            api_version="2024-05-01",
-        )
-
         # please add some check logic here by yourself
         # ...
 
@@ -54,7 +40,7 @@ class TestApiManagementProductApiOperationsAsync(AzureMgmtRecordedTestCase):
             service_name="str",
             product_id="str",
             api_id="str",
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself
@@ -68,7 +54,21 @@ class TestApiManagementProductApiOperationsAsync(AzureMgmtRecordedTestCase):
             service_name="str",
             product_id="str",
             api_id="str",
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
+        )
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
+    async def test_product_api_check_entity_exists(self, resource_group):
+        response = await self.client.product_api.check_entity_exists(
+            resource_group_name=resource_group.name,
+            service_name="str",
+            product_id="str",
+            api_id="str",
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself

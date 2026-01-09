@@ -21,11 +21,11 @@ class TestApiManagementDelegationSettingsOperationsAsync(AzureMgmtRecordedTestCa
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_delegation_settings_get_entity_tag(self, resource_group):
-        response = await self.client.delegation_settings.get_entity_tag(
+    async def test_delegation_settings_get(self, resource_group):
+        response = await self.client.delegation_settings.get(
             resource_group_name=resource_group.name,
             service_name="str",
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself
@@ -33,11 +33,28 @@ class TestApiManagementDelegationSettingsOperationsAsync(AzureMgmtRecordedTestCa
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_delegation_settings_get(self, resource_group):
-        response = await self.client.delegation_settings.get(
+    async def test_delegation_settings_create_or_update(self, resource_group):
+        response = await self.client.delegation_settings.create_or_update(
             resource_group_name=resource_group.name,
             service_name="str",
-            api_version="2024-05-01",
+            parameters={
+                "id": "str",
+                "name": "str",
+                "subscriptions": {"enabled": bool},
+                "systemData": {
+                    "createdAt": "2020-02-20 00:00:00",
+                    "createdBy": "str",
+                    "createdByType": "str",
+                    "lastModifiedAt": "2020-02-20 00:00:00",
+                    "lastModifiedBy": "str",
+                    "lastModifiedByType": "str",
+                },
+                "type": "str",
+                "url": "str",
+                "userRegistration": {"enabled": bool},
+                "validationKey": "str",
+            },
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself
@@ -54,12 +71,20 @@ class TestApiManagementDelegationSettingsOperationsAsync(AzureMgmtRecordedTestCa
                 "id": "str",
                 "name": "str",
                 "subscriptions": {"enabled": bool},
+                "systemData": {
+                    "createdAt": "2020-02-20 00:00:00",
+                    "createdBy": "str",
+                    "createdByType": "str",
+                    "lastModifiedAt": "2020-02-20 00:00:00",
+                    "lastModifiedBy": "str",
+                    "lastModifiedByType": "str",
+                },
                 "type": "str",
                 "url": "str",
                 "userRegistration": {"enabled": bool},
                 "validationKey": "str",
             },
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself
@@ -67,20 +92,11 @@ class TestApiManagementDelegationSettingsOperationsAsync(AzureMgmtRecordedTestCa
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_delegation_settings_create_or_update(self, resource_group):
-        response = await self.client.delegation_settings.create_or_update(
+    async def test_delegation_settings_get_entity_tag(self, resource_group):
+        response = await self.client.delegation_settings.get_entity_tag(
             resource_group_name=resource_group.name,
             service_name="str",
-            parameters={
-                "id": "str",
-                "name": "str",
-                "subscriptions": {"enabled": bool},
-                "type": "str",
-                "url": "str",
-                "userRegistration": {"enabled": bool},
-                "validationKey": "str",
-            },
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself
@@ -92,7 +108,7 @@ class TestApiManagementDelegationSettingsOperationsAsync(AzureMgmtRecordedTestCa
         response = await self.client.delegation_settings.list_secrets(
             resource_group_name=resource_group.name,
             service_name="str",
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself

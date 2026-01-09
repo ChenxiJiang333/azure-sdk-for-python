@@ -25,22 +25,9 @@ class TestApiManagementEmailTemplateOperationsAsync(AzureMgmtRecordedTestCase):
         response = self.client.email_template.list_by_service(
             resource_group_name=resource_group.name,
             service_name="str",
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
         result = [r async for r in response]
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_email_template_get_entity_tag(self, resource_group):
-        response = await self.client.email_template.get_entity_tag(
-            resource_group_name=resource_group.name,
-            service_name="str",
-            template_name="str",
-            api_version="2024-05-01",
-        )
-
         # please add some check logic here by yourself
         # ...
 
@@ -51,7 +38,7 @@ class TestApiManagementEmailTemplateOperationsAsync(AzureMgmtRecordedTestCase):
             resource_group_name=resource_group.name,
             service_name="str",
             template_name="str",
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself
@@ -71,7 +58,7 @@ class TestApiManagementEmailTemplateOperationsAsync(AzureMgmtRecordedTestCase):
                 "subject": "str",
                 "title": "str",
             },
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself
@@ -92,7 +79,7 @@ class TestApiManagementEmailTemplateOperationsAsync(AzureMgmtRecordedTestCase):
                 "subject": "str",
                 "title": "str",
             },
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself
@@ -106,7 +93,20 @@ class TestApiManagementEmailTemplateOperationsAsync(AzureMgmtRecordedTestCase):
             service_name="str",
             template_name="str",
             if_match="str",
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
+        )
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
+    async def test_email_template_get_entity_tag(self, resource_group):
+        response = await self.client.email_template.get_entity_tag(
+            resource_group_name=resource_group.name,
+            service_name="str",
+            template_name="str",
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself

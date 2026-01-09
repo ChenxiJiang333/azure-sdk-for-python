@@ -27,24 +27,9 @@ class TestApiManagementTagOperationsAsync(AzureMgmtRecordedTestCase):
             service_name="str",
             api_id="str",
             operation_id="str",
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
         result = [r async for r in response]
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_tag_get_entity_state_by_operation(self, resource_group):
-        response = await self.client.tag.get_entity_state_by_operation(
-            resource_group_name=resource_group.name,
-            service_name="str",
-            api_id="str",
-            operation_id="str",
-            tag_id="str",
-            api_version="2024-05-01",
-        )
-
         # please add some check logic here by yourself
         # ...
 
@@ -57,7 +42,7 @@ class TestApiManagementTagOperationsAsync(AzureMgmtRecordedTestCase):
             api_id="str",
             operation_id="str",
             tag_id="str",
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself
@@ -72,7 +57,7 @@ class TestApiManagementTagOperationsAsync(AzureMgmtRecordedTestCase):
             api_id="str",
             operation_id="str",
             tag_id="str",
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself
@@ -87,7 +72,22 @@ class TestApiManagementTagOperationsAsync(AzureMgmtRecordedTestCase):
             api_id="str",
             operation_id="str",
             tag_id="str",
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
+        )
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
+    async def test_tag_get_entity_state_by_operation(self, resource_group):
+        response = await self.client.tag.get_entity_state_by_operation(
+            resource_group_name=resource_group.name,
+            service_name="str",
+            api_id="str",
+            operation_id="str",
+            tag_id="str",
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself
@@ -100,23 +100,9 @@ class TestApiManagementTagOperationsAsync(AzureMgmtRecordedTestCase):
             resource_group_name=resource_group.name,
             service_name="str",
             api_id="str",
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
         result = [r async for r in response]
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_tag_get_entity_state_by_api(self, resource_group):
-        response = await self.client.tag.get_entity_state_by_api(
-            resource_group_name=resource_group.name,
-            service_name="str",
-            api_id="str",
-            tag_id="str",
-            api_version="2024-05-01",
-        )
-
         # please add some check logic here by yourself
         # ...
 
@@ -128,7 +114,7 @@ class TestApiManagementTagOperationsAsync(AzureMgmtRecordedTestCase):
             service_name="str",
             api_id="str",
             tag_id="str",
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself
@@ -142,7 +128,7 @@ class TestApiManagementTagOperationsAsync(AzureMgmtRecordedTestCase):
             service_name="str",
             api_id="str",
             tag_id="str",
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself
@@ -156,7 +142,21 @@ class TestApiManagementTagOperationsAsync(AzureMgmtRecordedTestCase):
             service_name="str",
             api_id="str",
             tag_id="str",
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
+        )
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
+    async def test_tag_get_entity_state_by_api(self, resource_group):
+        response = await self.client.tag.get_entity_state_by_api(
+            resource_group_name=resource_group.name,
+            service_name="str",
+            api_id="str",
+            tag_id="str",
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself
@@ -169,23 +169,9 @@ class TestApiManagementTagOperationsAsync(AzureMgmtRecordedTestCase):
             resource_group_name=resource_group.name,
             service_name="str",
             product_id="str",
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
         result = [r async for r in response]
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_tag_get_entity_state_by_product(self, resource_group):
-        response = await self.client.tag.get_entity_state_by_product(
-            resource_group_name=resource_group.name,
-            service_name="str",
-            product_id="str",
-            tag_id="str",
-            api_version="2024-05-01",
-        )
-
         # please add some check logic here by yourself
         # ...
 
@@ -197,7 +183,7 @@ class TestApiManagementTagOperationsAsync(AzureMgmtRecordedTestCase):
             service_name="str",
             product_id="str",
             tag_id="str",
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself
@@ -211,7 +197,7 @@ class TestApiManagementTagOperationsAsync(AzureMgmtRecordedTestCase):
             service_name="str",
             product_id="str",
             tag_id="str",
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself
@@ -225,7 +211,21 @@ class TestApiManagementTagOperationsAsync(AzureMgmtRecordedTestCase):
             service_name="str",
             product_id="str",
             tag_id="str",
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
+        )
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
+    async def test_tag_get_entity_state_by_product(self, resource_group):
+        response = await self.client.tag.get_entity_state_by_product(
+            resource_group_name=resource_group.name,
+            service_name="str",
+            product_id="str",
+            tag_id="str",
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself
@@ -237,22 +237,9 @@ class TestApiManagementTagOperationsAsync(AzureMgmtRecordedTestCase):
         response = self.client.tag.list_by_service(
             resource_group_name=resource_group.name,
             service_name="str",
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
         result = [r async for r in response]
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_tag_get_entity_state(self, resource_group):
-        response = await self.client.tag.get_entity_state(
-            resource_group_name=resource_group.name,
-            service_name="str",
-            tag_id="str",
-            api_version="2024-05-01",
-        )
-
         # please add some check logic here by yourself
         # ...
 
@@ -263,7 +250,7 @@ class TestApiManagementTagOperationsAsync(AzureMgmtRecordedTestCase):
             resource_group_name=resource_group.name,
             service_name="str",
             tag_id="str",
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself
@@ -277,7 +264,7 @@ class TestApiManagementTagOperationsAsync(AzureMgmtRecordedTestCase):
             service_name="str",
             tag_id="str",
             parameters={"displayName": "str"},
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself
@@ -292,7 +279,7 @@ class TestApiManagementTagOperationsAsync(AzureMgmtRecordedTestCase):
             tag_id="str",
             if_match="str",
             parameters={"displayName": "str"},
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself
@@ -306,7 +293,20 @@ class TestApiManagementTagOperationsAsync(AzureMgmtRecordedTestCase):
             service_name="str",
             tag_id="str",
             if_match="str",
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
+        )
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
+    async def test_tag_get_entity_state(self, resource_group):
+        response = await self.client.tag.get_entity_state(
+            resource_group_name=resource_group.name,
+            service_name="str",
+            tag_id="str",
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself

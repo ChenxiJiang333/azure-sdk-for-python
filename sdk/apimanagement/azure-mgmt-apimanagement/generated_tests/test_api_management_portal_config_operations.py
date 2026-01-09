@@ -24,22 +24,9 @@ class TestApiManagementPortalConfigOperations(AzureMgmtRecordedTestCase):
         response = self.client.portal_config.list_by_service(
             resource_group_name=resource_group.name,
             service_name="str",
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
         result = [r for r in response]
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_portal_config_get_entity_tag(self, resource_group):
-        response = self.client.portal_config.get_entity_tag(
-            resource_group_name=resource_group.name,
-            service_name="str",
-            portal_config_id="str",
-            api_version="2024-05-01",
-        )
-
         # please add some check logic here by yourself
         # ...
 
@@ -50,37 +37,7 @@ class TestApiManagementPortalConfigOperations(AzureMgmtRecordedTestCase):
             resource_group_name=resource_group.name,
             service_name="str",
             portal_config_id="str",
-            api_version="2024-05-01",
-        )
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_portal_config_update(self, resource_group):
-        response = self.client.portal_config.update(
-            resource_group_name=resource_group.name,
-            service_name="str",
-            portal_config_id="str",
-            if_match="str",
-            parameters={
-                "cors": {"allowedOrigins": ["str"]},
-                "csp": {"allowedSources": ["str"], "mode": "disabled", "reportUri": ["str"]},
-                "delegation": {
-                    "delegateRegistration": False,
-                    "delegateSubscription": False,
-                    "delegationUrl": "str",
-                    "validationKey": "str",
-                },
-                "enableBasicAuth": True,
-                "id": "str",
-                "name": "str",
-                "signin": {"require": False},
-                "signup": {"termsOfService": {"requireConsent": False, "text": "str"}},
-                "type": "str",
-            },
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself
@@ -96,7 +53,7 @@ class TestApiManagementPortalConfigOperations(AzureMgmtRecordedTestCase):
             if_match="str",
             parameters={
                 "cors": {"allowedOrigins": ["str"]},
-                "csp": {"allowedSources": ["str"], "mode": "disabled", "reportUri": ["str"]},
+                "csp": {"allowedSources": ["str"], "mode": "str", "reportUri": ["str"]},
                 "delegation": {
                     "delegateRegistration": False,
                     "delegateSubscription": False,
@@ -108,9 +65,68 @@ class TestApiManagementPortalConfigOperations(AzureMgmtRecordedTestCase):
                 "name": "str",
                 "signin": {"require": False},
                 "signup": {"termsOfService": {"requireConsent": False, "text": "str"}},
+                "systemData": {
+                    "createdAt": "2020-02-20 00:00:00",
+                    "createdBy": "str",
+                    "createdByType": "str",
+                    "lastModifiedAt": "2020-02-20 00:00:00",
+                    "lastModifiedBy": "str",
+                    "lastModifiedByType": "str",
+                },
                 "type": "str",
             },
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
+        )
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
+    def test_portal_config_update(self, resource_group):
+        response = self.client.portal_config.update(
+            resource_group_name=resource_group.name,
+            service_name="str",
+            portal_config_id="str",
+            if_match="str",
+            parameters={
+                "cors": {"allowedOrigins": ["str"]},
+                "csp": {"allowedSources": ["str"], "mode": "str", "reportUri": ["str"]},
+                "delegation": {
+                    "delegateRegistration": False,
+                    "delegateSubscription": False,
+                    "delegationUrl": "str",
+                    "validationKey": "str",
+                },
+                "enableBasicAuth": True,
+                "id": "str",
+                "name": "str",
+                "signin": {"require": False},
+                "signup": {"termsOfService": {"requireConsent": False, "text": "str"}},
+                "systemData": {
+                    "createdAt": "2020-02-20 00:00:00",
+                    "createdBy": "str",
+                    "createdByType": "str",
+                    "lastModifiedAt": "2020-02-20 00:00:00",
+                    "lastModifiedBy": "str",
+                    "lastModifiedByType": "str",
+                },
+                "type": "str",
+            },
+            api_version="2025-03-01-preview",
+        )
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
+    def test_portal_config_get_entity_tag(self, resource_group):
+        response = self.client.portal_config.get_entity_tag(
+            resource_group_name=resource_group.name,
+            service_name="str",
+            portal_config_id="str",
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself

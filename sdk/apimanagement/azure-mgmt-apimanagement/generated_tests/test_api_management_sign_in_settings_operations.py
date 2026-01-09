@@ -20,11 +20,11 @@ class TestApiManagementSignInSettingsOperations(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_sign_in_settings_get_entity_tag(self, resource_group):
-        response = self.client.sign_in_settings.get_entity_tag(
+    def test_sign_in_settings_get(self, resource_group):
+        response = self.client.sign_in_settings.get(
             resource_group_name=resource_group.name,
             service_name="str",
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself
@@ -32,11 +32,25 @@ class TestApiManagementSignInSettingsOperations(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_sign_in_settings_get(self, resource_group):
-        response = self.client.sign_in_settings.get(
+    def test_sign_in_settings_create_or_update(self, resource_group):
+        response = self.client.sign_in_settings.create_or_update(
             resource_group_name=resource_group.name,
             service_name="str",
-            api_version="2024-05-01",
+            parameters={
+                "enabled": bool,
+                "id": "str",
+                "name": "str",
+                "systemData": {
+                    "createdAt": "2020-02-20 00:00:00",
+                    "createdBy": "str",
+                    "createdByType": "str",
+                    "lastModifiedAt": "2020-02-20 00:00:00",
+                    "lastModifiedBy": "str",
+                    "lastModifiedByType": "str",
+                },
+                "type": "str",
+            },
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself
@@ -49,8 +63,21 @@ class TestApiManagementSignInSettingsOperations(AzureMgmtRecordedTestCase):
             resource_group_name=resource_group.name,
             service_name="str",
             if_match="str",
-            parameters={"enabled": bool, "id": "str", "name": "str", "type": "str"},
-            api_version="2024-05-01",
+            parameters={
+                "enabled": bool,
+                "id": "str",
+                "name": "str",
+                "systemData": {
+                    "createdAt": "2020-02-20 00:00:00",
+                    "createdBy": "str",
+                    "createdByType": "str",
+                    "lastModifiedAt": "2020-02-20 00:00:00",
+                    "lastModifiedBy": "str",
+                    "lastModifiedByType": "str",
+                },
+                "type": "str",
+            },
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself
@@ -58,12 +85,11 @@ class TestApiManagementSignInSettingsOperations(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_sign_in_settings_create_or_update(self, resource_group):
-        response = self.client.sign_in_settings.create_or_update(
+    def test_sign_in_settings_get_entity_tag(self, resource_group):
+        response = self.client.sign_in_settings.get_entity_tag(
             resource_group_name=resource_group.name,
             service_name="str",
-            parameters={"enabled": bool, "id": "str", "name": "str", "type": "str"},
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself

@@ -25,23 +25,9 @@ class TestApiManagementWorkspaceNamedValueOperations(AzureMgmtRecordedTestCase):
             resource_group_name=resource_group.name,
             service_name="str",
             workspace_id="str",
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
         result = [r for r in response]
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_workspace_named_value_get_entity_tag(self, resource_group):
-        response = self.client.workspace_named_value.get_entity_tag(
-            resource_group_name=resource_group.name,
-            service_name="str",
-            workspace_id="str",
-            named_value_id="str",
-            api_version="2024-05-01",
-        )
-
         # please add some check logic here by yourself
         # ...
 
@@ -53,7 +39,7 @@ class TestApiManagementWorkspaceNamedValueOperations(AzureMgmtRecordedTestCase):
             service_name="str",
             workspace_id="str",
             named_value_id="str",
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself
@@ -73,11 +59,19 @@ class TestApiManagementWorkspaceNamedValueOperations(AzureMgmtRecordedTestCase):
                 "keyVault": {"identityClientId": "str", "secretIdentifier": "str"},
                 "name": "str",
                 "secret": bool,
+                "systemData": {
+                    "createdAt": "2020-02-20 00:00:00",
+                    "createdBy": "str",
+                    "createdByType": "str",
+                    "lastModifiedAt": "2020-02-20 00:00:00",
+                    "lastModifiedBy": "str",
+                    "lastModifiedByType": "str",
+                },
                 "tags": ["str"],
                 "type": "str",
                 "value": "str",
             },
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         ).result()  # call '.result()' to poll until service return final result
 
         # please add some check logic here by yourself
@@ -99,7 +93,7 @@ class TestApiManagementWorkspaceNamedValueOperations(AzureMgmtRecordedTestCase):
                 "tags": ["str"],
                 "value": "str",
             },
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         ).result()  # call '.result()' to poll until service return final result
 
         # please add some check logic here by yourself
@@ -114,7 +108,21 @@ class TestApiManagementWorkspaceNamedValueOperations(AzureMgmtRecordedTestCase):
             workspace_id="str",
             named_value_id="str",
             if_match="str",
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
+        )
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
+    def test_workspace_named_value_get_entity_tag(self, resource_group):
+        response = self.client.workspace_named_value.get_entity_tag(
+            resource_group_name=resource_group.name,
+            service_name="str",
+            workspace_id="str",
+            named_value_id="str",
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself
@@ -128,7 +136,7 @@ class TestApiManagementWorkspaceNamedValueOperations(AzureMgmtRecordedTestCase):
             service_name="str",
             workspace_id="str",
             named_value_id="str",
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself
@@ -142,7 +150,7 @@ class TestApiManagementWorkspaceNamedValueOperations(AzureMgmtRecordedTestCase):
             service_name="str",
             workspace_id="str",
             named_value_id="str",
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         ).result()  # call '.result()' to poll until service return final result
 
         # please add some check logic here by yourself

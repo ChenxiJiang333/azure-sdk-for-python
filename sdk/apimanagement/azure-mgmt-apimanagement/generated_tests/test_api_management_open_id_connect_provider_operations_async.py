@@ -25,22 +25,9 @@ class TestApiManagementOpenIdConnectProviderOperationsAsync(AzureMgmtRecordedTes
         response = self.client.open_id_connect_provider.list_by_service(
             resource_group_name=resource_group.name,
             service_name="str",
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
         result = [r async for r in response]
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_open_id_connect_provider_get_entity_tag(self, resource_group):
-        response = await self.client.open_id_connect_provider.get_entity_tag(
-            resource_group_name=resource_group.name,
-            service_name="str",
-            opid="str",
-            api_version="2024-05-01",
-        )
-
         # please add some check logic here by yourself
         # ...
 
@@ -51,7 +38,7 @@ class TestApiManagementOpenIdConnectProviderOperationsAsync(AzureMgmtRecordedTes
             resource_group_name=resource_group.name,
             service_name="str",
             opid="str",
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself
@@ -72,11 +59,19 @@ class TestApiManagementOpenIdConnectProviderOperationsAsync(AzureMgmtRecordedTes
                 "id": "str",
                 "metadataEndpoint": "str",
                 "name": "str",
+                "systemData": {
+                    "createdAt": "2020-02-20 00:00:00",
+                    "createdBy": "str",
+                    "createdByType": "str",
+                    "lastModifiedAt": "2020-02-20 00:00:00",
+                    "lastModifiedBy": "str",
+                    "lastModifiedByType": "str",
+                },
                 "type": "str",
                 "useInApiDocumentation": bool,
                 "useInTestConsole": bool,
             },
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself
@@ -99,7 +94,7 @@ class TestApiManagementOpenIdConnectProviderOperationsAsync(AzureMgmtRecordedTes
                 "useInApiDocumentation": bool,
                 "useInTestConsole": bool,
             },
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself
@@ -113,7 +108,20 @@ class TestApiManagementOpenIdConnectProviderOperationsAsync(AzureMgmtRecordedTes
             service_name="str",
             opid="str",
             if_match="str",
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
+        )
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
+    async def test_open_id_connect_provider_get_entity_tag(self, resource_group):
+        response = await self.client.open_id_connect_provider.get_entity_tag(
+            resource_group_name=resource_group.name,
+            service_name="str",
+            opid="str",
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself
@@ -126,7 +134,7 @@ class TestApiManagementOpenIdConnectProviderOperationsAsync(AzureMgmtRecordedTes
             resource_group_name=resource_group.name,
             service_name="str",
             opid="str",
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself

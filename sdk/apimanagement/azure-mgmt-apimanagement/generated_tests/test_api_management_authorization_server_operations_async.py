@@ -25,22 +25,9 @@ class TestApiManagementAuthorizationServerOperationsAsync(AzureMgmtRecordedTestC
         response = self.client.authorization_server.list_by_service(
             resource_group_name=resource_group.name,
             service_name="str",
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
         result = [r async for r in response]
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_authorization_server_get_entity_tag(self, resource_group):
-        response = await self.client.authorization_server.get_entity_tag(
-            resource_group_name=resource_group.name,
-            service_name="str",
-            authsid="str",
-            api_version="2024-05-01",
-        )
-
         # please add some check logic here by yourself
         # ...
 
@@ -51,7 +38,7 @@ class TestApiManagementAuthorizationServerOperationsAsync(AzureMgmtRecordedTestC
             resource_group_name=resource_group.name,
             service_name="str",
             authsid="str",
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself
@@ -81,13 +68,21 @@ class TestApiManagementAuthorizationServerOperationsAsync(AzureMgmtRecordedTestC
                 "resourceOwnerPassword": "str",
                 "resourceOwnerUsername": "str",
                 "supportState": bool,
+                "systemData": {
+                    "createdAt": "2020-02-20 00:00:00",
+                    "createdBy": "str",
+                    "createdByType": "str",
+                    "lastModifiedAt": "2020-02-20 00:00:00",
+                    "lastModifiedBy": "str",
+                    "lastModifiedByType": "str",
+                },
                 "tokenBodyParameters": [{"name": "str", "value": "str"}],
                 "tokenEndpoint": "str",
                 "type": "str",
                 "useInApiDocumentation": bool,
                 "useInTestConsole": bool,
             },
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself
@@ -118,13 +113,21 @@ class TestApiManagementAuthorizationServerOperationsAsync(AzureMgmtRecordedTestC
                 "resourceOwnerPassword": "str",
                 "resourceOwnerUsername": "str",
                 "supportState": bool,
+                "systemData": {
+                    "createdAt": "2020-02-20 00:00:00",
+                    "createdBy": "str",
+                    "createdByType": "str",
+                    "lastModifiedAt": "2020-02-20 00:00:00",
+                    "lastModifiedBy": "str",
+                    "lastModifiedByType": "str",
+                },
                 "tokenBodyParameters": [{"name": "str", "value": "str"}],
                 "tokenEndpoint": "str",
                 "type": "str",
                 "useInApiDocumentation": bool,
                 "useInTestConsole": bool,
             },
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself
@@ -138,7 +141,20 @@ class TestApiManagementAuthorizationServerOperationsAsync(AzureMgmtRecordedTestC
             service_name="str",
             authsid="str",
             if_match="str",
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
+        )
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
+    async def test_authorization_server_get_entity_tag(self, resource_group):
+        response = await self.client.authorization_server.get_entity_tag(
+            resource_group_name=resource_group.name,
+            service_name="str",
+            authsid="str",
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself
@@ -151,7 +167,7 @@ class TestApiManagementAuthorizationServerOperationsAsync(AzureMgmtRecordedTestC
             resource_group_name=resource_group.name,
             service_name="str",
             authsid="str",
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself

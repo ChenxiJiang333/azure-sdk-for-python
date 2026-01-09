@@ -26,7 +26,7 @@ class TestApiManagementTagOperationLinkOperationsAsync(AzureMgmtRecordedTestCase
             resource_group_name=resource_group.name,
             service_name="str",
             tag_id="str",
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
         result = [r async for r in response]
         # please add some check logic here by yourself
@@ -40,7 +40,7 @@ class TestApiManagementTagOperationLinkOperationsAsync(AzureMgmtRecordedTestCase
             service_name="str",
             tag_id="str",
             operation_link_id="str",
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself
@@ -54,8 +54,21 @@ class TestApiManagementTagOperationLinkOperationsAsync(AzureMgmtRecordedTestCase
             service_name="str",
             tag_id="str",
             operation_link_id="str",
-            parameters={"id": "str", "name": "str", "operationId": "str", "type": "str"},
-            api_version="2024-05-01",
+            parameters={
+                "id": "str",
+                "name": "str",
+                "operationId": "str",
+                "systemData": {
+                    "createdAt": "2020-02-20 00:00:00",
+                    "createdBy": "str",
+                    "createdByType": "str",
+                    "lastModifiedAt": "2020-02-20 00:00:00",
+                    "lastModifiedBy": "str",
+                    "lastModifiedByType": "str",
+                },
+                "type": "str",
+            },
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself
@@ -69,7 +82,7 @@ class TestApiManagementTagOperationLinkOperationsAsync(AzureMgmtRecordedTestCase
             service_name="str",
             tag_id="str",
             operation_link_id="str",
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself

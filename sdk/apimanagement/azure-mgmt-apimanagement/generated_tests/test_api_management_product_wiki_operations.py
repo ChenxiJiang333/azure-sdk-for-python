@@ -20,25 +20,12 @@ class TestApiManagementProductWikiOperations(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_product_wiki_get_entity_tag(self, resource_group):
-        response = self.client.product_wiki.get_entity_tag(
-            resource_group_name=resource_group.name,
-            service_name="str",
-            product_id="str",
-            api_version="2024-05-01",
-        )
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
     def test_product_wiki_get(self, resource_group):
         response = self.client.product_wiki.get(
             resource_group_name=resource_group.name,
             service_name="str",
             product_id="str",
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself
@@ -51,8 +38,21 @@ class TestApiManagementProductWikiOperations(AzureMgmtRecordedTestCase):
             resource_group_name=resource_group.name,
             service_name="str",
             product_id="str",
-            parameters={"documents": [{"documentationId": "str"}], "id": "str", "name": "str", "type": "str"},
-            api_version="2024-05-01",
+            parameters={
+                "documents": [{"documentationId": "str"}],
+                "id": "str",
+                "name": "str",
+                "systemData": {
+                    "createdAt": "2020-02-20 00:00:00",
+                    "createdBy": "str",
+                    "createdByType": "str",
+                    "lastModifiedAt": "2020-02-20 00:00:00",
+                    "lastModifiedBy": "str",
+                    "lastModifiedByType": "str",
+                },
+                "type": "str",
+            },
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself
@@ -67,7 +67,7 @@ class TestApiManagementProductWikiOperations(AzureMgmtRecordedTestCase):
             product_id="str",
             if_match="str",
             parameters={"documents": [{"documentationId": "str"}]},
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself
@@ -81,7 +81,20 @@ class TestApiManagementProductWikiOperations(AzureMgmtRecordedTestCase):
             service_name="str",
             product_id="str",
             if_match="str",
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
+        )
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
+    def test_product_wiki_get_entity_tag(self, resource_group):
+        response = self.client.product_wiki.get_entity_tag(
+            resource_group_name=resource_group.name,
+            service_name="str",
+            product_id="str",
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself

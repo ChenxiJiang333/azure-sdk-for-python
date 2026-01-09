@@ -25,46 +25,7 @@ class TestApiManagementReportsOperations(AzureMgmtRecordedTestCase):
             resource_group_name=resource_group.name,
             service_name="str",
             filter="str",
-            api_version="2024-05-01",
-        )
-        result = [r for r in response]
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_reports_list_by_user(self, resource_group):
-        response = self.client.reports.list_by_user(
-            resource_group_name=resource_group.name,
-            service_name="str",
-            filter="str",
-            api_version="2024-05-01",
-        )
-        result = [r for r in response]
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_reports_list_by_operation(self, resource_group):
-        response = self.client.reports.list_by_operation(
-            resource_group_name=resource_group.name,
-            service_name="str",
-            filter="str",
-            api_version="2024-05-01",
-        )
-        result = [r for r in response]
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_reports_list_by_product(self, resource_group):
-        response = self.client.reports.list_by_product(
-            resource_group_name=resource_group.name,
-            service_name="str",
-            filter="str",
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
         result = [r for r in response]
         # please add some check logic here by yourself
@@ -77,7 +38,46 @@ class TestApiManagementReportsOperations(AzureMgmtRecordedTestCase):
             resource_group_name=resource_group.name,
             service_name="str",
             filter="str",
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
+        )
+        result = [r for r in response]
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
+    def test_reports_list_by_operation(self, resource_group):
+        response = self.client.reports.list_by_operation(
+            resource_group_name=resource_group.name,
+            service_name="str",
+            filter="str",
+            api_version="2025-03-01-preview",
+        )
+        result = [r for r in response]
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
+    def test_reports_list_by_product(self, resource_group):
+        response = self.client.reports.list_by_product(
+            resource_group_name=resource_group.name,
+            service_name="str",
+            filter="str",
+            api_version="2025-03-01-preview",
+        )
+        result = [r for r in response]
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
+    def test_reports_list_by_request(self, resource_group):
+        response = self.client.reports.list_by_request(
+            resource_group_name=resource_group.name,
+            service_name="str",
+            filter="str",
+            api_version="2025-03-01-preview",
         )
         result = [r for r in response]
         # please add some check logic here by yourself
@@ -90,7 +90,7 @@ class TestApiManagementReportsOperations(AzureMgmtRecordedTestCase):
             resource_group_name=resource_group.name,
             service_name="str",
             filter="str",
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
         result = [r for r in response]
         # please add some check logic here by yourself
@@ -104,7 +104,7 @@ class TestApiManagementReportsOperations(AzureMgmtRecordedTestCase):
             service_name="str",
             filter="str",
             interval="1 day, 0:00:00",
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
         result = [r for r in response]
         # please add some check logic here by yourself
@@ -112,12 +112,12 @@ class TestApiManagementReportsOperations(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_reports_list_by_request(self, resource_group):
-        response = self.client.reports.list_by_request(
+    def test_reports_list_by_user(self, resource_group):
+        response = self.client.reports.list_by_user(
             resource_group_name=resource_group.name,
             service_name="str",
             filter="str",
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
         result = [r for r in response]
         # please add some check logic here by yourself

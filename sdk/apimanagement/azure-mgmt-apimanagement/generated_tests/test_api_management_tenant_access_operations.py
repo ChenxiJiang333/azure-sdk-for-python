@@ -24,22 +24,9 @@ class TestApiManagementTenantAccessOperations(AzureMgmtRecordedTestCase):
         response = self.client.tenant_access.list_by_service(
             resource_group_name=resource_group.name,
             service_name="str",
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
         result = [r for r in response]
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_tenant_access_get_entity_tag(self, resource_group):
-        response = self.client.tenant_access.get_entity_tag(
-            resource_group_name=resource_group.name,
-            service_name="str",
-            access_name="str",
-            api_version="2024-05-01",
-        )
-
         # please add some check logic here by yourself
         # ...
 
@@ -50,7 +37,7 @@ class TestApiManagementTenantAccessOperations(AzureMgmtRecordedTestCase):
             resource_group_name=resource_group.name,
             service_name="str",
             access_name="str",
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself
@@ -65,7 +52,7 @@ class TestApiManagementTenantAccessOperations(AzureMgmtRecordedTestCase):
             access_name="str",
             if_match="str",
             parameters={"enabled": bool, "primaryKey": "str", "principalId": "str", "secondaryKey": "str"},
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself
@@ -80,7 +67,7 @@ class TestApiManagementTenantAccessOperations(AzureMgmtRecordedTestCase):
             access_name="str",
             if_match="str",
             parameters={"enabled": bool},
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself
@@ -88,25 +75,12 @@ class TestApiManagementTenantAccessOperations(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_tenant_access_regenerate_primary_key(self, resource_group):
-        response = self.client.tenant_access.regenerate_primary_key(
+    def test_tenant_access_get_entity_tag(self, resource_group):
+        response = self.client.tenant_access.get_entity_tag(
             resource_group_name=resource_group.name,
             service_name="str",
             access_name="str",
-            api_version="2024-05-01",
-        )
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_tenant_access_regenerate_secondary_key(self, resource_group):
-        response = self.client.tenant_access.regenerate_secondary_key(
-            resource_group_name=resource_group.name,
-            service_name="str",
-            access_name="str",
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself
@@ -119,7 +93,33 @@ class TestApiManagementTenantAccessOperations(AzureMgmtRecordedTestCase):
             resource_group_name=resource_group.name,
             service_name="str",
             access_name="str",
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
+        )
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
+    def test_tenant_access_regenerate_primary_key(self, resource_group):
+        response = self.client.tenant_access.regenerate_primary_key(
+            resource_group_name=resource_group.name,
+            service_name="str",
+            access_name="str",
+            api_version="2025-03-01-preview",
+        )
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
+    def test_tenant_access_regenerate_secondary_key(self, resource_group):
+        response = self.client.tenant_access.regenerate_secondary_key(
+            resource_group_name=resource_group.name,
+            service_name="str",
+            access_name="str",
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself

@@ -27,24 +27,9 @@ class TestApiManagementWorkspaceApiOperationOperationsAsync(AzureMgmtRecordedTes
             service_name="str",
             workspace_id="str",
             api_id="str",
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
         result = [r async for r in response]
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_workspace_api_operation_get_entity_tag(self, resource_group):
-        response = await self.client.workspace_api_operation.get_entity_tag(
-            resource_group_name=resource_group.name,
-            service_name="str",
-            workspace_id="str",
-            api_id="str",
-            operation_id="str",
-            api_version="2024-05-01",
-        )
-
         # please add some check logic here by yourself
         # ...
 
@@ -57,7 +42,7 @@ class TestApiManagementWorkspaceApiOperationOperationsAsync(AzureMgmtRecordedTes
             workspace_id="str",
             api_id="str",
             operation_id="str",
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself
@@ -193,6 +178,14 @@ class TestApiManagementWorkspaceApiOperationOperationsAsync(AzureMgmtRecordedTes
                         ],
                     }
                 ],
+                "systemData": {
+                    "createdAt": "2020-02-20 00:00:00",
+                    "createdBy": "str",
+                    "createdByType": "str",
+                    "lastModifiedAt": "2020-02-20 00:00:00",
+                    "lastModifiedBy": "str",
+                    "lastModifiedByType": "str",
+                },
                 "templateParameters": [
                     {
                         "name": "str",
@@ -211,7 +204,7 @@ class TestApiManagementWorkspaceApiOperationOperationsAsync(AzureMgmtRecordedTes
                 "type": "str",
                 "urlTemplate": "str",
             },
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself
@@ -363,7 +356,7 @@ class TestApiManagementWorkspaceApiOperationOperationsAsync(AzureMgmtRecordedTes
                 ],
                 "urlTemplate": "str",
             },
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself
@@ -379,7 +372,22 @@ class TestApiManagementWorkspaceApiOperationOperationsAsync(AzureMgmtRecordedTes
             api_id="str",
             operation_id="str",
             if_match="str",
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
+        )
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
+    async def test_workspace_api_operation_get_entity_tag(self, resource_group):
+        response = await self.client.workspace_api_operation.get_entity_tag(
+            resource_group_name=resource_group.name,
+            service_name="str",
+            workspace_id="str",
+            api_id="str",
+            operation_id="str",
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself

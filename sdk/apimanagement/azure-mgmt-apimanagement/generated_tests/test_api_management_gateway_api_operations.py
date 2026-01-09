@@ -25,23 +25,9 @@ class TestApiManagementGatewayApiOperations(AzureMgmtRecordedTestCase):
             resource_group_name=resource_group.name,
             service_name="str",
             gateway_id="str",
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
         result = [r for r in response]
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_gateway_api_get_entity_tag(self, resource_group):
-        response = self.client.gateway_api.get_entity_tag(
-            resource_group_name=resource_group.name,
-            service_name="str",
-            gateway_id="str",
-            api_id="str",
-            api_version="2024-05-01",
-        )
-
         # please add some check logic here by yourself
         # ...
 
@@ -53,7 +39,7 @@ class TestApiManagementGatewayApiOperations(AzureMgmtRecordedTestCase):
             service_name="str",
             gateway_id="str",
             api_id="str",
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself
@@ -67,7 +53,21 @@ class TestApiManagementGatewayApiOperations(AzureMgmtRecordedTestCase):
             service_name="str",
             gateway_id="str",
             api_id="str",
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
+        )
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
+    def test_gateway_api_get_entity_tag(self, resource_group):
+        response = self.client.gateway_api.get_entity_tag(
+            resource_group_name=resource_group.name,
+            service_name="str",
+            gateway_id="str",
+            api_id="str",
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself

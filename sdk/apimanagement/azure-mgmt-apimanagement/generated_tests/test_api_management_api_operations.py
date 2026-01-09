@@ -24,22 +24,9 @@ class TestApiManagementApiOperations(AzureMgmtRecordedTestCase):
         response = self.client.api.list_by_service(
             resource_group_name=resource_group.name,
             service_name="str",
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
         result = [r for r in response]
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_api_get_entity_tag(self, resource_group):
-        response = self.client.api.get_entity_tag(
-            resource_group_name=resource_group.name,
-            service_name="str",
-            api_id="str",
-            api_version="2024-05-01",
-        )
-
         # please add some check logic here by yourself
         # ...
 
@@ -50,7 +37,7 @@ class TestApiManagementApiOperations(AzureMgmtRecordedTestCase):
             resource_group_name=resource_group.name,
             service_name="str",
             api_id="str",
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself
@@ -104,7 +91,7 @@ class TestApiManagementApiOperations(AzureMgmtRecordedTestCase):
                 "value": "str",
                 "wsdlSelector": {"wsdlEndpointName": "str", "wsdlServiceName": "str"},
             },
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         ).result()  # call '.result()' to poll until service return final result
 
         # please add some check logic here by yourself
@@ -144,7 +131,7 @@ class TestApiManagementApiOperations(AzureMgmtRecordedTestCase):
                 "termsOfServiceUrl": "str",
                 "type": "str",
             },
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself
@@ -158,8 +145,21 @@ class TestApiManagementApiOperations(AzureMgmtRecordedTestCase):
             service_name="str",
             api_id="str",
             if_match="str",
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         ).result()  # call '.result()' to poll until service return final result
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
+    def test_api_get_entity_tag(self, resource_group):
+        response = self.client.api.get_entity_tag(
+            resource_group_name=resource_group.name,
+            service_name="str",
+            api_id="str",
+            api_version="2025-03-01-preview",
+        )
 
         # please add some check logic here by yourself
         # ...
@@ -170,7 +170,7 @@ class TestApiManagementApiOperations(AzureMgmtRecordedTestCase):
         response = self.client.api.list_by_tags(
             resource_group_name=resource_group.name,
             service_name="str",
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
         result = [r for r in response]
         # please add some check logic here by yourself

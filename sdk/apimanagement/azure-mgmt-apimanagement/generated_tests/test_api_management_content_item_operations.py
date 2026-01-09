@@ -25,23 +25,9 @@ class TestApiManagementContentItemOperations(AzureMgmtRecordedTestCase):
             resource_group_name=resource_group.name,
             service_name="str",
             content_type_id="str",
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
         result = [r for r in response]
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_content_item_get_entity_tag(self, resource_group):
-        response = self.client.content_item.get_entity_tag(
-            resource_group_name=resource_group.name,
-            service_name="str",
-            content_type_id="str",
-            content_item_id="str",
-            api_version="2024-05-01",
-        )
-
         # please add some check logic here by yourself
         # ...
 
@@ -53,7 +39,7 @@ class TestApiManagementContentItemOperations(AzureMgmtRecordedTestCase):
             service_name="str",
             content_type_id="str",
             content_item_id="str",
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself
@@ -67,8 +53,21 @@ class TestApiManagementContentItemOperations(AzureMgmtRecordedTestCase):
             service_name="str",
             content_type_id="str",
             content_item_id="str",
-            parameters={"id": "str", "name": "str", "properties": {"str": {}}, "type": "str"},
-            api_version="2024-05-01",
+            parameters={
+                "id": "str",
+                "name": "str",
+                "properties": {"str": {}},
+                "systemData": {
+                    "createdAt": "2020-02-20 00:00:00",
+                    "createdBy": "str",
+                    "createdByType": "str",
+                    "lastModifiedAt": "2020-02-20 00:00:00",
+                    "lastModifiedBy": "str",
+                    "lastModifiedByType": "str",
+                },
+                "type": "str",
+            },
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself
@@ -83,7 +82,21 @@ class TestApiManagementContentItemOperations(AzureMgmtRecordedTestCase):
             content_type_id="str",
             content_item_id="str",
             if_match="str",
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
+        )
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
+    def test_content_item_get_entity_tag(self, resource_group):
+        response = self.client.content_item.get_entity_tag(
+            resource_group_name=resource_group.name,
+            service_name="str",
+            content_type_id="str",
+            content_item_id="str",
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself

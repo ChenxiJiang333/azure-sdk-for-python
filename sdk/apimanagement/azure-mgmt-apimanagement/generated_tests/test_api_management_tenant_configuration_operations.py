@@ -26,7 +26,7 @@ class TestApiManagementTenantConfigurationOperations(AzureMgmtRecordedTestCase):
             service_name="str",
             configuration_name="str",
             parameters={"branch": "str", "force": bool},
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         ).result()  # call '.result()' to poll until service return final result
 
         # please add some check logic here by yourself
@@ -40,21 +40,7 @@ class TestApiManagementTenantConfigurationOperations(AzureMgmtRecordedTestCase):
             service_name="str",
             configuration_name="str",
             parameters={"branch": "str", "force": bool},
-            api_version="2024-05-01",
-        ).result()  # call '.result()' to poll until service return final result
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_tenant_configuration_begin_validate(self, resource_group):
-        response = self.client.tenant_configuration.begin_validate(
-            resource_group_name=resource_group.name,
-            service_name="str",
-            configuration_name="str",
-            parameters={"branch": "str", "force": bool},
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         ).result()  # call '.result()' to poll until service return final result
 
         # please add some check logic here by yourself
@@ -67,8 +53,22 @@ class TestApiManagementTenantConfigurationOperations(AzureMgmtRecordedTestCase):
             resource_group_name=resource_group.name,
             service_name="str",
             configuration_name="str",
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
+    def test_tenant_configuration_begin_validate(self, resource_group):
+        response = self.client.tenant_configuration.begin_validate(
+            resource_group_name=resource_group.name,
+            service_name="str",
+            configuration_name="str",
+            parameters={"branch": "str", "force": bool},
+            api_version="2025-03-01-preview",
+        ).result()  # call '.result()' to poll until service return final result
 
         # please add some check logic here by yourself
         # ...

@@ -26,7 +26,7 @@ class TestApiManagementAuthorizationOperationsAsync(AzureMgmtRecordedTestCase):
             resource_group_name=resource_group.name,
             service_name="str",
             authorization_provider_id="str",
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
         result = [r async for r in response]
         # please add some check logic here by yourself
@@ -40,7 +40,7 @@ class TestApiManagementAuthorizationOperationsAsync(AzureMgmtRecordedTestCase):
             service_name="str",
             authorization_provider_id="str",
             authorization_id="str",
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself
@@ -62,9 +62,17 @@ class TestApiManagementAuthorizationOperationsAsync(AzureMgmtRecordedTestCase):
                 "oauth2grantType": "str",
                 "parameters": {"str": "str"},
                 "status": "str",
+                "systemData": {
+                    "createdAt": "2020-02-20 00:00:00",
+                    "createdBy": "str",
+                    "createdByType": "str",
+                    "lastModifiedAt": "2020-02-20 00:00:00",
+                    "lastModifiedBy": "str",
+                    "lastModifiedByType": "str",
+                },
                 "type": "str",
             },
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself
@@ -79,7 +87,7 @@ class TestApiManagementAuthorizationOperationsAsync(AzureMgmtRecordedTestCase):
             authorization_provider_id="str",
             authorization_id="str",
             if_match="str",
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself
@@ -94,7 +102,7 @@ class TestApiManagementAuthorizationOperationsAsync(AzureMgmtRecordedTestCase):
             authorization_provider_id="str",
             authorization_id="str",
             parameters={"consentCode": "str"},
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself

@@ -26,23 +26,9 @@ class TestApiManagementGatewayHostnameConfigurationOperationsAsync(AzureMgmtReco
             resource_group_name=resource_group.name,
             service_name="str",
             gateway_id="str",
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
         result = [r async for r in response]
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_gateway_hostname_configuration_get_entity_tag(self, resource_group):
-        response = await self.client.gateway_hostname_configuration.get_entity_tag(
-            resource_group_name=resource_group.name,
-            service_name="str",
-            gateway_id="str",
-            hc_id="str",
-            api_version="2024-05-01",
-        )
-
         # please add some check logic here by yourself
         # ...
 
@@ -54,7 +40,7 @@ class TestApiManagementGatewayHostnameConfigurationOperationsAsync(AzureMgmtReco
             service_name="str",
             gateway_id="str",
             hc_id="str",
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself
@@ -75,11 +61,19 @@ class TestApiManagementGatewayHostnameConfigurationOperationsAsync(AzureMgmtReco
                 "id": "str",
                 "name": "str",
                 "negotiateClientCertificate": bool,
+                "systemData": {
+                    "createdAt": "2020-02-20 00:00:00",
+                    "createdBy": "str",
+                    "createdByType": "str",
+                    "lastModifiedAt": "2020-02-20 00:00:00",
+                    "lastModifiedBy": "str",
+                    "lastModifiedByType": "str",
+                },
                 "tls10Enabled": bool,
                 "tls11Enabled": bool,
                 "type": "str",
             },
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself
@@ -94,7 +88,21 @@ class TestApiManagementGatewayHostnameConfigurationOperationsAsync(AzureMgmtReco
             gateway_id="str",
             hc_id="str",
             if_match="str",
-            api_version="2024-05-01",
+            api_version="2025-03-01-preview",
+        )
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
+    async def test_gateway_hostname_configuration_get_entity_tag(self, resource_group):
+        response = await self.client.gateway_hostname_configuration.get_entity_tag(
+            resource_group_name=resource_group.name,
+            service_name="str",
+            gateway_id="str",
+            hc_id="str",
+            api_version="2025-03-01-preview",
         )
 
         # please add some check logic here by yourself
