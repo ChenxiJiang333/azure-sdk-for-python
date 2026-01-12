@@ -1,12 +1,1001 @@
+## tsp migration
+
+### Breaking Changes
+
+- Client `ApiManagementClient` deleted or renamed instance variable `url`
+- Deleted or renamed client method `ApiManagementClient.begin_perform_connectivity_check_async`
+- Renamed enum value `HttpCorrelationProtocol.W3_C` to `W3C`
+- Deleted or renamed model `BackendSessionIdSource`
+- Deleted or renamed model `LlmDiagnosticSettings`
+- Deleted or renamed model `LlmMessageLogTypes`
+- Deleted or renamed model `ConnectivityCheckRequestProtocolConfigurationHttpConfiguration`
+- Method `ApiOperationPolicyOperations.get` parameter `format` changed default value from `None` to `str`
+- Method `ApiPolicyOperations.get` parameter `format` changed default value from `None` to `str`
+- Method `WorkspacePolicyOperations.get` parameter `format` changed default value from `None` to `str`
+- Method `WorkspaceApiPolicyOperations.get` parameter `format` changed default value from `None` to `str`
+- Method `WorkspaceApiOperationPolicyOperations.get` parameter `format` changed default value from `None` to `str`
+- Method `ProductPolicyOperations.get` parameter `format` changed default value from `None` to `str`
+- Method `GraphQLApiResolverPolicyOperations.get` parameter `format` changed default value from `None` to `str`
+- Method `PolicyOperations.get` parameter `format` changed default value from `None` to `str`
+
+- Model `AccessInformationContract` deleted or renamed its instance variable `id_properties_id`
+- Model `AccessInformationContract` deleted or renamed its instance variable `principal_id`
+- Model `AccessInformationContract` deleted or renamed its instance variable `enabled`
+- Model `AccessInformationCreateParameters` deleted or renamed its instance variable `principal_id`
+- Model `AccessInformationCreateParameters` deleted or renamed its instance variable `primary_key`
+- Model `AccessInformationCreateParameters` deleted or renamed its instance variable `secondary_key`
+- Model `AccessInformationCreateParameters` deleted or renamed its instance variable `enabled`
+- Model `AccessInformationUpdateParameters` deleted or renamed its instance variable `enabled`
+- Model `AllPoliciesContract` deleted or renamed its instance variable `reference_policy_id`
+- Model `AllPoliciesContract` deleted or renamed its instance variable `compliance_state`
+- Model `ApiContract` deleted or renamed its instance variable `description`
+- Model `ApiContract` deleted or renamed its instance variable `authentication_settings`
+- Model `ApiContract` deleted or renamed its instance variable `subscription_key_parameter_names`
+- Model `ApiContract` deleted or renamed its instance variable `api_type`
+- Model `ApiContract` deleted or renamed its instance variable `api_revision`
+- Model `ApiContract` deleted or renamed its instance variable `api_version`
+- Model `ApiContract` deleted or renamed its instance variable `is_current`
+- Model `ApiContract` deleted or renamed its instance variable `is_online`
+- Model `ApiContract` deleted or renamed its instance variable `api_revision_description`
+- Model `ApiContract` deleted or renamed its instance variable `api_version_description`
+- Model `ApiContract` deleted or renamed its instance variable `api_version_set_id`
+- Model `ApiContract` deleted or renamed its instance variable `subscription_required`
+- Model `ApiContract` deleted or renamed its instance variable `terms_of_service_url`
+- Model `ApiContract` deleted or renamed its instance variable `contact`
+- Model `ApiContract` deleted or renamed its instance variable `license`
+- Model `ApiContract` deleted or renamed its instance variable `source_api_id`
+- Model `ApiContract` deleted or renamed its instance variable `display_name`
+- Model `ApiContract` deleted or renamed its instance variable `service_url`
+- Model `ApiContract` deleted or renamed its instance variable `path`
+- Model `ApiContract` deleted or renamed its instance variable `protocols`
+- Model `ApiContract` deleted or renamed its instance variable `api_version_set`
+- Model `ApiContract` deleted or renamed its instance variable `provisioning_state`
+- Model `ApiCreateOrUpdateParameter` deleted or renamed its instance variable `description`
+- Model `ApiCreateOrUpdateParameter` deleted or renamed its instance variable `authentication_settings`
+- Model `ApiCreateOrUpdateParameter` deleted or renamed its instance variable `subscription_key_parameter_names`
+- Model `ApiCreateOrUpdateParameter` deleted or renamed its instance variable `api_type`
+- Model `ApiCreateOrUpdateParameter` deleted or renamed its instance variable `api_revision`
+- Model `ApiCreateOrUpdateParameter` deleted or renamed its instance variable `api_version`
+- Model `ApiCreateOrUpdateParameter` deleted or renamed its instance variable `is_current`
+- Model `ApiCreateOrUpdateParameter` deleted or renamed its instance variable `is_online`
+- Model `ApiCreateOrUpdateParameter` deleted or renamed its instance variable `api_revision_description`
+- Model `ApiCreateOrUpdateParameter` deleted or renamed its instance variable `api_version_description`
+- Model `ApiCreateOrUpdateParameter` deleted or renamed its instance variable `api_version_set_id`
+- Model `ApiCreateOrUpdateParameter` deleted or renamed its instance variable `subscription_required`
+- Model `ApiCreateOrUpdateParameter` deleted or renamed its instance variable `terms_of_service_url`
+- Model `ApiCreateOrUpdateParameter` deleted or renamed its instance variable `contact`
+- Model `ApiCreateOrUpdateParameter` deleted or renamed its instance variable `license`
+- Model `ApiCreateOrUpdateParameter` deleted or renamed its instance variable `source_api_id`
+- Model `ApiCreateOrUpdateParameter` deleted or renamed its instance variable `display_name`
+- Model `ApiCreateOrUpdateParameter` deleted or renamed its instance variable `service_url`
+- Model `ApiCreateOrUpdateParameter` deleted or renamed its instance variable `path`
+- Model `ApiCreateOrUpdateParameter` deleted or renamed its instance variable `protocols`
+- Model `ApiCreateOrUpdateParameter` deleted or renamed its instance variable `api_version_set`
+- Model `ApiCreateOrUpdateParameter` deleted or renamed its instance variable `provisioning_state`
+- Model `ApiCreateOrUpdateParameter` deleted or renamed its instance variable `value`
+- Model `ApiCreateOrUpdateParameter` deleted or renamed its instance variable `format`
+- Model `ApiCreateOrUpdateParameter` deleted or renamed its instance variable `wsdl_selector`
+- Model `ApiCreateOrUpdateParameter` deleted or renamed its instance variable `soap_api_type`
+- Model `ApiCreateOrUpdateParameter` deleted or renamed its instance variable `translate_required_query_parameters_conduct`
+- Model `ApiManagementGatewayConfigConnectionResource` deleted or renamed its instance variable `provisioning_state`
+- Model `ApiManagementGatewayConfigConnectionResource` deleted or renamed its instance variable `source_id`
+- Model `ApiManagementGatewayConfigConnectionResource` deleted or renamed its instance variable `default_hostname`
+- Model `ApiManagementGatewayConfigConnectionResource` deleted or renamed its instance variable `hostnames`
+- Model `ApiManagementGatewayResource` deleted or renamed its instance variable `provisioning_state`
+- Model `ApiManagementGatewayResource` deleted or renamed its instance variable `target_provisioning_state`
+- Model `ApiManagementGatewayResource` deleted or renamed its instance variable `created_at_utc`
+- Model `ApiManagementGatewayResource` deleted or renamed its instance variable `frontend`
+- Model `ApiManagementGatewayResource` deleted or renamed its instance variable `backend`
+- Model `ApiManagementGatewayResource` deleted or renamed its instance variable `configuration_api`
+- Model `ApiManagementGatewayResource` deleted or renamed its instance variable `virtual_network_type`
+- Model `ApiManagementGatewayUpdateParameters` deleted or renamed its instance variable `provisioning_state`
+- Model `ApiManagementGatewayUpdateParameters` deleted or renamed its instance variable `target_provisioning_state`
+- Model `ApiManagementGatewayUpdateParameters` deleted or renamed its instance variable `created_at_utc`
+- Model `ApiManagementGatewayUpdateParameters` deleted or renamed its instance variable `frontend`
+- Model `ApiManagementGatewayUpdateParameters` deleted or renamed its instance variable `backend`
+- Model `ApiManagementGatewayUpdateParameters` deleted or renamed its instance variable `configuration_api`
+- Model `ApiManagementGatewayUpdateParameters` deleted or renamed its instance variable `virtual_network_type`
+- Model `ApiManagementServiceResource` deleted or renamed its instance variable `notification_sender_email`
+- Model `ApiManagementServiceResource` deleted or renamed its instance variable `provisioning_state`
+- Model `ApiManagementServiceResource` deleted or renamed its instance variable `target_provisioning_state`
+- Model `ApiManagementServiceResource` deleted or renamed its instance variable `created_at_utc`
+- Model `ApiManagementServiceResource` deleted or renamed its instance variable `gateway_url`
+- Model `ApiManagementServiceResource` deleted or renamed its instance variable `gateway_regional_url`
+- Model `ApiManagementServiceResource` deleted or renamed its instance variable `portal_url`
+- Model `ApiManagementServiceResource` deleted or renamed its instance variable `management_api_url`
+- Model `ApiManagementServiceResource` deleted or renamed its instance variable `scm_url`
+- Model `ApiManagementServiceResource` deleted or renamed its instance variable `developer_portal_url`
+- Model `ApiManagementServiceResource` deleted or renamed its instance variable `hostname_configurations`
+- Model `ApiManagementServiceResource` deleted or renamed its instance variable `public_ip_addresses`
+- Model `ApiManagementServiceResource` deleted or renamed its instance variable `private_ip_addresses`
+- Model `ApiManagementServiceResource` deleted or renamed its instance variable `public_ip_address_id`
+- Model `ApiManagementServiceResource` deleted or renamed its instance variable `public_network_access`
+- Model `ApiManagementServiceResource` deleted or renamed its instance variable `configuration_api`
+- Model `ApiManagementServiceResource` deleted or renamed its instance variable `virtual_network_configuration`
+- Model `ApiManagementServiceResource` deleted or renamed its instance variable `additional_locations`
+- Model `ApiManagementServiceResource` deleted or renamed its instance variable `custom_properties`
+- Model `ApiManagementServiceResource` deleted or renamed its instance variable `certificates`
+- Model `ApiManagementServiceResource` deleted or renamed its instance variable `enable_client_certificate`
+- Model `ApiManagementServiceResource` deleted or renamed its instance variable `nat_gateway_state`
+- Model `ApiManagementServiceResource` deleted or renamed its instance variable `outbound_public_ip_addresses`
+- Model `ApiManagementServiceResource` deleted or renamed its instance variable `disable_gateway`
+- Model `ApiManagementServiceResource` deleted or renamed its instance variable `virtual_network_type`
+- Model `ApiManagementServiceResource` deleted or renamed its instance variable `api_version_constraint`
+- Model `ApiManagementServiceResource` deleted or renamed its instance variable `restore`
+- Model `ApiManagementServiceResource` deleted or renamed its instance variable `private_endpoint_connections`
+- Model `ApiManagementServiceResource` deleted or renamed its instance variable `platform_version`
+- Model `ApiManagementServiceResource` deleted or renamed its instance variable `legacy_portal_status`
+- Model `ApiManagementServiceResource` deleted or renamed its instance variable `developer_portal_status`
+- Model `ApiManagementServiceResource` deleted or renamed its instance variable `release_channel`
+- Model `ApiManagementServiceResource` deleted or renamed its instance variable `zone_redundant`
+- Model `ApiManagementServiceResource` deleted or renamed its instance variable `publisher_email`
+- Model `ApiManagementServiceResource` deleted or renamed its instance variable `publisher_name`
+- Model `ApiManagementServiceUpdateParameters` deleted or renamed its instance variable `notification_sender_email`
+- Model `ApiManagementServiceUpdateParameters` deleted or renamed its instance variable `provisioning_state`
+- Model `ApiManagementServiceUpdateParameters` deleted or renamed its instance variable `target_provisioning_state`
+- Model `ApiManagementServiceUpdateParameters` deleted or renamed its instance variable `created_at_utc`
+- Model `ApiManagementServiceUpdateParameters` deleted or renamed its instance variable `gateway_url`
+- Model `ApiManagementServiceUpdateParameters` deleted or renamed its instance variable `gateway_regional_url`
+- Model `ApiManagementServiceUpdateParameters` deleted or renamed its instance variable `portal_url`
+- Model `ApiManagementServiceUpdateParameters` deleted or renamed its instance variable `management_api_url`
+- Model `ApiManagementServiceUpdateParameters` deleted or renamed its instance variable `scm_url`
+- Model `ApiManagementServiceUpdateParameters` deleted or renamed its instance variable `developer_portal_url`
+- Model `ApiManagementServiceUpdateParameters` deleted or renamed its instance variable `hostname_configurations`
+- Model `ApiManagementServiceUpdateParameters` deleted or renamed its instance variable `public_ip_addresses`
+- Model `ApiManagementServiceUpdateParameters` deleted or renamed its instance variable `private_ip_addresses`
+- Model `ApiManagementServiceUpdateParameters` deleted or renamed its instance variable `public_ip_address_id`
+- Model `ApiManagementServiceUpdateParameters` deleted or renamed its instance variable `public_network_access`
+- Model `ApiManagementServiceUpdateParameters` deleted or renamed its instance variable `configuration_api`
+- Model `ApiManagementServiceUpdateParameters` deleted or renamed its instance variable `virtual_network_configuration`
+- Model `ApiManagementServiceUpdateParameters` deleted or renamed its instance variable `additional_locations`
+- Model `ApiManagementServiceUpdateParameters` deleted or renamed its instance variable `custom_properties`
+- Model `ApiManagementServiceUpdateParameters` deleted or renamed its instance variable `certificates`
+- Model `ApiManagementServiceUpdateParameters` deleted or renamed its instance variable `enable_client_certificate`
+- Model `ApiManagementServiceUpdateParameters` deleted or renamed its instance variable `nat_gateway_state`
+- Model `ApiManagementServiceUpdateParameters` deleted or renamed its instance variable `outbound_public_ip_addresses`
+- Model `ApiManagementServiceUpdateParameters` deleted or renamed its instance variable `disable_gateway`
+- Model `ApiManagementServiceUpdateParameters` deleted or renamed its instance variable `virtual_network_type`
+- Model `ApiManagementServiceUpdateParameters` deleted or renamed its instance variable `api_version_constraint`
+- Model `ApiManagementServiceUpdateParameters` deleted or renamed its instance variable `restore`
+- Model `ApiManagementServiceUpdateParameters` deleted or renamed its instance variable `private_endpoint_connections`
+- Model `ApiManagementServiceUpdateParameters` deleted or renamed its instance variable `platform_version`
+- Model `ApiManagementServiceUpdateParameters` deleted or renamed its instance variable `legacy_portal_status`
+- Model `ApiManagementServiceUpdateParameters` deleted or renamed its instance variable `developer_portal_status`
+- Model `ApiManagementServiceUpdateParameters` deleted or renamed its instance variable `release_channel`
+- Model `ApiManagementServiceUpdateParameters` deleted or renamed its instance variable `zone_redundant`
+- Model `ApiManagementServiceUpdateParameters` deleted or renamed its instance variable `publisher_email`
+- Model `ApiManagementServiceUpdateParameters` deleted or renamed its instance variable `publisher_name`
+- Model `ApiManagementSkuRestrictions` deleted or renamed its instance variable `values`
+- Model `ApiManagementWorkspaceLinksResource` deleted or renamed its instance variable `workspace_id`
+- Model `ApiManagementWorkspaceLinksResource` deleted or renamed its instance variable `gateways`
+- Model `ApiReleaseContract` deleted or renamed its instance variable `api_id`
+- Model `ApiReleaseContract` deleted or renamed its instance variable `created_date_time`
+- Model `ApiReleaseContract` deleted or renamed its instance variable `updated_date_time`
+- Model `ApiReleaseContract` deleted or renamed its instance variable `notes`
+- Model `ApiUpdateContract` deleted or renamed its instance variable `description`
+- Model `ApiUpdateContract` deleted or renamed its instance variable `authentication_settings`
+- Model `ApiUpdateContract` deleted or renamed its instance variable `subscription_key_parameter_names`
+- Model `ApiUpdateContract` deleted or renamed its instance variable `api_type`
+- Model `ApiUpdateContract` deleted or renamed its instance variable `api_revision`
+- Model `ApiUpdateContract` deleted or renamed its instance variable `api_version`
+- Model `ApiUpdateContract` deleted or renamed its instance variable `is_current`
+- Model `ApiUpdateContract` deleted or renamed its instance variable `is_online`
+- Model `ApiUpdateContract` deleted or renamed its instance variable `api_revision_description`
+- Model `ApiUpdateContract` deleted or renamed its instance variable `api_version_description`
+- Model `ApiUpdateContract` deleted or renamed its instance variable `api_version_set_id`
+- Model `ApiUpdateContract` deleted or renamed its instance variable `subscription_required`
+- Model `ApiUpdateContract` deleted or renamed its instance variable `terms_of_service_url`
+- Model `ApiUpdateContract` deleted or renamed its instance variable `contact`
+- Model `ApiUpdateContract` deleted or renamed its instance variable `license`
+- Model `ApiUpdateContract` deleted or renamed its instance variable `display_name`
+- Model `ApiUpdateContract` deleted or renamed its instance variable `service_url`
+- Model `ApiUpdateContract` deleted or renamed its instance variable `path`
+- Model `ApiUpdateContract` deleted or renamed its instance variable `protocols`
+- Model `ApiVersionSetContract` deleted or renamed its instance variable `description`
+- Model `ApiVersionSetContract` deleted or renamed its instance variable `version_query_name`
+- Model `ApiVersionSetContract` deleted or renamed its instance variable `version_header_name`
+- Model `ApiVersionSetContract` deleted or renamed its instance variable `display_name`
+- Model `ApiVersionSetContract` deleted or renamed its instance variable `versioning_scheme`
+- Model `ApiVersionSetUpdateParameters` deleted or renamed its instance variable `description`
+- Model `ApiVersionSetUpdateParameters` deleted or renamed its instance variable `version_query_name`
+- Model `ApiVersionSetUpdateParameters` deleted or renamed its instance variable `version_header_name`
+- Model `ApiVersionSetUpdateParameters` deleted or renamed its instance variable `display_name`
+- Model `ApiVersionSetUpdateParameters` deleted or renamed its instance variable `versioning_scheme`
+- Model `AssociationContract` deleted or renamed its instance variable `provisioning_state`
+- Model `AuthorizationAccessPolicyContract` deleted or renamed its instance variable `app_ids`
+- Model `AuthorizationAccessPolicyContract` deleted or renamed its instance variable `tenant_id`
+- Model `AuthorizationAccessPolicyContract` deleted or renamed its instance variable `object_id`
+- Model `AuthorizationContract` deleted or renamed its instance variable `authorization_type`
+- Model `AuthorizationContract` deleted or renamed its instance variable `o_auth2_grant_type`
+- Model `AuthorizationContract` deleted or renamed its instance variable `parameters`
+- Model `AuthorizationContract` deleted or renamed its instance variable `error`
+- Model `AuthorizationContract` deleted or renamed its instance variable `status`
+- Model `AuthorizationProviderContract` deleted or renamed its instance variable `display_name`
+- Model `AuthorizationProviderContract` deleted or renamed its instance variable `identity_provider`
+- Model `AuthorizationProviderContract` deleted or renamed its instance variable `oauth2`
+- Model `AuthorizationServerContract` deleted or renamed its instance variable `description`
+- Model `AuthorizationServerContract` deleted or renamed its instance variable `authorization_methods`
+- Model `AuthorizationServerContract` deleted or renamed its instance variable `client_authentication_method`
+- Model `AuthorizationServerContract` deleted or renamed its instance variable `token_body_parameters`
+- Model `AuthorizationServerContract` deleted or renamed its instance variable `token_endpoint`
+- Model `AuthorizationServerContract` deleted or renamed its instance variable `support_state`
+- Model `AuthorizationServerContract` deleted or renamed its instance variable `default_scope`
+- Model `AuthorizationServerContract` deleted or renamed its instance variable `bearer_token_sending_methods`
+- Model `AuthorizationServerContract` deleted or renamed its instance variable `resource_owner_username`
+- Model `AuthorizationServerContract` deleted or renamed its instance variable `resource_owner_password`
+- Model `AuthorizationServerContract` deleted or renamed its instance variable `display_name`
+- Model `AuthorizationServerContract` deleted or renamed its instance variable `use_in_test_console`
+- Model `AuthorizationServerContract` deleted or renamed its instance variable `use_in_api_documentation`
+- Model `AuthorizationServerContract` deleted or renamed its instance variable `client_registration_endpoint`
+- Model `AuthorizationServerContract` deleted or renamed its instance variable `authorization_endpoint`
+- Model `AuthorizationServerContract` deleted or renamed its instance variable `grant_types`
+- Model `AuthorizationServerContract` deleted or renamed its instance variable `client_id`
+- Model `AuthorizationServerContract` deleted or renamed its instance variable `client_secret`
+- Model `AuthorizationServerUpdateContract` deleted or renamed its instance variable `description`
+- Model `AuthorizationServerUpdateContract` deleted or renamed its instance variable `authorization_methods`
+- Model `AuthorizationServerUpdateContract` deleted or renamed its instance variable `client_authentication_method`
+- Model `AuthorizationServerUpdateContract` deleted or renamed its instance variable `token_body_parameters`
+- Model `AuthorizationServerUpdateContract` deleted or renamed its instance variable `token_endpoint`
+- Model `AuthorizationServerUpdateContract` deleted or renamed its instance variable `support_state`
+- Model `AuthorizationServerUpdateContract` deleted or renamed its instance variable `default_scope`
+- Model `AuthorizationServerUpdateContract` deleted or renamed its instance variable `bearer_token_sending_methods`
+- Model `AuthorizationServerUpdateContract` deleted or renamed its instance variable `resource_owner_username`
+- Model `AuthorizationServerUpdateContract` deleted or renamed its instance variable `resource_owner_password`
+- Model `AuthorizationServerUpdateContract` deleted or renamed its instance variable `display_name`
+- Model `AuthorizationServerUpdateContract` deleted or renamed its instance variable `use_in_test_console`
+- Model `AuthorizationServerUpdateContract` deleted or renamed its instance variable `use_in_api_documentation`
+- Model `AuthorizationServerUpdateContract` deleted or renamed its instance variable `client_registration_endpoint`
+- Model `AuthorizationServerUpdateContract` deleted or renamed its instance variable `authorization_endpoint`
+- Model `AuthorizationServerUpdateContract` deleted or renamed its instance variable `grant_types`
+- Model `AuthorizationServerUpdateContract` deleted or renamed its instance variable `client_id`
+- Model `AuthorizationServerUpdateContract` deleted or renamed its instance variable `client_secret`
+- Model `BackendContract` deleted or renamed its instance variable `title`
+- Model `BackendContract` deleted or renamed its instance variable `description`
+- Model `BackendContract` deleted or renamed its instance variable `resource_id`
+- Model `BackendContract` deleted or renamed its instance variable `credentials`
+- Model `BackendContract` deleted or renamed its instance variable `proxy`
+- Model `BackendContract` deleted or renamed its instance variable `tls`
+- Model `BackendContract` deleted or renamed its instance variable `circuit_breaker`
+- Model `BackendContract` deleted or renamed its instance variable `azure_region`
+- Model `BackendContract` deleted or renamed its instance variable `pool`
+- Model `BackendContract` deleted or renamed its instance variable `type_properties_type`
+- Model `BackendContract` deleted or renamed its instance variable `url`
+- Model `BackendContract` deleted or renamed its instance variable `protocol`
+- Model `BackendReconnectContract` deleted or renamed its instance variable `after`
+- Model `BackendUpdateParameters` deleted or renamed its instance variable `title`
+- Model `BackendUpdateParameters` deleted or renamed its instance variable `description`
+- Model `BackendUpdateParameters` deleted or renamed its instance variable `resource_id`
+- Model `BackendUpdateParameters` deleted or renamed its instance variable `credentials`
+- Model `BackendUpdateParameters` deleted or renamed its instance variable `proxy`
+- Model `BackendUpdateParameters` deleted or renamed its instance variable `tls`
+- Model `BackendUpdateParameters` deleted or renamed its instance variable `circuit_breaker`
+- Model `BackendUpdateParameters` deleted or renamed its instance variable `azure_region`
+- Model `BackendUpdateParameters` deleted or renamed its instance variable `pool`
+- Model `BackendUpdateParameters` deleted or renamed its instance variable `type`
+- Model `BackendUpdateParameters` deleted or renamed its instance variable `url`
+- Model `BackendUpdateParameters` deleted or renamed its instance variable `protocol`
+- Model `CacheContract` deleted or renamed its instance variable `description`
+- Model `CacheContract` deleted or renamed its instance variable `connection_string`
+- Model `CacheContract` deleted or renamed its instance variable `use_from_location`
+- Model `CacheContract` deleted or renamed its instance variable `resource_id`
+- Model `CacheUpdateParameters` deleted or renamed its instance variable `description`
+- Model `CacheUpdateParameters` deleted or renamed its instance variable `connection_string`
+- Model `CacheUpdateParameters` deleted or renamed its instance variable `use_from_location`
+- Model `CacheUpdateParameters` deleted or renamed its instance variable `resource_id`
+- Model `CertificateContract` deleted or renamed its instance variable `subject`
+- Model `CertificateContract` deleted or renamed its instance variable `thumbprint`
+- Model `CertificateContract` deleted or renamed its instance variable `expiration_date`
+- Model `CertificateContract` deleted or renamed its instance variable `key_vault`
+- Model `CertificateCreateOrUpdateParameters` deleted or renamed its instance variable `data`
+- Model `CertificateCreateOrUpdateParameters` deleted or renamed its instance variable `password`
+- Model `CertificateCreateOrUpdateParameters` deleted or renamed its instance variable `key_vault`
+- Model `ClientApplicationContract` deleted or renamed its instance variable `display_name`
+- Model `ClientApplicationContract` deleted or renamed its instance variable `description`
+- Model `ClientApplicationContract` deleted or renamed its instance variable `owner_id`
+- Model `ClientApplicationContract` deleted or renamed its instance variable `entra_application_id`
+- Model `ClientApplicationContract` deleted or renamed its instance variable `entra_tenant_id`
+- Model `ClientApplicationContract` deleted or renamed its instance variable `state`
+- Model `ClientApplicationProductLinkContract` deleted or renamed its instance variable `product_id`
+- Model `ContentTypeContract` deleted or renamed its instance variable `id_properties_id`
+- Model `ContentTypeContract` deleted or renamed its instance variable `name_properties_name`
+- Model `ContentTypeContract` deleted or renamed its instance variable `description`
+- Model `ContentTypeContract` deleted or renamed its instance variable `schema`
+- Model `ContentTypeContract` deleted or renamed its instance variable `version`
+- Model `DeletedServiceContract` deleted or renamed its instance variable `service_id`
+- Model `DeletedServiceContract` deleted or renamed its instance variable `scheduled_purge_date`
+- Model `DeletedServiceContract` deleted or renamed its instance variable `deletion_date`
+- Model `DeployConfigurationParameters` deleted or renamed its instance variable `branch`
+- Model `DeployConfigurationParameters` deleted or renamed its instance variable `force`
+- Model `DiagnosticContract` deleted or renamed its instance variable `always_log`
+- Model `DiagnosticContract` deleted or renamed its instance variable `logger_id`
+- Model `DiagnosticContract` deleted or renamed its instance variable `sampling`
+- Model `DiagnosticContract` deleted or renamed its instance variable `frontend`
+- Model `DiagnosticContract` deleted or renamed its instance variable `backend`
+- Model `DiagnosticContract` deleted or renamed its instance variable `large_language_model`
+- Model `DiagnosticContract` deleted or renamed its instance variable `log_client_ip`
+- Model `DiagnosticContract` deleted or renamed its instance variable `http_correlation_protocol`
+- Model `DiagnosticContract` deleted or renamed its instance variable `verbosity`
+- Model `DiagnosticContract` deleted or renamed its instance variable `operation_name_format`
+- Model `DiagnosticContract` deleted or renamed its instance variable `metrics`
+- Model `DiagnosticUpdateContract` deleted or renamed its instance variable `always_log`
+- Model `DiagnosticUpdateContract` deleted or renamed its instance variable `logger_id`
+- Model `DiagnosticUpdateContract` deleted or renamed its instance variable `sampling`
+- Model `DiagnosticUpdateContract` deleted or renamed its instance variable `frontend`
+- Model `DiagnosticUpdateContract` deleted or renamed its instance variable `backend`
+- Model `DiagnosticUpdateContract` deleted or renamed its instance variable `log_client_ip`
+- Model `DiagnosticUpdateContract` deleted or renamed its instance variable `http_correlation_protocol`
+- Model `DiagnosticUpdateContract` deleted or renamed its instance variable `verbosity`
+- Model `DiagnosticUpdateContract` deleted or renamed its instance variable `operation_name_format`
+- Model `DiagnosticUpdateContract` deleted or renamed its instance variable `metrics`
+- Model `DocumentationContract` deleted or renamed its instance variable `title`
+- Model `DocumentationContract` deleted or renamed its instance variable `content`
+- Model `DocumentationUpdateContract` deleted or renamed its instance variable `title`
+- Model `DocumentationUpdateContract` deleted or renamed its instance variable `content`
+- Model `EmailTemplateContract` deleted or renamed its instance variable `subject`
+- Model `EmailTemplateContract` deleted or renamed its instance variable `body`
+- Model `EmailTemplateContract` deleted or renamed its instance variable `title`
+- Model `EmailTemplateContract` deleted or renamed its instance variable `description`
+- Model `EmailTemplateContract` deleted or renamed its instance variable `is_default`
+- Model `EmailTemplateContract` deleted or renamed its instance variable `parameters`
+- Model `EmailTemplateUpdateParameters` deleted or renamed its instance variable `subject`
+- Model `EmailTemplateUpdateParameters` deleted or renamed its instance variable `title`
+- Model `EmailTemplateUpdateParameters` deleted or renamed its instance variable `description`
+- Model `EmailTemplateUpdateParameters` deleted or renamed its instance variable `body`
+- Model `EmailTemplateUpdateParameters` deleted or renamed its instance variable `parameters`
+- Model `GatewayCertificateAuthorityContract` deleted or renamed its instance variable `is_trusted`
+- Model `GatewayContract` deleted or renamed its instance variable `location_data`
+- Model `GatewayContract` deleted or renamed its instance variable `description`
+- Model `GatewayHostnameBindingResource` deleted or renamed its instance variable `provisioning_state`
+- Model `GatewayHostnameBindingResource` deleted or renamed its instance variable `hostname`
+- Model `GatewayHostnameBindingResource` deleted or renamed its instance variable `key_vault`
+- Model `GatewayHostnameBindingResource` deleted or renamed its instance variable `certificate`
+- Model `GatewayHostnameConfigurationContract` deleted or renamed its instance variable `hostname`
+- Model `GatewayHostnameConfigurationContract` deleted or renamed its instance variable `certificate_id`
+- Model `GatewayHostnameConfigurationContract` deleted or renamed its instance variable `negotiate_client_certificate`
+- Model `GatewayHostnameConfigurationContract` deleted or renamed its instance variable `tls10_enabled`
+- Model `GatewayHostnameConfigurationContract` deleted or renamed its instance variable `tls11_enabled`
+- Model `GatewayHostnameConfigurationContract` deleted or renamed its instance variable `http2_enabled`
+- Model `GlobalSchemaContract` deleted or renamed its instance variable `schema_type`
+- Model `GlobalSchemaContract` deleted or renamed its instance variable `description`
+- Model `GlobalSchemaContract` deleted or renamed its instance variable `value`
+- Model `GlobalSchemaContract` deleted or renamed its instance variable `document`
+- Model `GlobalSchemaContract` deleted or renamed its instance variable `provisioning_state`
+- Model `GroupContract` deleted or renamed its instance variable `display_name`
+- Model `GroupContract` deleted or renamed its instance variable `description`
+- Model `GroupContract` deleted or renamed its instance variable `built_in`
+- Model `GroupContract` deleted or renamed its instance variable `type_properties_type`
+- Model `GroupContract` deleted or renamed its instance variable `external_id`
+- Model `GroupCreateParameters` deleted or renamed its instance variable `display_name`
+- Model `GroupCreateParameters` deleted or renamed its instance variable `description`
+- Model `GroupCreateParameters` deleted or renamed its instance variable `type`
+- Model `GroupCreateParameters` deleted or renamed its instance variable `external_id`
+- Model `GroupUpdateParameters` deleted or renamed its instance variable `display_name`
+- Model `GroupUpdateParameters` deleted or renamed its instance variable `description`
+- Model `GroupUpdateParameters` deleted or renamed its instance variable `type`
+- Model `GroupUpdateParameters` deleted or renamed its instance variable `external_id`
+- Model `IdentityProviderContract` deleted or renamed its instance variable `type_properties_type`
+- Model `IdentityProviderContract` deleted or renamed its instance variable `signin_tenant`
+- Model `IdentityProviderContract` deleted or renamed its instance variable `allowed_tenants`
+- Model `IdentityProviderContract` deleted or renamed its instance variable `authority`
+- Model `IdentityProviderContract` deleted or renamed its instance variable `signup_policy_name`
+- Model `IdentityProviderContract` deleted or renamed its instance variable `signin_policy_name`
+- Model `IdentityProviderContract` deleted or renamed its instance variable `profile_editing_policy_name`
+- Model `IdentityProviderContract` deleted or renamed its instance variable `password_reset_policy_name`
+- Model `IdentityProviderContract` deleted or renamed its instance variable `client_library`
+- Model `IdentityProviderContract` deleted or renamed its instance variable `client_id`
+- Model `IdentityProviderContract` deleted or renamed its instance variable `client_secret`
+- Model `IdentityProviderContract` deleted or renamed its instance variable `certificate_id`
+- Model `IdentityProviderCreateContract` deleted or renamed its instance variable `type_properties_type`
+- Model `IdentityProviderCreateContract` deleted or renamed its instance variable `signin_tenant`
+- Model `IdentityProviderCreateContract` deleted or renamed its instance variable `allowed_tenants`
+- Model `IdentityProviderCreateContract` deleted or renamed its instance variable `authority`
+- Model `IdentityProviderCreateContract` deleted or renamed its instance variable `signup_policy_name`
+- Model `IdentityProviderCreateContract` deleted or renamed its instance variable `signin_policy_name`
+- Model `IdentityProviderCreateContract` deleted or renamed its instance variable `profile_editing_policy_name`
+- Model `IdentityProviderCreateContract` deleted or renamed its instance variable `password_reset_policy_name`
+- Model `IdentityProviderCreateContract` deleted or renamed its instance variable `client_library`
+- Model `IdentityProviderCreateContract` deleted or renamed its instance variable `client_id`
+- Model `IdentityProviderCreateContract` deleted or renamed its instance variable `client_secret`
+- Model `IdentityProviderCreateContract` deleted or renamed its instance variable `certificate_id`
+- Model `IdentityProviderUpdateParameters` deleted or renamed its instance variable `type`
+- Model `IdentityProviderUpdateParameters` deleted or renamed its instance variable `signin_tenant`
+- Model `IdentityProviderUpdateParameters` deleted or renamed its instance variable `allowed_tenants`
+- Model `IdentityProviderUpdateParameters` deleted or renamed its instance variable `authority`
+- Model `IdentityProviderUpdateParameters` deleted or renamed its instance variable `signup_policy_name`
+- Model `IdentityProviderUpdateParameters` deleted or renamed its instance variable `signin_policy_name`
+- Model `IdentityProviderUpdateParameters` deleted or renamed its instance variable `profile_editing_policy_name`
+- Model `IdentityProviderUpdateParameters` deleted or renamed its instance variable `password_reset_policy_name`
+- Model `IdentityProviderUpdateParameters` deleted or renamed its instance variable `client_library`
+- Model `IdentityProviderUpdateParameters` deleted or renamed its instance variable `client_id`
+- Model `IdentityProviderUpdateParameters` deleted or renamed its instance variable `client_secret`
+- Model `IdentityProviderUpdateParameters` deleted or renamed its instance variable `certificate_id`
+- Model `IssueAttachmentContract` deleted or renamed its instance variable `title`
+- Model `IssueAttachmentContract` deleted or renamed its instance variable `content_format`
+- Model `IssueAttachmentContract` deleted or renamed its instance variable `content`
+- Model `IssueCommentContract` deleted or renamed its instance variable `text`
+- Model `IssueCommentContract` deleted or renamed its instance variable `created_date`
+- Model `IssueCommentContract` deleted or renamed its instance variable `user_id`
+- Model `IssueContract` deleted or renamed its instance variable `created_date`
+- Model `IssueContract` deleted or renamed its instance variable `state`
+- Model `IssueContract` deleted or renamed its instance variable `api_id`
+- Model `IssueContract` deleted or renamed its instance variable `title`
+- Model `IssueContract` deleted or renamed its instance variable `description`
+- Model `IssueContract` deleted or renamed its instance variable `user_id`
+- Model `IssueUpdateContract` deleted or renamed its instance variable `created_date`
+- Model `IssueUpdateContract` deleted or renamed its instance variable `state`
+- Model `IssueUpdateContract` deleted or renamed its instance variable `api_id`
+- Model `IssueUpdateContract` deleted or renamed its instance variable `title`
+- Model `IssueUpdateContract` deleted or renamed its instance variable `description`
+- Model `IssueUpdateContract` deleted or renamed its instance variable `user_id`
+- Model `LoggerContract` deleted or renamed its instance variable `logger_type`
+- Model `LoggerContract` deleted or renamed its instance variable `description`
+- Model `LoggerContract` deleted or renamed its instance variable `credentials`
+- Model `LoggerContract` deleted or renamed its instance variable `is_buffered`
+- Model `LoggerContract` deleted or renamed its instance variable `resource_id`
+- Model `LoggerUpdateContract` deleted or renamed its instance variable `logger_type`
+- Model `LoggerUpdateContract` deleted or renamed its instance variable `description`
+- Model `LoggerUpdateContract` deleted or renamed its instance variable `credentials`
+- Model `LoggerUpdateContract` deleted or renamed its instance variable `is_buffered`
+- Model `NamedValueContract` deleted or renamed its instance variable `tags`
+- Model `NamedValueContract` deleted or renamed its instance variable `secret`
+- Model `NamedValueContract` deleted or renamed its instance variable `display_name`
+- Model `NamedValueContract` deleted or renamed its instance variable `value`
+- Model `NamedValueContract` deleted or renamed its instance variable `key_vault`
+- Model `NamedValueContract` deleted or renamed its instance variable `provisioning_state`
+- Model `NamedValueCreateContract` deleted or renamed its instance variable `tags`
+- Model `NamedValueCreateContract` deleted or renamed its instance variable `secret`
+- Model `NamedValueCreateContract` deleted or renamed its instance variable `display_name`
+- Model `NamedValueCreateContract` deleted or renamed its instance variable `value`
+- Model `NamedValueCreateContract` deleted or renamed its instance variable `key_vault`
+- Model `NamedValueUpdateParameters` deleted or renamed its instance variable `tags`
+- Model `NamedValueUpdateParameters` deleted or renamed its instance variable `secret`
+- Model `NamedValueUpdateParameters` deleted or renamed its instance variable `display_name`
+- Model `NamedValueUpdateParameters` deleted or renamed its instance variable `value`
+- Model `NamedValueUpdateParameters` deleted or renamed its instance variable `key_vault`
+- Model `NotificationContract` deleted or renamed its instance variable `title`
+- Model `NotificationContract` deleted or renamed its instance variable `description`
+- Model `NotificationContract` deleted or renamed its instance variable `recipients`
+- Model `OpenidConnectProviderContract` deleted or renamed its instance variable `display_name`
+- Model `OpenidConnectProviderContract` deleted or renamed its instance variable `description`
+- Model `OpenidConnectProviderContract` deleted or renamed its instance variable `metadata_endpoint`
+- Model `OpenidConnectProviderContract` deleted or renamed its instance variable `client_id`
+- Model `OpenidConnectProviderContract` deleted or renamed its instance variable `client_secret`
+- Model `OpenidConnectProviderContract` deleted or renamed its instance variable `use_in_test_console`
+- Model `OpenidConnectProviderContract` deleted or renamed its instance variable `use_in_api_documentation`
+- Model `OpenidConnectProviderUpdateContract` deleted or renamed its instance variable `display_name`
+- Model `OpenidConnectProviderUpdateContract` deleted or renamed its instance variable `description`
+- Model `OpenidConnectProviderUpdateContract` deleted or renamed its instance variable `metadata_endpoint`
+- Model `OpenidConnectProviderUpdateContract` deleted or renamed its instance variable `client_id`
+- Model `OpenidConnectProviderUpdateContract` deleted or renamed its instance variable `client_secret`
+- Model `OpenidConnectProviderUpdateContract` deleted or renamed its instance variable `use_in_test_console`
+- Model `OpenidConnectProviderUpdateContract` deleted or renamed its instance variable `use_in_api_documentation`
+- Model `OperationContract` deleted or renamed its instance variable `template_parameters`
+- Model `OperationContract` deleted or renamed its instance variable `description`
+- Model `OperationContract` deleted or renamed its instance variable `request`
+- Model `OperationContract` deleted or renamed its instance variable `responses`
+- Model `OperationContract` deleted or renamed its instance variable `policies`
+- Model `OperationContract` deleted or renamed its instance variable `display_name`
+- Model `OperationContract` deleted or renamed its instance variable `method`
+- Model `OperationContract` deleted or renamed its instance variable `url_template`
+- Model `OperationResultContract` deleted or renamed its instance variable `id_properties_id`
+- Model `OperationResultContract` deleted or renamed its instance variable `status`
+- Model `OperationResultContract` deleted or renamed its instance variable `started`
+- Model `OperationResultContract` deleted or renamed its instance variable `updated`
+- Model `OperationResultContract` deleted or renamed its instance variable `result_info`
+- Model `OperationResultContract` deleted or renamed its instance variable `error`
+- Model `OperationResultContract` deleted or renamed its instance variable `action_log`
+- Model `OperationUpdateContract` deleted or renamed its instance variable `template_parameters`
+- Model `OperationUpdateContract` deleted or renamed its instance variable `description`
+- Model `OperationUpdateContract` deleted or renamed its instance variable `request`
+- Model `OperationUpdateContract` deleted or renamed its instance variable `responses`
+- Model `OperationUpdateContract` deleted or renamed its instance variable `policies`
+- Model `OperationUpdateContract` deleted or renamed its instance variable `display_name`
+- Model `OperationUpdateContract` deleted or renamed its instance variable `method`
+- Model `OperationUpdateContract` deleted or renamed its instance variable `url_template`
+- Model `ParameterContract` deleted or renamed its instance variable `values`
+- Model `PolicyContract` deleted or renamed its instance variable `value`
+- Model `PolicyContract` deleted or renamed its instance variable `format`
+- Model `PolicyDescriptionContract` deleted or renamed its instance variable `description`
+- Model `PolicyDescriptionContract` deleted or renamed its instance variable `scope`
+- Model `PolicyFragmentContract` deleted or renamed its instance variable `value`
+- Model `PolicyFragmentContract` deleted or renamed its instance variable `description`
+- Model `PolicyFragmentContract` deleted or renamed its instance variable `format`
+- Model `PolicyFragmentContract` deleted or renamed its instance variable `provisioning_state`
+- Model `PolicyRestrictionContract` deleted or renamed its instance variable `scope`
+- Model `PolicyRestrictionContract` deleted or renamed its instance variable `require_base`
+- Model `PolicyRestrictionUpdateContract` deleted or renamed its instance variable `scope`
+- Model `PolicyRestrictionUpdateContract` deleted or renamed its instance variable `require_base`
+- Model `PortalConfigContract` deleted or renamed its instance variable `enable_basic_auth`
+- Model `PortalConfigContract` deleted or renamed its instance variable `signin`
+- Model `PortalConfigContract` deleted or renamed its instance variable `signup`
+- Model `PortalConfigContract` deleted or renamed its instance variable `delegation`
+- Model `PortalConfigContract` deleted or renamed its instance variable `cors`
+- Model `PortalConfigContract` deleted or renamed its instance variable `csp`
+- Model `PortalDelegationSettings` deleted or renamed its instance variable `url`
+- Model `PortalDelegationSettings` deleted or renamed its instance variable `validation_key`
+- Model `PortalDelegationSettings` deleted or renamed its instance variable `subscriptions`
+- Model `PortalDelegationSettings` deleted or renamed its instance variable `user_registration`
+- Model `PortalRevisionContract` deleted or renamed its instance variable `description`
+- Model `PortalRevisionContract` deleted or renamed its instance variable `status_details`
+- Model `PortalRevisionContract` deleted or renamed its instance variable `status`
+- Model `PortalRevisionContract` deleted or renamed its instance variable `is_current`
+- Model `PortalRevisionContract` deleted or renamed its instance variable `created_date_time`
+- Model `PortalRevisionContract` deleted or renamed its instance variable `updated_date_time`
+- Model `PortalRevisionContract` deleted or renamed its instance variable `provisioning_state`
+- Model `PortalSettingsContract` deleted or renamed its instance variable `url`
+- Model `PortalSettingsContract` deleted or renamed its instance variable `validation_key`
+- Model `PortalSettingsContract` deleted or renamed its instance variable `subscriptions`
+- Model `PortalSettingsContract` deleted or renamed its instance variable `user_registration`
+- Model `PortalSettingsContract` deleted or renamed its instance variable `enabled`
+- Model `PortalSettingsContract` deleted or renamed its instance variable `terms_of_service`
+- Model `PortalSigninSettings` deleted or renamed its instance variable `enabled`
+- Model `PortalSignupSettings` deleted or renamed its instance variable `enabled`
+- Model `PortalSignupSettings` deleted or renamed its instance variable `terms_of_service`
+- Model `PrivateEndpointConnection` deleted or renamed its instance variable `group_ids`
+- Model `PrivateEndpointConnection` deleted or renamed its instance variable `private_endpoint`
+- Model `PrivateEndpointConnection` deleted or renamed its instance variable `private_link_service_connection_state`
+- Model `PrivateEndpointConnection` deleted or renamed its instance variable `provisioning_state`
+- Model `PrivateLinkResource` deleted or renamed its instance variable `group_id`
+- Model `PrivateLinkResource` deleted or renamed its instance variable `required_members`
+- Model `PrivateLinkResource` deleted or renamed its instance variable `required_zone_names`
+- Model `ProductApiLinkContract` deleted or renamed its instance variable `api_id`
+- Model `ProductContract` deleted or renamed its instance variable `description`
+- Model `ProductContract` deleted or renamed its instance variable `terms`
+- Model `ProductContract` deleted or renamed its instance variable `subscription_required`
+- Model `ProductContract` deleted or renamed its instance variable `approval_required`
+- Model `ProductContract` deleted or renamed its instance variable `subscriptions_limit`
+- Model `ProductContract` deleted or renamed its instance variable `authentication_type`
+- Model `ProductContract` deleted or renamed its instance variable `application`
+- Model `ProductContract` deleted or renamed its instance variable `state`
+- Model `ProductContract` deleted or renamed its instance variable `display_name`
+- Model `ProductGroupLinkContract` deleted or renamed its instance variable `group_id`
+- Model `ProductUpdateParameters` deleted or renamed its instance variable `description`
+- Model `ProductUpdateParameters` deleted or renamed its instance variable `terms`
+- Model `ProductUpdateParameters` deleted or renamed its instance variable `subscription_required`
+- Model `ProductUpdateParameters` deleted or renamed its instance variable `approval_required`
+- Model `ProductUpdateParameters` deleted or renamed its instance variable `subscriptions_limit`
+- Model `ProductUpdateParameters` deleted or renamed its instance variable `authentication_type`
+- Model `ProductUpdateParameters` deleted or renamed its instance variable `application`
+- Model `ProductUpdateParameters` deleted or renamed its instance variable `state`
+- Model `ProductUpdateParameters` deleted or renamed its instance variable `display_name`
+- Model `QuotaCounterValueUpdateContract` deleted or renamed its instance variable `calls_count`
+- Model `QuotaCounterValueUpdateContract` deleted or renamed its instance variable `kb_transferred`
+- Model `RecipientEmailContract` deleted or renamed its instance variable `email`
+- Model `RecipientUserContract` deleted or renamed its instance variable `user_id`
+- Model `RemotePrivateEndpointConnectionWrapper` deleted or renamed its instance variable `private_endpoint`
+- Model `RemotePrivateEndpointConnectionWrapper` deleted or renamed its instance variable `private_link_service_connection_state`
+- Model `RemotePrivateEndpointConnectionWrapper` deleted or renamed its instance variable `provisioning_state`
+- Model `RemotePrivateEndpointConnectionWrapper` deleted or renamed its instance variable `group_ids`
+- Model `ResolverContract` deleted or renamed its instance variable `display_name`
+- Model `ResolverContract` deleted or renamed its instance variable `path`
+- Model `ResolverContract` deleted or renamed its instance variable `description`
+- Model `ResolverUpdateContract` deleted or renamed its instance variable `display_name`
+- Model `ResolverUpdateContract` deleted or renamed its instance variable `path`
+- Model `ResolverUpdateContract` deleted or renamed its instance variable `description`
+- Model `SaveConfigurationParameter` deleted or renamed its instance variable `branch`
+- Model `SaveConfigurationParameter` deleted or renamed its instance variable `force`
+- Model `SchemaContract` deleted or renamed its instance variable `content_type`
+- Model `SchemaContract` deleted or renamed its instance variable `provisioning_state`
+- Model `SchemaContract` deleted or renamed its instance variable `value`
+- Model `SchemaContract` deleted or renamed its instance variable `definitions`
+- Model `SchemaContract` deleted or renamed its instance variable `components`
+- Model `SubscriptionContract` deleted or renamed its instance variable `owner_id`
+- Model `SubscriptionContract` deleted or renamed its instance variable `scope`
+- Model `SubscriptionContract` deleted or renamed its instance variable `display_name`
+- Model `SubscriptionContract` deleted or renamed its instance variable `state`
+- Model `SubscriptionContract` deleted or renamed its instance variable `created_date`
+- Model `SubscriptionContract` deleted or renamed its instance variable `start_date`
+- Model `SubscriptionContract` deleted or renamed its instance variable `expiration_date`
+- Model `SubscriptionContract` deleted or renamed its instance variable `end_date`
+- Model `SubscriptionContract` deleted or renamed its instance variable `notification_date`
+- Model `SubscriptionContract` deleted or renamed its instance variable `primary_key`
+- Model `SubscriptionContract` deleted or renamed its instance variable `secondary_key`
+- Model `SubscriptionContract` deleted or renamed its instance variable `state_comment`
+- Model `SubscriptionContract` deleted or renamed its instance variable `allow_tracing`
+- Model `SubscriptionCreateParameters` deleted or renamed its instance variable `owner_id`
+- Model `SubscriptionCreateParameters` deleted or renamed its instance variable `scope`
+- Model `SubscriptionCreateParameters` deleted or renamed its instance variable `display_name`
+- Model `SubscriptionCreateParameters` deleted or renamed its instance variable `primary_key`
+- Model `SubscriptionCreateParameters` deleted or renamed its instance variable `secondary_key`
+- Model `SubscriptionCreateParameters` deleted or renamed its instance variable `state`
+- Model `SubscriptionCreateParameters` deleted or renamed its instance variable `allow_tracing`
+- Model `SubscriptionUpdateParameters` deleted or renamed its instance variable `owner_id`
+- Model `SubscriptionUpdateParameters` deleted or renamed its instance variable `scope`
+- Model `SubscriptionUpdateParameters` deleted or renamed its instance variable `expiration_date`
+- Model `SubscriptionUpdateParameters` deleted or renamed its instance variable `display_name`
+- Model `SubscriptionUpdateParameters` deleted or renamed its instance variable `primary_key`
+- Model `SubscriptionUpdateParameters` deleted or renamed its instance variable `secondary_key`
+- Model `SubscriptionUpdateParameters` deleted or renamed its instance variable `state`
+- Model `SubscriptionUpdateParameters` deleted or renamed its instance variable `state_comment`
+- Model `SubscriptionUpdateParameters` deleted or renamed its instance variable `allow_tracing`
+- Model `TagApiLinkContract` deleted or renamed its instance variable `api_id`
+- Model `TagContract` deleted or renamed its instance variable `display_name`
+- Model `TagCreateUpdateParameters` deleted or renamed its instance variable `display_name`
+- Model `TagDescriptionContract` deleted or renamed its instance variable `description`
+- Model `TagDescriptionContract` deleted or renamed its instance variable `external_docs_url`
+- Model `TagDescriptionContract` deleted or renamed its instance variable `external_docs_description`
+- Model `TagDescriptionContract` deleted or renamed its instance variable `tag_id`
+- Model `TagDescriptionContract` deleted or renamed its instance variable `display_name`
+- Model `TagDescriptionCreateParameters` deleted or renamed its instance variable `description`
+- Model `TagDescriptionCreateParameters` deleted or renamed its instance variable `external_docs_url`
+- Model `TagDescriptionCreateParameters` deleted or renamed its instance variable `external_docs_description`
+- Model `TagOperationLinkContract` deleted or renamed its instance variable `operation_id`
+- Model `TagProductLinkContract` deleted or renamed its instance variable `product_id`
+- Model `TenantConfigurationSyncStateContract` deleted or renamed its instance variable `branch`
+- Model `TenantConfigurationSyncStateContract` deleted or renamed its instance variable `commit_id`
+- Model `TenantConfigurationSyncStateContract` deleted or renamed its instance variable `is_export`
+- Model `TenantConfigurationSyncStateContract` deleted or renamed its instance variable `is_synced`
+- Model `TenantConfigurationSyncStateContract` deleted or renamed its instance variable `is_git_enabled`
+- Model `TenantConfigurationSyncStateContract` deleted or renamed its instance variable `sync_date`
+- Model `TenantConfigurationSyncStateContract` deleted or renamed its instance variable `configuration_change_date`
+- Model `TenantConfigurationSyncStateContract` deleted or renamed its instance variable `last_operation_id`
+- Model `TenantSettingsContract` deleted or renamed its instance variable `settings`
+- Model `ToolContract` deleted or renamed its instance variable `display_name`
+- Model `ToolContract` deleted or renamed its instance variable `description`
+- Model `ToolContract` deleted or renamed its instance variable `operation_id`
+- Model `UserContract` deleted or renamed its instance variable `state`
+- Model `UserContract` deleted or renamed its instance variable `note`
+- Model `UserContract` deleted or renamed its instance variable `identities`
+- Model `UserContract` deleted or renamed its instance variable `first_name`
+- Model `UserContract` deleted or renamed its instance variable `last_name`
+- Model `UserContract` deleted or renamed its instance variable `email`
+- Model `UserContract` deleted or renamed its instance variable `registration_date`
+- Model `UserContract` deleted or renamed its instance variable `groups`
+- Model `UserCreateParameters` deleted or renamed its instance variable `state`
+- Model `UserCreateParameters` deleted or renamed its instance variable `note`
+- Model `UserCreateParameters` deleted or renamed its instance variable `identities`
+- Model `UserCreateParameters` deleted or renamed its instance variable `email`
+- Model `UserCreateParameters` deleted or renamed its instance variable `first_name`
+- Model `UserCreateParameters` deleted or renamed its instance variable `last_name`
+- Model `UserCreateParameters` deleted or renamed its instance variable `password`
+- Model `UserCreateParameters` deleted or renamed its instance variable `app_type`
+- Model `UserCreateParameters` deleted or renamed its instance variable `confirmation`
+- Model `UserTokenParameters` deleted or renamed its instance variable `key_type`
+- Model `UserTokenParameters` deleted or renamed its instance variable `expiry`
+- Model `UserUpdateParameters` deleted or renamed its instance variable `state`
+- Model `UserUpdateParameters` deleted or renamed its instance variable `note`
+- Model `UserUpdateParameters` deleted or renamed its instance variable `identities`
+- Model `UserUpdateParameters` deleted or renamed its instance variable `email`
+- Model `UserUpdateParameters` deleted or renamed its instance variable `password`
+- Model `UserUpdateParameters` deleted or renamed its instance variable `first_name`
+- Model `UserUpdateParameters` deleted or renamed its instance variable `last_name`
+- Model `WikiContract` deleted or renamed its instance variable `documents`
+- Model `WikiUpdateContract` deleted or renamed its instance variable `documents`
+- Model `WorkspaceContract` deleted or renamed its instance variable `display_name`
+- Model `WorkspaceContract` deleted or renamed its instance variable `description`
+- Deleted or renamed model `ApiReleaseCollection`
+- Deleted or renamed model `ApiRevisionCollection`
+- Deleted or renamed model `AccessInformationCollection`
+- Deleted or renamed model `AllPoliciesCollection`
+- Deleted or renamed model `ApiCollection`
+- Deleted or renamed model `AuthorizationAccessPolicyCollection`
+- Deleted or renamed model `AuthorizationCollection`
+- Deleted or renamed model `AuthorizationProviderCollection`
+- Deleted or renamed model `AuthorizationServerCollection`
+- Deleted or renamed model `BackendCollection`
+- Deleted or renamed model `CacheCollection`
+- Deleted or renamed model `CertificateCollection`
+- Deleted or renamed model `ClientApplicationCollection`
+- Deleted or renamed model `ClientApplicationProductLinkCollection`
+- Deleted or renamed model `ApiVersionSetCollection`
+- Deleted or renamed model `ContentItemCollection`
+- Deleted or renamed model `ContentTypeCollection`
+- Deleted or renamed model `DeletedServicesCollection`
+- Deleted or renamed model `DiagnosticCollection`
+- Deleted or renamed model `DocumentationCollection`
+- Deleted or renamed model `EmailTemplateCollection`
+- Deleted or renamed model `GatewayCertificateAuthorityCollection`
+- Deleted or renamed model `GatewayCollection`
+- Deleted or renamed model `GatewayHostnameConfigurationCollection`
+- Deleted or renamed model `GatewayResourceSkuResults`
+- Deleted or renamed model `GlobalSchemaCollection`
+- Deleted or renamed model `GroupCollection`
+- Deleted or renamed model `IdentityProviderList`
+- Deleted or renamed model `IssueAttachmentCollection`
+- Deleted or renamed model `IssueCollection`
+- Deleted or renamed model `IssueCommentCollection`
+- Deleted or renamed model `LoggerCollection`
+- Deleted or renamed model `NamedValueCollection`
+- Deleted or renamed model `NotificationCollection`
+- Deleted or renamed model `OpenIdConnectProviderCollection`
+- Deleted or renamed model `OperationCollection`
+- Deleted or renamed model `PolicyFragmentCollection`
+- Deleted or renamed model `PolicyRestrictionCollection`
+- Deleted or renamed model `PolicyWithComplianceCollection`
+- Deleted or renamed model `PortalConfigCollection`
+- Deleted or renamed model `PortalRevisionCollection`
+- Deleted or renamed model `ProductApiLinkCollection`
+- Deleted or renamed model `ProductCollection`
+- Deleted or renamed model `ProductGroupLinkCollection`
+- Deleted or renamed model `ReportCollection`
+- Deleted or renamed model `RequestReportCollection`
+- Deleted or renamed model `ResolverCollection`
+- Deleted or renamed model `SubscriptionCollection`
+- Deleted or renamed model `TagApiLinkCollection`
+- Deleted or renamed model `TagCollection`
+- Deleted or renamed model `TagDescriptionCollection`
+- Deleted or renamed model `TagOperationLinkCollection`
+- Deleted or renamed model `TagProductLinkCollection`
+- Deleted or renamed model `TagResourceCollection`
+- Deleted or renamed model `TenantSettingsCollection`
+- Deleted or renamed model `ToolCollection`
+- Deleted or renamed model `UserCollection`
+- Deleted or renamed model `UserIdentityCollection`
+- Deleted or renamed model `WikiCollection`
+- Deleted or renamed model `WorkspaceCollection`
+- Deleted or renamed model `SchemaCollection`
+- Deleted or renamed model `ApiManagementSkusResult`
+- Deleted or renamed model `SettingsTypeNameAutoGenerated`
+- Deleted or renamed model `ResolverResultLogItemContract`
+- Deleted or renamed model `ResourceSkuResults`
+- Deleted or renamed model `ConfigurationIdNameAutoGenerated`
+- Deleted or renamed model `ExportApiAutoGenerated`
+- Deleted or renamed model `PolicyIdNameAutoGenerated`
+- Deleted or renamed model `PolicyWithComplianceContract`
+- Deleted or renamed model `QuotaCounterValueContract`
+- Deleted or renamed model `ApiRevisionInfoContract`
+- Deleted or renamed model `ResolverResultContract`
+- Deleted or renamed model `AsyncResolverStatus`
+- Method `ApiDiagnosticOperations.create_or_update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `ApiDiagnosticOperations.delete` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `ApiDiagnosticOperations.update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `ApiExportOperations.get` changed its parameter `format` from `positional_or_keyword` to `keyword_only`
+- Method `ApiExportOperations.get` changed its parameter `export` from `positional_or_keyword` to `keyword_only`
+- Method `ApiGatewayConfigConnectionOperations.begin_delete` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `ApiGatewayHostnameBindingOperations.begin_create_or_update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `ApiGatewayHostnameBindingOperations.begin_delete` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `ApiIssueAttachmentOperations.create_or_update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `ApiIssueAttachmentOperations.delete` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `ApiIssueCommentOperations.create_or_update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `ApiIssueCommentOperations.delete` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `ApiIssueOperations.create_or_update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `ApiIssueOperations.delete` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `ApiIssueOperations.get` changed its parameter `expand_comments_attachments` from `positional_or_keyword` to `keyword_only`
+- Method `ApiIssueOperations.list_by_service` changed its parameter `expand_comments_attachments` from `positional_or_keyword` to `keyword_only`
+- Method `ApiIssueOperations.update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `ApiOperationOperations.create_or_update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `ApiOperationOperations.delete` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `ApiOperationOperations.list_by_api` changed its parameter `tags` from `positional_or_keyword` to `keyword_only`
+- Method `ApiOperationOperations.update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `ApiOperationPolicyOperations.create_or_update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `ApiOperationPolicyOperations.delete` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `ApiOperationPolicyOperations.get` changed its parameter `format` from `positional_or_keyword` to `keyword_only`
+- Method `ApiOperations.begin_create_or_update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `ApiOperations.begin_delete` changed its parameter `delete_revisions` from `positional_or_keyword` to `keyword_only`
+- Method `ApiOperations.begin_delete` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `ApiOperations.list_by_service` changed its parameter `tags` from `positional_or_keyword` to `keyword_only`
+- Method `ApiOperations.list_by_service` changed its parameter `expand_api_version_set` from `positional_or_keyword` to `keyword_only`
+- Method `ApiOperations.list_by_tags` changed its parameter `include_not_tagged_apis` from `positional_or_keyword` to `keyword_only`
+- Method `ApiOperations.update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `ApiPolicyOperations.create_or_update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `ApiPolicyOperations.delete` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `ApiPolicyOperations.get` changed its parameter `format` from `positional_or_keyword` to `keyword_only`
+- Method `ApiReleaseOperations.create_or_update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `ApiReleaseOperations.delete` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `ApiReleaseOperations.update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `ApiSchemaOperations.begin_create_or_update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `ApiSchemaOperations.delete` changed its parameter `force` from `positional_or_keyword` to `keyword_only`
+- Method `ApiSchemaOperations.delete` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `ApiTagDescriptionOperations.create_or_update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `ApiTagDescriptionOperations.delete` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `ApiVersionSetOperations.create_or_update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `ApiVersionSetOperations.delete` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `ApiVersionSetOperations.update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `ApiWikiOperations.create_or_update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `ApiWikiOperations.delete` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `ApiWikiOperations.update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `AuthorizationAccessPolicyOperations.create_or_update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `AuthorizationAccessPolicyOperations.delete` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `AuthorizationOperations.create_or_update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `AuthorizationOperations.delete` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `AuthorizationProviderOperations.create_or_update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `AuthorizationProviderOperations.delete` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `AuthorizationServerOperations.create_or_update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `AuthorizationServerOperations.delete` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `AuthorizationServerOperations.update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `BackendOperations.create_or_update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `BackendOperations.delete` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `BackendOperations.update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `CacheOperations.create_or_update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `CacheOperations.delete` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `CacheOperations.update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `CertificateOperations.create_or_update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `CertificateOperations.delete` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `CertificateOperations.list_by_service` changed its parameter `is_key_vault_refresh_failed` from `positional_or_keyword` to `keyword_only`
+- Method `ContentItemOperations.create_or_update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `ContentItemOperations.delete` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `ContentTypeOperations.create_or_update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `ContentTypeOperations.delete` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `DelegationSettingsOperations.create_or_update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `DelegationSettingsOperations.update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `DiagnosticOperations.create_or_update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `DiagnosticOperations.delete` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `DiagnosticOperations.update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `DocumentationOperations.create_or_update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `DocumentationOperations.delete` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `DocumentationOperations.update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `EmailTemplateOperations.create_or_update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `EmailTemplateOperations.delete` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `EmailTemplateOperations.update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `GatewayCertificateAuthorityOperations.create_or_update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `GatewayCertificateAuthorityOperations.delete` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `GatewayHostnameConfigurationOperations.create_or_update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `GatewayHostnameConfigurationOperations.delete` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `GatewayOperations.create_or_update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `GatewayOperations.delete` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `GatewayOperations.update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `GlobalSchemaOperations.begin_create_or_update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `GlobalSchemaOperations.delete` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `GraphQLApiResolverOperations.create_or_update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `GraphQLApiResolverOperations.delete` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `GraphQLApiResolverOperations.update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `GraphQLApiResolverPolicyOperations.create_or_update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `GraphQLApiResolverPolicyOperations.delete` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `GraphQLApiResolverPolicyOperations.get` changed its parameter `format` from `positional_or_keyword` to `keyword_only`
+- Method `GroupOperations.create_or_update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `GroupOperations.delete` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `GroupOperations.update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `IdentityProviderOperations.create_or_update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `IdentityProviderOperations.delete` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `IdentityProviderOperations.update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `LoggerOperations.create_or_update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `LoggerOperations.delete` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `LoggerOperations.update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `NamedValueOperations.begin_create_or_update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `NamedValueOperations.begin_update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `NamedValueOperations.delete` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `NamedValueOperations.list_by_service` changed its parameter `is_key_vault_refresh_failed` from `positional_or_keyword` to `keyword_only`
+- Method `NotificationOperations.create_or_update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `OpenIdConnectProviderOperations.create_or_update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `OpenIdConnectProviderOperations.delete` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `OpenIdConnectProviderOperations.update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `OperationOperations.list_by_tags` changed its parameter `include_not_tagged_operations` from `positional_or_keyword` to `keyword_only`
+- Method `PolicyDescriptionOperations.list_by_service` changed its parameter `scope` from `positional_or_keyword` to `keyword_only`
+- Method `PolicyFragmentOperations.begin_create_or_update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `PolicyFragmentOperations.delete` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `PolicyFragmentOperations.get` changed its parameter `format` from `positional_or_keyword` to `keyword_only`
+- Method `PolicyFragmentOperations.list_by_service` changed its parameter `orderby` from `positional_or_keyword` to `keyword_only`
+- Method `PolicyOperations.create_or_update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `PolicyOperations.delete` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `PolicyOperations.get` changed its parameter `format` from `positional_or_keyword` to `keyword_only`
+- Method `PolicyRestrictionOperations.create_or_update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `PolicyRestrictionOperations.delete` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `PolicyRestrictionOperations.update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `PortalConfigOperations.create_or_update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `PortalConfigOperations.update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `PortalRevisionOperations.begin_update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `ProductOperations.create_or_update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `ProductOperations.delete` changed its parameter `delete_subscriptions` from `positional_or_keyword` to `keyword_only`
+- Method `ProductOperations.delete` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `ProductOperations.list_by_service` changed its parameter `expand_groups` from `positional_or_keyword` to `keyword_only`
+- Method `ProductOperations.list_by_service` changed its parameter `tags` from `positional_or_keyword` to `keyword_only`
+- Method `ProductOperations.list_by_tags` changed its parameter `include_not_tagged_products` from `positional_or_keyword` to `keyword_only`
+- Method `ProductOperations.update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `ProductPolicyOperations.create_or_update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `ProductPolicyOperations.delete` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `ProductPolicyOperations.get` changed its parameter `format` from `positional_or_keyword` to `keyword_only`
+- Method `ProductWikiOperations.create_or_update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `ProductWikiOperations.delete` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `ProductWikiOperations.update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `ReportsOperations.list_by_api` changed its parameter `orderby` from `positional_or_keyword` to `keyword_only`
+- Method `ReportsOperations.list_by_operation` changed its parameter `orderby` from `positional_or_keyword` to `keyword_only`
+- Method `ReportsOperations.list_by_product` changed its parameter `orderby` from `positional_or_keyword` to `keyword_only`
+- Method `ReportsOperations.list_by_subscription` changed its parameter `orderby` from `positional_or_keyword` to `keyword_only`
+- Method `ReportsOperations.list_by_time` changed its parameter `interval` from `positional_or_keyword` to `keyword_only`
+- Method `ReportsOperations.list_by_time` changed its parameter `orderby` from `positional_or_keyword` to `keyword_only`
+- Method `ReportsOperations.list_by_user` changed its parameter `orderby` from `positional_or_keyword` to `keyword_only`
+- Method `SignInSettingsOperations.create_or_update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `SignInSettingsOperations.update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `SignUpSettingsOperations.create_or_update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `SignUpSettingsOperations.update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `SubscriptionOperations.create_or_update` changed its parameter `notify` from `positional_or_keyword` to `keyword_only`
+- Method `SubscriptionOperations.create_or_update` changed its parameter `app_type` from `positional_or_keyword` to `keyword_only`
+- Method `SubscriptionOperations.create_or_update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `SubscriptionOperations.delete` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `SubscriptionOperations.update` changed its parameter `notify` from `positional_or_keyword` to `keyword_only`
+- Method `SubscriptionOperations.update` changed its parameter `app_type` from `positional_or_keyword` to `keyword_only`
+- Method `SubscriptionOperations.update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `TagOperations.create_or_update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `TagOperations.delete` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `TagOperations.list_by_service` changed its parameter `scope` from `positional_or_keyword` to `keyword_only`
+- Method `TagOperations.update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `TenantAccessOperations.create` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `TenantAccessOperations.update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `UserConfirmationPasswordOperations.send` changed its parameter `app_type` from `positional_or_keyword` to `keyword_only`
+- Method `UserOperations.begin_delete` changed its parameter `delete_subscriptions` from `positional_or_keyword` to `keyword_only`
+- Method `UserOperations.begin_delete` changed its parameter `notify` from `positional_or_keyword` to `keyword_only`
+- Method `UserOperations.begin_delete` changed its parameter `app_type` from `positional_or_keyword` to `keyword_only`
+- Method `UserOperations.begin_delete` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `UserOperations.create_or_update` changed its parameter `notify` from `positional_or_keyword` to `keyword_only`
+- Method `UserOperations.create_or_update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `UserOperations.list_by_service` changed its parameter `expand_groups` from `positional_or_keyword` to `keyword_only`
+- Method `UserOperations.update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `WorkspaceApiDiagnosticOperations.create_or_update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `WorkspaceApiDiagnosticOperations.delete` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `WorkspaceApiDiagnosticOperations.update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `WorkspaceApiExportOperations.get` changed its parameter `format` from `positional_or_keyword` to `keyword_only`
+- Method `WorkspaceApiExportOperations.get` changed its parameter `export` from `positional_or_keyword` to `keyword_only`
+- Method `WorkspaceApiOperationOperations.create_or_update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `WorkspaceApiOperationOperations.delete` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `WorkspaceApiOperationOperations.list_by_api` changed its parameter `tags` from `positional_or_keyword` to `keyword_only`
+- Method `WorkspaceApiOperationOperations.update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `WorkspaceApiOperationPolicyOperations.create_or_update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `WorkspaceApiOperationPolicyOperations.delete` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `WorkspaceApiOperationPolicyOperations.get` changed its parameter `format` from `positional_or_keyword` to `keyword_only`
+- Method `WorkspaceApiOperations.begin_create_or_update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `WorkspaceApiOperations.delete` changed its parameter `delete_revisions` from `positional_or_keyword` to `keyword_only`
+- Method `WorkspaceApiOperations.delete` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `WorkspaceApiOperations.list_by_service` changed its parameter `tags` from `positional_or_keyword` to `keyword_only`
+- Method `WorkspaceApiOperations.list_by_service` changed its parameter `expand_api_version_set` from `positional_or_keyword` to `keyword_only`
+- Method `WorkspaceApiOperations.update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `WorkspaceApiPolicyOperations.create_or_update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `WorkspaceApiPolicyOperations.delete` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `WorkspaceApiPolicyOperations.get` changed its parameter `format` from `positional_or_keyword` to `keyword_only`
+- Method `WorkspaceApiReleaseOperations.create_or_update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `WorkspaceApiReleaseOperations.delete` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `WorkspaceApiReleaseOperations.update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `WorkspaceApiSchemaOperations.begin_create_or_update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `WorkspaceApiSchemaOperations.delete` changed its parameter `force` from `positional_or_keyword` to `keyword_only`
+- Method `WorkspaceApiSchemaOperations.delete` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `WorkspaceApiVersionSetOperations.create_or_update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `WorkspaceApiVersionSetOperations.delete` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `WorkspaceApiVersionSetOperations.update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `WorkspaceBackendOperations.create_or_update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `WorkspaceBackendOperations.delete` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `WorkspaceBackendOperations.update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `WorkspaceCertificateOperations.create_or_update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `WorkspaceCertificateOperations.delete` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `WorkspaceCertificateOperations.list_by_workspace` changed its parameter `is_key_vault_refresh_failed` from `positional_or_keyword` to `keyword_only`
+- Method `WorkspaceDiagnosticOperations.create_or_update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `WorkspaceDiagnosticOperations.delete` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `WorkspaceDiagnosticOperations.update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `WorkspaceGlobalSchemaOperations.begin_create_or_update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `WorkspaceGlobalSchemaOperations.delete` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `WorkspaceGroupOperations.create_or_update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `WorkspaceGroupOperations.delete` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `WorkspaceGroupOperations.update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `WorkspaceLoggerOperations.create_or_update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `WorkspaceLoggerOperations.delete` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `WorkspaceLoggerOperations.update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `WorkspaceNamedValueOperations.begin_create_or_update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `WorkspaceNamedValueOperations.begin_update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `WorkspaceNamedValueOperations.delete` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `WorkspaceNamedValueOperations.list_by_service` changed its parameter `is_key_vault_refresh_failed` from `positional_or_keyword` to `keyword_only`
+- Method `WorkspaceNotificationOperations.create_or_update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `WorkspaceOperations.create_or_update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `WorkspaceOperations.delete` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `WorkspaceOperations.update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `WorkspacePolicyFragmentOperations.begin_create_or_update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `WorkspacePolicyFragmentOperations.delete` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `WorkspacePolicyFragmentOperations.get` changed its parameter `format` from `positional_or_keyword` to `keyword_only`
+- Method `WorkspacePolicyFragmentOperations.list_by_service` changed its parameter `orderby` from `positional_or_keyword` to `keyword_only`
+- Method `WorkspacePolicyOperations.create_or_update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `WorkspacePolicyOperations.delete` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `WorkspacePolicyOperations.get` changed its parameter `format` from `positional_or_keyword` to `keyword_only`
+- Method `WorkspaceProductOperations.create_or_update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `WorkspaceProductOperations.delete` changed its parameter `delete_subscriptions` from `positional_or_keyword` to `keyword_only`
+- Method `WorkspaceProductOperations.delete` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `WorkspaceProductOperations.list_by_service` changed its parameter `expand_groups` from `positional_or_keyword` to `keyword_only`
+- Method `WorkspaceProductOperations.list_by_service` changed its parameter `tags` from `positional_or_keyword` to `keyword_only`
+- Method `WorkspaceProductOperations.update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `WorkspaceProductPolicyOperations.create_or_update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `WorkspaceProductPolicyOperations.delete` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `WorkspaceProductPolicyOperations.get` changed its parameter `format` from `positional_or_keyword` to `keyword_only`
+- Method `WorkspaceSubscriptionOperations.create_or_update` changed its parameter `notify` from `positional_or_keyword` to `keyword_only`
+- Method `WorkspaceSubscriptionOperations.create_or_update` changed its parameter `app_type` from `positional_or_keyword` to `keyword_only`
+- Method `WorkspaceSubscriptionOperations.create_or_update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `WorkspaceSubscriptionOperations.delete` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `WorkspaceSubscriptionOperations.update` changed its parameter `notify` from `positional_or_keyword` to `keyword_only`
+- Method `WorkspaceSubscriptionOperations.update` changed its parameter `app_type` from `positional_or_keyword` to `keyword_only`
+- Method `WorkspaceSubscriptionOperations.update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `WorkspaceTagOperations.create_or_update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `WorkspaceTagOperations.delete` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `WorkspaceTagOperations.list_by_service` changed its parameter `scope` from `positional_or_keyword` to `keyword_only`
+- Method `WorkspaceTagOperations.update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `DeletedServicesOperations.get_by_name` re-ordered its parameters from `['self', 'location', 'service_name', 'kwargs']` to `['self', 'service_name', 'location', 'kwargs']`
+- Method `DeletedServicesOperations.begin_purge` re-ordered its parameters from `['self', 'location', 'service_name', 'kwargs']` to `['self', 'service_name', 'location', 'kwargs']`
+
 # Release History
-
-## 5.1.0b1 (2026-01-09)
-
-change log generation failed!!! You need to write it manually!!!
-
-## 5.1.0b1 (2026-01-09)
-
-change log generation failed!!! You need to write it manually!!!
 
 ## 5.0.0 (2025-04-21)
 
