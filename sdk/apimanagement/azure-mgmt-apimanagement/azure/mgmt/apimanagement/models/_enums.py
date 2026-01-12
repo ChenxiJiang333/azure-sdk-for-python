@@ -540,8 +540,8 @@ class LegacyPortalStatus(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Legacy Portal is disabled for the service."""
 
 
-class Llm_diagnostic_settings(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """Type of Llm-diagnostic-settings."""
+class LlmDiagnosticSettings(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Type of LlmDiagnosticSettings."""
 
     ENABLED = "enabled"
     """Default LLM logs are enabled."""
