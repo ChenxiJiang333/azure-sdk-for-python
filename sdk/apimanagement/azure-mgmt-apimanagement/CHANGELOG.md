@@ -1,18 +1,9 @@
 ## tsp migration
 
-## 5.1.0b1 (2026-01-12)
-
-change log generation failed!!! You need to write it manually!!!
-
-## 5.1.0b1 (2026-01-12)
-
-change log generation failed!!! You need to write it manually!!!
-
 ### Breaking Changes
 
 - Client `ApiManagementClient` deleted or renamed instance variable `url`
 - Deleted or renamed client method `ApiManagementClient.begin_perform_connectivity_check_async`
-- Deleted or renamed model `LlmDiagnosticSettings`
 
 - Model `AccessInformationContract` deleted or renamed its instance variable `id_properties_id`
 - Model `AccessInformationContract` deleted or renamed its instance variable `principal_id`
