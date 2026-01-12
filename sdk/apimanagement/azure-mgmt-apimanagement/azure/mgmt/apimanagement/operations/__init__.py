@@ -13,6 +13,7 @@ if TYPE_CHECKING:
     from ._patch import *  # pylint: disable=unused-wildcard-import
 
 from ._operations import WorkspaceApiOperations  # type: ignore
+from ._operations import ApiManagementServiceResourcesOperations  # type: ignore
 from ._operations import WorkspaceApiReleaseOperations  # type: ignore
 from ._operations import WorkspaceApiOperationOperations  # type: ignore
 from ._operations import GraphQLApiResolverPolicyOperations  # type: ignore
@@ -61,7 +62,6 @@ from ._operations import OperationOperations  # type: ignore
 from ._operations import WorkspaceApiRevisionOperations  # type: ignore
 from ._operations import ApiManagementServiceOperations  # type: ignore
 from ._operations import AllPoliciesOperations  # type: ignore
-from ._operations import ApiManagementOperations  # type: ignore
 from ._operations import ApiManagementServiceSkusOperations  # type: ignore
 from ._operations import NetworkStatusOperations  # type: ignore
 from ._operations import OutboundNetworkDependenciesEndpointsOperations  # type: ignore
@@ -160,6 +160,7 @@ from ._patch import patch_sdk as _patch_sdk
 
 __all__ = [
     "WorkspaceApiOperations",
+    "ApiManagementServiceResourcesOperations",
     "WorkspaceApiReleaseOperations",
     "WorkspaceApiOperationOperations",
     "GraphQLApiResolverPolicyOperations",
@@ -208,7 +209,6 @@ __all__ = [
     "WorkspaceApiRevisionOperations",
     "ApiManagementServiceOperations",
     "AllPoliciesOperations",
-    "ApiManagementOperations",
     "ApiManagementServiceSkusOperations",
     "NetworkStatusOperations",
     "OutboundNetworkDependenciesEndpointsOperations",

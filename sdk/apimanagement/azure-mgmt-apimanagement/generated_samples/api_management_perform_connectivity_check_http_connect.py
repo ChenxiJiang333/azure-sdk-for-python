@@ -30,7 +30,7 @@ def main():
         subscription_id="SUBSCRIPTION_ID",
     )
 
-    response = client.api_management.begin_perform_connectivity_check_async(
+    response = client.api_management_service_resources.begin_perform_connectivity_check_async(
         resource_group_name="rg1",
         service_name="apimService1",
         connectivity_check_request_params={

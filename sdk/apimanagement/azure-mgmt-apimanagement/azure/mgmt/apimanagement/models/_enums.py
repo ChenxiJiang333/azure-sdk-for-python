@@ -130,14 +130,6 @@ class AuthorizationType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """OAuth2 authorization type"""
 
 
-class Backend_sessionId_source(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """Source from where the session id is extracted."""
-
-    COOKIE = "cookie"
-    """The session id is set by APIM gateway in a cookie and is extracted from the cookies in client
-    requests."""
-
-
 class BackendProtocol(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Backend communication protocol. Required when backend type is 'Single'."""
 
@@ -145,6 +137,14 @@ class BackendProtocol(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The Backend is a RESTful service."""
     SOAP = "soap"
     """The Backend is a SOAP service."""
+
+
+class BackendSessionIdSource(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Source from where the session id is extracted."""
+
+    COOKIE = "cookie"
+    """The session id is set by APIM gateway in a cookie and is extracted from the cookies in client
+    requests."""
 
 
 class BackendType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
@@ -457,7 +457,7 @@ class HttpCorrelationProtocol(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Inject Request-Id and Request-Context headers with request correlation data. See
     `https://github.com/dotnet/corefx/blob/master/src/System.Diagnostics.DiagnosticSource/src/HttpCorrelationProtocol.md
     <https://github.com/dotnet/corefx/blob/master/src/System.Diagnostics.DiagnosticSource/src/HttpCorrelationProtocol.md>`_."""
-    W3C = "W3C"
+    W3_C = "W3C"
     """Inject Trace Context headers. See `https://w3c.github.io/trace-context
     <https://w3c.github.io/trace-context>`_."""
 
@@ -549,8 +549,8 @@ class Llm_diagnostic_settings(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Default LLM logs are disabled."""
 
 
-class Llm_message_log_types(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """Type of Llm-message-log-types."""
+class LlmMessageLogTypes(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Type of LlmMessageLogTypes."""
 
     ALL = "all"
     """Log all messages."""

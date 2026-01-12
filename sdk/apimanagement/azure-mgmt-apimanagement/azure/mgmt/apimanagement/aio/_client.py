@@ -30,9 +30,9 @@ from .operations import (
     ApiIssueCommentOperations,
     ApiIssueOperations,
     ApiManagementGatewaySkusOperations,
-    ApiManagementOperations,
     ApiManagementOperationsOperations,
     ApiManagementServiceOperations,
+    ApiManagementServiceResourcesOperations,
     ApiManagementServiceSkusOperations,
     ApiManagementSkusOperations,
     ApiManagementWorkspaceLinkOperations,
@@ -173,6 +173,9 @@ class ApiManagementClient:  # pylint: disable=too-many-instance-attributes
 
     :ivar workspace_api: WorkspaceApiOperations operations
     :vartype workspace_api: azure.mgmt.apimanagement.aio.operations.WorkspaceApiOperations
+    :ivar api_management_service_resources: ApiManagementServiceResourcesOperations operations
+    :vartype api_management_service_resources:
+     azure.mgmt.apimanagement.aio.operations.ApiManagementServiceResourcesOperations
     :ivar workspace_api_release: WorkspaceApiReleaseOperations operations
     :vartype workspace_api_release:
      azure.mgmt.apimanagement.aio.operations.WorkspaceApiReleaseOperations
@@ -295,8 +298,6 @@ class ApiManagementClient:  # pylint: disable=too-many-instance-attributes
      azure.mgmt.apimanagement.aio.operations.ApiManagementServiceOperations
     :ivar all_policies: AllPoliciesOperations operations
     :vartype all_policies: azure.mgmt.apimanagement.aio.operations.AllPoliciesOperations
-    :ivar api_management: ApiManagementOperations operations
-    :vartype api_management: azure.mgmt.apimanagement.aio.operations.ApiManagementOperations
     :ivar api_management_service_skus: ApiManagementServiceSkusOperations operations
     :vartype api_management_service_skus:
      azure.mgmt.apimanagement.aio.operations.ApiManagementServiceSkusOperations
@@ -585,6 +586,9 @@ class ApiManagementClient:  # pylint: disable=too-many-instance-attributes
         self._deserialize = Deserializer()
         self._serialize.client_side_validation = False
         self.workspace_api = WorkspaceApiOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.api_management_service_resources = ApiManagementServiceResourcesOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
         self.workspace_api_release = WorkspaceApiReleaseOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
@@ -695,7 +699,6 @@ class ApiManagementClient:  # pylint: disable=too-many-instance-attributes
             self._client, self._config, self._serialize, self._deserialize
         )
         self.all_policies = AllPoliciesOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.api_management = ApiManagementOperations(self._client, self._config, self._serialize, self._deserialize)
         self.api_management_service_skus = ApiManagementServiceSkusOperations(
             self._client, self._config, self._serialize, self._deserialize
         )

@@ -6491,12 +6491,12 @@ class BackendSessionId(_Model):
     """The properties of the id that identifies the requests belonging to the same session.
 
     :ivar source: Source from where the session id is extracted. "cookie"
-    :vartype source: str or ~azure.mgmt.apimanagement.models.Backend_sessionId_source
+    :vartype source: str or ~azure.mgmt.apimanagement.models.BackendSessionIdSource
     :ivar name: Name of the variable that refers to the session id.
     :vartype name: str
     """
 
-    source: Optional[Union[str, "_models.Backend_sessionId_source"]] = rest_field(
+    source: Optional[Union[str, "_models.BackendSessionIdSource"]] = rest_field(
         visibility=["read", "create", "update", "delete", "query"]
     )
     """Source from where the session id is extracted. \"cookie\""""
@@ -6507,7 +6507,7 @@ class BackendSessionId(_Model):
     def __init__(
         self,
         *,
-        source: Optional[Union[str, "_models.Backend_sessionId_source"]] = None,
+        source: Optional[Union[str, "_models.BackendSessionIdSource"]] = None,
         name: Optional[str] = None,
     ) -> None: ...
 
@@ -7828,10 +7828,10 @@ class ConnectivityCheckRequestProtocolConfiguration(_Model):  # pylint: disable=
 
     :ivar http_configuration: Configuration for HTTP or HTTPS requests.
     :vartype http_configuration:
-     ~azure.mgmt.apimanagement.models.ConnectivityCheckRequestProtocolConfigurationHTTPConfiguration
+     ~azure.mgmt.apimanagement.models.ConnectivityCheckRequestProtocolConfigurationHttpConfiguration
     """
 
-    http_configuration: Optional["_models.ConnectivityCheckRequestProtocolConfigurationHTTPConfiguration"] = rest_field(
+    http_configuration: Optional["_models.ConnectivityCheckRequestProtocolConfigurationHttpConfiguration"] = rest_field(
         name="HTTPConfiguration", visibility=["read", "create", "update", "delete", "query"]
     )
     """Configuration for HTTP or HTTPS requests."""
@@ -7840,7 +7840,7 @@ class ConnectivityCheckRequestProtocolConfiguration(_Model):  # pylint: disable=
     def __init__(
         self,
         *,
-        http_configuration: Optional["_models.ConnectivityCheckRequestProtocolConfigurationHTTPConfiguration"] = None,
+        http_configuration: Optional["_models.ConnectivityCheckRequestProtocolConfigurationHttpConfiguration"] = None,
     ) -> None: ...
 
     @overload
@@ -7854,7 +7854,7 @@ class ConnectivityCheckRequestProtocolConfiguration(_Model):  # pylint: disable=
         super().__init__(*args, **kwargs)
 
 
-class ConnectivityCheckRequestProtocolConfigurationHTTPConfiguration(_Model):  # pylint: disable=name-too-long
+class ConnectivityCheckRequestProtocolConfigurationHttpConfiguration(_Model):  # pylint: disable=name-too-long
     """Configuration for HTTP or HTTPS requests.
 
     :ivar method: The HTTP method to be used. Known values are: "GET" and "POST".
@@ -12293,12 +12293,12 @@ class LLMMessageDiagnosticSettings(_Model):
 
     :ivar messages: Specifies which message should be logged. Currently there is only 'all' option.
      "all"
-    :vartype messages: str or ~azure.mgmt.apimanagement.models.Llm_message_log_types
+    :vartype messages: str or ~azure.mgmt.apimanagement.models.LlmMessageLogTypes
     :ivar max_size_in_bytes: Maximum size of message to logs in bytes. The default size is 32KB.
     :vartype max_size_in_bytes: int
     """
 
-    messages: Optional[Union[str, "_models.Llm_message_log_types"]] = rest_field(
+    messages: Optional[Union[str, "_models.LlmMessageLogTypes"]] = rest_field(
         visibility=["read", "create", "update", "delete", "query"]
     )
     """Specifies which message should be logged. Currently there is only 'all' option. \"all\""""
@@ -12311,7 +12311,7 @@ class LLMMessageDiagnosticSettings(_Model):
     def __init__(
         self,
         *,
-        messages: Optional[Union[str, "_models.Llm_message_log_types"]] = None,
+        messages: Optional[Union[str, "_models.LlmMessageLogTypes"]] = None,
         max_size_in_bytes: Optional[int] = None,
     ) -> None: ...
 
