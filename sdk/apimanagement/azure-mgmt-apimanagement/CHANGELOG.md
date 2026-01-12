@@ -8,19 +8,7 @@ change log generation failed!!! You need to write it manually!!!
 
 - Client `ApiManagementClient` deleted or renamed instance variable `url`
 - Deleted or renamed client method `ApiManagementClient.begin_perform_connectivity_check_async`
-- Renamed enum value `HttpCorrelationProtocol.W3_C` to `W3C`
-- Deleted or renamed model `BackendSessionIdSource`
 - Deleted or renamed model `LlmDiagnosticSettings`
-- Deleted or renamed model `LlmMessageLogTypes`
-- Deleted or renamed model `ConnectivityCheckRequestProtocolConfigurationHttpConfiguration`
-- Method `ApiOperationPolicyOperations.get` parameter `format` changed default value from `None` to `str`
-- Method `ApiPolicyOperations.get` parameter `format` changed default value from `None` to `str`
-- Method `WorkspacePolicyOperations.get` parameter `format` changed default value from `None` to `str`
-- Method `WorkspaceApiPolicyOperations.get` parameter `format` changed default value from `None` to `str`
-- Method `WorkspaceApiOperationPolicyOperations.get` parameter `format` changed default value from `None` to `str`
-- Method `ProductPolicyOperations.get` parameter `format` changed default value from `None` to `str`
-- Method `GraphQLApiResolverPolicyOperations.get` parameter `format` changed default value from `None` to `str`
-- Method `PolicyOperations.get` parameter `format` changed default value from `None` to `str`
 
 - Model `AccessInformationContract` deleted or renamed its instance variable `id_properties_id`
 - Model `AccessInformationContract` deleted or renamed its instance variable `principal_id`
@@ -996,8 +984,6 @@ change log generation failed!!! You need to write it manually!!!
 - Method `WorkspaceTagOperations.delete` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
 - Method `WorkspaceTagOperations.list_by_service` changed its parameter `scope` from `positional_or_keyword` to `keyword_only`
 - Method `WorkspaceTagOperations.update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
-- Method `DeletedServicesOperations.get_by_name` re-ordered its parameters from `['self', 'location', 'service_name', 'kwargs']` to `['self', 'service_name', 'location', 'kwargs']`
-- Method `DeletedServicesOperations.begin_purge` re-ordered its parameters from `['self', 'location', 'service_name', 'kwargs']` to `['self', 'service_name', 'location', 'kwargs']`
 
 # Release History
 

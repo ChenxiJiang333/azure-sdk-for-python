@@ -31,8 +31,8 @@ def main():
     )
 
     client.deleted_services.begin_purge(
-        service_name="apimService3",
         location="westus",
+        service_name="apimService3",
     ).result()
 
 

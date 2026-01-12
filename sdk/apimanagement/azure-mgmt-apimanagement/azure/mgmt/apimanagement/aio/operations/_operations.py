@@ -86,6 +86,7 @@ from ...operations._operations import (
     build_api_list_by_tags_request,
     build_api_management_gateway_skus_list_available_skus_request,
     build_api_management_operations_list_request,
+    build_api_management_perform_connectivity_check_async_request,
     build_api_management_service_apply_network_configuration_updates_request,
     build_api_management_service_backup_request,
     build_api_management_service_check_name_availability_request,
@@ -98,7 +99,6 @@ from ...operations._operations import (
     build_api_management_service_list_request,
     build_api_management_service_migrate_to_stv2_request,
     build_api_management_service_refresh_hostnames_request,
-    build_api_management_service_resources_perform_connectivity_check_async_request,
     build_api_management_service_restore_request,
     build_api_management_service_skus_list_available_service_skus_request,
     build_api_management_service_update_request,
@@ -1643,271 +1643,6 @@ class WorkspaceApiOperations:
             return pipeline_response
 
         return AsyncItemPaged(get_next, extract_data)
-
-
-class ApiManagementServiceResourcesOperations:
-    """
-    .. warning::
-        **DO NOT** instantiate this class directly.
-
-        Instead, you should access the following operations through
-        :class:`~azure.mgmt.apimanagement.aio.ApiManagementClient`'s
-        :attr:`api_management_service_resources` attribute.
-    """
-
-    def __init__(self, *args, **kwargs) -> None:
-        input_args = list(args)
-        self._client: AsyncPipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: ApiManagementClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
-        self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
-        self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
-
-    async def _perform_connectivity_check_async_initial(  # pylint: disable=name-too-long
-        self,
-        resource_group_name: str,
-        service_name: str,
-        connectivity_check_request_params: Union[_models.ConnectivityCheckRequest, JSON, IO[bytes]],
-        **kwargs: Any
-    ) -> AsyncIterator[bytes]:
-        error_map: MutableMapping = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-        _params = kwargs.pop("params", {}) or {}
-
-        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
-        cls: ClsType[AsyncIterator[bytes]] = kwargs.pop("cls", None)
-
-        content_type = content_type or "application/json"
-        _content = None
-        if isinstance(connectivity_check_request_params, (IOBase, bytes)):
-            _content = connectivity_check_request_params
-        else:
-            _content = json.dumps(connectivity_check_request_params, cls=SdkJSONEncoder, exclude_readonly=True)  # type: ignore
-
-        _request = build_api_management_service_resources_perform_connectivity_check_async_request(
-            resource_group_name=resource_group_name,
-            service_name=service_name,
-            subscription_id=self._config.subscription_id,
-            content_type=content_type,
-            api_version=self._config.api_version,
-            content=_content,
-            headers=_headers,
-            params=_params,
-        )
-        path_format_arguments = {
-            "endpoint": self._serialize.url("self._config.base_url", self._config.base_url, "str", skip_quote=True),
-        }
-        _request.url = self._client.format_url(_request.url, **path_format_arguments)
-
-        _stream = True
-        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            _request, stream=_stream, **kwargs
-        )
-
-        response = pipeline_response.http_response
-
-        if response.status_code not in [200, 202]:
-            try:
-                await response.read()  # Load the body in memory and close the socket
-            except (StreamConsumedError, StreamClosedError):
-                pass
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = _failsafe_deserialize(
-                _models.ErrorResponse,
-                response,
-            )
-            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
-
-        response_headers = {}
-        if response.status_code == 202:
-            response_headers["location"] = self._deserialize("str", response.headers.get("location"))
-            response_headers["Retry-After"] = self._deserialize("int", response.headers.get("Retry-After"))
-
-        deserialized = response.iter_bytes()
-
-        if cls:
-            return cls(pipeline_response, deserialized, response_headers)  # type: ignore
-
-        return deserialized  # type: ignore
-
-    @overload
-    async def begin_perform_connectivity_check_async(
-        self,
-        resource_group_name: str,
-        service_name: str,
-        connectivity_check_request_params: _models.ConnectivityCheckRequest,
-        *,
-        content_type: str = "application/json",
-        **kwargs: Any
-    ) -> AsyncLROPoller[_models.ConnectivityCheckResponse]:
-        """Performs a connectivity check between the API Management service and a given destination, and
-        returns metrics for the connection, as well as errors encountered while trying to establish it.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param service_name: The name of the API Management service. Required.
-        :type service_name: str
-        :param connectivity_check_request_params: Connectivity Check request parameters. Required.
-        :type connectivity_check_request_params:
-         ~azure.mgmt.apimanagement.models.ConnectivityCheckRequest
-        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
-         Default value is "application/json".
-        :paramtype content_type: str
-        :return: An instance of AsyncLROPoller that returns ConnectivityCheckResponse. The
-         ConnectivityCheckResponse is compatible with MutableMapping
-        :rtype:
-         ~azure.core.polling.AsyncLROPoller[~azure.mgmt.apimanagement.models.ConnectivityCheckResponse]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-
-    @overload
-    async def begin_perform_connectivity_check_async(
-        self,
-        resource_group_name: str,
-        service_name: str,
-        connectivity_check_request_params: JSON,
-        *,
-        content_type: str = "application/json",
-        **kwargs: Any
-    ) -> AsyncLROPoller[_models.ConnectivityCheckResponse]:
-        """Performs a connectivity check between the API Management service and a given destination, and
-        returns metrics for the connection, as well as errors encountered while trying to establish it.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param service_name: The name of the API Management service. Required.
-        :type service_name: str
-        :param connectivity_check_request_params: Connectivity Check request parameters. Required.
-        :type connectivity_check_request_params: JSON
-        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
-         Default value is "application/json".
-        :paramtype content_type: str
-        :return: An instance of AsyncLROPoller that returns ConnectivityCheckResponse. The
-         ConnectivityCheckResponse is compatible with MutableMapping
-        :rtype:
-         ~azure.core.polling.AsyncLROPoller[~azure.mgmt.apimanagement.models.ConnectivityCheckResponse]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-
-    @overload
-    async def begin_perform_connectivity_check_async(
-        self,
-        resource_group_name: str,
-        service_name: str,
-        connectivity_check_request_params: IO[bytes],
-        *,
-        content_type: str = "application/json",
-        **kwargs: Any
-    ) -> AsyncLROPoller[_models.ConnectivityCheckResponse]:
-        """Performs a connectivity check between the API Management service and a given destination, and
-        returns metrics for the connection, as well as errors encountered while trying to establish it.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param service_name: The name of the API Management service. Required.
-        :type service_name: str
-        :param connectivity_check_request_params: Connectivity Check request parameters. Required.
-        :type connectivity_check_request_params: IO[bytes]
-        :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
-         Default value is "application/json".
-        :paramtype content_type: str
-        :return: An instance of AsyncLROPoller that returns ConnectivityCheckResponse. The
-         ConnectivityCheckResponse is compatible with MutableMapping
-        :rtype:
-         ~azure.core.polling.AsyncLROPoller[~azure.mgmt.apimanagement.models.ConnectivityCheckResponse]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-
-    @distributed_trace_async
-    async def begin_perform_connectivity_check_async(
-        self,
-        resource_group_name: str,
-        service_name: str,
-        connectivity_check_request_params: Union[_models.ConnectivityCheckRequest, JSON, IO[bytes]],
-        **kwargs: Any
-    ) -> AsyncLROPoller[_models.ConnectivityCheckResponse]:
-        """Performs a connectivity check between the API Management service and a given destination, and
-        returns metrics for the connection, as well as errors encountered while trying to establish it.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param service_name: The name of the API Management service. Required.
-        :type service_name: str
-        :param connectivity_check_request_params: Connectivity Check request parameters. Is one of the
-         following types: ConnectivityCheckRequest, JSON, IO[bytes] Required.
-        :type connectivity_check_request_params:
-         ~azure.mgmt.apimanagement.models.ConnectivityCheckRequest or JSON or IO[bytes]
-        :return: An instance of AsyncLROPoller that returns ConnectivityCheckResponse. The
-         ConnectivityCheckResponse is compatible with MutableMapping
-        :rtype:
-         ~azure.core.polling.AsyncLROPoller[~azure.mgmt.apimanagement.models.ConnectivityCheckResponse]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-        _params = kwargs.pop("params", {}) or {}
-
-        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
-        cls: ClsType[_models.ConnectivityCheckResponse] = kwargs.pop("cls", None)
-        polling: Union[bool, AsyncPollingMethod] = kwargs.pop("polling", True)
-        lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
-        cont_token: Optional[str] = kwargs.pop("continuation_token", None)
-        if cont_token is None:
-            raw_result = await self._perform_connectivity_check_async_initial(
-                resource_group_name=resource_group_name,
-                service_name=service_name,
-                connectivity_check_request_params=connectivity_check_request_params,
-                content_type=content_type,
-                cls=lambda x, y, z: x,
-                headers=_headers,
-                params=_params,
-                **kwargs
-            )
-            await raw_result.http_response.read()  # type: ignore
-        kwargs.pop("error_map", None)
-
-        def get_long_running_output(pipeline_response):
-            response_headers = {}
-            response = pipeline_response.http_response
-            response_headers["location"] = self._deserialize("str", response.headers.get("location"))
-            response_headers["Retry-After"] = self._deserialize("int", response.headers.get("Retry-After"))
-
-            deserialized = _deserialize(_models.ConnectivityCheckResponse, response.json())
-            if cls:
-                return cls(pipeline_response, deserialized, response_headers)  # type: ignore
-            return deserialized
-
-        path_format_arguments = {
-            "endpoint": self._serialize.url("self._config.base_url", self._config.base_url, "str", skip_quote=True),
-        }
-
-        if polling is True:
-            polling_method: AsyncPollingMethod = cast(
-                AsyncPollingMethod, AsyncARMPolling(lro_delay, path_format_arguments=path_format_arguments, **kwargs)
-            )
-        elif polling is False:
-            polling_method = cast(AsyncPollingMethod, AsyncNoPolling())
-        else:
-            polling_method = polling
-        if cont_token:
-            return AsyncLROPoller[_models.ConnectivityCheckResponse].from_continuation_token(
-                polling_method=polling_method,
-                continuation_token=cont_token,
-                client=self._client,
-                deserialization_callback=get_long_running_output,
-            )
-        return AsyncLROPoller[_models.ConnectivityCheckResponse](
-            self._client, raw_result, get_long_running_output, polling_method  # type: ignore
-        )
 
 
 class WorkspaceApiReleaseOperations:
@@ -35128,6 +34863,271 @@ class AllPoliciesOperations:
         return AsyncItemPaged(get_next, extract_data)
 
 
+class ApiManagementOperations:
+    """
+    .. warning::
+        **DO NOT** instantiate this class directly.
+
+        Instead, you should access the following operations through
+        :class:`~azure.mgmt.apimanagement.aio.ApiManagementClient`'s
+        :attr:`api_management` attribute.
+    """
+
+    def __init__(self, *args, **kwargs) -> None:
+        input_args = list(args)
+        self._client: AsyncPipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
+        self._config: ApiManagementClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
+        self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
+
+    async def _perform_connectivity_check_async_initial(  # pylint: disable=name-too-long
+        self,
+        resource_group_name: str,
+        service_name: str,
+        connectivity_check_request_params: Union[_models.ConnectivityCheckRequest, JSON, IO[bytes]],
+        **kwargs: Any
+    ) -> AsyncIterator[bytes]:
+        error_map: MutableMapping = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+        _params = kwargs.pop("params", {}) or {}
+
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[AsyncIterator[bytes]] = kwargs.pop("cls", None)
+
+        content_type = content_type or "application/json"
+        _content = None
+        if isinstance(connectivity_check_request_params, (IOBase, bytes)):
+            _content = connectivity_check_request_params
+        else:
+            _content = json.dumps(connectivity_check_request_params, cls=SdkJSONEncoder, exclude_readonly=True)  # type: ignore
+
+        _request = build_api_management_perform_connectivity_check_async_request(
+            resource_group_name=resource_group_name,
+            service_name=service_name,
+            subscription_id=self._config.subscription_id,
+            content_type=content_type,
+            api_version=self._config.api_version,
+            content=_content,
+            headers=_headers,
+            params=_params,
+        )
+        path_format_arguments = {
+            "endpoint": self._serialize.url("self._config.base_url", self._config.base_url, "str", skip_quote=True),
+        }
+        _request.url = self._client.format_url(_request.url, **path_format_arguments)
+
+        _stream = True
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200, 202]:
+            try:
+                await response.read()  # Load the body in memory and close the socket
+            except (StreamConsumedError, StreamClosedError):
+                pass
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            error = _failsafe_deserialize(
+                _models.ErrorResponse,
+                response,
+            )
+            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
+
+        response_headers = {}
+        if response.status_code == 202:
+            response_headers["location"] = self._deserialize("str", response.headers.get("location"))
+            response_headers["Retry-After"] = self._deserialize("int", response.headers.get("Retry-After"))
+
+        deserialized = response.iter_bytes()
+
+        if cls:
+            return cls(pipeline_response, deserialized, response_headers)  # type: ignore
+
+        return deserialized  # type: ignore
+
+    @overload
+    async def begin_perform_connectivity_check_async(
+        self,
+        resource_group_name: str,
+        service_name: str,
+        connectivity_check_request_params: _models.ConnectivityCheckRequest,
+        *,
+        content_type: str = "application/json",
+        **kwargs: Any
+    ) -> AsyncLROPoller[_models.ConnectivityCheckResponse]:
+        """Performs a connectivity check between the API Management service and a given destination, and
+        returns metrics for the connection, as well as errors encountered while trying to establish it.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param service_name: The name of the API Management service. Required.
+        :type service_name: str
+        :param connectivity_check_request_params: Connectivity Check request parameters. Required.
+        :type connectivity_check_request_params:
+         ~azure.mgmt.apimanagement.models.ConnectivityCheckRequest
+        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :return: An instance of AsyncLROPoller that returns ConnectivityCheckResponse. The
+         ConnectivityCheckResponse is compatible with MutableMapping
+        :rtype:
+         ~azure.core.polling.AsyncLROPoller[~azure.mgmt.apimanagement.models.ConnectivityCheckResponse]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+
+    @overload
+    async def begin_perform_connectivity_check_async(
+        self,
+        resource_group_name: str,
+        service_name: str,
+        connectivity_check_request_params: JSON,
+        *,
+        content_type: str = "application/json",
+        **kwargs: Any
+    ) -> AsyncLROPoller[_models.ConnectivityCheckResponse]:
+        """Performs a connectivity check between the API Management service and a given destination, and
+        returns metrics for the connection, as well as errors encountered while trying to establish it.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param service_name: The name of the API Management service. Required.
+        :type service_name: str
+        :param connectivity_check_request_params: Connectivity Check request parameters. Required.
+        :type connectivity_check_request_params: JSON
+        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :return: An instance of AsyncLROPoller that returns ConnectivityCheckResponse. The
+         ConnectivityCheckResponse is compatible with MutableMapping
+        :rtype:
+         ~azure.core.polling.AsyncLROPoller[~azure.mgmt.apimanagement.models.ConnectivityCheckResponse]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+
+    @overload
+    async def begin_perform_connectivity_check_async(
+        self,
+        resource_group_name: str,
+        service_name: str,
+        connectivity_check_request_params: IO[bytes],
+        *,
+        content_type: str = "application/json",
+        **kwargs: Any
+    ) -> AsyncLROPoller[_models.ConnectivityCheckResponse]:
+        """Performs a connectivity check between the API Management service and a given destination, and
+        returns metrics for the connection, as well as errors encountered while trying to establish it.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param service_name: The name of the API Management service. Required.
+        :type service_name: str
+        :param connectivity_check_request_params: Connectivity Check request parameters. Required.
+        :type connectivity_check_request_params: IO[bytes]
+        :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :return: An instance of AsyncLROPoller that returns ConnectivityCheckResponse. The
+         ConnectivityCheckResponse is compatible with MutableMapping
+        :rtype:
+         ~azure.core.polling.AsyncLROPoller[~azure.mgmt.apimanagement.models.ConnectivityCheckResponse]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+
+    @distributed_trace_async
+    async def begin_perform_connectivity_check_async(
+        self,
+        resource_group_name: str,
+        service_name: str,
+        connectivity_check_request_params: Union[_models.ConnectivityCheckRequest, JSON, IO[bytes]],
+        **kwargs: Any
+    ) -> AsyncLROPoller[_models.ConnectivityCheckResponse]:
+        """Performs a connectivity check between the API Management service and a given destination, and
+        returns metrics for the connection, as well as errors encountered while trying to establish it.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param service_name: The name of the API Management service. Required.
+        :type service_name: str
+        :param connectivity_check_request_params: Connectivity Check request parameters. Is one of the
+         following types: ConnectivityCheckRequest, JSON, IO[bytes] Required.
+        :type connectivity_check_request_params:
+         ~azure.mgmt.apimanagement.models.ConnectivityCheckRequest or JSON or IO[bytes]
+        :return: An instance of AsyncLROPoller that returns ConnectivityCheckResponse. The
+         ConnectivityCheckResponse is compatible with MutableMapping
+        :rtype:
+         ~azure.core.polling.AsyncLROPoller[~azure.mgmt.apimanagement.models.ConnectivityCheckResponse]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+        _params = kwargs.pop("params", {}) or {}
+
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[_models.ConnectivityCheckResponse] = kwargs.pop("cls", None)
+        polling: Union[bool, AsyncPollingMethod] = kwargs.pop("polling", True)
+        lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
+        cont_token: Optional[str] = kwargs.pop("continuation_token", None)
+        if cont_token is None:
+            raw_result = await self._perform_connectivity_check_async_initial(
+                resource_group_name=resource_group_name,
+                service_name=service_name,
+                connectivity_check_request_params=connectivity_check_request_params,
+                content_type=content_type,
+                cls=lambda x, y, z: x,
+                headers=_headers,
+                params=_params,
+                **kwargs
+            )
+            await raw_result.http_response.read()  # type: ignore
+        kwargs.pop("error_map", None)
+
+        def get_long_running_output(pipeline_response):
+            response_headers = {}
+            response = pipeline_response.http_response
+            response_headers["location"] = self._deserialize("str", response.headers.get("location"))
+            response_headers["Retry-After"] = self._deserialize("int", response.headers.get("Retry-After"))
+
+            deserialized = _deserialize(_models.ConnectivityCheckResponse, response.json())
+            if cls:
+                return cls(pipeline_response, deserialized, response_headers)  # type: ignore
+            return deserialized
+
+        path_format_arguments = {
+            "endpoint": self._serialize.url("self._config.base_url", self._config.base_url, "str", skip_quote=True),
+        }
+
+        if polling is True:
+            polling_method: AsyncPollingMethod = cast(
+                AsyncPollingMethod, AsyncARMPolling(lro_delay, path_format_arguments=path_format_arguments, **kwargs)
+            )
+        elif polling is False:
+            polling_method = cast(AsyncPollingMethod, AsyncNoPolling())
+        else:
+            polling_method = polling
+        if cont_token:
+            return AsyncLROPoller[_models.ConnectivityCheckResponse].from_continuation_token(
+                polling_method=polling_method,
+                continuation_token=cont_token,
+                client=self._client,
+                deserialization_callback=get_long_running_output,
+            )
+        return AsyncLROPoller[_models.ConnectivityCheckResponse](
+            self._client, raw_result, get_long_running_output, polling_method  # type: ignore
+        )
+
+
 class ApiManagementServiceSkusOperations:
     """
     .. warning::
@@ -55479,13 +55479,13 @@ class DeletedServicesOperations:
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
     @distributed_trace_async
-    async def get_by_name(self, service_name: str, location: str, **kwargs: Any) -> _models.DeletedServiceContract:
+    async def get_by_name(self, location: str, service_name: str, **kwargs: Any) -> _models.DeletedServiceContract:
         """Get soft-deleted Api Management Service by name.
 
-        :param service_name: The name of the API Management service. Required.
-        :type service_name: str
         :param location: The name of the Azure region. Required.
         :type location: str
+        :param service_name: The name of the API Management service. Required.
+        :type service_name: str
         :return: DeletedServiceContract. The DeletedServiceContract is compatible with MutableMapping
         :rtype: ~azure.mgmt.apimanagement.models.DeletedServiceContract
         :raises ~azure.core.exceptions.HttpResponseError:
@@ -55504,8 +55504,8 @@ class DeletedServicesOperations:
         cls: ClsType[_models.DeletedServiceContract] = kwargs.pop("cls", None)
 
         _request = build_deleted_services_get_by_name_request(
-            service_name=service_name,
             location=location,
+            service_name=service_name,
             subscription_id=self._config.subscription_id,
             api_version=self._config.api_version,
             headers=_headers,
@@ -55546,7 +55546,7 @@ class DeletedServicesOperations:
 
         return deserialized  # type: ignore
 
-    async def _purge_initial(self, service_name: str, location: str, **kwargs: Any) -> AsyncIterator[bytes]:
+    async def _purge_initial(self, location: str, service_name: str, **kwargs: Any) -> AsyncIterator[bytes]:
         error_map: MutableMapping = {
             401: ClientAuthenticationError,
             404: ResourceNotFoundError,
@@ -55561,8 +55561,8 @@ class DeletedServicesOperations:
         cls: ClsType[AsyncIterator[bytes]] = kwargs.pop("cls", None)
 
         _request = build_deleted_services_purge_request(
-            service_name=service_name,
             location=location,
+            service_name=service_name,
             subscription_id=self._config.subscription_id,
             api_version=self._config.api_version,
             headers=_headers,
@@ -55605,13 +55605,13 @@ class DeletedServicesOperations:
         return deserialized  # type: ignore
 
     @distributed_trace_async
-    async def begin_purge(self, service_name: str, location: str, **kwargs: Any) -> AsyncLROPoller[None]:
+    async def begin_purge(self, location: str, service_name: str, **kwargs: Any) -> AsyncLROPoller[None]:
         """Purges Api Management Service (deletes it with no option to undelete).
 
-        :param service_name: The name of the API Management service. Required.
-        :type service_name: str
         :param location: The name of the Azure region. Required.
         :type location: str
+        :param service_name: The name of the API Management service. Required.
+        :type service_name: str
         :return: An instance of AsyncLROPoller that returns None
         :rtype: ~azure.core.polling.AsyncLROPoller[None]
         :raises ~azure.core.exceptions.HttpResponseError:
@@ -55625,8 +55625,8 @@ class DeletedServicesOperations:
         cont_token: Optional[str] = kwargs.pop("continuation_token", None)
         if cont_token is None:
             raw_result = await self._purge_initial(
-                service_name=service_name,
                 location=location,
+                service_name=service_name,
                 cls=lambda x, y, z: x,
                 headers=_headers,
                 params=_params,

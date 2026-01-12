@@ -14,14 +14,14 @@ AZURE_LOCATION = "eastus"
 
 
 @pytest.mark.skip("you may need to update the auto-generated test case before run it")
-class TestApiManagementApiManagementServiceResourcesOperations(AzureMgmtRecordedTestCase):
+class TestApiManagementApiManagementOperations(AzureMgmtRecordedTestCase):
     def setup_method(self, method):
         self.client = self.create_mgmt_client(ApiManagementClient)
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_api_management_service_resources_begin_perform_connectivity_check_async(self, resource_group):
-        response = self.client.api_management_service_resources.begin_perform_connectivity_check_async(
+    def test_api_management_begin_perform_connectivity_check_async(self, resource_group):
+        response = self.client.api_management.begin_perform_connectivity_check_async(
             resource_group_name=resource_group.name,
             service_name="str",
             connectivity_check_request_params={

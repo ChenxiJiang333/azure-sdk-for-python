@@ -31,8 +31,8 @@ def main():
     )
 
     response = client.deleted_services.get_by_name(
-        service_name="apimService3",
         location="westus",
+        service_name="apimService3",
     )
     print(response)
 

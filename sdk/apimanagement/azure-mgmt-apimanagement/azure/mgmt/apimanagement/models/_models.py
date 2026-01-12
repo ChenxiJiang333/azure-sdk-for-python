@@ -8635,7 +8635,7 @@ class DiagnosticContractProperties(_Model):
     :ivar backend: Diagnostic settings for incoming/outgoing HTTP messages to the Backend.
     :vartype backend: ~azure.mgmt.apimanagement.models.PipelineDiagnosticSettings
     :ivar large_language_model: Large Language Models diagnostic settings.
-    :vartype large_language_model: ~azure.mgmt.apimanagement.models.LLMDiagnosticSettings
+    :vartype large_language_model: ~azure.mgmt.apimanagement.models.LlmDiagnosticSettings
     :ivar log_client_ip: Log the ClientIP. Default is false.
     :vartype log_client_ip: bool
     :ivar http_correlation_protocol: Sets correlation protocol to use for Application Insights
@@ -8671,7 +8671,7 @@ class DiagnosticContractProperties(_Model):
         visibility=["read", "create", "update", "delete", "query"]
     )
     """Diagnostic settings for incoming/outgoing HTTP messages to the Backend."""
-    large_language_model: Optional["_models.LLMDiagnosticSettings"] = rest_field(
+    large_language_model: Optional["_models.LlmDiagnosticSettings"] = rest_field(
         name="largeLanguageModel", visibility=["read", "create", "update", "delete", "query"]
     )
     """Large Language Models diagnostic settings."""
@@ -8707,7 +8707,7 @@ class DiagnosticContractProperties(_Model):
         sampling: Optional["_models.SamplingSettings"] = None,
         frontend: Optional["_models.PipelineDiagnosticSettings"] = None,
         backend: Optional["_models.PipelineDiagnosticSettings"] = None,
-        large_language_model: Optional["_models.LLMDiagnosticSettings"] = None,
+        large_language_model: Optional["_models.LlmDiagnosticSettings"] = None,
         log_client_ip: Optional[bool] = None,
         http_correlation_protocol: Optional[Union[str, "_models.HttpCorrelationProtocol"]] = None,
         verbosity: Optional[Union[str, "_models.Verbosity"]] = None,
@@ -12242,7 +12242,7 @@ class KeyVaultLastAccessStatusContractProperties(_Model):  # pylint: disable=nam
         super().__init__(*args, **kwargs)
 
 
-class LLMDiagnosticSettings(_Model):
+class LlmDiagnosticSettings(_Model):
     """Diagnostic settings for Large Language Models.
 
     :ivar logs: Specifies whether default diagnostic should be enabled for Large Language Models or
