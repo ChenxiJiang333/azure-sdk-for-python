@@ -314,7 +314,9 @@ class ClusterPurpose(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     DEV_TEST = "DevTest"
 
 
-class ComputeInstanceAuthorizationType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+class ComputeInstancePropertiesComputeInstanceAuthorizationType(  # pylint: disable=name-too-long
+    str, Enum, metaclass=CaseInsensitiveEnumMeta
+):
     """The Compute Instance Authorization type. Available values are personal (default)."""
 
     PERSONAL = "personal"
@@ -1633,7 +1635,9 @@ class PoolProvisioningState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     CANCELED = "Canceled"
 
 
-class PrivateEndpointConnectionProvisioningState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+class PrivateEndpointConnectionProvisioningState(  # pylint: disable=name-too-long
+    str, Enum, metaclass=CaseInsensitiveEnumMeta
+):
     """The current provisioning state."""
 
     SUCCEEDED = "Succeeded"

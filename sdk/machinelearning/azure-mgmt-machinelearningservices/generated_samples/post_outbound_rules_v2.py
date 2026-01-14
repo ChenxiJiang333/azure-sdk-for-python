@@ -45,7 +45,8 @@ def main():
             }
         },
     ).result()
-    print(response)
+    for item in response:
+        print(item)
 
 
 # x-ms-original-file: 2025-10-01-preview/ManagedNetwork/postOutboundRulesV2.json

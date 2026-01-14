@@ -5708,7 +5708,7 @@ class CommandJob(JobBaseProperties, discriminator="Command"):
     """[Required] Specifies the type of job. Required."""
 
     @overload
-    def __init__(  # pylint: disable=too-many-locals
+    def __init__(
         self,
         *,
         command: str,
@@ -6505,7 +6505,7 @@ class ComputeInstanceProperties(_Model):
     :vartype state: str or ~azure.mgmt.machinelearningservices.models.ComputeInstanceState
     :ivar compute_instance_authorization_type: Compute Instance Authorization type. "personal"
     :vartype compute_instance_authorization_type: str or
-     ~azure.mgmt.machinelearningservices.models.ComputeInstanceAuthorizationType
+     ~azure.mgmt.machinelearningservices.models.ComputeInstancePropertiesComputeInstanceAuthorizationType
     :ivar enable_os_patching: Enable Auto OS Patching.
     :vartype enable_os_patching: bool
     :ivar enable_root_access: Enable root access.
@@ -6577,9 +6577,9 @@ class ComputeInstanceProperties(_Model):
      \"Deleting\", \"Running\", \"Restarting\", \"Resizing\", \"JobRunning\", \"SettingUp\",
      \"SetupFailed\", \"Starting\", \"Stopped\", \"Stopping\", \"UserSettingUp\",
      \"UserSetupFailed\", \"Unknown\", and \"Unusable\"."""
-    compute_instance_authorization_type: Optional[Union[str, "_models.ComputeInstanceAuthorizationType"]] = rest_field(
-        name="computeInstanceAuthorizationType", visibility=["read", "create", "update", "delete", "query"]
-    )
+    compute_instance_authorization_type: Optional[
+        Union[str, "_models.ComputeInstancePropertiesComputeInstanceAuthorizationType"]
+    ] = rest_field(name="computeInstanceAuthorizationType", visibility=["read", "create", "update", "delete", "query"])
     """Compute Instance Authorization type. \"personal\""""
     enable_os_patching: Optional[bool] = rest_field(
         name="enableOSPatching", visibility=["read", "create", "update", "delete", "query"]
@@ -6641,7 +6641,9 @@ class ComputeInstanceProperties(_Model):
         autologger_settings: Optional["_models.ComputeInstanceAutologgerSettings"] = None,
         ssh_settings: Optional["_models.ComputeInstanceSshSettings"] = None,
         custom_services: Optional[list["_models.CustomService"]] = None,
-        compute_instance_authorization_type: Optional[Union[str, "_models.ComputeInstanceAuthorizationType"]] = None,
+        compute_instance_authorization_type: Optional[
+            Union[str, "_models.ComputeInstancePropertiesComputeInstanceAuthorizationType"]
+        ] = None,
         enable_os_patching: Optional[bool] = None,
         enable_root_access: Optional[bool] = None,
         enable_sso: Optional[bool] = None,

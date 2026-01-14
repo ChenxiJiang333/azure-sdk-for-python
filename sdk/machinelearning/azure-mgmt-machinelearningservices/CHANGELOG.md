@@ -1,5 +1,9 @@
 ## tsp migration
 
+## 2.0.0b3 (2026-01-14)
+
+change log generation failed!!! You need to write it manually!!!
+
 ### Breaking Changes
 
 - Method `SparkJob.__init__` removed default value `None` from its parameter `args`

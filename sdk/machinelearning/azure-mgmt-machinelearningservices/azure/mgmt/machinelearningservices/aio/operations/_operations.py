@@ -849,6 +849,7 @@ class EndpointDeploymentOperations:
             deployment_name=deployment_name,
             subscription_id=self._config.subscription_id,
             api_version=self._config.api_version,
+            api_version=self._config.api_version,
             headers=_headers,
             params=_params,
         )
@@ -9961,7 +9962,7 @@ class ModelVersionsOperations:
             return cls(pipeline_response, None, {})  # type: ignore
 
     @distributed_trace
-    def list(
+    def list(  # pylint: disable=too-many-locals
         self,
         resource_group_name: str,
         workspace_name: str,
@@ -14782,7 +14783,7 @@ class FeaturesetVersionsOperations:
         return AsyncLROPoller[None](self._client, raw_result, get_long_running_output, polling_method)  # type: ignore
 
     @distributed_trace
-    def list(
+    def list(  # pylint: disable=too-many-locals
         self,
         resource_group_name: str,
         workspace_name: str,
@@ -16346,7 +16347,7 @@ class FeaturestoreEntityVersionsOperations:
         return AsyncLROPoller[None](self._client, raw_result, get_long_running_output, polling_method)  # type: ignore
 
     @distributed_trace
-    def list(
+    def list(  # pylint: disable=too-many-locals
         self,
         resource_group_name: str,
         workspace_name: str,
@@ -25018,6 +25019,7 @@ class RaiPolicyOperations:
             subscription_id=self._config.subscription_id,
             content_type=content_type,
             api_version=self._config.api_version,
+            api_version=self._config.api_version,
             content=_content,
             headers=_headers,
             params=_params,
@@ -25278,6 +25280,7 @@ class RaiPolicyOperations:
             endpoint_name=endpoint_name,
             rai_policy_name=rai_policy_name,
             subscription_id=self._config.subscription_id,
+            api_version=self._config.api_version,
             api_version=self._config.api_version,
             headers=_headers,
             params=_params,
@@ -28351,6 +28354,7 @@ class ConnectionOperations:
                     connection_name=connection_name,
                     subscription_id=self._config.subscription_id,
                     api_version=self._config.api_version,
+                    api_version=self._config.api_version,
                     headers=_headers,
                     params=_params,
                 )
@@ -28529,6 +28533,7 @@ class ConnectionOperations:
             deployment_name=deployment_name,
             subscription_id=self._config.subscription_id,
             content_type=content_type,
+            api_version=self._config.api_version,
             api_version=self._config.api_version,
             content=_content,
             headers=_headers,
@@ -28797,6 +28802,7 @@ class ConnectionOperations:
             deployment_name=deployment_name,
             subscription_id=self._config.subscription_id,
             api_version=self._config.api_version,
+            api_version=self._config.api_version,
             headers=_headers,
             params=_params,
         )
@@ -28944,6 +28950,7 @@ class ConnectionOperations:
                     workspace_name=workspace_name,
                     connection_name=connection_name,
                     subscription_id=self._config.subscription_id,
+                    api_version=self._config.api_version,
                     api_version=self._config.api_version,
                     headers=_headers,
                     params=_params,
@@ -38350,6 +38357,7 @@ class ConnectionRaiBlocklistOperations:
             subscription_id=self._config.subscription_id,
             content_type=content_type,
             api_version=self._config.api_version,
+            api_version=self._config.api_version,
             content=_content,
             headers=_headers,
             params=_params,
@@ -38616,6 +38624,7 @@ class ConnectionRaiBlocklistOperations:
             rai_blocklist_name=rai_blocklist_name,
             subscription_id=self._config.subscription_id,
             api_version=self._config.api_version,
+            api_version=self._config.api_version,
             headers=_headers,
             params=_params,
         )
@@ -38788,6 +38797,7 @@ class ConnectionRaiBlocklistsOperations:
                     workspace_name=workspace_name,
                     connection_name=connection_name,
                     subscription_id=self._config.subscription_id,
+                    api_version=self._config.api_version,
                     api_version=self._config.api_version,
                     headers=_headers,
                     params=_params,
@@ -39504,6 +39514,7 @@ class ConnectionRaiBlocklistItemOperations:
             subscription_id=self._config.subscription_id,
             content_type=content_type,
             api_version=self._config.api_version,
+            api_version=self._config.api_version,
             content=_content,
             headers=_headers,
             params=_params,
@@ -39785,6 +39796,7 @@ class ConnectionRaiBlocklistItemOperations:
             rai_blocklist_item_name=rai_blocklist_item_name,
             subscription_id=self._config.subscription_id,
             api_version=self._config.api_version,
+            api_version=self._config.api_version,
             headers=_headers,
             params=_params,
         )
@@ -39969,6 +39981,7 @@ class ConnectionRaiBlocklistItemsOperations:
                     connection_name=connection_name,
                     rai_blocklist_name=rai_blocklist_name,
                     subscription_id=self._config.subscription_id,
+                    api_version=self._config.api_version,
                     api_version=self._config.api_version,
                     headers=_headers,
                     params=_params,
@@ -40169,6 +40182,7 @@ class ConnectionRaiPolicyOperations:
             rai_policy_name=rai_policy_name,
             subscription_id=self._config.subscription_id,
             content_type=content_type,
+            api_version=self._config.api_version,
             api_version=self._config.api_version,
             content=_content,
             headers=_headers,
@@ -40431,6 +40445,7 @@ class ConnectionRaiPolicyOperations:
             rai_policy_name=rai_policy_name,
             subscription_id=self._config.subscription_id,
             api_version=self._config.api_version,
+            api_version=self._config.api_version,
             headers=_headers,
             params=_params,
         )
@@ -40599,6 +40614,7 @@ class ConnectionRaiPoliciesOperations:
                     connection_name=connection_name,
                     subscription_id=self._config.subscription_id,
                     api_version=self._config.api_version,
+                    api_version=self._config.api_version,
                     headers=_headers,
                     params=_params,
                 )
@@ -40720,6 +40736,7 @@ class RaiPoliciesOperations:
                     workspace_name=workspace_name,
                     endpoint_name=endpoint_name,
                     subscription_id=self._config.subscription_id,
+                    api_version=self._config.api_version,
                     api_version=self._config.api_version,
                     headers=_headers,
                     params=_params,
@@ -43682,7 +43699,7 @@ class OutboundRulesOperations:
         return deserialized  # type: ignore
 
     @overload
-    def post(
+    async def begin_post(
         self,
         resource_group_name: str,
         workspace_name: str,
@@ -43691,7 +43708,7 @@ class OutboundRulesOperations:
         *,
         content_type: str = "application/json",
         **kwargs: Any
-    ) -> AsyncItemPaged["_models.OutboundRuleBasicResource"]:
+    ) -> AsyncLROPoller[AsyncItemPaged["_models.OutboundRuleBasicResource"]]:
         """The POST API for updating the outbound rules of the managed network associated with the machine
         learning workspace.
 
@@ -43711,14 +43728,15 @@ class OutboundRulesOperations:
         :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
          Default value is "application/json".
         :paramtype content_type: str
-        :return: An iterator like instance of OutboundRuleBasicResource
+        :return: An instance of LROPoller that returns an iterator like instance of list of
+         OutboundRuleBasicResource
         :rtype:
-         ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.machinelearningservices.models.OutboundRuleBasicResource]
+         ~azure.core.polling.AsyncLROPoller[~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.machinelearningservices.models.OutboundRuleBasicResource]]
         :raises ~azure.core.exceptions.HttpResponseError:
         """
 
     @overload
-    def post(
+    async def begin_post(
         self,
         resource_group_name: str,
         workspace_name: str,
@@ -43727,7 +43745,7 @@ class OutboundRulesOperations:
         *,
         content_type: str = "application/json",
         **kwargs: Any
-    ) -> AsyncItemPaged["_models.OutboundRuleBasicResource"]:
+    ) -> AsyncLROPoller[AsyncItemPaged["_models.OutboundRuleBasicResource"]]:
         """The POST API for updating the outbound rules of the managed network associated with the machine
         learning workspace.
 
@@ -43747,14 +43765,15 @@ class OutboundRulesOperations:
         :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
          Default value is "application/json".
         :paramtype content_type: str
-        :return: An iterator like instance of OutboundRuleBasicResource
+        :return: An instance of LROPoller that returns an iterator like instance of list of
+         OutboundRuleBasicResource
         :rtype:
-         ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.machinelearningservices.models.OutboundRuleBasicResource]
+         ~azure.core.polling.AsyncLROPoller[~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.machinelearningservices.models.OutboundRuleBasicResource]]
         :raises ~azure.core.exceptions.HttpResponseError:
         """
 
     @overload
-    def post(
+    async def begin_post(
         self,
         resource_group_name: str,
         workspace_name: str,
@@ -43763,7 +43782,7 @@ class OutboundRulesOperations:
         *,
         content_type: str = "application/json",
         **kwargs: Any
-    ) -> AsyncItemPaged["_models.OutboundRuleBasicResource"]:
+    ) -> AsyncLROPoller[AsyncItemPaged["_models.OutboundRuleBasicResource"]]:
         """The POST API for updating the outbound rules of the managed network associated with the machine
         learning workspace.
 
@@ -43783,21 +43802,22 @@ class OutboundRulesOperations:
         :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
          Default value is "application/json".
         :paramtype content_type: str
-        :return: An iterator like instance of OutboundRuleBasicResource
+        :return: An instance of LROPoller that returns an iterator like instance of list of
+         OutboundRuleBasicResource
         :rtype:
-         ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.machinelearningservices.models.OutboundRuleBasicResource]
+         ~azure.core.polling.AsyncLROPoller[~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.machinelearningservices.models.OutboundRuleBasicResource]]
         :raises ~azure.core.exceptions.HttpResponseError:
         """
 
-    @distributed_trace
-    def post(
+    @distributed_trace_async
+    async def begin_post(
         self,
         resource_group_name: str,
         workspace_name: str,
         managed_network_name: str,
         body: Union[_models.ManagedNetworkSettingsBasicResource, JSON, IO[bytes]],
         **kwargs: Any
-    ) -> AsyncItemPaged["_models.OutboundRuleBasicResource"]:
+    ) -> AsyncLROPoller[AsyncItemPaged["_models.OutboundRuleBasicResource"]]:
         """The POST API for updating the outbound rules of the managed network associated with the machine
         learning workspace.
 
@@ -43816,11 +43836,13 @@ class OutboundRulesOperations:
          types: ManagedNetworkSettingsBasicResource, JSON, IO[bytes] Required.
         :type body: ~azure.mgmt.machinelearningservices.models.ManagedNetworkSettingsBasicResource or
          JSON or IO[bytes]
-        :return: An iterator like instance of OutboundRuleBasicResource
+        :return: An instance of LROPoller that returns an iterator like instance of list of
+         OutboundRuleBasicResource
         :rtype:
-         ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.machinelearningservices.models.OutboundRuleBasicResource]
+         ~azure.core.polling.AsyncLROPoller[~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.machinelearningservices.models.OutboundRuleBasicResource]]
         :raises ~azure.core.exceptions.HttpResponseError:
         """
+
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = kwargs.pop("params", {}) or {}
 
@@ -43900,7 +43922,7 @@ class OutboundRulesOperations:
             )
             response = pipeline_response.http_response
 
-            if response.status_code not in [200, 202]:
+            if response.status_code not in [200]:
                 map_error(status_code=response.status_code, response=response, error_map=error_map)
                 error = _failsafe_deserialize(
                     _models.ErrorResponse,
@@ -43910,153 +43932,6 @@ class OutboundRulesOperations:
 
             return pipeline_response
 
-        return AsyncItemPaged(get_next, extract_data)
-
-    @overload
-    async def begin_post(
-        self,
-        resource_group_name: str,
-        workspace_name: str,
-        managed_network_name: str,
-        body: _models.ManagedNetworkSettingsBasicResource,
-        *,
-        content_type: str = "application/json",
-        **kwargs: Any
-    ) -> AsyncLROPoller[List[_models.OutboundRuleBasicResource]]:
-        """The POST API for updating the outbound rules of the managed network associated with the machine
-        learning workspace.
-
-        The POST API for updating the outbound rules of the managed network associated with the machine
-        learning workspace.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param workspace_name: Azure Machine Learning Workspace Name. Required.
-        :type workspace_name: str
-        :param managed_network_name: Name of the managedNetwork associated with the workspace. Only
-         'default' is supported. Required.
-        :type managed_network_name: str
-        :param body: The Managed Network Settings object of the workspace. Required.
-        :type body: ~azure.mgmt.machinelearningservices.models.ManagedNetworkSettingsBasicResource
-        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
-         Default value is "application/json".
-        :paramtype content_type: str
-        :return: An instance of AsyncLROPoller that returns list of OutboundRuleBasicResource
-        :rtype:
-         ~azure.core.polling.AsyncLROPoller[list[~azure.mgmt.machinelearningservices.models.OutboundRuleBasicResource]]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-
-    @overload
-    async def begin_post(
-        self,
-        resource_group_name: str,
-        workspace_name: str,
-        managed_network_name: str,
-        body: JSON,
-        *,
-        content_type: str = "application/json",
-        **kwargs: Any
-    ) -> AsyncLROPoller[List[_models.OutboundRuleBasicResource]]:
-        """The POST API for updating the outbound rules of the managed network associated with the machine
-        learning workspace.
-
-        The POST API for updating the outbound rules of the managed network associated with the machine
-        learning workspace.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param workspace_name: Azure Machine Learning Workspace Name. Required.
-        :type workspace_name: str
-        :param managed_network_name: Name of the managedNetwork associated with the workspace. Only
-         'default' is supported. Required.
-        :type managed_network_name: str
-        :param body: The Managed Network Settings object of the workspace. Required.
-        :type body: JSON
-        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
-         Default value is "application/json".
-        :paramtype content_type: str
-        :return: An instance of AsyncLROPoller that returns list of OutboundRuleBasicResource
-        :rtype:
-         ~azure.core.polling.AsyncLROPoller[list[~azure.mgmt.machinelearningservices.models.OutboundRuleBasicResource]]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-
-    @overload
-    async def begin_post(
-        self,
-        resource_group_name: str,
-        workspace_name: str,
-        managed_network_name: str,
-        body: IO[bytes],
-        *,
-        content_type: str = "application/json",
-        **kwargs: Any
-    ) -> AsyncLROPoller[List[_models.OutboundRuleBasicResource]]:
-        """The POST API for updating the outbound rules of the managed network associated with the machine
-        learning workspace.
-
-        The POST API for updating the outbound rules of the managed network associated with the machine
-        learning workspace.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param workspace_name: Azure Machine Learning Workspace Name. Required.
-        :type workspace_name: str
-        :param managed_network_name: Name of the managedNetwork associated with the workspace. Only
-         'default' is supported. Required.
-        :type managed_network_name: str
-        :param body: The Managed Network Settings object of the workspace. Required.
-        :type body: IO[bytes]
-        :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
-         Default value is "application/json".
-        :paramtype content_type: str
-        :return: An instance of AsyncLROPoller that returns list of OutboundRuleBasicResource
-        :rtype:
-         ~azure.core.polling.AsyncLROPoller[list[~azure.mgmt.machinelearningservices.models.OutboundRuleBasicResource]]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-
-    @distributed_trace_async
-    async def begin_post(
-        self,
-        resource_group_name: str,
-        workspace_name: str,
-        managed_network_name: str,
-        body: Union[_models.ManagedNetworkSettingsBasicResource, JSON, IO[bytes]],
-        **kwargs: Any
-    ) -> AsyncLROPoller[List[_models.OutboundRuleBasicResource]]:
-        """The POST API for updating the outbound rules of the managed network associated with the machine
-        learning workspace.
-
-        The POST API for updating the outbound rules of the managed network associated with the machine
-        learning workspace.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param workspace_name: Azure Machine Learning Workspace Name. Required.
-        :type workspace_name: str
-        :param managed_network_name: Name of the managedNetwork associated with the workspace. Only
-         'default' is supported. Required.
-        :type managed_network_name: str
-        :param body: The Managed Network Settings object of the workspace. Is one of the following
-         types: ManagedNetworkSettingsBasicResource, JSON, IO[bytes] Required.
-        :type body: ~azure.mgmt.machinelearningservices.models.ManagedNetworkSettingsBasicResource or
-         JSON or IO[bytes]
-        :return: An instance of AsyncLROPoller that returns list of OutboundRuleBasicResource
-        :rtype:
-         ~azure.core.polling.AsyncLROPoller[list[~azure.mgmt.machinelearningservices.models.OutboundRuleBasicResource]]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-        _params = kwargs.pop("params", {}) or {}
-
-        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
-        cls: ClsType[List[_models.OutboundRuleBasicResource]] = kwargs.pop("cls", None)
         polling: Union[bool, AsyncPollingMethod] = kwargs.pop("polling", True)
         lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
         cont_token: Optional[str] = kwargs.pop("continuation_token", None)
@@ -44076,15 +43951,12 @@ class OutboundRulesOperations:
         kwargs.pop("error_map", None)
 
         def get_long_running_output(pipeline_response):
-            response_headers = {}
-            response = pipeline_response.http_response
-            response_headers["Location"] = self._deserialize("str", response.headers.get("Location"))
-            response_headers["Retry-After"] = self._deserialize("int", response.headers.get("Retry-After"))
+            async def internal_get_next(next_link=None):
+                if next_link is None:
+                    return pipeline_response
+                return await get_next(next_link)
 
-            deserialized = _deserialize(List[_models.OutboundRuleBasicResource], response.json().get("value", {}))
-            if cls:
-                return cls(pipeline_response, deserialized, response_headers)  # type: ignore
-            return deserialized
+            return AsyncItemPaged(internal_get_next, extract_data)
 
         path_format_arguments = {
             "endpoint": self._serialize.url("self._config.base_url", self._config.base_url, "str", skip_quote=True),
@@ -44099,13 +43971,13 @@ class OutboundRulesOperations:
         else:
             polling_method = polling
         if cont_token:
-            return AsyncLROPoller[List[_models.OutboundRuleBasicResource]].from_continuation_token(
+            return AsyncLROPoller[AsyncItemPaged["_models.OutboundRuleBasicResource"]].from_continuation_token(
                 polling_method=polling_method,
                 continuation_token=cont_token,
                 client=self._client,
                 deserialization_callback=get_long_running_output,
             )
-        return AsyncLROPoller[List[_models.OutboundRuleBasicResource]](
+        return AsyncLROPoller[AsyncItemPaged["_models.OutboundRuleBasicResource"]](
             self._client, raw_result, get_long_running_output, polling_method  # type: ignore
         )
 

@@ -21,41 +21,6 @@ class TestMachineLearningServicesMgmtOutboundRulesOperationsAsync(AzureMgmtRecor
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_outbound_rules_post(self, resource_group):
-        response = self.client.outbound_rules.post(
-            resource_group_name=resource_group.name,
-            workspace_name="str",
-            managed_network_name="str",
-            body={
-                "id": "str",
-                "name": "str",
-                "properties": {
-                    "enableNetworkMonitor": bool,
-                    "firewallPublicIpAddress": "str",
-                    "firewallSku": "str",
-                    "isolationMode": "str",
-                    "managedNetworkKind": "str",
-                    "networkId": "str",
-                    "outboundRules": {"str": "outbound_rule"},
-                    "status": {"sparkReady": bool, "status": "str"},
-                },
-                "systemData": {
-                    "createdAt": "2020-02-20 00:00:00",
-                    "createdBy": "str",
-                    "createdByType": "str",
-                    "lastModifiedAt": "2020-02-20 00:00:00",
-                    "lastModifiedBy": "str",
-                    "lastModifiedByType": "str",
-                },
-                "type": "str",
-            },
-        )
-        result = [r async for r in response]
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
     async def test_outbound_rules_begin_post(self, resource_group):
         response = await (
             await self.client.outbound_rules.begin_post(
@@ -87,6 +52,6 @@ class TestMachineLearningServicesMgmtOutboundRulesOperationsAsync(AzureMgmtRecor
                 },
             )
         ).result()  # call '.result()' to poll until service return final result
-
+        result = [r async for r in response]
         # please add some check logic here by yourself
         # ...
