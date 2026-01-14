@@ -2,6 +2,28 @@
 
 ### Breaking Changes
 
+- Method `SparkJob.__init__` removed default value `None` from its parameter `args`
+- Method `SparkJob.__init__` changed its parameter `args` from `keyword_only` to `var_positional`
+
+- Method `DatastoresOperations.create_or_update` parameter `skip_validation` changed default value from `bool` to `none`
+- Method `DatastoresOperations.list` parameter `count` changed default value from `int` to `none`
+- Method `DatastoresOperations.list` parameter `order_by_asc` changed default value from `bool` to `none`
+- Method `EndpointOperations.list` parameter `include_online_endpoints` changed default value from `bool` to `none`
+- Method `EndpointOperations.list` parameter `include_serverless_endpoints` changed default value from `bool` to `none`
+- Method `EndpointOperations.list` parameter `include_connections` changed default value from `bool` to `none`
+- Method `FeaturesOperations.list` parameter `page_size` changed default value from `int` to `none`
+- Method `FeaturesetContainersOperations.list` parameter `page_size` changed default value from `int` to `none`
+- Method `FeaturesetVersionsOperations.list` parameter `page_size` changed default value from `int` to `none`
+- Method `FeaturestoreEntityContainersOperations.list` parameter `page_size` changed default value from `int` to `none`
+- Method `FeaturestoreEntityVersionsOperations.list` parameter `page_size` changed default value from `int` to `none`
+- Method `WorkspaceConnectionsOperations.list` parameter `include_all` changed default value from `bool` to `none`
+- Method `WorkspacesOperations.begin_delete` parameter `force_to_purge` changed default value from `bool` to `none`
+- Method `SchedulesOperations.list` parameter `list_view_type` changed default value from `str` to `none`
+
+
+- Renamed enum `ComputeInstancePropertiesComputeInstanceAuthorizationType` to `ComputeInstanceAuthorizationType`
+
+
 - Model `BatchEndpointProperties` deleted or renamed its instance variable `keys`
 - Model `CustomKeys` deleted or renamed its instance variable `keys`
 - Model `CustomTargetLags` deleted or renamed its instance variable `values`
@@ -9,6 +31,52 @@
 - Model `EndpointPropertiesBase` deleted or renamed its instance variable `keys`
 - Model `EstimatedVMPrices` deleted or renamed its instance variable `values`
 - Model `OnlineEndpointProperties` deleted or renamed its instance variable `keys`
+
+
+- Deleted or renamed model `AmlComputeNodesInformation`
+- Deleted or renamed model `ListWorkspaceQuotas`
+- Deleted or renamed model `StringKeyValuePair`
+- Deleted or renamed model `PaginatedComputeResourcesList`
+- Deleted or renamed model `AvailableQuotaArmPaginatedResult`
+- Deleted or renamed model `BatchDeploymentTrackedResourceArmPaginatedResult`
+- Deleted or renamed model `BatchEndpointTrackedResourceArmPaginatedResult`
+- Deleted or renamed model `CodeContainerResourceArmPaginatedResult`
+- Deleted or renamed model `CodeVersionResourceArmPaginatedResult`
+- Deleted or renamed model `ComponentContainerResourceArmPaginatedResult`
+- Deleted or renamed model `ComponentVersionResourceArmPaginatedResult`
+- Deleted or renamed model `DataContainerResourceArmPaginatedResult`
+- Deleted or renamed model `DataVersionBaseResourceArmPaginatedResult`
+- Deleted or renamed model `DatastoreResourceArmPaginatedResult`
+- Deleted or renamed model `EndpointDeploymentResourcePropertiesBasicResourceArmPaginatedResult`
+- Deleted or renamed model `EndpointResourcePropertiesBasicResourceArmPaginatedResult`
+- Deleted or renamed model `EnvironmentContainerResourceArmPaginatedResult`
+- Deleted or renamed model `EnvironmentVersionResourceArmPaginatedResult`
+- Deleted or renamed model `FeatureResourceArmPaginatedResult`
+- Deleted or renamed model `FeaturesetContainerResourceArmPaginatedResult`
+- Deleted or renamed model `FeaturesetVersionResourceArmPaginatedResult`
+- Deleted or renamed model `FeaturestoreEntityContainerResourceArmPaginatedResult`
+- Deleted or renamed model `FeaturestoreEntityVersionResourceArmPaginatedResult`
+- Deleted or renamed model `InferenceEndpointTrackedResourceArmPaginatedResult`
+- Deleted or renamed model `InferenceGroupTrackedResourceArmPaginatedResult`
+- Deleted or renamed model `InferencePoolTrackedResourceArmPaginatedResult`
+- Deleted or renamed model `JobBaseResourceArmPaginatedResult`
+- Deleted or renamed model `ListAmlUserFeatureResult`
+- Deleted or renamed model `ListUsagesResult`
+- Deleted or renamed model `MarketplaceSubscriptionResourceArmPaginatedResult`
+- Deleted or renamed model `ModelContainerResourceArmPaginatedResult`
+- Deleted or renamed model `ModelVersionResourceArmPaginatedResult`
+- Deleted or renamed model `OnlineDeploymentTrackedResourceArmPaginatedResult`
+- Deleted or renamed model `OnlineEndpointTrackedResourceArmPaginatedResult`
+- Deleted or renamed model `RaiBlocklistItemPropertiesBasicResourceArmPaginatedResult`
+- Deleted or renamed model `RaiBlocklistPropertiesBasicResourceArmPaginatedResult`
+- Deleted or renamed model `RaiPolicyPropertiesBasicResourceArmPaginatedResult`
+- Deleted or renamed model `RegistryTrackedResourceArmPaginatedResult`
+- Deleted or renamed model `ScheduleResourceArmPaginatedResult`
+- Deleted or renamed model `ServerlessEndpointTrackedResourceArmPaginatedResult`
+- Deleted or renamed model `SkuResourceArmPaginatedResult`
+- Deleted or renamed model `StringArmPaginatedResult`
+- Deleted or renamed model `UsageAndQuotaDetailsArmPaginatedResult`
+- Deleted or renamed model `WorkspaceConnectionPropertiesV2BasicResourceArmPaginatedResult`
 - Model `PrivateEndpointConnection` deleted or renamed its instance variable `private_endpoint`
 - Model `PrivateEndpointConnection` deleted or renamed its instance variable `private_link_service_connection_state`
 - Model `PrivateEndpointConnection` deleted or renamed its instance variable `provisioning_state`
@@ -31,8 +99,6 @@
 - Model `SharedPrivateLinkResource` deleted or renamed its instance variable `private_link_resource_id`
 - Model `SharedPrivateLinkResource` deleted or renamed its instance variable `request_message`
 - Model `SharedPrivateLinkResource` deleted or renamed its instance variable `status`
-- Method `SparkJob.__init__` removed default value `None` from its parameter `args`
-- Method `SparkJob.__init__` changed its parameter `args` from `keyword_only` to `var_positional`
 - Model `Workspace` deleted or renamed its instance variable `agents_endpoint_uri`
 - Model `Workspace` deleted or renamed its instance variable `allow_public_access_when_behind_vnet`
 - Model `Workspace` deleted or renamed its instance variable `allow_role_assignment_on_rg`
@@ -99,51 +165,6 @@
 - Model `WorkspaceUpdateParameters` deleted or renamed its instance variable `soft_delete_retention_in_days`
 - Model `WorkspaceUpdateParameters` deleted or renamed its instance variable `system_datastores_auth_mode`
 - Model `WorkspaceUpdateParameters` deleted or renamed its instance variable `v1_legacy_mode`
-- Deleted or renamed model `AmlComputeNodesInformation`
-- Deleted or renamed model `AvailableQuotaArmPaginatedResult`
-- Deleted or renamed model `BatchDeploymentTrackedResourceArmPaginatedResult`
-- Deleted or renamed model `BatchEndpointTrackedResourceArmPaginatedResult`
-- Deleted or renamed model `CodeContainerResourceArmPaginatedResult`
-- Deleted or renamed model `CodeVersionResourceArmPaginatedResult`
-- Deleted or renamed model `ComponentContainerResourceArmPaginatedResult`
-- Deleted or renamed model `ComponentVersionResourceArmPaginatedResult`
-- Deleted or renamed model `ComputeInstancePropertiesComputeInstanceAuthorizationType`
-- Deleted or renamed model `DataContainerResourceArmPaginatedResult`
-- Deleted or renamed model `DataVersionBaseResourceArmPaginatedResult`
-- Deleted or renamed model `DatastoreResourceArmPaginatedResult`
-- Deleted or renamed model `EndpointDeploymentResourcePropertiesBasicResourceArmPaginatedResult`
-- Deleted or renamed model `EndpointResourcePropertiesBasicResourceArmPaginatedResult`
-- Deleted or renamed model `EnvironmentContainerResourceArmPaginatedResult`
-- Deleted or renamed model `EnvironmentVersionResourceArmPaginatedResult`
-- Deleted or renamed model `FeatureResourceArmPaginatedResult`
-- Deleted or renamed model `FeaturesetContainerResourceArmPaginatedResult`
-- Deleted or renamed model `FeaturesetVersionResourceArmPaginatedResult`
-- Deleted or renamed model `FeaturestoreEntityContainerResourceArmPaginatedResult`
-- Deleted or renamed model `FeaturestoreEntityVersionResourceArmPaginatedResult`
-- Deleted or renamed model `InferenceEndpointTrackedResourceArmPaginatedResult`
-- Deleted or renamed model `InferenceGroupTrackedResourceArmPaginatedResult`
-- Deleted or renamed model `InferencePoolTrackedResourceArmPaginatedResult`
-- Deleted or renamed model `JobBaseResourceArmPaginatedResult`
-- Deleted or renamed model `ListAmlUserFeatureResult`
-- Deleted or renamed model `ListUsagesResult`
-- Deleted or renamed model `ListWorkspaceQuotas`
-- Deleted or renamed model `MarketplaceSubscriptionResourceArmPaginatedResult`
-- Deleted or renamed model `ModelContainerResourceArmPaginatedResult`
-- Deleted or renamed model `ModelVersionResourceArmPaginatedResult`
-- Deleted or renamed model `OnlineDeploymentTrackedResourceArmPaginatedResult`
-- Deleted or renamed model `OnlineEndpointTrackedResourceArmPaginatedResult`
-- Deleted or renamed model `PaginatedComputeResourcesList`
-- Deleted or renamed model `RaiBlocklistItemPropertiesBasicResourceArmPaginatedResult`
-- Deleted or renamed model `RaiBlocklistPropertiesBasicResourceArmPaginatedResult`
-- Deleted or renamed model `RaiPolicyPropertiesBasicResourceArmPaginatedResult`
-- Deleted or renamed model `RegistryTrackedResourceArmPaginatedResult`
-- Deleted or renamed model `ScheduleResourceArmPaginatedResult`
-- Deleted or renamed model `ServerlessEndpointTrackedResourceArmPaginatedResult`
-- Deleted or renamed model `SkuResourceArmPaginatedResult`
-- Deleted or renamed model `StringArmPaginatedResult`
-- Deleted or renamed model `StringKeyValuePair`
-- Deleted or renamed model `UsageAndQuotaDetailsArmPaginatedResult`
-- Deleted or renamed model `WorkspaceConnectionPropertiesV2BasicResourceArmPaginatedResult`
 - Method `BatchDeploymentsOperations.list` changed its parameter `order_by` from `positional_or_keyword` to `keyword_only`
 - Method `BatchEndpointsOperations.list` changed its parameter `count` from `positional_or_keyword` to `keyword_only`
 - Method `CodeVersionsOperations.list` changed its parameter `order_by` from `positional_or_keyword` to `keyword_only`
@@ -170,24 +191,18 @@
 - Method `DataVersionsOperations.list` changed its parameter `order_by` from `positional_or_keyword` to `keyword_only`
 - Method `DataVersionsOperations.list` changed its parameter `tags` from `positional_or_keyword` to `keyword_only`
 - Method `DataVersionsOperations.list` changed its parameter `list_view_type` from `positional_or_keyword` to `keyword_only`
-- Method `DatastoresOperations.create_or_update` parameter `skip_validation` changed default value from `bool` to `none`
 - Method `DatastoresOperations.create_or_update` changed its parameter `skip_validation` from `positional_or_keyword` to `keyword_only`
-- Method `DatastoresOperations.list` parameter `count` changed default value from `int` to `none`
 - Method `DatastoresOperations.list` changed its parameter `count` from `positional_or_keyword` to `keyword_only`
 - Method `DatastoresOperations.list` changed its parameter `is_default` from `positional_or_keyword` to `keyword_only`
 - Method `DatastoresOperations.list` changed its parameter `names` from `positional_or_keyword` to `keyword_only`
 - Method `DatastoresOperations.list` changed its parameter `search_text` from `positional_or_keyword` to `keyword_only`
 - Method `DatastoresOperations.list` changed its parameter `order_by` from `positional_or_keyword` to `keyword_only`
-- Method `DatastoresOperations.list` parameter `order_by_asc` changed default value from `bool` to `none`
 - Method `DatastoresOperations.list` changed its parameter `order_by_asc` from `positional_or_keyword` to `keyword_only`
 - Method `EndpointDeploymentOperations.begin_delete` deleted or renamed its parameter `proxy_api_version` of kind `positional_or_keyword`
 - Method `EndpointDeploymentOperations.get_in_workspace` changed its parameter `endpoint_type` from `positional_or_keyword` to `keyword_only`
 - Method `EndpointOperations.list` changed its parameter `endpoint_type` from `positional_or_keyword` to `keyword_only`
-- Method `EndpointOperations.list` parameter `include_online_endpoints` changed default value from `bool` to `none`
 - Method `EndpointOperations.list` changed its parameter `include_online_endpoints` from `positional_or_keyword` to `keyword_only`
-- Method `EndpointOperations.list` parameter `include_serverless_endpoints` changed default value from `bool` to `none`
 - Method `EndpointOperations.list` changed its parameter `include_serverless_endpoints` from `positional_or_keyword` to `keyword_only`
-- Method `EndpointOperations.list` parameter `include_connections` changed default value from `bool` to `none`
 - Method `EndpointOperations.list` changed its parameter `include_connections` from `positional_or_keyword` to `keyword_only`
 - Method `EndpointOperations.list` changed its parameter `expand` from `positional_or_keyword` to `keyword_only`
 - Method `EnvironmentContainersOperations.list` changed its parameter `list_view_type` from `positional_or_keyword` to `keyword_only`
@@ -197,18 +212,15 @@
 - Method `FeaturesOperations.list` changed its parameter `feature_name` from `positional_or_keyword` to `keyword_only`
 - Method `FeaturesOperations.list` changed its parameter `description` from `positional_or_keyword` to `keyword_only`
 - Method `FeaturesOperations.list` changed its parameter `list_view_type` from `positional_or_keyword` to `keyword_only`
-- Method `FeaturesOperations.list` parameter `page_size` changed default value from `int` to `none`
 - Method `FeaturesOperations.list` changed its parameter `page_size` from `positional_or_keyword` to `keyword_only`
 - Method `FeaturesetContainersOperations.list` changed its parameter `tags` from `positional_or_keyword` to `keyword_only`
 - Method `FeaturesetContainersOperations.list` changed its parameter `list_view_type` from `positional_or_keyword` to `keyword_only`
-- Method `FeaturesetContainersOperations.list` parameter `page_size` changed default value from `int` to `none`
 - Method `FeaturesetContainersOperations.list` changed its parameter `page_size` from `positional_or_keyword` to `keyword_only`
 - Method `FeaturesetContainersOperations.list` changed its parameter `name` from `positional_or_keyword` to `keyword_only`
 - Method `FeaturesetContainersOperations.list` changed its parameter `description` from `positional_or_keyword` to `keyword_only`
 - Method `FeaturesetContainersOperations.list` changed its parameter `created_by` from `positional_or_keyword` to `keyword_only`
 - Method `FeaturesetVersionsOperations.list` changed its parameter `tags` from `positional_or_keyword` to `keyword_only`
 - Method `FeaturesetVersionsOperations.list` changed its parameter `list_view_type` from `positional_or_keyword` to `keyword_only`
-- Method `FeaturesetVersionsOperations.list` parameter `page_size` changed default value from `int` to `none`
 - Method `FeaturesetVersionsOperations.list` changed its parameter `page_size` from `positional_or_keyword` to `keyword_only`
 - Method `FeaturesetVersionsOperations.list` changed its parameter `version_name` from `positional_or_keyword` to `keyword_only`
 - Method `FeaturesetVersionsOperations.list` changed its parameter `version` from `positional_or_keyword` to `keyword_only`
@@ -217,14 +229,12 @@
 - Method `FeaturesetVersionsOperations.list` changed its parameter `stage` from `positional_or_keyword` to `keyword_only`
 - Method `FeaturestoreEntityContainersOperations.list` changed its parameter `tags` from `positional_or_keyword` to `keyword_only`
 - Method `FeaturestoreEntityContainersOperations.list` changed its parameter `list_view_type` from `positional_or_keyword` to `keyword_only`
-- Method `FeaturestoreEntityContainersOperations.list` parameter `page_size` changed default value from `int` to `none`
 - Method `FeaturestoreEntityContainersOperations.list` changed its parameter `page_size` from `positional_or_keyword` to `keyword_only`
 - Method `FeaturestoreEntityContainersOperations.list` changed its parameter `name` from `positional_or_keyword` to `keyword_only`
 - Method `FeaturestoreEntityContainersOperations.list` changed its parameter `description` from `positional_or_keyword` to `keyword_only`
 - Method `FeaturestoreEntityContainersOperations.list` changed its parameter `created_by` from `positional_or_keyword` to `keyword_only`
 - Method `FeaturestoreEntityVersionsOperations.list` changed its parameter `tags` from `positional_or_keyword` to `keyword_only`
 - Method `FeaturestoreEntityVersionsOperations.list` changed its parameter `list_view_type` from `positional_or_keyword` to `keyword_only`
-- Method `FeaturestoreEntityVersionsOperations.list` parameter `page_size` changed default value from `int` to `none`
 - Method `FeaturestoreEntityVersionsOperations.list` changed its parameter `page_size` from `positional_or_keyword` to `keyword_only`
 - Method `FeaturestoreEntityVersionsOperations.list` changed its parameter `version_name` from `positional_or_keyword` to `keyword_only`
 - Method `FeaturestoreEntityVersionsOperations.list` changed its parameter `version` from `positional_or_keyword` to `keyword_only`
@@ -285,13 +295,10 @@
 - Method `RegistryModelVersionsOperations.list` changed its parameter `tags` from `positional_or_keyword` to `keyword_only`
 - Method `RegistryModelVersionsOperations.list` changed its parameter `properties` from `positional_or_keyword` to `keyword_only`
 - Method `RegistryModelVersionsOperations.list` changed its parameter `list_view_type` from `positional_or_keyword` to `keyword_only`
-- Method `SchedulesOperations.list` parameter `list_view_type` changed default value from `str` to `none`
 - Method `SchedulesOperations.list` changed its parameter `list_view_type` from `positional_or_keyword` to `keyword_only`
 - Method `WorkspaceConnectionsOperations.list` changed its parameter `target` from `positional_or_keyword` to `keyword_only`
 - Method `WorkspaceConnectionsOperations.list` changed its parameter `category` from `positional_or_keyword` to `keyword_only`
-- Method `WorkspaceConnectionsOperations.list` parameter `include_all` changed default value from `bool` to `none`
 - Method `WorkspaceConnectionsOperations.list` changed its parameter `include_all` from `positional_or_keyword` to `keyword_only`
-- Method `WorkspacesOperations.begin_delete` parameter `force_to_purge` changed default value from `bool` to `none`
 - Method `WorkspacesOperations.begin_delete` changed its parameter `force_to_purge` from `positional_or_keyword` to `keyword_only`
 - Method `WorkspacesOperations.list_by_resource_group` changed its parameter `kind` from `positional_or_keyword` to `keyword_only`
 - Method `WorkspacesOperations.list_by_resource_group` changed its parameter `ai_capabilities` from `positional_or_keyword` to `keyword_only`
