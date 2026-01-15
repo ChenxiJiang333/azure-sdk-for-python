@@ -144,12 +144,13 @@ def build_endpoint_deployment_delete_request(
     endpoint_name: str,
     deployment_name: str,
     subscription_id: str,
+    *,
+    proxy_api_version: Optional[str] = None,
     **kwargs: Any
 ) -> HttpRequest:
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
     api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-10-01-preview"))
-    api_version: str = kwargs.pop("api_version", _params.pop("proxy-api-version", "2025-10-01-preview"))
     # Construct URL
     _url = "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/endpoints/{endpointName}/deployments/{deploymentName}"
     path_format_arguments = {
@@ -164,8 +165,8 @@ def build_endpoint_deployment_delete_request(
 
     # Construct parameters
     _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
-    if api_version is not None:
-        _params["proxy-api-version"] = _SERIALIZER.query("api_version", api_version, "str")
+    if proxy_api_version is not None:
+        _params["proxy-api-version"] = _SERIALIZER.query("proxy_api_version", proxy_api_version, "str")
 
     return HttpRequest(method="DELETE", url=_url, params=_params, **kwargs)
 
@@ -328,12 +329,7 @@ def build_workspaces_update_request(
 
 
 def build_workspaces_delete_request(
-    resource_group_name: str,
-    workspace_name: str,
-    subscription_id: str,
-    *,
-    force_to_purge: Optional[bool] = None,
-    **kwargs: Any
+    resource_group_name: str, workspace_name: str, subscription_id: str, *, force_to_purge: bool = False, **kwargs: Any
 ) -> HttpRequest:
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
@@ -2809,7 +2805,7 @@ def build_datastores_create_or_update_request(  # pylint: disable=name-too-long
     name: str,
     subscription_id: str,
     *,
-    skip_validation: Optional[bool] = None,
+    skip_validation: bool = False,
     **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
@@ -2872,12 +2868,12 @@ def build_datastores_list_request(
     subscription_id: str,
     *,
     skip: Optional[str] = None,
-    count: Optional[int] = None,
+    count: int = 30,
     is_default: Optional[bool] = None,
     names: Optional[List[str]] = None,
     search_text: Optional[str] = None,
     order_by: Optional[str] = None,
-    order_by_asc: Optional[bool] = None,
+    order_by_asc: bool = False,
     **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
@@ -3043,7 +3039,7 @@ def build_featureset_containers_list_request(
     skip: Optional[str] = None,
     tags: Optional[str] = None,
     list_view_type: Optional[Union[str, _models.ListViewType]] = None,
-    page_size: Optional[int] = None,
+    page_size: int = 20,
     name: Optional[str] = None,
     description: Optional[str] = None,
     created_by: Optional[str] = None,
@@ -3137,7 +3133,7 @@ def build_features_list_request(
     feature_name: Optional[str] = None,
     description: Optional[str] = None,
     list_view_type: Optional[Union[str, _models.ListViewType]] = None,
-    page_size: Optional[int] = None,
+    page_size: int = 1000,
     **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
@@ -3275,7 +3271,7 @@ def build_featureset_versions_list_request(
     skip: Optional[str] = None,
     tags: Optional[str] = None,
     list_view_type: Optional[Union[str, _models.ListViewType]] = None,
-    page_size: Optional[int] = None,
+    page_size: int = 20,
     version_name: Optional[str] = None,
     version: Optional[str] = None,
     description: Optional[str] = None,
@@ -3452,7 +3448,7 @@ def build_featurestore_entity_containers_list_request(  # pylint: disable=name-t
     skip: Optional[str] = None,
     tags: Optional[str] = None,
     list_view_type: Optional[Union[str, _models.ListViewType]] = None,
-    page_size: Optional[int] = None,
+    page_size: int = 20,
     name: Optional[str] = None,
     description: Optional[str] = None,
     created_by: Optional[str] = None,
@@ -3593,7 +3589,7 @@ def build_featurestore_entity_versions_list_request(  # pylint: disable=name-too
     skip: Optional[str] = None,
     tags: Optional[str] = None,
     list_view_type: Optional[Union[str, _models.ListViewType]] = None,
-    page_size: Optional[int] = None,
+    page_size: int = 20,
     version_name: Optional[str] = None,
     version: Optional[str] = None,
     description: Optional[str] = None,
@@ -5054,7 +5050,7 @@ def build_schedules_list_request(
     subscription_id: str,
     *,
     skip: Optional[str] = None,
-    list_view_type: Optional[Union[str, _models.ScheduleListViewType]] = None,
+    list_view_type: Union[str, _models.ScheduleListViewType] = "EnabledOnly",
     **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
@@ -5334,6 +5330,8 @@ def build_rai_policy_create_request(
     endpoint_name: str,
     rai_policy_name: str,
     subscription_id: str,
+    *,
+    proxy_api_version: Optional[str] = None,
     **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
@@ -5341,7 +5339,6 @@ def build_rai_policy_create_request(
 
     content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
     api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-10-01-preview"))
-    api_version: str = kwargs.pop("api_version", _params.pop("proxy-api-version", "2025-10-01-preview"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -5358,8 +5355,8 @@ def build_rai_policy_create_request(
 
     # Construct parameters
     _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
-    if api_version is not None:
-        _params["proxy-api-version"] = _SERIALIZER.query("api_version", api_version, "str")
+    if proxy_api_version is not None:
+        _params["proxy-api-version"] = _SERIALIZER.query("proxy_api_version", proxy_api_version, "str")
 
     # Construct headers
     if content_type is not None:
@@ -5375,12 +5372,13 @@ def build_rai_policy_delete_request(
     endpoint_name: str,
     rai_policy_name: str,
     subscription_id: str,
+    *,
+    proxy_api_version: Optional[str] = None,
     **kwargs: Any
 ) -> HttpRequest:
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
     api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-10-01-preview"))
-    api_version: str = kwargs.pop("api_version", _params.pop("proxy-api-version", "2025-10-01-preview"))
     # Construct URL
     _url = "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/endpoints/{endpointName}/raiPolicies/{raiPolicyName}"
     path_format_arguments = {
@@ -5395,8 +5393,8 @@ def build_rai_policy_delete_request(
 
     # Construct parameters
     _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
-    if api_version is not None:
-        _params["proxy-api-version"] = _SERIALIZER.query("api_version", api_version, "str")
+    if proxy_api_version is not None:
+        _params["proxy-api-version"] = _SERIALIZER.query("proxy_api_version", proxy_api_version, "str")
 
     return HttpRequest(method="DELETE", url=_url, params=_params, **kwargs)
 
@@ -6015,13 +6013,18 @@ def build_connection_get_all_models_request(
 
 
 def build_connection_get_models_request(
-    resource_group_name: str, workspace_name: str, connection_name: str, subscription_id: str, **kwargs: Any
+    resource_group_name: str,
+    workspace_name: str,
+    connection_name: str,
+    subscription_id: str,
+    *,
+    proxy_api_version: Optional[str] = None,
+    **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
     api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-10-01-preview"))
-    api_version: str = kwargs.pop("api_version", _params.pop("proxy-api-version", "2025-10-01-preview"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -6037,8 +6040,8 @@ def build_connection_get_models_request(
 
     # Construct parameters
     _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
-    if api_version is not None:
-        _params["proxy-api-version"] = _SERIALIZER.query("api_version", api_version, "str")
+    if proxy_api_version is not None:
+        _params["proxy-api-version"] = _SERIALIZER.query("proxy_api_version", proxy_api_version, "str")
 
     # Construct headers
     _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
@@ -6087,6 +6090,8 @@ def build_connection_create_or_update_deployment_request(  # pylint: disable=nam
     connection_name: str,
     deployment_name: str,
     subscription_id: str,
+    *,
+    proxy_api_version: Optional[str] = None,
     **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
@@ -6094,7 +6099,6 @@ def build_connection_create_or_update_deployment_request(  # pylint: disable=nam
 
     content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
     api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-10-01-preview"))
-    api_version: str = kwargs.pop("api_version", _params.pop("proxy-api-version", "2025-10-01-preview"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -6111,8 +6115,8 @@ def build_connection_create_or_update_deployment_request(  # pylint: disable=nam
 
     # Construct parameters
     _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
-    if api_version is not None:
-        _params["proxy-api-version"] = _SERIALIZER.query("api_version", api_version, "str")
+    if proxy_api_version is not None:
+        _params["proxy-api-version"] = _SERIALIZER.query("proxy_api_version", proxy_api_version, "str")
 
     # Construct headers
     if content_type is not None:
@@ -6128,12 +6132,13 @@ def build_connection_delete_deployment_request(  # pylint: disable=name-too-long
     connection_name: str,
     deployment_name: str,
     subscription_id: str,
+    *,
+    proxy_api_version: Optional[str] = None,
     **kwargs: Any
 ) -> HttpRequest:
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
     api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-10-01-preview"))
-    api_version: str = kwargs.pop("api_version", _params.pop("proxy-api-version", "2025-10-01-preview"))
     # Construct URL
     _url = "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/deployments/{deploymentName}"
     path_format_arguments = {
@@ -6148,20 +6153,25 @@ def build_connection_delete_deployment_request(  # pylint: disable=name-too-long
 
     # Construct parameters
     _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
-    if api_version is not None:
-        _params["proxy-api-version"] = _SERIALIZER.query("api_version", api_version, "str")
+    if proxy_api_version is not None:
+        _params["proxy-api-version"] = _SERIALIZER.query("proxy_api_version", proxy_api_version, "str")
 
     return HttpRequest(method="DELETE", url=_url, params=_params, **kwargs)
 
 
 def build_connection_list_deployments_request(  # pylint: disable=name-too-long
-    resource_group_name: str, workspace_name: str, connection_name: str, subscription_id: str, **kwargs: Any
+    resource_group_name: str,
+    workspace_name: str,
+    connection_name: str,
+    subscription_id: str,
+    *,
+    proxy_api_version: Optional[str] = None,
+    **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
     api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-10-01-preview"))
-    api_version: str = kwargs.pop("api_version", _params.pop("proxy-api-version", "2025-10-01-preview"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -6177,8 +6187,8 @@ def build_connection_list_deployments_request(  # pylint: disable=name-too-long
 
     # Construct parameters
     _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
-    if api_version is not None:
-        _params["proxy-api-version"] = _SERIALIZER.query("api_version", api_version, "str")
+    if proxy_api_version is not None:
+        _params["proxy-api-version"] = _SERIALIZER.query("proxy_api_version", proxy_api_version, "str")
 
     # Construct headers
     _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
@@ -7937,7 +7947,7 @@ def build_workspace_connections_list_request(
     *,
     target: Optional[str] = None,
     category: Optional[str] = None,
-    include_all: Optional[bool] = None,
+    include_all: bool = False,
     **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
@@ -8070,6 +8080,8 @@ def build_connection_rai_blocklist_create_request(  # pylint: disable=name-too-l
     connection_name: str,
     rai_blocklist_name: str,
     subscription_id: str,
+    *,
+    proxy_api_version: Optional[str] = None,
     **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
@@ -8077,7 +8089,6 @@ def build_connection_rai_blocklist_create_request(  # pylint: disable=name-too-l
 
     content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
     api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-10-01-preview"))
-    api_version: str = kwargs.pop("api_version", _params.pop("proxy-api-version", "2025-10-01-preview"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -8094,8 +8105,8 @@ def build_connection_rai_blocklist_create_request(  # pylint: disable=name-too-l
 
     # Construct parameters
     _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
-    if api_version is not None:
-        _params["proxy-api-version"] = _SERIALIZER.query("api_version", api_version, "str")
+    if proxy_api_version is not None:
+        _params["proxy-api-version"] = _SERIALIZER.query("proxy_api_version", proxy_api_version, "str")
 
     # Construct headers
     if content_type is not None:
@@ -8111,12 +8122,13 @@ def build_connection_rai_blocklist_delete_request(  # pylint: disable=name-too-l
     connection_name: str,
     rai_blocklist_name: str,
     subscription_id: str,
+    *,
+    proxy_api_version: Optional[str] = None,
     **kwargs: Any
 ) -> HttpRequest:
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
     api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-10-01-preview"))
-    api_version: str = kwargs.pop("api_version", _params.pop("proxy-api-version", "2025-10-01-preview"))
     # Construct URL
     _url = "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/raiBlocklists/{raiBlocklistName}"
     path_format_arguments = {
@@ -8131,20 +8143,25 @@ def build_connection_rai_blocklist_delete_request(  # pylint: disable=name-too-l
 
     # Construct parameters
     _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
-    if api_version is not None:
-        _params["proxy-api-version"] = _SERIALIZER.query("api_version", api_version, "str")
+    if proxy_api_version is not None:
+        _params["proxy-api-version"] = _SERIALIZER.query("proxy_api_version", proxy_api_version, "str")
 
     return HttpRequest(method="DELETE", url=_url, params=_params, **kwargs)
 
 
 def build_connection_rai_blocklists_list_request(  # pylint: disable=name-too-long
-    resource_group_name: str, workspace_name: str, connection_name: str, subscription_id: str, **kwargs: Any
+    resource_group_name: str,
+    workspace_name: str,
+    connection_name: str,
+    subscription_id: str,
+    *,
+    proxy_api_version: Optional[str] = None,
+    **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
     api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-10-01-preview"))
-    api_version: str = kwargs.pop("api_version", _params.pop("proxy-api-version", "2025-10-01-preview"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -8160,8 +8177,8 @@ def build_connection_rai_blocklists_list_request(  # pylint: disable=name-too-lo
 
     # Construct parameters
     _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
-    if api_version is not None:
-        _params["proxy-api-version"] = _SERIALIZER.query("api_version", api_version, "str")
+    if proxy_api_version is not None:
+        _params["proxy-api-version"] = _SERIALIZER.query("proxy_api_version", proxy_api_version, "str")
 
     # Construct headers
     _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
@@ -8286,6 +8303,8 @@ def build_connection_rai_blocklist_item_create_request(  # pylint: disable=name-
     rai_blocklist_name: str,
     rai_blocklist_item_name: str,
     subscription_id: str,
+    *,
+    proxy_api_version: Optional[str] = None,
     **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
@@ -8293,7 +8312,6 @@ def build_connection_rai_blocklist_item_create_request(  # pylint: disable=name-
 
     content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
     api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-10-01-preview"))
-    api_version: str = kwargs.pop("api_version", _params.pop("proxy-api-version", "2025-10-01-preview"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -8311,8 +8329,8 @@ def build_connection_rai_blocklist_item_create_request(  # pylint: disable=name-
 
     # Construct parameters
     _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
-    if api_version is not None:
-        _params["proxy-api-version"] = _SERIALIZER.query("api_version", api_version, "str")
+    if proxy_api_version is not None:
+        _params["proxy-api-version"] = _SERIALIZER.query("proxy_api_version", proxy_api_version, "str")
 
     # Construct headers
     if content_type is not None:
@@ -8329,12 +8347,13 @@ def build_connection_rai_blocklist_item_delete_request(  # pylint: disable=name-
     rai_blocklist_name: str,
     rai_blocklist_item_name: str,
     subscription_id: str,
+    *,
+    proxy_api_version: Optional[str] = None,
     **kwargs: Any
 ) -> HttpRequest:
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
     api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-10-01-preview"))
-    api_version: str = kwargs.pop("api_version", _params.pop("proxy-api-version", "2025-10-01-preview"))
     # Construct URL
     _url = "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/raiBlocklists/{raiBlocklistName}/raiBlocklistItems/{raiBlocklistItemName}"
     path_format_arguments = {
@@ -8350,8 +8369,8 @@ def build_connection_rai_blocklist_item_delete_request(  # pylint: disable=name-
 
     # Construct parameters
     _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
-    if api_version is not None:
-        _params["proxy-api-version"] = _SERIALIZER.query("api_version", api_version, "str")
+    if proxy_api_version is not None:
+        _params["proxy-api-version"] = _SERIALIZER.query("proxy_api_version", proxy_api_version, "str")
 
     return HttpRequest(method="DELETE", url=_url, params=_params, **kwargs)
 
@@ -8362,13 +8381,14 @@ def build_connection_rai_blocklist_items_list_request(  # pylint: disable=name-t
     connection_name: str,
     rai_blocklist_name: str,
     subscription_id: str,
+    *,
+    proxy_api_version: Optional[str] = None,
     **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
     api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-10-01-preview"))
-    api_version: str = kwargs.pop("api_version", _params.pop("proxy-api-version", "2025-10-01-preview"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -8385,8 +8405,8 @@ def build_connection_rai_blocklist_items_list_request(  # pylint: disable=name-t
 
     # Construct parameters
     _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
-    if api_version is not None:
-        _params["proxy-api-version"] = _SERIALIZER.query("api_version", api_version, "str")
+    if proxy_api_version is not None:
+        _params["proxy-api-version"] = _SERIALIZER.query("proxy_api_version", proxy_api_version, "str")
 
     # Construct headers
     _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
@@ -8435,6 +8455,8 @@ def build_connection_rai_policy_create_request(  # pylint: disable=name-too-long
     connection_name: str,
     rai_policy_name: str,
     subscription_id: str,
+    *,
+    proxy_api_version: Optional[str] = None,
     **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
@@ -8442,7 +8464,6 @@ def build_connection_rai_policy_create_request(  # pylint: disable=name-too-long
 
     content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
     api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-10-01-preview"))
-    api_version: str = kwargs.pop("api_version", _params.pop("proxy-api-version", "2025-10-01-preview"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -8459,8 +8480,8 @@ def build_connection_rai_policy_create_request(  # pylint: disable=name-too-long
 
     # Construct parameters
     _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
-    if api_version is not None:
-        _params["proxy-api-version"] = _SERIALIZER.query("api_version", api_version, "str")
+    if proxy_api_version is not None:
+        _params["proxy-api-version"] = _SERIALIZER.query("proxy_api_version", proxy_api_version, "str")
 
     # Construct headers
     if content_type is not None:
@@ -8476,12 +8497,13 @@ def build_connection_rai_policy_delete_request(  # pylint: disable=name-too-long
     connection_name: str,
     rai_policy_name: str,
     subscription_id: str,
+    *,
+    proxy_api_version: Optional[str] = None,
     **kwargs: Any
 ) -> HttpRequest:
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
     api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-10-01-preview"))
-    api_version: str = kwargs.pop("api_version", _params.pop("proxy-api-version", "2025-10-01-preview"))
     # Construct URL
     _url = "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/raiPolicies/{raiPolicyName}"
     path_format_arguments = {
@@ -8496,20 +8518,25 @@ def build_connection_rai_policy_delete_request(  # pylint: disable=name-too-long
 
     # Construct parameters
     _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
-    if api_version is not None:
-        _params["proxy-api-version"] = _SERIALIZER.query("api_version", api_version, "str")
+    if proxy_api_version is not None:
+        _params["proxy-api-version"] = _SERIALIZER.query("proxy_api_version", proxy_api_version, "str")
 
     return HttpRequest(method="DELETE", url=_url, params=_params, **kwargs)
 
 
 def build_connection_rai_policies_list_request(  # pylint: disable=name-too-long
-    resource_group_name: str, workspace_name: str, connection_name: str, subscription_id: str, **kwargs: Any
+    resource_group_name: str,
+    workspace_name: str,
+    connection_name: str,
+    subscription_id: str,
+    *,
+    proxy_api_version: Optional[str] = None,
+    **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
     api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-10-01-preview"))
-    api_version: str = kwargs.pop("api_version", _params.pop("proxy-api-version", "2025-10-01-preview"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -8525,8 +8552,8 @@ def build_connection_rai_policies_list_request(  # pylint: disable=name-too-long
 
     # Construct parameters
     _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
-    if api_version is not None:
-        _params["proxy-api-version"] = _SERIALIZER.query("api_version", api_version, "str")
+    if proxy_api_version is not None:
+        _params["proxy-api-version"] = _SERIALIZER.query("proxy_api_version", proxy_api_version, "str")
 
     # Construct headers
     _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
@@ -8535,13 +8562,18 @@ def build_connection_rai_policies_list_request(  # pylint: disable=name-too-long
 
 
 def build_rai_policies_list_request(
-    resource_group_name: str, workspace_name: str, endpoint_name: str, subscription_id: str, **kwargs: Any
+    resource_group_name: str,
+    workspace_name: str,
+    endpoint_name: str,
+    subscription_id: str,
+    *,
+    proxy_api_version: Optional[str] = None,
+    **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
     api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-10-01-preview"))
-    api_version: str = kwargs.pop("api_version", _params.pop("proxy-api-version", "2025-10-01-preview"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -8557,8 +8589,8 @@ def build_rai_policies_list_request(
 
     # Construct parameters
     _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
-    if api_version is not None:
-        _params["proxy-api-version"] = _SERIALIZER.query("api_version", api_version, "str")
+    if proxy_api_version is not None:
+        _params["proxy-api-version"] = _SERIALIZER.query("proxy_api_version", proxy_api_version, "str")
 
     # Construct headers
     _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
@@ -8633,9 +8665,9 @@ def build_endpoint_list_request(
     subscription_id: str,
     *,
     endpoint_type: Optional[Union[str, _models.EndpointType]] = None,
-    include_online_endpoints: Optional[bool] = None,
-    include_serverless_endpoints: Optional[bool] = None,
-    include_connections: Optional[bool] = None,
+    include_online_endpoints: bool = False,
+    include_serverless_endpoints: bool = False,
+    include_connections: bool = False,
     skip: Optional[str] = None,
     expand: Optional[str] = None,
     **kwargs: Any
@@ -9848,7 +9880,14 @@ class EndpointDeploymentOperations:
         )
 
     def _delete_initial(
-        self, resource_group_name: str, workspace_name: str, endpoint_name: str, deployment_name: str, **kwargs: Any
+        self,
+        resource_group_name: str,
+        workspace_name: str,
+        endpoint_name: str,
+        deployment_name: str,
+        *,
+        proxy_api_version: Optional[str] = None,
+        **kwargs: Any
     ) -> Iterator[bytes]:
         error_map: MutableMapping = {
             401: ClientAuthenticationError,
@@ -9869,6 +9908,7 @@ class EndpointDeploymentOperations:
             endpoint_name=endpoint_name,
             deployment_name=deployment_name,
             subscription_id=self._config.subscription_id,
+            proxy_api_version=proxy_api_version,
             api_version=self._config.api_version,
             headers=_headers,
             params=_params,
@@ -9911,7 +9951,14 @@ class EndpointDeploymentOperations:
 
     @distributed_trace
     def begin_delete(
-        self, resource_group_name: str, workspace_name: str, endpoint_name: str, deployment_name: str, **kwargs: Any
+        self,
+        resource_group_name: str,
+        workspace_name: str,
+        endpoint_name: str,
+        deployment_name: str,
+        *,
+        proxy_api_version: Optional[str] = None,
+        **kwargs: Any
     ) -> LROPoller[None]:
         """Delete  endpoint deployment resource by name.
 
@@ -9926,6 +9973,8 @@ class EndpointDeploymentOperations:
         :type endpoint_name: str
         :param deployment_name: Name of the deployment resource. Required.
         :type deployment_name: str
+        :keyword proxy_api_version: Api version used by proxy call. Default value is None.
+        :paramtype proxy_api_version: str
         :return: An instance of LROPoller that returns None
         :rtype: ~azure.core.polling.LROPoller[None]
         :raises ~azure.core.exceptions.HttpResponseError:
@@ -9943,6 +9992,7 @@ class EndpointDeploymentOperations:
                 workspace_name=workspace_name,
                 endpoint_name=endpoint_name,
                 deployment_name=deployment_name,
+                proxy_api_version=proxy_api_version,
                 cls=lambda x, y, z: x,
                 headers=_headers,
                 params=_params,
@@ -10770,7 +10820,7 @@ class WorkspacesOperations:
         )
 
     def _delete_initial(
-        self, resource_group_name: str, workspace_name: str, *, force_to_purge: Optional[bool] = None, **kwargs: Any
+        self, resource_group_name: str, workspace_name: str, *, force_to_purge: bool = False, **kwargs: Any
     ) -> Iterator[bytes]:
         error_map: MutableMapping = {
             401: ClientAuthenticationError,
@@ -10832,7 +10882,7 @@ class WorkspacesOperations:
 
     @distributed_trace
     def begin_delete(
-        self, resource_group_name: str, workspace_name: str, *, force_to_purge: Optional[bool] = None, **kwargs: Any
+        self, resource_group_name: str, workspace_name: str, *, force_to_purge: bool = False, **kwargs: Any
     ) -> LROPoller[None]:
         """Deletes a machine learning workspace.
 
@@ -10843,7 +10893,7 @@ class WorkspacesOperations:
         :type resource_group_name: str
         :param workspace_name: Azure Machine Learning Workspace Name. Required.
         :type workspace_name: str
-        :keyword force_to_purge: Flag to indicate delete is a purge request. Default value is None.
+        :keyword force_to_purge: Flag to indicate delete is a purge request. Default value is False.
         :paramtype force_to_purge: bool
         :return: An instance of LROPoller that returns None
         :rtype: ~azure.core.polling.LROPoller[None]
@@ -21806,7 +21856,7 @@ class DatastoresOperations:
         name: str,
         body: _models.Datastore,
         *,
-        skip_validation: Optional[bool] = None,
+        skip_validation: bool = False,
         content_type: str = "application/json",
         **kwargs: Any
     ) -> _models.Datastore:
@@ -21823,7 +21873,7 @@ class DatastoresOperations:
         :type name: str
         :param body: Datastore entity to create or update. Required.
         :type body: ~azure.mgmt.machinelearningservices.models.Datastore
-        :keyword skip_validation: Flag to skip validation. Default value is None.
+        :keyword skip_validation: Flag to skip validation. Default value is False.
         :paramtype skip_validation: bool
         :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
          Default value is "application/json".
@@ -21841,7 +21891,7 @@ class DatastoresOperations:
         name: str,
         body: JSON,
         *,
-        skip_validation: Optional[bool] = None,
+        skip_validation: bool = False,
         content_type: str = "application/json",
         **kwargs: Any
     ) -> _models.Datastore:
@@ -21858,7 +21908,7 @@ class DatastoresOperations:
         :type name: str
         :param body: Datastore entity to create or update. Required.
         :type body: JSON
-        :keyword skip_validation: Flag to skip validation. Default value is None.
+        :keyword skip_validation: Flag to skip validation. Default value is False.
         :paramtype skip_validation: bool
         :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
          Default value is "application/json".
@@ -21876,7 +21926,7 @@ class DatastoresOperations:
         name: str,
         body: IO[bytes],
         *,
-        skip_validation: Optional[bool] = None,
+        skip_validation: bool = False,
         content_type: str = "application/json",
         **kwargs: Any
     ) -> _models.Datastore:
@@ -21893,7 +21943,7 @@ class DatastoresOperations:
         :type name: str
         :param body: Datastore entity to create or update. Required.
         :type body: IO[bytes]
-        :keyword skip_validation: Flag to skip validation. Default value is None.
+        :keyword skip_validation: Flag to skip validation. Default value is False.
         :paramtype skip_validation: bool
         :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
          Default value is "application/json".
@@ -21911,7 +21961,7 @@ class DatastoresOperations:
         name: str,
         body: Union[_models.Datastore, JSON, IO[bytes]],
         *,
-        skip_validation: Optional[bool] = None,
+        skip_validation: bool = False,
         **kwargs: Any
     ) -> _models.Datastore:
         """Create or update datastore.
@@ -21928,7 +21978,7 @@ class DatastoresOperations:
         :param body: Datastore entity to create or update. Is one of the following types: Datastore,
          JSON, IO[bytes] Required.
         :type body: ~azure.mgmt.machinelearningservices.models.Datastore or JSON or IO[bytes]
-        :keyword skip_validation: Flag to skip validation. Default value is None.
+        :keyword skip_validation: Flag to skip validation. Default value is False.
         :paramtype skip_validation: bool
         :return: Datastore. The Datastore is compatible with MutableMapping
         :rtype: ~azure.mgmt.machinelearningservices.models.Datastore
@@ -22073,12 +22123,12 @@ class DatastoresOperations:
         workspace_name: str,
         *,
         skip: Optional[str] = None,
-        count: Optional[int] = None,
+        count: int = 30,
         is_default: Optional[bool] = None,
         names: Optional[List[str]] = None,
         search_text: Optional[str] = None,
         order_by: Optional[str] = None,
-        order_by_asc: Optional[bool] = None,
+        order_by_asc: bool = False,
         **kwargs: Any
     ) -> ItemPaged["_models.Datastore"]:
         """List datastores.
@@ -22092,7 +22142,7 @@ class DatastoresOperations:
         :type workspace_name: str
         :keyword skip: Continuation token for pagination. Default value is None.
         :paramtype skip: str
-        :keyword count: Maximum number of results to return. Default value is None.
+        :keyword count: Maximum number of results to return. Default value is 30.
         :paramtype count: int
         :keyword is_default: Filter down to the workspace default datastore. Default value is None.
         :paramtype is_default: bool
@@ -22103,7 +22153,7 @@ class DatastoresOperations:
         :keyword order_by: Order by property (createdtime | modifiedtime | name). Default value is
          None.
         :paramtype order_by: str
-        :keyword order_by_asc: Order by property in ascending order. Default value is None.
+        :keyword order_by_asc: Order by property in ascending order. Default value is False.
         :paramtype order_by_asc: bool
         :return: An iterator like instance of Datastore
         :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.machinelearningservices.models.Datastore]
@@ -22887,7 +22937,7 @@ class FeaturesetContainersOperations:
         skip: Optional[str] = None,
         tags: Optional[str] = None,
         list_view_type: Optional[Union[str, _models.ListViewType]] = None,
-        page_size: Optional[int] = None,
+        page_size: int = 20,
         name: Optional[str] = None,
         description: Optional[str] = None,
         created_by: Optional[str] = None,
@@ -22911,7 +22961,7 @@ class FeaturesetContainersOperations:
          ListViewType.All]View type for including/excluding (for example) archived entities. Known
          values are: "ActiveOnly", "ArchivedOnly", and "All". Default value is None.
         :paramtype list_view_type: str or ~azure.mgmt.machinelearningservices.models.ListViewType
-        :keyword page_size: page size. Default value is None.
+        :keyword page_size: page size. Default value is 20.
         :paramtype page_size: int
         :keyword name: name for the featureset. Default value is None.
         :paramtype name: str
@@ -23133,7 +23183,7 @@ class FeaturesOperations:
         feature_name: Optional[str] = None,
         description: Optional[str] = None,
         list_view_type: Optional[Union[str, _models.ListViewType]] = None,
-        page_size: Optional[int] = None,
+        page_size: int = 1000,
         **kwargs: Any
     ) -> ItemPaged["_models.Feature"]:
         """List Features.
@@ -23162,7 +23212,7 @@ class FeaturesOperations:
          ListViewType.All]View type for including/excluding (for example) archived entities. Known
          values are: "ActiveOnly", "ArchivedOnly", and "All". Default value is None.
         :paramtype list_view_type: str or ~azure.mgmt.machinelearningservices.models.ListViewType
-        :keyword page_size: Page size. Default value is None.
+        :keyword page_size: Page size. Default value is 1000.
         :paramtype page_size: int
         :return: An iterator like instance of Feature
         :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.machinelearningservices.models.Feature]
@@ -23778,7 +23828,7 @@ class FeaturesetVersionsOperations:
         skip: Optional[str] = None,
         tags: Optional[str] = None,
         list_view_type: Optional[Union[str, _models.ListViewType]] = None,
-        page_size: Optional[int] = None,
+        page_size: int = 20,
         version_name: Optional[str] = None,
         version: Optional[str] = None,
         description: Optional[str] = None,
@@ -23806,7 +23856,7 @@ class FeaturesetVersionsOperations:
          ListViewType.All]View type for including/excluding (for example) archived entities. Known
          values are: "ActiveOnly", "ArchivedOnly", and "All". Default value is None.
         :paramtype list_view_type: str or ~azure.mgmt.machinelearningservices.models.ListViewType
-        :keyword page_size: page size. Default value is None.
+        :keyword page_size: page size. Default value is 20.
         :paramtype page_size: int
         :keyword version_name: name for the featureset version. Default value is None.
         :paramtype version_name: str
@@ -24692,7 +24742,7 @@ class FeaturestoreEntityContainersOperations:
         skip: Optional[str] = None,
         tags: Optional[str] = None,
         list_view_type: Optional[Union[str, _models.ListViewType]] = None,
-        page_size: Optional[int] = None,
+        page_size: int = 20,
         name: Optional[str] = None,
         description: Optional[str] = None,
         created_by: Optional[str] = None,
@@ -24716,7 +24766,7 @@ class FeaturestoreEntityContainersOperations:
          ListViewType.All]View type for including/excluding (for example) archived entities. Known
          values are: "ActiveOnly", "ArchivedOnly", and "All". Default value is None.
         :paramtype list_view_type: str or ~azure.mgmt.machinelearningservices.models.ListViewType
-        :keyword page_size: page size. Default value is None.
+        :keyword page_size: page size. Default value is 20.
         :paramtype page_size: int
         :keyword name: name for the featurestore entity. Default value is None.
         :paramtype name: str
@@ -25340,7 +25390,7 @@ class FeaturestoreEntityVersionsOperations:
         skip: Optional[str] = None,
         tags: Optional[str] = None,
         list_view_type: Optional[Union[str, _models.ListViewType]] = None,
-        page_size: Optional[int] = None,
+        page_size: int = 20,
         version_name: Optional[str] = None,
         version: Optional[str] = None,
         description: Optional[str] = None,
@@ -25368,7 +25418,7 @@ class FeaturestoreEntityVersionsOperations:
          ListViewType.All]View type for including/excluding (for example) archived entities. Known
          values are: "ActiveOnly", "ArchivedOnly", and "All". Default value is None.
         :paramtype list_view_type: str or ~azure.mgmt.machinelearningservices.models.ListViewType
-        :keyword page_size: page size. Default value is None.
+        :keyword page_size: page size. Default value is 20.
         :paramtype page_size: int
         :keyword version_name: name for the featurestore entity version. Default value is None.
         :paramtype version_name: str
@@ -32545,7 +32595,7 @@ class SchedulesOperations:
         workspace_name: str,
         *,
         skip: Optional[str] = None,
-        list_view_type: Optional[Union[str, _models.ScheduleListViewType]] = None,
+        list_view_type: Union[str, _models.ScheduleListViewType] = "EnabledOnly",
         **kwargs: Any
     ) -> ItemPaged["_models.Schedule"]:
         """List schedules in specified workspace.
@@ -32560,7 +32610,7 @@ class SchedulesOperations:
         :keyword skip: Continuation token for pagination. Default value is None.
         :paramtype skip: str
         :keyword list_view_type: Status filter for schedule. Known values are: "EnabledOnly",
-         "DisabledOnly", and "All". Default value is None.
+         "DisabledOnly", and "All". Default value is "EnabledOnly".
         :paramtype list_view_type: str or
          ~azure.mgmt.machinelearningservices.models.ScheduleListViewType
         :return: An iterator like instance of Schedule
@@ -33952,6 +34002,8 @@ class RaiPolicyOperations:
         endpoint_name: str,
         rai_policy_name: str,
         body: Union[_models.RaiPolicyPropertiesBasicResource, JSON, IO[bytes]],
+        *,
+        proxy_api_version: Optional[str] = None,
         **kwargs: Any
     ) -> Iterator[bytes]:
         error_map: MutableMapping = {
@@ -33981,6 +34033,7 @@ class RaiPolicyOperations:
             endpoint_name=endpoint_name,
             rai_policy_name=rai_policy_name,
             subscription_id=self._config.subscription_id,
+            proxy_api_version=proxy_api_version,
             content_type=content_type,
             api_version=self._config.api_version,
             content=_content,
@@ -34032,6 +34085,7 @@ class RaiPolicyOperations:
         rai_policy_name: str,
         body: _models.RaiPolicyPropertiesBasicResource,
         *,
+        proxy_api_version: Optional[str] = None,
         content_type: str = "application/json",
         **kwargs: Any
     ) -> LROPoller[_models.RaiPolicyPropertiesBasicResource]:
@@ -34050,6 +34104,8 @@ class RaiPolicyOperations:
         :type rai_policy_name: str
         :param body: Required.
         :type body: ~azure.mgmt.machinelearningservices.models.RaiPolicyPropertiesBasicResource
+        :keyword proxy_api_version: Api version used by proxy call. Default value is None.
+        :paramtype proxy_api_version: str
         :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
          Default value is "application/json".
         :paramtype content_type: str
@@ -34069,6 +34125,7 @@ class RaiPolicyOperations:
         rai_policy_name: str,
         body: JSON,
         *,
+        proxy_api_version: Optional[str] = None,
         content_type: str = "application/json",
         **kwargs: Any
     ) -> LROPoller[_models.RaiPolicyPropertiesBasicResource]:
@@ -34087,6 +34144,8 @@ class RaiPolicyOperations:
         :type rai_policy_name: str
         :param body: Required.
         :type body: JSON
+        :keyword proxy_api_version: Api version used by proxy call. Default value is None.
+        :paramtype proxy_api_version: str
         :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
          Default value is "application/json".
         :paramtype content_type: str
@@ -34106,6 +34165,7 @@ class RaiPolicyOperations:
         rai_policy_name: str,
         body: IO[bytes],
         *,
+        proxy_api_version: Optional[str] = None,
         content_type: str = "application/json",
         **kwargs: Any
     ) -> LROPoller[_models.RaiPolicyPropertiesBasicResource]:
@@ -34124,6 +34184,8 @@ class RaiPolicyOperations:
         :type rai_policy_name: str
         :param body: Required.
         :type body: IO[bytes]
+        :keyword proxy_api_version: Api version used by proxy call. Default value is None.
+        :paramtype proxy_api_version: str
         :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
          Default value is "application/json".
         :paramtype content_type: str
@@ -34142,6 +34204,8 @@ class RaiPolicyOperations:
         endpoint_name: str,
         rai_policy_name: str,
         body: Union[_models.RaiPolicyPropertiesBasicResource, JSON, IO[bytes]],
+        *,
+        proxy_api_version: Optional[str] = None,
         **kwargs: Any
     ) -> LROPoller[_models.RaiPolicyPropertiesBasicResource]:
         """Update the state of specified Content Filters associated with the Azure OpenAI account.
@@ -34161,6 +34225,8 @@ class RaiPolicyOperations:
          Required.
         :type body: ~azure.mgmt.machinelearningservices.models.RaiPolicyPropertiesBasicResource or JSON
          or IO[bytes]
+        :keyword proxy_api_version: Api version used by proxy call. Default value is None.
+        :paramtype proxy_api_version: str
         :return: An instance of LROPoller that returns RaiPolicyPropertiesBasicResource. The
          RaiPolicyPropertiesBasicResource is compatible with MutableMapping
         :rtype:
@@ -34182,6 +34248,7 @@ class RaiPolicyOperations:
                 endpoint_name=endpoint_name,
                 rai_policy_name=rai_policy_name,
                 body=body,
+                proxy_api_version=proxy_api_version,
                 content_type=content_type,
                 cls=lambda x, y, z: x,
                 headers=_headers,
@@ -34222,7 +34289,14 @@ class RaiPolicyOperations:
         )
 
     def _delete_initial(
-        self, resource_group_name: str, workspace_name: str, endpoint_name: str, rai_policy_name: str, **kwargs: Any
+        self,
+        resource_group_name: str,
+        workspace_name: str,
+        endpoint_name: str,
+        rai_policy_name: str,
+        *,
+        proxy_api_version: Optional[str] = None,
+        **kwargs: Any
     ) -> Iterator[bytes]:
         error_map: MutableMapping = {
             401: ClientAuthenticationError,
@@ -34243,6 +34317,7 @@ class RaiPolicyOperations:
             endpoint_name=endpoint_name,
             rai_policy_name=rai_policy_name,
             subscription_id=self._config.subscription_id,
+            proxy_api_version=proxy_api_version,
             api_version=self._config.api_version,
             headers=_headers,
             params=_params,
@@ -34285,7 +34360,14 @@ class RaiPolicyOperations:
 
     @distributed_trace
     def begin_delete(
-        self, resource_group_name: str, workspace_name: str, endpoint_name: str, rai_policy_name: str, **kwargs: Any
+        self,
+        resource_group_name: str,
+        workspace_name: str,
+        endpoint_name: str,
+        rai_policy_name: str,
+        *,
+        proxy_api_version: Optional[str] = None,
+        **kwargs: Any
     ) -> LROPoller[None]:
         """Deletes the specified Content Filters associated with the Azure OpenAI account.
 
@@ -34300,6 +34382,8 @@ class RaiPolicyOperations:
         :type endpoint_name: str
         :param rai_policy_name: Name of the Rai Policy. Required.
         :type rai_policy_name: str
+        :keyword proxy_api_version: Api version used by proxy call. Default value is None.
+        :paramtype proxy_api_version: str
         :return: An instance of LROPoller that returns None
         :rtype: ~azure.core.polling.LROPoller[None]
         :raises ~azure.core.exceptions.HttpResponseError:
@@ -34317,6 +34401,7 @@ class RaiPolicyOperations:
                 workspace_name=workspace_name,
                 endpoint_name=endpoint_name,
                 rai_policy_name=rai_policy_name,
+                proxy_api_version=proxy_api_version,
                 cls=lambda x, y, z: x,
                 headers=_headers,
                 params=_params,
@@ -37271,7 +37356,13 @@ class ConnectionOperations:
 
     @distributed_trace
     def get_models(
-        self, resource_group_name: str, workspace_name: str, connection_name: str, **kwargs: Any
+        self,
+        resource_group_name: str,
+        workspace_name: str,
+        connection_name: str,
+        *,
+        proxy_api_version: Optional[str] = None,
+        **kwargs: Any
     ) -> ItemPaged["_models.EndpointModelProperties"]:
         """Get available models under the Azure OpenAI connection.
 
@@ -37284,6 +37375,8 @@ class ConnectionOperations:
         :type workspace_name: str
         :param connection_name: Friendly name of the workspace connection. Required.
         :type connection_name: str
+        :keyword proxy_api_version: Api version used by proxy call. Default value is None.
+        :paramtype proxy_api_version: str
         :return: An iterator like instance of EndpointModelProperties
         :rtype:
          ~azure.core.paging.ItemPaged[~azure.mgmt.machinelearningservices.models.EndpointModelProperties]
@@ -37310,6 +37403,7 @@ class ConnectionOperations:
                     workspace_name=workspace_name,
                     connection_name=connection_name,
                     subscription_id=self._config.subscription_id,
+                    proxy_api_version=proxy_api_version,
                     api_version=self._config.api_version,
                     headers=_headers,
                     params=_params,
@@ -37459,6 +37553,8 @@ class ConnectionOperations:
         connection_name: str,
         deployment_name: str,
         body: Union[_models.EndpointDeploymentResourcePropertiesBasicResource, JSON, IO[bytes]],
+        *,
+        proxy_api_version: Optional[str] = None,
         **kwargs: Any
     ) -> Iterator[bytes]:
         error_map: MutableMapping = {
@@ -37488,6 +37584,7 @@ class ConnectionOperations:
             connection_name=connection_name,
             deployment_name=deployment_name,
             subscription_id=self._config.subscription_id,
+            proxy_api_version=proxy_api_version,
             content_type=content_type,
             api_version=self._config.api_version,
             content=_content,
@@ -37539,6 +37636,7 @@ class ConnectionOperations:
         deployment_name: str,
         body: _models.EndpointDeploymentResourcePropertiesBasicResource,
         *,
+        proxy_api_version: Optional[str] = None,
         content_type: str = "application/json",
         **kwargs: Any
     ) -> LROPoller[_models.EndpointDeploymentResourcePropertiesBasicResource]:
@@ -37558,6 +37656,8 @@ class ConnectionOperations:
         :param body: deployment object. Required.
         :type body:
          ~azure.mgmt.machinelearningservices.models.EndpointDeploymentResourcePropertiesBasicResource
+        :keyword proxy_api_version: Api version used by proxy call. Default value is None.
+        :paramtype proxy_api_version: str
         :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
          Default value is "application/json".
         :paramtype content_type: str
@@ -37578,6 +37678,7 @@ class ConnectionOperations:
         deployment_name: str,
         body: JSON,
         *,
+        proxy_api_version: Optional[str] = None,
         content_type: str = "application/json",
         **kwargs: Any
     ) -> LROPoller[_models.EndpointDeploymentResourcePropertiesBasicResource]:
@@ -37596,6 +37697,8 @@ class ConnectionOperations:
         :type deployment_name: str
         :param body: deployment object. Required.
         :type body: JSON
+        :keyword proxy_api_version: Api version used by proxy call. Default value is None.
+        :paramtype proxy_api_version: str
         :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
          Default value is "application/json".
         :paramtype content_type: str
@@ -37616,6 +37719,7 @@ class ConnectionOperations:
         deployment_name: str,
         body: IO[bytes],
         *,
+        proxy_api_version: Optional[str] = None,
         content_type: str = "application/json",
         **kwargs: Any
     ) -> LROPoller[_models.EndpointDeploymentResourcePropertiesBasicResource]:
@@ -37634,6 +37738,8 @@ class ConnectionOperations:
         :type deployment_name: str
         :param body: deployment object. Required.
         :type body: IO[bytes]
+        :keyword proxy_api_version: Api version used by proxy call. Default value is None.
+        :paramtype proxy_api_version: str
         :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
          Default value is "application/json".
         :paramtype content_type: str
@@ -37653,6 +37759,8 @@ class ConnectionOperations:
         connection_name: str,
         deployment_name: str,
         body: Union[_models.EndpointDeploymentResourcePropertiesBasicResource, JSON, IO[bytes]],
+        *,
+        proxy_api_version: Optional[str] = None,
         **kwargs: Any
     ) -> LROPoller[_models.EndpointDeploymentResourcePropertiesBasicResource]:
         """Create or update Azure OpenAI connection deployment resource with the specified parameters.
@@ -37673,6 +37781,8 @@ class ConnectionOperations:
         :type body:
          ~azure.mgmt.machinelearningservices.models.EndpointDeploymentResourcePropertiesBasicResource or
          JSON or IO[bytes]
+        :keyword proxy_api_version: Api version used by proxy call. Default value is None.
+        :paramtype proxy_api_version: str
         :return: An instance of LROPoller that returns
          EndpointDeploymentResourcePropertiesBasicResource. The
          EndpointDeploymentResourcePropertiesBasicResource is compatible with MutableMapping
@@ -37695,6 +37805,7 @@ class ConnectionOperations:
                 connection_name=connection_name,
                 deployment_name=deployment_name,
                 body=body,
+                proxy_api_version=proxy_api_version,
                 content_type=content_type,
                 cls=lambda x, y, z: x,
                 headers=_headers,
@@ -37735,7 +37846,14 @@ class ConnectionOperations:
         )
 
     def _delete_deployment_initial(
-        self, resource_group_name: str, workspace_name: str, connection_name: str, deployment_name: str, **kwargs: Any
+        self,
+        resource_group_name: str,
+        workspace_name: str,
+        connection_name: str,
+        deployment_name: str,
+        *,
+        proxy_api_version: Optional[str] = None,
+        **kwargs: Any
     ) -> Iterator[bytes]:
         error_map: MutableMapping = {
             401: ClientAuthenticationError,
@@ -37756,6 +37874,7 @@ class ConnectionOperations:
             connection_name=connection_name,
             deployment_name=deployment_name,
             subscription_id=self._config.subscription_id,
+            proxy_api_version=proxy_api_version,
             api_version=self._config.api_version,
             headers=_headers,
             params=_params,
@@ -37798,7 +37917,14 @@ class ConnectionOperations:
 
     @distributed_trace
     def begin_delete_deployment(
-        self, resource_group_name: str, workspace_name: str, connection_name: str, deployment_name: str, **kwargs: Any
+        self,
+        resource_group_name: str,
+        workspace_name: str,
+        connection_name: str,
+        deployment_name: str,
+        *,
+        proxy_api_version: Optional[str] = None,
+        **kwargs: Any
     ) -> LROPoller[None]:
         """Delete Azure OpenAI connection deployment resource by name.
 
@@ -37813,6 +37939,8 @@ class ConnectionOperations:
         :type connection_name: str
         :param deployment_name: Name of the deployment resource. Required.
         :type deployment_name: str
+        :keyword proxy_api_version: Api version used by proxy call. Default value is None.
+        :paramtype proxy_api_version: str
         :return: An instance of LROPoller that returns None
         :rtype: ~azure.core.polling.LROPoller[None]
         :raises ~azure.core.exceptions.HttpResponseError:
@@ -37830,6 +37958,7 @@ class ConnectionOperations:
                 workspace_name=workspace_name,
                 connection_name=connection_name,
                 deployment_name=deployment_name,
+                proxy_api_version=proxy_api_version,
                 cls=lambda x, y, z: x,
                 headers=_headers,
                 params=_params,
@@ -37865,7 +37994,13 @@ class ConnectionOperations:
 
     @distributed_trace
     def list_deployments(
-        self, resource_group_name: str, workspace_name: str, connection_name: str, **kwargs: Any
+        self,
+        resource_group_name: str,
+        workspace_name: str,
+        connection_name: str,
+        *,
+        proxy_api_version: Optional[str] = None,
+        **kwargs: Any
     ) -> ItemPaged["_models.EndpointDeploymentResourcePropertiesBasicResource"]:
         """Get all the deployments under the Azure OpenAI connection.
 
@@ -37878,6 +38013,8 @@ class ConnectionOperations:
         :type workspace_name: str
         :param connection_name: Friendly name of the workspace connection. Required.
         :type connection_name: str
+        :keyword proxy_api_version: Api version used by proxy call. Default value is None.
+        :paramtype proxy_api_version: str
         :return: An iterator like instance of EndpointDeploymentResourcePropertiesBasicResource
         :rtype:
          ~azure.core.paging.ItemPaged[~azure.mgmt.machinelearningservices.models.EndpointDeploymentResourcePropertiesBasicResource]
@@ -37904,6 +38041,7 @@ class ConnectionOperations:
                     workspace_name=workspace_name,
                     connection_name=connection_name,
                     subscription_id=self._config.subscription_id,
+                    proxy_api_version=proxy_api_version,
                     api_version=self._config.api_version,
                     headers=_headers,
                     params=_params,
@@ -41460,7 +41598,7 @@ class RegistryDataContainersOperations:
         *,
         content_type: str = "application/json",
         **kwargs: Any
-    ) -> LROPoller[_models.CodeContainer]:
+    ) -> LROPoller[_models.DataContainer]:
         """Create or update container.
 
         Create or update container.
@@ -41478,9 +41616,9 @@ class RegistryDataContainersOperations:
         :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
          Default value is "application/json".
         :paramtype content_type: str
-        :return: An instance of LROPoller that returns CodeContainer. The CodeContainer is compatible
+        :return: An instance of LROPoller that returns DataContainer. The DataContainer is compatible
          with MutableMapping
-        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.machinelearningservices.models.CodeContainer]
+        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.machinelearningservices.models.DataContainer]
         :raises ~azure.core.exceptions.HttpResponseError:
         """
 
@@ -41494,7 +41632,7 @@ class RegistryDataContainersOperations:
         *,
         content_type: str = "application/json",
         **kwargs: Any
-    ) -> LROPoller[_models.CodeContainer]:
+    ) -> LROPoller[_models.DataContainer]:
         """Create or update container.
 
         Create or update container.
@@ -41512,9 +41650,9 @@ class RegistryDataContainersOperations:
         :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
          Default value is "application/json".
         :paramtype content_type: str
-        :return: An instance of LROPoller that returns CodeContainer. The CodeContainer is compatible
+        :return: An instance of LROPoller that returns DataContainer. The DataContainer is compatible
          with MutableMapping
-        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.machinelearningservices.models.CodeContainer]
+        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.machinelearningservices.models.DataContainer]
         :raises ~azure.core.exceptions.HttpResponseError:
         """
 
@@ -41528,7 +41666,7 @@ class RegistryDataContainersOperations:
         *,
         content_type: str = "application/json",
         **kwargs: Any
-    ) -> LROPoller[_models.CodeContainer]:
+    ) -> LROPoller[_models.DataContainer]:
         """Create or update container.
 
         Create or update container.
@@ -41546,9 +41684,9 @@ class RegistryDataContainersOperations:
         :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
          Default value is "application/json".
         :paramtype content_type: str
-        :return: An instance of LROPoller that returns CodeContainer. The CodeContainer is compatible
+        :return: An instance of LROPoller that returns DataContainer. The DataContainer is compatible
          with MutableMapping
-        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.machinelearningservices.models.CodeContainer]
+        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.machinelearningservices.models.DataContainer]
         :raises ~azure.core.exceptions.HttpResponseError:
         """
 
@@ -41560,7 +41698,7 @@ class RegistryDataContainersOperations:
         name: str,
         body: Union[_models.DataContainer, JSON, IO[bytes]],
         **kwargs: Any
-    ) -> LROPoller[_models.CodeContainer]:
+    ) -> LROPoller[_models.DataContainer]:
         """Create or update container.
 
         Create or update container.
@@ -41576,16 +41714,16 @@ class RegistryDataContainersOperations:
         :param body: Container entity to create or update. Is one of the following types:
          DataContainer, JSON, IO[bytes] Required.
         :type body: ~azure.mgmt.machinelearningservices.models.DataContainer or JSON or IO[bytes]
-        :return: An instance of LROPoller that returns CodeContainer. The CodeContainer is compatible
+        :return: An instance of LROPoller that returns DataContainer. The DataContainer is compatible
          with MutableMapping
-        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.machinelearningservices.models.CodeContainer]
+        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.machinelearningservices.models.DataContainer]
         :raises ~azure.core.exceptions.HttpResponseError:
         """
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = kwargs.pop("params", {}) or {}
 
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
-        cls: ClsType[_models.CodeContainer] = kwargs.pop("cls", None)
+        cls: ClsType[_models.DataContainer] = kwargs.pop("cls", None)
         polling: Union[bool, PollingMethod] = kwargs.pop("polling", True)
         lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
         cont_token: Optional[str] = kwargs.pop("continuation_token", None)
@@ -41606,7 +41744,7 @@ class RegistryDataContainersOperations:
 
         def get_long_running_output(pipeline_response):
             response = pipeline_response.http_response
-            deserialized = _deserialize(_models.CodeContainer, response.json())
+            deserialized = _deserialize(_models.DataContainer, response.json())
             if cls:
                 return cls(pipeline_response, deserialized, {})  # type: ignore
             return deserialized
@@ -41624,13 +41762,13 @@ class RegistryDataContainersOperations:
         else:
             polling_method = polling
         if cont_token:
-            return LROPoller[_models.CodeContainer].from_continuation_token(
+            return LROPoller[_models.DataContainer].from_continuation_token(
                 polling_method=polling_method,
                 continuation_token=cont_token,
                 client=self._client,
                 deserialization_callback=get_long_running_output,
             )
-        return LROPoller[_models.CodeContainer](
+        return LROPoller[_models.DataContainer](
             self._client, raw_result, get_long_running_output, polling_method  # type: ignore
         )
 
@@ -46692,7 +46830,7 @@ class WorkspaceConnectionsOperations:
         *,
         target: Optional[str] = None,
         category: Optional[str] = None,
-        include_all: Optional[bool] = None,
+        include_all: bool = False,
         **kwargs: Any
     ) -> ItemPaged["_models.WorkspaceConnectionPropertiesV2BasicResource"]:
         """List all the available machine learning workspaces connections under the specified workspace.
@@ -46709,7 +46847,7 @@ class WorkspaceConnectionsOperations:
         :keyword category: Category of the workspace connection. Default value is None.
         :paramtype category: str
         :keyword include_all: query parameter that indicates if get connection call should return both
-         connections and datastores. Default value is None.
+         connections and datastores. Default value is False.
         :paramtype include_all: bool
         :return: An iterator like instance of WorkspaceConnectionPropertiesV2BasicResource
         :rtype:
@@ -47245,6 +47383,8 @@ class ConnectionRaiBlocklistOperations:
         connection_name: str,
         rai_blocklist_name: str,
         body: Union[_models.RaiBlocklistPropertiesBasicResource, JSON, IO[bytes]],
+        *,
+        proxy_api_version: Optional[str] = None,
         **kwargs: Any
     ) -> Iterator[bytes]:
         error_map: MutableMapping = {
@@ -47274,6 +47414,7 @@ class ConnectionRaiBlocklistOperations:
             connection_name=connection_name,
             rai_blocklist_name=rai_blocklist_name,
             subscription_id=self._config.subscription_id,
+            proxy_api_version=proxy_api_version,
             content_type=content_type,
             api_version=self._config.api_version,
             content=_content,
@@ -47325,6 +47466,7 @@ class ConnectionRaiBlocklistOperations:
         rai_blocklist_name: str,
         body: _models.RaiBlocklistPropertiesBasicResource,
         *,
+        proxy_api_version: Optional[str] = None,
         content_type: str = "application/json",
         **kwargs: Any
     ) -> LROPoller[_models.RaiBlocklistPropertiesBasicResource]:
@@ -47343,6 +47485,8 @@ class ConnectionRaiBlocklistOperations:
         :type rai_blocklist_name: str
         :param body: Required.
         :type body: ~azure.mgmt.machinelearningservices.models.RaiBlocklistPropertiesBasicResource
+        :keyword proxy_api_version: Api version used by proxy call. Default value is None.
+        :paramtype proxy_api_version: str
         :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
          Default value is "application/json".
         :paramtype content_type: str
@@ -47362,6 +47506,7 @@ class ConnectionRaiBlocklistOperations:
         rai_blocklist_name: str,
         body: JSON,
         *,
+        proxy_api_version: Optional[str] = None,
         content_type: str = "application/json",
         **kwargs: Any
     ) -> LROPoller[_models.RaiBlocklistPropertiesBasicResource]:
@@ -47380,6 +47525,8 @@ class ConnectionRaiBlocklistOperations:
         :type rai_blocklist_name: str
         :param body: Required.
         :type body: JSON
+        :keyword proxy_api_version: Api version used by proxy call. Default value is None.
+        :paramtype proxy_api_version: str
         :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
          Default value is "application/json".
         :paramtype content_type: str
@@ -47399,6 +47546,7 @@ class ConnectionRaiBlocklistOperations:
         rai_blocklist_name: str,
         body: IO[bytes],
         *,
+        proxy_api_version: Optional[str] = None,
         content_type: str = "application/json",
         **kwargs: Any
     ) -> LROPoller[_models.RaiBlocklistPropertiesBasicResource]:
@@ -47417,6 +47565,8 @@ class ConnectionRaiBlocklistOperations:
         :type rai_blocklist_name: str
         :param body: Required.
         :type body: IO[bytes]
+        :keyword proxy_api_version: Api version used by proxy call. Default value is None.
+        :paramtype proxy_api_version: str
         :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
          Default value is "application/json".
         :paramtype content_type: str
@@ -47435,6 +47585,8 @@ class ConnectionRaiBlocklistOperations:
         connection_name: str,
         rai_blocklist_name: str,
         body: Union[_models.RaiBlocklistPropertiesBasicResource, JSON, IO[bytes]],
+        *,
+        proxy_api_version: Optional[str] = None,
         **kwargs: Any
     ) -> LROPoller[_models.RaiBlocklistPropertiesBasicResource]:
         """Update the state of specified blocklist associated with the Azure OpenAI connection.
@@ -47454,6 +47606,8 @@ class ConnectionRaiBlocklistOperations:
          IO[bytes] Required.
         :type body: ~azure.mgmt.machinelearningservices.models.RaiBlocklistPropertiesBasicResource or
          JSON or IO[bytes]
+        :keyword proxy_api_version: Api version used by proxy call. Default value is None.
+        :paramtype proxy_api_version: str
         :return: An instance of LROPoller that returns RaiBlocklistPropertiesBasicResource. The
          RaiBlocklistPropertiesBasicResource is compatible with MutableMapping
         :rtype:
@@ -47475,6 +47629,7 @@ class ConnectionRaiBlocklistOperations:
                 connection_name=connection_name,
                 rai_blocklist_name=rai_blocklist_name,
                 body=body,
+                proxy_api_version=proxy_api_version,
                 content_type=content_type,
                 cls=lambda x, y, z: x,
                 headers=_headers,
@@ -47520,6 +47675,8 @@ class ConnectionRaiBlocklistOperations:
         workspace_name: str,
         connection_name: str,
         rai_blocklist_name: str,
+        *,
+        proxy_api_version: Optional[str] = None,
         **kwargs: Any
     ) -> Iterator[bytes]:
         error_map: MutableMapping = {
@@ -47541,6 +47698,7 @@ class ConnectionRaiBlocklistOperations:
             connection_name=connection_name,
             rai_blocklist_name=rai_blocklist_name,
             subscription_id=self._config.subscription_id,
+            proxy_api_version=proxy_api_version,
             api_version=self._config.api_version,
             headers=_headers,
             params=_params,
@@ -47588,6 +47746,8 @@ class ConnectionRaiBlocklistOperations:
         workspace_name: str,
         connection_name: str,
         rai_blocklist_name: str,
+        *,
+        proxy_api_version: Optional[str] = None,
         **kwargs: Any
     ) -> LROPoller[None]:
         """Deletes the specified custom blocklist associated with the Azure OpenAI connection.
@@ -47603,6 +47763,8 @@ class ConnectionRaiBlocklistOperations:
         :type connection_name: str
         :param rai_blocklist_name: The name of the RaiBlocklist. Required.
         :type rai_blocklist_name: str
+        :keyword proxy_api_version: Api version used by proxy call. Default value is None.
+        :paramtype proxy_api_version: str
         :return: An instance of LROPoller that returns None
         :rtype: ~azure.core.polling.LROPoller[None]
         :raises ~azure.core.exceptions.HttpResponseError:
@@ -47620,6 +47782,7 @@ class ConnectionRaiBlocklistOperations:
                 workspace_name=workspace_name,
                 connection_name=connection_name,
                 rai_blocklist_name=rai_blocklist_name,
+                proxy_api_version=proxy_api_version,
                 cls=lambda x, y, z: x,
                 headers=_headers,
                 params=_params,
@@ -47675,7 +47838,13 @@ class ConnectionRaiBlocklistsOperations:
 
     @distributed_trace
     def list(
-        self, resource_group_name: str, workspace_name: str, connection_name: str, **kwargs: Any
+        self,
+        resource_group_name: str,
+        workspace_name: str,
+        connection_name: str,
+        *,
+        proxy_api_version: Optional[str] = None,
+        **kwargs: Any
     ) -> ItemPaged["_models.RaiBlocklistPropertiesBasicResource"]:
         """Gets the custom blocklists associated with the Azure OpenAI connection.
 
@@ -47688,6 +47857,8 @@ class ConnectionRaiBlocklistsOperations:
         :type workspace_name: str
         :param connection_name: Friendly name of the workspace connection. Required.
         :type connection_name: str
+        :keyword proxy_api_version: Api version used by proxy call. Default value is None.
+        :paramtype proxy_api_version: str
         :return: An iterator like instance of RaiBlocklistPropertiesBasicResource
         :rtype:
          ~azure.core.paging.ItemPaged[~azure.mgmt.machinelearningservices.models.RaiBlocklistPropertiesBasicResource]
@@ -47714,6 +47885,7 @@ class ConnectionRaiBlocklistsOperations:
                     workspace_name=workspace_name,
                     connection_name=connection_name,
                     subscription_id=self._config.subscription_id,
+                    proxy_api_version=proxy_api_version,
                     api_version=self._config.api_version,
                     headers=_headers,
                     params=_params,
@@ -48398,6 +48570,8 @@ class ConnectionRaiBlocklistItemOperations:
         rai_blocklist_name: str,
         rai_blocklist_item_name: str,
         body: Union[_models.RaiBlocklistItemPropertiesBasicResource, JSON, IO[bytes]],
+        *,
+        proxy_api_version: Optional[str] = None,
         **kwargs: Any
     ) -> Iterator[bytes]:
         error_map: MutableMapping = {
@@ -48428,6 +48602,7 @@ class ConnectionRaiBlocklistItemOperations:
             rai_blocklist_name=rai_blocklist_name,
             rai_blocklist_item_name=rai_blocklist_item_name,
             subscription_id=self._config.subscription_id,
+            proxy_api_version=proxy_api_version,
             content_type=content_type,
             api_version=self._config.api_version,
             content=_content,
@@ -48480,6 +48655,7 @@ class ConnectionRaiBlocklistItemOperations:
         rai_blocklist_item_name: str,
         body: _models.RaiBlocklistItemPropertiesBasicResource,
         *,
+        proxy_api_version: Optional[str] = None,
         content_type: str = "application/json",
         **kwargs: Any
     ) -> LROPoller[_models.RaiBlocklistItemPropertiesBasicResource]:
@@ -48500,6 +48676,8 @@ class ConnectionRaiBlocklistItemOperations:
         :type rai_blocklist_item_name: str
         :param body: Required.
         :type body: ~azure.mgmt.machinelearningservices.models.RaiBlocklistItemPropertiesBasicResource
+        :keyword proxy_api_version: Api version used by proxy call. Default value is None.
+        :paramtype proxy_api_version: str
         :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
          Default value is "application/json".
         :paramtype content_type: str
@@ -48520,6 +48698,7 @@ class ConnectionRaiBlocklistItemOperations:
         rai_blocklist_item_name: str,
         body: JSON,
         *,
+        proxy_api_version: Optional[str] = None,
         content_type: str = "application/json",
         **kwargs: Any
     ) -> LROPoller[_models.RaiBlocklistItemPropertiesBasicResource]:
@@ -48540,6 +48719,8 @@ class ConnectionRaiBlocklistItemOperations:
         :type rai_blocklist_item_name: str
         :param body: Required.
         :type body: JSON
+        :keyword proxy_api_version: Api version used by proxy call. Default value is None.
+        :paramtype proxy_api_version: str
         :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
          Default value is "application/json".
         :paramtype content_type: str
@@ -48560,6 +48741,7 @@ class ConnectionRaiBlocklistItemOperations:
         rai_blocklist_item_name: str,
         body: IO[bytes],
         *,
+        proxy_api_version: Optional[str] = None,
         content_type: str = "application/json",
         **kwargs: Any
     ) -> LROPoller[_models.RaiBlocklistItemPropertiesBasicResource]:
@@ -48580,6 +48762,8 @@ class ConnectionRaiBlocklistItemOperations:
         :type rai_blocklist_item_name: str
         :param body: Required.
         :type body: IO[bytes]
+        :keyword proxy_api_version: Api version used by proxy call. Default value is None.
+        :paramtype proxy_api_version: str
         :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
          Default value is "application/json".
         :paramtype content_type: str
@@ -48599,6 +48783,8 @@ class ConnectionRaiBlocklistItemOperations:
         rai_blocklist_name: str,
         rai_blocklist_item_name: str,
         body: Union[_models.RaiBlocklistItemPropertiesBasicResource, JSON, IO[bytes]],
+        *,
+        proxy_api_version: Optional[str] = None,
         **kwargs: Any
     ) -> LROPoller[_models.RaiBlocklistItemPropertiesBasicResource]:
         """Update the state of specified blocklist item associated with the Azure OpenAI connection.
@@ -48620,6 +48806,8 @@ class ConnectionRaiBlocklistItemOperations:
          IO[bytes] Required.
         :type body: ~azure.mgmt.machinelearningservices.models.RaiBlocklistItemPropertiesBasicResource
          or JSON or IO[bytes]
+        :keyword proxy_api_version: Api version used by proxy call. Default value is None.
+        :paramtype proxy_api_version: str
         :return: An instance of LROPoller that returns RaiBlocklistItemPropertiesBasicResource. The
          RaiBlocklistItemPropertiesBasicResource is compatible with MutableMapping
         :rtype:
@@ -48642,6 +48830,7 @@ class ConnectionRaiBlocklistItemOperations:
                 rai_blocklist_name=rai_blocklist_name,
                 rai_blocklist_item_name=rai_blocklist_item_name,
                 body=body,
+                proxy_api_version=proxy_api_version,
                 content_type=content_type,
                 cls=lambda x, y, z: x,
                 headers=_headers,
@@ -48688,6 +48877,8 @@ class ConnectionRaiBlocklistItemOperations:
         connection_name: str,
         rai_blocklist_name: str,
         rai_blocklist_item_name: str,
+        *,
+        proxy_api_version: Optional[str] = None,
         **kwargs: Any
     ) -> Iterator[bytes]:
         error_map: MutableMapping = {
@@ -48710,6 +48901,7 @@ class ConnectionRaiBlocklistItemOperations:
             rai_blocklist_name=rai_blocklist_name,
             rai_blocklist_item_name=rai_blocklist_item_name,
             subscription_id=self._config.subscription_id,
+            proxy_api_version=proxy_api_version,
             api_version=self._config.api_version,
             headers=_headers,
             params=_params,
@@ -48758,6 +48950,8 @@ class ConnectionRaiBlocklistItemOperations:
         connection_name: str,
         rai_blocklist_name: str,
         rai_blocklist_item_name: str,
+        *,
+        proxy_api_version: Optional[str] = None,
         **kwargs: Any
     ) -> LROPoller[None]:
         """Deletes the specified custom blocklist item associated with the Azure OpenAI connection.
@@ -48775,6 +48969,8 @@ class ConnectionRaiBlocklistItemOperations:
         :type rai_blocklist_name: str
         :param rai_blocklist_item_name: Name of the RaiBlocklist Item. Required.
         :type rai_blocklist_item_name: str
+        :keyword proxy_api_version: Api version used by proxy call. Default value is None.
+        :paramtype proxy_api_version: str
         :return: An instance of LROPoller that returns None
         :rtype: ~azure.core.polling.LROPoller[None]
         :raises ~azure.core.exceptions.HttpResponseError:
@@ -48793,6 +48989,7 @@ class ConnectionRaiBlocklistItemOperations:
                 connection_name=connection_name,
                 rai_blocklist_name=rai_blocklist_name,
                 rai_blocklist_item_name=rai_blocklist_item_name,
+                proxy_api_version=proxy_api_version,
                 cls=lambda x, y, z: x,
                 headers=_headers,
                 params=_params,
@@ -48853,6 +49050,8 @@ class ConnectionRaiBlocklistItemsOperations:
         workspace_name: str,
         connection_name: str,
         rai_blocklist_name: str,
+        *,
+        proxy_api_version: Optional[str] = None,
         **kwargs: Any
     ) -> ItemPaged["_models.RaiBlocklistItemPropertiesBasicResource"]:
         """Gets the custom blocklist items associated with the Azure OpenAI connection.
@@ -48868,6 +49067,8 @@ class ConnectionRaiBlocklistItemsOperations:
         :type connection_name: str
         :param rai_blocklist_name: The name of the RaiBlocklist. Required.
         :type rai_blocklist_name: str
+        :keyword proxy_api_version: Api version used by proxy call. Default value is None.
+        :paramtype proxy_api_version: str
         :return: An iterator like instance of RaiBlocklistItemPropertiesBasicResource
         :rtype:
          ~azure.core.paging.ItemPaged[~azure.mgmt.machinelearningservices.models.RaiBlocklistItemPropertiesBasicResource]
@@ -48895,6 +49096,7 @@ class ConnectionRaiBlocklistItemsOperations:
                     connection_name=connection_name,
                     rai_blocklist_name=rai_blocklist_name,
                     subscription_id=self._config.subscription_id,
+                    proxy_api_version=proxy_api_version,
                     api_version=self._config.api_version,
                     headers=_headers,
                     params=_params,
@@ -49065,6 +49267,8 @@ class ConnectionRaiPolicyOperations:
         connection_name: str,
         rai_policy_name: str,
         body: Union[_models.RaiPolicyPropertiesBasicResource, JSON, IO[bytes]],
+        *,
+        proxy_api_version: Optional[str] = None,
         **kwargs: Any
     ) -> Iterator[bytes]:
         error_map: MutableMapping = {
@@ -49094,6 +49298,7 @@ class ConnectionRaiPolicyOperations:
             connection_name=connection_name,
             rai_policy_name=rai_policy_name,
             subscription_id=self._config.subscription_id,
+            proxy_api_version=proxy_api_version,
             content_type=content_type,
             api_version=self._config.api_version,
             content=_content,
@@ -49145,6 +49350,7 @@ class ConnectionRaiPolicyOperations:
         rai_policy_name: str,
         body: _models.RaiPolicyPropertiesBasicResource,
         *,
+        proxy_api_version: Optional[str] = None,
         content_type: str = "application/json",
         **kwargs: Any
     ) -> LROPoller[_models.RaiPolicyPropertiesBasicResource]:
@@ -49163,6 +49369,8 @@ class ConnectionRaiPolicyOperations:
         :type rai_policy_name: str
         :param body: Required.
         :type body: ~azure.mgmt.machinelearningservices.models.RaiPolicyPropertiesBasicResource
+        :keyword proxy_api_version: Api version used by proxy call. Default value is None.
+        :paramtype proxy_api_version: str
         :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
          Default value is "application/json".
         :paramtype content_type: str
@@ -49182,6 +49390,7 @@ class ConnectionRaiPolicyOperations:
         rai_policy_name: str,
         body: JSON,
         *,
+        proxy_api_version: Optional[str] = None,
         content_type: str = "application/json",
         **kwargs: Any
     ) -> LROPoller[_models.RaiPolicyPropertiesBasicResource]:
@@ -49200,6 +49409,8 @@ class ConnectionRaiPolicyOperations:
         :type rai_policy_name: str
         :param body: Required.
         :type body: JSON
+        :keyword proxy_api_version: Api version used by proxy call. Default value is None.
+        :paramtype proxy_api_version: str
         :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
          Default value is "application/json".
         :paramtype content_type: str
@@ -49219,6 +49430,7 @@ class ConnectionRaiPolicyOperations:
         rai_policy_name: str,
         body: IO[bytes],
         *,
+        proxy_api_version: Optional[str] = None,
         content_type: str = "application/json",
         **kwargs: Any
     ) -> LROPoller[_models.RaiPolicyPropertiesBasicResource]:
@@ -49237,6 +49449,8 @@ class ConnectionRaiPolicyOperations:
         :type rai_policy_name: str
         :param body: Required.
         :type body: IO[bytes]
+        :keyword proxy_api_version: Api version used by proxy call. Default value is None.
+        :paramtype proxy_api_version: str
         :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
          Default value is "application/json".
         :paramtype content_type: str
@@ -49255,6 +49469,8 @@ class ConnectionRaiPolicyOperations:
         connection_name: str,
         rai_policy_name: str,
         body: Union[_models.RaiPolicyPropertiesBasicResource, JSON, IO[bytes]],
+        *,
+        proxy_api_version: Optional[str] = None,
         **kwargs: Any
     ) -> LROPoller[_models.RaiPolicyPropertiesBasicResource]:
         """Update the state of specified Content Filters associated with the Azure OpenAI connection.
@@ -49274,6 +49490,8 @@ class ConnectionRaiPolicyOperations:
          Required.
         :type body: ~azure.mgmt.machinelearningservices.models.RaiPolicyPropertiesBasicResource or JSON
          or IO[bytes]
+        :keyword proxy_api_version: Api version used by proxy call. Default value is None.
+        :paramtype proxy_api_version: str
         :return: An instance of LROPoller that returns RaiPolicyPropertiesBasicResource. The
          RaiPolicyPropertiesBasicResource is compatible with MutableMapping
         :rtype:
@@ -49295,6 +49513,7 @@ class ConnectionRaiPolicyOperations:
                 connection_name=connection_name,
                 rai_policy_name=rai_policy_name,
                 body=body,
+                proxy_api_version=proxy_api_version,
                 content_type=content_type,
                 cls=lambda x, y, z: x,
                 headers=_headers,
@@ -49335,7 +49554,14 @@ class ConnectionRaiPolicyOperations:
         )
 
     def _delete_initial(
-        self, resource_group_name: str, workspace_name: str, connection_name: str, rai_policy_name: str, **kwargs: Any
+        self,
+        resource_group_name: str,
+        workspace_name: str,
+        connection_name: str,
+        rai_policy_name: str,
+        *,
+        proxy_api_version: Optional[str] = None,
+        **kwargs: Any
     ) -> Iterator[bytes]:
         error_map: MutableMapping = {
             401: ClientAuthenticationError,
@@ -49356,6 +49582,7 @@ class ConnectionRaiPolicyOperations:
             connection_name=connection_name,
             rai_policy_name=rai_policy_name,
             subscription_id=self._config.subscription_id,
+            proxy_api_version=proxy_api_version,
             api_version=self._config.api_version,
             headers=_headers,
             params=_params,
@@ -49398,7 +49625,14 @@ class ConnectionRaiPolicyOperations:
 
     @distributed_trace
     def begin_delete(
-        self, resource_group_name: str, workspace_name: str, connection_name: str, rai_policy_name: str, **kwargs: Any
+        self,
+        resource_group_name: str,
+        workspace_name: str,
+        connection_name: str,
+        rai_policy_name: str,
+        *,
+        proxy_api_version: Optional[str] = None,
+        **kwargs: Any
     ) -> LROPoller[None]:
         """Deletes the specified Content Filters associated with the Azure OpenAI connection.
 
@@ -49413,6 +49647,8 @@ class ConnectionRaiPolicyOperations:
         :type connection_name: str
         :param rai_policy_name: Name of the Rai Policy. Required.
         :type rai_policy_name: str
+        :keyword proxy_api_version: Api version used by proxy call. Default value is None.
+        :paramtype proxy_api_version: str
         :return: An instance of LROPoller that returns None
         :rtype: ~azure.core.polling.LROPoller[None]
         :raises ~azure.core.exceptions.HttpResponseError:
@@ -49430,6 +49666,7 @@ class ConnectionRaiPolicyOperations:
                 workspace_name=workspace_name,
                 connection_name=connection_name,
                 rai_policy_name=rai_policy_name,
+                proxy_api_version=proxy_api_version,
                 cls=lambda x, y, z: x,
                 headers=_headers,
                 params=_params,
@@ -49485,7 +49722,13 @@ class ConnectionRaiPoliciesOperations:
 
     @distributed_trace
     def list(
-        self, resource_group_name: str, workspace_name: str, connection_name: str, **kwargs: Any
+        self,
+        resource_group_name: str,
+        workspace_name: str,
+        connection_name: str,
+        *,
+        proxy_api_version: Optional[str] = None,
+        **kwargs: Any
     ) -> ItemPaged["_models.RaiPolicyPropertiesBasicResource"]:
         """List the specified Content Filters associated with the Azure OpenAI connection.
 
@@ -49498,6 +49741,8 @@ class ConnectionRaiPoliciesOperations:
         :type workspace_name: str
         :param connection_name: Friendly name of the workspace connection. Required.
         :type connection_name: str
+        :keyword proxy_api_version: Api version used by proxy call. Default value is None.
+        :paramtype proxy_api_version: str
         :return: An iterator like instance of RaiPolicyPropertiesBasicResource
         :rtype:
          ~azure.core.paging.ItemPaged[~azure.mgmt.machinelearningservices.models.RaiPolicyPropertiesBasicResource]
@@ -49524,6 +49769,7 @@ class ConnectionRaiPoliciesOperations:
                     workspace_name=workspace_name,
                     connection_name=connection_name,
                     subscription_id=self._config.subscription_id,
+                    proxy_api_version=proxy_api_version,
                     api_version=self._config.api_version,
                     headers=_headers,
                     params=_params,
@@ -49607,7 +49853,13 @@ class RaiPoliciesOperations:
 
     @distributed_trace
     def list(
-        self, resource_group_name: str, workspace_name: str, endpoint_name: str, **kwargs: Any
+        self,
+        resource_group_name: str,
+        workspace_name: str,
+        endpoint_name: str,
+        *,
+        proxy_api_version: Optional[str] = None,
+        **kwargs: Any
     ) -> ItemPaged["_models.RaiPolicyPropertiesBasicResource"]:
         """List the specified Content Filters associated with the Azure OpenAI account.
 
@@ -49620,6 +49872,8 @@ class RaiPoliciesOperations:
         :type workspace_name: str
         :param endpoint_name: Name of the endpoint resource. Required.
         :type endpoint_name: str
+        :keyword proxy_api_version: Api version used by proxy call. Default value is None.
+        :paramtype proxy_api_version: str
         :return: An iterator like instance of RaiPolicyPropertiesBasicResource
         :rtype:
          ~azure.core.paging.ItemPaged[~azure.mgmt.machinelearningservices.models.RaiPolicyPropertiesBasicResource]
@@ -49646,6 +49900,7 @@ class RaiPoliciesOperations:
                     workspace_name=workspace_name,
                     endpoint_name=endpoint_name,
                     subscription_id=self._config.subscription_id,
+                    proxy_api_version=proxy_api_version,
                     api_version=self._config.api_version,
                     headers=_headers,
                     params=_params,
@@ -50072,9 +50327,9 @@ class EndpointOperations:
         workspace_name: str,
         *,
         endpoint_type: Optional[Union[str, _models.EndpointType]] = None,
-        include_online_endpoints: Optional[bool] = None,
-        include_serverless_endpoints: Optional[bool] = None,
-        include_connections: Optional[bool] = None,
+        include_online_endpoints: bool = False,
+        include_serverless_endpoints: bool = False,
+        include_connections: bool = False,
         skip: Optional[str] = None,
         expand: Optional[str] = None,
         **kwargs: Any
@@ -50092,11 +50347,11 @@ class EndpointOperations:
          "Azure.ContentSafety", "Azure.Llama", "managedOnlineEndpoint", and "serverlessEndpoint".
          Default value is None.
         :paramtype endpoint_type: str or ~azure.mgmt.machinelearningservices.models.EndpointType
-        :keyword include_online_endpoints: Default value is None.
+        :keyword include_online_endpoints: Default value is False.
         :paramtype include_online_endpoints: bool
-        :keyword include_serverless_endpoints: Default value is None.
+        :keyword include_serverless_endpoints: Default value is False.
         :paramtype include_serverless_endpoints: bool
-        :keyword include_connections: Default value is None.
+        :keyword include_connections: Default value is False.
         :paramtype include_connections: bool
         :keyword skip: Continuation token for pagination. Default value is None.
         :paramtype skip: str
