@@ -1,36 +1,9 @@
 ## tsp migration
 
-## 2.0.0b3 (2026-01-15)
-
-change log generation failed!!! You need to write it manually!!!
-
-## 2.0.0b3 (2026-01-14)
-
-change log generation failed!!! You need to write it manually!!!
-
 ### Breaking Changes
 
 - Method `SparkJob.__init__` removed default value `None` from its parameter `args`
 - Method `SparkJob.__init__` changed its parameter `args` from `keyword_only` to `var_positional`
-
-- Method `DatastoresOperations.create_or_update` parameter `skip_validation` changed default value from `bool` to `none`
-- Method `DatastoresOperations.list` parameter `count` changed default value from `int` to `none`
-- Method `DatastoresOperations.list` parameter `order_by_asc` changed default value from `bool` to `none`
-- Method `EndpointOperations.list` parameter `include_online_endpoints` changed default value from `bool` to `none`
-- Method `EndpointOperations.list` parameter `include_serverless_endpoints` changed default value from `bool` to `none`
-- Method `EndpointOperations.list` parameter `include_connections` changed default value from `bool` to `none`
-- Method `FeaturesOperations.list` parameter `page_size` changed default value from `int` to `none`
-- Method `FeaturesetContainersOperations.list` parameter `page_size` changed default value from `int` to `none`
-- Method `FeaturesetVersionsOperations.list` parameter `page_size` changed default value from `int` to `none`
-- Method `FeaturestoreEntityContainersOperations.list` parameter `page_size` changed default value from `int` to `none`
-- Method `FeaturestoreEntityVersionsOperations.list` parameter `page_size` changed default value from `int` to `none`
-- Method `WorkspaceConnectionsOperations.list` parameter `include_all` changed default value from `bool` to `none`
-- Method `WorkspacesOperations.begin_delete` parameter `force_to_purge` changed default value from `bool` to `none`
-- Method `SchedulesOperations.list` parameter `list_view_type` changed default value from `str` to `none`
-
-
-- Renamed enum `ComputeInstancePropertiesComputeInstanceAuthorizationType` to `ComputeInstanceAuthorizationType`
-
 
 - Model `BatchEndpointProperties` deleted or renamed its instance variable `keys`
 - Model `CustomKeys` deleted or renamed its instance variable `keys`
