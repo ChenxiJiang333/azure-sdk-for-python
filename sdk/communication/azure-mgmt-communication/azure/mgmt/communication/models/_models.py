@@ -153,7 +153,7 @@ class CommunicationServiceProperties(_Model):
     :ivar provisioning_state: Provisioning state of the resource. Known values are: "Unknown",
      "Succeeded", "Failed", "Canceled", "Running", "Creating", "Updating", "Deleting", and "Moving".
     :vartype provisioning_state: str or
-     ~azure.mgmt.communication.models.CommunicationServices_ProvisioningState
+     ~azure.mgmt.communication.models.CommunicationServicesProvisioningState
     :ivar host_name: FQDN of the CommunicationService instance.
     :vartype host_name: str
     :ivar data_location: The location where the communication service stores its data at rest.
@@ -177,7 +177,7 @@ class CommunicationServiceProperties(_Model):
     :vartype disable_local_auth: bool
     """
 
-    provisioning_state: Optional[Union[str, "_models.CommunicationServices_ProvisioningState"]] = rest_field(
+    provisioning_state: Optional[Union[str, "_models.CommunicationServicesProvisioningState"]] = rest_field(
         name="provisioningState", visibility=["read"]
     )
     """Provisioning state of the resource. Known values are: \"Unknown\", \"Succeeded\", \"Failed\",
@@ -548,7 +548,7 @@ class DomainProperties(_Model):
 
     :ivar provisioning_state: Provisioning state of the resource. Known values are: "Unknown",
      "Succeeded", "Failed", "Canceled", "Running", "Creating", "Updating", "Deleting", and "Moving".
-    :vartype provisioning_state: str or ~azure.mgmt.communication.models.Domains_ProvisioningState
+    :vartype provisioning_state: str or ~azure.mgmt.communication.models.DomainsProvisioningState
     :ivar data_location: The location where the Domains resource data is stored at rest.
     :vartype data_location: str
     :ivar from_sender_domain: P2 sender domain that is displayed to the email recipients [RFC
@@ -572,7 +572,7 @@ class DomainProperties(_Model):
      ~azure.mgmt.communication.models.UserEngagementTracking
     """
 
-    provisioning_state: Optional[Union[str, "_models.Domains_ProvisioningState"]] = rest_field(
+    provisioning_state: Optional[Union[str, "_models.DomainsProvisioningState"]] = rest_field(
         name="provisioningState", visibility=["read"]
     )
     """Provisioning state of the resource. Known values are: \"Unknown\", \"Succeeded\", \"Failed\",
@@ -819,12 +819,12 @@ class EmailServiceProperties(_Model):
     :ivar provisioning_state: Provisioning state of the resource. Known values are: "Unknown",
      "Succeeded", "Failed", "Canceled", "Running", "Creating", "Updating", "Deleting", and "Moving".
     :vartype provisioning_state: str or
-     ~azure.mgmt.communication.models.EmailServices_ProvisioningState
+     ~azure.mgmt.communication.models.EmailServicesProvisioningState
     :ivar data_location: The location where the email service stores its data at rest. Required.
     :vartype data_location: str
     """
 
-    provisioning_state: Optional[Union[str, "_models.EmailServices_ProvisioningState"]] = rest_field(
+    provisioning_state: Optional[Union[str, "_models.EmailServicesProvisioningState"]] = rest_field(
         name="provisioningState", visibility=["read"]
     )
     """Provisioning state of the resource. Known values are: \"Unknown\", \"Succeeded\", \"Failed\",

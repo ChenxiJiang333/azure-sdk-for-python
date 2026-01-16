@@ -6,7 +6,7 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 import pytest
-from azure.mgmt.communication.aio import CommunicationClient
+from azure.mgmt.communication.aio import CommunicationServiceManagementClient
 
 from devtools_testutils import AzureMgmtRecordedTestCase, RandomNameResourceGroupPreparer
 from devtools_testutils.aio import recorded_by_proxy_async
@@ -15,19 +15,18 @@ AZURE_LOCATION = "eastus"
 
 
 @pytest.mark.skip("you may need to update the auto-generated test case before run it")
-class TestCommunicationSuppressionListAddressesOperationsAsync(AzureMgmtRecordedTestCase):
+class TestCommunicationServiceManagementSuppressionListsOperationsAsync(AzureMgmtRecordedTestCase):
     def setup_method(self, method):
-        self.client = self.create_mgmt_client(CommunicationClient, is_async=True)
+        self.client = self.create_mgmt_client(CommunicationServiceManagementClient, is_async=True)
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_suppression_list_addresses_get(self, resource_group):
-        response = await self.client.suppression_list_addresses.get(
+    async def test_suppression_lists_get(self, resource_group):
+        response = await self.client.suppression_lists.get(
             resource_group_name=resource_group.name,
             email_service_name="str",
             domain_name="str",
             suppression_list_name="str",
-            address_id="str",
         )
 
         # please add some check logic here by yourself
@@ -35,23 +34,20 @@ class TestCommunicationSuppressionListAddressesOperationsAsync(AzureMgmtRecorded
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_suppression_list_addresses_create_or_update(self, resource_group):
-        response = await self.client.suppression_list_addresses.create_or_update(
+    async def test_suppression_lists_create_or_update(self, resource_group):
+        response = await self.client.suppression_lists.create_or_update(
             resource_group_name=resource_group.name,
             email_service_name="str",
             domain_name="str",
             suppression_list_name="str",
-            address_id="str",
             parameters={
                 "id": "str",
                 "name": "str",
                 "properties": {
-                    "email": "str",
+                    "createdTimeStamp": "str",
                     "dataLocation": "str",
-                    "firstName": "str",
-                    "lastModified": "2020-02-20 00:00:00",
-                    "lastName": "str",
-                    "notes": "str",
+                    "lastUpdatedTimeStamp": "str",
+                    "listName": "str",
                 },
                 "systemData": {
                     "createdAt": "2020-02-20 00:00:00",
@@ -70,13 +66,12 @@ class TestCommunicationSuppressionListAddressesOperationsAsync(AzureMgmtRecorded
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_suppression_list_addresses_delete(self, resource_group):
-        response = await self.client.suppression_list_addresses.delete(
+    async def test_suppression_lists_delete(self, resource_group):
+        response = await self.client.suppression_lists.delete(
             resource_group_name=resource_group.name,
             email_service_name="str",
             domain_name="str",
             suppression_list_name="str",
-            address_id="str",
         )
 
         # please add some check logic here by yourself
@@ -84,12 +79,11 @@ class TestCommunicationSuppressionListAddressesOperationsAsync(AzureMgmtRecorded
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_suppression_list_addresses_list(self, resource_group):
-        response = self.client.suppression_list_addresses.list(
+    async def test_suppression_lists_list_by_domain(self, resource_group):
+        response = self.client.suppression_lists.list_by_domain(
             resource_group_name=resource_group.name,
             email_service_name="str",
             domain_name="str",
-            suppression_list_name="str",
         )
         result = [r async for r in response]
         # please add some check logic here by yourself

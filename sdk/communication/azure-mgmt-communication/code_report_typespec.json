@@ -1,7 +1,7 @@
 {
   "azure.mgmt.communication": {
     "class_nodes": {
-      "CommunicationClient": {
+      "CommunicationServiceManagementClient": {
         "type": null,
         "methods": {
           "__init__": {
@@ -4627,7 +4627,7 @@
           "disable_local_auth": "Optional"
         }
       },
-      "CommunicationServices_ProvisioningState": {
+      "CommunicationServicesProvisioningState": {
         "type": "Enum",
         "methods": {},
         "properties": {
@@ -5910,7 +5910,7 @@
           "system_data": "Optional"
         }
       },
-      "Domains_ProvisioningState": {
+      "DomainsProvisioningState": {
         "type": "Enum",
         "methods": {},
         "properties": {
@@ -6673,7 +6673,7 @@
           "tags": "Optional"
         }
       },
-      "EmailServices_ProvisioningState": {
+      "EmailServicesProvisioningState": {
         "type": "Enum",
         "methods": {},
         "properties": {
@@ -12921,7 +12921,7 @@
   },
   "azure.mgmt.communication.aio": {
     "class_nodes": {
-      "CommunicationClient": {
+      "CommunicationServiceManagementClient": {
         "type": null,
         "methods": {
           "__init__": {

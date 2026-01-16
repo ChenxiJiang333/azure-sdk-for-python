@@ -6,7 +6,7 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 import pytest
-from azure.mgmt.communication import CommunicationClient
+from azure.mgmt.communication import CommunicationServiceManagementClient
 
 from devtools_testutils import AzureMgmtRecordedTestCase, RandomNameResourceGroupPreparer, recorded_by_proxy
 
@@ -14,18 +14,16 @@ AZURE_LOCATION = "eastus"
 
 
 @pytest.mark.skip("you may need to update the auto-generated test case before run it")
-class TestCommunicationSenderUsernamesOperations(AzureMgmtRecordedTestCase):
+class TestCommunicationServiceManagementEmailServicesOperations(AzureMgmtRecordedTestCase):
     def setup_method(self, method):
-        self.client = self.create_mgmt_client(CommunicationClient)
+        self.client = self.create_mgmt_client(CommunicationServiceManagementClient)
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_sender_usernames_get(self, resource_group):
-        response = self.client.sender_usernames.get(
+    def test_email_services_get(self, resource_group):
+        response = self.client.email_services.get(
             resource_group_name=resource_group.name,
             email_service_name="str",
-            domain_name="str",
-            sender_username="str",
         )
 
         # please add some check logic here by yourself
@@ -33,21 +31,15 @@ class TestCommunicationSenderUsernamesOperations(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_sender_usernames_create_or_update(self, resource_group):
-        response = self.client.sender_usernames.create_or_update(
+    def test_email_services_begin_create_or_update(self, resource_group):
+        response = self.client.email_services.begin_create_or_update(
             resource_group_name=resource_group.name,
             email_service_name="str",
-            domain_name="str",
-            sender_username="str",
             parameters={
+                "location": "str",
                 "id": "str",
                 "name": "str",
-                "properties": {
-                    "username": "str",
-                    "dataLocation": "str",
-                    "displayName": "str",
-                    "provisioningState": "str",
-                },
+                "properties": {"dataLocation": "str", "provisioningState": "str"},
                 "systemData": {
                     "createdAt": "2020-02-20 00:00:00",
                     "createdBy": "str",
@@ -56,34 +48,59 @@ class TestCommunicationSenderUsernamesOperations(AzureMgmtRecordedTestCase):
                     "lastModifiedBy": "str",
                     "lastModifiedByType": "str",
                 },
+                "tags": {"str": "str"},
                 "type": "str",
             },
-        )
+        ).result()  # call '.result()' to poll until service return final result
 
         # please add some check logic here by yourself
         # ...
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_sender_usernames_delete(self, resource_group):
-        response = self.client.sender_usernames.delete(
+    def test_email_services_begin_update(self, resource_group):
+        response = self.client.email_services.begin_update(
             resource_group_name=resource_group.name,
             email_service_name="str",
-            domain_name="str",
-            sender_username="str",
-        )
+            parameters={"tags": {"str": "str"}},
+        ).result()  # call '.result()' to poll until service return final result
 
         # please add some check logic here by yourself
         # ...
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_sender_usernames_list_by_domains(self, resource_group):
-        response = self.client.sender_usernames.list_by_domains(
+    def test_email_services_begin_delete(self, resource_group):
+        response = self.client.email_services.begin_delete(
             resource_group_name=resource_group.name,
             email_service_name="str",
-            domain_name="str",
+        ).result()  # call '.result()' to poll until service return final result
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
+    def test_email_services_list_by_resource_group(self, resource_group):
+        response = self.client.email_services.list_by_resource_group(
+            resource_group_name=resource_group.name,
         )
         result = [r for r in response]
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
+    def test_email_services_list_by_subscription(self, resource_group):
+        response = self.client.email_services.list_by_subscription()
+        result = [r for r in response]
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
+    def test_email_services_list_verified_exchange_online_domains(self, resource_group):
+        response = self.client.email_services.list_verified_exchange_online_domains()
+
         # please add some check logic here by yourself
         # ...

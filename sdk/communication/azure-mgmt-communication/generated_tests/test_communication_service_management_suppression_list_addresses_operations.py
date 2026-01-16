@@ -6,7 +6,7 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 import pytest
-from azure.mgmt.communication import CommunicationClient
+from azure.mgmt.communication import CommunicationServiceManagementClient
 
 from devtools_testutils import AzureMgmtRecordedTestCase, RandomNameResourceGroupPreparer, recorded_by_proxy
 
@@ -14,17 +14,19 @@ AZURE_LOCATION = "eastus"
 
 
 @pytest.mark.skip("you may need to update the auto-generated test case before run it")
-class TestCommunicationSmtpUsernamesOperations(AzureMgmtRecordedTestCase):
+class TestCommunicationServiceManagementSuppressionListAddressesOperations(AzureMgmtRecordedTestCase):
     def setup_method(self, method):
-        self.client = self.create_mgmt_client(CommunicationClient)
+        self.client = self.create_mgmt_client(CommunicationServiceManagementClient)
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_smtp_usernames_get(self, resource_group):
-        response = self.client.smtp_usernames.get(
+    def test_suppression_list_addresses_get(self, resource_group):
+        response = self.client.suppression_list_addresses.get(
             resource_group_name=resource_group.name,
-            communication_service_name="str",
-            smtp_username="str",
+            email_service_name="str",
+            domain_name="str",
+            suppression_list_name="str",
+            address_id="str",
         )
 
         # please add some check logic here by yourself
@@ -32,15 +34,24 @@ class TestCommunicationSmtpUsernamesOperations(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_smtp_usernames_create_or_update(self, resource_group):
-        response = self.client.smtp_usernames.create_or_update(
+    def test_suppression_list_addresses_create_or_update(self, resource_group):
+        response = self.client.suppression_list_addresses.create_or_update(
             resource_group_name=resource_group.name,
-            communication_service_name="str",
-            smtp_username="str",
+            email_service_name="str",
+            domain_name="str",
+            suppression_list_name="str",
+            address_id="str",
             parameters={
                 "id": "str",
                 "name": "str",
-                "properties": {"entraApplicationId": "str", "tenantId": "str", "username": "str"},
+                "properties": {
+                    "email": "str",
+                    "dataLocation": "str",
+                    "firstName": "str",
+                    "lastModified": "2020-02-20 00:00:00",
+                    "lastName": "str",
+                    "notes": "str",
+                },
                 "systemData": {
                     "createdAt": "2020-02-20 00:00:00",
                     "createdBy": "str",
@@ -58,11 +69,13 @@ class TestCommunicationSmtpUsernamesOperations(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_smtp_usernames_delete(self, resource_group):
-        response = self.client.smtp_usernames.delete(
+    def test_suppression_list_addresses_delete(self, resource_group):
+        response = self.client.suppression_list_addresses.delete(
             resource_group_name=resource_group.name,
-            communication_service_name="str",
-            smtp_username="str",
+            email_service_name="str",
+            domain_name="str",
+            suppression_list_name="str",
+            address_id="str",
         )
 
         # please add some check logic here by yourself
@@ -70,10 +83,12 @@ class TestCommunicationSmtpUsernamesOperations(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_smtp_usernames_list(self, resource_group):
-        response = self.client.smtp_usernames.list(
+    def test_suppression_list_addresses_list(self, resource_group):
+        response = self.client.suppression_list_addresses.list(
             resource_group_name=resource_group.name,
-            communication_service_name="str",
+            email_service_name="str",
+            domain_name="str",
+            suppression_list_name="str",
         )
         result = [r for r in response]
         # please add some check logic here by yourself

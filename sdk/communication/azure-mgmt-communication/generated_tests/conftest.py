@@ -21,14 +21,26 @@ load_dotenv()
 # For security, please avoid record sensitive identity information in recordings
 @pytest.fixture(scope="session", autouse=True)
 def add_sanitizers(test_proxy):
-    communication_subscription_id = os.environ.get("AZURE_SUBSCRIPTION_ID", "00000000-0000-0000-0000-000000000000")
-    communication_tenant_id = os.environ.get("AZURE_TENANT_ID", "00000000-0000-0000-0000-000000000000")
-    communication_client_id = os.environ.get("AZURE_CLIENT_ID", "00000000-0000-0000-0000-000000000000")
-    communication_client_secret = os.environ.get("AZURE_CLIENT_SECRET", "00000000-0000-0000-0000-000000000000")
-    add_general_regex_sanitizer(regex=communication_subscription_id, value="00000000-0000-0000-0000-000000000000")
-    add_general_regex_sanitizer(regex=communication_tenant_id, value="00000000-0000-0000-0000-000000000000")
-    add_general_regex_sanitizer(regex=communication_client_id, value="00000000-0000-0000-0000-000000000000")
-    add_general_regex_sanitizer(regex=communication_client_secret, value="00000000-0000-0000-0000-000000000000")
+    communicationservicemanagement_subscription_id = os.environ.get(
+        "AZURE_SUBSCRIPTION_ID", "00000000-0000-0000-0000-000000000000"
+    )
+    communicationservicemanagement_tenant_id = os.environ.get("AZURE_TENANT_ID", "00000000-0000-0000-0000-000000000000")
+    communicationservicemanagement_client_id = os.environ.get("AZURE_CLIENT_ID", "00000000-0000-0000-0000-000000000000")
+    communicationservicemanagement_client_secret = os.environ.get(
+        "AZURE_CLIENT_SECRET", "00000000-0000-0000-0000-000000000000"
+    )
+    add_general_regex_sanitizer(
+        regex=communicationservicemanagement_subscription_id, value="00000000-0000-0000-0000-000000000000"
+    )
+    add_general_regex_sanitizer(
+        regex=communicationservicemanagement_tenant_id, value="00000000-0000-0000-0000-000000000000"
+    )
+    add_general_regex_sanitizer(
+        regex=communicationservicemanagement_client_id, value="00000000-0000-0000-0000-000000000000"
+    )
+    add_general_regex_sanitizer(
+        regex=communicationservicemanagement_client_secret, value="00000000-0000-0000-0000-000000000000"
+    )
 
     add_header_regex_sanitizer(key="Set-Cookie", value="[set-cookie;]")
     add_header_regex_sanitizer(key="Cookie", value="cookie;")

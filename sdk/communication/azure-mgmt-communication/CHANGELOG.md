@@ -1,5 +1,9 @@
 ## tsp migration
 
+## 2.2.0 (2026-01-16)
+
+change log generation failed!!! You need to write it manually!!!
+
 ### Breaking Changes
 
 - Deleted or renamed client `CommunicationServiceManagementClient`

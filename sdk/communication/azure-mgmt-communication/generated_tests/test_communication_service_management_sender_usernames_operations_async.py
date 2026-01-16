@@ -6,7 +6,7 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 import pytest
-from azure.mgmt.communication.aio import CommunicationClient
+from azure.mgmt.communication.aio import CommunicationServiceManagementClient
 
 from devtools_testutils import AzureMgmtRecordedTestCase, RandomNameResourceGroupPreparer
 from devtools_testutils.aio import recorded_by_proxy_async
@@ -15,17 +15,18 @@ AZURE_LOCATION = "eastus"
 
 
 @pytest.mark.skip("you may need to update the auto-generated test case before run it")
-class TestCommunicationSmtpUsernamesOperationsAsync(AzureMgmtRecordedTestCase):
+class TestCommunicationServiceManagementSenderUsernamesOperationsAsync(AzureMgmtRecordedTestCase):
     def setup_method(self, method):
-        self.client = self.create_mgmt_client(CommunicationClient, is_async=True)
+        self.client = self.create_mgmt_client(CommunicationServiceManagementClient, is_async=True)
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_smtp_usernames_get(self, resource_group):
-        response = await self.client.smtp_usernames.get(
+    async def test_sender_usernames_get(self, resource_group):
+        response = await self.client.sender_usernames.get(
             resource_group_name=resource_group.name,
-            communication_service_name="str",
-            smtp_username="str",
+            email_service_name="str",
+            domain_name="str",
+            sender_username="str",
         )
 
         # please add some check logic here by yourself
@@ -33,15 +34,21 @@ class TestCommunicationSmtpUsernamesOperationsAsync(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_smtp_usernames_create_or_update(self, resource_group):
-        response = await self.client.smtp_usernames.create_or_update(
+    async def test_sender_usernames_create_or_update(self, resource_group):
+        response = await self.client.sender_usernames.create_or_update(
             resource_group_name=resource_group.name,
-            communication_service_name="str",
-            smtp_username="str",
+            email_service_name="str",
+            domain_name="str",
+            sender_username="str",
             parameters={
                 "id": "str",
                 "name": "str",
-                "properties": {"entraApplicationId": "str", "tenantId": "str", "username": "str"},
+                "properties": {
+                    "username": "str",
+                    "dataLocation": "str",
+                    "displayName": "str",
+                    "provisioningState": "str",
+                },
                 "systemData": {
                     "createdAt": "2020-02-20 00:00:00",
                     "createdBy": "str",
@@ -59,11 +66,12 @@ class TestCommunicationSmtpUsernamesOperationsAsync(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_smtp_usernames_delete(self, resource_group):
-        response = await self.client.smtp_usernames.delete(
+    async def test_sender_usernames_delete(self, resource_group):
+        response = await self.client.sender_usernames.delete(
             resource_group_name=resource_group.name,
-            communication_service_name="str",
-            smtp_username="str",
+            email_service_name="str",
+            domain_name="str",
+            sender_username="str",
         )
 
         # please add some check logic here by yourself
@@ -71,10 +79,11 @@ class TestCommunicationSmtpUsernamesOperationsAsync(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_smtp_usernames_list(self, resource_group):
-        response = self.client.smtp_usernames.list(
+    async def test_sender_usernames_list_by_domains(self, resource_group):
+        response = self.client.sender_usernames.list_by_domains(
             resource_group_name=resource_group.name,
-            communication_service_name="str",
+            email_service_name="str",
+            domain_name="str",
         )
         result = [r async for r in response]
         # please add some check logic here by yourself

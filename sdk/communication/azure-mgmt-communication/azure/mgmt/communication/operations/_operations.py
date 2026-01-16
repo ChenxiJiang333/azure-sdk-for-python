@@ -33,7 +33,7 @@ from azure.mgmt.core.exceptions import ARMErrorFormat
 from azure.mgmt.core.polling.arm_polling import ARMPolling
 
 from .. import models as _models
-from .._configuration import CommunicationClientConfiguration
+from .._configuration import CommunicationServiceManagementClientConfiguration
 from .._utils.model_base import SdkJSONEncoder, _deserialize, _failsafe_deserialize
 from .._utils.serialization import Deserializer, Serializer
 
@@ -1265,14 +1265,16 @@ class Operations:
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.communication.CommunicationClient`'s
+        :class:`~azure.mgmt.communication.CommunicationServiceManagementClient`'s
         :attr:`operations` attribute.
     """
 
     def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client: PipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: CommunicationClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._config: CommunicationServiceManagementClientConfiguration = (
+            input_args.pop(0) if input_args else kwargs.pop("config")
+        )
         self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
@@ -1371,14 +1373,16 @@ class CommunicationServicesOperations:
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.communication.CommunicationClient`'s
+        :class:`~azure.mgmt.communication.CommunicationServiceManagementClient`'s
         :attr:`communication_services` attribute.
     """
 
     def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client: PipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: CommunicationClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._config: CommunicationServiceManagementClientConfiguration = (
+            input_args.pop(0) if input_args else kwargs.pop("config")
+        )
         self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
@@ -2787,14 +2791,16 @@ class DomainsOperations:
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.communication.CommunicationClient`'s
+        :class:`~azure.mgmt.communication.CommunicationServiceManagementClient`'s
         :attr:`domains` attribute.
     """
 
     def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client: PipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: CommunicationClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._config: CommunicationServiceManagementClientConfiguration = (
+            input_args.pop(0) if input_args else kwargs.pop("config")
+        )
         self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
@@ -4117,14 +4123,16 @@ class EmailServicesOperations:
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.communication.CommunicationClient`'s
+        :class:`~azure.mgmt.communication.CommunicationServiceManagementClient`'s
         :attr:`email_services` attribute.
     """
 
     def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client: PipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: CommunicationClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._config: CommunicationServiceManagementClientConfiguration = (
+            input_args.pop(0) if input_args else kwargs.pop("config")
+        )
         self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
@@ -5058,14 +5066,16 @@ class SenderUsernamesOperations:
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.communication.CommunicationClient`'s
+        :class:`~azure.mgmt.communication.CommunicationServiceManagementClient`'s
         :attr:`sender_usernames` attribute.
     """
 
     def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client: PipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: CommunicationClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._config: CommunicationServiceManagementClientConfiguration = (
+            input_args.pop(0) if input_args else kwargs.pop("config")
+        )
         self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
@@ -5530,14 +5540,16 @@ class SmtpUsernamesOperations:
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.communication.CommunicationClient`'s
+        :class:`~azure.mgmt.communication.CommunicationServiceManagementClient`'s
         :attr:`smtp_usernames` attribute.
     """
 
     def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client: PipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: CommunicationClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._config: CommunicationServiceManagementClientConfiguration = (
+            input_args.pop(0) if input_args else kwargs.pop("config")
+        )
         self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
@@ -5976,14 +5988,16 @@ class SuppressionListsOperations:
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.communication.CommunicationClient`'s
+        :class:`~azure.mgmt.communication.CommunicationServiceManagementClient`'s
         :attr:`suppression_lists` attribute.
     """
 
     def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client: PipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: CommunicationClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._config: CommunicationServiceManagementClientConfiguration = (
+            input_args.pop(0) if input_args else kwargs.pop("config")
+        )
         self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
@@ -6458,14 +6472,16 @@ class SuppressionListAddressesOperations:
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.communication.CommunicationClient`'s
+        :class:`~azure.mgmt.communication.CommunicationServiceManagementClient`'s
         :attr:`suppression_list_addresses` attribute.
     """
 
     def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client: PipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: CommunicationClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._config: CommunicationServiceManagementClientConfiguration = (
+            input_args.pop(0) if input_args else kwargs.pop("config")
+        )
         self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 

@@ -28,7 +28,7 @@ class CheckNameAvailabilityReason(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Name already exists."""
 
 
-class CommunicationServices_ProvisioningState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+class CommunicationServicesProvisioningState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Provisioning state of the resource."""
 
     UNKNOWN = "Unknown"
@@ -75,7 +75,7 @@ class DomainManagement(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """CustomerManagedInExchangeOnline"""
 
 
-class Domains_ProvisioningState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+class DomainsProvisioningState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Provisioning state of the resource."""
 
     UNKNOWN = "Unknown"
@@ -98,7 +98,7 @@ class Domains_ProvisioningState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Moving"""
 
 
-class EmailServices_ProvisioningState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+class EmailServicesProvisioningState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Provisioning state of the resource."""
 
     UNKNOWN = "Unknown"

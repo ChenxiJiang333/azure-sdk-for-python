@@ -6,49 +6,41 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 import pytest
-from azure.mgmt.communication.aio import CommunicationClient
+from azure.mgmt.communication import CommunicationServiceManagementClient
 
-from devtools_testutils import AzureMgmtRecordedTestCase, RandomNameResourceGroupPreparer
-from devtools_testutils.aio import recorded_by_proxy_async
+from devtools_testutils import AzureMgmtRecordedTestCase, RandomNameResourceGroupPreparer, recorded_by_proxy
 
 AZURE_LOCATION = "eastus"
 
 
 @pytest.mark.skip("you may need to update the auto-generated test case before run it")
-class TestCommunicationSuppressionListsOperationsAsync(AzureMgmtRecordedTestCase):
+class TestCommunicationServiceManagementSmtpUsernamesOperations(AzureMgmtRecordedTestCase):
     def setup_method(self, method):
-        self.client = self.create_mgmt_client(CommunicationClient, is_async=True)
+        self.client = self.create_mgmt_client(CommunicationServiceManagementClient)
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_suppression_lists_get(self, resource_group):
-        response = await self.client.suppression_lists.get(
+    @recorded_by_proxy
+    def test_smtp_usernames_get(self, resource_group):
+        response = self.client.smtp_usernames.get(
             resource_group_name=resource_group.name,
-            email_service_name="str",
-            domain_name="str",
-            suppression_list_name="str",
+            communication_service_name="str",
+            smtp_username="str",
         )
 
         # please add some check logic here by yourself
         # ...
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_suppression_lists_create_or_update(self, resource_group):
-        response = await self.client.suppression_lists.create_or_update(
+    @recorded_by_proxy
+    def test_smtp_usernames_create_or_update(self, resource_group):
+        response = self.client.smtp_usernames.create_or_update(
             resource_group_name=resource_group.name,
-            email_service_name="str",
-            domain_name="str",
-            suppression_list_name="str",
+            communication_service_name="str",
+            smtp_username="str",
             parameters={
                 "id": "str",
                 "name": "str",
-                "properties": {
-                    "createdTimeStamp": "str",
-                    "dataLocation": "str",
-                    "lastUpdatedTimeStamp": "str",
-                    "listName": "str",
-                },
+                "properties": {"entraApplicationId": "str", "tenantId": "str", "username": "str"},
                 "systemData": {
                     "createdAt": "2020-02-20 00:00:00",
                     "createdBy": "str",
@@ -65,26 +57,24 @@ class TestCommunicationSuppressionListsOperationsAsync(AzureMgmtRecordedTestCase
         # ...
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_suppression_lists_delete(self, resource_group):
-        response = await self.client.suppression_lists.delete(
+    @recorded_by_proxy
+    def test_smtp_usernames_delete(self, resource_group):
+        response = self.client.smtp_usernames.delete(
             resource_group_name=resource_group.name,
-            email_service_name="str",
-            domain_name="str",
-            suppression_list_name="str",
+            communication_service_name="str",
+            smtp_username="str",
         )
 
         # please add some check logic here by yourself
         # ...
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_suppression_lists_list_by_domain(self, resource_group):
-        response = self.client.suppression_lists.list_by_domain(
+    @recorded_by_proxy
+    def test_smtp_usernames_list(self, resource_group):
+        response = self.client.smtp_usernames.list(
             resource_group_name=resource_group.name,
-            email_service_name="str",
-            domain_name="str",
+            communication_service_name="str",
         )
-        result = [r async for r in response]
+        result = [r for r in response]
         # please add some check logic here by yourself
         # ...
