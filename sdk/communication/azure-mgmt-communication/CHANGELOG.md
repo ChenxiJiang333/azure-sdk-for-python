@@ -3,6 +3,10 @@
 ### Breaking Changes
 
 - Deleted or renamed client `CommunicationServiceManagementClient`
+- Renamed enum `CommunicationServicesProvisioningState` to `CommunicationServices_ProvisioningState`
+- Renamed enum `DomainsProvisioningState` to `Domains_ProvisioningState``
+- Renamed enum `EmailServicesProvisioningState` to `EmailServices_ProvisioningState`
+
 - Model `CommunicationServiceResource` deleted or renamed its instance variable `provisioning_state`
 - Model `CommunicationServiceResource` deleted or renamed its instance variable `host_name`
 - Model `CommunicationServiceResource` deleted or renamed its instance variable `data_location`
@@ -44,11 +48,8 @@
 - Model `SuppressionListResource` deleted or renamed its instance variable `data_location`
 - Model `UpdateDomainRequestParameters` deleted or renamed its instance variable `user_engagement_tracking`
 - Deleted or renamed model `CommunicationServiceResourceList`
-- Deleted or renamed model `CommunicationServicesProvisioningState`
 - Deleted or renamed model `DomainResourceList`
-- Deleted or renamed model `DomainsProvisioningState`
 - Deleted or renamed model `EmailServiceResourceList`
-- Deleted or renamed model `EmailServicesProvisioningState`
 - Deleted or renamed model `SenderUsernameResourceCollection`
 - Deleted or renamed model `SmtpUsernameResourceCollection`
 - Deleted or renamed model `SuppressionListAddressResourceCollection`
