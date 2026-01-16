@@ -27,14 +27,23 @@ class CommunicationServicesProvisioningState(str, Enum, metaclass=CaseInsensitiv
     """Provisioning state of the resource."""
 
     UNKNOWN = "Unknown"
+    """Unknown"""
     SUCCEEDED = "Succeeded"
+    """Succeeded"""
     FAILED = "Failed"
+    """Failed"""
     CANCELED = "Canceled"
+    """Canceled"""
     RUNNING = "Running"
+    """Running"""
     CREATING = "Creating"
+    """Creating"""
     UPDATING = "Updating"
+    """Updating"""
     DELETING = "Deleting"
+    """Deleting"""
     MOVING = "Moving"
+    """Moving"""
 
 
 class CreatedByType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
@@ -50,43 +59,66 @@ class DomainManagement(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Describes how a Domains resource is being managed."""
 
     AZURE_MANAGED = "AzureManaged"
+    """AzureManaged"""
     CUSTOMER_MANAGED = "CustomerManaged"
+    """CustomerManaged"""
     CUSTOMER_MANAGED_IN_EXCHANGE_ONLINE = "CustomerManagedInExchangeOnline"
+    """CustomerManagedInExchangeOnline"""
 
 
 class DomainsProvisioningState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Provisioning state of the resource."""
 
     UNKNOWN = "Unknown"
+    """Unknown"""
     SUCCEEDED = "Succeeded"
+    """Succeeded"""
     FAILED = "Failed"
+    """Failed"""
     CANCELED = "Canceled"
+    """Canceled"""
     RUNNING = "Running"
+    """Running"""
     CREATING = "Creating"
+    """Creating"""
     UPDATING = "Updating"
+    """Updating"""
     DELETING = "Deleting"
+    """Deleting"""
     MOVING = "Moving"
+    """Moving"""
 
 
 class EmailServicesProvisioningState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Provisioning state of the resource."""
 
     UNKNOWN = "Unknown"
+    """Unknown"""
     SUCCEEDED = "Succeeded"
+    """Succeeded"""
     FAILED = "Failed"
+    """Failed"""
     CANCELED = "Canceled"
+    """Canceled"""
     RUNNING = "Running"
+    """Running"""
     CREATING = "Creating"
+    """Creating"""
     UPDATING = "Updating"
+    """Updating"""
     DELETING = "Deleting"
+    """Deleting"""
     MOVING = "Moving"
+    """Moving"""
 
 
 class KeyType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The keyType to regenerate. Must be either 'primary' or 'secondary'(case-insensitive)."""
 
     PRIMARY = "Primary"
+    """Primary"""
     SECONDARY = "Secondary"
+    """Secondary"""
 
 
 class ManagedServiceIdentityType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
@@ -114,39 +146,76 @@ class ProvisioningState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Provisioning state of the resource. Unknown is the default state for Communication Services."""
 
     UNKNOWN = "Unknown"
+    """Unknown"""
     SUCCEEDED = "Succeeded"
+    """Succeeded"""
     FAILED = "Failed"
+    """Failed"""
     CANCELED = "Canceled"
+    """Canceled"""
     RUNNING = "Running"
+    """Running"""
     CREATING = "Creating"
+    """Creating"""
     UPDATING = "Updating"
+    """Updating"""
     DELETING = "Deleting"
+    """Deleting"""
     MOVING = "Moving"
+    """Moving"""
+
+
+class PublicNetworkAccess(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Allow, disallow, or let network security perimeter configuration control public network access
+    to the protected resource. Value is optional but if passed in, it must be 'Enabled', 'Disabled'
+    or 'SecuredByPerimeter'.
+    """
+
+    ENABLED = "Enabled"
+    """Allows public network access to the resource"""
+    DISABLED = "Disabled"
+    """Disallows public network access to the resource"""
+    SECURED_BY_PERIMETER = "SecuredByPerimeter"
+    """The network security perimeter configuration rules allow or disallow public network access to
+    the resource. Requires an associated network security perimeter."""
 
 
 class UserEngagementTracking(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Describes whether user engagement tracking is enabled or disabled."""
 
     DISABLED = "Disabled"
+    """Disabled"""
     ENABLED = "Enabled"
+    """Enabled"""
 
 
 class VerificationStatus(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Status of the verification operation."""
 
     NOT_STARTED = "NotStarted"
+    """NotStarted"""
     VERIFICATION_REQUESTED = "VerificationRequested"
+    """VerificationRequested"""
     VERIFICATION_IN_PROGRESS = "VerificationInProgress"
+    """VerificationInProgress"""
     VERIFICATION_FAILED = "VerificationFailed"
+    """VerificationFailed"""
     VERIFIED = "Verified"
+    """Verified"""
     CANCELLATION_REQUESTED = "CancellationRequested"
+    """CancellationRequested"""
 
 
 class VerificationType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Type of verification."""
 
     DOMAIN = "Domain"
+    """Domain"""
     SPF = "SPF"
+    """SPF"""
     DKIM = "DKIM"
+    """DKIM"""
     DKIM2 = "DKIM2"
+    """DKIM2"""
     DMARC = "DMARC"
+    """DMARC"""
