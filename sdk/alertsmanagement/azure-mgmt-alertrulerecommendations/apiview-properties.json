@@ -1,0 +1,19 @@
+{
+    "CrossLanguagePackageId": null,
+    "CrossLanguageDefinitionId": {
+        "azure.mgmt.alertrulerecommendations.models.Resource": null,
+        "azure.mgmt.alertrulerecommendations.models.ProxyResource": null,
+        "azure.mgmt.alertrulerecommendations.models.AlertRuleRecommendationResource": null,
+        "azure.mgmt.alertrulerecommendations.models.AlertRuleRecommendationsListResponse": null,
+        "azure.mgmt.alertrulerecommendations.models.ErrorAdditionalInfo": null,
+        "azure.mgmt.alertrulerecommendations.models.ErrorDetail": null,
+        "azure.mgmt.alertrulerecommendations.models.ErrorResponse": null,
+        "azure.mgmt.alertrulerecommendations.models.RuleArmTemplate": null,
+        "azure.mgmt.alertrulerecommendations.models.SystemData": null,
+        "azure.mgmt.alertrulerecommendations.models.CreatedByType": null,
+        "azure.mgmt.alertrulerecommendations.operations.AlertRuleRecommendationsOperations.list_by_resource": null,
+        "azure.mgmt.alertrulerecommendations.aio.operations.AlertRuleRecommendationsOperations.list_by_resource": null,
+        "azure.mgmt.alertrulerecommendations.operations.AlertRuleRecommendationsOperations.list_by_target_type": null,
+        "azure.mgmt.alertrulerecommendations.aio.operations.AlertRuleRecommendationsOperations.list_by_target_type": null
+    }
+}
