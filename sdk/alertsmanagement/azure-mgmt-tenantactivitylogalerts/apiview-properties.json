@@ -1,0 +1,32 @@
+{
+    "CrossLanguagePackageId": null,
+    "CrossLanguageDefinitionId": {
+        "azure.mgmt.tenantactivitylogalerts.models.ActionGroup": null,
+        "azure.mgmt.tenantactivitylogalerts.models.ActionList": null,
+        "azure.mgmt.tenantactivitylogalerts.models.AlertRuleAllOfCondition": null,
+        "azure.mgmt.tenantactivitylogalerts.models.AlertRuleLeafCondition": null,
+        "azure.mgmt.tenantactivitylogalerts.models.AlertRuleAnyOfOrLeafCondition": null,
+        "azure.mgmt.tenantactivitylogalerts.models.AzureResource": null,
+        "azure.mgmt.tenantactivitylogalerts.models.ErrorAdditionalInfo": null,
+        "azure.mgmt.tenantactivitylogalerts.models.ErrorDetail": null,
+        "azure.mgmt.tenantactivitylogalerts.models.ErrorResponse": null,
+        "azure.mgmt.tenantactivitylogalerts.models.Resource": null,
+        "azure.mgmt.tenantactivitylogalerts.models.SystemData": null,
+        "azure.mgmt.tenantactivitylogalerts.models.TenantActivityLogAlertResource": null,
+        "azure.mgmt.tenantactivitylogalerts.models.TenantAlertRuleList": null,
+        "azure.mgmt.tenantactivitylogalerts.models.TenantAlertRulePatchObject": null,
+        "azure.mgmt.tenantactivitylogalerts.models.CreatedByType": null,
+        "azure.mgmt.tenantactivitylogalerts.operations.TenantActivityLogAlertsOperations.list_by_tenant": null,
+        "azure.mgmt.tenantactivitylogalerts.aio.operations.TenantActivityLogAlertsOperations.list_by_tenant": null,
+        "azure.mgmt.tenantactivitylogalerts.operations.TenantActivityLogAlertsOperations.list_by_management_group": null,
+        "azure.mgmt.tenantactivitylogalerts.aio.operations.TenantActivityLogAlertsOperations.list_by_management_group": null,
+        "azure.mgmt.tenantactivitylogalerts.operations.TenantActivityLogAlertsOperations.get": null,
+        "azure.mgmt.tenantactivitylogalerts.aio.operations.TenantActivityLogAlertsOperations.get": null,
+        "azure.mgmt.tenantactivitylogalerts.operations.TenantActivityLogAlertsOperations.create_or_update": null,
+        "azure.mgmt.tenantactivitylogalerts.aio.operations.TenantActivityLogAlertsOperations.create_or_update": null,
+        "azure.mgmt.tenantactivitylogalerts.operations.TenantActivityLogAlertsOperations.update": null,
+        "azure.mgmt.tenantactivitylogalerts.aio.operations.TenantActivityLogAlertsOperations.update": null,
+        "azure.mgmt.tenantactivitylogalerts.operations.TenantActivityLogAlertsOperations.delete": null,
+        "azure.mgmt.tenantactivitylogalerts.aio.operations.TenantActivityLogAlertsOperations.delete": null
+    }
+}
