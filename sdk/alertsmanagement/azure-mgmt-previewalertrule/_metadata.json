@@ -1,0 +1,11 @@
+{
+  "commit": "e39ecdf416bdf8d885ef50fadc6c072f4dd083f3",
+  "repository_url": "https://github.com/Azure/azure-rest-api-specs",
+  "autorest": "3.10.2",
+  "use": [
+    "@autorest/python@6.45.1",
+    "@autorest/modelerfour@4.27.0"
+  ],
+  "autorest_command": "autorest specification/alertsmanagement/resource-manager/Microsoft.AlertsManagement/PreviewAlertRule/readme.md --generate-sample=True --generate-test=True --include-x-ms-examples-original-file=True --package-mode=azure-mgmt --python --python-sdks-folder=/home/v-chenjiang/spec/azure-sdk-for-python/sdk --use=@autorest/python@6.45.1 --use=@autorest/modelerfour@4.27.0 --version=3.10.2 --version-tolerant=False",
+  "readme": "specification/alertsmanagement/resource-manager/Microsoft.AlertsManagement/PreviewAlertRule/readme.md"
+}
