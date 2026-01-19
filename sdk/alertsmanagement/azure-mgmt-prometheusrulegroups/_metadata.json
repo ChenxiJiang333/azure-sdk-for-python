@@ -1,11 +1,7 @@
 {
+  "apiVersion": "2023-03-01",
   "commit": "b2f9215bfa5a1112bee455a259771ce3da78026a",
   "repository_url": "https://github.com/Azure/azure-rest-api-specs",
-  "autorest": "3.10.2",
-  "use": [
-    "@autorest/python@6.45.1",
-    "@autorest/modelerfour@4.27.0"
-  ],
-  "autorest_command": "autorest specification/alertsmanagement/resource-manager/Microsoft.AlertsManagement/PrometheusRuleGroups/readme.md --generate-sample=True --generate-test=True --include-x-ms-examples-original-file=True --package-mode=azure-mgmt --python --python-sdks-folder=/home/v-chenjiang/spec/azure-sdk-for-python/sdk --use=@autorest/python@6.45.1 --use=@autorest/modelerfour@4.27.0 --version=3.10.2 --version-tolerant=False",
-  "readme": "specification/alertsmanagement/resource-manager/Microsoft.AlertsManagement/PrometheusRuleGroups/readme.md"
+  "typespec_src": "specification/alertsmanagement/resource-manager/Microsoft.AlertsManagement/PrometheusRuleGroups",
+  "emitterVersion": "0.57.1"
 }
