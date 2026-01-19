@@ -2,16 +2,12 @@
 
 ### Breaking Changes
 
-- started
-- finished with status 'done'
-- started
-- finished with status 'done'
-- Model `AlertRuleRecommendationResource` deleted or renamed its instance variable `alert_rule_type`
-- Model `AlertRuleRecommendationResource` deleted or renamed its instance variable `category`
-- Model `AlertRuleRecommendationResource` deleted or renamed its instance variable `display_information`
-- Model `AlertRuleRecommendationResource` deleted or renamed its instance variable `rule_arm_template`
-- Deleted or renamed model `AlertRuleRecommendationsListResponse`
-- Method `AlertRuleRecommendationsOperations.list_by_target_type` changed its parameter `target_type` from `positional_or_keyword` to `keyword_only`
+  - Model `AlertRuleRecommendationResource` moved instance variable `alert_rule_type`, `category`, `display_information` and `rule_arm_template` under property `properties`
+  - Method `AlertRuleRecommendationsOperations.list_by_target_type` changed its parameter `target_type` from `positional_or_keyword` to `keyword_only`
+
+### Other Changes
+
+  - Deleted model `AlertRuleRecommendationsListResponse` which actually were not used by SDK users
 
 # Release History
 
