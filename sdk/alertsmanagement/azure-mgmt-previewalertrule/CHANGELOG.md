@@ -2,10 +2,6 @@
 
 ### Breaking Changes
 
-- started
-- finished with status 'done'
-- started
-- finished with status 'done'
 - Deleted or renamed client `PreviewAlertRuleClient`
 - Deleted or renamed enum value `AlertSeverity.FOUR`
 - Deleted or renamed enum value `AlertSeverity.ONE`
@@ -14,18 +10,9 @@
 - Deleted or renamed enum value `AlertSeverity.ZERO`
 - Deleted or renamed enum value `AlertSeverity.fromhex`
 - Deleted or renamed enum value `AlertSeverity.hex`
-- Model `LogAlertRuleDimension` deleted or renamed its instance variable `values`
-- Model `LogAlertRuleResource` deleted or renamed its instance variable `description`
-- Model `LogAlertRuleResource` deleted or renamed its instance variable `display_name`
-- Model `LogAlertRuleResource` deleted or renamed its instance variable `severity`
-- Model `LogAlertRuleResource` deleted or renamed its instance variable `enabled`
-- Model `LogAlertRuleResource` deleted or renamed its instance variable `scopes`
-- Model `LogAlertRuleResource` deleted or renamed its instance variable `evaluation_frequency`
-- Model `LogAlertRuleResource` deleted or renamed its instance variable `window_size`
-- Model `LogAlertRuleResource` deleted or renamed its instance variable `override_query_time_range`
-- Model `LogAlertRuleResource` deleted or renamed its instance variable `target_resource_types`
-- Model `LogAlertRuleResource` deleted or renamed its instance variable `criteria`
-- Deleted or renamed module `['azure.mgmt.previewalertrule.aio.operations', 'azure.mgmt.previewalertrule.operations']`
+- Model `LogAlertRuleDimension` renamed its instance variable `values` to `values_property`
+- Model `LogAlertRuleResource` moved instance variable `description`, `display_name`, `severity`, `enabled`, `scopes`, `evaluation_frequency`, `window_size`, `override_query_time_range`, `target_resource_types` and `criteria` under property `properties`
+- Renamed module `['azure.mgmt.previewalertrule.aio.operations', 'azure.mgmt.previewalertrule.operations']` to `['azure.mgmt.previewalertrule.aio._operations', 'azure.mgmt.previewalertrule._operations']`
 
 # Release History
 
