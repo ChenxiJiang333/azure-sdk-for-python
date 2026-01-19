@@ -1,11 +1,7 @@
 {
+  "apiVersion": "2023-08-01-preview",
   "commit": "0e75f001dd5cc3e0381e78343eee3fd90a28fef9",
   "repository_url": "https://github.com/Azure/azure-rest-api-specs",
-  "autorest": "3.10.2",
-  "use": [
-    "@autorest/python@6.45.1",
-    "@autorest/modelerfour@4.27.0"
-  ],
-  "autorest_command": "autorest specification/alertsmanagement/resource-manager/Microsoft.AlertsManagement/AlertRuleRecommendations/readme.md --generate-sample=True --generate-test=True --include-x-ms-examples-original-file=True --package-mode=azure-mgmt --python --python-sdks-folder=/home/v-chenjiang/spec/azure-sdk-for-python/sdk --use=@autorest/python@6.45.1 --use=@autorest/modelerfour@4.27.0 --version=3.10.2 --version-tolerant=False",
-  "readme": "specification/alertsmanagement/resource-manager/Microsoft.AlertsManagement/AlertRuleRecommendations/readme.md"
+  "typespec_src": "specification/alertsmanagement/resource-manager/Microsoft.AlertsManagement/AlertRuleRecommendations",
+  "emitterVersion": "0.57.1"
 }

@@ -1,19 +1,19 @@
 {
-    "CrossLanguagePackageId": null,
+    "CrossLanguagePackageId": "Microsoft.AlertsManagement",
     "CrossLanguageDefinitionId": {
-        "azure.mgmt.alertrulerecommendations.models.Resource": null,
-        "azure.mgmt.alertrulerecommendations.models.ProxyResource": null,
-        "azure.mgmt.alertrulerecommendations.models.AlertRuleRecommendationResource": null,
-        "azure.mgmt.alertrulerecommendations.models.AlertRuleRecommendationsListResponse": null,
-        "azure.mgmt.alertrulerecommendations.models.ErrorAdditionalInfo": null,
-        "azure.mgmt.alertrulerecommendations.models.ErrorDetail": null,
-        "azure.mgmt.alertrulerecommendations.models.ErrorResponse": null,
-        "azure.mgmt.alertrulerecommendations.models.RuleArmTemplate": null,
-        "azure.mgmt.alertrulerecommendations.models.SystemData": null,
-        "azure.mgmt.alertrulerecommendations.models.CreatedByType": null,
-        "azure.mgmt.alertrulerecommendations.operations.AlertRuleRecommendationsOperations.list_by_resource": null,
-        "azure.mgmt.alertrulerecommendations.aio.operations.AlertRuleRecommendationsOperations.list_by_resource": null,
-        "azure.mgmt.alertrulerecommendations.operations.AlertRuleRecommendationsOperations.list_by_target_type": null,
-        "azure.mgmt.alertrulerecommendations.aio.operations.AlertRuleRecommendationsOperations.list_by_target_type": null
+        "azure.mgmt.alertrulerecommendations.models.AlertRuleRecommendationProperties": "Microsoft.AlertsManagement.AlertRuleRecommendationProperties",
+        "azure.mgmt.alertrulerecommendations.models.Resource": "Azure.ResourceManager.CommonTypes.Resource",
+        "azure.mgmt.alertrulerecommendations.models.ProxyResource": "Azure.ResourceManager.CommonTypes.ProxyResource",
+        "azure.mgmt.alertrulerecommendations.models.AlertRuleRecommendationResource": "Microsoft.AlertsManagement.AlertRuleRecommendationResource",
+        "azure.mgmt.alertrulerecommendations.models.ErrorAdditionalInfo": "Azure.ResourceManager.CommonTypes.ErrorAdditionalInfo",
+        "azure.mgmt.alertrulerecommendations.models.ErrorDetail": "Azure.ResourceManager.CommonTypes.ErrorDetail",
+        "azure.mgmt.alertrulerecommendations.models.ErrorResponse": "Azure.ResourceManager.CommonTypes.ErrorResponse",
+        "azure.mgmt.alertrulerecommendations.models.RuleArmTemplate": "Microsoft.AlertsManagement.RuleArmTemplate",
+        "azure.mgmt.alertrulerecommendations.models.SystemData": "Azure.ResourceManager.CommonTypes.SystemData",
+        "azure.mgmt.alertrulerecommendations.models.CreatedByType": "Azure.ResourceManager.CommonTypes.createdByType",
+        "azure.mgmt.alertrulerecommendations.operations.AlertRuleRecommendationsOperations.list_by_resource": "Microsoft.AlertsManagement.AlertRuleRecommendationsOperationGroup.listByResource",
+        "azure.mgmt.alertrulerecommendations.aio.operations.AlertRuleRecommendationsOperations.list_by_resource": "Microsoft.AlertsManagement.AlertRuleRecommendationsOperationGroup.listByResource",
+        "azure.mgmt.alertrulerecommendations.operations.AlertRuleRecommendationsOperations.list_by_target_type": "Microsoft.AlertsManagement.AlertRuleRecommendationsOperationGroup.listByTargetType",
+        "azure.mgmt.alertrulerecommendations.aio.operations.AlertRuleRecommendationsOperations.list_by_target_type": "Microsoft.AlertsManagement.AlertRuleRecommendationsOperationGroup.listByTargetType"
     }
 }
