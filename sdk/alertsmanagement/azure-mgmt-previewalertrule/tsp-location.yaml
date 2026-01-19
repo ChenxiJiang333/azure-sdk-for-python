@@ -1,0 +1,4 @@
+directory: specification/alertsmanagement/resource-manager/Microsoft.AlertsManagement/PreviewAlertRule
+commit: f47405edc581080fc50124f1711984aa538e9f0b
+repo: Azure/azure-rest-api-specs
+additionalDirectories: 
