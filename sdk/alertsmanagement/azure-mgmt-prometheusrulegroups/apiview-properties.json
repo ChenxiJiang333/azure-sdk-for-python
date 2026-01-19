@@ -1,0 +1,30 @@
+{
+    "CrossLanguagePackageId": null,
+    "CrossLanguageDefinitionId": {
+        "azure.mgmt.prometheusrulegroups.models.ErrorAdditionalInfo": null,
+        "azure.mgmt.prometheusrulegroups.models.ErrorDetail": null,
+        "azure.mgmt.prometheusrulegroups.models.ErrorResponse": null,
+        "azure.mgmt.prometheusrulegroups.models.PrometheusRule": null,
+        "azure.mgmt.prometheusrulegroups.models.PrometheusRuleGroupAction": null,
+        "azure.mgmt.prometheusrulegroups.models.Resource": null,
+        "azure.mgmt.prometheusrulegroups.models.TrackedResource": null,
+        "azure.mgmt.prometheusrulegroups.models.PrometheusRuleGroupResource": null,
+        "azure.mgmt.prometheusrulegroups.models.PrometheusRuleGroupResourceCollection": null,
+        "azure.mgmt.prometheusrulegroups.models.PrometheusRuleGroupResourcePatchParameters": null,
+        "azure.mgmt.prometheusrulegroups.models.PrometheusRuleResolveConfiguration": null,
+        "azure.mgmt.prometheusrulegroups.models.SystemData": null,
+        "azure.mgmt.prometheusrulegroups.models.CreatedByType": null,
+        "azure.mgmt.prometheusrulegroups.operations.PrometheusRuleGroupsOperations.list_by_subscription": null,
+        "azure.mgmt.prometheusrulegroups.aio.operations.PrometheusRuleGroupsOperations.list_by_subscription": null,
+        "azure.mgmt.prometheusrulegroups.operations.PrometheusRuleGroupsOperations.list_by_resource_group": null,
+        "azure.mgmt.prometheusrulegroups.aio.operations.PrometheusRuleGroupsOperations.list_by_resource_group": null,
+        "azure.mgmt.prometheusrulegroups.operations.PrometheusRuleGroupsOperations.get": null,
+        "azure.mgmt.prometheusrulegroups.aio.operations.PrometheusRuleGroupsOperations.get": null,
+        "azure.mgmt.prometheusrulegroups.operations.PrometheusRuleGroupsOperations.create_or_update": null,
+        "azure.mgmt.prometheusrulegroups.aio.operations.PrometheusRuleGroupsOperations.create_or_update": null,
+        "azure.mgmt.prometheusrulegroups.operations.PrometheusRuleGroupsOperations.update": null,
+        "azure.mgmt.prometheusrulegroups.aio.operations.PrometheusRuleGroupsOperations.update": null,
+        "azure.mgmt.prometheusrulegroups.operations.PrometheusRuleGroupsOperations.delete": null,
+        "azure.mgmt.prometheusrulegroups.aio.operations.PrometheusRuleGroupsOperations.delete": null
+    }
+}
