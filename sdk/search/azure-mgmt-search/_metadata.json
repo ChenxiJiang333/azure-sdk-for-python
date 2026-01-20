@@ -1,7 +1,3 @@
 {
-  "apiVersion": "2025-05-01",
-  "commit": "e27d7575f51fbc75def5bdfc0d14449d19035304",
-  "repository_url": "https://github.com/Azure/azure-rest-api-specs",
-  "typespec_src": "specification/search/resource-manager/Microsoft.Search/Search",
-  "emitterVersion": "0.56.1"
+  "apiVersion": "2025-05-01"
 }

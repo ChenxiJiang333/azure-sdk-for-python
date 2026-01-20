@@ -16,7 +16,7 @@ if TYPE_CHECKING:
 from ._models import (  # type: ignore
     AccessRule,
     AccessRuleProperties,
-    AccessRulePropertiesSubscription,
+    AccessRulePropertiesSubscriptionsItem,
     AdminKeyResult,
     CheckNameAvailabilityInput,
     CheckNameAvailabilityOutput,
@@ -60,7 +60,6 @@ from ._models import (  # type: ignore
     SystemData,
     TrackedResource,
     UserAssignedIdentity,
-    UserAssignedManagedIdentities,
 )
 
 from ._enums import (  # type: ignore
@@ -100,7 +99,7 @@ from ._patch import patch_sdk as _patch_sdk
 __all__ = [
     "AccessRule",
     "AccessRuleProperties",
-    "AccessRulePropertiesSubscription",
+    "AccessRulePropertiesSubscriptionsItem",
     "AdminKeyResult",
     "CheckNameAvailabilityInput",
     "CheckNameAvailabilityOutput",
@@ -144,7 +143,6 @@ __all__ = [
     "SystemData",
     "TrackedResource",
     "UserAssignedIdentity",
-    "UserAssignedManagedIdentities",
     "AadAuthFailureMode",
     "AccessRuleDirection",
     "ActionType",

@@ -48,7 +48,12 @@ class TestSearchManagementServicesOperations(AzureMgmtRecordedTestCase):
             service={
                 "location": "str",
                 "id": "str",
-                "identity": {"type": "str", "principalId": "str", "tenantId": "str", "userAssignedIdentities": {}},
+                "identity": {
+                    "type": "str",
+                    "principalId": "str",
+                    "tenantId": "str",
+                    "userAssignedIdentities": {"str": {"clientId": "str", "principalId": "str"}},
+                },
                 "name": "str",
                 "properties": {
                     "authOptions": {"aadOrApiKey": {"aadAuthFailureMode": "str"}, "apiKeyOnly": {}},
@@ -143,7 +148,12 @@ class TestSearchManagementServicesOperations(AzureMgmtRecordedTestCase):
             search_service_name="str",
             service={
                 "id": "str",
-                "identity": {"type": "str", "principalId": "str", "tenantId": "str", "userAssignedIdentities": {}},
+                "identity": {
+                    "type": "str",
+                    "principalId": "str",
+                    "tenantId": "str",
+                    "userAssignedIdentities": {"str": {"clientId": "str", "principalId": "str"}},
+                },
                 "location": "str",
                 "name": "str",
                 "properties": {

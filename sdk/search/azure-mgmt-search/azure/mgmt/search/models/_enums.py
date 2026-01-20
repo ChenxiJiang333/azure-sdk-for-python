@@ -120,7 +120,9 @@ class IssueType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     access rules, but it won't be able to perform outbound access as a member of the NSP."""
 
 
-class NetworkSecurityPerimeterConfigurationProvisioningState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+class NetworkSecurityPerimeterConfigurationProvisioningState(  # pylint: disable=name-too-long
+    str, Enum, metaclass=CaseInsensitiveEnumMeta
+):
     """Provisioning state of a network security perimeter configuration that is being created or
     updated.
     """
@@ -147,7 +149,9 @@ class Origin(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Indicates the operation is initiated by a user or system."""
 
 
-class PrivateLinkServiceConnectionProvisioningState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+class PrivateLinkServiceConnectionProvisioningState(  # pylint: disable=name-too-long
+    str, Enum, metaclass=CaseInsensitiveEnumMeta
+):
     """The provisioning state of the private link service connection. Valid values are Updating,
     Deleting, Failed, Succeeded, Incomplete, or Canceled.
     """
@@ -329,7 +333,9 @@ class Severity(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     ERROR = "Error"
 
 
-class SharedPrivateLinkResourceProvisioningState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+class SharedPrivateLinkResourceProvisioningState(  # pylint: disable=name-too-long
+    str, Enum, metaclass=CaseInsensitiveEnumMeta
+):
     """The provisioning state of the shared private link resource. Valid values are Updating,
     Deleting, Failed, Succeeded or Incomplete.
     """

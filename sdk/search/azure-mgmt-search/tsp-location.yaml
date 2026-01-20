@@ -1,4 +1,4 @@
 directory: specification/search/resource-manager/Microsoft.Search/Search
-commit: e27d7575f51fbc75def5bdfc0d14449d19035304
+commit: 59b6c502b6ddc6361f4a6e4cf1490c53a17b2f8c
 repo: Azure/azure-rest-api-specs
 additionalDirectories: 

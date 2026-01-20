@@ -3,7 +3,7 @@
     "CrossLanguageDefinitionId": {
         "azure.mgmt.search.models.AccessRule": "Azure.ResourceManager.CommonTypes.AccessRule",
         "azure.mgmt.search.models.AccessRuleProperties": "Azure.ResourceManager.CommonTypes.AccessRuleProperties",
-        "azure.mgmt.search.models.AccessRulePropertiesSubscription": "Azure.ResourceManager.CommonTypes.AccessRuleProperties.subscription.anonymous",
+        "azure.mgmt.search.models.AccessRulePropertiesSubscriptionsItem": "Microsoft.Search.AccessRulePropertiesSubscriptionsItem",
         "azure.mgmt.search.models.AdminKeyResult": "Microsoft.Search.AdminKeyResult",
         "azure.mgmt.search.models.CheckNameAvailabilityInput": "Microsoft.Search.CheckNameAvailabilityInput",
         "azure.mgmt.search.models.CheckNameAvailabilityOutput": "Microsoft.Search.CheckNameAvailabilityOutput",
@@ -47,7 +47,6 @@
         "azure.mgmt.search.models.Sku": "Microsoft.Search.Sku",
         "azure.mgmt.search.models.SystemData": "Azure.ResourceManager.CommonTypes.SystemData",
         "azure.mgmt.search.models.UserAssignedIdentity": "Azure.ResourceManager.CommonTypes.UserAssignedIdentity",
-        "azure.mgmt.search.models.UserAssignedManagedIdentities": "Microsoft.Search.UserAssignedManagedIdentities",
         "azure.mgmt.search.models.Origin": "Azure.ResourceManager.CommonTypes.Origin",
         "azure.mgmt.search.models.ActionType": "Azure.ResourceManager.CommonTypes.ActionType",
         "azure.mgmt.search.models.CreatedByType": "Azure.ResourceManager.CommonTypes.createdByType",

@@ -59,7 +59,7 @@ class AccessRuleProperties(_Model):
     :ivar address_prefixes: Address prefixes in the CIDR format for inbound rules.
     :vartype address_prefixes: list[str]
     :ivar subscriptions: Subscriptions for inbound rules.
-    :vartype subscriptions: list[~azure.mgmt.search.models.AccessRulePropertiesSubscription]
+    :vartype subscriptions: list[~azure.mgmt.search.models.AccessRulePropertiesSubscriptionsItem]
     :ivar network_security_perimeters: Network security perimeters for inbound rules.
     :vartype network_security_perimeters: list[~azure.mgmt.search.models.NetworkSecurityPerimeter]
     :ivar fully_qualified_domain_names: Fully qualified domain names (FQDN) for outbound rules.
@@ -78,7 +78,7 @@ class AccessRuleProperties(_Model):
         name="addressPrefixes", visibility=["read", "create", "update", "delete", "query"]
     )
     """Address prefixes in the CIDR format for inbound rules."""
-    subscriptions: Optional[list["_models.AccessRulePropertiesSubscription"]] = rest_field(
+    subscriptions: Optional[list["_models.AccessRulePropertiesSubscriptionsItem"]] = rest_field(
         visibility=["read", "create", "update", "delete", "query"]
     )
     """Subscriptions for inbound rules."""
@@ -105,7 +105,7 @@ class AccessRuleProperties(_Model):
         *,
         direction: Optional[Union[str, "_models.AccessRuleDirection"]] = None,
         address_prefixes: Optional[list[str]] = None,
-        subscriptions: Optional[list["_models.AccessRulePropertiesSubscription"]] = None,
+        subscriptions: Optional[list["_models.AccessRulePropertiesSubscriptionsItem"]] = None,
         network_security_perimeters: Optional[list["_models.NetworkSecurityPerimeter"]] = None,
         fully_qualified_domain_names: Optional[list[str]] = None,
         email_addresses: Optional[list[str]] = None,
@@ -123,8 +123,8 @@ class AccessRuleProperties(_Model):
         super().__init__(*args, **kwargs)
 
 
-class AccessRulePropertiesSubscription(_Model):
-    """AccessRulePropertiesSubscription.
+class AccessRulePropertiesSubscriptionsItem(_Model):
+    """Network security perimeter configuration.
 
     :ivar id: The fully qualified Azure resource ID of the subscription e.g.
      ('/subscriptions/00000000-0000-0000-0000-000000000000').
@@ -455,7 +455,7 @@ class Identity(_Model):
     :ivar user_assigned_identities: The list of user identities associated with the resource. The
      user identity dictionary key references will be ARM resource IDs in the form:
      '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.
-    :vartype user_assigned_identities: ~azure.mgmt.search.models.UserAssignedManagedIdentities
+    :vartype user_assigned_identities: dict[str, ~azure.mgmt.search.models.UserAssignedIdentity]
     """
 
     principal_id: Optional[str] = rest_field(name="principalId", visibility=["read"])
@@ -467,7 +467,7 @@ class Identity(_Model):
      both an identity created by the system and a set of user assigned identities. The type 'None'
      will remove all identities from the service. Required. Known values are: \"None\",
      \"SystemAssigned\", \"UserAssigned\", and \"SystemAssigned, UserAssigned\"."""
-    user_assigned_identities: Optional["_models.UserAssignedManagedIdentities"] = rest_field(
+    user_assigned_identities: Optional[dict[str, "_models.UserAssignedIdentity"]] = rest_field(
         name="userAssignedIdentities", visibility=["read", "create", "update", "delete", "query"]
     )
     """The list of user identities associated with the resource. The user identity dictionary key
@@ -479,7 +479,7 @@ class Identity(_Model):
         self,
         *,
         type: Union[str, "_models.IdentityType"],
-        user_assigned_identities: Optional["_models.UserAssignedManagedIdentities"] = None,
+        user_assigned_identities: Optional[dict[str, "_models.UserAssignedIdentity"]] = None,
     ) -> None: ...
 
     @overload
@@ -867,7 +867,7 @@ class Operation(_Model):
 
 
 class OperationDisplay(_Model):
-    """Localized display information for and operation.
+    """Localized display information for an operation.
 
     :ivar provider: The localized friendly form of the resource provider name, e.g. "Microsoft
      Monitoring Insights" or "Microsoft Compute".
@@ -2102,11 +2102,3 @@ class UserAssignedIdentity(_Model):
     """The principal ID of the assigned identity."""
     client_id: Optional[str] = rest_field(name="clientId", visibility=["read"])
     """The client ID of the assigned identity."""
-
-
-class UserAssignedManagedIdentities(_Model):
-    """The list of user identities associated with the search service. The user identity dictionary
-    key references will be ARM resource IDs in the form:
-    '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.
-
-    """
