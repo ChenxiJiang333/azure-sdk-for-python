@@ -1,6 +1,6 @@
 {
   "apiVersion": "2025-07-01-preview",
-  "commit": "f47405edc581080fc50124f1711984aa538e9f0b",
+  "commit": "75ae723407598d31d4d6cf8627e4f91c84a58df8",
   "repository_url": "https://github.com/Azure/azure-rest-api-specs",
   "typespec_src": "specification/alertsmanagement/resource-manager/Microsoft.AlertsManagement/PreviewAlertRule",
   "emitterVersion": "0.57.1"

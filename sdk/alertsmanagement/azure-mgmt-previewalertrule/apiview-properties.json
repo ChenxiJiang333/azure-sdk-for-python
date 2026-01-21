@@ -19,7 +19,7 @@
         "azure.mgmt.previewalertrule.models.RulePreviewResult": "Microsoft.AlertsManagement.RulePreviewResult",
         "azure.mgmt.previewalertrule.models.AlertState": "Microsoft.AlertsManagement.AlertState",
         "azure.mgmt.previewalertrule.models.Kind": "Microsoft.AlertsManagement.Kind",
-        "azure.mgmt.previewalertrule.models.AlertSeverity": "Microsoft.AlertsManagement.AlertSeverity",
+        "azure.mgmt.previewalertrule.models.AlertSeverity": "AlertSeverityCustomization.AlertSeverity",
         "azure.mgmt.previewalertrule.models.CriterionType": "Microsoft.AlertsManagement.CriterionType",
         "azure.mgmt.previewalertrule.models.TimeAggregation": "Microsoft.AlertsManagement.TimeAggregation",
         "azure.mgmt.previewalertrule.models.DimensionOperator": "Microsoft.AlertsManagement.DimensionOperator",

@@ -488,7 +488,7 @@ class LogAlertRuleProperties(_Model):
     :ivar severity: Severity of the alert. Should be an integer between [0-4]. Value of 0 is
      severest. Relevant and required only for rules of the kind LogAlert. Known values are: 0, 1, 2,
      3, and 4.
-    :vartype severity: int or ~azure.mgmt.previewalertrule.models.AlertSeverity
+    :vartype severity: float or ~azure.mgmt.previewalertrule.models.AlertSeverity
     :ivar enabled: The flag which indicates whether this scheduled query rule is enabled. Value
      should be true or false.
     :vartype enabled: bool
@@ -519,7 +519,7 @@ class LogAlertRuleProperties(_Model):
         name="displayName", visibility=["read", "create", "update", "delete", "query"]
     )
     """The display name of the alert rule."""
-    severity: Optional[Union[int, "_models.AlertSeverity"]] = rest_field(
+    severity: Optional[Union[float, "_models.AlertSeverity"]] = rest_field(
         visibility=["read", "create", "update", "delete", "query"]
     )
     """Severity of the alert. Should be an integer between [0-4]. Value of 0 is severest. Relevant and
@@ -563,7 +563,7 @@ class LogAlertRuleProperties(_Model):
         *,
         description: Optional[str] = None,
         display_name: Optional[str] = None,
-        severity: Optional[Union[int, "_models.AlertSeverity"]] = None,
+        severity: Optional[Union[float, "_models.AlertSeverity"]] = None,
         enabled: Optional[bool] = None,
         scopes: Optional[list[str]] = None,
         evaluation_frequency: Optional[datetime.timedelta] = None,

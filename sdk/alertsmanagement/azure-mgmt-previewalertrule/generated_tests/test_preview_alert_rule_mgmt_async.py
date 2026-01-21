@@ -58,7 +58,7 @@ class TestPreviewAlertRuleMgmtAsync(AzureMgmtRecordedTestCase):
                             "evaluationFrequency": "1 day, 0:00:00",
                             "overrideQueryTimeRange": "1 day, 0:00:00",
                             "scopes": ["str"],
-                            "severity": 0,
+                            "severity": 0.0,
                             "targetResourceTypes": ["str"],
                             "windowSize": "1 day, 0:00:00",
                         },

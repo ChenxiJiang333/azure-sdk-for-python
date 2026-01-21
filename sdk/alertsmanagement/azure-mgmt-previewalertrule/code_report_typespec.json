@@ -185,16 +185,12 @@
           "TWO": "TWO",
           "ZERO": "ZERO",
           "as_integer_ratio": "as_integer_ratio",
-          "bit_count": "bit_count",
-          "bit_length": "bit_length",
           "conjugate": "conjugate",
-          "denominator": "denominator",
-          "from_bytes": "from_bytes",
+          "fromhex": "fromhex",
+          "hex": "hex",
           "imag": "imag",
           "is_integer": "is_integer",
-          "numerator": "numerator",
-          "real": "real",
-          "to_bytes": "to_bytes"
+          "real": "real"
         }
       },
       "AlertState": {
@@ -2639,7 +2635,7 @@
                     "param_type": "keyword_only"
                   },
                   "severity": {
-                    "type": "Optional[Union[int, _models.AlertSeverity]]",
+                    "type": "Optional[Union[float, _models.AlertSeverity]]",
                     "default": null,
                     "param_type": "keyword_only"
                   },

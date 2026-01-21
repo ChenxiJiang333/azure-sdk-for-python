@@ -10,7 +10,7 @@ from enum import Enum
 from azure.core import CaseInsensitiveEnumMeta
 
 
-class AlertSeverity(int, Enum, metaclass=CaseInsensitiveEnumMeta):
+class AlertSeverity(float, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Severity of the alert. Should be an integer between [0-4]. Value of 0 is severest. Relevant and
     required only for rules of the kind LogAlert.
     """
