@@ -86,6 +86,7 @@ class TestAlertsManagementAlertsOperationsAsync(AzureMgmtRecordedTestCase):
         response = await self.client.alerts.change_state(
             scope="str",
             alert_id="str",
+            comment={"comments": "str"},
             new_state="str",
         )
 

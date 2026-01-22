@@ -116,7 +116,7 @@
                 "param_type": "positional_or_keyword"
               },
               "comment": {
-                "default": "none",
+                "default": null,
                 "param_type": "positional_or_keyword"
               },
               "new_state": {
@@ -148,7 +148,7 @@
                     "param_type": "positional_or_keyword"
                   },
                   "comment": {
-                    "type": "Optional[Comments]",
+                    "type": "Comments",
                     "default": null,
                     "param_type": "positional_or_keyword"
                   },
@@ -184,7 +184,7 @@
                     "param_type": "positional_or_keyword"
                   },
                   "comment": {
-                    "type": "Optional[JSON]",
+                    "type": "JSON",
                     "default": null,
                     "param_type": "positional_or_keyword"
                   },
@@ -220,7 +220,7 @@
                     "param_type": "positional_or_keyword"
                   },
                   "comment": {
-                    "type": "Optional[IO[bytes]]",
+                    "type": "IO[bytes]",
                     "default": null,
                     "param_type": "positional_or_keyword"
                   },
@@ -10039,7 +10039,7 @@
                 "param_type": "positional_or_keyword"
               },
               "comment": {
-                "default": "none",
+                "default": null,
                 "param_type": "positional_or_keyword"
               },
               "new_state": {
@@ -10071,7 +10071,7 @@
                     "param_type": "positional_or_keyword"
                   },
                   "comment": {
-                    "type": "Optional[Comments]",
+                    "type": "Comments",
                     "default": null,
                     "param_type": "positional_or_keyword"
                   },
@@ -10107,7 +10107,7 @@
                     "param_type": "positional_or_keyword"
                   },
                   "comment": {
-                    "type": "Optional[JSON]",
+                    "type": "JSON",
                     "default": null,
                     "param_type": "positional_or_keyword"
                   },
@@ -10143,7 +10143,7 @@
                     "param_type": "positional_or_keyword"
                   },
                   "comment": {
-                    "type": "Optional[IO[bytes]]",
+                    "type": "IO[bytes]",
                     "default": null,
                     "param_type": "positional_or_keyword"
                   },

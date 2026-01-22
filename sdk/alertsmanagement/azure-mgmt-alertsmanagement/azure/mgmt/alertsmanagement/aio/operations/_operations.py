@@ -939,7 +939,7 @@ class AlertsOperations:
         self,
         scope: str,
         alert_id: str,
-        comment: Optional[_models.Comments] = None,
+        comment: _models.Comments,
         *,
         new_state: Union[str, _models.AlertState],
         content_type: str = "application/json",
@@ -956,7 +956,7 @@ class AlertsOperations:
         :type scope: str
         :param alert_id: Unique ID of an alert instance. Required.
         :type alert_id: str
-        :param comment: reason of change alert state. Default value is None.
+        :param comment: reason of change alert state. Required.
         :type comment: ~azure.mgmt.alertsmanagement.models.Comments
         :keyword new_state: New state of the alert. Known values are: "New", "Acknowledged", and
          "Closed". Required.
@@ -974,7 +974,7 @@ class AlertsOperations:
         self,
         scope: str,
         alert_id: str,
-        comment: Optional[JSON] = None,
+        comment: JSON,
         *,
         new_state: Union[str, _models.AlertState],
         content_type: str = "application/json",
@@ -991,7 +991,7 @@ class AlertsOperations:
         :type scope: str
         :param alert_id: Unique ID of an alert instance. Required.
         :type alert_id: str
-        :param comment: reason of change alert state. Default value is None.
+        :param comment: reason of change alert state. Required.
         :type comment: JSON
         :keyword new_state: New state of the alert. Known values are: "New", "Acknowledged", and
          "Closed". Required.
@@ -1009,7 +1009,7 @@ class AlertsOperations:
         self,
         scope: str,
         alert_id: str,
-        comment: Optional[IO[bytes]] = None,
+        comment: IO[bytes],
         *,
         new_state: Union[str, _models.AlertState],
         content_type: str = "application/json",
@@ -1026,7 +1026,7 @@ class AlertsOperations:
         :type scope: str
         :param alert_id: Unique ID of an alert instance. Required.
         :type alert_id: str
-        :param comment: reason of change alert state. Default value is None.
+        :param comment: reason of change alert state. Required.
         :type comment: IO[bytes]
         :keyword new_state: New state of the alert. Known values are: "New", "Acknowledged", and
          "Closed". Required.
@@ -1044,7 +1044,7 @@ class AlertsOperations:
         self,
         scope: str,
         alert_id: str,
-        comment: Optional[Union[_models.Comments, JSON, IO[bytes]]] = None,
+        comment: Union[_models.Comments, JSON, IO[bytes]],
         *,
         new_state: Union[str, _models.AlertState],
         **kwargs: Any
@@ -1061,7 +1061,7 @@ class AlertsOperations:
         :param alert_id: Unique ID of an alert instance. Required.
         :type alert_id: str
         :param comment: reason of change alert state. Is one of the following types: Comments, JSON,
-         IO[bytes] Default value is None.
+         IO[bytes] Required.
         :type comment: ~azure.mgmt.alertsmanagement.models.Comments or JSON or IO[bytes]
         :keyword new_state: New state of the alert. Known values are: "New", "Acknowledged", and
          "Closed". Required.
@@ -1082,18 +1082,14 @@ class AlertsOperations:
         _params = kwargs.pop("params", {}) or {}
 
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
-        content_type = content_type if comment else None
         cls: ClsType[_models.Alert] = kwargs.pop("cls", None)
 
-        content_type = content_type or "application/json" if comment else None
+        content_type = content_type or "application/json"
         _content = None
         if isinstance(comment, (IOBase, bytes)):
             _content = comment
         else:
-            if comment is not None:
-                _content = json.dumps(comment, cls=SdkJSONEncoder, exclude_readonly=True)  # type: ignore
-            else:
-                _content = None
+            _content = json.dumps(comment, cls=SdkJSONEncoder, exclude_readonly=True)  # type: ignore
 
         _request = build_alerts_change_state_request(
             scope=scope,
