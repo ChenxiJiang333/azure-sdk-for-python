@@ -2,6 +2,10 @@
 
 ## 2.0.0b3 (2026-01-22)
 
+change log generation failed!!! You need to write it manually!!!
+
+## 2.0.0b3 (2026-01-22)
+
 ### Features Added
 
   - Added operation AlertsOperations.change_state_tenant
