@@ -1,11 +1,11 @@
 {
-  "commit": "09140f5c20e737339b6d70b4aa36eff9f86f204f",
+  "commit": "897a6055bee254591e12448de85b84545ee79bfc",
   "repository_url": "https://github.com/Azure/azure-rest-api-specs",
   "autorest": "3.10.2",
   "use": [
     "@autorest/python@6.45.1",
     "@autorest/modelerfour@4.27.0"
   ],
-  "autorest_command": "autorest specification/alertsmanagement/resource-manager/Microsoft.AlertsManagement/AlertsManagement/readme.md --generate-sample=True --generate-test=True --include-x-ms-examples-original-file=True --package-mode=azure-mgmt --python --python-sdks-folder=/home/v-chenjiang/spec/azure-sdk-for-python/sdk --use=@autorest/python@6.45.1 --use=@autorest/modelerfour@4.27.0 --version=3.10.2 --version-tolerant=False",
-  "readme": "specification/alertsmanagement/resource-manager/Microsoft.AlertsManagement/AlertsManagement/readme.md"
+  "autorest_command": "autorest specification/alertsmanagement/resource-manager/Microsoft.AlertsManagement/AlertsManagement/reamde.md --generate-sample=True --generate-test=True --include-x-ms-examples-original-file=True --package-mode=azure-mgmt --python --python-sdks-folder=/home/v-chenjiang/spec/azure-sdk-for-python/sdk --use=@autorest/python@6.45.1 --use=@autorest/modelerfour@4.27.0 --version=3.10.2 --version-tolerant=False",
+  "readme": "specification/alertsmanagement/resource-manager/Microsoft.AlertsManagement/AlertsManagement/reamde.md"
 }

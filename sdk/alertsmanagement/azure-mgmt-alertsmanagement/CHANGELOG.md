@@ -1,5 +1,33 @@
 # Release History
 
+## 2.0.0b3 (2026-01-22)
+
+### Features Added
+
+  - Added operation AlertsOperations.change_state_tenant
+  - Added operation AlertsOperations.get_all_tenant
+  - Added operation AlertsOperations.get_by_id_tenant
+  - Added operation AlertsOperations.get_enrichments
+  - Added operation AlertsOperations.get_history_tenant
+  - Model Alert has a new parameter system_data
+  - Model AlertModificationItem has a new parameter details
+  - Model AlertProperties has a new parameter custom_properties
+  - Model Operation has a new parameter action_type
+  - Model Operation has a new parameter is_data_action
+  - Model Resource has a new parameter system_data
+
+### Breaking Changes
+
+  - Operation AlertsOperations.change_state has a new required parameter scope
+  - Operation AlertsOperations.get_all has a new required parameter scope
+  - Operation AlertsOperations.get_by_id has a new required parameter scope
+  - Operation AlertsOperations.get_history has a new required parameter scope
+  - Operation AlertsOperations.get_summary has a new required parameter scope
+  - Parameter value of model AlertsList is now required
+  - Removed operation group AlertProcessingRulesOperations
+  - Removed operation group PrometheusRuleGroupsOperations
+  - Removed operation group SmartGroupsOperations
+
 ## 2.0.0b3 (2026-01-19)
 
 change log generation failed!!! You need to write it manually!!!
