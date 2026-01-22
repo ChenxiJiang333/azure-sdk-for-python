@@ -27,10 +27,10 @@ from azure.mgmt.alertsmanagement import AlertsManagementClient
 def main():
     client = AlertsManagementClient(
         credential=DefaultAzureCredential(),
-        scope="SCOPE",
     )
 
     response = client.alerts.get_summary(
+        scope="subscriptions/1e3ff1c0-771a-4119-a03b-be82a51e232d",
         groupby="severity,alertState",
     )
     print(response)

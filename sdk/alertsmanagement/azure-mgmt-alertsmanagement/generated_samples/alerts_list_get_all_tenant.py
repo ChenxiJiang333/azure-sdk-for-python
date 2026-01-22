@@ -27,7 +27,6 @@ from azure.mgmt.alertsmanagement import AlertsManagementClient
 def main():
     client = AlertsManagementClient(
         credential=DefaultAzureCredential(),
-        scope="SCOPE",
     )
 
     response = client.alerts.get_all_tenant()

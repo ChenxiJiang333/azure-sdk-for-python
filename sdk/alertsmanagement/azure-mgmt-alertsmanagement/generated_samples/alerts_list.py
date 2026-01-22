@@ -27,10 +27,11 @@ from azure.mgmt.alertsmanagement import AlertsManagementClient
 def main():
     client = AlertsManagementClient(
         credential=DefaultAzureCredential(),
-        scope="SCOPE",
     )
 
-    response = client.alerts.get_all()
+    response = client.alerts.get_all(
+        scope="subscriptions/3b540246-808d-4331-99aa-917b808a9166",
+    )
     for item in response:
         print(item)
 

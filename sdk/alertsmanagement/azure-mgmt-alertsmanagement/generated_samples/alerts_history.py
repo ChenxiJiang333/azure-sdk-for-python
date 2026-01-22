@@ -27,10 +27,10 @@ from azure.mgmt.alertsmanagement import AlertsManagementClient
 def main():
     client = AlertsManagementClient(
         credential=DefaultAzureCredential(),
-        scope="SCOPE",
     )
 
     response = client.alerts.get_history(
+        scope="subscriptions/9e261de7-c804-4b9d-9ebf-6f50fe350a9a",
         alert_id="66114d64-d9d9-478b-95c9-b789d6502100",
     )
     print(response)

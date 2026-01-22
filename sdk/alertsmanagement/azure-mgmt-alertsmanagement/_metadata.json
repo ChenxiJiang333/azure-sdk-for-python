@@ -1,6 +1,6 @@
 {
   "apiVersion": "2025-05-25-preview",
-  "commit": "897a6055bee254591e12448de85b84545ee79bfc",
+  "commit": "24f1ade26bfbc7337965db4d482463dddc9fed30",
   "repository_url": "https://github.com/Azure/azure-rest-api-specs",
   "typespec_src": "specification/alertsmanagement/resource-manager/Microsoft.AlertsManagement/AlertsManagement",
   "emitterVersion": "0.57.1"

@@ -257,13 +257,13 @@ class Status(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 class TimeRange(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Type of TimeRange."""
 
-    ENUM_1_H = "1h"
+    ONE_H = "1h"
     """1h"""
-    ENUM_1_D = "1d"
+    ONE_D = "1d"
     """1d"""
-    ENUM_7_D = "7d"
+    SEVEN_D = "7d"
     """7d"""
-    ENUM_30_D = "30d"
+    THIRTY_D = "30d"
     """30d"""
 
 

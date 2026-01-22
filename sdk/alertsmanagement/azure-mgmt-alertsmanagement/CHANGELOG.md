@@ -1,5 +1,9 @@
 ## tsp migration
 
+## 2.0.0b3 (2026-01-22)
+
+change log generation failed!!! You need to write it manually!!!
+
 ### Breaking Changes
 
 - Method `AlertsManagementClient.__init__` inserted a `positional_or_keyword` parameter `scope`

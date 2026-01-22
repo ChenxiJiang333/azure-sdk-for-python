@@ -26,8 +26,6 @@ class AlertsManagementClientConfiguration:  # pylint: disable=too-many-instance-
 
     :param credential: Credential used to authenticate requests to the service. Required.
     :type credential: ~azure.core.credentials.TokenCredential
-    :param scope: Required.
-    :type scope: str
     :param base_url: Service host. Default value is "https://management.azure.com".
     :type base_url: str
     :param cloud_setting: The cloud setting for which to get the ARM endpoint. Default value is
@@ -42,7 +40,6 @@ class AlertsManagementClientConfiguration:  # pylint: disable=too-many-instance-
     def __init__(
         self,
         credential: "TokenCredential",
-        scope: str,
         base_url: str = "https://management.azure.com",
         cloud_setting: Optional["AzureClouds"] = None,
         **kwargs: Any
@@ -51,11 +48,8 @@ class AlertsManagementClientConfiguration:  # pylint: disable=too-many-instance-
 
         if credential is None:
             raise ValueError("Parameter 'credential' must not be None.")
-        if scope is None:
-            raise ValueError("Parameter 'scope' must not be None.")
 
         self.credential = credential
-        self.scope = scope
         self.base_url = base_url
         self.cloud_setting = cloud_setting
         self.api_version = api_version

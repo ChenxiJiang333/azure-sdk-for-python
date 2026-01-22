@@ -35,8 +35,6 @@ class AlertsManagementClient:
     :vartype alerts: azure.mgmt.alertsmanagement.aio.operations.AlertsOperations
     :param credential: Credential used to authenticate requests to the service. Required.
     :type credential: ~azure.core.credentials_async.AsyncTokenCredential
-    :param scope: Required.
-    :type scope: str
     :param base_url: Service host. Default value is None.
     :type base_url: str
     :keyword cloud_setting: The cloud setting for which to get the ARM endpoint. Default value is
@@ -51,7 +49,6 @@ class AlertsManagementClient:
     def __init__(
         self,
         credential: "AsyncTokenCredential",
-        scope: str,
         base_url: Optional[str] = None,
         *,
         cloud_setting: Optional["AzureClouds"] = None,
@@ -65,7 +62,6 @@ class AlertsManagementClient:
         credential_scopes = kwargs.pop("credential_scopes", _endpoints["credential_scopes"])
         self._config = AlertsManagementClientConfiguration(
             credential=credential,
-            scope=scope,
             base_url=cast(str, base_url),
             cloud_setting=cloud_setting,
             credential_scopes=credential_scopes,

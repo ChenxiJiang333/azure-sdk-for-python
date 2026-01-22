@@ -130,8 +130,8 @@ def build_alerts_change_state_tenant_request(
     _url: str = _url.format(**path_format_arguments)  # type: ignore
 
     # Construct parameters
-    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
     _params["newState"] = _SERIALIZER.query("new_state", new_state, "str")
+    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
 
     # Construct headers
     if content_type is not None:
@@ -214,7 +214,7 @@ def build_alerts_get_all_tenant_request(
     return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_alerts_get_by_id_request(alert_id: str, scope: str, **kwargs: Any) -> HttpRequest:
+def build_alerts_get_by_id_request(scope: str, alert_id: str, **kwargs: Any) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
@@ -319,7 +319,7 @@ def build_alerts_get_all_request(
 
 
 def build_alerts_change_state_request(
-    alert_id: str, scope: str, *, new_state: Union[str, _models.AlertState], **kwargs: Any
+    scope: str, alert_id: str, *, new_state: Union[str, _models.AlertState], **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
@@ -349,7 +349,7 @@ def build_alerts_change_state_request(
     return HttpRequest(method="POST", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_alerts_get_history_request(alert_id: str, scope: str, **kwargs: Any) -> HttpRequest:
+def build_alerts_get_history_request(scope: str, alert_id: str, **kwargs: Any) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
@@ -374,7 +374,7 @@ def build_alerts_get_history_request(alert_id: str, scope: str, **kwargs: Any) -
     return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_alerts_get_enrichments_request(alert_id: str, scope: str, **kwargs: Any) -> HttpRequest:
+def build_alerts_get_enrichments_request(scope: str, alert_id: str, **kwargs: Any) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
@@ -741,7 +741,7 @@ class AlertsOperations:
     def change_state_tenant(
         self,
         alert_id: str,
-        comment: Optional[_models.Comments] = None,
+        comment: _models.Comments,
         *,
         new_state: Union[str, _models.AlertState],
         content_type: str = "application/json",
@@ -751,7 +751,7 @@ class AlertsOperations:
 
         :param alert_id: Unique ID of an alert instance. Required.
         :type alert_id: str
-        :param comment: reason of change alert state. Default value is None.
+        :param comment: reason of change alert state. Required.
         :type comment: ~azure.mgmt.alertsmanagement.models.Comments
         :keyword new_state: New state of the alert. Known values are: "New", "Acknowledged", and
          "Closed". Required.
@@ -768,7 +768,7 @@ class AlertsOperations:
     def change_state_tenant(
         self,
         alert_id: str,
-        comment: Optional[JSON] = None,
+        comment: JSON,
         *,
         new_state: Union[str, _models.AlertState],
         content_type: str = "application/json",
@@ -778,7 +778,7 @@ class AlertsOperations:
 
         :param alert_id: Unique ID of an alert instance. Required.
         :type alert_id: str
-        :param comment: reason of change alert state. Default value is None.
+        :param comment: reason of change alert state. Required.
         :type comment: JSON
         :keyword new_state: New state of the alert. Known values are: "New", "Acknowledged", and
          "Closed". Required.
@@ -795,7 +795,7 @@ class AlertsOperations:
     def change_state_tenant(
         self,
         alert_id: str,
-        comment: Optional[IO[bytes]] = None,
+        comment: IO[bytes],
         *,
         new_state: Union[str, _models.AlertState],
         content_type: str = "application/json",
@@ -805,7 +805,7 @@ class AlertsOperations:
 
         :param alert_id: Unique ID of an alert instance. Required.
         :type alert_id: str
-        :param comment: reason of change alert state. Default value is None.
+        :param comment: reason of change alert state. Required.
         :type comment: IO[bytes]
         :keyword new_state: New state of the alert. Known values are: "New", "Acknowledged", and
          "Closed". Required.
@@ -822,7 +822,7 @@ class AlertsOperations:
     def change_state_tenant(
         self,
         alert_id: str,
-        comment: Optional[Union[_models.Comments, JSON, IO[bytes]]] = None,
+        comment: Union[_models.Comments, JSON, IO[bytes]],
         *,
         new_state: Union[str, _models.AlertState],
         **kwargs: Any
@@ -832,7 +832,7 @@ class AlertsOperations:
         :param alert_id: Unique ID of an alert instance. Required.
         :type alert_id: str
         :param comment: reason of change alert state. Is one of the following types: Comments, JSON,
-         IO[bytes] Default value is None.
+         IO[bytes] Required.
         :type comment: ~azure.mgmt.alertsmanagement.models.Comments or JSON or IO[bytes]
         :keyword new_state: New state of the alert. Known values are: "New", "Acknowledged", and
          "Closed". Required.
@@ -853,18 +853,14 @@ class AlertsOperations:
         _params = kwargs.pop("params", {}) or {}
 
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
-        content_type = content_type if comment else None
         cls: ClsType[_models.Alert] = kwargs.pop("cls", None)
 
-        content_type = content_type or "application/json" if comment else None
+        content_type = content_type or "application/json"
         _content = None
         if isinstance(comment, (IOBase, bytes)):
             _content = comment
         else:
-            if comment is not None:
-                _content = json.dumps(comment, cls=SdkJSONEncoder, exclude_readonly=True)  # type: ignore
-            else:
-                _content = None
+            _content = json.dumps(comment, cls=SdkJSONEncoder, exclude_readonly=True)  # type: ignore
 
         _request = build_alerts_change_state_tenant_request(
             alert_id=alert_id,
@@ -1100,7 +1096,7 @@ class AlertsOperations:
         return ItemPaged(get_next, extract_data)
 
     @distributed_trace
-    def get_by_id(self, alert_id: str, **kwargs: Any) -> _models.Alert:
+    def get_by_id(self, scope: str, alert_id: str, **kwargs: Any) -> _models.Alert:
         """Get a specific alert.
 
         Get information related to a specific alert. If scope is a deleted resource then please use
@@ -1110,6 +1106,8 @@ class AlertsOperations:
         in this example get alert by id call will look like this:
         '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.AlertsManagement/alerts/{alertId}'.
 
+        :param scope: undefined. Required.
+        :type scope: str
         :param alert_id: Unique ID of an alert instance. Required.
         :type alert_id: str
         :return: Alert. The Alert is compatible with MutableMapping
@@ -1130,8 +1128,8 @@ class AlertsOperations:
         cls: ClsType[_models.Alert] = kwargs.pop("cls", None)
 
         _request = build_alerts_get_by_id_request(
+            scope=scope,
             alert_id=alert_id,
-            scope=self._config.scope,
             api_version=self._config.api_version,
             headers=_headers,
             params=_params,
@@ -1174,6 +1172,7 @@ class AlertsOperations:
     @distributed_trace
     def get_all(  # pylint: disable=too-many-locals
         self,
+        scope: str,
         *,
         target_resource: Optional[str] = None,
         target_resource_type: Optional[str] = None,
@@ -1198,6 +1197,8 @@ class AlertsOperations:
         (e.g. time range). The results can then be sorted on the basis specific fields, with the
         default being lastModifiedDateTime.
 
+        :param scope: undefined. Required.
+        :type scope: str
         :keyword target_resource: Filter by target resource( which is full ARM ID) Default value is
          select all. Default value is None.
         :paramtype target_resource: str
@@ -1282,7 +1283,7 @@ class AlertsOperations:
             if not next_link:
 
                 _request = build_alerts_get_all_request(
-                    scope=self._config.scope,
+                    scope=scope,
                     target_resource=target_resource,
                     target_resource_type=target_resource_type,
                     target_resource_group=target_resource_group,
@@ -1364,6 +1365,7 @@ class AlertsOperations:
     @overload
     def change_state(
         self,
+        scope: str,
         alert_id: str,
         comment: Optional[_models.Comments] = None,
         *,
@@ -1378,6 +1380,8 @@ class AlertsOperations:
         resource of scope. So in this example change state call will look like this:
         '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.AlertsManagement/alerts/{alertId}'.
 
+        :param scope: undefined. Required.
+        :type scope: str
         :param alert_id: Unique ID of an alert instance. Required.
         :type alert_id: str
         :param comment: reason of change alert state. Default value is None.
@@ -1396,6 +1400,7 @@ class AlertsOperations:
     @overload
     def change_state(
         self,
+        scope: str,
         alert_id: str,
         comment: Optional[JSON] = None,
         *,
@@ -1410,6 +1415,8 @@ class AlertsOperations:
         resource of scope. So in this example change state call will look like this:
         '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.AlertsManagement/alerts/{alertId}'.
 
+        :param scope: undefined. Required.
+        :type scope: str
         :param alert_id: Unique ID of an alert instance. Required.
         :type alert_id: str
         :param comment: reason of change alert state. Default value is None.
@@ -1428,6 +1435,7 @@ class AlertsOperations:
     @overload
     def change_state(
         self,
+        scope: str,
         alert_id: str,
         comment: Optional[IO[bytes]] = None,
         *,
@@ -1442,6 +1450,8 @@ class AlertsOperations:
         resource of scope. So in this example change state call will look like this:
         '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.AlertsManagement/alerts/{alertId}'.
 
+        :param scope: undefined. Required.
+        :type scope: str
         :param alert_id: Unique ID of an alert instance. Required.
         :type alert_id: str
         :param comment: reason of change alert state. Default value is None.
@@ -1460,6 +1470,7 @@ class AlertsOperations:
     @distributed_trace
     def change_state(
         self,
+        scope: str,
         alert_id: str,
         comment: Optional[Union[_models.Comments, JSON, IO[bytes]]] = None,
         *,
@@ -1473,6 +1484,8 @@ class AlertsOperations:
         resource of scope. So in this example change state call will look like this:
         '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.AlertsManagement/alerts/{alertId}'.
 
+        :param scope: undefined. Required.
+        :type scope: str
         :param alert_id: Unique ID of an alert instance. Required.
         :type alert_id: str
         :param comment: reason of change alert state. Is one of the following types: Comments, JSON,
@@ -1511,8 +1524,8 @@ class AlertsOperations:
                 _content = None
 
         _request = build_alerts_change_state_request(
+            scope=scope,
             alert_id=alert_id,
-            scope=self._config.scope,
             new_state=new_state,
             content_type=content_type,
             api_version=self._config.api_version,
@@ -1556,7 +1569,7 @@ class AlertsOperations:
         return deserialized  # type: ignore
 
     @distributed_trace
-    def get_history(self, alert_id: str, **kwargs: Any) -> _models.AlertModification:
+    def get_history(self, scope: str, alert_id: str, **kwargs: Any) -> _models.AlertModification:
         """Get the history of an alert, which captures any monitor condition changes (Fired/Resolved),
         alert state changes (New/Acknowledged/Closed) and applied action rules for that particular
         alert. If scope is a deleted resource then please use scope as parent resource of the delete
@@ -1566,6 +1579,8 @@ class AlertsOperations:
         resource of scope. So in this example get history call will look like this:
         '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.AlertsManagement/alerts/{alertId}/history'.
 
+        :param scope: undefined. Required.
+        :type scope: str
         :param alert_id: Unique ID of an alert instance. Required.
         :type alert_id: str
         :return: AlertModification. The AlertModification is compatible with MutableMapping
@@ -1586,8 +1601,8 @@ class AlertsOperations:
         cls: ClsType[_models.AlertModification] = kwargs.pop("cls", None)
 
         _request = build_alerts_get_history_request(
+            scope=scope,
             alert_id=alert_id,
-            scope=self._config.scope,
             api_version=self._config.api_version,
             headers=_headers,
             params=_params,
@@ -1628,9 +1643,11 @@ class AlertsOperations:
         return deserialized  # type: ignore
 
     @distributed_trace
-    def get_enrichments(self, alert_id: str, **kwargs: Any) -> ItemPaged["_models.AlertEnrichmentResponse"]:
+    def get_enrichments(self, scope: str, alert_id: str, **kwargs: Any) -> ItemPaged["_models.AlertEnrichmentResponse"]:
         """Get the enrichments of an alert. It returns a collection of one object named default.
 
+        :param scope: undefined. Required.
+        :type scope: str
         :param alert_id: Unique ID of an alert instance. Required.
         :type alert_id: str
         :return: An iterator like instance of AlertEnrichmentResponse
@@ -1655,8 +1672,8 @@ class AlertsOperations:
             if not next_link:
 
                 _request = build_alerts_get_enrichments_request(
+                    scope=scope,
                     alert_id=alert_id,
-                    scope=self._config.scope,
                     api_version=self._config.api_version,
                     headers=_headers,
                     params=_params,
@@ -1786,6 +1803,7 @@ class AlertsOperations:
     @distributed_trace
     def get_summary(  # pylint: disable=too-many-locals
         self,
+        scope: str,
         *,
         groupby: Union[str, _models.AlertsSummaryGroupByFields],
         include_smart_groups_count: Optional[bool] = None,
@@ -1804,6 +1822,8 @@ class AlertsOperations:
         """Get a summarized count of your alerts grouped by various parameters (e.g. grouping by
         'Severity' returns the count of alerts for each severity).
 
+        :param scope: The fully qualified Azure Resource manager identifier of the resource. Required.
+        :type scope: str
         :keyword groupby: This parameter allows the result set to be grouped by input fields. For
          example, groupby=severity,alertstate. Known values are: "severity", "alertState",
          "monitorCondition", "monitorService", "signalType", and "alertRule". Required.
@@ -1865,7 +1885,7 @@ class AlertsOperations:
         cls: ClsType[_models.AlertsSummary] = kwargs.pop("cls", None)
 
         _request = build_alerts_get_summary_request(
-            scope=self._config.scope,
+            scope=scope,
             groupby=groupby,
             include_smart_groups_count=include_smart_groups_count,
             target_resource=target_resource,

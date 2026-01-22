@@ -44,6 +44,7 @@ class TestAlertsManagementAlertsOperationsAsync(AzureMgmtRecordedTestCase):
     async def test_alerts_change_state_tenant(self, resource_group):
         response = await self.client.alerts.change_state_tenant(
             alert_id="str",
+            comment={"comments": "str"},
             new_state="str",
         )
 
@@ -62,6 +63,7 @@ class TestAlertsManagementAlertsOperationsAsync(AzureMgmtRecordedTestCase):
     @recorded_by_proxy_async
     async def test_alerts_get_by_id(self, resource_group):
         response = await self.client.alerts.get_by_id(
+            scope="str",
             alert_id="str",
         )
 
@@ -71,7 +73,9 @@ class TestAlertsManagementAlertsOperationsAsync(AzureMgmtRecordedTestCase):
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
     async def test_alerts_get_all(self, resource_group):
-        response = self.client.alerts.get_all()
+        response = self.client.alerts.get_all(
+            scope="str",
+        )
         result = [r async for r in response]
         # please add some check logic here by yourself
         # ...
@@ -80,6 +84,7 @@ class TestAlertsManagementAlertsOperationsAsync(AzureMgmtRecordedTestCase):
     @recorded_by_proxy_async
     async def test_alerts_change_state(self, resource_group):
         response = await self.client.alerts.change_state(
+            scope="str",
             alert_id="str",
             new_state="str",
         )
@@ -91,6 +96,7 @@ class TestAlertsManagementAlertsOperationsAsync(AzureMgmtRecordedTestCase):
     @recorded_by_proxy_async
     async def test_alerts_get_history(self, resource_group):
         response = await self.client.alerts.get_history(
+            scope="str",
             alert_id="str",
         )
 
@@ -101,6 +107,7 @@ class TestAlertsManagementAlertsOperationsAsync(AzureMgmtRecordedTestCase):
     @recorded_by_proxy_async
     async def test_alerts_get_enrichments(self, resource_group):
         response = self.client.alerts.get_enrichments(
+            scope="str",
             alert_id="str",
         )
         result = [r async for r in response]
@@ -121,6 +128,7 @@ class TestAlertsManagementAlertsOperationsAsync(AzureMgmtRecordedTestCase):
     @recorded_by_proxy_async
     async def test_alerts_get_summary(self, resource_group):
         response = await self.client.alerts.get_summary(
+            scope="str",
             groupby="str",
         )
 
