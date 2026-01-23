@@ -1,3 +1,34 @@
+## tsp migration
+
+### Breaking Changes
+
+- Deleted or renamed enum value `MinimumTLSVersion.ONE0`
+- Deleted or renamed enum value `MinimumTLSVersion.ONE2`
+- Model `BackendPool` moved instance variable `backends`, `load_balancing_settings`, `health_probe_settings` and `resource_state` under property `properties`
+- Model `CustomHttpsConfiguration` moved instance variable `certificate_type`, `vault`, `secret_name` and `secret_version` under property `properties`
+- Model `Experiment` moved instance variable `description`, `endpoint_a`, `endpoint_b`, `enabled_state`, `resource_state`, `status` and `script_file_uri` under property `properties`
+- Model `ExperimentUpdateModel` moved instance variable `description` and `enabled_state` under property `properties`
+- Model `FrontDoor` moved instance variable `friendly_name`, `routing_rules`, `load_balancing_settings`, `health_probe_settings`, `backend_pools`, `frontend_endpoints`, `backend_pools_settings`, `enabled_state`, `resource_state`, `provisioning_state`, `cname`, `frontdoor_id`, `rules_engines` and `extended_properties` under property `properties`
+- Model `FrontendEndpoint` moved instance variable `host_name`, `session_affinity_enabled_state`, `session_affinity_ttl_seconds`, `web_application_firewall_policy_link`, `resource_state`, `custom_https_provisioning_state`, `custom_https_provisioning_substate` and `custom_https_configuration` under property `properties`
+- Model `HealthProbeSettingsModel` moved instance variable `path`, `protocol`, `interval_in_seconds`, `health_probe_method`, `enabled_state` and `resource_state` under property `properties`
+- Model `LatencyScorecard` moved instance variable `id_properties_id`, `name_properties_name`, `description`, `endpoint_a`, `endpoint_b`, `start_date_time_utc`, `end_date_time_utc`, `country` and `latency_metrics` under property `properties`
+- Model `LoadBalancingSettingsModel` moved instance variable `sample_size`, `successful_samples_required`, `additional_latency_milliseconds` and `resource_state` under property `properties`
+- Model `ManagedRuleSetDefinition` moved instance variable `provisioning_state`, `rule_set_id`, `rule_set_type`, `rule_set_version` and `rule_groups` under property `properties`
+- Model `PolicySettings` moved instance variable `state` and `scrubbing_rules` under property `properties`
+- Model `PreconfiguredEndpoint` moved instance variable `description`, `endpoint`, `endpoint_type` and `backend` under property `properties`
+- Model `Profile` moved instance variable `resource_state` and `enabled_state` under property `properties`
+- Model `ProfileUpdateModel` deleted or renamed its instance variable `enabled_state`
+- Model `RoutingRule` moved instance variable `frontend_endpoints`, `accepted_protocols`, `patterns_to_match`, `enabled_state`, `route_configuration`, `rules_engine`, `web_application_firewall_policy_link` and `resource_state` under property `properties`
+- Model `RulesEngine` moved instance variable `rules` and `resource_state` under property `properties`
+- Model `Timeseries` moved instance variable `endpoint`, `start_date_time_utc`, `end_date_time_utc`, `aggregation_interval`, `timeseries_type`, `country` and `timeseries_data` under property `properties`
+- Model `WebApplicationFirewallPolicy` moved instance variable `policy_settings`, `custom_rules`, `managed_rules`, `frontend_endpoint_links`, `routing_rule_links`, `security_policy_links`, `provisioning_state` and `resource_state` under property `properties`
+- Method `ReportsOperations.get_latency_scorecards` changed its parameter `aggregation_interval`/`end_date_time_utc`/`country` from `positional_or_keyword` to `keyword_only`
+- Method `ReportsOperations.get_timeseries` changed its parameter `start_date_time_utc`/`end_date_time_utc`/`aggregation_interval`/`timeseries_type`/`endpoint`/`country` from `positional_or_keyword` to `keyword_only`
+
+### Other Changes
+
+- Deleted model `ExperimentList`/`ManagedRuleSetDefinitionList`/`PreconfiguredEndpointList`/`ProfileList`/`WebApplicationFirewallPolicyList` which actually were not used by SDK users
+
 # Release History
 
 ## 1.3.0 (2026-01-23)
