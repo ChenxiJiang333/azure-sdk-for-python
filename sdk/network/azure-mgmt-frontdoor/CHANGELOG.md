@@ -6,8 +6,6 @@ change log generation failed!!! You need to write it manually!!!
 
 ### Breaking Changes
 
-- Deleted or renamed enum value `MinimumTLSVersion.ONE0`
-- Deleted or renamed enum value `MinimumTLSVersion.ONE2`
 - Model `BackendPool` moved instance variable `backends`, `load_balancing_settings`, `health_probe_settings` and `resource_state` under property `properties`
 - Model `CustomHttpsConfiguration` moved instance variable `certificate_type`, `vault`, `secret_name` and `secret_version` under property `properties`
 - Model `Experiment` moved instance variable `description`, `endpoint_a`, `endpoint_b`, `enabled_state`, `resource_state`, `status` and `script_file_uri` under property `properties`
@@ -34,14 +32,6 @@ change log generation failed!!! You need to write it manually!!!
 - Deleted model `ExperimentList`/`ManagedRuleSetDefinitionList`/`PreconfiguredEndpointList`/`ProfileList`/`WebApplicationFirewallPolicyList` which actually were not used by SDK users
 
 # Release History
-
-## 1.3.0 (2026-01-23)
-
-change log generation failed!!! You need to write it manually!!!
-
-## 1.3.0 (2026-01-23)
-
-change log generation failed!!! You need to write it manually!!!
 
 ## 1.2.0 (2024-04-15)
 
