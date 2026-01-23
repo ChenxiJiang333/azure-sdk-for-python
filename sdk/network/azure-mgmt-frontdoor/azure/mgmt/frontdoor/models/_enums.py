@@ -390,9 +390,9 @@ class MinimumTLSVersion(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     Door.
     """
 
-    ENUM_1_0 = "1.0"
+    ONE0 = "1.0"
     """1.0"""
-    ENUM_1_2 = "1.2"
+    ONE2 = "1.2"
     """1.2"""
 
 

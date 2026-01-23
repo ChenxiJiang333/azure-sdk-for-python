@@ -1,5 +1,9 @@
 ## tsp migration
 
+## 1.3.0 (2026-01-23)
+
+change log generation failed!!! You need to write it manually!!!
+
 ### Breaking Changes
 
 - Deleted or renamed enum value `MinimumTLSVersion.ONE0`

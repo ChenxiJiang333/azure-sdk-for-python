@@ -1,6 +1,6 @@
 {
   "apiVersion": "2025-10-01",
-  "commit": "868131f6b5823c512c49e043c42d07fab917cdd1",
+  "commit": "66322900efc693faa6fa09e5a54c40e50f984c8c",
   "repository_url": "https://github.com/Azure/azure-rest-api-specs",
   "typespec_src": "specification/frontdoor/FrontDoor.Management",
   "emitterVersion": "0.58.0"

@@ -16336,8 +16336,8 @@
         "type": "Enum",
         "methods": {},
         "properties": {
-          "ENUM_1_0": "ENUM_1_0",
-          "ENUM_1_2": "ENUM_1_2",
+          "ONE0": "ONE0",
+          "ONE2": "ONE2",
           "capitalize": "capitalize",
           "casefold": "casefold",
           "center": "center",
