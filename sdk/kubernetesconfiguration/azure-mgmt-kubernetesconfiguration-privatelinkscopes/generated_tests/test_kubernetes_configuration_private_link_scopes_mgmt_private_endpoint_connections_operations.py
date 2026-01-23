@@ -20,6 +20,18 @@ class TestKubernetesConfigurationPrivateLinkScopesMgmtPrivateEndpointConnections
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
+    def test_private_endpoint_connections_list_by_private_link_scope(self, resource_group):
+        response = self.client.private_endpoint_connections.list_by_private_link_scope(
+            resource_group_name=resource_group.name,
+            scope_name="str",
+            api_version="2024-11-01-preview",
+        )
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
     def test_private_endpoint_connections_get(self, resource_group):
         response = self.client.private_endpoint_connections.get(
             resource_group_name=resource_group.name,
@@ -67,18 +79,6 @@ class TestKubernetesConfigurationPrivateLinkScopesMgmtPrivateEndpointConnections
             resource_group_name=resource_group.name,
             scope_name="str",
             private_endpoint_connection_name="str",
-            api_version="2024-11-01-preview",
-        )
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_private_endpoint_connections_list_by_private_link_scope(self, resource_group):
-        response = self.client.private_endpoint_connections.list_by_private_link_scope(
-            resource_group_name=resource_group.name,
-            scope_name="str",
             api_version="2024-11-01-preview",
         )
 

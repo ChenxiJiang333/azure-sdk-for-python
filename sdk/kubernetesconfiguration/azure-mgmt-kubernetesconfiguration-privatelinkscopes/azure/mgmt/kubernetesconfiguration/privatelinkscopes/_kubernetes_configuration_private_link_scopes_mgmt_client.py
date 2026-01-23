@@ -27,6 +27,7 @@ from .operations import (
 )
 
 if TYPE_CHECKING:
+    from azure.core import AzureClouds
     from azure.core.credentials import TokenCredential
 
 
@@ -36,18 +37,21 @@ class KubernetesConfigurationPrivateLinkScopesMgmtClient:  # pylint: disable=nam
     :ivar private_link_scopes: PrivateLinkScopesOperations operations
     :vartype private_link_scopes:
      azure.mgmt.kubernetesconfiguration.privatelinkscopes.operations.PrivateLinkScopesOperations
-    :ivar private_link_resources: PrivateLinkResourcesOperations operations
-    :vartype private_link_resources:
-     azure.mgmt.kubernetesconfiguration.privatelinkscopes.operations.PrivateLinkResourcesOperations
     :ivar private_endpoint_connections: PrivateEndpointConnectionsOperations operations
     :vartype private_endpoint_connections:
      azure.mgmt.kubernetesconfiguration.privatelinkscopes.operations.PrivateEndpointConnectionsOperations
+    :ivar private_link_resources: PrivateLinkResourcesOperations operations
+    :vartype private_link_resources:
+     azure.mgmt.kubernetesconfiguration.privatelinkscopes.operations.PrivateLinkResourcesOperations
     :param credential: Credential needed for the client to connect to Azure. Required.
     :type credential: ~azure.core.credentials.TokenCredential
     :param subscription_id: The ID of the target subscription. Required.
     :type subscription_id: str
     :param base_url: Service URL. Default value is None.
     :type base_url: str
+    :keyword cloud_setting: The cloud setting for which to get the ARM endpoint. Default value is
+     None.
+    :paramtype cloud_setting: ~azure.core.AzureClouds
     :keyword api_version: Api Version. Default value is "2024-11-01-preview". Note that overriding
      this default value may result in unsupported behavior.
     :paramtype api_version: str
@@ -56,15 +60,25 @@ class KubernetesConfigurationPrivateLinkScopesMgmtClient:  # pylint: disable=nam
     """
 
     def __init__(
-        self, credential: "TokenCredential", subscription_id: str, base_url: Optional[str] = None, **kwargs: Any
+        self,
+        credential: "TokenCredential",
+        subscription_id: str,
+        base_url: Optional[str] = None,
+        *,
+        cloud_setting: Optional["AzureClouds"] = None,
+        **kwargs: Any
     ) -> None:
-        _cloud = kwargs.pop("cloud_setting", None) or settings.current.azure_cloud  # type: ignore
+        _cloud = cloud_setting or settings.current.azure_cloud  # type: ignore
         _endpoints = get_arm_endpoints(_cloud)
         if not base_url:
             base_url = _endpoints["resource_manager"]
         credential_scopes = kwargs.pop("credential_scopes", _endpoints["credential_scopes"])
         self._config = KubernetesConfigurationPrivateLinkScopesMgmtClientConfiguration(
-            credential=credential, subscription_id=subscription_id, credential_scopes=credential_scopes, **kwargs
+            credential=credential,
+            subscription_id=subscription_id,
+            cloud_setting=cloud_setting,
+            credential_scopes=credential_scopes,
+            **kwargs
         )
 
         _policies = kwargs.pop("policies", None)
@@ -94,10 +108,10 @@ class KubernetesConfigurationPrivateLinkScopesMgmtClient:  # pylint: disable=nam
         self.private_link_scopes = PrivateLinkScopesOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
-        self.private_link_resources = PrivateLinkResourcesOperations(
+        self.private_endpoint_connections = PrivateEndpointConnectionsOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
-        self.private_endpoint_connections = PrivateEndpointConnectionsOperations(
+        self.private_link_resources = PrivateLinkResourcesOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
 

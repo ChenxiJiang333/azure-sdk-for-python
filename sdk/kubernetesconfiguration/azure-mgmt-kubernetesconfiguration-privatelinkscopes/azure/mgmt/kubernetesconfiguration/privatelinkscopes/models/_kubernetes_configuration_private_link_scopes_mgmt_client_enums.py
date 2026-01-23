@@ -40,16 +40,22 @@ class ProvisioningState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The provisioning state of the resource."""
 
     SUCCEEDED = "Succeeded"
+    """Succeeded"""
     FAILED = "Failed"
+    """Failed"""
     CANCELED = "Canceled"
+    """Canceled"""
     CREATING = "Creating"
+    """Creating"""
     UPDATING = "Updating"
+    """Updating"""
     DELETING = "Deleting"
+    """Deleting"""
 
 
 class PublicNetworkAccessType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """The network access policy to determine if Azure Arc agents can use public Azure Arc service
-    endpoints. Defaults to disabled (access to Azure Arc services only via private link).
+    """Indicates whether machines associated with the private link scope can also use public Azure Arc
+    service endpoints.
     """
 
     ENABLED = "Enabled"

@@ -13,8 +13,8 @@ if TYPE_CHECKING:
     from ._patch import *  # pylint: disable=unused-wildcard-import
 
 from ._private_link_scopes_operations import PrivateLinkScopesOperations  # type: ignore
-from ._private_link_resources_operations import PrivateLinkResourcesOperations  # type: ignore
 from ._private_endpoint_connections_operations import PrivateEndpointConnectionsOperations  # type: ignore
+from ._private_link_resources_operations import PrivateLinkResourcesOperations  # type: ignore
 
 from ._patch import __all__ as _patch_all
 from ._patch import *
@@ -22,8 +22,8 @@ from ._patch import patch_sdk as _patch_sdk
 
 __all__ = [
     "PrivateLinkScopesOperations",
-    "PrivateLinkResourcesOperations",
     "PrivateEndpointConnectionsOperations",
+    "PrivateLinkResourcesOperations",
 ]
 __all__.extend([p for p in _patch_all if p not in __all__])  # pyright: ignore
 _patch_sdk()

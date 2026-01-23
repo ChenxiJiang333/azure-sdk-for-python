@@ -41,18 +41,6 @@ class TestKubernetesConfigurationPrivateLinkScopesMgmtPrivateLinkScopesOperation
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_private_link_scopes_delete(self, resource_group):
-        response = self.client.private_link_scopes.delete(
-            resource_group_name=resource_group.name,
-            scope_name="str",
-            api_version="2024-11-01-preview",
-        )
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
     def test_private_link_scopes_get(self, resource_group):
         response = self.client.private_link_scopes.get(
             resource_group_name=resource_group.name,
@@ -125,6 +113,18 @@ class TestKubernetesConfigurationPrivateLinkScopesMgmtPrivateLinkScopesOperation
             resource_group_name=resource_group.name,
             scope_name="str",
             private_link_scope_tags={"tags": {"str": "str"}},
+            api_version="2024-11-01-preview",
+        )
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
+    def test_private_link_scopes_delete(self, resource_group):
+        response = self.client.private_link_scopes.delete(
+            resource_group_name=resource_group.name,
+            scope_name="str",
             api_version="2024-11-01-preview",
         )
 

@@ -7,13 +7,15 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 
+from collections.abc import MutableMapping
 import datetime
-from typing import Any, Dict, List, Optional, TYPE_CHECKING, Union
+from typing import Any, Optional, TYPE_CHECKING, Union
 
 from .._utils import serialization as _serialization
 
 if TYPE_CHECKING:
     from .. import models as _models
+JSON = MutableMapping[str, Any]
 
 
 class ErrorAdditionalInfo(_serialization.Model):
@@ -85,8 +87,8 @@ class ErrorDetail(_serialization.Model):
         self.code: Optional[str] = None
         self.message: Optional[str] = None
         self.target: Optional[str] = None
-        self.details: Optional[List["_models.ErrorDetail"]] = None
-        self.additional_info: Optional[List["_models.ErrorAdditionalInfo"]] = None
+        self.details: Optional[list["_models.ErrorDetail"]] = None
+        self.additional_info: Optional[list["_models.ErrorAdditionalInfo"]] = None
 
 
 class ErrorResponse(_serialization.Model):
@@ -193,7 +195,7 @@ class TrackedResource(Resource):
         "location": {"key": "location", "type": "str"},
     }
 
-    def __init__(self, *, location: str, tags: Optional[Dict[str, str]] = None, **kwargs: Any) -> None:
+    def __init__(self, *, location: str, tags: Optional[dict[str, str]] = None, **kwargs: Any) -> None:
         """
         :keyword tags: Resource tags.
         :paramtype tags: dict[str, str]
@@ -254,7 +256,7 @@ class KubernetesConfigurationPrivateLinkScope(TrackedResource):
         self,
         *,
         location: str,
-        tags: Optional[Dict[str, str]] = None,
+        tags: Optional[dict[str, str]] = None,
         properties: Optional["_models.KubernetesConfigurationPrivateLinkScopeProperties"] = None,
         **kwargs: Any
     ) -> None:
@@ -272,15 +274,14 @@ class KubernetesConfigurationPrivateLinkScope(TrackedResource):
 
 
 class KubernetesConfigurationPrivateLinkScopeListResult(_serialization.Model):  # pylint: disable=name-too-long
-    """Describes the list of Azure Arc PrivateLinkScope resources.
+    """The response of a KubernetesConfigurationPrivateLinkScope list operation.
 
     All required parameters must be populated in order to send to server.
 
-    :ivar value: List of Azure Arc PrivateLinkScope definitions. Required.
+    :ivar value: The KubernetesConfigurationPrivateLinkScope items on this page. Required.
     :vartype value:
      list[~azure.mgmt.kubernetesconfiguration.privatelinkscopes.models.KubernetesConfigurationPrivateLinkScope]
-    :ivar next_link: The URI to get the next set of Azure Arc PrivateLinkScope definitions if too
-     many PrivateLinkScopes where returned in the result set.
+    :ivar next_link: The link to the next page of items.
     :vartype next_link: str
     """
 
@@ -296,16 +297,15 @@ class KubernetesConfigurationPrivateLinkScopeListResult(_serialization.Model):  
     def __init__(
         self,
         *,
-        value: List["_models.KubernetesConfigurationPrivateLinkScope"],
+        value: list["_models.KubernetesConfigurationPrivateLinkScope"],
         next_link: Optional[str] = None,
         **kwargs: Any
     ) -> None:
         """
-        :keyword value: List of Azure Arc PrivateLinkScope definitions. Required.
+        :keyword value: The KubernetesConfigurationPrivateLinkScope items on this page. Required.
         :paramtype value:
          list[~azure.mgmt.kubernetesconfiguration.privatelinkscopes.models.KubernetesConfigurationPrivateLinkScope]
-        :keyword next_link: The URI to get the next set of Azure Arc PrivateLinkScope definitions if
-         too many PrivateLinkScopes where returned in the result set.
+        :keyword next_link: The link to the next page of items.
         :paramtype next_link: str
         """
         super().__init__(**kwargs)
@@ -377,7 +377,7 @@ class KubernetesConfigurationPrivateLinkScopeProperties(_serialization.Model):  
         self.provisioning_state: Optional[Union[str, "_models.ProvisioningState"]] = None
         self.cluster_resource_id = cluster_resource_id
         self.private_link_scope_id: Optional[str] = None
-        self.private_endpoint_connections: Optional[List["_models.PrivateEndpointConnection"]] = None
+        self.private_endpoint_connections: Optional[list["_models.PrivateEndpointConnection"]] = None
 
 
 class PrivateEndpoint(_serialization.Model):
@@ -476,28 +476,62 @@ class PrivateEndpointConnection(Resource):
 
 
 class PrivateEndpointConnectionListResult(_serialization.Model):
-    """List of private endpoint connection associated with the specified storage account.
+    """The response of a PrivateEndpointConnection list operation.
 
-    :ivar value: Array of private endpoint connections.
+    All required parameters must be populated in order to send to server.
+
+    :ivar value: The PrivateEndpointConnection items on this page. Required.
     :vartype value:
      list[~azure.mgmt.kubernetesconfiguration.privatelinkscopes.models.PrivateEndpointConnection]
+    :ivar next_link: The link to the next page of items.
+    :vartype next_link: str
     """
+
+    _validation = {
+        "value": {"required": True},
+    }
 
     _attribute_map = {
         "value": {"key": "value", "type": "[PrivateEndpointConnection]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(self, *, value: Optional[List["_models.PrivateEndpointConnection"]] = None, **kwargs: Any) -> None:
+    def __init__(
+        self, *, value: list["_models.PrivateEndpointConnection"], next_link: Optional[str] = None, **kwargs: Any
+    ) -> None:
         """
-        :keyword value: Array of private endpoint connections.
+        :keyword value: The PrivateEndpointConnection items on this page. Required.
         :paramtype value:
          list[~azure.mgmt.kubernetesconfiguration.privatelinkscopes.models.PrivateEndpointConnection]
+        :keyword next_link: The link to the next page of items.
+        :paramtype next_link: str
         """
         super().__init__(**kwargs)
         self.value = value
+        self.next_link = next_link
 
 
-class PrivateLinkResource(Resource):
+class ProxyResource(Resource):
+    """The resource model definition for a Azure Resource Manager proxy resource. It will not have
+    tags and a location.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    :ivar id: Fully qualified resource ID for the resource. Ex -
+     /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}.
+    :vartype id: str
+    :ivar name: The name of the resource.
+    :vartype name: str
+    :ivar type: The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or
+     "Microsoft.Storage/storageAccounts".
+    :vartype type: str
+    :ivar system_data: Azure Resource Manager metadata containing createdBy and modifiedBy
+     information.
+    :vartype system_data: ~azure.mgmt.kubernetesconfiguration.privatelinkscopes.models.SystemData
+    """
+
+
+class PrivateLinkResource(ProxyResource):
     """A private link resource.
 
     Variables are only populated by the server, and will be ignored when sending a request.
@@ -540,37 +574,51 @@ class PrivateLinkResource(Resource):
         "required_zone_names": {"key": "properties.requiredZoneNames", "type": "[str]"},
     }
 
-    def __init__(self, *, required_zone_names: Optional[List[str]] = None, **kwargs: Any) -> None:
+    def __init__(self, *, required_zone_names: Optional[list[str]] = None, **kwargs: Any) -> None:
         """
         :keyword required_zone_names: The private link resource Private link DNS zone name.
         :paramtype required_zone_names: list[str]
         """
         super().__init__(**kwargs)
         self.group_id: Optional[str] = None
-        self.required_members: Optional[List[str]] = None
+        self.required_members: Optional[list[str]] = None
         self.required_zone_names = required_zone_names
 
 
 class PrivateLinkResourceListResult(_serialization.Model):
-    """A list of private link resources.
+    """The response of a PrivateLinkResource list operation.
 
-    :ivar value: Array of private link resources.
+    All required parameters must be populated in order to send to server.
+
+    :ivar value: The PrivateLinkResource items on this page. Required.
     :vartype value:
      list[~azure.mgmt.kubernetesconfiguration.privatelinkscopes.models.PrivateLinkResource]
+    :ivar next_link: The link to the next page of items.
+    :vartype next_link: str
     """
+
+    _validation = {
+        "value": {"required": True},
+    }
 
     _attribute_map = {
         "value": {"key": "value", "type": "[PrivateLinkResource]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(self, *, value: Optional[List["_models.PrivateLinkResource"]] = None, **kwargs: Any) -> None:
+    def __init__(
+        self, *, value: list["_models.PrivateLinkResource"], next_link: Optional[str] = None, **kwargs: Any
+    ) -> None:
         """
-        :keyword value: Array of private link resources.
+        :keyword value: The PrivateLinkResource items on this page. Required.
         :paramtype value:
          list[~azure.mgmt.kubernetesconfiguration.privatelinkscopes.models.PrivateLinkResource]
+        :keyword next_link: The link to the next page of items.
+        :paramtype next_link: str
         """
         super().__init__(**kwargs)
         self.value = value
+        self.next_link = next_link
 
 
 class PrivateLinkServiceConnectionState(_serialization.Model):
@@ -699,7 +747,7 @@ class TagsResource(_serialization.Model):
         "tags": {"key": "tags", "type": "{str}"},
     }
 
-    def __init__(self, *, tags: Optional[Dict[str, str]] = None, **kwargs: Any) -> None:
+    def __init__(self, *, tags: Optional[dict[str, str]] = None, **kwargs: Any) -> None:
         """
         :keyword tags: Resource tags.
         :paramtype tags: dict[str, str]
