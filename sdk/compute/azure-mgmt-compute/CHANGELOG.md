@@ -1,3 +1,839 @@
+## tsp migration
+
+### Breaking Changes
+
+- Deleted or renamed client `ComputeManagementClient`
+- Model `AvailabilitySet` deleted or renamed its instance variable `platform_update_domain_count`
+- Model `AvailabilitySet` deleted or renamed its instance variable `platform_fault_domain_count`
+- Model `AvailabilitySet` deleted or renamed its instance variable `virtual_machines`
+- Model `AvailabilitySet` deleted or renamed its instance variable `proximity_placement_group`
+- Model `AvailabilitySet` deleted or renamed its instance variable `statuses`
+- Model `AvailabilitySet` deleted or renamed its instance variable `scheduled_events_policy`
+- Model `AvailabilitySet` deleted or renamed its instance variable `virtual_machine_scale_set_migration_info`
+- Model `AvailabilitySetUpdate` deleted or renamed its instance variable `platform_update_domain_count`
+- Model `AvailabilitySetUpdate` deleted or renamed its instance variable `platform_fault_domain_count`
+- Model `AvailabilitySetUpdate` deleted or renamed its instance variable `virtual_machines`
+- Model `AvailabilitySetUpdate` deleted or renamed its instance variable `proximity_placement_group`
+- Model `AvailabilitySetUpdate` deleted or renamed its instance variable `statuses`
+- Model `AvailabilitySetUpdate` deleted or renamed its instance variable `scheduled_events_policy`
+- Model `AvailabilitySetUpdate` deleted or renamed its instance variable `virtual_machine_scale_set_migration_info`
+- Model `CapacityReservation` deleted or renamed its instance variable `reservation_id`
+- Model `CapacityReservation` deleted or renamed its instance variable `platform_fault_domain_count`
+- Model `CapacityReservation` deleted or renamed its instance variable `virtual_machines_associated`
+- Model `CapacityReservation` deleted or renamed its instance variable `provisioning_time`
+- Model `CapacityReservation` deleted or renamed its instance variable `provisioning_state`
+- Model `CapacityReservation` deleted or renamed its instance variable `instance_view`
+- Model `CapacityReservation` deleted or renamed its instance variable `time_created`
+- Model `CapacityReservation` deleted or renamed its instance variable `schedule_profile`
+- Model `CapacityReservationGroup` deleted or renamed its instance variable `capacity_reservations`
+- Model `CapacityReservationGroup` deleted or renamed its instance variable `virtual_machines_associated`
+- Model `CapacityReservationGroup` deleted or renamed its instance variable `instance_view`
+- Model `CapacityReservationGroup` deleted or renamed its instance variable `sharing_profile`
+- Model `CapacityReservationGroup` deleted or renamed its instance variable `reservation_type`
+- Model `CapacityReservationGroupUpdate` deleted or renamed its instance variable `capacity_reservations`
+- Model `CapacityReservationGroupUpdate` deleted or renamed its instance variable `virtual_machines_associated`
+- Model `CapacityReservationGroupUpdate` deleted or renamed its instance variable `instance_view`
+- Model `CapacityReservationGroupUpdate` deleted or renamed its instance variable `sharing_profile`
+- Model `CapacityReservationGroupUpdate` deleted or renamed its instance variable `reservation_type`
+- Model `CapacityReservationUpdate` deleted or renamed its instance variable `reservation_id`
+- Model `CapacityReservationUpdate` deleted or renamed its instance variable `platform_fault_domain_count`
+- Model `CapacityReservationUpdate` deleted or renamed its instance variable `virtual_machines_associated`
+- Model `CapacityReservationUpdate` deleted or renamed its instance variable `provisioning_time`
+- Model `CapacityReservationUpdate` deleted or renamed its instance variable `provisioning_state`
+- Model `CapacityReservationUpdate` deleted or renamed its instance variable `instance_view`
+- Model `CapacityReservationUpdate` deleted or renamed its instance variable `time_created`
+- Model `CapacityReservationUpdate` deleted or renamed its instance variable `schedule_profile`
+- Model `CommunityGallery` deleted or renamed its instance variable `disclaimer`
+- Model `CommunityGallery` deleted or renamed its instance variable `artifact_tags`
+- Model `CommunityGallery` deleted or renamed its instance variable `community_metadata`
+- Model `CommunityGallery` deleted or renamed its instance variable `unique_id`
+- Model `CommunityGalleryImage` deleted or renamed its instance variable `os_type`
+- Model `CommunityGalleryImage` deleted or renamed its instance variable `os_state`
+- Model `CommunityGalleryImage` deleted or renamed its instance variable `end_of_life_date`
+- Model `CommunityGalleryImage` deleted or renamed its instance variable `recommended`
+- Model `CommunityGalleryImage` deleted or renamed its instance variable `disallowed`
+- Model `CommunityGalleryImage` deleted or renamed its instance variable `hyper_v_generation`
+- Model `CommunityGalleryImage` deleted or renamed its instance variable `features`
+- Model `CommunityGalleryImage` deleted or renamed its instance variable `purchase_plan`
+- Model `CommunityGalleryImage` deleted or renamed its instance variable `architecture`
+- Model `CommunityGalleryImage` deleted or renamed its instance variable `privacy_statement_uri`
+- Model `CommunityGalleryImage` deleted or renamed its instance variable `eula`
+- Model `CommunityGalleryImage` deleted or renamed its instance variable `disclaimer`
+- Model `CommunityGalleryImage` deleted or renamed its instance variable `artifact_tags`
+- Model `CommunityGalleryImage` deleted or renamed its instance variable `unique_id`
+- Model `CommunityGalleryImageVersion` deleted or renamed its instance variable `published_date`
+- Model `CommunityGalleryImageVersion` deleted or renamed its instance variable `end_of_life_date`
+- Model `CommunityGalleryImageVersion` deleted or renamed its instance variable `exclude_from_latest`
+- Model `CommunityGalleryImageVersion` deleted or renamed its instance variable `storage_profile`
+- Model `CommunityGalleryImageVersion` deleted or renamed its instance variable `disclaimer`
+- Model `CommunityGalleryImageVersion` deleted or renamed its instance variable `artifact_tags`
+- Model `CommunityGalleryImageVersion` deleted or renamed its instance variable `unique_id`
+- Model `DedicatedHost` deleted or renamed its instance variable `platform_fault_domain`
+- Model `DedicatedHost` deleted or renamed its instance variable `auto_replace_on_failure`
+- Model `DedicatedHost` deleted or renamed its instance variable `host_id`
+- Model `DedicatedHost` deleted or renamed its instance variable `virtual_machines`
+- Model `DedicatedHost` deleted or renamed its instance variable `license_type`
+- Model `DedicatedHost` deleted or renamed its instance variable `provisioning_time`
+- Model `DedicatedHost` deleted or renamed its instance variable `provisioning_state`
+- Model `DedicatedHost` deleted or renamed its instance variable `instance_view`
+- Model `DedicatedHost` deleted or renamed its instance variable `time_created`
+- Model `DedicatedHostGroup` deleted or renamed its instance variable `platform_fault_domain_count`
+- Model `DedicatedHostGroup` deleted or renamed its instance variable `hosts`
+- Model `DedicatedHostGroup` deleted or renamed its instance variable `instance_view`
+- Model `DedicatedHostGroup` deleted or renamed its instance variable `support_automatic_placement`
+- Model `DedicatedHostGroup` deleted or renamed its instance variable `additional_capabilities`
+- Model `DedicatedHostGroupUpdate` deleted or renamed its instance variable `platform_fault_domain_count`
+- Model `DedicatedHostGroupUpdate` deleted or renamed its instance variable `hosts`
+- Model `DedicatedHostGroupUpdate` deleted or renamed its instance variable `instance_view`
+- Model `DedicatedHostGroupUpdate` deleted or renamed its instance variable `support_automatic_placement`
+- Model `DedicatedHostGroupUpdate` deleted or renamed its instance variable `additional_capabilities`
+- Model `DedicatedHostUpdate` deleted or renamed its instance variable `platform_fault_domain`
+- Model `DedicatedHostUpdate` deleted or renamed its instance variable `auto_replace_on_failure`
+- Model `DedicatedHostUpdate` deleted or renamed its instance variable `host_id`
+- Model `DedicatedHostUpdate` deleted or renamed its instance variable `virtual_machines`
+- Model `DedicatedHostUpdate` deleted or renamed its instance variable `license_type`
+- Model `DedicatedHostUpdate` deleted or renamed its instance variable `provisioning_time`
+- Model `DedicatedHostUpdate` deleted or renamed its instance variable `provisioning_state`
+- Model `DedicatedHostUpdate` deleted or renamed its instance variable `instance_view`
+- Model `DedicatedHostUpdate` deleted or renamed its instance variable `time_created`
+- Model `Disk` deleted or renamed its instance variable `time_created`
+- Model `Disk` deleted or renamed its instance variable `os_type`
+- Model `Disk` deleted or renamed its instance variable `hyper_v_generation`
+- Model `Disk` deleted or renamed its instance variable `purchase_plan`
+- Model `Disk` deleted or renamed its instance variable `supported_capabilities`
+- Model `Disk` deleted or renamed its instance variable `creation_data`
+- Model `Disk` deleted or renamed its instance variable `disk_size_gb`
+- Model `Disk` deleted or renamed its instance variable `disk_size_bytes`
+- Model `Disk` deleted or renamed its instance variable `unique_id`
+- Model `Disk` deleted or renamed its instance variable `encryption_settings_collection`
+- Model `Disk` deleted or renamed its instance variable `provisioning_state`
+- Model `Disk` deleted or renamed its instance variable `disk_iops_read_write`
+- Model `Disk` deleted or renamed its instance variable `disk_m_bps_read_write`
+- Model `Disk` deleted or renamed its instance variable `disk_iops_read_only`
+- Model `Disk` deleted or renamed its instance variable `disk_m_bps_read_only`
+- Model `Disk` deleted or renamed its instance variable `disk_state`
+- Model `Disk` deleted or renamed its instance variable `encryption`
+- Model `Disk` deleted or renamed its instance variable `max_shares`
+- Model `Disk` deleted or renamed its instance variable `share_info`
+- Model `Disk` deleted or renamed its instance variable `network_access_policy`
+- Model `Disk` deleted or renamed its instance variable `disk_access_id`
+- Model `Disk` deleted or renamed its instance variable `bursting_enabled_time`
+- Model `Disk` deleted or renamed its instance variable `tier`
+- Model `Disk` deleted or renamed its instance variable `bursting_enabled`
+- Model `Disk` deleted or renamed its instance variable `property_updates_in_progress`
+- Model `Disk` deleted or renamed its instance variable `supports_hibernation`
+- Model `Disk` deleted or renamed its instance variable `security_profile`
+- Model `Disk` deleted or renamed its instance variable `completion_percent`
+- Model `Disk` deleted or renamed its instance variable `public_network_access`
+- Model `Disk` deleted or renamed its instance variable `data_access_auth_mode`
+- Model `Disk` deleted or renamed its instance variable `optimized_for_frequent_attach`
+- Model `Disk` deleted or renamed its instance variable `last_ownership_update_time`
+- Model `Disk` deleted or renamed its instance variable `availability_policy`
+- Model `DiskAccess` deleted or renamed its instance variable `private_endpoint_connections`
+- Model `DiskAccess` deleted or renamed its instance variable `provisioning_state`
+- Model `DiskAccess` deleted or renamed its instance variable `time_created`
+- Model `DiskEncryptionSet` deleted or renamed its instance variable `encryption_type`
+- Model `DiskEncryptionSet` deleted or renamed its instance variable `active_key`
+- Model `DiskEncryptionSet` deleted or renamed its instance variable `previous_keys`
+- Model `DiskEncryptionSet` deleted or renamed its instance variable `provisioning_state`
+- Model `DiskEncryptionSet` deleted or renamed its instance variable `rotation_to_latest_key_version_enabled`
+- Model `DiskEncryptionSet` deleted or renamed its instance variable `last_key_rotation_timestamp`
+- Model `DiskEncryptionSet` deleted or renamed its instance variable `auto_key_rotation_error`
+- Model `DiskEncryptionSet` deleted or renamed its instance variable `federated_client_id`
+- Model `DiskEncryptionSetUpdate` deleted or renamed its instance variable `encryption_type`
+- Model `DiskEncryptionSetUpdate` deleted or renamed its instance variable `active_key`
+- Model `DiskEncryptionSetUpdate` deleted or renamed its instance variable `rotation_to_latest_key_version_enabled`
+- Model `DiskEncryptionSetUpdate` deleted or renamed its instance variable `federated_client_id`
+- Model `DiskRestorePoint` deleted or renamed its instance variable `time_created`
+- Model `DiskRestorePoint` deleted or renamed its instance variable `source_resource_id`
+- Model `DiskRestorePoint` deleted or renamed its instance variable `os_type`
+- Model `DiskRestorePoint` deleted or renamed its instance variable `hyper_v_generation`
+- Model `DiskRestorePoint` deleted or renamed its instance variable `purchase_plan`
+- Model `DiskRestorePoint` deleted or renamed its instance variable `supported_capabilities`
+- Model `DiskRestorePoint` deleted or renamed its instance variable `family_id`
+- Model `DiskRestorePoint` deleted or renamed its instance variable `source_unique_id`
+- Model `DiskRestorePoint` deleted or renamed its instance variable `encryption`
+- Model `DiskRestorePoint` deleted or renamed its instance variable `supports_hibernation`
+- Model `DiskRestorePoint` deleted or renamed its instance variable `network_access_policy`
+- Model `DiskRestorePoint` deleted or renamed its instance variable `public_network_access`
+- Model `DiskRestorePoint` deleted or renamed its instance variable `disk_access_id`
+- Model `DiskRestorePoint` deleted or renamed its instance variable `completion_percent`
+- Model `DiskRestorePoint` deleted or renamed its instance variable `replication_state`
+- Model `DiskRestorePoint` deleted or renamed its instance variable `source_resource_location`
+- Model `DiskRestorePoint` deleted or renamed its instance variable `security_profile`
+- Model `DiskRestorePoint` deleted or renamed its instance variable `logical_sector_size`
+- Model `DiskUpdate` deleted or renamed its instance variable `os_type`
+- Model `DiskUpdate` deleted or renamed its instance variable `disk_size_gb`
+- Model `DiskUpdate` deleted or renamed its instance variable `encryption_settings_collection`
+- Model `DiskUpdate` deleted or renamed its instance variable `disk_iops_read_write`
+- Model `DiskUpdate` deleted or renamed its instance variable `disk_m_bps_read_write`
+- Model `DiskUpdate` deleted or renamed its instance variable `disk_iops_read_only`
+- Model `DiskUpdate` deleted or renamed its instance variable `disk_m_bps_read_only`
+- Model `DiskUpdate` deleted or renamed its instance variable `max_shares`
+- Model `DiskUpdate` deleted or renamed its instance variable `encryption`
+- Model `DiskUpdate` deleted or renamed its instance variable `network_access_policy`
+- Model `DiskUpdate` deleted or renamed its instance variable `disk_access_id`
+- Model `DiskUpdate` deleted or renamed its instance variable `tier`
+- Model `DiskUpdate` deleted or renamed its instance variable `bursting_enabled`
+- Model `DiskUpdate` deleted or renamed its instance variable `purchase_plan`
+- Model `DiskUpdate` deleted or renamed its instance variable `supported_capabilities`
+- Model `DiskUpdate` deleted or renamed its instance variable `property_updates_in_progress`
+- Model `DiskUpdate` deleted or renamed its instance variable `supports_hibernation`
+- Model `DiskUpdate` deleted or renamed its instance variable `public_network_access`
+- Model `DiskUpdate` deleted or renamed its instance variable `data_access_auth_mode`
+- Model `DiskUpdate` deleted or renamed its instance variable `optimized_for_frequent_attach`
+- Model `DiskUpdate` deleted or renamed its instance variable `availability_policy`
+- Model `Gallery` deleted or renamed its instance variable `description`
+- Model `Gallery` deleted or renamed its instance variable `identifier`
+- Model `Gallery` deleted or renamed its instance variable `provisioning_state`
+- Model `Gallery` deleted or renamed its instance variable `sharing_profile`
+- Model `Gallery` deleted or renamed its instance variable `soft_delete_policy`
+- Model `Gallery` deleted or renamed its instance variable `sharing_status`
+- Model `GalleryApplication` deleted or renamed its instance variable `description`
+- Model `GalleryApplication` deleted or renamed its instance variable `eula`
+- Model `GalleryApplication` deleted or renamed its instance variable `privacy_statement_uri`
+- Model `GalleryApplication` deleted or renamed its instance variable `release_note_uri`
+- Model `GalleryApplication` deleted or renamed its instance variable `end_of_life_date`
+- Model `GalleryApplication` deleted or renamed its instance variable `supported_os_type`
+- Model `GalleryApplication` deleted or renamed its instance variable `custom_actions`
+- Model `GalleryApplicationUpdate` deleted or renamed its instance variable `description`
+- Model `GalleryApplicationUpdate` deleted or renamed its instance variable `eula`
+- Model `GalleryApplicationUpdate` deleted or renamed its instance variable `privacy_statement_uri`
+- Model `GalleryApplicationUpdate` deleted or renamed its instance variable `release_note_uri`
+- Model `GalleryApplicationUpdate` deleted or renamed its instance variable `end_of_life_date`
+- Model `GalleryApplicationUpdate` deleted or renamed its instance variable `supported_os_type`
+- Model `GalleryApplicationUpdate` deleted or renamed its instance variable `custom_actions`
+- Model `GalleryApplicationVersion` deleted or renamed its instance variable `publishing_profile`
+- Model `GalleryApplicationVersion` deleted or renamed its instance variable `safety_profile`
+- Model `GalleryApplicationVersion` deleted or renamed its instance variable `provisioning_state`
+- Model `GalleryApplicationVersion` deleted or renamed its instance variable `replication_status`
+- Model `GalleryApplicationVersionUpdate` deleted or renamed its instance variable `publishing_profile`
+- Model `GalleryApplicationVersionUpdate` deleted or renamed its instance variable `safety_profile`
+- Model `GalleryApplicationVersionUpdate` deleted or renamed its instance variable `provisioning_state`
+- Model `GalleryApplicationVersionUpdate` deleted or renamed its instance variable `replication_status`
+- Model `GalleryImage` deleted or renamed its instance variable `description`
+- Model `GalleryImage` deleted or renamed its instance variable `eula`
+- Model `GalleryImage` deleted or renamed its instance variable `privacy_statement_uri`
+- Model `GalleryImage` deleted or renamed its instance variable `release_note_uri`
+- Model `GalleryImage` deleted or renamed its instance variable `os_type`
+- Model `GalleryImage` deleted or renamed its instance variable `os_state`
+- Model `GalleryImage` deleted or renamed its instance variable `hyper_v_generation`
+- Model `GalleryImage` deleted or renamed its instance variable `end_of_life_date`
+- Model `GalleryImage` deleted or renamed its instance variable `identifier`
+- Model `GalleryImage` deleted or renamed its instance variable `recommended`
+- Model `GalleryImage` deleted or renamed its instance variable `disallowed`
+- Model `GalleryImage` deleted or renamed its instance variable `purchase_plan`
+- Model `GalleryImage` deleted or renamed its instance variable `provisioning_state`
+- Model `GalleryImage` deleted or renamed its instance variable `features`
+- Model `GalleryImage` deleted or renamed its instance variable `architecture`
+- Model `GalleryImage` deleted or renamed its instance variable `allow_update_image`
+- Model `GalleryImageUpdate` deleted or renamed its instance variable `description`
+- Model `GalleryImageUpdate` deleted or renamed its instance variable `eula`
+- Model `GalleryImageUpdate` deleted or renamed its instance variable `privacy_statement_uri`
+- Model `GalleryImageUpdate` deleted or renamed its instance variable `release_note_uri`
+- Model `GalleryImageUpdate` deleted or renamed its instance variable `os_type`
+- Model `GalleryImageUpdate` deleted or renamed its instance variable `os_state`
+- Model `GalleryImageUpdate` deleted or renamed its instance variable `hyper_v_generation`
+- Model `GalleryImageUpdate` deleted or renamed its instance variable `end_of_life_date`
+- Model `GalleryImageUpdate` deleted or renamed its instance variable `identifier`
+- Model `GalleryImageUpdate` deleted or renamed its instance variable `recommended`
+- Model `GalleryImageUpdate` deleted or renamed its instance variable `disallowed`
+- Model `GalleryImageUpdate` deleted or renamed its instance variable `purchase_plan`
+- Model `GalleryImageUpdate` deleted or renamed its instance variable `provisioning_state`
+- Model `GalleryImageUpdate` deleted or renamed its instance variable `features`
+- Model `GalleryImageUpdate` deleted or renamed its instance variable `architecture`
+- Model `GalleryImageUpdate` deleted or renamed its instance variable `allow_update_image`
+- Model `GalleryImageVersion` deleted or renamed its instance variable `publishing_profile`
+- Model `GalleryImageVersion` deleted or renamed its instance variable `provisioning_state`
+- Model `GalleryImageVersion` deleted or renamed its instance variable `storage_profile`
+- Model `GalleryImageVersion` deleted or renamed its instance variable `safety_profile`
+- Model `GalleryImageVersion` deleted or renamed its instance variable `replication_status`
+- Model `GalleryImageVersion` deleted or renamed its instance variable `security_profile`
+- Model `GalleryImageVersion` deleted or renamed its instance variable `restore`
+- Model `GalleryImageVersion` deleted or renamed its instance variable `validations_profile`
+- Model `GalleryImageVersionUpdate` deleted or renamed its instance variable `publishing_profile`
+- Model `GalleryImageVersionUpdate` deleted or renamed its instance variable `provisioning_state`
+- Model `GalleryImageVersionUpdate` deleted or renamed its instance variable `storage_profile`
+- Model `GalleryImageVersionUpdate` deleted or renamed its instance variable `safety_profile`
+- Model `GalleryImageVersionUpdate` deleted or renamed its instance variable `replication_status`
+- Model `GalleryImageVersionUpdate` deleted or renamed its instance variable `security_profile`
+- Model `GalleryImageVersionUpdate` deleted or renamed its instance variable `restore`
+- Model `GalleryImageVersionUpdate` deleted or renamed its instance variable `validations_profile`
+- Model `GalleryInVMAccessControlProfileVersion` deleted or renamed its instance variable `target_locations`
+- Model `GalleryInVMAccessControlProfileVersion` deleted or renamed its instance variable `exclude_from_latest`
+- Model `GalleryInVMAccessControlProfileVersion` deleted or renamed its instance variable `published_date`
+- Model `GalleryInVMAccessControlProfileVersion` deleted or renamed its instance variable `provisioning_state`
+- Model `GalleryInVMAccessControlProfileVersion` deleted or renamed its instance variable `replication_status`
+- Model `GalleryInVMAccessControlProfileVersion` deleted or renamed its instance variable `mode`
+- Model `GalleryInVMAccessControlProfileVersion` deleted or renamed its instance variable `default_access`
+- Model `GalleryInVMAccessControlProfileVersion` deleted or renamed its instance variable `rules`
+- Model `GalleryInVMAccessControlProfileVersionUpdate` deleted or renamed its instance variable `target_locations`
+- Model `GalleryInVMAccessControlProfileVersionUpdate` deleted or renamed its instance variable `exclude_from_latest`
+- Model `GalleryInVMAccessControlProfileVersionUpdate` deleted or renamed its instance variable `published_date`
+- Model `GalleryInVMAccessControlProfileVersionUpdate` deleted or renamed its instance variable `provisioning_state`
+- Model `GalleryInVMAccessControlProfileVersionUpdate` deleted or renamed its instance variable `replication_status`
+- Model `GalleryInVMAccessControlProfileVersionUpdate` deleted or renamed its instance variable `mode`
+- Model `GalleryInVMAccessControlProfileVersionUpdate` deleted or renamed its instance variable `default_access`
+- Model `GalleryInVMAccessControlProfileVersionUpdate` deleted or renamed its instance variable `rules`
+- Model `GallerySoftDeletedResource` deleted or renamed its instance variable `resource_arm_id`
+- Model `GallerySoftDeletedResource` deleted or renamed its instance variable `soft_deleted_artifact_type`
+- Model `GallerySoftDeletedResource` deleted or renamed its instance variable `soft_deleted_time`
+- Model `GalleryUpdate` deleted or renamed its instance variable `description`
+- Model `GalleryUpdate` deleted or renamed its instance variable `identifier`
+- Model `GalleryUpdate` deleted or renamed its instance variable `provisioning_state`
+- Model `GalleryUpdate` deleted or renamed its instance variable `sharing_profile`
+- Model `GalleryUpdate` deleted or renamed its instance variable `soft_delete_policy`
+- Model `GalleryUpdate` deleted or renamed its instance variable `sharing_status`
+- Model `Image` deleted or renamed its instance variable `source_virtual_machine`
+- Model `Image` deleted or renamed its instance variable `storage_profile`
+- Model `Image` deleted or renamed its instance variable `provisioning_state`
+- Model `Image` deleted or renamed its instance variable `hyper_v_generation`
+- Model `ImageUpdate` deleted or renamed its instance variable `source_virtual_machine`
+- Model `ImageUpdate` deleted or renamed its instance variable `storage_profile`
+- Model `ImageUpdate` deleted or renamed its instance variable `provisioning_state`
+- Model `ImageUpdate` deleted or renamed its instance variable `hyper_v_generation`
+- Deleted or renamed enum value `NetworkApiVersion.TWO_THOUSAND_TWENTY11_01`
+- Deleted or renamed enum value `NetworkApiVersion.TWO_THOUSAND_TWENTY_TWO11_01`
+- Model `NetworkInterfaceReference` deleted or renamed its instance variable `primary`
+- Model `NetworkInterfaceReference` deleted or renamed its instance variable `delete_option`
+- Model `PirCommunityGalleryResource` deleted or renamed its instance variable `unique_id`
+- Model `PirSharedGalleryResource` deleted or renamed its instance variable `unique_id`
+- Model `PrivateEndpointConnection` deleted or renamed its instance variable `private_endpoint`
+- Model `PrivateEndpointConnection` deleted or renamed its instance variable `private_link_service_connection_state`
+- Model `PrivateEndpointConnection` deleted or renamed its instance variable `provisioning_state`
+- Model `PrivateLinkResource` deleted or renamed its instance variable `group_id`
+- Model `PrivateLinkResource` deleted or renamed its instance variable `required_members`
+- Model `PrivateLinkResource` deleted or renamed its instance variable `required_zone_names`
+- Model `ProximityPlacementGroup` deleted or renamed its instance variable `proximity_placement_group_type`
+- Model `ProximityPlacementGroup` deleted or renamed its instance variable `virtual_machines`
+- Model `ProximityPlacementGroup` deleted or renamed its instance variable `virtual_machine_scale_sets`
+- Model `ProximityPlacementGroup` deleted or renamed its instance variable `availability_sets`
+- Model `ProximityPlacementGroup` deleted or renamed its instance variable `colocation_status`
+- Model `ProximityPlacementGroup` deleted or renamed its instance variable `intent`
+- Model `ResourceSkuRestrictions` deleted or renamed its instance variable `values`
+- Model `RestorePoint` deleted or renamed its instance variable `exclude_disks`
+- Model `RestorePoint` deleted or renamed its instance variable `source_metadata`
+- Model `RestorePoint` deleted or renamed its instance variable `provisioning_state`
+- Model `RestorePoint` deleted or renamed its instance variable `consistency_mode`
+- Model `RestorePoint` deleted or renamed its instance variable `time_created`
+- Model `RestorePoint` deleted or renamed its instance variable `source_restore_point`
+- Model `RestorePoint` deleted or renamed its instance variable `instance_view`
+- Model `RestorePoint` deleted or renamed its instance variable `instant_access_duration_minutes`
+- Model `RestorePointCollection` deleted or renamed its instance variable `source`
+- Model `RestorePointCollection` deleted or renamed its instance variable `provisioning_state`
+- Model `RestorePointCollection` deleted or renamed its instance variable `restore_point_collection_id`
+- Model `RestorePointCollection` deleted or renamed its instance variable `restore_points`
+- Model `RestorePointCollection` deleted or renamed its instance variable `instant_access`
+- Model `RestorePointCollectionUpdate` deleted or renamed its instance variable `source`
+- Model `RestorePointCollectionUpdate` deleted or renamed its instance variable `provisioning_state`
+- Model `RestorePointCollectionUpdate` deleted or renamed its instance variable `restore_point_collection_id`
+- Model `RestorePointCollectionUpdate` deleted or renamed its instance variable `restore_points`
+- Model `RestorePointCollectionUpdate` deleted or renamed its instance variable `instant_access`
+- Model `RollingUpgradeStatusInfo` deleted or renamed its instance variable `policy`
+- Model `RollingUpgradeStatusInfo` deleted or renamed its instance variable `running_status`
+- Model `RollingUpgradeStatusInfo` deleted or renamed its instance variable `progress`
+- Model `RollingUpgradeStatusInfo` deleted or renamed its instance variable `error`
+- Model `SharedGallery` deleted or renamed its instance variable `artifact_tags`
+- Model `SharedGallery` deleted or renamed its instance variable `unique_id`
+- Model `SharedGalleryImage` deleted or renamed its instance variable `os_type`
+- Model `SharedGalleryImage` deleted or renamed its instance variable `os_state`
+- Model `SharedGalleryImage` deleted or renamed its instance variable `end_of_life_date`
+- Model `SharedGalleryImage` deleted or renamed its instance variable `recommended`
+- Model `SharedGalleryImage` deleted or renamed its instance variable `disallowed`
+- Model `SharedGalleryImage` deleted or renamed its instance variable `hyper_v_generation`
+- Model `SharedGalleryImage` deleted or renamed its instance variable `features`
+- Model `SharedGalleryImage` deleted or renamed its instance variable `purchase_plan`
+- Model `SharedGalleryImage` deleted or renamed its instance variable `architecture`
+- Model `SharedGalleryImage` deleted or renamed its instance variable `privacy_statement_uri`
+- Model `SharedGalleryImage` deleted or renamed its instance variable `eula`
+- Model `SharedGalleryImage` deleted or renamed its instance variable `artifact_tags`
+- Model `SharedGalleryImage` deleted or renamed its instance variable `unique_id`
+- Model `SharedGalleryImageVersion` deleted or renamed its instance variable `published_date`
+- Model `SharedGalleryImageVersion` deleted or renamed its instance variable `end_of_life_date`
+- Model `SharedGalleryImageVersion` deleted or renamed its instance variable `exclude_from_latest`
+- Model `SharedGalleryImageVersion` deleted or renamed its instance variable `storage_profile`
+- Model `SharedGalleryImageVersion` deleted or renamed its instance variable `artifact_tags`
+- Model `SharedGalleryImageVersion` deleted or renamed its instance variable `unique_id`
+- Model `Snapshot` deleted or renamed its instance variable `time_created`
+- Model `Snapshot` deleted or renamed its instance variable `os_type`
+- Model `Snapshot` deleted or renamed its instance variable `hyper_v_generation`
+- Model `Snapshot` deleted or renamed its instance variable `purchase_plan`
+- Model `Snapshot` deleted or renamed its instance variable `supported_capabilities`
+- Model `Snapshot` deleted or renamed its instance variable `creation_data`
+- Model `Snapshot` deleted or renamed its instance variable `disk_size_gb`
+- Model `Snapshot` deleted or renamed its instance variable `disk_size_bytes`
+- Model `Snapshot` deleted or renamed its instance variable `disk_state`
+- Model `Snapshot` deleted or renamed its instance variable `unique_id`
+- Model `Snapshot` deleted or renamed its instance variable `encryption_settings_collection`
+- Model `Snapshot` deleted or renamed its instance variable `provisioning_state`
+- Model `Snapshot` deleted or renamed its instance variable `incremental`
+- Model `Snapshot` deleted or renamed its instance variable `incremental_snapshot_family_id`
+- Model `Snapshot` deleted or renamed its instance variable `encryption`
+- Model `Snapshot` deleted or renamed its instance variable `network_access_policy`
+- Model `Snapshot` deleted or renamed its instance variable `disk_access_id`
+- Model `Snapshot` deleted or renamed its instance variable `security_profile`
+- Model `Snapshot` deleted or renamed its instance variable `supports_hibernation`
+- Model `Snapshot` deleted or renamed its instance variable `public_network_access`
+- Model `Snapshot` deleted or renamed its instance variable `completion_percent`
+- Model `Snapshot` deleted or renamed its instance variable `copy_completion_error`
+- Model `Snapshot` deleted or renamed its instance variable `data_access_auth_mode`
+- Model `Snapshot` deleted or renamed its instance variable `snapshot_access_state`
+- Model `SnapshotUpdate` deleted or renamed its instance variable `os_type`
+- Model `SnapshotUpdate` deleted or renamed its instance variable `disk_size_gb`
+- Model `SnapshotUpdate` deleted or renamed its instance variable `encryption_settings_collection`
+- Model `SnapshotUpdate` deleted or renamed its instance variable `encryption`
+- Model `SnapshotUpdate` deleted or renamed its instance variable `network_access_policy`
+- Model `SnapshotUpdate` deleted or renamed its instance variable `disk_access_id`
+- Model `SnapshotUpdate` deleted or renamed its instance variable `supports_hibernation`
+- Model `SnapshotUpdate` deleted or renamed its instance variable `public_network_access`
+- Model `SnapshotUpdate` deleted or renamed its instance variable `data_access_auth_mode`
+- Model `SnapshotUpdate` deleted or renamed its instance variable `supported_capabilities`
+- Model `SnapshotUpdate` deleted or renamed its instance variable `snapshot_access_state`
+- Model `SshPublicKeyResource` deleted or renamed its instance variable `public_key`
+- Model `SshPublicKeyUpdateResource` deleted or renamed its instance variable `public_key`
+- Model `UserArtifactManage` deleted or renamed its instance variable `update`
+- Model `VirtualMachine` deleted or renamed its instance variable `hardware_profile`
+- Model `VirtualMachine` deleted or renamed its instance variable `scheduled_events_policy`
+- Model `VirtualMachine` deleted or renamed its instance variable `storage_profile`
+- Model `VirtualMachine` deleted or renamed its instance variable `additional_capabilities`
+- Model `VirtualMachine` deleted or renamed its instance variable `os_profile`
+- Model `VirtualMachine` deleted or renamed its instance variable `network_profile`
+- Model `VirtualMachine` deleted or renamed its instance variable `security_profile`
+- Model `VirtualMachine` deleted or renamed its instance variable `diagnostics_profile`
+- Model `VirtualMachine` deleted or renamed its instance variable `availability_set`
+- Model `VirtualMachine` deleted or renamed its instance variable `virtual_machine_scale_set`
+- Model `VirtualMachine` deleted or renamed its instance variable `proximity_placement_group`
+- Model `VirtualMachine` deleted or renamed its instance variable `priority`
+- Model `VirtualMachine` deleted or renamed its instance variable `eviction_policy`
+- Model `VirtualMachine` deleted or renamed its instance variable `billing_profile`
+- Model `VirtualMachine` deleted or renamed its instance variable `host`
+- Model `VirtualMachine` deleted or renamed its instance variable `host_group`
+- Model `VirtualMachine` deleted or renamed its instance variable `provisioning_state`
+- Model `VirtualMachine` deleted or renamed its instance variable `instance_view`
+- Model `VirtualMachine` deleted or renamed its instance variable `license_type`
+- Model `VirtualMachine` deleted or renamed its instance variable `vm_id`
+- Model `VirtualMachine` deleted or renamed its instance variable `extensions_time_budget`
+- Model `VirtualMachine` deleted or renamed its instance variable `platform_fault_domain`
+- Model `VirtualMachine` deleted or renamed its instance variable `scheduled_events_profile`
+- Model `VirtualMachine` deleted or renamed its instance variable `user_data`
+- Model `VirtualMachine` deleted or renamed its instance variable `capacity_reservation`
+- Model `VirtualMachine` deleted or renamed its instance variable `application_profile`
+- Model `VirtualMachine` deleted or renamed its instance variable `time_created`
+- Model `VirtualMachineExtension` deleted or renamed its instance variable `force_update_tag`
+- Model `VirtualMachineExtension` deleted or renamed its instance variable `publisher`
+- Model `VirtualMachineExtension` deleted or renamed its instance variable `type_properties_type`
+- Model `VirtualMachineExtension` deleted or renamed its instance variable `type_handler_version`
+- Model `VirtualMachineExtension` deleted or renamed its instance variable `auto_upgrade_minor_version`
+- Model `VirtualMachineExtension` deleted or renamed its instance variable `enable_automatic_upgrade`
+- Model `VirtualMachineExtension` deleted or renamed its instance variable `settings`
+- Model `VirtualMachineExtension` deleted or renamed its instance variable `protected_settings`
+- Model `VirtualMachineExtension` deleted or renamed its instance variable `provisioning_state`
+- Model `VirtualMachineExtension` deleted or renamed its instance variable `instance_view`
+- Model `VirtualMachineExtension` deleted or renamed its instance variable `suppress_failures`
+- Model `VirtualMachineExtension` deleted or renamed its instance variable `protected_settings_from_key_vault`
+- Model `VirtualMachineExtension` deleted or renamed its instance variable `provision_after_extensions`
+- Model `VirtualMachineExtensionImage` deleted or renamed its instance variable `operating_system`
+- Model `VirtualMachineExtensionImage` deleted or renamed its instance variable `compute_role`
+- Model `VirtualMachineExtensionImage` deleted or renamed its instance variable `handler_schema`
+- Model `VirtualMachineExtensionImage` deleted or renamed its instance variable `vm_scale_set_enabled`
+- Model `VirtualMachineExtensionImage` deleted or renamed its instance variable `supports_multiple_extensions`
+- Model `VirtualMachineExtensionUpdate` deleted or renamed its instance variable `force_update_tag`
+- Model `VirtualMachineExtensionUpdate` deleted or renamed its instance variable `publisher`
+- Model `VirtualMachineExtensionUpdate` deleted or renamed its instance variable `type`
+- Model `VirtualMachineExtensionUpdate` deleted or renamed its instance variable `type_handler_version`
+- Model `VirtualMachineExtensionUpdate` deleted or renamed its instance variable `auto_upgrade_minor_version`
+- Model `VirtualMachineExtensionUpdate` deleted or renamed its instance variable `enable_automatic_upgrade`
+- Model `VirtualMachineExtensionUpdate` deleted or renamed its instance variable `settings`
+- Model `VirtualMachineExtensionUpdate` deleted or renamed its instance variable `protected_settings`
+- Model `VirtualMachineExtensionUpdate` deleted or renamed its instance variable `suppress_failures`
+- Model `VirtualMachineExtensionUpdate` deleted or renamed its instance variable `protected_settings_from_key_vault`
+- Model `VirtualMachineImage` deleted or renamed its instance variable `plan`
+- Model `VirtualMachineImage` deleted or renamed its instance variable `os_disk_image`
+- Model `VirtualMachineImage` deleted or renamed its instance variable `data_disk_images`
+- Model `VirtualMachineImage` deleted or renamed its instance variable `automatic_os_upgrade_properties`
+- Model `VirtualMachineImage` deleted or renamed its instance variable `hyper_v_generation`
+- Model `VirtualMachineImage` deleted or renamed its instance variable `disallowed`
+- Model `VirtualMachineImage` deleted or renamed its instance variable `features`
+- Model `VirtualMachineImage` deleted or renamed its instance variable `architecture`
+- Model `VirtualMachineImage` deleted or renamed its instance variable `image_deprecation_status`
+- Model `VirtualMachineNetworkInterfaceConfiguration` deleted or renamed its instance variable `primary`
+- Model `VirtualMachineNetworkInterfaceConfiguration` deleted or renamed its instance variable `delete_option`
+- Model `VirtualMachineNetworkInterfaceConfiguration` deleted or renamed its instance variable `enable_accelerated_networking`
+- Model `VirtualMachineNetworkInterfaceConfiguration` deleted or renamed its instance variable `disable_tcp_state_tracking`
+- Model `VirtualMachineNetworkInterfaceConfiguration` deleted or renamed its instance variable `enable_fpga`
+- Model `VirtualMachineNetworkInterfaceConfiguration` deleted or renamed its instance variable `enable_ip_forwarding`
+- Model `VirtualMachineNetworkInterfaceConfiguration` deleted or renamed its instance variable `network_security_group`
+- Model `VirtualMachineNetworkInterfaceConfiguration` deleted or renamed its instance variable `dns_settings`
+- Model `VirtualMachineNetworkInterfaceConfiguration` deleted or renamed its instance variable `ip_configurations`
+- Model `VirtualMachineNetworkInterfaceConfiguration` deleted or renamed its instance variable `dscp_configuration`
+- Model `VirtualMachineNetworkInterfaceConfiguration` deleted or renamed its instance variable `auxiliary_mode`
+- Model `VirtualMachineNetworkInterfaceConfiguration` deleted or renamed its instance variable `auxiliary_sku`
+- Model `VirtualMachineNetworkInterfaceIPConfiguration` deleted or renamed its instance variable `subnet`
+- Model `VirtualMachineNetworkInterfaceIPConfiguration` deleted or renamed its instance variable `primary`
+- Model `VirtualMachineNetworkInterfaceIPConfiguration` deleted or renamed its instance variable `public_ip_address_configuration`
+- Model `VirtualMachineNetworkInterfaceIPConfiguration` deleted or renamed its instance variable `private_ip_address_version`
+- Model `VirtualMachineNetworkInterfaceIPConfiguration` deleted or renamed its instance variable `application_security_groups`
+- Model `VirtualMachineNetworkInterfaceIPConfiguration` deleted or renamed its instance variable `application_gateway_backend_address_pools`
+- Model `VirtualMachineNetworkInterfaceIPConfiguration` deleted or renamed its instance variable `load_balancer_backend_address_pools`
+- Model `VirtualMachinePublicIPAddressConfiguration` deleted or renamed its instance variable `idle_timeout_in_minutes`
+- Model `VirtualMachinePublicIPAddressConfiguration` deleted or renamed its instance variable `delete_option`
+- Model `VirtualMachinePublicIPAddressConfiguration` deleted or renamed its instance variable `dns_settings`
+- Model `VirtualMachinePublicIPAddressConfiguration` deleted or renamed its instance variable `ip_tags`
+- Model `VirtualMachinePublicIPAddressConfiguration` deleted or renamed its instance variable `public_ip_prefix`
+- Model `VirtualMachinePublicIPAddressConfiguration` deleted or renamed its instance variable `public_ip_address_version`
+- Model `VirtualMachinePublicIPAddressConfiguration` deleted or renamed its instance variable `public_ip_allocation_method`
+- Model `VirtualMachineRunCommand` deleted or renamed its instance variable `source`
+- Model `VirtualMachineRunCommand` deleted or renamed its instance variable `parameters`
+- Model `VirtualMachineRunCommand` deleted or renamed its instance variable `protected_parameters`
+- Model `VirtualMachineRunCommand` deleted or renamed its instance variable `async_execution`
+- Model `VirtualMachineRunCommand` deleted or renamed its instance variable `run_as_user`
+- Model `VirtualMachineRunCommand` deleted or renamed its instance variable `run_as_password`
+- Model `VirtualMachineRunCommand` deleted or renamed its instance variable `timeout_in_seconds`
+- Model `VirtualMachineRunCommand` deleted or renamed its instance variable `output_blob_uri`
+- Model `VirtualMachineRunCommand` deleted or renamed its instance variable `error_blob_uri`
+- Model `VirtualMachineRunCommand` deleted or renamed its instance variable `output_blob_managed_identity`
+- Model `VirtualMachineRunCommand` deleted or renamed its instance variable `error_blob_managed_identity`
+- Model `VirtualMachineRunCommand` deleted or renamed its instance variable `provisioning_state`
+- Model `VirtualMachineRunCommand` deleted or renamed its instance variable `instance_view`
+- Model `VirtualMachineRunCommand` deleted or renamed its instance variable `treat_failure_as_deployment_failure`
+- Model `VirtualMachineRunCommandUpdate` deleted or renamed its instance variable `source`
+- Model `VirtualMachineRunCommandUpdate` deleted or renamed its instance variable `parameters`
+- Model `VirtualMachineRunCommandUpdate` deleted or renamed its instance variable `protected_parameters`
+- Model `VirtualMachineRunCommandUpdate` deleted or renamed its instance variable `async_execution`
+- Model `VirtualMachineRunCommandUpdate` deleted or renamed its instance variable `run_as_user`
+- Model `VirtualMachineRunCommandUpdate` deleted or renamed its instance variable `run_as_password`
+- Model `VirtualMachineRunCommandUpdate` deleted or renamed its instance variable `timeout_in_seconds`
+- Model `VirtualMachineRunCommandUpdate` deleted or renamed its instance variable `output_blob_uri`
+- Model `VirtualMachineRunCommandUpdate` deleted or renamed its instance variable `error_blob_uri`
+- Model `VirtualMachineRunCommandUpdate` deleted or renamed its instance variable `output_blob_managed_identity`
+- Model `VirtualMachineRunCommandUpdate` deleted or renamed its instance variable `error_blob_managed_identity`
+- Model `VirtualMachineRunCommandUpdate` deleted or renamed its instance variable `provisioning_state`
+- Model `VirtualMachineRunCommandUpdate` deleted or renamed its instance variable `instance_view`
+- Model `VirtualMachineRunCommandUpdate` deleted or renamed its instance variable `treat_failure_as_deployment_failure`
+- Model `VirtualMachineScaleSet` deleted or renamed its instance variable `upgrade_policy`
+- Model `VirtualMachineScaleSet` deleted or renamed its instance variable `scheduled_events_policy`
+- Model `VirtualMachineScaleSet` deleted or renamed its instance variable `automatic_repairs_policy`
+- Model `VirtualMachineScaleSet` deleted or renamed its instance variable `virtual_machine_profile`
+- Model `VirtualMachineScaleSet` deleted or renamed its instance variable `provisioning_state`
+- Model `VirtualMachineScaleSet` deleted or renamed its instance variable `overprovision`
+- Model `VirtualMachineScaleSet` deleted or renamed its instance variable `do_not_run_extensions_on_overprovisioned_v_ms`
+- Model `VirtualMachineScaleSet` deleted or renamed its instance variable `unique_id`
+- Model `VirtualMachineScaleSet` deleted or renamed its instance variable `single_placement_group`
+- Model `VirtualMachineScaleSet` deleted or renamed its instance variable `zone_balance`
+- Model `VirtualMachineScaleSet` deleted or renamed its instance variable `platform_fault_domain_count`
+- Model `VirtualMachineScaleSet` deleted or renamed its instance variable `proximity_placement_group`
+- Model `VirtualMachineScaleSet` deleted or renamed its instance variable `host_group`
+- Model `VirtualMachineScaleSet` deleted or renamed its instance variable `additional_capabilities`
+- Model `VirtualMachineScaleSet` deleted or renamed its instance variable `scale_in_policy`
+- Model `VirtualMachineScaleSet` deleted or renamed its instance variable `orchestration_mode`
+- Model `VirtualMachineScaleSet` deleted or renamed its instance variable `spot_restore_policy`
+- Model `VirtualMachineScaleSet` deleted or renamed its instance variable `priority_mix_policy`
+- Model `VirtualMachineScaleSet` deleted or renamed its instance variable `time_created`
+- Model `VirtualMachineScaleSet` deleted or renamed its instance variable `constrained_maximum_capacity`
+- Model `VirtualMachineScaleSet` deleted or renamed its instance variable `resiliency_policy`
+- Model `VirtualMachineScaleSet` deleted or renamed its instance variable `zonal_platform_fault_domain_align_mode`
+- Model `VirtualMachineScaleSet` deleted or renamed its instance variable `sku_profile`
+- Model `VirtualMachineScaleSet` deleted or renamed its instance variable `high_speed_interconnect_placement`
+- Model `VirtualMachineScaleSetExtension` deleted or renamed its instance variable `force_update_tag`
+- Model `VirtualMachineScaleSetExtension` deleted or renamed its instance variable `publisher`
+- Model `VirtualMachineScaleSetExtension` deleted or renamed its instance variable `type_properties_type`
+- Model `VirtualMachineScaleSetExtension` deleted or renamed its instance variable `type_handler_version`
+- Model `VirtualMachineScaleSetExtension` deleted or renamed its instance variable `auto_upgrade_minor_version`
+- Model `VirtualMachineScaleSetExtension` deleted or renamed its instance variable `enable_automatic_upgrade`
+- Model `VirtualMachineScaleSetExtension` deleted or renamed its instance variable `settings`
+- Model `VirtualMachineScaleSetExtension` deleted or renamed its instance variable `protected_settings`
+- Model `VirtualMachineScaleSetExtension` deleted or renamed its instance variable `provisioning_state`
+- Model `VirtualMachineScaleSetExtension` deleted or renamed its instance variable `provision_after_extensions`
+- Model `VirtualMachineScaleSetExtension` deleted or renamed its instance variable `suppress_failures`
+- Model `VirtualMachineScaleSetExtension` deleted or renamed its instance variable `protected_settings_from_key_vault`
+- Model `VirtualMachineScaleSetExtensionUpdate` deleted or renamed its instance variable `force_update_tag`
+- Model `VirtualMachineScaleSetExtensionUpdate` deleted or renamed its instance variable `publisher`
+- Model `VirtualMachineScaleSetExtensionUpdate` deleted or renamed its instance variable `type_properties_type`
+- Model `VirtualMachineScaleSetExtensionUpdate` deleted or renamed its instance variable `type_handler_version`
+- Model `VirtualMachineScaleSetExtensionUpdate` deleted or renamed its instance variable `auto_upgrade_minor_version`
+- Model `VirtualMachineScaleSetExtensionUpdate` deleted or renamed its instance variable `enable_automatic_upgrade`
+- Model `VirtualMachineScaleSetExtensionUpdate` deleted or renamed its instance variable `settings`
+- Model `VirtualMachineScaleSetExtensionUpdate` deleted or renamed its instance variable `protected_settings`
+- Model `VirtualMachineScaleSetExtensionUpdate` deleted or renamed its instance variable `provisioning_state`
+- Model `VirtualMachineScaleSetExtensionUpdate` deleted or renamed its instance variable `provision_after_extensions`
+- Model `VirtualMachineScaleSetExtensionUpdate` deleted or renamed its instance variable `suppress_failures`
+- Model `VirtualMachineScaleSetExtensionUpdate` deleted or renamed its instance variable `protected_settings_from_key_vault`
+- Model `VirtualMachineScaleSetIPConfiguration` deleted or renamed its instance variable `subnet`
+- Model `VirtualMachineScaleSetIPConfiguration` deleted or renamed its instance variable `primary`
+- Model `VirtualMachineScaleSetIPConfiguration` deleted or renamed its instance variable `public_ip_address_configuration`
+- Model `VirtualMachineScaleSetIPConfiguration` deleted or renamed its instance variable `private_ip_address_version`
+- Model `VirtualMachineScaleSetIPConfiguration` deleted or renamed its instance variable `application_gateway_backend_address_pools`
+- Model `VirtualMachineScaleSetIPConfiguration` deleted or renamed its instance variable `application_security_groups`
+- Model `VirtualMachineScaleSetIPConfiguration` deleted or renamed its instance variable `load_balancer_backend_address_pools`
+- Model `VirtualMachineScaleSetIPConfiguration` deleted or renamed its instance variable `load_balancer_inbound_nat_pools`
+- Model `VirtualMachineScaleSetNetworkConfiguration` deleted or renamed its instance variable `primary`
+- Model `VirtualMachineScaleSetNetworkConfiguration` deleted or renamed its instance variable `enable_accelerated_networking`
+- Model `VirtualMachineScaleSetNetworkConfiguration` deleted or renamed its instance variable `disable_tcp_state_tracking`
+- Model `VirtualMachineScaleSetNetworkConfiguration` deleted or renamed its instance variable `enable_fpga`
+- Model `VirtualMachineScaleSetNetworkConfiguration` deleted or renamed its instance variable `network_security_group`
+- Model `VirtualMachineScaleSetNetworkConfiguration` deleted or renamed its instance variable `dns_settings`
+- Model `VirtualMachineScaleSetNetworkConfiguration` deleted or renamed its instance variable `ip_configurations`
+- Model `VirtualMachineScaleSetNetworkConfiguration` deleted or renamed its instance variable `enable_ip_forwarding`
+- Model `VirtualMachineScaleSetNetworkConfiguration` deleted or renamed its instance variable `delete_option`
+- Model `VirtualMachineScaleSetNetworkConfiguration` deleted or renamed its instance variable `auxiliary_mode`
+- Model `VirtualMachineScaleSetNetworkConfiguration` deleted or renamed its instance variable `auxiliary_sku`
+- Model `VirtualMachineScaleSetPublicIPAddressConfiguration` deleted or renamed its instance variable `idle_timeout_in_minutes`
+- Model `VirtualMachineScaleSetPublicIPAddressConfiguration` deleted or renamed its instance variable `dns_settings`
+- Model `VirtualMachineScaleSetPublicIPAddressConfiguration` deleted or renamed its instance variable `ip_tags`
+- Model `VirtualMachineScaleSetPublicIPAddressConfiguration` deleted or renamed its instance variable `public_ip_prefix`
+- Model `VirtualMachineScaleSetPublicIPAddressConfiguration` deleted or renamed its instance variable `public_ip_address_version`
+- Model `VirtualMachineScaleSetPublicIPAddressConfiguration` deleted or renamed its instance variable `delete_option`
+- Model `VirtualMachineScaleSetUpdate` deleted or renamed its instance variable `upgrade_policy`
+- Model `VirtualMachineScaleSetUpdate` deleted or renamed its instance variable `automatic_repairs_policy`
+- Model `VirtualMachineScaleSetUpdate` deleted or renamed its instance variable `virtual_machine_profile`
+- Model `VirtualMachineScaleSetUpdate` deleted or renamed its instance variable `overprovision`
+- Model `VirtualMachineScaleSetUpdate` deleted or renamed its instance variable `do_not_run_extensions_on_overprovisioned_v_ms`
+- Model `VirtualMachineScaleSetUpdate` deleted or renamed its instance variable `single_placement_group`
+- Model `VirtualMachineScaleSetUpdate` deleted or renamed its instance variable `additional_capabilities`
+- Model `VirtualMachineScaleSetUpdate` deleted or renamed its instance variable `scale_in_policy`
+- Model `VirtualMachineScaleSetUpdate` deleted or renamed its instance variable `proximity_placement_group`
+- Model `VirtualMachineScaleSetUpdate` deleted or renamed its instance variable `priority_mix_policy`
+- Model `VirtualMachineScaleSetUpdate` deleted or renamed its instance variable `spot_restore_policy`
+- Model `VirtualMachineScaleSetUpdate` deleted or renamed its instance variable `resiliency_policy`
+- Model `VirtualMachineScaleSetUpdate` deleted or renamed its instance variable `zonal_platform_fault_domain_align_mode`
+- Model `VirtualMachineScaleSetUpdate` deleted or renamed its instance variable `sku_profile`
+- Model `VirtualMachineScaleSetUpdateIPConfiguration` deleted or renamed its instance variable `subnet`
+- Model `VirtualMachineScaleSetUpdateIPConfiguration` deleted or renamed its instance variable `primary`
+- Model `VirtualMachineScaleSetUpdateIPConfiguration` deleted or renamed its instance variable `public_ip_address_configuration`
+- Model `VirtualMachineScaleSetUpdateIPConfiguration` deleted or renamed its instance variable `private_ip_address_version`
+- Model `VirtualMachineScaleSetUpdateIPConfiguration` deleted or renamed its instance variable `application_gateway_backend_address_pools`
+- Model `VirtualMachineScaleSetUpdateIPConfiguration` deleted or renamed its instance variable `application_security_groups`
+- Model `VirtualMachineScaleSetUpdateIPConfiguration` deleted or renamed its instance variable `load_balancer_backend_address_pools`
+- Model `VirtualMachineScaleSetUpdateIPConfiguration` deleted or renamed its instance variable `load_balancer_inbound_nat_pools`
+- Model `VirtualMachineScaleSetUpdateNetworkConfiguration` deleted or renamed its instance variable `primary`
+- Model `VirtualMachineScaleSetUpdateNetworkConfiguration` deleted or renamed its instance variable `enable_accelerated_networking`
+- Model `VirtualMachineScaleSetUpdateNetworkConfiguration` deleted or renamed its instance variable `disable_tcp_state_tracking`
+- Model `VirtualMachineScaleSetUpdateNetworkConfiguration` deleted or renamed its instance variable `enable_fpga`
+- Model `VirtualMachineScaleSetUpdateNetworkConfiguration` deleted or renamed its instance variable `network_security_group`
+- Model `VirtualMachineScaleSetUpdateNetworkConfiguration` deleted or renamed its instance variable `dns_settings`
+- Model `VirtualMachineScaleSetUpdateNetworkConfiguration` deleted or renamed its instance variable `ip_configurations`
+- Model `VirtualMachineScaleSetUpdateNetworkConfiguration` deleted or renamed its instance variable `enable_ip_forwarding`
+- Model `VirtualMachineScaleSetUpdateNetworkConfiguration` deleted or renamed its instance variable `delete_option`
+- Model `VirtualMachineScaleSetUpdateNetworkConfiguration` deleted or renamed its instance variable `auxiliary_mode`
+- Model `VirtualMachineScaleSetUpdateNetworkConfiguration` deleted or renamed its instance variable `auxiliary_sku`
+- Model `VirtualMachineScaleSetUpdatePublicIPAddressConfiguration` deleted or renamed its instance variable `idle_timeout_in_minutes`
+- Model `VirtualMachineScaleSetUpdatePublicIPAddressConfiguration` deleted or renamed its instance variable `dns_settings`
+- Model `VirtualMachineScaleSetUpdatePublicIPAddressConfiguration` deleted or renamed its instance variable `public_ip_prefix`
+- Model `VirtualMachineScaleSetUpdatePublicIPAddressConfiguration` deleted or renamed its instance variable `delete_option`
+- Model `VirtualMachineScaleSetVM` deleted or renamed its instance variable `latest_model_applied`
+- Model `VirtualMachineScaleSetVM` deleted or renamed its instance variable `vm_id`
+- Model `VirtualMachineScaleSetVM` deleted or renamed its instance variable `instance_view`
+- Model `VirtualMachineScaleSetVM` deleted or renamed its instance variable `hardware_profile`
+- Model `VirtualMachineScaleSetVM` deleted or renamed its instance variable `resilient_vm_deletion_status`
+- Model `VirtualMachineScaleSetVM` deleted or renamed its instance variable `storage_profile`
+- Model `VirtualMachineScaleSetVM` deleted or renamed its instance variable `additional_capabilities`
+- Model `VirtualMachineScaleSetVM` deleted or renamed its instance variable `os_profile`
+- Model `VirtualMachineScaleSetVM` deleted or renamed its instance variable `security_profile`
+- Model `VirtualMachineScaleSetVM` deleted or renamed its instance variable `network_profile`
+- Model `VirtualMachineScaleSetVM` deleted or renamed its instance variable `network_profile_configuration`
+- Model `VirtualMachineScaleSetVM` deleted or renamed its instance variable `diagnostics_profile`
+- Model `VirtualMachineScaleSetVM` deleted or renamed its instance variable `availability_set`
+- Model `VirtualMachineScaleSetVM` deleted or renamed its instance variable `provisioning_state`
+- Model `VirtualMachineScaleSetVM` deleted or renamed its instance variable `license_type`
+- Model `VirtualMachineScaleSetVM` deleted or renamed its instance variable `model_definition_applied`
+- Model `VirtualMachineScaleSetVM` deleted or renamed its instance variable `protection_policy`
+- Model `VirtualMachineScaleSetVM` deleted or renamed its instance variable `user_data`
+- Model `VirtualMachineScaleSetVM` deleted or renamed its instance variable `time_created`
+- Model `VirtualMachineScaleSetVMExtension` deleted or renamed its instance variable `force_update_tag`
+- Model `VirtualMachineScaleSetVMExtension` deleted or renamed its instance variable `publisher`
+- Model `VirtualMachineScaleSetVMExtension` deleted or renamed its instance variable `type_properties_type`
+- Model `VirtualMachineScaleSetVMExtension` deleted or renamed its instance variable `type_handler_version`
+- Model `VirtualMachineScaleSetVMExtension` deleted or renamed its instance variable `auto_upgrade_minor_version`
+- Model `VirtualMachineScaleSetVMExtension` deleted or renamed its instance variable `enable_automatic_upgrade`
+- Model `VirtualMachineScaleSetVMExtension` deleted or renamed its instance variable `settings`
+- Model `VirtualMachineScaleSetVMExtension` deleted or renamed its instance variable `protected_settings`
+- Model `VirtualMachineScaleSetVMExtension` deleted or renamed its instance variable `provisioning_state`
+- Model `VirtualMachineScaleSetVMExtension` deleted or renamed its instance variable `instance_view`
+- Model `VirtualMachineScaleSetVMExtension` deleted or renamed its instance variable `suppress_failures`
+- Model `VirtualMachineScaleSetVMExtension` deleted or renamed its instance variable `protected_settings_from_key_vault`
+- Model `VirtualMachineScaleSetVMExtension` deleted or renamed its instance variable `provision_after_extensions`
+- Model `VirtualMachineScaleSetVMExtensionUpdate` deleted or renamed its instance variable `force_update_tag`
+- Model `VirtualMachineScaleSetVMExtensionUpdate` deleted or renamed its instance variable `publisher`
+- Model `VirtualMachineScaleSetVMExtensionUpdate` deleted or renamed its instance variable `type_properties_type`
+- Model `VirtualMachineScaleSetVMExtensionUpdate` deleted or renamed its instance variable `type_handler_version`
+- Model `VirtualMachineScaleSetVMExtensionUpdate` deleted or renamed its instance variable `auto_upgrade_minor_version`
+- Model `VirtualMachineScaleSetVMExtensionUpdate` deleted or renamed its instance variable `enable_automatic_upgrade`
+- Model `VirtualMachineScaleSetVMExtensionUpdate` deleted or renamed its instance variable `settings`
+- Model `VirtualMachineScaleSetVMExtensionUpdate` deleted or renamed its instance variable `protected_settings`
+- Model `VirtualMachineScaleSetVMExtensionUpdate` deleted or renamed its instance variable `suppress_failures`
+- Model `VirtualMachineScaleSetVMExtensionUpdate` deleted or renamed its instance variable `protected_settings_from_key_vault`
+- Model `VirtualMachineUpdate` deleted or renamed its instance variable `hardware_profile`
+- Model `VirtualMachineUpdate` deleted or renamed its instance variable `scheduled_events_policy`
+- Model `VirtualMachineUpdate` deleted or renamed its instance variable `storage_profile`
+- Model `VirtualMachineUpdate` deleted or renamed its instance variable `additional_capabilities`
+- Model `VirtualMachineUpdate` deleted or renamed its instance variable `os_profile`
+- Model `VirtualMachineUpdate` deleted or renamed its instance variable `network_profile`
+- Model `VirtualMachineUpdate` deleted or renamed its instance variable `security_profile`
+- Model `VirtualMachineUpdate` deleted or renamed its instance variable `diagnostics_profile`
+- Model `VirtualMachineUpdate` deleted or renamed its instance variable `availability_set`
+- Model `VirtualMachineUpdate` deleted or renamed its instance variable `virtual_machine_scale_set`
+- Model `VirtualMachineUpdate` deleted or renamed its instance variable `proximity_placement_group`
+- Model `VirtualMachineUpdate` deleted or renamed its instance variable `priority`
+- Model `VirtualMachineUpdate` deleted or renamed its instance variable `eviction_policy`
+- Model `VirtualMachineUpdate` deleted or renamed its instance variable `billing_profile`
+- Model `VirtualMachineUpdate` deleted or renamed its instance variable `host`
+- Model `VirtualMachineUpdate` deleted or renamed its instance variable `host_group`
+- Model `VirtualMachineUpdate` deleted or renamed its instance variable `provisioning_state`
+- Model `VirtualMachineUpdate` deleted or renamed its instance variable `instance_view`
+- Model `VirtualMachineUpdate` deleted or renamed its instance variable `license_type`
+- Model `VirtualMachineUpdate` deleted or renamed its instance variable `vm_id`
+- Model `VirtualMachineUpdate` deleted or renamed its instance variable `extensions_time_budget`
+- Model `VirtualMachineUpdate` deleted or renamed its instance variable `platform_fault_domain`
+- Model `VirtualMachineUpdate` deleted or renamed its instance variable `scheduled_events_profile`
+- Model `VirtualMachineUpdate` deleted or renamed its instance variable `user_data`
+- Model `VirtualMachineUpdate` deleted or renamed its instance variable `capacity_reservation`
+- Model `VirtualMachineUpdate` deleted or renamed its instance variable `application_profile`
+- Model `VirtualMachineUpdate` deleted or renamed its instance variable `time_created`
+- Deleted or renamed model `AvailabilitySetSkuTypes`
+- Deleted or renamed model `CloudService`
+- Deleted or renamed model `CloudServiceExtensionProfile`
+- Deleted or renamed model `CloudServiceExtensionProperties`
+- Deleted or renamed model `CloudServiceInstanceView`
+- Deleted or renamed model `CloudServiceNetworkProfile`
+- Deleted or renamed model `CloudServiceOsProfile`
+- Deleted or renamed model `CloudServiceProperties`
+- Deleted or renamed model `CloudServiceRole`
+- Deleted or renamed model `CloudServiceRoleProfile`
+- Deleted or renamed model `CloudServiceRoleProfileProperties`
+- Deleted or renamed model `CloudServiceRoleProperties`
+- Deleted or renamed model `CloudServiceRoleSku`
+- Deleted or renamed model `CloudServiceSlotType`
+- Deleted or renamed model `CloudServiceUpdate`
+- Deleted or renamed model `CloudServiceUpgradeMode`
+- Deleted or renamed model `CloudServiceVaultAndSecretReference`
+- Deleted or renamed model `CloudServiceVaultCertificate`
+- Deleted or renamed model `CloudServiceVaultSecretGroup`
+- Deleted or renamed model `CommunityGalleryImageList`
+- Deleted or renamed model `CommunityGalleryImageVersionList`
+- Deleted or renamed model `DiskAccessList`
+- Deleted or renamed model `DiskEncryptionSetList`
+- Deleted or renamed model `DiskList`
+- Deleted or renamed model `DiskRestorePointList`
+- Deleted or renamed model `Extension`
+- Deleted or renamed model `GalleryApplicationList`
+- Deleted or renamed model `GalleryApplicationVersionList`
+- Deleted or renamed model `GalleryImageList`
+- Deleted or renamed model `GalleryImageVersionList`
+- Deleted or renamed model `GalleryInVMAccessControlProfileList`
+- Deleted or renamed model `GalleryInVMAccessControlProfileVersionList`
+- Deleted or renamed model `GalleryList`
+- Deleted or renamed model `GallerySoftDeletedResourceList`
+- Deleted or renamed model `InstanceSku`
+- Deleted or renamed model `InstanceViewStatusesSummary`
+- Deleted or renamed model `ListUsagesResult`
+- Deleted or renamed model `LoadBalancerConfiguration`
+- Deleted or renamed model `LoadBalancerConfigurationProperties`
+- Deleted or renamed model `LoadBalancerFrontendIpConfiguration`
+- Deleted or renamed model `LoadBalancerFrontendIpConfigurationProperties`
+- Deleted or renamed model `OSFamily`
+- Deleted or renamed model `OSFamilyProperties`
+- Deleted or renamed model `OSVersion`
+- Deleted or renamed model `OSVersionProperties`
+- Deleted or renamed model `OSVersionPropertiesBase`
+- Deleted or renamed model `ResourceInstanceViewStatus`
+- Deleted or renamed model `ResourceSkusResult`
+- Deleted or renamed model `ResourceUriList`
+- Deleted or renamed model `ResourceWithOptionalLocation`
+- Deleted or renamed model `RoleInstance`
+- Deleted or renamed model `RoleInstanceNetworkProfile`
+- Deleted or renamed model `RoleInstanceProperties`
+- Deleted or renamed model `RoleInstanceView`
+- Deleted or renamed model `RoleInstances`
+- Deleted or renamed model `SharedGalleryImageList`
+- Deleted or renamed model `SharedGalleryImageVersionList`
+- Deleted or renamed model `SharedGalleryList`
+- Deleted or renamed model `SnapshotList`
+- Deleted or renamed model `StatusCodeCount`
+- Deleted or renamed model `UpdateDomain`
+- Deleted or renamed model `VirtualMachineScaleSetListOSUpgradeHistory`
+- Deleted or renamed model `VirtualMachineScaleSetListSkusResult`
+- Deleted or renamed model `VirtualMachineScaleSetListWithLinkResult`
+- Method `AvailabilitySetsOperations.list_by_subscription` changed its parameter `expand` from `positional_or_keyword` to `keyword_only`
+- Method `CapacityReservationGroupsOperations.get` changed its parameter `expand` from `positional_or_keyword` to `keyword_only`
+- Method `CapacityReservationGroupsOperations.list_by_resource_group` changed its parameter `expand` from `positional_or_keyword` to `keyword_only`
+- Method `CapacityReservationGroupsOperations.list_by_subscription` changed its parameter `expand` from `positional_or_keyword` to `keyword_only`
+- Method `CapacityReservationGroupsOperations.list_by_subscription` changed its parameter `resource_ids_only` from `positional_or_keyword` to `keyword_only`
+- Method `CapacityReservationsOperations.get` changed its parameter `expand` from `positional_or_keyword` to `keyword_only`
+- Method `DedicatedHostGroupsOperations.get` changed its parameter `expand` from `positional_or_keyword` to `keyword_only`
+- Method `DedicatedHostsOperations.get` changed its parameter `expand` from `positional_or_keyword` to `keyword_only`
+- Method `GalleriesOperations.get` changed its parameter `select` from `positional_or_keyword` to `keyword_only`
+- Method `GalleriesOperations.get` changed its parameter `expand` from `positional_or_keyword` to `keyword_only`
+- Method `GalleryApplicationVersionsOperations.get` changed its parameter `expand` from `positional_or_keyword` to `keyword_only`
+- Method `GalleryImageVersionsOperations.get` changed its parameter `expand` from `positional_or_keyword` to `keyword_only`
+- Method `ImagesOperations.get` changed its parameter `expand` from `positional_or_keyword` to `keyword_only`
+- Method `ProximityPlacementGroupsOperations.get` changed its parameter `include_colocation_status` from `positional_or_keyword` to `keyword_only`
+- Method `ResourceSkusOperations.list` changed its parameter `include_extended_locations` from `positional_or_keyword` to `keyword_only`
+- Method `RestorePointCollectionsOperations.get` changed its parameter `expand` from `positional_or_keyword` to `keyword_only`
+- Method `RestorePointsOperations.get` changed its parameter `expand` from `positional_or_keyword` to `keyword_only`
+- Method `SharedGalleriesOperations.list` changed its parameter `shared_to` from `positional_or_keyword` to `keyword_only`
+- Method `SharedGalleryImageVersionsOperations.list` changed its parameter `shared_to` from `positional_or_keyword` to `keyword_only`
+- Method `SharedGalleryImagesOperations.list` changed its parameter `shared_to` from `positional_or_keyword` to `keyword_only`
+- Method `VirtualMachineExtensionImagesOperations.list_versions` changed its parameter `orderby` from `positional_or_keyword` to `keyword_only`
+- Method `VirtualMachineExtensionsOperations.get` changed its parameter `expand` from `positional_or_keyword` to `keyword_only`
+- Method `VirtualMachineExtensionsOperations.list` changed its parameter `expand` from `positional_or_keyword` to `keyword_only`
+- Method `VirtualMachineImagesEdgeZoneOperations.list` changed its parameter `expand` from `positional_or_keyword` to `keyword_only`
+- Method `VirtualMachineImagesEdgeZoneOperations.list` changed its parameter `orderby` from `positional_or_keyword` to `keyword_only`
+- Method `VirtualMachineImagesOperations.list` changed its parameter `expand` from `positional_or_keyword` to `keyword_only`
+- Method `VirtualMachineImagesOperations.list` changed its parameter `orderby` from `positional_or_keyword` to `keyword_only`
+- Method `VirtualMachineImagesOperations.list_with_properties` changed its parameter `expand` from `positional_or_keyword` to `keyword_only`
+- Method `VirtualMachineImagesOperations.list_with_properties` changed its parameter `orderby` from `positional_or_keyword` to `keyword_only`
+- Method `VirtualMachineRunCommandsOperations.get_by_virtual_machine` changed its parameter `expand` from `positional_or_keyword` to `keyword_only`
+- Method `VirtualMachineRunCommandsOperations.list_by_virtual_machine` changed its parameter `expand` from `positional_or_keyword` to `keyword_only`
+- Method `VirtualMachineScaleSetExtensionsOperations.get` changed its parameter `expand` from `positional_or_keyword` to `keyword_only`
+- Method `VirtualMachineScaleSetVMExtensionsOperations.get` changed its parameter `expand` from `positional_or_keyword` to `keyword_only`
+- Method `VirtualMachineScaleSetVMExtensionsOperations.list` changed its parameter `expand` from `positional_or_keyword` to `keyword_only`
+- Method `VirtualMachineScaleSetVMRunCommandsOperations.get` changed its parameter `expand` from `positional_or_keyword` to `keyword_only`
+- Method `VirtualMachineScaleSetVMRunCommandsOperations.list` changed its parameter `expand` from `positional_or_keyword` to `keyword_only`
+- Method `VirtualMachineScaleSetVMsOperations.begin_delete` changed its parameter `force_deletion` from `positional_or_keyword` to `keyword_only`
+- Method `VirtualMachineScaleSetVMsOperations.begin_power_off` changed its parameter `skip_shutdown` from `positional_or_keyword` to `keyword_only`
+- Method `VirtualMachineScaleSetVMsOperations.begin_update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `VirtualMachineScaleSetVMsOperations.begin_update` deleted or renamed its parameter `if_none_match` of kind `positional_or_keyword`
+- Method `VirtualMachineScaleSetVMsOperations.get` changed its parameter `expand` from `positional_or_keyword` to `keyword_only`
+- Method `VirtualMachineScaleSetVMsOperations.list` changed its parameter `select` from `positional_or_keyword` to `keyword_only`
+- Method `VirtualMachineScaleSetVMsOperations.list` changed its parameter `expand` from `positional_or_keyword` to `keyword_only`
+- Method `VirtualMachineScaleSetVMsOperations.retrieve_boot_diagnostics_data` changed its parameter `sas_uri_expiration_time_in_minutes` from `positional_or_keyword` to `keyword_only`
+- Method `VirtualMachineScaleSetsOperations.begin_create_or_update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `VirtualMachineScaleSetsOperations.begin_create_or_update` deleted or renamed its parameter `if_none_match` of kind `positional_or_keyword`
+- Method `VirtualMachineScaleSetsOperations.begin_deallocate` changed its parameter `hibernate` from `positional_or_keyword` to `keyword_only`
+- Method `VirtualMachineScaleSetsOperations.begin_delete` changed its parameter `force_deletion` from `positional_or_keyword` to `keyword_only`
+- Method `VirtualMachineScaleSetsOperations.begin_delete_instances` changed its parameter `force_deletion` from `positional_or_keyword` to `keyword_only`
+- Method `VirtualMachineScaleSetsOperations.begin_power_off` changed its parameter `skip_shutdown` from `positional_or_keyword` to `keyword_only`
+- Method `VirtualMachineScaleSetsOperations.begin_update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `VirtualMachineScaleSetsOperations.begin_update` deleted or renamed its parameter `if_none_match` of kind `positional_or_keyword`
+- Method `VirtualMachineScaleSetsOperations.force_recovery_service_fabric_platform_update_domain_walk` changed its parameter `platform_update_domain` from `positional_or_keyword` to `keyword_only`
+- Method `VirtualMachineScaleSetsOperations.force_recovery_service_fabric_platform_update_domain_walk` changed its parameter `zone` from `positional_or_keyword` to `keyword_only`
+- Method `VirtualMachineScaleSetsOperations.force_recovery_service_fabric_platform_update_domain_walk` changed its parameter `placement_group_id` from `positional_or_keyword` to `keyword_only`
+- Method `VirtualMachineScaleSetsOperations.get` changed its parameter `expand` from `positional_or_keyword` to `keyword_only`
+- Method `VirtualMachinesOperations.begin_create_or_update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `VirtualMachinesOperations.begin_create_or_update` deleted or renamed its parameter `if_none_match` of kind `positional_or_keyword`
+- Method `VirtualMachinesOperations.begin_deallocate` changed its parameter `hibernate` from `positional_or_keyword` to `keyword_only`
+- Method `VirtualMachinesOperations.begin_delete` changed its parameter `force_deletion` from `positional_or_keyword` to `keyword_only`
+- Method `VirtualMachinesOperations.begin_power_off` changed its parameter `skip_shutdown` from `positional_or_keyword` to `keyword_only`
+- Method `VirtualMachinesOperations.begin_update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
+- Method `VirtualMachinesOperations.begin_update` deleted or renamed its parameter `if_none_match` of kind `positional_or_keyword`
+- Method `VirtualMachinesOperations.get` changed its parameter `expand` from `positional_or_keyword` to `keyword_only`
+- Method `VirtualMachinesOperations.list` changed its parameter `expand` from `positional_or_keyword` to `keyword_only`
+- Method `VirtualMachinesOperations.list_all` changed its parameter `status_only` from `positional_or_keyword` to `keyword_only`
+- Method `VirtualMachinesOperations.list_all` changed its parameter `expand` from `positional_or_keyword` to `keyword_only`
+- Method `VirtualMachinesOperations.retrieve_boot_diagnostics_data` changed its parameter `sas_uri_expiration_time_in_minutes` from `positional_or_keyword` to `keyword_only`
+- Deleted or renamed model `CloudServiceOperatingSystemsOperations`
+- Deleted or renamed model `CloudServiceRoleInstancesOperations`
+- Deleted or renamed model `CloudServiceRolesOperations`
+- Deleted or renamed model `CloudServicesOperations`
+- Deleted or renamed model `CloudServicesUpdateDomainOperations`
+- Method `VirtualMachineScaleSetVMsOperations.begin_update` re-ordered its parameters from `['self', 'resource_group_name', 'vm_scale_set_name', 'instance_id', 'parameters', 'if_match', 'if_none_match', 'kwargs']` to `['self', 'resource_group_name', 'vm_scale_set_name', 'instance_id', 'parameters', 'etag', 'match_condition', 'kwargs']`
+- Method `VirtualMachinesOperations.begin_create_or_update` re-ordered its parameters from `['self', 'resource_group_name', 'vm_name', 'parameters', 'if_match', 'if_none_match', 'kwargs']` to `['self', 'resource_group_name', 'vm_name', 'parameters', 'etag', 'match_condition', 'kwargs']`
+- Method `VirtualMachinesOperations.begin_update` re-ordered its parameters from `['self', 'resource_group_name', 'vm_name', 'parameters', 'if_match', 'if_none_match', 'kwargs']` to `['self', 'resource_group_name', 'vm_name', 'parameters', 'etag', 'match_condition', 'kwargs']`
+- Method `VirtualMachineScaleSetsOperations.begin_power_off` re-ordered its parameters from `['self', 'resource_group_name', 'vm_scale_set_name', 'skip_shutdown', 'vm_instance_i_ds', 'kwargs']` to `['self', 'resource_group_name', 'vm_scale_set_name', 'vm_instance_i_ds', 'skip_shutdown', 'kwargs']`
+- Method `VirtualMachineScaleSetsOperations.begin_create_or_update` re-ordered its parameters from `['self', 'resource_group_name', 'vm_scale_set_name', 'parameters', 'if_match', 'if_none_match', 'kwargs']` to `['self', 'resource_group_name', 'vm_scale_set_name', 'parameters', 'etag', 'match_condition', 'kwargs']`
+- Method `VirtualMachineScaleSetsOperations.begin_deallocate` re-ordered its parameters from `['self', 'resource_group_name', 'vm_scale_set_name', 'hibernate', 'vm_instance_i_ds', 'kwargs']` to `['self', 'resource_group_name', 'vm_scale_set_name', 'vm_instance_i_ds', 'hibernate', 'kwargs']`
+- Method `VirtualMachineScaleSetsOperations.begin_update` re-ordered its parameters from `['self', 'resource_group_name', 'vm_scale_set_name', 'parameters', 'if_match', 'if_none_match', 'kwargs']` to `['self', 'resource_group_name', 'vm_scale_set_name', 'parameters', 'etag', 'match_condition', 'kwargs']`
+
 # Release History
 
 ## 37.2.0 (2026-01-26)
