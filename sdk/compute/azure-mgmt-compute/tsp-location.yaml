@@ -1,0 +1,4 @@
+directory: specification/compute/resource-manager/Microsoft.Compute/Compute
+commit: 23c358538feb61d81d7e8c52c90cde570fceaf35
+repo: Azure/azure-rest-api-specs
+additionalDirectories: 
