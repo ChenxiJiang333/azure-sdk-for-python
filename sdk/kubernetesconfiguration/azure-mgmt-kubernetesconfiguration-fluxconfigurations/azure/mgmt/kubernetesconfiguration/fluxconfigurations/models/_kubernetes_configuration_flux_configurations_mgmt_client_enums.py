@@ -23,10 +23,15 @@ class FluxComplianceState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Compliance state of the cluster object."""
 
     COMPLIANT = "Compliant"
+    """Compliant"""
     NON_COMPLIANT = "Non-Compliant"
+    """Non-Compliant"""
     PENDING = "Pending"
+    """Pending"""
     SUSPENDED = "Suspended"
+    """Suspended"""
     UNKNOWN = "Unknown"
+    """Unknown"""
 
 
 class KustomizationValidationType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
@@ -35,8 +40,11 @@ class KustomizationValidationType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """
 
     NONE = "none"
+    """none"""
     CLIENT = "client"
+    """client"""
     SERVER = "server"
+    """server"""
 
 
 class OperationType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
@@ -45,7 +53,9 @@ class OperationType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """
 
     EXTRACT = "extract"
+    """extract"""
     COPY = "copy"
+    """copy"""
 
 
 class ProviderType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
@@ -63,24 +73,36 @@ class ProvisioningState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The provisioning state of the resource."""
 
     SUCCEEDED = "Succeeded"
+    """Succeeded"""
     FAILED = "Failed"
+    """Failed"""
     CANCELED = "Canceled"
+    """Canceled"""
     CREATING = "Creating"
+    """Creating"""
     UPDATING = "Updating"
+    """Updating"""
     DELETING = "Deleting"
+    """Deleting"""
 
 
 class ScopeType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """Scope at which the configuration will be installed."""
+    """Scope at which the operator will be installed."""
 
     CLUSTER = "cluster"
+    """cluster"""
     NAMESPACE = "namespace"
+    """namespace"""
 
 
 class SourceKindType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Source Kind to pull the configuration data from."""
 
     GIT_REPOSITORY = "GitRepository"
+    """GitRepository"""
     BUCKET = "Bucket"
+    """Bucket"""
     AZURE_BLOB = "AzureBlob"
+    """AzureBlob"""
     OCI_REPOSITORY = "OCIRepository"
+    """OCIRepository"""

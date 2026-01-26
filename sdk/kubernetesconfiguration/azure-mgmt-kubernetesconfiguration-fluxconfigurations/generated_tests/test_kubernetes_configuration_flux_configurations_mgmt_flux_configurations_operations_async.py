@@ -23,6 +23,20 @@ class TestKubernetesConfigurationFluxConfigurationsMgmtFluxConfigurationsOperati
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
+    async def test_flux_configurations_list(self, resource_group):
+        response = self.client.flux_configurations.list(
+            resource_group_name=resource_group.name,
+            cluster_rp="str",
+            cluster_resource_name="str",
+            cluster_name="str",
+            api_version="2025-04-01",
+        )
+        result = [r async for r in response]
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
     async def test_flux_configurations_get(self, resource_group):
         response = await self.client.flux_configurations.get(
             resource_group_name=resource_group.name,
@@ -74,7 +88,7 @@ class TestKubernetesConfigurationFluxConfigurationsMgmtFluxConfigurationsOperati
                         "timeoutInSeconds": 600,
                         "url": "str",
                     },
-                    "complianceState": "Unknown",
+                    "complianceState": "str",
                     "configurationProtectedSettings": {"str": "str"},
                     "errorMessage": "str",
                     "gitRepository": {
@@ -128,7 +142,7 @@ class TestKubernetesConfigurationFluxConfigurationsMgmtFluxConfigurationsOperati
                     "provisioningState": "str",
                     "reconciliationWaitDuration": "str",
                     "repositoryPublicKey": "str",
-                    "scope": "cluster",
+                    "scope": "str",
                     "sourceKind": "str",
                     "sourceSyncedCommitId": "str",
                     "sourceUpdatedAt": "2020-02-20 00:00:00",
@@ -136,7 +150,7 @@ class TestKubernetesConfigurationFluxConfigurationsMgmtFluxConfigurationsOperati
                     "statuses": [
                         {
                             "appliedBy": {"name": "str", "namespace": "str"},
-                            "complianceState": "Unknown",
+                            "complianceState": "str",
                             "helmReleaseProperties": {
                                 "failureCount": 0,
                                 "helmChartRef": {"name": "str", "namespace": "str"},
@@ -284,19 +298,5 @@ class TestKubernetesConfigurationFluxConfigurationsMgmtFluxConfigurationsOperati
             )
         ).result()  # call '.result()' to poll until service return final result
 
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_flux_configurations_list(self, resource_group):
-        response = self.client.flux_configurations.list(
-            resource_group_name=resource_group.name,
-            cluster_rp="str",
-            cluster_resource_name="str",
-            cluster_name="str",
-            api_version="2025-04-01",
-        )
-        result = [r async for r in response]
         # please add some check logic here by yourself
         # ...

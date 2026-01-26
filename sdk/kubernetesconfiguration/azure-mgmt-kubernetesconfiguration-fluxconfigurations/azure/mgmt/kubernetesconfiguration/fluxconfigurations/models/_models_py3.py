@@ -7,13 +7,15 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 
+from collections.abc import MutableMapping
 import datetime
-from typing import Any, Dict, List, Optional, TYPE_CHECKING, Union
+from typing import Any, Optional, TYPE_CHECKING, Union
 
 from .._utils import serialization as _serialization
 
 if TYPE_CHECKING:
     from .. import models as _models
+JSON = MutableMapping[str, Any]
 
 
 class AzureBlobDefinition(_serialization.Model):
@@ -421,8 +423,8 @@ class ErrorDetail(_serialization.Model):
         self.code: Optional[str] = None
         self.message: Optional[str] = None
         self.target: Optional[str] = None
-        self.details: Optional[List["_models.ErrorDetail"]] = None
-        self.additional_info: Optional[List["_models.ErrorAdditionalInfo"]] = None
+        self.details: Optional[list["_models.ErrorDetail"]] = None
+        self.additional_info: Optional[list["_models.ErrorAdditionalInfo"]] = None
 
 
 class ErrorResponse(_serialization.Model):
@@ -459,18 +461,23 @@ class Resource(_serialization.Model):
     :ivar type: The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or
      "Microsoft.Storage/storageAccounts".
     :vartype type: str
+    :ivar system_data: Azure Resource Manager metadata containing createdBy and modifiedBy
+     information.
+    :vartype system_data: ~azure.mgmt.kubernetesconfiguration.fluxconfigurations.models.SystemData
     """
 
     _validation = {
         "id": {"readonly": True},
         "name": {"readonly": True},
         "type": {"readonly": True},
+        "system_data": {"readonly": True},
     }
 
     _attribute_map = {
         "id": {"key": "id", "type": "str"},
         "name": {"key": "name", "type": "str"},
         "type": {"key": "type", "type": "str"},
+        "system_data": {"key": "systemData", "type": "SystemData"},
     }
 
     def __init__(self, **kwargs: Any) -> None:
@@ -479,6 +486,7 @@ class Resource(_serialization.Model):
         self.id: Optional[str] = None
         self.name: Optional[str] = None
         self.type: Optional[str] = None
+        self.system_data: Optional["_models.SystemData"] = None
 
 
 class ProxyResource(Resource):
@@ -495,6 +503,9 @@ class ProxyResource(Resource):
     :ivar type: The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or
      "Microsoft.Storage/storageAccounts".
     :vartype type: str
+    :ivar system_data: Azure Resource Manager metadata containing createdBy and modifiedBy
+     information.
+    :vartype system_data: ~azure.mgmt.kubernetesconfiguration.fluxconfigurations.models.SystemData
     """
 
 
@@ -511,8 +522,8 @@ class FluxConfiguration(ProxyResource):
     :ivar type: The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or
      "Microsoft.Storage/storageAccounts".
     :vartype type: str
-    :ivar system_data: Top level metadata
-     https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/common-api-contracts.md#system-metadata-for-all-azure-resources.
+    :ivar system_data: Azure Resource Manager metadata containing createdBy and modifiedBy
+     information.
     :vartype system_data: ~azure.mgmt.kubernetesconfiguration.fluxconfigurations.models.SystemData
     :ivar scope: Scope at which the operator will be installed. Known values are: "cluster" and
      "namespace".
@@ -623,7 +634,7 @@ class FluxConfiguration(ProxyResource):
     def __init__(  # pylint: disable=too-many-locals
         self,
         *,
-        scope: Union[str, "_models.ScopeType"] = "cluster",
+        scope: Optional[Union[str, "_models.ScopeType"]] = None,
         namespace: str = "default",
         source_kind: Optional[Union[str, "_models.SourceKindType"]] = None,
         suspend: bool = False,
@@ -631,8 +642,8 @@ class FluxConfiguration(ProxyResource):
         bucket: Optional["_models.BucketDefinition"] = None,
         azure_blob: Optional["_models.AzureBlobDefinition"] = None,
         oci_repository: Optional["_models.OCIRepositoryDefinition"] = None,
-        kustomizations: Optional[Dict[str, "_models.KustomizationDefinition"]] = None,
-        configuration_protected_settings: Optional[Dict[str, str]] = None,
+        kustomizations: Optional[dict[str, "_models.KustomizationDefinition"]] = None,
+        configuration_protected_settings: Optional[dict[str, str]] = None,
         wait_for_reconciliation: Optional[bool] = None,
         reconciliation_wait_duration: Optional[str] = None,
         **kwargs: Any
@@ -679,7 +690,6 @@ class FluxConfiguration(ProxyResource):
         :paramtype reconciliation_wait_duration: str
         """
         super().__init__(**kwargs)
-        self.system_data: Optional["_models.SystemData"] = None
         self.scope = scope
         self.namespace = namespace
         self.source_kind = source_kind
@@ -690,7 +700,7 @@ class FluxConfiguration(ProxyResource):
         self.oci_repository = oci_repository
         self.kustomizations = kustomizations
         self.configuration_protected_settings = configuration_protected_settings
-        self.statuses: Optional[List["_models.ObjectStatusDefinition"]] = None
+        self.statuses: Optional[list["_models.ObjectStatusDefinition"]] = None
         self.repository_public_key: Optional[str] = None
         self.source_synced_commit_id: Optional[str] = None
         self.source_updated_at: Optional[datetime.datetime] = None
@@ -753,8 +763,8 @@ class FluxConfigurationPatch(_serialization.Model):
         bucket: Optional["_models.BucketPatchDefinition"] = None,
         azure_blob: Optional["_models.AzureBlobPatchDefinition"] = None,
         oci_repository: Optional["_models.OCIRepositoryPatchDefinition"] = None,
-        kustomizations: Optional[Dict[str, "_models.KustomizationPatchDefinition"]] = None,
-        configuration_protected_settings: Optional[Dict[str, str]] = None,
+        kustomizations: Optional[dict[str, "_models.KustomizationPatchDefinition"]] = None,
+        configuration_protected_settings: Optional[dict[str, str]] = None,
         **kwargs: Any
     ) -> None:
         """
@@ -802,16 +812,17 @@ class FluxConfigurationsList(_serialization.Model):
 
     Variables are only populated by the server, and will be ignored when sending a request.
 
-    :ivar value: List of Flux Configurations within a Kubernetes cluster.
+    All required parameters must be populated in order to send to server.
+
+    :ivar value: The FluxConfiguration items on this page. Required.
     :vartype value:
      list[~azure.mgmt.kubernetesconfiguration.fluxconfigurations.models.FluxConfiguration]
-    :ivar next_link: URL to get the next set of configuration objects, if any.
+    :ivar next_link: The link to the next page of items.
     :vartype next_link: str
     """
 
     _validation = {
-        "value": {"readonly": True},
-        "next_link": {"readonly": True},
+        "value": {"required": True, "readonly": True},
     }
 
     _attribute_map = {
@@ -819,11 +830,14 @@ class FluxConfigurationsList(_serialization.Model):
         "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(self, **kwargs: Any) -> None:
-        """ """
+    def __init__(self, *, next_link: Optional[str] = None, **kwargs: Any) -> None:
+        """
+        :keyword next_link: The link to the next page of items.
+        :paramtype next_link: str
+        """
         super().__init__(**kwargs)
-        self.value: Optional[List["_models.FluxConfiguration"]] = None
-        self.next_link: Optional[str] = None
+        self.value: Optional[list["_models.FluxConfiguration"]] = None
+        self.next_link = next_link
 
 
 class GitRepositoryDefinition(_serialization.Model):
@@ -1137,7 +1151,7 @@ class KustomizationDefinition(_serialization.Model):
         self,
         *,
         path: str = "",
-        depends_on: Optional[List[str]] = None,
+        depends_on: Optional[list[str]] = None,
         timeout_in_seconds: int = 600,
         sync_interval_in_seconds: int = 600,
         retry_interval_in_seconds: Optional[int] = None,
@@ -1237,7 +1251,7 @@ class KustomizationPatchDefinition(_serialization.Model):
         self,
         *,
         path: Optional[str] = None,
-        depends_on: Optional[List[str]] = None,
+        depends_on: Optional[list[str]] = None,
         timeout_in_seconds: Optional[int] = None,
         sync_interval_in_seconds: Optional[int] = None,
         retry_interval_in_seconds: Optional[int] = None,
@@ -1577,9 +1591,9 @@ class ObjectStatusDefinition(_serialization.Model):
         name: Optional[str] = None,
         namespace: Optional[str] = None,
         kind: Optional[str] = None,
-        compliance_state: Union[str, "_models.FluxComplianceState"] = "Unknown",
+        compliance_state: Optional[Union[str, "_models.FluxComplianceState"]] = None,
         applied_by: Optional["_models.ObjectReferenceDefinition"] = None,
-        status_conditions: Optional[List["_models.ObjectStatusConditionDefinition"]] = None,
+        status_conditions: Optional[list["_models.ObjectStatusConditionDefinition"]] = None,
         helm_release_properties: Optional["_models.HelmReleasePropertiesDefinition"] = None,
         **kwargs: Any
     ) -> None:
@@ -1953,7 +1967,7 @@ class OperationStatusResult(_serialization.Model):
         status: str,
         id: Optional[str] = None,  # pylint: disable=redefined-builtin
         name: Optional[str] = None,
-        properties: Optional[Dict[str, str]] = None,
+        properties: Optional[dict[str, str]] = None,
         **kwargs: Any
     ) -> None:
         """
@@ -1995,8 +2009,8 @@ class PostBuildDefinition(_serialization.Model):
     def __init__(
         self,
         *,
-        substitute: Optional[Dict[str, str]] = None,
-        substitute_from: Optional[List["_models.SubstituteFromDefinition"]] = None,
+        substitute: Optional[dict[str, str]] = None,
+        substitute_from: Optional[list["_models.SubstituteFromDefinition"]] = None,
         **kwargs: Any
     ) -> None:
         """
@@ -2034,8 +2048,8 @@ class PostBuildPatchDefinition(_serialization.Model):
     def __init__(
         self,
         *,
-        substitute: Optional[Dict[str, str]] = None,
-        substitute_from: Optional[List["_models.SubstituteFromPatchDefinition"]] = None,
+        substitute: Optional[dict[str, str]] = None,
+        substitute_from: Optional[list["_models.SubstituteFromPatchDefinition"]] = None,
         **kwargs: Any
     ) -> None:
         """
@@ -2487,8 +2501,8 @@ class VerifyDefinition(_serialization.Model):
         self,
         *,
         provider: Optional[str] = None,
-        verification_config: Optional[Dict[str, str]] = None,
-        match_oidc_identity: Optional[List["_models.MatchOidcIdentityDefinition"]] = None,
+        verification_config: Optional[dict[str, str]] = None,
+        match_oidc_identity: Optional[list["_models.MatchOidcIdentityDefinition"]] = None,
         **kwargs: Any
     ) -> None:
         """
@@ -2530,8 +2544,8 @@ class VerifyPatchDefinition(_serialization.Model):
         self,
         *,
         provider: Optional[str] = None,
-        verification_config: Optional[Dict[str, str]] = None,
-        match_oidc_identity: Optional[List["_models.MatchOidcIdentityPatchDefinition"]] = None,
+        verification_config: Optional[dict[str, str]] = None,
+        match_oidc_identity: Optional[list["_models.MatchOidcIdentityPatchDefinition"]] = None,
         **kwargs: Any
     ) -> None:
         """
