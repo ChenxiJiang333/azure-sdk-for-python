@@ -7,13 +7,15 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 
+from collections.abc import MutableMapping
 import datetime
-from typing import Any, Dict, List, Literal, Optional, TYPE_CHECKING, Union
+from typing import Any, Literal, Optional, TYPE_CHECKING, Union
 
 from .._utils import serialization as _serialization
 
 if TYPE_CHECKING:
     from .. import models as _models
+JSON = MutableMapping[str, Any]
 
 
 class ErrorAdditionalInfo(_serialization.Model):
@@ -84,8 +86,8 @@ class ErrorDetail(_serialization.Model):
         self.code: Optional[str] = None
         self.message: Optional[str] = None
         self.target: Optional[str] = None
-        self.details: Optional[List["_models.ErrorDetail"]] = None
-        self.additional_info: Optional[List["_models.ErrorAdditionalInfo"]] = None
+        self.details: Optional[list["_models.ErrorDetail"]] = None
+        self.additional_info: Optional[list["_models.ErrorAdditionalInfo"]] = None
 
 
 class ErrorResponse(_serialization.Model):
@@ -122,18 +124,23 @@ class Resource(_serialization.Model):
     :ivar type: The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or
      "Microsoft.Storage/storageAccounts".
     :vartype type: str
+    :ivar system_data: Azure Resource Manager metadata containing createdBy and modifiedBy
+     information.
+    :vartype system_data: ~azure.mgmt.kubernetesconfiguration.extensions.models.SystemData
     """
 
     _validation = {
         "id": {"readonly": True},
         "name": {"readonly": True},
         "type": {"readonly": True},
+        "system_data": {"readonly": True},
     }
 
     _attribute_map = {
         "id": {"key": "id", "type": "str"},
         "name": {"key": "name", "type": "str"},
         "type": {"key": "type", "type": "str"},
+        "system_data": {"key": "systemData", "type": "SystemData"},
     }
 
     def __init__(self, **kwargs: Any) -> None:
@@ -142,6 +149,7 @@ class Resource(_serialization.Model):
         self.id: Optional[str] = None
         self.name: Optional[str] = None
         self.type: Optional[str] = None
+        self.system_data: Optional["_models.SystemData"] = None
 
 
 class ProxyResource(Resource):
@@ -158,6 +166,9 @@ class ProxyResource(Resource):
     :ivar type: The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or
      "Microsoft.Storage/storageAccounts".
     :vartype type: str
+    :ivar system_data: Azure Resource Manager metadata containing createdBy and modifiedBy
+     information.
+    :vartype system_data: ~azure.mgmt.kubernetesconfiguration.extensions.models.SystemData
     """
 
 
@@ -174,12 +185,12 @@ class Extension(ProxyResource):
     :ivar type: The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or
      "Microsoft.Storage/storageAccounts".
     :vartype type: str
+    :ivar system_data: Azure Resource Manager metadata containing createdBy and modifiedBy
+     information.
+    :vartype system_data: ~azure.mgmt.kubernetesconfiguration.extensions.models.SystemData
     :ivar identity: Identity of the Extension resource.
     :vartype identity: ~azure.mgmt.kubernetesconfiguration.extensions.models.Identity
-    :ivar system_data: Top level metadata
-     https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/common-api-contracts.md#system-metadata-for-all-azure-resources.
-    :vartype system_data: ~azure.mgmt.kubernetesconfiguration.extensions.models.SystemData
-    :ivar plan: The plan information.
+    :ivar plan: Details of the resource plan.
     :vartype plan: ~azure.mgmt.kubernetesconfiguration.extensions.models.Plan
     :ivar extension_type: Type of the Extension, of which this resource is an instance of.  It must
      be one of the Extension Types registered with Microsoft.KubernetesConfiguration by the
@@ -240,8 +251,8 @@ class Extension(ProxyResource):
         "id": {"key": "id", "type": "str"},
         "name": {"key": "name", "type": "str"},
         "type": {"key": "type", "type": "str"},
-        "identity": {"key": "identity", "type": "Identity"},
         "system_data": {"key": "systemData", "type": "SystemData"},
+        "identity": {"key": "identity", "type": "Identity"},
         "plan": {"key": "plan", "type": "Plan"},
         "extension_type": {"key": "properties.extensionType", "type": "str"},
         "auto_upgrade_minor_version": {"key": "properties.autoUpgradeMinorVersion", "type": "bool"},
@@ -273,16 +284,16 @@ class Extension(ProxyResource):
         release_train: str = "Stable",
         version: Optional[str] = None,
         scope: Optional["_models.Scope"] = None,
-        configuration_settings: Optional[Dict[str, str]] = None,
-        configuration_protected_settings: Optional[Dict[str, str]] = None,
-        statuses: Optional[List["_models.ExtensionStatus"]] = None,
+        configuration_settings: Optional[dict[str, str]] = None,
+        configuration_protected_settings: Optional[dict[str, str]] = None,
+        statuses: Optional[list["_models.ExtensionStatus"]] = None,
         aks_assigned_identity: Optional["_models.ExtensionPropertiesAksAssignedIdentity"] = None,
         **kwargs: Any
     ) -> None:
         """
         :keyword identity: Identity of the Extension resource.
         :paramtype identity: ~azure.mgmt.kubernetesconfiguration.extensions.models.Identity
-        :keyword plan: The plan information.
+        :keyword plan: Details of the resource plan.
         :paramtype plan: ~azure.mgmt.kubernetesconfiguration.extensions.models.Plan
         :keyword extension_type: Type of the Extension, of which this resource is an instance of.  It
          must be one of the Extension Types registered with Microsoft.KubernetesConfiguration by the
@@ -314,7 +325,6 @@ class Extension(ProxyResource):
         """
         super().__init__(**kwargs)
         self.identity = identity
-        self.system_data: Optional["_models.SystemData"] = None
         self.plan = plan
         self.extension_type = extension_type
         self.auto_upgrade_minor_version = auto_upgrade_minor_version
@@ -327,7 +337,7 @@ class Extension(ProxyResource):
         self.provisioning_state: Optional[Union[str, "_models.ProvisioningState"]] = None
         self.statuses = statuses
         self.error_info: Optional["_models.ErrorDetail"] = None
-        self.custom_location_settings: Optional[Dict[str, str]] = None
+        self.custom_location_settings: Optional[dict[str, str]] = None
         self.package_uri: Optional[str] = None
         self.aks_assigned_identity = aks_assigned_identity
         self.is_system_extension: Optional[bool] = None
@@ -372,17 +382,16 @@ class ExtensionsList(_serialization.Model):
     """Result of the request to list Extensions.  It contains a list of Extension objects and a URL
     link to get the next set of results.
 
-    Variables are only populated by the server, and will be ignored when sending a request.
+    All required parameters must be populated in order to send to server.
 
-    :ivar value: List of Extensions within a Kubernetes cluster.
+    :ivar value: The Extension items on this page. Required.
     :vartype value: list[~azure.mgmt.kubernetesconfiguration.extensions.models.Extension]
-    :ivar next_link: URL to get the next set of extension objects, if any.
+    :ivar next_link: The link to the next page of items.
     :vartype next_link: str
     """
 
     _validation = {
-        "value": {"readonly": True},
-        "next_link": {"readonly": True},
+        "value": {"required": True},
     }
 
     _attribute_map = {
@@ -390,11 +399,16 @@ class ExtensionsList(_serialization.Model):
         "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(self, **kwargs: Any) -> None:
-        """ """
+    def __init__(self, *, value: list["_models.Extension"], next_link: Optional[str] = None, **kwargs: Any) -> None:
+        """
+        :keyword value: The Extension items on this page. Required.
+        :paramtype value: list[~azure.mgmt.kubernetesconfiguration.extensions.models.Extension]
+        :keyword next_link: The link to the next page of items.
+        :paramtype next_link: str
+        """
         super().__init__(**kwargs)
-        self.value: Optional[List["_models.Extension"]] = None
-        self.next_link: Optional[str] = None
+        self.value = value
+        self.next_link = next_link
 
 
 class ExtensionStatus(_serialization.Model):
@@ -425,7 +439,7 @@ class ExtensionStatus(_serialization.Model):
         *,
         code: Optional[str] = None,
         display_status: Optional[str] = None,
-        level: Union[str, "_models.LevelType"] = "Information",
+        level: Optional[Union[str, "_models.LevelType"]] = None,
         message: Optional[str] = None,
         time: Optional[str] = None,
         **kwargs: Any
@@ -523,7 +537,7 @@ class OperationStatusResult(_serialization.Model):
         status: str,
         id: Optional[str] = None,  # pylint: disable=redefined-builtin
         name: Optional[str] = None,
-        properties: Optional[Dict[str, str]] = None,
+        properties: Optional[dict[str, str]] = None,
         **kwargs: Any
     ) -> None:
         """
@@ -578,8 +592,8 @@ class PatchExtension(_serialization.Model):
         auto_upgrade_minor_version: bool = True,
         release_train: str = "Stable",
         version: Optional[str] = None,
-        configuration_settings: Optional[Dict[str, str]] = None,
-        configuration_protected_settings: Optional[Dict[str, str]] = None,
+        configuration_settings: Optional[dict[str, str]] = None,
+        configuration_protected_settings: Optional[dict[str, str]] = None,
         **kwargs: Any
     ) -> None:
         """

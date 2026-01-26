@@ -7,7 +7,7 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 from collections.abc import MutableMapping
-from typing import Any, Callable, Dict, Optional, TypeVar
+from typing import Any, Callable, Optional, TypeVar
 
 from azure.core import PipelineClient
 from azure.core.exceptions import (
@@ -29,7 +29,8 @@ from .._configuration import KubernetesConfigurationExtensionsMgmtClientConfigur
 from .._utils.serialization import Deserializer, Serializer
 
 T = TypeVar("T")
-ClsType = Optional[Callable[[PipelineResponse[HttpRequest, HttpResponse], T, Dict[str, Any]], Any]]
+ClsType = Optional[Callable[[PipelineResponse[HttpRequest, HttpResponse], T, dict[str, Any]], Any]]
+List = list
 
 _SERIALIZER = Serializer()
 _SERIALIZER.client_side_validation = False
@@ -93,7 +94,7 @@ class OperationStatusOperations:
 
     models = _models
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client: PipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
         self._config: KubernetesConfigurationExtensionsMgmtClientConfiguration = (
@@ -128,7 +129,7 @@ class OperationStatusOperations:
         :type cluster_name: str
         :param extension_name: Name of the Extension. Required.
         :type extension_name: str
-        :param operation_id: operation Id. Required.
+        :param operation_id: Required.
         :type operation_id: str
         :return: OperationStatusResult or the result of cls(response)
         :rtype: ~azure.mgmt.kubernetesconfiguration.extensions.models.OperationStatusResult
@@ -171,7 +172,10 @@ class OperationStatusOperations:
 
         if response.status_code not in [200]:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
+            error = self._deserialize.failsafe_deserialize(
+                _models.ErrorResponse,
+                pipeline_response,
+            )
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
         deserialized = self._deserialize("OperationStatusResult", pipeline_response.http_response)

@@ -20,6 +20,35 @@ class TestKubernetesConfigurationExtensionsMgmtExtensionsOperations(AzureMgmtRec
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
+    def test_extensions_list(self, resource_group):
+        response = self.client.extensions.list(
+            resource_group_name=resource_group.name,
+            cluster_rp="str",
+            cluster_resource_name="str",
+            cluster_name="str",
+            api_version="2024-11-01",
+        )
+        result = [r for r in response]
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
+    def test_extensions_get(self, resource_group):
+        response = self.client.extensions.get(
+            resource_group_name=resource_group.name,
+            cluster_rp="str",
+            cluster_resource_name="str",
+            cluster_name="str",
+            extension_name="str",
+            api_version="2024-11-01",
+        )
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
     def test_extensions_begin_create(self, resource_group):
         response = self.client.extensions.begin_create(
             resource_group_name=resource_group.name,
@@ -51,9 +80,7 @@ class TestKubernetesConfigurationExtensionsMgmtExtensionsOperations(AzureMgmtRec
                 "provisioningState": "str",
                 "releaseTrain": "Stable",
                 "scope": {"cluster": {"releaseNamespace": "str"}, "namespace": {"targetNamespace": "str"}},
-                "statuses": [
-                    {"code": "str", "displayStatus": "str", "level": "Information", "message": "str", "time": "str"}
-                ],
+                "statuses": [{"code": "str", "displayStatus": "str", "level": "str", "message": "str", "time": "str"}],
                 "systemData": {
                     "createdAt": "2020-02-20 00:00:00",
                     "createdBy": "str",
@@ -65,36 +92,6 @@ class TestKubernetesConfigurationExtensionsMgmtExtensionsOperations(AzureMgmtRec
                 "type": "str",
                 "version": "str",
             },
-            api_version="2024-11-01",
-        ).result()  # call '.result()' to poll until service return final result
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_extensions_get(self, resource_group):
-        response = self.client.extensions.get(
-            resource_group_name=resource_group.name,
-            cluster_rp="str",
-            cluster_resource_name="str",
-            cluster_name="str",
-            extension_name="str",
-            api_version="2024-11-01",
-        )
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_extensions_begin_delete(self, resource_group):
-        response = self.client.extensions.begin_delete(
-            resource_group_name=resource_group.name,
-            cluster_rp="str",
-            cluster_resource_name="str",
-            cluster_name="str",
-            extension_name="str",
             api_version="2024-11-01",
         ).result()  # call '.result()' to poll until service return final result
 
@@ -125,14 +122,15 @@ class TestKubernetesConfigurationExtensionsMgmtExtensionsOperations(AzureMgmtRec
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_extensions_list(self, resource_group):
-        response = self.client.extensions.list(
+    def test_extensions_begin_delete(self, resource_group):
+        response = self.client.extensions.begin_delete(
             resource_group_name=resource_group.name,
             cluster_rp="str",
             cluster_resource_name="str",
             cluster_name="str",
+            extension_name="str",
             api_version="2024-11-01",
-        )
-        result = [r for r in response]
+        ).result()  # call '.result()' to poll until service return final result
+
         # please add some check logic here by yourself
         # ...

@@ -14,7 +14,9 @@ class AKSIdentityType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The identity type."""
 
     SYSTEM_ASSIGNED = "SystemAssigned"
+    """SystemAssigned"""
     USER_ASSIGNED = "UserAssigned"
+    """UserAssigned"""
 
 
 class CreatedByType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
@@ -30,16 +32,25 @@ class LevelType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Level of the status."""
 
     ERROR = "Error"
+    """Error"""
     WARNING = "Warning"
+    """Warning"""
     INFORMATION = "Information"
+    """Information"""
 
 
 class ProvisioningState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The provisioning state of the resource."""
 
     SUCCEEDED = "Succeeded"
+    """Succeeded"""
     FAILED = "Failed"
+    """Failed"""
     CANCELED = "Canceled"
+    """Canceled"""
     CREATING = "Creating"
+    """Creating"""
     UPDATING = "Updating"
+    """Updating"""
     DELETING = "Deleting"
+    """Deleting"""
