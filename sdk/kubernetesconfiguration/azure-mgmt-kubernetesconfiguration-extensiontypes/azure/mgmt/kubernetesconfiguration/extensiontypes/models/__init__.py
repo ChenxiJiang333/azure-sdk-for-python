@@ -30,6 +30,11 @@ from ._models_py3 import (  # type: ignore
     ExtensionTypesList,
     ProxyResource,
     Resource,
+    SystemData,
+)
+
+from ._kubernetes_configuration_extension_types_mgmt_client_enums import (  # type: ignore
+    CreatedByType,
 )
 from ._patch import __all__ as _patch_all
 from ._patch import *
@@ -52,6 +57,8 @@ __all__ = [
     "ExtensionTypesList",
     "ProxyResource",
     "Resource",
+    "SystemData",
+    "CreatedByType",
 ]
 __all__.extend([p for p in _patch_all if p not in __all__])  # pyright: ignore
 _patch_sdk()

@@ -7,7 +7,7 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 from collections.abc import MutableMapping
-from typing import Any, Callable, Dict, Iterable, Optional, TypeVar
+from typing import Any, Callable, Optional, TypeVar
 import urllib.parse
 
 from azure.core import PipelineClient
@@ -31,7 +31,8 @@ from .._configuration import KubernetesConfigurationExtensionTypesMgmtClientConf
 from .._utils.serialization import Deserializer, Serializer
 
 T = TypeVar("T")
-ClsType = Optional[Callable[[PipelineResponse[HttpRequest, HttpResponse], T, Dict[str, Any]], Any]]
+ClsType = Optional[Callable[[PipelineResponse[HttpRequest, HttpResponse], T, dict[str, Any]], Any]]
+List = list
 
 _SERIALIZER = Serializer()
 _SERIALIZER.client_side_validation = False
@@ -67,6 +68,7 @@ def build_location_list_request(
     _url: str = _url.format(**path_format_arguments)  # type: ignore
 
     # Construct parameters
+    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
     if publisher_id is not None:
         _params["publisherId"] = _SERIALIZER.query("publisher_id", publisher_id, "str")
     if offer_id is not None:
@@ -77,7 +79,6 @@ def build_location_list_request(
         _params["releaseTrain"] = _SERIALIZER.query("release_train", release_train, "str")
     if cluster_type is not None:
         _params["clusterType"] = _SERIALIZER.query("cluster_type", cluster_type, "str")
-    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
 
     # Construct headers
     _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
@@ -151,6 +152,7 @@ def build_list_versions_request(
     _url: str = _url.format(**path_format_arguments)  # type: ignore
 
     # Construct parameters
+    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
     if release_train is not None:
         _params["releaseTrain"] = _SERIALIZER.query("release_train", release_train, "str")
     if cluster_type is not None:
@@ -159,7 +161,6 @@ def build_list_versions_request(
         _params["majorVersion"] = _SERIALIZER.query("major_version", major_version, "str")
     if show_latest is not None:
         _params["showLatest"] = _SERIALIZER.query("show_latest", show_latest, "bool")
-    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
 
     # Construct headers
     _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
@@ -240,6 +241,7 @@ def build_list_request(
     _url: str = _url.format(**path_format_arguments)  # type: ignore
 
     # Construct parameters
+    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
     if publisher_id is not None:
         _params["publisherId"] = _SERIALIZER.query("publisher_id", publisher_id, "str")
     if offer_id is not None:
@@ -248,7 +250,6 @@ def build_list_request(
         _params["planId"] = _SERIALIZER.query("plan_id", plan_id, "str")
     if release_train is not None:
         _params["releaseTrain"] = _SERIALIZER.query("release_train", release_train, "str")
-    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
 
     # Construct headers
     _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
@@ -344,13 +345,13 @@ def build_cluster_list_versions_request(
     _url: str = _url.format(**path_format_arguments)  # type: ignore
 
     # Construct parameters
+    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
     if release_train is not None:
         _params["releaseTrain"] = _SERIALIZER.query("release_train", release_train, "str")
     if major_version is not None:
         _params["majorVersion"] = _SERIALIZER.query("major_version", major_version, "str")
     if show_latest is not None:
         _params["showLatest"] = _SERIALIZER.query("show_latest", show_latest, "bool")
-    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
 
     # Construct headers
     _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
@@ -418,7 +419,7 @@ class ExtensionTypesOperations:
 
     models = _models
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client: PipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
         self._config: KubernetesConfigurationExtensionTypesMgmtClientConfiguration = (
@@ -437,7 +438,7 @@ class ExtensionTypesOperations:
         release_train: Optional[str] = None,
         cluster_type: Optional[str] = None,
         **kwargs: Any
-    ) -> Iterable["_models.ExtensionType"]:
+    ) -> ItemPaged["_models.ExtensionType"]:
         """List all Extension Types for the location.
 
         :param location: The name of Azure region. Required.
@@ -528,7 +529,10 @@ class ExtensionTypesOperations:
 
             if response.status_code not in [200]:
                 map_error(status_code=response.status_code, response=response, error_map=error_map)
-                error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
+                error = self._deserialize.failsafe_deserialize(
+                    _models.ErrorResponse,
+                    pipeline_response,
+                )
                 raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
             return pipeline_response
@@ -580,7 +584,10 @@ class ExtensionTypesOperations:
 
         if response.status_code not in [200]:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
+            error = self._deserialize.failsafe_deserialize(
+                _models.ErrorResponse,
+                pipeline_response,
+            )
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
         deserialized = self._deserialize("ExtensionType", pipeline_response.http_response)
@@ -600,7 +607,7 @@ class ExtensionTypesOperations:
         major_version: Optional[str] = None,
         show_latest: Optional[bool] = None,
         **kwargs: Any
-    ) -> Iterable["_models.ExtensionTypeVersionForReleaseTrain"]:
+    ) -> ItemPaged["_models.ExtensionTypeVersionForReleaseTrain"]:
         """List the versions for an extension type and location.
 
         :param location: The name of Azure region. Required.
@@ -691,7 +698,10 @@ class ExtensionTypesOperations:
 
             if response.status_code not in [200]:
                 map_error(status_code=response.status_code, response=response, error_map=error_map)
-                error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
+                error = self._deserialize.failsafe_deserialize(
+                    _models.ErrorResponse,
+                    pipeline_response,
+                )
                 raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
             return pipeline_response
@@ -749,7 +759,10 @@ class ExtensionTypesOperations:
 
         if response.status_code not in [200]:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
+            error = self._deserialize.failsafe_deserialize(
+                _models.ErrorResponse,
+                pipeline_response,
+            )
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
         deserialized = self._deserialize("ExtensionTypeVersionForReleaseTrain", pipeline_response.http_response)
@@ -771,7 +784,7 @@ class ExtensionTypesOperations:
         plan_id: Optional[str] = None,
         release_train: Optional[str] = None,
         **kwargs: Any
-    ) -> Iterable["_models.ExtensionType"]:
+    ) -> ItemPaged["_models.ExtensionType"]:
         """List installable Extension Types for the cluster based region and type for the cluster.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
@@ -870,7 +883,10 @@ class ExtensionTypesOperations:
 
             if response.status_code not in [200]:
                 map_error(status_code=response.status_code, response=response, error_map=error_map)
-                error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
+                error = self._deserialize.failsafe_deserialize(
+                    _models.ErrorResponse,
+                    pipeline_response,
+                )
                 raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
             return pipeline_response
@@ -942,7 +958,10 @@ class ExtensionTypesOperations:
 
         if response.status_code not in [200]:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
+            error = self._deserialize.failsafe_deserialize(
+                _models.ErrorResponse,
+                pipeline_response,
+            )
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
         deserialized = self._deserialize("ExtensionType", pipeline_response.http_response)
@@ -964,7 +983,7 @@ class ExtensionTypesOperations:
         major_version: Optional[str] = None,
         show_latest: Optional[bool] = None,
         **kwargs: Any
-    ) -> Iterable["_models.ExtensionTypeVersionForReleaseTrain"]:
+    ) -> ItemPaged["_models.ExtensionTypeVersionForReleaseTrain"]:
         """List the version for an Extension Type installable to the cluster.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
@@ -1063,7 +1082,10 @@ class ExtensionTypesOperations:
 
             if response.status_code not in [200]:
                 map_error(status_code=response.status_code, response=response, error_map=error_map)
-                error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
+                error = self._deserialize.failsafe_deserialize(
+                    _models.ErrorResponse,
+                    pipeline_response,
+                )
                 raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
             return pipeline_response
@@ -1140,7 +1162,10 @@ class ExtensionTypesOperations:
 
         if response.status_code not in [200]:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
+            error = self._deserialize.failsafe_deserialize(
+                _models.ErrorResponse,
+                pipeline_response,
+            )
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
         deserialized = self._deserialize("ExtensionTypeVersionForReleaseTrain", pipeline_response.http_response)

@@ -7,12 +7,15 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 
-from typing import Any, List, Optional, TYPE_CHECKING
+from collections.abc import MutableMapping
+import datetime
+from typing import Any, Optional, TYPE_CHECKING, Union
 
 from .._utils import serialization as _serialization
 
 if TYPE_CHECKING:
     from .. import models as _models
+JSON = MutableMapping[str, Any]
 
 
 class Resource(_serialization.Model):
@@ -28,18 +31,23 @@ class Resource(_serialization.Model):
     :ivar type: The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or
      "Microsoft.Storage/storageAccounts".
     :vartype type: str
+    :ivar system_data: Azure Resource Manager metadata containing createdBy and modifiedBy
+     information.
+    :vartype system_data: ~azure.mgmt.kubernetesconfiguration.extensiontypes.models.SystemData
     """
 
     _validation = {
         "id": {"readonly": True},
         "name": {"readonly": True},
         "type": {"readonly": True},
+        "system_data": {"readonly": True},
     }
 
     _attribute_map = {
         "id": {"key": "id", "type": "str"},
         "name": {"key": "name", "type": "str"},
         "type": {"key": "type", "type": "str"},
+        "system_data": {"key": "systemData", "type": "SystemData"},
     }
 
     def __init__(self, **kwargs: Any) -> None:
@@ -48,6 +56,7 @@ class Resource(_serialization.Model):
         self.id: Optional[str] = None
         self.name: Optional[str] = None
         self.type: Optional[str] = None
+        self.system_data: Optional["_models.SystemData"] = None
 
 
 class ProxyResource(Resource):
@@ -64,6 +73,9 @@ class ProxyResource(Resource):
     :ivar type: The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or
      "Microsoft.Storage/storageAccounts".
     :vartype type: str
+    :ivar system_data: Azure Resource Manager metadata containing createdBy and modifiedBy
+     information.
+    :vartype system_data: ~azure.mgmt.kubernetesconfiguration.extensiontypes.models.SystemData
     """
 
 
@@ -80,6 +92,9 @@ class ClusterScopeSettings(ProxyResource):
     :ivar type: The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or
      "Microsoft.Storage/storageAccounts".
     :vartype type: str
+    :ivar system_data: Azure Resource Manager metadata containing createdBy and modifiedBy
+     information.
+    :vartype system_data: ~azure.mgmt.kubernetesconfiguration.extensiontypes.models.SystemData
     :ivar allow_multiple_instances: Describes if multiple instances of the extension are allowed.
     :vartype allow_multiple_instances: bool
     :ivar default_release_namespace: Default extension release namespace.
@@ -90,12 +105,14 @@ class ClusterScopeSettings(ProxyResource):
         "id": {"readonly": True},
         "name": {"readonly": True},
         "type": {"readonly": True},
+        "system_data": {"readonly": True},
     }
 
     _attribute_map = {
         "id": {"key": "id", "type": "str"},
         "name": {"key": "name", "type": "str"},
         "type": {"key": "type", "type": "str"},
+        "system_data": {"key": "systemData", "type": "SystemData"},
         "allow_multiple_instances": {"key": "properties.allowMultipleInstances", "type": "bool"},
         "default_release_namespace": {"key": "properties.defaultReleaseNamespace", "type": "str"},
     }
@@ -187,8 +204,8 @@ class ErrorDetail(_serialization.Model):
         self.code: Optional[str] = None
         self.message: Optional[str] = None
         self.target: Optional[str] = None
-        self.details: Optional[List["_models.ErrorDetail"]] = None
-        self.additional_info: Optional[List["_models.ErrorAdditionalInfo"]] = None
+        self.details: Optional[list["_models.ErrorDetail"]] = None
+        self.additional_info: Optional[list["_models.ErrorAdditionalInfo"]] = None
 
 
 class ErrorResponse(_serialization.Model):
@@ -225,6 +242,9 @@ class ExtensionType(ProxyResource):
     :ivar type: The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or
      "Microsoft.Storage/storageAccounts".
     :vartype type: str
+    :ivar system_data: Azure Resource Manager metadata containing createdBy and modifiedBy
+     information.
+    :vartype system_data: ~azure.mgmt.kubernetesconfiguration.extensiontypes.models.SystemData
     :ivar properties:
     :vartype properties:
      ~azure.mgmt.kubernetesconfiguration.extensiontypes.models.ExtensionTypeProperties
@@ -234,12 +254,14 @@ class ExtensionType(ProxyResource):
         "id": {"readonly": True},
         "name": {"readonly": True},
         "type": {"readonly": True},
+        "system_data": {"readonly": True},
     }
 
     _attribute_map = {
         "id": {"key": "id", "type": "str"},
         "name": {"key": "name", "type": "str"},
         "type": {"key": "type", "type": "str"},
+        "system_data": {"key": "systemData", "type": "SystemData"},
         "properties": {"key": "properties", "type": "ExtensionTypeProperties"},
     }
 
@@ -292,7 +314,7 @@ class ExtensionTypeProperties(_serialization.Model):
         description: Optional[str] = None,
         publisher: Optional[str] = None,
         plan_info: Optional["_models.ExtensionTypePropertiesPlanInfo"] = None,
-        supported_cluster_types: Optional[List[str]] = None,
+        supported_cluster_types: Optional[list[str]] = None,
         supported_scopes: Optional["_models.ExtensionTypePropertiesSupportedScopes"] = None,
         **kwargs: Any
     ) -> None:
@@ -405,15 +427,16 @@ class ExtensionTypesList(_serialization.Model):
 
     Variables are only populated by the server, and will be ignored when sending a request.
 
-    :ivar value: List of Extension Types.
+    All required parameters must be populated in order to send to server.
+
+    :ivar value: The ExtensionType items on this page. Required.
     :vartype value: list[~azure.mgmt.kubernetesconfiguration.extensiontypes.models.ExtensionType]
-    :ivar next_link: URL to get the next set of extension type objects, if any.
+    :ivar next_link: The link to the next page of items.
     :vartype next_link: str
     """
 
     _validation = {
-        "value": {"readonly": True},
-        "next_link": {"readonly": True},
+        "value": {"required": True, "readonly": True},
     }
 
     _attribute_map = {
@@ -421,11 +444,14 @@ class ExtensionTypesList(_serialization.Model):
         "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(self, **kwargs: Any) -> None:
-        """ """
+    def __init__(self, *, next_link: Optional[str] = None, **kwargs: Any) -> None:
+        """
+        :keyword next_link: The link to the next page of items.
+        :paramtype next_link: str
+        """
         super().__init__(**kwargs)
-        self.value: Optional[List["_models.ExtensionType"]] = None
-        self.next_link: Optional[str] = None
+        self.value: Optional[list["_models.ExtensionType"]] = None
+        self.next_link = next_link
 
 
 class ExtensionTypeVersionForReleaseTrain(ProxyResource):
@@ -441,6 +467,9 @@ class ExtensionTypeVersionForReleaseTrain(ProxyResource):
     :ivar type: The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or
      "Microsoft.Storage/storageAccounts".
     :vartype type: str
+    :ivar system_data: Azure Resource Manager metadata containing createdBy and modifiedBy
+     information.
+    :vartype system_data: ~azure.mgmt.kubernetesconfiguration.extensiontypes.models.SystemData
     :ivar properties:
     :vartype properties:
      ~azure.mgmt.kubernetesconfiguration.extensiontypes.models.ExtensionTypeVersionForReleaseTrainProperties
@@ -450,12 +479,14 @@ class ExtensionTypeVersionForReleaseTrain(ProxyResource):
         "id": {"readonly": True},
         "name": {"readonly": True},
         "type": {"readonly": True},
+        "system_data": {"readonly": True},
     }
 
     _attribute_map = {
         "id": {"key": "id", "type": "str"},
         "name": {"key": "name", "type": "str"},
         "type": {"key": "type", "type": "str"},
+        "system_data": {"key": "systemData", "type": "SystemData"},
         "properties": {"key": "properties", "type": "ExtensionTypeVersionForReleaseTrainProperties"},
     }
 
@@ -501,7 +532,7 @@ class ExtensionTypeVersionForReleaseTrainProperties(_serialization.Model):  # py
         unsupported_kubernetes_versions: Optional[
             "_models.ExtensionTypeVersionForReleaseTrainPropertiesUnsupportedKubernetesVersions"
         ] = None,
-        supported_cluster_types: Optional[List[str]] = None,
+        supported_cluster_types: Optional[list[str]] = None,
         **kwargs: Any
     ) -> None:
         """
@@ -556,10 +587,10 @@ class ExtensionTypeVersionForReleaseTrainPropertiesUnsupportedKubernetesVersions
     def __init__(
         self,
         *,
-        connected_cluster: Optional[List["_models.ExtensionTypeVersionUnsupportedKubernetesMatrixItem"]] = None,
-        appliances: Optional[List["_models.ExtensionTypeVersionUnsupportedKubernetesMatrixItem"]] = None,
-        provisioned_cluster: Optional[List["_models.ExtensionTypeVersionUnsupportedKubernetesMatrixItem"]] = None,
-        managed_cluster: Optional[List["_models.ExtensionTypeVersionUnsupportedKubernetesMatrixItem"]] = None,
+        connected_cluster: Optional[list["_models.ExtensionTypeVersionUnsupportedKubernetesMatrixItem"]] = None,
+        appliances: Optional[list["_models.ExtensionTypeVersionUnsupportedKubernetesMatrixItem"]] = None,
+        provisioned_cluster: Optional[list["_models.ExtensionTypeVersionUnsupportedKubernetesMatrixItem"]] = None,
+        managed_cluster: Optional[list["_models.ExtensionTypeVersionUnsupportedKubernetesMatrixItem"]] = None,
         **kwargs: Any
     ) -> None:
         """
@@ -589,16 +620,17 @@ class ExtensionTypeVersionsList(_serialization.Model):
 
     Variables are only populated by the server, and will be ignored when sending a request.
 
-    :ivar value: List of Extension Type Versions for an Extension Type in a Release Train.
+    All required parameters must be populated in order to send to server.
+
+    :ivar value: The ExtensionTypeVersionForReleaseTrain items on this page. Required.
     :vartype value:
      list[~azure.mgmt.kubernetesconfiguration.extensiontypes.models.ExtensionTypeVersionForReleaseTrain]
-    :ivar next_link: URL to get the next set of extension objects, if any.
+    :ivar next_link: The link to the next page of items.
     :vartype next_link: str
     """
 
     _validation = {
-        "value": {"readonly": True},
-        "next_link": {"readonly": True},
+        "value": {"required": True, "readonly": True},
     }
 
     _attribute_map = {
@@ -606,11 +638,14 @@ class ExtensionTypeVersionsList(_serialization.Model):
         "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(self, **kwargs: Any) -> None:
-        """ """
+    def __init__(self, *, next_link: Optional[str] = None, **kwargs: Any) -> None:
+        """
+        :keyword next_link: The link to the next page of items.
+        :paramtype next_link: str
+        """
         super().__init__(**kwargs)
-        self.value: Optional[List["_models.ExtensionTypeVersionForReleaseTrain"]] = None
-        self.next_link: Optional[str] = None
+        self.value: Optional[list["_models.ExtensionTypeVersionForReleaseTrain"]] = None
+        self.next_link = next_link
 
 
 class ExtensionTypeVersionUnsupportedKubernetesMatrixItem(_serialization.Model):  # pylint: disable=name-too-long
@@ -632,8 +667,8 @@ class ExtensionTypeVersionUnsupportedKubernetesMatrixItem(_serialization.Model):
     def __init__(
         self,
         *,
-        distributions: Optional[List[str]] = None,
-        unsupported_versions: Optional[List[str]] = None,
+        distributions: Optional[list[str]] = None,
+        unsupported_versions: Optional[list[str]] = None,
         **kwargs: Any
     ) -> None:
         """
@@ -646,3 +681,71 @@ class ExtensionTypeVersionUnsupportedKubernetesMatrixItem(_serialization.Model):
         super().__init__(**kwargs)
         self.distributions = distributions
         self.unsupported_versions = unsupported_versions
+
+
+class SystemData(_serialization.Model):
+    """Metadata pertaining to creation and last modification of the resource.
+
+    :ivar created_by: The identity that created the resource.
+    :vartype created_by: str
+    :ivar created_by_type: The type of identity that created the resource. Known values are:
+     "User", "Application", "ManagedIdentity", and "Key".
+    :vartype created_by_type: str or
+     ~azure.mgmt.kubernetesconfiguration.extensiontypes.models.CreatedByType
+    :ivar created_at: The timestamp of resource creation (UTC).
+    :vartype created_at: ~datetime.datetime
+    :ivar last_modified_by: The identity that last modified the resource.
+    :vartype last_modified_by: str
+    :ivar last_modified_by_type: The type of identity that last modified the resource. Known values
+     are: "User", "Application", "ManagedIdentity", and "Key".
+    :vartype last_modified_by_type: str or
+     ~azure.mgmt.kubernetesconfiguration.extensiontypes.models.CreatedByType
+    :ivar last_modified_at: The timestamp of resource last modification (UTC).
+    :vartype last_modified_at: ~datetime.datetime
+    """
+
+    _attribute_map = {
+        "created_by": {"key": "createdBy", "type": "str"},
+        "created_by_type": {"key": "createdByType", "type": "str"},
+        "created_at": {"key": "createdAt", "type": "iso-8601"},
+        "last_modified_by": {"key": "lastModifiedBy", "type": "str"},
+        "last_modified_by_type": {"key": "lastModifiedByType", "type": "str"},
+        "last_modified_at": {"key": "lastModifiedAt", "type": "iso-8601"},
+    }
+
+    def __init__(
+        self,
+        *,
+        created_by: Optional[str] = None,
+        created_by_type: Optional[Union[str, "_models.CreatedByType"]] = None,
+        created_at: Optional[datetime.datetime] = None,
+        last_modified_by: Optional[str] = None,
+        last_modified_by_type: Optional[Union[str, "_models.CreatedByType"]] = None,
+        last_modified_at: Optional[datetime.datetime] = None,
+        **kwargs: Any
+    ) -> None:
+        """
+        :keyword created_by: The identity that created the resource.
+        :paramtype created_by: str
+        :keyword created_by_type: The type of identity that created the resource. Known values are:
+         "User", "Application", "ManagedIdentity", and "Key".
+        :paramtype created_by_type: str or
+         ~azure.mgmt.kubernetesconfiguration.extensiontypes.models.CreatedByType
+        :keyword created_at: The timestamp of resource creation (UTC).
+        :paramtype created_at: ~datetime.datetime
+        :keyword last_modified_by: The identity that last modified the resource.
+        :paramtype last_modified_by: str
+        :keyword last_modified_by_type: The type of identity that last modified the resource. Known
+         values are: "User", "Application", "ManagedIdentity", and "Key".
+        :paramtype last_modified_by_type: str or
+         ~azure.mgmt.kubernetesconfiguration.extensiontypes.models.CreatedByType
+        :keyword last_modified_at: The timestamp of resource last modification (UTC).
+        :paramtype last_modified_at: ~datetime.datetime
+        """
+        super().__init__(**kwargs)
+        self.created_by = created_by
+        self.created_by_type = created_by_type
+        self.created_at = created_at
+        self.last_modified_by = last_modified_by
+        self.last_modified_by_type = last_modified_by_type
+        self.last_modified_at = last_modified_at
