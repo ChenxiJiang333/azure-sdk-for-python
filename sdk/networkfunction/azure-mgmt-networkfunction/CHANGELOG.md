@@ -1,12 +1,17 @@
+## tsp migration
+
+### Breaking Changes
+
+- Model `AzureTrafficCollector` moved instance variable `collector_policies`, `virtual_hub` and `provisioning_state` under property `properties`
+- Model `CollectorPolicy` moved instance variable `ingestion_policy`, `emission_policies` and `provisioning_state` under property `properties`
+- Method `AzureTrafficCollectorsOperations.begin_create_or_update` moved its parameters `location`/`tags`/`virtual_hub` under property `parameters`
+- Method `CollectorPoliciesOperations.begin_create_or_update` moved its parameters `location`/`tags`/`ingestion_policy`/`emission_policies` under property `parameters`
+
+### Other Changes
+
+- Deleted model `ApiVersionParameter`/`TrackedResource`/`TrackedResourceSystemData` which actually were not used by SDK users
+
 # Release History
-
-## 1.0.0 (2026-02-05)
-
-change log generation failed!!! You need to write it manually!!!
-
-## 1.0.0 (2026-02-05)
-
-change log generation failed!!! You need to write it manually!!!
 
 ## 1.0.0b1 (2022-11-18)
 
