@@ -20,20 +20,10 @@ class TestHDInsightManagementLocationsOperations(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_locations_get_capabilities(self, resource_group):
-        response = self.client.locations.get_capabilities(
+    def test_locations_get_azure_async_operation_status(self, resource_group):
+        response = self.client.locations.get_azure_async_operation_status(
             location="str",
-            api_version="2025-01-15-preview",
-        )
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_locations_list_usages(self, resource_group):
-        response = self.client.locations.list_usages(
-            location="str",
+            operation_id="str",
             api_version="2025-01-15-preview",
         )
 
@@ -53,10 +43,9 @@ class TestHDInsightManagementLocationsOperations(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_locations_get_azure_async_operation_status(self, resource_group):
-        response = self.client.locations.get_azure_async_operation_status(
+    def test_locations_get_capabilities(self, resource_group):
+        response = self.client.locations.get_capabilities(
             location="str",
-            operation_id="str",
             api_version="2025-01-15-preview",
         )
 
@@ -69,6 +58,17 @@ class TestHDInsightManagementLocationsOperations(AzureMgmtRecordedTestCase):
         response = self.client.locations.check_name_availability(
             location="str",
             parameters={"name": "str", "type": "str"},
+            api_version="2025-01-15-preview",
+        )
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
+    def test_locations_list_usages(self, resource_group):
+        response = self.client.locations.list_usages(
+            location="str",
             api_version="2025-01-15-preview",
         )
 

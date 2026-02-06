@@ -119,6 +119,6 @@ def main():
     print(response)
 
 
-# x-ms-original-file: specification/hdinsight/resource-manager/Microsoft.HDInsight/preview/2025-01-15-preview/examples/CreateHDInsightClusterWithWasbMsi.json
+# x-ms-original-file: specification/hdinsight/resource-manager/Microsoft.HDInsight/HDInsight/preview/2025-01-15-preview/examples/CreateHDInsightClusterWithWasbMsi.json
 if __name__ == "__main__":
     main()

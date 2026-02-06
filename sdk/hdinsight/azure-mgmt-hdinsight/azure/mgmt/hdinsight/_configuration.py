@@ -26,8 +26,7 @@ class HDInsightManagementClientConfiguration:  # pylint: disable=too-many-instan
 
     :param credential: Credential needed for the client to connect to Azure. Required.
     :type credential: ~azure.core.credentials.TokenCredential
-    :param subscription_id: The subscription credentials which uniquely identify Microsoft Azure
-     subscription. The subscription ID forms part of the URI for every service call. Required.
+    :param subscription_id: The ID of the target subscription. Required.
     :type subscription_id: str
     :param cloud_setting: The cloud setting for which to get the ARM endpoint. Default value is
      None.

@@ -20,11 +20,11 @@ class TestHDInsightManagementScriptActionsOperations(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_script_actions_delete(self, resource_group):
-        response = self.client.script_actions.delete(
+    def test_script_actions_get_execution_async_operation_status(self, resource_group):
+        response = self.client.script_actions.get_execution_async_operation_status(
             resource_group_name=resource_group.name,
             cluster_name="str",
-            script_name="str",
+            operation_id="str",
             api_version="2025-01-15-preview",
         )
 
@@ -45,11 +45,11 @@ class TestHDInsightManagementScriptActionsOperations(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_script_actions_get_execution_detail(self, resource_group):
-        response = self.client.script_actions.get_execution_detail(
+    def test_script_actions_delete(self, resource_group):
+        response = self.client.script_actions.delete(
             resource_group_name=resource_group.name,
             cluster_name="str",
-            script_execution_id="str",
+            script_name="str",
             api_version="2025-01-15-preview",
         )
 
@@ -58,11 +58,11 @@ class TestHDInsightManagementScriptActionsOperations(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_script_actions_get_execution_async_operation_status(self, resource_group):
-        response = self.client.script_actions.get_execution_async_operation_status(
+    def test_script_actions_get_execution_detail(self, resource_group):
+        response = self.client.script_actions.get_execution_detail(
             resource_group_name=resource_group.name,
             cluster_name="str",
-            operation_id="str",
+            script_execution_id="str",
             api_version="2025-01-15-preview",
         )
 

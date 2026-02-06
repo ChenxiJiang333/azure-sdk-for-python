@@ -61,168 +61,12 @@ class LocationsOperations:
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
     @distributed_trace_async
-    async def get_capabilities(self, location: str, **kwargs: Any) -> _models.CapabilitiesResult:
-        """Gets the capabilities for the specified location.
-
-        :param location: The Azure location (region) for which to make the request. Required.
-        :type location: str
-        :return: CapabilitiesResult or the result of cls(response)
-        :rtype: ~azure.mgmt.hdinsight.models.CapabilitiesResult
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        error_map: MutableMapping = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        _headers = kwargs.pop("headers", {}) or {}
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
-        cls: ClsType[_models.CapabilitiesResult] = kwargs.pop("cls", None)
-
-        _request = build_get_capabilities_request(
-            location=location,
-            subscription_id=self._config.subscription_id,
-            api_version=api_version,
-            headers=_headers,
-            params=_params,
-        )
-        _request.url = self._client.format_url(_request.url)
-
-        _stream = False
-        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            _request, stream=_stream, **kwargs
-        )
-
-        response = pipeline_response.http_response
-
-        if response.status_code not in [200]:
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
-            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
-
-        deserialized = self._deserialize("CapabilitiesResult", pipeline_response.http_response)
-
-        if cls:
-            return cls(pipeline_response, deserialized, {})  # type: ignore
-
-        return deserialized  # type: ignore
-
-    @distributed_trace_async
-    async def list_usages(self, location: str, **kwargs: Any) -> _models.UsagesListResult:
-        """Lists the usages for the specified location.
-
-        :param location: The Azure location (region) for which to make the request. Required.
-        :type location: str
-        :return: UsagesListResult or the result of cls(response)
-        :rtype: ~azure.mgmt.hdinsight.models.UsagesListResult
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        error_map: MutableMapping = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        _headers = kwargs.pop("headers", {}) or {}
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
-        cls: ClsType[_models.UsagesListResult] = kwargs.pop("cls", None)
-
-        _request = build_list_usages_request(
-            location=location,
-            subscription_id=self._config.subscription_id,
-            api_version=api_version,
-            headers=_headers,
-            params=_params,
-        )
-        _request.url = self._client.format_url(_request.url)
-
-        _stream = False
-        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            _request, stream=_stream, **kwargs
-        )
-
-        response = pipeline_response.http_response
-
-        if response.status_code not in [200]:
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
-            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
-
-        deserialized = self._deserialize("UsagesListResult", pipeline_response.http_response)
-
-        if cls:
-            return cls(pipeline_response, deserialized, {})  # type: ignore
-
-        return deserialized  # type: ignore
-
-    @distributed_trace_async
-    async def list_billing_specs(self, location: str, **kwargs: Any) -> _models.BillingResponseListResult:
-        """Lists the billingSpecs for the specified subscription and location.
-
-        :param location: The Azure location (region) for which to make the request. Required.
-        :type location: str
-        :return: BillingResponseListResult or the result of cls(response)
-        :rtype: ~azure.mgmt.hdinsight.models.BillingResponseListResult
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        error_map: MutableMapping = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        _headers = kwargs.pop("headers", {}) or {}
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
-        cls: ClsType[_models.BillingResponseListResult] = kwargs.pop("cls", None)
-
-        _request = build_list_billing_specs_request(
-            location=location,
-            subscription_id=self._config.subscription_id,
-            api_version=api_version,
-            headers=_headers,
-            params=_params,
-        )
-        _request.url = self._client.format_url(_request.url)
-
-        _stream = False
-        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            _request, stream=_stream, **kwargs
-        )
-
-        response = pipeline_response.http_response
-
-        if response.status_code not in [200]:
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
-            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
-
-        deserialized = self._deserialize("BillingResponseListResult", pipeline_response.http_response)
-
-        if cls:
-            return cls(pipeline_response, deserialized, {})  # type: ignore
-
-        return deserialized  # type: ignore
-
-    @distributed_trace_async
     async def get_azure_async_operation_status(
         self, location: str, operation_id: str, **kwargs: Any
     ) -> _models.AsyncOperationResult:
         """Get the async operation status.
 
-        :param location: The Azure location (region) for which to make the request. Required.
+        :param location: The name of Azure region. Required.
         :type location: str
         :param operation_id: The long running operation id. Required.
         :type operation_id: str
@@ -263,10 +107,123 @@ class LocationsOperations:
 
         if response.status_code not in [200]:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
+            error = self._deserialize.failsafe_deserialize(
+                _models.ErrorResponse,
+                pipeline_response,
+            )
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
         deserialized = self._deserialize("AsyncOperationResult", pipeline_response.http_response)
+
+        if cls:
+            return cls(pipeline_response, deserialized, {})  # type: ignore
+
+        return deserialized  # type: ignore
+
+    @distributed_trace_async
+    async def list_billing_specs(self, location: str, **kwargs: Any) -> _models.BillingResponseListResult:
+        """Lists the billingSpecs for the specified subscription and location.
+
+        :param location: The name of Azure region. Required.
+        :type location: str
+        :return: BillingResponseListResult or the result of cls(response)
+        :rtype: ~azure.mgmt.hdinsight.models.BillingResponseListResult
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
+        cls: ClsType[_models.BillingResponseListResult] = kwargs.pop("cls", None)
+
+        _request = build_list_billing_specs_request(
+            location=location,
+            subscription_id=self._config.subscription_id,
+            api_version=api_version,
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            error = self._deserialize.failsafe_deserialize(
+                _models.ErrorResponse,
+                pipeline_response,
+            )
+            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
+
+        deserialized = self._deserialize("BillingResponseListResult", pipeline_response.http_response)
+
+        if cls:
+            return cls(pipeline_response, deserialized, {})  # type: ignore
+
+        return deserialized  # type: ignore
+
+    @distributed_trace_async
+    async def get_capabilities(self, location: str, **kwargs: Any) -> _models.CapabilitiesResult:
+        """Gets the capabilities for the specified location.
+
+        :param location: The name of Azure region. Required.
+        :type location: str
+        :return: CapabilitiesResult or the result of cls(response)
+        :rtype: ~azure.mgmt.hdinsight.models.CapabilitiesResult
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
+        cls: ClsType[_models.CapabilitiesResult] = kwargs.pop("cls", None)
+
+        _request = build_get_capabilities_request(
+            location=location,
+            subscription_id=self._config.subscription_id,
+            api_version=api_version,
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            error = self._deserialize.failsafe_deserialize(
+                _models.ErrorResponse,
+                pipeline_response,
+            )
+            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
+
+        deserialized = self._deserialize("CapabilitiesResult", pipeline_response.http_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})  # type: ignore
@@ -284,9 +241,9 @@ class LocationsOperations:
     ) -> _models.NameAvailabilityCheckResult:
         """Check the cluster name is available or not.
 
-        :param location: The Azure location (region) for which to make the request. Required.
+        :param location: The name of Azure region. Required.
         :type location: str
-        :param parameters: Required.
+        :param parameters: The request body. Required.
         :type parameters: ~azure.mgmt.hdinsight.models.NameAvailabilityCheckRequestParameters
         :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
          Default value is "application/json".
@@ -302,9 +259,9 @@ class LocationsOperations:
     ) -> _models.NameAvailabilityCheckResult:
         """Check the cluster name is available or not.
 
-        :param location: The Azure location (region) for which to make the request. Required.
+        :param location: The name of Azure region. Required.
         :type location: str
-        :param parameters: Required.
+        :param parameters: The request body. Required.
         :type parameters: IO[bytes]
         :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
          Default value is "application/json".
@@ -320,10 +277,10 @@ class LocationsOperations:
     ) -> _models.NameAvailabilityCheckResult:
         """Check the cluster name is available or not.
 
-        :param location: The Azure location (region) for which to make the request. Required.
+        :param location: The name of Azure region. Required.
         :type location: str
-        :param parameters: Is either a NameAvailabilityCheckRequestParameters type or a IO[bytes] type.
-         Required.
+        :param parameters: The request body. Is either a NameAvailabilityCheckRequestParameters type or
+         a IO[bytes] type. Required.
         :type parameters: ~azure.mgmt.hdinsight.models.NameAvailabilityCheckRequestParameters or
          IO[bytes]
         :return: NameAvailabilityCheckResult or the result of cls(response)
@@ -374,10 +331,68 @@ class LocationsOperations:
 
         if response.status_code not in [200]:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
+            error = self._deserialize.failsafe_deserialize(
+                _models.ErrorResponse,
+                pipeline_response,
+            )
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
         deserialized = self._deserialize("NameAvailabilityCheckResult", pipeline_response.http_response)
+
+        if cls:
+            return cls(pipeline_response, deserialized, {})  # type: ignore
+
+        return deserialized  # type: ignore
+
+    @distributed_trace_async
+    async def list_usages(self, location: str, **kwargs: Any) -> _models.UsagesListResult:
+        """Lists the usages for the specified location.
+
+        :param location: The name of Azure region. Required.
+        :type location: str
+        :return: UsagesListResult or the result of cls(response)
+        :rtype: ~azure.mgmt.hdinsight.models.UsagesListResult
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
+        cls: ClsType[_models.UsagesListResult] = kwargs.pop("cls", None)
+
+        _request = build_list_usages_request(
+            location=location,
+            subscription_id=self._config.subscription_id,
+            api_version=api_version,
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            error = self._deserialize.failsafe_deserialize(
+                _models.ErrorResponse,
+                pipeline_response,
+            )
+            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
+
+        deserialized = self._deserialize("UsagesListResult", pipeline_response.http_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})  # type: ignore
@@ -395,9 +410,9 @@ class LocationsOperations:
     ) -> _models.ClusterCreateValidationResult:
         """Validate the cluster create request spec is valid or not.
 
-        :param location: The Azure location (region) for which to make the request. Required.
+        :param location: The name of Azure region. Required.
         :type location: str
-        :param parameters: Required.
+        :param parameters: The request body. Required.
         :type parameters: ~azure.mgmt.hdinsight.models.ClusterCreateRequestValidationParameters
         :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
          Default value is "application/json".
@@ -413,9 +428,9 @@ class LocationsOperations:
     ) -> _models.ClusterCreateValidationResult:
         """Validate the cluster create request spec is valid or not.
 
-        :param location: The Azure location (region) for which to make the request. Required.
+        :param location: The name of Azure region. Required.
         :type location: str
-        :param parameters: Required.
+        :param parameters: The request body. Required.
         :type parameters: IO[bytes]
         :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
          Default value is "application/json".
@@ -434,10 +449,10 @@ class LocationsOperations:
     ) -> _models.ClusterCreateValidationResult:
         """Validate the cluster create request spec is valid or not.
 
-        :param location: The Azure location (region) for which to make the request. Required.
+        :param location: The name of Azure region. Required.
         :type location: str
-        :param parameters: Is either a ClusterCreateRequestValidationParameters type or a IO[bytes]
-         type. Required.
+        :param parameters: The request body. Is either a ClusterCreateRequestValidationParameters type
+         or a IO[bytes] type. Required.
         :type parameters: ~azure.mgmt.hdinsight.models.ClusterCreateRequestValidationParameters or
          IO[bytes]
         :return: ClusterCreateValidationResult or the result of cls(response)
@@ -488,7 +503,10 @@ class LocationsOperations:
 
         if response.status_code not in [200]:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
+            error = self._deserialize.failsafe_deserialize(
+                _models.ErrorResponse,
+                pipeline_response,
+            )
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
         deserialized = self._deserialize("ClusterCreateValidationResult", pipeline_response.http_response)

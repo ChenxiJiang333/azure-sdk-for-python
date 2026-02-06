@@ -20,6 +20,39 @@ class TestHDInsightManagementClustersOperations(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
+    def test_clusters_list(self, resource_group):
+        response = self.client.clusters.list(
+            api_version="2025-01-15-preview",
+        )
+        result = [r for r in response]
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
+    def test_clusters_list_by_resource_group(self, resource_group):
+        response = self.client.clusters.list_by_resource_group(
+            resource_group_name=resource_group.name,
+            api_version="2025-01-15-preview",
+        )
+        result = [r for r in response]
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
+    def test_clusters_get(self, resource_group):
+        response = self.client.clusters.get(
+            resource_group_name=resource_group.name,
+            cluster_name="str",
+            api_version="2025-01-15-preview",
+        )
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
     def test_clusters_begin_create(self, resource_group):
         response = self.client.clusters.begin_create(
             resource_group_name=resource_group.name,
@@ -194,10 +227,11 @@ class TestHDInsightManagementClustersOperations(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_clusters_get(self, resource_group):
-        response = self.client.clusters.get(
+    def test_clusters_get_azure_async_operation_status(self, resource_group):
+        response = self.client.clusters.get_azure_async_operation_status(
             resource_group_name=resource_group.name,
             cluster_name="str",
+            operation_id="str",
             api_version="2025-01-15-preview",
         )
 
@@ -206,25 +240,30 @@ class TestHDInsightManagementClustersOperations(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_clusters_list_by_resource_group(self, resource_group):
-        response = self.client.clusters.list_by_resource_group(
-            resource_group_name=resource_group.name,
-            api_version="2025-01-15-preview",
-        )
-        result = [r for r in response]
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_clusters_begin_resize(self, resource_group):
-        response = self.client.clusters.begin_resize(
+    def test_clusters_begin_execute_script_actions(self, resource_group):
+        response = self.client.clusters.begin_execute_script_actions(
             resource_group_name=resource_group.name,
             cluster_name="str",
-            role_name="str",
-            parameters={"targetInstanceCount": 0},
+            parameters={
+                "persistOnSuccess": bool,
+                "scriptActions": [
+                    {"name": "str", "roles": ["str"], "uri": "str", "applicationName": "str", "parameters": "str"}
+                ],
+            },
             api_version="2025-01-15-preview",
         ).result()  # call '.result()' to poll until service return final result
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
+    def test_clusters_get_gateway_settings(self, resource_group):
+        response = self.client.clusters.get_gateway_settings(
+            resource_group_name=resource_group.name,
+            cluster_name="str",
+            api_version="2025-01-15-preview",
+        )
 
         # please add some check logic here by yourself
         # ...
@@ -258,11 +297,15 @@ class TestHDInsightManagementClustersOperations(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_clusters_list(self, resource_group):
-        response = self.client.clusters.list(
+    def test_clusters_begin_resize(self, resource_group):
+        response = self.client.clusters.begin_resize(
+            resource_group_name=resource_group.name,
+            cluster_name="str",
+            role_name="str",
+            parameters={"targetInstanceCount": 0},
             api_version="2025-01-15-preview",
-        )
-        result = [r for r in response]
+        ).result()  # call '.result()' to poll until service return final result
+
         # please add some check logic here by yourself
         # ...
 
@@ -275,49 +318,6 @@ class TestHDInsightManagementClustersOperations(AzureMgmtRecordedTestCase):
             parameters={"keyName": "str", "keyVersion": "str", "vaultUri": "str"},
             api_version="2025-01-15-preview",
         ).result()  # call '.result()' to poll until service return final result
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_clusters_get_gateway_settings(self, resource_group):
-        response = self.client.clusters.get_gateway_settings(
-            resource_group_name=resource_group.name,
-            cluster_name="str",
-            api_version="2025-01-15-preview",
-        )
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_clusters_begin_update_gateway_settings(self, resource_group):
-        response = self.client.clusters.begin_update_gateway_settings(
-            resource_group_name=resource_group.name,
-            cluster_name="str",
-            parameters={
-                "restAuthCredential.isEnabled": True,
-                "restAuthCredential.password": "str",
-                "restAuthCredential.username": "str",
-                "restAuthEntraUsers": [{"displayName": "str", "objectId": "str", "upn": "str"}],
-            },
-            api_version="2025-01-15-preview",
-        ).result()  # call '.result()' to poll until service return final result
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_clusters_get_azure_async_operation_status(self, resource_group):
-        response = self.client.clusters.get_azure_async_operation_status(
-            resource_group_name=resource_group.name,
-            cluster_name="str",
-            operation_id="str",
-            api_version="2025-01-15-preview",
-        )
 
         # please add some check logic here by yourself
         # ...
@@ -337,15 +337,15 @@ class TestHDInsightManagementClustersOperations(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_clusters_begin_execute_script_actions(self, resource_group):
-        response = self.client.clusters.begin_execute_script_actions(
+    def test_clusters_begin_update_gateway_settings(self, resource_group):
+        response = self.client.clusters.begin_update_gateway_settings(
             resource_group_name=resource_group.name,
             cluster_name="str",
             parameters={
-                "persistOnSuccess": bool,
-                "scriptActions": [
-                    {"name": "str", "roles": ["str"], "uri": "str", "applicationName": "str", "parameters": "str"}
-                ],
+                "restAuthCredential.isEnabled": True,
+                "restAuthCredential.password": "str",
+                "restAuthCredential.username": "str",
+                "restAuthEntraUsers": [{"displayName": "str", "objectId": "str", "upn": "str"}],
             },
             api_version="2025-01-15-preview",
         ).result()  # call '.result()' to poll until service return final result

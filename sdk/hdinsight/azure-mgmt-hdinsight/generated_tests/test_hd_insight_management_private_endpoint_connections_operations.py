@@ -32,6 +32,19 @@ class TestHDInsightManagementPrivateEndpointConnectionsOperations(AzureMgmtRecor
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
+    def test_private_endpoint_connections_get(self, resource_group):
+        response = self.client.private_endpoint_connections.get(
+            resource_group_name=resource_group.name,
+            cluster_name="str",
+            private_endpoint_connection_name="str",
+            api_version="2025-01-15-preview",
+        )
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
     def test_private_endpoint_connections_begin_create_or_update(self, resource_group):
         response = self.client.private_endpoint_connections.begin_create_or_update(
             resource_group_name=resource_group.name,
@@ -56,19 +69,6 @@ class TestHDInsightManagementPrivateEndpointConnectionsOperations(AzureMgmtRecor
             },
             api_version="2025-01-15-preview",
         ).result()  # call '.result()' to poll until service return final result
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_private_endpoint_connections_get(self, resource_group):
-        response = self.client.private_endpoint_connections.get(
-            resource_group_name=resource_group.name,
-            cluster_name="str",
-            private_endpoint_connection_name="str",
-            api_version="2025-01-15-preview",
-        )
 
         # please add some check logic here by yourself
         # ...

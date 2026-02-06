@@ -32,6 +32,19 @@ class TestHDInsightManagementConfigurationsOperations(AzureMgmtRecordedTestCase)
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
+    def test_configurations_get(self, resource_group):
+        response = self.client.configurations.get(
+            resource_group_name=resource_group.name,
+            cluster_name="str",
+            configuration_name="str",
+            api_version="2025-01-15-preview",
+        )
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
     def test_configurations_begin_update(self, resource_group):
         response = self.client.configurations.begin_update(
             resource_group_name=resource_group.name,
@@ -40,19 +53,6 @@ class TestHDInsightManagementConfigurationsOperations(AzureMgmtRecordedTestCase)
             parameters={"str": "str"},
             api_version="2025-01-15-preview",
         ).result()  # call '.result()' to poll until service return final result
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_configurations_get(self, resource_group):
-        response = self.client.configurations.get(
-            resource_group_name=resource_group.name,
-            cluster_name="str",
-            configuration_name="str",
-            api_version="2025-01-15-preview",
-        )
 
         # please add some check logic here by yourself
         # ...

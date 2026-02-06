@@ -99,18 +99,23 @@ class Resource(_serialization.Model):
     :ivar type: The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or
      "Microsoft.Storage/storageAccounts".
     :vartype type: str
+    :ivar system_data: Azure Resource Manager metadata containing createdBy and modifiedBy
+     information.
+    :vartype system_data: ~azure.mgmt.hdinsight.models.SystemData
     """
 
     _validation = {
         "id": {"readonly": True},
         "name": {"readonly": True},
         "type": {"readonly": True},
+        "system_data": {"readonly": True},
     }
 
     _attribute_map = {
         "id": {"key": "id", "type": "str"},
         "name": {"key": "name", "type": "str"},
         "type": {"key": "type", "type": "str"},
+        "system_data": {"key": "systemData", "type": "SystemData"},
     }
 
     def __init__(self, **kwargs: Any) -> None:
@@ -119,6 +124,7 @@ class Resource(_serialization.Model):
         self.id: Optional[str] = None
         self.name: Optional[str] = None
         self.type: Optional[str] = None
+        self.system_data: Optional["_models.SystemData"] = None
 
 
 class ProxyResource(Resource):
@@ -135,6 +141,9 @@ class ProxyResource(Resource):
     :ivar type: The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or
      "Microsoft.Storage/storageAccounts".
     :vartype type: str
+    :ivar system_data: Azure Resource Manager metadata containing createdBy and modifiedBy
+     information.
+    :vartype system_data: ~azure.mgmt.hdinsight.models.SystemData
     """
 
 
@@ -151,14 +160,15 @@ class Application(ProxyResource):
     :ivar type: The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or
      "Microsoft.Storage/storageAccounts".
     :vartype type: str
+    :ivar system_data: Azure Resource Manager metadata containing createdBy and modifiedBy
+     information.
+    :vartype system_data: ~azure.mgmt.hdinsight.models.SystemData
+    :ivar properties: The properties of the application.
+    :vartype properties: ~azure.mgmt.hdinsight.models.ApplicationProperties
     :ivar etag: The ETag for the application.
     :vartype etag: str
     :ivar tags: The tags for the application.
     :vartype tags: dict[str, str]
-    :ivar properties: The properties of the application.
-    :vartype properties: ~azure.mgmt.hdinsight.models.ApplicationProperties
-    :ivar system_data: Metadata pertaining to creation and last modification of the resource.
-    :vartype system_data: ~azure.mgmt.hdinsight.models.SystemData
     """
 
     _validation = {
@@ -172,33 +182,32 @@ class Application(ProxyResource):
         "id": {"key": "id", "type": "str"},
         "name": {"key": "name", "type": "str"},
         "type": {"key": "type", "type": "str"},
+        "system_data": {"key": "systemData", "type": "SystemData"},
+        "properties": {"key": "properties", "type": "ApplicationProperties"},
         "etag": {"key": "etag", "type": "str"},
         "tags": {"key": "tags", "type": "{str}"},
-        "properties": {"key": "properties", "type": "ApplicationProperties"},
-        "system_data": {"key": "systemData", "type": "SystemData"},
     }
 
     def __init__(
         self,
         *,
+        properties: Optional["_models.ApplicationProperties"] = None,
         etag: Optional[str] = None,
         tags: Optional[dict[str, str]] = None,
-        properties: Optional["_models.ApplicationProperties"] = None,
         **kwargs: Any
     ) -> None:
         """
+        :keyword properties: The properties of the application.
+        :paramtype properties: ~azure.mgmt.hdinsight.models.ApplicationProperties
         :keyword etag: The ETag for the application.
         :paramtype etag: str
         :keyword tags: The tags for the application.
         :paramtype tags: dict[str, str]
-        :keyword properties: The properties of the application.
-        :paramtype properties: ~azure.mgmt.hdinsight.models.ApplicationProperties
         """
         super().__init__(**kwargs)
+        self.properties = properties
         self.etag = etag
         self.tags = tags
-        self.properties = properties
-        self.system_data: Optional["_models.SystemData"] = None
 
 
 class ApplicationGetEndpoint(_serialization.Model):
@@ -316,19 +325,18 @@ class ApplicationGetHttpsEndpoint(_serialization.Model):
 
 
 class ApplicationListResult(_serialization.Model):
-    """Result of the request to list cluster Applications. It contains a list of operations and a URL
-    link to get the next set of results.
+    """The response of a Application list operation.
 
-    Variables are only populated by the server, and will be ignored when sending a request.
+    All required parameters must be populated in order to send to server.
 
-    :ivar value: The list of HDInsight applications installed on HDInsight cluster.
+    :ivar value: The Application items on this page. Required.
     :vartype value: list[~azure.mgmt.hdinsight.models.Application]
-    :ivar next_link: The URL to get the next set of operation list results if there are any.
+    :ivar next_link: The link to the next page of items.
     :vartype next_link: str
     """
 
     _validation = {
-        "next_link": {"readonly": True},
+        "value": {"required": True},
     }
 
     _attribute_map = {
@@ -336,14 +344,16 @@ class ApplicationListResult(_serialization.Model):
         "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(self, *, value: Optional[list["_models.Application"]] = None, **kwargs: Any) -> None:
+    def __init__(self, *, value: list["_models.Application"], next_link: Optional[str] = None, **kwargs: Any) -> None:
         """
-        :keyword value: The list of HDInsight applications installed on HDInsight cluster.
+        :keyword value: The Application items on this page. Required.
         :paramtype value: list[~azure.mgmt.hdinsight.models.Application]
+        :keyword next_link: The link to the next page of items.
+        :paramtype next_link: str
         """
         super().__init__(**kwargs)
         self.value = value
-        self.next_link: Optional[str] = None
+        self.next_link = next_link
 
 
 class ApplicationProperties(_serialization.Model):
@@ -958,6 +968,7 @@ class CapabilitiesResult(_serialization.Model):
     """
 
     _validation = {
+        "versions": {"readonly": True},
         "quota": {"readonly": True},
     }
 
@@ -971,21 +982,18 @@ class CapabilitiesResult(_serialization.Model):
     def __init__(
         self,
         *,
-        versions: Optional[dict[str, "_models.VersionsCapability"]] = None,
         regions: Optional[dict[str, "_models.RegionsCapability"]] = None,
         features: Optional[list[str]] = None,
         **kwargs: Any
     ) -> None:
         """
-        :keyword versions: The version capability.
-        :paramtype versions: dict[str, ~azure.mgmt.hdinsight.models.VersionsCapability]
         :keyword regions: The virtual machine size compatibility features.
         :paramtype regions: dict[str, ~azure.mgmt.hdinsight.models.RegionsCapability]
         :keyword features: The capability features.
         :paramtype features: list[str]
         """
         super().__init__(**kwargs)
-        self.versions = versions
+        self.versions: Optional[dict[str, "_models.VersionsCapability"]] = None
         self.regions = regions
         self.features = features
         self.quota: Optional["_models.QuotaCapability"] = None
@@ -1017,42 +1025,7 @@ class ClientGroupInfo(_serialization.Model):
         self.group_id = group_id
 
 
-class ResourceAutoGenerated(_serialization.Model):
-    """Common fields that are returned in the response for all Azure Resource Manager resources.
-
-    Variables are only populated by the server, and will be ignored when sending a request.
-
-    :ivar id: Fully qualified resource ID for the resource. Ex -
-     /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}.
-    :vartype id: str
-    :ivar name: The name of the resource.
-    :vartype name: str
-    :ivar type: The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or
-     "Microsoft.Storage/storageAccounts".
-    :vartype type: str
-    """
-
-    _validation = {
-        "id": {"readonly": True},
-        "name": {"readonly": True},
-        "type": {"readonly": True},
-    }
-
-    _attribute_map = {
-        "id": {"key": "id", "type": "str"},
-        "name": {"key": "name", "type": "str"},
-        "type": {"key": "type", "type": "str"},
-    }
-
-    def __init__(self, **kwargs: Any) -> None:
-        """ """
-        super().__init__(**kwargs)
-        self.id: Optional[str] = None
-        self.name: Optional[str] = None
-        self.type: Optional[str] = None
-
-
-class TrackedResource(ResourceAutoGenerated):
+class TrackedResource(Resource):
     """The resource model definition for an Azure Resource Manager tracked top level resource which
     has 'tags' and a 'location'.
 
@@ -1068,6 +1041,9 @@ class TrackedResource(ResourceAutoGenerated):
     :ivar type: The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or
      "Microsoft.Storage/storageAccounts".
     :vartype type: str
+    :ivar system_data: Azure Resource Manager metadata containing createdBy and modifiedBy
+     information.
+    :vartype system_data: ~azure.mgmt.hdinsight.models.SystemData
     :ivar tags: Resource tags.
     :vartype tags: dict[str, str]
     :ivar location: The geo-location where the resource lives. Required.
@@ -1078,6 +1054,7 @@ class TrackedResource(ResourceAutoGenerated):
         "id": {"readonly": True},
         "name": {"readonly": True},
         "type": {"readonly": True},
+        "system_data": {"readonly": True},
         "location": {"required": True},
     }
 
@@ -1085,6 +1062,7 @@ class TrackedResource(ResourceAutoGenerated):
         "id": {"key": "id", "type": "str"},
         "name": {"key": "name", "type": "str"},
         "type": {"key": "type", "type": "str"},
+        "system_data": {"key": "systemData", "type": "SystemData"},
         "tags": {"key": "tags", "type": "{str}"},
         "location": {"key": "location", "type": "str"},
     }
@@ -1116,41 +1094,42 @@ class Cluster(TrackedResource):
     :ivar type: The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or
      "Microsoft.Storage/storageAccounts".
     :vartype type: str
+    :ivar system_data: Azure Resource Manager metadata containing createdBy and modifiedBy
+     information.
+    :vartype system_data: ~azure.mgmt.hdinsight.models.SystemData
     :ivar tags: Resource tags.
     :vartype tags: dict[str, str]
     :ivar location: The geo-location where the resource lives. Required.
     :vartype location: str
+    :ivar properties: The properties of the cluster.
+    :vartype properties: ~azure.mgmt.hdinsight.models.ClusterGetProperties
     :ivar etag: The ETag for the resource.
     :vartype etag: str
     :ivar zones: The availability zones.
     :vartype zones: list[str]
-    :ivar properties: The properties of the cluster.
-    :vartype properties: ~azure.mgmt.hdinsight.models.ClusterGetProperties
     :ivar identity: The identity of the cluster, if configured.
     :vartype identity: ~azure.mgmt.hdinsight.models.ClusterIdentity
-    :ivar system_data: Metadata pertaining to creation and last modification of the resource.
-    :vartype system_data: ~azure.mgmt.hdinsight.models.SystemData
     """
 
     _validation = {
         "id": {"readonly": True},
         "name": {"readonly": True},
         "type": {"readonly": True},
-        "location": {"required": True},
         "system_data": {"readonly": True},
+        "location": {"required": True},
     }
 
     _attribute_map = {
         "id": {"key": "id", "type": "str"},
         "name": {"key": "name", "type": "str"},
         "type": {"key": "type", "type": "str"},
+        "system_data": {"key": "systemData", "type": "SystemData"},
         "tags": {"key": "tags", "type": "{str}"},
         "location": {"key": "location", "type": "str"},
+        "properties": {"key": "properties", "type": "ClusterGetProperties"},
         "etag": {"key": "etag", "type": "str"},
         "zones": {"key": "zones", "type": "[str]"},
-        "properties": {"key": "properties", "type": "ClusterGetProperties"},
         "identity": {"key": "identity", "type": "ClusterIdentity"},
-        "system_data": {"key": "systemData", "type": "SystemData"},
     }
 
     def __init__(
@@ -1158,9 +1137,9 @@ class Cluster(TrackedResource):
         *,
         location: str,
         tags: Optional[dict[str, str]] = None,
+        properties: Optional["_models.ClusterGetProperties"] = None,
         etag: Optional[str] = None,
         zones: Optional[list[str]] = None,
-        properties: Optional["_models.ClusterGetProperties"] = None,
         identity: Optional["_models.ClusterIdentity"] = None,
         **kwargs: Any
     ) -> None:
@@ -1169,21 +1148,20 @@ class Cluster(TrackedResource):
         :paramtype tags: dict[str, str]
         :keyword location: The geo-location where the resource lives. Required.
         :paramtype location: str
+        :keyword properties: The properties of the cluster.
+        :paramtype properties: ~azure.mgmt.hdinsight.models.ClusterGetProperties
         :keyword etag: The ETag for the resource.
         :paramtype etag: str
         :keyword zones: The availability zones.
         :paramtype zones: list[str]
-        :keyword properties: The properties of the cluster.
-        :paramtype properties: ~azure.mgmt.hdinsight.models.ClusterGetProperties
         :keyword identity: The identity of the cluster, if configured.
         :paramtype identity: ~azure.mgmt.hdinsight.models.ClusterIdentity
         """
         super().__init__(tags=tags, location=location, **kwargs)
+        self.properties = properties
         self.etag = etag
         self.zones = zones
-        self.properties = properties
         self.identity = identity
-        self.system_data: Optional["_models.SystemData"] = None
 
 
 class ClusterConfigurations(_serialization.Model):
@@ -1691,7 +1669,7 @@ class ClusterGetProperties(_serialization.Model):
         "private_endpoint_connections": {"key": "privateEndpointConnections", "type": "[PrivateEndpointConnection]"},
     }
 
-    def __init__(  # pylint: disable=too-many-locals
+    def __init__(
         self,
         *,
         cluster_definition: "_models.ClusterDefinition",
@@ -1858,49 +1836,19 @@ class ClusterIdentity(_serialization.Model):
         self.user_assigned_identities = user_assigned_identities
 
 
-class ClusterListPersistedScriptActionsResult(_serialization.Model):
-    """The ListPersistedScriptActions operation response.
-
-    Variables are only populated by the server, and will be ignored when sending a request.
-
-    :ivar value: The list of Persisted Script Actions.
-    :vartype value: list[~azure.mgmt.hdinsight.models.RuntimeScriptAction]
-    :ivar next_link: The link (url) to the next page of results.
-    :vartype next_link: str
-    """
-
-    _validation = {
-        "next_link": {"readonly": True},
-    }
-
-    _attribute_map = {
-        "value": {"key": "value", "type": "[RuntimeScriptAction]"},
-        "next_link": {"key": "nextLink", "type": "str"},
-    }
-
-    def __init__(self, *, value: Optional[list["_models.RuntimeScriptAction"]] = None, **kwargs: Any) -> None:
-        """
-        :keyword value: The list of Persisted Script Actions.
-        :paramtype value: list[~azure.mgmt.hdinsight.models.RuntimeScriptAction]
-        """
-        super().__init__(**kwargs)
-        self.value = value
-        self.next_link: Optional[str] = None
-
-
 class ClusterListResult(_serialization.Model):
-    """The List Cluster operation response.
+    """The response of a Cluster list operation.
 
-    Variables are only populated by the server, and will be ignored when sending a request.
+    All required parameters must be populated in order to send to server.
 
-    :ivar value: The list of Clusters.
+    :ivar value: The Cluster items on this page. Required.
     :vartype value: list[~azure.mgmt.hdinsight.models.Cluster]
-    :ivar next_link: The link (url) to the next page of results.
+    :ivar next_link: The link to the next page of items.
     :vartype next_link: str
     """
 
     _validation = {
-        "next_link": {"readonly": True},
+        "value": {"required": True},
     }
 
     _attribute_map = {
@@ -1908,14 +1856,16 @@ class ClusterListResult(_serialization.Model):
         "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(self, *, value: Optional[list["_models.Cluster"]] = None, **kwargs: Any) -> None:
+    def __init__(self, *, value: list["_models.Cluster"], next_link: Optional[str] = None, **kwargs: Any) -> None:
         """
-        :keyword value: The list of Clusters.
+        :keyword value: The Cluster items on this page. Required.
         :paramtype value: list[~azure.mgmt.hdinsight.models.Cluster]
+        :keyword next_link: The link to the next page of items.
+        :paramtype next_link: str
         """
         super().__init__(**kwargs)
         self.value = value
-        self.next_link: Optional[str] = None
+        self.next_link = next_link
 
 
 class ClusterMonitoringRequest(_serialization.Model):
@@ -2382,6 +2332,77 @@ class EntraUserInfo(_serialization.Model):
         self.upn = upn
 
 
+class ErrorAdditionalInfo(_serialization.Model):
+    """The resource management error additional info.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    :ivar type: The additional info type.
+    :vartype type: str
+    :ivar info: The additional info.
+    :vartype info: JSON
+    """
+
+    _validation = {
+        "type": {"readonly": True},
+        "info": {"readonly": True},
+    }
+
+    _attribute_map = {
+        "type": {"key": "type", "type": "str"},
+        "info": {"key": "info", "type": "object"},
+    }
+
+    def __init__(self, **kwargs: Any) -> None:
+        """ """
+        super().__init__(**kwargs)
+        self.type: Optional[str] = None
+        self.info: Optional[JSON] = None
+
+
+class ErrorDetail(_serialization.Model):
+    """The error detail.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    :ivar code: The error code.
+    :vartype code: str
+    :ivar message: The error message.
+    :vartype message: str
+    :ivar target: The error target.
+    :vartype target: str
+    :ivar details: The error details.
+    :vartype details: list[~azure.mgmt.hdinsight.models.ErrorDetail]
+    :ivar additional_info: The error additional info.
+    :vartype additional_info: list[~azure.mgmt.hdinsight.models.ErrorAdditionalInfo]
+    """
+
+    _validation = {
+        "code": {"readonly": True},
+        "message": {"readonly": True},
+        "target": {"readonly": True},
+        "details": {"readonly": True},
+        "additional_info": {"readonly": True},
+    }
+
+    _attribute_map = {
+        "code": {"key": "code", "type": "str"},
+        "message": {"key": "message", "type": "str"},
+        "target": {"key": "target", "type": "str"},
+        "details": {"key": "details", "type": "[ErrorDetail]"},
+        "additional_info": {"key": "additionalInfo", "type": "[ErrorAdditionalInfo]"},
+    }
+
+    def __init__(self, **kwargs: Any) -> None:
+        """ """
+        super().__init__(**kwargs)
+        self.code: Optional[str] = None
+        self.message: Optional[str] = None
+        self.target: Optional[str] = None
+        self.details: Optional[list["_models.ErrorDetail"]] = None
+        self.additional_info: Optional[list["_models.ErrorAdditionalInfo"]] = None
+
+
 class ErrorResponse(_serialization.Model):
     """Describes the format of Error response.
 
@@ -2406,6 +2427,27 @@ class ErrorResponse(_serialization.Model):
         super().__init__(**kwargs)
         self.code = code
         self.message = message
+
+
+class ErrorResponseAutoGenerated(_serialization.Model):
+    """Common error response for all Azure Resource Manager APIs to return error details for failed
+    operations. (This also follows the OData error response format.).
+
+    :ivar error: The error object.
+    :vartype error: ~azure.mgmt.hdinsight.models.ErrorDetail
+    """
+
+    _attribute_map = {
+        "error": {"key": "error", "type": "ErrorDetail"},
+    }
+
+    def __init__(self, *, error: Optional["_models.ErrorDetail"] = None, **kwargs: Any) -> None:
+        """
+        :keyword error: The error object.
+        :paramtype error: ~azure.mgmt.hdinsight.models.ErrorDetail
+        """
+        super().__init__(**kwargs)
+        self.error = error
 
 
 class Errors(_serialization.Model):
@@ -3201,28 +3243,30 @@ class OperationListResult(_serialization.Model):
     """Result of the request to list HDInsight operations. It contains a list of operations and a URL
     link to get the next set of results.
 
+    Variables are only populated by the server, and will be ignored when sending a request.
+
     :ivar value: The list of HDInsight operations supported by the HDInsight resource provider.
     :vartype value: list[~azure.mgmt.hdinsight.models.Operation]
     :ivar next_link: The URL to get the next set of operation list results if there are any.
     :vartype next_link: str
     """
 
+    _validation = {
+        "value": {"readonly": True},
+    }
+
     _attribute_map = {
         "value": {"key": "value", "type": "[Operation]"},
         "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self, *, value: Optional[list["_models.Operation"]] = None, next_link: Optional[str] = None, **kwargs: Any
-    ) -> None:
+    def __init__(self, *, next_link: Optional[str] = None, **kwargs: Any) -> None:
         """
-        :keyword value: The list of HDInsight operations supported by the HDInsight resource provider.
-        :paramtype value: list[~azure.mgmt.hdinsight.models.Operation]
         :keyword next_link: The URL to get the next set of operation list results if there are any.
         :paramtype next_link: str
         """
         super().__init__(**kwargs)
-        self.value = value
+        self.value: Optional[list["_models.Operation"]] = None
         self.next_link = next_link
 
 
@@ -3292,7 +3336,7 @@ class PrivateEndpoint(_serialization.Model):
         self.id = id
 
 
-class PrivateEndpointConnection(Resource):
+class PrivateEndpointConnection(ProxyResource):
     """The private endpoint connection.
 
     Variables are only populated by the server, and will be ignored when sending a request.
@@ -3307,7 +3351,8 @@ class PrivateEndpointConnection(Resource):
     :ivar type: The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or
      "Microsoft.Storage/storageAccounts".
     :vartype type: str
-    :ivar system_data: Metadata pertaining to creation and last modification of the resource.
+    :ivar system_data: Azure Resource Manager metadata containing createdBy and modifiedBy
+     information.
     :vartype system_data: ~azure.mgmt.hdinsight.models.SystemData
     :ivar private_endpoint: The private endpoint of the private endpoint connection.
     :vartype private_endpoint: ~azure.mgmt.hdinsight.models.PrivateEndpoint
@@ -3358,7 +3403,6 @@ class PrivateEndpointConnection(Resource):
          ~azure.mgmt.hdinsight.models.PrivateLinkServiceConnectionState
         """
         super().__init__(**kwargs)
-        self.system_data: Optional["_models.SystemData"] = None
         self.private_endpoint: Optional["_models.PrivateEndpoint"] = None
         self.private_link_service_connection_state = private_link_service_connection_state
         self.link_identifier: Optional[str] = None
@@ -3366,18 +3410,18 @@ class PrivateEndpointConnection(Resource):
 
 
 class PrivateEndpointConnectionListResult(_serialization.Model):
-    """The list private endpoint connections response.
+    """The response of a PrivateEndpointConnection list operation.
 
-    Variables are only populated by the server, and will be ignored when sending a request.
+    All required parameters must be populated in order to send to server.
 
-    :ivar value: The list of private endpoint connections.
+    :ivar value: The PrivateEndpointConnection items on this page. Required.
     :vartype value: list[~azure.mgmt.hdinsight.models.PrivateEndpointConnection]
-    :ivar next_link: The link (url) to the next page of results.
+    :ivar next_link: The link to the next page of items.
     :vartype next_link: str
     """
 
     _validation = {
-        "next_link": {"readonly": True},
+        "value": {"required": True},
     }
 
     _attribute_map = {
@@ -3385,14 +3429,18 @@ class PrivateEndpointConnectionListResult(_serialization.Model):
         "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(self, *, value: Optional[list["_models.PrivateEndpointConnection"]] = None, **kwargs: Any) -> None:
+    def __init__(
+        self, *, value: list["_models.PrivateEndpointConnection"], next_link: Optional[str] = None, **kwargs: Any
+    ) -> None:
         """
-        :keyword value: The list of private endpoint connections.
+        :keyword value: The PrivateEndpointConnection items on this page. Required.
         :paramtype value: list[~azure.mgmt.hdinsight.models.PrivateEndpointConnection]
+        :keyword next_link: The link to the next page of items.
+        :paramtype next_link: str
         """
         super().__init__(**kwargs)
         self.value = value
-        self.next_link: Optional[str] = None
+        self.next_link = next_link
 
 
 class PrivateLinkConfiguration(_serialization.Model):
@@ -3459,7 +3507,7 @@ class PrivateLinkConfiguration(_serialization.Model):
         self.ip_configurations = ip_configurations
 
 
-class PrivateLinkResource(ResourceAutoGenerated):
+class PrivateLinkResource(ProxyResource):
     """A private link resource.
 
     Variables are only populated by the server, and will be ignored when sending a request.
@@ -3472,7 +3520,8 @@ class PrivateLinkResource(ResourceAutoGenerated):
     :ivar type: The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or
      "Microsoft.Storage/storageAccounts".
     :vartype type: str
-    :ivar system_data: Metadata pertaining to creation and last modification of the resource.
+    :ivar system_data: Azure Resource Manager metadata containing createdBy and modifiedBy
+     information.
     :vartype system_data: ~azure.mgmt.hdinsight.models.SystemData
     :ivar group_id: The private link resource group id.
     :vartype group_id: str
@@ -3507,7 +3556,6 @@ class PrivateLinkResource(ResourceAutoGenerated):
         :paramtype required_zone_names: list[str]
         """
         super().__init__(**kwargs)
-        self.system_data: Optional["_models.SystemData"] = None
         self.group_id: Optional[str] = None
         self.required_members: Optional[list[str]] = None
         self.required_zone_names = required_zone_names
@@ -3583,6 +3631,8 @@ class PrivateLinkServiceConnectionState(_serialization.Model):
 class QuotaCapability(_serialization.Model):
     """The regional quota capability.
 
+    Variables are only populated by the server, and will be ignored when sending a request.
+
     :ivar cores_used: The number of cores used in the subscription.
     :vartype cores_used: int
     :ivar max_cores_allowed: The number of cores that the subscription allowed.
@@ -3591,6 +3641,10 @@ class QuotaCapability(_serialization.Model):
     :vartype regional_quotas: list[~azure.mgmt.hdinsight.models.RegionalQuotaCapability]
     """
 
+    _validation = {
+        "regional_quotas": {"readonly": True},
+    }
+
     _attribute_map = {
         "cores_used": {"key": "coresUsed", "type": "int"},
         "max_cores_allowed": {"key": "maxCoresAllowed", "type": "int"},
@@ -3598,25 +3652,18 @@ class QuotaCapability(_serialization.Model):
     }
 
     def __init__(
-        self,
-        *,
-        cores_used: Optional[int] = None,
-        max_cores_allowed: Optional[int] = None,
-        regional_quotas: Optional[list["_models.RegionalQuotaCapability"]] = None,
-        **kwargs: Any
+        self, *, cores_used: Optional[int] = None, max_cores_allowed: Optional[int] = None, **kwargs: Any
     ) -> None:
         """
         :keyword cores_used: The number of cores used in the subscription.
         :paramtype cores_used: int
         :keyword max_cores_allowed: The number of cores that the subscription allowed.
         :paramtype max_cores_allowed: int
-        :keyword regional_quotas: The list of region quota capabilities.
-        :paramtype regional_quotas: list[~azure.mgmt.hdinsight.models.RegionalQuotaCapability]
         """
         super().__init__(**kwargs)
         self.cores_used = cores_used
         self.max_cores_allowed = max_cores_allowed
-        self.regional_quotas = regional_quotas
+        self.regional_quotas: Optional[list["_models.RegionalQuotaCapability"]] = None
 
 
 class QuotaInfo(_serialization.Model):
@@ -3998,15 +4045,16 @@ class ScriptActionExecutionHistoryList(_serialization.Model):
 
     Variables are only populated by the server, and will be ignored when sending a request.
 
-    :ivar value: The list of persisted script action details for the cluster.
+    All required parameters must be populated in order to send to server.
+
+    :ivar value: The RuntimeScriptActionDetail items on this page. Required.
     :vartype value: list[~azure.mgmt.hdinsight.models.RuntimeScriptActionDetail]
-    :ivar next_link: The link (url) to the next page of results.
+    :ivar next_link: The link to the next page of items.
     :vartype next_link: str
     """
 
     _validation = {
-        "value": {"readonly": True},
-        "next_link": {"readonly": True},
+        "value": {"required": True, "readonly": True},
     }
 
     _attribute_map = {
@@ -4014,11 +4062,14 @@ class ScriptActionExecutionHistoryList(_serialization.Model):
         "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(self, **kwargs: Any) -> None:
-        """ """
+    def __init__(self, *, next_link: Optional[str] = None, **kwargs: Any) -> None:
+        """
+        :keyword next_link: The link to the next page of items.
+        :paramtype next_link: str
+        """
         super().__init__(**kwargs)
         self.value: Optional[list["_models.RuntimeScriptActionDetail"]] = None
-        self.next_link: Optional[str] = None
+        self.next_link = next_link
 
 
 class ScriptActionExecutionSummary(_serialization.Model):
@@ -4049,72 +4100,19 @@ class ScriptActionExecutionSummary(_serialization.Model):
         self.instance_count: Optional[int] = None
 
 
-class ScriptActionPersistedGetResponseSpec(_serialization.Model):
-    """The persisted script action for cluster.
-
-    :ivar name: The name of script action.
-    :vartype name: str
-    :ivar uri: The URI to the script.
-    :vartype uri: str
-    :ivar parameters: The parameters for the script provided.
-    :vartype parameters: str
-    :ivar roles: The list of roles where script will be executed.
-    :vartype roles: list[str]
-    :ivar application_name: The application name for the script action.
-    :vartype application_name: str
-    """
-
-    _attribute_map = {
-        "name": {"key": "name", "type": "str"},
-        "uri": {"key": "uri", "type": "str"},
-        "parameters": {"key": "parameters", "type": "str"},
-        "roles": {"key": "roles", "type": "[str]"},
-        "application_name": {"key": "applicationName", "type": "str"},
-    }
-
-    def __init__(
-        self,
-        *,
-        name: Optional[str] = None,
-        uri: Optional[str] = None,
-        parameters: Optional[str] = None,
-        roles: Optional[list[str]] = None,
-        application_name: Optional[str] = None,
-        **kwargs: Any
-    ) -> None:
-        """
-        :keyword name: The name of script action.
-        :paramtype name: str
-        :keyword uri: The URI to the script.
-        :paramtype uri: str
-        :keyword parameters: The parameters for the script provided.
-        :paramtype parameters: str
-        :keyword roles: The list of roles where script will be executed.
-        :paramtype roles: list[str]
-        :keyword application_name: The application name for the script action.
-        :paramtype application_name: str
-        """
-        super().__init__(**kwargs)
-        self.name = name
-        self.uri = uri
-        self.parameters = parameters
-        self.roles = roles
-        self.application_name = application_name
-
-
 class ScriptActionsList(_serialization.Model):
     """The persisted script action for the cluster.
 
-    Variables are only populated by the server, and will be ignored when sending a request.
+    All required parameters must be populated in order to send to server.
 
-    :ivar value: The list of persisted script action details for the cluster.
+    :ivar value: The RuntimeScriptActionDetail items on this page. Required.
     :vartype value: list[~azure.mgmt.hdinsight.models.RuntimeScriptActionDetail]
-    :ivar next_link: The link (url) to the next page of results.
+    :ivar next_link: The link to the next page of items.
     :vartype next_link: str
     """
 
     _validation = {
-        "next_link": {"readonly": True},
+        "value": {"required": True},
     }
 
     _attribute_map = {
@@ -4122,14 +4120,18 @@ class ScriptActionsList(_serialization.Model):
         "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(self, *, value: Optional[list["_models.RuntimeScriptActionDetail"]] = None, **kwargs: Any) -> None:
+    def __init__(
+        self, *, value: list["_models.RuntimeScriptActionDetail"], next_link: Optional[str] = None, **kwargs: Any
+    ) -> None:
         """
-        :keyword value: The list of persisted script action details for the cluster.
+        :keyword value: The RuntimeScriptActionDetail items on this page. Required.
         :paramtype value: list[~azure.mgmt.hdinsight.models.RuntimeScriptActionDetail]
+        :keyword next_link: The link to the next page of items.
+        :paramtype next_link: str
         """
         super().__init__(**kwargs)
         self.value = value
-        self.next_link: Optional[str] = None
+        self.next_link = next_link
 
 
 class SecurityProfile(_serialization.Model):
@@ -4601,21 +4603,24 @@ class Usage(_serialization.Model):
 class UsagesListResult(_serialization.Model):
     """The response for the operation to get regional usages for a subscription.
 
+    Variables are only populated by the server, and will be ignored when sending a request.
+
     :ivar value: The list of usages.
     :vartype value: list[~azure.mgmt.hdinsight.models.Usage]
     """
+
+    _validation = {
+        "value": {"readonly": True},
+    }
 
     _attribute_map = {
         "value": {"key": "value", "type": "[Usage]"},
     }
 
-    def __init__(self, *, value: Optional[list["_models.Usage"]] = None, **kwargs: Any) -> None:
-        """
-        :keyword value: The list of usages.
-        :paramtype value: list[~azure.mgmt.hdinsight.models.Usage]
-        """
+    def __init__(self, **kwargs: Any) -> None:
+        """ """
         super().__init__(**kwargs)
-        self.value = value
+        self.value: Optional[list["_models.Usage"]] = None
 
 
 class UserAssignedIdentity(_serialization.Model):
@@ -4702,21 +4707,24 @@ class ValidationErrorInfo(_serialization.Model):
 class VersionsCapability(_serialization.Model):
     """The version capability.
 
+    Variables are only populated by the server, and will be ignored when sending a request.
+
     :ivar available: The list of version capabilities.
     :vartype available: list[~azure.mgmt.hdinsight.models.VersionSpec]
     """
+
+    _validation = {
+        "available": {"readonly": True},
+    }
 
     _attribute_map = {
         "available": {"key": "available", "type": "[VersionSpec]"},
     }
 
-    def __init__(self, *, available: Optional[list["_models.VersionSpec"]] = None, **kwargs: Any) -> None:
-        """
-        :keyword available: The list of version capabilities.
-        :paramtype available: list[~azure.mgmt.hdinsight.models.VersionSpec]
-        """
+    def __init__(self, **kwargs: Any) -> None:
+        """ """
         super().__init__(**kwargs)
-        self.available = available
+        self.available: Optional[list["_models.VersionSpec"]] = None
 
 
 class VersionSpec(_serialization.Model):

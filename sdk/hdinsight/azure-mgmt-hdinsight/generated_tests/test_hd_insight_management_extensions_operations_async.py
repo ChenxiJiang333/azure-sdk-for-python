@@ -21,139 +21,13 @@ class TestHDInsightManagementExtensionsOperationsAsync(AzureMgmtRecordedTestCase
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_extensions_begin_enable_monitoring(self, resource_group):
-        response = await (
-            await self.client.extensions.begin_enable_monitoring(
-                resource_group_name=resource_group.name,
-                cluster_name="str",
-                parameters={"primaryKey": "str", "workspaceId": "str"},
-                api_version="2025-01-15-preview",
-            )
-        ).result()  # call '.result()' to poll until service return final result
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_extensions_get_monitoring_status(self, resource_group):
-        response = await self.client.extensions.get_monitoring_status(
+    async def test_extensions_get(self, resource_group):
+        response = await self.client.extensions.get(
             resource_group_name=resource_group.name,
             cluster_name="str",
+            extension_name="str",
             api_version="2025-01-15-preview",
         )
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_extensions_begin_disable_monitoring(self, resource_group):
-        response = await (
-            await self.client.extensions.begin_disable_monitoring(
-                resource_group_name=resource_group.name,
-                cluster_name="str",
-                api_version="2025-01-15-preview",
-            )
-        ).result()  # call '.result()' to poll until service return final result
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_extensions_begin_enable_azure_monitor(self, resource_group):
-        response = await (
-            await self.client.extensions.begin_enable_azure_monitor(
-                resource_group_name=resource_group.name,
-                cluster_name="str",
-                parameters={
-                    "primaryKey": "str",
-                    "selectedConfigurations": {
-                        "configurationVersion": "str",
-                        "globalConfigurations": {"str": "str"},
-                        "tableList": [{"name": "str"}],
-                    },
-                    "workspaceId": "str",
-                },
-                api_version="2025-01-15-preview",
-            )
-        ).result()  # call '.result()' to poll until service return final result
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_extensions_get_azure_monitor_status(self, resource_group):
-        response = await self.client.extensions.get_azure_monitor_status(
-            resource_group_name=resource_group.name,
-            cluster_name="str",
-            api_version="2025-01-15-preview",
-        )
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_extensions_begin_disable_azure_monitor(self, resource_group):
-        response = await (
-            await self.client.extensions.begin_disable_azure_monitor(
-                resource_group_name=resource_group.name,
-                cluster_name="str",
-                api_version="2025-01-15-preview",
-            )
-        ).result()  # call '.result()' to poll until service return final result
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_extensions_begin_enable_azure_monitor_agent(self, resource_group):
-        response = await (
-            await self.client.extensions.begin_enable_azure_monitor_agent(
-                resource_group_name=resource_group.name,
-                cluster_name="str",
-                parameters={
-                    "primaryKey": "str",
-                    "selectedConfigurations": {
-                        "configurationVersion": "str",
-                        "globalConfigurations": {"str": "str"},
-                        "tableList": [{"name": "str"}],
-                    },
-                    "workspaceId": "str",
-                },
-                api_version="2025-01-15-preview",
-            )
-        ).result()  # call '.result()' to poll until service return final result
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_extensions_get_azure_monitor_agent_status(self, resource_group):
-        response = await self.client.extensions.get_azure_monitor_agent_status(
-            resource_group_name=resource_group.name,
-            cluster_name="str",
-            api_version="2025-01-15-preview",
-        )
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_extensions_begin_disable_azure_monitor_agent(self, resource_group):
-        response = await (
-            await self.client.extensions.begin_disable_azure_monitor_agent(
-                resource_group_name=resource_group.name,
-                cluster_name="str",
-                api_version="2025-01-15-preview",
-            )
-        ).result()  # call '.result()' to poll until service return final result
 
         # please add some check logic here by yourself
         # ...
@@ -170,19 +44,6 @@ class TestHDInsightManagementExtensionsOperationsAsync(AzureMgmtRecordedTestCase
                 api_version="2025-01-15-preview",
             )
         ).result()  # call '.result()' to poll until service return final result
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_extensions_get(self, resource_group):
-        response = await self.client.extensions.get(
-            resource_group_name=resource_group.name,
-            cluster_name="str",
-            extension_name="str",
-            api_version="2025-01-15-preview",
-        )
 
         # please add some check logic here by yourself
         # ...
@@ -212,6 +73,145 @@ class TestHDInsightManagementExtensionsOperationsAsync(AzureMgmtRecordedTestCase
             operation_id="str",
             api_version="2025-01-15-preview",
         )
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
+    async def test_extensions_get_azure_monitor_status(self, resource_group):
+        response = await self.client.extensions.get_azure_monitor_status(
+            resource_group_name=resource_group.name,
+            cluster_name="str",
+            api_version="2025-01-15-preview",
+        )
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
+    async def test_extensions_begin_enable_azure_monitor(self, resource_group):
+        response = await (
+            await self.client.extensions.begin_enable_azure_monitor(
+                resource_group_name=resource_group.name,
+                cluster_name="str",
+                parameters={
+                    "primaryKey": "str",
+                    "selectedConfigurations": {
+                        "configurationVersion": "str",
+                        "globalConfigurations": {"str": "str"},
+                        "tableList": [{"name": "str"}],
+                    },
+                    "workspaceId": "str",
+                },
+                api_version="2025-01-15-preview",
+            )
+        ).result()  # call '.result()' to poll until service return final result
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
+    async def test_extensions_begin_disable_azure_monitor(self, resource_group):
+        response = await (
+            await self.client.extensions.begin_disable_azure_monitor(
+                resource_group_name=resource_group.name,
+                cluster_name="str",
+                api_version="2025-01-15-preview",
+            )
+        ).result()  # call '.result()' to poll until service return final result
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
+    async def test_extensions_get_azure_monitor_agent_status(self, resource_group):
+        response = await self.client.extensions.get_azure_monitor_agent_status(
+            resource_group_name=resource_group.name,
+            cluster_name="str",
+            api_version="2025-01-15-preview",
+        )
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
+    async def test_extensions_begin_enable_azure_monitor_agent(self, resource_group):
+        response = await (
+            await self.client.extensions.begin_enable_azure_monitor_agent(
+                resource_group_name=resource_group.name,
+                cluster_name="str",
+                parameters={
+                    "primaryKey": "str",
+                    "selectedConfigurations": {
+                        "configurationVersion": "str",
+                        "globalConfigurations": {"str": "str"},
+                        "tableList": [{"name": "str"}],
+                    },
+                    "workspaceId": "str",
+                },
+                api_version="2025-01-15-preview",
+            )
+        ).result()  # call '.result()' to poll until service return final result
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
+    async def test_extensions_begin_disable_azure_monitor_agent(self, resource_group):
+        response = await (
+            await self.client.extensions.begin_disable_azure_monitor_agent(
+                resource_group_name=resource_group.name,
+                cluster_name="str",
+                api_version="2025-01-15-preview",
+            )
+        ).result()  # call '.result()' to poll until service return final result
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
+    async def test_extensions_get_monitoring_status(self, resource_group):
+        response = await self.client.extensions.get_monitoring_status(
+            resource_group_name=resource_group.name,
+            cluster_name="str",
+            api_version="2025-01-15-preview",
+        )
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
+    async def test_extensions_begin_enable_monitoring(self, resource_group):
+        response = await (
+            await self.client.extensions.begin_enable_monitoring(
+                resource_group_name=resource_group.name,
+                cluster_name="str",
+                parameters={"primaryKey": "str", "workspaceId": "str"},
+                api_version="2025-01-15-preview",
+            )
+        ).result()  # call '.result()' to poll until service return final result
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
+    async def test_extensions_begin_disable_monitoring(self, resource_group):
+        response = await (
+            await self.client.extensions.begin_disable_monitoring(
+                resource_group_name=resource_group.name,
+                cluster_name="str",
+                api_version="2025-01-15-preview",
+            )
+        ).result()  # call '.result()' to poll until service return final result
 
         # please add some check logic here by yourself
         # ...

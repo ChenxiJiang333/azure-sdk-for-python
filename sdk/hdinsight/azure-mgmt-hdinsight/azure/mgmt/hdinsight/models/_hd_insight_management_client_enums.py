@@ -14,8 +14,11 @@ class AsyncOperationState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The async operation state."""
 
     IN_PROGRESS = "InProgress"
+    """InProgress"""
     SUCCEEDED = "Succeeded"
+    """Succeeded"""
     FAILED = "Failed"
+    """Failed"""
 
 
 class CreatedByType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
@@ -31,18 +34,26 @@ class DaysOfWeek(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """DaysOfWeek."""
 
     MONDAY = "Monday"
+    """Monday"""
     TUESDAY = "Tuesday"
+    """Tuesday"""
     WEDNESDAY = "Wednesday"
+    """Wednesday"""
     THURSDAY = "Thursday"
+    """Thursday"""
     FRIDAY = "Friday"
+    """Friday"""
     SATURDAY = "Saturday"
+    """Saturday"""
     SUNDAY = "Sunday"
+    """Sunday"""
 
 
 class DirectoryType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The directory type."""
 
     ACTIVE_DIRECTORY = "ActiveDirectory"
+    """ActiveDirectory"""
 
 
 class FilterMode(str, Enum, metaclass=CaseInsensitiveEnumMeta):
@@ -51,34 +62,48 @@ class FilterMode(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """
 
     EXCLUDE = "Exclude"
+    """Exclude"""
     INCLUDE = "Include"
+    """Include"""
     RECOMMEND = "Recommend"
+    """Recommend"""
     DEFAULT = "Default"
+    """Default"""
 
 
 class HDInsightClusterProvisioningState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The provisioning state, which only appears in the response."""
 
     IN_PROGRESS = "InProgress"
+    """InProgress"""
     FAILED = "Failed"
+    """Failed"""
     SUCCEEDED = "Succeeded"
+    """Succeeded"""
     CANCELED = "Canceled"
+    """Canceled"""
     DELETING = "Deleting"
+    """Deleting"""
 
 
 class JsonWebKeyEncryptionAlgorithm(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Algorithm identifier for encryption, default RSA-OAEP."""
 
     RSA_OAEP = "RSA-OAEP"
+    """RSA-OAEP"""
     RSA_OAEP256 = "RSA-OAEP-256"
+    """RSA-OAEP-256"""
     RSA1_5 = "RSA1_5"
+    """RSA1_5"""
 
 
 class OSType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The type of operating system."""
 
     WINDOWS = "Windows"
+    """Windows"""
     LINUX = "Linux"
+    """Linux"""
 
 
 class OutboundDependenciesManagedType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
@@ -88,51 +113,76 @@ class OutboundDependenciesManagedType(str, Enum, metaclass=CaseInsensitiveEnumMe
     """
 
     MANAGED = "Managed"
+    """Managed"""
     EXTERNAL = "External"
+    """External"""
 
 
-class PrivateEndpointConnectionProvisioningState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+class PrivateEndpointConnectionProvisioningState(  # pylint: disable=name-too-long
+    str, Enum, metaclass=CaseInsensitiveEnumMeta
+):
     """The provisioning state, which only appears in the response."""
 
     IN_PROGRESS = "InProgress"
+    """InProgress"""
     UPDATING = "Updating"
+    """Updating"""
     FAILED = "Failed"
+    """Failed"""
     SUCCEEDED = "Succeeded"
+    """Succeeded"""
     CANCELED = "Canceled"
+    """Canceled"""
     DELETING = "Deleting"
+    """Deleting"""
 
 
 class PrivateIPAllocationMethod(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The method that private IP address is allocated."""
 
     DYNAMIC = "dynamic"
+    """dynamic"""
     STATIC = "static"
+    """static"""
 
 
 class PrivateLink(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Indicates whether or not private link is enabled."""
 
     DISABLED = "Disabled"
+    """Disabled"""
     ENABLED = "Enabled"
+    """Enabled"""
 
 
-class PrivateLinkConfigurationProvisioningState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+class PrivateLinkConfigurationProvisioningState(  # pylint: disable=name-too-long
+    str, Enum, metaclass=CaseInsensitiveEnumMeta
+):
     """The private link configuration provisioning state, which only appears in the response."""
 
     IN_PROGRESS = "InProgress"
+    """InProgress"""
     FAILED = "Failed"
+    """Failed"""
     SUCCEEDED = "Succeeded"
+    """Succeeded"""
     CANCELED = "Canceled"
+    """Canceled"""
     DELETING = "Deleting"
+    """Deleting"""
 
 
 class PrivateLinkServiceConnectionStatus(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The concrete private link service connection."""
 
     APPROVED = "Approved"
+    """Approved"""
     REJECTED = "Rejected"
+    """Rejected"""
     PENDING = "Pending"
+    """Pending"""
     REMOVED = "Removed"
+    """Removed"""
 
 
 class ResourceIdentityType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
@@ -141,26 +191,35 @@ class ResourceIdentityType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """
 
     SYSTEM_ASSIGNED = "SystemAssigned"
+    """SystemAssigned"""
     USER_ASSIGNED = "UserAssigned"
+    """UserAssigned"""
     SYSTEM_ASSIGNED_USER_ASSIGNED = "SystemAssigned, UserAssigned"
+    """SystemAssigned, UserAssigned"""
     NONE = "None"
+    """None"""
 
 
 class ResourceProviderConnection(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The direction for the resource provider connection."""
 
     INBOUND = "Inbound"
+    """Inbound"""
     OUTBOUND = "Outbound"
+    """Outbound"""
 
 
 class RoleName(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """RoleName."""
 
     WORKERNODE = "workernode"
+    """workernode"""
 
 
 class Tier(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The cluster tier."""
 
     STANDARD = "Standard"
+    """Standard"""
     PREMIUM = "Premium"
+    """Premium"""
