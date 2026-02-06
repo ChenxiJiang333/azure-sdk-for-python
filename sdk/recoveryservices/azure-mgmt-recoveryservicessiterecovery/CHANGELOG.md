@@ -1,5 +1,9 @@
 ## tsp migration
 
+## 1.4.0 (2026-02-06)
+
+change log generation failed!!! You need to write it manually!!!
+
 ### Breaking Changes
 
 - Method `ReplicationEligibilityResultsOperations.list` changed from `asynchronous` to `synchronous`
