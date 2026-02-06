@@ -1,12 +1,10 @@
+## tsp migration
+
+### Breaking Changes
+
+- Model `SerialPort` moved instance variable `state` and `connection_state` under property `properties`
+
 # Release History
-
-## 1.1.0 (2026-02-06)
-
-change log generation failed!!! You need to write it manually!!!
-
-## 1.1.0 (2026-02-06)
-
-change log generation failed!!! You need to write it manually!!!
 
 ## 1.1.0b1 (2022-11-01)
 
