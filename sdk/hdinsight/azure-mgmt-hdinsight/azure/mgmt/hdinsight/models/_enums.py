@@ -95,7 +95,7 @@ class JsonWebKeyEncryptionAlgorithm(str, Enum, metaclass=CaseInsensitiveEnumMeta
 
     RSA_OAEP = "RSA-OAEP"
     """RSA-OAEP"""
-    RSA_OAEP_256 = "RSA-OAEP-256"
+    RSA_OAEP256 = "RSA-OAEP-256"
     """RSA-OAEP-256"""
     RSA1_5 = "RSA1_5"
     """RSA1_5"""

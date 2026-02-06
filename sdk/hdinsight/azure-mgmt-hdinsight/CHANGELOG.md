@@ -1,5 +1,9 @@
 ## tsp migration
 
+## 9.1.0b3 (2026-02-06)
+
+change log generation failed!!! You need to write it manually!!!
+
 ### Breaking Changes
 
 - Method `PrivateLinkResourcesOperations.list_by_cluster` changed from `asynchronous` to `synchronous`
