@@ -2,6 +2,10 @@
 
 ## 10.5.0b2 (2026-02-09)
 
+change log generation failed!!! You need to write it manually!!!
+
+## 10.5.0b2 (2026-02-09)
+
 ### Features Added
 
   - Model EventTypesListResult has a new parameter next_link
