@@ -20,12 +20,24 @@ class TestEventGridManagementClientsOperations(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
+    def test_clients_list_by_namespace(self, resource_group):
+        response = self.client.clients.list_by_namespace(
+            resource_group_name=resource_group.name,
+            namespace_name="str",
+            api_version="2025-07-15-preview",
+        )
+        result = [r for r in response]
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
     def test_clients_get(self, resource_group):
         response = self.client.clients.get(
             resource_group_name=resource_group.name,
             namespace_name="str",
             client_name="str",
-            api_version="2025-04-01-preview",
+            api_version="2025-07-15-preview",
         )
 
         # please add some check logic here by yourself
@@ -57,7 +69,7 @@ class TestEventGridManagementClientsOperations(AzureMgmtRecordedTestCase):
                 },
                 "type": "str",
             },
-            api_version="2025-04-01-preview",
+            api_version="2025-07-15-preview",
         ).result()  # call '.result()' to poll until service return final result
 
         # please add some check logic here by yourself
@@ -70,20 +82,8 @@ class TestEventGridManagementClientsOperations(AzureMgmtRecordedTestCase):
             resource_group_name=resource_group.name,
             namespace_name="str",
             client_name="str",
-            api_version="2025-04-01-preview",
+            api_version="2025-07-15-preview",
         ).result()  # call '.result()' to poll until service return final result
 
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_clients_list_by_namespace(self, resource_group):
-        response = self.client.clients.list_by_namespace(
-            resource_group_name=resource_group.name,
-            namespace_name="str",
-            api_version="2025-04-01-preview",
-        )
-        result = [r for r in response]
         # please add some check logic here by yourself
         # ...

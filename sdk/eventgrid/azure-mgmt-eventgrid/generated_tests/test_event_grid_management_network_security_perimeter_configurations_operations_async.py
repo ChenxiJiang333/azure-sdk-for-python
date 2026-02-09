@@ -21,6 +21,19 @@ class TestEventGridManagementNetworkSecurityPerimeterConfigurationsOperationsAsy
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
+    async def test_network_security_perimeter_configurations_list(self, resource_group):
+        response = self.client.network_security_perimeter_configurations.list(
+            resource_group_name=resource_group.name,
+            resource_type="str",
+            resource_name="str",
+            api_version="2025-07-15-preview",
+        )
+        result = [r async for r in response]
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
     async def test_network_security_perimeter_configurations_get(self, resource_group):
         response = await self.client.network_security_perimeter_configurations.get(
             resource_group_name=resource_group.name,
@@ -28,7 +41,7 @@ class TestEventGridManagementNetworkSecurityPerimeterConfigurationsOperationsAsy
             resource_name="str",
             perimeter_guid="str",
             association_name="str",
-            api_version="2025-04-01-preview",
+            api_version="2025-07-15-preview",
         )
 
         # please add some check logic here by yourself
@@ -44,22 +57,9 @@ class TestEventGridManagementNetworkSecurityPerimeterConfigurationsOperationsAsy
                 resource_name="str",
                 perimeter_guid="str",
                 association_name="str",
-                api_version="2025-04-01-preview",
+                api_version="2025-07-15-preview",
             )
         ).result()  # call '.result()' to poll until service return final result
 
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_network_security_perimeter_configurations_list(self, resource_group):
-        response = self.client.network_security_perimeter_configurations.list(
-            resource_group_name=resource_group.name,
-            resource_type="str",
-            resource_name="str",
-            api_version="2025-04-01-preview",
-        )
-        result = [r async for r in response]
         # please add some check logic here by yourself
         # ...

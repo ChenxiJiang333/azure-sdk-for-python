@@ -20,12 +20,24 @@ class TestEventGridManagementClientGroupsOperations(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
+    def test_client_groups_list_by_namespace(self, resource_group):
+        response = self.client.client_groups.list_by_namespace(
+            resource_group_name=resource_group.name,
+            namespace_name="str",
+            api_version="2025-07-15-preview",
+        )
+        result = [r for r in response]
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
     def test_client_groups_get(self, resource_group):
         response = self.client.client_groups.get(
             resource_group_name=resource_group.name,
             namespace_name="str",
             client_group_name="str",
-            api_version="2025-04-01-preview",
+            api_version="2025-07-15-preview",
         )
 
         # please add some check logic here by yourself
@@ -54,7 +66,7 @@ class TestEventGridManagementClientGroupsOperations(AzureMgmtRecordedTestCase):
                 },
                 "type": "str",
             },
-            api_version="2025-04-01-preview",
+            api_version="2025-07-15-preview",
         ).result()  # call '.result()' to poll until service return final result
 
         # please add some check logic here by yourself
@@ -67,20 +79,8 @@ class TestEventGridManagementClientGroupsOperations(AzureMgmtRecordedTestCase):
             resource_group_name=resource_group.name,
             namespace_name="str",
             client_group_name="str",
-            api_version="2025-04-01-preview",
+            api_version="2025-07-15-preview",
         ).result()  # call '.result()' to poll until service return final result
 
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_client_groups_list_by_namespace(self, resource_group):
-        response = self.client.client_groups.list_by_namespace(
-            resource_group_name=resource_group.name,
-            namespace_name="str",
-            api_version="2025-04-01-preview",
-        )
-        result = [r for r in response]
         # please add some check logic here by yourself
         # ...

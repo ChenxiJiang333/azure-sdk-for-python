@@ -20,21 +20,21 @@ class TestEventGridManagementVerifiedPartnersOperations(AzureMgmtRecordedTestCas
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_verified_partners_get(self, resource_group):
-        response = self.client.verified_partners.get(
-            verified_partner_name="str",
-            api_version="2025-04-01-preview",
+    def test_verified_partners_list(self, resource_group):
+        response = self.client.verified_partners.list(
+            api_version="2025-07-15-preview",
         )
-
+        result = [r for r in response]
         # please add some check logic here by yourself
         # ...
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_verified_partners_list(self, resource_group):
-        response = self.client.verified_partners.list(
-            api_version="2025-04-01-preview",
+    def test_verified_partners_get(self, resource_group):
+        response = self.client.verified_partners.get(
+            verified_partner_name="str",
+            api_version="2025-07-15-preview",
         )
-        result = [r for r in response]
+
         # please add some check logic here by yourself
         # ...

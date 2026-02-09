@@ -1,4 +1,3 @@
-# pylint: disable=line-too-long,useless-suppression
 # coding=utf-8
 # --------------------------------------------------------------------------
 # Copyright (c) Microsoft Corporation. All rights reserved.
@@ -7,7 +6,7 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 from collections.abc import MutableMapping
-from typing import Any, Callable, Dict, Optional, TypeVar
+from typing import Any, Callable, Optional, TypeVar
 
 from azure.core import AsyncPipelineClient
 from azure.core.exceptions import (
@@ -30,7 +29,8 @@ from ...operations._extension_topics_operations import build_get_request
 from .._configuration import EventGridManagementClientConfiguration
 
 T = TypeVar("T")
-ClsType = Optional[Callable[[PipelineResponse[HttpRequest, AsyncHttpResponse], T, Dict[str, Any]], Any]]
+ClsType = Optional[Callable[[PipelineResponse[HttpRequest, AsyncHttpResponse], T, dict[str, Any]], Any]]
+List = list
 
 
 class ExtensionTopicsOperations:
@@ -58,12 +58,7 @@ class ExtensionTopicsOperations:
 
         Get the properties of an extension topic.
 
-        :param scope: The identifier of the resource to which extension topic is queried. The scope can
-         be a subscription, or a resource group, or a top level resource belonging to a resource
-         provider namespace. For example, use '/subscriptions/{subscriptionId}/' for a subscription,
-         '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for a resource group, and
-         '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}'
-         for Azure resource. Required.
+        :param scope: The fully qualified Azure Resource manager identifier of the resource. Required.
         :type scope: str
         :return: ExtensionTopic or the result of cls(response)
         :rtype: ~azure.mgmt.eventgrid.models.ExtensionTopic
@@ -100,7 +95,11 @@ class ExtensionTopicsOperations:
 
         if response.status_code not in [200]:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
-            raise HttpResponseError(response=response, error_format=ARMErrorFormat)
+            error = self._deserialize.failsafe_deserialize(
+                _models.ErrorResponse,
+                pipeline_response,
+            )
+            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
         deserialized = self._deserialize("ExtensionTopic", pipeline_response.http_response)
 

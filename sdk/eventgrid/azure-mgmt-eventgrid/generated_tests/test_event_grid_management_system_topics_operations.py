@@ -20,11 +20,32 @@ class TestEventGridManagementSystemTopicsOperations(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
+    def test_system_topics_list_by_subscription(self, resource_group):
+        response = self.client.system_topics.list_by_subscription(
+            api_version="2025-07-15-preview",
+        )
+        result = [r for r in response]
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
+    def test_system_topics_list_by_resource_group(self, resource_group):
+        response = self.client.system_topics.list_by_resource_group(
+            resource_group_name=resource_group.name,
+            api_version="2025-07-15-preview",
+        )
+        result = [r for r in response]
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
     def test_system_topics_get(self, resource_group):
         response = self.client.system_topics.get(
             resource_group_name=resource_group.name,
             system_topic_name="str",
-            api_version="2025-04-01-preview",
+            api_version="2025-07-15-preview",
         )
 
         # please add some check logic here by yourself
@@ -38,6 +59,16 @@ class TestEventGridManagementSystemTopicsOperations(AzureMgmtRecordedTestCase):
             system_topic_name="str",
             system_topic_info={
                 "location": "str",
+                "encryption": {
+                    "customerManagedKeyEncryption": [
+                        {
+                            "keyEncryptionKeyUrl": "str",
+                            "keyEncryptionKeyIdentity": {"type": "str", "userAssignedIdentityResourceId": "str"},
+                            "keyEncryptionKeyStatus": "str",
+                            "keyEncryptionKeyStatusFriendlyDescription": "str",
+                        }
+                    ]
+                },
                 "id": "str",
                 "identity": {
                     "principalId": "str",
@@ -47,6 +78,7 @@ class TestEventGridManagementSystemTopicsOperations(AzureMgmtRecordedTestCase):
                 },
                 "metricResourceId": "str",
                 "name": "str",
+                "platformCapabilities": {"confidentialCompute": {"mode": "str"}},
                 "provisioningState": "str",
                 "source": "str",
                 "systemData": {
@@ -61,19 +93,7 @@ class TestEventGridManagementSystemTopicsOperations(AzureMgmtRecordedTestCase):
                 "topicType": "str",
                 "type": "str",
             },
-            api_version="2025-04-01-preview",
-        ).result()  # call '.result()' to poll until service return final result
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_system_topics_begin_delete(self, resource_group):
-        response = self.client.system_topics.begin_delete(
-            resource_group_name=resource_group.name,
-            system_topic_name="str",
-            api_version="2025-04-01-preview",
+            api_version="2025-07-15-preview",
         ).result()  # call '.result()' to poll until service return final result
 
         # please add some check logic here by yourself
@@ -94,7 +114,7 @@ class TestEventGridManagementSystemTopicsOperations(AzureMgmtRecordedTestCase):
                 },
                 "tags": {"str": "str"},
             },
-            api_version="2025-04-01-preview",
+            api_version="2025-07-15-preview",
         ).result()  # call '.result()' to poll until service return final result
 
         # please add some check logic here by yourself
@@ -102,21 +122,12 @@ class TestEventGridManagementSystemTopicsOperations(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_system_topics_list_by_subscription(self, resource_group):
-        response = self.client.system_topics.list_by_subscription(
-            api_version="2025-04-01-preview",
-        )
-        result = [r for r in response]
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_system_topics_list_by_resource_group(self, resource_group):
-        response = self.client.system_topics.list_by_resource_group(
+    def test_system_topics_begin_delete(self, resource_group):
+        response = self.client.system_topics.begin_delete(
             resource_group_name=resource_group.name,
-            api_version="2025-04-01-preview",
-        )
-        result = [r for r in response]
+            system_topic_name="str",
+            api_version="2025-07-15-preview",
+        ).result()  # call '.result()' to poll until service return final result
+
         # please add some check logic here by yourself
         # ...

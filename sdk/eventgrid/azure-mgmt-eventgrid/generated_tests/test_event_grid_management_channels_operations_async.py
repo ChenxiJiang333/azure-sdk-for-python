@@ -21,12 +21,24 @@ class TestEventGridManagementChannelsOperationsAsync(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
+    async def test_channels_list_by_partner_namespace(self, resource_group):
+        response = self.client.channels.list_by_partner_namespace(
+            resource_group_name=resource_group.name,
+            partner_namespace_name="str",
+            api_version="2025-07-15-preview",
+        )
+        result = [r async for r in response]
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
     async def test_channels_get(self, resource_group):
         response = await self.client.channels.get(
             resource_group_name=resource_group.name,
             partner_namespace_name="str",
             channel_name="str",
-            api_version="2025-04-01-preview",
+            api_version="2025-07-15-preview",
         )
 
         # please add some check logic here by yourself
@@ -75,23 +87,8 @@ class TestEventGridManagementChannelsOperationsAsync(AzureMgmtRecordedTestCase):
                 },
                 "type": "str",
             },
-            api_version="2025-04-01-preview",
+            api_version="2025-07-15-preview",
         )
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_channels_begin_delete(self, resource_group):
-        response = await (
-            await self.client.channels.begin_delete(
-                resource_group_name=resource_group.name,
-                partner_namespace_name="str",
-                channel_name="str",
-                api_version="2025-04-01-preview",
-            )
-        ).result()  # call '.result()' to poll until service return final result
 
         # please add some check logic here by yourself
         # ...
@@ -120,7 +117,7 @@ class TestEventGridManagementChannelsOperationsAsync(AzureMgmtRecordedTestCase):
                     }
                 },
             },
-            api_version="2025-04-01-preview",
+            api_version="2025-07-15-preview",
         )
 
         # please add some check logic here by yourself
@@ -128,13 +125,16 @@ class TestEventGridManagementChannelsOperationsAsync(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_channels_list_by_partner_namespace(self, resource_group):
-        response = self.client.channels.list_by_partner_namespace(
-            resource_group_name=resource_group.name,
-            partner_namespace_name="str",
-            api_version="2025-04-01-preview",
-        )
-        result = [r async for r in response]
+    async def test_channels_begin_delete(self, resource_group):
+        response = await (
+            await self.client.channels.begin_delete(
+                resource_group_name=resource_group.name,
+                partner_namespace_name="str",
+                channel_name="str",
+                api_version="2025-07-15-preview",
+            )
+        ).result()  # call '.result()' to poll until service return final result
+
         # please add some check logic here by yourself
         # ...
 
@@ -145,7 +145,7 @@ class TestEventGridManagementChannelsOperationsAsync(AzureMgmtRecordedTestCase):
             resource_group_name=resource_group.name,
             partner_namespace_name="str",
             channel_name="str",
-            api_version="2025-04-01-preview",
+            api_version="2025-07-15-preview",
         )
 
         # please add some check logic here by yourself

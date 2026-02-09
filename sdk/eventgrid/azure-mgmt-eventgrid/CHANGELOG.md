@@ -1,5 +1,50 @@
 # Release History
 
+## 10.5.0b2 (2026-02-09)
+
+### Features Added
+
+  - Model EventTypesListResult has a new parameter next_link
+  - Model NetworkSecurityPerimeterConfiguration has a new parameter system_data
+  - Model OperationsListResult has a new parameter next_link
+  - Model PrivateEndpointConnection has a new parameter system_data
+  - Model PrivateLinkResource has a new parameter system_data
+  - Model Resource has a new parameter system_data
+  - Model SystemTopic has a new parameter encryption
+  - Model SystemTopic has a new parameter platform_capabilities
+  - Model Topic has a new parameter encryption
+  - Model Topic has a new parameter platform_capabilities
+  - Model TopicTypeInfo has a new parameter system_data
+  - Model TopicTypesListResult has a new parameter next_link
+  - Model TrackedResource has a new parameter system_data
+
+### Breaking Changes
+
+  - Parameter value of model CaCertificatesListResult is now required
+  - Parameter value of model ChannelsListResult is now required
+  - Parameter value of model ClientGroupsListResult is now required
+  - Parameter value of model ClientsListResult is now required
+  - Parameter value of model DomainTopicsListResult is now required
+  - Parameter value of model DomainsListResult is now required
+  - Parameter value of model EventSubscriptionsListResult is now required
+  - Parameter value of model NamespaceTopicsListResult is now required
+  - Parameter value of model NamespacesListResult is now required
+  - Parameter value of model NetworkSecurityPerimeterConfigurationList is now required
+  - Parameter value of model OperationsListResult is now required
+  - Parameter value of model PartnerConfigurationsListResult is now required
+  - Parameter value of model PartnerDestinationsListResult is now required
+  - Parameter value of model PartnerNamespacesListResult is now required
+  - Parameter value of model PartnerRegistrationsListResult is now required
+  - Parameter value of model PartnerTopicsListResult is now required
+  - Parameter value of model PermissionBindingsListResult is now required
+  - Parameter value of model PrivateEndpointConnectionListResult is now required
+  - Parameter value of model PrivateLinkResourcesListResult is now required
+  - Parameter value of model SubscriptionsListResult is now required
+  - Parameter value of model SystemTopicsListResult is now required
+  - Parameter value of model TopicSpacesListResult is now required
+  - Parameter value of model TopicsListResult is now required
+  - Parameter value of model VerifiedPartnersListResult is now required
+
 ## 10.5.0b1 (2025-07-20)
 
 ### Features Added

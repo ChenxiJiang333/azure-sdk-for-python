@@ -7,7 +7,7 @@
 # --------------------------------------------------------------------------
 from collections.abc import MutableMapping
 from io import IOBase
-from typing import Any, AsyncIterator, Callable, Dict, IO, Optional, TypeVar, Union, cast, overload
+from typing import Any, AsyncIterator, Callable, IO, Optional, TypeVar, Union, cast, overload
 import urllib.parse
 
 from azure.core import AsyncPipelineClient
@@ -42,7 +42,8 @@ from ...operations._topic_spaces_operations import (
 from .._configuration import EventGridManagementClientConfiguration
 
 T = TypeVar("T")
-ClsType = Optional[Callable[[PipelineResponse[HttpRequest, AsyncHttpResponse], T, Dict[str, Any]], Any]]
+ClsType = Optional[Callable[[PipelineResponse[HttpRequest, AsyncHttpResponse], T, dict[str, Any]], Any]]
+List = list
 
 
 class TopicSpacesOperations:
@@ -64,6 +65,114 @@ class TopicSpacesOperations:
         self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
+    @distributed_trace
+    def list_by_namespace(
+        self,
+        resource_group_name: str,
+        namespace_name: str,
+        filter: Optional[str] = None,
+        top: Optional[int] = None,
+        **kwargs: Any
+    ) -> AsyncItemPaged["_models.TopicSpace"]:
+        """List all topic spaces under a namespace.
+
+        Get all the topic spaces under a namespace.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param namespace_name: Name of the namespace. Required.
+        :type namespace_name: str
+        :param filter: The query used to filter the search results using OData syntax. Filtering is
+         permitted on the 'name' property only and with limited number of OData operations. These
+         operations are: the 'contains' function as well as the following logical operations: not, and,
+         or, eq (for equal), and ne (for not equal). No arithmetic operations are supported. The
+         following is a valid filter example: $filter=contains(namE, 'PATTERN') and name ne 'PATTERN-1'.
+         The following is not a valid filter example: $filter=location eq 'westus'. Default value is
+         None.
+        :type filter: str
+        :param top: The number of results to return per page for the list operation. Valid range for
+         top parameter is 1 to 100. If not specified, the default number of results to be returned is 20
+         items per page. Default value is None.
+        :type top: int
+        :return: An iterator like instance of either TopicSpace or the result of cls(response)
+        :rtype: ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.eventgrid.models.TopicSpace]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
+        cls: ClsType[_models.TopicSpacesListResult] = kwargs.pop("cls", None)
+
+        error_map: MutableMapping = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        def prepare_request(next_link=None):
+            if not next_link:
+
+                _request = build_list_by_namespace_request(
+                    resource_group_name=resource_group_name,
+                    namespace_name=namespace_name,
+                    subscription_id=self._config.subscription_id,
+                    filter=filter,
+                    top=top,
+                    api_version=api_version,
+                    headers=_headers,
+                    params=_params,
+                )
+                _request.url = self._client.format_url(_request.url)
+
+            else:
+                # make call to next link with the client's api-version
+                _parsed_next_link = urllib.parse.urlparse(next_link)
+                _next_request_params = case_insensitive_dict(
+                    {
+                        key: [urllib.parse.quote(v) for v in value]
+                        for key, value in urllib.parse.parse_qs(_parsed_next_link.query).items()
+                    }
+                )
+                _next_request_params["api-version"] = self._config.api_version
+                _request = HttpRequest(
+                    "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
+                )
+                _request.url = self._client.format_url(_request.url)
+                _request.method = "GET"
+            return _request
+
+        async def extract_data(pipeline_response):
+            deserialized = self._deserialize("TopicSpacesListResult", pipeline_response)
+            list_of_elem = deserialized.value
+            if cls:
+                list_of_elem = cls(list_of_elem)  # type: ignore
+            return deserialized.next_link or None, AsyncList(list_of_elem)
+
+        async def get_next(next_link=None):
+            _request = prepare_request(next_link)
+
+            _stream = False
+            pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
+                _request, stream=_stream, **kwargs
+            )
+            response = pipeline_response.http_response
+
+            if response.status_code not in [200]:
+                map_error(status_code=response.status_code, response=response, error_map=error_map)
+                error = self._deserialize.failsafe_deserialize(
+                    _models.ErrorResponse,
+                    pipeline_response,
+                )
+                raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
+
+            return pipeline_response
+
+        return AsyncItemPaged(get_next, extract_data)
+
     @distributed_trace_async
     async def get(
         self, resource_group_name: str, namespace_name: str, topic_space_name: str, **kwargs: Any
@@ -72,7 +181,7 @@ class TopicSpacesOperations:
 
         Get properties of a topic space.
 
-        :param resource_group_name: The name of the resource group within the user's subscription.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
         :param namespace_name: Name of the namespace. Required.
@@ -117,7 +226,10 @@ class TopicSpacesOperations:
 
         if response.status_code not in [200]:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
+            error = self._deserialize.failsafe_deserialize(
+                _models.ErrorResponse,
+                pipeline_response,
+            )
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
         deserialized = self._deserialize("TopicSpace", pipeline_response.http_response)
@@ -186,13 +298,23 @@ class TopicSpacesOperations:
             except (StreamConsumedError, StreamClosedError):
                 pass
             map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
+            error = self._deserialize.failsafe_deserialize(
+                _models.ErrorResponse,
+                pipeline_response,
+            )
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
+
+        response_headers = {}
+        if response.status_code == 201:
+            response_headers["Azure-AsyncOperation"] = self._deserialize(
+                "str", response.headers.get("Azure-AsyncOperation")
+            )
+            response_headers["Retry-After"] = self._deserialize("int", response.headers.get("Retry-After"))
 
         deserialized = response.stream_download(self._client._pipeline, decompress=_decompress)
 
         if cls:
-            return cls(pipeline_response, deserialized, {})  # type: ignore
+            return cls(pipeline_response, deserialized, response_headers)  # type: ignore
 
         return deserialized  # type: ignore
 
@@ -211,12 +333,12 @@ class TopicSpacesOperations:
 
         Create or update a topic space with the specified parameters.
 
-        :param resource_group_name: The name of the resource group within the user's subscription.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
         :param namespace_name: Name of the namespace. Required.
         :type namespace_name: str
-        :param topic_space_name: The topic space name. Required.
+        :param topic_space_name: Name of the Topic space. Required.
         :type topic_space_name: str
         :param topic_space_info: Topic space information. Required.
         :type topic_space_info: ~azure.mgmt.eventgrid.models.TopicSpace
@@ -244,12 +366,12 @@ class TopicSpacesOperations:
 
         Create or update a topic space with the specified parameters.
 
-        :param resource_group_name: The name of the resource group within the user's subscription.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
         :param namespace_name: Name of the namespace. Required.
         :type namespace_name: str
-        :param topic_space_name: The topic space name. Required.
+        :param topic_space_name: Name of the Topic space. Required.
         :type topic_space_name: str
         :param topic_space_info: Topic space information. Required.
         :type topic_space_info: IO[bytes]
@@ -275,12 +397,12 @@ class TopicSpacesOperations:
 
         Create or update a topic space with the specified parameters.
 
-        :param resource_group_name: The name of the resource group within the user's subscription.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
         :param namespace_name: Name of the namespace. Required.
         :type namespace_name: str
-        :param topic_space_name: The topic space name. Required.
+        :param topic_space_name: Name of the Topic space. Required.
         :type topic_space_name: str
         :param topic_space_info: Topic space information. Is either a TopicSpace type or a IO[bytes]
          type. Required.
@@ -383,12 +505,16 @@ class TopicSpacesOperations:
             except (StreamConsumedError, StreamClosedError):
                 pass
             map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
+            error = self._deserialize.failsafe_deserialize(
+                _models.ErrorResponse,
+                pipeline_response,
+            )
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
         response_headers = {}
         if response.status_code == 202:
             response_headers["Location"] = self._deserialize("str", response.headers.get("Location"))
+            response_headers["Retry-After"] = self._deserialize("int", response.headers.get("Retry-After"))
 
         deserialized = response.stream_download(self._client._pipeline, decompress=_decompress)
 
@@ -405,7 +531,7 @@ class TopicSpacesOperations:
 
         Delete an existing topic space.
 
-        :param resource_group_name: The name of the resource group within the user's subscription.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
         :param namespace_name: Name of the namespace. Required.
@@ -458,108 +584,3 @@ class TopicSpacesOperations:
                 deserialization_callback=get_long_running_output,
             )
         return AsyncLROPoller[None](self._client, raw_result, get_long_running_output, polling_method)  # type: ignore
-
-    @distributed_trace
-    def list_by_namespace(
-        self,
-        resource_group_name: str,
-        namespace_name: str,
-        filter: Optional[str] = None,
-        top: Optional[int] = None,
-        **kwargs: Any
-    ) -> AsyncItemPaged["_models.TopicSpace"]:
-        """List all topic spaces under a namespace.
-
-        Get all the topic spaces under a namespace.
-
-        :param resource_group_name: The name of the resource group within the user's subscription.
-         Required.
-        :type resource_group_name: str
-        :param namespace_name: Name of the namespace. Required.
-        :type namespace_name: str
-        :param filter: The query used to filter the search results using OData syntax. Filtering is
-         permitted on the 'name' property only and with limited number of OData operations. These
-         operations are: the 'contains' function as well as the following logical operations: not, and,
-         or, eq (for equal), and ne (for not equal). No arithmetic operations are supported. The
-         following is a valid filter example: $filter=contains(namE, 'PATTERN') and name ne 'PATTERN-1'.
-         The following is not a valid filter example: $filter=location eq 'westus'. Default value is
-         None.
-        :type filter: str
-        :param top: The number of results to return per page for the list operation. Valid range for
-         top parameter is 1 to 100. If not specified, the default number of results to be returned is 20
-         items per page. Default value is None.
-        :type top: int
-        :return: An iterator like instance of either TopicSpace or the result of cls(response)
-        :rtype: ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.eventgrid.models.TopicSpace]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        _headers = kwargs.pop("headers", {}) or {}
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
-        cls: ClsType[_models.TopicSpacesListResult] = kwargs.pop("cls", None)
-
-        error_map: MutableMapping = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        def prepare_request(next_link=None):
-            if not next_link:
-
-                _request = build_list_by_namespace_request(
-                    resource_group_name=resource_group_name,
-                    namespace_name=namespace_name,
-                    subscription_id=self._config.subscription_id,
-                    filter=filter,
-                    top=top,
-                    api_version=api_version,
-                    headers=_headers,
-                    params=_params,
-                )
-                _request.url = self._client.format_url(_request.url)
-
-            else:
-                # make call to next link with the client's api-version
-                _parsed_next_link = urllib.parse.urlparse(next_link)
-                _next_request_params = case_insensitive_dict(
-                    {
-                        key: [urllib.parse.quote(v) for v in value]
-                        for key, value in urllib.parse.parse_qs(_parsed_next_link.query).items()
-                    }
-                )
-                _next_request_params["api-version"] = self._config.api_version
-                _request = HttpRequest(
-                    "GET", urllib.parse.urljoin(next_link, _parsed_next_link.path), params=_next_request_params
-                )
-                _request.url = self._client.format_url(_request.url)
-                _request.method = "GET"
-            return _request
-
-        async def extract_data(pipeline_response):
-            deserialized = self._deserialize("TopicSpacesListResult", pipeline_response)
-            list_of_elem = deserialized.value
-            if cls:
-                list_of_elem = cls(list_of_elem)  # type: ignore
-            return deserialized.next_link or None, AsyncList(list_of_elem)
-
-        async def get_next(next_link=None):
-            _request = prepare_request(next_link)
-
-            _stream = False
-            pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-                _request, stream=_stream, **kwargs
-            )
-            response = pipeline_response.http_response
-
-            if response.status_code not in [200]:
-                map_error(status_code=response.status_code, response=response, error_map=error_map)
-                error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
-                raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
-
-            return pipeline_response
-
-        return AsyncItemPaged(get_next, extract_data)

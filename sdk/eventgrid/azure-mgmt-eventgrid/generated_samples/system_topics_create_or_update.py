@@ -35,8 +35,26 @@ def main():
         resource_group_name="examplerg",
         system_topic_name="exampleSystemTopic1",
         system_topic_info={
-            "location": "westus2",
+            "identity": {
+                "type": "UserAssigned",
+                "userAssignedIdentities": {
+                    "/subscriptions/8f6b6269-84f2-4d09-9e31-1127efcd1e40/resourceGroups/azureeventgridrunnerrgcentraluseuap/providers/Microsoft.ManagedIdentity/userAssignedIdentities/user-assigned-id": {}
+                },
+            },
+            "location": "centraluseuap",
             "properties": {
+                "encryption": {
+                    "customerManagedKeyEncryption": [
+                        {
+                            "keyEncryptionKeyIdentity": {
+                                "type": "UserAssigned",
+                                "userAssignedIdentityResourceId": "/subscriptions/8f6b6269-84f2-4d09-9e31-1127efcd1e40/resourceGroups/azureeventgridrunnerrgcentraluseuap/providers/Microsoft.ManagedIdentity/userAssignedIdentities/user-assigned-id",
+                            },
+                            "keyEncryptionKeyUrl": "https://ege2ekeyvault.vault.azure.net/keys/ValidKey1",
+                        }
+                    ]
+                },
+                "platformCapabilities": {"confidentialCompute": {"mode": "Enabled"}},
                 "source": "/subscriptions/8f6b6269-84f2-4d09-9e31-1127efcd1e40/resourceGroups/azureeventgridrunnerrgcentraluseuap/providers/microsoft.storage/storageaccounts/pubstgrunnerb71cd29e",
                 "topicType": "microsoft.storage.storageaccounts",
             },
@@ -46,6 +64,6 @@ def main():
     print(response)
 
 
-# x-ms-original-file: specification/eventgrid/resource-manager/Microsoft.EventGrid/preview/2025-04-01-preview/examples/SystemTopics_CreateOrUpdate.json
+# x-ms-original-file: specification/eventgrid/resource-manager/Microsoft.EventGrid/EventGrid/preview/2025-07-15-preview/examples/SystemTopics_CreateOrUpdate.json
 if __name__ == "__main__":
     main()

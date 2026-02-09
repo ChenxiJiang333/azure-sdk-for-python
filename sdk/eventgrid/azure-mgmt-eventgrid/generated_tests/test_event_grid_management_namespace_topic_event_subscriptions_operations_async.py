@@ -21,13 +21,26 @@ class TestEventGridManagementNamespaceTopicEventSubscriptionsOperationsAsync(Azu
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
+    async def test_namespace_topic_event_subscriptions_list_by_namespace_topic(self, resource_group):
+        response = self.client.namespace_topic_event_subscriptions.list_by_namespace_topic(
+            resource_group_name=resource_group.name,
+            namespace_name="str",
+            topic_name="str",
+            api_version="2025-07-15-preview",
+        )
+        result = [r async for r in response]
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
     async def test_namespace_topic_event_subscriptions_get(self, resource_group):
         response = await self.client.namespace_topic_event_subscriptions.get(
             resource_group_name=resource_group.name,
             namespace_name="str",
             topic_name="str",
             event_subscription_name="str",
-            api_version="2025-04-01-preview",
+            api_version="2025-07-15-preview",
         )
 
         # please add some check logic here by yourself
@@ -97,23 +110,7 @@ class TestEventGridManagementNamespaceTopicEventSubscriptionsOperationsAsync(Azu
                     "tags": {"str": "str"},
                     "type": "str",
                 },
-                api_version="2025-04-01-preview",
-            )
-        ).result()  # call '.result()' to poll until service return final result
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_namespace_topic_event_subscriptions_begin_delete(self, resource_group):
-        response = await (
-            await self.client.namespace_topic_event_subscriptions.begin_delete(
-                resource_group_name=resource_group.name,
-                namespace_name="str",
-                topic_name="str",
-                event_subscription_name="str",
-                api_version="2025-04-01-preview",
+                api_version="2025-07-15-preview",
             )
         ).result()  # call '.result()' to poll until service return final result
 
@@ -172,7 +169,7 @@ class TestEventGridManagementNamespaceTopicEventSubscriptionsOperationsAsync(Azu
                     "filtersConfiguration": {"filters": ["filter"], "includedEventTypes": ["str"]},
                     "tags": {"str": "str"},
                 },
-                api_version="2025-04-01-preview",
+                api_version="2025-07-15-preview",
             )
         ).result()  # call '.result()' to poll until service return final result
 
@@ -181,14 +178,17 @@ class TestEventGridManagementNamespaceTopicEventSubscriptionsOperationsAsync(Azu
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_namespace_topic_event_subscriptions_list_by_namespace_topic(self, resource_group):
-        response = self.client.namespace_topic_event_subscriptions.list_by_namespace_topic(
-            resource_group_name=resource_group.name,
-            namespace_name="str",
-            topic_name="str",
-            api_version="2025-04-01-preview",
-        )
-        result = [r async for r in response]
+    async def test_namespace_topic_event_subscriptions_begin_delete(self, resource_group):
+        response = await (
+            await self.client.namespace_topic_event_subscriptions.begin_delete(
+                resource_group_name=resource_group.name,
+                namespace_name="str",
+                topic_name="str",
+                event_subscription_name="str",
+                api_version="2025-07-15-preview",
+            )
+        ).result()  # call '.result()' to poll until service return final result
+
         # please add some check logic here by yourself
         # ...
 
@@ -200,7 +200,7 @@ class TestEventGridManagementNamespaceTopicEventSubscriptionsOperationsAsync(Azu
             namespace_name="str",
             topic_name="str",
             event_subscription_name="str",
-            api_version="2025-04-01-preview",
+            api_version="2025-07-15-preview",
         )
 
         # please add some check logic here by yourself
@@ -214,7 +214,7 @@ class TestEventGridManagementNamespaceTopicEventSubscriptionsOperationsAsync(Azu
             namespace_name="str",
             topic_name="str",
             event_subscription_name="str",
-            api_version="2025-04-01-preview",
+            api_version="2025-07-15-preview",
         )
 
         # please add some check logic here by yourself

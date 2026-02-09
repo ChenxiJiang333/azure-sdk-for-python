@@ -21,11 +21,46 @@ class TestEventGridManagementTopicsOperationsAsync(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
+    async def test_topics_list_by_subscription(self, resource_group):
+        response = self.client.topics.list_by_subscription(
+            api_version="2025-07-15-preview",
+        )
+        result = [r async for r in response]
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
+    async def test_topics_list_event_types(self, resource_group):
+        response = self.client.topics.list_event_types(
+            resource_group_name=resource_group.name,
+            provider_namespace="str",
+            resource_type_name="str",
+            resource_name="str",
+            api_version="2025-07-15-preview",
+        )
+        result = [r async for r in response]
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
+    async def test_topics_list_by_resource_group(self, resource_group):
+        response = self.client.topics.list_by_resource_group(
+            resource_group_name=resource_group.name,
+            api_version="2025-07-15-preview",
+        )
+        result = [r async for r in response]
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
     async def test_topics_get(self, resource_group):
         response = await self.client.topics.get(
             resource_group_name=resource_group.name,
             topic_name="str",
-            api_version="2025-04-01-preview",
+            api_version="2025-07-15-preview",
         )
 
         # please add some check logic here by yourself
@@ -42,6 +77,16 @@ class TestEventGridManagementTopicsOperationsAsync(AzureMgmtRecordedTestCase):
                     "location": "str",
                     "dataResidencyBoundary": "str",
                     "disableLocalAuth": False,
+                    "encryption": {
+                        "customerManagedKeyEncryption": [
+                            {
+                                "keyEncryptionKeyUrl": "str",
+                                "keyEncryptionKeyIdentity": {"type": "str", "userAssignedIdentityResourceId": "str"},
+                                "keyEncryptionKeyStatus": "str",
+                                "keyEncryptionKeyStatusFriendlyDescription": "str",
+                            }
+                        ]
+                    },
                     "endpoint": "str",
                     "eventTypeInfo": {
                         "inlineEventTypes": {
@@ -69,6 +114,7 @@ class TestEventGridManagementTopicsOperationsAsync(AzureMgmtRecordedTestCase):
                     "metricResourceId": "str",
                     "minimumTlsVersionAllowed": "str",
                     "name": "str",
+                    "platformCapabilities": {"confidentialCompute": {"mode": "str"}},
                     "privateEndpointConnections": [
                         {
                             "groupIds": ["str"],
@@ -81,6 +127,14 @@ class TestEventGridManagementTopicsOperationsAsync(AzureMgmtRecordedTestCase):
                                 "status": "str",
                             },
                             "provisioningState": "str",
+                            "systemData": {
+                                "createdAt": "2020-02-20 00:00:00",
+                                "createdBy": "str",
+                                "createdByType": "str",
+                                "lastModifiedAt": "2020-02-20 00:00:00",
+                                "lastModifiedBy": "str",
+                                "lastModifiedByType": "str",
+                            },
                             "type": "str",
                         }
                     ],
@@ -98,21 +152,7 @@ class TestEventGridManagementTopicsOperationsAsync(AzureMgmtRecordedTestCase):
                     "tags": {"str": "str"},
                     "type": "str",
                 },
-                api_version="2025-04-01-preview",
-            )
-        ).result()  # call '.result()' to poll until service return final result
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_topics_begin_delete(self, resource_group):
-        response = await (
-            await self.client.topics.begin_delete(
-                resource_group_name=resource_group.name,
-                topic_name="str",
-                api_version="2025-04-01-preview",
+                api_version="2025-07-15-preview",
             )
         ).result()  # call '.result()' to poll until service return final result
 
@@ -152,7 +192,7 @@ class TestEventGridManagementTopicsOperationsAsync(AzureMgmtRecordedTestCase):
                     "sku": {"name": "Basic"},
                     "tags": {"str": "str"},
                 },
-                api_version="2025-04-01-preview",
+                api_version="2025-07-15-preview",
             )
         ).result()  # call '.result()' to poll until service return final result
 
@@ -161,22 +201,15 @@ class TestEventGridManagementTopicsOperationsAsync(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_topics_list_by_subscription(self, resource_group):
-        response = self.client.topics.list_by_subscription(
-            api_version="2025-04-01-preview",
-        )
-        result = [r async for r in response]
-        # please add some check logic here by yourself
-        # ...
+    async def test_topics_begin_delete(self, resource_group):
+        response = await (
+            await self.client.topics.begin_delete(
+                resource_group_name=resource_group.name,
+                topic_name="str",
+                api_version="2025-07-15-preview",
+            )
+        ).result()  # call '.result()' to poll until service return final result
 
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_topics_list_by_resource_group(self, resource_group):
-        response = self.client.topics.list_by_resource_group(
-            resource_group_name=resource_group.name,
-            api_version="2025-04-01-preview",
-        )
-        result = [r async for r in response]
         # please add some check logic here by yourself
         # ...
 
@@ -186,7 +219,7 @@ class TestEventGridManagementTopicsOperationsAsync(AzureMgmtRecordedTestCase):
         response = await self.client.topics.list_shared_access_keys(
             resource_group_name=resource_group.name,
             topic_name="str",
-            api_version="2025-04-01-preview",
+            api_version="2025-07-15-preview",
         )
 
         # please add some check logic here by yourself
@@ -200,23 +233,9 @@ class TestEventGridManagementTopicsOperationsAsync(AzureMgmtRecordedTestCase):
                 resource_group_name=resource_group.name,
                 topic_name="str",
                 regenerate_key_request={"keyName": "str"},
-                api_version="2025-04-01-preview",
+                api_version="2025-07-15-preview",
             )
         ).result()  # call '.result()' to poll until service return final result
 
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_topics_list_event_types(self, resource_group):
-        response = self.client.topics.list_event_types(
-            resource_group_name=resource_group.name,
-            provider_namespace="str",
-            resource_type_name="str",
-            resource_name="str",
-            api_version="2025-04-01-preview",
-        )
-        result = [r async for r in response]
         # please add some check logic here by yourself
         # ...

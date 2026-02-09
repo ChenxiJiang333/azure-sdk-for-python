@@ -21,11 +21,32 @@ class TestEventGridManagementPartnerRegistrationsOperationsAsync(AzureMgmtRecord
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
+    async def test_partner_registrations_list_by_subscription(self, resource_group):
+        response = self.client.partner_registrations.list_by_subscription(
+            api_version="2025-07-15-preview",
+        )
+        result = [r async for r in response]
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
+    async def test_partner_registrations_list_by_resource_group(self, resource_group):
+        response = self.client.partner_registrations.list_by_resource_group(
+            resource_group_name=resource_group.name,
+            api_version="2025-07-15-preview",
+        )
+        result = [r async for r in response]
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
     async def test_partner_registrations_get(self, resource_group):
         response = await self.client.partner_registrations.get(
             resource_group_name=resource_group.name,
             partner_registration_name="str",
-            api_version="2025-04-01-preview",
+            api_version="2025-07-15-preview",
         )
 
         # please add some check logic here by yourself
@@ -55,21 +76,7 @@ class TestEventGridManagementPartnerRegistrationsOperationsAsync(AzureMgmtRecord
                     "tags": {"str": "str"},
                     "type": "str",
                 },
-                api_version="2025-04-01-preview",
-            )
-        ).result()  # call '.result()' to poll until service return final result
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_partner_registrations_begin_delete(self, resource_group):
-        response = await (
-            await self.client.partner_registrations.begin_delete(
-                resource_group_name=resource_group.name,
-                partner_registration_name="str",
-                api_version="2025-04-01-preview",
+                api_version="2025-07-15-preview",
             )
         ).result()  # call '.result()' to poll until service return final result
 
@@ -84,7 +91,7 @@ class TestEventGridManagementPartnerRegistrationsOperationsAsync(AzureMgmtRecord
                 resource_group_name=resource_group.name,
                 partner_registration_name="str",
                 partner_registration_update_parameters={"tags": {"str": "str"}},
-                api_version="2025-04-01-preview",
+                api_version="2025-07-15-preview",
             )
         ).result()  # call '.result()' to poll until service return final result
 
@@ -93,21 +100,14 @@ class TestEventGridManagementPartnerRegistrationsOperationsAsync(AzureMgmtRecord
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_partner_registrations_list_by_subscription(self, resource_group):
-        response = self.client.partner_registrations.list_by_subscription(
-            api_version="2025-04-01-preview",
-        )
-        result = [r async for r in response]
-        # please add some check logic here by yourself
-        # ...
+    async def test_partner_registrations_begin_delete(self, resource_group):
+        response = await (
+            await self.client.partner_registrations.begin_delete(
+                resource_group_name=resource_group.name,
+                partner_registration_name="str",
+                api_version="2025-07-15-preview",
+            )
+        ).result()  # call '.result()' to poll until service return final result
 
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_partner_registrations_list_by_resource_group(self, resource_group):
-        response = self.client.partner_registrations.list_by_resource_group(
-            resource_group_name=resource_group.name,
-            api_version="2025-04-01-preview",
-        )
-        result = [r async for r in response]
         # please add some check logic here by yourself
         # ...

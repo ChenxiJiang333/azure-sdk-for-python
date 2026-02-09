@@ -35,13 +35,26 @@ def main():
         resource_group_name="examplerg",
         topic_name="exampletopic1",
         topic_info={
+            "identity": {
+                "type": "UserAssigned",
+                "userAssignedIdentities": {
+                    "/subscriptions/8f6b6269-84f2-4d09-9e31-1127efcd1e40/resourceGroups/azureeventgridrunnerrgcentraluseuap/providers/Microsoft.ManagedIdentity/userAssignedIdentities/user-assigned-id": {}
+                },
+            },
             "location": "westus2",
             "properties": {
-                "inboundIpRules": [
-                    {"action": "Allow", "ipMask": "12.18.30.15"},
-                    {"action": "Allow", "ipMask": "12.18.176.1"},
-                ],
-                "publicNetworkAccess": "Enabled",
+                "encryption": {
+                    "customerManagedKeyEncryption": [
+                        {
+                            "keyEncryptionKeyIdentity": {
+                                "type": "UserAssigned",
+                                "userAssignedIdentityResourceId": "/subscriptions/8f6b6269-84f2-4d09-9e31-1127efcd1e40/resourceGroups/azureeventgridrunnerrgcentraluseuap/providers/Microsoft.ManagedIdentity/userAssignedIdentities/user-assigned-id",
+                            },
+                            "keyEncryptionKeyUrl": "https://ege2ekeyvault.vault.azure.net/keys/ValidKey1",
+                        }
+                    ]
+                },
+                "platformCapabilities": {"confidentialCompute": {"mode": "Enabled"}},
             },
             "tags": {"tag1": "value1", "tag2": "value2"},
         },
@@ -49,6 +62,6 @@ def main():
     print(response)
 
 
-# x-ms-original-file: specification/eventgrid/resource-manager/Microsoft.EventGrid/preview/2025-04-01-preview/examples/Topics_CreateOrUpdate.json
+# x-ms-original-file: specification/eventgrid/resource-manager/Microsoft.EventGrid/EventGrid/preview/2025-07-15-preview/examples/Topics_CreateOrUpdate.json
 if __name__ == "__main__":
     main()

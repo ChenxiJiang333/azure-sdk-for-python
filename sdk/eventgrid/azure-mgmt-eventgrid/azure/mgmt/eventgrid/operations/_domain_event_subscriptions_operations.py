@@ -8,7 +8,7 @@
 # --------------------------------------------------------------------------
 from collections.abc import MutableMapping
 from io import IOBase
-from typing import Any, Callable, Dict, IO, Iterator, Optional, TypeVar, Union, cast, overload
+from typing import Any, Callable, IO, Iterator, Optional, TypeVar, Union, cast, overload
 import urllib.parse
 
 from azure.core import PipelineClient
@@ -36,42 +36,54 @@ from .._configuration import EventGridManagementClientConfiguration
 from .._utils.serialization import Deserializer, Serializer
 
 T = TypeVar("T")
-ClsType = Optional[Callable[[PipelineResponse[HttpRequest, HttpResponse], T, Dict[str, Any]], Any]]
+ClsType = Optional[Callable[[PipelineResponse[HttpRequest, HttpResponse], T, dict[str, Any]], Any]]
+List = list
 
 _SERIALIZER = Serializer()
 _SERIALIZER.client_side_validation = False
 
 
-def build_get_delivery_attributes_request(
-    resource_group_name: str, domain_name: str, event_subscription_name: str, subscription_id: str, **kwargs: Any
+def build_list_request(
+    resource_group_name: str,
+    domain_name: str,
+    subscription_id: str,
+    *,
+    filter: Optional[str] = None,
+    top: Optional[int] = None,
+    **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-04-01-preview"))
+    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-07-15-preview"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
     _url = kwargs.pop(
         "template_url",
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/domains/{domainName}/eventSubscriptions/{eventSubscriptionName}/getDeliveryAttributes",
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/domains/{domainName}/eventSubscriptions",
     )
     path_format_arguments = {
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
-        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
+        "resourceGroupName": _SERIALIZER.url(
+            "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
+        ),
         "domainName": _SERIALIZER.url("domain_name", domain_name, "str"),
-        "eventSubscriptionName": _SERIALIZER.url("event_subscription_name", event_subscription_name, "str"),
     }
 
     _url: str = _url.format(**path_format_arguments)  # type: ignore
 
     # Construct parameters
     _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
+    if filter is not None:
+        _params["$filter"] = _SERIALIZER.query("filter", filter, "str")
+    if top is not None:
+        _params["$top"] = _SERIALIZER.query("top", top, "int")
 
     # Construct headers
     _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
 
-    return HttpRequest(method="POST", url=_url, params=_params, headers=_headers, **kwargs)
+    return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
 
 
 def build_get_request(
@@ -80,7 +92,7 @@ def build_get_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-04-01-preview"))
+    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-07-15-preview"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -90,7 +102,9 @@ def build_get_request(
     )
     path_format_arguments = {
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
-        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
+        "resourceGroupName": _SERIALIZER.url(
+            "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
+        ),
         "domainName": _SERIALIZER.url("domain_name", domain_name, "str"),
         "eventSubscriptionName": _SERIALIZER.url("event_subscription_name", event_subscription_name, "str"),
     }
@@ -112,7 +126,7 @@ def build_create_or_update_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-04-01-preview"))
+    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-07-15-preview"))
     content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
     accept = _headers.pop("Accept", "application/json")
 
@@ -123,7 +137,9 @@ def build_create_or_update_request(
     )
     path_format_arguments = {
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
-        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
+        "resourceGroupName": _SERIALIZER.url(
+            "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
+        ),
         "domainName": _SERIALIZER.url("domain_name", domain_name, "str"),
         "eventSubscriptionName": _SERIALIZER.url("event_subscription_name", event_subscription_name, "str"),
     }
@@ -141,39 +157,13 @@ def build_create_or_update_request(
     return HttpRequest(method="PUT", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_delete_request(
-    resource_group_name: str, domain_name: str, event_subscription_name: str, subscription_id: str, **kwargs: Any
-) -> HttpRequest:
-    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-04-01-preview"))
-    # Construct URL
-    _url = kwargs.pop(
-        "template_url",
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/domains/{domainName}/eventSubscriptions/{eventSubscriptionName}",
-    )
-    path_format_arguments = {
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
-        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
-        "domainName": _SERIALIZER.url("domain_name", domain_name, "str"),
-        "eventSubscriptionName": _SERIALIZER.url("event_subscription_name", event_subscription_name, "str"),
-    }
-
-    _url: str = _url.format(**path_format_arguments)  # type: ignore
-
-    # Construct parameters
-    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
-
-    return HttpRequest(method="DELETE", url=_url, params=_params, **kwargs)
-
-
 def build_update_request(
     resource_group_name: str, domain_name: str, event_subscription_name: str, subscription_id: str, **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-04-01-preview"))
+    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-07-15-preview"))
     content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
     accept = _headers.pop("Accept", "application/json")
 
@@ -184,7 +174,9 @@ def build_update_request(
     )
     path_format_arguments = {
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
-        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
+        "resourceGroupName": _SERIALIZER.url(
+            "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
+        ),
         "domainName": _SERIALIZER.url("domain_name", domain_name, "str"),
         "eventSubscriptionName": _SERIALIZER.url("event_subscription_name", event_subscription_name, "str"),
     }
@@ -202,23 +194,59 @@ def build_update_request(
     return HttpRequest(method="PATCH", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_get_full_url_request(
+def build_delete_request(
     resource_group_name: str, domain_name: str, event_subscription_name: str, subscription_id: str, **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-04-01-preview"))
+    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-07-15-preview"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
     _url = kwargs.pop(
         "template_url",
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/domains/{domainName}/eventSubscriptions/{eventSubscriptionName}/getFullUrl",
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/domains/{domainName}/eventSubscriptions/{eventSubscriptionName}",
     )
     path_format_arguments = {
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
-        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
+        "resourceGroupName": _SERIALIZER.url(
+            "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
+        ),
+        "domainName": _SERIALIZER.url("domain_name", domain_name, "str"),
+        "eventSubscriptionName": _SERIALIZER.url("event_subscription_name", event_subscription_name, "str"),
+    }
+
+    _url: str = _url.format(**path_format_arguments)  # type: ignore
+
+    # Construct parameters
+    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
+
+    # Construct headers
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(method="DELETE", url=_url, params=_params, headers=_headers, **kwargs)
+
+
+def build_get_delivery_attributes_request(
+    resource_group_name: str, domain_name: str, event_subscription_name: str, subscription_id: str, **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-07-15-preview"))
+    accept = _headers.pop("Accept", "application/json")
+
+    # Construct URL
+    _url = kwargs.pop(
+        "template_url",
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/domains/{domainName}/eventSubscriptions/{eventSubscriptionName}/getDeliveryAttributes",
+    )
+    path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
+        "resourceGroupName": _SERIALIZER.url(
+            "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
+        ),
         "domainName": _SERIALIZER.url("domain_name", domain_name, "str"),
         "eventSubscriptionName": _SERIALIZER.url("event_subscription_name", event_subscription_name, "str"),
     }
@@ -234,45 +262,38 @@ def build_get_full_url_request(
     return HttpRequest(method="POST", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_list_request(
-    resource_group_name: str,
-    domain_name: str,
-    subscription_id: str,
-    *,
-    filter: Optional[str] = None,
-    top: Optional[int] = None,
-    **kwargs: Any
+def build_get_full_url_request(
+    resource_group_name: str, domain_name: str, event_subscription_name: str, subscription_id: str, **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-04-01-preview"))
+    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-07-15-preview"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
     _url = kwargs.pop(
         "template_url",
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/domains/{domainName}/eventSubscriptions",
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventGrid/domains/{domainName}/eventSubscriptions/{eventSubscriptionName}/getFullUrl",
     )
     path_format_arguments = {
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
-        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
+        "resourceGroupName": _SERIALIZER.url(
+            "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
+        ),
         "domainName": _SERIALIZER.url("domain_name", domain_name, "str"),
+        "eventSubscriptionName": _SERIALIZER.url("event_subscription_name", event_subscription_name, "str"),
     }
 
     _url: str = _url.format(**path_format_arguments)  # type: ignore
 
     # Construct parameters
     _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
-    if filter is not None:
-        _params["$filter"] = _SERIALIZER.query("filter", filter, "str")
-    if top is not None:
-        _params["$top"] = _SERIALIZER.query("top", top, "int")
 
     # Construct headers
     _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
 
-    return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
+    return HttpRequest(method="POST", url=_url, params=_params, headers=_headers, **kwargs)
 
 
 class DomainEventSubscriptionsOperations:
@@ -295,737 +316,6 @@ class DomainEventSubscriptionsOperations:
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
     @distributed_trace
-    def get_delivery_attributes(
-        self, resource_group_name: str, domain_name: str, event_subscription_name: str, **kwargs: Any
-    ) -> _models.DeliveryAttributeListResult:
-        """Get delivery attributes for an event subscription for domain.
-
-        Get all delivery attributes for an event subscription for domain.
-
-        :param resource_group_name: The name of the resource group within the user's subscription.
-         Required.
-        :type resource_group_name: str
-        :param domain_name: Name of the domain. Required.
-        :type domain_name: str
-        :param event_subscription_name: Name of the event subscription. Required.
-        :type event_subscription_name: str
-        :return: DeliveryAttributeListResult or the result of cls(response)
-        :rtype: ~azure.mgmt.eventgrid.models.DeliveryAttributeListResult
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        error_map: MutableMapping = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        _headers = kwargs.pop("headers", {}) or {}
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
-        cls: ClsType[_models.DeliveryAttributeListResult] = kwargs.pop("cls", None)
-
-        _request = build_get_delivery_attributes_request(
-            resource_group_name=resource_group_name,
-            domain_name=domain_name,
-            event_subscription_name=event_subscription_name,
-            subscription_id=self._config.subscription_id,
-            api_version=api_version,
-            headers=_headers,
-            params=_params,
-        )
-        _request.url = self._client.format_url(_request.url)
-
-        _stream = False
-        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            _request, stream=_stream, **kwargs
-        )
-
-        response = pipeline_response.http_response
-
-        if response.status_code not in [200]:
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
-            raise HttpResponseError(response=response, error_format=ARMErrorFormat)
-
-        deserialized = self._deserialize("DeliveryAttributeListResult", pipeline_response.http_response)
-
-        if cls:
-            return cls(pipeline_response, deserialized, {})  # type: ignore
-
-        return deserialized  # type: ignore
-
-    @distributed_trace
-    def get(
-        self, resource_group_name: str, domain_name: str, event_subscription_name: str, **kwargs: Any
-    ) -> _models.EventSubscription:
-        """Get an event subscription of a domain.
-
-        Get properties of an event subscription of a domain.
-
-        :param resource_group_name: The name of the resource group within the user's subscription.
-         Required.
-        :type resource_group_name: str
-        :param domain_name: Name of the domain. Required.
-        :type domain_name: str
-        :param event_subscription_name: Name of the event subscription to be found. Required.
-        :type event_subscription_name: str
-        :return: EventSubscription or the result of cls(response)
-        :rtype: ~azure.mgmt.eventgrid.models.EventSubscription
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        error_map: MutableMapping = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        _headers = kwargs.pop("headers", {}) or {}
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
-        cls: ClsType[_models.EventSubscription] = kwargs.pop("cls", None)
-
-        _request = build_get_request(
-            resource_group_name=resource_group_name,
-            domain_name=domain_name,
-            event_subscription_name=event_subscription_name,
-            subscription_id=self._config.subscription_id,
-            api_version=api_version,
-            headers=_headers,
-            params=_params,
-        )
-        _request.url = self._client.format_url(_request.url)
-
-        _stream = False
-        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            _request, stream=_stream, **kwargs
-        )
-
-        response = pipeline_response.http_response
-
-        if response.status_code not in [200]:
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
-            raise HttpResponseError(response=response, error_format=ARMErrorFormat)
-
-        deserialized = self._deserialize("EventSubscription", pipeline_response.http_response)
-
-        if cls:
-            return cls(pipeline_response, deserialized, {})  # type: ignore
-
-        return deserialized  # type: ignore
-
-    def _create_or_update_initial(
-        self,
-        resource_group_name: str,
-        domain_name: str,
-        event_subscription_name: str,
-        event_subscription_info: Union[_models.EventSubscription, IO[bytes]],
-        **kwargs: Any
-    ) -> Iterator[bytes]:
-        error_map: MutableMapping = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
-        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
-        cls: ClsType[Iterator[bytes]] = kwargs.pop("cls", None)
-
-        content_type = content_type or "application/json"
-        _json = None
-        _content = None
-        if isinstance(event_subscription_info, (IOBase, bytes)):
-            _content = event_subscription_info
-        else:
-            _json = self._serialize.body(event_subscription_info, "EventSubscription")
-
-        _request = build_create_or_update_request(
-            resource_group_name=resource_group_name,
-            domain_name=domain_name,
-            event_subscription_name=event_subscription_name,
-            subscription_id=self._config.subscription_id,
-            api_version=api_version,
-            content_type=content_type,
-            json=_json,
-            content=_content,
-            headers=_headers,
-            params=_params,
-        )
-        _request.url = self._client.format_url(_request.url)
-
-        _decompress = kwargs.pop("decompress", True)
-        _stream = True
-        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            _request, stream=_stream, **kwargs
-        )
-
-        response = pipeline_response.http_response
-
-        if response.status_code not in [200, 201]:
-            try:
-                response.read()  # Load the body in memory and close the socket
-            except (StreamConsumedError, StreamClosedError):
-                pass
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
-            raise HttpResponseError(response=response, error_format=ARMErrorFormat)
-
-        deserialized = response.stream_download(self._client._pipeline, decompress=_decompress)
-
-        if cls:
-            return cls(pipeline_response, deserialized, {})  # type: ignore
-
-        return deserialized  # type: ignore
-
-    @overload
-    def begin_create_or_update(
-        self,
-        resource_group_name: str,
-        domain_name: str,
-        event_subscription_name: str,
-        event_subscription_info: _models.EventSubscription,
-        *,
-        content_type: str = "application/json",
-        **kwargs: Any
-    ) -> LROPoller[_models.EventSubscription]:
-        """Create or update an event subscription to a domain.
-
-        Asynchronously creates a new event subscription or updates an existing event subscription.
-
-        :param resource_group_name: The name of the resource group within the user's subscription.
-         Required.
-        :type resource_group_name: str
-        :param domain_name: Name of the domain topic. Required.
-        :type domain_name: str
-        :param event_subscription_name: Name of the event subscription to be created. Event
-         subscription names must be between 3 and 64 characters in length and use alphanumeric letters
-         only. Required.
-        :type event_subscription_name: str
-        :param event_subscription_info: Event subscription properties containing the destination and
-         filter information. Required.
-        :type event_subscription_info: ~azure.mgmt.eventgrid.models.EventSubscription
-        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
-         Default value is "application/json".
-        :paramtype content_type: str
-        :return: An instance of LROPoller that returns either EventSubscription or the result of
-         cls(response)
-        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.eventgrid.models.EventSubscription]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-
-    @overload
-    def begin_create_or_update(
-        self,
-        resource_group_name: str,
-        domain_name: str,
-        event_subscription_name: str,
-        event_subscription_info: IO[bytes],
-        *,
-        content_type: str = "application/json",
-        **kwargs: Any
-    ) -> LROPoller[_models.EventSubscription]:
-        """Create or update an event subscription to a domain.
-
-        Asynchronously creates a new event subscription or updates an existing event subscription.
-
-        :param resource_group_name: The name of the resource group within the user's subscription.
-         Required.
-        :type resource_group_name: str
-        :param domain_name: Name of the domain topic. Required.
-        :type domain_name: str
-        :param event_subscription_name: Name of the event subscription to be created. Event
-         subscription names must be between 3 and 64 characters in length and use alphanumeric letters
-         only. Required.
-        :type event_subscription_name: str
-        :param event_subscription_info: Event subscription properties containing the destination and
-         filter information. Required.
-        :type event_subscription_info: IO[bytes]
-        :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
-         Default value is "application/json".
-        :paramtype content_type: str
-        :return: An instance of LROPoller that returns either EventSubscription or the result of
-         cls(response)
-        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.eventgrid.models.EventSubscription]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-
-    @distributed_trace
-    def begin_create_or_update(
-        self,
-        resource_group_name: str,
-        domain_name: str,
-        event_subscription_name: str,
-        event_subscription_info: Union[_models.EventSubscription, IO[bytes]],
-        **kwargs: Any
-    ) -> LROPoller[_models.EventSubscription]:
-        """Create or update an event subscription to a domain.
-
-        Asynchronously creates a new event subscription or updates an existing event subscription.
-
-        :param resource_group_name: The name of the resource group within the user's subscription.
-         Required.
-        :type resource_group_name: str
-        :param domain_name: Name of the domain topic. Required.
-        :type domain_name: str
-        :param event_subscription_name: Name of the event subscription to be created. Event
-         subscription names must be between 3 and 64 characters in length and use alphanumeric letters
-         only. Required.
-        :type event_subscription_name: str
-        :param event_subscription_info: Event subscription properties containing the destination and
-         filter information. Is either a EventSubscription type or a IO[bytes] type. Required.
-        :type event_subscription_info: ~azure.mgmt.eventgrid.models.EventSubscription or IO[bytes]
-        :return: An instance of LROPoller that returns either EventSubscription or the result of
-         cls(response)
-        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.eventgrid.models.EventSubscription]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
-        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
-        cls: ClsType[_models.EventSubscription] = kwargs.pop("cls", None)
-        polling: Union[bool, PollingMethod] = kwargs.pop("polling", True)
-        lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
-        cont_token: Optional[str] = kwargs.pop("continuation_token", None)
-        if cont_token is None:
-            raw_result = self._create_or_update_initial(
-                resource_group_name=resource_group_name,
-                domain_name=domain_name,
-                event_subscription_name=event_subscription_name,
-                event_subscription_info=event_subscription_info,
-                api_version=api_version,
-                content_type=content_type,
-                cls=lambda x, y, z: x,
-                headers=_headers,
-                params=_params,
-                **kwargs
-            )
-            raw_result.http_response.read()  # type: ignore
-        kwargs.pop("error_map", None)
-
-        def get_long_running_output(pipeline_response):
-            deserialized = self._deserialize("EventSubscription", pipeline_response.http_response)
-            if cls:
-                return cls(pipeline_response, deserialized, {})  # type: ignore
-            return deserialized
-
-        if polling is True:
-            polling_method: PollingMethod = cast(PollingMethod, ARMPolling(lro_delay, **kwargs))
-        elif polling is False:
-            polling_method = cast(PollingMethod, NoPolling())
-        else:
-            polling_method = polling
-        if cont_token:
-            return LROPoller[_models.EventSubscription].from_continuation_token(
-                polling_method=polling_method,
-                continuation_token=cont_token,
-                client=self._client,
-                deserialization_callback=get_long_running_output,
-            )
-        return LROPoller[_models.EventSubscription](
-            self._client, raw_result, get_long_running_output, polling_method  # type: ignore
-        )
-
-    def _delete_initial(
-        self, resource_group_name: str, domain_name: str, event_subscription_name: str, **kwargs: Any
-    ) -> Iterator[bytes]:
-        error_map: MutableMapping = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        _headers = kwargs.pop("headers", {}) or {}
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
-        cls: ClsType[Iterator[bytes]] = kwargs.pop("cls", None)
-
-        _request = build_delete_request(
-            resource_group_name=resource_group_name,
-            domain_name=domain_name,
-            event_subscription_name=event_subscription_name,
-            subscription_id=self._config.subscription_id,
-            api_version=api_version,
-            headers=_headers,
-            params=_params,
-        )
-        _request.url = self._client.format_url(_request.url)
-
-        _decompress = kwargs.pop("decompress", True)
-        _stream = True
-        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            _request, stream=_stream, **kwargs
-        )
-
-        response = pipeline_response.http_response
-
-        if response.status_code not in [200, 202, 204]:
-            try:
-                response.read()  # Load the body in memory and close the socket
-            except (StreamConsumedError, StreamClosedError):
-                pass
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
-            raise HttpResponseError(response=response, error_format=ARMErrorFormat)
-
-        response_headers = {}
-        if response.status_code == 202:
-            response_headers["Location"] = self._deserialize("str", response.headers.get("Location"))
-
-        deserialized = response.stream_download(self._client._pipeline, decompress=_decompress)
-
-        if cls:
-            return cls(pipeline_response, deserialized, response_headers)  # type: ignore
-
-        return deserialized  # type: ignore
-
-    @distributed_trace
-    def begin_delete(
-        self, resource_group_name: str, domain_name: str, event_subscription_name: str, **kwargs: Any
-    ) -> LROPoller[None]:
-        """Delete an event subscription for a domain.
-
-        Delete an existing event subscription for a domain.
-
-        :param resource_group_name: The name of the resource group within the user's subscription.
-         Required.
-        :type resource_group_name: str
-        :param domain_name: Name of the domain. Required.
-        :type domain_name: str
-        :param event_subscription_name: Name of the event subscription to be deleted. Required.
-        :type event_subscription_name: str
-        :return: An instance of LROPoller that returns either None or the result of cls(response)
-        :rtype: ~azure.core.polling.LROPoller[None]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        _headers = kwargs.pop("headers", {}) or {}
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
-        cls: ClsType[None] = kwargs.pop("cls", None)
-        polling: Union[bool, PollingMethod] = kwargs.pop("polling", True)
-        lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
-        cont_token: Optional[str] = kwargs.pop("continuation_token", None)
-        if cont_token is None:
-            raw_result = self._delete_initial(
-                resource_group_name=resource_group_name,
-                domain_name=domain_name,
-                event_subscription_name=event_subscription_name,
-                api_version=api_version,
-                cls=lambda x, y, z: x,
-                headers=_headers,
-                params=_params,
-                **kwargs
-            )
-            raw_result.http_response.read()  # type: ignore
-        kwargs.pop("error_map", None)
-
-        def get_long_running_output(pipeline_response):  # pylint: disable=inconsistent-return-statements
-            if cls:
-                return cls(pipeline_response, None, {})  # type: ignore
-
-        if polling is True:
-            polling_method: PollingMethod = cast(PollingMethod, ARMPolling(lro_delay, **kwargs))
-        elif polling is False:
-            polling_method = cast(PollingMethod, NoPolling())
-        else:
-            polling_method = polling
-        if cont_token:
-            return LROPoller[None].from_continuation_token(
-                polling_method=polling_method,
-                continuation_token=cont_token,
-                client=self._client,
-                deserialization_callback=get_long_running_output,
-            )
-        return LROPoller[None](self._client, raw_result, get_long_running_output, polling_method)  # type: ignore
-
-    def _update_initial(
-        self,
-        resource_group_name: str,
-        domain_name: str,
-        event_subscription_name: str,
-        event_subscription_update_parameters: Union[_models.EventSubscriptionUpdateParameters, IO[bytes]],
-        **kwargs: Any
-    ) -> Iterator[bytes]:
-        error_map: MutableMapping = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
-        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
-        cls: ClsType[Iterator[bytes]] = kwargs.pop("cls", None)
-
-        content_type = content_type or "application/json"
-        _json = None
-        _content = None
-        if isinstance(event_subscription_update_parameters, (IOBase, bytes)):
-            _content = event_subscription_update_parameters
-        else:
-            _json = self._serialize.body(event_subscription_update_parameters, "EventSubscriptionUpdateParameters")
-
-        _request = build_update_request(
-            resource_group_name=resource_group_name,
-            domain_name=domain_name,
-            event_subscription_name=event_subscription_name,
-            subscription_id=self._config.subscription_id,
-            api_version=api_version,
-            content_type=content_type,
-            json=_json,
-            content=_content,
-            headers=_headers,
-            params=_params,
-        )
-        _request.url = self._client.format_url(_request.url)
-
-        _decompress = kwargs.pop("decompress", True)
-        _stream = True
-        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            _request, stream=_stream, **kwargs
-        )
-
-        response = pipeline_response.http_response
-
-        if response.status_code not in [201]:
-            try:
-                response.read()  # Load the body in memory and close the socket
-            except (StreamConsumedError, StreamClosedError):
-                pass
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
-            raise HttpResponseError(response=response, error_format=ARMErrorFormat)
-
-        deserialized = response.stream_download(self._client._pipeline, decompress=_decompress)
-
-        if cls:
-            return cls(pipeline_response, deserialized, {})  # type: ignore
-
-        return deserialized  # type: ignore
-
-    @overload
-    def begin_update(
-        self,
-        resource_group_name: str,
-        domain_name: str,
-        event_subscription_name: str,
-        event_subscription_update_parameters: _models.EventSubscriptionUpdateParameters,
-        *,
-        content_type: str = "application/json",
-        **kwargs: Any
-    ) -> LROPoller[_models.EventSubscription]:
-        """Update an event subscription for a domain.
-
-        Update an existing event subscription for a topic.
-
-        :param resource_group_name: The name of the resource group within the user's subscription.
-         Required.
-        :type resource_group_name: str
-        :param domain_name: Name of the domain. Required.
-        :type domain_name: str
-        :param event_subscription_name: Name of the event subscription to be updated. Required.
-        :type event_subscription_name: str
-        :param event_subscription_update_parameters: Updated event subscription information. Required.
-        :type event_subscription_update_parameters:
-         ~azure.mgmt.eventgrid.models.EventSubscriptionUpdateParameters
-        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
-         Default value is "application/json".
-        :paramtype content_type: str
-        :return: An instance of LROPoller that returns either EventSubscription or the result of
-         cls(response)
-        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.eventgrid.models.EventSubscription]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-
-    @overload
-    def begin_update(
-        self,
-        resource_group_name: str,
-        domain_name: str,
-        event_subscription_name: str,
-        event_subscription_update_parameters: IO[bytes],
-        *,
-        content_type: str = "application/json",
-        **kwargs: Any
-    ) -> LROPoller[_models.EventSubscription]:
-        """Update an event subscription for a domain.
-
-        Update an existing event subscription for a topic.
-
-        :param resource_group_name: The name of the resource group within the user's subscription.
-         Required.
-        :type resource_group_name: str
-        :param domain_name: Name of the domain. Required.
-        :type domain_name: str
-        :param event_subscription_name: Name of the event subscription to be updated. Required.
-        :type event_subscription_name: str
-        :param event_subscription_update_parameters: Updated event subscription information. Required.
-        :type event_subscription_update_parameters: IO[bytes]
-        :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
-         Default value is "application/json".
-        :paramtype content_type: str
-        :return: An instance of LROPoller that returns either EventSubscription or the result of
-         cls(response)
-        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.eventgrid.models.EventSubscription]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-
-    @distributed_trace
-    def begin_update(
-        self,
-        resource_group_name: str,
-        domain_name: str,
-        event_subscription_name: str,
-        event_subscription_update_parameters: Union[_models.EventSubscriptionUpdateParameters, IO[bytes]],
-        **kwargs: Any
-    ) -> LROPoller[_models.EventSubscription]:
-        """Update an event subscription for a domain.
-
-        Update an existing event subscription for a topic.
-
-        :param resource_group_name: The name of the resource group within the user's subscription.
-         Required.
-        :type resource_group_name: str
-        :param domain_name: Name of the domain. Required.
-        :type domain_name: str
-        :param event_subscription_name: Name of the event subscription to be updated. Required.
-        :type event_subscription_name: str
-        :param event_subscription_update_parameters: Updated event subscription information. Is either
-         a EventSubscriptionUpdateParameters type or a IO[bytes] type. Required.
-        :type event_subscription_update_parameters:
-         ~azure.mgmt.eventgrid.models.EventSubscriptionUpdateParameters or IO[bytes]
-        :return: An instance of LROPoller that returns either EventSubscription or the result of
-         cls(response)
-        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.eventgrid.models.EventSubscription]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
-        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
-        cls: ClsType[_models.EventSubscription] = kwargs.pop("cls", None)
-        polling: Union[bool, PollingMethod] = kwargs.pop("polling", True)
-        lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
-        cont_token: Optional[str] = kwargs.pop("continuation_token", None)
-        if cont_token is None:
-            raw_result = self._update_initial(
-                resource_group_name=resource_group_name,
-                domain_name=domain_name,
-                event_subscription_name=event_subscription_name,
-                event_subscription_update_parameters=event_subscription_update_parameters,
-                api_version=api_version,
-                content_type=content_type,
-                cls=lambda x, y, z: x,
-                headers=_headers,
-                params=_params,
-                **kwargs
-            )
-            raw_result.http_response.read()  # type: ignore
-        kwargs.pop("error_map", None)
-
-        def get_long_running_output(pipeline_response):
-            deserialized = self._deserialize("EventSubscription", pipeline_response.http_response)
-            if cls:
-                return cls(pipeline_response, deserialized, {})  # type: ignore
-            return deserialized
-
-        if polling is True:
-            polling_method: PollingMethod = cast(PollingMethod, ARMPolling(lro_delay, **kwargs))
-        elif polling is False:
-            polling_method = cast(PollingMethod, NoPolling())
-        else:
-            polling_method = polling
-        if cont_token:
-            return LROPoller[_models.EventSubscription].from_continuation_token(
-                polling_method=polling_method,
-                continuation_token=cont_token,
-                client=self._client,
-                deserialization_callback=get_long_running_output,
-            )
-        return LROPoller[_models.EventSubscription](
-            self._client, raw_result, get_long_running_output, polling_method  # type: ignore
-        )
-
-    @distributed_trace
-    def get_full_url(
-        self, resource_group_name: str, domain_name: str, event_subscription_name: str, **kwargs: Any
-    ) -> _models.EventSubscriptionFullUrl:
-        """Get full URL of an event subscription for domain.
-
-        Get the full endpoint URL for an event subscription for domain.
-
-        :param resource_group_name: The name of the resource group within the user's subscription.
-         Required.
-        :type resource_group_name: str
-        :param domain_name: Name of the domain topic. Required.
-        :type domain_name: str
-        :param event_subscription_name: Name of the event subscription. Required.
-        :type event_subscription_name: str
-        :return: EventSubscriptionFullUrl or the result of cls(response)
-        :rtype: ~azure.mgmt.eventgrid.models.EventSubscriptionFullUrl
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        error_map: MutableMapping = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        _headers = kwargs.pop("headers", {}) or {}
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
-        cls: ClsType[_models.EventSubscriptionFullUrl] = kwargs.pop("cls", None)
-
-        _request = build_get_full_url_request(
-            resource_group_name=resource_group_name,
-            domain_name=domain_name,
-            event_subscription_name=event_subscription_name,
-            subscription_id=self._config.subscription_id,
-            api_version=api_version,
-            headers=_headers,
-            params=_params,
-        )
-        _request.url = self._client.format_url(_request.url)
-
-        _stream = False
-        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            _request, stream=_stream, **kwargs
-        )
-
-        response = pipeline_response.http_response
-
-        if response.status_code not in [200]:
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
-            raise HttpResponseError(response=response, error_format=ARMErrorFormat)
-
-        deserialized = self._deserialize("EventSubscriptionFullUrl", pipeline_response.http_response)
-
-        if cls:
-            return cls(pipeline_response, deserialized, {})  # type: ignore
-
-        return deserialized  # type: ignore
-
-    @distributed_trace
     def list(
         self,
         resource_group_name: str,
@@ -1038,7 +328,7 @@ class DomainEventSubscriptionsOperations:
 
         List all event subscriptions that have been created for a specific topic.
 
-        :param resource_group_name: The name of the resource group within the user's subscription.
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
         :param domain_name: Name of the domain. Required.
@@ -1123,8 +413,777 @@ class DomainEventSubscriptionsOperations:
 
             if response.status_code not in [200]:
                 map_error(status_code=response.status_code, response=response, error_map=error_map)
-                raise HttpResponseError(response=response, error_format=ARMErrorFormat)
+                error = self._deserialize.failsafe_deserialize(
+                    _models.ErrorResponse,
+                    pipeline_response,
+                )
+                raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
             return pipeline_response
 
         return ItemPaged(get_next, extract_data)
+
+    @distributed_trace
+    def get(
+        self, resource_group_name: str, domain_name: str, event_subscription_name: str, **kwargs: Any
+    ) -> _models.EventSubscription:
+        """Get an event subscription of a domain.
+
+        Get properties of an event subscription of a domain.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param domain_name: Name of the domain. Required.
+        :type domain_name: str
+        :param event_subscription_name: Name of the event subscription to be found. Required.
+        :type event_subscription_name: str
+        :return: EventSubscription or the result of cls(response)
+        :rtype: ~azure.mgmt.eventgrid.models.EventSubscription
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
+        cls: ClsType[_models.EventSubscription] = kwargs.pop("cls", None)
+
+        _request = build_get_request(
+            resource_group_name=resource_group_name,
+            domain_name=domain_name,
+            event_subscription_name=event_subscription_name,
+            subscription_id=self._config.subscription_id,
+            api_version=api_version,
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            error = self._deserialize.failsafe_deserialize(
+                _models.ErrorResponse,
+                pipeline_response,
+            )
+            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
+
+        deserialized = self._deserialize("EventSubscription", pipeline_response.http_response)
+
+        if cls:
+            return cls(pipeline_response, deserialized, {})  # type: ignore
+
+        return deserialized  # type: ignore
+
+    def _create_or_update_initial(
+        self,
+        resource_group_name: str,
+        domain_name: str,
+        event_subscription_name: str,
+        event_subscription_info: Union[_models.EventSubscription, IO[bytes]],
+        **kwargs: Any
+    ) -> Iterator[bytes]:
+        error_map: MutableMapping = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[Iterator[bytes]] = kwargs.pop("cls", None)
+
+        content_type = content_type or "application/json"
+        _json = None
+        _content = None
+        if isinstance(event_subscription_info, (IOBase, bytes)):
+            _content = event_subscription_info
+        else:
+            _json = self._serialize.body(event_subscription_info, "EventSubscription")
+
+        _request = build_create_or_update_request(
+            resource_group_name=resource_group_name,
+            domain_name=domain_name,
+            event_subscription_name=event_subscription_name,
+            subscription_id=self._config.subscription_id,
+            api_version=api_version,
+            content_type=content_type,
+            json=_json,
+            content=_content,
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _decompress = kwargs.pop("decompress", True)
+        _stream = True
+        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200, 201]:
+            try:
+                response.read()  # Load the body in memory and close the socket
+            except (StreamConsumedError, StreamClosedError):
+                pass
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            error = self._deserialize.failsafe_deserialize(
+                _models.ErrorResponse,
+                pipeline_response,
+            )
+            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
+
+        response_headers = {}
+        if response.status_code == 201:
+            response_headers["Location"] = self._deserialize("str", response.headers.get("Location"))
+            response_headers["Retry-After"] = self._deserialize("int", response.headers.get("Retry-After"))
+
+        deserialized = response.stream_download(self._client._pipeline, decompress=_decompress)
+
+        if cls:
+            return cls(pipeline_response, deserialized, response_headers)  # type: ignore
+
+        return deserialized  # type: ignore
+
+    @overload
+    def begin_create_or_update(
+        self,
+        resource_group_name: str,
+        domain_name: str,
+        event_subscription_name: str,
+        event_subscription_info: _models.EventSubscription,
+        *,
+        content_type: str = "application/json",
+        **kwargs: Any
+    ) -> LROPoller[_models.EventSubscription]:
+        """Create or update an event subscription to a domain.
+
+        Asynchronously creates a new event subscription or updates an existing event subscription.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param domain_name: Name of the domain. Required.
+        :type domain_name: str
+        :param event_subscription_name: Name of the event subscription to be found. Required.
+        :type event_subscription_name: str
+        :param event_subscription_info: Event subscription properties containing the destination and
+         filter information. Required.
+        :type event_subscription_info: ~azure.mgmt.eventgrid.models.EventSubscription
+        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :return: An instance of LROPoller that returns either EventSubscription or the result of
+         cls(response)
+        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.eventgrid.models.EventSubscription]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+
+    @overload
+    def begin_create_or_update(
+        self,
+        resource_group_name: str,
+        domain_name: str,
+        event_subscription_name: str,
+        event_subscription_info: IO[bytes],
+        *,
+        content_type: str = "application/json",
+        **kwargs: Any
+    ) -> LROPoller[_models.EventSubscription]:
+        """Create or update an event subscription to a domain.
+
+        Asynchronously creates a new event subscription or updates an existing event subscription.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param domain_name: Name of the domain. Required.
+        :type domain_name: str
+        :param event_subscription_name: Name of the event subscription to be found. Required.
+        :type event_subscription_name: str
+        :param event_subscription_info: Event subscription properties containing the destination and
+         filter information. Required.
+        :type event_subscription_info: IO[bytes]
+        :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :return: An instance of LROPoller that returns either EventSubscription or the result of
+         cls(response)
+        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.eventgrid.models.EventSubscription]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+
+    @distributed_trace
+    def begin_create_or_update(
+        self,
+        resource_group_name: str,
+        domain_name: str,
+        event_subscription_name: str,
+        event_subscription_info: Union[_models.EventSubscription, IO[bytes]],
+        **kwargs: Any
+    ) -> LROPoller[_models.EventSubscription]:
+        """Create or update an event subscription to a domain.
+
+        Asynchronously creates a new event subscription or updates an existing event subscription.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param domain_name: Name of the domain. Required.
+        :type domain_name: str
+        :param event_subscription_name: Name of the event subscription to be found. Required.
+        :type event_subscription_name: str
+        :param event_subscription_info: Event subscription properties containing the destination and
+         filter information. Is either a EventSubscription type or a IO[bytes] type. Required.
+        :type event_subscription_info: ~azure.mgmt.eventgrid.models.EventSubscription or IO[bytes]
+        :return: An instance of LROPoller that returns either EventSubscription or the result of
+         cls(response)
+        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.eventgrid.models.EventSubscription]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[_models.EventSubscription] = kwargs.pop("cls", None)
+        polling: Union[bool, PollingMethod] = kwargs.pop("polling", True)
+        lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
+        cont_token: Optional[str] = kwargs.pop("continuation_token", None)
+        if cont_token is None:
+            raw_result = self._create_or_update_initial(
+                resource_group_name=resource_group_name,
+                domain_name=domain_name,
+                event_subscription_name=event_subscription_name,
+                event_subscription_info=event_subscription_info,
+                api_version=api_version,
+                content_type=content_type,
+                cls=lambda x, y, z: x,
+                headers=_headers,
+                params=_params,
+                **kwargs
+            )
+            raw_result.http_response.read()  # type: ignore
+        kwargs.pop("error_map", None)
+
+        def get_long_running_output(pipeline_response):
+            deserialized = self._deserialize("EventSubscription", pipeline_response.http_response)
+            if cls:
+                return cls(pipeline_response, deserialized, {})  # type: ignore
+            return deserialized
+
+        if polling is True:
+            polling_method: PollingMethod = cast(
+                PollingMethod, ARMPolling(lro_delay, lro_options={"final-state-via": "location"}, **kwargs)
+            )
+        elif polling is False:
+            polling_method = cast(PollingMethod, NoPolling())
+        else:
+            polling_method = polling
+        if cont_token:
+            return LROPoller[_models.EventSubscription].from_continuation_token(
+                polling_method=polling_method,
+                continuation_token=cont_token,
+                client=self._client,
+                deserialization_callback=get_long_running_output,
+            )
+        return LROPoller[_models.EventSubscription](
+            self._client, raw_result, get_long_running_output, polling_method  # type: ignore
+        )
+
+    def _update_initial(
+        self,
+        resource_group_name: str,
+        domain_name: str,
+        event_subscription_name: str,
+        event_subscription_update_parameters: Union[_models.EventSubscriptionUpdateParameters, IO[bytes]],
+        **kwargs: Any
+    ) -> Iterator[bytes]:
+        error_map: MutableMapping = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[Iterator[bytes]] = kwargs.pop("cls", None)
+
+        content_type = content_type or "application/json"
+        _json = None
+        _content = None
+        if isinstance(event_subscription_update_parameters, (IOBase, bytes)):
+            _content = event_subscription_update_parameters
+        else:
+            _json = self._serialize.body(event_subscription_update_parameters, "EventSubscriptionUpdateParameters")
+
+        _request = build_update_request(
+            resource_group_name=resource_group_name,
+            domain_name=domain_name,
+            event_subscription_name=event_subscription_name,
+            subscription_id=self._config.subscription_id,
+            api_version=api_version,
+            content_type=content_type,
+            json=_json,
+            content=_content,
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _decompress = kwargs.pop("decompress", True)
+        _stream = True
+        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200, 201]:
+            try:
+                response.read()  # Load the body in memory and close the socket
+            except (StreamConsumedError, StreamClosedError):
+                pass
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            error = self._deserialize.failsafe_deserialize(
+                _models.ErrorResponse,
+                pipeline_response,
+            )
+            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
+
+        response_headers = {}
+        if response.status_code == 201:
+            response_headers["Location"] = self._deserialize("str", response.headers.get("Location"))
+
+        deserialized = response.stream_download(self._client._pipeline, decompress=_decompress)
+
+        if cls:
+            return cls(pipeline_response, deserialized, response_headers)  # type: ignore
+
+        return deserialized  # type: ignore
+
+    @overload
+    def begin_update(
+        self,
+        resource_group_name: str,
+        domain_name: str,
+        event_subscription_name: str,
+        event_subscription_update_parameters: _models.EventSubscriptionUpdateParameters,
+        *,
+        content_type: str = "application/json",
+        **kwargs: Any
+    ) -> LROPoller[_models.EventSubscription]:
+        """Update an event subscription for a domain.
+
+        Update an existing event subscription for a topic.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param domain_name: Name of the domain. Required.
+        :type domain_name: str
+        :param event_subscription_name: Name of the event subscription to be found. Required.
+        :type event_subscription_name: str
+        :param event_subscription_update_parameters: Updated event subscription information. Required.
+        :type event_subscription_update_parameters:
+         ~azure.mgmt.eventgrid.models.EventSubscriptionUpdateParameters
+        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :return: An instance of LROPoller that returns either EventSubscription or the result of
+         cls(response)
+        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.eventgrid.models.EventSubscription]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+
+    @overload
+    def begin_update(
+        self,
+        resource_group_name: str,
+        domain_name: str,
+        event_subscription_name: str,
+        event_subscription_update_parameters: IO[bytes],
+        *,
+        content_type: str = "application/json",
+        **kwargs: Any
+    ) -> LROPoller[_models.EventSubscription]:
+        """Update an event subscription for a domain.
+
+        Update an existing event subscription for a topic.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param domain_name: Name of the domain. Required.
+        :type domain_name: str
+        :param event_subscription_name: Name of the event subscription to be found. Required.
+        :type event_subscription_name: str
+        :param event_subscription_update_parameters: Updated event subscription information. Required.
+        :type event_subscription_update_parameters: IO[bytes]
+        :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :return: An instance of LROPoller that returns either EventSubscription or the result of
+         cls(response)
+        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.eventgrid.models.EventSubscription]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+
+    @distributed_trace
+    def begin_update(
+        self,
+        resource_group_name: str,
+        domain_name: str,
+        event_subscription_name: str,
+        event_subscription_update_parameters: Union[_models.EventSubscriptionUpdateParameters, IO[bytes]],
+        **kwargs: Any
+    ) -> LROPoller[_models.EventSubscription]:
+        """Update an event subscription for a domain.
+
+        Update an existing event subscription for a topic.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param domain_name: Name of the domain. Required.
+        :type domain_name: str
+        :param event_subscription_name: Name of the event subscription to be found. Required.
+        :type event_subscription_name: str
+        :param event_subscription_update_parameters: Updated event subscription information. Is either
+         a EventSubscriptionUpdateParameters type or a IO[bytes] type. Required.
+        :type event_subscription_update_parameters:
+         ~azure.mgmt.eventgrid.models.EventSubscriptionUpdateParameters or IO[bytes]
+        :return: An instance of LROPoller that returns either EventSubscription or the result of
+         cls(response)
+        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.eventgrid.models.EventSubscription]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[_models.EventSubscription] = kwargs.pop("cls", None)
+        polling: Union[bool, PollingMethod] = kwargs.pop("polling", True)
+        lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
+        cont_token: Optional[str] = kwargs.pop("continuation_token", None)
+        if cont_token is None:
+            raw_result = self._update_initial(
+                resource_group_name=resource_group_name,
+                domain_name=domain_name,
+                event_subscription_name=event_subscription_name,
+                event_subscription_update_parameters=event_subscription_update_parameters,
+                api_version=api_version,
+                content_type=content_type,
+                cls=lambda x, y, z: x,
+                headers=_headers,
+                params=_params,
+                **kwargs
+            )
+            raw_result.http_response.read()  # type: ignore
+        kwargs.pop("error_map", None)
+
+        def get_long_running_output(pipeline_response):
+            deserialized = self._deserialize("EventSubscription", pipeline_response.http_response)
+            if cls:
+                return cls(pipeline_response, deserialized, {})  # type: ignore
+            return deserialized
+
+        if polling is True:
+            polling_method: PollingMethod = cast(
+                PollingMethod, ARMPolling(lro_delay, lro_options={"final-state-via": "location"}, **kwargs)
+            )
+        elif polling is False:
+            polling_method = cast(PollingMethod, NoPolling())
+        else:
+            polling_method = polling
+        if cont_token:
+            return LROPoller[_models.EventSubscription].from_continuation_token(
+                polling_method=polling_method,
+                continuation_token=cont_token,
+                client=self._client,
+                deserialization_callback=get_long_running_output,
+            )
+        return LROPoller[_models.EventSubscription](
+            self._client, raw_result, get_long_running_output, polling_method  # type: ignore
+        )
+
+    def _delete_initial(
+        self, resource_group_name: str, domain_name: str, event_subscription_name: str, **kwargs: Any
+    ) -> Iterator[bytes]:
+        error_map: MutableMapping = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
+        cls: ClsType[Iterator[bytes]] = kwargs.pop("cls", None)
+
+        _request = build_delete_request(
+            resource_group_name=resource_group_name,
+            domain_name=domain_name,
+            event_subscription_name=event_subscription_name,
+            subscription_id=self._config.subscription_id,
+            api_version=api_version,
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _decompress = kwargs.pop("decompress", True)
+        _stream = True
+        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200, 202, 204]:
+            try:
+                response.read()  # Load the body in memory and close the socket
+            except (StreamConsumedError, StreamClosedError):
+                pass
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            error = self._deserialize.failsafe_deserialize(
+                _models.ErrorResponse,
+                pipeline_response,
+            )
+            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
+
+        response_headers = {}
+        if response.status_code == 202:
+            response_headers["Location"] = self._deserialize("str", response.headers.get("Location"))
+            response_headers["Retry-After"] = self._deserialize("int", response.headers.get("Retry-After"))
+
+        deserialized = response.stream_download(self._client._pipeline, decompress=_decompress)
+
+        if cls:
+            return cls(pipeline_response, deserialized, response_headers)  # type: ignore
+
+        return deserialized  # type: ignore
+
+    @distributed_trace
+    def begin_delete(
+        self, resource_group_name: str, domain_name: str, event_subscription_name: str, **kwargs: Any
+    ) -> LROPoller[None]:
+        """Delete an event subscription for a domain.
+
+        Delete an existing event subscription for a domain.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param domain_name: Name of the domain. Required.
+        :type domain_name: str
+        :param event_subscription_name: Name of the event subscription to be found. Required.
+        :type event_subscription_name: str
+        :return: An instance of LROPoller that returns either None or the result of cls(response)
+        :rtype: ~azure.core.polling.LROPoller[None]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
+        cls: ClsType[None] = kwargs.pop("cls", None)
+        polling: Union[bool, PollingMethod] = kwargs.pop("polling", True)
+        lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
+        cont_token: Optional[str] = kwargs.pop("continuation_token", None)
+        if cont_token is None:
+            raw_result = self._delete_initial(
+                resource_group_name=resource_group_name,
+                domain_name=domain_name,
+                event_subscription_name=event_subscription_name,
+                api_version=api_version,
+                cls=lambda x, y, z: x,
+                headers=_headers,
+                params=_params,
+                **kwargs
+            )
+            raw_result.http_response.read()  # type: ignore
+        kwargs.pop("error_map", None)
+
+        def get_long_running_output(pipeline_response):  # pylint: disable=inconsistent-return-statements
+            if cls:
+                return cls(pipeline_response, None, {})  # type: ignore
+
+        if polling is True:
+            polling_method: PollingMethod = cast(
+                PollingMethod, ARMPolling(lro_delay, lro_options={"final-state-via": "location"}, **kwargs)
+            )
+        elif polling is False:
+            polling_method = cast(PollingMethod, NoPolling())
+        else:
+            polling_method = polling
+        if cont_token:
+            return LROPoller[None].from_continuation_token(
+                polling_method=polling_method,
+                continuation_token=cont_token,
+                client=self._client,
+                deserialization_callback=get_long_running_output,
+            )
+        return LROPoller[None](self._client, raw_result, get_long_running_output, polling_method)  # type: ignore
+
+    @distributed_trace
+    def get_delivery_attributes(
+        self, resource_group_name: str, domain_name: str, event_subscription_name: str, **kwargs: Any
+    ) -> _models.DeliveryAttributeListResult:
+        """Get delivery attributes for an event subscription for domain.
+
+        Get all delivery attributes for an event subscription for domain.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param domain_name: Name of the domain. Required.
+        :type domain_name: str
+        :param event_subscription_name: Name of the event subscription to be found. Required.
+        :type event_subscription_name: str
+        :return: DeliveryAttributeListResult or the result of cls(response)
+        :rtype: ~azure.mgmt.eventgrid.models.DeliveryAttributeListResult
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
+        cls: ClsType[_models.DeliveryAttributeListResult] = kwargs.pop("cls", None)
+
+        _request = build_get_delivery_attributes_request(
+            resource_group_name=resource_group_name,
+            domain_name=domain_name,
+            event_subscription_name=event_subscription_name,
+            subscription_id=self._config.subscription_id,
+            api_version=api_version,
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            error = self._deserialize.failsafe_deserialize(
+                _models.ErrorResponse,
+                pipeline_response,
+            )
+            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
+
+        deserialized = self._deserialize("DeliveryAttributeListResult", pipeline_response.http_response)
+
+        if cls:
+            return cls(pipeline_response, deserialized, {})  # type: ignore
+
+        return deserialized  # type: ignore
+
+    @distributed_trace
+    def get_full_url(
+        self, resource_group_name: str, domain_name: str, event_subscription_name: str, **kwargs: Any
+    ) -> _models.EventSubscriptionFullUrl:
+        """Get full URL of an event subscription for domain.
+
+        Get the full endpoint URL for an event subscription for domain.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param domain_name: Name of the domain. Required.
+        :type domain_name: str
+        :param event_subscription_name: Name of the event subscription to be found. Required.
+        :type event_subscription_name: str
+        :return: EventSubscriptionFullUrl or the result of cls(response)
+        :rtype: ~azure.mgmt.eventgrid.models.EventSubscriptionFullUrl
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
+        cls: ClsType[_models.EventSubscriptionFullUrl] = kwargs.pop("cls", None)
+
+        _request = build_get_full_url_request(
+            resource_group_name=resource_group_name,
+            domain_name=domain_name,
+            event_subscription_name=event_subscription_name,
+            subscription_id=self._config.subscription_id,
+            api_version=api_version,
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            error = self._deserialize.failsafe_deserialize(
+                _models.ErrorResponse,
+                pipeline_response,
+            )
+            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
+
+        deserialized = self._deserialize("EventSubscriptionFullUrl", pipeline_response.http_response)
+
+        if cls:
+            return cls(pipeline_response, deserialized, {})  # type: ignore
+
+        return deserialized  # type: ignore

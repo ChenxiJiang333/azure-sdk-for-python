@@ -20,12 +20,24 @@ class TestEventGridManagementPartnerTopicEventSubscriptionsOperations(AzureMgmtR
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
+    def test_partner_topic_event_subscriptions_list_by_partner_topic(self, resource_group):
+        response = self.client.partner_topic_event_subscriptions.list_by_partner_topic(
+            resource_group_name=resource_group.name,
+            partner_topic_name="str",
+            api_version="2025-07-15-preview",
+        )
+        result = [r for r in response]
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
     def test_partner_topic_event_subscriptions_get(self, resource_group):
         response = self.client.partner_topic_event_subscriptions.get(
             resource_group_name=resource_group.name,
             partner_topic_name="str",
             event_subscription_name="str",
-            api_version="2025-04-01-preview",
+            api_version="2025-07-15-preview",
         )
 
         # please add some check logic here by yourself
@@ -83,20 +95,7 @@ class TestEventGridManagementPartnerTopicEventSubscriptionsOperations(AzureMgmtR
                 "topic": "str",
                 "type": "str",
             },
-            api_version="2025-04-01-preview",
-        ).result()  # call '.result()' to poll until service return final result
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_partner_topic_event_subscriptions_begin_delete(self, resource_group):
-        response = self.client.partner_topic_event_subscriptions.begin_delete(
-            resource_group_name=resource_group.name,
-            partner_topic_name="str",
-            event_subscription_name="str",
-            api_version="2025-04-01-preview",
+            api_version="2025-07-15-preview",
         ).result()  # call '.result()' to poll until service return final result
 
         # please add some check logic here by yourself
@@ -141,8 +140,34 @@ class TestEventGridManagementPartnerTopicEventSubscriptionsOperations(AzureMgmtR
                 "labels": ["str"],
                 "retryPolicy": {"eventTimeToLiveInMinutes": 1440, "maxDeliveryAttempts": 30},
             },
-            api_version="2025-04-01-preview",
+            api_version="2025-07-15-preview",
         ).result()  # call '.result()' to poll until service return final result
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
+    def test_partner_topic_event_subscriptions_begin_delete(self, resource_group):
+        response = self.client.partner_topic_event_subscriptions.begin_delete(
+            resource_group_name=resource_group.name,
+            partner_topic_name="str",
+            event_subscription_name="str",
+            api_version="2025-07-15-preview",
+        ).result()  # call '.result()' to poll until service return final result
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
+    def test_partner_topic_event_subscriptions_get_delivery_attributes(self, resource_group):
+        response = self.client.partner_topic_event_subscriptions.get_delivery_attributes(
+            resource_group_name=resource_group.name,
+            partner_topic_name="str",
+            event_subscription_name="str",
+            api_version="2025-07-15-preview",
+        )
 
         # please add some check logic here by yourself
         # ...
@@ -154,32 +179,7 @@ class TestEventGridManagementPartnerTopicEventSubscriptionsOperations(AzureMgmtR
             resource_group_name=resource_group.name,
             partner_topic_name="str",
             event_subscription_name="str",
-            api_version="2025-04-01-preview",
-        )
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_partner_topic_event_subscriptions_list_by_partner_topic(self, resource_group):
-        response = self.client.partner_topic_event_subscriptions.list_by_partner_topic(
-            resource_group_name=resource_group.name,
-            partner_topic_name="str",
-            api_version="2025-04-01-preview",
-        )
-        result = [r for r in response]
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_partner_topic_event_subscriptions_get_delivery_attributes(self, resource_group):
-        response = self.client.partner_topic_event_subscriptions.get_delivery_attributes(
-            resource_group_name=resource_group.name,
-            partner_topic_name="str",
-            event_subscription_name="str",
-            api_version="2025-04-01-preview",
+            api_version="2025-07-15-preview",
         )
 
         # please add some check logic here by yourself

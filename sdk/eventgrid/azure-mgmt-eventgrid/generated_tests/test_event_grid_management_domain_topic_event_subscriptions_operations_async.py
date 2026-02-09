@@ -21,15 +21,14 @@ class TestEventGridManagementDomainTopicEventSubscriptionsOperationsAsync(AzureM
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_domain_topic_event_subscriptions_get_delivery_attributes(self, resource_group):
-        response = await self.client.domain_topic_event_subscriptions.get_delivery_attributes(
+    async def test_domain_topic_event_subscriptions_list(self, resource_group):
+        response = self.client.domain_topic_event_subscriptions.list(
             resource_group_name=resource_group.name,
             domain_name="str",
             topic_name="str",
-            event_subscription_name="str",
-            api_version="2025-04-01-preview",
+            api_version="2025-07-15-preview",
         )
-
+        result = [r async for r in response]
         # please add some check logic here by yourself
         # ...
 
@@ -41,7 +40,7 @@ class TestEventGridManagementDomainTopicEventSubscriptionsOperationsAsync(AzureM
             domain_name="str",
             topic_name="str",
             event_subscription_name="str",
-            api_version="2025-04-01-preview",
+            api_version="2025-07-15-preview",
         )
 
         # please add some check logic here by yourself
@@ -101,23 +100,7 @@ class TestEventGridManagementDomainTopicEventSubscriptionsOperationsAsync(AzureM
                     "topic": "str",
                     "type": "str",
                 },
-                api_version="2025-04-01-preview",
-            )
-        ).result()  # call '.result()' to poll until service return final result
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_domain_topic_event_subscriptions_begin_delete(self, resource_group):
-        response = await (
-            await self.client.domain_topic_event_subscriptions.begin_delete(
-                resource_group_name=resource_group.name,
-                domain_name="str",
-                topic_name="str",
-                event_subscription_name="str",
-                api_version="2025-04-01-preview",
+                api_version="2025-07-15-preview",
             )
         ).result()  # call '.result()' to poll until service return final result
 
@@ -165,9 +148,39 @@ class TestEventGridManagementDomainTopicEventSubscriptionsOperationsAsync(AzureM
                     "labels": ["str"],
                     "retryPolicy": {"eventTimeToLiveInMinutes": 1440, "maxDeliveryAttempts": 30},
                 },
-                api_version="2025-04-01-preview",
+                api_version="2025-07-15-preview",
             )
         ).result()  # call '.result()' to poll until service return final result
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
+    async def test_domain_topic_event_subscriptions_begin_delete(self, resource_group):
+        response = await (
+            await self.client.domain_topic_event_subscriptions.begin_delete(
+                resource_group_name=resource_group.name,
+                domain_name="str",
+                topic_name="str",
+                event_subscription_name="str",
+                api_version="2025-07-15-preview",
+            )
+        ).result()  # call '.result()' to poll until service return final result
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
+    async def test_domain_topic_event_subscriptions_get_delivery_attributes(self, resource_group):
+        response = await self.client.domain_topic_event_subscriptions.get_delivery_attributes(
+            resource_group_name=resource_group.name,
+            domain_name="str",
+            topic_name="str",
+            event_subscription_name="str",
+            api_version="2025-07-15-preview",
+        )
 
         # please add some check logic here by yourself
         # ...
@@ -180,21 +193,8 @@ class TestEventGridManagementDomainTopicEventSubscriptionsOperationsAsync(AzureM
             domain_name="str",
             topic_name="str",
             event_subscription_name="str",
-            api_version="2025-04-01-preview",
+            api_version="2025-07-15-preview",
         )
 
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_domain_topic_event_subscriptions_list(self, resource_group):
-        response = self.client.domain_topic_event_subscriptions.list(
-            resource_group_name=resource_group.name,
-            domain_name="str",
-            topic_name="str",
-            api_version="2025-04-01-preview",
-        )
-        result = [r async for r in response]
         # please add some check logic here by yourself
         # ...

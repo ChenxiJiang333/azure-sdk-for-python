@@ -20,11 +20,32 @@ class TestEventGridManagementPartnerNamespacesOperations(AzureMgmtRecordedTestCa
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
+    def test_partner_namespaces_list_by_subscription(self, resource_group):
+        response = self.client.partner_namespaces.list_by_subscription(
+            api_version="2025-07-15-preview",
+        )
+        result = [r for r in response]
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
+    def test_partner_namespaces_list_by_resource_group(self, resource_group):
+        response = self.client.partner_namespaces.list_by_resource_group(
+            resource_group_name=resource_group.name,
+            api_version="2025-07-15-preview",
+        )
+        result = [r for r in response]
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
     def test_partner_namespaces_get(self, resource_group):
         response = self.client.partner_namespaces.get(
             resource_group_name=resource_group.name,
             partner_namespace_name="str",
-            api_version="2025-04-01-preview",
+            api_version="2025-07-15-preview",
         )
 
         # please add some check logic here by yourself
@@ -58,6 +79,14 @@ class TestEventGridManagementPartnerNamespacesOperations(AzureMgmtRecordedTestCa
                             "status": "str",
                         },
                         "provisioningState": "str",
+                        "systemData": {
+                            "createdAt": "2020-02-20 00:00:00",
+                            "createdBy": "str",
+                            "createdByType": "str",
+                            "lastModifiedAt": "2020-02-20 00:00:00",
+                            "lastModifiedBy": "str",
+                            "lastModifiedByType": "str",
+                        },
                         "type": "str",
                     }
                 ],
@@ -74,19 +103,7 @@ class TestEventGridManagementPartnerNamespacesOperations(AzureMgmtRecordedTestCa
                 "tags": {"str": "str"},
                 "type": "str",
             },
-            api_version="2025-04-01-preview",
-        ).result()  # call '.result()' to poll until service return final result
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_partner_namespaces_begin_delete(self, resource_group):
-        response = self.client.partner_namespaces.begin_delete(
-            resource_group_name=resource_group.name,
-            partner_namespace_name="str",
-            api_version="2025-04-01-preview",
+            api_version="2025-07-15-preview",
         ).result()  # call '.result()' to poll until service return final result
 
         # please add some check logic here by yourself
@@ -105,7 +122,7 @@ class TestEventGridManagementPartnerNamespacesOperations(AzureMgmtRecordedTestCa
                 "publicNetworkAccess": "str",
                 "tags": {"str": "str"},
             },
-            api_version="2025-04-01-preview",
+            api_version="2025-07-15-preview",
         ).result()  # call '.result()' to poll until service return final result
 
         # please add some check logic here by yourself
@@ -113,22 +130,13 @@ class TestEventGridManagementPartnerNamespacesOperations(AzureMgmtRecordedTestCa
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_partner_namespaces_list_by_subscription(self, resource_group):
-        response = self.client.partner_namespaces.list_by_subscription(
-            api_version="2025-04-01-preview",
-        )
-        result = [r for r in response]
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_partner_namespaces_list_by_resource_group(self, resource_group):
-        response = self.client.partner_namespaces.list_by_resource_group(
+    def test_partner_namespaces_begin_delete(self, resource_group):
+        response = self.client.partner_namespaces.begin_delete(
             resource_group_name=resource_group.name,
-            api_version="2025-04-01-preview",
-        )
-        result = [r for r in response]
+            partner_namespace_name="str",
+            api_version="2025-07-15-preview",
+        ).result()  # call '.result()' to poll until service return final result
+
         # please add some check logic here by yourself
         # ...
 
@@ -138,7 +146,7 @@ class TestEventGridManagementPartnerNamespacesOperations(AzureMgmtRecordedTestCa
         response = self.client.partner_namespaces.list_shared_access_keys(
             resource_group_name=resource_group.name,
             partner_namespace_name="str",
-            api_version="2025-04-01-preview",
+            api_version="2025-07-15-preview",
         )
 
         # please add some check logic here by yourself
@@ -151,7 +159,7 @@ class TestEventGridManagementPartnerNamespacesOperations(AzureMgmtRecordedTestCa
             resource_group_name=resource_group.name,
             partner_namespace_name="str",
             regenerate_key_request={"keyName": "str"},
-            api_version="2025-04-01-preview",
+            api_version="2025-07-15-preview",
         )
 
         # please add some check logic here by yourself

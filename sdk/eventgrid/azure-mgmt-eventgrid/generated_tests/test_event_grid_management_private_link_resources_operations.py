@@ -20,27 +20,27 @@ class TestEventGridManagementPrivateLinkResourcesOperations(AzureMgmtRecordedTes
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
+    def test_private_link_resources_list_by_resource(self, resource_group):
+        response = self.client.private_link_resources.list_by_resource(
+            resource_group_name=resource_group.name,
+            parent_type="str",
+            parent_name="str",
+            api_version="2025-07-15-preview",
+        )
+        result = [r for r in response]
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
     def test_private_link_resources_get(self, resource_group):
         response = self.client.private_link_resources.get(
             resource_group_name=resource_group.name,
             parent_type="str",
             parent_name="str",
             private_link_resource_name="str",
-            api_version="2025-04-01-preview",
+            api_version="2025-07-15-preview",
         )
 
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_private_link_resources_list_by_resource(self, resource_group):
-        response = self.client.private_link_resources.list_by_resource(
-            resource_group_name=resource_group.name,
-            parent_type="str",
-            parent_name="str",
-            api_version="2025-04-01-preview",
-        )
-        result = [r for r in response]
         # please add some check logic here by yourself
         # ...

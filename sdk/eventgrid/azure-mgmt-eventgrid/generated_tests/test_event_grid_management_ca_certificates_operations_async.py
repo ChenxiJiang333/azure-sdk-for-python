@@ -21,12 +21,24 @@ class TestEventGridManagementCaCertificatesOperationsAsync(AzureMgmtRecordedTest
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
+    async def test_ca_certificates_list_by_namespace(self, resource_group):
+        response = self.client.ca_certificates.list_by_namespace(
+            resource_group_name=resource_group.name,
+            namespace_name="str",
+            api_version="2025-07-15-preview",
+        )
+        result = [r async for r in response]
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
     async def test_ca_certificates_get(self, resource_group):
         response = await self.client.ca_certificates.get(
             resource_group_name=resource_group.name,
             namespace_name="str",
             ca_certificate_name="str",
-            api_version="2025-04-01-preview",
+            api_version="2025-07-15-preview",
         )
 
         # please add some check logic here by yourself
@@ -58,7 +70,7 @@ class TestEventGridManagementCaCertificatesOperationsAsync(AzureMgmtRecordedTest
                     },
                     "type": "str",
                 },
-                api_version="2025-04-01-preview",
+                api_version="2025-07-15-preview",
             )
         ).result()  # call '.result()' to poll until service return final result
 
@@ -73,21 +85,9 @@ class TestEventGridManagementCaCertificatesOperationsAsync(AzureMgmtRecordedTest
                 resource_group_name=resource_group.name,
                 namespace_name="str",
                 ca_certificate_name="str",
-                api_version="2025-04-01-preview",
+                api_version="2025-07-15-preview",
             )
         ).result()  # call '.result()' to poll until service return final result
 
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_ca_certificates_list_by_namespace(self, resource_group):
-        response = self.client.ca_certificates.list_by_namespace(
-            resource_group_name=resource_group.name,
-            namespace_name="str",
-            api_version="2025-04-01-preview",
-        )
-        result = [r async for r in response]
         # please add some check logic here by yourself
         # ...

@@ -20,11 +20,32 @@ class TestEventGridManagementPartnerDestinationsOperations(AzureMgmtRecordedTest
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
+    def test_partner_destinations_list_by_subscription(self, resource_group):
+        response = self.client.partner_destinations.list_by_subscription(
+            api_version="2025-07-15-preview",
+        )
+        result = [r for r in response]
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
+    def test_partner_destinations_list_by_resource_group(self, resource_group):
+        response = self.client.partner_destinations.list_by_resource_group(
+            resource_group_name=resource_group.name,
+            api_version="2025-07-15-preview",
+        )
+        result = [r for r in response]
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
     def test_partner_destinations_get(self, resource_group):
         response = self.client.partner_destinations.get(
             resource_group_name=resource_group.name,
             partner_destination_name="str",
-            api_version="2025-04-01-preview",
+            api_version="2025-07-15-preview",
         )
 
         # please add some check logic here by yourself
@@ -58,19 +79,7 @@ class TestEventGridManagementPartnerDestinationsOperations(AzureMgmtRecordedTest
                 "tags": {"str": "str"},
                 "type": "str",
             },
-            api_version="2025-04-01-preview",
-        ).result()  # call '.result()' to poll until service return final result
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_partner_destinations_begin_delete(self, resource_group):
-        response = self.client.partner_destinations.begin_delete(
-            resource_group_name=resource_group.name,
-            partner_destination_name="str",
-            api_version="2025-04-01-preview",
+            api_version="2025-07-15-preview",
         ).result()  # call '.result()' to poll until service return final result
 
         # please add some check logic here by yourself
@@ -83,7 +92,7 @@ class TestEventGridManagementPartnerDestinationsOperations(AzureMgmtRecordedTest
             resource_group_name=resource_group.name,
             partner_destination_name="str",
             partner_destination_update_parameters={"tags": {"str": "str"}},
-            api_version="2025-04-01-preview",
+            api_version="2025-07-15-preview",
         ).result()  # call '.result()' to poll until service return final result
 
         # please add some check logic here by yourself
@@ -91,22 +100,13 @@ class TestEventGridManagementPartnerDestinationsOperations(AzureMgmtRecordedTest
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_partner_destinations_list_by_subscription(self, resource_group):
-        response = self.client.partner_destinations.list_by_subscription(
-            api_version="2025-04-01-preview",
-        )
-        result = [r for r in response]
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_partner_destinations_list_by_resource_group(self, resource_group):
-        response = self.client.partner_destinations.list_by_resource_group(
+    def test_partner_destinations_begin_delete(self, resource_group):
+        response = self.client.partner_destinations.begin_delete(
             resource_group_name=resource_group.name,
-            api_version="2025-04-01-preview",
-        )
-        result = [r for r in response]
+            partner_destination_name="str",
+            api_version="2025-07-15-preview",
+        ).result()  # call '.result()' to poll until service return final result
+
         # please add some check logic here by yourself
         # ...
 
@@ -116,7 +116,7 @@ class TestEventGridManagementPartnerDestinationsOperations(AzureMgmtRecordedTest
         response = self.client.partner_destinations.activate(
             resource_group_name=resource_group.name,
             partner_destination_name="str",
-            api_version="2025-04-01-preview",
+            api_version="2025-07-15-preview",
         )
 
         # please add some check logic here by yourself
