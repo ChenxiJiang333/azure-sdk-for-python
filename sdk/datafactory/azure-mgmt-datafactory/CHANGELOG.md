@@ -1,5 +1,81 @@
 ## tsp migration
 
+## 10.0.0 (2026-02-09)
+
+### Features Added
+
+  - Added operation group IntegrationRuntimeOperations
+  - Model AmazonRdsForOracleLinkedService has a new parameter authentication_type
+  - Model AmazonRdsForOracleLinkedService has a new parameter crypto_checksum_client
+  - Model AmazonRdsForOracleLinkedService has a new parameter crypto_checksum_types_client
+  - Model AmazonRdsForOracleLinkedService has a new parameter enable_bulk_load
+  - Model AmazonRdsForOracleLinkedService has a new parameter encryption_client
+  - Model AmazonRdsForOracleLinkedService has a new parameter encryption_types_client
+  - Model AmazonRdsForOracleLinkedService has a new parameter fetch_size
+  - Model AmazonRdsForOracleLinkedService has a new parameter fetch_tswtz_as_timestamp
+  - Model AmazonRdsForOracleLinkedService has a new parameter initial_lob_fetch_size
+  - Model AmazonRdsForOracleLinkedService has a new parameter initialization_string
+  - Model AmazonRdsForOracleLinkedService has a new parameter server
+  - Model AmazonRdsForOracleLinkedService has a new parameter statement_cache_size
+  - Model AmazonRdsForOracleLinkedService has a new parameter support_v1_data_types
+  - Model AmazonRdsForOracleLinkedService has a new parameter username
+  - Model AmazonRdsForOracleSource has a new parameter number_precision
+  - Model AmazonRdsForOracleSource has a new parameter number_scale
+  - Model AzureDatabricksLinkedService has a new parameter data_security_mode
+  - Model ChangeDataCaptureResource has a new parameter system_data
+  - Model CredentialResource has a new parameter system_data
+  - Model DataFlowResource has a new parameter system_data
+  - Model DatasetResource has a new parameter system_data
+  - Model Factory has a new parameter system_data
+  - Model GlobalParameterResource has a new parameter system_data
+  - Model HDInsightLinkedService has a new parameter cluster_auth_type
+  - Model HDInsightLinkedService has a new parameter credential
+  - Model HDInsightOnDemandLinkedService has a new parameter cluster_resource_group_auth_type
+  - Model HiveLinkedService has a new parameter enable_server_certificate_validation
+  - Model ImpalaLinkedService has a new parameter enable_server_certificate_validation
+  - Model ImpalaLinkedService has a new parameter thrift_transport_protocol
+  - Model IntegrationRuntimeResource has a new parameter system_data
+  - Model JiraObjectDataset has a new parameter schema_type_properties_schema
+  - Model JiraObjectDataset has a new parameter table
+  - Model LakeHouseLinkedService has a new parameter authentication_type
+  - Model LakeHouseLinkedService has a new parameter credential
+  - Model LinkedServiceResource has a new parameter system_data
+  - Model LookupActivity has a new parameter treat_decimal_as_string
+  - Model ManagedIntegrationRuntime has a new parameter interactive_query
+  - Model ManagedPrivateEndpointResource has a new parameter system_data
+  - Model ManagedVirtualNetworkResource has a new parameter system_data
+  - Model NetezzaLinkedService has a new parameter database
+  - Model NetezzaLinkedService has a new parameter port
+  - Model NetezzaLinkedService has a new parameter security_level
+  - Model NetezzaLinkedService has a new parameter server
+  - Model NetezzaLinkedService has a new parameter uid
+  - Model Office365LinkedService has a new parameter service_principal_credential_type
+  - Model Office365LinkedService has a new parameter service_principal_embedded_cert
+  - Model Office365LinkedService has a new parameter service_principal_embedded_cert_password
+  - Model OracleSource has a new parameter number_precision
+  - Model OracleSource has a new parameter number_scale
+  - Model PipelineResource has a new parameter system_data
+  - Model PrivateEndpointConnectionResource has a new parameter system_data
+  - Model QuickBooksLinkedService has a new parameter refresh_token
+  - Model Resource has a new parameter system_data
+  - Model SalesforceV2Source has a new parameter partition_option
+  - Model ScriptActivity has a new parameter treat_decimal_as_string
+  - Model SnowflakeV2LinkedService has a new parameter role
+  - Model SnowflakeV2LinkedService has a new parameter schema
+  - Model SnowflakeV2LinkedService has a new parameter use_utc_timestamps
+  - Model SparkLinkedService has a new parameter enable_server_certificate_validation
+  - Model TriggerResource has a new parameter system_data
+  - Model WarehouseLinkedService has a new parameter authentication_type
+  - Model WarehouseLinkedService has a new parameter credential
+
+### Breaking Changes
+
+  - Model Resource no longer has parameter e_tag
+  - Model Resource no longer has parameter location
+  - Model Resource no longer has parameter tags
+  - Parameter value of model QueryDataFlowDebugSessionsResponse is now required
+  - Parameter value of model SsisObjectMetadataListResponse is now required
+
 ### Breaking Changes
 
 - Method `ActivityRunsOperations.query_by_pipeline_run` changed from `asynchronous` to `synchronous`
