@@ -25,6 +25,6 @@ class TestDataFactoryManagementprivateLinkResourcesOperations(AzureMgmtRecordedT
             resource_group_name=resource_group.name,
             factory_name="str",
         )
-        result = [r for r in response]
+
         # please add some check logic here by yourself
         # ...

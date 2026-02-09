@@ -1,5 +1,9 @@
 ## tsp migration
 
+## 9.3.0 (2026-02-09)
+
+change log generation failed!!! You need to write it manually!!!
+
 ## 10.0.0 (2026-02-09)
 
 ### Features Added

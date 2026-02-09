@@ -1,0 +1,4 @@
+directory: specification/datafactory/DataFactory.Management
+commit: bc3a5625440e5988c6f8d1630591b172358d78c8
+repo: Azure/azure-rest-api-specs
+additionalDirectories: 
