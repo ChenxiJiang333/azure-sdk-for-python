@@ -1,11 +1,7 @@
 {
+  "apiVersion": "2025-07-01-preview",
   "commit": "769e05a929529a74e5e27c3f0028e0e669d78443",
   "repository_url": "https://github.com/Azure/azure-rest-api-specs",
-  "autorest": "3.10.2",
-  "use": [
-    "@autorest/python@6.48.0",
-    "@autorest/modelerfour@4.27.0"
-  ],
-  "autorest_command": "autorest specification/securityinsights/resource-manager/Microsoft.SecurityInsights/SecurityInsights/readme.md --generate-sample=True --generate-test=True --include-x-ms-examples-original-file=True --package-mode=azure-mgmt --python --python-sdks-folder=/home/v-chenjiang/spec/azure-sdk-for-python/sdk --use=@autorest/python@6.48.0 --use=@autorest/modelerfour@4.27.0 --version=3.10.2 --version-tolerant=False",
-  "readme": "specification/securityinsights/resource-manager/Microsoft.SecurityInsights/SecurityInsights/readme.md"
+  "typespec_src": "specification/securityinsights/resource-manager/Microsoft.SecurityInsights/SecurityInsights",
+  "emitterVersion": "0.60.1"
 }

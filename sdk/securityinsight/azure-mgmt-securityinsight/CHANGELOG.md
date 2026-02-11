@@ -2,6 +2,10 @@
 
 ## 2.0.0b3 (2026-02-11)
 
+change log generation failed!!! You need to write it manually!!!
+
+## 2.0.0b3 (2026-02-11)
+
 ### Features Added
 
   - Added operation EntitiesOperations.run_playbook

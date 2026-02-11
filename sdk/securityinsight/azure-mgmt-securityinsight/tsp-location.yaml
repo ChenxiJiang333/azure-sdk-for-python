@@ -1,0 +1,4 @@
+directory: specification/securityinsights/resource-manager/Microsoft.SecurityInsights/SecurityInsights
+commit: 769e05a929529a74e5e27c3f0028e0e669d78443
+repo: Azure/azure-rest-api-specs
+additionalDirectories: 
