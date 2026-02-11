@@ -1,5 +1,132 @@
 # Release History
 
+## 2.0.0b3 (2026-02-11)
+
+### Features Added
+
+  - Added operation EntitiesOperations.run_playbook
+  - Added operation UpdateOperations.recommendation
+  - Added operation group AlertRuleOperations
+  - Added operation group BillingStatisticsOperations
+  - Added operation group ContentPackageOperations
+  - Added operation group ContentPackagesOperations
+  - Added operation group ContentTemplateOperations
+  - Added operation group ContentTemplatesOperations
+  - Added operation group DataConnectorDefinitionsOperations
+  - Added operation group GetTriggeredAnalyticsRuleRunsOperations
+  - Added operation group HuntCommentsOperations
+  - Added operation group HuntRelationsOperations
+  - Added operation group HuntsOperations
+  - Added operation group ProductPackageOperations
+  - Added operation group ProductPackagesOperations
+  - Added operation group ProductTemplateOperations
+  - Added operation group ProductTemplatesOperations
+  - Added operation group ReevaluateOperations
+  - Added operation group ThreatIntelligenceOperations
+  - Added operation group TriggeredAnalyticsRuleRunOperations
+  - Added operation group WorkspaceManagerAssignmentJobsOperations
+  - Added operation group WorkspaceManagerAssignmentsOperations
+  - Added operation group WorkspaceManagerConfigurationsOperations
+  - Added operation group WorkspaceManagerGroupsOperations
+  - Added operation group WorkspaceManagerMembersOperations
+  - Model ActivityEntityQueryTemplate has a new parameter etag
+  - Model EnrichmentIpGeodata has a new parameter city_confidence_factor
+  - Model EnrichmentIpGeodata has a new parameter country_confidence_factor
+  - Model EnrichmentIpGeodata has a new parameter state_confidence_factor
+  - Model EntityQueryTemplate has a new parameter etag
+  - Model FusionAlertRule has a new parameter sub_techniques
+  - Model FusionAlertRuleTemplate has a new parameter sub_techniques
+  - Model GetQueriesResponse has a new parameter next_link
+  - Model IncidentAdditionalData has a new parameter merged_incident_number
+  - Model IncidentAdditionalData has a new parameter merged_incident_url
+  - Model MLBehaviorAnalyticsAlertRule has a new parameter sub_techniques
+  - Model MTPDataConnector has a new parameter filtered_providers
+  - Model MTPDataConnectorDataTypes has a new parameter alerts
+  - Model MTPDataConnectorProperties has a new parameter filtered_providers
+  - Model NrtAlertRule has a new parameter sub_techniques
+  - Model Recommendation has a new parameter creation_time_utc
+  - Model Recommendation has a new parameter etag
+  - Model Recommendation has a new parameter last_modified_time_utc
+  - Model Recommendation has a new parameter name
+  - Model Recommendation has a new parameter suggestions
+  - Model Recommendation has a new parameter system_data
+  - Model Recommendation has a new parameter type
+  - Model RecommendationList has a new parameter next_link
+  - Model RecommendationPatch has a new parameter properties
+  - Model Repo has a new parameter installation_id
+  - Model ScheduledAlertRule has a new parameter sub_techniques
+  - Model ScheduledAlertRuleProperties has a new parameter sub_techniques
+  - Model ScheduledAlertRuleTemplate has a new parameter sub_techniques
+  - Model SettingList has a new parameter next_link
+  - Model SourceControl has a new parameter pull_request
+  - Model SourceControl has a new parameter repository_access
+  - Model SourceControl has a new parameter service_principal
+  - Model SourceControl has a new parameter workload_identity_federation
+  - Model ThreatIntelligenceAlertRule has a new parameter sub_techniques
+  - Model Watchlist has a new parameter provisioning_state
+
+### Breaking Changes
+
+  - Model EnrichmentIpGeodata no longer has parameter city_cf
+  - Model EnrichmentIpGeodata no longer has parameter country_cf
+  - Model EnrichmentIpGeodata no longer has parameter state_cf
+  - Model IoTDeviceEntity no longer has parameter device_sub_type
+  - Model IoTDeviceEntity no longer has parameter importance
+  - Model IoTDeviceEntity no longer has parameter is_authorized
+  - Model IoTDeviceEntity no longer has parameter is_programming
+  - Model IoTDeviceEntity no longer has parameter is_scanner
+  - Model IoTDeviceEntity no longer has parameter nic_entity_ids
+  - Model IoTDeviceEntity no longer has parameter owners
+  - Model IoTDeviceEntity no longer has parameter purdue_layer
+  - Model IoTDeviceEntity no longer has parameter sensor
+  - Model IoTDeviceEntity no longer has parameter site
+  - Model IoTDeviceEntity no longer has parameter zone
+  - Model IoTDeviceEntityProperties no longer has parameter device_sub_type
+  - Model IoTDeviceEntityProperties no longer has parameter importance
+  - Model IoTDeviceEntityProperties no longer has parameter is_authorized
+  - Model IoTDeviceEntityProperties no longer has parameter is_programming
+  - Model IoTDeviceEntityProperties no longer has parameter is_scanner
+  - Model IoTDeviceEntityProperties no longer has parameter nic_entity_ids
+  - Model IoTDeviceEntityProperties no longer has parameter owners
+  - Model IoTDeviceEntityProperties no longer has parameter purdue_layer
+  - Model IoTDeviceEntityProperties no longer has parameter sensor
+  - Model IoTDeviceEntityProperties no longer has parameter site
+  - Model IoTDeviceEntityProperties no longer has parameter zone
+  - Model MSTIDataConnectorDataTypes no longer has parameter bing_safety_phishing_url
+  - Model Recommendation no longer has parameter actions
+  - Model Recommendation no longer has parameter category
+  - Model Recommendation no longer has parameter content
+  - Model Recommendation no longer has parameter context
+  - Model Recommendation no longer has parameter display_until_time_utc
+  - Model Recommendation no longer has parameter hide_until_time_utc
+  - Model Recommendation no longer has parameter instructions
+  - Model Recommendation no longer has parameter priority
+  - Model Recommendation no longer has parameter recommendation_type_title
+  - Model Recommendation no longer has parameter visible
+  - Model Recommendation no longer has parameter workspace_id
+  - Model RecommendationPatch no longer has parameter hide_until_time_utc
+  - Model RecommendationPatch no longer has parameter state
+  - Model Repository no longer has parameter path_mapping
+  - Operation SourceControlOperations.list_repositories has a new required parameter repository_access
+  - Operation SourceControlOperations.list_repositories no longer has parameter repo_type
+  - Operation SourceControlsOperations.delete has a new required parameter repository_access
+  - Parameter branch of model Repository is now required
+  - Parameter content_types of model SourceControl is now required
+  - Parameter display_name of model SourceControl is now required
+  - Parameter logic_app_resource_id of model PlaybookActionProperties is now required
+  - Parameter repo_type of model SourceControl is now required
+  - Parameter repository of model SourceControl is now required
+  - Parameter url of model Repository is now required
+  - Parameter value of model AutomationRulesList is now required
+  - Parameter value of model IncidentTaskList is now required
+  - Parameter value of model RecommendationList is now required
+  - Removed operation IncidentsOperations.create_team
+  - Removed operation UpdateOperations.begin_recommendation
+  - Removed operation group DomainWhoisOperations
+  - Removed operation group IPGeodataOperations
+  - Renamed operation WatchlistsOperations.create_or_update to WatchlistsOperations.begin_create_or_update
+  - Renamed operation WatchlistsOperations.delete to WatchlistsOperations.begin_delete
+
 ## 2.0.0b2 (2022-12-27)
 
 ### Features Added
