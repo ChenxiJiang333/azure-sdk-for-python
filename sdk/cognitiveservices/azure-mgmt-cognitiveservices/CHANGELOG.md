@@ -1,12 +1,35 @@
+## tsp migration
+
+### Breaking Changes
+
+- Method `PrivateEndpointConnectionsOperations.list` changed from `asynchronous` to `synchronous`
+- Deleted or renamed model `AgentCard`
+- Deleted or renamed model `ProviderInfo`
+- Deleted or renamed model `Skill`
+- Parameter `include_all` of `AccountConnectionsOperations.list` is now optional
+- Parameter `count` of `AgentApplicationsOperations.list` is now optional
+- Parameter `order_by_asc` of `AgentApplicationsOperations.list` is now optional
+- Parameter `count` of `AgentDeploymentsOperations.list` is now optional
+- Parameter `order_by_asc` of `AgentDeploymentsOperations.list` is now optional
+- Parameter `include_all` of `ProjectConnectionsOperations.list` is now optional
+- Deleted or renamed enum value `AgentProtocol.A2_A`
+
+- Model `CommitmentPlanAccountAssociation` moved instance variable `account_id` under property `properties`
+- Model `DefenderForAISetting` moved its instance variable `state` under property `properties`
+- Model `CustomKeys` renamed its instance variable `keys` to `keys_property`
+- Model `ResourceSkuRestrictions` deleted or renamed its instance variable `values_property`
+- Method `AccountConnectionsOperations.list` changed its parameter `target`/`category`/`include_all` from `positional_or_keyword` to `keyword_only`
+- Method `AgentApplicationsOperations.list` changed its parameter `count`/`skip_token`/`names`/`search_text`/`order_by`/`order_by_asc` from `positional_or_keyword` to `keyword_only`
+- Method `AgentDeploymentsOperations.list` changed its parameter `count`/`skip_token`/`names`/`order_by`/`order_by_asc` from `positional_or_keyword` to `keyword_only`
+- Method `LocationBasedModelCapacitiesOperations.list` changed its parameter `model_format`/`model_name`/`model_version` from `positional_or_keyword` to `keyword_only`
+- Method `ModelCapacitiesOperations.list` changed its parameter `model_format`/`model_name`/`model_version` from `positional_or_keyword` to `keyword_only`
+- Method `ProjectConnectionsOperations.list` changed its parameter `target`/`category`/`include_all` from `positional_or_keyword` to `keyword_only`
+
+### Other Changes
+
+- Deleted model `AgentApplicationResourceArmPaginatedResult`/`AgentDeploymentResourceArmPaginatedResult`/`CapabilityHostResourceArmPaginatedResult`/`ConnectionPropertiesV2BasicResourceArmPaginatedResult`/`DefenderForAISettingResult`/`NetworkSecurityPerimeterConfigurationList`/`ProjectCapabilityHostResourceArmPaginatedResult`/`RaiBlockListItemsResult`/`RaiExternalSafetyProviderResult`/`RaiToolLabelResult`/`RaiTopicResult` which actually were not used by SDK users
+
 # Release History
-
-## 14.2.0b1 (2026-02-11)
-
-change log generation failed!!! You need to write it manually!!!
-
-## 14.2.0b1 (2026-02-11)
-
-change log generation failed!!! You need to write it manually!!!
 
 ## 14.1.0 (2025-10-24)
 
