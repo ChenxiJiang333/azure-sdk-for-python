@@ -1,22 +1,8 @@
 ## tsp migration
 
-## 14.2.0b1 (2026-02-11)
-
-change log generation failed!!! You need to write it manually!!!
-
 ### Breaking Changes
 
 - Method `PrivateEndpointConnectionsOperations.list` changed from `asynchronous` to `synchronous`
-- Deleted or renamed model `AgentCard`
-- Deleted or renamed model `ProviderInfo`
-- Deleted or renamed model `Skill`
-- Parameter `include_all` of `AccountConnectionsOperations.list` is now optional
-- Parameter `count` of `AgentApplicationsOperations.list` is now optional
-- Parameter `order_by_asc` of `AgentApplicationsOperations.list` is now optional
-- Parameter `count` of `AgentDeploymentsOperations.list` is now optional
-- Parameter `order_by_asc` of `AgentDeploymentsOperations.list` is now optional
-- Parameter `include_all` of `ProjectConnectionsOperations.list` is now optional
-- Deleted or renamed enum value `AgentProtocol.A2_A`
 
 - Model `CommitmentPlanAccountAssociation` moved instance variable `account_id` under property `properties`
 - Model `DefenderForAISetting` moved its instance variable `state` under property `properties`
@@ -31,7 +17,7 @@ change log generation failed!!! You need to write it manually!!!
 
 ### Other Changes
 
-- Deleted model `AgentApplicationResourceArmPaginatedResult`/`AgentDeploymentResourceArmPaginatedResult`/`CapabilityHostResourceArmPaginatedResult`/`ConnectionPropertiesV2BasicResourceArmPaginatedResult`/`DefenderForAISettingResult`/`NetworkSecurityPerimeterConfigurationList`/`ProjectCapabilityHostResourceArmPaginatedResult`/`RaiBlockListItemsResult`/`RaiExternalSafetyProviderResult`/`RaiToolLabelResult`/`RaiTopicResult` which actually were not used by SDK users
+- Deleted model `AgentCard`/`ProviderInfo`/`Skill`/`AgentApplicationResourceArmPaginatedResult`/`AgentDeploymentResourceArmPaginatedResult`/`CapabilityHostResourceArmPaginatedResult`/`ConnectionPropertiesV2BasicResourceArmPaginatedResult`/`DefenderForAISettingResult`/`NetworkSecurityPerimeterConfigurationList`/`ProjectCapabilityHostResourceArmPaginatedResult`/`RaiBlockListItemsResult`/`RaiExternalSafetyProviderResult`/`RaiToolLabelResult`/`RaiTopicResult` which actually were not used by SDK users
 
 # Release History
 
