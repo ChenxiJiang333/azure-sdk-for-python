@@ -4,6 +4,10 @@
 
 change log generation failed!!! You need to write it manually!!!
 
+## 14.2.0b1 (2026-02-11)
+
+change log generation failed!!! You need to write it manually!!!
+
 ## 14.1.0 (2025-10-24)
 
 ### Features Added
