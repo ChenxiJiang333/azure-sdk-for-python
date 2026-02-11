@@ -11707,7 +11707,7 @@ class ProjectConnectionsOperations:
         *,
         target: Optional[str] = None,
         category: Optional[str] = None,
-        include_all: Optional[bool] = None,
+        include_all: bool = False,
         **kwargs: Any
     ) -> AsyncItemPaged["_models.ConnectionPropertiesV2BasicResource"]:
         """Lists all the available Cognitive Services project connections under the specified project.
@@ -11726,7 +11726,7 @@ class ProjectConnectionsOperations:
         :keyword category: Category of the connection. Default value is None.
         :paramtype category: str
         :keyword include_all: query parameter that indicates if get connection call should return both
-         connections and datastores. Default value is None.
+         connections and datastores. Default value is False.
         :paramtype include_all: bool
         :return: An iterator like instance of ConnectionPropertiesV2BasicResource
         :rtype:
@@ -13424,13 +13424,13 @@ class AgentApplicationsOperations:
         account_name: str,
         project_name: str,
         *,
-        count: Optional[int] = None,
+        count: int = 30,
         skip: Optional[int] = None,
         skip_token: Optional[str] = None,
         names: Optional[List[str]] = None,
         search_text: Optional[str] = None,
         order_by: Optional[str] = None,
-        order_by_asc: Optional[bool] = None,
+        order_by_asc: bool = False,
         **kwargs: Any
     ) -> AsyncItemPaged["_models.AgentApplication"]:
         """Lists Agent Applications in the project.
@@ -13445,7 +13445,7 @@ class AgentApplicationsOperations:
         :param project_name: The name of Cognitive Services account's project. Required.
         :type project_name: str
         :keyword count: Number of agent applications to be retrieved in a page of results. Default
-         value is None.
+         value is 30.
         :paramtype count: int
         :keyword skip: Number of agent applications to skip. Default value is None.
         :paramtype skip: int
@@ -13457,7 +13457,7 @@ class AgentApplicationsOperations:
         :paramtype search_text: str
         :keyword order_by: Field to order by. Default value is None.
         :paramtype order_by: str
-        :keyword order_by_asc: Whether to order in ascending order. Default value is None.
+        :keyword order_by_asc: Whether to order in ascending order. Default value is False.
         :paramtype order_by_asc: bool
         :return: An iterator like instance of AgentApplication
         :rtype:
@@ -15386,7 +15386,7 @@ class AccountConnectionsOperations:
         *,
         target: Optional[str] = None,
         category: Optional[str] = None,
-        include_all: Optional[bool] = None,
+        include_all: bool = False,
         **kwargs: Any
     ) -> AsyncItemPaged["_models.ConnectionPropertiesV2BasicResource"]:
         """Lists all the available  Cognitive Services account connections under the specified account.
@@ -15403,7 +15403,7 @@ class AccountConnectionsOperations:
         :keyword category: Category of the connection. Default value is None.
         :paramtype category: str
         :keyword include_all: query parameter that indicates if get connection call should return both
-         connections and datastores. Default value is None.
+         connections and datastores. Default value is False.
         :paramtype include_all: bool
         :return: An iterator like instance of ConnectionPropertiesV2BasicResource
         :rtype:
@@ -18324,11 +18324,11 @@ class AgentDeploymentsOperations:
         project_name: str,
         app_name: str,
         *,
-        count: Optional[int] = None,
+        count: int = 30,
         skip_token: Optional[str] = None,
         names: Optional[List[str]] = None,
         order_by: Optional[str] = None,
-        order_by_asc: Optional[bool] = None,
+        order_by_asc: bool = False,
         **kwargs: Any
     ) -> AsyncItemPaged["_models.AgentDeployment"]:
         """Lists Agent Deployments in the application.
@@ -18346,7 +18346,7 @@ class AgentDeploymentsOperations:
          Required.
         :type app_name: str
         :keyword count: Number of agent deployments to be retrieved in a page of results. Default value
-         is None.
+         is 30.
         :paramtype count: int
         :keyword skip_token: Continuation token for pagination. Default value is None.
         :paramtype skip_token: str
@@ -18354,7 +18354,7 @@ class AgentDeploymentsOperations:
         :paramtype names: list[str]
         :keyword order_by: Field to order by. Default value is None.
         :paramtype order_by: str
-        :keyword order_by_asc: Whether to order in ascending order. Default value is None.
+        :keyword order_by_asc: Whether to order in ascending order. Default value is False.
         :paramtype order_by_asc: bool
         :return: An iterator like instance of AgentDeployment
         :rtype:

@@ -929,7 +929,7 @@
                 "param_type": "keyword_only"
               },
               "include_all": {
-                "default": "none",
+                "default": "bool",
                 "param_type": "keyword_only"
               },
               "kwargs": {
@@ -1952,7 +1952,7 @@
                 "param_type": "positional_or_keyword"
               },
               "count": {
-                "default": "none",
+                "default": "int",
                 "param_type": "keyword_only"
               },
               "skip": {
@@ -1976,7 +1976,7 @@
                 "param_type": "keyword_only"
               },
               "order_by_asc": {
-                "default": "none",
+                "default": "bool",
                 "param_type": "keyword_only"
               },
               "kwargs": {
@@ -2309,7 +2309,7 @@
                 "param_type": "positional_or_keyword"
               },
               "count": {
-                "default": "none",
+                "default": "int",
                 "param_type": "keyword_only"
               },
               "skip_token": {
@@ -2325,7 +2325,7 @@
                 "param_type": "keyword_only"
               },
               "order_by_asc": {
-                "default": "none",
+                "default": "bool",
                 "param_type": "keyword_only"
               },
               "kwargs": {
@@ -6370,7 +6370,7 @@
                 "param_type": "keyword_only"
               },
               "include_all": {
-                "default": "none",
+                "default": "bool",
                 "param_type": "keyword_only"
               },
               "kwargs": {
@@ -12907,7 +12907,7 @@
         "type": "Enum",
         "methods": {},
         "properties": {
-          "A2A": "A2A",
+          "A2_A": "A2_A",
           "AGENT": "AGENT",
           "RESPONSES": "RESPONSES",
           "capitalize": "capitalize",
@@ -57473,7 +57473,7 @@
                 "param_type": "keyword_only"
               },
               "include_all": {
-                "default": "none",
+                "default": "bool",
                 "param_type": "keyword_only"
               },
               "kwargs": {
@@ -58496,7 +58496,7 @@
                 "param_type": "positional_or_keyword"
               },
               "count": {
-                "default": "none",
+                "default": "int",
                 "param_type": "keyword_only"
               },
               "skip": {
@@ -58520,7 +58520,7 @@
                 "param_type": "keyword_only"
               },
               "order_by_asc": {
-                "default": "none",
+                "default": "bool",
                 "param_type": "keyword_only"
               },
               "kwargs": {
@@ -58853,7 +58853,7 @@
                 "param_type": "positional_or_keyword"
               },
               "count": {
-                "default": "none",
+                "default": "int",
                 "param_type": "keyword_only"
               },
               "skip_token": {
@@ -58869,7 +58869,7 @@
                 "param_type": "keyword_only"
               },
               "order_by_asc": {
-                "default": "none",
+                "default": "bool",
                 "param_type": "keyword_only"
               },
               "kwargs": {
@@ -62914,7 +62914,7 @@
                 "param_type": "keyword_only"
               },
               "include_all": {
-                "default": "none",
+                "default": "bool",
                 "param_type": "keyword_only"
               },
               "kwargs": {

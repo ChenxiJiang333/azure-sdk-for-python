@@ -1,5 +1,9 @@
 ## tsp migration
 
+## 14.2.0b1 (2026-02-11)
+
+change log generation failed!!! You need to write it manually!!!
+
 ### Breaking Changes
 
 - Method `PrivateEndpointConnectionsOperations.list` changed from `asynchronous` to `synchronous`

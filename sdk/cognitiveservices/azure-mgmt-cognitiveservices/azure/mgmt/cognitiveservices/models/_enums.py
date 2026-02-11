@@ -99,7 +99,7 @@ class AgentProtocol(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 
     AGENT = "Agent"
     """Agent protocol (aka Active)"""
-    A2A = "A2A"
+    A2_A = "A2A"
     """Agent2Agent standard"""
     RESPONSES = "Responses"
     """OpenAI-compatible"""
