@@ -60,7 +60,7 @@ class UsagesOperations:
     def list(self, location: str, filter: Optional[str] = None, **kwargs: Any) -> AsyncItemPaged["_models.Usage"]:
         """Get usages for the requested subscription.
 
-        :param location: Resource location. Required.
+        :param location: The name of Azure region. Required.
         :type location: str
         :param filter: An OData filter expression that describes a subset of usages to return. The
          supported parameter is name.value (name of the metric, can have an or of multiple names).
@@ -132,7 +132,10 @@ class UsagesOperations:
 
             if response.status_code not in [200]:
                 map_error(status_code=response.status_code, response=response, error_map=error_map)
-                error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
+                error = self._deserialize.failsafe_deserialize(
+                    _models.ErrorResponse,
+                    pipeline_response,
+                )
                 raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
             return pipeline_response

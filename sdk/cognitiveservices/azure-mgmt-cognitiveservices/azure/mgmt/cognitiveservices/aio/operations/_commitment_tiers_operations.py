@@ -60,7 +60,7 @@ class CommitmentTiersOperations:
     def list(self, location: str, **kwargs: Any) -> AsyncItemPaged["_models.CommitmentTier"]:
         """List Commitment Tiers.
 
-        :param location: Resource location. Required.
+        :param location: The name of Azure region. Required.
         :type location: str
         :return: An iterator like instance of either CommitmentTier or the result of cls(response)
         :rtype:
@@ -128,7 +128,10 @@ class CommitmentTiersOperations:
 
             if response.status_code not in [200]:
                 map_error(status_code=response.status_code, response=response, error_map=error_map)
-                error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
+                error = self._deserialize.failsafe_deserialize(
+                    _models.ErrorResponse,
+                    pipeline_response,
+                )
                 raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
             return pipeline_response

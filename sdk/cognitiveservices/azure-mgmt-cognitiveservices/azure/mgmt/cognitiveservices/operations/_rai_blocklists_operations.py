@@ -47,7 +47,7 @@ def build_list_request(resource_group_name: str, account_name: str, subscription
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-09-01"))
+    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-10-01-preview"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -56,13 +56,13 @@ def build_list_request(resource_group_name: str, account_name: str, subscription
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/raiBlocklists",
     )
     path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str", min_length=1),
         "resourceGroupName": _SERIALIZER.url(
             "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
         "accountName": _SERIALIZER.url(
             "account_name", account_name, "str", max_length=64, min_length=2, pattern=r"^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
         ),
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str", min_length=1),
     }
 
     _url: str = _url.format(**path_format_arguments)  # type: ignore
@@ -82,7 +82,7 @@ def build_get_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-09-01"))
+    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-10-01-preview"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -91,13 +91,13 @@ def build_get_request(
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/raiBlocklists/{raiBlocklistName}",
     )
     path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str", min_length=1),
         "resourceGroupName": _SERIALIZER.url(
             "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
         "accountName": _SERIALIZER.url(
             "account_name", account_name, "str", max_length=64, min_length=2, pattern=r"^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
         ),
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str", min_length=1),
         "raiBlocklistName": _SERIALIZER.url(
             "rai_blocklist_name", rai_blocklist_name, "str", pattern=r"^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
         ),
@@ -120,7 +120,7 @@ def build_create_or_update_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-09-01"))
+    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-10-01-preview"))
     content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
     accept = _headers.pop("Accept", "application/json")
 
@@ -130,13 +130,13 @@ def build_create_or_update_request(
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/raiBlocklists/{raiBlocklistName}",
     )
     path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str", min_length=1),
         "resourceGroupName": _SERIALIZER.url(
             "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
         "accountName": _SERIALIZER.url(
             "account_name", account_name, "str", max_length=64, min_length=2, pattern=r"^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
         ),
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str", min_length=1),
         "raiBlocklistName": _SERIALIZER.url(
             "rai_blocklist_name", rai_blocklist_name, "str", pattern=r"^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
         ),
@@ -161,7 +161,7 @@ def build_delete_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-09-01"))
+    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-10-01-preview"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -170,13 +170,13 @@ def build_delete_request(
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/raiBlocklists/{raiBlocklistName}",
     )
     path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str", min_length=1),
         "resourceGroupName": _SERIALIZER.url(
             "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
         "accountName": _SERIALIZER.url(
             "account_name", account_name, "str", max_length=64, min_length=2, pattern=r"^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
         ),
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str", min_length=1),
         "raiBlocklistName": _SERIALIZER.url(
             "rai_blocklist_name", rai_blocklist_name, "str", pattern=r"^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
         ),
@@ -289,7 +289,10 @@ class RaiBlocklistsOperations:
 
             if response.status_code not in [200]:
                 map_error(status_code=response.status_code, response=response, error_map=error_map)
-                error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
+                error = self._deserialize.failsafe_deserialize(
+                    _models.ErrorResponse,
+                    pipeline_response,
+                )
                 raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
             return pipeline_response
@@ -348,7 +351,10 @@ class RaiBlocklistsOperations:
 
         if response.status_code not in [200]:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
+            error = self._deserialize.failsafe_deserialize(
+                _models.ErrorResponse,
+                pipeline_response,
+            )
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
         deserialized = self._deserialize("RaiBlocklist", pipeline_response.http_response)
@@ -492,7 +498,10 @@ class RaiBlocklistsOperations:
 
         if response.status_code not in [200, 201]:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
+            error = self._deserialize.failsafe_deserialize(
+                _models.ErrorResponse,
+                pipeline_response,
+            )
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
         deserialized = self._deserialize("RaiBlocklist", pipeline_response.http_response)
@@ -544,11 +553,15 @@ class RaiBlocklistsOperations:
             except (StreamConsumedError, StreamClosedError):
                 pass
             map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
+            error = self._deserialize.failsafe_deserialize(
+                _models.ErrorResponse,
+                pipeline_response,
+            )
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
         response_headers = {}
         if response.status_code == 202:
+            response_headers["Retry-After"] = self._deserialize("int", response.headers.get("Retry-After"))
             response_headers["location"] = self._deserialize("str", response.headers.get("location"))
 
         deserialized = response.stream_download(self._client._pipeline, decompress=_decompress)

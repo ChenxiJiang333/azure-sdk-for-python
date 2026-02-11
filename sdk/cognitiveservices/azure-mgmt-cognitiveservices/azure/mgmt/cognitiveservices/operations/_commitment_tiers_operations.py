@@ -41,7 +41,7 @@ def build_list_request(location: str, subscription_id: str, **kwargs: Any) -> Ht
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-09-01"))
+    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-10-01-preview"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -51,7 +51,7 @@ def build_list_request(location: str, subscription_id: str, **kwargs: Any) -> Ht
     )
     path_format_arguments = {
         "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str", min_length=1),
-        "location": _SERIALIZER.url("location", location, "str"),
+        "location": _SERIALIZER.url("location", location, "str", min_length=1),
     }
 
     _url: str = _url.format(**path_format_arguments)  # type: ignore
@@ -90,7 +90,7 @@ class CommitmentTiersOperations:
     def list(self, location: str, **kwargs: Any) -> ItemPaged["_models.CommitmentTier"]:
         """List Commitment Tiers.
 
-        :param location: Resource location. Required.
+        :param location: The name of Azure region. Required.
         :type location: str
         :return: An iterator like instance of either CommitmentTier or the result of cls(response)
         :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.cognitiveservices.models.CommitmentTier]
@@ -157,7 +157,10 @@ class CommitmentTiersOperations:
 
             if response.status_code not in [200]:
                 map_error(status_code=response.status_code, response=response, error_map=error_map)
-                error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
+                error = self._deserialize.failsafe_deserialize(
+                    _models.ErrorResponse,
+                    pipeline_response,
+                )
                 raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
             return pipeline_response
