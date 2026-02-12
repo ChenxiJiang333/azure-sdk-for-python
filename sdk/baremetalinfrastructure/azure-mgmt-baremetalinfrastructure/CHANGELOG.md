@@ -2,6 +2,10 @@
 
 ## 1.1.0b3 (2026-02-12)
 
+change log generation failed!!! You need to write it manually!!!
+
+## 1.1.0b3 (2026-02-12)
+
 ### Features Added
 
   - Added operation AzureBareMetalInstancesOperations.create
