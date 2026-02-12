@@ -30,7 +30,7 @@ def main():
         subscription_id="SUBSCRIPTION_ID",
     )
 
-    response = client.alert_rule.list(
+    response = client.alert_rules.list(
         resource_group_name="myRg",
         workspace_name="myWorkspace",
     )

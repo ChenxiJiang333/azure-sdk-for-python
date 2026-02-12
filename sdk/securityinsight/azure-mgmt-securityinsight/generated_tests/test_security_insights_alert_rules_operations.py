@@ -14,14 +14,14 @@ AZURE_LOCATION = "eastus"
 
 
 @pytest.mark.skip("you may need to update the auto-generated test case before run it")
-class TestSecurityInsightsAlertRuleOperations(AzureMgmtRecordedTestCase):
+class TestSecurityInsightsAlertRulesOperations(AzureMgmtRecordedTestCase):
     def setup_method(self, method):
         self.client = self.create_mgmt_client(SecurityInsightsClient)
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_alert_rule_get(self, resource_group):
-        response = self.client.alert_rule.get(
+    def test_alert_rules_get(self, resource_group):
+        response = self.client.alert_rules.get(
             resource_group_name=resource_group.name,
             workspace_name="str",
             rule_id="str",
@@ -32,8 +32,8 @@ class TestSecurityInsightsAlertRuleOperations(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_alert_rule_create_or_update(self, resource_group):
-        response = self.client.alert_rule.create_or_update(
+    def test_alert_rules_create_or_update(self, resource_group):
+        response = self.client.alert_rules.create_or_update(
             resource_group_name=resource_group.name,
             workspace_name="str",
             rule_id="str",
@@ -88,8 +88,8 @@ class TestSecurityInsightsAlertRuleOperations(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_alert_rule_delete(self, resource_group):
-        response = self.client.alert_rule.delete(
+    def test_alert_rules_delete(self, resource_group):
+        response = self.client.alert_rules.delete(
             resource_group_name=resource_group.name,
             workspace_name="str",
             rule_id="str",
@@ -100,8 +100,8 @@ class TestSecurityInsightsAlertRuleOperations(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_alert_rule_list(self, resource_group):
-        response = self.client.alert_rule.list(
+    def test_alert_rules_list(self, resource_group):
+        response = self.client.alert_rules.list(
             resource_group_name=resource_group.name,
             workspace_name="str",
         )

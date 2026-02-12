@@ -42,13 +42,13 @@ from ...operations._operations import (
     build_actions_delete_request,
     build_actions_get_request,
     build_actions_list_by_alert_rule_request,
-    build_alert_rule_create_or_update_request,
-    build_alert_rule_delete_request,
-    build_alert_rule_get_request,
-    build_alert_rule_list_request,
     build_alert_rule_templates_get_request,
     build_alert_rule_templates_list_request,
     build_alert_rule_trigger_rule_run_request,
+    build_alert_rules_create_or_update_request,
+    build_alert_rules_delete_request,
+    build_alert_rules_get_request,
+    build_alert_rules_list_request,
     build_automation_rules_create_or_update_request,
     build_automation_rules_delete_request,
     build_automation_rules_get_request,
@@ -324,14 +324,14 @@ class Operations:
         return AsyncItemPaged(get_next, extract_data)
 
 
-class AlertRuleOperations:
+class AlertRulesOperations:
     """
     .. warning::
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
         :class:`~azure.mgmt.securityinsight.aio.SecurityInsightsClient`'s
-        :attr:`alert_rule` attribute.
+        :attr:`alert_rules` attribute.
     """
 
     def __init__(self, *args, **kwargs) -> None:
@@ -371,7 +371,7 @@ class AlertRuleOperations:
 
         cls: ClsType[_models.AlertRule] = kwargs.pop("cls", None)
 
-        _request = build_alert_rule_get_request(
+        _request = build_alert_rules_get_request(
             resource_group_name=resource_group_name,
             workspace_name=workspace_name,
             rule_id=rule_id,
@@ -551,7 +551,7 @@ class AlertRuleOperations:
         else:
             _content = json.dumps(alert_rule, cls=SdkJSONEncoder, exclude_readonly=True)  # type: ignore
 
-        _request = build_alert_rule_create_or_update_request(
+        _request = build_alert_rules_create_or_update_request(
             resource_group_name=resource_group_name,
             workspace_name=workspace_name,
             rule_id=rule_id,
@@ -625,7 +625,7 @@ class AlertRuleOperations:
 
         cls: ClsType[None] = kwargs.pop("cls", None)
 
-        _request = build_alert_rule_delete_request(
+        _request = build_alert_rules_delete_request(
             resource_group_name=resource_group_name,
             workspace_name=workspace_name,
             rule_id=rule_id,
@@ -686,7 +686,7 @@ class AlertRuleOperations:
         def prepare_request(next_link=None):
             if not next_link:
 
-                _request = build_alert_rule_list_request(
+                _request = build_alert_rules_list_request(
                     resource_group_name=resource_group_name,
                     workspace_name=workspace_name,
                     subscription_id=self._config.subscription_id,

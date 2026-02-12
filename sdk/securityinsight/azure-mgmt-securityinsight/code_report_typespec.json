@@ -352,8 +352,8 @@
           "operations": {
             "attr_type": "Operations"
           },
-          "alert_rule": {
-            "attr_type": "alertRuleOperations"
+          "alert_rules": {
+            "attr_type": "AlertRulesOperations"
           },
           "alert_rule_templates": {
             "attr_type": "AlertRuleTemplatesOperations"
@@ -441,6 +441,9 @@
           },
           "workspace_manager_members": {
             "attr_type": "WorkspaceManagerMembersOperations"
+          },
+          "alert_rule": {
+            "attr_type": "alertRuleOperations"
           },
           "actions": {
             "attr_type": "ActionsOperations"
@@ -798,7 +801,79 @@
         },
         "properties": {}
       },
-      "AlertRuleOperations": {
+      "AlertRuleTemplatesOperations": {
+        "type": null,
+        "methods": {
+          "__init__": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "args": {
+                "default": null,
+                "param_type": "var_positional"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "get": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "resource_group_name": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "workspace_name": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "alert_rule_template_id": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "list": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "resource_group_name": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "workspace_name": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          }
+        },
+        "properties": {}
+      },
+      "AlertRulesOperations": {
         "type": null,
         "methods": {
           "__init__": {
@@ -999,78 +1074,6 @@
                 "param_type": "positional_or_keyword"
               },
               "rule_id": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              },
-              "kwargs": {
-                "default": null,
-                "param_type": "var_keyword"
-              }
-            },
-            "is_async": false,
-            "overloads": []
-          },
-          "list": {
-            "parameters": {
-              "self": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              },
-              "resource_group_name": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              },
-              "workspace_name": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              },
-              "kwargs": {
-                "default": null,
-                "param_type": "var_keyword"
-              }
-            },
-            "is_async": false,
-            "overloads": []
-          }
-        },
-        "properties": {}
-      },
-      "AlertRuleTemplatesOperations": {
-        "type": null,
-        "methods": {
-          "__init__": {
-            "parameters": {
-              "self": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              },
-              "args": {
-                "default": null,
-                "param_type": "var_positional"
-              },
-              "kwargs": {
-                "default": null,
-                "param_type": "var_keyword"
-              }
-            },
-            "is_async": false,
-            "overloads": []
-          },
-          "get": {
-            "parameters": {
-              "self": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              },
-              "resource_group_name": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              },
-              "workspace_name": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              },
-              "alert_rule_template_id": {
                 "default": null,
                 "param_type": "positional_or_keyword"
               },
@@ -139958,8 +139961,8 @@
           "operations": {
             "attr_type": "Operations"
           },
-          "alert_rule": {
-            "attr_type": "alertRuleOperations"
+          "alert_rules": {
+            "attr_type": "AlertRulesOperations"
           },
           "alert_rule_templates": {
             "attr_type": "AlertRuleTemplatesOperations"
@@ -140047,6 +140050,9 @@
           },
           "workspace_manager_members": {
             "attr_type": "WorkspaceManagerMembersOperations"
+          },
+          "alert_rule": {
+            "attr_type": "alertRuleOperations"
           },
           "actions": {
             "attr_type": "ActionsOperations"
@@ -140404,7 +140410,79 @@
         },
         "properties": {}
       },
-      "AlertRuleOperations": {
+      "AlertRuleTemplatesOperations": {
+        "type": null,
+        "methods": {
+          "__init__": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "args": {
+                "default": null,
+                "param_type": "var_positional"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "get": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "resource_group_name": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "workspace_name": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "alert_rule_template_id": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": true,
+            "overloads": []
+          },
+          "list": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "resource_group_name": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "workspace_name": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          }
+        },
+        "properties": {}
+      },
+      "AlertRulesOperations": {
         "type": null,
         "methods": {
           "__init__": {
@@ -140605,78 +140683,6 @@
                 "param_type": "positional_or_keyword"
               },
               "rule_id": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              },
-              "kwargs": {
-                "default": null,
-                "param_type": "var_keyword"
-              }
-            },
-            "is_async": true,
-            "overloads": []
-          },
-          "list": {
-            "parameters": {
-              "self": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              },
-              "resource_group_name": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              },
-              "workspace_name": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              },
-              "kwargs": {
-                "default": null,
-                "param_type": "var_keyword"
-              }
-            },
-            "is_async": false,
-            "overloads": []
-          }
-        },
-        "properties": {}
-      },
-      "AlertRuleTemplatesOperations": {
-        "type": null,
-        "methods": {
-          "__init__": {
-            "parameters": {
-              "self": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              },
-              "args": {
-                "default": null,
-                "param_type": "var_positional"
-              },
-              "kwargs": {
-                "default": null,
-                "param_type": "var_keyword"
-              }
-            },
-            "is_async": false,
-            "overloads": []
-          },
-          "get": {
-            "parameters": {
-              "self": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              },
-              "resource_group_name": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              },
-              "workspace_name": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              },
-              "alert_rule_template_id": {
                 "default": null,
                 "param_type": "positional_or_keyword"
               },

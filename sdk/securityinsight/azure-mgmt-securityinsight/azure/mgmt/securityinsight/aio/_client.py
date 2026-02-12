@@ -21,8 +21,8 @@ from .._utils.serialization import Deserializer, Serializer
 from ._configuration import SecurityInsightsClientConfiguration
 from .operations import (
     ActionsOperations,
-    AlertRuleOperations,
     AlertRuleTemplatesOperations,
+    AlertRulesOperations,
     AutomationRulesOperations,
     BillingStatisticsOperations,
     BookmarkOperations,
@@ -92,8 +92,8 @@ class SecurityInsightsClient(_SecurityInsightsClientOperationsMixin):  # pylint:
 
     :ivar operations: Operations operations
     :vartype operations: azure.mgmt.securityinsight.aio.operations.Operations
-    :ivar alert_rule: AlertRuleOperations operations
-    :vartype alert_rule: azure.mgmt.securityinsight.aio.operations.AlertRuleOperations
+    :ivar alert_rules: AlertRulesOperations operations
+    :vartype alert_rules: azure.mgmt.securityinsight.aio.operations.AlertRulesOperations
     :ivar alert_rule_templates: AlertRuleTemplatesOperations operations
     :vartype alert_rule_templates:
      azure.mgmt.securityinsight.aio.operations.AlertRuleTemplatesOperations
@@ -302,7 +302,7 @@ class SecurityInsightsClient(_SecurityInsightsClientOperationsMixin):  # pylint:
         self._deserialize = Deserializer()
         self._serialize.client_side_validation = False
         self.operations = Operations(self._client, self._config, self._serialize, self._deserialize)
-        self.alert_rule = AlertRuleOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.alert_rules = AlertRulesOperations(self._client, self._config, self._serialize, self._deserialize)
         self.alert_rule_templates = AlertRuleTemplatesOperations(
             self._client, self._config, self._serialize, self._deserialize
         )

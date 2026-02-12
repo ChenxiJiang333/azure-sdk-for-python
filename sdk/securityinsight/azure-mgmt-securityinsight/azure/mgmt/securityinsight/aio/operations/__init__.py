@@ -13,7 +13,7 @@ if TYPE_CHECKING:
     from ._patch import *  # pylint: disable=unused-wildcard-import
 
 from ._operations import Operations  # type: ignore
-from ._operations import AlertRuleOperations  # type: ignore
+from ._operations import AlertRulesOperations  # type: ignore
 from ._operations import AlertRuleTemplatesOperations  # type: ignore
 from ._operations import AutomationRulesOperations  # type: ignore
 from ._operations import IncidentsOperations  # type: ignore
@@ -79,7 +79,7 @@ from ._patch import patch_sdk as _patch_sdk
 
 __all__ = [
     "Operations",
-    "AlertRuleOperations",
+    "AlertRulesOperations",
     "AlertRuleTemplatesOperations",
     "AutomationRulesOperations",
     "IncidentsOperations",

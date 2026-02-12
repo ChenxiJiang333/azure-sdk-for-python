@@ -30,7 +30,7 @@ def main():
         subscription_id="SUBSCRIPTION_ID",
     )
 
-    response = client.alert_rule.get(
+    response = client.alert_rules.get(
         resource_group_name="myRg",
         workspace_name="myWorkspace",
         rule_id="microsoftSecurityIncidentCreationRuleExample",
