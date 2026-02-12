@@ -1,5 +1,5 @@
+# pylint: disable=line-too-long,useless-suppression,too-many-lines
 # coding=utf-8
-# pylint: disable=too-many-lines
 # --------------------------------------------------------------------------
 # Copyright (c) Microsoft Corporation. All rights reserved.
 # Licensed under the MIT License. See License.txt in the project root for license information.
@@ -7,14 +7,15 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 
+from collections.abc import MutableMapping
 import datetime
-from typing import Any, Dict, List, Optional, TYPE_CHECKING, Union
+from typing import Any, Optional, TYPE_CHECKING, Union
 
-from .. import _serialization
+from .._utils import serialization as _serialization
 
 if TYPE_CHECKING:
-    # pylint: disable=unused-import,ungrouped-imports
     from .. import models as _models
+JSON = MutableMapping[str, Any]
 
 
 class Resource(_serialization.Model):
@@ -52,10 +53,10 @@ class Resource(_serialization.Model):
     def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
-        self.id = None
-        self.name = None
-        self.type = None
-        self.system_data = None
+        self.id: Optional[str] = None
+        self.name: Optional[str] = None
+        self.type: Optional[str] = None
+        self.system_data: Optional["_models.SystemData"] = None
 
 
 class TrackedResource(Resource):
@@ -64,7 +65,7 @@ class TrackedResource(Resource):
 
     Variables are only populated by the server, and will be ignored when sending a request.
 
-    All required parameters must be populated in order to send to Azure.
+    All required parameters must be populated in order to send to server.
 
     :ivar id: Fully qualified resource ID for the resource. E.g.
      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}".
@@ -100,7 +101,7 @@ class TrackedResource(Resource):
         "location": {"key": "location", "type": "str"},
     }
 
-    def __init__(self, *, location: str, tags: Optional[Dict[str, str]] = None, **kwargs: Any) -> None:
+    def __init__(self, *, location: str, tags: Optional[dict[str, str]] = None, **kwargs: Any) -> None:
         """
         :keyword tags: Resource tags.
         :paramtype tags: dict[str, str]
@@ -112,12 +113,12 @@ class TrackedResource(Resource):
         self.location = location
 
 
-class AzureBareMetalInstance(TrackedResource):  # pylint: disable=too-many-instance-attributes
+class AzureBareMetalInstance(TrackedResource):
     """AzureBareMetal instance info on Azure (ARM properties and AzureBareMetal properties).
 
     Variables are only populated by the server, and will be ignored when sending a request.
 
-    All required parameters must be populated in order to send to Azure.
+    All required parameters must be populated in order to send to server.
 
     :ivar id: Fully qualified resource ID for the resource. E.g.
      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}".
@@ -167,10 +168,6 @@ class AzureBareMetalInstance(TrackedResource):  # pylint: disable=too-many-insta
         "type": {"readonly": True},
         "system_data": {"readonly": True},
         "location": {"required": True},
-        "azure_bare_metal_instance_id": {"readonly": True},
-        "power_state": {"readonly": True},
-        "proximity_placement_group": {"readonly": True},
-        "hw_revision": {"readonly": True},
         "provisioning_state": {"readonly": True},
     }
 
@@ -197,11 +194,15 @@ class AzureBareMetalInstance(TrackedResource):  # pylint: disable=too-many-insta
         self,
         *,
         location: str,
-        tags: Optional[Dict[str, str]] = None,
+        tags: Optional[dict[str, str]] = None,
         hardware_profile: Optional["_models.HardwareProfile"] = None,
         storage_profile: Optional["_models.StorageProfile"] = None,
         os_profile: Optional["_models.OSProfile"] = None,
         network_profile: Optional["_models.NetworkProfile"] = None,
+        azure_bare_metal_instance_id: Optional[str] = None,
+        power_state: Optional[Union[str, "_models.AzureBareMetalInstancePowerStateEnum"]] = None,
+        proximity_placement_group: Optional[str] = None,
+        hw_revision: Optional[str] = None,
         partner_node_id: Optional[str] = None,
         **kwargs: Any
     ) -> None:
@@ -219,6 +220,16 @@ class AzureBareMetalInstance(TrackedResource):  # pylint: disable=too-many-insta
         :paramtype os_profile: ~azure.mgmt.baremetalinfrastructure.models.OSProfile
         :keyword network_profile: Specifies the network settings for the Azure Bare Metal Instance.
         :paramtype network_profile: ~azure.mgmt.baremetalinfrastructure.models.NetworkProfile
+        :keyword azure_bare_metal_instance_id: Specifies the Azure Bare Metal Instance unique ID.
+        :paramtype azure_bare_metal_instance_id: str
+        :keyword power_state: Resource power state. Known values are: "starting", "started",
+         "stopping", "stopped", "restarting", and "unknown".
+        :paramtype power_state: str or
+         ~azure.mgmt.baremetalinfrastructure.models.AzureBareMetalInstancePowerStateEnum
+        :keyword proximity_placement_group: Resource proximity placement group.
+        :paramtype proximity_placement_group: str
+        :keyword hw_revision: Hardware revision of an Azure Bare Metal Instance.
+        :paramtype hw_revision: str
         :keyword partner_node_id: ARM ID of another AzureBareMetalInstance that will share a network
          with this AzureBareMetalInstance.
         :paramtype partner_node_id: str
@@ -228,22 +239,28 @@ class AzureBareMetalInstance(TrackedResource):  # pylint: disable=too-many-insta
         self.storage_profile = storage_profile
         self.os_profile = os_profile
         self.network_profile = network_profile
-        self.azure_bare_metal_instance_id = None
-        self.power_state = None
-        self.proximity_placement_group = None
-        self.hw_revision = None
+        self.azure_bare_metal_instance_id = azure_bare_metal_instance_id
+        self.power_state = power_state
+        self.proximity_placement_group = proximity_placement_group
+        self.hw_revision = hw_revision
         self.partner_node_id = partner_node_id
-        self.provisioning_state = None
+        self.provisioning_state: Optional[Union[str, "_models.AzureBareMetalProvisioningStatesEnum"]] = None
 
 
 class AzureBareMetalInstancesListResult(_serialization.Model):
-    """The response from the List Azure Bare Metal Instances operation.
+    """The response of a AzureBareMetalInstance list operation.
 
-    :ivar value: The list of Azure Bare Metal Instances.
+    All required parameters must be populated in order to send to server.
+
+    :ivar value: The AzureBareMetalInstance items on this page. Required.
     :vartype value: list[~azure.mgmt.baremetalinfrastructure.models.AzureBareMetalInstance]
-    :ivar next_link: The URL to get the next set of Azure Bare Metal Instances.
+    :ivar next_link: The link to the next page of items.
     :vartype next_link: str
     """
+
+    _validation = {
+        "value": {"required": True},
+    }
 
     _attribute_map = {
         "value": {"key": "value", "type": "[AzureBareMetalInstance]"},
@@ -251,16 +268,12 @@ class AzureBareMetalInstancesListResult(_serialization.Model):
     }
 
     def __init__(
-        self,
-        *,
-        value: Optional[List["_models.AzureBareMetalInstance"]] = None,
-        next_link: Optional[str] = None,
-        **kwargs: Any
+        self, *, value: list["_models.AzureBareMetalInstance"], next_link: Optional[str] = None, **kwargs: Any
     ) -> None:
         """
-        :keyword value: The list of Azure Bare Metal Instances.
+        :keyword value: The AzureBareMetalInstance items on this page. Required.
         :paramtype value: list[~azure.mgmt.baremetalinfrastructure.models.AzureBareMetalInstance]
-        :keyword next_link: The URL to get the next set of Azure Bare Metal Instances.
+        :keyword next_link: The link to the next page of items.
         :paramtype next_link: str
         """
         super().__init__(**kwargs)
@@ -274,7 +287,7 @@ class AzureBareMetalStorageInstance(TrackedResource):
 
     Variables are only populated by the server, and will be ignored when sending a request.
 
-    All required parameters must be populated in order to send to Azure.
+    All required parameters must be populated in order to send to server.
 
     :ivar id: Fully qualified resource ID for the resource. E.g.
      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}".
@@ -291,6 +304,9 @@ class AzureBareMetalStorageInstance(TrackedResource):
     :vartype tags: dict[str, str]
     :ivar location: The geo-location where the resource lives. Required.
     :vartype location: str
+    :ivar identity: The identity of Azure Bare Metal Storage Instance, if configured.
+    :vartype identity:
+     ~azure.mgmt.baremetalinfrastructure.models.AzureBareMetalStorageInstanceIdentity
     :ivar azure_bare_metal_storage_instance_unique_identifier: Specifies the
      AzureBareMetaStorageInstance unique ID.
     :vartype azure_bare_metal_storage_instance_unique_identifier: str
@@ -314,6 +330,7 @@ class AzureBareMetalStorageInstance(TrackedResource):
         "system_data": {"key": "systemData", "type": "SystemData"},
         "tags": {"key": "tags", "type": "{str}"},
         "location": {"key": "location", "type": "str"},
+        "identity": {"key": "identity", "type": "AzureBareMetalStorageInstanceIdentity"},
         "azure_bare_metal_storage_instance_unique_identifier": {
             "key": "properties.azureBareMetalStorageInstanceUniqueIdentifier",
             "type": "str",
@@ -325,7 +342,8 @@ class AzureBareMetalStorageInstance(TrackedResource):
         self,
         *,
         location: str,
-        tags: Optional[Dict[str, str]] = None,
+        tags: Optional[dict[str, str]] = None,
+        identity: Optional["_models.AzureBareMetalStorageInstanceIdentity"] = None,
         azure_bare_metal_storage_instance_unique_identifier: Optional[str] = None,
         storage_properties: Optional["_models.StorageProperties"] = None,
         **kwargs: Any
@@ -335,6 +353,9 @@ class AzureBareMetalStorageInstance(TrackedResource):
         :paramtype tags: dict[str, str]
         :keyword location: The geo-location where the resource lives. Required.
         :paramtype location: str
+        :keyword identity: The identity of Azure Bare Metal Storage Instance, if configured.
+        :paramtype identity:
+         ~azure.mgmt.baremetalinfrastructure.models.AzureBareMetalStorageInstanceIdentity
         :keyword azure_bare_metal_storage_instance_unique_identifier: Specifies the
          AzureBareMetaStorageInstance unique ID.
         :paramtype azure_bare_metal_storage_instance_unique_identifier: str
@@ -343,18 +364,102 @@ class AzureBareMetalStorageInstance(TrackedResource):
         :paramtype storage_properties: ~azure.mgmt.baremetalinfrastructure.models.StorageProperties
         """
         super().__init__(tags=tags, location=location, **kwargs)
+        self.identity = identity
         self.azure_bare_metal_storage_instance_unique_identifier = azure_bare_metal_storage_instance_unique_identifier
         self.storage_properties = storage_properties
 
 
-class AzureBareMetalStorageInstancesListResult(_serialization.Model):
-    """The response from the Get AzureBareMetalStorageInstances operation.
+class AzureBareMetalStorageInstanceBody(_serialization.Model):
+    """properties of body during PUT/PATCH for an AzureBareMetalStorageInstance.
 
-    :ivar value: The list of AzureBareMetalStorage instances.
+    :ivar identity: The identity of Azure Bare Metal Storage Instance, if configured.
+    :vartype identity:
+     ~azure.mgmt.baremetalinfrastructure.models.AzureBareMetalStorageInstanceIdentity
+    :ivar tags: Tags field of the AzureBareMetal/AzureBareMetaStorage instance.
+    :vartype tags: dict[str, str]
+    """
+
+    _attribute_map = {
+        "identity": {"key": "identity", "type": "AzureBareMetalStorageInstanceIdentity"},
+        "tags": {"key": "tags", "type": "{str}"},
+    }
+
+    def __init__(
+        self,
+        *,
+        identity: Optional["_models.AzureBareMetalStorageInstanceIdentity"] = None,
+        tags: Optional[dict[str, str]] = None,
+        **kwargs: Any
+    ) -> None:
+        """
+        :keyword identity: The identity of Azure Bare Metal Storage Instance, if configured.
+        :paramtype identity:
+         ~azure.mgmt.baremetalinfrastructure.models.AzureBareMetalStorageInstanceIdentity
+        :keyword tags: Tags field of the AzureBareMetal/AzureBareMetaStorage instance.
+        :paramtype tags: dict[str, str]
+        """
+        super().__init__(**kwargs)
+        self.identity = identity
+        self.tags = tags
+
+
+class AzureBareMetalStorageInstanceIdentity(_serialization.Model):
+    """Identity for Azure Bare Metal Storage Instance.
+
+    Variables are only populated by the server, and will be ignored when sending a request.
+
+    :ivar principal_id: The principal ID of Azure Bare Metal Storage Instance identity. This
+     property will only be provided for a system assigned identity.
+    :vartype principal_id: str
+    :ivar tenant_id: The tenant ID associated with the Azure Bare Metal Storage Instance. This
+     property will only be provided for a system assigned identity.
+    :vartype tenant_id: str
+    :ivar type: The type of identity used for the Azure Bare Metal Storage Instance. The type
+     'SystemAssigned' refers to an implicitly created identity. The type 'None' will remove any
+     identities from the Azure Bare Metal Storage Instance. Known values are: "SystemAssigned" and
+     "None".
+    :vartype type: str or ~azure.mgmt.baremetalinfrastructure.models.ResourceIdentityType
+    """
+
+    _validation = {
+        "principal_id": {"readonly": True},
+        "tenant_id": {"readonly": True},
+    }
+
+    _attribute_map = {
+        "principal_id": {"key": "principalId", "type": "str"},
+        "tenant_id": {"key": "tenantId", "type": "str"},
+        "type": {"key": "type", "type": "str"},
+    }
+
+    def __init__(self, *, type: Optional[Union[str, "_models.ResourceIdentityType"]] = None, **kwargs: Any) -> None:
+        """
+        :keyword type: The type of identity used for the Azure Bare Metal Storage Instance. The type
+         'SystemAssigned' refers to an implicitly created identity. The type 'None' will remove any
+         identities from the Azure Bare Metal Storage Instance. Known values are: "SystemAssigned" and
+         "None".
+        :paramtype type: str or ~azure.mgmt.baremetalinfrastructure.models.ResourceIdentityType
+        """
+        super().__init__(**kwargs)
+        self.principal_id: Optional[str] = None
+        self.tenant_id: Optional[str] = None
+        self.type = type
+
+
+class AzureBareMetalStorageInstancesListResult(_serialization.Model):
+    """The response of a AzureBareMetalStorageInstance list operation.
+
+    All required parameters must be populated in order to send to server.
+
+    :ivar value: The AzureBareMetalStorageInstance items on this page. Required.
     :vartype value: list[~azure.mgmt.baremetalinfrastructure.models.AzureBareMetalStorageInstance]
-    :ivar next_link: The URL to get the next set of AzureBareMetalStorage instances.
+    :ivar next_link: The link to the next page of items.
     :vartype next_link: str
     """
+
+    _validation = {
+        "value": {"required": True},
+    }
 
     _attribute_map = {
         "value": {"key": "value", "type": "[AzureBareMetalStorageInstance]"},
@@ -362,17 +467,13 @@ class AzureBareMetalStorageInstancesListResult(_serialization.Model):
     }
 
     def __init__(
-        self,
-        *,
-        value: Optional[List["_models.AzureBareMetalStorageInstance"]] = None,
-        next_link: Optional[str] = None,
-        **kwargs: Any
+        self, *, value: list["_models.AzureBareMetalStorageInstance"], next_link: Optional[str] = None, **kwargs: Any
     ) -> None:
         """
-        :keyword value: The list of AzureBareMetalStorage instances.
+        :keyword value: The AzureBareMetalStorageInstance items on this page. Required.
         :paramtype value:
          list[~azure.mgmt.baremetalinfrastructure.models.AzureBareMetalStorageInstance]
-        :keyword next_link: The URL to get the next set of AzureBareMetalStorage instances.
+        :keyword next_link: The link to the next page of items.
         :paramtype next_link: str
         """
         super().__init__(**kwargs)
@@ -414,7 +515,7 @@ class Disk(_serialization.Model):
         super().__init__(**kwargs)
         self.name = name
         self.disk_size_gb = disk_size_gb
-        self.lun = None
+        self.lun: Optional[int] = None
 
 
 class ErrorAdditionalInfo(_serialization.Model):
@@ -441,8 +542,8 @@ class ErrorAdditionalInfo(_serialization.Model):
     def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
-        self.type = None
-        self.info = None
+        self.type: Optional[str] = None
+        self.info: Optional[JSON] = None
 
 
 class ErrorDetail(_serialization.Model):
@@ -481,11 +582,11 @@ class ErrorDetail(_serialization.Model):
     def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
-        self.code = None
-        self.message = None
-        self.target = None
-        self.details = None
-        self.additional_info = None
+        self.code: Optional[str] = None
+        self.message: Optional[str] = None
+        self.target: Optional[str] = None
+        self.details: Optional[list["_models.ErrorDetail"]] = None
+        self.additional_info: Optional[list["_models.ErrorAdditionalInfo"]] = None
 
 
 class ErrorResponse(_serialization.Model):
@@ -542,8 +643,6 @@ class ForceState(_serialization.Model):
 class HardwareProfile(_serialization.Model):
     """Specifies the hardware settings for the Azure Bare Metal Instance.
 
-    Variables are only populated by the server, and will be ignored when sending a request.
-
     :ivar hardware_type: Name of the hardware type (vendor and/or their product name). Known values
      are: "Cisco_UCS", "HPE", and "SDFLEX".
     :vartype hardware_type: str or
@@ -558,21 +657,35 @@ class HardwareProfile(_serialization.Model):
      ~azure.mgmt.baremetalinfrastructure.models.AzureBareMetalInstanceSizeNamesEnum
     """
 
-    _validation = {
-        "hardware_type": {"readonly": True},
-        "azure_bare_metal_instance_size": {"readonly": True},
-    }
-
     _attribute_map = {
         "hardware_type": {"key": "hardwareType", "type": "str"},
         "azure_bare_metal_instance_size": {"key": "azureBareMetalInstanceSize", "type": "str"},
     }
 
-    def __init__(self, **kwargs: Any) -> None:
-        """ """
+    def __init__(
+        self,
+        *,
+        hardware_type: Optional[Union[str, "_models.AzureBareMetalHardwareTypeNamesEnum"]] = None,
+        azure_bare_metal_instance_size: Optional[Union[str, "_models.AzureBareMetalInstanceSizeNamesEnum"]] = None,
+        **kwargs: Any
+    ) -> None:
+        """
+        :keyword hardware_type: Name of the hardware type (vendor and/or their product name). Known
+         values are: "Cisco_UCS", "HPE", and "SDFLEX".
+        :paramtype hardware_type: str or
+         ~azure.mgmt.baremetalinfrastructure.models.AzureBareMetalHardwareTypeNamesEnum
+        :keyword azure_bare_metal_instance_size: Specifies the Azure Bare Metal Instance SKU. Known
+         values are: "S72m", "S144m", "S72", "S144", "S192", "S192m", "S192xm", "S96", "S112", "S224",
+         "S224m", "S224om", "S224oo", "S224oom", "S224ooo", "S384", "S384m", "S384xm", "S384xxm",
+         "S448", "S448m", "S448om", "S448oo", "S448oom", "S448ooo", "S448se", "S576m", "S576xm", "S672",
+         "S672m", "S672om", "S672oo", "S672oom", "S672ooo", "S768", "S768m", "S768xm", "S896", "S896m",
+         "S896om", "S896oo", "S896oom", "S896ooo", and "S960m".
+        :paramtype azure_bare_metal_instance_size: str or
+         ~azure.mgmt.baremetalinfrastructure.models.AzureBareMetalInstanceSizeNamesEnum
+        """
         super().__init__(**kwargs)
-        self.hardware_type = None
-        self.azure_bare_metal_instance_size = None
+        self.hardware_type = hardware_type
+        self.azure_bare_metal_instance_size = azure_bare_metal_instance_size
 
 
 class NetworkInterface(_serialization.Model):
@@ -598,33 +711,35 @@ class NetworkInterface(_serialization.Model):
 class NetworkProfile(_serialization.Model):
     """Specifies the network settings for the Azure Bare Metal Instance disks.
 
-    Variables are only populated by the server, and will be ignored when sending a request.
-
     :ivar network_interfaces: Specifies the network interfaces for the Azure Bare Metal Instance.
     :vartype network_interfaces: list[~azure.mgmt.baremetalinfrastructure.models.NetworkInterface]
     :ivar circuit_id: Specifies the circuit id for connecting to express route.
     :vartype circuit_id: str
     """
 
-    _validation = {
-        "circuit_id": {"readonly": True},
-    }
-
     _attribute_map = {
         "network_interfaces": {"key": "networkInterfaces", "type": "[NetworkInterface]"},
         "circuit_id": {"key": "circuitId", "type": "str"},
     }
 
-    def __init__(self, *, network_interfaces: Optional[List["_models.NetworkInterface"]] = None, **kwargs: Any) -> None:
+    def __init__(
+        self,
+        *,
+        network_interfaces: Optional[list["_models.NetworkInterface"]] = None,
+        circuit_id: Optional[str] = None,
+        **kwargs: Any
+    ) -> None:
         """
         :keyword network_interfaces: Specifies the network interfaces for the Azure Bare Metal
          Instance.
         :paramtype network_interfaces:
          list[~azure.mgmt.baremetalinfrastructure.models.NetworkInterface]
+        :keyword circuit_id: Specifies the circuit id for connecting to express route.
+        :paramtype circuit_id: str
         """
         super().__init__(**kwargs)
         self.network_interfaces = network_interfaces
-        self.circuit_id = None
+        self.circuit_id = circuit_id
 
 
 class Operation(_serialization.Model):
@@ -670,11 +785,11 @@ class Operation(_serialization.Model):
         :paramtype display: ~azure.mgmt.baremetalinfrastructure.models.OperationDisplay
         """
         super().__init__(**kwargs)
-        self.name = None
-        self.is_data_action = None
+        self.name: Optional[str] = None
+        self.is_data_action: Optional[bool] = None
         self.display = display
-        self.origin = None
-        self.action_type = None
+        self.origin: Optional[Union[str, "_models.Origin"]] = None
+        self.action_type: Optional[Union[str, "_models.ActionType"]] = None
 
 
 class OperationDisplay(_serialization.Model):
@@ -713,10 +828,10 @@ class OperationDisplay(_serialization.Model):
     def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
-        self.provider = None
-        self.resource = None
-        self.operation = None
-        self.description = None
+        self.provider: Optional[str] = None
+        self.resource: Optional[str] = None
+        self.operation: Optional[str] = None
+        self.description: Optional[str] = None
 
 
 class OperationListResult(_serialization.Model):
@@ -744,8 +859,8 @@ class OperationListResult(_serialization.Model):
     def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
-        self.value = None
-        self.next_link = None
+        self.value: Optional[list["_models.Operation"]] = None
+        self.next_link: Optional[str] = None
 
 
 class OperationStatus(_serialization.Model):
@@ -825,8 +940,6 @@ class OperationStatusError(_serialization.Model):
 class OSProfile(_serialization.Model):
     """Specifies the operating system settings for the Azure Bare Metal instance.
 
-    Variables are only populated by the server, and will be ignored when sending a request.
-
     :ivar computer_name: Specifies the host OS name of the Azure Bare Metal instance.
     :vartype computer_name: str
     :ivar os_type: This property allows you to specify the type of the OS.
@@ -837,11 +950,6 @@ class OSProfile(_serialization.Model):
     :vartype ssh_public_key: str
     """
 
-    _validation = {
-        "os_type": {"readonly": True},
-        "version": {"readonly": True},
-    }
-
     _attribute_map = {
         "computer_name": {"key": "computerName", "type": "str"},
         "os_type": {"key": "osType", "type": "str"},
@@ -850,18 +958,28 @@ class OSProfile(_serialization.Model):
     }
 
     def __init__(
-        self, *, computer_name: Optional[str] = None, ssh_public_key: Optional[str] = None, **kwargs: Any
+        self,
+        *,
+        computer_name: Optional[str] = None,
+        os_type: Optional[str] = None,
+        version: Optional[str] = None,
+        ssh_public_key: Optional[str] = None,
+        **kwargs: Any
     ) -> None:
         """
         :keyword computer_name: Specifies the host OS name of the Azure Bare Metal instance.
         :paramtype computer_name: str
+        :keyword os_type: This property allows you to specify the type of the OS.
+        :paramtype os_type: str
+        :keyword version: Specifies version of operating system.
+        :paramtype version: str
         :keyword ssh_public_key: Specifies the SSH public key used to access the operating system.
         :paramtype ssh_public_key: str
         """
         super().__init__(**kwargs)
         self.computer_name = computer_name
-        self.os_type = None
-        self.version = None
+        self.os_type = os_type
+        self.version = version
         self.ssh_public_key = ssh_public_key
 
 
@@ -900,8 +1018,6 @@ class StorageBillingProperties(_serialization.Model):
 class StorageProfile(_serialization.Model):
     """Specifies the storage settings for the Azure Bare Metal instance disks.
 
-    Variables are only populated by the server, and will be ignored when sending a request.
-
     :ivar nfs_ip_address: IP Address to connect to storage.
     :vartype nfs_ip_address: str
     :ivar os_disks: Specifies information about the operating system disk used by bare metal
@@ -909,23 +1025,23 @@ class StorageProfile(_serialization.Model):
     :vartype os_disks: list[~azure.mgmt.baremetalinfrastructure.models.Disk]
     """
 
-    _validation = {
-        "nfs_ip_address": {"readonly": True},
-    }
-
     _attribute_map = {
         "nfs_ip_address": {"key": "nfsIpAddress", "type": "str"},
         "os_disks": {"key": "osDisks", "type": "[Disk]"},
     }
 
-    def __init__(self, *, os_disks: Optional[List["_models.Disk"]] = None, **kwargs: Any) -> None:
+    def __init__(
+        self, *, nfs_ip_address: Optional[str] = None, os_disks: Optional[list["_models.Disk"]] = None, **kwargs: Any
+    ) -> None:
         """
+        :keyword nfs_ip_address: IP Address to connect to storage.
+        :paramtype nfs_ip_address: str
         :keyword os_disks: Specifies information about the operating system disk used by bare metal
          instance.
         :paramtype os_disks: list[~azure.mgmt.baremetalinfrastructure.models.Disk]
         """
         super().__init__(**kwargs)
-        self.nfs_ip_address = None
+        self.nfs_ip_address = nfs_ip_address
         self.os_disks = os_disks
 
 
@@ -1070,7 +1186,7 @@ class SystemData(_serialization.Model):
 
 
 class Tags(_serialization.Model):
-    """Tags field of the AzureBareMetal/AzureBareMetaStorage instance.
+    """Tags field of the AzureBareMetal/AzureBareMetalStorage instance.
 
     :ivar tags: Tags field of the AzureBareMetal/AzureBareMetaStorage instance.
     :vartype tags: dict[str, str]
@@ -1080,7 +1196,7 @@ class Tags(_serialization.Model):
         "tags": {"key": "tags", "type": "{str}"},
     }
 
-    def __init__(self, *, tags: Optional[Dict[str, str]] = None, **kwargs: Any) -> None:
+    def __init__(self, *, tags: Optional[dict[str, str]] = None, **kwargs: Any) -> None:
         """
         :keyword tags: Tags field of the AzureBareMetal/AzureBareMetaStorage instance.
         :paramtype tags: dict[str, str]

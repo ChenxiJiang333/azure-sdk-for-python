@@ -1,5 +1,20 @@
 # Release History
 
+## 1.1.0b3 (2026-02-12)
+
+### Features Added
+
+  - Added operation AzureBareMetalInstancesOperations.create
+  - Added operation AzureBareMetalInstancesOperations.delete
+  - Model AzureBareMetalStorageInstance has a new parameter identity
+
+### Breaking Changes
+
+  - Operation AzureBareMetalStorageInstancesOperations.update has a new required parameter azure_bare_metal_storage_instance_body_parameter
+  - Operation AzureBareMetalStorageInstancesOperations.update no longer has parameter tags_parameter
+  - Parameter value of model AzureBareMetalInstancesListResult is now required
+  - Parameter value of model AzureBareMetalStorageInstancesListResult is now required
+
 ## 1.1.0b2 (2023-10-23)
 
 ### Features Added
