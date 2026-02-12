@@ -6,29 +6,26 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 import pytest
-from azure.mgmt.securityinsight.aio import SecurityInsightsClient
+from azure.mgmt.securityinsight import SecurityInsightsClient
 
-from devtools_testutils import AzureMgmtRecordedTestCase, RandomNameResourceGroupPreparer
-from devtools_testutils.aio import recorded_by_proxy_async
+from devtools_testutils import AzureMgmtRecordedTestCase, RandomNameResourceGroupPreparer, recorded_by_proxy
 
 AZURE_LOCATION = "eastus"
 
 
 @pytest.mark.skip("you may need to update the auto-generated test case before run it")
-class TestSecurityInsightsalertRuleOperationsAsync(AzureMgmtRecordedTestCase):
+class TestSecurityInsightsAlertRuleOperations(AzureMgmtRecordedTestCase):
     def setup_method(self, method):
-        self.client = self.create_mgmt_client(SecurityInsightsClient, is_async=True)
+        self.client = self.create_mgmt_client(SecurityInsightsClient)
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_alert_rule_begin_trigger_rule_run(self, resource_group):
-        response = await (
-            await self.client.alert_rule.begin_trigger_rule_run(
-                resource_group_name=resource_group.name,
-                workspace_name="str",
-                rule_id="str",
-                analytics_rule_run_trigger_parameter={"properties": {"executionTimeUtc": "2020-02-20 00:00:00"}},
-            )
+    @recorded_by_proxy
+    def test_alert_rule_begin_trigger_rule_run(self, resource_group):
+        response = self.client.alert_rule.begin_trigger_rule_run(
+            resource_group_name=resource_group.name,
+            workspace_name="str",
+            rule_id="str",
+            analytics_rule_run_trigger_parameter={"properties": {"executionTimeUtc": "2020-02-20 00:00:00"}},
         ).result()  # call '.result()' to poll until service return final result
 
         # please add some check logic here by yourself

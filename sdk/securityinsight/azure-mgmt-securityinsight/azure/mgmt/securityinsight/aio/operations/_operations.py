@@ -13952,7 +13952,7 @@ class WorkspaceManagerMembersOperations:
         return AsyncItemPaged(get_next, extract_data)
 
 
-class alertRuleOperations:
+class AlertRuleOperations:
     """
     .. warning::
         **DO NOT** instantiate this class directly.

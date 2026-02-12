@@ -19355,7 +19355,7 @@ class WorkspaceManagerMembersOperations:
         return ItemPaged(get_next, extract_data)
 
 
-class alertRuleOperations:
+class AlertRuleOperations:
     """
     .. warning::
         **DO NOT** instantiate this class directly.

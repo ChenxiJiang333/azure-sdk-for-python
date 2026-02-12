@@ -21,6 +21,7 @@ from ._configuration import SecurityInsightsClientConfiguration
 from ._utils.serialization import Deserializer, Serializer
 from .operations import (
     ActionsOperations,
+    AlertRuleOperations,
     AlertRuleTemplatesOperations,
     AlertRulesOperations,
     AutomationRulesOperations,
@@ -79,7 +80,6 @@ from .operations import (
     WorkspaceManagerGroupsOperations,
     WorkspaceManagerMembersOperations,
     _SecurityInsightsClientOperationsMixin,
-    alertRuleOperations,
 )
 
 if TYPE_CHECKING:
@@ -161,8 +161,8 @@ class SecurityInsightsClient(_SecurityInsightsClientOperationsMixin):  # pylint:
     :ivar workspace_manager_members: WorkspaceManagerMembersOperations operations
     :vartype workspace_manager_members:
      azure.mgmt.securityinsight.operations.WorkspaceManagerMembersOperations
-    :ivar alert_rule: alertRuleOperations operations
-    :vartype alert_rule: azure.mgmt.securityinsight.operations.alertRuleOperations
+    :ivar alert_rule: AlertRuleOperations operations
+    :vartype alert_rule: azure.mgmt.securityinsight.operations.AlertRuleOperations
     :ivar actions: ActionsOperations operations
     :vartype actions: azure.mgmt.securityinsight.operations.ActionsOperations
     :ivar bookmark: BookmarkOperations operations
@@ -353,7 +353,7 @@ class SecurityInsightsClient(_SecurityInsightsClientOperationsMixin):  # pylint:
         self.workspace_manager_members = WorkspaceManagerMembersOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
-        self.alert_rule = alertRuleOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.alert_rule = AlertRuleOperations(self._client, self._config, self._serialize, self._deserialize)
         self.actions = ActionsOperations(self._client, self._config, self._serialize, self._deserialize)
         self.bookmark = BookmarkOperations(self._client, self._config, self._serialize, self._deserialize)
         self.content_packages = ContentPackagesOperations(

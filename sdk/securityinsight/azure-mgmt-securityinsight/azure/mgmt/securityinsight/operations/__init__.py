@@ -43,7 +43,7 @@ from ._operations import WorkspaceManagerAssignmentsOperations  # type: ignore
 from ._operations import WorkspaceManagerConfigurationsOperations  # type: ignore
 from ._operations import WorkspaceManagerGroupsOperations  # type: ignore
 from ._operations import WorkspaceManagerMembersOperations  # type: ignore
-from ._operations import alertRuleOperations  # type: ignore
+from ._operations import AlertRuleOperations  # type: ignore
 from ._operations import ActionsOperations  # type: ignore
 from ._operations import BookmarkOperations  # type: ignore
 from ._operations import ContentPackagesOperations  # type: ignore
@@ -109,7 +109,7 @@ __all__ = [
     "WorkspaceManagerConfigurationsOperations",
     "WorkspaceManagerGroupsOperations",
     "WorkspaceManagerMembersOperations",
-    "alertRuleOperations",
+    "AlertRuleOperations",
     "ActionsOperations",
     "BookmarkOperations",
     "ContentPackagesOperations",

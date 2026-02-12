@@ -8,6 +8,10 @@ change log generation failed!!! You need to write it manually!!!
 
 change log generation failed!!! You need to write it manually!!!
 
+## 2.0.0b3 (2026-02-12)
+
+change log generation failed!!! You need to write it manually!!!
+
 ### Breaking Changes
 
 - Rrenamed model `SecurityInsights` to `SecurityInsightMgmtClient` // can't avoid, python emitter adds suffix `Client` in default
