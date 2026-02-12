@@ -948,7 +948,7 @@ class FileHashAlgorithm(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """SHA1 hash type"""
     SHA256 = "SHA256"
     """SHA256 hash type"""
-    SHA256AC = "SHA256AC"
+    SHA256_AC = "SHA256AC"
     """SHA256 Authenticode hash type"""
 
 

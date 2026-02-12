@@ -30,7 +30,7 @@ def main():
         subscription_id="SUBSCRIPTION_ID",
     )
 
-    response = client.alert_rules.create_or_update(
+    response = client.alert_rule.create_or_update(
         resource_group_name="myRg",
         workspace_name="myWorkspace",
         rule_id="myFirstFusionRule",

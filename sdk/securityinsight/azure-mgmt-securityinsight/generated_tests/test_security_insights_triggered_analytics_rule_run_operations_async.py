@@ -15,7 +15,7 @@ AZURE_LOCATION = "eastus"
 
 
 @pytest.mark.skip("you may need to update the auto-generated test case before run it")
-class TestSecurityInsightstriggeredAnalyticsRuleRunOperationsAsync(AzureMgmtRecordedTestCase):
+class TestSecurityInsightsTriggeredAnalyticsRuleRunOperationsAsync(AzureMgmtRecordedTestCase):
     def setup_method(self, method):
         self.client = self.create_mgmt_client(SecurityInsightsClient, is_async=True)
 

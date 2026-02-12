@@ -13,7 +13,7 @@ if TYPE_CHECKING:
     from ._patch import *  # pylint: disable=unused-wildcard-import
 
 from ._operations import Operations  # type: ignore
-from ._operations import AlertRulesOperations  # type: ignore
+from ._operations import AlertRuleOperations  # type: ignore
 from ._operations import AlertRuleTemplatesOperations  # type: ignore
 from ._operations import AutomationRulesOperations  # type: ignore
 from ._operations import IncidentsOperations  # type: ignore
@@ -39,7 +39,6 @@ from ._operations import HuntCommentsOperations  # type: ignore
 from ._operations import HuntRelationsOperations  # type: ignore
 from ._operations import OfficeConsentsOperations  # type: ignore
 from ._operations import ProductSettingsOperations  # type: ignore
-from ._operations import triggeredAnalyticsRuleRunOperations  # type: ignore
 from ._operations import WorkspaceManagerAssignmentsOperations  # type: ignore
 from ._operations import WorkspaceManagerConfigurationsOperations  # type: ignore
 from ._operations import WorkspaceManagerGroupsOperations  # type: ignore
@@ -69,7 +68,8 @@ from ._operations import GetOperations  # type: ignore
 from ._operations import UpdateOperations  # type: ignore
 from ._operations import GetRecommendationsOperations  # type: ignore
 from ._operations import ReevaluateOperations  # type: ignore
-from ._operations import getTriggeredAnalyticsRuleRunsOperations  # type: ignore
+from ._operations import TriggeredAnalyticsRuleRunOperations  # type: ignore
+from ._operations import GetTriggeredAnalyticsRuleRunsOperations  # type: ignore
 from ._operations import WorkspaceManagerAssignmentJobsOperations  # type: ignore
 from ._operations import _SecurityInsightsClientOperationsMixin  # type: ignore # pylint: disable=unused-import
 
@@ -79,7 +79,7 @@ from ._patch import patch_sdk as _patch_sdk
 
 __all__ = [
     "Operations",
-    "AlertRulesOperations",
+    "AlertRuleOperations",
     "AlertRuleTemplatesOperations",
     "AutomationRulesOperations",
     "IncidentsOperations",
@@ -105,7 +105,6 @@ __all__ = [
     "HuntRelationsOperations",
     "OfficeConsentsOperations",
     "ProductSettingsOperations",
-    "triggeredAnalyticsRuleRunOperations",
     "WorkspaceManagerAssignmentsOperations",
     "WorkspaceManagerConfigurationsOperations",
     "WorkspaceManagerGroupsOperations",
@@ -135,7 +134,8 @@ __all__ = [
     "UpdateOperations",
     "GetRecommendationsOperations",
     "ReevaluateOperations",
-    "getTriggeredAnalyticsRuleRunsOperations",
+    "TriggeredAnalyticsRuleRunOperations",
+    "GetTriggeredAnalyticsRuleRunsOperations",
     "WorkspaceManagerAssignmentJobsOperations",
 ]
 __all__.extend([p for p in _patch_all if p not in __all__])  # pyright: ignore

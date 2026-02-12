@@ -42,13 +42,13 @@ from ...operations._operations import (
     build_actions_delete_request,
     build_actions_get_request,
     build_actions_list_by_alert_rule_request,
+    build_alert_rule_create_or_update_request,
+    build_alert_rule_delete_request,
+    build_alert_rule_get_request,
+    build_alert_rule_list_request,
     build_alert_rule_templates_get_request,
     build_alert_rule_templates_list_request,
     build_alert_rule_trigger_rule_run_request,
-    build_alert_rules_create_or_update_request,
-    build_alert_rules_delete_request,
-    build_alert_rules_get_request,
-    build_alert_rules_list_request,
     build_automation_rules_create_or_update_request,
     build_automation_rules_delete_request,
     build_automation_rules_get_request,
@@ -324,14 +324,14 @@ class Operations:
         return AsyncItemPaged(get_next, extract_data)
 
 
-class AlertRulesOperations:
+class AlertRuleOperations:
     """
     .. warning::
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
         :class:`~azure.mgmt.securityinsight.aio.SecurityInsightsClient`'s
-        :attr:`alert_rules` attribute.
+        :attr:`alert_rule` attribute.
     """
 
     def __init__(self, *args, **kwargs) -> None:
@@ -371,7 +371,7 @@ class AlertRulesOperations:
 
         cls: ClsType[_models.AlertRule] = kwargs.pop("cls", None)
 
-        _request = build_alert_rules_get_request(
+        _request = build_alert_rule_get_request(
             resource_group_name=resource_group_name,
             workspace_name=workspace_name,
             rule_id=rule_id,
@@ -551,7 +551,7 @@ class AlertRulesOperations:
         else:
             _content = json.dumps(alert_rule, cls=SdkJSONEncoder, exclude_readonly=True)  # type: ignore
 
-        _request = build_alert_rules_create_or_update_request(
+        _request = build_alert_rule_create_or_update_request(
             resource_group_name=resource_group_name,
             workspace_name=workspace_name,
             rule_id=rule_id,
@@ -625,7 +625,7 @@ class AlertRulesOperations:
 
         cls: ClsType[None] = kwargs.pop("cls", None)
 
-        _request = build_alert_rules_delete_request(
+        _request = build_alert_rule_delete_request(
             resource_group_name=resource_group_name,
             workspace_name=workspace_name,
             rule_id=rule_id,
@@ -686,7 +686,7 @@ class AlertRulesOperations:
         def prepare_request(next_link=None):
             if not next_link:
 
-                _request = build_alert_rules_list_request(
+                _request = build_alert_rule_list_request(
                     resource_group_name=resource_group_name,
                     workspace_name=workspace_name,
                     subscription_id=self._config.subscription_id,
@@ -12116,99 +12116,6 @@ class ProductSettingsOperations:
         return AsyncItemPaged(get_next, extract_data)
 
 
-class triggeredAnalyticsRuleRunOperations:
-    """
-    .. warning::
-        **DO NOT** instantiate this class directly.
-
-        Instead, you should access the following operations through
-        :class:`~azure.mgmt.securityinsight.aio.SecurityInsightsClient`'s
-        :attr:`triggered_analytics_rule_run` attribute.
-    """
-
-    def __init__(self, *args, **kwargs) -> None:
-        input_args = list(args)
-        self._client: AsyncPipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: SecurityInsightsClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
-        self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
-        self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
-
-    @distributed_trace_async
-    async def get(
-        self, resource_group_name: str, workspace_name: str, rule_run_id: str, **kwargs: Any
-    ) -> _models.TriggeredAnalyticsRuleRun:
-        """Gets the triggered analytics rule run.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param workspace_name: The name of the workspace. Required.
-        :type workspace_name: str
-        :param rule_run_id: the triggered rule id. Required.
-        :type rule_run_id: str
-        :return: TriggeredAnalyticsRuleRun. The TriggeredAnalyticsRuleRun is compatible with
-         MutableMapping
-        :rtype: ~azure.mgmt.securityinsight.models.TriggeredAnalyticsRuleRun
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        error_map: MutableMapping = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        _headers = kwargs.pop("headers", {}) or {}
-        _params = kwargs.pop("params", {}) or {}
-
-        cls: ClsType[_models.TriggeredAnalyticsRuleRun] = kwargs.pop("cls", None)
-
-        _request = build_triggered_analytics_rule_run_get_request(
-            resource_group_name=resource_group_name,
-            workspace_name=workspace_name,
-            rule_run_id=rule_run_id,
-            subscription_id=self._config.subscription_id,
-            api_version=self._config.api_version,
-            headers=_headers,
-            params=_params,
-        )
-        path_format_arguments = {
-            "endpoint": self._serialize.url("self._config.base_url", self._config.base_url, "str", skip_quote=True),
-        }
-        _request.url = self._client.format_url(_request.url, **path_format_arguments)
-
-        _stream = kwargs.pop("stream", False)
-        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            _request, stream=_stream, **kwargs
-        )
-
-        response = pipeline_response.http_response
-
-        if response.status_code not in [200]:
-            if _stream:
-                try:
-                    await response.read()  # Load the body in memory and close the socket
-                except (StreamConsumedError, StreamClosedError):
-                    pass
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = _failsafe_deserialize(
-                _models.CloudError,
-                response,
-            )
-            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
-
-        if _stream:
-            deserialized = response.iter_bytes()
-        else:
-            deserialized = _deserialize(_models.TriggeredAnalyticsRuleRun, response.json())
-
-        if cls:
-            return cls(pipeline_response, deserialized, {})  # type: ignore
-
-        return deserialized  # type: ignore
-
-
 class WorkspaceManagerAssignmentsOperations:
     """
     .. warning::
@@ -20544,7 +20451,100 @@ class ReevaluateOperations:
         return deserialized  # type: ignore
 
 
-class getTriggeredAnalyticsRuleRunsOperations:
+class TriggeredAnalyticsRuleRunOperations:
+    """
+    .. warning::
+        **DO NOT** instantiate this class directly.
+
+        Instead, you should access the following operations through
+        :class:`~azure.mgmt.securityinsight.aio.SecurityInsightsClient`'s
+        :attr:`triggered_analytics_rule_run` attribute.
+    """
+
+    def __init__(self, *args, **kwargs) -> None:
+        input_args = list(args)
+        self._client: AsyncPipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
+        self._config: SecurityInsightsClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
+        self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
+
+    @distributed_trace_async
+    async def get(
+        self, resource_group_name: str, workspace_name: str, rule_run_id: str, **kwargs: Any
+    ) -> _models.TriggeredAnalyticsRuleRun:
+        """Gets the triggered analytics rule run.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param workspace_name: The name of the workspace. Required.
+        :type workspace_name: str
+        :param rule_run_id: the triggered rule id. Required.
+        :type rule_run_id: str
+        :return: TriggeredAnalyticsRuleRun. The TriggeredAnalyticsRuleRun is compatible with
+         MutableMapping
+        :rtype: ~azure.mgmt.securityinsight.models.TriggeredAnalyticsRuleRun
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[_models.TriggeredAnalyticsRuleRun] = kwargs.pop("cls", None)
+
+        _request = build_triggered_analytics_rule_run_get_request(
+            resource_group_name=resource_group_name,
+            workspace_name=workspace_name,
+            rule_run_id=rule_run_id,
+            subscription_id=self._config.subscription_id,
+            api_version=self._config.api_version,
+            headers=_headers,
+            params=_params,
+        )
+        path_format_arguments = {
+            "endpoint": self._serialize.url("self._config.base_url", self._config.base_url, "str", skip_quote=True),
+        }
+        _request.url = self._client.format_url(_request.url, **path_format_arguments)
+
+        _stream = kwargs.pop("stream", False)
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                try:
+                    await response.read()  # Load the body in memory and close the socket
+                except (StreamConsumedError, StreamClosedError):
+                    pass
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            error = _failsafe_deserialize(
+                _models.CloudError,
+                response,
+            )
+            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
+
+        if _stream:
+            deserialized = response.iter_bytes()
+        else:
+            deserialized = _deserialize(_models.TriggeredAnalyticsRuleRun, response.json())
+
+        if cls:
+            return cls(pipeline_response, deserialized, {})  # type: ignore
+
+        return deserialized  # type: ignore
+
+
+class GetTriggeredAnalyticsRuleRunsOperations:
     """
     .. warning::
         **DO NOT** instantiate this class directly.

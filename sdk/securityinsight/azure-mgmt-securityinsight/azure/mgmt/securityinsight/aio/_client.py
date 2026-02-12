@@ -21,8 +21,8 @@ from .._utils.serialization import Deserializer, Serializer
 from ._configuration import SecurityInsightsClientConfiguration
 from .operations import (
     ActionsOperations,
+    AlertRuleOperations,
     AlertRuleTemplatesOperations,
-    AlertRulesOperations,
     AutomationRulesOperations,
     BillingStatisticsOperations,
     BookmarkOperations,
@@ -44,6 +44,7 @@ from .operations import (
     FileImportsOperations,
     GetOperations,
     GetRecommendationsOperations,
+    GetTriggeredAnalyticsRuleRunsOperations,
     HuntCommentsOperations,
     HuntRelationsOperations,
     HuntsOperations,
@@ -68,6 +69,7 @@ from .operations import (
     ThreatIntelligenceIndicatorOperations,
     ThreatIntelligenceIndicatorsOperations,
     ThreatIntelligenceOperations,
+    TriggeredAnalyticsRuleRunOperations,
     UpdateOperations,
     WatchlistItemsOperations,
     WatchlistsOperations,
@@ -78,8 +80,6 @@ from .operations import (
     WorkspaceManagerMembersOperations,
     _SecurityInsightsClientOperationsMixin,
     alertRuleOperations,
-    getTriggeredAnalyticsRuleRunsOperations,
-    triggeredAnalyticsRuleRunOperations,
 )
 
 if TYPE_CHECKING:
@@ -92,8 +92,8 @@ class SecurityInsightsClient(_SecurityInsightsClientOperationsMixin):  # pylint:
 
     :ivar operations: Operations operations
     :vartype operations: azure.mgmt.securityinsight.aio.operations.Operations
-    :ivar alert_rules: AlertRulesOperations operations
-    :vartype alert_rules: azure.mgmt.securityinsight.aio.operations.AlertRulesOperations
+    :ivar alert_rule: AlertRuleOperations operations
+    :vartype alert_rule: azure.mgmt.securityinsight.aio.operations.AlertRuleOperations
     :ivar alert_rule_templates: AlertRuleTemplatesOperations operations
     :vartype alert_rule_templates:
      azure.mgmt.securityinsight.aio.operations.AlertRuleTemplatesOperations
@@ -152,9 +152,6 @@ class SecurityInsightsClient(_SecurityInsightsClientOperationsMixin):  # pylint:
     :vartype office_consents: azure.mgmt.securityinsight.aio.operations.OfficeConsentsOperations
     :ivar product_settings: ProductSettingsOperations operations
     :vartype product_settings: azure.mgmt.securityinsight.aio.operations.ProductSettingsOperations
-    :ivar triggered_analytics_rule_run: triggeredAnalyticsRuleRunOperations operations
-    :vartype triggered_analytics_rule_run:
-     azure.mgmt.securityinsight.aio.operations.triggeredAnalyticsRuleRunOperations
     :ivar workspace_manager_assignments: WorkspaceManagerAssignmentsOperations operations
     :vartype workspace_manager_assignments:
      azure.mgmt.securityinsight.aio.operations.WorkspaceManagerAssignmentsOperations
@@ -229,9 +226,12 @@ class SecurityInsightsClient(_SecurityInsightsClientOperationsMixin):  # pylint:
      azure.mgmt.securityinsight.aio.operations.GetRecommendationsOperations
     :ivar reevaluate: ReevaluateOperations operations
     :vartype reevaluate: azure.mgmt.securityinsight.aio.operations.ReevaluateOperations
-    :ivar get_triggered_analytics_rule_runs: getTriggeredAnalyticsRuleRunsOperations operations
+    :ivar triggered_analytics_rule_run: TriggeredAnalyticsRuleRunOperations operations
+    :vartype triggered_analytics_rule_run:
+     azure.mgmt.securityinsight.aio.operations.TriggeredAnalyticsRuleRunOperations
+    :ivar get_triggered_analytics_rule_runs: GetTriggeredAnalyticsRuleRunsOperations operations
     :vartype get_triggered_analytics_rule_runs:
-     azure.mgmt.securityinsight.aio.operations.getTriggeredAnalyticsRuleRunsOperations
+     azure.mgmt.securityinsight.aio.operations.GetTriggeredAnalyticsRuleRunsOperations
     :ivar workspace_manager_assignment_jobs: WorkspaceManagerAssignmentJobsOperations operations
     :vartype workspace_manager_assignment_jobs:
      azure.mgmt.securityinsight.aio.operations.WorkspaceManagerAssignmentJobsOperations
@@ -302,7 +302,7 @@ class SecurityInsightsClient(_SecurityInsightsClientOperationsMixin):  # pylint:
         self._deserialize = Deserializer()
         self._serialize.client_side_validation = False
         self.operations = Operations(self._client, self._config, self._serialize, self._deserialize)
-        self.alert_rules = AlertRulesOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.alert_rule = AlertRuleOperations(self._client, self._config, self._serialize, self._deserialize)
         self.alert_rule_templates = AlertRuleTemplatesOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
@@ -348,9 +348,6 @@ class SecurityInsightsClient(_SecurityInsightsClientOperationsMixin):  # pylint:
         self.hunt_relations = HuntRelationsOperations(self._client, self._config, self._serialize, self._deserialize)
         self.office_consents = OfficeConsentsOperations(self._client, self._config, self._serialize, self._deserialize)
         self.product_settings = ProductSettingsOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
-        self.triggered_analytics_rule_run = triggeredAnalyticsRuleRunOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
         self.workspace_manager_assignments = WorkspaceManagerAssignmentsOperations(
@@ -420,7 +417,10 @@ class SecurityInsightsClient(_SecurityInsightsClientOperationsMixin):  # pylint:
             self._client, self._config, self._serialize, self._deserialize
         )
         self.reevaluate = ReevaluateOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.get_triggered_analytics_rule_runs = getTriggeredAnalyticsRuleRunsOperations(
+        self.triggered_analytics_rule_run = TriggeredAnalyticsRuleRunOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.get_triggered_analytics_rule_runs = GetTriggeredAnalyticsRuleRunsOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
         self.workspace_manager_assignment_jobs = WorkspaceManagerAssignmentJobsOperations(

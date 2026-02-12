@@ -66,7 +66,7 @@ def build_operations_list_request(**kwargs: Any) -> HttpRequest:
     return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_alert_rules_get_request(
+def build_alert_rule_get_request(
     resource_group_name: str, workspace_name: str, rule_id: str, subscription_id: str, **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
@@ -95,7 +95,7 @@ def build_alert_rules_get_request(
     return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_alert_rules_create_or_update_request(  # pylint: disable=name-too-long
+def build_alert_rule_create_or_update_request(  # pylint: disable=name-too-long
     resource_group_name: str, workspace_name: str, rule_id: str, subscription_id: str, **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
@@ -127,7 +127,7 @@ def build_alert_rules_create_or_update_request(  # pylint: disable=name-too-long
     return HttpRequest(method="PUT", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_alert_rules_delete_request(
+def build_alert_rule_delete_request(
     resource_group_name: str, workspace_name: str, rule_id: str, subscription_id: str, **kwargs: Any
 ) -> HttpRequest:
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
@@ -150,7 +150,7 @@ def build_alert_rules_delete_request(
     return HttpRequest(method="DELETE", url=_url, params=_params, **kwargs)
 
 
-def build_alert_rules_list_request(
+def build_alert_rule_list_request(
     resource_group_name: str, workspace_name: str, subscription_id: str, **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
@@ -176,6 +176,35 @@ def build_alert_rules_list_request(
     _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
 
     return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
+
+
+def build_alert_rule_trigger_rule_run_request(  # pylint: disable=name-too-long
+    resource_group_name: str, workspace_name: str, rule_id: str, subscription_id: str, **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-07-01-preview"))
+    # Construct URL
+    _url = "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/alertRules/{ruleId}/triggerRuleRun"
+    path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
+        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
+        "workspaceName": _SERIALIZER.url("workspace_name", workspace_name, "str"),
+        "ruleId": _SERIALIZER.url("rule_id", rule_id, "str"),
+    }
+
+    _url: str = _url.format(**path_format_arguments)  # type: ignore
+
+    # Construct parameters
+    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
+
+    # Construct headers
+    if content_type is not None:
+        _headers["Content-Type"] = _SERIALIZER.header("content_type", content_type, "str")
+
+    return HttpRequest(method="POST", url=_url, params=_params, headers=_headers, **kwargs)
 
 
 def build_alert_rule_templates_get_request(
@@ -3265,35 +3294,6 @@ def build_product_settings_list_request(
     return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_triggered_analytics_rule_run_get_request(  # pylint: disable=name-too-long
-    resource_group_name: str, workspace_name: str, rule_run_id: str, subscription_id: str, **kwargs: Any
-) -> HttpRequest:
-    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-07-01-preview"))
-    accept = _headers.pop("Accept", "application/json")
-
-    # Construct URL
-    _url = "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/triggeredAnalyticsRuleRuns/{ruleRunId}"
-    path_format_arguments = {
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
-        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
-        "workspaceName": _SERIALIZER.url("workspace_name", workspace_name, "str"),
-        "ruleRunId": _SERIALIZER.url("rule_run_id", rule_run_id, "str"),
-    }
-
-    _url: str = _url.format(**path_format_arguments)  # type: ignore
-
-    # Construct parameters
-    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
-
-    # Construct headers
-    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
-
-    return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
-
-
 def build_workspace_manager_assignments_get_request(  # pylint: disable=name-too-long
     resource_group_name: str,
     workspace_name: str,
@@ -3859,6 +3859,118 @@ def build_workspace_manager_members_list_request(  # pylint: disable=name-too-lo
         _params["$top"] = _SERIALIZER.query("top", top, "int")
     if skip_token is not None:
         _params["$skipToken"] = _SERIALIZER.query("skip_token", skip_token, "str")
+
+    # Construct headers
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
+
+
+def build_alert_rule_get_request(
+    resource_group_name: str, workspace_name: str, rule_id: str, subscription_id: str, **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-07-01-preview"))
+    accept = _headers.pop("Accept", "application/json")
+
+    # Construct URL
+    _url = "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/alertRules/{ruleId}"
+    path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
+        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
+        "workspaceName": _SERIALIZER.url("workspace_name", workspace_name, "str"),
+        "ruleId": _SERIALIZER.url("rule_id", rule_id, "str"),
+    }
+
+    _url: str = _url.format(**path_format_arguments)  # type: ignore
+
+    # Construct parameters
+    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
+
+    # Construct headers
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
+
+
+def build_alert_rule_create_or_update_request(  # pylint: disable=name-too-long
+    resource_group_name: str, workspace_name: str, rule_id: str, subscription_id: str, **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-07-01-preview"))
+    accept = _headers.pop("Accept", "application/json")
+
+    # Construct URL
+    _url = "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/alertRules/{ruleId}"
+    path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
+        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
+        "workspaceName": _SERIALIZER.url("workspace_name", workspace_name, "str"),
+        "ruleId": _SERIALIZER.url("rule_id", rule_id, "str"),
+    }
+
+    _url: str = _url.format(**path_format_arguments)  # type: ignore
+
+    # Construct parameters
+    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
+
+    # Construct headers
+    if content_type is not None:
+        _headers["Content-Type"] = _SERIALIZER.header("content_type", content_type, "str")
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(method="PUT", url=_url, params=_params, headers=_headers, **kwargs)
+
+
+def build_alert_rule_delete_request(
+    resource_group_name: str, workspace_name: str, rule_id: str, subscription_id: str, **kwargs: Any
+) -> HttpRequest:
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-07-01-preview"))
+    # Construct URL
+    _url = "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/alertRules/{ruleId}"
+    path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
+        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
+        "workspaceName": _SERIALIZER.url("workspace_name", workspace_name, "str"),
+        "ruleId": _SERIALIZER.url("rule_id", rule_id, "str"),
+    }
+
+    _url: str = _url.format(**path_format_arguments)  # type: ignore
+
+    # Construct parameters
+    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
+
+    return HttpRequest(method="DELETE", url=_url, params=_params, **kwargs)
+
+
+def build_alert_rule_list_request(
+    resource_group_name: str, workspace_name: str, subscription_id: str, **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-07-01-preview"))
+    accept = _headers.pop("Accept", "application/json")
+
+    # Construct URL
+    _url = "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/alertRules"
+    path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
+        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
+        "workspaceName": _SERIALIZER.url("workspace_name", workspace_name, "str"),
+    }
+
+    _url: str = _url.format(**path_format_arguments)  # type: ignore
+
+    # Construct parameters
+    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
 
     # Construct headers
     _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
@@ -5395,6 +5507,35 @@ def build_reevaluate_recommendation_request(
     return HttpRequest(method="POST", url=_url, params=_params, headers=_headers, **kwargs)
 
 
+def build_triggered_analytics_rule_run_get_request(  # pylint: disable=name-too-long
+    resource_group_name: str, workspace_name: str, rule_run_id: str, subscription_id: str, **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-07-01-preview"))
+    accept = _headers.pop("Accept", "application/json")
+
+    # Construct URL
+    _url = "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/triggeredAnalyticsRuleRuns/{ruleRunId}"
+    path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
+        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
+        "workspaceName": _SERIALIZER.url("workspace_name", workspace_name, "str"),
+        "ruleRunId": _SERIALIZER.url("rule_run_id", rule_run_id, "str"),
+    }
+
+    _url: str = _url.format(**path_format_arguments)  # type: ignore
+
+    # Construct parameters
+    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
+
+    # Construct headers
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
+
+
 def build_get_triggered_analytics_rule_runs_list_request(  # pylint: disable=name-too-long
     resource_group_name: str, workspace_name: str, subscription_id: str, **kwargs: Any
 ) -> HttpRequest:
@@ -5747,14 +5888,14 @@ class Operations:
         return ItemPaged(get_next, extract_data)
 
 
-class AlertRulesOperations:
+class AlertRuleOperations:
     """
     .. warning::
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
         :class:`~azure.mgmt.securityinsight.SecurityInsightsClient`'s
-        :attr:`alert_rules` attribute.
+        :attr:`alert_rule` attribute.
     """
 
     def __init__(self, *args, **kwargs) -> None:
@@ -5792,7 +5933,7 @@ class AlertRulesOperations:
 
         cls: ClsType[_models.AlertRule] = kwargs.pop("cls", None)
 
-        _request = build_alert_rules_get_request(
+        _request = build_alert_rule_get_request(
             resource_group_name=resource_group_name,
             workspace_name=workspace_name,
             rule_id=rule_id,
@@ -5972,7 +6113,7 @@ class AlertRulesOperations:
         else:
             _content = json.dumps(alert_rule, cls=SdkJSONEncoder, exclude_readonly=True)  # type: ignore
 
-        _request = build_alert_rules_create_or_update_request(
+        _request = build_alert_rule_create_or_update_request(
             resource_group_name=resource_group_name,
             workspace_name=workspace_name,
             rule_id=rule_id,
@@ -6048,7 +6189,7 @@ class AlertRulesOperations:
 
         cls: ClsType[None] = kwargs.pop("cls", None)
 
-        _request = build_alert_rules_delete_request(
+        _request = build_alert_rule_delete_request(
             resource_group_name=resource_group_name,
             workspace_name=workspace_name,
             rule_id=rule_id,
@@ -6109,7 +6250,7 @@ class AlertRulesOperations:
         def prepare_request(next_link=None):
             if not next_link:
 
-                _request = build_alert_rules_list_request(
+                _request = build_alert_rule_list_request(
                     resource_group_name=resource_group_name,
                     workspace_name=workspace_name,
                     subscription_id=self._config.subscription_id,
@@ -17521,99 +17662,6 @@ class ProductSettingsOperations:
         return ItemPaged(get_next, extract_data)
 
 
-class triggeredAnalyticsRuleRunOperations:
-    """
-    .. warning::
-        **DO NOT** instantiate this class directly.
-
-        Instead, you should access the following operations through
-        :class:`~azure.mgmt.securityinsight.SecurityInsightsClient`'s
-        :attr:`triggered_analytics_rule_run` attribute.
-    """
-
-    def __init__(self, *args, **kwargs) -> None:
-        input_args = list(args)
-        self._client: PipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: SecurityInsightsClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
-        self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
-        self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
-
-    @distributed_trace
-    def get(
-        self, resource_group_name: str, workspace_name: str, rule_run_id: str, **kwargs: Any
-    ) -> _models.TriggeredAnalyticsRuleRun:
-        """Gets the triggered analytics rule run.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param workspace_name: The name of the workspace. Required.
-        :type workspace_name: str
-        :param rule_run_id: the triggered rule id. Required.
-        :type rule_run_id: str
-        :return: TriggeredAnalyticsRuleRun. The TriggeredAnalyticsRuleRun is compatible with
-         MutableMapping
-        :rtype: ~azure.mgmt.securityinsight.models.TriggeredAnalyticsRuleRun
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        error_map: MutableMapping = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        _headers = kwargs.pop("headers", {}) or {}
-        _params = kwargs.pop("params", {}) or {}
-
-        cls: ClsType[_models.TriggeredAnalyticsRuleRun] = kwargs.pop("cls", None)
-
-        _request = build_triggered_analytics_rule_run_get_request(
-            resource_group_name=resource_group_name,
-            workspace_name=workspace_name,
-            rule_run_id=rule_run_id,
-            subscription_id=self._config.subscription_id,
-            api_version=self._config.api_version,
-            headers=_headers,
-            params=_params,
-        )
-        path_format_arguments = {
-            "endpoint": self._serialize.url("self._config.base_url", self._config.base_url, "str", skip_quote=True),
-        }
-        _request.url = self._client.format_url(_request.url, **path_format_arguments)
-
-        _stream = kwargs.pop("stream", False)
-        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            _request, stream=_stream, **kwargs
-        )
-
-        response = pipeline_response.http_response
-
-        if response.status_code not in [200]:
-            if _stream:
-                try:
-                    response.read()  # Load the body in memory and close the socket
-                except (StreamConsumedError, StreamClosedError):
-                    pass
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = _failsafe_deserialize(
-                _models.CloudError,
-                response,
-            )
-            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
-
-        if _stream:
-            deserialized = response.iter_bytes()
-        else:
-            deserialized = _deserialize(_models.TriggeredAnalyticsRuleRun, response.json())
-
-        if cls:
-            return cls(pipeline_response, deserialized, {})  # type: ignore
-
-        return deserialized  # type: ignore
-
-
 class WorkspaceManagerAssignmentsOperations:
     """
     .. warning::
@@ -25946,7 +25994,100 @@ class ReevaluateOperations:
         return deserialized  # type: ignore
 
 
-class getTriggeredAnalyticsRuleRunsOperations:
+class TriggeredAnalyticsRuleRunOperations:
+    """
+    .. warning::
+        **DO NOT** instantiate this class directly.
+
+        Instead, you should access the following operations through
+        :class:`~azure.mgmt.securityinsight.SecurityInsightsClient`'s
+        :attr:`triggered_analytics_rule_run` attribute.
+    """
+
+    def __init__(self, *args, **kwargs) -> None:
+        input_args = list(args)
+        self._client: PipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
+        self._config: SecurityInsightsClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
+        self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
+
+    @distributed_trace
+    def get(
+        self, resource_group_name: str, workspace_name: str, rule_run_id: str, **kwargs: Any
+    ) -> _models.TriggeredAnalyticsRuleRun:
+        """Gets the triggered analytics rule run.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param workspace_name: The name of the workspace. Required.
+        :type workspace_name: str
+        :param rule_run_id: the triggered rule id. Required.
+        :type rule_run_id: str
+        :return: TriggeredAnalyticsRuleRun. The TriggeredAnalyticsRuleRun is compatible with
+         MutableMapping
+        :rtype: ~azure.mgmt.securityinsight.models.TriggeredAnalyticsRuleRun
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = kwargs.pop("params", {}) or {}
+
+        cls: ClsType[_models.TriggeredAnalyticsRuleRun] = kwargs.pop("cls", None)
+
+        _request = build_triggered_analytics_rule_run_get_request(
+            resource_group_name=resource_group_name,
+            workspace_name=workspace_name,
+            rule_run_id=rule_run_id,
+            subscription_id=self._config.subscription_id,
+            api_version=self._config.api_version,
+            headers=_headers,
+            params=_params,
+        )
+        path_format_arguments = {
+            "endpoint": self._serialize.url("self._config.base_url", self._config.base_url, "str", skip_quote=True),
+        }
+        _request.url = self._client.format_url(_request.url, **path_format_arguments)
+
+        _stream = kwargs.pop("stream", False)
+        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                try:
+                    response.read()  # Load the body in memory and close the socket
+                except (StreamConsumedError, StreamClosedError):
+                    pass
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            error = _failsafe_deserialize(
+                _models.CloudError,
+                response,
+            )
+            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
+
+        if _stream:
+            deserialized = response.iter_bytes()
+        else:
+            deserialized = _deserialize(_models.TriggeredAnalyticsRuleRun, response.json())
+
+        if cls:
+            return cls(pipeline_response, deserialized, {})  # type: ignore
+
+        return deserialized  # type: ignore
+
+
+class GetTriggeredAnalyticsRuleRunsOperations:
     """
     .. warning::
         **DO NOT** instantiate this class directly.
