@@ -1,8 +1,21 @@
+## tsp migration
+
+### Breaking Changes
+
+- Model `AzureBareMetalInstance` moved instance variable `hardware_profile` under property `properties`
+- Model `AzureBareMetalInstance` moved instance variable `storage_profile` under property `properties`
+- Model `AzureBareMetalInstance` moved instance variable `os_profile` under property `properties`
+- Model `AzureBareMetalInstance` moved instance variable `network_profile` under property `properties`
+- Model `AzureBareMetalInstance` moved instance variable `azure_bare_metal_instance_id` under property `properties`
+- Model `AzureBareMetalInstance` moved instance variable `power_state` under property `properties`
+- Model `AzureBareMetalInstance` moved instance variable `proximity_placement_group` under property `properties`
+- Model `AzureBareMetalInstance` moved instance variable `hw_revision` under property `properties`
+- Model `AzureBareMetalInstance` moved instance variable `partner_node_id` under property `properties`
+- Model `AzureBareMetalInstance` moved instance variable `provisioning_state` under property `properties`
+- Model `AzureBareMetalStorageInstance` moved instance variable `azure_bare_metal_storage_instance_unique_identifier` under property `properties`
+- Model `AzureBareMetalStorageInstance` moved instance variable `storage_properties` under property `properties`
+
 # Release History
-
-## 1.1.0b3 (2026-02-12)
-
-change log generation failed!!! You need to write it manually!!!
 
 ## 1.1.0b3 (2026-02-12)
 
