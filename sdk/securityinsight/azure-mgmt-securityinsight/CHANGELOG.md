@@ -1,17 +1,5 @@
 ## tsp migration
 
-## 2.0.0b3 (2026-02-12)
-
-change log generation failed!!! You need to write it manually!!!
-
-## 2.0.0b3 (2026-02-12)
-
-change log generation failed!!! You need to write it manually!!!
-
-## 2.0.0b3 (2026-02-12)
-
-change log generation failed!!! You need to write it manually!!!
-
 ### Breaking Changes
 
 - Rrenamed model `SecurityInsights` to `SecurityInsightMgmtClient` // can't avoid, python emitter adds suffix `Client` in default
@@ -23,11 +11,6 @@ change log generation failed!!! You need to write it manually!!!
 - Deleted or renamed client method `TiTaxiiDataConnectorDataTypesTaxiiClient.from_dict`
 - Deleted or renamed client method `TiTaxiiDataConnectorDataTypesTaxiiClient.is_xml_model`
 - Deleted or renamed client method `TiTaxiiDataConnectorDataTypesTaxiiClient.serialize`
-
-- Renamed operation `AlertRuleOperations` to `alertRulesOperations`
-- Rrenamed operation `GetTriggeredAnalyticsRuleRunsOperations` to `getTriggeredAnalyticsRuleRunsOperations`
-- Renamed operation `TriggeredAnalyticsRuleRunOperations` to `triggeredAnalyticsRuleRunOperations`
-- Deleted or renamed enum value `FileHashAlgorithm.SHA256_AC`
 
 - Model `AADCheckRequirements` deleted or renamed its instance variable `tenant_id`
 - Model `AADDataConnector` deleted or renamed its instance variable `tenant_id`
