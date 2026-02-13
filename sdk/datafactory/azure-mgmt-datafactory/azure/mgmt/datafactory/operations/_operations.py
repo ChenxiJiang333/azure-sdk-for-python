@@ -3029,7 +3029,7 @@ def build_private_endpoint_connection_delete_request(  # pylint: disable=name-to
     return HttpRequest(method="DELETE", url=_url, params=_params, **kwargs)
 
 
-def build_private_end_point_connections_list_by_factory_request(  # pylint: disable=name-too-long
+def build_private_end_point_connections_private_end_point_connections_request(  # pylint: disable=name-too-long
     resource_group_name: str, factory_name: str, subscription_id: str, **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
@@ -8259,7 +8259,7 @@ class DataFlowDebugSessionOperations:
         )
 
 
-class privateLinkResourcesOperations:
+class PrivateLinkResourcesOperations:
     """
     .. warning::
         **DO NOT** instantiate this class directly.
@@ -15661,7 +15661,7 @@ class privateEndPointConnectionsOperations:
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
     @distributed_trace
-    def list_by_factory(
+    def private_end_point_connections(
         self, resource_group_name: str, factory_name: str, **kwargs: Any
     ) -> ItemPaged["_models.PrivateEndpointConnectionResource"]:
         """Lists Private endpoint connections.
@@ -15692,7 +15692,7 @@ class privateEndPointConnectionsOperations:
         def prepare_request(next_link=None):
             if not next_link:
 
-                _request = build_private_end_point_connections_list_by_factory_request(
+                _request = build_private_end_point_connections_private_end_point_connections_request(
                     resource_group_name=resource_group_name,
                     factory_name=factory_name,
                     subscription_id=self._config.subscription_id,

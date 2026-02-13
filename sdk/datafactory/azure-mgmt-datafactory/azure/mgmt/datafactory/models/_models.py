@@ -6224,7 +6224,7 @@ class AzureDatabricksLinkedServiceTypeProperties(_Model):  # pylint: disable=nam
      `https://docs.azuredatabricks.net/api/latest/authentication.html
      <https://docs.azuredatabricks.net/api/latest/authentication.html>`_. Type: string (or
      Expression with resultType string).
-    :vartype access_token: any
+    :vartype access_token: ~azure.mgmt.datafactory.models.SecretBase
     :ivar authentication: Required to specify MSI, if using Workspace resource id for databricks
      REST API. Type: string (or Expression with resultType string).
     :vartype authentication: any
@@ -6292,7 +6292,7 @@ class AzureDatabricksLinkedServiceTypeProperties(_Model):  # pylint: disable=nam
     domain: Any = rest_field(visibility=["read", "create", "update", "delete", "query"])
     """<REGION>.azuredatabricks.net, domain name of your Databricks deployment. Type: string (or
      Expression with resultType string). Required."""
-    access_token: Optional[Any] = rest_field(
+    access_token: Optional["_models.SecretBase"] = rest_field(
         name="accessToken", visibility=["read", "create", "update", "delete", "query"]
     )
     """Access token for databricks REST API. Refer to
@@ -6395,7 +6395,7 @@ class AzureDatabricksLinkedServiceTypeProperties(_Model):  # pylint: disable=nam
         self,
         *,
         domain: Any,
-        access_token: Optional[Any] = None,
+        access_token: Optional["_models.SecretBase"] = None,
         authentication: Optional[Any] = None,
         workspace_resource_id: Optional[Any] = None,
         existing_cluster_id: Optional[Any] = None,
@@ -18721,7 +18721,7 @@ class DWCopyCommandSettings(_Model):
     :ivar additional_options: Additional options directly passed to SQL DW in Copy Command. Type:
      key value pairs (value should be string type) (or Expression with resultType object). Example:
      "additionalOptions": { "MAXERRORS": "1000", "DATEFORMAT": "'ymd'" }.
-    :vartype additional_options: any
+    :vartype additional_options: dict[str, str]
     """
 
     default_values: Optional[list["_models.DWCopyCommandDefaultValue"]] = rest_field(
@@ -18730,7 +18730,7 @@ class DWCopyCommandSettings(_Model):
     """Specifies the default values for each target column in SQL DW. The default values in the
      property overwrite the DEFAULT constraint set in the DB, and identity column cannot have a
      default value. Type: array of objects (or Expression with resultType array of objects)."""
-    additional_options: Optional[Any] = rest_field(
+    additional_options: Optional[dict[str, str]] = rest_field(
         name="additionalOptions", visibility=["read", "create", "update", "delete", "query"]
     )
     """Additional options directly passed to SQL DW in Copy Command. Type: key value pairs (value
@@ -18742,7 +18742,7 @@ class DWCopyCommandSettings(_Model):
         self,
         *,
         default_values: Optional[list["_models.DWCopyCommandDefaultValue"]] = None,
-        additional_options: Optional[Any] = None,
+        additional_options: Optional[dict[str, str]] = None,
     ) -> None: ...
 
     @overload
@@ -18844,7 +18844,7 @@ class DynamicsAXLinkedServiceTypeProperties(_Model):
     :ivar service_principal_key: Specify the application's key. Mark this field as a SecureString
      to store it securely in Data Factory, or reference a secret stored in Azure Key Vault. Type:
      string (or Expression with resultType string). Required.
-    :vartype service_principal_key: any
+    :vartype service_principal_key: ~azure.mgmt.datafactory.models.SecretBase
     :ivar tenant: Specify the tenant information (domain name or tenant ID) under which your
      application resides. Retrieve it by hovering the mouse in the top-right corner of the Azure
      portal. Type: string (or Expression with resultType string). Required.
@@ -18864,7 +18864,7 @@ class DynamicsAXLinkedServiceTypeProperties(_Model):
     )
     """Specify the application's client ID. Type: string (or Expression with resultType string).
      Required."""
-    service_principal_key: Any = rest_field(
+    service_principal_key: "_models.SecretBase" = rest_field(
         name="servicePrincipalKey", visibility=["read", "create", "update", "delete", "query"]
     )
     """Specify the application's key. Mark this field as a SecureString to store it securely in Data
@@ -18889,7 +18889,7 @@ class DynamicsAXLinkedServiceTypeProperties(_Model):
         *,
         url: Any,
         service_principal_id: Any,
-        service_principal_key: Any,
+        service_principal_key: "_models.SecretBase",
         tenant: Any,
         aad_resource_id: Any,
         encrypted_credential: Optional[str] = None,
@@ -23078,7 +23078,7 @@ class GlobalParameterResource(ProxyResource):
      information.
     :vartype system_data: ~azure.mgmt.datafactory.models.SystemData
     :ivar properties: Properties of the global parameter.
-    :vartype properties: dict[str, any]
+    :vartype properties: dict[str, ~azure.mgmt.datafactory.models.GlobalParameterSpecification]
     :ivar etag: "If etag is provided in the response body, it may also be provided as a header per
      the normal etag convention.  Entity tags are used for comparing two or more entities from the
      same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match
@@ -23086,7 +23086,9 @@ class GlobalParameterResource(ProxyResource):
     :vartype etag: str
     """
 
-    properties: Optional[dict[str, Any]] = rest_field(visibility=["read", "create", "update", "delete", "query"])
+    properties: Optional[dict[str, "_models.GlobalParameterSpecification"]] = rest_field(
+        visibility=["read", "create", "update", "delete", "query"]
+    )
     """Properties of the global parameter."""
     etag: Optional[str] = rest_field(visibility=["read"])
     """\"If etag is provided in the response body, it may also be provided as a header per the normal
@@ -23098,7 +23100,7 @@ class GlobalParameterResource(ProxyResource):
     def __init__(
         self,
         *,
-        properties: Optional[dict[str, Any]] = None,
+        properties: Optional[dict[str, "_models.GlobalParameterSpecification"]] = None,
     ) -> None: ...
 
     @overload
@@ -41920,7 +41922,7 @@ class ResponsysLinkedServiceTypeProperties(_Model):
     :vartype client_id: any
     :ivar client_secret: The client secret associated with the Responsys application. Type: string
      (or Expression with resultType string).
-    :vartype client_secret: any
+    :vartype client_secret: ~azure.mgmt.datafactory.models.SecretBase
     :ivar use_encrypted_endpoints: Specifies whether the data source endpoints are encrypted using
      HTTPS. The default value is true. Type: boolean (or Expression with resultType boolean).
     :vartype use_encrypted_endpoints: any
@@ -41942,7 +41944,7 @@ class ResponsysLinkedServiceTypeProperties(_Model):
     client_id: Any = rest_field(name="clientId", visibility=["read", "create", "update", "delete", "query"])
     """The client ID associated with the Responsys application. Type: string (or Expression with
      resultType string). Required."""
-    client_secret: Optional[Any] = rest_field(
+    client_secret: Optional["_models.SecretBase"] = rest_field(
         name="clientSecret", visibility=["read", "create", "update", "delete", "query"]
     )
     """The client secret associated with the Responsys application. Type: string (or Expression with
@@ -41975,7 +41977,7 @@ class ResponsysLinkedServiceTypeProperties(_Model):
         *,
         endpoint: Any,
         client_id: Any,
-        client_secret: Optional[Any] = None,
+        client_secret: Optional["_models.SecretBase"] = None,
         use_encrypted_endpoints: Optional[Any] = None,
         use_host_verification: Optional[Any] = None,
         use_peer_verification: Optional[Any] = None,
@@ -43153,7 +43155,7 @@ class SalesforceMarketingCloudLinkedServiceTypeProperties(_Model):  # pylint: di
     :vartype client_id: any
     :ivar client_secret: The client secret associated with the Salesforce Marketing Cloud
      application. Type: string (or Expression with resultType string).
-    :vartype client_secret: any
+    :vartype client_secret: ~azure.mgmt.datafactory.models.SecretBase
     :ivar use_encrypted_endpoints: Specifies whether the data source endpoints are encrypted using
      HTTPS. The default value is true. Type: boolean (or Expression with resultType boolean).
     :vartype use_encrypted_endpoints: any
@@ -43178,7 +43180,7 @@ class SalesforceMarketingCloudLinkedServiceTypeProperties(_Model):  # pylint: di
     client_id: Optional[Any] = rest_field(name="clientId", visibility=["read", "create", "update", "delete", "query"])
     """The client ID associated with the Salesforce Marketing Cloud application. Type: string (or
      Expression with resultType string)."""
-    client_secret: Optional[Any] = rest_field(
+    client_secret: Optional["_models.SecretBase"] = rest_field(
         name="clientSecret", visibility=["read", "create", "update", "delete", "query"]
     )
     """The client secret associated with the Salesforce Marketing Cloud application. Type: string (or
@@ -43211,7 +43213,7 @@ class SalesforceMarketingCloudLinkedServiceTypeProperties(_Model):  # pylint: di
         *,
         connection_properties: Optional[Any] = None,
         client_id: Optional[Any] = None,
-        client_secret: Optional[Any] = None,
+        client_secret: Optional["_models.SecretBase"] = None,
         use_encrypted_endpoints: Optional[Any] = None,
         use_host_verification: Optional[Any] = None,
         use_peer_verification: Optional[Any] = None,
@@ -49355,12 +49357,12 @@ class SnowflakeExportCopyCommand(ExportSettings, discriminator="SnowflakeExportC
      Command. Type: key value pairs (value should be string type) (or Expression with resultType
      object). Example: "additionalCopyOptions": { "DATE_FORMAT": "MM/DD/YYYY", "TIME_FORMAT":
      "'HH24:MI:SS.FF'" }.
-    :vartype additional_copy_options: any
+    :vartype additional_copy_options: dict[str, str]
     :ivar additional_format_options: Additional format options directly passed to snowflake Copy
      Command. Type: key value pairs (value should be string type) (or Expression with resultType
      object). Example: "additionalFormatOptions": { "OVERWRITE": "TRUE", "MAX_FILE_SIZE": "'FALSE'"
      }.
-    :vartype additional_format_options: any
+    :vartype additional_format_options: dict[str, str]
     :ivar storage_integration: The name of the snowflake storage integration to use for the copy
      operation. Type: string (or Expression with resultType string).
     :vartype storage_integration: any
@@ -49368,14 +49370,14 @@ class SnowflakeExportCopyCommand(ExportSettings, discriminator="SnowflakeExportC
     :vartype type: str
     """
 
-    additional_copy_options: Optional[Any] = rest_field(
+    additional_copy_options: Optional[dict[str, str]] = rest_field(
         name="additionalCopyOptions", visibility=["read", "create", "update", "delete", "query"]
     )
     """Additional copy options directly passed to snowflake Copy Command. Type: key value pairs (value
      should be string type) (or Expression with resultType object). Example:
      \"additionalCopyOptions\": { \"DATE_FORMAT\": \"MM/DD/YYYY\", \"TIME_FORMAT\":
      \"'HH24:MI:SS.FF'\" }."""
-    additional_format_options: Optional[Any] = rest_field(
+    additional_format_options: Optional[dict[str, str]] = rest_field(
         name="additionalFormatOptions", visibility=["read", "create", "update", "delete", "query"]
     )
     """Additional format options directly passed to snowflake Copy Command. Type: key value pairs
@@ -49393,8 +49395,8 @@ class SnowflakeExportCopyCommand(ExportSettings, discriminator="SnowflakeExportC
     def __init__(
         self,
         *,
-        additional_copy_options: Optional[Any] = None,
-        additional_format_options: Optional[Any] = None,
+        additional_copy_options: Optional[dict[str, str]] = None,
+        additional_format_options: Optional[dict[str, str]] = None,
         storage_integration: Optional[Any] = None,
     ) -> None: ...
 
@@ -49417,12 +49419,12 @@ class SnowflakeImportCopyCommand(ImportSettings, discriminator="SnowflakeImportC
      Command. Type: key value pairs (value should be string type) (or Expression with resultType
      object). Example: "additionalCopyOptions": { "DATE_FORMAT": "MM/DD/YYYY", "TIME_FORMAT":
      "'HH24:MI:SS.FF'" }.
-    :vartype additional_copy_options: any
+    :vartype additional_copy_options: dict[str, str]
     :ivar additional_format_options: Additional format options directly passed to snowflake Copy
      Command. Type: key value pairs (value should be string type) (or Expression with resultType
      object). Example: "additionalFormatOptions": { "FORCE": "TRUE", "LOAD_UNCERTAIN_FILES":
      "'FALSE'" }.
-    :vartype additional_format_options: any
+    :vartype additional_format_options: dict[str, str]
     :ivar storage_integration: The name of the snowflake storage integration to use for the copy
      operation. Type: string (or Expression with resultType string).
     :vartype storage_integration: any
@@ -49430,14 +49432,14 @@ class SnowflakeImportCopyCommand(ImportSettings, discriminator="SnowflakeImportC
     :vartype type: str
     """
 
-    additional_copy_options: Optional[Any] = rest_field(
+    additional_copy_options: Optional[dict[str, str]] = rest_field(
         name="additionalCopyOptions", visibility=["read", "create", "update", "delete", "query"]
     )
     """Additional copy options directly passed to snowflake Copy Command. Type: key value pairs (value
      should be string type) (or Expression with resultType object). Example:
      \"additionalCopyOptions\": { \"DATE_FORMAT\": \"MM/DD/YYYY\", \"TIME_FORMAT\":
      \"'HH24:MI:SS.FF'\" }."""
-    additional_format_options: Optional[Any] = rest_field(
+    additional_format_options: Optional[dict[str, str]] = rest_field(
         name="additionalFormatOptions", visibility=["read", "create", "update", "delete", "query"]
     )
     """Additional format options directly passed to snowflake Copy Command. Type: key value pairs
@@ -49455,8 +49457,8 @@ class SnowflakeImportCopyCommand(ImportSettings, discriminator="SnowflakeImportC
     def __init__(
         self,
         *,
-        additional_copy_options: Optional[Any] = None,
-        additional_format_options: Optional[Any] = None,
+        additional_copy_options: Optional[dict[str, str]] = None,
+        additional_format_options: Optional[dict[str, str]] = None,
         storage_integration: Optional[Any] = None,
     ) -> None: ...
 
@@ -50586,7 +50588,7 @@ class SqlDWSink(CopySink, discriminator="SqlDWSink"):
      SqlDWWriteBehaviorEnum (or Expression with resultType SqlDWWriteBehaviorEnum).
     :vartype write_behavior: any
     :ivar upsert_settings: SQL DW upsert settings.
-    :vartype upsert_settings: any
+    :vartype upsert_settings: ~azure.mgmt.datafactory.models.SqlDWUpsertSettings
     :ivar type: Copy sink type. Required. Default value is "SqlDWSink".
     :vartype type: str
     """
@@ -50628,7 +50630,7 @@ class SqlDWSink(CopySink, discriminator="SqlDWSink"):
     )
     """Write behavior when copying data into azure SQL DW. Type: SqlDWWriteBehaviorEnum (or Expression
      with resultType SqlDWWriteBehaviorEnum)."""
-    upsert_settings: Optional[Any] = rest_field(
+    upsert_settings: Optional["_models.SqlDWUpsertSettings"] = rest_field(
         name="upsertSettings", visibility=["read", "create", "update", "delete", "query"]
     )
     """SQL DW upsert settings."""
@@ -50653,7 +50655,7 @@ class SqlDWSink(CopySink, discriminator="SqlDWSink"):
         table_option: Optional[Any] = None,
         sql_writer_use_table_lock: Optional[Any] = None,
         write_behavior: Optional[Any] = None,
-        upsert_settings: Optional[Any] = None,
+        upsert_settings: Optional["_models.SqlDWUpsertSettings"] = None,
     ) -> None: ...
 
     @overload
@@ -50666,6 +50668,46 @@ class SqlDWSink(CopySink, discriminator="SqlDWSink"):
     def __init__(self, *args: Any, **kwargs: Any) -> None:
         super().__init__(*args, **kwargs)
         self.type = "SqlDWSink"  # type: ignore
+
+
+class SqlDWUpsertSettings(_Model):
+    """Sql DW upsert option settings.
+
+    :ivar interim_schema_name: Schema name for interim table. Type: string (or Expression with
+     resultType string).
+    :vartype interim_schema_name: any
+    :ivar keys_property: Key column names for unique row identification. Type: array of strings (or
+     Expression with resultType array of strings).
+    :vartype keys_property: any
+    """
+
+    interim_schema_name: Optional[Any] = rest_field(
+        name="interimSchemaName", visibility=["read", "create", "update", "delete", "query"]
+    )
+    """Schema name for interim table. Type: string (or Expression with resultType string)."""
+    keys_property: Optional[Any] = rest_field(
+        name="keys", visibility=["read", "create", "update", "delete", "query"], original_tsp_name="keys"
+    )
+    """Key column names for unique row identification. Type: array of strings (or Expression with
+     resultType array of strings)."""
+
+    @overload
+    def __init__(
+        self,
+        *,
+        interim_schema_name: Optional[Any] = None,
+        keys_property: Optional[Any] = None,
+    ) -> None: ...
+
+    @overload
+    def __init__(self, mapping: Mapping[str, Any]) -> None:
+        """
+        :param mapping: raw JSON to initialize the model.
+        :type mapping: Mapping[str, Any]
+        """
+
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
+        super().__init__(*args, **kwargs)
 
 
 class SqlMISink(CopySink, discriminator="SqlMISink"):

@@ -30,7 +30,7 @@ def main():
         subscription_id="SUBSCRIPTION_ID",
     )
 
-    response = client.private_end_point_connections.list_by_factory(
+    response = client.private_end_point_connections.private_end_point_connections(
         resource_group_name="exampleResourceGroup",
         factory_name="exampleFactoryName",
     )

@@ -42,7 +42,7 @@ class TestDataFactoryManagementGlobalParametersOperationsAsync(AzureMgmtRecorded
                 "etag": "str",
                 "id": "str",
                 "name": "str",
-                "properties": {"str": {}},
+                "properties": {"str": {"type": "str", "value": {}}},
                 "systemData": {
                     "createdAt": "2020-02-20 00:00:00",
                     "createdBy": "str",

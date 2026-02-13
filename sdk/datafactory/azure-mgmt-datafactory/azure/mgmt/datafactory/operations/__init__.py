@@ -20,7 +20,7 @@ from ._operations import ActivityRunsOperations  # type: ignore
 from ._operations import TriggersOperations  # type: ignore
 from ._operations import TriggerRunsOperations  # type: ignore
 from ._operations import DataFlowDebugSessionOperations  # type: ignore
-from ._operations import privateLinkResourcesOperations  # type: ignore
+from ._operations import PrivateLinkResourcesOperations  # type: ignore
 from ._operations import IntegrationRuntimesOperations  # type: ignore
 from ._operations import IntegrationRuntimeObjectMetadataOperations  # type: ignore
 from ._operations import IntegrationRuntimeNodesOperations  # type: ignore
@@ -50,7 +50,7 @@ __all__ = [
     "TriggersOperations",
     "TriggerRunsOperations",
     "DataFlowDebugSessionOperations",
-    "privateLinkResourcesOperations",
+    "PrivateLinkResourcesOperations",
     "IntegrationRuntimesOperations",
     "IntegrationRuntimeObjectMetadataOperations",
     "IntegrationRuntimeNodesOperations",

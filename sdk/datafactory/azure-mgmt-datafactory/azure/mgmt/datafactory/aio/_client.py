@@ -40,10 +40,10 @@ from .operations import (
     PipelineRunsOperations,
     PipelinesOperations,
     PrivateEndpointConnectionOperations,
+    PrivateLinkResourcesOperations,
     TriggerRunsOperations,
     TriggersOperations,
     privateEndPointConnectionsOperations,
-    privateLinkResourcesOperations,
 )
 
 if TYPE_CHECKING:
@@ -71,9 +71,9 @@ class DataFactoryManagementClient:  # pylint: disable=too-many-instance-attribut
     :ivar data_flow_debug_session: DataFlowDebugSessionOperations operations
     :vartype data_flow_debug_session:
      azure.mgmt.datafactory.aio.operations.DataFlowDebugSessionOperations
-    :ivar private_link_resources: privateLinkResourcesOperations operations
+    :ivar private_link_resources: PrivateLinkResourcesOperations operations
     :vartype private_link_resources:
-     azure.mgmt.datafactory.aio.operations.privateLinkResourcesOperations
+     azure.mgmt.datafactory.aio.operations.PrivateLinkResourcesOperations
     :ivar integration_runtimes: IntegrationRuntimesOperations operations
     :vartype integration_runtimes:
      azure.mgmt.datafactory.aio.operations.IntegrationRuntimesOperations
@@ -191,7 +191,7 @@ class DataFactoryManagementClient:  # pylint: disable=too-many-instance-attribut
         self.data_flow_debug_session = DataFlowDebugSessionOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
-        self.private_link_resources = privateLinkResourcesOperations(
+        self.private_link_resources = PrivateLinkResourcesOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
         self.integration_runtimes = IntegrationRuntimesOperations(

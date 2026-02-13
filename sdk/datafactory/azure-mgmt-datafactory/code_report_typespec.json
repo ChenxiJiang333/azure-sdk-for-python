@@ -96,7 +96,7 @@
             "attr_type": "DataFlowDebugSessionOperations"
           },
           "private_link_resources": {
-            "attr_type": "privateLinkResourcesOperations"
+            "attr_type": "PrivateLinkResourcesOperations"
           },
           "integration_runtimes": {
             "attr_type": "IntegrationRuntimesOperations"
@@ -6896,6 +6896,52 @@
         },
         "properties": {}
       },
+      "PrivateLinkResourcesOperations": {
+        "type": null,
+        "methods": {
+          "__init__": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "args": {
+                "default": null,
+                "param_type": "var_positional"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "get": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "resource_group_name": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "factory_name": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          }
+        },
+        "properties": {}
+      },
       "TriggerRunsOperations": {
         "type": null,
         "methods": {
@@ -7654,53 +7700,7 @@
             "is_async": false,
             "overloads": []
           },
-          "list_by_factory": {
-            "parameters": {
-              "self": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              },
-              "resource_group_name": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              },
-              "factory_name": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              },
-              "kwargs": {
-                "default": null,
-                "param_type": "var_keyword"
-              }
-            },
-            "is_async": false,
-            "overloads": []
-          }
-        },
-        "properties": {}
-      },
-      "privateLinkResourcesOperations": {
-        "type": null,
-        "methods": {
-          "__init__": {
-            "parameters": {
-              "self": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              },
-              "args": {
-                "default": null,
-                "param_type": "var_positional"
-              },
-              "kwargs": {
-                "default": null,
-                "param_type": "var_keyword"
-              }
-            },
-            "is_async": false,
-            "overloads": []
-          },
-          "get": {
+          "private_end_point_connections": {
             "parameters": {
               "self": {
                 "default": null,
@@ -32653,7 +32653,7 @@
                     "param_type": "keyword_only"
                   },
                   "access_token": {
-                    "type": "Optional[Any]",
+                    "type": "Optional[_models.SecretBase]",
                     "default": null,
                     "param_type": "keyword_only"
                   },
@@ -66743,7 +66743,7 @@
                     "param_type": "keyword_only"
                   },
                   "additional_options": {
-                    "type": "Optional[Any]",
+                    "type": "Optional[dict[str, str]]",
                     "default": null,
                     "param_type": "keyword_only"
                   }
@@ -79226,7 +79226,7 @@
                     "param_type": "keyword_only"
                   },
                   "service_principal_key": {
-                    "type": "Any",
+                    "type": "_models.SecretBase",
                     "default": null,
                     "param_type": "keyword_only"
                   },
@@ -97659,7 +97659,7 @@
                     "param_type": "positional_or_keyword"
                   },
                   "properties": {
-                    "type": "Optional[dict[str, Any]]",
+                    "type": "Optional[dict[str, _models.GlobalParameterSpecification]]",
                     "default": null,
                     "param_type": "keyword_only"
                   }
@@ -177300,7 +177300,7 @@
                     "param_type": "keyword_only"
                   },
                   "client_secret": {
-                    "type": "Optional[Any]",
+                    "type": "Optional[_models.SecretBase]",
                     "default": null,
                     "param_type": "keyword_only"
                   },
@@ -181650,7 +181650,7 @@
                     "param_type": "keyword_only"
                   },
                   "client_secret": {
-                    "type": "Optional[Any]",
+                    "type": "Optional[_models.SecretBase]",
                     "default": null,
                     "param_type": "keyword_only"
                   },
@@ -206034,12 +206034,12 @@
                     "param_type": "positional_or_keyword"
                   },
                   "additional_copy_options": {
-                    "type": "Optional[Any]",
+                    "type": "Optional[dict[str, str]]",
                     "default": null,
                     "param_type": "keyword_only"
                   },
                   "additional_format_options": {
-                    "type": "Optional[Any]",
+                    "type": "Optional[dict[str, str]]",
                     "default": null,
                     "param_type": "keyword_only"
                   },
@@ -206284,12 +206284,12 @@
                     "param_type": "positional_or_keyword"
                   },
                   "additional_copy_options": {
-                    "type": "Optional[Any]",
+                    "type": "Optional[dict[str, str]]",
                     "default": null,
                     "param_type": "keyword_only"
                   },
                   "additional_format_options": {
-                    "type": "Optional[Any]",
+                    "type": "Optional[dict[str, str]]",
                     "default": null,
                     "param_type": "keyword_only"
                   },
@@ -210781,7 +210781,7 @@
                     "param_type": "keyword_only"
                   },
                   "upsert_settings": {
-                    "type": "Optional[Any]",
+                    "type": "Optional[_models.SqlDWUpsertSettings]",
                     "default": null,
                     "param_type": "keyword_only"
                   }
@@ -211033,6 +211033,217 @@
           "sink_retry_wait": "Optional",
           "max_concurrent_connections": "Optional",
           "disable_metrics_collection": "Optional"
+        }
+      },
+      "SqlDWUpsertSettings": {
+        "type": null,
+        "methods": {
+          "__init__": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "args": {
+                "default": null,
+                "param_type": "var_positional"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": [
+              {
+                "parameters": {
+                  "self": {
+                    "type": null,
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "interim_schema_name": {
+                    "type": "Optional[Any]",
+                    "default": null,
+                    "param_type": "keyword_only"
+                  },
+                  "keys_property": {
+                    "type": "Optional[Any]",
+                    "default": null,
+                    "param_type": "keyword_only"
+                  }
+                },
+                "is_async": false,
+                "return_type": null
+              },
+              {
+                "parameters": {
+                  "self": {
+                    "type": null,
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "mapping": {
+                    "type": "Mapping[str, Any]",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  }
+                },
+                "is_async": false,
+                "return_type": null
+              }
+            ]
+          },
+          "as_dict": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "exclude_readonly": {
+                "default": "bool",
+                "param_type": "keyword_only"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "clear": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "copy": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "get": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "key": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "default": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "items": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "keys": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "pop": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "key": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "default": {
+                "default": "object",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "popitem": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "setdefault": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "key": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "default": {
+                "default": "object",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "update": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "args": {
+                "default": null,
+                "param_type": "var_positional"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "values": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          }
+        },
+        "properties": {
+          "interim_schema_name": "Optional",
+          "keys_property": "Optional"
         }
       },
       "SqlMISink": {
@@ -237075,7 +237286,7 @@
             "attr_type": "DataFlowDebugSessionOperations"
           },
           "private_link_resources": {
-            "attr_type": "privateLinkResourcesOperations"
+            "attr_type": "PrivateLinkResourcesOperations"
           },
           "integration_runtimes": {
             "attr_type": "IntegrationRuntimesOperations"
@@ -243875,6 +244086,52 @@
         },
         "properties": {}
       },
+      "PrivateLinkResourcesOperations": {
+        "type": null,
+        "methods": {
+          "__init__": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "args": {
+                "default": null,
+                "param_type": "var_positional"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "get": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "resource_group_name": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "factory_name": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": true,
+            "overloads": []
+          }
+        },
+        "properties": {}
+      },
       "TriggerRunsOperations": {
         "type": null,
         "methods": {
@@ -244633,7 +244890,7 @@
             "is_async": false,
             "overloads": []
           },
-          "list_by_factory": {
+          "private_end_point_connections": {
             "parameters": {
               "self": {
                 "default": null,
@@ -244653,52 +244910,6 @@
               }
             },
             "is_async": false,
-            "overloads": []
-          }
-        },
-        "properties": {}
-      },
-      "privateLinkResourcesOperations": {
-        "type": null,
-        "methods": {
-          "__init__": {
-            "parameters": {
-              "self": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              },
-              "args": {
-                "default": null,
-                "param_type": "var_positional"
-              },
-              "kwargs": {
-                "default": null,
-                "param_type": "var_keyword"
-              }
-            },
-            "is_async": false,
-            "overloads": []
-          },
-          "get": {
-            "parameters": {
-              "self": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              },
-              "resource_group_name": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              },
-              "factory_name": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              },
-              "kwargs": {
-                "default": null,
-                "param_type": "var_keyword"
-              }
-            },
-            "is_async": true,
             "overloads": []
           }
         },

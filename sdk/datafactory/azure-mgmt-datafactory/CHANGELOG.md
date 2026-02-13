@@ -1,5 +1,9 @@
 ## tsp migration
 
+## 9.3.0 (2026-02-13)
+
+change log generation failed!!! You need to write it manually!!!
+
 ### Breaking Changes
 
 - Deleted or renamed model `AvroCompressionCodec`

@@ -124,7 +124,7 @@ from ...operations._operations import (
     build_pipelines_delete_request,
     build_pipelines_get_request,
     build_pipelines_list_by_factory_request,
-    build_private_end_point_connections_list_by_factory_request,
+    build_private_end_point_connections_private_end_point_connections_request,
     build_private_endpoint_connection_create_or_update_request,
     build_private_endpoint_connection_delete_request,
     build_private_endpoint_connection_get_request,
@@ -5025,7 +5025,7 @@ class DataFlowDebugSessionOperations:
         )
 
 
-class privateLinkResourcesOperations:
+class PrivateLinkResourcesOperations:
     """
     .. warning::
         **DO NOT** instantiate this class directly.
@@ -12426,7 +12426,7 @@ class privateEndPointConnectionsOperations:
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
     @distributed_trace
-    def list_by_factory(
+    def private_end_point_connections(
         self, resource_group_name: str, factory_name: str, **kwargs: Any
     ) -> AsyncItemPaged["_models.PrivateEndpointConnectionResource"]:
         """Lists Private endpoint connections.
@@ -12457,7 +12457,7 @@ class privateEndPointConnectionsOperations:
         def prepare_request(next_link=None):
             if not next_link:
 
-                _request = build_private_end_point_connections_list_by_factory_request(
+                _request = build_private_end_point_connections_private_end_point_connections_request(
                     resource_group_name=resource_group_name,
                     factory_name=factory_name,
                     subscription_id=self._config.subscription_id,
