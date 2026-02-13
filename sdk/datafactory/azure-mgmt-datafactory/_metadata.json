@@ -1,6 +1,6 @@
 {
   "apiVersion": "2018-06-01",
-  "commit": "bfe2caee3e6937384c5de40b36f9147d30a8b005",
+  "commit": "23b45e7fe357da4dca03fc101136f4ec1ef03a1f",
   "repository_url": "https://github.com/Azure/azure-rest-api-specs",
   "typespec_src": "specification/datafactory/DataFactory.Management",
   "emitterVersion": "0.59.3"

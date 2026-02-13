@@ -135,7 +135,7 @@
             "attr_type": "PrivateEndpointConnectionOperations"
           },
           "private_end_point_connections": {
-            "attr_type": "privateEndPointConnectionsOperations"
+            "attr_type": "PrivateEndPointConnectionsOperations"
           },
           "global_parameters": {
             "attr_type": "GlobalParametersOperations"
@@ -6635,6 +6635,52 @@
         },
         "properties": {}
       },
+      "PrivateEndPointConnectionsOperations": {
+        "type": null,
+        "methods": {
+          "__init__": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "args": {
+                "default": null,
+                "param_type": "var_positional"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "list_by_factory": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "resource_group_name": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "factory_name": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          }
+        },
+        "properties": {}
+      },
       "PrivateEndpointConnectionOperations": {
         "type": null,
         "methods": {
@@ -7675,52 +7721,6 @@
                 "return_type": null
               }
             ]
-          }
-        },
-        "properties": {}
-      },
-      "privateEndPointConnectionsOperations": {
-        "type": null,
-        "methods": {
-          "__init__": {
-            "parameters": {
-              "self": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              },
-              "args": {
-                "default": null,
-                "param_type": "var_positional"
-              },
-              "kwargs": {
-                "default": null,
-                "param_type": "var_keyword"
-              }
-            },
-            "is_async": false,
-            "overloads": []
-          },
-          "private_end_point_connections": {
-            "parameters": {
-              "self": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              },
-              "resource_group_name": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              },
-              "factory_name": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              },
-              "kwargs": {
-                "default": null,
-                "param_type": "var_keyword"
-              }
-            },
-            "is_async": false,
-            "overloads": []
           }
         },
         "properties": {}
@@ -237325,7 +237325,7 @@
             "attr_type": "PrivateEndpointConnectionOperations"
           },
           "private_end_point_connections": {
-            "attr_type": "privateEndPointConnectionsOperations"
+            "attr_type": "PrivateEndPointConnectionsOperations"
           },
           "global_parameters": {
             "attr_type": "GlobalParametersOperations"
@@ -243825,6 +243825,52 @@
         },
         "properties": {}
       },
+      "PrivateEndPointConnectionsOperations": {
+        "type": null,
+        "methods": {
+          "__init__": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "args": {
+                "default": null,
+                "param_type": "var_positional"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "list_by_factory": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "resource_group_name": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "factory_name": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          }
+        },
+        "properties": {}
+      },
       "PrivateEndpointConnectionOperations": {
         "type": null,
         "methods": {
@@ -244865,52 +244911,6 @@
                 "return_type": null
               }
             ]
-          }
-        },
-        "properties": {}
-      },
-      "privateEndPointConnectionsOperations": {
-        "type": null,
-        "methods": {
-          "__init__": {
-            "parameters": {
-              "self": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              },
-              "args": {
-                "default": null,
-                "param_type": "var_positional"
-              },
-              "kwargs": {
-                "default": null,
-                "param_type": "var_keyword"
-              }
-            },
-            "is_async": false,
-            "overloads": []
-          },
-          "private_end_point_connections": {
-            "parameters": {
-              "self": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              },
-              "resource_group_name": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              },
-              "factory_name": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              },
-              "kwargs": {
-                "default": null,
-                "param_type": "var_keyword"
-              }
-            },
-            "is_async": false,
-            "overloads": []
           }
         },
         "properties": {}

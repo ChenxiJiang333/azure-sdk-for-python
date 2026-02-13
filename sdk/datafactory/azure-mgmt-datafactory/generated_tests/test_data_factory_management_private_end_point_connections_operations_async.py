@@ -15,14 +15,14 @@ AZURE_LOCATION = "eastus"
 
 
 @pytest.mark.skip("you may need to update the auto-generated test case before run it")
-class TestDataFactoryManagementprivateEndPointConnectionsOperationsAsync(AzureMgmtRecordedTestCase):
+class TestDataFactoryManagementPrivateEndPointConnectionsOperationsAsync(AzureMgmtRecordedTestCase):
     def setup_method(self, method):
         self.client = self.create_mgmt_client(DataFactoryManagementClient, is_async=True)
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_private_end_point_connections_private_end_point_connections(self, resource_group):
-        response = self.client.private_end_point_connections.private_end_point_connections(
+    async def test_private_end_point_connections_list_by_factory(self, resource_group):
+        response = self.client.private_end_point_connections.list_by_factory(
             resource_group_name=resource_group.name,
             factory_name="str",
         )
