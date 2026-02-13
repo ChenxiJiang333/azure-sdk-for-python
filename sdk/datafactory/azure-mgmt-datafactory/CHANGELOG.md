@@ -1,92 +1,19 @@
 ## tsp migration
 
-## 9.3.0 (2026-02-09)
-
-change log generation failed!!! You need to write it manually!!!
-
-## 10.0.0 (2026-02-09)
-
-### Features Added
-
-  - Added operation group IntegrationRuntimeOperations
-  - Model AmazonRdsForOracleLinkedService has a new parameter authentication_type
-  - Model AmazonRdsForOracleLinkedService has a new parameter crypto_checksum_client
-  - Model AmazonRdsForOracleLinkedService has a new parameter crypto_checksum_types_client
-  - Model AmazonRdsForOracleLinkedService has a new parameter enable_bulk_load
-  - Model AmazonRdsForOracleLinkedService has a new parameter encryption_client
-  - Model AmazonRdsForOracleLinkedService has a new parameter encryption_types_client
-  - Model AmazonRdsForOracleLinkedService has a new parameter fetch_size
-  - Model AmazonRdsForOracleLinkedService has a new parameter fetch_tswtz_as_timestamp
-  - Model AmazonRdsForOracleLinkedService has a new parameter initial_lob_fetch_size
-  - Model AmazonRdsForOracleLinkedService has a new parameter initialization_string
-  - Model AmazonRdsForOracleLinkedService has a new parameter server
-  - Model AmazonRdsForOracleLinkedService has a new parameter statement_cache_size
-  - Model AmazonRdsForOracleLinkedService has a new parameter support_v1_data_types
-  - Model AmazonRdsForOracleLinkedService has a new parameter username
-  - Model AmazonRdsForOracleSource has a new parameter number_precision
-  - Model AmazonRdsForOracleSource has a new parameter number_scale
-  - Model AzureDatabricksLinkedService has a new parameter data_security_mode
-  - Model ChangeDataCaptureResource has a new parameter system_data
-  - Model CredentialResource has a new parameter system_data
-  - Model DataFlowResource has a new parameter system_data
-  - Model DatasetResource has a new parameter system_data
-  - Model Factory has a new parameter system_data
-  - Model GlobalParameterResource has a new parameter system_data
-  - Model HDInsightLinkedService has a new parameter cluster_auth_type
-  - Model HDInsightLinkedService has a new parameter credential
-  - Model HDInsightOnDemandLinkedService has a new parameter cluster_resource_group_auth_type
-  - Model HiveLinkedService has a new parameter enable_server_certificate_validation
-  - Model ImpalaLinkedService has a new parameter enable_server_certificate_validation
-  - Model ImpalaLinkedService has a new parameter thrift_transport_protocol
-  - Model IntegrationRuntimeResource has a new parameter system_data
-  - Model JiraObjectDataset has a new parameter schema_type_properties_schema
-  - Model JiraObjectDataset has a new parameter table
-  - Model LakeHouseLinkedService has a new parameter authentication_type
-  - Model LakeHouseLinkedService has a new parameter credential
-  - Model LinkedServiceResource has a new parameter system_data
-  - Model LookupActivity has a new parameter treat_decimal_as_string
-  - Model ManagedIntegrationRuntime has a new parameter interactive_query
-  - Model ManagedPrivateEndpointResource has a new parameter system_data
-  - Model ManagedVirtualNetworkResource has a new parameter system_data
-  - Model NetezzaLinkedService has a new parameter database
-  - Model NetezzaLinkedService has a new parameter port
-  - Model NetezzaLinkedService has a new parameter security_level
-  - Model NetezzaLinkedService has a new parameter server
-  - Model NetezzaLinkedService has a new parameter uid
-  - Model Office365LinkedService has a new parameter service_principal_credential_type
-  - Model Office365LinkedService has a new parameter service_principal_embedded_cert
-  - Model Office365LinkedService has a new parameter service_principal_embedded_cert_password
-  - Model OracleSource has a new parameter number_precision
-  - Model OracleSource has a new parameter number_scale
-  - Model PipelineResource has a new parameter system_data
-  - Model PrivateEndpointConnectionResource has a new parameter system_data
-  - Model QuickBooksLinkedService has a new parameter refresh_token
-  - Model Resource has a new parameter system_data
-  - Model SalesforceV2Source has a new parameter partition_option
-  - Model ScriptActivity has a new parameter treat_decimal_as_string
-  - Model SnowflakeV2LinkedService has a new parameter role
-  - Model SnowflakeV2LinkedService has a new parameter schema
-  - Model SnowflakeV2LinkedService has a new parameter use_utc_timestamps
-  - Model SparkLinkedService has a new parameter enable_server_certificate_validation
-  - Model TriggerResource has a new parameter system_data
-  - Model WarehouseLinkedService has a new parameter authentication_type
-  - Model WarehouseLinkedService has a new parameter credential
-
 ### Breaking Changes
 
-  - Model Resource no longer has parameter e_tag
-  - Model Resource no longer has parameter location
-  - Model Resource no longer has parameter tags
-  - Parameter value of model QueryDataFlowDebugSessionsResponse is now required
-  - Parameter value of model SsisObjectMetadataListResponse is now required
+- Deleted or renamed model `AvroCompressionCodec`
+- Deleted or renamed model `CompressionCodec`
+- Deleted or renamed model `OrcCompressionCodec`
+- Deleted or renamed model `SqlWriteBehaviorEnum`
+- Deleted or renamed model `ServicePrincipalCredentialType`
+- Deleted or renamed model `DatasetDataElement`
+- Deleted or renamed model `DatasetSchemaDataElement`
+- Deleted or renamed model `PrivateEndPointConnectionsOperations`
+- Deleted or renamed model `PrivateLinkResourcesOperations`
+- Deleted or renamed model `ResourceAutoGenerated`
 
-### Breaking Changes
-
-- Method `ActivityRunsOperations.query_by_pipeline_run` changed from `asynchronous` to `synchronous`
-- Method `IntegrationRuntimesOperations.list_outbound_network_dependencies_endpoints` changed from `asynchronous` to `synchronous`
-- Method `PipelineRunsOperations.query_by_factory` changed from `asynchronous` to `synchronous`
-- Method `TriggerRunsOperations.query_by_factory` changed from `asynchronous` to `synchronous`
-- Method `TriggersOperations.query_by_factory` changed from `asynchronous` to `synchronous`
+- Method `PipelinesOperations.create_run` re-ordered its parameters from `['self', 'resource_group_name', 'factory_name', 'pipeline_name', 'reference_pipeline_run_id', 'is_recovery', 'start_activity_name', 'start_from_failure', 'parameters', 'kwargs']` to `['self', 'resource_group_name', 'factory_name', 'pipeline_name', 'parameters', 'reference_pipeline_run_id', 'is_recovery', 'start_activity_name', 'start_from_failure', 'kwargs']` // can't avoid, query parameters converted to keyword-only
 - Model `AmazonMWSLinkedService` deleted or renamed its instance variable `endpoint`
 - Model `AmazonMWSLinkedService` deleted or renamed its instance variable `marketplace_id`
 - Model `AmazonMWSLinkedService` deleted or renamed its instance variable `seller_id`
@@ -99,7 +26,21 @@ change log generation failed!!! You need to write it manually!!!
 - Model `AmazonMWSLinkedService` deleted or renamed its instance variable `encrypted_credential`
 - Model `AmazonMWSObjectDataset` deleted or renamed its instance variable `table_name`
 - Model `AmazonRdsForOracleLinkedService` deleted or renamed its instance variable `connection_string`
+- Model `AmazonRdsForOracleLinkedService` deleted or renamed its instance variable `server`
+- Model `AmazonRdsForOracleLinkedService` deleted or renamed its instance variable `authentication_type`
+- Model `AmazonRdsForOracleLinkedService` deleted or renamed its instance variable `username`
 - Model `AmazonRdsForOracleLinkedService` deleted or renamed its instance variable `password`
+- Model `AmazonRdsForOracleLinkedService` deleted or renamed its instance variable `encryption_client`
+- Model `AmazonRdsForOracleLinkedService` deleted or renamed its instance variable `encryption_types_client`
+- Model `AmazonRdsForOracleLinkedService` deleted or renamed its instance variable `crypto_checksum_client`
+- Model `AmazonRdsForOracleLinkedService` deleted or renamed its instance variable `crypto_checksum_types_client`
+- Model `AmazonRdsForOracleLinkedService` deleted or renamed its instance variable `initial_lob_fetch_size`
+- Model `AmazonRdsForOracleLinkedService` deleted or renamed its instance variable `fetch_size`
+- Model `AmazonRdsForOracleLinkedService` deleted or renamed its instance variable `statement_cache_size`
+- Model `AmazonRdsForOracleLinkedService` deleted or renamed its instance variable `initialization_string`
+- Model `AmazonRdsForOracleLinkedService` deleted or renamed its instance variable `enable_bulk_load`
+- Model `AmazonRdsForOracleLinkedService` deleted or renamed its instance variable `support_v1_data_types`
+- Model `AmazonRdsForOracleLinkedService` deleted or renamed its instance variable `fetch_tswtz_as_timestamp`
 - Model `AmazonRdsForOracleLinkedService` deleted or renamed its instance variable `encrypted_credential`
 - Model `AmazonRdsForOracleTableDataset` deleted or renamed its instance variable `schema_type_properties_schema`
 - Model `AmazonRdsForOracleTableDataset` deleted or renamed its instance variable `table`
@@ -267,6 +208,7 @@ change log generation failed!!! You need to write it manually!!!
 - Model `AzureDatabricksLinkedService` deleted or renamed its instance variable `encrypted_credential`
 - Model `AzureDatabricksLinkedService` deleted or renamed its instance variable `policy_id`
 - Model `AzureDatabricksLinkedService` deleted or renamed its instance variable `credential`
+- Model `AzureDatabricksLinkedService` deleted or renamed its instance variable `data_security_mode`
 - Model `AzureFileStorageLinkedService` deleted or renamed its instance variable `host`
 - Model `AzureFileStorageLinkedService` deleted or renamed its instance variable `user_id`
 - Model `AzureFileStorageLinkedService` deleted or renamed its instance variable `password`
@@ -756,6 +698,7 @@ change log generation failed!!! You need to write it manually!!!
 - Model `HBaseLinkedService` deleted or renamed its instance variable `encrypted_credential`
 - Model `HBaseObjectDataset` deleted or renamed its instance variable `table_name`
 - Model `HDInsightLinkedService` deleted or renamed its instance variable `cluster_uri`
+- Model `HDInsightLinkedService` deleted or renamed its instance variable `cluster_auth_type`
 - Model `HDInsightLinkedService` deleted or renamed its instance variable `user_name`
 - Model `HDInsightLinkedService` deleted or renamed its instance variable `password`
 - Model `HDInsightLinkedService` deleted or renamed its instance variable `linked_service_name`
@@ -763,6 +706,7 @@ change log generation failed!!! You need to write it manually!!!
 - Model `HDInsightLinkedService` deleted or renamed its instance variable `encrypted_credential`
 - Model `HDInsightLinkedService` deleted or renamed its instance variable `is_esp_enabled`
 - Model `HDInsightLinkedService` deleted or renamed its instance variable `file_system`
+- Model `HDInsightLinkedService` deleted or renamed its instance variable `credential`
 - Model `HDInsightOnDemandLinkedService` deleted or renamed its instance variable `cluster_size`
 - Model `HDInsightOnDemandLinkedService` deleted or renamed its instance variable `time_to_live`
 - Model `HDInsightOnDemandLinkedService` deleted or renamed its instance variable `version_type_properties_version`
@@ -772,6 +716,7 @@ change log generation failed!!! You need to write it manually!!!
 - Model `HDInsightOnDemandLinkedService` deleted or renamed its instance variable `service_principal_key`
 - Model `HDInsightOnDemandLinkedService` deleted or renamed its instance variable `tenant`
 - Model `HDInsightOnDemandLinkedService` deleted or renamed its instance variable `cluster_resource_group`
+- Model `HDInsightOnDemandLinkedService` deleted or renamed its instance variable `cluster_resource_group_auth_type`
 - Model `HDInsightOnDemandLinkedService` deleted or renamed its instance variable `cluster_name_prefix`
 - Model `HDInsightOnDemandLinkedService` deleted or renamed its instance variable `cluster_user_name`
 - Model `HDInsightOnDemandLinkedService` deleted or renamed its instance variable `cluster_password`
@@ -814,6 +759,7 @@ change log generation failed!!! You need to write it manually!!!
 - Model `HiveLinkedService` deleted or renamed its instance variable `password`
 - Model `HiveLinkedService` deleted or renamed its instance variable `http_path`
 - Model `HiveLinkedService` deleted or renamed its instance variable `enable_ssl`
+- Model `HiveLinkedService` deleted or renamed its instance variable `enable_server_certificate_validation`
 - Model `HiveLinkedService` deleted or renamed its instance variable `trusted_cert_path`
 - Model `HiveLinkedService` deleted or renamed its instance variable `use_system_trust_store`
 - Model `HiveLinkedService` deleted or renamed its instance variable `allow_host_name_cn_mismatch`
@@ -852,7 +798,9 @@ change log generation failed!!! You need to write it manually!!!
 - Model `ImpalaLinkedService` deleted or renamed its instance variable `authentication_type`
 - Model `ImpalaLinkedService` deleted or renamed its instance variable `username`
 - Model `ImpalaLinkedService` deleted or renamed its instance variable `password`
+- Model `ImpalaLinkedService` deleted or renamed its instance variable `thrift_transport_protocol`
 - Model `ImpalaLinkedService` deleted or renamed its instance variable `enable_ssl`
+- Model `ImpalaLinkedService` deleted or renamed its instance variable `enable_server_certificate_validation`
 - Model `ImpalaLinkedService` deleted or renamed its instance variable `trusted_cert_path`
 - Model `ImpalaLinkedService` deleted or renamed its instance variable `use_system_trust_store`
 - Model `ImpalaLinkedService` deleted or renamed its instance variable `allow_host_name_cn_mismatch`
@@ -877,17 +825,21 @@ change log generation failed!!! You need to write it manually!!!
 - Model `JiraLinkedService` deleted or renamed its instance variable `use_peer_verification`
 - Model `JiraLinkedService` deleted or renamed its instance variable `encrypted_credential`
 - Model `JiraObjectDataset` deleted or renamed its instance variable `table_name`
+- Model `JiraObjectDataset` deleted or renamed its instance variable `schema_type_properties_schema`
+- Model `JiraObjectDataset` deleted or renamed its instance variable `table`
 - Model `JsonDataset` deleted or renamed its instance variable `location`
 - Model `JsonDataset` deleted or renamed its instance variable `encoding_name`
 - Model `JsonDataset` deleted or renamed its instance variable `compression`
 - Model `LakeHouseLinkedService` deleted or renamed its instance variable `workspace_id`
 - Model `LakeHouseLinkedService` deleted or renamed its instance variable `artifact_id`
+- Model `LakeHouseLinkedService` deleted or renamed its instance variable `authentication_type`
 - Model `LakeHouseLinkedService` deleted or renamed its instance variable `service_principal_id`
 - Model `LakeHouseLinkedService` deleted or renamed its instance variable `service_principal_key`
 - Model `LakeHouseLinkedService` deleted or renamed its instance variable `tenant`
 - Model `LakeHouseLinkedService` deleted or renamed its instance variable `encrypted_credential`
 - Model `LakeHouseLinkedService` deleted or renamed its instance variable `service_principal_credential_type`
 - Model `LakeHouseLinkedService` deleted or renamed its instance variable `service_principal_credential`
+- Model `LakeHouseLinkedService` deleted or renamed its instance variable `credential`
 - Model `LakeHouseTableDataset` deleted or renamed its instance variable `schema_type_properties_schema`
 - Model `LakeHouseTableDataset` deleted or renamed its instance variable `table`
 - Model `MagentoLinkedService` deleted or renamed its instance variable `host`
@@ -901,6 +853,7 @@ change log generation failed!!! You need to write it manually!!!
 - Model `ManagedIntegrationRuntime` deleted or renamed its instance variable `compute_properties`
 - Model `ManagedIntegrationRuntime` deleted or renamed its instance variable `ssis_properties`
 - Model `ManagedIntegrationRuntime` deleted or renamed its instance variable `customer_virtual_network`
+- Model `ManagedIntegrationRuntime` deleted or renamed its instance variable `interactive_query`
 - Model `ManagedIntegrationRuntimeStatus` deleted or renamed its instance variable `create_time`
 - Model `ManagedIntegrationRuntimeStatus` deleted or renamed its instance variable `nodes`
 - Model `ManagedIntegrationRuntimeStatus` deleted or renamed its instance variable `other_errors`
@@ -975,6 +928,11 @@ change log generation failed!!! You need to write it manually!!!
 - Model `MySqlLinkedService` deleted or renamed its instance variable `treat_tiny_as_boolean`
 - Model `MySqlTableDataset` deleted or renamed its instance variable `table_name`
 - Model `NetezzaLinkedService` deleted or renamed its instance variable `connection_string`
+- Model `NetezzaLinkedService` deleted or renamed its instance variable `server`
+- Model `NetezzaLinkedService` deleted or renamed its instance variable `port`
+- Model `NetezzaLinkedService` deleted or renamed its instance variable `uid`
+- Model `NetezzaLinkedService` deleted or renamed its instance variable `database`
+- Model `NetezzaLinkedService` deleted or renamed its instance variable `security_level`
 - Model `NetezzaLinkedService` deleted or renamed its instance variable `pwd`
 - Model `NetezzaLinkedService` deleted or renamed its instance variable `encrypted_credential`
 - Model `NetezzaTableDataset` deleted or renamed its instance variable `table_name`
@@ -1008,6 +966,9 @@ change log generation failed!!! You need to write it manually!!!
 - Model `Office365LinkedService` deleted or renamed its instance variable `service_principal_tenant_id`
 - Model `Office365LinkedService` deleted or renamed its instance variable `service_principal_id`
 - Model `Office365LinkedService` deleted or renamed its instance variable `service_principal_key`
+- Model `Office365LinkedService` deleted or renamed its instance variable `service_principal_credential_type`
+- Model `Office365LinkedService` deleted or renamed its instance variable `service_principal_embedded_cert`
+- Model `Office365LinkedService` deleted or renamed its instance variable `service_principal_embedded_cert_password`
 - Model `Office365LinkedService` deleted or renamed its instance variable `encrypted_credential`
 - Model `Operation` deleted or renamed its instance variable `service_specification`
 - Model `OracleCloudStorageLinkedService` deleted or renamed its instance variable `access_key_id`
@@ -1131,6 +1092,7 @@ change log generation failed!!! You need to write it manually!!!
 - Model `QuickBooksLinkedService` deleted or renamed its instance variable `consumer_secret`
 - Model `QuickBooksLinkedService` deleted or renamed its instance variable `access_token`
 - Model `QuickBooksLinkedService` deleted or renamed its instance variable `access_token_secret`
+- Model `QuickBooksLinkedService` deleted or renamed its instance variable `refresh_token`
 - Model `QuickBooksLinkedService` deleted or renamed its instance variable `use_encrypted_endpoints`
 - Model `QuickBooksLinkedService` deleted or renamed its instance variable `encrypted_credential`
 - Model `QuickBooksObjectDataset` deleted or renamed its instance variable `table_name`
@@ -1383,8 +1345,11 @@ change log generation failed!!! You need to write it manually!!!
 - Model `SnowflakeV2LinkedService` deleted or renamed its instance variable `scope`
 - Model `SnowflakeV2LinkedService` deleted or renamed its instance variable `private_key`
 - Model `SnowflakeV2LinkedService` deleted or renamed its instance variable `private_key_passphrase`
+- Model `SnowflakeV2LinkedService` deleted or renamed its instance variable `role`
 - Model `SnowflakeV2LinkedService` deleted or renamed its instance variable `host`
+- Model `SnowflakeV2LinkedService` deleted or renamed its instance variable `schema`
 - Model `SnowflakeV2LinkedService` deleted or renamed its instance variable `encrypted_credential`
+- Model `SnowflakeV2LinkedService` deleted or renamed its instance variable `use_utc_timestamps`
 - Model `SparkLinkedService` deleted or renamed its instance variable `host`
 - Model `SparkLinkedService` deleted or renamed its instance variable `port`
 - Model `SparkLinkedService` deleted or renamed its instance variable `server_type`
@@ -1394,6 +1359,7 @@ change log generation failed!!! You need to write it manually!!!
 - Model `SparkLinkedService` deleted or renamed its instance variable `password`
 - Model `SparkLinkedService` deleted or renamed its instance variable `http_path`
 - Model `SparkLinkedService` deleted or renamed its instance variable `enable_ssl`
+- Model `SparkLinkedService` deleted or renamed its instance variable `enable_server_certificate_validation`
 - Model `SparkLinkedService` deleted or renamed its instance variable `trusted_cert_path`
 - Model `SparkLinkedService` deleted or renamed its instance variable `use_system_trust_store`
 - Model `SparkLinkedService` deleted or renamed its instance variable `allow_host_name_cn_mismatch`
@@ -1493,12 +1459,14 @@ change log generation failed!!! You need to write it manually!!!
 - Model `WarehouseLinkedService` deleted or renamed its instance variable `artifact_id`
 - Model `WarehouseLinkedService` deleted or renamed its instance variable `endpoint`
 - Model `WarehouseLinkedService` deleted or renamed its instance variable `workspace_id`
+- Model `WarehouseLinkedService` deleted or renamed its instance variable `authentication_type`
 - Model `WarehouseLinkedService` deleted or renamed its instance variable `service_principal_id`
 - Model `WarehouseLinkedService` deleted or renamed its instance variable `service_principal_key`
 - Model `WarehouseLinkedService` deleted or renamed its instance variable `tenant`
 - Model `WarehouseLinkedService` deleted or renamed its instance variable `encrypted_credential`
 - Model `WarehouseLinkedService` deleted or renamed its instance variable `service_principal_credential_type`
 - Model `WarehouseLinkedService` deleted or renamed its instance variable `service_principal_credential`
+- Model `WarehouseLinkedService` deleted or renamed its instance variable `credential`
 - Model `WarehouseTableDataset` deleted or renamed its instance variable `schema_type_properties_schema`
 - Model `WarehouseTableDataset` deleted or renamed its instance variable `table`
 - Model `WebHookActivity` deleted or renamed its instance variable `method`
@@ -1569,15 +1537,86 @@ change log generation failed!!! You need to write it manually!!!
 - Method `PrivateEndpointConnectionOperations.get` deleted or renamed its parameter `if_none_match` of kind `positional_or_keyword`
 - Method `TriggersOperations.create_or_update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
 - Method `TriggersOperations.get` deleted or renamed its parameter `if_none_match` of kind `positional_or_keyword`
-- Deleted or renamed model `PrivateEndPointConnectionsOperations`
-- Deleted or renamed model `PrivateLinkResourcesOperations`
-- Method `PipelinesOperations.create_run` re-ordered its parameters from `['self', 'resource_group_name', 'factory_name', 'pipeline_name', 'reference_pipeline_run_id', 'is_recovery', 'start_activity_name', 'start_from_failure', 'parameters', 'kwargs']` to `['self', 'resource_group_name', 'factory_name', 'pipeline_name', 'parameters', 'reference_pipeline_run_id', 'is_recovery', 'start_activity_name', 'start_from_failure', 'kwargs']`
 
-# Release History
+### Other Changes
 
-## 9.3.0 (2026-02-04)
+- Deleted model `AmazonMWSSource`/`AmazonRdsForSqlServerSource`/`AmazonRedshiftSource`/`AppendVariableActivity`/`AzureDataExplorerCommandActivity`/`AzureFunctionActivity`/`AzureFunctionActivityMethod`/`AzureMLBatchExecutionActivity`/`AzureMLExecutePipelineActivity`/`AzureMLUpdateResourceActivity`/`AzureMariaDBSource`/`AzureMySqlSource`/`AzurePostgreSqlSource`/`AzureSqlSource`/`CassandraSource`/`ConcurSource`/`ControlActivity`/`CouchbaseSource`/`CustomActivity`/`DataLakeAnalyticsUsqlActivity`/`DatabricksJobActivity`/`DatabricksNotebookActivity`/`DatabricksSparkJarActivity`/`DatabricksSparkPythonActivity`/`Db2Source`/`DeleteActivity`/`DrillSource`/`DynamicsAXSource`/`EloquaSource`/`ExecuteDataFlowActivity`/`ExecutePipelineActivity`/`ExecuteSsisPackageActivity`/`ExecutionActivity`/`FailActivity`/`FilterActivity`/`GetMetadataActivity`/`GoogleAdWordsSource`/`GoogleBigQuerySource`/`GoogleBigQueryV2Source`/`GreenplumSource`/`HBaseSource`/`HDInsightHiveActivity`/`HDInsightMapReduceActivity`/`HDInsightPigActivity`/`HDInsightSparkActivity`/`HDInsightStreamingActivity`/`HiveSource`/`HubspotSource`/`IfConditionActivity`/`ImpalaSource`/`InformixSource`/`JiraSource`/`LookupActivity`/`MagentoSource`/`MariaDBSource`/`MarketoSource`/`MySqlSource`/`NetezzaSource`/`OdbcSource`/`OracleServiceCloudSource`/`PaypalSource`/`PhoenixSource`/`PostgreSqlSource`/`PostgreSqlV2Source`/`PrestoSource`/`QuickBooksSource`/`ResponsysSource`/`SalesforceMarketingCloudSource`/`SalesforceSource`/`SalesforceV2Source`/`SapBwSource`/`SapCloudForCustomerSource`/`SapEccSource`/`SapHanaSource`/`SapOdpSource`/`SapOpenHubSource`/`SapTableSource`/`ScriptActivity`/`ServiceNowSource`/`ServiceNowV2Source`/`SetVariableActivity`/`ShopifySource`/`SparkSource`/`SqlDWSource`/`SqlMISource`/`SqlServerSource`/`SqlServerStoredProcedureActivity`/`SqlSource`/`SquareSource`/`SybaseSource`/`SynapseNotebookActivity`/`SynapseSparkJobDefinitionActivity`/`TabularSource`/`TeradataSource`/`UntilActivity`/`ValidationActivity`/`VerticaSource`/`WaitActivity`/`WarehouseSource`/`WebActivity`/`WebActivityMethod`/`XeroSource`/`ZohoSource`/`ChangeDataCaptureListResponse`/`CredentialListResponse`/`DataFlowListResponse`/`DatasetListResponse`/`FactoryListResponse`/`GlobalParameterListResponse`/`IntegrationRuntimeListResponse`/`IntegrationRuntimeStatusListResponse`/`LinkedServiceListResponse`/`ManagedPrivateEndpointListResponse`/`ManagedVirtualNetworkListResponse`/`OperationListResponse`/`PipelineListResponse`/`PrivateEndpointConnectionListResponse`/`QueryDataFlowDebugSessionsResponse`/`TriggerListResponse`/`BlobEventsTrigger`/`BlobTrigger`/`CustomEventsTrigger`/`MultiplePipelineTrigger`/`AdditionalColumns`/`AmazonRdsForOraclePartitionOption`/`AzureMLWebServiceFile`/`BigDataPoolParametrizationReference`/`BigDataPoolReferenceType`/`BlobEventTypes`/`CassandraSourceReadConsistencyLevels`/`ConfigurationType`/`CopyBehaviorType`/`CopyTranslator`/`CustomActivityReferenceObject`/`DataFactoryElement`/`DatasetCompressionLevel`/`DynamicsAuthenticationType`/`DynamicsDeploymentType`/`ExecutePipelineActivityPolicy`/`ExpressionV2`/`ExpressionV2Type`/`GetDataFactoryOperationStatusResponse`/`HDInsightActivityDebugInfoOption`/`HdiNodeTypes`/`JsonFormatFilePattern`/`JsonWriteFilePattern`/`NetezzaPartitionOption`/`NetezzaPartitionSettings`/`NotebookParameter`/`NotebookParameterType`/`NotebookReferenceType`/`OraclePartitionOption`/`OutputColumn`/`RedshiftUnloadSettings`/`SalesforceSourceReadBehavior`/`SapHanaPartitionOption`/`SapHanaPartitionSettings`/`SapTablePartitionOption`/`SapTablePartitionSettings`/`ScriptActivityLogDestination`/`ScriptActivityParameter`/`ScriptActivityParameterDirection`/`ScriptActivityParameterType`/`ScriptActivityScriptBlock`/`ScriptActivityTypePropertiesLogSettings`/`ScriptType`/`SparkConfigurationParametrizationReference`/`SparkConfigurationReferenceType`/`SparkJobReferenceType`/`SqlDWUpsertSettings`/`SqlDWWriteBehaviorEnum`/`SqlPartitionOption`/`SqlPartitionSettings`/`SsisAccessCredential`/`SsisChildPackage`/`SsisExecutionCredential`/`SsisExecutionParameter`/`SsisLogLocation`/`SsisLogLocationType`/`SsisPackageLocation`/`SsisPackageLocationType`/`SsisPropertyOverride`/`StoredProcedureParameter`/`StoredProcedureParameterType`/`SwitchCase`/`SynapseNotebookReference`/`SynapseSparkJobReference`/`TabularTranslator`/`TeradataPartitionOption`/`TeradataPartitionSettings`/`TriggerDependencyReference`/`TypeConversionSettings` which actually were not used by SDK users
 
-change log generation failed!!! You need to write it manually!!!
+## 10.0.0 (2026-02-09)
+
+### Features Added
+
+  - Added operation group IntegrationRuntimeOperations
+  - Model AmazonRdsForOracleLinkedService has a new parameter authentication_type
+  - Model AmazonRdsForOracleLinkedService has a new parameter crypto_checksum_client
+  - Model AmazonRdsForOracleLinkedService has a new parameter crypto_checksum_types_client
+  - Model AmazonRdsForOracleLinkedService has a new parameter enable_bulk_load
+  - Model AmazonRdsForOracleLinkedService has a new parameter encryption_client
+  - Model AmazonRdsForOracleLinkedService has a new parameter encryption_types_client
+  - Model AmazonRdsForOracleLinkedService has a new parameter fetch_size
+  - Model AmazonRdsForOracleLinkedService has a new parameter fetch_tswtz_as_timestamp
+  - Model AmazonRdsForOracleLinkedService has a new parameter initial_lob_fetch_size
+  - Model AmazonRdsForOracleLinkedService has a new parameter initialization_string
+  - Model AmazonRdsForOracleLinkedService has a new parameter server
+  - Model AmazonRdsForOracleLinkedService has a new parameter statement_cache_size
+  - Model AmazonRdsForOracleLinkedService has a new parameter support_v1_data_types
+  - Model AmazonRdsForOracleLinkedService has a new parameter username
+  - Model AmazonRdsForOracleSource has a new parameter number_precision
+  - Model AmazonRdsForOracleSource has a new parameter number_scale
+  - Model AzureDatabricksLinkedService has a new parameter data_security_mode
+  - Model ChangeDataCaptureResource has a new parameter system_data
+  - Model CredentialResource has a new parameter system_data
+  - Model DataFlowResource has a new parameter system_data
+  - Model DatasetResource has a new parameter system_data
+  - Model Factory has a new parameter system_data
+  - Model GlobalParameterResource has a new parameter system_data
+  - Model HDInsightLinkedService has a new parameter cluster_auth_type
+  - Model HDInsightLinkedService has a new parameter credential
+  - Model HDInsightOnDemandLinkedService has a new parameter cluster_resource_group_auth_type
+  - Model HiveLinkedService has a new parameter enable_server_certificate_validation
+  - Model ImpalaLinkedService has a new parameter enable_server_certificate_validation
+  - Model ImpalaLinkedService has a new parameter thrift_transport_protocol
+  - Model IntegrationRuntimeResource has a new parameter system_data
+  - Model JiraObjectDataset has a new parameter schema_type_properties_schema
+  - Model JiraObjectDataset has a new parameter table
+  - Model LakeHouseLinkedService has a new parameter authentication_type
+  - Model LakeHouseLinkedService has a new parameter credential
+  - Model LinkedServiceResource has a new parameter system_data
+  - Model LookupActivity has a new parameter treat_decimal_as_string
+  - Model ManagedIntegrationRuntime has a new parameter interactive_query
+  - Model ManagedPrivateEndpointResource has a new parameter system_data
+  - Model ManagedVirtualNetworkResource has a new parameter system_data
+  - Model NetezzaLinkedService has a new parameter database
+  - Model NetezzaLinkedService has a new parameter port
+  - Model NetezzaLinkedService has a new parameter security_level
+  - Model NetezzaLinkedService has a new parameter server
+  - Model NetezzaLinkedService has a new parameter uid
+  - Model Office365LinkedService has a new parameter service_principal_credential_type
+  - Model Office365LinkedService has a new parameter service_principal_embedded_cert
+  - Model Office365LinkedService has a new parameter service_principal_embedded_cert_password
+  - Model OracleSource has a new parameter number_precision
+  - Model OracleSource has a new parameter number_scale
+  - Model PipelineResource has a new parameter system_data
+  - Model PrivateEndpointConnectionResource has a new parameter system_data
+  - Model QuickBooksLinkedService has a new parameter refresh_token
+  - Model Resource has a new parameter system_data
+  - Model SalesforceV2Source has a new parameter partition_option
+  - Model ScriptActivity has a new parameter treat_decimal_as_string
+  - Model SnowflakeV2LinkedService has a new parameter role
+  - Model SnowflakeV2LinkedService has a new parameter schema
+  - Model SnowflakeV2LinkedService has a new parameter use_utc_timestamps
+  - Model SparkLinkedService has a new parameter enable_server_certificate_validation
+  - Model TriggerResource has a new parameter system_data
+  - Model WarehouseLinkedService has a new parameter authentication_type
+  - Model WarehouseLinkedService has a new parameter credential
+
+### Breaking Changes
+
+  - Model Resource no longer has parameter e_tag
+  - Model Resource no longer has parameter location
+  - Model Resource no longer has parameter tags
+  - Parameter value of model QueryDataFlowDebugSessionsResponse is now required
+  - Parameter value of model SsisObjectMetadataListResponse is now required
 
 ## 9.2.0 (2025-04-20)
 
