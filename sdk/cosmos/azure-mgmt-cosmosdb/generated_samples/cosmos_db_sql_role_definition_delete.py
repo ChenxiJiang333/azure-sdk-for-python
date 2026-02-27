@@ -28,16 +28,16 @@ from azure.mgmt.cosmosdb import CosmosDBManagementClient
 def main():
     client = CosmosDBManagementClient(
         credential=DefaultAzureCredential(),
-        subscription_id="mySubscriptionId",
+        subscription_id="00000000-1111-2222-3333-444444444444",
     )
 
     client.sql_resources.begin_delete_sql_role_definition(
-        role_definition_id="myRoleDefinitionId",
         resource_group_name="myResourceGroupName",
         account_name="myAccountName",
+        role_definition_id="myRoleDefinitionId",
     ).result()
 
 
-# x-ms-original-file: specification/cosmos-db/resource-manager/Microsoft.DocumentDB/DocumentDB/stable/2025-10-15/examples/CosmosDBSqlRoleDefinitionDelete.json
+# x-ms-original-file: specification/cosmos-db/resource-manager/Microsoft.DocumentDB/DocumentDB/preview/2025-11-01-preview/examples/CosmosDBSqlRoleDefinitionDelete.json
 if __name__ == "__main__":
     main()

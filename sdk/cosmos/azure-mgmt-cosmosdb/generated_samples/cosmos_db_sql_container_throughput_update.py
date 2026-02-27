@@ -28,7 +28,7 @@ from azure.mgmt.cosmosdb import CosmosDBManagementClient
 def main():
     client = CosmosDBManagementClient(
         credential=DefaultAzureCredential(),
-        subscription_id="subid",
+        subscription_id="00000000-0000-0000-0000-000000000000",
     )
 
     response = client.sql_resources.begin_update_sql_container_throughput(
@@ -45,6 +45,6 @@ def main():
     print(response)
 
 
-# x-ms-original-file: specification/cosmos-db/resource-manager/Microsoft.DocumentDB/DocumentDB/stable/2025-10-15/examples/CosmosDBSqlContainerThroughputUpdate.json
+# x-ms-original-file: specification/cosmos-db/resource-manager/Microsoft.DocumentDB/DocumentDB/preview/2025-11-01-preview/examples/CosmosDBSqlContainerThroughputUpdate.json
 if __name__ == "__main__":
     main()

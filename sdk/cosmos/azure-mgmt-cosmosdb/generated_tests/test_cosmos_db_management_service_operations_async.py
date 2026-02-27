@@ -25,9 +25,22 @@ class TestCosmosDBManagementServiceOperationsAsync(AzureMgmtRecordedTestCase):
         response = self.client.service.list(
             resource_group_name=resource_group.name,
             account_name="str",
-            api_version="2025-10-15",
+            api_version="2025-11-01-preview",
         )
         result = [r async for r in response]
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
+    async def test_service_get(self, resource_group):
+        response = await self.client.service.get(
+            resource_group_name=resource_group.name,
+            account_name="str",
+            service_name="str",
+            api_version="2025-11-01-preview",
+        )
+
         # please add some check logic here by yourself
         # ...
 
@@ -40,22 +53,9 @@ class TestCosmosDBManagementServiceOperationsAsync(AzureMgmtRecordedTestCase):
                 account_name="str",
                 service_name="str",
                 create_update_parameters={"properties": "service_resource_create_update_properties"},
-                api_version="2025-10-15",
+                api_version="2025-11-01-preview",
             )
         ).result()  # call '.result()' to poll until service return final result
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_service_get(self, resource_group):
-        response = await self.client.service.get(
-            resource_group_name=resource_group.name,
-            account_name="str",
-            service_name="str",
-            api_version="2025-10-15",
-        )
 
         # please add some check logic here by yourself
         # ...
@@ -68,7 +68,7 @@ class TestCosmosDBManagementServiceOperationsAsync(AzureMgmtRecordedTestCase):
                 resource_group_name=resource_group.name,
                 account_name="str",
                 service_name="str",
-                api_version="2025-10-15",
+                api_version="2025-11-01-preview",
             )
         ).result()  # call '.result()' to poll until service return final result
 

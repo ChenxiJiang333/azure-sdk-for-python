@@ -28,7 +28,7 @@ from azure.mgmt.cosmosdb import CosmosDBManagementClient
 def main():
     client = CosmosDBManagementClient(
         credential=DefaultAzureCredential(),
-        subscription_id="subid",
+        subscription_id="d6beadc3-5469-4109-ab3c-22a036c7e175",
     )
 
     response = client.cassandra_resources.begin_create_update_cassandra_keyspace(
@@ -44,6 +44,6 @@ def main():
     print(response)
 
 
-# x-ms-original-file: specification/cosmos-db/resource-manager/Microsoft.DocumentDB/DocumentDB/stable/2025-10-15/examples/CosmosDBCassandraKeyspaceCreateUpdate.json
+# x-ms-original-file: specification/cosmos-db/resource-manager/Microsoft.DocumentDB/DocumentDB/preview/2025-11-01-preview/examples/CosmosDBCassandraKeyspaceCreateUpdate.json
 if __name__ == "__main__":
     main()

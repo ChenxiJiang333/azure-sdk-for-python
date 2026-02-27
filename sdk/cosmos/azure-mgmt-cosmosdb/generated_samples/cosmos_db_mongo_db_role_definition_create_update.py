@@ -28,13 +28,13 @@ from azure.mgmt.cosmosdb import CosmosDBManagementClient
 def main():
     client = CosmosDBManagementClient(
         credential=DefaultAzureCredential(),
-        subscription_id="mySubscriptionId",
+        subscription_id="00000000-1111-2222-3333-444444444444",
     )
 
     response = client.mongo_db_resources.begin_create_update_mongo_role_definition(
-        mongo_role_definition_id="myMongoRoleDefinitionId",
         resource_group_name="myResourceGroupName",
         account_name="myAccountName",
+        mongo_role_definition_id="myMongoRoleDefinitionId",
         create_update_mongo_role_definition_parameters={
             "properties": {
                 "databaseName": "sales",
@@ -47,6 +47,6 @@ def main():
     print(response)
 
 
-# x-ms-original-file: specification/cosmos-db/resource-manager/Microsoft.DocumentDB/DocumentDB/stable/2025-10-15/examples/CosmosDBMongoDBRoleDefinitionCreateUpdate.json
+# x-ms-original-file: specification/cosmos-db/resource-manager/Microsoft.DocumentDB/DocumentDB/preview/2025-11-01-preview/examples/CosmosDBMongoDBRoleDefinitionCreateUpdate.json
 if __name__ == "__main__":
     main()

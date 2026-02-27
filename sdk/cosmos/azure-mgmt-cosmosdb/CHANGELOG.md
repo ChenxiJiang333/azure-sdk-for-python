@@ -1,5 +1,9 @@
 # Release History
 
+## 10.0.0b6 (2026-02-27)
+
+change log generation failed!!! You need to write it manually!!!
+
 ## 9.9.0 (2025-11-14)
 
 ### Features Added

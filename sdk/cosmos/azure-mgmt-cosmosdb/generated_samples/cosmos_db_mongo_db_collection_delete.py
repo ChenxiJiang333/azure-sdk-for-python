@@ -28,7 +28,7 @@ from azure.mgmt.cosmosdb import CosmosDBManagementClient
 def main():
     client = CosmosDBManagementClient(
         credential=DefaultAzureCredential(),
-        subscription_id="subid",
+        subscription_id="00000000-1111-2222-3333-444444444444",
     )
 
     client.mongo_db_resources.begin_delete_mongo_db_collection(
@@ -39,6 +39,6 @@ def main():
     ).result()
 
 
-# x-ms-original-file: specification/cosmos-db/resource-manager/Microsoft.DocumentDB/DocumentDB/stable/2025-10-15/examples/CosmosDBMongoDBCollectionDelete.json
+# x-ms-original-file: specification/cosmos-db/resource-manager/Microsoft.DocumentDB/DocumentDB/preview/2025-11-01-preview/examples/CosmosDBMongoDBCollectionDelete.json
 if __name__ == "__main__":
     main()

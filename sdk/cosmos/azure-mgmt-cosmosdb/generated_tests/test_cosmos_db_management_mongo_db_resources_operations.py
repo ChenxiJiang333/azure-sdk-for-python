@@ -24,7 +24,7 @@ class TestCosmosDBManagementMongoDBResourcesOperations(AzureMgmtRecordedTestCase
         response = self.client.mongo_db_resources.list_mongo_db_databases(
             resource_group_name=resource_group.name,
             account_name="str",
-            api_version="2025-10-15",
+            api_version="2025-11-01-preview",
         )
         result = [r for r in response]
         # please add some check logic here by yourself
@@ -37,7 +37,7 @@ class TestCosmosDBManagementMongoDBResourcesOperations(AzureMgmtRecordedTestCase
             resource_group_name=resource_group.name,
             account_name="str",
             database_name="str",
-            api_version="2025-10-15",
+            api_version="2025-11-01-preview",
         )
 
         # please add some check logic here by yourself
@@ -53,7 +53,7 @@ class TestCosmosDBManagementMongoDBResourcesOperations(AzureMgmtRecordedTestCase
             create_update_mongo_db_database_parameters={
                 "resource": {
                     "id": "str",
-                    "createMode": "Default",
+                    "createMode": "str",
                     "restoreParameters": {
                         "restoreSource": "str",
                         "restoreTimestampInUtc": "2020-02-20 00:00:00",
@@ -61,13 +61,19 @@ class TestCosmosDBManagementMongoDBResourcesOperations(AzureMgmtRecordedTestCase
                     },
                 },
                 "id": "str",
+                "identity": {
+                    "principalId": "str",
+                    "tenantId": "str",
+                    "type": "str",
+                    "userAssignedIdentities": {"str": {"clientId": "str", "principalId": "str"}},
+                },
                 "location": "str",
                 "name": "str",
                 "options": {"autoscaleSettings": {"maxThroughput": 0}, "throughput": 0},
                 "tags": {"str": "str"},
                 "type": "str",
             },
-            api_version="2025-10-15",
+            api_version="2025-11-01-preview",
         ).result()  # call '.result()' to poll until service return final result
 
         # please add some check logic here by yourself
@@ -80,78 +86,7 @@ class TestCosmosDBManagementMongoDBResourcesOperations(AzureMgmtRecordedTestCase
             resource_group_name=resource_group.name,
             account_name="str",
             database_name="str",
-            api_version="2025-10-15",
-        ).result()  # call '.result()' to poll until service return final result
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_mongo_db_resources_get_mongo_db_database_throughput(self, resource_group):
-        response = self.client.mongo_db_resources.get_mongo_db_database_throughput(
-            resource_group_name=resource_group.name,
-            account_name="str",
-            database_name="str",
-            api_version="2025-10-15",
-        )
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_mongo_db_resources_begin_update_mongo_db_database_throughput(self, resource_group):
-        response = self.client.mongo_db_resources.begin_update_mongo_db_database_throughput(
-            resource_group_name=resource_group.name,
-            account_name="str",
-            database_name="str",
-            update_throughput_parameters={
-                "resource": {
-                    "autoscaleSettings": {
-                        "maxThroughput": 0,
-                        "autoUpgradePolicy": {"throughputPolicy": {"incrementPercent": 0, "isEnabled": bool}},
-                        "targetMaxThroughput": 0,
-                    },
-                    "instantMaximumThroughput": "str",
-                    "minimumThroughput": "str",
-                    "offerReplacePending": "str",
-                    "softAllowedMaximumThroughput": "str",
-                    "throughput": 0,
-                },
-                "id": "str",
-                "location": "str",
-                "name": "str",
-                "tags": {"str": "str"},
-                "type": "str",
-            },
-            api_version="2025-10-15",
-        ).result()  # call '.result()' to poll until service return final result
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_mongo_db_resources_begin_migrate_mongo_db_database_to_autoscale(self, resource_group):
-        response = self.client.mongo_db_resources.begin_migrate_mongo_db_database_to_autoscale(
-            resource_group_name=resource_group.name,
-            account_name="str",
-            database_name="str",
-            api_version="2025-10-15",
-        ).result()  # call '.result()' to poll until service return final result
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_mongo_db_resources_begin_migrate_mongo_db_database_to_manual_throughput(self, resource_group):
-        response = self.client.mongo_db_resources.begin_migrate_mongo_db_database_to_manual_throughput(
-            resource_group_name=resource_group.name,
-            account_name="str",
-            database_name="str",
-            api_version="2025-10-15",
+            api_version="2025-11-01-preview",
         ).result()  # call '.result()' to poll until service return final result
 
         # please add some check logic here by yourself
@@ -164,7 +99,7 @@ class TestCosmosDBManagementMongoDBResourcesOperations(AzureMgmtRecordedTestCase
             resource_group_name=resource_group.name,
             account_name="str",
             database_name="str",
-            api_version="2025-10-15",
+            api_version="2025-11-01-preview",
         )
         result = [r for r in response]
         # please add some check logic here by yourself
@@ -178,7 +113,7 @@ class TestCosmosDBManagementMongoDBResourcesOperations(AzureMgmtRecordedTestCase
             account_name="str",
             database_name="str",
             collection_name="str",
-            api_version="2025-10-15",
+            api_version="2025-11-01-preview",
         )
 
         # please add some check logic here by yourself
@@ -196,7 +131,7 @@ class TestCosmosDBManagementMongoDBResourcesOperations(AzureMgmtRecordedTestCase
                 "resource": {
                     "id": "str",
                     "analyticalStorageTtl": 0,
-                    "createMode": "Default",
+                    "createMode": "str",
                     "indexes": [{"key": {"keys": ["str"]}, "options": {"expireAfterSeconds": 0, "unique": bool}}],
                     "restoreParameters": {
                         "restoreSource": "str",
@@ -206,13 +141,19 @@ class TestCosmosDBManagementMongoDBResourcesOperations(AzureMgmtRecordedTestCase
                     "shardKey": {"str": "str"},
                 },
                 "id": "str",
+                "identity": {
+                    "principalId": "str",
+                    "tenantId": "str",
+                    "type": "str",
+                    "userAssignedIdentities": {"str": {"clientId": "str", "principalId": "str"}},
+                },
                 "location": "str",
                 "name": "str",
                 "options": {"autoscaleSettings": {"maxThroughput": 0}, "throughput": 0},
                 "tags": {"str": "str"},
                 "type": "str",
             },
-            api_version="2025-10-15",
+            api_version="2025-11-01-preview",
         ).result()  # call '.result()' to poll until service return final result
 
         # please add some check logic here by yourself
@@ -226,7 +167,37 @@ class TestCosmosDBManagementMongoDBResourcesOperations(AzureMgmtRecordedTestCase
             account_name="str",
             database_name="str",
             collection_name="str",
-            api_version="2025-10-15",
+            api_version="2025-11-01-preview",
+        ).result()  # call '.result()' to poll until service return final result
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
+    def test_mongo_db_resources_begin_list_mongo_db_collection_partition_merge(self, resource_group):
+        response = self.client.mongo_db_resources.begin_list_mongo_db_collection_partition_merge(
+            resource_group_name=resource_group.name,
+            account_name="str",
+            database_name="str",
+            collection_name="str",
+            merge_parameters={"isDryRun": bool},
+            api_version="2025-11-01-preview",
+        ).result()  # call '.result()' to poll until service return final result
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
+    def test_mongo_db_resources_begin_retrieve_continuous_backup_information(self, resource_group):
+        response = self.client.mongo_db_resources.begin_retrieve_continuous_backup_information(
+            resource_group_name=resource_group.name,
+            account_name="str",
+            database_name="str",
+            collection_name="str",
+            location={"location": "str"},
+            api_version="2025-11-01-preview",
         ).result()  # call '.result()' to poll until service return final result
 
         # please add some check logic here by yourself
@@ -240,7 +211,7 @@ class TestCosmosDBManagementMongoDBResourcesOperations(AzureMgmtRecordedTestCase
             account_name="str",
             database_name="str",
             collection_name="str",
-            api_version="2025-10-15",
+            api_version="2025-11-01-preview",
         )
 
         # please add some check logic here by yourself
@@ -266,14 +237,21 @@ class TestCosmosDBManagementMongoDBResourcesOperations(AzureMgmtRecordedTestCase
                     "offerReplacePending": "str",
                     "softAllowedMaximumThroughput": "str",
                     "throughput": 0,
+                    "throughputBuckets": [{"id": 0, "maxThroughputPercentage": 0, "isDefaultBucket": bool}],
                 },
                 "id": "str",
+                "identity": {
+                    "principalId": "str",
+                    "tenantId": "str",
+                    "type": "str",
+                    "userAssignedIdentities": {"str": {"clientId": "str", "principalId": "str"}},
+                },
                 "location": "str",
                 "name": "str",
                 "tags": {"str": "str"},
                 "type": "str",
             },
-            api_version="2025-10-15",
+            api_version="2025-11-01-preview",
         ).result()  # call '.result()' to poll until service return final result
 
         # please add some check logic here by yourself
@@ -287,7 +265,7 @@ class TestCosmosDBManagementMongoDBResourcesOperations(AzureMgmtRecordedTestCase
             account_name="str",
             database_name="str",
             collection_name="str",
-            api_version="2025-10-15",
+            api_version="2025-11-01-preview",
         ).result()  # call '.result()' to poll until service return final result
 
         # please add some check logic here by yourself
@@ -301,7 +279,7 @@ class TestCosmosDBManagementMongoDBResourcesOperations(AzureMgmtRecordedTestCase
             account_name="str",
             database_name="str",
             collection_name="str",
-            api_version="2025-10-15",
+            api_version="2025-11-01-preview",
         ).result()  # call '.result()' to poll until service return final result
 
         # please add some check logic here by yourself
@@ -309,12 +287,90 @@ class TestCosmosDBManagementMongoDBResourcesOperations(AzureMgmtRecordedTestCase
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_mongo_db_resources_get_mongo_role_definition(self, resource_group):
-        response = self.client.mongo_db_resources.get_mongo_role_definition(
-            mongo_role_definition_id="str",
+    def test_mongo_db_resources_begin_mongo_db_container_redistribute_throughput(self, resource_group):
+        response = self.client.mongo_db_resources.begin_mongo_db_container_redistribute_throughput(
             resource_group_name=resource_group.name,
             account_name="str",
-            api_version="2025-10-15",
+            database_name="str",
+            collection_name="str",
+            redistribute_throughput_parameters={
+                "resource": {
+                    "sourcePhysicalPartitionThroughputInfo": [
+                        {"id": "str", "targetThroughput": 0.0, "throughput": 0.0}
+                    ],
+                    "targetPhysicalPartitionThroughputInfo": [
+                        {"id": "str", "targetThroughput": 0.0, "throughput": 0.0}
+                    ],
+                    "throughputPolicy": "str",
+                },
+                "id": "str",
+                "identity": {
+                    "principalId": "str",
+                    "tenantId": "str",
+                    "type": "str",
+                    "userAssignedIdentities": {"str": {"clientId": "str", "principalId": "str"}},
+                },
+                "location": "str",
+                "name": "str",
+                "tags": {"str": "str"},
+                "type": "str",
+            },
+            api_version="2025-11-01-preview",
+        ).result()  # call '.result()' to poll until service return final result
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
+    def test_mongo_db_resources_begin_mongo_db_container_retrieve_throughput_distribution(self, resource_group):
+        response = self.client.mongo_db_resources.begin_mongo_db_container_retrieve_throughput_distribution(
+            resource_group_name=resource_group.name,
+            account_name="str",
+            database_name="str",
+            collection_name="str",
+            retrieve_throughput_parameters={
+                "resource": {"physicalPartitionIds": [{"id": "str"}]},
+                "id": "str",
+                "identity": {
+                    "principalId": "str",
+                    "tenantId": "str",
+                    "type": "str",
+                    "userAssignedIdentities": {"str": {"clientId": "str", "principalId": "str"}},
+                },
+                "location": "str",
+                "name": "str",
+                "tags": {"str": "str"},
+                "type": "str",
+            },
+            api_version="2025-11-01-preview",
+        ).result()  # call '.result()' to poll until service return final result
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
+    def test_mongo_db_resources_begin_mongo_db_database_partition_merge(self, resource_group):
+        response = self.client.mongo_db_resources.begin_mongo_db_database_partition_merge(
+            resource_group_name=resource_group.name,
+            account_name="str",
+            database_name="str",
+            merge_parameters={"isDryRun": bool},
+            api_version="2025-11-01-preview",
+        ).result()  # call '.result()' to poll until service return final result
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
+    def test_mongo_db_resources_get_mongo_db_database_throughput(self, resource_group):
+        response = self.client.mongo_db_resources.get_mongo_db_database_throughput(
+            resource_group_name=resource_group.name,
+            account_name="str",
+            database_name="str",
+            api_version="2025-11-01-preview",
         )
 
         # please add some check logic here by yourself
@@ -322,19 +378,38 @@ class TestCosmosDBManagementMongoDBResourcesOperations(AzureMgmtRecordedTestCase
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_mongo_db_resources_begin_create_update_mongo_role_definition(self, resource_group):
-        response = self.client.mongo_db_resources.begin_create_update_mongo_role_definition(
-            mongo_role_definition_id="str",
+    def test_mongo_db_resources_begin_update_mongo_db_database_throughput(self, resource_group):
+        response = self.client.mongo_db_resources.begin_update_mongo_db_database_throughput(
             resource_group_name=resource_group.name,
             account_name="str",
-            create_update_mongo_role_definition_parameters={
-                "databaseName": "str",
-                "privileges": [{"actions": ["str"], "resource": {"collection": "str", "db": "str"}}],
-                "roleName": "str",
-                "roles": [{"db": "str", "role": "str"}],
+            database_name="str",
+            update_throughput_parameters={
+                "resource": {
+                    "autoscaleSettings": {
+                        "maxThroughput": 0,
+                        "autoUpgradePolicy": {"throughputPolicy": {"incrementPercent": 0, "isEnabled": bool}},
+                        "targetMaxThroughput": 0,
+                    },
+                    "instantMaximumThroughput": "str",
+                    "minimumThroughput": "str",
+                    "offerReplacePending": "str",
+                    "softAllowedMaximumThroughput": "str",
+                    "throughput": 0,
+                    "throughputBuckets": [{"id": 0, "maxThroughputPercentage": 0, "isDefaultBucket": bool}],
+                },
+                "id": "str",
+                "identity": {
+                    "principalId": "str",
+                    "tenantId": "str",
+                    "type": "str",
+                    "userAssignedIdentities": {"str": {"clientId": "str", "principalId": "str"}},
+                },
+                "location": "str",
+                "name": "str",
+                "tags": {"str": "str"},
                 "type": "str",
             },
-            api_version="2025-10-15",
+            api_version="2025-11-01-preview",
         ).result()  # call '.result()' to poll until service return final result
 
         # please add some check logic here by yourself
@@ -342,12 +417,87 @@ class TestCosmosDBManagementMongoDBResourcesOperations(AzureMgmtRecordedTestCase
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_mongo_db_resources_begin_delete_mongo_role_definition(self, resource_group):
-        response = self.client.mongo_db_resources.begin_delete_mongo_role_definition(
-            mongo_role_definition_id="str",
+    def test_mongo_db_resources_begin_migrate_mongo_db_database_to_autoscale(self, resource_group):
+        response = self.client.mongo_db_resources.begin_migrate_mongo_db_database_to_autoscale(
             resource_group_name=resource_group.name,
             account_name="str",
-            api_version="2025-10-15",
+            database_name="str",
+            api_version="2025-11-01-preview",
+        ).result()  # call '.result()' to poll until service return final result
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
+    def test_mongo_db_resources_begin_migrate_mongo_db_database_to_manual_throughput(self, resource_group):
+        response = self.client.mongo_db_resources.begin_migrate_mongo_db_database_to_manual_throughput(
+            resource_group_name=resource_group.name,
+            account_name="str",
+            database_name="str",
+            api_version="2025-11-01-preview",
+        ).result()  # call '.result()' to poll until service return final result
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
+    def test_mongo_db_resources_begin_mongo_db_database_redistribute_throughput(self, resource_group):
+        response = self.client.mongo_db_resources.begin_mongo_db_database_redistribute_throughput(
+            resource_group_name=resource_group.name,
+            account_name="str",
+            database_name="str",
+            redistribute_throughput_parameters={
+                "resource": {
+                    "sourcePhysicalPartitionThroughputInfo": [
+                        {"id": "str", "targetThroughput": 0.0, "throughput": 0.0}
+                    ],
+                    "targetPhysicalPartitionThroughputInfo": [
+                        {"id": "str", "targetThroughput": 0.0, "throughput": 0.0}
+                    ],
+                    "throughputPolicy": "str",
+                },
+                "id": "str",
+                "identity": {
+                    "principalId": "str",
+                    "tenantId": "str",
+                    "type": "str",
+                    "userAssignedIdentities": {"str": {"clientId": "str", "principalId": "str"}},
+                },
+                "location": "str",
+                "name": "str",
+                "tags": {"str": "str"},
+                "type": "str",
+            },
+            api_version="2025-11-01-preview",
+        ).result()  # call '.result()' to poll until service return final result
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
+    def test_mongo_db_resources_begin_mongo_db_database_retrieve_throughput_distribution(self, resource_group):
+        response = self.client.mongo_db_resources.begin_mongo_db_database_retrieve_throughput_distribution(
+            resource_group_name=resource_group.name,
+            account_name="str",
+            database_name="str",
+            retrieve_throughput_parameters={
+                "resource": {"physicalPartitionIds": [{"id": "str"}]},
+                "id": "str",
+                "identity": {
+                    "principalId": "str",
+                    "tenantId": "str",
+                    "type": "str",
+                    "userAssignedIdentities": {"str": {"clientId": "str", "principalId": "str"}},
+                },
+                "location": "str",
+                "name": "str",
+                "tags": {"str": "str"},
+                "type": "str",
+            },
+            api_version="2025-11-01-preview",
         ).result()  # call '.result()' to poll until service return final result
 
         # please add some check logic here by yourself
@@ -359,7 +509,7 @@ class TestCosmosDBManagementMongoDBResourcesOperations(AzureMgmtRecordedTestCase
         response = self.client.mongo_db_resources.list_mongo_role_definitions(
             resource_group_name=resource_group.name,
             account_name="str",
-            api_version="2025-10-15",
+            api_version="2025-11-01-preview",
         )
         result = [r for r in response]
         # please add some check logic here by yourself
@@ -367,12 +517,12 @@ class TestCosmosDBManagementMongoDBResourcesOperations(AzureMgmtRecordedTestCase
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_mongo_db_resources_get_mongo_user_definition(self, resource_group):
-        response = self.client.mongo_db_resources.get_mongo_user_definition(
-            mongo_user_definition_id="str",
+    def test_mongo_db_resources_get_mongo_role_definition(self, resource_group):
+        response = self.client.mongo_db_resources.get_mongo_role_definition(
             resource_group_name=resource_group.name,
             account_name="str",
-            api_version="2025-10-15",
+            mongo_role_definition_id="str",
+            api_version="2025-11-01-preview",
         )
 
         # please add some check logic here by yourself
@@ -380,20 +530,19 @@ class TestCosmosDBManagementMongoDBResourcesOperations(AzureMgmtRecordedTestCase
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_mongo_db_resources_begin_create_update_mongo_user_definition(self, resource_group):
-        response = self.client.mongo_db_resources.begin_create_update_mongo_user_definition(
-            mongo_user_definition_id="str",
+    def test_mongo_db_resources_begin_create_update_mongo_role_definition(self, resource_group):
+        response = self.client.mongo_db_resources.begin_create_update_mongo_role_definition(
             resource_group_name=resource_group.name,
             account_name="str",
-            create_update_mongo_user_definition_parameters={
-                "customData": "str",
+            mongo_role_definition_id="str",
+            create_update_mongo_role_definition_parameters={
                 "databaseName": "str",
-                "mechanisms": "str",
-                "password": "str",
+                "privileges": [{"actions": ["str"], "resource": {"collection": "str", "db": "str"}}],
+                "roleName": "str",
                 "roles": [{"db": "str", "role": "str"}],
-                "userName": "str",
+                "type": "str",
             },
-            api_version="2025-10-15",
+            api_version="2025-11-01-preview",
         ).result()  # call '.result()' to poll until service return final result
 
         # please add some check logic here by yourself
@@ -401,12 +550,12 @@ class TestCosmosDBManagementMongoDBResourcesOperations(AzureMgmtRecordedTestCase
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_mongo_db_resources_begin_delete_mongo_user_definition(self, resource_group):
-        response = self.client.mongo_db_resources.begin_delete_mongo_user_definition(
-            mongo_user_definition_id="str",
+    def test_mongo_db_resources_begin_delete_mongo_role_definition(self, resource_group):
+        response = self.client.mongo_db_resources.begin_delete_mongo_role_definition(
             resource_group_name=resource_group.name,
             account_name="str",
-            api_version="2025-10-15",
+            mongo_role_definition_id="str",
+            api_version="2025-11-01-preview",
         ).result()  # call '.result()' to poll until service return final result
 
         # please add some check logic here by yourself
@@ -418,7 +567,7 @@ class TestCosmosDBManagementMongoDBResourcesOperations(AzureMgmtRecordedTestCase
         response = self.client.mongo_db_resources.list_mongo_user_definitions(
             resource_group_name=resource_group.name,
             account_name="str",
-            api_version="2025-10-15",
+            api_version="2025-11-01-preview",
         )
         result = [r for r in response]
         # please add some check logic here by yourself
@@ -426,14 +575,46 @@ class TestCosmosDBManagementMongoDBResourcesOperations(AzureMgmtRecordedTestCase
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_mongo_db_resources_begin_retrieve_continuous_backup_information(self, resource_group):
-        response = self.client.mongo_db_resources.begin_retrieve_continuous_backup_information(
+    def test_mongo_db_resources_get_mongo_user_definition(self, resource_group):
+        response = self.client.mongo_db_resources.get_mongo_user_definition(
             resource_group_name=resource_group.name,
             account_name="str",
-            database_name="str",
-            collection_name="str",
-            location={"location": "str"},
-            api_version="2025-10-15",
+            mongo_user_definition_id="str",
+            api_version="2025-11-01-preview",
+        )
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
+    def test_mongo_db_resources_begin_create_update_mongo_user_definition(self, resource_group):
+        response = self.client.mongo_db_resources.begin_create_update_mongo_user_definition(
+            resource_group_name=resource_group.name,
+            account_name="str",
+            mongo_user_definition_id="str",
+            create_update_mongo_user_definition_parameters={
+                "customData": "str",
+                "databaseName": "str",
+                "mechanisms": "str",
+                "password": "str",
+                "roles": [{"db": "str", "role": "str"}],
+                "userName": "str",
+            },
+            api_version="2025-11-01-preview",
+        ).result()  # call '.result()' to poll until service return final result
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
+    def test_mongo_db_resources_begin_delete_mongo_user_definition(self, resource_group):
+        response = self.client.mongo_db_resources.begin_delete_mongo_user_definition(
+            resource_group_name=resource_group.name,
+            account_name="str",
+            mongo_user_definition_id="str",
+            api_version="2025-11-01-preview",
         ).result()  # call '.result()' to poll until service return final result
 
         # please add some check logic here by yourself

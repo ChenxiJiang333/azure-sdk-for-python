@@ -28,7 +28,7 @@ from azure.mgmt.cosmosdb import CosmosDBManagementClient
 def main():
     client = CosmosDBManagementClient(
         credential=DefaultAzureCredential(),
-        subscription_id="subId",
+        subscription_id="00000000-1111-2222-3333-444444444444",
     )
 
     response = client.sql_resources.begin_create_update_client_encryption_key(
@@ -47,7 +47,7 @@ def main():
                         "type": "AzureKeyVault",
                         "value": "AzureKeyVault Key URL",
                     },
-                    "wrappedDataEncryptionKey": "U3dhZ2dlciByb2Nrcw==",
+                    "wrappedDataEncryptionKey": "VGhpcyBpcyBhY3R1YWxseSBhbiBhcnJheSBvZiBieXRlcy4gVGhpcyByZXF1ZXN0L3Jlc3BvbnNlIGlzIGJlaW5nIHByZXNlbnRlZCBhcyBhIHN0cmluZyBmb3IgcmVhZGFiaWxpdHkgaW4gdGhlIGV4YW1wbGU=",
                 }
             }
         },
@@ -55,6 +55,6 @@ def main():
     print(response)
 
 
-# x-ms-original-file: specification/cosmos-db/resource-manager/Microsoft.DocumentDB/DocumentDB/stable/2025-10-15/examples/CosmosDBSqlClientEncryptionKeyCreateUpdate.json
+# x-ms-original-file: specification/cosmos-db/resource-manager/Microsoft.DocumentDB/DocumentDB/preview/2025-11-01-preview/examples/CosmosDBSqlClientEncryptionKeyCreateUpdate.json
 if __name__ == "__main__":
     main()

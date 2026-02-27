@@ -21,6 +21,31 @@ class TestCosmosDBManagementDataTransferJobsOperationsAsync(AzureMgmtRecordedTes
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
+    async def test_data_transfer_jobs_list_by_database_account(self, resource_group):
+        response = self.client.data_transfer_jobs.list_by_database_account(
+            resource_group_name=resource_group.name,
+            account_name="str",
+            api_version="2025-11-01-preview",
+        )
+        result = [r async for r in response]
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
+    async def test_data_transfer_jobs_get(self, resource_group):
+        response = await self.client.data_transfer_jobs.get(
+            resource_group_name=resource_group.name,
+            account_name="str",
+            job_name="str",
+            api_version="2025-11-01-preview",
+        )
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
     async def test_data_transfer_jobs_create(self, resource_group):
         response = await self.client.data_transfer_jobs.create(
             resource_group_name=resource_group.name,
@@ -44,46 +69,7 @@ class TestCosmosDBManagementDataTransferJobsOperationsAsync(AzureMgmtRecordedTes
                 "name": "str",
                 "type": "str",
             },
-            api_version="2024-12-01-preview",
-        )
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_data_transfer_jobs_get(self, resource_group):
-        response = await self.client.data_transfer_jobs.get(
-            resource_group_name=resource_group.name,
-            account_name="str",
-            job_name="str",
-            api_version="2024-12-01-preview",
-        )
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_data_transfer_jobs_pause(self, resource_group):
-        response = await self.client.data_transfer_jobs.pause(
-            resource_group_name=resource_group.name,
-            account_name="str",
-            job_name="str",
-            api_version="2024-12-01-preview",
-        )
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_data_transfer_jobs_resume(self, resource_group):
-        response = await self.client.data_transfer_jobs.resume(
-            resource_group_name=resource_group.name,
-            account_name="str",
-            job_name="str",
-            api_version="2024-12-01-preview",
+            api_version="2025-11-01-preview",
         )
 
         # please add some check logic here by yourself
@@ -96,7 +82,7 @@ class TestCosmosDBManagementDataTransferJobsOperationsAsync(AzureMgmtRecordedTes
             resource_group_name=resource_group.name,
             account_name="str",
             job_name="str",
-            api_version="2024-12-01-preview",
+            api_version="2025-11-01-preview",
         )
 
         # please add some check logic here by yourself
@@ -109,7 +95,7 @@ class TestCosmosDBManagementDataTransferJobsOperationsAsync(AzureMgmtRecordedTes
             resource_group_name=resource_group.name,
             account_name="str",
             job_name="str",
-            api_version="2024-12-01-preview",
+            api_version="2025-11-01-preview",
         )
 
         # please add some check logic here by yourself
@@ -117,12 +103,26 @@ class TestCosmosDBManagementDataTransferJobsOperationsAsync(AzureMgmtRecordedTes
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_data_transfer_jobs_list_by_database_account(self, resource_group):
-        response = self.client.data_transfer_jobs.list_by_database_account(
+    async def test_data_transfer_jobs_pause(self, resource_group):
+        response = await self.client.data_transfer_jobs.pause(
             resource_group_name=resource_group.name,
             account_name="str",
-            api_version="2024-12-01-preview",
+            job_name="str",
+            api_version="2025-11-01-preview",
         )
-        result = [r async for r in response]
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
+    async def test_data_transfer_jobs_resume(self, resource_group):
+        response = await self.client.data_transfer_jobs.resume(
+            resource_group_name=resource_group.name,
+            account_name="str",
+            job_name="str",
+            api_version="2025-11-01-preview",
+        )
+
         # please add some check logic here by yourself
         # ...

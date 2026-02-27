@@ -24,9 +24,22 @@ class TestCosmosDBManagementChaosFaultOperations(AzureMgmtRecordedTestCase):
         response = self.client.chaos_fault.list(
             resource_group_name=resource_group.name,
             account_name="str",
-            api_version="2024-12-01-preview",
+            api_version="2025-11-01-preview",
         )
         result = [r for r in response]
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
+    def test_chaos_fault_get(self, resource_group):
+        response = self.client.chaos_fault.get(
+            resource_group_name=resource_group.name,
+            account_name="str",
+            chaos_fault="str",
+            api_version="2025-11-01-preview",
+        )
+
         # please add some check logic here by yourself
         # ...
 
@@ -55,21 +68,8 @@ class TestCosmosDBManagementChaosFaultOperations(AzureMgmtRecordedTestCase):
                 },
                 "type": "str",
             },
-            api_version="2024-12-01-preview",
+            api_version="2025-11-01-preview",
         ).result()  # call '.result()' to poll until service return final result
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_chaos_fault_get(self, resource_group):
-        response = self.client.chaos_fault.get(
-            resource_group_name=resource_group.name,
-            account_name="str",
-            chaos_fault="str",
-            api_version="2024-12-01-preview",
-        )
 
         # please add some check logic here by yourself
         # ...

@@ -25,7 +25,7 @@ class TestCosmosDBManagementCassandraDataCentersOperationsAsync(AzureMgmtRecorde
         response = self.client.cassandra_data_centers.list(
             resource_group_name=resource_group.name,
             cluster_name="str",
-            api_version="2025-10-15",
+            api_version="2025-11-01-preview",
         )
         result = [r async for r in response]
         # please add some check logic here by yourself
@@ -38,23 +38,8 @@ class TestCosmosDBManagementCassandraDataCentersOperationsAsync(AzureMgmtRecorde
             resource_group_name=resource_group.name,
             cluster_name="str",
             data_center_name="str",
-            api_version="2025-10-15",
+            api_version="2025-11-01-preview",
         )
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_cassandra_data_centers_begin_delete(self, resource_group):
-        response = await (
-            await self.client.cassandra_data_centers.begin_delete(
-                resource_group_name=resource_group.name,
-                cluster_name="str",
-                data_center_name="str",
-                api_version="2025-10-15",
-            )
-        ).result()  # call '.result()' to poll until service return final result
 
         # please add some check logic here by yourself
         # ...
@@ -102,9 +87,17 @@ class TestCosmosDBManagementCassandraDataCentersOperationsAsync(AzureMgmtRecorde
                         "seedNodes": [{"ipAddress": "str"}],
                         "sku": "str",
                     },
+                    "systemData": {
+                        "createdAt": "2020-02-20 00:00:00",
+                        "createdBy": "str",
+                        "createdByType": "str",
+                        "lastModifiedAt": "2020-02-20 00:00:00",
+                        "lastModifiedBy": "str",
+                        "lastModifiedByType": "str",
+                    },
                     "type": "str",
                 },
-                api_version="2025-10-15",
+                api_version="2025-11-01-preview",
             )
         ).result()  # call '.result()' to poll until service return final result
 
@@ -154,9 +147,32 @@ class TestCosmosDBManagementCassandraDataCentersOperationsAsync(AzureMgmtRecorde
                         "seedNodes": [{"ipAddress": "str"}],
                         "sku": "str",
                     },
+                    "systemData": {
+                        "createdAt": "2020-02-20 00:00:00",
+                        "createdBy": "str",
+                        "createdByType": "str",
+                        "lastModifiedAt": "2020-02-20 00:00:00",
+                        "lastModifiedBy": "str",
+                        "lastModifiedByType": "str",
+                    },
                     "type": "str",
                 },
-                api_version="2025-10-15",
+                api_version="2025-11-01-preview",
+            )
+        ).result()  # call '.result()' to poll until service return final result
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
+    async def test_cassandra_data_centers_begin_delete(self, resource_group):
+        response = await (
+            await self.client.cassandra_data_centers.begin_delete(
+                resource_group_name=resource_group.name,
+                cluster_name="str",
+                data_center_name="str",
+                api_version="2025-11-01-preview",
             )
         ).result()  # call '.result()' to poll until service return final result
 

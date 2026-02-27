@@ -28,7 +28,7 @@ from azure.mgmt.cosmosdb import CosmosDBManagementClient
 def main():
     client = CosmosDBManagementClient(
         credential=DefaultAzureCredential(),
-        subscription_id="subid",
+        subscription_id="00000000-0000-0000-0000-000000000000",
     )
 
     response = client.sql_resources.begin_create_update_sql_container(
@@ -54,6 +54,14 @@ def main():
                     },
                     "computedProperties": [{"name": "cp_lowerName", "query": "SELECT VALUE LOWER(c.name) FROM c"}],
                     "conflictResolutionPolicy": {"conflictResolutionPath": "/path", "mode": "LastWriterWins"},
+                    "dataMaskingPolicy": {
+                        "excludedPaths": [{"path": "/id"}],
+                        "includedPaths": [
+                            {"path": "/"},
+                            {"length": 10, "path": "/contact/phones", "startPosition": 3, "strategy": "MaskSubstring"},
+                        ],
+                        "isPolicyEnabled": True,
+                    },
                     "defaultTtl": 100,
                     "fullTextPolicy": {
                         "defaultLanguage": "1033",
@@ -116,6 +124,6 @@ def main():
     print(response)
 
 
-# x-ms-original-file: specification/cosmos-db/resource-manager/Microsoft.DocumentDB/DocumentDB/stable/2025-10-15/examples/CosmosDBSqlContainerCreateUpdate.json
+# x-ms-original-file: specification/cosmos-db/resource-manager/Microsoft.DocumentDB/DocumentDB/preview/2025-11-01-preview/examples/CosmosDBSqlContainerCreateUpdate.json
 if __name__ == "__main__":
     main()

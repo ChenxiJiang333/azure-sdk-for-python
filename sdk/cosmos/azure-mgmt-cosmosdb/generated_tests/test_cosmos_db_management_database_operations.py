@@ -20,13 +20,26 @@ class TestCosmosDBManagementDatabaseOperations(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
+    def test_database_list_metric_definitions(self, resource_group):
+        response = self.client.database.list_metric_definitions(
+            resource_group_name=resource_group.name,
+            account_name="str",
+            database_rid="str",
+            api_version="2025-11-01-preview",
+        )
+        result = [r for r in response]
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
     def test_database_list_metrics(self, resource_group):
         response = self.client.database.list_metrics(
             resource_group_name=resource_group.name,
             account_name="str",
             database_rid="str",
             filter="str",
-            api_version="2025-10-15",
+            api_version="2025-11-01-preview",
         )
         result = [r for r in response]
         # please add some check logic here by yourself
@@ -39,20 +52,7 @@ class TestCosmosDBManagementDatabaseOperations(AzureMgmtRecordedTestCase):
             resource_group_name=resource_group.name,
             account_name="str",
             database_rid="str",
-            api_version="2025-10-15",
-        )
-        result = [r for r in response]
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_database_list_metric_definitions(self, resource_group):
-        response = self.client.database.list_metric_definitions(
-            resource_group_name=resource_group.name,
-            account_name="str",
-            database_rid="str",
-            api_version="2025-10-15",
+            api_version="2025-11-01-preview",
         )
         result = [r for r in response]
         # please add some check logic here by yourself
