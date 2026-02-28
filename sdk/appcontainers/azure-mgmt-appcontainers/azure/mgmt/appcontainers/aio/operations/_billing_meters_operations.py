@@ -58,7 +58,7 @@ class BillingMetersOperations:
 
         Get all billingMeters for a location.
 
-        :param location: The name of Azure region. Required.
+        :param location: The name of the Azure region. Required.
         :type location: str
         :return: BillingMeterCollection or the result of cls(response)
         :rtype: ~azure.mgmt.appcontainers.models.BillingMeterCollection
@@ -96,7 +96,10 @@ class BillingMetersOperations:
 
         if response.status_code not in [200]:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = self._deserialize.failsafe_deserialize(_models.DefaultErrorResponse, pipeline_response)
+            error = self._deserialize.failsafe_deserialize(
+                _models.DefaultErrorResponse,
+                pipeline_response,
+            )
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
         deserialized = self._deserialize("BillingMeterCollection", pipeline_response.http_response)

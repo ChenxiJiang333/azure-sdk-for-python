@@ -20,12 +20,24 @@ class TestContainerAppsAPIManagedCertificatesOperations(AzureMgmtRecordedTestCas
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
+    def test_managed_certificates_list(self, resource_group):
+        response = self.client.managed_certificates.list(
+            resource_group_name=resource_group.name,
+            environment_name="str",
+            api_version="2025-10-02-preview",
+        )
+        result = [r for r in response]
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
     def test_managed_certificates_get(self, resource_group):
         response = self.client.managed_certificates.get(
             resource_group_name=resource_group.name,
             environment_name="str",
             managed_certificate_name="str",
-            api_version="2025-07-01",
+            api_version="2025-10-02-preview",
         )
 
         # please add some check logic here by yourself
@@ -38,21 +50,8 @@ class TestContainerAppsAPIManagedCertificatesOperations(AzureMgmtRecordedTestCas
             resource_group_name=resource_group.name,
             environment_name="str",
             managed_certificate_name="str",
-            api_version="2025-07-01",
+            api_version="2025-10-02-preview",
         ).result()  # call '.result()' to poll until service return final result
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_managed_certificates_delete(self, resource_group):
-        response = self.client.managed_certificates.delete(
-            resource_group_name=resource_group.name,
-            environment_name="str",
-            managed_certificate_name="str",
-            api_version="2025-07-01",
-        )
 
         # please add some check logic here by yourself
         # ...
@@ -65,7 +64,7 @@ class TestContainerAppsAPIManagedCertificatesOperations(AzureMgmtRecordedTestCas
             environment_name="str",
             managed_certificate_name="str",
             managed_certificate_envelope={"tags": {"str": "str"}},
-            api_version="2025-07-01",
+            api_version="2025-10-02-preview",
         )
 
         # please add some check logic here by yourself
@@ -73,12 +72,13 @@ class TestContainerAppsAPIManagedCertificatesOperations(AzureMgmtRecordedTestCas
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_managed_certificates_list(self, resource_group):
-        response = self.client.managed_certificates.list(
+    def test_managed_certificates_delete(self, resource_group):
+        response = self.client.managed_certificates.delete(
             resource_group_name=resource_group.name,
             environment_name="str",
-            api_version="2025-07-01",
+            managed_certificate_name="str",
+            api_version="2025-10-02-preview",
         )
-        result = [r for r in response]
+
         # please add some check logic here by yourself
         # ...

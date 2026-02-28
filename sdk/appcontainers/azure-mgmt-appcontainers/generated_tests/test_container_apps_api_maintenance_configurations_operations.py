@@ -24,9 +24,22 @@ class TestContainerAppsAPIMaintenanceConfigurationsOperations(AzureMgmtRecordedT
         response = self.client.maintenance_configurations.list(
             resource_group_name=resource_group.name,
             environment_name="str",
-            api_version="2025-07-01",
+            api_version="2025-10-02-preview",
         )
         result = [r for r in response]
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
+    def test_maintenance_configurations_get(self, resource_group):
+        response = self.client.maintenance_configurations.get(
+            resource_group_name=resource_group.name,
+            environment_name="str",
+            config_name="str",
+            api_version="2025-10-02-preview",
+        )
+
         # please add some check logic here by yourself
         # ...
 
@@ -51,7 +64,7 @@ class TestContainerAppsAPIMaintenanceConfigurationsOperations(AzureMgmtRecordedT
                 },
                 "type": "str",
             },
-            api_version="2025-07-01",
+            api_version="2025-10-02-preview",
         )
 
         # please add some check logic here by yourself
@@ -64,20 +77,7 @@ class TestContainerAppsAPIMaintenanceConfigurationsOperations(AzureMgmtRecordedT
             resource_group_name=resource_group.name,
             environment_name="str",
             config_name="str",
-            api_version="2025-07-01",
-        )
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_maintenance_configurations_get(self, resource_group):
-        response = self.client.maintenance_configurations.get(
-            resource_group_name=resource_group.name,
-            environment_name="str",
-            config_name="str",
-            api_version="2025-07-01",
+            api_version="2025-10-02-preview",
         )
 
         # please add some check logic here by yourself

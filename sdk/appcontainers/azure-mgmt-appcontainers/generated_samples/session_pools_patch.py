@@ -48,6 +48,9 @@ def main():
                     ],
                     "ingress": {"targetPort": 80},
                 },
+                "dynamicPoolConfiguration": {
+                    "lifecycleConfiguration": {"cooldownPeriodInSeconds": 600, "lifecycleType": "Timed"}
+                },
                 "scaleConfiguration": {"maxConcurrentSessions": 500, "readySessionInstances": 100},
                 "sessionNetworkConfiguration": {"status": "EgressEnabled"},
             }
@@ -56,6 +59,6 @@ def main():
     print(response)
 
 
-# x-ms-original-file: specification/app/resource-manager/Microsoft.App/ContainerApps/stable/2025-07-01/examples/SessionPools_Patch.json
+# x-ms-original-file: specification/app/resource-manager/Microsoft.App/ContainerApps/preview/2025-10-02-preview/examples/SessionPools_Patch.json
 if __name__ == "__main__":
     main()

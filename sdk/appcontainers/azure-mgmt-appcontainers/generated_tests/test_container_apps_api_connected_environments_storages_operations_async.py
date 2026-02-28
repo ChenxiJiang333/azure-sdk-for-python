@@ -25,7 +25,7 @@ class TestContainerAppsAPIConnectedEnvironmentsStoragesOperationsAsync(AzureMgmt
         response = await self.client.connected_environments_storages.list(
             resource_group_name=resource_group.name,
             connected_environment_name="str",
-            api_version="2025-07-01",
+            api_version="2025-10-02-preview",
         )
 
         # please add some check logic here by yourself
@@ -38,7 +38,7 @@ class TestContainerAppsAPIConnectedEnvironmentsStoragesOperationsAsync(AzureMgmt
             resource_group_name=resource_group.name,
             connected_environment_name="str",
             storage_name="str",
-            api_version="2025-07-01",
+            api_version="2025-10-02-preview",
         )
 
         # please add some check logic here by yourself
@@ -65,6 +65,14 @@ class TestContainerAppsAPIConnectedEnvironmentsStoragesOperationsAsync(AzureMgmt
                         },
                         "deploymentErrors": "str",
                         "provisioningState": "str",
+                        "smb": {
+                            "accessMode": "str",
+                            "domain": "str",
+                            "host": "str",
+                            "password": "str",
+                            "shareName": "str",
+                            "username": "str",
+                        },
                     },
                     "systemData": {
                         "createdAt": "2020-02-20 00:00:00",
@@ -76,7 +84,7 @@ class TestContainerAppsAPIConnectedEnvironmentsStoragesOperationsAsync(AzureMgmt
                     },
                     "type": "str",
                 },
-                api_version="2025-07-01",
+                api_version="2025-10-02-preview",
             )
         ).result()  # call '.result()' to poll until service return final result
 
@@ -91,7 +99,7 @@ class TestContainerAppsAPIConnectedEnvironmentsStoragesOperationsAsync(AzureMgmt
                 resource_group_name=resource_group.name,
                 connected_environment_name="str",
                 storage_name="str",
-                api_version="2025-07-01",
+                api_version="2025-10-02-preview",
             )
         ).result()  # call '.result()' to poll until service return final result
 

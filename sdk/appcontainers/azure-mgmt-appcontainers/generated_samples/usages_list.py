@@ -28,7 +28,7 @@ from azure.mgmt.appcontainers import ContainerAppsAPIClient
 def main():
     client = ContainerAppsAPIClient(
         credential=DefaultAzureCredential(),
-        subscription_id="subid",
+        subscription_id="00000000-0000-0000-0000-000000000000",
     )
 
     response = client.usages.list(
@@ -38,6 +38,6 @@ def main():
         print(item)
 
 
-# x-ms-original-file: specification/app/resource-manager/Microsoft.App/ContainerApps/stable/2025-07-01/examples/Usages_List.json
+# x-ms-original-file: specification/app/resource-manager/Microsoft.App/ContainerApps/preview/2025-10-02-preview/examples/Usages_List.json
 if __name__ == "__main__":
     main()

@@ -33,11 +33,11 @@ def main():
 
     response = client.jobs.begin_start(
         resource_group_name="rg",
-        job_name="testcontainerappsjob0",
+        job_name="testcontainerAppsJob0",
     ).result()
     print(response)
 
 
-# x-ms-original-file: specification/app/resource-manager/Microsoft.App/ContainerApps/stable/2025-07-01/examples/Job_Start.json
+# x-ms-original-file: specification/app/resource-manager/Microsoft.App/ContainerApps/preview/2025-10-02-preview/examples/Job_Start.json
 if __name__ == "__main__":
     main()

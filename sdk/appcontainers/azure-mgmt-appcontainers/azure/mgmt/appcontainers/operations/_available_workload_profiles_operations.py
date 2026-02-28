@@ -42,7 +42,7 @@ def build_get_request(location: str, subscription_id: str, **kwargs: Any) -> Htt
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-07-01"))
+    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-10-02-preview"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -51,7 +51,7 @@ def build_get_request(location: str, subscription_id: str, **kwargs: Any) -> Htt
         "/subscriptions/{subscriptionId}/providers/Microsoft.App/locations/{location}/availableManagedEnvironmentsWorkloadProfileTypes",
     )
     path_format_arguments = {
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str", min_length=1),
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
         "location": _SERIALIZER.url("location", location, "str", min_length=1),
     }
 
@@ -91,7 +91,7 @@ class AvailableWorkloadProfilesOperations:
 
         Get all available workload profiles for a location.
 
-        :param location: The name of Azure region. Required.
+        :param location: The name of the Azure region. Required.
         :type location: str
         :return: An iterator like instance of either AvailableWorkloadProfile or the result of
          cls(response)
@@ -159,7 +159,10 @@ class AvailableWorkloadProfilesOperations:
 
             if response.status_code not in [200]:
                 map_error(status_code=response.status_code, response=response, error_map=error_map)
-                error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
+                error = self._deserialize.failsafe_deserialize(
+                    _models.ErrorResponse,
+                    pipeline_response,
+                )
                 raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
             return pipeline_response

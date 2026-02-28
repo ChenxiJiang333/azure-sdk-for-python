@@ -24,7 +24,7 @@ class TestContainerAppsAPIContainerAppsPatchesOperations(AzureMgmtRecordedTestCa
         response = self.client.container_apps_patches.list_by_container_app(
             resource_group_name=resource_group.name,
             container_app_name="str",
-            api_version="2025-02-02-preview",
+            api_version="2025-10-02-preview",
         )
         result = [r for r in response]
         # please add some check logic here by yourself
@@ -37,7 +37,7 @@ class TestContainerAppsAPIContainerAppsPatchesOperations(AzureMgmtRecordedTestCa
             resource_group_name=resource_group.name,
             container_app_name="str",
             patch_name="str",
-            api_version="2025-02-02-preview",
+            api_version="2025-10-02-preview",
         )
 
         # please add some check logic here by yourself
@@ -50,7 +50,20 @@ class TestContainerAppsAPIContainerAppsPatchesOperations(AzureMgmtRecordedTestCa
             resource_group_name=resource_group.name,
             container_app_name="str",
             patch_name="str",
-            api_version="2025-02-02-preview",
+            api_version="2025-10-02-preview",
+        ).result()  # call '.result()' to poll until service return final result
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
+    def test_container_apps_patches_begin_apply(self, resource_group):
+        response = self.client.container_apps_patches.begin_apply(
+            resource_group_name=resource_group.name,
+            container_app_name="str",
+            patch_name="str",
+            api_version="2025-10-02-preview",
         ).result()  # call '.result()' to poll until service return final result
 
         # please add some check logic here by yourself
@@ -64,20 +77,7 @@ class TestContainerAppsAPIContainerAppsPatchesOperations(AzureMgmtRecordedTestCa
             container_app_name="str",
             patch_name="str",
             patch_skip_config={"skip": bool},
-            api_version="2025-02-02-preview",
-        ).result()  # call '.result()' to poll until service return final result
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_container_apps_patches_begin_apply(self, resource_group):
-        response = self.client.container_apps_patches.begin_apply(
-            resource_group_name=resource_group.name,
-            container_app_name="str",
-            patch_name="str",
-            api_version="2025-02-02-preview",
+            api_version="2025-10-02-preview",
         ).result()  # call '.result()' to poll until service return final result
 
         # please add some check logic here by yourself

@@ -41,7 +41,7 @@ def build_list_request(location: str, subscription_id: str, **kwargs: Any) -> Ht
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-07-01"))
+    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-10-02-preview"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -49,8 +49,8 @@ def build_list_request(location: str, subscription_id: str, **kwargs: Any) -> Ht
         "template_url", "/subscriptions/{subscriptionId}/providers/Microsoft.App/locations/{location}/usages"
     )
     path_format_arguments = {
-        "location": _SERIALIZER.url("location", location, "str", pattern=r"^[-\w\._]+$"),
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str", min_length=1),
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
+        "location": _SERIALIZER.url("location", location, "str", min_length=1),
     }
 
     _url: str = _url.format(**path_format_arguments)  # type: ignore
@@ -88,7 +88,7 @@ class UsagesOperations:
         """Gets, for the specified location, the current resource usage information as well as the limits
         under the subscription.
 
-        :param location: The location for which resource usage is queried. Required.
+        :param location: The name of the Azure region. Required.
         :type location: str
         :return: An iterator like instance of either Usage or the result of cls(response)
         :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.appcontainers.models.Usage]
@@ -155,7 +155,10 @@ class UsagesOperations:
 
             if response.status_code not in [200]:
                 map_error(status_code=response.status_code, response=response, error_map=error_map)
-                error = self._deserialize.failsafe_deserialize(_models.DefaultErrorResponse, pipeline_response)
+                error = self._deserialize.failsafe_deserialize(
+                    _models.DefaultErrorResponse,
+                    pipeline_response,
+                )
                 raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
             return pipeline_response

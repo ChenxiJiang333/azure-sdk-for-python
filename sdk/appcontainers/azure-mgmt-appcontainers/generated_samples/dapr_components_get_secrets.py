@@ -39,6 +39,6 @@ def main():
     print(response)
 
 
-# x-ms-original-file: specification/app/resource-manager/Microsoft.App/ContainerApps/stable/2025-07-01/examples/DaprComponents_Get_Secrets.json
+# x-ms-original-file: specification/app/resource-manager/Microsoft.App/ContainerApps/preview/2025-10-02-preview/examples/DaprComponents_Get_Secrets.json
 if __name__ == "__main__":
     main()

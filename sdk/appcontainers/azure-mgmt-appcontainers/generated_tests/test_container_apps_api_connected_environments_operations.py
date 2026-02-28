@@ -22,7 +22,7 @@ class TestContainerAppsAPIConnectedEnvironmentsOperations(AzureMgmtRecordedTestC
     @recorded_by_proxy
     def test_connected_environments_list_by_subscription(self, resource_group):
         response = self.client.connected_environments.list_by_subscription(
-            api_version="2025-07-01",
+            api_version="2025-10-02-preview",
         )
         result = [r for r in response]
         # please add some check logic here by yourself
@@ -33,7 +33,7 @@ class TestContainerAppsAPIConnectedEnvironmentsOperations(AzureMgmtRecordedTestC
     def test_connected_environments_list_by_resource_group(self, resource_group):
         response = self.client.connected_environments.list_by_resource_group(
             resource_group_name=resource_group.name,
-            api_version="2025-07-01",
+            api_version="2025-10-02-preview",
         )
         result = [r for r in response]
         # please add some check logic here by yourself
@@ -45,7 +45,7 @@ class TestContainerAppsAPIConnectedEnvironmentsOperations(AzureMgmtRecordedTestC
         response = self.client.connected_environments.get(
             resource_group_name=resource_group.name,
             connected_environment_name="str",
-            api_version="2025-07-01",
+            api_version="2025-10-02-preview",
         )
 
         # please add some check logic here by yourself
@@ -62,7 +62,7 @@ class TestContainerAppsAPIConnectedEnvironmentsOperations(AzureMgmtRecordedTestC
                 "customDomainConfiguration": {
                     "certificateKeyVaultProperties": {"identity": "str", "keyVaultUrl": "str"},
                     "certificatePassword": "str",
-                    "certificateValue": bytes("bytes", encoding="utf-8"),
+                    "certificateValue": "str",
                     "customDomainVerificationId": "str",
                     "dnsSuffix": "str",
                     "expirationDate": "2020-02-20 00:00:00",
@@ -88,19 +88,7 @@ class TestContainerAppsAPIConnectedEnvironmentsOperations(AzureMgmtRecordedTestC
                 "tags": {"str": "str"},
                 "type": "str",
             },
-            api_version="2025-07-01",
-        ).result()  # call '.result()' to poll until service return final result
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_connected_environments_begin_delete(self, resource_group):
-        response = self.client.connected_environments.begin_delete(
-            resource_group_name=resource_group.name,
-            connected_environment_name="str",
-            api_version="2025-07-01",
+            api_version="2025-10-02-preview",
         ).result()  # call '.result()' to poll until service return final result
 
         # please add some check logic here by yourself
@@ -112,9 +100,20 @@ class TestContainerAppsAPIConnectedEnvironmentsOperations(AzureMgmtRecordedTestC
         response = self.client.connected_environments.update(
             resource_group_name=resource_group.name,
             connected_environment_name="str",
-            environment_envelope={"tags": {"str": "str"}},
-            api_version="2025-07-01",
+            api_version="2025-10-02-preview",
         )
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
+    def test_connected_environments_begin_delete(self, resource_group):
+        response = self.client.connected_environments.begin_delete(
+            resource_group_name=resource_group.name,
+            connected_environment_name="str",
+            api_version="2025-10-02-preview",
+        ).result()  # call '.result()' to poll until service return final result
 
         # please add some check logic here by yourself
         # ...
@@ -126,7 +125,7 @@ class TestContainerAppsAPIConnectedEnvironmentsOperations(AzureMgmtRecordedTestC
             resource_group_name=resource_group.name,
             connected_environment_name="str",
             check_name_availability_request={"name": "str", "type": "str"},
-            api_version="2025-07-01",
+            api_version="2025-10-02-preview",
         )
 
         # please add some check logic here by yourself

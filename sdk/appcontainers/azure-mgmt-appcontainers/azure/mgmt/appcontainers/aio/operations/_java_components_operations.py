@@ -77,7 +77,7 @@ class JavaComponentsOperations:
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param environment_name: Name of the Managed Environment. Required.
+        :param environment_name: Name of the managed environment. Required.
         :type environment_name: str
         :return: An iterator like instance of either JavaComponent or the result of cls(response)
         :rtype: ~azure.core.async_paging.AsyncItemPaged[~azure.mgmt.appcontainers.models.JavaComponent]
@@ -145,7 +145,10 @@ class JavaComponentsOperations:
 
             if response.status_code not in [200]:
                 map_error(status_code=response.status_code, response=response, error_map=error_map)
-                error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
+                error = self._deserialize.failsafe_deserialize(
+                    _models.ErrorResponse,
+                    pipeline_response,
+                )
                 raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
             return pipeline_response
@@ -163,7 +166,7 @@ class JavaComponentsOperations:
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param environment_name: Name of the Managed Environment. Required.
+        :param environment_name: Name of the managed environment. Required.
         :type environment_name: str
         :param name: Name of the Java Component. Required.
         :type name: str
@@ -205,7 +208,10 @@ class JavaComponentsOperations:
 
         if response.status_code not in [200]:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
+            error = self._deserialize.failsafe_deserialize(
+                _models.ErrorResponse,
+                pipeline_response,
+            )
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
         deserialized = self._deserialize("JavaComponent", pipeline_response.http_response)
@@ -274,13 +280,23 @@ class JavaComponentsOperations:
             except (StreamConsumedError, StreamClosedError):
                 pass
             map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
+            error = self._deserialize.failsafe_deserialize(
+                _models.ErrorResponse,
+                pipeline_response,
+            )
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
+
+        response_headers = {}
+        if response.status_code == 201:
+            response_headers["Azure-AsyncOperation"] = self._deserialize(
+                "str", response.headers.get("Azure-AsyncOperation")
+            )
+            response_headers["Retry-After"] = self._deserialize("int", response.headers.get("Retry-After"))
 
         deserialized = response.stream_download(self._client._pipeline, decompress=_decompress)
 
         if cls:
-            return cls(pipeline_response, deserialized, {})  # type: ignore
+            return cls(pipeline_response, deserialized, response_headers)  # type: ignore
 
         return deserialized  # type: ignore
 
@@ -302,7 +318,7 @@ class JavaComponentsOperations:
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param environment_name: Name of the Managed Environment. Required.
+        :param environment_name: Name of the managed environment. Required.
         :type environment_name: str
         :param name: Name of the Java Component. Required.
         :type name: str
@@ -335,7 +351,7 @@ class JavaComponentsOperations:
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param environment_name: Name of the Managed Environment. Required.
+        :param environment_name: Name of the managed environment. Required.
         :type environment_name: str
         :param name: Name of the Java Component. Required.
         :type name: str
@@ -366,7 +382,7 @@ class JavaComponentsOperations:
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param environment_name: Name of the Managed Environment. Required.
+        :param environment_name: Name of the managed environment. Required.
         :type environment_name: str
         :param name: Name of the Java Component. Required.
         :type name: str
@@ -488,12 +504,16 @@ class JavaComponentsOperations:
             except (StreamConsumedError, StreamClosedError):
                 pass
             map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
+            error = self._deserialize.failsafe_deserialize(
+                _models.ErrorResponse,
+                pipeline_response,
+            )
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
         response_headers = {}
         if response.status_code == 202:
             response_headers["Location"] = self._deserialize("str", response.headers.get("Location"))
+            response_headers["Retry-After"] = self._deserialize("int", response.headers.get("Retry-After"))
 
         deserialized = response.stream_download(self._client._pipeline, decompress=_decompress)
 
@@ -520,7 +540,7 @@ class JavaComponentsOperations:
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param environment_name: Name of the Managed Environment. Required.
+        :param environment_name: Name of the managed environment. Required.
         :type environment_name: str
         :param name: Name of the Java Component. Required.
         :type name: str
@@ -553,7 +573,7 @@ class JavaComponentsOperations:
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param environment_name: Name of the Managed Environment. Required.
+        :param environment_name: Name of the managed environment. Required.
         :type environment_name: str
         :param name: Name of the Java Component. Required.
         :type name: str
@@ -584,7 +604,7 @@ class JavaComponentsOperations:
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param environment_name: Name of the Managed Environment. Required.
+        :param environment_name: Name of the managed environment. Required.
         :type environment_name: str
         :param name: Name of the Java Component. Required.
         :type name: str
@@ -628,7 +648,9 @@ class JavaComponentsOperations:
             return deserialized
 
         if polling is True:
-            polling_method: AsyncPollingMethod = cast(AsyncPollingMethod, AsyncARMPolling(lro_delay, **kwargs))
+            polling_method: AsyncPollingMethod = cast(
+                AsyncPollingMethod, AsyncARMPolling(lro_delay, lro_options={"final-state-via": "location"}, **kwargs)
+            )
         elif polling is False:
             polling_method = cast(AsyncPollingMethod, AsyncNoPolling())
         else:
@@ -686,12 +708,16 @@ class JavaComponentsOperations:
             except (StreamConsumedError, StreamClosedError):
                 pass
             map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = self._deserialize.failsafe_deserialize(_models.ErrorResponse, pipeline_response)
+            error = self._deserialize.failsafe_deserialize(
+                _models.ErrorResponse,
+                pipeline_response,
+            )
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
         response_headers = {}
         if response.status_code == 202:
             response_headers["Location"] = self._deserialize("str", response.headers.get("Location"))
+            response_headers["Retry-After"] = self._deserialize("int", response.headers.get("Retry-After"))
 
         deserialized = response.stream_download(self._client._pipeline, decompress=_decompress)
 
@@ -704,14 +730,14 @@ class JavaComponentsOperations:
     async def begin_delete(
         self, resource_group_name: str, environment_name: str, name: str, **kwargs: Any
     ) -> AsyncLROPoller[None]:
-        """Delete.
+        """Delete a Java Component.
 
         Delete a Java Component.
 
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param environment_name: Name of the Managed Environment. Required.
+        :param environment_name: Name of the managed environment. Required.
         :type environment_name: str
         :param name: Name of the Java Component. Required.
         :type name: str

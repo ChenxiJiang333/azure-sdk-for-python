@@ -24,7 +24,7 @@ class TestContainerAppsAPICertificatesOperations(AzureMgmtRecordedTestCase):
         response = self.client.certificates.list(
             resource_group_name=resource_group.name,
             environment_name="str",
-            api_version="2025-07-01",
+            api_version="2025-10-02-preview",
         )
         result = [r for r in response]
         # please add some check logic here by yourself
@@ -37,7 +37,7 @@ class TestContainerAppsAPICertificatesOperations(AzureMgmtRecordedTestCase):
             resource_group_name=resource_group.name,
             environment_name="str",
             certificate_name="str",
-            api_version="2025-07-01",
+            api_version="2025-10-02-preview",
         )
 
         # please add some check logic here by yourself
@@ -50,20 +50,7 @@ class TestContainerAppsAPICertificatesOperations(AzureMgmtRecordedTestCase):
             resource_group_name=resource_group.name,
             environment_name="str",
             certificate_name="str",
-            api_version="2025-07-01",
-        )
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_certificates_delete(self, resource_group):
-        response = self.client.certificates.delete(
-            resource_group_name=resource_group.name,
-            environment_name="str",
-            certificate_name="str",
-            api_version="2025-07-01",
+            api_version="2025-10-02-preview",
         )
 
         # please add some check logic here by yourself
@@ -77,7 +64,20 @@ class TestContainerAppsAPICertificatesOperations(AzureMgmtRecordedTestCase):
             environment_name="str",
             certificate_name="str",
             certificate_envelope={"tags": {"str": "str"}},
-            api_version="2025-07-01",
+            api_version="2025-10-02-preview",
+        )
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
+    def test_certificates_delete(self, resource_group):
+        response = self.client.certificates.delete(
+            resource_group_name=resource_group.name,
+            environment_name="str",
+            certificate_name="str",
+            api_version="2025-10-02-preview",
         )
 
         # please add some check logic here by yourself

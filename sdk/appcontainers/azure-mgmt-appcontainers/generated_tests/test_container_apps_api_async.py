@@ -21,12 +21,9 @@ class TestContainerAppsAPIAsync(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_job_execution(self, resource_group):
-        response = await self.client.job_execution(
-            resource_group_name=resource_group.name,
-            job_name="str",
-            job_execution_name="str",
-            api_version="2025-07-01",
+    async def test_get_custom_domain_verification_id(self, resource_group):
+        response = await self.client.get_custom_domain_verification_id(
+            api_version="2025-10-02-preview",
         )
 
         # please add some check logic here by yourself
@@ -34,9 +31,12 @@ class TestContainerAppsAPIAsync(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_get_custom_domain_verification_id(self, resource_group):
-        response = await self.client.get_custom_domain_verification_id(
-            api_version="2025-07-01",
+    async def test_job_execution(self, resource_group):
+        response = await self.client.job_execution(
+            resource_group_name=resource_group.name,
+            job_name="str",
+            job_execution_name="str",
+            api_version="2025-10-02-preview",
         )
 
         # please add some check logic here by yourself

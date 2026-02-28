@@ -25,7 +25,7 @@ class TestContainerAppsAPIBuildsByBuilderResourceOperationsAsync(AzureMgmtRecord
         response = self.client.builds_by_builder_resource.list(
             resource_group_name=resource_group.name,
             builder_name="str",
-            api_version="2025-02-02-preview",
+            api_version="2025-10-02-preview",
         )
         result = [r async for r in response]
         # please add some check logic here by yourself

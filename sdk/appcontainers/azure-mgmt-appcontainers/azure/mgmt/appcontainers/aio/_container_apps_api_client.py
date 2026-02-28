@@ -21,21 +21,36 @@ from .. import models as _models
 from .._utils.serialization import Deserializer, Serializer
 from ._configuration import ContainerAppsAPIClientConfiguration
 from .operations import (
+    AppResiliencyOperations,
     AvailableWorkloadProfilesOperations,
     BillingMetersOperations,
+    BuildAuthTokenOperations,
+    BuildersOperations,
+    BuildsByBuilderResourceOperations,
+    BuildsOperations,
     CertificatesOperations,
     ConnectedEnvironmentsCertificatesOperations,
     ConnectedEnvironmentsDaprComponentsOperations,
     ConnectedEnvironmentsOperations,
     ConnectedEnvironmentsStoragesOperations,
     ContainerAppsAuthConfigsOperations,
+    ContainerAppsBuildsByContainerAppOperations,
+    ContainerAppsBuildsOperations,
     ContainerAppsDiagnosticsOperations,
+    ContainerAppsFunctionsOperations,
+    ContainerAppsLabelHistoryOperations,
     ContainerAppsOperations,
+    ContainerAppsPatchesOperations,
+    ContainerAppsRevisionFunctionsOperations,
     ContainerAppsRevisionReplicasOperations,
     ContainerAppsRevisionsOperations,
     ContainerAppsSessionPoolsOperations,
     ContainerAppsSourceControlsOperations,
+    DaprComponentResiliencyPoliciesOperations,
     DaprComponentsOperations,
+    DaprSubscriptionsOperations,
+    DotNetComponentsOperations,
+    FunctionsExtensionOperations,
     HttpRouteConfigOperations,
     JavaComponentsOperations,
     JobsExecutionsOperations,
@@ -62,20 +77,41 @@ if TYPE_CHECKING:
 
 
 class ContainerAppsAPIClient(_ContainerAppsAPIClientOperationsMixin):  # pylint: disable=too-many-instance-attributes
-    """Logic app is an extension resource on container app and the extension resource enables logic
-    specific operations on the container app through the APIs listed.
+    """Functions is an extension resource to revisions and the api listed is used to proxy the call
+    from Web RP to the function app's host process, this api is not exposed to users and only Web
+    RP is allowed to invoke functions extension resource.
 
-    :ivar container_apps_auth_configs: ContainerAppsAuthConfigsOperations operations
-    :vartype container_apps_auth_configs:
-     azure.mgmt.appcontainers.aio.operations.ContainerAppsAuthConfigsOperations
+    :ivar operations: Operations operations
+    :vartype operations: azure.mgmt.appcontainers.aio.operations.Operations
+    :ivar builders: BuildersOperations operations
+    :vartype builders: azure.mgmt.appcontainers.aio.operations.BuildersOperations
+    :ivar connected_environments: ConnectedEnvironmentsOperations operations
+    :vartype connected_environments:
+     azure.mgmt.appcontainers.aio.operations.ConnectedEnvironmentsOperations
+    :ivar container_apps: ContainerAppsOperations operations
+    :vartype container_apps: azure.mgmt.appcontainers.aio.operations.ContainerAppsOperations
+    :ivar jobs: JobsOperations operations
+    :vartype jobs: azure.mgmt.appcontainers.aio.operations.JobsOperations
     :ivar available_workload_profiles: AvailableWorkloadProfilesOperations operations
     :vartype available_workload_profiles:
      azure.mgmt.appcontainers.aio.operations.AvailableWorkloadProfilesOperations
     :ivar billing_meters: BillingMetersOperations operations
     :vartype billing_meters: azure.mgmt.appcontainers.aio.operations.BillingMetersOperations
-    :ivar connected_environments: ConnectedEnvironmentsOperations operations
-    :vartype connected_environments:
-     azure.mgmt.appcontainers.aio.operations.ConnectedEnvironmentsOperations
+    :ivar usages: UsagesOperations operations
+    :vartype usages: azure.mgmt.appcontainers.aio.operations.UsagesOperations
+    :ivar managed_environments: ManagedEnvironmentsOperations operations
+    :vartype managed_environments:
+     azure.mgmt.appcontainers.aio.operations.ManagedEnvironmentsOperations
+    :ivar container_apps_session_pools: ContainerAppsSessionPoolsOperations operations
+    :vartype container_apps_session_pools:
+     azure.mgmt.appcontainers.aio.operations.ContainerAppsSessionPoolsOperations
+    :ivar builds_by_builder_resource: BuildsByBuilderResourceOperations operations
+    :vartype builds_by_builder_resource:
+     azure.mgmt.appcontainers.aio.operations.BuildsByBuilderResourceOperations
+    :ivar builds: BuildsOperations operations
+    :vartype builds: azure.mgmt.appcontainers.aio.operations.BuildsOperations
+    :ivar build_auth_token: BuildAuthTokenOperations operations
+    :vartype build_auth_token: azure.mgmt.appcontainers.aio.operations.BuildAuthTokenOperations
     :ivar connected_environments_certificates: ConnectedEnvironmentsCertificatesOperations
      operations
     :vartype connected_environments_certificates:
@@ -87,41 +123,79 @@ class ContainerAppsAPIClient(_ContainerAppsAPIClientOperationsMixin):  # pylint:
     :ivar connected_environments_storages: ConnectedEnvironmentsStoragesOperations operations
     :vartype connected_environments_storages:
      azure.mgmt.appcontainers.aio.operations.ConnectedEnvironmentsStoragesOperations
-    :ivar container_apps: ContainerAppsOperations operations
-    :vartype container_apps: azure.mgmt.appcontainers.aio.operations.ContainerAppsOperations
-    :ivar container_apps_revisions: ContainerAppsRevisionsOperations operations
-    :vartype container_apps_revisions:
-     azure.mgmt.appcontainers.aio.operations.ContainerAppsRevisionsOperations
-    :ivar container_apps_revision_replicas: ContainerAppsRevisionReplicasOperations operations
-    :vartype container_apps_revision_replicas:
-     azure.mgmt.appcontainers.aio.operations.ContainerAppsRevisionReplicasOperations
+    :ivar container_apps_auth_configs: ContainerAppsAuthConfigsOperations operations
+    :vartype container_apps_auth_configs:
+     azure.mgmt.appcontainers.aio.operations.ContainerAppsAuthConfigsOperations
+    :ivar container_apps_builds_by_container_app: ContainerAppsBuildsByContainerAppOperations
+     operations
+    :vartype container_apps_builds_by_container_app:
+     azure.mgmt.appcontainers.aio.operations.ContainerAppsBuildsByContainerAppOperations
+    :ivar container_apps_builds: ContainerAppsBuildsOperations operations
+    :vartype container_apps_builds:
+     azure.mgmt.appcontainers.aio.operations.ContainerAppsBuildsOperations
     :ivar container_apps_diagnostics: ContainerAppsDiagnosticsOperations operations
     :vartype container_apps_diagnostics:
      azure.mgmt.appcontainers.aio.operations.ContainerAppsDiagnosticsOperations
-    :ivar managed_environment_diagnostics: ManagedEnvironmentDiagnosticsOperations operations
-    :vartype managed_environment_diagnostics:
-     azure.mgmt.appcontainers.aio.operations.ManagedEnvironmentDiagnosticsOperations
+    :ivar container_apps_functions: ContainerAppsFunctionsOperations operations
+    :vartype container_apps_functions:
+     azure.mgmt.appcontainers.aio.operations.ContainerAppsFunctionsOperations
+    :ivar container_apps_label_history: ContainerAppsLabelHistoryOperations operations
+    :vartype container_apps_label_history:
+     azure.mgmt.appcontainers.aio.operations.ContainerAppsLabelHistoryOperations
+    :ivar container_apps_patches: ContainerAppsPatchesOperations operations
+    :vartype container_apps_patches:
+     azure.mgmt.appcontainers.aio.operations.ContainerAppsPatchesOperations
+    :ivar logic_apps: LogicAppsOperations operations
+    :vartype logic_apps: azure.mgmt.appcontainers.aio.operations.LogicAppsOperations
+    :ivar app_resiliency: AppResiliencyOperations operations
+    :vartype app_resiliency: azure.mgmt.appcontainers.aio.operations.AppResiliencyOperations
+    :ivar container_apps_revisions: ContainerAppsRevisionsOperations operations
+    :vartype container_apps_revisions:
+     azure.mgmt.appcontainers.aio.operations.ContainerAppsRevisionsOperations
+    :ivar container_apps_revision_functions: ContainerAppsRevisionFunctionsOperations operations
+    :vartype container_apps_revision_functions:
+     azure.mgmt.appcontainers.aio.operations.ContainerAppsRevisionFunctionsOperations
+    :ivar functions_extension: FunctionsExtensionOperations operations
+    :vartype functions_extension:
+     azure.mgmt.appcontainers.aio.operations.FunctionsExtensionOperations
+    :ivar container_apps_revision_replicas: ContainerAppsRevisionReplicasOperations operations
+    :vartype container_apps_revision_replicas:
+     azure.mgmt.appcontainers.aio.operations.ContainerAppsRevisionReplicasOperations
+    :ivar container_apps_source_controls: ContainerAppsSourceControlsOperations operations
+    :vartype container_apps_source_controls:
+     azure.mgmt.appcontainers.aio.operations.ContainerAppsSourceControlsOperations
+    :ivar jobs_executions: JobsExecutionsOperations operations
+    :vartype jobs_executions: azure.mgmt.appcontainers.aio.operations.JobsExecutionsOperations
+    :ivar certificates: CertificatesOperations operations
+    :vartype certificates: azure.mgmt.appcontainers.aio.operations.CertificatesOperations
+    :ivar namespaces: NamespacesOperations operations
+    :vartype namespaces: azure.mgmt.appcontainers.aio.operations.NamespacesOperations
+    :ivar dapr_components: DaprComponentsOperations operations
+    :vartype dapr_components: azure.mgmt.appcontainers.aio.operations.DaprComponentsOperations
+    :ivar dapr_component_resiliency_policies: DaprComponentResiliencyPoliciesOperations operations
+    :vartype dapr_component_resiliency_policies:
+     azure.mgmt.appcontainers.aio.operations.DaprComponentResiliencyPoliciesOperations
+    :ivar dapr_subscriptions: DaprSubscriptionsOperations operations
+    :vartype dapr_subscriptions:
+     azure.mgmt.appcontainers.aio.operations.DaprSubscriptionsOperations
     :ivar managed_environments_diagnostics: ManagedEnvironmentsDiagnosticsOperations operations
     :vartype managed_environments_diagnostics:
      azure.mgmt.appcontainers.aio.operations.ManagedEnvironmentsDiagnosticsOperations
-    :ivar jobs: JobsOperations operations
-    :vartype jobs: azure.mgmt.appcontainers.aio.operations.JobsOperations
-    :ivar operations: Operations operations
-    :vartype operations: azure.mgmt.appcontainers.aio.operations.Operations
+    :ivar managed_environment_diagnostics: ManagedEnvironmentDiagnosticsOperations operations
+    :vartype managed_environment_diagnostics:
+     azure.mgmt.appcontainers.aio.operations.ManagedEnvironmentDiagnosticsOperations
+    :ivar dot_net_components: DotNetComponentsOperations operations
+    :vartype dot_net_components: azure.mgmt.appcontainers.aio.operations.DotNetComponentsOperations
+    :ivar http_route_config: HttpRouteConfigOperations operations
+    :vartype http_route_config: azure.mgmt.appcontainers.aio.operations.HttpRouteConfigOperations
     :ivar java_components: JavaComponentsOperations operations
     :vartype java_components: azure.mgmt.appcontainers.aio.operations.JavaComponentsOperations
-    :ivar jobs_executions: JobsExecutionsOperations operations
-    :vartype jobs_executions: azure.mgmt.appcontainers.aio.operations.JobsExecutionsOperations
-    :ivar managed_environments: ManagedEnvironmentsOperations operations
-    :vartype managed_environments:
-     azure.mgmt.appcontainers.aio.operations.ManagedEnvironmentsOperations
-    :ivar certificates: CertificatesOperations operations
-    :vartype certificates: azure.mgmt.appcontainers.aio.operations.CertificatesOperations
+    :ivar maintenance_configurations: MaintenanceConfigurationsOperations operations
+    :vartype maintenance_configurations:
+     azure.mgmt.appcontainers.aio.operations.MaintenanceConfigurationsOperations
     :ivar managed_certificates: ManagedCertificatesOperations operations
     :vartype managed_certificates:
      azure.mgmt.appcontainers.aio.operations.ManagedCertificatesOperations
-    :ivar namespaces: NamespacesOperations operations
-    :vartype namespaces: azure.mgmt.appcontainers.aio.operations.NamespacesOperations
     :ivar managed_environment_private_endpoint_connections:
      ManagedEnvironmentPrivateEndpointConnectionsOperations operations
     :vartype managed_environment_private_endpoint_connections:
@@ -130,40 +204,23 @@ class ContainerAppsAPIClient(_ContainerAppsAPIClientOperationsMixin):  # pylint:
      ManagedEnvironmentPrivateLinkResourcesOperations operations
     :vartype managed_environment_private_link_resources:
      azure.mgmt.appcontainers.aio.operations.ManagedEnvironmentPrivateLinkResourcesOperations
-    :ivar dapr_components: DaprComponentsOperations operations
-    :vartype dapr_components: azure.mgmt.appcontainers.aio.operations.DaprComponentsOperations
-    :ivar http_route_config: HttpRouteConfigOperations operations
-    :vartype http_route_config: azure.mgmt.appcontainers.aio.operations.HttpRouteConfigOperations
-    :ivar maintenance_configurations: MaintenanceConfigurationsOperations operations
-    :vartype maintenance_configurations:
-     azure.mgmt.appcontainers.aio.operations.MaintenanceConfigurationsOperations
     :ivar managed_environments_storages: ManagedEnvironmentsStoragesOperations operations
     :vartype managed_environments_storages:
      azure.mgmt.appcontainers.aio.operations.ManagedEnvironmentsStoragesOperations
-    :ivar container_apps_session_pools: ContainerAppsSessionPoolsOperations operations
-    :vartype container_apps_session_pools:
-     azure.mgmt.appcontainers.aio.operations.ContainerAppsSessionPoolsOperations
-    :ivar container_apps_source_controls: ContainerAppsSourceControlsOperations operations
-    :vartype container_apps_source_controls:
-     azure.mgmt.appcontainers.aio.operations.ContainerAppsSourceControlsOperations
-    :ivar usages: UsagesOperations operations
-    :vartype usages: azure.mgmt.appcontainers.aio.operations.UsagesOperations
     :ivar managed_environment_usages: ManagedEnvironmentUsagesOperations operations
     :vartype managed_environment_usages:
      azure.mgmt.appcontainers.aio.operations.ManagedEnvironmentUsagesOperations
-    :ivar logic_apps: LogicAppsOperations operations
-    :vartype logic_apps: azure.mgmt.appcontainers.aio.operations.LogicAppsOperations
     :param credential: Credential needed for the client to connect to Azure. Required.
     :type credential: ~azure.core.credentials_async.AsyncTokenCredential
-    :param subscription_id: The ID of the target subscription. Required.
+    :param subscription_id: The ID of the target subscription. The value must be an UUID. Required.
     :type subscription_id: str
     :param base_url: Service URL. Default value is None.
     :type base_url: str
     :keyword cloud_setting: The cloud setting for which to get the ARM endpoint. Default value is
      None.
     :paramtype cloud_setting: ~azure.core.AzureClouds
-    :keyword api_version: Api Version. Default value is "2025-07-01". Note that overriding this
-     default value may result in unsupported behavior.
+    :keyword api_version: Api Version. Default value is "2025-10-02-preview". Note that overriding
+     this default value may result in unsupported behavior.
     :paramtype api_version: str
     :keyword int polling_interval: Default waiting time between two polls for LRO operations if no
      Retry-After header is present.
@@ -217,16 +274,29 @@ class ContainerAppsAPIClient(_ContainerAppsAPIClientOperationsMixin):  # pylint:
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
         self._serialize.client_side_validation = False
-        self.container_apps_auth_configs = ContainerAppsAuthConfigsOperations(
+        self.operations = Operations(self._client, self._config, self._serialize, self._deserialize)
+        self.builders = BuildersOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.connected_environments = ConnectedEnvironmentsOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
+        self.container_apps = ContainerAppsOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.jobs = JobsOperations(self._client, self._config, self._serialize, self._deserialize)
         self.available_workload_profiles = AvailableWorkloadProfilesOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
         self.billing_meters = BillingMetersOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.connected_environments = ConnectedEnvironmentsOperations(
+        self.usages = UsagesOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.managed_environments = ManagedEnvironmentsOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
+        self.container_apps_session_pools = ContainerAppsSessionPoolsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.builds_by_builder_resource = BuildsByBuilderResourceOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.builds = BuildsOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.build_auth_token = BuildAuthTokenOperations(self._client, self._config, self._serialize, self._deserialize)
         self.connected_environments_certificates = ConnectedEnvironmentsCertificatesOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
@@ -236,61 +306,85 @@ class ContainerAppsAPIClient(_ContainerAppsAPIClientOperationsMixin):  # pylint:
         self.connected_environments_storages = ConnectedEnvironmentsStoragesOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
-        self.container_apps = ContainerAppsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.container_apps_revisions = ContainerAppsRevisionsOperations(
+        self.container_apps_auth_configs = ContainerAppsAuthConfigsOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
-        self.container_apps_revision_replicas = ContainerAppsRevisionReplicasOperations(
+        self.container_apps_builds_by_container_app = ContainerAppsBuildsByContainerAppOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.container_apps_builds = ContainerAppsBuildsOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
         self.container_apps_diagnostics = ContainerAppsDiagnosticsOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
-        self.managed_environment_diagnostics = ManagedEnvironmentDiagnosticsOperations(
+        self.container_apps_functions = ContainerAppsFunctionsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.container_apps_label_history = ContainerAppsLabelHistoryOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.container_apps_patches = ContainerAppsPatchesOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.logic_apps = LogicAppsOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.app_resiliency = AppResiliencyOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.container_apps_revisions = ContainerAppsRevisionsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.container_apps_revision_functions = ContainerAppsRevisionFunctionsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.functions_extension = FunctionsExtensionOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.container_apps_revision_replicas = ContainerAppsRevisionReplicasOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.container_apps_source_controls = ContainerAppsSourceControlsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.jobs_executions = JobsExecutionsOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.certificates = CertificatesOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.namespaces = NamespacesOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.dapr_components = DaprComponentsOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.dapr_component_resiliency_policies = DaprComponentResiliencyPoliciesOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.dapr_subscriptions = DaprSubscriptionsOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
         self.managed_environments_diagnostics = ManagedEnvironmentsDiagnosticsOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
-        self.jobs = JobsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.operations = Operations(self._client, self._config, self._serialize, self._deserialize)
-        self.java_components = JavaComponentsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.jobs_executions = JobsExecutionsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.managed_environments = ManagedEnvironmentsOperations(
+        self.managed_environment_diagnostics = ManagedEnvironmentDiagnosticsOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
-        self.certificates = CertificatesOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.dot_net_components = DotNetComponentsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.http_route_config = HttpRouteConfigOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.java_components = JavaComponentsOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.maintenance_configurations = MaintenanceConfigurationsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
         self.managed_certificates = ManagedCertificatesOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
-        self.namespaces = NamespacesOperations(self._client, self._config, self._serialize, self._deserialize)
         self.managed_environment_private_endpoint_connections = ManagedEnvironmentPrivateEndpointConnectionsOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
         self.managed_environment_private_link_resources = ManagedEnvironmentPrivateLinkResourcesOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
-        self.dapr_components = DaprComponentsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.http_route_config = HttpRouteConfigOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
-        self.maintenance_configurations = MaintenanceConfigurationsOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
         self.managed_environments_storages = ManagedEnvironmentsStoragesOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
-        self.container_apps_session_pools = ContainerAppsSessionPoolsOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
-        self.container_apps_source_controls = ContainerAppsSourceControlsOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
-        self.usages = UsagesOperations(self._client, self._config, self._serialize, self._deserialize)
         self.managed_environment_usages = ManagedEnvironmentUsagesOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
-        self.logic_apps = LogicAppsOperations(self._client, self._config, self._serialize, self._deserialize)
 
     def _send_request(
         self, request: HttpRequest, *, stream: bool = False, **kwargs: Any

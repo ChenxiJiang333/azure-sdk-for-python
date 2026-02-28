@@ -25,7 +25,7 @@ class TestContainerAppsAPIContainerAppsLabelHistoryOperationsAsync(AzureMgmtReco
         response = self.client.container_apps_label_history.list_label_history(
             resource_group_name=resource_group.name,
             container_app_name="str",
-            api_version="2025-02-02-preview",
+            api_version="2025-10-02-preview",
         )
         result = [r async for r in response]
         # please add some check logic here by yourself
@@ -38,7 +38,7 @@ class TestContainerAppsAPIContainerAppsLabelHistoryOperationsAsync(AzureMgmtReco
             resource_group_name=resource_group.name,
             container_app_name="str",
             label_name="str",
-            api_version="2025-02-02-preview",
+            api_version="2025-10-02-preview",
         )
 
         # please add some check logic here by yourself
@@ -51,7 +51,7 @@ class TestContainerAppsAPIContainerAppsLabelHistoryOperationsAsync(AzureMgmtReco
             resource_group_name=resource_group.name,
             container_app_name="str",
             label_name="str",
-            api_version="2025-02-02-preview",
+            api_version="2025-10-02-preview",
         )
 
         # please add some check logic here by yourself

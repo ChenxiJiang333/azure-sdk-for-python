@@ -35,10 +35,11 @@ def main():
         resource_group_name="examplerg",
         container_app_name="testcontainerApp0",
         logic_app_name="testcontainerApp0",
+        resource={"properties": {}},
     )
     print(response)
 
 
-# x-ms-original-file: specification/app/resource-manager/Microsoft.App/ContainerApps/stable/2025-07-01/examples/LogicApps_Create.json
+# x-ms-original-file: specification/app/resource-manager/Microsoft.App/ContainerApps/preview/2025-10-02-preview/examples/LogicApps_Create.json
 if __name__ == "__main__":
     main()

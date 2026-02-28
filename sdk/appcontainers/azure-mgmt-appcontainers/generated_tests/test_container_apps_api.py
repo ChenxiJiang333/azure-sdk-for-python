@@ -20,12 +20,9 @@ class TestContainerAppsAPI(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_job_execution(self, resource_group):
-        response = self.client.job_execution(
-            resource_group_name=resource_group.name,
-            job_name="str",
-            job_execution_name="str",
-            api_version="2025-07-01",
+    def test_get_custom_domain_verification_id(self, resource_group):
+        response = self.client.get_custom_domain_verification_id(
+            api_version="2025-10-02-preview",
         )
 
         # please add some check logic here by yourself
@@ -33,9 +30,12 @@ class TestContainerAppsAPI(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_get_custom_domain_verification_id(self, resource_group):
-        response = self.client.get_custom_domain_verification_id(
-            api_version="2025-07-01",
+    def test_job_execution(self, resource_group):
+        response = self.client.job_execution(
+            resource_group_name=resource_group.name,
+            job_name="str",
+            job_execution_name="str",
+            api_version="2025-10-02-preview",
         )
 
         # please add some check logic here by yourself

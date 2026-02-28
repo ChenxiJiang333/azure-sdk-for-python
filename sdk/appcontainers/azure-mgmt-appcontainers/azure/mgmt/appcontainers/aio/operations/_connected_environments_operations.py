@@ -140,7 +140,10 @@ class ConnectedEnvironmentsOperations:
 
             if response.status_code not in [200]:
                 map_error(status_code=response.status_code, response=response, error_map=error_map)
-                error = self._deserialize.failsafe_deserialize(_models.DefaultErrorResponse, pipeline_response)
+                error = self._deserialize.failsafe_deserialize(
+                    _models.DefaultErrorResponse,
+                    pipeline_response,
+                )
                 raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
             return pipeline_response
@@ -223,7 +226,10 @@ class ConnectedEnvironmentsOperations:
 
             if response.status_code not in [200]:
                 map_error(status_code=response.status_code, response=response, error_map=error_map)
-                error = self._deserialize.failsafe_deserialize(_models.DefaultErrorResponse, pipeline_response)
+                error = self._deserialize.failsafe_deserialize(
+                    _models.DefaultErrorResponse,
+                    pipeline_response,
+                )
                 raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
             return pipeline_response
@@ -278,7 +284,10 @@ class ConnectedEnvironmentsOperations:
 
         if response.status_code not in [200]:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = self._deserialize.failsafe_deserialize(_models.DefaultErrorResponse, pipeline_response)
+            error = self._deserialize.failsafe_deserialize(
+                _models.DefaultErrorResponse,
+                pipeline_response,
+            )
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
         deserialized = self._deserialize("ConnectedEnvironment", pipeline_response.http_response)
@@ -345,7 +354,10 @@ class ConnectedEnvironmentsOperations:
             except (StreamConsumedError, StreamClosedError):
                 pass
             map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = self._deserialize.failsafe_deserialize(_models.DefaultErrorResponse, pipeline_response)
+            error = self._deserialize.failsafe_deserialize(
+                _models.DefaultErrorResponse,
+                pipeline_response,
+            )
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
         response_headers = {}
@@ -353,6 +365,7 @@ class ConnectedEnvironmentsOperations:
             response_headers["Azure-AsyncOperation"] = self._deserialize(
                 "str", response.headers.get("Azure-AsyncOperation")
             )
+            response_headers["Retry-After"] = self._deserialize("int", response.headers.get("Retry-After"))
 
         deserialized = response.stream_download(self._client._pipeline, decompress=_decompress)
 
@@ -493,6 +506,153 @@ class ConnectedEnvironmentsOperations:
             self._client, raw_result, get_long_running_output, polling_method  # type: ignore
         )
 
+    @overload
+    async def update(
+        self,
+        resource_group_name: str,
+        connected_environment_name: str,
+        environment_envelope: Optional[_models.ConnectedEnvironmentPatchResource] = None,
+        *,
+        content_type: str = "application/json",
+        **kwargs: Any
+    ) -> _models.ConnectedEnvironment:
+        """Update connected Environment's properties.
+
+        Patches a Managed Environment. Only patching of tags is supported currently.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param connected_environment_name: Name of the connectedEnvironment. Required.
+        :type connected_environment_name: str
+        :param environment_envelope: Configuration details of the connectedEnvironment. Default value
+         is None.
+        :type environment_envelope: ~azure.mgmt.appcontainers.models.ConnectedEnvironmentPatchResource
+        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :return: ConnectedEnvironment or the result of cls(response)
+        :rtype: ~azure.mgmt.appcontainers.models.ConnectedEnvironment
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+
+    @overload
+    async def update(
+        self,
+        resource_group_name: str,
+        connected_environment_name: str,
+        environment_envelope: Optional[IO[bytes]] = None,
+        *,
+        content_type: str = "application/json",
+        **kwargs: Any
+    ) -> _models.ConnectedEnvironment:
+        """Update connected Environment's properties.
+
+        Patches a Managed Environment. Only patching of tags is supported currently.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param connected_environment_name: Name of the connectedEnvironment. Required.
+        :type connected_environment_name: str
+        :param environment_envelope: Configuration details of the connectedEnvironment. Default value
+         is None.
+        :type environment_envelope: IO[bytes]
+        :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :return: ConnectedEnvironment or the result of cls(response)
+        :rtype: ~azure.mgmt.appcontainers.models.ConnectedEnvironment
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+
+    @distributed_trace_async
+    async def update(
+        self,
+        resource_group_name: str,
+        connected_environment_name: str,
+        environment_envelope: Optional[Union[_models.ConnectedEnvironmentPatchResource, IO[bytes]]] = None,
+        **kwargs: Any
+    ) -> _models.ConnectedEnvironment:
+        """Update connected Environment's properties.
+
+        Patches a Managed Environment. Only patching of tags is supported currently.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param connected_environment_name: Name of the connectedEnvironment. Required.
+        :type connected_environment_name: str
+        :param environment_envelope: Configuration details of the connectedEnvironment. Is either a
+         ConnectedEnvironmentPatchResource type or a IO[bytes] type. Default value is None.
+        :type environment_envelope: ~azure.mgmt.appcontainers.models.ConnectedEnvironmentPatchResource
+         or IO[bytes]
+        :return: ConnectedEnvironment or the result of cls(response)
+        :rtype: ~azure.mgmt.appcontainers.models.ConnectedEnvironment
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        content_type = content_type if environment_envelope else None
+        cls: ClsType[_models.ConnectedEnvironment] = kwargs.pop("cls", None)
+
+        content_type = content_type or "application/json" if environment_envelope else None
+        _json = None
+        _content = None
+        if isinstance(environment_envelope, (IOBase, bytes)):
+            _content = environment_envelope
+        else:
+            if environment_envelope is not None:
+                _json = self._serialize.body(environment_envelope, "ConnectedEnvironmentPatchResource")
+            else:
+                _json = None
+
+        _request = build_update_request(
+            resource_group_name=resource_group_name,
+            connected_environment_name=connected_environment_name,
+            subscription_id=self._config.subscription_id,
+            api_version=api_version,
+            content_type=content_type,
+            json=_json,
+            content=_content,
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            error = self._deserialize.failsafe_deserialize(
+                _models.DefaultErrorResponse,
+                pipeline_response,
+            )
+            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
+
+        deserialized = self._deserialize("ConnectedEnvironment", pipeline_response.http_response)
+
+        if cls:
+            return cls(pipeline_response, deserialized, {})  # type: ignore
+
+        return deserialized  # type: ignore
+
     async def _delete_initial(
         self, resource_group_name: str, connected_environment_name: str, **kwargs: Any
     ) -> AsyncIterator[bytes]:
@@ -534,12 +694,16 @@ class ConnectedEnvironmentsOperations:
             except (StreamConsumedError, StreamClosedError):
                 pass
             map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = self._deserialize.failsafe_deserialize(_models.DefaultErrorResponse, pipeline_response)
+            error = self._deserialize.failsafe_deserialize(
+                _models.DefaultErrorResponse,
+                pipeline_response,
+            )
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
         response_headers = {}
         if response.status_code == 202:
             response_headers["Location"] = self._deserialize("str", response.headers.get("Location"))
+            response_headers["Retry-After"] = self._deserialize("int", response.headers.get("Retry-After"))
 
         deserialized = response.stream_download(self._client._pipeline, decompress=_decompress)
 
@@ -608,144 +772,6 @@ class ConnectedEnvironmentsOperations:
         return AsyncLROPoller[None](self._client, raw_result, get_long_running_output, polling_method)  # type: ignore
 
     @overload
-    async def update(
-        self,
-        resource_group_name: str,
-        connected_environment_name: str,
-        environment_envelope: _models.ConnectedEnvironmentPatchResource,
-        *,
-        content_type: str = "application/json",
-        **kwargs: Any
-    ) -> _models.ConnectedEnvironment:
-        """Update connected Environment's properties.
-
-        Patches a Managed Environment. Only patching of tags is supported currently.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param connected_environment_name: Name of the connectedEnvironment. Required.
-        :type connected_environment_name: str
-        :param environment_envelope: Configuration details of the connectedEnvironment. Required.
-        :type environment_envelope: ~azure.mgmt.appcontainers.models.ConnectedEnvironmentPatchResource
-        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
-         Default value is "application/json".
-        :paramtype content_type: str
-        :return: ConnectedEnvironment or the result of cls(response)
-        :rtype: ~azure.mgmt.appcontainers.models.ConnectedEnvironment
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-
-    @overload
-    async def update(
-        self,
-        resource_group_name: str,
-        connected_environment_name: str,
-        environment_envelope: IO[bytes],
-        *,
-        content_type: str = "application/json",
-        **kwargs: Any
-    ) -> _models.ConnectedEnvironment:
-        """Update connected Environment's properties.
-
-        Patches a Managed Environment. Only patching of tags is supported currently.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param connected_environment_name: Name of the connectedEnvironment. Required.
-        :type connected_environment_name: str
-        :param environment_envelope: Configuration details of the connectedEnvironment. Required.
-        :type environment_envelope: IO[bytes]
-        :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
-         Default value is "application/json".
-        :paramtype content_type: str
-        :return: ConnectedEnvironment or the result of cls(response)
-        :rtype: ~azure.mgmt.appcontainers.models.ConnectedEnvironment
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-
-    @distributed_trace_async
-    async def update(
-        self,
-        resource_group_name: str,
-        connected_environment_name: str,
-        environment_envelope: Union[_models.ConnectedEnvironmentPatchResource, IO[bytes]],
-        **kwargs: Any
-    ) -> _models.ConnectedEnvironment:
-        """Update connected Environment's properties.
-
-        Patches a Managed Environment. Only patching of tags is supported currently.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param connected_environment_name: Name of the connectedEnvironment. Required.
-        :type connected_environment_name: str
-        :param environment_envelope: Configuration details of the connectedEnvironment. Is either a
-         ConnectedEnvironmentPatchResource type or a IO[bytes] type. Required.
-        :type environment_envelope: ~azure.mgmt.appcontainers.models.ConnectedEnvironmentPatchResource
-         or IO[bytes]
-        :return: ConnectedEnvironment or the result of cls(response)
-        :rtype: ~azure.mgmt.appcontainers.models.ConnectedEnvironment
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        error_map: MutableMapping = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
-        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
-        cls: ClsType[_models.ConnectedEnvironment] = kwargs.pop("cls", None)
-
-        content_type = content_type or "application/json"
-        _json = None
-        _content = None
-        if isinstance(environment_envelope, (IOBase, bytes)):
-            _content = environment_envelope
-        else:
-            _json = self._serialize.body(environment_envelope, "ConnectedEnvironmentPatchResource")
-
-        _request = build_update_request(
-            resource_group_name=resource_group_name,
-            connected_environment_name=connected_environment_name,
-            subscription_id=self._config.subscription_id,
-            api_version=api_version,
-            content_type=content_type,
-            json=_json,
-            content=_content,
-            headers=_headers,
-            params=_params,
-        )
-        _request.url = self._client.format_url(_request.url)
-
-        _stream = False
-        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            _request, stream=_stream, **kwargs
-        )
-
-        response = pipeline_response.http_response
-
-        if response.status_code not in [200]:
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = self._deserialize.failsafe_deserialize(_models.DefaultErrorResponse, pipeline_response)
-            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
-
-        deserialized = self._deserialize("ConnectedEnvironment", pipeline_response.http_response)
-
-        if cls:
-            return cls(pipeline_response, deserialized, {})  # type: ignore
-
-        return deserialized  # type: ignore
-
-    @overload
     async def check_name_availability(
         self,
         resource_group_name: str,
@@ -762,7 +788,7 @@ class ConnectedEnvironmentsOperations:
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param connected_environment_name: Name of the Managed Environment. Required.
+        :param connected_environment_name: Name of the connectedEnvironment. Required.
         :type connected_environment_name: str
         :param check_name_availability_request: The check connectedEnvironmentName availability
          request. Required.
@@ -793,7 +819,7 @@ class ConnectedEnvironmentsOperations:
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param connected_environment_name: Name of the Managed Environment. Required.
+        :param connected_environment_name: Name of the connectedEnvironment. Required.
         :type connected_environment_name: str
         :param check_name_availability_request: The check connectedEnvironmentName availability
          request. Required.
@@ -821,7 +847,7 @@ class ConnectedEnvironmentsOperations:
         :param resource_group_name: The name of the resource group. The name is case insensitive.
          Required.
         :type resource_group_name: str
-        :param connected_environment_name: Name of the Managed Environment. Required.
+        :param connected_environment_name: Name of the connectedEnvironment. Required.
         :type connected_environment_name: str
         :param check_name_availability_request: The check connectedEnvironmentName availability
          request. Is either a CheckNameAvailabilityRequest type or a IO[bytes] type. Required.
@@ -876,7 +902,10 @@ class ConnectedEnvironmentsOperations:
 
         if response.status_code not in [200]:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = self._deserialize.failsafe_deserialize(_models.DefaultErrorResponse, pipeline_response)
+            error = self._deserialize.failsafe_deserialize(
+                _models.DefaultErrorResponse,
+                pipeline_response,
+            )
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
         deserialized = self._deserialize("CheckNameAvailabilityResponse", pipeline_response.http_response)

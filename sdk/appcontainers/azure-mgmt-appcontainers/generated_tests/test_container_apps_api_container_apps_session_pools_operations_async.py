@@ -23,7 +23,7 @@ class TestContainerAppsAPIContainerAppsSessionPoolsOperationsAsync(AzureMgmtReco
     @recorded_by_proxy_async
     async def test_container_apps_session_pools_list_by_subscription(self, resource_group):
         response = self.client.container_apps_session_pools.list_by_subscription(
-            api_version="2025-07-01",
+            api_version="2025-10-02-preview",
         )
         result = [r async for r in response]
         # please add some check logic here by yourself
@@ -34,7 +34,7 @@ class TestContainerAppsAPIContainerAppsSessionPoolsOperationsAsync(AzureMgmtReco
     async def test_container_apps_session_pools_list_by_resource_group(self, resource_group):
         response = self.client.container_apps_session_pools.list_by_resource_group(
             resource_group_name=resource_group.name,
-            api_version="2025-07-01",
+            api_version="2025-10-02-preview",
         )
         result = [r async for r in response]
         # please add some check logic here by yourself
@@ -46,7 +46,7 @@ class TestContainerAppsAPIContainerAppsSessionPoolsOperationsAsync(AzureMgmtReco
         response = await self.client.container_apps_session_pools.get(
             resource_group_name=resource_group.name,
             session_pool_name="str",
-            api_version="2025-07-01",
+            api_version="2025-10-02-preview",
         )
 
         # please add some check logic here by yourself
@@ -70,6 +70,25 @@ class TestContainerAppsAPIContainerAppsSessionPoolsOperationsAsync(AzureMgmtReco
                                 "env": [{"name": "str", "secretRef": "str", "value": "str"}],
                                 "image": "str",
                                 "name": "str",
+                                "probes": [
+                                    {
+                                        "failureThreshold": 0,
+                                        "httpGet": {
+                                            "port": 0,
+                                            "host": "str",
+                                            "httpHeaders": [{"name": "str", "value": "str"}],
+                                            "path": "str",
+                                            "scheme": "str",
+                                        },
+                                        "initialDelaySeconds": 0,
+                                        "periodSeconds": 0,
+                                        "successThreshold": 0,
+                                        "tcpSocket": {"port": 0, "host": "str"},
+                                        "terminationGracePeriodSeconds": 0,
+                                        "timeoutSeconds": 0,
+                                        "type": "str",
+                                    }
+                                ],
                                 "resources": {"cpu": 0.0, "memory": "str"},
                             }
                         ],
@@ -97,6 +116,11 @@ class TestContainerAppsAPIContainerAppsSessionPoolsOperationsAsync(AzureMgmtReco
                         "userAssignedIdentities": {"str": {"clientId": "str", "principalId": "str"}},
                     },
                     "managedIdentitySettings": [{"identity": "str", "lifecycle": "str"}],
+                    "mcpServerSettings": {
+                        "isMcpServerApiKeyDisabled": False,
+                        "isMcpServerEnabled": False,
+                        "mcpServerEndpoint": "str",
+                    },
                     "name": "str",
                     "nodeCount": 0,
                     "poolManagementEndpoint": "str",
@@ -114,9 +138,95 @@ class TestContainerAppsAPIContainerAppsSessionPoolsOperationsAsync(AzureMgmtReco
                         "lastModifiedByType": "str",
                     },
                     "tags": {"str": "str"},
+                    "templateUpdateStatus": {
+                        "activeTemplate": {
+                            "containers": [
+                                {
+                                    "args": ["str"],
+                                    "command": ["str"],
+                                    "env": [{"name": "str", "secretRef": "str", "value": "str"}],
+                                    "image": "str",
+                                    "name": "str",
+                                    "probes": [
+                                        {
+                                            "failureThreshold": 0,
+                                            "httpGet": {
+                                                "port": 0,
+                                                "host": "str",
+                                                "httpHeaders": [{"name": "str", "value": "str"}],
+                                                "path": "str",
+                                                "scheme": "str",
+                                            },
+                                            "initialDelaySeconds": 0,
+                                            "periodSeconds": 0,
+                                            "successThreshold": 0,
+                                            "tcpSocket": {"port": 0, "host": "str"},
+                                            "terminationGracePeriodSeconds": 0,
+                                            "timeoutSeconds": 0,
+                                            "type": "str",
+                                        }
+                                    ],
+                                    "resources": {"cpu": 0.0, "memory": "str"},
+                                }
+                            ],
+                            "createdTime": "2020-02-20 00:00:00",
+                            "details": "str",
+                            "ingress": {"targetPort": 0},
+                            "status": {
+                                "allocatedCount": 0,
+                                "crashCount": 0,
+                                "expectedCount": 0,
+                                "imagePullFailCount": 0,
+                                "pendingCount": 0,
+                                "readyCount": 0,
+                            },
+                        },
+                        "desiredTemplate": {
+                            "containers": [
+                                {
+                                    "args": ["str"],
+                                    "command": ["str"],
+                                    "env": [{"name": "str", "secretRef": "str", "value": "str"}],
+                                    "image": "str",
+                                    "name": "str",
+                                    "probes": [
+                                        {
+                                            "failureThreshold": 0,
+                                            "httpGet": {
+                                                "port": 0,
+                                                "host": "str",
+                                                "httpHeaders": [{"name": "str", "value": "str"}],
+                                                "path": "str",
+                                                "scheme": "str",
+                                            },
+                                            "initialDelaySeconds": 0,
+                                            "periodSeconds": 0,
+                                            "successThreshold": 0,
+                                            "tcpSocket": {"port": 0, "host": "str"},
+                                            "terminationGracePeriodSeconds": 0,
+                                            "timeoutSeconds": 0,
+                                            "type": "str",
+                                        }
+                                    ],
+                                    "resources": {"cpu": 0.0, "memory": "str"},
+                                }
+                            ],
+                            "createdTime": "2020-02-20 00:00:00",
+                            "details": "str",
+                            "ingress": {"targetPort": 0},
+                            "status": {
+                                "allocatedCount": 0,
+                                "crashCount": 0,
+                                "expectedCount": 0,
+                                "imagePullFailCount": 0,
+                                "pendingCount": 0,
+                                "readyCount": 0,
+                            },
+                        },
+                    },
                     "type": "str",
                 },
-                api_version="2025-07-01",
+                api_version="2025-10-02-preview",
             )
         ).result()  # call '.result()' to poll until service return final result
 
@@ -139,6 +249,25 @@ class TestContainerAppsAPIContainerAppsSessionPoolsOperationsAsync(AzureMgmtReco
                                 "env": [{"name": "str", "secretRef": "str", "value": "str"}],
                                 "image": "str",
                                 "name": "str",
+                                "probes": [
+                                    {
+                                        "failureThreshold": 0,
+                                        "httpGet": {
+                                            "port": 0,
+                                            "host": "str",
+                                            "httpHeaders": [{"name": "str", "value": "str"}],
+                                            "path": "str",
+                                            "scheme": "str",
+                                        },
+                                        "initialDelaySeconds": 0,
+                                        "periodSeconds": 0,
+                                        "successThreshold": 0,
+                                        "tcpSocket": {"port": 0, "host": "str"},
+                                        "terminationGracePeriodSeconds": 0,
+                                        "timeoutSeconds": 0,
+                                        "type": "str",
+                                    }
+                                ],
                                 "resources": {"cpu": 0.0, "memory": "str"},
                             }
                         ],
@@ -168,7 +297,7 @@ class TestContainerAppsAPIContainerAppsSessionPoolsOperationsAsync(AzureMgmtReco
                     "sessionNetworkConfiguration": {"status": "str"},
                     "tags": {"str": "str"},
                 },
-                api_version="2025-07-01",
+                api_version="2025-10-02-preview",
             )
         ).result()  # call '.result()' to poll until service return final result
 
@@ -182,9 +311,33 @@ class TestContainerAppsAPIContainerAppsSessionPoolsOperationsAsync(AzureMgmtReco
             await self.client.container_apps_session_pools.begin_delete(
                 resource_group_name=resource_group.name,
                 session_pool_name="str",
-                api_version="2025-07-01",
+                api_version="2025-10-02-preview",
             )
         ).result()  # call '.result()' to poll until service return final result
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
+    async def test_container_apps_session_pools_fetch_mcp_server_credentials(self, resource_group):
+        response = await self.client.container_apps_session_pools.fetch_mcp_server_credentials(
+            resource_group_name=resource_group.name,
+            session_pool_name="str",
+            api_version="2025-10-02-preview",
+        )
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
+    async def test_container_apps_session_pools_rotate_mcp_server_credentials(self, resource_group):
+        response = await self.client.container_apps_session_pools.rotate_mcp_server_credentials(
+            resource_group_name=resource_group.name,
+            session_pool_name="str",
+            api_version="2025-10-02-preview",
+        )
 
         # please add some check logic here by yourself
         # ...

@@ -34,11 +34,10 @@ def main():
     response = client.connected_environments.update(
         resource_group_name="examplerg",
         connected_environment_name="testenv",
-        environment_envelope={"tags": {"tag1": "value1", "tag2": "value2"}},
     )
     print(response)
 
 
-# x-ms-original-file: specification/app/resource-manager/Microsoft.App/ContainerApps/stable/2025-07-01/examples/ConnectedEnvironments_Patch.json
+# x-ms-original-file: specification/app/resource-manager/Microsoft.App/ContainerApps/preview/2025-10-02-preview/examples/ConnectedEnvironments_Patch.json
 if __name__ == "__main__":
     main()

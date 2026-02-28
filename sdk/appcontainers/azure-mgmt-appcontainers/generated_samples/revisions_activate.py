@@ -38,6 +38,6 @@ def main():
     )
 
 
-# x-ms-original-file: specification/app/resource-manager/Microsoft.App/ContainerApps/stable/2025-07-01/examples/Revisions_Activate.json
+# x-ms-original-file: specification/app/resource-manager/Microsoft.App/ContainerApps/preview/2025-10-02-preview/examples/Revisions_Activate.json
 if __name__ == "__main__":
     main()

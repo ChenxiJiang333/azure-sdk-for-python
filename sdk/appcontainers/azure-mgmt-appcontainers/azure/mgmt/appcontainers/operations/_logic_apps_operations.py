@@ -1,4 +1,4 @@
-# pylint: disable=line-too-long,useless-suppression
+# pylint: disable=line-too-long,useless-suppression,too-many-lines
 # coding=utf-8
 # --------------------------------------------------------------------------
 # Copyright (c) Microsoft Corporation. All rights reserved.
@@ -45,7 +45,7 @@ def build_get_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-07-01"))
+    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-10-02-preview"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -54,7 +54,7 @@ def build_get_request(
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/providers/Microsoft.App/logicApps/{logicAppName}",
     )
     path_format_arguments = {
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str", min_length=1),
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
         "resourceGroupName": _SERIALIZER.url(
             "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
@@ -81,7 +81,7 @@ def build_create_or_update_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-07-01"))
+    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-10-02-preview"))
     content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
     accept = _headers.pop("Accept", "application/json")
 
@@ -91,7 +91,7 @@ def build_create_or_update_request(
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/providers/Microsoft.App/logicApps/{logicAppName}",
     )
     path_format_arguments = {
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str", min_length=1),
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
         "resourceGroupName": _SERIALIZER.url(
             "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
@@ -120,7 +120,7 @@ def build_delete_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-07-01"))
+    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-10-02-preview"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -129,7 +129,7 @@ def build_delete_request(
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/providers/Microsoft.App/logicApps/{logicAppName}",
     )
     path_format_arguments = {
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str", min_length=1),
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
         "resourceGroupName": _SERIALIZER.url(
             "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
@@ -150,13 +150,137 @@ def build_delete_request(
     return HttpRequest(method="DELETE", url=_url, params=_params, headers=_headers, **kwargs)
 
 
+def build_deploy_workflow_artifacts_request(
+    resource_group_name: str, container_app_name: str, logic_app_name: str, subscription_id: str, **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-10-02-preview"))
+    content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+    accept = _headers.pop("Accept", "application/json")
+
+    # Construct URL
+    _url = kwargs.pop(
+        "template_url",
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/providers/Microsoft.App/logicApps/{logicAppName}/deployWorkflowArtifacts",
+    )
+    path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
+        "resourceGroupName": _SERIALIZER.url(
+            "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
+        ),
+        "containerAppName": _SERIALIZER.url(
+            "container_app_name", container_app_name, "str", pattern=r"^[-\w\._\(\)]+$"
+        ),
+        "logicAppName": _SERIALIZER.url("logic_app_name", logic_app_name, "str", pattern=r"^[-\w\._\(\)]+$"),
+    }
+
+    _url: str = _url.format(**path_format_arguments)  # type: ignore
+
+    # Construct parameters
+    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
+
+    # Construct headers
+    if content_type is not None:
+        _headers["Content-Type"] = _SERIALIZER.header("content_type", content_type, "str")
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(method="POST", url=_url, params=_params, headers=_headers, **kwargs)
+
+
+def build_invoke_request(
+    resource_group_name: str,
+    container_app_name: str,
+    logic_app_name: str,
+    subscription_id: str,
+    *,
+    x_ms_logic_apps_proxy_path: str,
+    x_ms_logic_apps_proxy_method: Union[str, _models.LogicAppsProxyMethod],
+    **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-10-02-preview"))
+    accept = _headers.pop("Accept", "application/json")
+
+    # Construct URL
+    _url = kwargs.pop(
+        "template_url",
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/providers/Microsoft.App/logicApps/{logicAppName}/invoke",
+    )
+    path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
+        "resourceGroupName": _SERIALIZER.url(
+            "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
+        ),
+        "containerAppName": _SERIALIZER.url(
+            "container_app_name", container_app_name, "str", pattern=r"^[-\w\._\(\)]+$"
+        ),
+        "logicAppName": _SERIALIZER.url("logic_app_name", logic_app_name, "str", pattern=r"^[-\w\._\(\)]+$"),
+    }
+
+    _url: str = _url.format(**path_format_arguments)  # type: ignore
+
+    # Construct parameters
+    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
+
+    # Construct headers
+    _headers["x-ms-logicApps-proxy-path"] = _SERIALIZER.header(
+        "x_ms_logic_apps_proxy_path", x_ms_logic_apps_proxy_path, "str"
+    )
+    _headers["x-ms-logicApps-proxy-method"] = _SERIALIZER.header(
+        "x_ms_logic_apps_proxy_method", x_ms_logic_apps_proxy_method, "str"
+    )
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(method="POST", url=_url, params=_params, headers=_headers, **kwargs)
+
+
+def build_list_workflows_connections_request(
+    resource_group_name: str, container_app_name: str, logic_app_name: str, subscription_id: str, **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-10-02-preview"))
+    accept = _headers.pop("Accept", "application/json")
+
+    # Construct URL
+    _url = kwargs.pop(
+        "template_url",
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/providers/Microsoft.App/logicApps/{logicAppName}/listWorkflowsConnections",
+    )
+    path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
+        "resourceGroupName": _SERIALIZER.url(
+            "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
+        ),
+        "containerAppName": _SERIALIZER.url(
+            "container_app_name", container_app_name, "str", pattern=r"^[-\w\._\(\)]+$"
+        ),
+        "logicAppName": _SERIALIZER.url("logic_app_name", logic_app_name, "str", pattern=r"^[-\w\._\(\)]+$"),
+    }
+
+    _url: str = _url.format(**path_format_arguments)  # type: ignore
+
+    # Construct parameters
+    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
+
+    # Construct headers
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(method="POST", url=_url, params=_params, headers=_headers, **kwargs)
+
+
 def build_list_workflows_request(
     resource_group_name: str, container_app_name: str, logic_app_name: str, subscription_id: str, **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-07-01"))
+    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-10-02-preview"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -165,7 +289,7 @@ def build_list_workflows_request(
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/providers/Microsoft.App/logicApps/{logicAppName}/workflows",
     )
     path_format_arguments = {
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str", min_length=1),
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
         "resourceGroupName": _SERIALIZER.url(
             "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
@@ -197,7 +321,7 @@ def build_get_workflow_request(
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-07-01"))
+    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-10-02-preview"))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
@@ -206,7 +330,7 @@ def build_get_workflow_request(
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/providers/Microsoft.App/logicApps/{logicAppName}/workflows/{workflowName}",
     )
     path_format_arguments = {
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str", min_length=1),
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
         "resourceGroupName": _SERIALIZER.url(
             "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
         ),
@@ -228,42 +352,6 @@ def build_get_workflow_request(
     _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
 
     return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
-
-
-def build_list_workflows_connections_request(
-    resource_group_name: str, container_app_name: str, logic_app_name: str, subscription_id: str, **kwargs: Any
-) -> HttpRequest:
-    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-07-01"))
-    accept = _headers.pop("Accept", "application/json")
-
-    # Construct URL
-    _url = kwargs.pop(
-        "template_url",
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/providers/Microsoft.App/logicApps/{logicAppName}/listWorkflowsConnections",
-    )
-    path_format_arguments = {
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str", min_length=1),
-        "resourceGroupName": _SERIALIZER.url(
-            "resource_group_name", resource_group_name, "str", max_length=90, min_length=1
-        ),
-        "containerAppName": _SERIALIZER.url(
-            "container_app_name", container_app_name, "str", pattern=r"^[-\w\._\(\)]+$"
-        ),
-        "logicAppName": _SERIALIZER.url("logic_app_name", logic_app_name, "str", pattern=r"^[-\w\._\(\)]+$"),
-    }
-
-    _url: str = _url.format(**path_format_arguments)  # type: ignore
-
-    # Construct parameters
-    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
-
-    # Construct headers
-    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
-
-    return HttpRequest(method="POST", url=_url, params=_params, headers=_headers, **kwargs)
 
 
 class LogicAppsOperations:
@@ -298,7 +386,7 @@ class LogicAppsOperations:
         :type resource_group_name: str
         :param container_app_name: Name of the Container App. Required.
         :type container_app_name: str
-        :param logic_app_name: Name of the Logic App. Required.
+        :param logic_app_name: Name of the Logic App, the extension resource. Required.
         :type logic_app_name: str
         :return: LogicApp or the result of cls(response)
         :rtype: ~azure.mgmt.appcontainers.models.LogicApp
@@ -338,7 +426,10 @@ class LogicAppsOperations:
 
         if response.status_code not in [200]:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = self._deserialize.failsafe_deserialize(_models.DefaultErrorResponse, pipeline_response)
+            error = self._deserialize.failsafe_deserialize(
+                _models.DefaultErrorResponse,
+                pipeline_response,
+            )
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
         deserialized = self._deserialize("LogicApp", pipeline_response.http_response)
@@ -354,7 +445,7 @@ class LogicAppsOperations:
         resource_group_name: str,
         container_app_name: str,
         logic_app_name: str,
-        resource: Optional[_models.LogicApp] = None,
+        resource: _models.LogicApp,
         *,
         content_type: str = "application/json",
         **kwargs: Any
@@ -366,9 +457,9 @@ class LogicAppsOperations:
         :type resource_group_name: str
         :param container_app_name: Name of the Container App. Required.
         :type container_app_name: str
-        :param logic_app_name: Name of the Logic App. Required.
+        :param logic_app_name: Name of the Logic App, the extension resource. Required.
         :type logic_app_name: str
-        :param resource: Logic app resource properties. Default value is None.
+        :param resource: Logic app resource properties. Required.
         :type resource: ~azure.mgmt.appcontainers.models.LogicApp
         :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
          Default value is "application/json".
@@ -384,7 +475,7 @@ class LogicAppsOperations:
         resource_group_name: str,
         container_app_name: str,
         logic_app_name: str,
-        resource: Optional[IO[bytes]] = None,
+        resource: IO[bytes],
         *,
         content_type: str = "application/json",
         **kwargs: Any
@@ -396,9 +487,9 @@ class LogicAppsOperations:
         :type resource_group_name: str
         :param container_app_name: Name of the Container App. Required.
         :type container_app_name: str
-        :param logic_app_name: Name of the Logic App. Required.
+        :param logic_app_name: Name of the Logic App, the extension resource. Required.
         :type logic_app_name: str
-        :param resource: Logic app resource properties. Default value is None.
+        :param resource: Logic app resource properties. Required.
         :type resource: IO[bytes]
         :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
          Default value is "application/json".
@@ -414,7 +505,7 @@ class LogicAppsOperations:
         resource_group_name: str,
         container_app_name: str,
         logic_app_name: str,
-        resource: Optional[Union[_models.LogicApp, IO[bytes]]] = None,
+        resource: Union[_models.LogicApp, IO[bytes]],
         **kwargs: Any
     ) -> _models.LogicApp:
         """Create or update a Logic App extension resource.
@@ -424,10 +515,10 @@ class LogicAppsOperations:
         :type resource_group_name: str
         :param container_app_name: Name of the Container App. Required.
         :type container_app_name: str
-        :param logic_app_name: Name of the Logic App. Required.
+        :param logic_app_name: Name of the Logic App, the extension resource. Required.
         :type logic_app_name: str
         :param resource: Logic app resource properties. Is either a LogicApp type or a IO[bytes] type.
-         Default value is None.
+         Required.
         :type resource: ~azure.mgmt.appcontainers.models.LogicApp or IO[bytes]
         :return: LogicApp or the result of cls(response)
         :rtype: ~azure.mgmt.appcontainers.models.LogicApp
@@ -446,19 +537,15 @@ class LogicAppsOperations:
 
         api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
-        content_type = content_type if resource else None
         cls: ClsType[_models.LogicApp] = kwargs.pop("cls", None)
 
-        content_type = content_type or "application/json" if resource else None
+        content_type = content_type or "application/json"
         _json = None
         _content = None
         if isinstance(resource, (IOBase, bytes)):
             _content = resource
         else:
-            if resource is not None:
-                _json = self._serialize.body(resource, "LogicApp")
-            else:
-                _json = None
+            _json = self._serialize.body(resource, "LogicApp")
 
         _request = build_create_or_update_request(
             resource_group_name=resource_group_name,
@@ -483,7 +570,10 @@ class LogicAppsOperations:
 
         if response.status_code not in [200, 201]:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = self._deserialize.failsafe_deserialize(_models.DefaultErrorResponse, pipeline_response)
+            error = self._deserialize.failsafe_deserialize(
+                _models.DefaultErrorResponse,
+                pipeline_response,
+            )
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
         deserialized = self._deserialize("LogicApp", pipeline_response.http_response)
@@ -504,7 +594,7 @@ class LogicAppsOperations:
         :type resource_group_name: str
         :param container_app_name: Name of the Container App. Required.
         :type container_app_name: str
-        :param logic_app_name: Name of the Logic App. Required.
+        :param logic_app_name: Name of the Logic App, the extension resource. Required.
         :type logic_app_name: str
         :return: None or the result of cls(response)
         :rtype: None
@@ -544,11 +634,306 @@ class LogicAppsOperations:
 
         if response.status_code not in [200, 204]:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = self._deserialize.failsafe_deserialize(_models.DefaultErrorResponse, pipeline_response)
+            error = self._deserialize.failsafe_deserialize(
+                _models.DefaultErrorResponse,
+                pipeline_response,
+            )
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
         if cls:
             return cls(pipeline_response, None, {})  # type: ignore
+
+    @overload
+    def deploy_workflow_artifacts(
+        self,
+        resource_group_name: str,
+        container_app_name: str,
+        logic_app_name: str,
+        workflow_artifacts: Optional[_models.WorkflowArtifacts] = None,
+        *,
+        content_type: str = "application/json",
+        **kwargs: Any
+    ) -> None:
+        """Creates or updates the artifacts for the logic app.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param container_app_name: Name of the Container App. Required.
+        :type container_app_name: str
+        :param logic_app_name: Name of the Logic App, the extension resource. Required.
+        :type logic_app_name: str
+        :param workflow_artifacts: Application settings and files of the workflow. Default value is
+         None.
+        :type workflow_artifacts: ~azure.mgmt.appcontainers.models.WorkflowArtifacts
+        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :return: None or the result of cls(response)
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+
+    @overload
+    def deploy_workflow_artifacts(
+        self,
+        resource_group_name: str,
+        container_app_name: str,
+        logic_app_name: str,
+        workflow_artifacts: Optional[IO[bytes]] = None,
+        *,
+        content_type: str = "application/json",
+        **kwargs: Any
+    ) -> None:
+        """Creates or updates the artifacts for the logic app.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param container_app_name: Name of the Container App. Required.
+        :type container_app_name: str
+        :param logic_app_name: Name of the Logic App, the extension resource. Required.
+        :type logic_app_name: str
+        :param workflow_artifacts: Application settings and files of the workflow. Default value is
+         None.
+        :type workflow_artifacts: IO[bytes]
+        :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :return: None or the result of cls(response)
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+
+    @distributed_trace
+    def deploy_workflow_artifacts(  # pylint: disable=inconsistent-return-statements
+        self,
+        resource_group_name: str,
+        container_app_name: str,
+        logic_app_name: str,
+        workflow_artifacts: Optional[Union[_models.WorkflowArtifacts, IO[bytes]]] = None,
+        **kwargs: Any
+    ) -> None:
+        """Creates or updates the artifacts for the logic app.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param container_app_name: Name of the Container App. Required.
+        :type container_app_name: str
+        :param logic_app_name: Name of the Logic App, the extension resource. Required.
+        :type logic_app_name: str
+        :param workflow_artifacts: Application settings and files of the workflow. Is either a
+         WorkflowArtifacts type or a IO[bytes] type. Default value is None.
+        :type workflow_artifacts: ~azure.mgmt.appcontainers.models.WorkflowArtifacts or IO[bytes]
+        :return: None or the result of cls(response)
+        :rtype: None
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        content_type = content_type if workflow_artifacts else None
+        cls: ClsType[None] = kwargs.pop("cls", None)
+
+        content_type = content_type or "application/json" if workflow_artifacts else None
+        _json = None
+        _content = None
+        if isinstance(workflow_artifacts, (IOBase, bytes)):
+            _content = workflow_artifacts
+        else:
+            if workflow_artifacts is not None:
+                _json = self._serialize.body(workflow_artifacts, "WorkflowArtifacts")
+            else:
+                _json = None
+
+        _request = build_deploy_workflow_artifacts_request(
+            resource_group_name=resource_group_name,
+            container_app_name=container_app_name,
+            logic_app_name=logic_app_name,
+            subscription_id=self._config.subscription_id,
+            api_version=api_version,
+            content_type=content_type,
+            json=_json,
+            content=_content,
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            error = self._deserialize.failsafe_deserialize(
+                _models.DefaultErrorResponse,
+                pipeline_response,
+            )
+            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
+
+        if cls:
+            return cls(pipeline_response, None, {})  # type: ignore
+
+    @distributed_trace
+    def invoke(
+        self,
+        resource_group_name: str,
+        container_app_name: str,
+        logic_app_name: str,
+        x_ms_logic_apps_proxy_path: str,
+        x_ms_logic_apps_proxy_method: Union[str, _models.LogicAppsProxyMethod],
+        **kwargs: Any
+    ) -> dict[str, Any]:
+        """Proxies a the API call to the logic app backed by the container app.
+
+        Proxies a the API call to the logic app backed by the container app.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param container_app_name: Name of the Container App. Required.
+        :type container_app_name: str
+        :param logic_app_name: Name of the Logic App, the extension resource. Required.
+        :type logic_app_name: str
+        :param x_ms_logic_apps_proxy_path: The proxy path for the API call. Required.
+        :type x_ms_logic_apps_proxy_path: str
+        :param x_ms_logic_apps_proxy_method: The proxy method for the API call. Known values are: "GET"
+         and "POST". Required.
+        :type x_ms_logic_apps_proxy_method: str or
+         ~azure.mgmt.appcontainers.models.LogicAppsProxyMethod
+        :return: dict mapping str to any or the result of cls(response)
+        :rtype: dict[str, any]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
+        cls: ClsType[dict[str, Any]] = kwargs.pop("cls", None)
+
+        _request = build_invoke_request(
+            resource_group_name=resource_group_name,
+            container_app_name=container_app_name,
+            logic_app_name=logic_app_name,
+            subscription_id=self._config.subscription_id,
+            x_ms_logic_apps_proxy_path=x_ms_logic_apps_proxy_path,
+            x_ms_logic_apps_proxy_method=x_ms_logic_apps_proxy_method,
+            api_version=api_version,
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            error = self._deserialize.failsafe_deserialize(
+                _models.DefaultErrorResponse,
+                pipeline_response,
+            )
+            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
+
+        deserialized = self._deserialize("{object}", pipeline_response.http_response)
+
+        if cls:
+            return cls(pipeline_response, deserialized, {})  # type: ignore
+
+        return deserialized  # type: ignore
+
+    @distributed_trace
+    def list_workflows_connections(
+        self, resource_group_name: str, container_app_name: str, logic_app_name: str, **kwargs: Any
+    ) -> _models.WorkflowEnvelope:
+        """Gets logic app's connections.
+
+        Gets logic app's connections.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param container_app_name: Name of the Container App. Required.
+        :type container_app_name: str
+        :param logic_app_name: Name of the Logic App, the extension resource. Required.
+        :type logic_app_name: str
+        :return: WorkflowEnvelope or the result of cls(response)
+        :rtype: ~azure.mgmt.appcontainers.models.WorkflowEnvelope
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
+        cls: ClsType[_models.WorkflowEnvelope] = kwargs.pop("cls", None)
+
+        _request = build_list_workflows_connections_request(
+            resource_group_name=resource_group_name,
+            container_app_name=container_app_name,
+            logic_app_name=logic_app_name,
+            subscription_id=self._config.subscription_id,
+            api_version=api_version,
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            error = self._deserialize.failsafe_deserialize(
+                _models.DefaultErrorResponse,
+                pipeline_response,
+            )
+            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
+
+        deserialized = self._deserialize("WorkflowEnvelope", pipeline_response.http_response)
+
+        if cls:
+            return cls(pipeline_response, deserialized, {})  # type: ignore
+
+        return deserialized  # type: ignore
 
     @distributed_trace
     def list_workflows(
@@ -563,7 +948,7 @@ class LogicAppsOperations:
         :type resource_group_name: str
         :param container_app_name: Name of the Container App. Required.
         :type container_app_name: str
-        :param logic_app_name: Name of the Logic App. Required.
+        :param logic_app_name: Name of the Logic App, the extension resource. Required.
         :type logic_app_name: str
         :return: An iterator like instance of either WorkflowEnvelope or the result of cls(response)
         :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.appcontainers.models.WorkflowEnvelope]
@@ -632,7 +1017,10 @@ class LogicAppsOperations:
 
             if response.status_code not in [200]:
                 map_error(status_code=response.status_code, response=response, error_map=error_map)
-                error = self._deserialize.failsafe_deserialize(_models.DefaultErrorResponse, pipeline_response)
+                error = self._deserialize.failsafe_deserialize(
+                    _models.DefaultErrorResponse,
+                    pipeline_response,
+                )
                 raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
             return pipeline_response
@@ -652,7 +1040,7 @@ class LogicAppsOperations:
         :type resource_group_name: str
         :param container_app_name: Name of the Container App. Required.
         :type container_app_name: str
-        :param logic_app_name: Name of the Logic App. Required.
+        :param logic_app_name: Name of the Logic App, the extension resource. Required.
         :type logic_app_name: str
         :param workflow_name: Workflow name. Required.
         :type workflow_name: str
@@ -695,70 +1083,10 @@ class LogicAppsOperations:
 
         if response.status_code not in [200]:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = self._deserialize.failsafe_deserialize(_models.DefaultErrorResponse, pipeline_response)
-            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
-
-        deserialized = self._deserialize("WorkflowEnvelope", pipeline_response.http_response)
-
-        if cls:
-            return cls(pipeline_response, deserialized, {})  # type: ignore
-
-        return deserialized  # type: ignore
-
-    @distributed_trace
-    def list_workflows_connections(
-        self, resource_group_name: str, container_app_name: str, logic_app_name: str, **kwargs: Any
-    ) -> _models.WorkflowEnvelope:
-        """Gets logic app's connections.
-
-        Gets logic app's connections.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param container_app_name: Name of the Container App. Required.
-        :type container_app_name: str
-        :param logic_app_name: Name of the Logic App. Required.
-        :type logic_app_name: str
-        :return: WorkflowEnvelope or the result of cls(response)
-        :rtype: ~azure.mgmt.appcontainers.models.WorkflowEnvelope
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        error_map: MutableMapping = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        _headers = kwargs.pop("headers", {}) or {}
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
-        cls: ClsType[_models.WorkflowEnvelope] = kwargs.pop("cls", None)
-
-        _request = build_list_workflows_connections_request(
-            resource_group_name=resource_group_name,
-            container_app_name=container_app_name,
-            logic_app_name=logic_app_name,
-            subscription_id=self._config.subscription_id,
-            api_version=api_version,
-            headers=_headers,
-            params=_params,
-        )
-        _request.url = self._client.format_url(_request.url)
-
-        _stream = False
-        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            _request, stream=_stream, **kwargs
-        )
-
-        response = pipeline_response.http_response
-
-        if response.status_code not in [200]:
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = self._deserialize.failsafe_deserialize(_models.DefaultErrorResponse, pipeline_response)
+            error = self._deserialize.failsafe_deserialize(
+                _models.DefaultErrorResponse,
+                pipeline_response,
+            )
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
         deserialized = self._deserialize("WorkflowEnvelope", pipeline_response.http_response)

@@ -31,13 +31,13 @@ def main():
         subscription_id="8efdecc5-919e-44eb-b179-915dca89ebf9",
     )
 
-    response = client.managed_environments_diagnostics.get_root(
+    response = client.managed_environments.get(
         resource_group_name="examplerg",
         environment_name="jlaw-demo1",
     )
     print(response)
 
 
-# x-ms-original-file: specification/app/resource-manager/Microsoft.App/ContainerApps/stable/2025-07-01/examples/ManagedEnvironments_Get.json
+# x-ms-original-file: specification/app/resource-manager/Microsoft.App/ContainerApps/preview/2025-10-02-preview/examples/ManagedEnvironments_Get.json
 if __name__ == "__main__":
     main()

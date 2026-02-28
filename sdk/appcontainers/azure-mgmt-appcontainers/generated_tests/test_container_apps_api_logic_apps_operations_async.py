@@ -26,7 +26,7 @@ class TestContainerAppsAPILogicAppsOperationsAsync(AzureMgmtRecordedTestCase):
             resource_group_name=resource_group.name,
             container_app_name="str",
             logic_app_name="str",
-            api_version="2025-07-01",
+            api_version="2025-10-02-preview",
         )
 
         # please add some check logic here by yourself
@@ -39,7 +39,21 @@ class TestContainerAppsAPILogicAppsOperationsAsync(AzureMgmtRecordedTestCase):
             resource_group_name=resource_group.name,
             container_app_name="str",
             logic_app_name="str",
-            api_version="2025-07-01",
+            resource={
+                "id": "str",
+                "name": "str",
+                "properties": {},
+                "systemData": {
+                    "createdAt": "2020-02-20 00:00:00",
+                    "createdBy": "str",
+                    "createdByType": "str",
+                    "lastModifiedAt": "2020-02-20 00:00:00",
+                    "lastModifiedBy": "str",
+                    "lastModifiedByType": "str",
+                },
+                "type": "str",
+            },
+            api_version="2025-10-02-preview",
         )
 
         # please add some check logic here by yourself
@@ -52,7 +66,48 @@ class TestContainerAppsAPILogicAppsOperationsAsync(AzureMgmtRecordedTestCase):
             resource_group_name=resource_group.name,
             container_app_name="str",
             logic_app_name="str",
-            api_version="2025-07-01",
+            api_version="2025-10-02-preview",
+        )
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
+    async def test_logic_apps_deploy_workflow_artifacts(self, resource_group):
+        response = await self.client.logic_apps.deploy_workflow_artifacts(
+            resource_group_name=resource_group.name,
+            container_app_name="str",
+            logic_app_name="str",
+            api_version="2025-10-02-preview",
+        )
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
+    async def test_logic_apps_invoke(self, resource_group):
+        response = await self.client.logic_apps.invoke(
+            resource_group_name=resource_group.name,
+            container_app_name="str",
+            logic_app_name="str",
+            x_ms_logic_apps_proxy_path="str",
+            x_ms_logic_apps_proxy_method="str",
+            api_version="2025-10-02-preview",
+        )
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
+    async def test_logic_apps_list_workflows_connections(self, resource_group):
+        response = await self.client.logic_apps.list_workflows_connections(
+            resource_group_name=resource_group.name,
+            container_app_name="str",
+            logic_app_name="str",
+            api_version="2025-10-02-preview",
         )
 
         # please add some check logic here by yourself
@@ -65,7 +120,7 @@ class TestContainerAppsAPILogicAppsOperationsAsync(AzureMgmtRecordedTestCase):
             resource_group_name=resource_group.name,
             container_app_name="str",
             logic_app_name="str",
-            api_version="2025-07-01",
+            api_version="2025-10-02-preview",
         )
         result = [r async for r in response]
         # please add some check logic here by yourself
@@ -79,20 +134,7 @@ class TestContainerAppsAPILogicAppsOperationsAsync(AzureMgmtRecordedTestCase):
             container_app_name="str",
             logic_app_name="str",
             workflow_name="str",
-            api_version="2025-07-01",
-        )
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_logic_apps_list_workflows_connections(self, resource_group):
-        response = await self.client.logic_apps.list_workflows_connections(
-            resource_group_name=resource_group.name,
-            container_app_name="str",
-            logic_app_name="str",
-            api_version="2025-07-01",
+            api_version="2025-10-02-preview",
         )
 
         # please add some check logic here by yourself

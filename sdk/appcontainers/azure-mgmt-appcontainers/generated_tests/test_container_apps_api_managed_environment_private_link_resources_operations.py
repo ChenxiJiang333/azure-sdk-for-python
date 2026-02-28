@@ -24,7 +24,7 @@ class TestContainerAppsAPIManagedEnvironmentPrivateLinkResourcesOperations(Azure
         response = self.client.managed_environment_private_link_resources.list(
             resource_group_name=resource_group.name,
             environment_name="str",
-            api_version="2025-07-01",
+            api_version="2025-10-02-preview",
         )
         result = [r for r in response]
         # please add some check logic here by yourself

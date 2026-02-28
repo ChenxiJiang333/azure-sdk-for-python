@@ -20,12 +20,24 @@ class TestContainerAppsAPIHttpRouteConfigOperations(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
+    def test_http_route_config_list(self, resource_group):
+        response = self.client.http_route_config.list(
+            resource_group_name=resource_group.name,
+            environment_name="str",
+            api_version="2025-10-02-preview",
+        )
+        result = [r for r in response]
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
     def test_http_route_config_get(self, resource_group):
         response = self.client.http_route_config.get(
             resource_group_name=resource_group.name,
             environment_name="str",
             http_route_name="str",
-            api_version="2025-07-01",
+            api_version="2025-10-02-preview",
         )
 
         # please add some check logic here by yourself
@@ -38,7 +50,7 @@ class TestContainerAppsAPIHttpRouteConfigOperations(AzureMgmtRecordedTestCase):
             resource_group_name=resource_group.name,
             environment_name="str",
             http_route_name="str",
-            api_version="2025-07-01",
+            api_version="2025-10-02-preview",
         )
 
         # please add some check logic here by yourself
@@ -73,7 +85,7 @@ class TestContainerAppsAPIHttpRouteConfigOperations(AzureMgmtRecordedTestCase):
                                     },
                                 }
                             ],
-                            "targets": [{"containerApp": "str", "label": "str", "revision": "str"}],
+                            "targets": [{"containerApp": "str", "label": "str", "revision": "str", "weight": 0}],
                         }
                     ],
                 },
@@ -87,7 +99,7 @@ class TestContainerAppsAPIHttpRouteConfigOperations(AzureMgmtRecordedTestCase):
                 },
                 "type": "str",
             },
-            api_version="2025-07-01",
+            api_version="2025-10-02-preview",
         )
 
         # please add some check logic here by yourself
@@ -100,20 +112,8 @@ class TestContainerAppsAPIHttpRouteConfigOperations(AzureMgmtRecordedTestCase):
             resource_group_name=resource_group.name,
             environment_name="str",
             http_route_name="str",
-            api_version="2025-07-01",
+            api_version="2025-10-02-preview",
         ).result()  # call '.result()' to poll until service return final result
 
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_http_route_config_list(self, resource_group):
-        response = self.client.http_route_config.list(
-            resource_group_name=resource_group.name,
-            environment_name="str",
-            api_version="2025-07-01",
-        )
-        result = [r for r in response]
         # please add some check logic here by yourself
         # ...

@@ -21,12 +21,24 @@ class TestContainerAppsAPIManagedCertificatesOperationsAsync(AzureMgmtRecordedTe
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
+    async def test_managed_certificates_list(self, resource_group):
+        response = self.client.managed_certificates.list(
+            resource_group_name=resource_group.name,
+            environment_name="str",
+            api_version="2025-10-02-preview",
+        )
+        result = [r async for r in response]
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
     async def test_managed_certificates_get(self, resource_group):
         response = await self.client.managed_certificates.get(
             resource_group_name=resource_group.name,
             environment_name="str",
             managed_certificate_name="str",
-            api_version="2025-07-01",
+            api_version="2025-10-02-preview",
         )
 
         # please add some check logic here by yourself
@@ -40,22 +52,9 @@ class TestContainerAppsAPIManagedCertificatesOperationsAsync(AzureMgmtRecordedTe
                 resource_group_name=resource_group.name,
                 environment_name="str",
                 managed_certificate_name="str",
-                api_version="2025-07-01",
+                api_version="2025-10-02-preview",
             )
         ).result()  # call '.result()' to poll until service return final result
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_managed_certificates_delete(self, resource_group):
-        response = await self.client.managed_certificates.delete(
-            resource_group_name=resource_group.name,
-            environment_name="str",
-            managed_certificate_name="str",
-            api_version="2025-07-01",
-        )
 
         # please add some check logic here by yourself
         # ...
@@ -68,7 +67,7 @@ class TestContainerAppsAPIManagedCertificatesOperationsAsync(AzureMgmtRecordedTe
             environment_name="str",
             managed_certificate_name="str",
             managed_certificate_envelope={"tags": {"str": "str"}},
-            api_version="2025-07-01",
+            api_version="2025-10-02-preview",
         )
 
         # please add some check logic here by yourself
@@ -76,12 +75,13 @@ class TestContainerAppsAPIManagedCertificatesOperationsAsync(AzureMgmtRecordedTe
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_managed_certificates_list(self, resource_group):
-        response = self.client.managed_certificates.list(
+    async def test_managed_certificates_delete(self, resource_group):
+        response = await self.client.managed_certificates.delete(
             resource_group_name=resource_group.name,
             environment_name="str",
-            api_version="2025-07-01",
+            managed_certificate_name="str",
+            api_version="2025-10-02-preview",
         )
-        result = [r async for r in response]
+
         # please add some check logic here by yourself
         # ...

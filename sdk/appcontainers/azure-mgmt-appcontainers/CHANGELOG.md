@@ -1,5 +1,86 @@
 # Release History
 
+## 5.0.0b1 (2026-02-28)
+
+### Features Added
+
+  - Added operation ContainerAppsSessionPoolsOperations.fetch_mcp_server_credentials
+  - Added operation ContainerAppsSessionPoolsOperations.rotate_mcp_server_credentials
+  - Added operation JobsOperations.begin_resume
+  - Added operation JobsOperations.begin_suspend
+  - Added operation LogicAppsOperations.deploy_workflow_artifacts
+  - Added operation LogicAppsOperations.invoke
+  - Added operation group AppResiliencyOperations
+  - Added operation group BuildAuthTokenOperations
+  - Added operation group BuildersOperations
+  - Added operation group BuildsByBuilderResourceOperations
+  - Added operation group BuildsOperations
+  - Added operation group ContainerAppsBuildsByContainerAppOperations
+  - Added operation group ContainerAppsBuildsOperations
+  - Added operation group ContainerAppsFunctionsOperations
+  - Added operation group ContainerAppsLabelHistoryOperations
+  - Added operation group ContainerAppsPatchesOperations
+  - Added operation group ContainerAppsRevisionFunctionsOperations
+  - Added operation group DaprComponentResiliencyPoliciesOperations
+  - Added operation group DaprSubscriptionsOperations
+  - Added operation group DotNetComponentsOperations
+  - Added operation group FunctionsExtensionOperations
+  - Model BaseContainer has a new parameter image_type
+  - Model BlobStorageTokenStore has a new parameter blob_container_uri
+  - Model BlobStorageTokenStore has a new parameter client_id
+  - Model BlobStorageTokenStore has a new parameter managed_identity_resource_id
+  - Model CertificateProperties has a new parameter certificate_type
+  - Model Configuration has a new parameter revision_transition_threshold
+  - Model Configuration has a new parameter target_label
+  - Model ConnectedEnvironmentStorageProperties has a new parameter smb
+  - Model Container has a new parameter image_type
+  - Model ContainerApp has a new parameter deployment_errors
+  - Model ContainerApp has a new parameter patching_configuration
+  - Model ContainerResources has a new parameter gpu
+  - Model DaprComponent has a new parameter service_component_bind
+  - Model GithubActionConfiguration has a new parameter build_environment_variables
+  - Model GithubActionConfiguration has a new parameter dockerfile_path
+  - Model HttpRouteTarget has a new parameter weight
+  - Model Ingress has a new parameter target_port_http_scheme
+  - Model InitContainer has a new parameter image_type
+  - Model Job has a new parameter extended_location
+  - Model Job has a new parameter running_state
+  - Model JobExecution has a new parameter detailed_status
+  - Model JobExecution has a new parameter message
+  - Model JobExecution has a new parameter reason
+  - Model JobExecution has a new parameter system_data
+  - Model JobPatchProperties has a new parameter extended_location
+  - Model LogAnalyticsConfiguration has a new parameter dynamic_json_columns
+  - Model LogicApp has a new parameter properties
+  - Model ManagedEnvironment has a new parameter app_insights_configuration
+  - Model ManagedEnvironment has a new parameter availability_zones
+  - Model ManagedEnvironment has a new parameter disk_encryption_configuration
+  - Model ManagedEnvironment has a new parameter open_telemetry_configuration
+  - Model ManagedEnvironment has a new parameter private_link_default_domain
+  - Model ReplicaContainer has a new parameter debug_endpoint
+  - Model Revision has a new parameter labels
+  - Model Runtime has a new parameter dotnet
+  - Model RuntimeJava has a new parameter java_agent
+  - Model ServiceBind has a new parameter client_type
+  - Model ServiceBind has a new parameter customized_keys
+  - Model SessionContainer has a new parameter probes
+  - Model SessionPool has a new parameter mcp_server_settings
+  - Model SessionPool has a new parameter template_update_status
+  - Model WorkloadProfile has a new parameter enable_fips
+  - Operation ContainerAppsSourceControlsOperations.begin_create_or_update has a new optional parameter x_ms_github_auxiliary
+  - Operation ContainerAppsSourceControlsOperations.begin_delete has a new optional parameter delete_workflow
+  - Operation ContainerAppsSourceControlsOperations.begin_delete has a new optional parameter ignore_workflow_deletion_failure
+  - Operation ContainerAppsSourceControlsOperations.begin_delete has a new optional parameter x_ms_github_auxiliary
+
+### Breaking Changes
+
+  - Parameter value of model AvailableOperations is now required
+  - Parameter value of model ConnectedEnvironmentCollection is now required
+  - Parameter value of model ListUsagesResult is now required
+  - Parameter value of model MaintenanceConfigurationCollection is now required
+  - Parameter value of model PrivateEndpointConnectionListResult is now required
+  - Parameter value of model PrivateLinkResourceListResult is now required
+
 ## 4.0.0 (2025-10-24)
 
 ### Features Added

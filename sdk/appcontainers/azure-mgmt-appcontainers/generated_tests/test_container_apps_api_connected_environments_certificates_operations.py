@@ -24,7 +24,7 @@ class TestContainerAppsAPIConnectedEnvironmentsCertificatesOperations(AzureMgmtR
         response = self.client.connected_environments_certificates.list(
             resource_group_name=resource_group.name,
             connected_environment_name="str",
-            api_version="2025-07-01",
+            api_version="2025-10-02-preview",
         )
         result = [r for r in response]
         # please add some check logic here by yourself
@@ -37,7 +37,7 @@ class TestContainerAppsAPIConnectedEnvironmentsCertificatesOperations(AzureMgmtR
             resource_group_name=resource_group.name,
             connected_environment_name="str",
             certificate_name="str",
-            api_version="2025-07-01",
+            api_version="2025-10-02-preview",
         )
 
         # please add some check logic here by yourself
@@ -50,20 +50,7 @@ class TestContainerAppsAPIConnectedEnvironmentsCertificatesOperations(AzureMgmtR
             resource_group_name=resource_group.name,
             connected_environment_name="str",
             certificate_name="str",
-            api_version="2025-07-01",
-        ).result()  # call '.result()' to poll until service return final result
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_connected_environments_certificates_begin_delete(self, resource_group):
-        response = self.client.connected_environments_certificates.begin_delete(
-            resource_group_name=resource_group.name,
-            connected_environment_name="str",
-            certificate_name="str",
-            api_version="2025-07-01",
+            api_version="2025-10-02-preview",
         ).result()  # call '.result()' to poll until service return final result
 
         # please add some check logic here by yourself
@@ -77,7 +64,20 @@ class TestContainerAppsAPIConnectedEnvironmentsCertificatesOperations(AzureMgmtR
             connected_environment_name="str",
             certificate_name="str",
             certificate_envelope={"tags": {"str": "str"}},
-            api_version="2025-07-01",
+            api_version="2025-10-02-preview",
+        ).result()  # call '.result()' to poll until service return final result
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
+    def test_connected_environments_certificates_begin_delete(self, resource_group):
+        response = self.client.connected_environments_certificates.begin_delete(
+            resource_group_name=resource_group.name,
+            connected_environment_name="str",
+            certificate_name="str",
+            api_version="2025-10-02-preview",
         ).result()  # call '.result()' to poll until service return final result
 
         # please add some check logic here by yourself
