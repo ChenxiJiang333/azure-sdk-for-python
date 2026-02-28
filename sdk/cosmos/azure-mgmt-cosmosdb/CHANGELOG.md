@@ -1,5 +1,9 @@
 ## tsp migration
 
+## 10.0.0b6 (2026-02-28)
+
+change log generation failed!!! You need to write it manually!!!
+
 ### Breaking Changes
 
 - Deleted or renamed model `AccessRulePropertiesSubscriptionsItem`
