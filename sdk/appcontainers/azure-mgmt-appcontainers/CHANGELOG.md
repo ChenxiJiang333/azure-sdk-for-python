@@ -1,8 +1,220 @@
+## tsp migration
+
+### Breaking Changes
+
+- Deleted or renamed client method `ContainerAppsAPIClient.job_execution`
+- Method `BaseContainer.__init__` removed default value `None` from its parameter `args`
+- Method `BaseContainer.__init__` changed its parameter `args` from `keyword_only` to `var_positional`
+- Method `Container.__init__` removed default value `None` from its parameter `args`
+- Method `Container.__init__` changed its parameter `args` from `keyword_only` to `var_positional`
+- Method `InitContainer.__init__` removed default value `None` from its parameter `args`
+- Method `InitContainer.__init__` changed its parameter `args` from `keyword_only` to `var_positional`
+- Method `JobExecutionContainer.__init__` removed default value `None` from its parameter `args`
+- Method `JobExecutionContainer.__init__` changed its parameter `args` from `keyword_only` to `var_positional`
+- Method `SessionContainer.__init__` removed default value `None` from its parameter `args`
+- Method `SessionContainer.__init__` changed its parameter `args` from `keyword_only` to `var_positional`
+- Deleted or renamed operation group `AvailableOperations`
+- Deleted or renamed model `RuntimeJavaAgent`
+- Deleted or renamed model `RuntimeJavaAgentLogging`
+
+- Method `ConnectedEnvironmentsDaprComponentsOperations.list_secrets` changed from `asynchronous` to `synchronous`
+- Method `ConnectedEnvironmentsStoragesOperations.list` changed from `asynchronous` to `synchronous`
+- Method `ContainerAppsOperations.list_secrets` changed from `asynchronous` to `synchronous`
+- Method `ContainerAppsRevisionReplicasOperations.list_replicas` changed from `asynchronous` to `synchronous`
+- Method `DaprComponentsOperations.list_secrets` changed from `asynchronous` to `synchronous`
+- Method `JobsOperations.list_secrets` changed from `asynchronous` to `synchronous`
+- Method `ManagedEnvironmentsStoragesOperations.list` changed from `asynchronous` to `synchronous`
+- Model `AppResiliency` deleted or renamed its instance variable `timeout_policy`
+- Model `AppResiliency` deleted or renamed its instance variable `http_retry_policy`
+- Model `AppResiliency` deleted or renamed its instance variable `tcp_retry_policy`
+- Model `AppResiliency` deleted or renamed its instance variable `circuit_breaker_policy`
+- Model `AppResiliency` deleted or renamed its instance variable `http_connection_pool`
+- Model `AppResiliency` deleted or renamed its instance variable `tcp_connection_pool`
+- Model `AuthConfig` deleted or renamed its instance variable `platform`
+- Model `AuthConfig` deleted or renamed its instance variable `global_validation`
+- Model `AuthConfig` deleted or renamed its instance variable `identity_providers`
+- Model `AuthConfig` deleted or renamed its instance variable `login`
+- Model `AuthConfig` deleted or renamed its instance variable `http_settings`
+- Model `AuthConfig` deleted or renamed its instance variable `encryption_settings`
+- Model `BuildResource` deleted or renamed its instance variable `provisioning_state`
+- Model `BuildResource` deleted or renamed its instance variable `build_status`
+- Model `BuildResource` deleted or renamed its instance variable `destination_container_registry`
+- Model `BuildResource` deleted or renamed its instance variable `configuration`
+- Model `BuildResource` deleted or renamed its instance variable `upload_endpoint`
+- Model `BuildResource` deleted or renamed its instance variable `log_stream_endpoint`
+- Model `BuildResource` deleted or renamed its instance variable `token_endpoint`
+- Model `BuilderResource` deleted or renamed its instance variable `provisioning_state`
+- Model `BuilderResource` deleted or renamed its instance variable `environment_id`
+- Model `BuilderResource` deleted or renamed its instance variable `container_registries`
+- Model `BuilderResourceUpdate` deleted or renamed its instance variable `environment_id`
+- Model `ConnectedEnvironment` deleted or renamed its instance variable `provisioning_state`
+- Model `ConnectedEnvironment` deleted or renamed its instance variable `deployment_errors`
+- Model `ConnectedEnvironment` deleted or renamed its instance variable `default_domain`
+- Model `ConnectedEnvironment` deleted or renamed its instance variable `static_ip`
+- Model `ConnectedEnvironment` deleted or renamed its instance variable `dapr_ai_connection_string`
+- Model `ConnectedEnvironment` deleted or renamed its instance variable `custom_domain_configuration`
+- Model `ContainerApp` deleted or renamed its instance variable `provisioning_state`
+- Model `ContainerApp` deleted or renamed its instance variable `running_status`
+- Model `ContainerApp` deleted or renamed its instance variable `deployment_errors`
+- Model `ContainerApp` deleted or renamed its instance variable `managed_environment_id`
+- Model `ContainerApp` deleted or renamed its instance variable `environment_id`
+- Model `ContainerApp` deleted or renamed its instance variable `workload_profile_name`
+- Model `ContainerApp` deleted or renamed its instance variable `patching_configuration`
+- Model `ContainerApp` deleted or renamed its instance variable `latest_revision_name`
+- Model `ContainerApp` deleted or renamed its instance variable `latest_ready_revision_name`
+- Model `ContainerApp` deleted or renamed its instance variable `latest_revision_fqdn`
+- Model `ContainerApp` deleted or renamed its instance variable `custom_domain_verification_id`
+- Model `ContainerApp` deleted or renamed its instance variable `configuration`
+- Model `ContainerApp` deleted or renamed its instance variable `template`
+- Model `ContainerApp` deleted or renamed its instance variable `outbound_ip_addresses`
+- Model `ContainerApp` deleted or renamed its instance variable `event_stream_endpoint`
+- Model `ContainerAppAuthToken` deleted or renamed its instance variable `token`
+- Model `ContainerAppAuthToken` deleted or renamed its instance variable `expires`
+- Model `ContainerAppsBuildResource` deleted or renamed its instance variable `provisioning_state`
+- Model `ContainerAppsBuildResource` deleted or renamed its instance variable `build_status`
+- Model `ContainerAppsBuildResource` deleted or renamed its instance variable `destination_container_registry`
+- Model `ContainerAppsBuildResource` deleted or renamed its instance variable `configuration`
+- Model `ContainerAppsBuildResource` deleted or renamed its instance variable `log_stream_endpoint`
+- Model `ContainerAppsFunction` deleted or renamed its instance variable `invoke_url_template`
+- Model `ContainerAppsFunction` deleted or renamed its instance variable `trigger_type`
+- Model `ContainerAppsFunction` deleted or renamed its instance variable `language`
+- Model `ContainerAppsFunction` deleted or renamed its instance variable `is_disabled`
+- Model `DaprComponent` deleted or renamed its instance variable `component_type`
+- Model `DaprComponent` deleted or renamed its instance variable `version`
+- Model `DaprComponent` deleted or renamed its instance variable `ignore_errors`
+- Model `DaprComponent` deleted or renamed its instance variable `init_timeout`
+- Model `DaprComponent` deleted or renamed its instance variable `secrets`
+- Model `DaprComponent` deleted or renamed its instance variable `secret_store_component`
+- Model `DaprComponent` deleted or renamed its instance variable `metadata`
+- Model `DaprComponent` deleted or renamed its instance variable `scopes`
+- Model `DaprComponent` deleted or renamed its instance variable `service_component_bind`
+- Model `DaprComponent` deleted or renamed its instance variable `provisioning_state`
+- Model `DaprComponent` deleted or renamed its instance variable `deployment_errors`
+- Model `DaprComponentResiliencyPolicy` deleted or renamed its instance variable `inbound_policy`
+- Model `DaprComponentResiliencyPolicy` deleted or renamed its instance variable `outbound_policy`
+- Model `DaprSubscription` deleted or renamed its instance variable `pubsub_name`
+- Model `DaprSubscription` deleted or renamed its instance variable `topic`
+- Model `DaprSubscription` deleted or renamed its instance variable `dead_letter_topic`
+- Model `DaprSubscription` deleted or renamed its instance variable `routes`
+- Model `DaprSubscription` deleted or renamed its instance variable `scopes`
+- Model `DaprSubscription` deleted or renamed its instance variable `metadata`
+- Model `DaprSubscription` deleted or renamed its instance variable `bulk_subscribe`
+- Model `DotNetComponent` deleted or renamed its instance variable `component_type`
+- Model `DotNetComponent` deleted or renamed its instance variable `provisioning_state`
+- Model `DotNetComponent` deleted or renamed its instance variable `configurations`
+- Model `DotNetComponent` deleted or renamed its instance variable `service_binds`
+- Model `EnvironmentAuthToken` deleted or renamed its instance variable `token`
+- Model `EnvironmentAuthToken` deleted or renamed its instance variable `expires`
+- Model `HeaderMatch` deleted or renamed its instance variable `exact_match`
+- Model `HeaderMatch` deleted or renamed its instance variable `prefix_match`
+- Model `HeaderMatch` deleted or renamed its instance variable `suffix_match`
+- Model `HeaderMatch` deleted or renamed its instance variable `regex_match`
+- Model `HttpRetryPolicy` deleted or renamed its instance variable `headers`
+- Model `HttpRetryPolicy` deleted or renamed its instance variable `http_status_codes`
+- Model `HttpRetryPolicy` deleted or renamed its instance variable `errors`
+- Model `HttpRetryPolicy` deleted or renamed its instance variable `initial_delay_in_milliseconds`
+- Model `HttpRetryPolicy` deleted or renamed its instance variable `max_interval_in_milliseconds`
+- Model `Job` deleted or renamed its instance variable `provisioning_state`
+- Model `Job` deleted or renamed its instance variable `running_state`
+- Model `Job` deleted or renamed its instance variable `environment_id`
+- Model `Job` deleted or renamed its instance variable `workload_profile_name`
+- Model `Job` deleted or renamed its instance variable `configuration`
+- Model `Job` deleted or renamed its instance variable `template`
+- Model `Job` deleted or renamed its instance variable `outbound_ip_addresses`
+- Model `Job` deleted or renamed its instance variable `event_stream_endpoint`
+- Model `JobExecution` deleted or renamed its instance variable `status`
+- Model `JobExecution` deleted or renamed its instance variable `start_time`
+- Model `JobExecution` deleted or renamed its instance variable `end_time`
+- Model `JobExecution` deleted or renamed its instance variable `template`
+- Model `JobExecution` deleted or renamed its instance variable `detailed_status`
+- Model `JobExecution` deleted or renamed its instance variable `reason`
+- Model `JobExecution` deleted or renamed its instance variable `message`
+- Model `MaintenanceConfigurationResource` deleted or renamed its instance variable `scheduled_entries`
+- Model `ManagedEnvironment` deleted or renamed its instance variable `provisioning_state`
+- Model `ManagedEnvironment` deleted or renamed its instance variable `dapr_ai_instrumentation_key`
+- Model `ManagedEnvironment` deleted or renamed its instance variable `dapr_ai_connection_string`
+- Model `ManagedEnvironment` deleted or renamed its instance variable `vnet_configuration`
+- Model `ManagedEnvironment` deleted or renamed its instance variable `deployment_errors`
+- Model `ManagedEnvironment` deleted or renamed its instance variable `default_domain`
+- Model `ManagedEnvironment` deleted or renamed its instance variable `private_link_default_domain`
+- Model `ManagedEnvironment` deleted or renamed its instance variable `static_ip`
+- Model `ManagedEnvironment` deleted or renamed its instance variable `app_logs_configuration`
+- Model `ManagedEnvironment` deleted or renamed its instance variable `app_insights_configuration`
+- Model `ManagedEnvironment` deleted or renamed its instance variable `open_telemetry_configuration`
+- Model `ManagedEnvironment` deleted or renamed its instance variable `zone_redundant`
+- Model `ManagedEnvironment` deleted or renamed its instance variable `availability_zones`
+- Model `ManagedEnvironment` deleted or renamed its instance variable `custom_domain_configuration`
+- Model `ManagedEnvironment` deleted or renamed its instance variable `event_stream_endpoint`
+- Model `ManagedEnvironment` deleted or renamed its instance variable `workload_profiles`
+- Model `ManagedEnvironment` deleted or renamed its instance variable `keda_configuration`
+- Model `ManagedEnvironment` deleted or renamed its instance variable `dapr_configuration`
+- Model `ManagedEnvironment` deleted or renamed its instance variable `infrastructure_resource_group`
+- Model `ManagedEnvironment` deleted or renamed its instance variable `peer_authentication`
+- Model `ManagedEnvironment` deleted or renamed its instance variable `peer_traffic_configuration`
+- Model `ManagedEnvironment` deleted or renamed its instance variable `ingress_configuration`
+- Model `ManagedEnvironment` deleted or renamed its instance variable `private_endpoint_connections`
+- Model `ManagedEnvironment` deleted or renamed its instance variable `public_network_access`
+- Model `ManagedEnvironment` deleted or renamed its instance variable `disk_encryption_configuration`
+- Model `PrivateEndpointConnection` deleted or renamed its instance variable `group_ids`
+- Model `PrivateEndpointConnection` deleted or renamed its instance variable `private_endpoint`
+- Model `PrivateEndpointConnection` deleted or renamed its instance variable `private_link_service_connection_state`
+- Model `PrivateEndpointConnection` deleted or renamed its instance variable `provisioning_state`
+- Model `PrivateLinkResource` deleted or renamed its instance variable `group_id`
+- Model `PrivateLinkResource` deleted or renamed its instance variable `required_members`
+- Model `PrivateLinkResource` deleted or renamed its instance variable `required_zone_names`
+- Model `Replica` deleted or renamed its instance variable `created_time`
+- Model `Replica` deleted or renamed its instance variable `running_state`
+- Model `Replica` deleted or renamed its instance variable `running_state_details`
+- Model `Replica` deleted or renamed its instance variable `containers`
+- Model `Replica` deleted or renamed its instance variable `init_containers`
+- Model `Revision` deleted or renamed its instance variable `created_time`
+- Model `Revision` deleted or renamed its instance variable `last_active_time`
+- Model `Revision` deleted or renamed its instance variable `fqdn`
+- Model `Revision` deleted or renamed its instance variable `template`
+- Model `Revision` deleted or renamed its instance variable `active`
+- Model `Revision` deleted or renamed its instance variable `replicas`
+- Model `Revision` deleted or renamed its instance variable `traffic_weight`
+- Model `Revision` deleted or renamed its instance variable `labels`
+- Model `Revision` deleted or renamed its instance variable `provisioning_error`
+- Model `Revision` deleted or renamed its instance variable `health_state`
+- Model `Revision` deleted or renamed its instance variable `provisioning_state`
+- Model `Revision` deleted or renamed its instance variable `running_state`
+- Model `SessionPool` deleted or renamed its instance variable `environment_id`
+- Model `SessionPool` deleted or renamed its instance variable `container_type`
+- Model `SessionPool` deleted or renamed its instance variable `pool_management_type`
+- Model `SessionPool` deleted or renamed its instance variable `node_count`
+- Model `SessionPool` deleted or renamed its instance variable `scale_configuration`
+- Model `SessionPool` deleted or renamed its instance variable `secrets`
+- Model `SessionPool` deleted or renamed its instance variable `dynamic_pool_configuration`
+- Model `SessionPool` deleted or renamed its instance variable `custom_container_template`
+- Model `SessionPool` deleted or renamed its instance variable `session_network_configuration`
+- Model `SessionPool` deleted or renamed its instance variable `template_update_status`
+- Model `SessionPool` deleted or renamed its instance variable `pool_management_endpoint`
+- Model `SessionPool` deleted or renamed its instance variable `provisioning_state`
+- Model `SessionPool` deleted or renamed its instance variable `managed_identity_settings`
+- Model `SessionPool` deleted or renamed its instance variable `mcp_server_settings`
+- Model `SessionPoolUpdatableProperties` deleted or renamed its instance variable `scale_configuration`
+- Model `SessionPoolUpdatableProperties` deleted or renamed its instance variable `secrets`
+- Model `SessionPoolUpdatableProperties` deleted or renamed its instance variable `dynamic_pool_configuration`
+- Model `SessionPoolUpdatableProperties` deleted or renamed its instance variable `custom_container_template`
+- Model `SessionPoolUpdatableProperties` deleted or renamed its instance variable `session_network_configuration`
+- Model `SourceControl` deleted or renamed its instance variable `operation_state`
+- Model `SourceControl` deleted or renamed its instance variable `repo_url`
+- Model `SourceControl` deleted or renamed its instance variable `branch`
+- Model `SourceControl` deleted or renamed its instance variable `github_action_configuration`
+- Method `ContainerAppsOperations.list_custom_host_name_analysis` changed its parameter `custom_hostname` from `positional_or_keyword` to `keyword_only`
+- Method `ContainerAppsSourceControlsOperations.begin_create_or_update` changed its parameter `x_ms_github_auxiliary` from `positional_or_keyword` to `keyword_only`
+- Method `ContainerAppsSourceControlsOperations.begin_delete` changed its parameter `x_ms_github_auxiliary` from `positional_or_keyword` to `keyword_only`
+- Method `ContainerAppsSourceControlsOperations.begin_delete` changed its parameter `ignore_workflow_deletion_failure` from `positional_or_keyword` to `keyword_only`
+- Method `ContainerAppsSourceControlsOperations.begin_delete` changed its parameter `delete_workflow` from `positional_or_keyword` to `keyword_only`
+- Method `LogicAppsOperations.invoke` changed its parameter `x_ms_logic_apps_proxy_path` from `positional_or_keyword` to `keyword_only`
+- Method `LogicAppsOperations.invoke` changed its parameter `x_ms_logic_apps_proxy_method` from `positional_or_keyword` to `keyword_only`
+
+### Other Changes
+
+- Deleted model `AppResiliencyCollection`/`AuthConfigCollection`/`AvailableWorkloadProfilesCollection`/`BuildCollection`/`BuilderCollection`/`CertificateCollection`/`ConnectedEnvironmentCollection`/`ConnectedEnvironmentStoragesCollection`/`ContainerAppCollection`/`ContainerAppsBuildCollection`/`ContainerAppsFunctionCollection`/`DaprComponentResiliencyPoliciesCollection`/`DaprComponentsCollection`/`DaprSecretsCollection`/`DaprSubscriptionsCollection`/`DotNetComponentsCollection`/`HttpRouteConfigCollection`/`JavaComponentsCollection`/`JobSecretsCollection`/`JobsCollection`/`LabelHistoryCollection`/`ListUsagesResult`/`MaintenanceConfigurationCollection`/`ManagedCertificateCollection`/`ManagedEnvironmentStoragesCollection`/`ManagedEnvironmentsCollection`/`PatchCollection`/`ReplicaCollection`/`RevisionCollection`/`SecretsCollection`/`SessionPoolCollection`/`SourceControlCollection`/`WorkflowEnvelopeCollection`/`WorkloadProfileStatesCollection` which actually were not used by SDK users
+
 # Release History
-
-## 4.1.0b1 (2026-02-28)
-
-change log generation failed!!! You need to write it manually!!!
 
 ## 5.0.0b1 (2026-02-28)
 
