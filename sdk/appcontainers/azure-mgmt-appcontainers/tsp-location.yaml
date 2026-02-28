@@ -1,0 +1,4 @@
+directory: specification/app/App.Management
+commit: 4bfc655990e8d4a907bff060fba67183a43a862a
+repo: Azure/azure-rest-api-specs
+additionalDirectories: 
