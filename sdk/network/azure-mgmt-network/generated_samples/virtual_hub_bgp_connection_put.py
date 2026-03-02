@@ -28,7 +28,7 @@ from azure.mgmt.network import NetworkManagementClient
 def main():
     client = NetworkManagementClient(
         credential=DefaultAzureCredential(),
-        subscription_id="subid",
+        subscription_id="00000000-0000-0000-0000-000000000000",
     )
 
     response = client.virtual_hub_bgp_connection.begin_create_or_update(
@@ -38,7 +38,7 @@ def main():
         parameters={
             "properties": {
                 "hubVirtualNetworkConnection": {
-                    "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/hub1/hubVirtualNetworkConnections/hubVnetConn1"
+                    "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/hub1/hubVirtualNetworkConnections/hubVnetConn1"
                 },
                 "peerAsn": 20000,
                 "peerIp": "192.168.1.5",
@@ -48,6 +48,6 @@ def main():
     print(response)
 
 
-# x-ms-original-file: specification/network/resource-manager/Microsoft.Network/stable/2025-05-01/examples/VirtualHubBgpConnectionPut.json
+# x-ms-original-file: specification/network/resource-manager/Microsoft.Network/Network/stable/2025-05-01/examples/VirtualHubBgpConnectionPut.json
 if __name__ == "__main__":
     main()

@@ -21,13 +21,22 @@ class TestNetworkManagementServiceGatewaysOperations(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_service_gateways_begin_delete(self, resource_group):
-        response = self.client.service_gateways.begin_delete(
-            resource_group_name=resource_group.name,
-            service_gateway_name="str",
+    def test_service_gateways_list_all(self, resource_group):
+        response = self.client.service_gateways.list_all(
             api_version="2025-05-01",
-        ).result()  # call '.result()' to poll until service return final result
+        )
+        result = [r for r in response]
+        # please add some check logic here by yourself
+        # ...
 
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
+    def test_service_gateways_list(self, resource_group):
+        response = self.client.service_gateways.list(
+            resource_group_name=resource_group.name,
+            api_version="2025-05-01",
+        )
+        result = [r for r in response]
         # please add some check logic here by yourself
         # ...
 
@@ -576,7 +585,7 @@ class TestNetworkManagementServiceGatewaysOperations(AzureMgmtRecordedTestCase):
                                                 "type": "str",
                                             }
                                         ],
-                                        "ipVersionType": "IPv4",
+                                        "ipVersionType": "str",
                                         "location": "str",
                                         "manualPrivateLinkServiceConnections": [
                                             {
@@ -763,7 +772,7 @@ class TestNetworkManagementServiceGatewaysOperations(AzureMgmtRecordedTestCase):
                                                             "type": "str",
                                                         }
                                                     ],
-                                                    "ipVersionType": "IPv4",
+                                                    "ipVersionType": "str",
                                                     "location": "str",
                                                     "manualPrivateLinkServiceConnections": [
                                                         {
@@ -1156,7 +1165,7 @@ class TestNetworkManagementServiceGatewaysOperations(AzureMgmtRecordedTestCase):
                             "tags": {"str": "str"},
                             "type": "str",
                         },
-                        "privateEndpointNetworkPolicies": "Disabled",
+                        "privateEndpointNetworkPolicies": "str",
                         "privateEndpoints": [
                             {
                                 "applicationSecurityGroups": [
@@ -1186,7 +1195,7 @@ class TestNetworkManagementServiceGatewaysOperations(AzureMgmtRecordedTestCase):
                                         "type": "str",
                                     }
                                 ],
-                                "ipVersionType": "IPv4",
+                                "ipVersionType": "str",
                                 "location": "str",
                                 "manualPrivateLinkServiceConnections": [
                                     {
@@ -2092,7 +2101,7 @@ class TestNetworkManagementServiceGatewaysOperations(AzureMgmtRecordedTestCase):
                                 "type": "str",
                             }
                         ],
-                        "privateLinkServiceNetworkPolicies": "Enabled",
+                        "privateLinkServiceNetworkPolicies": "str",
                         "provisioningState": "str",
                         "purpose": "str",
                         "resourceNavigationLinks": [
@@ -2705,7 +2714,7 @@ class TestNetworkManagementServiceGatewaysOperations(AzureMgmtRecordedTestCase):
                                                 "type": "str",
                                             }
                                         ],
-                                        "ipVersionType": "IPv4",
+                                        "ipVersionType": "str",
                                         "location": "str",
                                         "manualPrivateLinkServiceConnections": [
                                             {
@@ -2892,7 +2901,7 @@ class TestNetworkManagementServiceGatewaysOperations(AzureMgmtRecordedTestCase):
                                                             "type": "str",
                                                         }
                                                     ],
-                                                    "ipVersionType": "IPv4",
+                                                    "ipVersionType": "str",
                                                     "location": "str",
                                                     "manualPrivateLinkServiceConnections": [
                                                         {
@@ -3285,7 +3294,7 @@ class TestNetworkManagementServiceGatewaysOperations(AzureMgmtRecordedTestCase):
                             "tags": {"str": "str"},
                             "type": "str",
                         },
-                        "privateEndpointNetworkPolicies": "Disabled",
+                        "privateEndpointNetworkPolicies": "str",
                         "privateEndpoints": [
                             {
                                 "applicationSecurityGroups": [
@@ -3315,7 +3324,7 @@ class TestNetworkManagementServiceGatewaysOperations(AzureMgmtRecordedTestCase):
                                         "type": "str",
                                     }
                                 ],
-                                "ipVersionType": "IPv4",
+                                "ipVersionType": "str",
                                 "location": "str",
                                 "manualPrivateLinkServiceConnections": [
                                     {
@@ -4221,7 +4230,7 @@ class TestNetworkManagementServiceGatewaysOperations(AzureMgmtRecordedTestCase):
                                 "type": "str",
                             }
                         ],
-                        "privateLinkServiceNetworkPolicies": "Enabled",
+                        "privateLinkServiceNetworkPolicies": "str",
                         "provisioningState": "str",
                         "purpose": "str",
                         "resourceNavigationLinks": [
@@ -4908,7 +4917,7 @@ class TestNetworkManagementServiceGatewaysOperations(AzureMgmtRecordedTestCase):
                                                     "type": "str",
                                                 }
                                             ],
-                                            "ipVersionType": "IPv4",
+                                            "ipVersionType": "str",
                                             "location": "str",
                                             "manualPrivateLinkServiceConnections": [
                                                 {
@@ -5095,7 +5104,7 @@ class TestNetworkManagementServiceGatewaysOperations(AzureMgmtRecordedTestCase):
                                                                 "type": "str",
                                                             }
                                                         ],
-                                                        "ipVersionType": "IPv4",
+                                                        "ipVersionType": "str",
                                                         "location": "str",
                                                         "manualPrivateLinkServiceConnections": [
                                                             {
@@ -5492,7 +5501,7 @@ class TestNetworkManagementServiceGatewaysOperations(AzureMgmtRecordedTestCase):
                                 "tags": {"str": "str"},
                                 "type": "str",
                             },
-                            "privateEndpointNetworkPolicies": "Disabled",
+                            "privateEndpointNetworkPolicies": "str",
                             "privateEndpoints": [
                                 {
                                     "applicationSecurityGroups": [
@@ -5522,7 +5531,7 @@ class TestNetworkManagementServiceGatewaysOperations(AzureMgmtRecordedTestCase):
                                             "type": "str",
                                         }
                                     ],
-                                    "ipVersionType": "IPv4",
+                                    "ipVersionType": "str",
                                     "location": "str",
                                     "manualPrivateLinkServiceConnections": [
                                         {
@@ -6430,7 +6439,7 @@ class TestNetworkManagementServiceGatewaysOperations(AzureMgmtRecordedTestCase):
                                     "type": "str",
                                 }
                             ],
-                            "privateLinkServiceNetworkPolicies": "Enabled",
+                            "privateLinkServiceNetworkPolicies": "str",
                             "provisioningState": "str",
                             "purpose": "str",
                             "resourceNavigationLinks": [
@@ -6597,8 +6606,22 @@ class TestNetworkManagementServiceGatewaysOperations(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_service_gateways_list_all(self, resource_group):
-        response = self.client.service_gateways.list_all(
+    def test_service_gateways_begin_delete(self, resource_group):
+        response = self.client.service_gateways.begin_delete(
+            resource_group_name=resource_group.name,
+            service_gateway_name="str",
+            api_version="2025-05-01",
+        ).result()  # call '.result()' to poll until service return final result
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
+    def test_service_gateways_get_address_locations(self, resource_group):
+        response = self.client.service_gateways.get_address_locations(
+            resource_group_name=resource_group.name,
+            service_gateway_name="str",
             api_version="2025-05-01",
         )
         result = [r for r in response]
@@ -6607,9 +6630,10 @@ class TestNetworkManagementServiceGatewaysOperations(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_service_gateways_list(self, resource_group):
-        response = self.client.service_gateways.list(
+    def test_service_gateways_get_services(self, resource_group):
+        response = self.client.service_gateways.get_services(
             resource_group_name=resource_group.name,
+            service_gateway_name="str",
             api_version="2025-05-01",
         )
         result = [r for r in response]
@@ -6939,7 +6963,7 @@ class TestNetworkManagementServiceGatewaysOperations(AzureMgmtRecordedTestCase):
                                                                                 "type": "str",
                                                                             }
                                                                         ],
-                                                                        "ipVersionType": "IPv4",
+                                                                        "ipVersionType": "str",
                                                                         "location": "str",
                                                                         "manualPrivateLinkServiceConnections": [
                                                                             {
@@ -7075,7 +7099,7 @@ class TestNetworkManagementServiceGatewaysOperations(AzureMgmtRecordedTestCase):
                                                                                             "type": "str",
                                                                                         }
                                                                                     ],
-                                                                                    "ipVersionType": "IPv4",
+                                                                                    "ipVersionType": "str",
                                                                                     "location": "str",
                                                                                     "manualPrivateLinkServiceConnections": [
                                                                                         {
@@ -7241,7 +7265,7 @@ class TestNetworkManagementServiceGatewaysOperations(AzureMgmtRecordedTestCase):
                                                             "tags": {"str": "str"},
                                                             "type": "str",
                                                         },
-                                                        "privateEndpointNetworkPolicies": "Disabled",
+                                                        "privateEndpointNetworkPolicies": "str",
                                                         "privateEndpoints": [
                                                             {
                                                                 "applicationSecurityGroups": [
@@ -7273,7 +7297,7 @@ class TestNetworkManagementServiceGatewaysOperations(AzureMgmtRecordedTestCase):
                                                                         "type": "str",
                                                                     }
                                                                 ],
-                                                                "ipVersionType": "IPv4",
+                                                                "ipVersionType": "str",
                                                                 "location": "str",
                                                                 "manualPrivateLinkServiceConnections": [
                                                                     {
@@ -7640,7 +7664,7 @@ class TestNetworkManagementServiceGatewaysOperations(AzureMgmtRecordedTestCase):
                                                                 "type": "str",
                                                             }
                                                         ],
-                                                        "privateLinkServiceNetworkPolicies": "Enabled",
+                                                        "privateLinkServiceNetworkPolicies": "str",
                                                         "provisioningState": "str",
                                                         "purpose": "str",
                                                         "resourceNavigationLinks": [
@@ -8027,7 +8051,7 @@ class TestNetworkManagementServiceGatewaysOperations(AzureMgmtRecordedTestCase):
                                                                         "type": "str",
                                                                     }
                                                                 ],
-                                                                "ipVersionType": "IPv4",
+                                                                "ipVersionType": "str",
                                                                 "location": "str",
                                                                 "manualPrivateLinkServiceConnections": [
                                                                     {
@@ -8224,7 +8248,7 @@ class TestNetworkManagementServiceGatewaysOperations(AzureMgmtRecordedTestCase):
                                                                                     "type": "str",
                                                                                 }
                                                                             ],
-                                                                            "ipVersionType": "IPv4",
+                                                                            "ipVersionType": "str",
                                                                             "location": "str",
                                                                             "manualPrivateLinkServiceConnections": [
                                                                                 {
@@ -8459,7 +8483,7 @@ class TestNetworkManagementServiceGatewaysOperations(AzureMgmtRecordedTestCase):
                                                     "tags": {"str": "str"},
                                                     "type": "str",
                                                 },
-                                                "privateEndpointNetworkPolicies": "Disabled",
+                                                "privateEndpointNetworkPolicies": "str",
                                                 "privateEndpoints": [
                                                     {
                                                         "applicationSecurityGroups": [
@@ -8489,7 +8513,7 @@ class TestNetworkManagementServiceGatewaysOperations(AzureMgmtRecordedTestCase):
                                                                 "type": "str",
                                                             }
                                                         ],
-                                                        "ipVersionType": "IPv4",
+                                                        "ipVersionType": "str",
                                                         "location": "str",
                                                         "manualPrivateLinkServiceConnections": [
                                                             {
@@ -8987,7 +9011,7 @@ class TestNetworkManagementServiceGatewaysOperations(AzureMgmtRecordedTestCase):
                                                         "type": "str",
                                                     }
                                                 ],
-                                                "privateLinkServiceNetworkPolicies": "Enabled",
+                                                "privateLinkServiceNetworkPolicies": "str",
                                                 "provisioningState": "str",
                                                 "purpose": "str",
                                                 "resourceNavigationLinks": [
@@ -9329,7 +9353,7 @@ class TestNetworkManagementServiceGatewaysOperations(AzureMgmtRecordedTestCase):
                                                                                             "type": "str",
                                                                                         }
                                                                                     ],
-                                                                                    "ipVersionType": "IPv4",
+                                                                                    "ipVersionType": "str",
                                                                                     "location": "str",
                                                                                     "manualPrivateLinkServiceConnections": [
                                                                                         {
@@ -9453,7 +9477,7 @@ class TestNetworkManagementServiceGatewaysOperations(AzureMgmtRecordedTestCase):
                                                                                                         "type": "str",
                                                                                                     }
                                                                                                 ],
-                                                                                                "ipVersionType": "IPv4",
+                                                                                                "ipVersionType": "str",
                                                                                                 "location": "str",
                                                                                                 "manualPrivateLinkServiceConnections": [
                                                                                                     {
@@ -9590,7 +9614,7 @@ class TestNetworkManagementServiceGatewaysOperations(AzureMgmtRecordedTestCase):
                                                                         "tags": {"str": "str"},
                                                                         "type": "str",
                                                                     },
-                                                                    "privateEndpointNetworkPolicies": "Disabled",
+                                                                    "privateEndpointNetworkPolicies": "str",
                                                                     "privateEndpoints": [
                                                                         {
                                                                             "applicationSecurityGroups": [
@@ -9625,7 +9649,7 @@ class TestNetworkManagementServiceGatewaysOperations(AzureMgmtRecordedTestCase):
                                                                                     "type": "str",
                                                                                 }
                                                                             ],
-                                                                            "ipVersionType": "IPv4",
+                                                                            "ipVersionType": "str",
                                                                             "location": "str",
                                                                             "manualPrivateLinkServiceConnections": [
                                                                                 {
@@ -9951,7 +9975,7 @@ class TestNetworkManagementServiceGatewaysOperations(AzureMgmtRecordedTestCase):
                                                                             "type": "str",
                                                                         }
                                                                     ],
-                                                                    "privateLinkServiceNetworkPolicies": "Enabled",
+                                                                    "privateLinkServiceNetworkPolicies": "str",
                                                                     "provisioningState": "str",
                                                                     "purpose": "str",
                                                                     "resourceNavigationLinks": [
@@ -10356,7 +10380,7 @@ class TestNetworkManagementServiceGatewaysOperations(AzureMgmtRecordedTestCase):
                                                                                     "type": "str",
                                                                                 }
                                                                             ],
-                                                                            "ipVersionType": "IPv4",
+                                                                            "ipVersionType": "str",
                                                                             "location": "str",
                                                                             "manualPrivateLinkServiceConnections": [
                                                                                 {
@@ -10474,7 +10498,7 @@ class TestNetworkManagementServiceGatewaysOperations(AzureMgmtRecordedTestCase):
                                                                                                 "type": "str",
                                                                                             }
                                                                                         ],
-                                                                                        "ipVersionType": "IPv4",
+                                                                                        "ipVersionType": "str",
                                                                                         "location": "str",
                                                                                         "manualPrivateLinkServiceConnections": [
                                                                                             {
@@ -10603,7 +10627,7 @@ class TestNetworkManagementServiceGatewaysOperations(AzureMgmtRecordedTestCase):
                                                                 "tags": {"str": "str"},
                                                                 "type": "str",
                                                             },
-                                                            "privateEndpointNetworkPolicies": "Disabled",
+                                                            "privateEndpointNetworkPolicies": "str",
                                                             "privateEndpoints": [
                                                                 {
                                                                     "applicationSecurityGroups": [
@@ -10635,7 +10659,7 @@ class TestNetworkManagementServiceGatewaysOperations(AzureMgmtRecordedTestCase):
                                                                             "type": "str",
                                                                         }
                                                                     ],
-                                                                    "ipVersionType": "IPv4",
+                                                                    "ipVersionType": "str",
                                                                     "location": "str",
                                                                     "manualPrivateLinkServiceConnections": [
                                                                         {
@@ -10949,7 +10973,7 @@ class TestNetworkManagementServiceGatewaysOperations(AzureMgmtRecordedTestCase):
                                                                     "type": "str",
                                                                 }
                                                             ],
-                                                            "privateLinkServiceNetworkPolicies": "Enabled",
+                                                            "privateLinkServiceNetworkPolicies": "str",
                                                             "provisioningState": "str",
                                                             "purpose": "str",
                                                             "resourceNavigationLinks": [
@@ -11110,29 +11134,5 @@ class TestNetworkManagementServiceGatewaysOperations(AzureMgmtRecordedTestCase):
             api_version="2025-05-01",
         ).result()  # call '.result()' to poll until service return final result
 
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_service_gateways_get_address_locations(self, resource_group):
-        response = self.client.service_gateways.get_address_locations(
-            resource_group_name=resource_group.name,
-            service_gateway_name="str",
-            api_version="2025-05-01",
-        )
-        result = [r for r in response]
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_service_gateways_get_services(self, resource_group):
-        response = self.client.service_gateways.get_services(
-            resource_group_name=resource_group.name,
-            service_gateway_name="str",
-            api_version="2025-05-01",
-        )
-        result = [r for r in response]
         # please add some check logic here by yourself
         # ...

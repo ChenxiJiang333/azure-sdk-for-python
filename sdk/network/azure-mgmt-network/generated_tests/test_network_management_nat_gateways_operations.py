@@ -20,13 +20,22 @@ class TestNetworkManagementNatGatewaysOperations(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_nat_gateways_begin_delete(self, resource_group):
-        response = self.client.nat_gateways.begin_delete(
-            resource_group_name=resource_group.name,
-            nat_gateway_name="str",
+    def test_nat_gateways_list_all(self, resource_group):
+        response = self.client.nat_gateways.list_all(
             api_version="2025-05-01",
-        ).result()  # call '.result()' to poll until service return final result
+        )
+        result = [r for r in response]
+        # please add some check logic here by yourself
+        # ...
 
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
+    def test_nat_gateways_list(self, resource_group):
+        response = self.client.nat_gateways.list(
+            resource_group_name=resource_group.name,
+            api_version="2025-05-01",
+        )
+        result = [r for r in response]
         # please add some check logic here by yourself
         # ...
 
@@ -89,21 +98,12 @@ class TestNetworkManagementNatGatewaysOperations(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_nat_gateways_list_all(self, resource_group):
-        response = self.client.nat_gateways.list_all(
-            api_version="2025-05-01",
-        )
-        result = [r for r in response]
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_nat_gateways_list(self, resource_group):
-        response = self.client.nat_gateways.list(
+    def test_nat_gateways_begin_delete(self, resource_group):
+        response = self.client.nat_gateways.begin_delete(
             resource_group_name=resource_group.name,
+            nat_gateway_name="str",
             api_version="2025-05-01",
-        )
-        result = [r for r in response]
+        ).result()  # call '.result()' to poll until service return final result
+
         # please add some check logic here by yourself
         # ...

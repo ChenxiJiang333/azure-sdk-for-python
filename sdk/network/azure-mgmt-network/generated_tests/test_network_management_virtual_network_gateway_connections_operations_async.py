@@ -21,6 +21,29 @@ class TestNetworkManagementVirtualNetworkGatewayConnectionsOperationsAsync(Azure
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
+    async def test_virtual_network_gateway_connections_list(self, resource_group):
+        response = self.client.virtual_network_gateway_connections.list(
+            resource_group_name=resource_group.name,
+            api_version="2025-05-01",
+        )
+        result = [r async for r in response]
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
+    async def test_virtual_network_gateway_connections_get(self, resource_group):
+        response = await self.client.virtual_network_gateway_connections.get(
+            resource_group_name=resource_group.name,
+            virtual_network_gateway_connection_name="str",
+            api_version="2025-05-01",
+        )
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
     async def test_virtual_network_gateway_connections_begin_create_or_update(self, resource_group):
         response = await (
             await self.client.virtual_network_gateway_connections.begin_create_or_update(
@@ -444,12 +467,15 @@ class TestNetworkManagementVirtualNetworkGatewayConnectionsOperationsAsync(Azure
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_virtual_network_gateway_connections_get(self, resource_group):
-        response = await self.client.virtual_network_gateway_connections.get(
-            resource_group_name=resource_group.name,
-            virtual_network_gateway_connection_name="str",
-            api_version="2025-05-01",
-        )
+    async def test_virtual_network_gateway_connections_begin_update_tags(self, resource_group):
+        response = await (
+            await self.client.virtual_network_gateway_connections.begin_update_tags(
+                resource_group_name=resource_group.name,
+                virtual_network_gateway_connection_name="str",
+                parameters={"tags": {"str": "str"}},
+                api_version="2025-05-01",
+            )
+        ).result()  # call '.result()' to poll until service return final result
 
         # please add some check logic here by yourself
         # ...
@@ -470,12 +496,11 @@ class TestNetworkManagementVirtualNetworkGatewayConnectionsOperationsAsync(Azure
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_virtual_network_gateway_connections_begin_update_tags(self, resource_group):
+    async def test_virtual_network_gateway_connections_begin_get_ike_sas(self, resource_group):
         response = await (
-            await self.client.virtual_network_gateway_connections.begin_update_tags(
+            await self.client.virtual_network_gateway_connections.begin_get_ike_sas(
                 resource_group_name=resource_group.name,
                 virtual_network_gateway_connection_name="str",
-                parameters={"tags": {"str": "str"}},
                 api_version="2025-05-01",
             )
         ).result()  # call '.result()' to poll until service return final result
@@ -485,12 +510,11 @@ class TestNetworkManagementVirtualNetworkGatewayConnectionsOperationsAsync(Azure
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_virtual_network_gateway_connections_begin_set_shared_key(self, resource_group):
+    async def test_virtual_network_gateway_connections_begin_reset_connection(self, resource_group):
         response = await (
-            await self.client.virtual_network_gateway_connections.begin_set_shared_key(
+            await self.client.virtual_network_gateway_connections.begin_reset_connection(
                 resource_group_name=resource_group.name,
                 virtual_network_gateway_connection_name="str",
-                parameters={"value": "str", "id": "str"},
                 api_version="2025-05-01",
             )
         ).result()  # call '.result()' to poll until service return final result
@@ -512,12 +536,16 @@ class TestNetworkManagementVirtualNetworkGatewayConnectionsOperationsAsync(Azure
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_virtual_network_gateway_connections_list(self, resource_group):
-        response = self.client.virtual_network_gateway_connections.list(
-            resource_group_name=resource_group.name,
-            api_version="2025-05-01",
-        )
-        result = [r async for r in response]
+    async def test_virtual_network_gateway_connections_begin_set_shared_key(self, resource_group):
+        response = await (
+            await self.client.virtual_network_gateway_connections.begin_set_shared_key(
+                resource_group_name=resource_group.name,
+                virtual_network_gateway_connection_name="str",
+                parameters={"value": "str", "id": "str"},
+                api_version="2025-05-01",
+            )
+        ).result()  # call '.result()' to poll until service return final result
+
         # please add some check logic here by yourself
         # ...
 
@@ -558,34 +586,6 @@ class TestNetworkManagementVirtualNetworkGatewayConnectionsOperationsAsync(Azure
                 resource_group_name=resource_group.name,
                 virtual_network_gateway_connection_name="str",
                 parameters={"sasUrl": "str"},
-                api_version="2025-05-01",
-            )
-        ).result()  # call '.result()' to poll until service return final result
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_virtual_network_gateway_connections_begin_get_ike_sas(self, resource_group):
-        response = await (
-            await self.client.virtual_network_gateway_connections.begin_get_ike_sas(
-                resource_group_name=resource_group.name,
-                virtual_network_gateway_connection_name="str",
-                api_version="2025-05-01",
-            )
-        ).result()  # call '.result()' to poll until service return final result
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_virtual_network_gateway_connections_begin_reset_connection(self, resource_group):
-        response = await (
-            await self.client.virtual_network_gateway_connections.begin_reset_connection(
-                resource_group_name=resource_group.name,
-                virtual_network_gateway_connection_name="str",
                 api_version="2025-05-01",
             )
         ).result()  # call '.result()' to poll until service return final result

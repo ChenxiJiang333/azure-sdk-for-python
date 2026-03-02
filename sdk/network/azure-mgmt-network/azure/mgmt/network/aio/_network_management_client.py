@@ -193,63 +193,89 @@ class NetworkManagementClient(
 ):  # pylint: disable=client-accepts-api-version-keyword,too-many-instance-attributes
     """Network Client.
 
+    :ivar web_application_firewall_policies: WebApplicationFirewallPoliciesOperations operations
+    :vartype web_application_firewall_policies:
+     azure.mgmt.network.aio.operations.WebApplicationFirewallPoliciesOperations
     :ivar application_gateways: ApplicationGatewaysOperations operations
     :vartype application_gateways: azure.mgmt.network.aio.operations.ApplicationGatewaysOperations
-    :ivar application_gateway_private_link_resources:
-     ApplicationGatewayPrivateLinkResourcesOperations operations
-    :vartype application_gateway_private_link_resources:
-     azure.mgmt.network.aio.operations.ApplicationGatewayPrivateLinkResourcesOperations
-    :ivar application_gateway_private_endpoint_connections:
-     ApplicationGatewayPrivateEndpointConnectionsOperations operations
-    :vartype application_gateway_private_endpoint_connections:
-     azure.mgmt.network.aio.operations.ApplicationGatewayPrivateEndpointConnectionsOperations
-    :ivar application_gateway_waf_dynamic_manifests_default:
-     ApplicationGatewayWafDynamicManifestsDefaultOperations operations
-    :vartype application_gateway_waf_dynamic_manifests_default:
-     azure.mgmt.network.aio.operations.ApplicationGatewayWafDynamicManifestsDefaultOperations
     :ivar application_gateway_waf_dynamic_manifests:
      ApplicationGatewayWafDynamicManifestsOperations operations
     :vartype application_gateway_waf_dynamic_manifests:
      azure.mgmt.network.aio.operations.ApplicationGatewayWafDynamicManifestsOperations
-    :ivar application_security_groups: ApplicationSecurityGroupsOperations operations
-    :vartype application_security_groups:
-     azure.mgmt.network.aio.operations.ApplicationSecurityGroupsOperations
-    :ivar available_delegations: AvailableDelegationsOperations operations
-    :vartype available_delegations:
-     azure.mgmt.network.aio.operations.AvailableDelegationsOperations
-    :ivar available_resource_group_delegations: AvailableResourceGroupDelegationsOperations
-     operations
-    :vartype available_resource_group_delegations:
-     azure.mgmt.network.aio.operations.AvailableResourceGroupDelegationsOperations
-    :ivar available_service_aliases: AvailableServiceAliasesOperations operations
-    :vartype available_service_aliases:
-     azure.mgmt.network.aio.operations.AvailableServiceAliasesOperations
-    :ivar azure_firewalls: AzureFirewallsOperations operations
-    :vartype azure_firewalls: azure.mgmt.network.aio.operations.AzureFirewallsOperations
-    :ivar azure_firewall_fqdn_tags: AzureFirewallFqdnTagsOperations operations
-    :vartype azure_firewall_fqdn_tags:
-     azure.mgmt.network.aio.operations.AzureFirewallFqdnTagsOperations
+    :ivar application_gateway_waf_dynamic_manifests_default:
+     ApplicationGatewayWafDynamicManifestsDefaultOperations operations
+    :vartype application_gateway_waf_dynamic_manifests_default:
+     azure.mgmt.network.aio.operations.ApplicationGatewayWafDynamicManifestsDefaultOperations
+    :ivar application_gateway_private_endpoint_connections:
+     ApplicationGatewayPrivateEndpointConnectionsOperations operations
+    :vartype application_gateway_private_endpoint_connections:
+     azure.mgmt.network.aio.operations.ApplicationGatewayPrivateEndpointConnectionsOperations
+    :ivar application_gateway_private_link_resources:
+     ApplicationGatewayPrivateLinkResourcesOperations operations
+    :vartype application_gateway_private_link_resources:
+     azure.mgmt.network.aio.operations.ApplicationGatewayPrivateLinkResourcesOperations
     :ivar web_categories: WebCategoriesOperations operations
     :vartype web_categories: azure.mgmt.network.aio.operations.WebCategoriesOperations
-    :ivar bastion_hosts: BastionHostsOperations operations
-    :vartype bastion_hosts: azure.mgmt.network.aio.operations.BastionHostsOperations
-    :ivar network_interfaces: NetworkInterfacesOperations operations
-    :vartype network_interfaces: azure.mgmt.network.aio.operations.NetworkInterfacesOperations
-    :ivar public_ip_addresses: PublicIPAddressesOperations operations
-    :vartype public_ip_addresses: azure.mgmt.network.aio.operations.PublicIPAddressesOperations
-    :ivar vip_swap: VipSwapOperations operations
-    :vartype vip_swap: azure.mgmt.network.aio.operations.VipSwapOperations
-    :ivar custom_ip_prefixes: CustomIPPrefixesOperations operations
-    :vartype custom_ip_prefixes: azure.mgmt.network.aio.operations.CustomIPPrefixesOperations
-    :ivar ddos_custom_policies: DdosCustomPoliciesOperations operations
-    :vartype ddos_custom_policies: azure.mgmt.network.aio.operations.DdosCustomPoliciesOperations
-    :ivar ddos_protection_plans: DdosProtectionPlansOperations operations
-    :vartype ddos_protection_plans: azure.mgmt.network.aio.operations.DdosProtectionPlansOperations
-    :ivar dscp_configuration: DscpConfigurationOperations operations
-    :vartype dscp_configuration: azure.mgmt.network.aio.operations.DscpConfigurationOperations
-    :ivar available_endpoint_services: AvailableEndpointServicesOperations operations
-    :vartype available_endpoint_services:
-     azure.mgmt.network.aio.operations.AvailableEndpointServicesOperations
+    :ivar firewall_policies: FirewallPoliciesOperations operations
+    :vartype firewall_policies: azure.mgmt.network.aio.operations.FirewallPoliciesOperations
+    :ivar service_gateways: ServiceGatewaysOperations operations
+    :vartype service_gateways: azure.mgmt.network.aio.operations.ServiceGatewaysOperations
+    :ivar virtual_network_appliances: VirtualNetworkAppliancesOperations operations
+    :vartype virtual_network_appliances:
+     azure.mgmt.network.aio.operations.VirtualNetworkAppliancesOperations
+    :ivar firewall_policy_deployments: FirewallPolicyDeploymentsOperations operations
+    :vartype firewall_policy_deployments:
+     azure.mgmt.network.aio.operations.FirewallPolicyDeploymentsOperations
+    :ivar firewall_policy_drafts: FirewallPolicyDraftsOperations operations
+    :vartype firewall_policy_drafts:
+     azure.mgmt.network.aio.operations.FirewallPolicyDraftsOperations
+    :ivar firewall_policy_idps_signatures_filter_values:
+     FirewallPolicyIdpsSignaturesFilterValuesOperations operations
+    :vartype firewall_policy_idps_signatures_filter_values:
+     azure.mgmt.network.aio.operations.FirewallPolicyIdpsSignaturesFilterValuesOperations
+    :ivar firewall_policy_idps_signatures: FirewallPolicyIdpsSignaturesOperations operations
+    :vartype firewall_policy_idps_signatures:
+     azure.mgmt.network.aio.operations.FirewallPolicyIdpsSignaturesOperations
+    :ivar firewall_policy_rule_collection_groups: FirewallPolicyRuleCollectionGroupsOperations
+     operations
+    :vartype firewall_policy_rule_collection_groups:
+     azure.mgmt.network.aio.operations.FirewallPolicyRuleCollectionGroupsOperations
+    :ivar firewall_policy_rule_collection_group_drafts:
+     FirewallPolicyRuleCollectionGroupDraftsOperations operations
+    :vartype firewall_policy_rule_collection_group_drafts:
+     azure.mgmt.network.aio.operations.FirewallPolicyRuleCollectionGroupDraftsOperations
+    :ivar firewall_policy_idps_signatures_overrides:
+     FirewallPolicyIdpsSignaturesOverridesOperations operations
+    :vartype firewall_policy_idps_signatures_overrides:
+     azure.mgmt.network.aio.operations.FirewallPolicyIdpsSignaturesOverridesOperations
+    :ivar express_route_ports: ExpressRoutePortsOperations operations
+    :vartype express_route_ports: azure.mgmt.network.aio.operations.ExpressRoutePortsOperations
+    :ivar express_route_ports_locations: ExpressRoutePortsLocationsOperations operations
+    :vartype express_route_ports_locations:
+     azure.mgmt.network.aio.operations.ExpressRoutePortsLocationsOperations
+    :ivar bgp_service_communities: BgpServiceCommunitiesOperations operations
+    :vartype bgp_service_communities:
+     azure.mgmt.network.aio.operations.BgpServiceCommunitiesOperations
+    :ivar express_route_circuits: ExpressRouteCircuitsOperations operations
+    :vartype express_route_circuits:
+     azure.mgmt.network.aio.operations.ExpressRouteCircuitsOperations
+    :ivar express_route_cross_connections: ExpressRouteCrossConnectionsOperations operations
+    :vartype express_route_cross_connections:
+     azure.mgmt.network.aio.operations.ExpressRouteCrossConnectionsOperations
+    :ivar express_route_provider_ports_location: ExpressRouteProviderPortsLocationOperations
+     operations
+    :vartype express_route_provider_ports_location:
+     azure.mgmt.network.aio.operations.ExpressRouteProviderPortsLocationOperations
+    :ivar express_route_service_providers: ExpressRouteServiceProvidersOperations operations
+    :vartype express_route_service_providers:
+     azure.mgmt.network.aio.operations.ExpressRouteServiceProvidersOperations
+    :ivar route_filters: RouteFiltersOperations operations
+    :vartype route_filters: azure.mgmt.network.aio.operations.RouteFiltersOperations
+    :ivar service_endpoint_policies: ServiceEndpointPoliciesOperations operations
+    :vartype service_endpoint_policies:
+     azure.mgmt.network.aio.operations.ServiceEndpointPoliciesOperations
+    :ivar express_route_links: ExpressRouteLinksOperations operations
+    :vartype express_route_links: azure.mgmt.network.aio.operations.ExpressRouteLinksOperations
     :ivar express_route_circuit_authorizations: ExpressRouteCircuitAuthorizationsOperations
      operations
     :vartype express_route_circuit_authorizations:
@@ -264,68 +290,24 @@ class NetworkManagementClient(
      operations
     :vartype peer_express_route_circuit_connections:
      azure.mgmt.network.aio.operations.PeerExpressRouteCircuitConnectionsOperations
-    :ivar express_route_circuits: ExpressRouteCircuitsOperations operations
-    :vartype express_route_circuits:
-     azure.mgmt.network.aio.operations.ExpressRouteCircuitsOperations
-    :ivar express_route_service_providers: ExpressRouteServiceProvidersOperations operations
-    :vartype express_route_service_providers:
-     azure.mgmt.network.aio.operations.ExpressRouteServiceProvidersOperations
-    :ivar express_route_cross_connections: ExpressRouteCrossConnectionsOperations operations
-    :vartype express_route_cross_connections:
-     azure.mgmt.network.aio.operations.ExpressRouteCrossConnectionsOperations
     :ivar express_route_cross_connection_peerings: ExpressRouteCrossConnectionPeeringsOperations
      operations
     :vartype express_route_cross_connection_peerings:
      azure.mgmt.network.aio.operations.ExpressRouteCrossConnectionPeeringsOperations
-    :ivar express_route_ports_locations: ExpressRoutePortsLocationsOperations operations
-    :vartype express_route_ports_locations:
-     azure.mgmt.network.aio.operations.ExpressRoutePortsLocationsOperations
-    :ivar express_route_ports: ExpressRoutePortsOperations operations
-    :vartype express_route_ports: azure.mgmt.network.aio.operations.ExpressRoutePortsOperations
-    :ivar express_route_links: ExpressRouteLinksOperations operations
-    :vartype express_route_links: azure.mgmt.network.aio.operations.ExpressRouteLinksOperations
     :ivar express_route_port_authorizations: ExpressRoutePortAuthorizationsOperations operations
     :vartype express_route_port_authorizations:
      azure.mgmt.network.aio.operations.ExpressRoutePortAuthorizationsOperations
-    :ivar express_route_provider_ports_location: ExpressRouteProviderPortsLocationOperations
+    :ivar route_filter_rules: RouteFilterRulesOperations operations
+    :vartype route_filter_rules: azure.mgmt.network.aio.operations.RouteFilterRulesOperations
+    :ivar service_endpoint_policy_definitions: ServiceEndpointPolicyDefinitionsOperations
      operations
-    :vartype express_route_provider_ports_location:
-     azure.mgmt.network.aio.operations.ExpressRouteProviderPortsLocationOperations
-    :ivar firewall_policies: FirewallPoliciesOperations operations
-    :vartype firewall_policies: azure.mgmt.network.aio.operations.FirewallPoliciesOperations
-    :ivar firewall_policy_rule_collection_groups: FirewallPolicyRuleCollectionGroupsOperations
-     operations
-    :vartype firewall_policy_rule_collection_groups:
-     azure.mgmt.network.aio.operations.FirewallPolicyRuleCollectionGroupsOperations
-    :ivar firewall_policy_idps_signatures: FirewallPolicyIdpsSignaturesOperations operations
-    :vartype firewall_policy_idps_signatures:
-     azure.mgmt.network.aio.operations.FirewallPolicyIdpsSignaturesOperations
-    :ivar firewall_policy_idps_signatures_overrides:
-     FirewallPolicyIdpsSignaturesOverridesOperations operations
-    :vartype firewall_policy_idps_signatures_overrides:
-     azure.mgmt.network.aio.operations.FirewallPolicyIdpsSignaturesOverridesOperations
-    :ivar firewall_policy_idps_signatures_filter_values:
-     FirewallPolicyIdpsSignaturesFilterValuesOperations operations
-    :vartype firewall_policy_idps_signatures_filter_values:
-     azure.mgmt.network.aio.operations.FirewallPolicyIdpsSignaturesFilterValuesOperations
-    :ivar firewall_policy_drafts: FirewallPolicyDraftsOperations operations
-    :vartype firewall_policy_drafts:
-     azure.mgmt.network.aio.operations.FirewallPolicyDraftsOperations
-    :ivar firewall_policy_deployments: FirewallPolicyDeploymentsOperations operations
-    :vartype firewall_policy_deployments:
-     azure.mgmt.network.aio.operations.FirewallPolicyDeploymentsOperations
-    :ivar firewall_policy_rule_collection_group_drafts:
-     FirewallPolicyRuleCollectionGroupDraftsOperations operations
-    :vartype firewall_policy_rule_collection_group_drafts:
-     azure.mgmt.network.aio.operations.FirewallPolicyRuleCollectionGroupDraftsOperations
-    :ivar ipam_pools: IpamPoolsOperations operations
-    :vartype ipam_pools: azure.mgmt.network.aio.operations.IpamPoolsOperations
-    :ivar static_cidrs: StaticCidrsOperations operations
-    :vartype static_cidrs: azure.mgmt.network.aio.operations.StaticCidrsOperations
-    :ivar ip_allocations: IpAllocationsOperations operations
-    :vartype ip_allocations: azure.mgmt.network.aio.operations.IpAllocationsOperations
-    :ivar ip_groups: IpGroupsOperations operations
-    :vartype ip_groups: azure.mgmt.network.aio.operations.IpGroupsOperations
+    :vartype service_endpoint_policy_definitions:
+     azure.mgmt.network.aio.operations.ServiceEndpointPolicyDefinitionsOperations
+    :ivar azure_firewall_fqdn_tags: AzureFirewallFqdnTagsOperations operations
+    :vartype azure_firewall_fqdn_tags:
+     azure.mgmt.network.aio.operations.AzureFirewallFqdnTagsOperations
+    :ivar azure_firewalls: AzureFirewallsOperations operations
+    :vartype azure_firewalls: azure.mgmt.network.aio.operations.AzureFirewallsOperations
     :ivar load_balancers: LoadBalancersOperations operations
     :vartype load_balancers: azure.mgmt.network.aio.operations.LoadBalancersOperations
     :ivar load_balancer_backend_address_pools: LoadBalancerBackendAddressPoolsOperations operations
@@ -340,46 +322,50 @@ class NetworkManagementClient(
     :ivar load_balancer_load_balancing_rules: LoadBalancerLoadBalancingRulesOperations operations
     :vartype load_balancer_load_balancing_rules:
      azure.mgmt.network.aio.operations.LoadBalancerLoadBalancingRulesOperations
-    :ivar load_balancer_outbound_rules: LoadBalancerOutboundRulesOperations operations
-    :vartype load_balancer_outbound_rules:
-     azure.mgmt.network.aio.operations.LoadBalancerOutboundRulesOperations
     :ivar load_balancer_network_interfaces: LoadBalancerNetworkInterfacesOperations operations
     :vartype load_balancer_network_interfaces:
      azure.mgmt.network.aio.operations.LoadBalancerNetworkInterfacesOperations
+    :ivar load_balancer_outbound_rules: LoadBalancerOutboundRulesOperations operations
+    :vartype load_balancer_outbound_rules:
+     azure.mgmt.network.aio.operations.LoadBalancerOutboundRulesOperations
     :ivar load_balancer_probes: LoadBalancerProbesOperations operations
     :vartype load_balancer_probes: azure.mgmt.network.aio.operations.LoadBalancerProbesOperations
-    :ivar nat_gateways: NatGatewaysOperations operations
-    :vartype nat_gateways: azure.mgmt.network.aio.operations.NatGatewaysOperations
-    :ivar network_interface_ip_configurations: NetworkInterfaceIPConfigurationsOperations
+    :ivar virtual_network_taps: VirtualNetworkTapsOperations operations
+    :vartype virtual_network_taps: azure.mgmt.network.aio.operations.VirtualNetworkTapsOperations
+    :ivar virtual_network_gateway_connections: VirtualNetworkGatewayConnectionsOperations
      operations
-    :vartype network_interface_ip_configurations:
-     azure.mgmt.network.aio.operations.NetworkInterfaceIPConfigurationsOperations
-    :ivar network_interface_load_balancers: NetworkInterfaceLoadBalancersOperations operations
-    :vartype network_interface_load_balancers:
-     azure.mgmt.network.aio.operations.NetworkInterfaceLoadBalancersOperations
-    :ivar network_interface_tap_configurations: NetworkInterfaceTapConfigurationsOperations
+    :vartype virtual_network_gateway_connections:
+     azure.mgmt.network.aio.operations.VirtualNetworkGatewayConnectionsOperations
+    :ivar virtual_network_gateways: VirtualNetworkGatewaysOperations operations
+    :vartype virtual_network_gateways:
+     azure.mgmt.network.aio.operations.VirtualNetworkGatewaysOperations
+    :ivar local_network_gateways: LocalNetworkGatewaysOperations operations
+    :vartype local_network_gateways:
+     azure.mgmt.network.aio.operations.LocalNetworkGatewaysOperations
+    :ivar virtual_network_gateway_nat_rules: VirtualNetworkGatewayNatRulesOperations operations
+    :vartype virtual_network_gateway_nat_rules:
+     azure.mgmt.network.aio.operations.VirtualNetworkGatewayNatRulesOperations
+    :ivar operations: Operations operations
+    :vartype operations: azure.mgmt.network.aio.operations.Operations
+    :ivar management_group_network_manager_connections:
+     ManagementGroupNetworkManagerConnectionsOperations operations
+    :vartype management_group_network_manager_connections:
+     azure.mgmt.network.aio.operations.ManagementGroupNetworkManagerConnectionsOperations
+    :ivar subscription_network_manager_connections: SubscriptionNetworkManagerConnectionsOperations
      operations
-    :vartype network_interface_tap_configurations:
-     azure.mgmt.network.aio.operations.NetworkInterfaceTapConfigurationsOperations
+    :vartype subscription_network_manager_connections:
+     azure.mgmt.network.aio.operations.SubscriptionNetworkManagerConnectionsOperations
     :ivar network_managers: NetworkManagersOperations operations
     :vartype network_managers: azure.mgmt.network.aio.operations.NetworkManagersOperations
     :ivar network_manager_commits: NetworkManagerCommitsOperations operations
     :vartype network_manager_commits:
      azure.mgmt.network.aio.operations.NetworkManagerCommitsOperations
-    :ivar network_manager_deployment_status: NetworkManagerDeploymentStatusOperations operations
-    :vartype network_manager_deployment_status:
-     azure.mgmt.network.aio.operations.NetworkManagerDeploymentStatusOperations
-    :ivar subscription_network_manager_connections: SubscriptionNetworkManagerConnectionsOperations
-     operations
-    :vartype subscription_network_manager_connections:
-     azure.mgmt.network.aio.operations.SubscriptionNetworkManagerConnectionsOperations
-    :ivar management_group_network_manager_connections:
-     ManagementGroupNetworkManagerConnectionsOperations operations
-    :vartype management_group_network_manager_connections:
-     azure.mgmt.network.aio.operations.ManagementGroupNetworkManagerConnectionsOperations
     :ivar connectivity_configurations: ConnectivityConfigurationsOperations operations
     :vartype connectivity_configurations:
      azure.mgmt.network.aio.operations.ConnectivityConfigurationsOperations
+    :ivar network_manager_deployment_status: NetworkManagerDeploymentStatusOperations operations
+    :vartype network_manager_deployment_status:
+     azure.mgmt.network.aio.operations.NetworkManagerDeploymentStatusOperations
     :ivar network_groups: NetworkGroupsOperations operations
     :vartype network_groups: azure.mgmt.network.aio.operations.NetworkGroupsOperations
     :ivar static_members: StaticMembersOperations operations
@@ -411,19 +397,32 @@ class NetworkManagementClient(
      azure.mgmt.network.aio.operations.SecurityUserRuleCollectionsOperations
     :ivar security_user_rules: SecurityUserRulesOperations operations
     :vartype security_user_rules: azure.mgmt.network.aio.operations.SecurityUserRulesOperations
-    :ivar network_profiles: NetworkProfilesOperations operations
-    :vartype network_profiles: azure.mgmt.network.aio.operations.NetworkProfilesOperations
-    :ivar network_security_groups: NetworkSecurityGroupsOperations operations
-    :vartype network_security_groups:
-     azure.mgmt.network.aio.operations.NetworkSecurityGroupsOperations
-    :ivar security_rules: SecurityRulesOperations operations
-    :vartype security_rules: azure.mgmt.network.aio.operations.SecurityRulesOperations
-    :ivar default_security_rules: DefaultSecurityRulesOperations operations
-    :vartype default_security_rules:
-     azure.mgmt.network.aio.operations.DefaultSecurityRulesOperations
+    :ivar network_security_perimeter_operation_statuses:
+     NetworkSecurityPerimeterOperationStatusesOperations operations
+    :vartype network_security_perimeter_operation_statuses:
+     azure.mgmt.network.aio.operations.NetworkSecurityPerimeterOperationStatusesOperations
+    :ivar network_security_perimeter_service_tags: NetworkSecurityPerimeterServiceTagsOperations
+     operations
+    :vartype network_security_perimeter_service_tags:
+     azure.mgmt.network.aio.operations.NetworkSecurityPerimeterServiceTagsOperations
+    :ivar network_security_perimeter_associable_resource_types:
+     NetworkSecurityPerimeterAssociableResourceTypesOperations operations
+    :vartype network_security_perimeter_associable_resource_types:
+     azure.mgmt.network.aio.operations.NetworkSecurityPerimeterAssociableResourceTypesOperations
     :ivar network_security_perimeters: NetworkSecurityPerimetersOperations operations
     :vartype network_security_perimeters:
      azure.mgmt.network.aio.operations.NetworkSecurityPerimetersOperations
+    :ivar network_security_perimeter_link_references:
+     NetworkSecurityPerimeterLinkReferencesOperations operations
+    :vartype network_security_perimeter_link_references:
+     azure.mgmt.network.aio.operations.NetworkSecurityPerimeterLinkReferencesOperations
+    :ivar network_security_perimeter_links: NetworkSecurityPerimeterLinksOperations operations
+    :vartype network_security_perimeter_links:
+     azure.mgmt.network.aio.operations.NetworkSecurityPerimeterLinksOperations
+    :ivar network_security_perimeter_logging_configurations:
+     NetworkSecurityPerimeterLoggingConfigurationsOperations operations
+    :vartype network_security_perimeter_logging_configurations:
+     azure.mgmt.network.aio.operations.NetworkSecurityPerimeterLoggingConfigurationsOperations
     :ivar network_security_perimeter_profiles: NetworkSecurityPerimeterProfilesOperations
      operations
     :vartype network_security_perimeter_profiles:
@@ -436,102 +435,124 @@ class NetworkManagementClient(
      operations
     :vartype network_security_perimeter_associations:
      azure.mgmt.network.aio.operations.NetworkSecurityPerimeterAssociationsOperations
-    :ivar network_security_perimeter_associable_resource_types:
-     NetworkSecurityPerimeterAssociableResourceTypesOperations operations
-    :vartype network_security_perimeter_associable_resource_types:
-     azure.mgmt.network.aio.operations.NetworkSecurityPerimeterAssociableResourceTypesOperations
-    :ivar network_security_perimeter_links: NetworkSecurityPerimeterLinksOperations operations
-    :vartype network_security_perimeter_links:
-     azure.mgmt.network.aio.operations.NetworkSecurityPerimeterLinksOperations
-    :ivar network_security_perimeter_link_references:
-     NetworkSecurityPerimeterLinkReferencesOperations operations
-    :vartype network_security_perimeter_link_references:
-     azure.mgmt.network.aio.operations.NetworkSecurityPerimeterLinkReferencesOperations
-    :ivar network_security_perimeter_logging_configurations:
-     NetworkSecurityPerimeterLoggingConfigurationsOperations operations
-    :vartype network_security_perimeter_logging_configurations:
-     azure.mgmt.network.aio.operations.NetworkSecurityPerimeterLoggingConfigurationsOperations
-    :ivar network_security_perimeter_operation_statuses:
-     NetworkSecurityPerimeterOperationStatusesOperations operations
-    :vartype network_security_perimeter_operation_statuses:
-     azure.mgmt.network.aio.operations.NetworkSecurityPerimeterOperationStatusesOperations
-    :ivar network_security_perimeter_service_tags: NetworkSecurityPerimeterServiceTagsOperations
+    :ivar network_watchers: NetworkWatchersOperations operations
+    :vartype network_watchers: azure.mgmt.network.aio.operations.NetworkWatchersOperations
+    :ivar connection_monitors: ConnectionMonitorsOperations operations
+    :vartype connection_monitors: azure.mgmt.network.aio.operations.ConnectionMonitorsOperations
+    :ivar flow_logs: FlowLogsOperations operations
+    :vartype flow_logs: azure.mgmt.network.aio.operations.FlowLogsOperations
+    :ivar packet_captures: PacketCapturesOperations operations
+    :vartype packet_captures: azure.mgmt.network.aio.operations.PacketCapturesOperations
+    :ivar ip_allocations: IpAllocationsOperations operations
+    :vartype ip_allocations: azure.mgmt.network.aio.operations.IpAllocationsOperations
+    :ivar application_security_groups: ApplicationSecurityGroupsOperations operations
+    :vartype application_security_groups:
+     azure.mgmt.network.aio.operations.ApplicationSecurityGroupsOperations
+    :ivar bastion_hosts: BastionHostsOperations operations
+    :vartype bastion_hosts: azure.mgmt.network.aio.operations.BastionHostsOperations
+    :ivar custom_ip_prefixes: CustomIPPrefixesOperations operations
+    :vartype custom_ip_prefixes: azure.mgmt.network.aio.operations.CustomIPPrefixesOperations
+    :ivar ddos_protection_plans: DdosProtectionPlansOperations operations
+    :vartype ddos_protection_plans: azure.mgmt.network.aio.operations.DdosProtectionPlansOperations
+    :ivar dscp_configuration: DscpConfigurationOperations operations
+    :vartype dscp_configuration: azure.mgmt.network.aio.operations.DscpConfigurationOperations
+    :ivar ip_groups: IpGroupsOperations operations
+    :vartype ip_groups: azure.mgmt.network.aio.operations.IpGroupsOperations
+    :ivar private_link_services: PrivateLinkServicesOperations operations
+    :vartype private_link_services: azure.mgmt.network.aio.operations.PrivateLinkServicesOperations
+    :ivar available_delegations: AvailableDelegationsOperations operations
+    :vartype available_delegations:
+     azure.mgmt.network.aio.operations.AvailableDelegationsOperations
+    :ivar available_private_endpoint_types: AvailablePrivateEndpointTypesOperations operations
+    :vartype available_private_endpoint_types:
+     azure.mgmt.network.aio.operations.AvailablePrivateEndpointTypesOperations
+    :ivar available_service_aliases: AvailableServiceAliasesOperations operations
+    :vartype available_service_aliases:
+     azure.mgmt.network.aio.operations.AvailableServiceAliasesOperations
+    :ivar service_tag_information: ServiceTagInformationOperations operations
+    :vartype service_tag_information:
+     azure.mgmt.network.aio.operations.ServiceTagInformationOperations
+    :ivar service_tags: ServiceTagsOperations operations
+    :vartype service_tags: azure.mgmt.network.aio.operations.ServiceTagsOperations
+    :ivar usages: UsagesOperations operations
+    :vartype usages: azure.mgmt.network.aio.operations.UsagesOperations
+    :ivar available_endpoint_services: AvailableEndpointServicesOperations operations
+    :vartype available_endpoint_services:
+     azure.mgmt.network.aio.operations.AvailableEndpointServicesOperations
+    :ivar nat_gateways: NatGatewaysOperations operations
+    :vartype nat_gateways: azure.mgmt.network.aio.operations.NatGatewaysOperations
+    :ivar network_interfaces: NetworkInterfacesOperations operations
+    :vartype network_interfaces: azure.mgmt.network.aio.operations.NetworkInterfacesOperations
+    :ivar network_profiles: NetworkProfilesOperations operations
+    :vartype network_profiles: azure.mgmt.network.aio.operations.NetworkProfilesOperations
+    :ivar network_security_groups: NetworkSecurityGroupsOperations operations
+    :vartype network_security_groups:
+     azure.mgmt.network.aio.operations.NetworkSecurityGroupsOperations
+    :ivar virtual_appliance_skus: VirtualApplianceSkusOperations operations
+    :vartype virtual_appliance_skus:
+     azure.mgmt.network.aio.operations.VirtualApplianceSkusOperations
+    :ivar network_virtual_appliances: NetworkVirtualAppliancesOperations operations
+    :vartype network_virtual_appliances:
+     azure.mgmt.network.aio.operations.NetworkVirtualAppliancesOperations
+    :ivar private_endpoints: PrivateEndpointsOperations operations
+    :vartype private_endpoints: azure.mgmt.network.aio.operations.PrivateEndpointsOperations
+    :ivar public_ip_addresses: PublicIPAddressesOperations operations
+    :vartype public_ip_addresses: azure.mgmt.network.aio.operations.PublicIPAddressesOperations
+    :ivar public_ip_prefixes: PublicIPPrefixesOperations operations
+    :vartype public_ip_prefixes: azure.mgmt.network.aio.operations.PublicIPPrefixesOperations
+    :ivar route_tables: RouteTablesOperations operations
+    :vartype route_tables: azure.mgmt.network.aio.operations.RouteTablesOperations
+    :ivar security_partner_providers: SecurityPartnerProvidersOperations operations
+    :vartype security_partner_providers:
+     azure.mgmt.network.aio.operations.SecurityPartnerProvidersOperations
+    :ivar virtual_networks: VirtualNetworksOperations operations
+    :vartype virtual_networks: azure.mgmt.network.aio.operations.VirtualNetworksOperations
+    :ivar virtual_routers: VirtualRoutersOperations operations
+    :vartype virtual_routers: azure.mgmt.network.aio.operations.VirtualRoutersOperations
+    :ivar ddos_custom_policies: DdosCustomPoliciesOperations operations
+    :vartype ddos_custom_policies: azure.mgmt.network.aio.operations.DdosCustomPoliciesOperations
+    :ivar available_resource_group_delegations: AvailableResourceGroupDelegationsOperations
      operations
-    :vartype network_security_perimeter_service_tags:
-     azure.mgmt.network.aio.operations.NetworkSecurityPerimeterServiceTagsOperations
+    :vartype available_resource_group_delegations:
+     azure.mgmt.network.aio.operations.AvailableResourceGroupDelegationsOperations
+    :ivar network_interface_ip_configurations: NetworkInterfaceIPConfigurationsOperations
+     operations
+    :vartype network_interface_ip_configurations:
+     azure.mgmt.network.aio.operations.NetworkInterfaceIPConfigurationsOperations
+    :ivar network_interface_load_balancers: NetworkInterfaceLoadBalancersOperations operations
+    :vartype network_interface_load_balancers:
+     azure.mgmt.network.aio.operations.NetworkInterfaceLoadBalancersOperations
+    :ivar network_interface_tap_configurations: NetworkInterfaceTapConfigurationsOperations
+     operations
+    :vartype network_interface_tap_configurations:
+     azure.mgmt.network.aio.operations.NetworkInterfaceTapConfigurationsOperations
+    :ivar ipam_pools: IpamPoolsOperations operations
+    :vartype ipam_pools: azure.mgmt.network.aio.operations.IpamPoolsOperations
+    :ivar static_cidrs: StaticCidrsOperations operations
+    :vartype static_cidrs: azure.mgmt.network.aio.operations.StaticCidrsOperations
+    :ivar verifier_workspaces: VerifierWorkspacesOperations operations
+    :vartype verifier_workspaces: azure.mgmt.network.aio.operations.VerifierWorkspacesOperations
     :ivar reachability_analysis_intents: ReachabilityAnalysisIntentsOperations operations
     :vartype reachability_analysis_intents:
      azure.mgmt.network.aio.operations.ReachabilityAnalysisIntentsOperations
     :ivar reachability_analysis_runs: ReachabilityAnalysisRunsOperations operations
     :vartype reachability_analysis_runs:
      azure.mgmt.network.aio.operations.ReachabilityAnalysisRunsOperations
-    :ivar verifier_workspaces: VerifierWorkspacesOperations operations
-    :vartype verifier_workspaces: azure.mgmt.network.aio.operations.VerifierWorkspacesOperations
-    :ivar network_virtual_appliances: NetworkVirtualAppliancesOperations operations
-    :vartype network_virtual_appliances:
-     azure.mgmt.network.aio.operations.NetworkVirtualAppliancesOperations
+    :ivar default_security_rules: DefaultSecurityRulesOperations operations
+    :vartype default_security_rules:
+     azure.mgmt.network.aio.operations.DefaultSecurityRulesOperations
+    :ivar security_rules: SecurityRulesOperations operations
+    :vartype security_rules: azure.mgmt.network.aio.operations.SecurityRulesOperations
+    :ivar inbound_security_rule: InboundSecurityRuleOperations operations
+    :vartype inbound_security_rule: azure.mgmt.network.aio.operations.InboundSecurityRuleOperations
     :ivar virtual_appliance_sites: VirtualApplianceSitesOperations operations
     :vartype virtual_appliance_sites:
      azure.mgmt.network.aio.operations.VirtualApplianceSitesOperations
-    :ivar virtual_appliance_skus: VirtualApplianceSkusOperations operations
-    :vartype virtual_appliance_skus:
-     azure.mgmt.network.aio.operations.VirtualApplianceSkusOperations
-    :ivar inbound_security_rule: InboundSecurityRuleOperations operations
-    :vartype inbound_security_rule: azure.mgmt.network.aio.operations.InboundSecurityRuleOperations
-    :ivar network_watchers: NetworkWatchersOperations operations
-    :vartype network_watchers: azure.mgmt.network.aio.operations.NetworkWatchersOperations
-    :ivar packet_captures: PacketCapturesOperations operations
-    :vartype packet_captures: azure.mgmt.network.aio.operations.PacketCapturesOperations
-    :ivar connection_monitors: ConnectionMonitorsOperations operations
-    :vartype connection_monitors: azure.mgmt.network.aio.operations.ConnectionMonitorsOperations
-    :ivar flow_logs: FlowLogsOperations operations
-    :vartype flow_logs: azure.mgmt.network.aio.operations.FlowLogsOperations
-    :ivar operations: Operations operations
-    :vartype operations: azure.mgmt.network.aio.operations.Operations
-    :ivar private_endpoints: PrivateEndpointsOperations operations
-    :vartype private_endpoints: azure.mgmt.network.aio.operations.PrivateEndpointsOperations
-    :ivar available_private_endpoint_types: AvailablePrivateEndpointTypesOperations operations
-    :vartype available_private_endpoint_types:
-     azure.mgmt.network.aio.operations.AvailablePrivateEndpointTypesOperations
     :ivar private_dns_zone_groups: PrivateDnsZoneGroupsOperations operations
     :vartype private_dns_zone_groups:
      azure.mgmt.network.aio.operations.PrivateDnsZoneGroupsOperations
-    :ivar private_link_services: PrivateLinkServicesOperations operations
-    :vartype private_link_services: azure.mgmt.network.aio.operations.PrivateLinkServicesOperations
-    :ivar public_ip_prefixes: PublicIPPrefixesOperations operations
-    :vartype public_ip_prefixes: azure.mgmt.network.aio.operations.PublicIPPrefixesOperations
-    :ivar route_filters: RouteFiltersOperations operations
-    :vartype route_filters: azure.mgmt.network.aio.operations.RouteFiltersOperations
-    :ivar route_filter_rules: RouteFilterRulesOperations operations
-    :vartype route_filter_rules: azure.mgmt.network.aio.operations.RouteFilterRulesOperations
-    :ivar route_tables: RouteTablesOperations operations
-    :vartype route_tables: azure.mgmt.network.aio.operations.RouteTablesOperations
     :ivar routes: RoutesOperations operations
     :vartype routes: azure.mgmt.network.aio.operations.RoutesOperations
-    :ivar security_partner_providers: SecurityPartnerProvidersOperations operations
-    :vartype security_partner_providers:
-     azure.mgmt.network.aio.operations.SecurityPartnerProvidersOperations
-    :ivar bgp_service_communities: BgpServiceCommunitiesOperations operations
-    :vartype bgp_service_communities:
-     azure.mgmt.network.aio.operations.BgpServiceCommunitiesOperations
-    :ivar service_endpoint_policies: ServiceEndpointPoliciesOperations operations
-    :vartype service_endpoint_policies:
-     azure.mgmt.network.aio.operations.ServiceEndpointPoliciesOperations
-    :ivar service_endpoint_policy_definitions: ServiceEndpointPolicyDefinitionsOperations
-     operations
-    :vartype service_endpoint_policy_definitions:
-     azure.mgmt.network.aio.operations.ServiceEndpointPolicyDefinitionsOperations
-    :ivar service_gateways: ServiceGatewaysOperations operations
-    :vartype service_gateways: azure.mgmt.network.aio.operations.ServiceGatewaysOperations
-    :ivar service_tags: ServiceTagsOperations operations
-    :vartype service_tags: azure.mgmt.network.aio.operations.ServiceTagsOperations
-    :ivar service_tag_information: ServiceTagInformationOperations operations
-    :vartype service_tag_information:
-     azure.mgmt.network.aio.operations.ServiceTagInformationOperations
-    :ivar usages: UsagesOperations operations
-    :vartype usages: azure.mgmt.network.aio.operations.UsagesOperations
-    :ivar virtual_networks: VirtualNetworksOperations operations
-    :vartype virtual_networks: azure.mgmt.network.aio.operations.VirtualNetworksOperations
     :ivar subnets: SubnetsOperations operations
     :vartype subnets: azure.mgmt.network.aio.operations.SubnetsOperations
     :ivar resource_navigation_links: ResourceNavigationLinksOperations operations
@@ -543,74 +564,27 @@ class NetworkManagementClient(
     :ivar virtual_network_peerings: VirtualNetworkPeeringsOperations operations
     :vartype virtual_network_peerings:
      azure.mgmt.network.aio.operations.VirtualNetworkPeeringsOperations
-    :ivar virtual_network_appliances: VirtualNetworkAppliancesOperations operations
-    :vartype virtual_network_appliances:
-     azure.mgmt.network.aio.operations.VirtualNetworkAppliancesOperations
-    :ivar virtual_network_gateways: VirtualNetworkGatewaysOperations operations
-    :vartype virtual_network_gateways:
-     azure.mgmt.network.aio.operations.VirtualNetworkGatewaysOperations
-    :ivar virtual_network_gateway_connections: VirtualNetworkGatewayConnectionsOperations
-     operations
-    :vartype virtual_network_gateway_connections:
-     azure.mgmt.network.aio.operations.VirtualNetworkGatewayConnectionsOperations
-    :ivar local_network_gateways: LocalNetworkGatewaysOperations operations
-    :vartype local_network_gateways:
-     azure.mgmt.network.aio.operations.LocalNetworkGatewaysOperations
-    :ivar virtual_network_gateway_nat_rules: VirtualNetworkGatewayNatRulesOperations operations
-    :vartype virtual_network_gateway_nat_rules:
-     azure.mgmt.network.aio.operations.VirtualNetworkGatewayNatRulesOperations
-    :ivar virtual_network_taps: VirtualNetworkTapsOperations operations
-    :vartype virtual_network_taps: azure.mgmt.network.aio.operations.VirtualNetworkTapsOperations
-    :ivar virtual_routers: VirtualRoutersOperations operations
-    :vartype virtual_routers: azure.mgmt.network.aio.operations.VirtualRoutersOperations
     :ivar virtual_router_peerings: VirtualRouterPeeringsOperations operations
     :vartype virtual_router_peerings:
      azure.mgmt.network.aio.operations.VirtualRouterPeeringsOperations
-    :ivar virtual_wans: VirtualWansOperations operations
-    :vartype virtual_wans: azure.mgmt.network.aio.operations.VirtualWansOperations
-    :ivar vpn_sites: VpnSitesOperations operations
-    :vartype vpn_sites: azure.mgmt.network.aio.operations.VpnSitesOperations
-    :ivar vpn_site_links: VpnSiteLinksOperations operations
-    :vartype vpn_site_links: azure.mgmt.network.aio.operations.VpnSiteLinksOperations
-    :ivar vpn_sites_configuration: VpnSitesConfigurationOperations operations
-    :vartype vpn_sites_configuration:
-     azure.mgmt.network.aio.operations.VpnSitesConfigurationOperations
-    :ivar vpn_server_configurations: VpnServerConfigurationsOperations operations
-    :vartype vpn_server_configurations:
-     azure.mgmt.network.aio.operations.VpnServerConfigurationsOperations
-    :ivar configuration_policy_groups: ConfigurationPolicyGroupsOperations operations
-    :vartype configuration_policy_groups:
-     azure.mgmt.network.aio.operations.ConfigurationPolicyGroupsOperations
-    :ivar virtual_hubs: VirtualHubsOperations operations
-    :vartype virtual_hubs: azure.mgmt.network.aio.operations.VirtualHubsOperations
-    :ivar route_maps: RouteMapsOperations operations
-    :vartype route_maps: azure.mgmt.network.aio.operations.RouteMapsOperations
-    :ivar hub_virtual_network_connections: HubVirtualNetworkConnectionsOperations operations
-    :vartype hub_virtual_network_connections:
-     azure.mgmt.network.aio.operations.HubVirtualNetworkConnectionsOperations
-    :ivar vpn_gateways: VpnGatewaysOperations operations
-    :vartype vpn_gateways: azure.mgmt.network.aio.operations.VpnGatewaysOperations
-    :ivar vpn_link_connections: VpnLinkConnectionsOperations operations
-    :vartype vpn_link_connections: azure.mgmt.network.aio.operations.VpnLinkConnectionsOperations
-    :ivar vpn_connections: VpnConnectionsOperations operations
-    :vartype vpn_connections: azure.mgmt.network.aio.operations.VpnConnectionsOperations
-    :ivar vpn_site_link_connections: VpnSiteLinkConnectionsOperations operations
-    :vartype vpn_site_link_connections:
-     azure.mgmt.network.aio.operations.VpnSiteLinkConnectionsOperations
-    :ivar nat_rules: NatRulesOperations operations
-    :vartype nat_rules: azure.mgmt.network.aio.operations.NatRulesOperations
-    :ivar p2_svpn_gateways: P2SVpnGatewaysOperations operations
-    :vartype p2_svpn_gateways: azure.mgmt.network.aio.operations.P2SVpnGatewaysOperations
-    :ivar vpn_server_configurations_associated_with_virtual_wan:
-     VpnServerConfigurationsAssociatedWithVirtualWanOperations operations
-    :vartype vpn_server_configurations_associated_with_virtual_wan:
-     azure.mgmt.network.aio.operations.VpnServerConfigurationsAssociatedWithVirtualWanOperations
-    :ivar virtual_hub_route_table_v2_s: VirtualHubRouteTableV2SOperations operations
-    :vartype virtual_hub_route_table_v2_s:
-     azure.mgmt.network.aio.operations.VirtualHubRouteTableV2SOperations
+    :ivar vip_swap: VipSwapOperations operations
+    :vartype vip_swap: azure.mgmt.network.aio.operations.VipSwapOperations
     :ivar express_route_gateways: ExpressRouteGatewaysOperations operations
     :vartype express_route_gateways:
      azure.mgmt.network.aio.operations.ExpressRouteGatewaysOperations
+    :ivar p2_svpn_gateways: P2SVpnGatewaysOperations operations
+    :vartype p2_svpn_gateways: azure.mgmt.network.aio.operations.P2SVpnGatewaysOperations
+    :ivar virtual_hubs: VirtualHubsOperations operations
+    :vartype virtual_hubs: azure.mgmt.network.aio.operations.VirtualHubsOperations
+    :ivar virtual_wans: VirtualWansOperations operations
+    :vartype virtual_wans: azure.mgmt.network.aio.operations.VirtualWansOperations
+    :ivar vpn_gateways: VpnGatewaysOperations operations
+    :vartype vpn_gateways: azure.mgmt.network.aio.operations.VpnGatewaysOperations
+    :ivar vpn_server_configurations: VpnServerConfigurationsOperations operations
+    :vartype vpn_server_configurations:
+     azure.mgmt.network.aio.operations.VpnServerConfigurationsOperations
+    :ivar vpn_sites: VpnSitesOperations operations
+    :vartype vpn_sites: azure.mgmt.network.aio.operations.VpnSitesOperations
     :ivar express_route_connections: ExpressRouteConnectionsOperations operations
     :vartype express_route_connections:
      azure.mgmt.network.aio.operations.ExpressRouteConnectionsOperations
@@ -618,26 +592,51 @@ class NetworkManagementClient(
      operations
     :vartype network_virtual_appliance_connections:
      azure.mgmt.network.aio.operations.NetworkVirtualApplianceConnectionsOperations
-    :ivar virtual_hub_bgp_connection: VirtualHubBgpConnectionOperations operations
-    :vartype virtual_hub_bgp_connection:
-     azure.mgmt.network.aio.operations.VirtualHubBgpConnectionOperations
     :ivar virtual_hub_bgp_connections: VirtualHubBgpConnectionsOperations operations
     :vartype virtual_hub_bgp_connections:
      azure.mgmt.network.aio.operations.VirtualHubBgpConnectionsOperations
+    :ivar virtual_hub_bgp_connection: VirtualHubBgpConnectionOperations operations
+    :vartype virtual_hub_bgp_connection:
+     azure.mgmt.network.aio.operations.VirtualHubBgpConnectionOperations
+    :ivar hub_route_tables: HubRouteTablesOperations operations
+    :vartype hub_route_tables: azure.mgmt.network.aio.operations.HubRouteTablesOperations
+    :ivar hub_virtual_network_connections: HubVirtualNetworkConnectionsOperations operations
+    :vartype hub_virtual_network_connections:
+     azure.mgmt.network.aio.operations.HubVirtualNetworkConnectionsOperations
     :ivar virtual_hub_ip_configuration: VirtualHubIpConfigurationOperations operations
     :vartype virtual_hub_ip_configuration:
      azure.mgmt.network.aio.operations.VirtualHubIpConfigurationOperations
-    :ivar hub_route_tables: HubRouteTablesOperations operations
-    :vartype hub_route_tables: azure.mgmt.network.aio.operations.HubRouteTablesOperations
+    :ivar route_maps: RouteMapsOperations operations
+    :vartype route_maps: azure.mgmt.network.aio.operations.RouteMapsOperations
+    :ivar virtual_hub_route_table_v2_s: VirtualHubRouteTableV2SOperations operations
+    :vartype virtual_hub_route_table_v2_s:
+     azure.mgmt.network.aio.operations.VirtualHubRouteTableV2SOperations
     :ivar routing_intent: RoutingIntentOperations operations
     :vartype routing_intent: azure.mgmt.network.aio.operations.RoutingIntentOperations
-    :ivar web_application_firewall_policies: WebApplicationFirewallPoliciesOperations operations
-    :vartype web_application_firewall_policies:
-     azure.mgmt.network.aio.operations.WebApplicationFirewallPoliciesOperations
+    :ivar vpn_sites_configuration: VpnSitesConfigurationOperations operations
+    :vartype vpn_sites_configuration:
+     azure.mgmt.network.aio.operations.VpnSitesConfigurationOperations
+    :ivar vpn_server_configurations_associated_with_virtual_wan:
+     VpnServerConfigurationsAssociatedWithVirtualWanOperations operations
+    :vartype vpn_server_configurations_associated_with_virtual_wan:
+     azure.mgmt.network.aio.operations.VpnServerConfigurationsAssociatedWithVirtualWanOperations
+    :ivar nat_rules: NatRulesOperations operations
+    :vartype nat_rules: azure.mgmt.network.aio.operations.NatRulesOperations
+    :ivar vpn_connections: VpnConnectionsOperations operations
+    :vartype vpn_connections: azure.mgmt.network.aio.operations.VpnConnectionsOperations
+    :ivar vpn_link_connections: VpnLinkConnectionsOperations operations
+    :vartype vpn_link_connections: azure.mgmt.network.aio.operations.VpnLinkConnectionsOperations
+    :ivar vpn_site_link_connections: VpnSiteLinkConnectionsOperations operations
+    :vartype vpn_site_link_connections:
+     azure.mgmt.network.aio.operations.VpnSiteLinkConnectionsOperations
+    :ivar configuration_policy_groups: ConfigurationPolicyGroupsOperations operations
+    :vartype configuration_policy_groups:
+     azure.mgmt.network.aio.operations.ConfigurationPolicyGroupsOperations
+    :ivar vpn_site_links: VpnSiteLinksOperations operations
+    :vartype vpn_site_links: azure.mgmt.network.aio.operations.VpnSiteLinksOperations
     :param credential: Credential needed for the client to connect to Azure. Required.
     :type credential: ~azure.core.credentials_async.AsyncTokenCredential
-    :param subscription_id: The subscription credentials which uniquely identify the Microsoft
-     Azure subscription. The subscription ID forms part of the URI for every service call. Required.
+    :param subscription_id: The ID of the target subscription. The value must be an UUID. Required.
     :type subscription_id: str
     :param base_url: Service URL. Default value is None.
     :type base_url: str
@@ -696,59 +695,81 @@ class NetworkManagementClient(
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
         self._serialize.client_side_validation = False
+        self.web_application_firewall_policies = WebApplicationFirewallPoliciesOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
         self.application_gateways = ApplicationGatewaysOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
-        self.application_gateway_private_link_resources = ApplicationGatewayPrivateLinkResourcesOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
-        self.application_gateway_private_endpoint_connections = ApplicationGatewayPrivateEndpointConnectionsOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
-        self.application_gateway_waf_dynamic_manifests_default = ApplicationGatewayWafDynamicManifestsDefaultOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
         self.application_gateway_waf_dynamic_manifests = ApplicationGatewayWafDynamicManifestsOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
-        self.application_security_groups = ApplicationSecurityGroupsOperations(
+        self.application_gateway_waf_dynamic_manifests_default = ApplicationGatewayWafDynamicManifestsDefaultOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
-        self.available_delegations = AvailableDelegationsOperations(
+        self.application_gateway_private_endpoint_connections = ApplicationGatewayPrivateEndpointConnectionsOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
-        self.available_resource_group_delegations = AvailableResourceGroupDelegationsOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
-        self.available_service_aliases = AvailableServiceAliasesOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
-        self.azure_firewalls = AzureFirewallsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.azure_firewall_fqdn_tags = AzureFirewallFqdnTagsOperations(
+        self.application_gateway_private_link_resources = ApplicationGatewayPrivateLinkResourcesOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
         self.web_categories = WebCategoriesOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.bastion_hosts = BastionHostsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.network_interfaces = NetworkInterfacesOperations(
+        self.firewall_policies = FirewallPoliciesOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
-        self.public_ip_addresses = PublicIPAddressesOperations(
+        self.service_gateways = ServiceGatewaysOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
-        self.vip_swap = VipSwapOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.custom_ip_prefixes = CustomIPPrefixesOperations(
+        self.virtual_network_appliances = VirtualNetworkAppliancesOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
-        self.ddos_custom_policies = DdosCustomPoliciesOperations(
+        self.firewall_policy_deployments = FirewallPolicyDeploymentsOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
-        self.ddos_protection_plans = DdosProtectionPlansOperations(
+        self.firewall_policy_drafts = FirewallPolicyDraftsOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
-        self.dscp_configuration = DscpConfigurationOperations(
+        self.firewall_policy_idps_signatures_filter_values = FirewallPolicyIdpsSignaturesFilterValuesOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
-        self.available_endpoint_services = AvailableEndpointServicesOperations(
+        self.firewall_policy_idps_signatures = FirewallPolicyIdpsSignaturesOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.firewall_policy_rule_collection_groups = FirewallPolicyRuleCollectionGroupsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.firewall_policy_rule_collection_group_drafts = FirewallPolicyRuleCollectionGroupDraftsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.firewall_policy_idps_signatures_overrides = FirewallPolicyIdpsSignaturesOverridesOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.express_route_ports = ExpressRoutePortsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.express_route_ports_locations = ExpressRoutePortsLocationsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.bgp_service_communities = BgpServiceCommunitiesOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.express_route_circuits = ExpressRouteCircuitsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.express_route_cross_connections = ExpressRouteCrossConnectionsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.express_route_provider_ports_location = ExpressRouteProviderPortsLocationOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.express_route_service_providers = ExpressRouteServiceProvidersOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.route_filters = RouteFiltersOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.service_endpoint_policies = ServiceEndpointPoliciesOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.express_route_links = ExpressRouteLinksOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
         self.express_route_circuit_authorizations = ExpressRouteCircuitAuthorizationsOperations(
@@ -763,61 +784,22 @@ class NetworkManagementClient(
         self.peer_express_route_circuit_connections = PeerExpressRouteCircuitConnectionsOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
-        self.express_route_circuits = ExpressRouteCircuitsOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
-        self.express_route_service_providers = ExpressRouteServiceProvidersOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
-        self.express_route_cross_connections = ExpressRouteCrossConnectionsOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
         self.express_route_cross_connection_peerings = ExpressRouteCrossConnectionPeeringsOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
-        self.express_route_ports_locations = ExpressRoutePortsLocationsOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
-        self.express_route_ports = ExpressRoutePortsOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
-        self.express_route_links = ExpressRouteLinksOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
         self.express_route_port_authorizations = ExpressRoutePortAuthorizationsOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
-        self.express_route_provider_ports_location = ExpressRouteProviderPortsLocationOperations(
+        self.route_filter_rules = RouteFilterRulesOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
-        self.firewall_policies = FirewallPoliciesOperations(
+        self.service_endpoint_policy_definitions = ServiceEndpointPolicyDefinitionsOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
-        self.firewall_policy_rule_collection_groups = FirewallPolicyRuleCollectionGroupsOperations(
+        self.azure_firewall_fqdn_tags = AzureFirewallFqdnTagsOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
-        self.firewall_policy_idps_signatures = FirewallPolicyIdpsSignaturesOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
-        self.firewall_policy_idps_signatures_overrides = FirewallPolicyIdpsSignaturesOverridesOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
-        self.firewall_policy_idps_signatures_filter_values = FirewallPolicyIdpsSignaturesFilterValuesOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
-        self.firewall_policy_drafts = FirewallPolicyDraftsOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
-        self.firewall_policy_deployments = FirewallPolicyDeploymentsOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
-        self.firewall_policy_rule_collection_group_drafts = FirewallPolicyRuleCollectionGroupDraftsOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
-        self.ipam_pools = IpamPoolsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.static_cidrs = StaticCidrsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.ip_allocations = IpAllocationsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.ip_groups = IpGroupsOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.azure_firewalls = AzureFirewallsOperations(self._client, self._config, self._serialize, self._deserialize)
         self.load_balancers = LoadBalancersOperations(self._client, self._config, self._serialize, self._deserialize)
         self.load_balancer_backend_address_pools = LoadBalancerBackendAddressPoolsOperations(
             self._client, self._config, self._serialize, self._deserialize
@@ -831,23 +813,35 @@ class NetworkManagementClient(
         self.load_balancer_load_balancing_rules = LoadBalancerLoadBalancingRulesOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
-        self.load_balancer_outbound_rules = LoadBalancerOutboundRulesOperations(
+        self.load_balancer_network_interfaces = LoadBalancerNetworkInterfacesOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
-        self.load_balancer_network_interfaces = LoadBalancerNetworkInterfacesOperations(
+        self.load_balancer_outbound_rules = LoadBalancerOutboundRulesOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
         self.load_balancer_probes = LoadBalancerProbesOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
-        self.nat_gateways = NatGatewaysOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.network_interface_ip_configurations = NetworkInterfaceIPConfigurationsOperations(
+        self.virtual_network_taps = VirtualNetworkTapsOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
-        self.network_interface_load_balancers = NetworkInterfaceLoadBalancersOperations(
+        self.virtual_network_gateway_connections = VirtualNetworkGatewayConnectionsOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
-        self.network_interface_tap_configurations = NetworkInterfaceTapConfigurationsOperations(
+        self.virtual_network_gateways = VirtualNetworkGatewaysOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.local_network_gateways = LocalNetworkGatewaysOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.virtual_network_gateway_nat_rules = VirtualNetworkGatewayNatRulesOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.operations = Operations(self._client, self._config, self._serialize, self._deserialize)
+        self.management_group_network_manager_connections = ManagementGroupNetworkManagerConnectionsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.subscription_network_manager_connections = SubscriptionNetworkManagerConnectionsOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
         self.network_managers = NetworkManagersOperations(
@@ -856,16 +850,10 @@ class NetworkManagementClient(
         self.network_manager_commits = NetworkManagerCommitsOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
-        self.network_manager_deployment_status = NetworkManagerDeploymentStatusOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
-        self.subscription_network_manager_connections = SubscriptionNetworkManagerConnectionsOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
-        self.management_group_network_manager_connections = ManagementGroupNetworkManagerConnectionsOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
         self.connectivity_configurations = ConnectivityConfigurationsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.network_manager_deployment_status = NetworkManagerDeploymentStatusOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
         self.network_groups = NetworkGroupsOperations(self._client, self._config, self._serialize, self._deserialize)
@@ -896,18 +884,30 @@ class NetworkManagementClient(
         self.security_user_rules = SecurityUserRulesOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
-        self.network_profiles = NetworkProfilesOperations(
+        self.network_security_perimeter_operation_statuses = NetworkSecurityPerimeterOperationStatusesOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
-        self.network_security_groups = NetworkSecurityGroupsOperations(
+        self.network_security_perimeter_service_tags = NetworkSecurityPerimeterServiceTagsOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
-        self.security_rules = SecurityRulesOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.default_security_rules = DefaultSecurityRulesOperations(
-            self._client, self._config, self._serialize, self._deserialize
+        self.network_security_perimeter_associable_resource_types = (
+            NetworkSecurityPerimeterAssociableResourceTypesOperations(
+                self._client, self._config, self._serialize, self._deserialize
+            )
         )
         self.network_security_perimeters = NetworkSecurityPerimetersOperations(
             self._client, self._config, self._serialize, self._deserialize
+        )
+        self.network_security_perimeter_link_references = NetworkSecurityPerimeterLinkReferencesOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.network_security_perimeter_links = NetworkSecurityPerimeterLinksOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.network_security_perimeter_logging_configurations = (
+            NetworkSecurityPerimeterLoggingConfigurationsOperations(
+                self._client, self._config, self._serialize, self._deserialize
+            )
         )
         self.network_security_perimeter_profiles = NetworkSecurityPerimeterProfilesOperations(
             self._client, self._config, self._serialize, self._deserialize
@@ -918,26 +918,100 @@ class NetworkManagementClient(
         self.network_security_perimeter_associations = NetworkSecurityPerimeterAssociationsOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
-        self.network_security_perimeter_associable_resource_types = (
-            NetworkSecurityPerimeterAssociableResourceTypesOperations(
-                self._client, self._config, self._serialize, self._deserialize
-            )
-        )
-        self.network_security_perimeter_links = NetworkSecurityPerimeterLinksOperations(
+        self.network_watchers = NetworkWatchersOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
-        self.network_security_perimeter_link_references = NetworkSecurityPerimeterLinkReferencesOperations(
+        self.connection_monitors = ConnectionMonitorsOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
-        self.network_security_perimeter_logging_configurations = (
-            NetworkSecurityPerimeterLoggingConfigurationsOperations(
-                self._client, self._config, self._serialize, self._deserialize
-            )
-        )
-        self.network_security_perimeter_operation_statuses = NetworkSecurityPerimeterOperationStatusesOperations(
+        self.flow_logs = FlowLogsOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.packet_captures = PacketCapturesOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.ip_allocations = IpAllocationsOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.application_security_groups = ApplicationSecurityGroupsOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
-        self.network_security_perimeter_service_tags = NetworkSecurityPerimeterServiceTagsOperations(
+        self.bastion_hosts = BastionHostsOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.custom_ip_prefixes = CustomIPPrefixesOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.ddos_protection_plans = DdosProtectionPlansOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.dscp_configuration = DscpConfigurationOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.ip_groups = IpGroupsOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.private_link_services = PrivateLinkServicesOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.available_delegations = AvailableDelegationsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.available_private_endpoint_types = AvailablePrivateEndpointTypesOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.available_service_aliases = AvailableServiceAliasesOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.service_tag_information = ServiceTagInformationOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.service_tags = ServiceTagsOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.usages = UsagesOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.available_endpoint_services = AvailableEndpointServicesOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.nat_gateways = NatGatewaysOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.network_interfaces = NetworkInterfacesOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.network_profiles = NetworkProfilesOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.network_security_groups = NetworkSecurityGroupsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.virtual_appliance_skus = VirtualApplianceSkusOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.network_virtual_appliances = NetworkVirtualAppliancesOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.private_endpoints = PrivateEndpointsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.public_ip_addresses = PublicIPAddressesOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.public_ip_prefixes = PublicIPPrefixesOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.route_tables = RouteTablesOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.security_partner_providers = SecurityPartnerProvidersOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.virtual_networks = VirtualNetworksOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.virtual_routers = VirtualRoutersOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.ddos_custom_policies = DdosCustomPoliciesOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.available_resource_group_delegations = AvailableResourceGroupDelegationsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.network_interface_ip_configurations = NetworkInterfaceIPConfigurationsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.network_interface_load_balancers = NetworkInterfaceLoadBalancersOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.network_interface_tap_configurations = NetworkInterfaceTapConfigurationsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.ipam_pools = IpamPoolsOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.static_cidrs = StaticCidrsOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.verifier_workspaces = VerifierWorkspacesOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
         self.reachability_analysis_intents = ReachabilityAnalysisIntentsOperations(
@@ -946,74 +1020,20 @@ class NetworkManagementClient(
         self.reachability_analysis_runs = ReachabilityAnalysisRunsOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
-        self.verifier_workspaces = VerifierWorkspacesOperations(
+        self.default_security_rules = DefaultSecurityRulesOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
-        self.network_virtual_appliances = NetworkVirtualAppliancesOperations(
+        self.security_rules = SecurityRulesOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.inbound_security_rule = InboundSecurityRuleOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
         self.virtual_appliance_sites = VirtualApplianceSitesOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
-        self.virtual_appliance_skus = VirtualApplianceSkusOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
-        self.inbound_security_rule = InboundSecurityRuleOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
-        self.network_watchers = NetworkWatchersOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
-        self.packet_captures = PacketCapturesOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.connection_monitors = ConnectionMonitorsOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
-        self.flow_logs = FlowLogsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.operations = Operations(self._client, self._config, self._serialize, self._deserialize)
-        self.private_endpoints = PrivateEndpointsOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
-        self.available_private_endpoint_types = AvailablePrivateEndpointTypesOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
         self.private_dns_zone_groups = PrivateDnsZoneGroupsOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
-        self.private_link_services = PrivateLinkServicesOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
-        self.public_ip_prefixes = PublicIPPrefixesOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
-        self.route_filters = RouteFiltersOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.route_filter_rules = RouteFilterRulesOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
-        self.route_tables = RouteTablesOperations(self._client, self._config, self._serialize, self._deserialize)
         self.routes = RoutesOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.security_partner_providers = SecurityPartnerProvidersOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
-        self.bgp_service_communities = BgpServiceCommunitiesOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
-        self.service_endpoint_policies = ServiceEndpointPoliciesOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
-        self.service_endpoint_policy_definitions = ServiceEndpointPolicyDefinitionsOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
-        self.service_gateways = ServiceGatewaysOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
-        self.service_tags = ServiceTagsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.service_tag_information = ServiceTagInformationOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
-        self.usages = UsagesOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.virtual_networks = VirtualNetworksOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
         self.subnets = SubnetsOperations(self._client, self._config, self._serialize, self._deserialize)
         self.resource_navigation_links = ResourceNavigationLinksOperations(
             self._client, self._config, self._serialize, self._deserialize
@@ -1024,86 +1044,65 @@ class NetworkManagementClient(
         self.virtual_network_peerings = VirtualNetworkPeeringsOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
-        self.virtual_network_appliances = VirtualNetworkAppliancesOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
-        self.virtual_network_gateways = VirtualNetworkGatewaysOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
-        self.virtual_network_gateway_connections = VirtualNetworkGatewayConnectionsOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
-        self.local_network_gateways = LocalNetworkGatewaysOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
-        self.virtual_network_gateway_nat_rules = VirtualNetworkGatewayNatRulesOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
-        self.virtual_network_taps = VirtualNetworkTapsOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
-        self.virtual_routers = VirtualRoutersOperations(self._client, self._config, self._serialize, self._deserialize)
         self.virtual_router_peerings = VirtualRouterPeeringsOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
-        self.virtual_wans = VirtualWansOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.vpn_sites = VpnSitesOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.vpn_site_links = VpnSiteLinksOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.vpn_sites_configuration = VpnSitesConfigurationOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
-        self.vpn_server_configurations = VpnServerConfigurationsOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
-        self.configuration_policy_groups = ConfigurationPolicyGroupsOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
-        self.virtual_hubs = VirtualHubsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.route_maps = RouteMapsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.hub_virtual_network_connections = HubVirtualNetworkConnectionsOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
-        self.vpn_gateways = VpnGatewaysOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.vpn_link_connections = VpnLinkConnectionsOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
-        self.vpn_connections = VpnConnectionsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.vpn_site_link_connections = VpnSiteLinkConnectionsOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
-        self.nat_rules = NatRulesOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.p2_svpn_gateways = P2SVpnGatewaysOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.vpn_server_configurations_associated_with_virtual_wan = (
-            VpnServerConfigurationsAssociatedWithVirtualWanOperations(
-                self._client, self._config, self._serialize, self._deserialize
-            )
-        )
-        self.virtual_hub_route_table_v2_s = VirtualHubRouteTableV2SOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
+        self.vip_swap = VipSwapOperations(self._client, self._config, self._serialize, self._deserialize)
         self.express_route_gateways = ExpressRouteGatewaysOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
+        self.p2_svpn_gateways = P2SVpnGatewaysOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.virtual_hubs = VirtualHubsOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.virtual_wans = VirtualWansOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.vpn_gateways = VpnGatewaysOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.vpn_server_configurations = VpnServerConfigurationsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.vpn_sites = VpnSitesOperations(self._client, self._config, self._serialize, self._deserialize)
         self.express_route_connections = ExpressRouteConnectionsOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
         self.network_virtual_appliance_connections = NetworkVirtualApplianceConnectionsOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
+        self.virtual_hub_bgp_connections = VirtualHubBgpConnectionsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
         self.virtual_hub_bgp_connection = VirtualHubBgpConnectionOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
-        self.virtual_hub_bgp_connections = VirtualHubBgpConnectionsOperations(
+        self.hub_route_tables = HubRouteTablesOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.hub_virtual_network_connections = HubVirtualNetworkConnectionsOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
         self.virtual_hub_ip_configuration = VirtualHubIpConfigurationOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
-        self.hub_route_tables = HubRouteTablesOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.routing_intent = RoutingIntentOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.web_application_firewall_policies = WebApplicationFirewallPoliciesOperations(
+        self.route_maps = RouteMapsOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.virtual_hub_route_table_v2_s = VirtualHubRouteTableV2SOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
+        self.routing_intent = RoutingIntentOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.vpn_sites_configuration = VpnSitesConfigurationOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.vpn_server_configurations_associated_with_virtual_wan = (
+            VpnServerConfigurationsAssociatedWithVirtualWanOperations(
+                self._client, self._config, self._serialize, self._deserialize
+            )
+        )
+        self.nat_rules = NatRulesOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.vpn_connections = VpnConnectionsOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.vpn_link_connections = VpnLinkConnectionsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.vpn_site_link_connections = VpnSiteLinkConnectionsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.configuration_policy_groups = ConfigurationPolicyGroupsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.vpn_site_links = VpnSiteLinksOperations(self._client, self._config, self._serialize, self._deserialize)
 
     def _send_request(
         self, request: HttpRequest, *, stream: bool = False, **kwargs: Any

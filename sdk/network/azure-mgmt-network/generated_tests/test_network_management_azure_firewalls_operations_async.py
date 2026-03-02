@@ -21,15 +21,22 @@ class TestNetworkManagementAzureFirewallsOperationsAsync(AzureMgmtRecordedTestCa
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_azure_firewalls_begin_delete(self, resource_group):
-        response = await (
-            await self.client.azure_firewalls.begin_delete(
-                resource_group_name=resource_group.name,
-                azure_firewall_name="str",
-                api_version="2025-05-01",
-            )
-        ).result()  # call '.result()' to poll until service return final result
+    async def test_azure_firewalls_list_all(self, resource_group):
+        response = self.client.azure_firewalls.list_all(
+            api_version="2025-05-01",
+        )
+        result = [r async for r in response]
+        # please add some check logic here by yourself
+        # ...
 
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
+    async def test_azure_firewalls_list(self, resource_group):
+        response = self.client.azure_firewalls.list(
+            resource_group_name=resource_group.name,
+            api_version="2025-05-01",
+        )
+        result = [r async for r in response]
         # please add some check logic here by yourself
         # ...
 
@@ -187,22 +194,15 @@ class TestNetworkManagementAzureFirewallsOperationsAsync(AzureMgmtRecordedTestCa
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_azure_firewalls_list(self, resource_group):
-        response = self.client.azure_firewalls.list(
-            resource_group_name=resource_group.name,
-            api_version="2025-05-01",
-        )
-        result = [r async for r in response]
-        # please add some check logic here by yourself
-        # ...
+    async def test_azure_firewalls_begin_delete(self, resource_group):
+        response = await (
+            await self.client.azure_firewalls.begin_delete(
+                resource_group_name=resource_group.name,
+                azure_firewall_name="str",
+                api_version="2025-05-01",
+            )
+        ).result()  # call '.result()' to poll until service return final result
 
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_azure_firewalls_list_all(self, resource_group):
-        response = self.client.azure_firewalls.list_all(
-            api_version="2025-05-01",
-        )
-        result = [r async for r in response]
         # please add some check logic here by yourself
         # ...
 

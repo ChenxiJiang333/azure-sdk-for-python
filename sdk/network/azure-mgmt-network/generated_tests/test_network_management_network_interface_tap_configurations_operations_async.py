@@ -22,16 +22,13 @@ class TestNetworkManagementNetworkInterfaceTapConfigurationsOperationsAsync(Azur
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_network_interface_tap_configurations_begin_delete(self, resource_group):
-        response = await (
-            await self.client.network_interface_tap_configurations.begin_delete(
-                resource_group_name=resource_group.name,
-                network_interface_name="str",
-                tap_configuration_name="str",
-                api_version="2025-05-01",
-            )
-        ).result()  # call '.result()' to poll until service return final result
-
+    async def test_network_interface_tap_configurations_list(self, resource_group):
+        response = self.client.network_interface_tap_configurations.list(
+            resource_group_name=resource_group.name,
+            network_interface_name="str",
+            api_version="2025-05-01",
+        )
+        result = [r async for r in response]
         # please add some check logic here by yourself
         # ...
 
@@ -405,7 +402,7 @@ class TestNetworkManagementNetworkInterfaceTapConfigurationsOperationsAsync(Azur
                                                                 "type": "str",
                                                             }
                                                         ],
-                                                        "ipVersionType": "IPv4",
+                                                        "ipVersionType": "str",
                                                         "location": "str",
                                                         "manualPrivateLinkServiceConnections": [
                                                             {
@@ -512,7 +509,7 @@ class TestNetworkManagementNetworkInterfaceTapConfigurationsOperationsAsync(Azur
                                                                             "type": "str",
                                                                         }
                                                                     ],
-                                                                    "ipVersionType": "IPv4",
+                                                                    "ipVersionType": "str",
                                                                     "location": "str",
                                                                     "manualPrivateLinkServiceConnections": [
                                                                         {
@@ -632,7 +629,7 @@ class TestNetworkManagementNetworkInterfaceTapConfigurationsOperationsAsync(Azur
                                             "tags": {"str": "str"},
                                             "type": "str",
                                         },
-                                        "privateEndpointNetworkPolicies": "Disabled",
+                                        "privateEndpointNetworkPolicies": "str",
                                         "privateEndpoints": [
                                             {
                                                 "applicationSecurityGroups": [
@@ -662,7 +659,7 @@ class TestNetworkManagementNetworkInterfaceTapConfigurationsOperationsAsync(Azur
                                                         "type": "str",
                                                     }
                                                 ],
-                                                "ipVersionType": "IPv4",
+                                                "ipVersionType": "str",
                                                 "location": "str",
                                                 "manualPrivateLinkServiceConnections": [
                                                     {
@@ -1052,7 +1049,7 @@ class TestNetworkManagementNetworkInterfaceTapConfigurationsOperationsAsync(Azur
                                                 "type": "str",
                                             }
                                         ],
-                                        "privateLinkServiceNetworkPolicies": "Enabled",
+                                        "privateLinkServiceNetworkPolicies": "str",
                                         "provisioningState": "str",
                                         "purpose": "str",
                                         "resourceNavigationLinks": [
@@ -1607,7 +1604,7 @@ class TestNetworkManagementNetworkInterfaceTapConfigurationsOperationsAsync(Azur
                                                         "type": "str",
                                                     }
                                                 ],
-                                                "ipVersionType": "IPv4",
+                                                "ipVersionType": "str",
                                                 "location": "str",
                                                 "manualPrivateLinkServiceConnections": [
                                                     {
@@ -1714,7 +1711,7 @@ class TestNetworkManagementNetworkInterfaceTapConfigurationsOperationsAsync(Azur
                                                                     "type": "str",
                                                                 }
                                                             ],
-                                                            "ipVersionType": "IPv4",
+                                                            "ipVersionType": "str",
                                                             "location": "str",
                                                             "manualPrivateLinkServiceConnections": [
                                                                 {
@@ -1834,7 +1831,7 @@ class TestNetworkManagementNetworkInterfaceTapConfigurationsOperationsAsync(Azur
                                     "tags": {"str": "str"},
                                     "type": "str",
                                 },
-                                "privateEndpointNetworkPolicies": "Disabled",
+                                "privateEndpointNetworkPolicies": "str",
                                 "privateEndpoints": [
                                     {
                                         "applicationSecurityGroups": [
@@ -1864,7 +1861,7 @@ class TestNetworkManagementNetworkInterfaceTapConfigurationsOperationsAsync(Azur
                                                 "type": "str",
                                             }
                                         ],
-                                        "ipVersionType": "IPv4",
+                                        "ipVersionType": "str",
                                         "location": "str",
                                         "manualPrivateLinkServiceConnections": [
                                             {
@@ -2313,7 +2310,7 @@ class TestNetworkManagementNetworkInterfaceTapConfigurationsOperationsAsync(Azur
                                         "type": "str",
                                     }
                                 ],
-                                "privateLinkServiceNetworkPolicies": "Enabled",
+                                "privateLinkServiceNetworkPolicies": "str",
                                 "provisioningState": "str",
                                 "purpose": "str",
                                 "resourceNavigationLinks": [
@@ -2716,7 +2713,7 @@ class TestNetworkManagementNetworkInterfaceTapConfigurationsOperationsAsync(Azur
                                                                 "type": "str",
                                                             }
                                                         ],
-                                                        "ipVersionType": "IPv4",
+                                                        "ipVersionType": "str",
                                                         "location": "str",
                                                         "manualPrivateLinkServiceConnections": [
                                                             {
@@ -2843,7 +2840,7 @@ class TestNetworkManagementNetworkInterfaceTapConfigurationsOperationsAsync(Azur
                                                                             "type": "str",
                                                                         }
                                                                     ],
-                                                                    "ipVersionType": "IPv4",
+                                                                    "ipVersionType": "str",
                                                                     "location": "str",
                                                                     "manualPrivateLinkServiceConnections": [
                                                                         {
@@ -2963,7 +2960,7 @@ class TestNetworkManagementNetworkInterfaceTapConfigurationsOperationsAsync(Azur
                                             "tags": {"str": "str"},
                                             "type": "str",
                                         },
-                                        "privateEndpointNetworkPolicies": "Disabled",
+                                        "privateEndpointNetworkPolicies": "str",
                                         "privateEndpoints": [
                                             {
                                                 "applicationSecurityGroups": [
@@ -2993,7 +2990,7 @@ class TestNetworkManagementNetworkInterfaceTapConfigurationsOperationsAsync(Azur
                                                         "type": "str",
                                                     }
                                                 ],
-                                                "ipVersionType": "IPv4",
+                                                "ipVersionType": "str",
                                                 "location": "str",
                                                 "manualPrivateLinkServiceConnections": [
                                                     {
@@ -3288,7 +3285,7 @@ class TestNetworkManagementNetworkInterfaceTapConfigurationsOperationsAsync(Azur
                                                 "type": "str",
                                             }
                                         ],
-                                        "privateLinkServiceNetworkPolicies": "Enabled",
+                                        "privateLinkServiceNetworkPolicies": "str",
                                         "provisioningState": "str",
                                         "purpose": "str",
                                         "resourceNavigationLinks": [
@@ -3669,7 +3666,7 @@ class TestNetworkManagementNetworkInterfaceTapConfigurationsOperationsAsync(Azur
                                                         "type": "str",
                                                     }
                                                 ],
-                                                "ipVersionType": "IPv4",
+                                                "ipVersionType": "str",
                                                 "location": "str",
                                                 "manualPrivateLinkServiceConnections": [
                                                     {
@@ -3858,7 +3855,7 @@ class TestNetworkManagementNetworkInterfaceTapConfigurationsOperationsAsync(Azur
                                                                     "type": "str",
                                                                 }
                                                             ],
-                                                            "ipVersionType": "IPv4",
+                                                            "ipVersionType": "str",
                                                             "location": "str",
                                                             "manualPrivateLinkServiceConnections": [
                                                                 {
@@ -3978,7 +3975,7 @@ class TestNetworkManagementNetworkInterfaceTapConfigurationsOperationsAsync(Azur
                                     "tags": {"str": "str"},
                                     "type": "str",
                                 },
-                                "privateEndpointNetworkPolicies": "Disabled",
+                                "privateEndpointNetworkPolicies": "str",
                                 "privateEndpoints": [
                                     {
                                         "applicationSecurityGroups": [
@@ -4008,7 +4005,7 @@ class TestNetworkManagementNetworkInterfaceTapConfigurationsOperationsAsync(Azur
                                                 "type": "str",
                                             }
                                         ],
-                                        "ipVersionType": "IPv4",
+                                        "ipVersionType": "str",
                                         "location": "str",
                                         "manualPrivateLinkServiceConnections": [
                                             {
@@ -4362,7 +4359,7 @@ class TestNetworkManagementNetworkInterfaceTapConfigurationsOperationsAsync(Azur
                                         "type": "str",
                                     }
                                 ],
-                                "privateLinkServiceNetworkPolicies": "Enabled",
+                                "privateLinkServiceNetworkPolicies": "str",
                                 "provisioningState": "str",
                                 "purpose": "str",
                                 "resourceNavigationLinks": [
@@ -4478,12 +4475,15 @@ class TestNetworkManagementNetworkInterfaceTapConfigurationsOperationsAsync(Azur
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_network_interface_tap_configurations_list(self, resource_group):
-        response = self.client.network_interface_tap_configurations.list(
-            resource_group_name=resource_group.name,
-            network_interface_name="str",
-            api_version="2025-05-01",
-        )
-        result = [r async for r in response]
+    async def test_network_interface_tap_configurations_begin_delete(self, resource_group):
+        response = await (
+            await self.client.network_interface_tap_configurations.begin_delete(
+                resource_group_name=resource_group.name,
+                network_interface_name="str",
+                tap_configuration_name="str",
+                api_version="2025-05-01",
+            )
+        ).result()  # call '.result()' to poll until service return final result
+
         # please add some check logic here by yourself
         # ...

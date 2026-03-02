@@ -28,7 +28,7 @@ from azure.mgmt.network import NetworkManagementClient
 def main():
     client = NetworkManagementClient(
         credential=DefaultAzureCredential(),
-        subscription_id="subid",
+        subscription_id="00000000-0000-0000-0000-000000000000",
     )
 
     response = client.virtual_hubs.begin_get_inbound_routes(
@@ -36,12 +36,12 @@ def main():
         virtual_hub_name="virtualHub1",
         get_inbound_routes_parameters={
             "connectionType": "ExpressRouteConnection",
-            "resourceUri": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/expressRouteGateways/exrGw1/expressRouteConnections/exrConn1",
+            "resourceUri": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/expressRouteGateways/exrGw1/expressRouteConnections/exrConn1",
         },
     ).result()
     print(response)
 
 
-# x-ms-original-file: specification/network/resource-manager/Microsoft.Network/stable/2025-05-01/examples/GetInboundRoutes.json
+# x-ms-original-file: specification/network/resource-manager/Microsoft.Network/Network/stable/2025-05-01/examples/GetInboundRoutes.json
 if __name__ == "__main__":
     main()

@@ -20,13 +20,22 @@ class TestNetworkManagementExpressRoutePortsOperations(AzureMgmtRecordedTestCase
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_express_route_ports_begin_delete(self, resource_group):
-        response = self.client.express_route_ports.begin_delete(
-            resource_group_name=resource_group.name,
-            express_route_port_name="str",
+    def test_express_route_ports_list(self, resource_group):
+        response = self.client.express_route_ports.list(
             api_version="2025-05-01",
-        ).result()  # call '.result()' to poll until service return final result
+        )
+        result = [r for r in response]
+        # please add some check logic here by yourself
+        # ...
 
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
+    def test_express_route_ports_list_by_resource_group(self, resource_group):
+        response = self.client.express_route_ports.list_by_resource_group(
+            resource_group_name=resource_group.name,
+            api_version="2025-05-01",
+        )
+        result = [r for r in response]
         # please add some check logic here by yourself
         # ...
 
@@ -115,22 +124,13 @@ class TestNetworkManagementExpressRoutePortsOperations(AzureMgmtRecordedTestCase
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_express_route_ports_list_by_resource_group(self, resource_group):
-        response = self.client.express_route_ports.list_by_resource_group(
+    def test_express_route_ports_begin_delete(self, resource_group):
+        response = self.client.express_route_ports.begin_delete(
             resource_group_name=resource_group.name,
+            express_route_port_name="str",
             api_version="2025-05-01",
-        )
-        result = [r for r in response]
-        # please add some check logic here by yourself
-        # ...
+        ).result()  # call '.result()' to poll until service return final result
 
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_express_route_ports_list(self, resource_group):
-        response = self.client.express_route_ports.list(
-            api_version="2025-05-01",
-        )
-        result = [r for r in response]
         # please add some check logic here by yourself
         # ...
 

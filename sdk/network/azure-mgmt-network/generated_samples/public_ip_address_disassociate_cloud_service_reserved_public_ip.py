@@ -28,19 +28,19 @@ from azure.mgmt.network import NetworkManagementClient
 def main():
     client = NetworkManagementClient(
         credential=DefaultAzureCredential(),
-        subscription_id="subid",
+        subscription_id="00000000-0000-0000-0000-000000000000",
     )
 
     response = client.public_ip_addresses.begin_disassociate_cloud_service_reserved_public_ip(
         resource_group_name="rg1",
         public_ip_address_name="pip1",
         parameters={
-            "publicIpArmId": "/subscriptions/subid/resourcegroups/rg1/providers/Microsoft.Network/publicIpAddresses/pip2"
+            "publicIpArmId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg1/providers/Microsoft.Network/publicIpAddresses/pip2"
         },
     ).result()
     print(response)
 
 
-# x-ms-original-file: specification/network/resource-manager/Microsoft.Network/stable/2025-05-01/examples/PublicIpAddressDisassociateCloudServiceReservedPublicIp.json
+# x-ms-original-file: specification/network/resource-manager/Microsoft.Network/Network/stable/2025-05-01/examples/PublicIpAddressDisassociateCloudServiceReservedPublicIp.json
 if __name__ == "__main__":
     main()

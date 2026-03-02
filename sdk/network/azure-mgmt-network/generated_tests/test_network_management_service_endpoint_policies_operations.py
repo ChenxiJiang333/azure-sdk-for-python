@@ -21,13 +21,22 @@ class TestNetworkManagementServiceEndpointPoliciesOperations(AzureMgmtRecordedTe
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_service_endpoint_policies_begin_delete(self, resource_group):
-        response = self.client.service_endpoint_policies.begin_delete(
-            resource_group_name=resource_group.name,
-            service_endpoint_policy_name="str",
+    def test_service_endpoint_policies_list(self, resource_group):
+        response = self.client.service_endpoint_policies.list(
             api_version="2025-05-01",
-        ).result()  # call '.result()' to poll until service return final result
+        )
+        result = [r for r in response]
+        # please add some check logic here by yourself
+        # ...
 
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
+    def test_service_endpoint_policies_list_by_resource_group(self, resource_group):
+        response = self.client.service_endpoint_policies.list_by_resource_group(
+            resource_group_name=resource_group.name,
+            api_version="2025-05-01",
+        )
+        result = [r for r in response]
         # please add some check logic here by yourself
         # ...
 
@@ -589,7 +598,7 @@ class TestNetworkManagementServiceEndpointPoliciesOperations(AzureMgmtRecordedTe
                                                 "type": "str",
                                             }
                                         ],
-                                        "ipVersionType": "IPv4",
+                                        "ipVersionType": "str",
                                         "location": "str",
                                         "manualPrivateLinkServiceConnections": [
                                             {
@@ -776,7 +785,7 @@ class TestNetworkManagementServiceEndpointPoliciesOperations(AzureMgmtRecordedTe
                                                             "type": "str",
                                                         }
                                                     ],
-                                                    "ipVersionType": "IPv4",
+                                                    "ipVersionType": "str",
                                                     "location": "str",
                                                     "manualPrivateLinkServiceConnections": [
                                                         {
@@ -1169,7 +1178,7 @@ class TestNetworkManagementServiceEndpointPoliciesOperations(AzureMgmtRecordedTe
                             "tags": {"str": "str"},
                             "type": "str",
                         },
-                        "privateEndpointNetworkPolicies": "Disabled",
+                        "privateEndpointNetworkPolicies": "str",
                         "privateEndpoints": [
                             {
                                 "applicationSecurityGroups": [
@@ -1199,7 +1208,7 @@ class TestNetworkManagementServiceEndpointPoliciesOperations(AzureMgmtRecordedTe
                                         "type": "str",
                                     }
                                 ],
-                                "ipVersionType": "IPv4",
+                                "ipVersionType": "str",
                                 "location": "str",
                                 "manualPrivateLinkServiceConnections": [
                                     {
@@ -2105,7 +2114,7 @@ class TestNetworkManagementServiceEndpointPoliciesOperations(AzureMgmtRecordedTe
                                 "type": "str",
                             }
                         ],
-                        "privateLinkServiceNetworkPolicies": "Enabled",
+                        "privateLinkServiceNetworkPolicies": "str",
                         "provisioningState": "str",
                         "purpose": "str",
                         "resourceNavigationLinks": [
@@ -2195,21 +2204,12 @@ class TestNetworkManagementServiceEndpointPoliciesOperations(AzureMgmtRecordedTe
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_service_endpoint_policies_list(self, resource_group):
-        response = self.client.service_endpoint_policies.list(
-            api_version="2025-05-01",
-        )
-        result = [r for r in response]
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_service_endpoint_policies_list_by_resource_group(self, resource_group):
-        response = self.client.service_endpoint_policies.list_by_resource_group(
+    def test_service_endpoint_policies_begin_delete(self, resource_group):
+        response = self.client.service_endpoint_policies.begin_delete(
             resource_group_name=resource_group.name,
+            service_endpoint_policy_name="str",
             api_version="2025-05-01",
-        )
-        result = [r for r in response]
+        ).result()  # call '.result()' to poll until service return final result
+
         # please add some check logic here by yourself
         # ...

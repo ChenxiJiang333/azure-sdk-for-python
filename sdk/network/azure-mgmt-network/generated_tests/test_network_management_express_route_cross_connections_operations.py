@@ -162,8 +162,8 @@ class TestNetworkManagementExpressRouteCrossConnectionsOperations(AzureMgmtRecor
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_express_route_cross_connections_begin_list_routes_table_summary(self, resource_group):
-        response = self.client.express_route_cross_connections.begin_list_routes_table_summary(
+    def test_express_route_cross_connections_begin_list_routes_table(self, resource_group):
+        response = self.client.express_route_cross_connections.begin_list_routes_table(
             resource_group_name=resource_group.name,
             cross_connection_name="str",
             peering_name="str",
@@ -176,8 +176,8 @@ class TestNetworkManagementExpressRouteCrossConnectionsOperations(AzureMgmtRecor
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_express_route_cross_connections_begin_list_routes_table(self, resource_group):
-        response = self.client.express_route_cross_connections.begin_list_routes_table(
+    def test_express_route_cross_connections_begin_list_routes_table_summary(self, resource_group):
+        response = self.client.express_route_cross_connections.begin_list_routes_table_summary(
             resource_group_name=resource_group.name,
             cross_connection_name="str",
             peering_name="str",

@@ -20,13 +20,22 @@ class TestNetworkManagementFirewallPoliciesOperations(AzureMgmtRecordedTestCase)
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_firewall_policies_begin_delete(self, resource_group):
-        response = self.client.firewall_policies.begin_delete(
-            resource_group_name=resource_group.name,
-            firewall_policy_name="str",
+    def test_firewall_policies_list_all(self, resource_group):
+        response = self.client.firewall_policies.list_all(
             api_version="2025-05-01",
-        ).result()  # call '.result()' to poll until service return final result
+        )
+        result = [r for r in response]
+        # please add some check logic here by yourself
+        # ...
 
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
+    def test_firewall_policies_list(self, resource_group):
+        response = self.client.firewall_policies.list(
+            resource_group_name=resource_group.name,
+            api_version="2025-05-01",
+        )
+        result = [r for r in response]
         # please add some check logic here by yourself
         # ...
 
@@ -132,21 +141,12 @@ class TestNetworkManagementFirewallPoliciesOperations(AzureMgmtRecordedTestCase)
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_firewall_policies_list(self, resource_group):
-        response = self.client.firewall_policies.list(
+    def test_firewall_policies_begin_delete(self, resource_group):
+        response = self.client.firewall_policies.begin_delete(
             resource_group_name=resource_group.name,
+            firewall_policy_name="str",
             api_version="2025-05-01",
-        )
-        result = [r for r in response]
-        # please add some check logic here by yourself
-        # ...
+        ).result()  # call '.result()' to poll until service return final result
 
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_firewall_policies_list_all(self, resource_group):
-        response = self.client.firewall_policies.list_all(
-            api_version="2025-05-01",
-        )
-        result = [r for r in response]
         # please add some check logic here by yourself
         # ...

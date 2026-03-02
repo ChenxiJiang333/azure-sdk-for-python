@@ -21,6 +21,19 @@ class TestNetworkManagementStaticMembersOperationsAsync(AzureMgmtRecordedTestCas
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
+    async def test_static_members_list(self, resource_group):
+        response = self.client.static_members.list(
+            resource_group_name=resource_group.name,
+            network_manager_name="str",
+            network_group_name="str",
+            api_version="2025-05-01",
+        )
+        result = [r async for r in response]
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
     async def test_static_members_get(self, resource_group):
         response = await self.client.static_members.get(
             resource_group_name=resource_group.name,
@@ -75,18 +88,5 @@ class TestNetworkManagementStaticMembersOperationsAsync(AzureMgmtRecordedTestCas
             api_version="2025-05-01",
         )
 
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_static_members_list(self, resource_group):
-        response = self.client.static_members.list(
-            resource_group_name=resource_group.name,
-            network_manager_name="str",
-            network_group_name="str",
-            api_version="2025-05-01",
-        )
-        result = [r async for r in response]
         # please add some check logic here by yourself
         # ...

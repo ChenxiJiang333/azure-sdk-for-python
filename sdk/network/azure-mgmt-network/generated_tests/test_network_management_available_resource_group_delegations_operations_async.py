@@ -23,8 +23,8 @@ class TestNetworkManagementAvailableResourceGroupDelegationsOperationsAsync(Azur
     @recorded_by_proxy_async
     async def test_available_resource_group_delegations_list(self, resource_group):
         response = self.client.available_resource_group_delegations.list(
-            location="str",
             resource_group_name=resource_group.name,
+            location="str",
             api_version="2025-05-01",
         )
         result = [r async for r in response]

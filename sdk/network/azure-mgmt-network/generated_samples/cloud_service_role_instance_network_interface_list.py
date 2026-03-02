@@ -28,7 +28,7 @@ from azure.mgmt.network import NetworkManagementClient
 def main():
     client = NetworkManagementClient(
         credential=DefaultAzureCredential(),
-        subscription_id="subid",
+        subscription_id="00000000-0000-0000-0000-000000000000",
     )
 
     response = client.network_interfaces.list_cloud_service_role_instance_network_interfaces(
@@ -40,6 +40,6 @@ def main():
         print(item)
 
 
-# x-ms-original-file: specification/network/resource-manager/Microsoft.Network/stable/2025-05-01/examples/CloudServiceRoleInstanceNetworkInterfaceList.json
+# x-ms-original-file: specification/network/resource-manager/Microsoft.Network/Network/stable/2025-05-01/examples/CloudServiceRoleInstanceNetworkInterfaceList.json
 if __name__ == "__main__":
     main()

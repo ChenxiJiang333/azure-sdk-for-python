@@ -20,6 +20,18 @@ class TestNetworkManagementVpnConnectionsOperations(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
+    def test_vpn_connections_list_by_vpn_gateway(self, resource_group):
+        response = self.client.vpn_connections.list_by_vpn_gateway(
+            resource_group_name=resource_group.name,
+            gateway_name="str",
+            api_version="2025-05-01",
+        )
+        result = [r for r in response]
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
     def test_vpn_connections_get(self, resource_group):
         response = self.client.vpn_connections.get(
             resource_group_name=resource_group.name,
@@ -162,17 +174,5 @@ class TestNetworkManagementVpnConnectionsOperations(AzureMgmtRecordedTestCase):
             api_version="2025-05-01",
         ).result()  # call '.result()' to poll until service return final result
 
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_vpn_connections_list_by_vpn_gateway(self, resource_group):
-        response = self.client.vpn_connections.list_by_vpn_gateway(
-            resource_group_name=resource_group.name,
-            gateway_name="str",
-            api_version="2025-05-01",
-        )
-        result = [r for r in response]
         # please add some check logic here by yourself
         # ...

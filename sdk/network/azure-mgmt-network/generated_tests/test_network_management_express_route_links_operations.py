@@ -20,6 +20,18 @@ class TestNetworkManagementExpressRouteLinksOperations(AzureMgmtRecordedTestCase
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
+    def test_express_route_links_list(self, resource_group):
+        response = self.client.express_route_links.list(
+            resource_group_name=resource_group.name,
+            express_route_port_name="str",
+            api_version="2025-05-01",
+        )
+        result = [r for r in response]
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
     def test_express_route_links_get(self, resource_group):
         response = self.client.express_route_links.get(
             resource_group_name=resource_group.name,
@@ -28,17 +40,5 @@ class TestNetworkManagementExpressRouteLinksOperations(AzureMgmtRecordedTestCase
             api_version="2025-05-01",
         )
 
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_express_route_links_list(self, resource_group):
-        response = self.client.express_route_links.list(
-            resource_group_name=resource_group.name,
-            express_route_port_name="str",
-            api_version="2025-05-01",
-        )
-        result = [r for r in response]
         # please add some check logic here by yourself
         # ...

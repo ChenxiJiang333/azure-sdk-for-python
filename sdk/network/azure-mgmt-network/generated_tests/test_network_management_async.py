@@ -21,6 +21,81 @@ class TestNetworkManagementAsync(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
+    async def test_express_route_provider_port(self, resource_group):
+        response = await self.client.express_route_provider_port(
+            providerport="str",
+            api_version="2025-05-01",
+        )
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
+    async def test_list_active_connectivity_configurations(self, resource_group):
+        response = await self.client.list_active_connectivity_configurations(
+            resource_group_name=resource_group.name,
+            network_manager_name="str",
+            parameters={"regions": ["str"], "skipToken": "str"},
+            api_version="2025-05-01",
+        )
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
+    async def test_list_active_security_admin_rules(self, resource_group):
+        response = await self.client.list_active_security_admin_rules(
+            resource_group_name=resource_group.name,
+            network_manager_name="str",
+            parameters={"regions": ["str"], "skipToken": "str"},
+            api_version="2025-05-01",
+        )
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
+    async def test_list_network_manager_effective_connectivity_configurations(self, resource_group):
+        response = await self.client.list_network_manager_effective_connectivity_configurations(
+            resource_group_name=resource_group.name,
+            virtual_network_name="str",
+            parameters={"skipToken": "str"},
+            api_version="2025-05-01",
+        )
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
+    async def test_list_network_manager_effective_security_admin_rules(self, resource_group):
+        response = await self.client.list_network_manager_effective_security_admin_rules(
+            resource_group_name=resource_group.name,
+            virtual_network_name="str",
+            parameters={"skipToken": "str"},
+            api_version="2025-05-01",
+        )
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
+    async def test_check_dns_name_availability(self, resource_group):
+        response = await self.client.check_dns_name_availability(
+            location="str",
+            domain_name_label="str",
+            api_version="2025-05-01",
+        )
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
     async def test_begin_put_bastion_shareable_link(self, resource_group):
         response = await (
             await self.client.begin_put_bastion_shareable_link(
@@ -96,20 +171,11 @@ class TestNetworkManagementAsync(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_get_bastion_shareable_link(self, resource_group):
-        response = self.client.get_bastion_shareable_link(
+    async def test_disconnect_active_sessions(self, resource_group):
+        response = self.client.disconnect_active_sessions(
             resource_group_name=resource_group.name,
             bastion_host_name="str",
-            bsl_request={
-                "vms": [
-                    {
-                        "vm": {"id": "str", "location": "str", "name": "str", "tags": {"str": "str"}, "type": "str"},
-                        "bsl": "str",
-                        "createdAt": "str",
-                        "message": "str",
-                    }
-                ]
-            },
+            session_ids={"sessionIds": ["str"]},
             api_version="2025-05-01",
         )
         result = [r async for r in response]
@@ -132,101 +198,23 @@ class TestNetworkManagementAsync(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_disconnect_active_sessions(self, resource_group):
-        response = self.client.disconnect_active_sessions(
+    async def test_get_bastion_shareable_link(self, resource_group):
+        response = self.client.get_bastion_shareable_link(
             resource_group_name=resource_group.name,
             bastion_host_name="str",
-            session_ids={"sessionIds": ["str"]},
+            bsl_request={
+                "vms": [
+                    {
+                        "vm": {"id": "str", "location": "str", "name": "str", "tags": {"str": "str"}, "type": "str"},
+                        "bsl": "str",
+                        "createdAt": "str",
+                        "message": "str",
+                    }
+                ]
+            },
             api_version="2025-05-01",
         )
         result = [r async for r in response]
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_check_dns_name_availability(self, resource_group):
-        response = await self.client.check_dns_name_availability(
-            location="str",
-            domain_name_label="str",
-            api_version="2025-05-01",
-        )
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_express_route_provider_port(self, resource_group):
-        response = await self.client.express_route_provider_port(
-            providerport="str",
-            api_version="2025-05-01",
-        )
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_list_active_connectivity_configurations(self, resource_group):
-        response = await self.client.list_active_connectivity_configurations(
-            resource_group_name=resource_group.name,
-            network_manager_name="str",
-            parameters={"regions": ["str"], "skipToken": "str"},
-            api_version="2025-05-01",
-        )
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_list_active_security_admin_rules(self, resource_group):
-        response = await self.client.list_active_security_admin_rules(
-            resource_group_name=resource_group.name,
-            network_manager_name="str",
-            parameters={"regions": ["str"], "skipToken": "str"},
-            api_version="2025-05-01",
-        )
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_list_network_manager_effective_connectivity_configurations(self, resource_group):
-        response = await self.client.list_network_manager_effective_connectivity_configurations(
-            resource_group_name=resource_group.name,
-            virtual_network_name="str",
-            parameters={"skipToken": "str"},
-            api_version="2025-05-01",
-        )
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_list_network_manager_effective_security_admin_rules(self, resource_group):
-        response = await self.client.list_network_manager_effective_security_admin_rules(
-            resource_group_name=resource_group.name,
-            virtual_network_name="str",
-            parameters={"skipToken": "str"},
-            api_version="2025-05-01",
-        )
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_supported_security_providers(self, resource_group):
-        response = await self.client.supported_security_providers(
-            resource_group_name=resource_group.name,
-            virtual_wan_name="str",
-            api_version="2025-05-01",
-        )
-
         # please add some check logic here by yourself
         # ...
 
@@ -241,6 +229,18 @@ class TestNetworkManagementAsync(AzureMgmtRecordedTestCase):
                 api_version="2025-05-01",
             )
         ).result()  # call '.result()' to poll until service return final result
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
+    async def test_supported_security_providers(self, resource_group):
+        response = await self.client.supported_security_providers(
+            resource_group_name=resource_group.name,
+            virtual_wan_name="str",
+            api_version="2025-05-01",
+        )
 
         # please add some check logic here by yourself
         # ...

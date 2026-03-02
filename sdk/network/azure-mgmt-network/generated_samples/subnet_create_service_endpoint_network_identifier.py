@@ -28,7 +28,7 @@ from azure.mgmt.network import NetworkManagementClient
 def main():
     client = NetworkManagementClient(
         credential=DefaultAzureCredential(),
-        subscription_id="subid",
+        subscription_id="00000000-0000-0000-0000-000000000000",
     )
 
     response = client.subnets.begin_create_or_update(
@@ -41,7 +41,7 @@ def main():
                 "serviceEndpoints": [
                     {
                         "networkIdentifier": {
-                            "id": "/subscriptions/subid/resourceGroups/subnet-test/providers/Microsoft.Network/publicIPAddresses/test-ip"
+                            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/subnet-test/providers/Microsoft.Network/publicIPAddresses/test-ip"
                         },
                         "service": "Microsoft.Storage",
                     }
@@ -52,6 +52,6 @@ def main():
     print(response)
 
 
-# x-ms-original-file: specification/network/resource-manager/Microsoft.Network/stable/2025-05-01/examples/SubnetCreateServiceEndpointNetworkIdentifier.json
+# x-ms-original-file: specification/network/resource-manager/Microsoft.Network/Network/stable/2025-05-01/examples/SubnetCreateServiceEndpointNetworkIdentifier.json
 if __name__ == "__main__":
     main()

@@ -21,13 +21,22 @@ class TestNetworkManagementVirtualNetworkAppliancesOperations(AzureMgmtRecordedT
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_virtual_network_appliances_begin_delete(self, resource_group):
-        response = self.client.virtual_network_appliances.begin_delete(
-            resource_group_name=resource_group.name,
-            virtual_network_appliance_name="str",
+    def test_virtual_network_appliances_list_all(self, resource_group):
+        response = self.client.virtual_network_appliances.list_all(
             api_version="2025-05-01",
-        ).result()  # call '.result()' to poll until service return final result
+        )
+        result = [r for r in response]
+        # please add some check logic here by yourself
+        # ...
 
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
+    def test_virtual_network_appliances_list(self, resource_group):
+        response = self.client.virtual_network_appliances.list(
+            resource_group_name=resource_group.name,
+            api_version="2025-05-01",
+        )
+        result = [r for r in response]
         # please add some check logic here by yourself
         # ...
 
@@ -587,7 +596,7 @@ class TestNetworkManagementVirtualNetworkAppliancesOperations(AzureMgmtRecordedT
                                             "type": "str",
                                         }
                                     ],
-                                    "ipVersionType": "IPv4",
+                                    "ipVersionType": "str",
                                     "location": "str",
                                     "manualPrivateLinkServiceConnections": [
                                         {
@@ -774,7 +783,7 @@ class TestNetworkManagementVirtualNetworkAppliancesOperations(AzureMgmtRecordedT
                                                         "type": "str",
                                                     }
                                                 ],
-                                                "ipVersionType": "IPv4",
+                                                "ipVersionType": "str",
                                                 "location": "str",
                                                 "manualPrivateLinkServiceConnections": [
                                                     {
@@ -1165,7 +1174,7 @@ class TestNetworkManagementVirtualNetworkAppliancesOperations(AzureMgmtRecordedT
                         "tags": {"str": "str"},
                         "type": "str",
                     },
-                    "privateEndpointNetworkPolicies": "Disabled",
+                    "privateEndpointNetworkPolicies": "str",
                     "privateEndpoints": [
                         {
                             "applicationSecurityGroups": [
@@ -1195,7 +1204,7 @@ class TestNetworkManagementVirtualNetworkAppliancesOperations(AzureMgmtRecordedT
                                     "type": "str",
                                 }
                             ],
-                            "ipVersionType": "IPv4",
+                            "ipVersionType": "str",
                             "location": "str",
                             "manualPrivateLinkServiceConnections": [
                                 {
@@ -2092,7 +2101,7 @@ class TestNetworkManagementVirtualNetworkAppliancesOperations(AzureMgmtRecordedT
                             "type": "str",
                         }
                     ],
-                    "privateLinkServiceNetworkPolicies": "Enabled",
+                    "privateLinkServiceNetworkPolicies": "str",
                     "provisioningState": "str",
                     "purpose": "str",
                     "resourceNavigationLinks": [
@@ -2208,21 +2217,12 @@ class TestNetworkManagementVirtualNetworkAppliancesOperations(AzureMgmtRecordedT
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_virtual_network_appliances_list_all(self, resource_group):
-        response = self.client.virtual_network_appliances.list_all(
-            api_version="2025-05-01",
-        )
-        result = [r for r in response]
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_virtual_network_appliances_list(self, resource_group):
-        response = self.client.virtual_network_appliances.list(
+    def test_virtual_network_appliances_begin_delete(self, resource_group):
+        response = self.client.virtual_network_appliances.begin_delete(
             resource_group_name=resource_group.name,
+            virtual_network_appliance_name="str",
             api_version="2025-05-01",
-        )
-        result = [r for r in response]
+        ).result()  # call '.result()' to poll until service return final result
+
         # please add some check logic here by yourself
         # ...

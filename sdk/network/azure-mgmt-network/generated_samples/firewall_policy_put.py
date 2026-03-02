@@ -28,7 +28,7 @@ from azure.mgmt.network import NetworkManagementClient
 def main():
     client = NetworkManagementClient(
         credential=DefaultAzureCredential(),
-        subscription_id="subid",
+        subscription_id="00000000-0000-0000-0000-000000000000",
     )
 
     response = client.firewall_policies.begin_create_or_update(
@@ -50,19 +50,19 @@ def main():
                     "isEnabled": True,
                     "logAnalyticsResources": {
                         "defaultWorkspaceId": {
-                            "id": "/subscriptions/subid/resourcegroups/rg1/providers/microsoft.operationalinsights/workspaces/defaultWorkspace"
+                            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg1/providers/microsoft.operationalinsights/workspaces/defaultWorkspace"
                         },
                         "workspaces": [
                             {
                                 "region": "westus",
                                 "workspaceId": {
-                                    "id": "/subscriptions/subid/resourcegroups/rg1/providers/microsoft.operationalinsights/workspaces/workspace1"
+                                    "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg1/providers/microsoft.operationalinsights/workspaces/workspace1"
                                 },
                             },
                             {
                                 "region": "eastus",
                                 "workspaceId": {
-                                    "id": "/subscriptions/subid/resourcegroups/rg1/providers/microsoft.operationalinsights/workspaces/workspace2"
+                                    "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg1/providers/microsoft.operationalinsights/workspaces/workspace2"
                                 },
                             },
                         ],
@@ -84,7 +84,7 @@ def main():
                         "signatureOverrides": [{"id": "2525004", "mode": "Deny"}],
                     },
                     "mode": "Alert",
-                    "profile": "Core",
+                    "profile": "Balanced",
                 },
                 "sku": {"tier": "Premium"},
                 "snat": {"privateRanges": ["IANAPrivateRanges"]},
@@ -101,6 +101,6 @@ def main():
     print(response)
 
 
-# x-ms-original-file: specification/network/resource-manager/Microsoft.Network/stable/2025-05-01/examples/FirewallPolicyPut.json
+# x-ms-original-file: specification/network/resource-manager/Microsoft.Network/Network/stable/2025-05-01/examples/FirewallPolicyPut.json
 if __name__ == "__main__":
     main()

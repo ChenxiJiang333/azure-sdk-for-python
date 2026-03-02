@@ -21,20 +21,6 @@ class TestNetworkManagementDdosCustomPoliciesOperationsAsync(AzureMgmtRecordedTe
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_ddos_custom_policies_begin_delete(self, resource_group):
-        response = await (
-            await self.client.ddos_custom_policies.begin_delete(
-                resource_group_name=resource_group.name,
-                ddos_custom_policy_name="str",
-                api_version="2025-05-01",
-            )
-        ).result()  # call '.result()' to poll until service return final result
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
     async def test_ddos_custom_policies_get(self, resource_group):
         response = await self.client.ddos_custom_policies.get(
             resource_group_name=resource_group.name,
@@ -90,6 +76,20 @@ class TestNetworkManagementDdosCustomPoliciesOperationsAsync(AzureMgmtRecordedTe
             parameters={"tags": {"str": "str"}},
             api_version="2025-05-01",
         )
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
+    async def test_ddos_custom_policies_begin_delete(self, resource_group):
+        response = await (
+            await self.client.ddos_custom_policies.begin_delete(
+                resource_group_name=resource_group.name,
+                ddos_custom_policy_name="str",
+                api_version="2025-05-01",
+            )
+        ).result()  # call '.result()' to poll until service return final result
 
         # please add some check logic here by yourself
         # ...

@@ -20,14 +20,13 @@ class TestNetworkManagementVirtualRouterPeeringsOperations(AzureMgmtRecordedTest
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_virtual_router_peerings_begin_delete(self, resource_group):
-        response = self.client.virtual_router_peerings.begin_delete(
+    def test_virtual_router_peerings_list(self, resource_group):
+        response = self.client.virtual_router_peerings.list(
             resource_group_name=resource_group.name,
             virtual_router_name="str",
-            peering_name="str",
             api_version="2025-05-01",
-        ).result()  # call '.result()' to poll until service return final result
-
+        )
+        result = [r for r in response]
         # please add some check logic here by yourself
         # ...
 
@@ -68,12 +67,13 @@ class TestNetworkManagementVirtualRouterPeeringsOperations(AzureMgmtRecordedTest
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_virtual_router_peerings_list(self, resource_group):
-        response = self.client.virtual_router_peerings.list(
+    def test_virtual_router_peerings_begin_delete(self, resource_group):
+        response = self.client.virtual_router_peerings.begin_delete(
             resource_group_name=resource_group.name,
             virtual_router_name="str",
+            peering_name="str",
             api_version="2025-05-01",
-        )
-        result = [r for r in response]
+        ).result()  # call '.result()' to poll until service return final result
+
         # please add some check logic here by yourself
         # ...

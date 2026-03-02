@@ -28,7 +28,7 @@ from azure.mgmt.network import NetworkManagementClient
 def main():
     client = NetworkManagementClient(
         credential=DefaultAzureCredential(),
-        subscription_id="subid",
+        subscription_id="00000000-0000-0000-0000-000000000000",
     )
 
     response = client.vpn_gateways.begin_create_or_update(
@@ -50,7 +50,7 @@ def main():
                         "name": "vpnConnection1",
                         "properties": {
                             "remoteVpnSite": {
-                                "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnSites/vpnSite1"
+                                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/vpnSites/vpnSite1"
                             },
                             "vpnLinkConnections": [
                                 {
@@ -59,13 +59,13 @@ def main():
                                         "connectionBandwidth": 200,
                                         "egressNatRules": [
                                             {
-                                                "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnGateways/gateway1/natRules/nat03"
+                                                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/vpnGateways/gateway1/natRules/nat03"
                                             }
                                         ],
                                         "sharedKey": "key",
                                         "vpnConnectionProtocolType": "IKEv2",
                                         "vpnSiteLink": {
-                                            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnSites/vpnSite1/vpnSiteLinks/siteLink1"
+                                            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/vpnSites/vpnSite1/vpnSiteLinks/siteLink1"
                                         },
                                     },
                                 }
@@ -88,7 +88,7 @@ def main():
                     }
                 ],
                 "virtualHub": {
-                    "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/virtualHub1"
+                    "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualHubs/virtualHub1"
                 },
             },
             "tags": {"key1": "value1"},
@@ -97,6 +97,6 @@ def main():
     print(response)
 
 
-# x-ms-original-file: specification/network/resource-manager/Microsoft.Network/stable/2025-05-01/examples/VpnGatewayPut.json
+# x-ms-original-file: specification/network/resource-manager/Microsoft.Network/Network/stable/2025-05-01/examples/VpnGatewayPut.json
 if __name__ == "__main__":
     main()

@@ -20,6 +20,27 @@ class TestNetworkManagementVpnGatewaysOperations(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
+    def test_vpn_gateways_list(self, resource_group):
+        response = self.client.vpn_gateways.list(
+            api_version="2025-05-01",
+        )
+        result = [r for r in response]
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
+    def test_vpn_gateways_list_by_resource_group(self, resource_group):
+        response = self.client.vpn_gateways.list_by_resource_group(
+            resource_group_name=resource_group.name,
+            api_version="2025-05-01",
+        )
+        result = [r for r in response]
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
     def test_vpn_gateways_get(self, resource_group):
         response = self.client.vpn_gateways.get(
             resource_group_name=resource_group.name,
@@ -37,6 +58,7 @@ class TestNetworkManagementVpnGatewaysOperations(AzureMgmtRecordedTestCase):
             resource_group_name=resource_group.name,
             gateway_name="str",
             vpn_gateway_parameters={
+                "location": "str",
                 "bgpSettings": {
                     "asn": 0,
                     "bgpPeeringAddress": "str",
@@ -146,7 +168,6 @@ class TestNetworkManagementVpnGatewaysOperations(AzureMgmtRecordedTestCase):
                 "id": "str",
                 "ipConfigurations": [{"id": "str", "privateIpAddress": "str", "publicIpAddress": "str"}],
                 "isRoutingPreferenceInternet": bool,
-                "location": "str",
                 "name": "str",
                 "natRules": [
                     {
@@ -233,26 +254,5 @@ class TestNetworkManagementVpnGatewaysOperations(AzureMgmtRecordedTestCase):
             api_version="2025-05-01",
         ).result()  # call '.result()' to poll until service return final result
 
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_vpn_gateways_list_by_resource_group(self, resource_group):
-        response = self.client.vpn_gateways.list_by_resource_group(
-            resource_group_name=resource_group.name,
-            api_version="2025-05-01",
-        )
-        result = [r for r in response]
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_vpn_gateways_list(self, resource_group):
-        response = self.client.vpn_gateways.list(
-            api_version="2025-05-01",
-        )
-        result = [r for r in response]
         # please add some check logic here by yourself
         # ...

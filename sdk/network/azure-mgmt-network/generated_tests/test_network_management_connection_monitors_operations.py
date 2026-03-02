@@ -20,6 +20,31 @@ class TestNetworkManagementConnectionMonitorsOperations(AzureMgmtRecordedTestCas
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
+    def test_connection_monitors_list(self, resource_group):
+        response = self.client.connection_monitors.list(
+            resource_group_name=resource_group.name,
+            network_watcher_name="str",
+            api_version="2025-05-01",
+        )
+        result = [r for r in response]
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
+    def test_connection_monitors_get(self, resource_group):
+        response = self.client.connection_monitors.get(
+            resource_group_name=resource_group.name,
+            network_watcher_name="str",
+            connection_monitor_name="str",
+            api_version="2025-05-01",
+        )
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
     def test_connection_monitors_begin_create_or_update(self, resource_group):
         response = self.client.connection_monitors.begin_create_or_update(
             resource_group_name=resource_group.name,
@@ -84,11 +109,12 @@ class TestNetworkManagementConnectionMonitorsOperations(AzureMgmtRecordedTestCas
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_connection_monitors_get(self, resource_group):
-        response = self.client.connection_monitors.get(
+    def test_connection_monitors_update_tags(self, resource_group):
+        response = self.client.connection_monitors.update_tags(
             resource_group_name=resource_group.name,
             network_watcher_name="str",
             connection_monitor_name="str",
+            parameters={"tags": {"str": "str"}},
             api_version="2025-05-01",
         )
 
@@ -110,20 +136,6 @@ class TestNetworkManagementConnectionMonitorsOperations(AzureMgmtRecordedTestCas
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_connection_monitors_update_tags(self, resource_group):
-        response = self.client.connection_monitors.update_tags(
-            resource_group_name=resource_group.name,
-            network_watcher_name="str",
-            connection_monitor_name="str",
-            parameters={"tags": {"str": "str"}},
-            api_version="2025-05-01",
-        )
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
     def test_connection_monitors_begin_stop(self, resource_group):
         response = self.client.connection_monitors.begin_stop(
             resource_group_name=resource_group.name,
@@ -132,17 +144,5 @@ class TestNetworkManagementConnectionMonitorsOperations(AzureMgmtRecordedTestCas
             api_version="2025-05-01",
         ).result()  # call '.result()' to poll until service return final result
 
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_connection_monitors_list(self, resource_group):
-        response = self.client.connection_monitors.list(
-            resource_group_name=resource_group.name,
-            network_watcher_name="str",
-            api_version="2025-05-01",
-        )
-        result = [r for r in response]
         # please add some check logic here by yourself
         # ...

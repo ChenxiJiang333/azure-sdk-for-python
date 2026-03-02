@@ -28,7 +28,7 @@ from azure.mgmt.network import NetworkManagementClient
 def main():
     client = NetworkManagementClient(
         credential=DefaultAzureCredential(),
-        subscription_id="subid",
+        subscription_id="00000000-0000-0000-0000-000000000000",
     )
 
     response = client.service_endpoint_policies.begin_create_or_update(
@@ -44,9 +44,9 @@ def main():
                             "description": "Storage Service EndpointPolicy Definition",
                             "service": "Microsoft.Storage",
                             "serviceResources": [
-                                "/subscriptions/subid1",
-                                "/subscriptions/subid1/resourceGroups/storageRg",
-                                "/subscriptions/subid1/resourceGroups/storageRg/providers/Microsoft.Storage/storageAccounts/stAccount",
+                                "/subscriptions/00000000-0000-0000-0000-000000000000",
+                                "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/storageRg",
+                                "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/storageRg/providers/Microsoft.Storage/storageAccounts/stAccount",
                             ],
                         },
                     }
@@ -57,6 +57,6 @@ def main():
     print(response)
 
 
-# x-ms-original-file: specification/network/resource-manager/Microsoft.Network/stable/2025-05-01/examples/ServiceEndpointPolicyCreateWithDefinition.json
+# x-ms-original-file: specification/network/resource-manager/Microsoft.Network/Network/stable/2025-05-01/examples/ServiceEndpointPolicyCreateWithDefinition.json
 if __name__ == "__main__":
     main()

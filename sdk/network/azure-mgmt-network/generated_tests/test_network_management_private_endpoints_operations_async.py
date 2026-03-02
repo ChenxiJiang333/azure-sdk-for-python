@@ -22,15 +22,22 @@ class TestNetworkManagementPrivateEndpointsOperationsAsync(AzureMgmtRecordedTest
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_private_endpoints_begin_delete(self, resource_group):
-        response = await (
-            await self.client.private_endpoints.begin_delete(
-                resource_group_name=resource_group.name,
-                private_endpoint_name="str",
-                api_version="2025-05-01",
-            )
-        ).result()  # call '.result()' to poll until service return final result
+    async def test_private_endpoints_list_by_subscription(self, resource_group):
+        response = self.client.private_endpoints.list_by_subscription(
+            api_version="2025-05-01",
+        )
+        result = [r async for r in response]
+        # please add some check logic here by yourself
+        # ...
 
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
+    async def test_private_endpoints_list(self, resource_group):
+        response = self.client.private_endpoints.list(
+            resource_group_name=resource_group.name,
+            api_version="2025-05-01",
+        )
+        result = [r async for r in response]
         # please add some check logic here by yourself
         # ...
 
@@ -81,7 +88,7 @@ class TestNetworkManagementPrivateEndpointsOperationsAsync(AzureMgmtRecordedTest
                             "type": "str",
                         }
                     ],
-                    "ipVersionType": "IPv4",
+                    "ipVersionType": "str",
                     "location": "str",
                     "manualPrivateLinkServiceConnections": [
                         {
@@ -431,9 +438,9 @@ class TestNetworkManagementPrivateEndpointsOperationsAsync(AzureMgmtRecordedTest
                                                     "tags": {"str": "str"},
                                                     "type": "str",
                                                 },
-                                                "privateEndpointNetworkPolicies": "Disabled",
+                                                "privateEndpointNetworkPolicies": "str",
                                                 "privateEndpoints": [...],
-                                                "privateLinkServiceNetworkPolicies": "Enabled",
+                                                "privateLinkServiceNetworkPolicies": "str",
                                                 "provisioningState": "str",
                                                 "purpose": "str",
                                                 "resourceNavigationLinks": [
@@ -815,9 +822,9 @@ class TestNetworkManagementPrivateEndpointsOperationsAsync(AzureMgmtRecordedTest
                                             "tags": {"str": "str"},
                                             "type": "str",
                                         },
-                                        "privateEndpointNetworkPolicies": "Disabled",
+                                        "privateEndpointNetworkPolicies": "str",
                                         "privateEndpoints": [...],
-                                        "privateLinkServiceNetworkPolicies": "Enabled",
+                                        "privateLinkServiceNetworkPolicies": "str",
                                         "provisioningState": "str",
                                         "purpose": "str",
                                         "resourceNavigationLinks": [
@@ -1145,9 +1152,9 @@ class TestNetworkManagementPrivateEndpointsOperationsAsync(AzureMgmtRecordedTest
                                                                 "tags": {"str": "str"},
                                                                 "type": "str",
                                                             },
-                                                            "privateEndpointNetworkPolicies": "Disabled",
+                                                            "privateEndpointNetworkPolicies": "str",
                                                             "privateEndpoints": [...],
-                                                            "privateLinkServiceNetworkPolicies": "Enabled",
+                                                            "privateLinkServiceNetworkPolicies": "str",
                                                             "provisioningState": "str",
                                                             "purpose": "str",
                                                             "resourceNavigationLinks": [
@@ -1530,9 +1537,9 @@ class TestNetworkManagementPrivateEndpointsOperationsAsync(AzureMgmtRecordedTest
                                                         "tags": {"str": "str"},
                                                         "type": "str",
                                                     },
-                                                    "privateEndpointNetworkPolicies": "Disabled",
+                                                    "privateEndpointNetworkPolicies": "str",
                                                     "privateEndpoints": [...],
-                                                    "privateLinkServiceNetworkPolicies": "Enabled",
+                                                    "privateLinkServiceNetworkPolicies": "str",
                                                     "provisioningState": "str",
                                                     "purpose": "str",
                                                     "resourceNavigationLinks": [
@@ -1906,9 +1913,9 @@ class TestNetworkManagementPrivateEndpointsOperationsAsync(AzureMgmtRecordedTest
                                         "name": "str",
                                         "natGateway": {"id": "str"},
                                         "networkSecurityGroup": ...,
-                                        "privateEndpointNetworkPolicies": "Disabled",
+                                        "privateEndpointNetworkPolicies": "str",
                                         "privateEndpoints": [...],
-                                        "privateLinkServiceNetworkPolicies": "Enabled",
+                                        "privateLinkServiceNetworkPolicies": "str",
                                         "provisioningState": "str",
                                         "purpose": "str",
                                         "resourceNavigationLinks": [
@@ -2280,9 +2287,9 @@ class TestNetworkManagementPrivateEndpointsOperationsAsync(AzureMgmtRecordedTest
                                                 "tags": {"str": "str"},
                                                 "type": "str",
                                             },
-                                            "privateEndpointNetworkPolicies": "Disabled",
+                                            "privateEndpointNetworkPolicies": "str",
                                             "privateEndpoints": [...],
-                                            "privateLinkServiceNetworkPolicies": "Enabled",
+                                            "privateLinkServiceNetworkPolicies": "str",
                                             "provisioningState": "str",
                                             "purpose": "str",
                                             "resourceNavigationLinks": [
@@ -2605,9 +2612,9 @@ class TestNetworkManagementPrivateEndpointsOperationsAsync(AzureMgmtRecordedTest
                                                         "tags": {"str": "str"},
                                                         "type": "str",
                                                     },
-                                                    "privateEndpointNetworkPolicies": "Disabled",
+                                                    "privateEndpointNetworkPolicies": "str",
                                                     "privateEndpoints": [...],
-                                                    "privateLinkServiceNetworkPolicies": "Enabled",
+                                                    "privateLinkServiceNetworkPolicies": "str",
                                                     "provisioningState": "str",
                                                     "purpose": "str",
                                                     "resourceNavigationLinks": [
@@ -2990,9 +2997,9 @@ class TestNetworkManagementPrivateEndpointsOperationsAsync(AzureMgmtRecordedTest
                                                 "tags": {"str": "str"},
                                                 "type": "str",
                                             },
-                                            "privateEndpointNetworkPolicies": "Disabled",
+                                            "privateEndpointNetworkPolicies": "str",
                                             "privateEndpoints": [...],
-                                            "privateLinkServiceNetworkPolicies": "Enabled",
+                                            "privateLinkServiceNetworkPolicies": "str",
                                             "provisioningState": "str",
                                             "purpose": "str",
                                             "resourceNavigationLinks": [
@@ -3354,9 +3361,9 @@ class TestNetworkManagementPrivateEndpointsOperationsAsync(AzureMgmtRecordedTest
                                                             "tags": {"str": "str"},
                                                             "type": "str",
                                                         },
-                                                        "privateEndpointNetworkPolicies": "Disabled",
+                                                        "privateEndpointNetworkPolicies": "str",
                                                         "privateEndpoints": [...],
-                                                        "privateLinkServiceNetworkPolicies": "Enabled",
+                                                        "privateLinkServiceNetworkPolicies": "str",
                                                         "provisioningState": "str",
                                                         "purpose": "str",
                                                         "resourceNavigationLinks": [
@@ -3739,9 +3746,9 @@ class TestNetworkManagementPrivateEndpointsOperationsAsync(AzureMgmtRecordedTest
                                                     "tags": {"str": "str"},
                                                     "type": "str",
                                                 },
-                                                "privateEndpointNetworkPolicies": "Disabled",
+                                                "privateEndpointNetworkPolicies": "str",
                                                 "privateEndpoints": [...],
-                                                "privateLinkServiceNetworkPolicies": "Enabled",
+                                                "privateLinkServiceNetworkPolicies": "str",
                                                 "provisioningState": "str",
                                                 "purpose": "str",
                                                 "resourceNavigationLinks": [
@@ -4151,9 +4158,9 @@ class TestNetworkManagementPrivateEndpointsOperationsAsync(AzureMgmtRecordedTest
                                                             "tags": {"str": "str"},
                                                             "type": "str",
                                                         },
-                                                        "privateEndpointNetworkPolicies": "Disabled",
+                                                        "privateEndpointNetworkPolicies": "str",
                                                         "privateEndpoints": [...],
-                                                        "privateLinkServiceNetworkPolicies": "Enabled",
+                                                        "privateLinkServiceNetworkPolicies": "str",
                                                         "provisioningState": "str",
                                                         "purpose": "str",
                                                         "resourceNavigationLinks": [
@@ -4535,9 +4542,9 @@ class TestNetworkManagementPrivateEndpointsOperationsAsync(AzureMgmtRecordedTest
                                                     "tags": {"str": "str"},
                                                     "type": "str",
                                                 },
-                                                "privateEndpointNetworkPolicies": "Disabled",
+                                                "privateEndpointNetworkPolicies": "str",
                                                 "privateEndpoints": [...],
-                                                "privateLinkServiceNetworkPolicies": "Enabled",
+                                                "privateLinkServiceNetworkPolicies": "str",
                                                 "provisioningState": "str",
                                                 "purpose": "str",
                                                 "resourceNavigationLinks": [
@@ -5626,9 +5633,9 @@ class TestNetworkManagementPrivateEndpointsOperationsAsync(AzureMgmtRecordedTest
                             "tags": {"str": "str"},
                             "type": "str",
                         },
-                        "privateEndpointNetworkPolicies": "Disabled",
+                        "privateEndpointNetworkPolicies": "str",
                         "privateEndpoints": [...],
-                        "privateLinkServiceNetworkPolicies": "Enabled",
+                        "privateLinkServiceNetworkPolicies": "str",
                         "provisioningState": "str",
                         "purpose": "str",
                         "resourceNavigationLinks": [
@@ -5732,21 +5739,14 @@ class TestNetworkManagementPrivateEndpointsOperationsAsync(AzureMgmtRecordedTest
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_private_endpoints_list(self, resource_group):
-        response = self.client.private_endpoints.list(
-            resource_group_name=resource_group.name,
-            api_version="2025-05-01",
-        )
-        result = [r async for r in response]
-        # please add some check logic here by yourself
-        # ...
+    async def test_private_endpoints_begin_delete(self, resource_group):
+        response = await (
+            await self.client.private_endpoints.begin_delete(
+                resource_group_name=resource_group.name,
+                private_endpoint_name="str",
+                api_version="2025-05-01",
+            )
+        ).result()  # call '.result()' to poll until service return final result
 
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_private_endpoints_list_by_subscription(self, resource_group):
-        response = self.client.private_endpoints.list_by_subscription(
-            api_version="2025-05-01",
-        )
-        result = [r async for r in response]
         # please add some check logic here by yourself
         # ...

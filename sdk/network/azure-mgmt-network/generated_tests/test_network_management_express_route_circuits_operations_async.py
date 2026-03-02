@@ -21,15 +21,22 @@ class TestNetworkManagementExpressRouteCircuitsOperationsAsync(AzureMgmtRecorded
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_express_route_circuits_begin_delete(self, resource_group):
-        response = await (
-            await self.client.express_route_circuits.begin_delete(
-                resource_group_name=resource_group.name,
-                circuit_name="str",
-                api_version="2025-05-01",
-            )
-        ).result()  # call '.result()' to poll until service return final result
+    async def test_express_route_circuits_list_all(self, resource_group):
+        response = self.client.express_route_circuits.list_all(
+            api_version="2025-05-01",
+        )
+        result = [r async for r in response]
+        # please add some check logic here by yourself
+        # ...
 
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
+    async def test_express_route_circuits_list(self, resource_group):
+        response = self.client.express_route_circuits.list(
+            resource_group_name=resource_group.name,
+            api_version="2025-05-01",
+        )
+        result = [r async for r in response]
         # please add some check logic here by yourself
         # ...
 
@@ -214,6 +221,20 @@ class TestNetworkManagementExpressRouteCircuitsOperationsAsync(AzureMgmtRecorded
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
+    async def test_express_route_circuits_begin_delete(self, resource_group):
+        response = await (
+            await self.client.express_route_circuits.begin_delete(
+                resource_group_name=resource_group.name,
+                circuit_name="str",
+                api_version="2025-05-01",
+            )
+        ).result()  # call '.result()' to poll until service return final result
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
     async def test_express_route_circuits_begin_list_arp_table(self, resource_group):
         response = await (
             await self.client.express_route_circuits.begin_list_arp_table(
@@ -262,18 +283,6 @@ class TestNetworkManagementExpressRouteCircuitsOperationsAsync(AzureMgmtRecorded
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_express_route_circuits_get_stats(self, resource_group):
-        response = await self.client.express_route_circuits.get_stats(
-            resource_group_name=resource_group.name,
-            circuit_name="str",
-            api_version="2025-05-01",
-        )
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
     async def test_express_route_circuits_get_peering_stats(self, resource_group):
         response = await self.client.express_route_circuits.get_peering_stats(
             resource_group_name=resource_group.name,
@@ -287,21 +296,12 @@ class TestNetworkManagementExpressRouteCircuitsOperationsAsync(AzureMgmtRecorded
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_express_route_circuits_list(self, resource_group):
-        response = self.client.express_route_circuits.list(
+    async def test_express_route_circuits_get_stats(self, resource_group):
+        response = await self.client.express_route_circuits.get_stats(
             resource_group_name=resource_group.name,
+            circuit_name="str",
             api_version="2025-05-01",
         )
-        result = [r async for r in response]
-        # please add some check logic here by yourself
-        # ...
 
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_express_route_circuits_list_all(self, resource_group):
-        response = self.client.express_route_circuits.list_all(
-            api_version="2025-05-01",
-        )
-        result = [r async for r in response]
         # please add some check logic here by yourself
         # ...

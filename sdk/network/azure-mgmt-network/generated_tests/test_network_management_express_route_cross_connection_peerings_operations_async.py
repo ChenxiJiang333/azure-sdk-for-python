@@ -33,21 +33,6 @@ class TestNetworkManagementExpressRouteCrossConnectionPeeringsOperationsAsync(Az
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_express_route_cross_connection_peerings_begin_delete(self, resource_group):
-        response = await (
-            await self.client.express_route_cross_connection_peerings.begin_delete(
-                resource_group_name=resource_group.name,
-                cross_connection_name="str",
-                peering_name="str",
-                api_version="2025-05-01",
-            )
-        ).result()  # call '.result()' to poll until service return final result
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
     async def test_express_route_cross_connection_peerings_get(self, resource_group):
         response = await self.client.express_route_cross_connection_peerings.get(
             resource_group_name=resource_group.name,
@@ -113,6 +98,21 @@ class TestNetworkManagementExpressRouteCrossConnectionPeeringsOperationsAsync(Az
                     "state": "str",
                     "vlanId": 0,
                 },
+                api_version="2025-05-01",
+            )
+        ).result()  # call '.result()' to poll until service return final result
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
+    async def test_express_route_cross_connection_peerings_begin_delete(self, resource_group):
+        response = await (
+            await self.client.express_route_cross_connection_peerings.begin_delete(
+                resource_group_name=resource_group.name,
+                cross_connection_name="str",
+                peering_name="str",
                 api_version="2025-05-01",
             )
         ).result()  # call '.result()' to poll until service return final result

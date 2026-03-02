@@ -28,17 +28,17 @@ from azure.mgmt.network import NetworkManagementClient
 def main():
     client = NetworkManagementClient(
         credential=DefaultAzureCredential(),
-        subscription_id="subId",
+        subscription_id="00000000-0000-0000-0000-000000000000",
     )
 
     response = client.available_private_endpoint_types.list_by_resource_group(
-        location="regionName",
         resource_group_name="rg1",
+        location="regionName",
     )
     for item in response:
         print(item)
 
 
-# x-ms-original-file: specification/network/resource-manager/Microsoft.Network/stable/2025-05-01/examples/AvailablePrivateEndpointTypesResourceGroupGet.json
+# x-ms-original-file: specification/network/resource-manager/Microsoft.Network/Network/stable/2025-05-01/examples/AvailablePrivateEndpointTypesResourceGroupGet.json
 if __name__ == "__main__":
     main()

@@ -1,5 +1,173 @@
 # Release History
 
+## 31.0.0 (2026-03-02)
+
+### Features Added
+
+  - Model ConnectionMonitorListResult has a new parameter next_link
+  - Model NetworkWatcherListResult has a new parameter next_link
+  - Model PacketCaptureListResult has a new parameter next_link
+
+### Breaking Changes
+
+  - Parameter location of model P2SVpnGateway is now required
+  - Parameter location of model RouteFilter is now required
+  - Parameter location of model VirtualHub is now required
+  - Parameter location of model VirtualWAN is now required
+  - Parameter location of model VpnGateway is now required
+  - Parameter location of model VpnSite is now required
+  - Parameter value of model AdminRuleCollectionListResult is now required
+  - Parameter value of model AdminRuleListResult is now required
+  - Parameter value of model ApplicationGatewayAvailableSslPredefinedPolicies is now required
+  - Parameter value of model ApplicationGatewayListResult is now required
+  - Parameter value of model ApplicationGatewayPrivateEndpointConnectionListResult is now required
+  - Parameter value of model ApplicationGatewayPrivateLinkResourceListResult is now required
+  - Parameter value of model ApplicationGatewayWafDynamicManifestResultList is now required
+  - Parameter value of model ApplicationSecurityGroupListResult is now required
+  - Parameter value of model AuthorizationListResult is now required
+  - Parameter value of model AutoApprovedPrivateLinkServicesResult is now required
+  - Parameter value of model AvailableDelegationsResult is now required
+  - Parameter value of model AvailablePrivateEndpointTypesResult is now required
+  - Parameter value of model AvailableServiceAliasesResult is now required
+  - Parameter value of model AzureFirewallFqdnTagListResult is now required
+  - Parameter value of model AzureFirewallListResult is now required
+  - Parameter value of model AzureWebCategoryListResult is now required
+  - Parameter value of model BastionActiveSessionListResult is now required
+  - Parameter value of model BastionHostListResult is now required
+  - Parameter value of model BastionSessionDeleteResult is now required
+  - Parameter value of model BastionShareableLinkListResult is now required
+  - Parameter value of model BgpServiceCommunityListResult is now required
+  - Parameter value of model ConnectionSharedKeyResultList is now required
+  - Parameter value of model ConnectivityConfigurationListResult is now required
+  - Parameter value of model CustomIpPrefixListResult is now required
+  - Parameter value of model DdosProtectionPlanListResult is now required
+  - Parameter value of model DscpConfigurationListResult is now required
+  - Parameter value of model EffectiveNetworkSecurityGroupListResult is now required
+  - Parameter value of model EffectiveRouteListResult is now required
+  - Parameter value of model EndpointServicesListResult is now required
+  - Parameter value of model ExpressRouteCircuitConnectionListResult is now required
+  - Parameter value of model ExpressRouteCircuitListResult is now required
+  - Parameter value of model ExpressRouteCircuitPeeringListResult is now required
+  - Parameter value of model ExpressRouteCircuitsArpTableListResult is now required
+  - Parameter value of model ExpressRouteCircuitsRoutesTableListResult is now required
+  - Parameter value of model ExpressRouteCircuitsRoutesTableSummaryListResult is now required
+  - Parameter value of model ExpressRouteCrossConnectionListResult is now required
+  - Parameter value of model ExpressRouteCrossConnectionPeeringList is now required
+  - Parameter value of model ExpressRouteCrossConnectionsRoutesTableSummaryListResult is now required
+  - Parameter value of model ExpressRouteLinkListResult is now required
+  - Parameter value of model ExpressRoutePortAuthorizationListResult is now required
+  - Parameter value of model ExpressRoutePortListResult is now required
+  - Parameter value of model ExpressRoutePortsLocationListResult is now required
+  - Parameter value of model ExpressRouteProviderPortListResult is now required
+  - Parameter value of model ExpressRouteServiceProviderListResult is now required
+  - Parameter value of model FirewallPolicyListResult is now required
+  - Parameter value of model FirewallPolicyRuleCollectionGroupListResult is now required
+  - Parameter value of model FlowLogListResult is now required
+  - Parameter value of model GetServiceGatewayAddressLocationsResult is now required
+  - Parameter value of model GetServiceGatewayServicesResult is now required
+  - Parameter value of model InboundNatRuleListResult is now required
+  - Parameter value of model IpAllocationListResult is now required
+  - Parameter value of model IpGroupListResult is now required
+  - Parameter value of model IpamPoolList is now required
+  - Parameter value of model ListHubRouteTablesResult is now required
+  - Parameter value of model ListHubVirtualNetworkConnectionsResult is now required
+  - Parameter value of model ListP2SVpnGatewaysResult is now required
+  - Parameter value of model ListRouteMapsResult is now required
+  - Parameter value of model ListRoutingIntentResult is now required
+  - Parameter value of model ListVirtualHubBgpConnectionResults is now required
+  - Parameter value of model ListVirtualHubIpConfigurationResults is now required
+  - Parameter value of model ListVirtualHubRouteTableV2SResult is now required
+  - Parameter value of model ListVirtualHubsResult is now required
+  - Parameter value of model ListVirtualNetworkGatewayNatRulesResult is now required
+  - Parameter value of model ListVirtualWANsResult is now required
+  - Parameter value of model ListVpnConnectionsResult is now required
+  - Parameter value of model ListVpnGatewayNatRulesResult is now required
+  - Parameter value of model ListVpnGatewaysResult is now required
+  - Parameter value of model ListVpnServerConfigurationPolicyGroupsResult is now required
+  - Parameter value of model ListVpnServerConfigurationsResult is now required
+  - Parameter value of model ListVpnSiteLinkConnectionsResult is now required
+  - Parameter value of model ListVpnSiteLinksResult is now required
+  - Parameter value of model ListVpnSitesResult is now required
+  - Parameter value of model LoadBalancerBackendAddressPoolListResult is now required
+  - Parameter value of model LoadBalancerFrontendIPConfigurationListResult is now required
+  - Parameter value of model LoadBalancerListResult is now required
+  - Parameter value of model LoadBalancerLoadBalancingRuleListResult is now required
+  - Parameter value of model LoadBalancerOutboundRuleListResult is now required
+  - Parameter value of model LoadBalancerProbeListResult is now required
+  - Parameter value of model LocalNetworkGatewayListResult is now required
+  - Parameter value of model NatGatewayListResult is now required
+  - Parameter value of model NetworkGroupListResult is now required
+  - Parameter value of model NetworkInterfaceIPConfigurationListResult is now required
+  - Parameter value of model NetworkInterfaceListResult is now required
+  - Parameter value of model NetworkInterfaceLoadBalancerListResult is now required
+  - Parameter value of model NetworkInterfaceTapConfigurationListResult is now required
+  - Parameter value of model NetworkManagerConnectionListResult is now required
+  - Parameter value of model NetworkManagerListResult is now required
+  - Parameter value of model NetworkManagerRoutingConfigurationListResult is now required
+  - Parameter value of model NetworkProfileListResult is now required
+  - Parameter value of model NetworkSecurityGroupListResult is now required
+  - Parameter value of model NetworkSecurityPerimeterListResult is now required
+  - Parameter value of model NetworkVirtualApplianceConnectionList is now required
+  - Parameter value of model NetworkVirtualApplianceListResult is now required
+  - Parameter value of model NetworkVirtualApplianceSiteListResult is now required
+  - Parameter value of model NetworkVirtualApplianceSkuListResult is now required
+  - Parameter value of model NspAccessRuleListResult is now required
+  - Parameter value of model NspAssociationsListResult is now required
+  - Parameter value of model NspLinkListResult is now required
+  - Parameter value of model NspLinkReferenceListResult is now required
+  - Parameter value of model NspLoggingConfigurationListResult is now required
+  - Parameter value of model NspProfileListResult is now required
+  - Parameter value of model NspServiceTagsListResult is now required
+  - Parameter value of model OperationListResult is now required
+  - Parameter value of model PeerExpressRouteCircuitConnectionListResult is now required
+  - Parameter value of model PerimeterAssociableResourcesListResult is now required
+  - Parameter value of model PoolAssociationList is now required
+  - Parameter value of model PrivateDnsZoneGroupListResult is now required
+  - Parameter value of model PrivateEndpointConnectionListResult is now required
+  - Parameter value of model PrivateEndpointListResult is now required
+  - Parameter value of model PrivateLinkServiceListResult is now required
+  - Parameter value of model PublicIPAddressListResult is now required
+  - Parameter value of model PublicIPPrefixListResult is now required
+  - Parameter value of model RadiusAuthServerListResult is now required
+  - Parameter value of model ReachabilityAnalysisIntentListResult is now required
+  - Parameter value of model ReachabilityAnalysisRunListResult is now required
+  - Parameter value of model ResourceNavigationLinksListResult is now required
+  - Parameter value of model RouteFilterListResult is now required
+  - Parameter value of model RouteFilterRuleListResult is now required
+  - Parameter value of model RouteListResult is now required
+  - Parameter value of model RouteTableListResult is now required
+  - Parameter value of model RoutingRuleCollectionListResult is now required
+  - Parameter value of model RoutingRuleListResult is now required
+  - Parameter value of model ScopeConnectionListResult is now required
+  - Parameter value of model SecurityAdminConfigurationListResult is now required
+  - Parameter value of model SecurityPartnerProviderListResult is now required
+  - Parameter value of model SecurityRuleListResult is now required
+  - Parameter value of model SecurityUserConfigurationListResult is now required
+  - Parameter value of model SecurityUserRuleCollectionListResult is now required
+  - Parameter value of model SecurityUserRuleListResult is now required
+  - Parameter value of model ServiceAssociationLinksListResult is now required
+  - Parameter value of model ServiceEndpointPolicyDefinitionListResult is now required
+  - Parameter value of model ServiceEndpointPolicyListResult is now required
+  - Parameter value of model ServiceGatewayListResult is now required
+  - Parameter value of model ServiceTagInformationListResult is now required
+  - Parameter value of model StaticCidrList is now required
+  - Parameter value of model StaticMemberListResult is now required
+  - Parameter value of model SubnetListResult is now required
+  - Parameter value of model UsagesListResult is now required
+  - Parameter value of model VerifierWorkspaceListResult is now required
+  - Parameter value of model VirtualNetworkApplianceListResult is now required
+  - Parameter value of model VirtualNetworkDdosProtectionStatusResult is now required
+  - Parameter value of model VirtualNetworkGatewayConnectionListResult is now required
+  - Parameter value of model VirtualNetworkGatewayListConnectionsResult is now required
+  - Parameter value of model VirtualNetworkGatewayListResult is now required
+  - Parameter value of model VirtualNetworkListResult is now required
+  - Parameter value of model VirtualNetworkListUsageResult is now required
+  - Parameter value of model VirtualNetworkPeeringListResult is now required
+  - Parameter value of model VirtualNetworkTapListResult is now required
+  - Parameter value of model VirtualRouterListResult is now required
+  - Parameter value of model VirtualRouterPeeringListResult is now required
+  - Parameter value of model WebApplicationFirewallPolicyListResult is now required
+
 ## 30.2.0 (2026-02-11)
 
 ### Features Added

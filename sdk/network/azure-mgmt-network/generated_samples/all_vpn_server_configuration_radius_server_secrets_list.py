@@ -28,7 +28,7 @@ from azure.mgmt.network import NetworkManagementClient
 def main():
     client = NetworkManagementClient(
         credential=DefaultAzureCredential(),
-        subscription_id="72f988bf-86f1-41af-91ab-2d7cd0dddd4",
+        subscription_id="72f988bf-86f1-41af-91ab-2d7cd011db47",
     )
 
     response = client.vpn_server_configurations.list_radius_secrets(
@@ -38,6 +38,6 @@ def main():
     print(response)
 
 
-# x-ms-original-file: specification/network/resource-manager/Microsoft.Network/stable/2025-05-01/examples/AllVpnServerConfigurationRadiusServerSecretsList.json
+# x-ms-original-file: specification/network/resource-manager/Microsoft.Network/Network/stable/2025-05-01/examples/AllVpnServerConfigurationRadiusServerSecretsList.json
 if __name__ == "__main__":
     main()

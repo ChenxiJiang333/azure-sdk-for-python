@@ -20,6 +20,18 @@ class TestNetworkManagementNetworkGroupsOperations(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
+    def test_network_groups_list(self, resource_group):
+        response = self.client.network_groups.list(
+            resource_group_name=resource_group.name,
+            network_manager_name="str",
+            api_version="2025-05-01",
+        )
+        result = [r for r in response]
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
     def test_network_groups_get(self, resource_group):
         response = self.client.network_groups.get(
             resource_group_name=resource_group.name,
@@ -72,17 +84,5 @@ class TestNetworkManagementNetworkGroupsOperations(AzureMgmtRecordedTestCase):
             api_version="2025-05-01",
         ).result()  # call '.result()' to poll until service return final result
 
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_network_groups_list(self, resource_group):
-        response = self.client.network_groups.list(
-            resource_group_name=resource_group.name,
-            network_manager_name="str",
-            api_version="2025-05-01",
-        )
-        result = [r for r in response]
         # please add some check logic here by yourself
         # ...

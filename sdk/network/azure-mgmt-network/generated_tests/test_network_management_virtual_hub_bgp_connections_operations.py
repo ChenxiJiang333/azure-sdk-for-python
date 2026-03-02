@@ -32,8 +32,8 @@ class TestNetworkManagementVirtualHubBgpConnectionsOperations(AzureMgmtRecordedT
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_virtual_hub_bgp_connections_begin_list_learned_routes(self, resource_group):
-        response = self.client.virtual_hub_bgp_connections.begin_list_learned_routes(
+    def test_virtual_hub_bgp_connections_begin_list_advertised_routes(self, resource_group):
+        response = self.client.virtual_hub_bgp_connections.begin_list_advertised_routes(
             resource_group_name=resource_group.name,
             hub_name="str",
             connection_name="str",
@@ -45,8 +45,8 @@ class TestNetworkManagementVirtualHubBgpConnectionsOperations(AzureMgmtRecordedT
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_virtual_hub_bgp_connections_begin_list_advertised_routes(self, resource_group):
-        response = self.client.virtual_hub_bgp_connections.begin_list_advertised_routes(
+    def test_virtual_hub_bgp_connections_begin_list_learned_routes(self, resource_group):
+        response = self.client.virtual_hub_bgp_connections.begin_list_learned_routes(
             resource_group_name=resource_group.name,
             hub_name="str",
             connection_name="str",

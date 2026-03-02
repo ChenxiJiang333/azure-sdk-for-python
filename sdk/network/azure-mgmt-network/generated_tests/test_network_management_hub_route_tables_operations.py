@@ -20,6 +20,31 @@ class TestNetworkManagementHubRouteTablesOperations(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
+    def test_hub_route_tables_list(self, resource_group):
+        response = self.client.hub_route_tables.list(
+            resource_group_name=resource_group.name,
+            virtual_hub_name="str",
+            api_version="2025-05-01",
+        )
+        result = [r for r in response]
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
+    def test_hub_route_tables_get(self, resource_group):
+        response = self.client.hub_route_tables.get(
+            resource_group_name=resource_group.name,
+            virtual_hub_name="str",
+            route_table_name="str",
+            api_version="2025-05-01",
+        )
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
     def test_hub_route_tables_begin_create_or_update(self, resource_group):
         response = self.client.hub_route_tables.begin_create_or_update(
             resource_group_name=resource_group.name,
@@ -52,19 +77,6 @@ class TestNetworkManagementHubRouteTablesOperations(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_hub_route_tables_get(self, resource_group):
-        response = self.client.hub_route_tables.get(
-            resource_group_name=resource_group.name,
-            virtual_hub_name="str",
-            route_table_name="str",
-            api_version="2025-05-01",
-        )
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
     def test_hub_route_tables_begin_delete(self, resource_group):
         response = self.client.hub_route_tables.begin_delete(
             resource_group_name=resource_group.name,
@@ -73,17 +85,5 @@ class TestNetworkManagementHubRouteTablesOperations(AzureMgmtRecordedTestCase):
             api_version="2025-05-01",
         ).result()  # call '.result()' to poll until service return final result
 
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_hub_route_tables_list(self, resource_group):
-        response = self.client.hub_route_tables.list(
-            resource_group_name=resource_group.name,
-            virtual_hub_name="str",
-            api_version="2025-05-01",
-        )
-        result = [r for r in response]
         # please add some check logic here by yourself
         # ...

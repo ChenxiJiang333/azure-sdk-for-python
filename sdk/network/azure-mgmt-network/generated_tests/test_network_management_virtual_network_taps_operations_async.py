@@ -22,15 +22,22 @@ class TestNetworkManagementVirtualNetworkTapsOperationsAsync(AzureMgmtRecordedTe
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_virtual_network_taps_begin_delete(self, resource_group):
-        response = await (
-            await self.client.virtual_network_taps.begin_delete(
-                resource_group_name=resource_group.name,
-                tap_name="str",
-                api_version="2025-05-01",
-            )
-        ).result()  # call '.result()' to poll until service return final result
+    async def test_virtual_network_taps_list_all(self, resource_group):
+        response = self.client.virtual_network_taps.list_all(
+            api_version="2025-05-01",
+        )
+        result = [r async for r in response]
+        # please add some check logic here by yourself
+        # ...
 
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
+    async def test_virtual_network_taps_list_by_resource_group(self, resource_group):
+        response = self.client.virtual_network_taps.list_by_resource_group(
+            resource_group_name=resource_group.name,
+            api_version="2025-05-01",
+        )
+        result = [r async for r in response]
         # please add some check logic here by yourself
         # ...
 
@@ -392,7 +399,7 @@ class TestNetworkManagementVirtualNetworkTapsOperationsAsync(AzureMgmtRecordedTe
                                                             "type": "str",
                                                         }
                                                     ],
-                                                    "ipVersionType": "IPv4",
+                                                    "ipVersionType": "str",
                                                     "location": "str",
                                                     "manualPrivateLinkServiceConnections": [
                                                         {
@@ -499,7 +506,7 @@ class TestNetworkManagementVirtualNetworkTapsOperationsAsync(AzureMgmtRecordedTe
                                                                         "type": "str",
                                                                     }
                                                                 ],
-                                                                "ipVersionType": "IPv4",
+                                                                "ipVersionType": "str",
                                                                 "location": "str",
                                                                 "manualPrivateLinkServiceConnections": [
                                                                     {
@@ -628,7 +635,7 @@ class TestNetworkManagementVirtualNetworkTapsOperationsAsync(AzureMgmtRecordedTe
                                         "tags": {"str": "str"},
                                         "type": "str",
                                     },
-                                    "privateEndpointNetworkPolicies": "Disabled",
+                                    "privateEndpointNetworkPolicies": "str",
                                     "privateEndpoints": [
                                         {
                                             "applicationSecurityGroups": [
@@ -658,7 +665,7 @@ class TestNetworkManagementVirtualNetworkTapsOperationsAsync(AzureMgmtRecordedTe
                                                     "type": "str",
                                                 }
                                             ],
-                                            "ipVersionType": "IPv4",
+                                            "ipVersionType": "str",
                                             "location": "str",
                                             "manualPrivateLinkServiceConnections": [
                                                 {
@@ -1054,7 +1061,7 @@ class TestNetworkManagementVirtualNetworkTapsOperationsAsync(AzureMgmtRecordedTe
                                             "type": "str",
                                         }
                                     ],
-                                    "privateLinkServiceNetworkPolicies": "Enabled",
+                                    "privateLinkServiceNetworkPolicies": "str",
                                     "provisioningState": "str",
                                     "purpose": "str",
                                     "resourceNavigationLinks": [
@@ -1604,7 +1611,7 @@ class TestNetworkManagementVirtualNetworkTapsOperationsAsync(AzureMgmtRecordedTe
                                                     "type": "str",
                                                 }
                                             ],
-                                            "ipVersionType": "IPv4",
+                                            "ipVersionType": "str",
                                             "location": "str",
                                             "manualPrivateLinkServiceConnections": [
                                                 {
@@ -1709,7 +1716,7 @@ class TestNetworkManagementVirtualNetworkTapsOperationsAsync(AzureMgmtRecordedTe
                                                                 "type": "str",
                                                             }
                                                         ],
-                                                        "ipVersionType": "IPv4",
+                                                        "ipVersionType": "str",
                                                         "location": "str",
                                                         "manualPrivateLinkServiceConnections": [
                                                             {
@@ -1838,7 +1845,7 @@ class TestNetworkManagementVirtualNetworkTapsOperationsAsync(AzureMgmtRecordedTe
                                 "tags": {"str": "str"},
                                 "type": "str",
                             },
-                            "privateEndpointNetworkPolicies": "Disabled",
+                            "privateEndpointNetworkPolicies": "str",
                             "privateEndpoints": [
                                 {
                                     "applicationSecurityGroups": [
@@ -1868,7 +1875,7 @@ class TestNetworkManagementVirtualNetworkTapsOperationsAsync(AzureMgmtRecordedTe
                                             "type": "str",
                                         }
                                     ],
-                                    "ipVersionType": "IPv4",
+                                    "ipVersionType": "str",
                                     "location": "str",
                                     "manualPrivateLinkServiceConnections": [
                                         {
@@ -2322,7 +2329,7 @@ class TestNetworkManagementVirtualNetworkTapsOperationsAsync(AzureMgmtRecordedTe
                                     "type": "str",
                                 }
                             ],
-                            "privateLinkServiceNetworkPolicies": "Enabled",
+                            "privateLinkServiceNetworkPolicies": "str",
                             "provisioningState": "str",
                             "purpose": "str",
                             "resourceNavigationLinks": [
@@ -2719,7 +2726,7 @@ class TestNetworkManagementVirtualNetworkTapsOperationsAsync(AzureMgmtRecordedTe
                                                             "type": "str",
                                                         }
                                                     ],
-                                                    "ipVersionType": "IPv4",
+                                                    "ipVersionType": "str",
                                                     "location": "str",
                                                     "manualPrivateLinkServiceConnections": [
                                                         {
@@ -2846,7 +2853,7 @@ class TestNetworkManagementVirtualNetworkTapsOperationsAsync(AzureMgmtRecordedTe
                                                                         "type": "str",
                                                                     }
                                                                 ],
-                                                                "ipVersionType": "IPv4",
+                                                                "ipVersionType": "str",
                                                                 "location": "str",
                                                                 "manualPrivateLinkServiceConnections": [
                                                                     {
@@ -2975,7 +2982,7 @@ class TestNetworkManagementVirtualNetworkTapsOperationsAsync(AzureMgmtRecordedTe
                                         "tags": {"str": "str"},
                                         "type": "str",
                                     },
-                                    "privateEndpointNetworkPolicies": "Disabled",
+                                    "privateEndpointNetworkPolicies": "str",
                                     "privateEndpoints": [
                                         {
                                             "applicationSecurityGroups": [
@@ -3005,7 +3012,7 @@ class TestNetworkManagementVirtualNetworkTapsOperationsAsync(AzureMgmtRecordedTe
                                                     "type": "str",
                                                 }
                                             ],
-                                            "ipVersionType": "IPv4",
+                                            "ipVersionType": "str",
                                             "location": "str",
                                             "manualPrivateLinkServiceConnections": [
                                                 {
@@ -3306,7 +3313,7 @@ class TestNetworkManagementVirtualNetworkTapsOperationsAsync(AzureMgmtRecordedTe
                                             "type": "str",
                                         }
                                     ],
-                                    "privateLinkServiceNetworkPolicies": "Enabled",
+                                    "privateLinkServiceNetworkPolicies": "str",
                                     "provisioningState": "str",
                                     "purpose": "str",
                                     "resourceNavigationLinks": [
@@ -3684,7 +3691,7 @@ class TestNetworkManagementVirtualNetworkTapsOperationsAsync(AzureMgmtRecordedTe
                                                     "type": "str",
                                                 }
                                             ],
-                                            "ipVersionType": "IPv4",
+                                            "ipVersionType": "str",
                                             "location": "str",
                                             "manualPrivateLinkServiceConnections": [
                                                 {
@@ -3871,7 +3878,7 @@ class TestNetworkManagementVirtualNetworkTapsOperationsAsync(AzureMgmtRecordedTe
                                                                 "type": "str",
                                                             }
                                                         ],
-                                                        "ipVersionType": "IPv4",
+                                                        "ipVersionType": "str",
                                                         "location": "str",
                                                         "manualPrivateLinkServiceConnections": [
                                                             {
@@ -4000,7 +4007,7 @@ class TestNetworkManagementVirtualNetworkTapsOperationsAsync(AzureMgmtRecordedTe
                                 "tags": {"str": "str"},
                                 "type": "str",
                             },
-                            "privateEndpointNetworkPolicies": "Disabled",
+                            "privateEndpointNetworkPolicies": "str",
                             "privateEndpoints": [
                                 {
                                     "applicationSecurityGroups": [
@@ -4030,7 +4037,7 @@ class TestNetworkManagementVirtualNetworkTapsOperationsAsync(AzureMgmtRecordedTe
                                             "type": "str",
                                         }
                                     ],
-                                    "ipVersionType": "IPv4",
+                                    "ipVersionType": "str",
                                     "location": "str",
                                     "manualPrivateLinkServiceConnections": [
                                         {
@@ -4393,7 +4400,7 @@ class TestNetworkManagementVirtualNetworkTapsOperationsAsync(AzureMgmtRecordedTe
                                     "type": "str",
                                 }
                             ],
-                            "privateLinkServiceNetworkPolicies": "Enabled",
+                            "privateLinkServiceNetworkPolicies": "str",
                             "provisioningState": "str",
                             "purpose": "str",
                             "resourceNavigationLinks": [
@@ -4530,21 +4537,14 @@ class TestNetworkManagementVirtualNetworkTapsOperationsAsync(AzureMgmtRecordedTe
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_virtual_network_taps_list_all(self, resource_group):
-        response = self.client.virtual_network_taps.list_all(
-            api_version="2025-05-01",
-        )
-        result = [r async for r in response]
-        # please add some check logic here by yourself
-        # ...
+    async def test_virtual_network_taps_begin_delete(self, resource_group):
+        response = await (
+            await self.client.virtual_network_taps.begin_delete(
+                resource_group_name=resource_group.name,
+                tap_name="str",
+                api_version="2025-05-01",
+            )
+        ).result()  # call '.result()' to poll until service return final result
 
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_virtual_network_taps_list_by_resource_group(self, resource_group):
-        response = self.client.virtual_network_taps.list_by_resource_group(
-            resource_group_name=resource_group.name,
-            api_version="2025-05-01",
-        )
-        result = [r async for r in response]
         # please add some check logic here by yourself
         # ...

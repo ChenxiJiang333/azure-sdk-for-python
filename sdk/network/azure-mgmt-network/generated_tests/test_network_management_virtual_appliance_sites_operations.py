@@ -20,14 +20,13 @@ class TestNetworkManagementVirtualApplianceSitesOperations(AzureMgmtRecordedTest
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_virtual_appliance_sites_begin_delete(self, resource_group):
-        response = self.client.virtual_appliance_sites.begin_delete(
+    def test_virtual_appliance_sites_list(self, resource_group):
+        response = self.client.virtual_appliance_sites.list(
             resource_group_name=resource_group.name,
             network_virtual_appliance_name="str",
-            site_name="str",
             api_version="2025-05-01",
-        ).result()  # call '.result()' to poll until service return final result
-
+        )
+        result = [r for r in response]
         # please add some check logic here by yourself
         # ...
 
@@ -68,12 +67,13 @@ class TestNetworkManagementVirtualApplianceSitesOperations(AzureMgmtRecordedTest
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_virtual_appliance_sites_list(self, resource_group):
-        response = self.client.virtual_appliance_sites.list(
+    def test_virtual_appliance_sites_begin_delete(self, resource_group):
+        response = self.client.virtual_appliance_sites.begin_delete(
             resource_group_name=resource_group.name,
             network_virtual_appliance_name="str",
+            site_name="str",
             api_version="2025-05-01",
-        )
-        result = [r for r in response]
+        ).result()  # call '.result()' to poll until service return final result
+
         # please add some check logic here by yourself
         # ...

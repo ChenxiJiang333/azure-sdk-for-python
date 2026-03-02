@@ -21,16 +21,13 @@ class TestNetworkManagementFirewallPolicyRuleCollectionGroupsOperationsAsync(Azu
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_firewall_policy_rule_collection_groups_begin_delete(self, resource_group):
-        response = await (
-            await self.client.firewall_policy_rule_collection_groups.begin_delete(
-                resource_group_name=resource_group.name,
-                firewall_policy_name="str",
-                rule_collection_group_name="str",
-                api_version="2025-05-01",
-            )
-        ).result()  # call '.result()' to poll until service return final result
-
+    async def test_firewall_policy_rule_collection_groups_list(self, resource_group):
+        response = self.client.firewall_policy_rule_collection_groups.list(
+            resource_group_name=resource_group.name,
+            firewall_policy_name="str",
+            api_version="2025-05-01",
+        )
+        result = [r async for r in response]
         # please add some check logic here by yourself
         # ...
 
@@ -74,12 +71,15 @@ class TestNetworkManagementFirewallPolicyRuleCollectionGroupsOperationsAsync(Azu
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_firewall_policy_rule_collection_groups_list(self, resource_group):
-        response = self.client.firewall_policy_rule_collection_groups.list(
-            resource_group_name=resource_group.name,
-            firewall_policy_name="str",
-            api_version="2025-05-01",
-        )
-        result = [r async for r in response]
+    async def test_firewall_policy_rule_collection_groups_begin_delete(self, resource_group):
+        response = await (
+            await self.client.firewall_policy_rule_collection_groups.begin_delete(
+                resource_group_name=resource_group.name,
+                firewall_policy_name="str",
+                rule_collection_group_name="str",
+                api_version="2025-05-01",
+            )
+        ).result()  # call '.result()' to poll until service return final result
+
         # please add some check logic here by yourself
         # ...

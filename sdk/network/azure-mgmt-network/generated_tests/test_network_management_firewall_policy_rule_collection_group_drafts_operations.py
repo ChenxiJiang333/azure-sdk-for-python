@@ -20,8 +20,8 @@ class TestNetworkManagementFirewallPolicyRuleCollectionGroupDraftsOperations(Azu
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_firewall_policy_rule_collection_group_drafts_delete(self, resource_group):
-        response = self.client.firewall_policy_rule_collection_group_drafts.delete(
+    def test_firewall_policy_rule_collection_group_drafts_get(self, resource_group):
+        response = self.client.firewall_policy_rule_collection_group_drafts.get(
             resource_group_name=resource_group.name,
             firewall_policy_name="str",
             rule_collection_group_name="str",
@@ -54,8 +54,8 @@ class TestNetworkManagementFirewallPolicyRuleCollectionGroupDraftsOperations(Azu
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_firewall_policy_rule_collection_group_drafts_get(self, resource_group):
-        response = self.client.firewall_policy_rule_collection_group_drafts.get(
+    def test_firewall_policy_rule_collection_group_drafts_delete(self, resource_group):
+        response = self.client.firewall_policy_rule_collection_group_drafts.delete(
             resource_group_name=resource_group.name,
             firewall_policy_name="str",
             rule_collection_group_name="str",

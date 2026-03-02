@@ -20,6 +20,27 @@ class TestNetworkManagementVirtualWansOperations(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
+    def test_virtual_wans_list(self, resource_group):
+        response = self.client.virtual_wans.list(
+            api_version="2025-05-01",
+        )
+        result = [r for r in response]
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
+    def test_virtual_wans_list_by_resource_group(self, resource_group):
+        response = self.client.virtual_wans.list_by_resource_group(
+            resource_group_name=resource_group.name,
+            api_version="2025-05-01",
+        )
+        result = [r for r in response]
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
     def test_virtual_wans_get(self, resource_group):
         response = self.client.virtual_wans.get(
             resource_group_name=resource_group.name,
@@ -37,12 +58,12 @@ class TestNetworkManagementVirtualWansOperations(AzureMgmtRecordedTestCase):
             resource_group_name=resource_group.name,
             virtual_wan_name="str",
             wan_parameters={
+                "location": "str",
                 "allowBranchToBranchTraffic": bool,
                 "allowVnetToVnetTraffic": bool,
                 "disableVpnEncryption": bool,
                 "etag": "str",
                 "id": "str",
-                "location": "str",
                 "name": "str",
                 "office365LocalBreakoutCategory": "str",
                 "provisioningState": "str",
@@ -79,26 +100,5 @@ class TestNetworkManagementVirtualWansOperations(AzureMgmtRecordedTestCase):
             api_version="2025-05-01",
         ).result()  # call '.result()' to poll until service return final result
 
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_virtual_wans_list_by_resource_group(self, resource_group):
-        response = self.client.virtual_wans.list_by_resource_group(
-            resource_group_name=resource_group.name,
-            api_version="2025-05-01",
-        )
-        result = [r for r in response]
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_virtual_wans_list(self, resource_group):
-        response = self.client.virtual_wans.list(
-            api_version="2025-05-01",
-        )
-        result = [r for r in response]
         # please add some check logic here by yourself
         # ...

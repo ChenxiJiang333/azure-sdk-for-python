@@ -21,12 +21,24 @@ class TestNetworkManagementVipSwapOperationsAsync(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
+    async def test_vip_swap_list(self, resource_group):
+        response = await self.client.vip_swap.list(
+            group_name="str",
+            resource_name="str",
+            api_version="2025-05-01",
+        )
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
     async def test_vip_swap_get(self, resource_group):
         response = await self.client.vip_swap.get(
             group_name="str",
             resource_name="str",
-            singleton_resource="swap",
             api_version="2025-05-01",
+            singleton_resource="swap",
         )
 
         # please add some check logic here by yourself
@@ -40,22 +52,10 @@ class TestNetworkManagementVipSwapOperationsAsync(AzureMgmtRecordedTestCase):
                 group_name="str",
                 resource_name="str",
                 parameters={"id": "str", "name": "str", "properties": {"slotType": "str"}, "type": "str"},
-                singleton_resource="swap",
                 api_version="2025-05-01",
+                singleton_resource="swap",
             )
         ).result()  # call '.result()' to poll until service return final result
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_vip_swap_list(self, resource_group):
-        response = await self.client.vip_swap.list(
-            group_name="str",
-            resource_name="str",
-            api_version="2025-05-01",
-        )
 
         # please add some check logic here by yourself
         # ...

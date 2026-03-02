@@ -33,8 +33,8 @@ class TestNetworkManagementAvailablePrivateEndpointTypesOperations(AzureMgmtReco
     @recorded_by_proxy
     def test_available_private_endpoint_types_list_by_resource_group(self, resource_group):
         response = self.client.available_private_endpoint_types.list_by_resource_group(
-            location="str",
             resource_group_name=resource_group.name,
+            location="str",
             api_version="2025-05-01",
         )
         result = [r for r in response]

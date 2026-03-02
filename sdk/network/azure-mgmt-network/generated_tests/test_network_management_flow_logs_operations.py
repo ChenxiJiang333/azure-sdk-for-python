@@ -20,6 +20,31 @@ class TestNetworkManagementFlowLogsOperations(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
+    def test_flow_logs_list(self, resource_group):
+        response = self.client.flow_logs.list(
+            resource_group_name=resource_group.name,
+            network_watcher_name="str",
+            api_version="2025-05-01",
+        )
+        result = [r for r in response]
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
+    def test_flow_logs_get(self, resource_group):
+        response = self.client.flow_logs.get(
+            resource_group_name=resource_group.name,
+            network_watcher_name="str",
+            flow_log_name="str",
+            api_version="2025-05-01",
+        )
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
     def test_flow_logs_begin_create_or_update(self, resource_group):
         response = self.client.flow_logs.begin_create_or_update(
             resource_group_name=resource_group.name,
@@ -79,19 +104,6 @@ class TestNetworkManagementFlowLogsOperations(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_flow_logs_get(self, resource_group):
-        response = self.client.flow_logs.get(
-            resource_group_name=resource_group.name,
-            network_watcher_name="str",
-            flow_log_name="str",
-            api_version="2025-05-01",
-        )
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
     def test_flow_logs_begin_delete(self, resource_group):
         response = self.client.flow_logs.begin_delete(
             resource_group_name=resource_group.name,
@@ -100,17 +112,5 @@ class TestNetworkManagementFlowLogsOperations(AzureMgmtRecordedTestCase):
             api_version="2025-05-01",
         ).result()  # call '.result()' to poll until service return final result
 
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_flow_logs_list(self, resource_group):
-        response = self.client.flow_logs.list(
-            resource_group_name=resource_group.name,
-            network_watcher_name="str",
-            api_version="2025-05-01",
-        )
-        result = [r for r in response]
         # please add some check logic here by yourself
         # ...

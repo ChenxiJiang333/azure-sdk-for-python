@@ -22,15 +22,22 @@ class TestNetworkManagementVirtualNetworksOperationsAsync(AzureMgmtRecordedTestC
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_virtual_networks_begin_delete(self, resource_group):
-        response = await (
-            await self.client.virtual_networks.begin_delete(
-                resource_group_name=resource_group.name,
-                virtual_network_name="str",
-                api_version="2025-05-01",
-            )
-        ).result()  # call '.result()' to poll until service return final result
+    async def test_virtual_networks_list_all(self, resource_group):
+        response = self.client.virtual_networks.list_all(
+            api_version="2025-05-01",
+        )
+        result = [r async for r in response]
+        # please add some check logic here by yourself
+        # ...
 
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
+    async def test_virtual_networks_list(self, resource_group):
+        response = self.client.virtual_networks.list(
+            resource_group_name=resource_group.name,
+            api_version="2025-05-01",
+        )
+        result = [r async for r in response]
         # please add some check logic here by yourself
         # ...
 
@@ -636,7 +643,7 @@ class TestNetworkManagementVirtualNetworksOperationsAsync(AzureMgmtRecordedTestC
                                                     "type": "str",
                                                 }
                                             ],
-                                            "ipVersionType": "IPv4",
+                                            "ipVersionType": "str",
                                             "location": "str",
                                             "manualPrivateLinkServiceConnections": [
                                                 {
@@ -823,7 +830,7 @@ class TestNetworkManagementVirtualNetworksOperationsAsync(AzureMgmtRecordedTestC
                                                                 "type": "str",
                                                             }
                                                         ],
-                                                        "ipVersionType": "IPv4",
+                                                        "ipVersionType": "str",
                                                         "location": "str",
                                                         "manualPrivateLinkServiceConnections": [
                                                             {
@@ -1220,7 +1227,7 @@ class TestNetworkManagementVirtualNetworksOperationsAsync(AzureMgmtRecordedTestC
                                 "tags": {"str": "str"},
                                 "type": "str",
                             },
-                            "privateEndpointNetworkPolicies": "Disabled",
+                            "privateEndpointNetworkPolicies": "str",
                             "privateEndpoints": [
                                 {
                                     "applicationSecurityGroups": [
@@ -1250,7 +1257,7 @@ class TestNetworkManagementVirtualNetworksOperationsAsync(AzureMgmtRecordedTestC
                                             "type": "str",
                                         }
                                     ],
-                                    "ipVersionType": "IPv4",
+                                    "ipVersionType": "str",
                                     "location": "str",
                                     "manualPrivateLinkServiceConnections": [
                                         {
@@ -2158,7 +2165,7 @@ class TestNetworkManagementVirtualNetworksOperationsAsync(AzureMgmtRecordedTestC
                                     "type": "str",
                                 }
                             ],
-                            "privateLinkServiceNetworkPolicies": "Enabled",
+                            "privateLinkServiceNetworkPolicies": "str",
                             "provisioningState": "str",
                             "purpose": "str",
                             "resourceNavigationLinks": [
@@ -2324,22 +2331,15 @@ class TestNetworkManagementVirtualNetworksOperationsAsync(AzureMgmtRecordedTestC
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_virtual_networks_list_all(self, resource_group):
-        response = self.client.virtual_networks.list_all(
-            api_version="2025-05-01",
-        )
-        result = [r async for r in response]
-        # please add some check logic here by yourself
-        # ...
+    async def test_virtual_networks_begin_delete(self, resource_group):
+        response = await (
+            await self.client.virtual_networks.begin_delete(
+                resource_group_name=resource_group.name,
+                virtual_network_name="str",
+                api_version="2025-05-01",
+            )
+        ).result()  # call '.result()' to poll until service return final result
 
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_virtual_networks_list(self, resource_group):
-        response = self.client.virtual_networks.list(
-            resource_group_name=resource_group.name,
-            api_version="2025-05-01",
-        )
-        result = [r async for r in response]
         # please add some check logic here by yourself
         # ...
 
@@ -2358,18 +2358,6 @@ class TestNetworkManagementVirtualNetworksOperationsAsync(AzureMgmtRecordedTestC
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_virtual_networks_list_usage(self, resource_group):
-        response = self.client.virtual_networks.list_usage(
-            resource_group_name=resource_group.name,
-            virtual_network_name="str",
-            api_version="2025-05-01",
-        )
-        result = [r async for r in response]
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
     async def test_virtual_networks_begin_list_ddos_protection_status(self, resource_group):
         response = await (
             await self.client.virtual_networks.begin_list_ddos_protection_status(
@@ -2378,6 +2366,18 @@ class TestNetworkManagementVirtualNetworksOperationsAsync(AzureMgmtRecordedTestC
                 api_version="2025-05-01",
             )
         ).result()  # call '.result()' to poll until service return final result
+        result = [r async for r in response]
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
+    async def test_virtual_networks_list_usage(self, resource_group):
+        response = self.client.virtual_networks.list_usage(
+            resource_group_name=resource_group.name,
+            virtual_network_name="str",
+            api_version="2025-05-01",
+        )
         result = [r async for r in response]
         # please add some check logic here by yourself
         # ...

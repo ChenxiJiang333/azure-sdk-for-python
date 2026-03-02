@@ -20,122 +20,6 @@ class TestNetworkManagement(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_begin_put_bastion_shareable_link(self, resource_group):
-        response = self.client.begin_put_bastion_shareable_link(
-            resource_group_name=resource_group.name,
-            bastion_host_name="str",
-            bsl_request={
-                "vms": [
-                    {
-                        "vm": {"id": "str", "location": "str", "name": "str", "tags": {"str": "str"}, "type": "str"},
-                        "bsl": "str",
-                        "createdAt": "str",
-                        "message": "str",
-                    }
-                ]
-            },
-            api_version="2025-05-01",
-        ).result()  # call '.result()' to poll until service return final result
-        result = [r for r in response]
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_begin_delete_bastion_shareable_link(self, resource_group):
-        response = self.client.begin_delete_bastion_shareable_link(
-            resource_group_name=resource_group.name,
-            bastion_host_name="str",
-            bsl_request={
-                "vms": [
-                    {
-                        "vm": {"id": "str", "location": "str", "name": "str", "tags": {"str": "str"}, "type": "str"},
-                        "bsl": "str",
-                        "createdAt": "str",
-                        "message": "str",
-                    }
-                ]
-            },
-            api_version="2025-05-01",
-        ).result()  # call '.result()' to poll until service return final result
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_begin_delete_bastion_shareable_link_by_token(self, resource_group):
-        response = self.client.begin_delete_bastion_shareable_link_by_token(
-            resource_group_name=resource_group.name,
-            bastion_host_name="str",
-            bsl_token_request={"tokens": ["str"]},
-            api_version="2025-05-01",
-        ).result()  # call '.result()' to poll until service return final result
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_get_bastion_shareable_link(self, resource_group):
-        response = self.client.get_bastion_shareable_link(
-            resource_group_name=resource_group.name,
-            bastion_host_name="str",
-            bsl_request={
-                "vms": [
-                    {
-                        "vm": {"id": "str", "location": "str", "name": "str", "tags": {"str": "str"}, "type": "str"},
-                        "bsl": "str",
-                        "createdAt": "str",
-                        "message": "str",
-                    }
-                ]
-            },
-            api_version="2025-05-01",
-        )
-        result = [r for r in response]
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_begin_get_active_sessions(self, resource_group):
-        response = self.client.begin_get_active_sessions(
-            resource_group_name=resource_group.name,
-            bastion_host_name="str",
-            api_version="2025-05-01",
-        ).result()  # call '.result()' to poll until service return final result
-        result = [r for r in response]
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_disconnect_active_sessions(self, resource_group):
-        response = self.client.disconnect_active_sessions(
-            resource_group_name=resource_group.name,
-            bastion_host_name="str",
-            session_ids={"sessionIds": ["str"]},
-            api_version="2025-05-01",
-        )
-        result = [r for r in response]
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_check_dns_name_availability(self, resource_group):
-        response = self.client.check_dns_name_availability(
-            location="str",
-            domain_name_label="str",
-            api_version="2025-05-01",
-        )
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
     def test_express_route_provider_port(self, resource_group):
         response = self.client.express_route_provider_port(
             providerport="str",
@@ -199,13 +83,117 @@ class TestNetworkManagement(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_supported_security_providers(self, resource_group):
-        response = self.client.supported_security_providers(
-            resource_group_name=resource_group.name,
-            virtual_wan_name="str",
+    def test_check_dns_name_availability(self, resource_group):
+        response = self.client.check_dns_name_availability(
+            location="str",
+            domain_name_label="str",
             api_version="2025-05-01",
         )
 
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
+    def test_begin_put_bastion_shareable_link(self, resource_group):
+        response = self.client.begin_put_bastion_shareable_link(
+            resource_group_name=resource_group.name,
+            bastion_host_name="str",
+            bsl_request={
+                "vms": [
+                    {
+                        "vm": {"id": "str", "location": "str", "name": "str", "tags": {"str": "str"}, "type": "str"},
+                        "bsl": "str",
+                        "createdAt": "str",
+                        "message": "str",
+                    }
+                ]
+            },
+            api_version="2025-05-01",
+        ).result()  # call '.result()' to poll until service return final result
+        result = [r for r in response]
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
+    def test_begin_delete_bastion_shareable_link(self, resource_group):
+        response = self.client.begin_delete_bastion_shareable_link(
+            resource_group_name=resource_group.name,
+            bastion_host_name="str",
+            bsl_request={
+                "vms": [
+                    {
+                        "vm": {"id": "str", "location": "str", "name": "str", "tags": {"str": "str"}, "type": "str"},
+                        "bsl": "str",
+                        "createdAt": "str",
+                        "message": "str",
+                    }
+                ]
+            },
+            api_version="2025-05-01",
+        ).result()  # call '.result()' to poll until service return final result
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
+    def test_begin_delete_bastion_shareable_link_by_token(self, resource_group):
+        response = self.client.begin_delete_bastion_shareable_link_by_token(
+            resource_group_name=resource_group.name,
+            bastion_host_name="str",
+            bsl_token_request={"tokens": ["str"]},
+            api_version="2025-05-01",
+        ).result()  # call '.result()' to poll until service return final result
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
+    def test_disconnect_active_sessions(self, resource_group):
+        response = self.client.disconnect_active_sessions(
+            resource_group_name=resource_group.name,
+            bastion_host_name="str",
+            session_ids={"sessionIds": ["str"]},
+            api_version="2025-05-01",
+        )
+        result = [r for r in response]
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
+    def test_begin_get_active_sessions(self, resource_group):
+        response = self.client.begin_get_active_sessions(
+            resource_group_name=resource_group.name,
+            bastion_host_name="str",
+            api_version="2025-05-01",
+        ).result()  # call '.result()' to poll until service return final result
+        result = [r for r in response]
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
+    def test_get_bastion_shareable_link(self, resource_group):
+        response = self.client.get_bastion_shareable_link(
+            resource_group_name=resource_group.name,
+            bastion_host_name="str",
+            bsl_request={
+                "vms": [
+                    {
+                        "vm": {"id": "str", "location": "str", "name": "str", "tags": {"str": "str"}, "type": "str"},
+                        "bsl": "str",
+                        "createdAt": "str",
+                        "message": "str",
+                    }
+                ]
+            },
+            api_version="2025-05-01",
+        )
+        result = [r for r in response]
         # please add some check logic here by yourself
         # ...
 
@@ -218,6 +206,18 @@ class TestNetworkManagement(AzureMgmtRecordedTestCase):
             vpn_client_params={"authenticationMethod": "str", "vpnServerConfigurationResourceId": "str"},
             api_version="2025-05-01",
         ).result()  # call '.result()' to poll until service return final result
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
+    def test_supported_security_providers(self, resource_group):
+        response = self.client.supported_security_providers(
+            resource_group_name=resource_group.name,
+            virtual_wan_name="str",
+            api_version="2025-05-01",
+        )
 
         # please add some check logic here by yourself
         # ...

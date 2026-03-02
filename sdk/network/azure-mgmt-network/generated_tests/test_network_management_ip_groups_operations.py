@@ -20,6 +20,27 @@ class TestNetworkManagementIpGroupsOperations(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
+    def test_ip_groups_list(self, resource_group):
+        response = self.client.ip_groups.list(
+            api_version="2025-05-01",
+        )
+        result = [r for r in response]
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
+    def test_ip_groups_list_by_resource_group(self, resource_group):
+        response = self.client.ip_groups.list_by_resource_group(
+            resource_group_name=resource_group.name,
+            api_version="2025-05-01",
+        )
+        result = [r for r in response]
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
     def test_ip_groups_get(self, resource_group):
         response = self.client.ip_groups.get(
             resource_group_name=resource_group.name,
@@ -76,26 +97,5 @@ class TestNetworkManagementIpGroupsOperations(AzureMgmtRecordedTestCase):
             api_version="2025-05-01",
         ).result()  # call '.result()' to poll until service return final result
 
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_ip_groups_list_by_resource_group(self, resource_group):
-        response = self.client.ip_groups.list_by_resource_group(
-            resource_group_name=resource_group.name,
-            api_version="2025-05-01",
-        )
-        result = [r for r in response]
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_ip_groups_list(self, resource_group):
-        response = self.client.ip_groups.list(
-            api_version="2025-05-01",
-        )
-        result = [r for r in response]
         # please add some check logic here by yourself
         # ...

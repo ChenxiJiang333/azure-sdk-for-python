@@ -21,6 +21,31 @@ class TestNetworkManagementConnectionMonitorsOperationsAsync(AzureMgmtRecordedTe
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
+    async def test_connection_monitors_list(self, resource_group):
+        response = self.client.connection_monitors.list(
+            resource_group_name=resource_group.name,
+            network_watcher_name="str",
+            api_version="2025-05-01",
+        )
+        result = [r async for r in response]
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
+    async def test_connection_monitors_get(self, resource_group):
+        response = await self.client.connection_monitors.get(
+            resource_group_name=resource_group.name,
+            network_watcher_name="str",
+            connection_monitor_name="str",
+            api_version="2025-05-01",
+        )
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
     async def test_connection_monitors_begin_create_or_update(self, resource_group):
         response = await (
             await self.client.connection_monitors.begin_create_or_update(
@@ -91,11 +116,12 @@ class TestNetworkManagementConnectionMonitorsOperationsAsync(AzureMgmtRecordedTe
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_connection_monitors_get(self, resource_group):
-        response = await self.client.connection_monitors.get(
+    async def test_connection_monitors_update_tags(self, resource_group):
+        response = await self.client.connection_monitors.update_tags(
             resource_group_name=resource_group.name,
             network_watcher_name="str",
             connection_monitor_name="str",
+            parameters={"tags": {"str": "str"}},
             api_version="2025-05-01",
         )
 
@@ -119,20 +145,6 @@ class TestNetworkManagementConnectionMonitorsOperationsAsync(AzureMgmtRecordedTe
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_connection_monitors_update_tags(self, resource_group):
-        response = await self.client.connection_monitors.update_tags(
-            resource_group_name=resource_group.name,
-            network_watcher_name="str",
-            connection_monitor_name="str",
-            parameters={"tags": {"str": "str"}},
-            api_version="2025-05-01",
-        )
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
     async def test_connection_monitors_begin_stop(self, resource_group):
         response = await (
             await self.client.connection_monitors.begin_stop(
@@ -143,17 +155,5 @@ class TestNetworkManagementConnectionMonitorsOperationsAsync(AzureMgmtRecordedTe
             )
         ).result()  # call '.result()' to poll until service return final result
 
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_connection_monitors_list(self, resource_group):
-        response = self.client.connection_monitors.list(
-            resource_group_name=resource_group.name,
-            network_watcher_name="str",
-            api_version="2025-05-01",
-        )
-        result = [r async for r in response]
         # please add some check logic here by yourself
         # ...

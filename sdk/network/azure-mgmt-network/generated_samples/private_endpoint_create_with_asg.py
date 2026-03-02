@@ -28,7 +28,7 @@ from azure.mgmt.network import NetworkManagementClient
 def main():
     client = NetworkManagementClient(
         credential=DefaultAzureCredential(),
-        subscription_id="subId",
+        subscription_id="00000000-0000-0000-0000-000000000000",
     )
 
     response = client.private_endpoints.begin_create_or_update(
@@ -39,20 +39,20 @@ def main():
             "properties": {
                 "applicationSecurityGroups": [
                     {
-                        "id": "/subscriptions/subId/resourceGroups/rg1/provders/Microsoft.Network/applicationSecurityGroup/asg1"
+                        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/provders/Microsoft.Network/applicationSecurityGroup/asg1"
                     }
                 ],
                 "privateLinkServiceConnections": [
                     {
                         "properties": {
                             "groupIds": ["groupIdFromResource"],
-                            "privateLinkServiceId": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/privateLinkServices/testPls",
+                            "privateLinkServiceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/privateLinkServices/testPls",
                             "requestMessage": "Please approve my connection.",
                         }
                     }
                 ],
                 "subnet": {
-                    "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/myVnet/subnets/mySubnet"
+                    "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/myVnet/subnets/mySubnet"
                 },
             },
         },
@@ -60,6 +60,6 @@ def main():
     print(response)
 
 
-# x-ms-original-file: specification/network/resource-manager/Microsoft.Network/stable/2025-05-01/examples/PrivateEndpointCreateWithASG.json
+# x-ms-original-file: specification/network/resource-manager/Microsoft.Network/Network/stable/2025-05-01/examples/PrivateEndpointCreateWithASG.json
 if __name__ == "__main__":
     main()

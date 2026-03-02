@@ -28,7 +28,7 @@ from azure.mgmt.network import NetworkManagementClient
 def main():
     client = NetworkManagementClient(
         credential=DefaultAzureCredential(),
-        subscription_id="subid1",
+        subscription_id="00000000-0000-0000-0000-000000000000",
     )
 
     response = client.express_route_circuit_connections.begin_create_or_update(
@@ -41,11 +41,11 @@ def main():
                 "addressPrefix": "10.0.0.0/29",
                 "authorizationKey": "946a1918-b7a2-4917-b43c-8c4cdaee006a",
                 "expressRouteCircuitPeering": {
-                    "id": "/subscriptions/subid1/resourceGroups/dedharcktinit/providers/Microsoft.Network/expressRouteCircuits/dedharcktlocal/peerings/AzurePrivatePeering"
+                    "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/dedharcktinit/providers/Microsoft.Network/expressRouteCircuits/dedharcktlocal/peerings/AzurePrivatePeering"
                 },
                 "ipv6CircuitConnectionConfig": {"addressPrefix": "aa:bb::/125"},
                 "peerExpressRouteCircuitPeering": {
-                    "id": "/subscriptions/subid2/resourceGroups/dedharcktpeer/providers/Microsoft.Network/expressRouteCircuits/dedharcktremote/peerings/AzurePrivatePeering"
+                    "id": "/subscriptions/11111111-1111-1111-1111-111111111111/resourceGroups/dedharcktpeer/providers/Microsoft.Network/expressRouteCircuits/dedharcktremote/peerings/AzurePrivatePeering"
                 },
             }
         },
@@ -53,6 +53,6 @@ def main():
     print(response)
 
 
-# x-ms-original-file: specification/network/resource-manager/Microsoft.Network/stable/2025-05-01/examples/ExpressRouteCircuitConnectionCreate.json
+# x-ms-original-file: specification/network/resource-manager/Microsoft.Network/Network/stable/2025-05-01/examples/ExpressRouteCircuitConnectionCreate.json
 if __name__ == "__main__":
     main()

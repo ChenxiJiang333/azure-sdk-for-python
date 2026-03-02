@@ -21,6 +21,18 @@ class TestNetworkManagementVpnSiteLinksOperationsAsync(AzureMgmtRecordedTestCase
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
+    async def test_vpn_site_links_list_by_vpn_site(self, resource_group):
+        response = self.client.vpn_site_links.list_by_vpn_site(
+            resource_group_name=resource_group.name,
+            vpn_site_name="str",
+            api_version="2025-05-01",
+        )
+        result = [r async for r in response]
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
     async def test_vpn_site_links_get(self, resource_group):
         response = await self.client.vpn_site_links.get(
             resource_group_name=resource_group.name,
@@ -29,17 +41,5 @@ class TestNetworkManagementVpnSiteLinksOperationsAsync(AzureMgmtRecordedTestCase
             api_version="2025-05-01",
         )
 
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_vpn_site_links_list_by_vpn_site(self, resource_group):
-        response = self.client.vpn_site_links.list_by_vpn_site(
-            resource_group_name=resource_group.name,
-            vpn_site_name="str",
-            api_version="2025-05-01",
-        )
-        result = [r async for r in response]
         # please add some check logic here by yourself
         # ...

@@ -20,14 +20,13 @@ class TestNetworkManagementPrivateDnsZoneGroupsOperations(AzureMgmtRecordedTestC
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_private_dns_zone_groups_begin_delete(self, resource_group):
-        response = self.client.private_dns_zone_groups.begin_delete(
+    def test_private_dns_zone_groups_list(self, resource_group):
+        response = self.client.private_dns_zone_groups.list(
             resource_group_name=resource_group.name,
             private_endpoint_name="str",
-            private_dns_zone_group_name="str",
             api_version="2025-05-01",
-        ).result()  # call '.result()' to poll until service return final result
-
+        )
+        result = [r for r in response]
         # please add some check logic here by yourself
         # ...
 
@@ -81,12 +80,13 @@ class TestNetworkManagementPrivateDnsZoneGroupsOperations(AzureMgmtRecordedTestC
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_private_dns_zone_groups_list(self, resource_group):
-        response = self.client.private_dns_zone_groups.list(
-            private_endpoint_name="str",
+    def test_private_dns_zone_groups_begin_delete(self, resource_group):
+        response = self.client.private_dns_zone_groups.begin_delete(
             resource_group_name=resource_group.name,
+            private_endpoint_name="str",
+            private_dns_zone_group_name="str",
             api_version="2025-05-01",
-        )
-        result = [r for r in response]
+        ).result()  # call '.result()' to poll until service return final result
+
         # please add some check logic here by yourself
         # ...

@@ -42,6 +42,18 @@ class TestNetworkManagementExpressRouteGatewaysOperationsAsync(AzureMgmtRecorded
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
+    async def test_express_route_gateways_get(self, resource_group):
+        response = await self.client.express_route_gateways.get(
+            resource_group_name=resource_group.name,
+            express_route_gateway_name="str",
+            api_version="2025-05-01",
+        )
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
     async def test_express_route_gateways_begin_create_or_update(self, resource_group):
         response = await (
             await self.client.express_route_gateways.begin_create_or_update(
@@ -106,18 +118,6 @@ class TestNetworkManagementExpressRouteGatewaysOperationsAsync(AzureMgmtRecorded
                 api_version="2025-05-01",
             )
         ).result()  # call '.result()' to poll until service return final result
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_express_route_gateways_get(self, resource_group):
-        response = await self.client.express_route_gateways.get(
-            resource_group_name=resource_group.name,
-            express_route_gateway_name="str",
-            api_version="2025-05-01",
-        )
 
         # please add some check logic here by yourself
         # ...

@@ -20,6 +20,18 @@ class TestNetworkManagementVirtualHubRouteTableV2SOperations(AzureMgmtRecordedTe
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
+    def test_virtual_hub_route_table_v2_s_list(self, resource_group):
+        response = self.client.virtual_hub_route_table_v2_s.list(
+            resource_group_name=resource_group.name,
+            virtual_hub_name="str",
+            api_version="2025-05-01",
+        )
+        result = [r for r in response]
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
     def test_virtual_hub_route_table_v2_s_get(self, resource_group):
         response = self.client.virtual_hub_route_table_v2_s.get(
             resource_group_name=resource_group.name,
@@ -64,17 +76,5 @@ class TestNetworkManagementVirtualHubRouteTableV2SOperations(AzureMgmtRecordedTe
             api_version="2025-05-01",
         ).result()  # call '.result()' to poll until service return final result
 
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_virtual_hub_route_table_v2_s_list(self, resource_group):
-        response = self.client.virtual_hub_route_table_v2_s.list(
-            resource_group_name=resource_group.name,
-            virtual_hub_name="str",
-            api_version="2025-05-01",
-        )
-        result = [r for r in response]
         # please add some check logic here by yourself
         # ...

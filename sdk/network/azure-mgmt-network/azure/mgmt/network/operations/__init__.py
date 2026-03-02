@@ -12,71 +12,64 @@ from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from ._patch import *  # pylint: disable=unused-wildcard-import
 
+from ._operations import WebApplicationFirewallPoliciesOperations  # type: ignore
 from ._operations import ApplicationGatewaysOperations  # type: ignore
-from ._operations import ApplicationGatewayPrivateLinkResourcesOperations  # type: ignore
-from ._operations import ApplicationGatewayPrivateEndpointConnectionsOperations  # type: ignore
-from ._operations import ApplicationGatewayWafDynamicManifestsDefaultOperations  # type: ignore
 from ._operations import ApplicationGatewayWafDynamicManifestsOperations  # type: ignore
-from ._operations import ApplicationSecurityGroupsOperations  # type: ignore
-from ._operations import AvailableDelegationsOperations  # type: ignore
-from ._operations import AvailableResourceGroupDelegationsOperations  # type: ignore
-from ._operations import AvailableServiceAliasesOperations  # type: ignore
-from ._operations import AzureFirewallsOperations  # type: ignore
-from ._operations import AzureFirewallFqdnTagsOperations  # type: ignore
+from ._operations import ApplicationGatewayWafDynamicManifestsDefaultOperations  # type: ignore
+from ._operations import ApplicationGatewayPrivateEndpointConnectionsOperations  # type: ignore
+from ._operations import ApplicationGatewayPrivateLinkResourcesOperations  # type: ignore
 from ._operations import WebCategoriesOperations  # type: ignore
-from ._operations import BastionHostsOperations  # type: ignore
+from ._operations import FirewallPoliciesOperations  # type: ignore
+from ._operations import ServiceGatewaysOperations  # type: ignore
+from ._operations import VirtualNetworkAppliancesOperations  # type: ignore
+from ._operations import FirewallPolicyDeploymentsOperations  # type: ignore
+from ._operations import FirewallPolicyDraftsOperations  # type: ignore
+from ._operations import FirewallPolicyIdpsSignaturesFilterValuesOperations  # type: ignore
+from ._operations import FirewallPolicyIdpsSignaturesOperations  # type: ignore
+from ._operations import FirewallPolicyRuleCollectionGroupsOperations  # type: ignore
+from ._operations import FirewallPolicyRuleCollectionGroupDraftsOperations  # type: ignore
+from ._operations import FirewallPolicyIdpsSignaturesOverridesOperations  # type: ignore
+from ._operations import ExpressRoutePortsOperations  # type: ignore
+from ._operations import ExpressRoutePortsLocationsOperations  # type: ignore
+from ._operations import BgpServiceCommunitiesOperations  # type: ignore
+from ._operations import ExpressRouteCircuitsOperations  # type: ignore
+from ._operations import ExpressRouteCrossConnectionsOperations  # type: ignore
+from ._operations import ExpressRouteProviderPortsLocationOperations  # type: ignore
 from ._operations import _NetworkManagementClientOperationsMixin  # type: ignore # pylint: disable=unused-import
-from ._operations import NetworkInterfacesOperations  # type: ignore
-from ._operations import PublicIPAddressesOperations  # type: ignore
-from ._operations import VipSwapOperations  # type: ignore
-from ._operations import CustomIPPrefixesOperations  # type: ignore
-from ._operations import DdosCustomPoliciesOperations  # type: ignore
-from ._operations import DdosProtectionPlansOperations  # type: ignore
-from ._operations import DscpConfigurationOperations  # type: ignore
-from ._operations import AvailableEndpointServicesOperations  # type: ignore
+from ._operations import ExpressRouteServiceProvidersOperations  # type: ignore
+from ._operations import RouteFiltersOperations  # type: ignore
+from ._operations import ServiceEndpointPoliciesOperations  # type: ignore
+from ._operations import ExpressRouteLinksOperations  # type: ignore
 from ._operations import ExpressRouteCircuitAuthorizationsOperations  # type: ignore
 from ._operations import ExpressRouteCircuitPeeringsOperations  # type: ignore
 from ._operations import ExpressRouteCircuitConnectionsOperations  # type: ignore
 from ._operations import PeerExpressRouteCircuitConnectionsOperations  # type: ignore
-from ._operations import ExpressRouteCircuitsOperations  # type: ignore
-from ._operations import ExpressRouteServiceProvidersOperations  # type: ignore
-from ._operations import ExpressRouteCrossConnectionsOperations  # type: ignore
 from ._operations import ExpressRouteCrossConnectionPeeringsOperations  # type: ignore
-from ._operations import ExpressRoutePortsLocationsOperations  # type: ignore
-from ._operations import ExpressRoutePortsOperations  # type: ignore
-from ._operations import ExpressRouteLinksOperations  # type: ignore
 from ._operations import ExpressRoutePortAuthorizationsOperations  # type: ignore
-from ._operations import ExpressRouteProviderPortsLocationOperations  # type: ignore
-from ._operations import FirewallPoliciesOperations  # type: ignore
-from ._operations import FirewallPolicyRuleCollectionGroupsOperations  # type: ignore
-from ._operations import FirewallPolicyIdpsSignaturesOperations  # type: ignore
-from ._operations import FirewallPolicyIdpsSignaturesOverridesOperations  # type: ignore
-from ._operations import FirewallPolicyIdpsSignaturesFilterValuesOperations  # type: ignore
-from ._operations import FirewallPolicyDraftsOperations  # type: ignore
-from ._operations import FirewallPolicyDeploymentsOperations  # type: ignore
-from ._operations import FirewallPolicyRuleCollectionGroupDraftsOperations  # type: ignore
-from ._operations import IpamPoolsOperations  # type: ignore
-from ._operations import StaticCidrsOperations  # type: ignore
-from ._operations import IpAllocationsOperations  # type: ignore
-from ._operations import IpGroupsOperations  # type: ignore
+from ._operations import RouteFilterRulesOperations  # type: ignore
+from ._operations import ServiceEndpointPolicyDefinitionsOperations  # type: ignore
+from ._operations import AzureFirewallFqdnTagsOperations  # type: ignore
+from ._operations import AzureFirewallsOperations  # type: ignore
 from ._operations import LoadBalancersOperations  # type: ignore
 from ._operations import LoadBalancerBackendAddressPoolsOperations  # type: ignore
 from ._operations import LoadBalancerFrontendIPConfigurationsOperations  # type: ignore
 from ._operations import InboundNatRulesOperations  # type: ignore
 from ._operations import LoadBalancerLoadBalancingRulesOperations  # type: ignore
-from ._operations import LoadBalancerOutboundRulesOperations  # type: ignore
 from ._operations import LoadBalancerNetworkInterfacesOperations  # type: ignore
+from ._operations import LoadBalancerOutboundRulesOperations  # type: ignore
 from ._operations import LoadBalancerProbesOperations  # type: ignore
-from ._operations import NatGatewaysOperations  # type: ignore
-from ._operations import NetworkInterfaceIPConfigurationsOperations  # type: ignore
-from ._operations import NetworkInterfaceLoadBalancersOperations  # type: ignore
-from ._operations import NetworkInterfaceTapConfigurationsOperations  # type: ignore
+from ._operations import VirtualNetworkTapsOperations  # type: ignore
+from ._operations import VirtualNetworkGatewayConnectionsOperations  # type: ignore
+from ._operations import VirtualNetworkGatewaysOperations  # type: ignore
+from ._operations import LocalNetworkGatewaysOperations  # type: ignore
+from ._operations import VirtualNetworkGatewayNatRulesOperations  # type: ignore
+from ._operations import Operations  # type: ignore
+from ._operations import ManagementGroupNetworkManagerConnectionsOperations  # type: ignore
+from ._operations import SubscriptionNetworkManagerConnectionsOperations  # type: ignore
 from ._operations import NetworkManagersOperations  # type: ignore
 from ._operations import NetworkManagerCommitsOperations  # type: ignore
-from ._operations import NetworkManagerDeploymentStatusOperations  # type: ignore
-from ._operations import SubscriptionNetworkManagerConnectionsOperations  # type: ignore
-from ._operations import ManagementGroupNetworkManagerConnectionsOperations  # type: ignore
 from ._operations import ConnectivityConfigurationsOperations  # type: ignore
+from ._operations import NetworkManagerDeploymentStatusOperations  # type: ignore
 from ._operations import NetworkGroupsOperations  # type: ignore
 from ._operations import StaticMembersOperations  # type: ignore
 from ._operations import NetworkManagerRoutingConfigurationsOperations  # type: ignore
@@ -89,158 +82,158 @@ from ._operations import AdminRulesOperations  # type: ignore
 from ._operations import SecurityUserConfigurationsOperations  # type: ignore
 from ._operations import SecurityUserRuleCollectionsOperations  # type: ignore
 from ._operations import SecurityUserRulesOperations  # type: ignore
-from ._operations import NetworkProfilesOperations  # type: ignore
-from ._operations import NetworkSecurityGroupsOperations  # type: ignore
-from ._operations import SecurityRulesOperations  # type: ignore
-from ._operations import DefaultSecurityRulesOperations  # type: ignore
+from ._operations import NetworkSecurityPerimeterOperationStatusesOperations  # type: ignore
+from ._operations import NetworkSecurityPerimeterServiceTagsOperations  # type: ignore
+from ._operations import NetworkSecurityPerimeterAssociableResourceTypesOperations  # type: ignore
 from ._operations import NetworkSecurityPerimetersOperations  # type: ignore
+from ._operations import NetworkSecurityPerimeterLinkReferencesOperations  # type: ignore
+from ._operations import NetworkSecurityPerimeterLinksOperations  # type: ignore
+from ._operations import NetworkSecurityPerimeterLoggingConfigurationsOperations  # type: ignore
 from ._operations import NetworkSecurityPerimeterProfilesOperations  # type: ignore
 from ._operations import NetworkSecurityPerimeterAccessRulesOperations  # type: ignore
 from ._operations import NetworkSecurityPerimeterAssociationsOperations  # type: ignore
-from ._operations import NetworkSecurityPerimeterAssociableResourceTypesOperations  # type: ignore
-from ._operations import NetworkSecurityPerimeterLinksOperations  # type: ignore
-from ._operations import NetworkSecurityPerimeterLinkReferencesOperations  # type: ignore
-from ._operations import NetworkSecurityPerimeterLoggingConfigurationsOperations  # type: ignore
-from ._operations import NetworkSecurityPerimeterOperationStatusesOperations  # type: ignore
-from ._operations import NetworkSecurityPerimeterServiceTagsOperations  # type: ignore
-from ._operations import ReachabilityAnalysisIntentsOperations  # type: ignore
-from ._operations import ReachabilityAnalysisRunsOperations  # type: ignore
-from ._operations import VerifierWorkspacesOperations  # type: ignore
-from ._operations import NetworkVirtualAppliancesOperations  # type: ignore
-from ._operations import VirtualApplianceSitesOperations  # type: ignore
-from ._operations import VirtualApplianceSkusOperations  # type: ignore
-from ._operations import InboundSecurityRuleOperations  # type: ignore
 from ._operations import NetworkWatchersOperations  # type: ignore
-from ._operations import PacketCapturesOperations  # type: ignore
 from ._operations import ConnectionMonitorsOperations  # type: ignore
 from ._operations import FlowLogsOperations  # type: ignore
-from ._operations import Operations  # type: ignore
-from ._operations import PrivateEndpointsOperations  # type: ignore
-from ._operations import AvailablePrivateEndpointTypesOperations  # type: ignore
-from ._operations import PrivateDnsZoneGroupsOperations  # type: ignore
+from ._operations import PacketCapturesOperations  # type: ignore
+from ._operations import IpAllocationsOperations  # type: ignore
+from ._operations import ApplicationSecurityGroupsOperations  # type: ignore
+from ._operations import BastionHostsOperations  # type: ignore
+from ._operations import CustomIPPrefixesOperations  # type: ignore
+from ._operations import DdosProtectionPlansOperations  # type: ignore
+from ._operations import DscpConfigurationOperations  # type: ignore
+from ._operations import IpGroupsOperations  # type: ignore
 from ._operations import PrivateLinkServicesOperations  # type: ignore
-from ._operations import PublicIPPrefixesOperations  # type: ignore
-from ._operations import RouteFiltersOperations  # type: ignore
-from ._operations import RouteFilterRulesOperations  # type: ignore
-from ._operations import RouteTablesOperations  # type: ignore
-from ._operations import RoutesOperations  # type: ignore
-from ._operations import SecurityPartnerProvidersOperations  # type: ignore
-from ._operations import BgpServiceCommunitiesOperations  # type: ignore
-from ._operations import ServiceEndpointPoliciesOperations  # type: ignore
-from ._operations import ServiceEndpointPolicyDefinitionsOperations  # type: ignore
-from ._operations import ServiceGatewaysOperations  # type: ignore
-from ._operations import ServiceTagsOperations  # type: ignore
+from ._operations import AvailableDelegationsOperations  # type: ignore
+from ._operations import AvailablePrivateEndpointTypesOperations  # type: ignore
+from ._operations import AvailableServiceAliasesOperations  # type: ignore
 from ._operations import ServiceTagInformationOperations  # type: ignore
+from ._operations import ServiceTagsOperations  # type: ignore
 from ._operations import UsagesOperations  # type: ignore
+from ._operations import AvailableEndpointServicesOperations  # type: ignore
+from ._operations import NatGatewaysOperations  # type: ignore
+from ._operations import NetworkInterfacesOperations  # type: ignore
+from ._operations import NetworkProfilesOperations  # type: ignore
+from ._operations import NetworkSecurityGroupsOperations  # type: ignore
+from ._operations import VirtualApplianceSkusOperations  # type: ignore
+from ._operations import NetworkVirtualAppliancesOperations  # type: ignore
+from ._operations import PrivateEndpointsOperations  # type: ignore
+from ._operations import PublicIPAddressesOperations  # type: ignore
+from ._operations import PublicIPPrefixesOperations  # type: ignore
+from ._operations import RouteTablesOperations  # type: ignore
+from ._operations import SecurityPartnerProvidersOperations  # type: ignore
 from ._operations import VirtualNetworksOperations  # type: ignore
+from ._operations import VirtualRoutersOperations  # type: ignore
+from ._operations import DdosCustomPoliciesOperations  # type: ignore
+from ._operations import AvailableResourceGroupDelegationsOperations  # type: ignore
+from ._operations import NetworkInterfaceIPConfigurationsOperations  # type: ignore
+from ._operations import NetworkInterfaceLoadBalancersOperations  # type: ignore
+from ._operations import NetworkInterfaceTapConfigurationsOperations  # type: ignore
+from ._operations import IpamPoolsOperations  # type: ignore
+from ._operations import StaticCidrsOperations  # type: ignore
+from ._operations import VerifierWorkspacesOperations  # type: ignore
+from ._operations import ReachabilityAnalysisIntentsOperations  # type: ignore
+from ._operations import ReachabilityAnalysisRunsOperations  # type: ignore
+from ._operations import DefaultSecurityRulesOperations  # type: ignore
+from ._operations import SecurityRulesOperations  # type: ignore
+from ._operations import InboundSecurityRuleOperations  # type: ignore
+from ._operations import VirtualApplianceSitesOperations  # type: ignore
+from ._operations import PrivateDnsZoneGroupsOperations  # type: ignore
+from ._operations import RoutesOperations  # type: ignore
 from ._operations import SubnetsOperations  # type: ignore
 from ._operations import ResourceNavigationLinksOperations  # type: ignore
 from ._operations import ServiceAssociationLinksOperations  # type: ignore
 from ._operations import VirtualNetworkPeeringsOperations  # type: ignore
-from ._operations import VirtualNetworkAppliancesOperations  # type: ignore
-from ._operations import VirtualNetworkGatewaysOperations  # type: ignore
-from ._operations import VirtualNetworkGatewayConnectionsOperations  # type: ignore
-from ._operations import LocalNetworkGatewaysOperations  # type: ignore
-from ._operations import VirtualNetworkGatewayNatRulesOperations  # type: ignore
-from ._operations import VirtualNetworkTapsOperations  # type: ignore
-from ._operations import VirtualRoutersOperations  # type: ignore
 from ._operations import VirtualRouterPeeringsOperations  # type: ignore
-from ._operations import VirtualWansOperations  # type: ignore
-from ._operations import VpnSitesOperations  # type: ignore
-from ._operations import VpnSiteLinksOperations  # type: ignore
-from ._operations import VpnSitesConfigurationOperations  # type: ignore
-from ._operations import VpnServerConfigurationsOperations  # type: ignore
-from ._operations import ConfigurationPolicyGroupsOperations  # type: ignore
-from ._operations import VirtualHubsOperations  # type: ignore
-from ._operations import RouteMapsOperations  # type: ignore
-from ._operations import HubVirtualNetworkConnectionsOperations  # type: ignore
-from ._operations import VpnGatewaysOperations  # type: ignore
-from ._operations import VpnLinkConnectionsOperations  # type: ignore
-from ._operations import VpnConnectionsOperations  # type: ignore
-from ._operations import VpnSiteLinkConnectionsOperations  # type: ignore
-from ._operations import NatRulesOperations  # type: ignore
-from ._operations import P2SVpnGatewaysOperations  # type: ignore
-from ._operations import VpnServerConfigurationsAssociatedWithVirtualWanOperations  # type: ignore
-from ._operations import VirtualHubRouteTableV2SOperations  # type: ignore
+from ._operations import VipSwapOperations  # type: ignore
 from ._operations import ExpressRouteGatewaysOperations  # type: ignore
+from ._operations import P2SVpnGatewaysOperations  # type: ignore
+from ._operations import VirtualHubsOperations  # type: ignore
+from ._operations import VirtualWansOperations  # type: ignore
+from ._operations import VpnGatewaysOperations  # type: ignore
+from ._operations import VpnServerConfigurationsOperations  # type: ignore
+from ._operations import VpnSitesOperations  # type: ignore
 from ._operations import ExpressRouteConnectionsOperations  # type: ignore
 from ._operations import NetworkVirtualApplianceConnectionsOperations  # type: ignore
-from ._operations import VirtualHubBgpConnectionOperations  # type: ignore
 from ._operations import VirtualHubBgpConnectionsOperations  # type: ignore
-from ._operations import VirtualHubIpConfigurationOperations  # type: ignore
+from ._operations import VirtualHubBgpConnectionOperations  # type: ignore
 from ._operations import HubRouteTablesOperations  # type: ignore
+from ._operations import HubVirtualNetworkConnectionsOperations  # type: ignore
+from ._operations import VirtualHubIpConfigurationOperations  # type: ignore
+from ._operations import RouteMapsOperations  # type: ignore
+from ._operations import VirtualHubRouteTableV2SOperations  # type: ignore
 from ._operations import RoutingIntentOperations  # type: ignore
-from ._operations import WebApplicationFirewallPoliciesOperations  # type: ignore
+from ._operations import VpnSitesConfigurationOperations  # type: ignore
+from ._operations import VpnServerConfigurationsAssociatedWithVirtualWanOperations  # type: ignore
+from ._operations import NatRulesOperations  # type: ignore
+from ._operations import VpnConnectionsOperations  # type: ignore
+from ._operations import VpnLinkConnectionsOperations  # type: ignore
+from ._operations import VpnSiteLinkConnectionsOperations  # type: ignore
+from ._operations import ConfigurationPolicyGroupsOperations  # type: ignore
+from ._operations import VpnSiteLinksOperations  # type: ignore
 
 from ._patch import __all__ as _patch_all
 from ._patch import *
 from ._patch import patch_sdk as _patch_sdk
 
 __all__ = [
+    "WebApplicationFirewallPoliciesOperations",
     "ApplicationGatewaysOperations",
-    "ApplicationGatewayPrivateLinkResourcesOperations",
-    "ApplicationGatewayPrivateEndpointConnectionsOperations",
-    "ApplicationGatewayWafDynamicManifestsDefaultOperations",
     "ApplicationGatewayWafDynamicManifestsOperations",
-    "ApplicationSecurityGroupsOperations",
-    "AvailableDelegationsOperations",
-    "AvailableResourceGroupDelegationsOperations",
-    "AvailableServiceAliasesOperations",
-    "AzureFirewallsOperations",
-    "AzureFirewallFqdnTagsOperations",
+    "ApplicationGatewayWafDynamicManifestsDefaultOperations",
+    "ApplicationGatewayPrivateEndpointConnectionsOperations",
+    "ApplicationGatewayPrivateLinkResourcesOperations",
     "WebCategoriesOperations",
-    "BastionHostsOperations",
-    "NetworkInterfacesOperations",
-    "PublicIPAddressesOperations",
-    "VipSwapOperations",
-    "CustomIPPrefixesOperations",
-    "DdosCustomPoliciesOperations",
-    "DdosProtectionPlansOperations",
-    "DscpConfigurationOperations",
-    "AvailableEndpointServicesOperations",
+    "FirewallPoliciesOperations",
+    "ServiceGatewaysOperations",
+    "VirtualNetworkAppliancesOperations",
+    "FirewallPolicyDeploymentsOperations",
+    "FirewallPolicyDraftsOperations",
+    "FirewallPolicyIdpsSignaturesFilterValuesOperations",
+    "FirewallPolicyIdpsSignaturesOperations",
+    "FirewallPolicyRuleCollectionGroupsOperations",
+    "FirewallPolicyRuleCollectionGroupDraftsOperations",
+    "FirewallPolicyIdpsSignaturesOverridesOperations",
+    "ExpressRoutePortsOperations",
+    "ExpressRoutePortsLocationsOperations",
+    "BgpServiceCommunitiesOperations",
+    "ExpressRouteCircuitsOperations",
+    "ExpressRouteCrossConnectionsOperations",
+    "ExpressRouteProviderPortsLocationOperations",
+    "ExpressRouteServiceProvidersOperations",
+    "RouteFiltersOperations",
+    "ServiceEndpointPoliciesOperations",
+    "ExpressRouteLinksOperations",
     "ExpressRouteCircuitAuthorizationsOperations",
     "ExpressRouteCircuitPeeringsOperations",
     "ExpressRouteCircuitConnectionsOperations",
     "PeerExpressRouteCircuitConnectionsOperations",
-    "ExpressRouteCircuitsOperations",
-    "ExpressRouteServiceProvidersOperations",
-    "ExpressRouteCrossConnectionsOperations",
     "ExpressRouteCrossConnectionPeeringsOperations",
-    "ExpressRoutePortsLocationsOperations",
-    "ExpressRoutePortsOperations",
-    "ExpressRouteLinksOperations",
     "ExpressRoutePortAuthorizationsOperations",
-    "ExpressRouteProviderPortsLocationOperations",
-    "FirewallPoliciesOperations",
-    "FirewallPolicyRuleCollectionGroupsOperations",
-    "FirewallPolicyIdpsSignaturesOperations",
-    "FirewallPolicyIdpsSignaturesOverridesOperations",
-    "FirewallPolicyIdpsSignaturesFilterValuesOperations",
-    "FirewallPolicyDraftsOperations",
-    "FirewallPolicyDeploymentsOperations",
-    "FirewallPolicyRuleCollectionGroupDraftsOperations",
-    "IpamPoolsOperations",
-    "StaticCidrsOperations",
-    "IpAllocationsOperations",
-    "IpGroupsOperations",
+    "RouteFilterRulesOperations",
+    "ServiceEndpointPolicyDefinitionsOperations",
+    "AzureFirewallFqdnTagsOperations",
+    "AzureFirewallsOperations",
     "LoadBalancersOperations",
     "LoadBalancerBackendAddressPoolsOperations",
     "LoadBalancerFrontendIPConfigurationsOperations",
     "InboundNatRulesOperations",
     "LoadBalancerLoadBalancingRulesOperations",
-    "LoadBalancerOutboundRulesOperations",
     "LoadBalancerNetworkInterfacesOperations",
+    "LoadBalancerOutboundRulesOperations",
     "LoadBalancerProbesOperations",
-    "NatGatewaysOperations",
-    "NetworkInterfaceIPConfigurationsOperations",
-    "NetworkInterfaceLoadBalancersOperations",
-    "NetworkInterfaceTapConfigurationsOperations",
+    "VirtualNetworkTapsOperations",
+    "VirtualNetworkGatewayConnectionsOperations",
+    "VirtualNetworkGatewaysOperations",
+    "LocalNetworkGatewaysOperations",
+    "VirtualNetworkGatewayNatRulesOperations",
+    "Operations",
+    "ManagementGroupNetworkManagerConnectionsOperations",
+    "SubscriptionNetworkManagerConnectionsOperations",
     "NetworkManagersOperations",
     "NetworkManagerCommitsOperations",
-    "NetworkManagerDeploymentStatusOperations",
-    "SubscriptionNetworkManagerConnectionsOperations",
-    "ManagementGroupNetworkManagerConnectionsOperations",
     "ConnectivityConfigurationsOperations",
+    "NetworkManagerDeploymentStatusOperations",
     "NetworkGroupsOperations",
     "StaticMembersOperations",
     "NetworkManagerRoutingConfigurationsOperations",
@@ -253,88 +246,95 @@ __all__ = [
     "SecurityUserConfigurationsOperations",
     "SecurityUserRuleCollectionsOperations",
     "SecurityUserRulesOperations",
-    "NetworkProfilesOperations",
-    "NetworkSecurityGroupsOperations",
-    "SecurityRulesOperations",
-    "DefaultSecurityRulesOperations",
+    "NetworkSecurityPerimeterOperationStatusesOperations",
+    "NetworkSecurityPerimeterServiceTagsOperations",
+    "NetworkSecurityPerimeterAssociableResourceTypesOperations",
     "NetworkSecurityPerimetersOperations",
+    "NetworkSecurityPerimeterLinkReferencesOperations",
+    "NetworkSecurityPerimeterLinksOperations",
+    "NetworkSecurityPerimeterLoggingConfigurationsOperations",
     "NetworkSecurityPerimeterProfilesOperations",
     "NetworkSecurityPerimeterAccessRulesOperations",
     "NetworkSecurityPerimeterAssociationsOperations",
-    "NetworkSecurityPerimeterAssociableResourceTypesOperations",
-    "NetworkSecurityPerimeterLinksOperations",
-    "NetworkSecurityPerimeterLinkReferencesOperations",
-    "NetworkSecurityPerimeterLoggingConfigurationsOperations",
-    "NetworkSecurityPerimeterOperationStatusesOperations",
-    "NetworkSecurityPerimeterServiceTagsOperations",
-    "ReachabilityAnalysisIntentsOperations",
-    "ReachabilityAnalysisRunsOperations",
-    "VerifierWorkspacesOperations",
-    "NetworkVirtualAppliancesOperations",
-    "VirtualApplianceSitesOperations",
-    "VirtualApplianceSkusOperations",
-    "InboundSecurityRuleOperations",
     "NetworkWatchersOperations",
-    "PacketCapturesOperations",
     "ConnectionMonitorsOperations",
     "FlowLogsOperations",
-    "Operations",
-    "PrivateEndpointsOperations",
-    "AvailablePrivateEndpointTypesOperations",
-    "PrivateDnsZoneGroupsOperations",
+    "PacketCapturesOperations",
+    "IpAllocationsOperations",
+    "ApplicationSecurityGroupsOperations",
+    "BastionHostsOperations",
+    "CustomIPPrefixesOperations",
+    "DdosProtectionPlansOperations",
+    "DscpConfigurationOperations",
+    "IpGroupsOperations",
     "PrivateLinkServicesOperations",
-    "PublicIPPrefixesOperations",
-    "RouteFiltersOperations",
-    "RouteFilterRulesOperations",
-    "RouteTablesOperations",
-    "RoutesOperations",
-    "SecurityPartnerProvidersOperations",
-    "BgpServiceCommunitiesOperations",
-    "ServiceEndpointPoliciesOperations",
-    "ServiceEndpointPolicyDefinitionsOperations",
-    "ServiceGatewaysOperations",
-    "ServiceTagsOperations",
+    "AvailableDelegationsOperations",
+    "AvailablePrivateEndpointTypesOperations",
+    "AvailableServiceAliasesOperations",
     "ServiceTagInformationOperations",
+    "ServiceTagsOperations",
     "UsagesOperations",
+    "AvailableEndpointServicesOperations",
+    "NatGatewaysOperations",
+    "NetworkInterfacesOperations",
+    "NetworkProfilesOperations",
+    "NetworkSecurityGroupsOperations",
+    "VirtualApplianceSkusOperations",
+    "NetworkVirtualAppliancesOperations",
+    "PrivateEndpointsOperations",
+    "PublicIPAddressesOperations",
+    "PublicIPPrefixesOperations",
+    "RouteTablesOperations",
+    "SecurityPartnerProvidersOperations",
     "VirtualNetworksOperations",
+    "VirtualRoutersOperations",
+    "DdosCustomPoliciesOperations",
+    "AvailableResourceGroupDelegationsOperations",
+    "NetworkInterfaceIPConfigurationsOperations",
+    "NetworkInterfaceLoadBalancersOperations",
+    "NetworkInterfaceTapConfigurationsOperations",
+    "IpamPoolsOperations",
+    "StaticCidrsOperations",
+    "VerifierWorkspacesOperations",
+    "ReachabilityAnalysisIntentsOperations",
+    "ReachabilityAnalysisRunsOperations",
+    "DefaultSecurityRulesOperations",
+    "SecurityRulesOperations",
+    "InboundSecurityRuleOperations",
+    "VirtualApplianceSitesOperations",
+    "PrivateDnsZoneGroupsOperations",
+    "RoutesOperations",
     "SubnetsOperations",
     "ResourceNavigationLinksOperations",
     "ServiceAssociationLinksOperations",
     "VirtualNetworkPeeringsOperations",
-    "VirtualNetworkAppliancesOperations",
-    "VirtualNetworkGatewaysOperations",
-    "VirtualNetworkGatewayConnectionsOperations",
-    "LocalNetworkGatewaysOperations",
-    "VirtualNetworkGatewayNatRulesOperations",
-    "VirtualNetworkTapsOperations",
-    "VirtualRoutersOperations",
     "VirtualRouterPeeringsOperations",
-    "VirtualWansOperations",
-    "VpnSitesOperations",
-    "VpnSiteLinksOperations",
-    "VpnSitesConfigurationOperations",
-    "VpnServerConfigurationsOperations",
-    "ConfigurationPolicyGroupsOperations",
-    "VirtualHubsOperations",
-    "RouteMapsOperations",
-    "HubVirtualNetworkConnectionsOperations",
-    "VpnGatewaysOperations",
-    "VpnLinkConnectionsOperations",
-    "VpnConnectionsOperations",
-    "VpnSiteLinkConnectionsOperations",
-    "NatRulesOperations",
-    "P2SVpnGatewaysOperations",
-    "VpnServerConfigurationsAssociatedWithVirtualWanOperations",
-    "VirtualHubRouteTableV2SOperations",
+    "VipSwapOperations",
     "ExpressRouteGatewaysOperations",
+    "P2SVpnGatewaysOperations",
+    "VirtualHubsOperations",
+    "VirtualWansOperations",
+    "VpnGatewaysOperations",
+    "VpnServerConfigurationsOperations",
+    "VpnSitesOperations",
     "ExpressRouteConnectionsOperations",
     "NetworkVirtualApplianceConnectionsOperations",
-    "VirtualHubBgpConnectionOperations",
     "VirtualHubBgpConnectionsOperations",
-    "VirtualHubIpConfigurationOperations",
+    "VirtualHubBgpConnectionOperations",
     "HubRouteTablesOperations",
+    "HubVirtualNetworkConnectionsOperations",
+    "VirtualHubIpConfigurationOperations",
+    "RouteMapsOperations",
+    "VirtualHubRouteTableV2SOperations",
     "RoutingIntentOperations",
-    "WebApplicationFirewallPoliciesOperations",
+    "VpnSitesConfigurationOperations",
+    "VpnServerConfigurationsAssociatedWithVirtualWanOperations",
+    "NatRulesOperations",
+    "VpnConnectionsOperations",
+    "VpnLinkConnectionsOperations",
+    "VpnSiteLinkConnectionsOperations",
+    "ConfigurationPolicyGroupsOperations",
+    "VpnSiteLinksOperations",
 ]
 __all__.extend([p for p in _patch_all if p not in __all__])  # pyright: ignore
 _patch_sdk()

@@ -36,13 +36,13 @@ def main():
         network_manager_connection_name="TestNMConnection",
         parameters={
             "properties": {
-                "networkManagerId": "/subscriptions/subscriptionC/resourceGroup/rg1/providers/Microsoft.Network/networkManagers/testNetworkManager"
+                "networkManagerId": "/subscriptions/22222222-2222-2222-2222-222222222222/resourceGroups/rg1/providers/Microsoft.Network/networkManagers/testNetworkManager"
             }
         },
     )
     print(response)
 
 
-# x-ms-original-file: specification/network/resource-manager/Microsoft.Network/stable/2025-05-01/examples/NetworkManagerConnectionManagementGroupPut.json
+# x-ms-original-file: specification/network/resource-manager/Microsoft.Network/Network/stable/2025-05-01/examples/NetworkManagerConnectionManagementGroupPut.json
 if __name__ == "__main__":
     main()

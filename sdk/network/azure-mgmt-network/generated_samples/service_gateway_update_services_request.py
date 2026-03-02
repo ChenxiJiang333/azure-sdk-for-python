@@ -31,7 +31,7 @@ def main():
         subscription_id="00000000-0000-0000-0000-000000000000",
     )
 
-    client.service_gateways.begin_update_services(
+    response = client.service_gateways.begin_update_services(
         resource_group_name="rg1",
         service_gateway_name="sg",
         parameters={
@@ -44,10 +44,10 @@ def main():
                             "isDefault": True,
                             "loadBalancerBackendPools": [
                                 {
-                                    "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb1/backendAddressPools/be1"
+                                    "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb1/backendAddressPools/be1"
                                 }
                             ],
-                            "publicNatGatewayId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/natGateways/test-natGateway",
+                            "publicNatGatewayId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/natGateways/test-natGateway",
                             "serviceType": "Inbound",
                         },
                     }
@@ -59,8 +59,9 @@ def main():
             ],
         },
     ).result()
+    print(response)
 
 
-# x-ms-original-file: specification/network/resource-manager/Microsoft.Network/stable/2025-05-01/examples/ServiceGatewayUpdateServicesRequest.json
+# x-ms-original-file: specification/network/resource-manager/Microsoft.Network/Network/stable/2025-05-01/examples/ServiceGatewayUpdateServicesRequest.json
 if __name__ == "__main__":
     main()

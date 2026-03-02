@@ -21,16 +21,13 @@ class TestNetworkManagementExpressRoutePortAuthorizationsOperationsAsync(AzureMg
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_express_route_port_authorizations_begin_delete(self, resource_group):
-        response = await (
-            await self.client.express_route_port_authorizations.begin_delete(
-                resource_group_name=resource_group.name,
-                express_route_port_name="str",
-                authorization_name="str",
-                api_version="2025-05-01",
-            )
-        ).result()  # call '.result()' to poll until service return final result
-
+    async def test_express_route_port_authorizations_list(self, resource_group):
+        response = self.client.express_route_port_authorizations.list(
+            resource_group_name=resource_group.name,
+            express_route_port_name="str",
+            api_version="2025-05-01",
+        )
+        result = [r async for r in response]
         # please add some check logic here by yourself
         # ...
 
@@ -74,12 +71,15 @@ class TestNetworkManagementExpressRoutePortAuthorizationsOperationsAsync(AzureMg
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_express_route_port_authorizations_list(self, resource_group):
-        response = self.client.express_route_port_authorizations.list(
-            resource_group_name=resource_group.name,
-            express_route_port_name="str",
-            api_version="2025-05-01",
-        )
-        result = [r async for r in response]
+    async def test_express_route_port_authorizations_begin_delete(self, resource_group):
+        response = await (
+            await self.client.express_route_port_authorizations.begin_delete(
+                resource_group_name=resource_group.name,
+                express_route_port_name="str",
+                authorization_name="str",
+                api_version="2025-05-01",
+            )
+        ).result()  # call '.result()' to poll until service return final result
+
         # please add some check logic here by yourself
         # ...

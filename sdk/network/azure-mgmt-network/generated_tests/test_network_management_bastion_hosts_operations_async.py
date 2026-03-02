@@ -21,15 +21,22 @@ class TestNetworkManagementBastionHostsOperationsAsync(AzureMgmtRecordedTestCase
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_bastion_hosts_begin_delete(self, resource_group):
-        response = await (
-            await self.client.bastion_hosts.begin_delete(
-                resource_group_name=resource_group.name,
-                bastion_host_name="str",
-                api_version="2025-05-01",
-            )
-        ).result()  # call '.result()' to poll until service return final result
+    async def test_bastion_hosts_list(self, resource_group):
+        response = self.client.bastion_hosts.list(
+            api_version="2025-05-01",
+        )
+        result = [r async for r in response]
+        # please add some check logic here by yourself
+        # ...
 
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
+    async def test_bastion_hosts_list_by_resource_group(self, resource_group):
+        response = self.client.bastion_hosts.list_by_resource_group(
+            resource_group_name=resource_group.name,
+            api_version="2025-05-01",
+        )
+        result = [r async for r in response]
         # please add some check logic here by yourself
         # ...
 
@@ -111,21 +118,14 @@ class TestNetworkManagementBastionHostsOperationsAsync(AzureMgmtRecordedTestCase
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_bastion_hosts_list(self, resource_group):
-        response = self.client.bastion_hosts.list(
-            api_version="2025-05-01",
-        )
-        result = [r async for r in response]
-        # please add some check logic here by yourself
-        # ...
+    async def test_bastion_hosts_begin_delete(self, resource_group):
+        response = await (
+            await self.client.bastion_hosts.begin_delete(
+                resource_group_name=resource_group.name,
+                bastion_host_name="str",
+                api_version="2025-05-01",
+            )
+        ).result()  # call '.result()' to poll until service return final result
 
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_bastion_hosts_list_by_resource_group(self, resource_group):
-        response = self.client.bastion_hosts.list_by_resource_group(
-            resource_group_name=resource_group.name,
-            api_version="2025-05-01",
-        )
-        result = [r async for r in response]
         # please add some check logic here by yourself
         # ...

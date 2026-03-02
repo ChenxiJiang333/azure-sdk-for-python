@@ -28,7 +28,7 @@ from azure.mgmt.network import NetworkManagementClient
 def main():
     client = NetworkManagementClient(
         credential=DefaultAzureCredential(),
-        subscription_id="subid",
+        subscription_id="00000000-0000-0000-0000-000000000000",
     )
 
     client.begin_delete_bastion_shareable_link(
@@ -38,12 +38,12 @@ def main():
             "vms": [
                 {
                     "vm": {
-                        "id": "/subscriptions/subid/resourceGroups/rgx/providers/Microsoft.Compute/virtualMachines/vm1"
+                        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgx/providers/Microsoft.Compute/virtualMachines/vm1"
                     }
                 },
                 {
                     "vm": {
-                        "id": "/subscriptions/subid/resourceGroups/rgx/providers/Microsoft.Compute/virtualMachines/vm2"
+                        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgx/providers/Microsoft.Compute/virtualMachines/vm2"
                     }
                 },
             ]
@@ -51,6 +51,6 @@ def main():
     ).result()
 
 
-# x-ms-original-file: specification/network/resource-manager/Microsoft.Network/stable/2025-05-01/examples/BastionShareableLinkDelete.json
+# x-ms-original-file: specification/network/resource-manager/Microsoft.Network/Network/stable/2025-05-01/examples/BastionShareableLinkDelete.json
 if __name__ == "__main__":
     main()

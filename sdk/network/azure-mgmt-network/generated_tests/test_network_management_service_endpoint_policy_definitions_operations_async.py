@@ -21,16 +21,13 @@ class TestNetworkManagementServiceEndpointPolicyDefinitionsOperationsAsync(Azure
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_service_endpoint_policy_definitions_begin_delete(self, resource_group):
-        response = await (
-            await self.client.service_endpoint_policy_definitions.begin_delete(
-                resource_group_name=resource_group.name,
-                service_endpoint_policy_name="str",
-                service_endpoint_policy_definition_name="str",
-                api_version="2025-05-01",
-            )
-        ).result()  # call '.result()' to poll until service return final result
-
+    async def test_service_endpoint_policy_definitions_list_by_resource_group(self, resource_group):
+        response = self.client.service_endpoint_policy_definitions.list_by_resource_group(
+            resource_group_name=resource_group.name,
+            service_endpoint_policy_name="str",
+            api_version="2025-05-01",
+        )
+        result = [r async for r in response]
         # please add some check logic here by yourself
         # ...
 
@@ -74,12 +71,15 @@ class TestNetworkManagementServiceEndpointPolicyDefinitionsOperationsAsync(Azure
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_service_endpoint_policy_definitions_list_by_resource_group(self, resource_group):
-        response = self.client.service_endpoint_policy_definitions.list_by_resource_group(
-            resource_group_name=resource_group.name,
-            service_endpoint_policy_name="str",
-            api_version="2025-05-01",
-        )
-        result = [r async for r in response]
+    async def test_service_endpoint_policy_definitions_begin_delete(self, resource_group):
+        response = await (
+            await self.client.service_endpoint_policy_definitions.begin_delete(
+                resource_group_name=resource_group.name,
+                service_endpoint_policy_name="str",
+                service_endpoint_policy_definition_name="str",
+                api_version="2025-05-01",
+            )
+        ).result()  # call '.result()' to poll until service return final result
+
         # please add some check logic here by yourself
         # ...

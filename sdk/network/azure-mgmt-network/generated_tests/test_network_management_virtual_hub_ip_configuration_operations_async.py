@@ -22,6 +22,18 @@ class TestNetworkManagementVirtualHubIpConfigurationOperationsAsync(AzureMgmtRec
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
+    async def test_virtual_hub_ip_configuration_list(self, resource_group):
+        response = self.client.virtual_hub_ip_configuration.list(
+            resource_group_name=resource_group.name,
+            virtual_hub_name="str",
+            api_version="2025-05-01",
+        )
+        result = [r async for r in response]
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
     async def test_virtual_hub_ip_configuration_get(self, resource_group):
         response = await self.client.virtual_hub_ip_configuration.get(
             resource_group_name=resource_group.name,
@@ -411,7 +423,7 @@ class TestNetworkManagementVirtualHubIpConfigurationOperationsAsync(AzureMgmtRec
                                                         "type": "str",
                                                     }
                                                 ],
-                                                "ipVersionType": "IPv4",
+                                                "ipVersionType": "str",
                                                 "location": "str",
                                                 "manualPrivateLinkServiceConnections": [
                                                     {
@@ -538,7 +550,7 @@ class TestNetworkManagementVirtualHubIpConfigurationOperationsAsync(AzureMgmtRec
                                                                     "type": "str",
                                                                 }
                                                             ],
-                                                            "ipVersionType": "IPv4",
+                                                            "ipVersionType": "str",
                                                             "location": "str",
                                                             "manualPrivateLinkServiceConnections": [
                                                                 {
@@ -811,7 +823,7 @@ class TestNetworkManagementVirtualHubIpConfigurationOperationsAsync(AzureMgmtRec
                                     "tags": {"str": "str"},
                                     "type": "str",
                                 },
-                                "privateEndpointNetworkPolicies": "Disabled",
+                                "privateEndpointNetworkPolicies": "str",
                                 "privateEndpoints": [
                                     {
                                         "applicationSecurityGroups": [
@@ -841,7 +853,7 @@ class TestNetworkManagementVirtualHubIpConfigurationOperationsAsync(AzureMgmtRec
                                                 "type": "str",
                                             }
                                         ],
-                                        "ipVersionType": "IPv4",
+                                        "ipVersionType": "str",
                                         "location": "str",
                                         "manualPrivateLinkServiceConnections": [
                                             {
@@ -1443,7 +1455,7 @@ class TestNetworkManagementVirtualHubIpConfigurationOperationsAsync(AzureMgmtRec
                                         "type": "str",
                                     }
                                 ],
-                                "privateLinkServiceNetworkPolicies": "Enabled",
+                                "privateLinkServiceNetworkPolicies": "str",
                                 "provisioningState": "str",
                                 "purpose": "str",
                                 "resourceNavigationLinks": [
@@ -2089,7 +2101,7 @@ class TestNetworkManagementVirtualHubIpConfigurationOperationsAsync(AzureMgmtRec
                                                 "type": "str",
                                             }
                                         ],
-                                        "ipVersionType": "IPv4",
+                                        "ipVersionType": "str",
                                         "location": "str",
                                         "manualPrivateLinkServiceConnections": [
                                             {
@@ -2276,7 +2288,7 @@ class TestNetworkManagementVirtualHubIpConfigurationOperationsAsync(AzureMgmtRec
                                                             "type": "str",
                                                         }
                                                     ],
-                                                    "ipVersionType": "IPv4",
+                                                    "ipVersionType": "str",
                                                     "location": "str",
                                                     "manualPrivateLinkServiceConnections": [
                                                         {
@@ -2669,7 +2681,7 @@ class TestNetworkManagementVirtualHubIpConfigurationOperationsAsync(AzureMgmtRec
                             "tags": {"str": "str"},
                             "type": "str",
                         },
-                        "privateEndpointNetworkPolicies": "Disabled",
+                        "privateEndpointNetworkPolicies": "str",
                         "privateEndpoints": [
                             {
                                 "applicationSecurityGroups": [
@@ -2699,7 +2711,7 @@ class TestNetworkManagementVirtualHubIpConfigurationOperationsAsync(AzureMgmtRec
                                         "type": "str",
                                     }
                                 ],
-                                "ipVersionType": "IPv4",
+                                "ipVersionType": "str",
                                 "location": "str",
                                 "manualPrivateLinkServiceConnections": [
                                     {
@@ -3605,7 +3617,7 @@ class TestNetworkManagementVirtualHubIpConfigurationOperationsAsync(AzureMgmtRec
                                 "type": "str",
                             }
                         ],
-                        "privateLinkServiceNetworkPolicies": "Enabled",
+                        "privateLinkServiceNetworkPolicies": "str",
                         "provisioningState": "str",
                         "purpose": "str",
                         "resourceNavigationLinks": [
@@ -3718,17 +3730,5 @@ class TestNetworkManagementVirtualHubIpConfigurationOperationsAsync(AzureMgmtRec
             )
         ).result()  # call '.result()' to poll until service return final result
 
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_virtual_hub_ip_configuration_list(self, resource_group):
-        response = self.client.virtual_hub_ip_configuration.list(
-            resource_group_name=resource_group.name,
-            virtual_hub_name="str",
-            api_version="2025-05-01",
-        )
-        result = [r async for r in response]
         # please add some check logic here by yourself
         # ...

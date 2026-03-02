@@ -21,6 +21,27 @@ class TestNetworkManagementP2SVpnGatewaysOperationsAsync(AzureMgmtRecordedTestCa
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
+    async def test_p2_svpn_gateways_list(self, resource_group):
+        response = self.client.p2_svpn_gateways.list(
+            api_version="2025-05-01",
+        )
+        result = [r async for r in response]
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
+    async def test_p2_svpn_gateways_list_by_resource_group(self, resource_group):
+        response = self.client.p2_svpn_gateways.list_by_resource_group(
+            resource_group_name=resource_group.name,
+            api_version="2025-05-01",
+        )
+        result = [r async for r in response]
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
     async def test_p2_svpn_gateways_get(self, resource_group):
         response = await self.client.p2_svpn_gateways.get(
             resource_group_name=resource_group.name,
@@ -39,11 +60,11 @@ class TestNetworkManagementP2SVpnGatewaysOperationsAsync(AzureMgmtRecordedTestCa
                 resource_group_name=resource_group.name,
                 gateway_name="str",
                 p2_s_vpn_gateway_parameters={
+                    "location": "str",
                     "customDnsServers": ["str"],
                     "etag": "str",
                     "id": "str",
                     "isRoutingPreferenceInternet": bool,
-                    "location": "str",
                     "name": "str",
                     "p2SConnectionConfigurations": [
                         {
@@ -141,32 +162,12 @@ class TestNetworkManagementP2SVpnGatewaysOperationsAsync(AzureMgmtRecordedTestCa
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_p2_svpn_gateways_list_by_resource_group(self, resource_group):
-        response = self.client.p2_svpn_gateways.list_by_resource_group(
-            resource_group_name=resource_group.name,
-            api_version="2025-05-01",
-        )
-        result = [r async for r in response]
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_p2_svpn_gateways_list(self, resource_group):
-        response = self.client.p2_svpn_gateways.list(
-            api_version="2025-05-01",
-        )
-        result = [r async for r in response]
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_p2_svpn_gateways_begin_reset(self, resource_group):
+    async def test_p2_svpn_gateways_begin_disconnect_p2_s_vpn_connections(self, resource_group):
         response = await (
-            await self.client.p2_svpn_gateways.begin_reset(
+            await self.client.p2_svpn_gateways.begin_disconnect_p2_s_vpn_connections(
                 resource_group_name=resource_group.name,
-                gateway_name="str",
+                p2_s_vpn_gateway_name="str",
+                request={"vpnConnectionIds": ["str"]},
                 api_version="2025-05-01",
             )
         ).result()  # call '.result()' to poll until service return final result
@@ -220,12 +221,11 @@ class TestNetworkManagementP2SVpnGatewaysOperationsAsync(AzureMgmtRecordedTestCa
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_p2_svpn_gateways_begin_disconnect_p2_s_vpn_connections(self, resource_group):
+    async def test_p2_svpn_gateways_begin_reset(self, resource_group):
         response = await (
-            await self.client.p2_svpn_gateways.begin_disconnect_p2_s_vpn_connections(
+            await self.client.p2_svpn_gateways.begin_reset(
                 resource_group_name=resource_group.name,
-                p2_s_vpn_gateway_name="str",
-                request={"vpnConnectionIds": ["str"]},
+                gateway_name="str",
                 api_version="2025-05-01",
             )
         ).result()  # call '.result()' to poll until service return final result

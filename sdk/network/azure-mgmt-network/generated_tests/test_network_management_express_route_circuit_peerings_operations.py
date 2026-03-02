@@ -20,14 +20,13 @@ class TestNetworkManagementExpressRouteCircuitPeeringsOperations(AzureMgmtRecord
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_express_route_circuit_peerings_begin_delete(self, resource_group):
-        response = self.client.express_route_circuit_peerings.begin_delete(
+    def test_express_route_circuit_peerings_list(self, resource_group):
+        response = self.client.express_route_circuit_peerings.list(
             resource_group_name=resource_group.name,
             circuit_name="str",
-            peering_name="str",
             api_version="2025-05-01",
-        ).result()  # call '.result()' to poll until service return final result
-
+        )
+        result = [r for r in response]
         # please add some check logic here by yourself
         # ...
 
@@ -139,12 +138,13 @@ class TestNetworkManagementExpressRouteCircuitPeeringsOperations(AzureMgmtRecord
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_express_route_circuit_peerings_list(self, resource_group):
-        response = self.client.express_route_circuit_peerings.list(
+    def test_express_route_circuit_peerings_begin_delete(self, resource_group):
+        response = self.client.express_route_circuit_peerings.begin_delete(
             resource_group_name=resource_group.name,
             circuit_name="str",
+            peering_name="str",
             api_version="2025-05-01",
-        )
-        result = [r for r in response]
+        ).result()  # call '.result()' to poll until service return final result
+
         # please add some check logic here by yourself
         # ...

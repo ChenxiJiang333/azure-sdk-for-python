@@ -21,13 +21,22 @@ class TestNetworkManagementNetworkSecurityGroupsOperations(AzureMgmtRecordedTest
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_network_security_groups_begin_delete(self, resource_group):
-        response = self.client.network_security_groups.begin_delete(
-            resource_group_name=resource_group.name,
-            network_security_group_name="str",
+    def test_network_security_groups_list_all(self, resource_group):
+        response = self.client.network_security_groups.list_all(
             api_version="2025-05-01",
-        ).result()  # call '.result()' to poll until service return final result
+        )
+        result = [r for r in response]
+        # please add some check logic here by yourself
+        # ...
 
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
+    def test_network_security_groups_list(self, resource_group):
+        response = self.client.network_security_groups.list(
+            resource_group_name=resource_group.name,
+            api_version="2025-05-01",
+        )
+        result = [r for r in response]
         # please add some check logic here by yourself
         # ...
 
@@ -321,7 +330,7 @@ class TestNetworkManagementNetworkSecurityGroupsOperations(AzureMgmtRecordedTest
                                             "name": "str",
                                             "natGateway": {"id": "str"},
                                             "networkSecurityGroup": ...,
-                                            "privateEndpointNetworkPolicies": "Disabled",
+                                            "privateEndpointNetworkPolicies": "str",
                                             "privateEndpoints": [
                                                 {
                                                     "applicationSecurityGroups": [
@@ -351,7 +360,7 @@ class TestNetworkManagementNetworkSecurityGroupsOperations(AzureMgmtRecordedTest
                                                             "type": "str",
                                                         }
                                                     ],
-                                                    "ipVersionType": "IPv4",
+                                                    "ipVersionType": "str",
                                                     "location": "str",
                                                     "manualPrivateLinkServiceConnections": [
                                                         {
@@ -395,7 +404,7 @@ class TestNetworkManagementNetworkSecurityGroupsOperations(AzureMgmtRecordedTest
                                                     "type": "str",
                                                 }
                                             ],
-                                            "privateLinkServiceNetworkPolicies": "Enabled",
+                                            "privateLinkServiceNetworkPolicies": "str",
                                             "provisioningState": "str",
                                             "purpose": "str",
                                             "resourceNavigationLinks": [
@@ -633,7 +642,7 @@ class TestNetworkManagementNetworkSecurityGroupsOperations(AzureMgmtRecordedTest
                                     "name": "str",
                                     "natGateway": {"id": "str"},
                                     "networkSecurityGroup": ...,
-                                    "privateEndpointNetworkPolicies": "Disabled",
+                                    "privateEndpointNetworkPolicies": "str",
                                     "privateEndpoints": [
                                         {
                                             "applicationSecurityGroups": [
@@ -663,7 +672,7 @@ class TestNetworkManagementNetworkSecurityGroupsOperations(AzureMgmtRecordedTest
                                                     "type": "str",
                                                 }
                                             ],
-                                            "ipVersionType": "IPv4",
+                                            "ipVersionType": "str",
                                             "location": "str",
                                             "manualPrivateLinkServiceConnections": [
                                                 {
@@ -707,7 +716,7 @@ class TestNetworkManagementNetworkSecurityGroupsOperations(AzureMgmtRecordedTest
                                             "type": "str",
                                         }
                                     ],
-                                    "privateLinkServiceNetworkPolicies": "Enabled",
+                                    "privateLinkServiceNetworkPolicies": "str",
                                     "provisioningState": "str",
                                     "purpose": "str",
                                     "resourceNavigationLinks": [
@@ -889,7 +898,7 @@ class TestNetworkManagementNetworkSecurityGroupsOperations(AzureMgmtRecordedTest
                                                         "name": "str",
                                                         "natGateway": {"id": "str"},
                                                         "networkSecurityGroup": ...,
-                                                        "privateEndpointNetworkPolicies": "Disabled",
+                                                        "privateEndpointNetworkPolicies": "str",
                                                         "privateEndpoints": [
                                                             {
                                                                 "applicationSecurityGroups": [
@@ -921,7 +930,7 @@ class TestNetworkManagementNetworkSecurityGroupsOperations(AzureMgmtRecordedTest
                                                                         "type": "str",
                                                                     }
                                                                 ],
-                                                                "ipVersionType": "IPv4",
+                                                                "ipVersionType": "str",
                                                                 "location": "str",
                                                                 "manualPrivateLinkServiceConnections": [
                                                                     {
@@ -965,7 +974,7 @@ class TestNetworkManagementNetworkSecurityGroupsOperations(AzureMgmtRecordedTest
                                                                 "type": "str",
                                                             }
                                                         ],
-                                                        "privateLinkServiceNetworkPolicies": "Enabled",
+                                                        "privateLinkServiceNetworkPolicies": "str",
                                                         "provisioningState": "str",
                                                         "purpose": "str",
                                                         "resourceNavigationLinks": [
@@ -1208,7 +1217,7 @@ class TestNetworkManagementNetworkSecurityGroupsOperations(AzureMgmtRecordedTest
                                                 "name": "str",
                                                 "natGateway": {"id": "str"},
                                                 "networkSecurityGroup": ...,
-                                                "privateEndpointNetworkPolicies": "Disabled",
+                                                "privateEndpointNetworkPolicies": "str",
                                                 "privateEndpoints": [
                                                     {
                                                         "applicationSecurityGroups": [
@@ -1238,7 +1247,7 @@ class TestNetworkManagementNetworkSecurityGroupsOperations(AzureMgmtRecordedTest
                                                                 "type": "str",
                                                             }
                                                         ],
-                                                        "ipVersionType": "IPv4",
+                                                        "ipVersionType": "str",
                                                         "location": "str",
                                                         "manualPrivateLinkServiceConnections": [
                                                             {
@@ -1282,7 +1291,7 @@ class TestNetworkManagementNetworkSecurityGroupsOperations(AzureMgmtRecordedTest
                                                         "type": "str",
                                                     }
                                                 ],
-                                                "privateLinkServiceNetworkPolicies": "Enabled",
+                                                "privateLinkServiceNetworkPolicies": "str",
                                                 "provisioningState": "str",
                                                 "purpose": "str",
                                                 "resourceNavigationLinks": [
@@ -1436,7 +1445,7 @@ class TestNetworkManagementNetworkSecurityGroupsOperations(AzureMgmtRecordedTest
                                     "type": "str",
                                 }
                             ],
-                            "ipVersionType": "IPv4",
+                            "ipVersionType": "str",
                             "location": "str",
                             "manualPrivateLinkServiceConnections": [
                                 {
@@ -1584,9 +1593,9 @@ class TestNetworkManagementNetworkSecurityGroupsOperations(AzureMgmtRecordedTest
                                 "name": "str",
                                 "natGateway": {"id": "str"},
                                 "networkSecurityGroup": ...,
-                                "privateEndpointNetworkPolicies": "Disabled",
+                                "privateEndpointNetworkPolicies": "str",
                                 "privateEndpoints": [...],
-                                "privateLinkServiceNetworkPolicies": "Enabled",
+                                "privateLinkServiceNetworkPolicies": "str",
                                 "provisioningState": "str",
                                 "purpose": "str",
                                 "resourceNavigationLinks": [
@@ -1814,7 +1823,7 @@ class TestNetworkManagementNetworkSecurityGroupsOperations(AzureMgmtRecordedTest
                                         "name": "str",
                                         "natGateway": {"id": "str"},
                                         "networkSecurityGroup": ...,
-                                        "privateEndpointNetworkPolicies": "Disabled",
+                                        "privateEndpointNetworkPolicies": "str",
                                         "privateEndpoints": [
                                             {
                                                 "applicationSecurityGroups": [
@@ -1844,7 +1853,7 @@ class TestNetworkManagementNetworkSecurityGroupsOperations(AzureMgmtRecordedTest
                                                         "type": "str",
                                                     }
                                                 ],
-                                                "ipVersionType": "IPv4",
+                                                "ipVersionType": "str",
                                                 "location": "str",
                                                 "manualPrivateLinkServiceConnections": [
                                                     {
@@ -1888,7 +1897,7 @@ class TestNetworkManagementNetworkSecurityGroupsOperations(AzureMgmtRecordedTest
                                                 "type": "str",
                                             }
                                         ],
-                                        "privateLinkServiceNetworkPolicies": "Enabled",
+                                        "privateLinkServiceNetworkPolicies": "str",
                                         "provisioningState": "str",
                                         "purpose": "str",
                                         "resourceNavigationLinks": [
@@ -2068,7 +2077,7 @@ class TestNetworkManagementNetworkSecurityGroupsOperations(AzureMgmtRecordedTest
                                                 "name": "str",
                                                 "natGateway": {"id": "str"},
                                                 "networkSecurityGroup": ...,
-                                                "privateEndpointNetworkPolicies": "Disabled",
+                                                "privateEndpointNetworkPolicies": "str",
                                                 "privateEndpoints": [
                                                     {
                                                         "applicationSecurityGroups": [
@@ -2098,7 +2107,7 @@ class TestNetworkManagementNetworkSecurityGroupsOperations(AzureMgmtRecordedTest
                                                                 "type": "str",
                                                             }
                                                         ],
-                                                        "ipVersionType": "IPv4",
+                                                        "ipVersionType": "str",
                                                         "location": "str",
                                                         "manualPrivateLinkServiceConnections": [
                                                             {
@@ -2142,7 +2151,7 @@ class TestNetworkManagementNetworkSecurityGroupsOperations(AzureMgmtRecordedTest
                                                         "type": "str",
                                                     }
                                                 ],
-                                                "privateLinkServiceNetworkPolicies": "Enabled",
+                                                "privateLinkServiceNetworkPolicies": "str",
                                                 "provisioningState": "str",
                                                 "purpose": "str",
                                                 "resourceNavigationLinks": [
@@ -2385,7 +2394,7 @@ class TestNetworkManagementNetworkSecurityGroupsOperations(AzureMgmtRecordedTest
                                         "name": "str",
                                         "natGateway": {"id": "str"},
                                         "networkSecurityGroup": ...,
-                                        "privateEndpointNetworkPolicies": "Disabled",
+                                        "privateEndpointNetworkPolicies": "str",
                                         "privateEndpoints": [
                                             {
                                                 "applicationSecurityGroups": [
@@ -2415,7 +2424,7 @@ class TestNetworkManagementNetworkSecurityGroupsOperations(AzureMgmtRecordedTest
                                                         "type": "str",
                                                     }
                                                 ],
-                                                "ipVersionType": "IPv4",
+                                                "ipVersionType": "str",
                                                 "location": "str",
                                                 "manualPrivateLinkServiceConnections": [
                                                     {
@@ -2459,7 +2468,7 @@ class TestNetworkManagementNetworkSecurityGroupsOperations(AzureMgmtRecordedTest
                                                 "type": "str",
                                             }
                                         ],
-                                        "privateLinkServiceNetworkPolicies": "Enabled",
+                                        "privateLinkServiceNetworkPolicies": "str",
                                         "provisioningState": "str",
                                         "purpose": "str",
                                         "resourceNavigationLinks": [
@@ -2592,7 +2601,7 @@ class TestNetworkManagementNetworkSecurityGroupsOperations(AzureMgmtRecordedTest
                                                 "type": "str",
                                             }
                                         ],
-                                        "ipVersionType": "IPv4",
+                                        "ipVersionType": "str",
                                         "location": "str",
                                         "manualPrivateLinkServiceConnections": [
                                             {
@@ -2744,9 +2753,9 @@ class TestNetworkManagementNetworkSecurityGroupsOperations(AzureMgmtRecordedTest
                                             "name": "str",
                                             "natGateway": {"id": "str"},
                                             "networkSecurityGroup": ...,
-                                            "privateEndpointNetworkPolicies": "Disabled",
+                                            "privateEndpointNetworkPolicies": "str",
                                             "privateEndpoints": [...],
-                                            "privateLinkServiceNetworkPolicies": "Enabled",
+                                            "privateLinkServiceNetworkPolicies": "str",
                                             "provisioningState": "str",
                                             "purpose": "str",
                                             "resourceNavigationLinks": [
@@ -2954,7 +2963,7 @@ class TestNetworkManagementNetworkSecurityGroupsOperations(AzureMgmtRecordedTest
                                                     "name": "str",
                                                     "natGateway": {"id": "str"},
                                                     "networkSecurityGroup": ...,
-                                                    "privateEndpointNetworkPolicies": "Disabled",
+                                                    "privateEndpointNetworkPolicies": "str",
                                                     "privateEndpoints": [
                                                         {
                                                             "applicationSecurityGroups": [
@@ -2986,7 +2995,7 @@ class TestNetworkManagementNetworkSecurityGroupsOperations(AzureMgmtRecordedTest
                                                                     "type": "str",
                                                                 }
                                                             ],
-                                                            "ipVersionType": "IPv4",
+                                                            "ipVersionType": "str",
                                                             "location": "str",
                                                             "manualPrivateLinkServiceConnections": [
                                                                 {
@@ -3030,7 +3039,7 @@ class TestNetworkManagementNetworkSecurityGroupsOperations(AzureMgmtRecordedTest
                                                             "type": "str",
                                                         }
                                                     ],
-                                                    "privateLinkServiceNetworkPolicies": "Enabled",
+                                                    "privateLinkServiceNetworkPolicies": "str",
                                                     "provisioningState": "str",
                                                     "purpose": "str",
                                                     "resourceNavigationLinks": [
@@ -3273,7 +3282,7 @@ class TestNetworkManagementNetworkSecurityGroupsOperations(AzureMgmtRecordedTest
                                             "name": "str",
                                             "natGateway": {"id": "str"},
                                             "networkSecurityGroup": ...,
-                                            "privateEndpointNetworkPolicies": "Disabled",
+                                            "privateEndpointNetworkPolicies": "str",
                                             "privateEndpoints": [
                                                 {
                                                     "applicationSecurityGroups": [
@@ -3303,7 +3312,7 @@ class TestNetworkManagementNetworkSecurityGroupsOperations(AzureMgmtRecordedTest
                                                             "type": "str",
                                                         }
                                                     ],
-                                                    "ipVersionType": "IPv4",
+                                                    "ipVersionType": "str",
                                                     "location": "str",
                                                     "manualPrivateLinkServiceConnections": [
                                                         {
@@ -3347,7 +3356,7 @@ class TestNetworkManagementNetworkSecurityGroupsOperations(AzureMgmtRecordedTest
                                                     "type": "str",
                                                 }
                                             ],
-                                            "privateLinkServiceNetworkPolicies": "Enabled",
+                                            "privateLinkServiceNetworkPolicies": "str",
                                             "provisioningState": "str",
                                             "purpose": "str",
                                             "resourceNavigationLinks": [
@@ -3614,7 +3623,7 @@ class TestNetworkManagementNetworkSecurityGroupsOperations(AzureMgmtRecordedTest
                                                     "name": "str",
                                                     "natGateway": {"id": "str"},
                                                     "networkSecurityGroup": ...,
-                                                    "privateEndpointNetworkPolicies": "Disabled",
+                                                    "privateEndpointNetworkPolicies": "str",
                                                     "privateEndpoints": [
                                                         {
                                                             "applicationSecurityGroups": [
@@ -3646,7 +3655,7 @@ class TestNetworkManagementNetworkSecurityGroupsOperations(AzureMgmtRecordedTest
                                                                     "type": "str",
                                                                 }
                                                             ],
-                                                            "ipVersionType": "IPv4",
+                                                            "ipVersionType": "str",
                                                             "location": "str",
                                                             "manualPrivateLinkServiceConnections": [
                                                                 {
@@ -3690,7 +3699,7 @@ class TestNetworkManagementNetworkSecurityGroupsOperations(AzureMgmtRecordedTest
                                                             "type": "str",
                                                         }
                                                     ],
-                                                    "privateLinkServiceNetworkPolicies": "Enabled",
+                                                    "privateLinkServiceNetworkPolicies": "str",
                                                     "provisioningState": "str",
                                                     "purpose": "str",
                                                     "resourceNavigationLinks": [
@@ -3932,7 +3941,7 @@ class TestNetworkManagementNetworkSecurityGroupsOperations(AzureMgmtRecordedTest
                                             "name": "str",
                                             "natGateway": {"id": "str"},
                                             "networkSecurityGroup": ...,
-                                            "privateEndpointNetworkPolicies": "Disabled",
+                                            "privateEndpointNetworkPolicies": "str",
                                             "privateEndpoints": [
                                                 {
                                                     "applicationSecurityGroups": [
@@ -3962,7 +3971,7 @@ class TestNetworkManagementNetworkSecurityGroupsOperations(AzureMgmtRecordedTest
                                                             "type": "str",
                                                         }
                                                     ],
-                                                    "ipVersionType": "IPv4",
+                                                    "ipVersionType": "str",
                                                     "location": "str",
                                                     "manualPrivateLinkServiceConnections": [
                                                         {
@@ -4006,7 +4015,7 @@ class TestNetworkManagementNetworkSecurityGroupsOperations(AzureMgmtRecordedTest
                                                     "type": "str",
                                                 }
                                             ],
-                                            "privateLinkServiceNetworkPolicies": "Enabled",
+                                            "privateLinkServiceNetworkPolicies": "str",
                                             "provisioningState": "str",
                                             "purpose": "str",
                                             "resourceNavigationLinks": [
@@ -4275,7 +4284,7 @@ class TestNetworkManagementNetworkSecurityGroupsOperations(AzureMgmtRecordedTest
                         "name": "str",
                         "natGateway": {"id": "str"},
                         "networkSecurityGroup": ...,
-                        "privateEndpointNetworkPolicies": "Disabled",
+                        "privateEndpointNetworkPolicies": "str",
                         "privateEndpoints": [
                             {
                                 "applicationSecurityGroups": [
@@ -4305,7 +4314,7 @@ class TestNetworkManagementNetworkSecurityGroupsOperations(AzureMgmtRecordedTest
                                         "type": "str",
                                     }
                                 ],
-                                "ipVersionType": "IPv4",
+                                "ipVersionType": "str",
                                 "location": "str",
                                 "manualPrivateLinkServiceConnections": [
                                     {
@@ -5071,7 +5080,7 @@ class TestNetworkManagementNetworkSecurityGroupsOperations(AzureMgmtRecordedTest
                                 "type": "str",
                             }
                         ],
-                        "privateLinkServiceNetworkPolicies": "Enabled",
+                        "privateLinkServiceNetworkPolicies": "str",
                         "provisioningState": "str",
                         "purpose": "str",
                         "resourceNavigationLinks": [
@@ -5188,21 +5197,12 @@ class TestNetworkManagementNetworkSecurityGroupsOperations(AzureMgmtRecordedTest
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_network_security_groups_list_all(self, resource_group):
-        response = self.client.network_security_groups.list_all(
-            api_version="2025-05-01",
-        )
-        result = [r for r in response]
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_network_security_groups_list(self, resource_group):
-        response = self.client.network_security_groups.list(
+    def test_network_security_groups_begin_delete(self, resource_group):
+        response = self.client.network_security_groups.begin_delete(
             resource_group_name=resource_group.name,
+            network_security_group_name="str",
             api_version="2025-05-01",
-        )
-        result = [r for r in response]
+        ).result()  # call '.result()' to poll until service return final result
+
         # please add some check logic here by yourself
         # ...

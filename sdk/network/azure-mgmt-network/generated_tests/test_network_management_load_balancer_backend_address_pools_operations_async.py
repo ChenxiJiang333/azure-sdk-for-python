@@ -329,7 +329,7 @@ class TestNetworkManagementLoadBalancerBackendAddressPoolsOperationsAsync(AzureM
                                                                 "type": "str",
                                                             }
                                                         ],
-                                                        "ipVersionType": "IPv4",
+                                                        "ipVersionType": "str",
                                                         "location": "str",
                                                         "manualPrivateLinkServiceConnections": [
                                                             {
@@ -456,7 +456,7 @@ class TestNetworkManagementLoadBalancerBackendAddressPoolsOperationsAsync(AzureM
                                                                             "type": "str",
                                                                         }
                                                                     ],
-                                                                    "ipVersionType": "IPv4",
+                                                                    "ipVersionType": "str",
                                                                     "location": "str",
                                                                     "manualPrivateLinkServiceConnections": [
                                                                         {
@@ -616,7 +616,7 @@ class TestNetworkManagementLoadBalancerBackendAddressPoolsOperationsAsync(AzureM
                                             "tags": {"str": "str"},
                                             "type": "str",
                                         },
-                                        "privateEndpointNetworkPolicies": "Disabled",
+                                        "privateEndpointNetworkPolicies": "str",
                                         "privateEndpoints": [
                                             {
                                                 "applicationSecurityGroups": [
@@ -646,7 +646,7 @@ class TestNetworkManagementLoadBalancerBackendAddressPoolsOperationsAsync(AzureM
                                                         "type": "str",
                                                     }
                                                 ],
-                                                "ipVersionType": "IPv4",
+                                                "ipVersionType": "str",
                                                 "location": "str",
                                                 "manualPrivateLinkServiceConnections": [
                                                     {
@@ -981,7 +981,7 @@ class TestNetworkManagementLoadBalancerBackendAddressPoolsOperationsAsync(AzureM
                                                 "type": "str",
                                             }
                                         ],
-                                        "privateLinkServiceNetworkPolicies": "Enabled",
+                                        "privateLinkServiceNetworkPolicies": "str",
                                         "provisioningState": "str",
                                         "purpose": "str",
                                         "resourceNavigationLinks": [
@@ -1362,7 +1362,7 @@ class TestNetworkManagementLoadBalancerBackendAddressPoolsOperationsAsync(AzureM
                                                         "type": "str",
                                                     }
                                                 ],
-                                                "ipVersionType": "IPv4",
+                                                "ipVersionType": "str",
                                                 "location": "str",
                                                 "manualPrivateLinkServiceConnections": [
                                                     {
@@ -1551,7 +1551,7 @@ class TestNetworkManagementLoadBalancerBackendAddressPoolsOperationsAsync(AzureM
                                                                     "type": "str",
                                                                 }
                                                             ],
-                                                            "ipVersionType": "IPv4",
+                                                            "ipVersionType": "str",
                                                             "location": "str",
                                                             "manualPrivateLinkServiceConnections": [
                                                                 {
@@ -1773,7 +1773,7 @@ class TestNetworkManagementLoadBalancerBackendAddressPoolsOperationsAsync(AzureM
                                     "tags": {"str": "str"},
                                     "type": "str",
                                 },
-                                "privateEndpointNetworkPolicies": "Disabled",
+                                "privateEndpointNetworkPolicies": "str",
                                 "privateEndpoints": [
                                     {
                                         "applicationSecurityGroups": [
@@ -1803,7 +1803,7 @@ class TestNetworkManagementLoadBalancerBackendAddressPoolsOperationsAsync(AzureM
                                                 "type": "str",
                                             }
                                         ],
-                                        "ipVersionType": "IPv4",
+                                        "ipVersionType": "str",
                                         "location": "str",
                                         "manualPrivateLinkServiceConnections": [
                                             {
@@ -2259,7 +2259,7 @@ class TestNetworkManagementLoadBalancerBackendAddressPoolsOperationsAsync(AzureM
                                         "type": "str",
                                     }
                                 ],
-                                "privateLinkServiceNetworkPolicies": "Enabled",
+                                "privateLinkServiceNetworkPolicies": "str",
                                 "provisioningState": "str",
                                 "purpose": "str",
                                 "resourceNavigationLinks": [
@@ -2586,7 +2586,7 @@ class TestNetworkManagementLoadBalancerBackendAddressPoolsOperationsAsync(AzureM
                                                                             "type": "str",
                                                                         }
                                                                     ],
-                                                                    "ipVersionType": "IPv4",
+                                                                    "ipVersionType": "str",
                                                                     "location": "str",
                                                                     "manualPrivateLinkServiceConnections": [
                                                                         {
@@ -2699,7 +2699,7 @@ class TestNetworkManagementLoadBalancerBackendAddressPoolsOperationsAsync(AzureM
                                                                                         "type": "str",
                                                                                     }
                                                                                 ],
-                                                                                "ipVersionType": "IPv4",
+                                                                                "ipVersionType": "str",
                                                                                 "location": "str",
                                                                                 "manualPrivateLinkServiceConnections": [
                                                                                     {
@@ -2828,7 +2828,7 @@ class TestNetworkManagementLoadBalancerBackendAddressPoolsOperationsAsync(AzureM
                                                         "tags": {"str": "str"},
                                                         "type": "str",
                                                     },
-                                                    "privateEndpointNetworkPolicies": "Disabled",
+                                                    "privateEndpointNetworkPolicies": "str",
                                                     "privateEndpoints": [
                                                         {
                                                             "applicationSecurityGroups": [
@@ -2860,7 +2860,7 @@ class TestNetworkManagementLoadBalancerBackendAddressPoolsOperationsAsync(AzureM
                                                                     "type": "str",
                                                                 }
                                                             ],
-                                                            "ipVersionType": "IPv4",
+                                                            "ipVersionType": "str",
                                                             "location": "str",
                                                             "manualPrivateLinkServiceConnections": [
                                                                 {
@@ -3150,7 +3150,7 @@ class TestNetworkManagementLoadBalancerBackendAddressPoolsOperationsAsync(AzureM
                                                             "type": "str",
                                                         }
                                                     ],
-                                                    "privateLinkServiceNetworkPolicies": "Enabled",
+                                                    "privateLinkServiceNetworkPolicies": "str",
                                                     "provisioningState": "str",
                                                     "purpose": "str",
                                                     "resourceNavigationLinks": [
@@ -3538,7 +3538,7 @@ class TestNetworkManagementLoadBalancerBackendAddressPoolsOperationsAsync(AzureM
                                                                     "type": "str",
                                                                 }
                                                             ],
-                                                            "ipVersionType": "IPv4",
+                                                            "ipVersionType": "str",
                                                             "location": "str",
                                                             "manualPrivateLinkServiceConnections": [
                                                                 {
@@ -3648,7 +3648,7 @@ class TestNetworkManagementLoadBalancerBackendAddressPoolsOperationsAsync(AzureM
                                                                                 "type": "str",
                                                                             }
                                                                         ],
-                                                                        "ipVersionType": "IPv4",
+                                                                        "ipVersionType": "str",
                                                                         "location": "str",
                                                                         "manualPrivateLinkServiceConnections": [
                                                                             {
@@ -3777,7 +3777,7 @@ class TestNetworkManagementLoadBalancerBackendAddressPoolsOperationsAsync(AzureM
                                                 "tags": {"str": "str"},
                                                 "type": "str",
                                             },
-                                            "privateEndpointNetworkPolicies": "Disabled",
+                                            "privateEndpointNetworkPolicies": "str",
                                             "privateEndpoints": [
                                                 {
                                                     "applicationSecurityGroups": [
@@ -3807,7 +3807,7 @@ class TestNetworkManagementLoadBalancerBackendAddressPoolsOperationsAsync(AzureM
                                                             "type": "str",
                                                         }
                                                     ],
-                                                    "ipVersionType": "IPv4",
+                                                    "ipVersionType": "str",
                                                     "location": "str",
                                                     "manualPrivateLinkServiceConnections": [
                                                         {
@@ -4094,7 +4094,7 @@ class TestNetworkManagementLoadBalancerBackendAddressPoolsOperationsAsync(AzureM
                                                     "type": "str",
                                                 }
                                             ],
-                                            "privateLinkServiceNetworkPolicies": "Enabled",
+                                            "privateLinkServiceNetworkPolicies": "str",
                                             "provisioningState": "str",
                                             "purpose": "str",
                                             "resourceNavigationLinks": [

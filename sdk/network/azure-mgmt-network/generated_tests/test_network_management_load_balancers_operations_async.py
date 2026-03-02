@@ -22,15 +22,36 @@ class TestNetworkManagementLoadBalancersOperationsAsync(AzureMgmtRecordedTestCas
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_load_balancers_begin_delete(self, resource_group):
+    async def test_load_balancers_list_all(self, resource_group):
+        response = self.client.load_balancers.list_all(
+            api_version="2025-05-01",
+        )
+        result = [r async for r in response]
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
+    async def test_load_balancers_begin_swap_public_ip_addresses(self, resource_group):
         response = await (
-            await self.client.load_balancers.begin_delete(
-                resource_group_name=resource_group.name,
-                load_balancer_name="str",
+            await self.client.load_balancers.begin_swap_public_ip_addresses(
+                location="str",
+                parameters={"frontendIPConfigurations": [{"id": "str", "publicIPAddress": {"id": "str"}}]},
                 api_version="2025-05-01",
             )
         ).result()  # call '.result()' to poll until service return final result
 
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
+    async def test_load_balancers_list(self, resource_group):
+        response = self.client.load_balancers.list(
+            resource_group_name=resource_group.name,
+            api_version="2025-05-01",
+        )
+        result = [r async for r in response]
         # please add some check logic here by yourself
         # ...
 
@@ -333,7 +354,7 @@ class TestNetworkManagementLoadBalancersOperationsAsync(AzureMgmtRecordedTestCas
                                                                         "type": "str",
                                                                     }
                                                                 ],
-                                                                "ipVersionType": "IPv4",
+                                                                "ipVersionType": "str",
                                                                 "location": "str",
                                                                 "manualPrivateLinkServiceConnections": [
                                                                     {
@@ -463,7 +484,7 @@ class TestNetworkManagementLoadBalancersOperationsAsync(AzureMgmtRecordedTestCas
                                                                                     "type": "str",
                                                                                 }
                                                                             ],
-                                                                            "ipVersionType": "IPv4",
+                                                                            "ipVersionType": "str",
                                                                             "location": "str",
                                                                             "manualPrivateLinkServiceConnections": [
                                                                                 {
@@ -623,7 +644,7 @@ class TestNetworkManagementLoadBalancersOperationsAsync(AzureMgmtRecordedTestCas
                                                     "tags": {"str": "str"},
                                                     "type": "str",
                                                 },
-                                                "privateEndpointNetworkPolicies": "Disabled",
+                                                "privateEndpointNetworkPolicies": "str",
                                                 "privateEndpoints": [
                                                     {
                                                         "applicationSecurityGroups": [
@@ -653,7 +674,7 @@ class TestNetworkManagementLoadBalancersOperationsAsync(AzureMgmtRecordedTestCas
                                                                 "type": "str",
                                                             }
                                                         ],
-                                                        "ipVersionType": "IPv4",
+                                                        "ipVersionType": "str",
                                                         "location": "str",
                                                         "manualPrivateLinkServiceConnections": [
                                                             {
@@ -991,7 +1012,7 @@ class TestNetworkManagementLoadBalancersOperationsAsync(AzureMgmtRecordedTestCas
                                                         "type": "str",
                                                     }
                                                 ],
-                                                "privateLinkServiceNetworkPolicies": "Enabled",
+                                                "privateLinkServiceNetworkPolicies": "str",
                                                 "provisioningState": "str",
                                                 "purpose": "str",
                                                 "resourceNavigationLinks": [
@@ -1376,7 +1397,7 @@ class TestNetworkManagementLoadBalancersOperationsAsync(AzureMgmtRecordedTestCas
                                                                 "type": "str",
                                                             }
                                                         ],
-                                                        "ipVersionType": "IPv4",
+                                                        "ipVersionType": "str",
                                                         "location": "str",
                                                         "manualPrivateLinkServiceConnections": [
                                                             {
@@ -1565,7 +1586,7 @@ class TestNetworkManagementLoadBalancersOperationsAsync(AzureMgmtRecordedTestCas
                                                                             "type": "str",
                                                                         }
                                                                     ],
-                                                                    "ipVersionType": "IPv4",
+                                                                    "ipVersionType": "str",
                                                                     "location": "str",
                                                                     "manualPrivateLinkServiceConnections": [
                                                                         {
@@ -1790,7 +1811,7 @@ class TestNetworkManagementLoadBalancersOperationsAsync(AzureMgmtRecordedTestCas
                                             "tags": {"str": "str"},
                                             "type": "str",
                                         },
-                                        "privateEndpointNetworkPolicies": "Disabled",
+                                        "privateEndpointNetworkPolicies": "str",
                                         "privateEndpoints": [
                                             {
                                                 "applicationSecurityGroups": [
@@ -1820,7 +1841,7 @@ class TestNetworkManagementLoadBalancersOperationsAsync(AzureMgmtRecordedTestCas
                                                         "type": "str",
                                                     }
                                                 ],
-                                                "ipVersionType": "IPv4",
+                                                "ipVersionType": "str",
                                                 "location": "str",
                                                 "manualPrivateLinkServiceConnections": [
                                                     {
@@ -2287,7 +2308,7 @@ class TestNetworkManagementLoadBalancersOperationsAsync(AzureMgmtRecordedTestCas
                                                 "type": "str",
                                             }
                                         ],
-                                        "privateLinkServiceNetworkPolicies": "Enabled",
+                                        "privateLinkServiceNetworkPolicies": "str",
                                         "provisioningState": "str",
                                         "purpose": "str",
                                         "resourceNavigationLinks": [
@@ -2626,7 +2647,7 @@ class TestNetworkManagementLoadBalancersOperationsAsync(AzureMgmtRecordedTestCas
                                                                                     "type": "str",
                                                                                 }
                                                                             ],
-                                                                            "ipVersionType": "IPv4",
+                                                                            "ipVersionType": "str",
                                                                             "location": "str",
                                                                             "manualPrivateLinkServiceConnections": [
                                                                                 {
@@ -2744,7 +2765,7 @@ class TestNetworkManagementLoadBalancersOperationsAsync(AzureMgmtRecordedTestCas
                                                                                                 "type": "str",
                                                                                             }
                                                                                         ],
-                                                                                        "ipVersionType": "IPv4",
+                                                                                        "ipVersionType": "str",
                                                                                         "location": "str",
                                                                                         "manualPrivateLinkServiceConnections": [
                                                                                             {
@@ -2873,7 +2894,7 @@ class TestNetworkManagementLoadBalancersOperationsAsync(AzureMgmtRecordedTestCas
                                                                 "tags": {"str": "str"},
                                                                 "type": "str",
                                                             },
-                                                            "privateEndpointNetworkPolicies": "Disabled",
+                                                            "privateEndpointNetworkPolicies": "str",
                                                             "privateEndpoints": [
                                                                 {
                                                                     "applicationSecurityGroups": [
@@ -2905,7 +2926,7 @@ class TestNetworkManagementLoadBalancersOperationsAsync(AzureMgmtRecordedTestCas
                                                                             "type": "str",
                                                                         }
                                                                     ],
-                                                                    "ipVersionType": "IPv4",
+                                                                    "ipVersionType": "str",
                                                                     "location": "str",
                                                                     "manualPrivateLinkServiceConnections": [
                                                                         {
@@ -3219,7 +3240,7 @@ class TestNetworkManagementLoadBalancersOperationsAsync(AzureMgmtRecordedTestCas
                                                                     "type": "str",
                                                                 }
                                                             ],
-                                                            "privateLinkServiceNetworkPolicies": "Enabled",
+                                                            "privateLinkServiceNetworkPolicies": "str",
                                                             "provisioningState": "str",
                                                             "purpose": "str",
                                                             "resourceNavigationLinks": [
@@ -3607,7 +3628,7 @@ class TestNetworkManagementLoadBalancersOperationsAsync(AzureMgmtRecordedTestCas
                                                                             "type": "str",
                                                                         }
                                                                     ],
-                                                                    "ipVersionType": "IPv4",
+                                                                    "ipVersionType": "str",
                                                                     "location": "str",
                                                                     "manualPrivateLinkServiceConnections": [
                                                                         {
@@ -3720,7 +3741,7 @@ class TestNetworkManagementLoadBalancersOperationsAsync(AzureMgmtRecordedTestCas
                                                                                         "type": "str",
                                                                                     }
                                                                                 ],
-                                                                                "ipVersionType": "IPv4",
+                                                                                "ipVersionType": "str",
                                                                                 "location": "str",
                                                                                 "manualPrivateLinkServiceConnections": [
                                                                                     {
@@ -3849,7 +3870,7 @@ class TestNetworkManagementLoadBalancersOperationsAsync(AzureMgmtRecordedTestCas
                                                         "tags": {"str": "str"},
                                                         "type": "str",
                                                     },
-                                                    "privateEndpointNetworkPolicies": "Disabled",
+                                                    "privateEndpointNetworkPolicies": "str",
                                                     "privateEndpoints": [
                                                         {
                                                             "applicationSecurityGroups": [
@@ -3881,7 +3902,7 @@ class TestNetworkManagementLoadBalancersOperationsAsync(AzureMgmtRecordedTestCas
                                                                     "type": "str",
                                                                 }
                                                             ],
-                                                            "ipVersionType": "IPv4",
+                                                            "ipVersionType": "str",
                                                             "location": "str",
                                                             "manualPrivateLinkServiceConnections": [
                                                                 {
@@ -4171,7 +4192,7 @@ class TestNetworkManagementLoadBalancersOperationsAsync(AzureMgmtRecordedTestCas
                                                             "type": "str",
                                                         }
                                                     ],
-                                                    "privateLinkServiceNetworkPolicies": "Enabled",
+                                                    "privateLinkServiceNetworkPolicies": "str",
                                                     "provisioningState": "str",
                                                     "purpose": "str",
                                                     "resourceNavigationLinks": [
@@ -4689,7 +4710,7 @@ class TestNetworkManagementLoadBalancersOperationsAsync(AzureMgmtRecordedTestCas
                                                                 "type": "str",
                                                             }
                                                         ],
-                                                        "ipVersionType": "IPv4",
+                                                        "ipVersionType": "str",
                                                         "location": "str",
                                                         "manualPrivateLinkServiceConnections": [
                                                             {
@@ -4796,7 +4817,7 @@ class TestNetworkManagementLoadBalancersOperationsAsync(AzureMgmtRecordedTestCas
                                                                             "type": "str",
                                                                         }
                                                                     ],
-                                                                    "ipVersionType": "IPv4",
+                                                                    "ipVersionType": "str",
                                                                     "location": "str",
                                                                     "manualPrivateLinkServiceConnections": [
                                                                         {
@@ -5051,7 +5072,7 @@ class TestNetworkManagementLoadBalancersOperationsAsync(AzureMgmtRecordedTestCas
                                             "tags": {"str": "str"},
                                             "type": "str",
                                         },
-                                        "privateEndpointNetworkPolicies": "Disabled",
+                                        "privateEndpointNetworkPolicies": "str",
                                         "privateEndpoints": [
                                             {
                                                 "applicationSecurityGroups": [
@@ -5081,7 +5102,7 @@ class TestNetworkManagementLoadBalancersOperationsAsync(AzureMgmtRecordedTestCas
                                                         "type": "str",
                                                     }
                                                 ],
-                                                "ipVersionType": "IPv4",
+                                                "ipVersionType": "str",
                                                 "location": "str",
                                                 "manualPrivateLinkServiceConnections": [
                                                     {
@@ -5632,7 +5653,7 @@ class TestNetworkManagementLoadBalancersOperationsAsync(AzureMgmtRecordedTestCas
                                                 "type": "str",
                                             }
                                         ],
-                                        "privateLinkServiceNetworkPolicies": "Enabled",
+                                        "privateLinkServiceNetworkPolicies": "str",
                                         "provisioningState": "str",
                                         "purpose": "str",
                                         "resourceNavigationLinks": [
@@ -6211,7 +6232,7 @@ class TestNetworkManagementLoadBalancersOperationsAsync(AzureMgmtRecordedTestCas
                                                         "type": "str",
                                                     }
                                                 ],
-                                                "ipVersionType": "IPv4",
+                                                "ipVersionType": "str",
                                                 "location": "str",
                                                 "manualPrivateLinkServiceConnections": [
                                                     {
@@ -6318,7 +6339,7 @@ class TestNetworkManagementLoadBalancersOperationsAsync(AzureMgmtRecordedTestCas
                                                                     "type": "str",
                                                                 }
                                                             ],
-                                                            "ipVersionType": "IPv4",
+                                                            "ipVersionType": "str",
                                                             "location": "str",
                                                             "manualPrivateLinkServiceConnections": [
                                                                 {
@@ -6635,7 +6656,7 @@ class TestNetworkManagementLoadBalancersOperationsAsync(AzureMgmtRecordedTestCas
                                     "tags": {"str": "str"},
                                     "type": "str",
                                 },
-                                "privateEndpointNetworkPolicies": "Disabled",
+                                "privateEndpointNetworkPolicies": "str",
                                 "privateEndpoints": [
                                     {
                                         "applicationSecurityGroups": [
@@ -6665,7 +6686,7 @@ class TestNetworkManagementLoadBalancersOperationsAsync(AzureMgmtRecordedTestCas
                                                 "type": "str",
                                             }
                                         ],
-                                        "ipVersionType": "IPv4",
+                                        "ipVersionType": "str",
                                         "location": "str",
                                         "manualPrivateLinkServiceConnections": [
                                             {
@@ -7335,7 +7356,7 @@ class TestNetworkManagementLoadBalancersOperationsAsync(AzureMgmtRecordedTestCas
                                         "type": "str",
                                     }
                                 ],
-                                "privateLinkServiceNetworkPolicies": "Enabled",
+                                "privateLinkServiceNetworkPolicies": "str",
                                 "provisioningState": "str",
                                 "purpose": "str",
                                 "resourceNavigationLinks": [
@@ -7743,7 +7764,7 @@ class TestNetworkManagementLoadBalancersOperationsAsync(AzureMgmtRecordedTestCas
                                                                     "type": "str",
                                                                 }
                                                             ],
-                                                            "ipVersionType": "IPv4",
+                                                            "ipVersionType": "str",
                                                             "location": "str",
                                                             "manualPrivateLinkServiceConnections": [
                                                                 {
@@ -7873,7 +7894,7 @@ class TestNetworkManagementLoadBalancersOperationsAsync(AzureMgmtRecordedTestCas
                                                                                 "type": "str",
                                                                             }
                                                                         ],
-                                                                        "ipVersionType": "IPv4",
+                                                                        "ipVersionType": "str",
                                                                         "location": "str",
                                                                         "manualPrivateLinkServiceConnections": [
                                                                             {
@@ -8033,7 +8054,7 @@ class TestNetworkManagementLoadBalancersOperationsAsync(AzureMgmtRecordedTestCas
                                                 "tags": {"str": "str"},
                                                 "type": "str",
                                             },
-                                            "privateEndpointNetworkPolicies": "Disabled",
+                                            "privateEndpointNetworkPolicies": "str",
                                             "privateEndpoints": [
                                                 {
                                                     "applicationSecurityGroups": [
@@ -8063,7 +8084,7 @@ class TestNetworkManagementLoadBalancersOperationsAsync(AzureMgmtRecordedTestCas
                                                             "type": "str",
                                                         }
                                                     ],
-                                                    "ipVersionType": "IPv4",
+                                                    "ipVersionType": "str",
                                                     "location": "str",
                                                     "manualPrivateLinkServiceConnections": [
                                                         {
@@ -8401,7 +8422,7 @@ class TestNetworkManagementLoadBalancersOperationsAsync(AzureMgmtRecordedTestCas
                                                     "type": "str",
                                                 }
                                             ],
-                                            "privateLinkServiceNetworkPolicies": "Enabled",
+                                            "privateLinkServiceNetworkPolicies": "str",
                                             "provisioningState": "str",
                                             "purpose": "str",
                                             "resourceNavigationLinks": [
@@ -8782,7 +8803,7 @@ class TestNetworkManagementLoadBalancersOperationsAsync(AzureMgmtRecordedTestCas
                                                             "type": "str",
                                                         }
                                                     ],
-                                                    "ipVersionType": "IPv4",
+                                                    "ipVersionType": "str",
                                                     "location": "str",
                                                     "manualPrivateLinkServiceConnections": [
                                                         {
@@ -8971,7 +8992,7 @@ class TestNetworkManagementLoadBalancersOperationsAsync(AzureMgmtRecordedTestCas
                                                                         "type": "str",
                                                                     }
                                                                 ],
-                                                                "ipVersionType": "IPv4",
+                                                                "ipVersionType": "str",
                                                                 "location": "str",
                                                                 "manualPrivateLinkServiceConnections": [
                                                                     {
@@ -9193,7 +9214,7 @@ class TestNetworkManagementLoadBalancersOperationsAsync(AzureMgmtRecordedTestCas
                                         "tags": {"str": "str"},
                                         "type": "str",
                                     },
-                                    "privateEndpointNetworkPolicies": "Disabled",
+                                    "privateEndpointNetworkPolicies": "str",
                                     "privateEndpoints": [
                                         {
                                             "applicationSecurityGroups": [
@@ -9223,7 +9244,7 @@ class TestNetworkManagementLoadBalancersOperationsAsync(AzureMgmtRecordedTestCas
                                                     "type": "str",
                                                 }
                                             ],
-                                            "ipVersionType": "IPv4",
+                                            "ipVersionType": "str",
                                             "location": "str",
                                             "manualPrivateLinkServiceConnections": [
                                                 {
@@ -9682,7 +9703,7 @@ class TestNetworkManagementLoadBalancersOperationsAsync(AzureMgmtRecordedTestCas
                                             "type": "str",
                                         }
                                     ],
-                                    "privateLinkServiceNetworkPolicies": "Enabled",
+                                    "privateLinkServiceNetworkPolicies": "str",
                                     "provisioningState": "str",
                                     "purpose": "str",
                                     "resourceNavigationLinks": [
@@ -10015,7 +10036,7 @@ class TestNetworkManagementLoadBalancersOperationsAsync(AzureMgmtRecordedTestCas
                                                                                 "type": "str",
                                                                             }
                                                                         ],
-                                                                        "ipVersionType": "IPv4",
+                                                                        "ipVersionType": "str",
                                                                         "location": "str",
                                                                         "manualPrivateLinkServiceConnections": [
                                                                             {
@@ -10131,7 +10152,7 @@ class TestNetworkManagementLoadBalancersOperationsAsync(AzureMgmtRecordedTestCas
                                                                                             "type": "str",
                                                                                         }
                                                                                     ],
-                                                                                    "ipVersionType": "IPv4",
+                                                                                    "ipVersionType": "str",
                                                                                     "location": "str",
                                                                                     "manualPrivateLinkServiceConnections": [
                                                                                         {
@@ -10260,7 +10281,7 @@ class TestNetworkManagementLoadBalancersOperationsAsync(AzureMgmtRecordedTestCas
                                                             "tags": {"str": "str"},
                                                             "type": "str",
                                                         },
-                                                        "privateEndpointNetworkPolicies": "Disabled",
+                                                        "privateEndpointNetworkPolicies": "str",
                                                         "privateEndpoints": [
                                                             {
                                                                 "applicationSecurityGroups": [
@@ -10292,7 +10313,7 @@ class TestNetworkManagementLoadBalancersOperationsAsync(AzureMgmtRecordedTestCas
                                                                         "type": "str",
                                                                     }
                                                                 ],
-                                                                "ipVersionType": "IPv4",
+                                                                "ipVersionType": "str",
                                                                 "location": "str",
                                                                 "manualPrivateLinkServiceConnections": [
                                                                     {
@@ -10594,7 +10615,7 @@ class TestNetworkManagementLoadBalancersOperationsAsync(AzureMgmtRecordedTestCas
                                                                 "type": "str",
                                                             }
                                                         ],
-                                                        "privateLinkServiceNetworkPolicies": "Enabled",
+                                                        "privateLinkServiceNetworkPolicies": "str",
                                                         "provisioningState": "str",
                                                         "purpose": "str",
                                                         "resourceNavigationLinks": [
@@ -10982,7 +11003,7 @@ class TestNetworkManagementLoadBalancersOperationsAsync(AzureMgmtRecordedTestCas
                                                                         "type": "str",
                                                                     }
                                                                 ],
-                                                                "ipVersionType": "IPv4",
+                                                                "ipVersionType": "str",
                                                                 "location": "str",
                                                                 "manualPrivateLinkServiceConnections": [
                                                                     {
@@ -11092,7 +11113,7 @@ class TestNetworkManagementLoadBalancersOperationsAsync(AzureMgmtRecordedTestCas
                                                                                     "type": "str",
                                                                                 }
                                                                             ],
-                                                                            "ipVersionType": "IPv4",
+                                                                            "ipVersionType": "str",
                                                                             "location": "str",
                                                                             "manualPrivateLinkServiceConnections": [
                                                                                 {
@@ -11221,7 +11242,7 @@ class TestNetworkManagementLoadBalancersOperationsAsync(AzureMgmtRecordedTestCas
                                                     "tags": {"str": "str"},
                                                     "type": "str",
                                                 },
-                                                "privateEndpointNetworkPolicies": "Disabled",
+                                                "privateEndpointNetworkPolicies": "str",
                                                 "privateEndpoints": [
                                                     {
                                                         "applicationSecurityGroups": [
@@ -11251,7 +11272,7 @@ class TestNetworkManagementLoadBalancersOperationsAsync(AzureMgmtRecordedTestCas
                                                                 "type": "str",
                                                             }
                                                         ],
-                                                        "ipVersionType": "IPv4",
+                                                        "ipVersionType": "str",
                                                         "location": "str",
                                                         "manualPrivateLinkServiceConnections": [
                                                             {
@@ -11538,7 +11559,7 @@ class TestNetworkManagementLoadBalancersOperationsAsync(AzureMgmtRecordedTestCas
                                                         "type": "str",
                                                     }
                                                 ],
-                                                "privateLinkServiceNetworkPolicies": "Enabled",
+                                                "privateLinkServiceNetworkPolicies": "str",
                                                 "provisioningState": "str",
                                                 "purpose": "str",
                                                 "resourceNavigationLinks": [
@@ -11757,32 +11778,11 @@ class TestNetworkManagementLoadBalancersOperationsAsync(AzureMgmtRecordedTestCas
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_load_balancers_list_all(self, resource_group):
-        response = self.client.load_balancers.list_all(
-            api_version="2025-05-01",
-        )
-        result = [r async for r in response]
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_load_balancers_list(self, resource_group):
-        response = self.client.load_balancers.list(
-            resource_group_name=resource_group.name,
-            api_version="2025-05-01",
-        )
-        result = [r async for r in response]
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_load_balancers_begin_swap_public_ip_addresses(self, resource_group):
+    async def test_load_balancers_begin_delete(self, resource_group):
         response = await (
-            await self.client.load_balancers.begin_swap_public_ip_addresses(
-                location="str",
-                parameters={"frontendIPConfigurations": [{"id": "str", "publicIPAddress": {"id": "str"}}]},
+            await self.client.load_balancers.begin_delete(
+                resource_group_name=resource_group.name,
+                load_balancer_name="str",
                 api_version="2025-05-01",
             )
         ).result()  # call '.result()' to poll until service return final result

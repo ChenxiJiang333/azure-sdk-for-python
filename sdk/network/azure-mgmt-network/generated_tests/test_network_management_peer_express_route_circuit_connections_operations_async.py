@@ -21,6 +21,19 @@ class TestNetworkManagementPeerExpressRouteCircuitConnectionsOperationsAsync(Azu
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
+    async def test_peer_express_route_circuit_connections_list(self, resource_group):
+        response = self.client.peer_express_route_circuit_connections.list(
+            resource_group_name=resource_group.name,
+            circuit_name="str",
+            peering_name="str",
+            api_version="2025-05-01",
+        )
+        result = [r async for r in response]
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
     async def test_peer_express_route_circuit_connections_get(self, resource_group):
         response = await self.client.peer_express_route_circuit_connections.get(
             resource_group_name=resource_group.name,
@@ -30,18 +43,5 @@ class TestNetworkManagementPeerExpressRouteCircuitConnectionsOperationsAsync(Azu
             api_version="2025-05-01",
         )
 
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_peer_express_route_circuit_connections_list(self, resource_group):
-        response = self.client.peer_express_route_circuit_connections.list(
-            resource_group_name=resource_group.name,
-            circuit_name="str",
-            peering_name="str",
-            api_version="2025-05-01",
-        )
-        result = [r async for r in response]
         # please add some check logic here by yourself
         # ...

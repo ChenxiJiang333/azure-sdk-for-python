@@ -31,7 +31,7 @@ def main():
         subscription_id="00000000-0000-0000-0000-000000000000",
     )
 
-    client.service_gateways.begin_update_address_locations(
+    response = client.service_gateways.begin_update_address_locations(
         resource_group_name="rg1",
         service_gateway_name="sg",
         parameters={
@@ -51,8 +51,9 @@ def main():
             ],
         },
     ).result()
+    print(response)
 
 
-# x-ms-original-file: specification/network/resource-manager/Microsoft.Network/stable/2025-05-01/examples/ServiceGatewayPartialUpdateAddressLocationsRequest.json
+# x-ms-original-file: specification/network/resource-manager/Microsoft.Network/Network/stable/2025-05-01/examples/ServiceGatewayPartialUpdateAddressLocationsRequest.json
 if __name__ == "__main__":
     main()

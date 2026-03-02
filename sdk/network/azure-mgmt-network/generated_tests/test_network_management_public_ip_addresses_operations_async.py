@@ -22,10 +22,8 @@ class TestNetworkManagementPublicIPAddressesOperationsAsync(AzureMgmtRecordedTes
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_public_ip_addresses_list_cloud_service_public_ip_addresses(self, resource_group):
-        response = self.client.public_ip_addresses.list_cloud_service_public_ip_addresses(
-            resource_group_name=resource_group.name,
-            cloud_service_name="str",
+    async def test_public_ip_addresses_list_all(self, resource_group):
+        response = self.client.public_ip_addresses.list_all(
             api_version="2025-05-01",
         )
         result = [r async for r in response]
@@ -34,46 +32,12 @@ class TestNetworkManagementPublicIPAddressesOperationsAsync(AzureMgmtRecordedTes
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_public_ip_addresses_list_cloud_service_role_instance_public_ip_addresses(self, resource_group):
-        response = self.client.public_ip_addresses.list_cloud_service_role_instance_public_ip_addresses(
+    async def test_public_ip_addresses_list(self, resource_group):
+        response = self.client.public_ip_addresses.list(
             resource_group_name=resource_group.name,
-            cloud_service_name="str",
-            role_instance_name="str",
-            network_interface_name="str",
-            ip_configuration_name="str",
             api_version="2025-05-01",
         )
         result = [r async for r in response]
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_public_ip_addresses_get_cloud_service_public_ip_address(self, resource_group):
-        response = await self.client.public_ip_addresses.get_cloud_service_public_ip_address(
-            resource_group_name=resource_group.name,
-            cloud_service_name="str",
-            role_instance_name="str",
-            network_interface_name="str",
-            ip_configuration_name="str",
-            public_ip_address_name="str",
-            api_version="2025-05-01",
-        )
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_public_ip_addresses_begin_delete(self, resource_group):
-        response = await (
-            await self.client.public_ip_addresses.begin_delete(
-                resource_group_name=resource_group.name,
-                public_ip_address_name="str",
-                api_version="2025-05-01",
-            )
-        ).result()  # call '.result()' to poll until service return final result
-
         # please add some check logic here by yourself
         # ...
 
@@ -457,7 +421,7 @@ class TestNetworkManagementPublicIPAddressesOperationsAsync(AzureMgmtRecordedTes
                                                     "type": "str",
                                                 }
                                             ],
-                                            "ipVersionType": "IPv4",
+                                            "ipVersionType": "str",
                                             "location": "str",
                                             "manualPrivateLinkServiceConnections": [
                                                 {
@@ -582,7 +546,7 @@ class TestNetworkManagementPublicIPAddressesOperationsAsync(AzureMgmtRecordedTes
                                                                 "type": "str",
                                                             }
                                                         ],
-                                                        "ipVersionType": "IPv4",
+                                                        "ipVersionType": "str",
                                                         "location": "str",
                                                         "manualPrivateLinkServiceConnections": [
                                                             {
@@ -855,7 +819,7 @@ class TestNetworkManagementPublicIPAddressesOperationsAsync(AzureMgmtRecordedTes
                                 "tags": {"str": "str"},
                                 "type": "str",
                             },
-                            "privateEndpointNetworkPolicies": "Disabled",
+                            "privateEndpointNetworkPolicies": "str",
                             "privateEndpoints": [
                                 {
                                     "applicationSecurityGroups": [
@@ -885,7 +849,7 @@ class TestNetworkManagementPublicIPAddressesOperationsAsync(AzureMgmtRecordedTes
                                             "type": "str",
                                         }
                                     ],
-                                    "ipVersionType": "IPv4",
+                                    "ipVersionType": "str",
                                     "location": "str",
                                     "manualPrivateLinkServiceConnections": [
                                         {
@@ -1483,7 +1447,7 @@ class TestNetworkManagementPublicIPAddressesOperationsAsync(AzureMgmtRecordedTes
                                     "type": "str",
                                 }
                             ],
-                            "privateLinkServiceNetworkPolicies": "Enabled",
+                            "privateLinkServiceNetworkPolicies": "str",
                             "provisioningState": "str",
                             "purpose": "str",
                             "resourceNavigationLinks": [
@@ -1634,22 +1598,15 @@ class TestNetworkManagementPublicIPAddressesOperationsAsync(AzureMgmtRecordedTes
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_public_ip_addresses_list_all(self, resource_group):
-        response = self.client.public_ip_addresses.list_all(
-            api_version="2025-05-01",
-        )
-        result = [r async for r in response]
-        # please add some check logic here by yourself
-        # ...
+    async def test_public_ip_addresses_begin_delete(self, resource_group):
+        response = await (
+            await self.client.public_ip_addresses.begin_delete(
+                resource_group_name=resource_group.name,
+                public_ip_address_name="str",
+                api_version="2025-05-01",
+            )
+        ).result()  # call '.result()' to poll until service return final result
 
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_public_ip_addresses_list(self, resource_group):
-        response = self.client.public_ip_addresses.list(
-            resource_group_name=resource_group.name,
-            api_version="2025-05-01",
-        )
-        result = [r async for r in response]
         # please add some check logic here by yourself
         # ...
 
@@ -1660,6 +1617,21 @@ class TestNetworkManagementPublicIPAddressesOperationsAsync(AzureMgmtRecordedTes
             await self.client.public_ip_addresses.begin_ddos_protection_status(
                 resource_group_name=resource_group.name,
                 public_ip_address_name="str",
+                api_version="2025-05-01",
+            )
+        ).result()  # call '.result()' to poll until service return final result
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
+    async def test_public_ip_addresses_begin_disassociate_cloud_service_reserved_public_ip(self, resource_group):
+        response = await (
+            await self.client.public_ip_addresses.begin_disassociate_cloud_service_reserved_public_ip(
+                resource_group_name=resource_group.name,
+                public_ip_address_name="str",
+                parameters={"publicIpArmId": "str"},
                 api_version="2025-05-01",
             )
         ).result()  # call '.result()' to poll until service return final result
@@ -1684,15 +1656,43 @@ class TestNetworkManagementPublicIPAddressesOperationsAsync(AzureMgmtRecordedTes
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_public_ip_addresses_begin_disassociate_cloud_service_reserved_public_ip(self, resource_group):
-        response = await (
-            await self.client.public_ip_addresses.begin_disassociate_cloud_service_reserved_public_ip(
-                resource_group_name=resource_group.name,
-                public_ip_address_name="str",
-                parameters={"publicIpArmId": "str"},
-                api_version="2025-05-01",
-            )
-        ).result()  # call '.result()' to poll until service return final result
+    async def test_public_ip_addresses_list_cloud_service_public_ip_addresses(self, resource_group):
+        response = self.client.public_ip_addresses.list_cloud_service_public_ip_addresses(
+            resource_group_name=resource_group.name,
+            cloud_service_name="str",
+            api_version="2025-05-01",
+        )
+        result = [r async for r in response]
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
+    async def test_public_ip_addresses_list_cloud_service_role_instance_public_ip_addresses(self, resource_group):
+        response = self.client.public_ip_addresses.list_cloud_service_role_instance_public_ip_addresses(
+            resource_group_name=resource_group.name,
+            cloud_service_name="str",
+            role_instance_name="str",
+            network_interface_name="str",
+            ip_configuration_name="str",
+            api_version="2025-05-01",
+        )
+        result = [r async for r in response]
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
+    async def test_public_ip_addresses_get_cloud_service_public_ip_address(self, resource_group):
+        response = await self.client.public_ip_addresses.get_cloud_service_public_ip_address(
+            resource_group_name=resource_group.name,
+            cloud_service_name="str",
+            role_instance_name="str",
+            network_interface_name="str",
+            ip_configuration_name="str",
+            public_ip_address_name="str",
+            api_version="2025-05-01",
+        )
 
         # please add some check logic here by yourself
         # ...

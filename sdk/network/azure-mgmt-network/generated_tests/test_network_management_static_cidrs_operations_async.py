@@ -34,8 +34,8 @@ class TestNetworkManagementStaticCidrsOperationsAsync(AzureMgmtRecordedTestCase)
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_static_cidrs_create(self, resource_group):
-        response = await self.client.static_cidrs.create(
+    async def test_static_cidrs_get(self, resource_group):
+        response = await self.client.static_cidrs.get(
             resource_group_name=resource_group.name,
             network_manager_name="str",
             pool_name="str",
@@ -48,8 +48,8 @@ class TestNetworkManagementStaticCidrsOperationsAsync(AzureMgmtRecordedTestCase)
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_static_cidrs_get(self, resource_group):
-        response = await self.client.static_cidrs.get(
+    async def test_static_cidrs_create(self, resource_group):
+        response = await self.client.static_cidrs.create(
             resource_group_name=resource_group.name,
             network_manager_name="str",
             pool_name="str",

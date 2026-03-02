@@ -21,15 +21,22 @@ class TestNetworkManagementVirtualRoutersOperationsAsync(AzureMgmtRecordedTestCa
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_virtual_routers_begin_delete(self, resource_group):
-        response = await (
-            await self.client.virtual_routers.begin_delete(
-                resource_group_name=resource_group.name,
-                virtual_router_name="str",
-                api_version="2025-05-01",
-            )
-        ).result()  # call '.result()' to poll until service return final result
+    async def test_virtual_routers_list(self, resource_group):
+        response = self.client.virtual_routers.list(
+            api_version="2025-05-01",
+        )
+        result = [r async for r in response]
+        # please add some check logic here by yourself
+        # ...
 
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
+    async def test_virtual_routers_list_by_resource_group(self, resource_group):
+        response = self.client.virtual_routers.list_by_resource_group(
+            resource_group_name=resource_group.name,
+            api_version="2025-05-01",
+        )
+        result = [r async for r in response]
         # please add some check logic here by yourself
         # ...
 
@@ -75,21 +82,14 @@ class TestNetworkManagementVirtualRoutersOperationsAsync(AzureMgmtRecordedTestCa
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_virtual_routers_list_by_resource_group(self, resource_group):
-        response = self.client.virtual_routers.list_by_resource_group(
-            resource_group_name=resource_group.name,
-            api_version="2025-05-01",
-        )
-        result = [r async for r in response]
-        # please add some check logic here by yourself
-        # ...
+    async def test_virtual_routers_begin_delete(self, resource_group):
+        response = await (
+            await self.client.virtual_routers.begin_delete(
+                resource_group_name=resource_group.name,
+                virtual_router_name="str",
+                api_version="2025-05-01",
+            )
+        ).result()  # call '.result()' to poll until service return final result
 
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_virtual_routers_list(self, resource_group):
-        response = self.client.virtual_routers.list(
-            api_version="2025-05-01",
-        )
-        result = [r async for r in response]
         # please add some check logic here by yourself
         # ...

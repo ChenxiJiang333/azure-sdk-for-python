@@ -22,15 +22,25 @@ class TestNetworkManagementApplicationGatewayPrivateEndpointConnectionsOperation
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_application_gateway_private_endpoint_connections_begin_delete(self, resource_group):
-        response = await (
-            await self.client.application_gateway_private_endpoint_connections.begin_delete(
-                resource_group_name=resource_group.name,
-                application_gateway_name="str",
-                connection_name="str",
-                api_version="2025-05-01",
-            )
-        ).result()  # call '.result()' to poll until service return final result
+    async def test_application_gateway_private_endpoint_connections_list(self, resource_group):
+        response = self.client.application_gateway_private_endpoint_connections.list(
+            resource_group_name=resource_group.name,
+            application_gateway_name="str",
+            api_version="2025-05-01",
+        )
+        result = [r async for r in response]
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
+    async def test_application_gateway_private_endpoint_connections_get(self, resource_group):
+        response = await self.client.application_gateway_private_endpoint_connections.get(
+            resource_group_name=resource_group.name,
+            application_gateway_name="str",
+            connection_name="str",
+            api_version="2025-05-01",
+        )
 
         # please add some check logic here by yourself
         # ...
@@ -76,7 +86,7 @@ class TestNetworkManagementApplicationGatewayPrivateEndpointConnectionsOperation
                                 "type": "str",
                             }
                         ],
-                        "ipVersionType": "IPv4",
+                        "ipVersionType": "str",
                         "location": "str",
                         "manualPrivateLinkServiceConnections": [
                             {
@@ -429,9 +439,9 @@ class TestNetworkManagementApplicationGatewayPrivateEndpointConnectionsOperation
                                                         "tags": {"str": "str"},
                                                         "type": "str",
                                                     },
-                                                    "privateEndpointNetworkPolicies": "Disabled",
+                                                    "privateEndpointNetworkPolicies": "str",
                                                     "privateEndpoints": [...],
-                                                    "privateLinkServiceNetworkPolicies": "Enabled",
+                                                    "privateLinkServiceNetworkPolicies": "str",
                                                     "provisioningState": "str",
                                                     "purpose": "str",
                                                     "resourceNavigationLinks": [
@@ -813,9 +823,9 @@ class TestNetworkManagementApplicationGatewayPrivateEndpointConnectionsOperation
                                                 "tags": {"str": "str"},
                                                 "type": "str",
                                             },
-                                            "privateEndpointNetworkPolicies": "Disabled",
+                                            "privateEndpointNetworkPolicies": "str",
                                             "privateEndpoints": [...],
-                                            "privateLinkServiceNetworkPolicies": "Enabled",
+                                            "privateLinkServiceNetworkPolicies": "str",
                                             "provisioningState": "str",
                                             "purpose": "str",
                                             "resourceNavigationLinks": [
@@ -1143,9 +1153,9 @@ class TestNetworkManagementApplicationGatewayPrivateEndpointConnectionsOperation
                                                                     "tags": {"str": "str"},
                                                                     "type": "str",
                                                                 },
-                                                                "privateEndpointNetworkPolicies": "Disabled",
+                                                                "privateEndpointNetworkPolicies": "str",
                                                                 "privateEndpoints": [...],
-                                                                "privateLinkServiceNetworkPolicies": "Enabled",
+                                                                "privateLinkServiceNetworkPolicies": "str",
                                                                 "provisioningState": "str",
                                                                 "purpose": "str",
                                                                 "resourceNavigationLinks": [
@@ -1531,9 +1541,9 @@ class TestNetworkManagementApplicationGatewayPrivateEndpointConnectionsOperation
                                                             "tags": {"str": "str"},
                                                             "type": "str",
                                                         },
-                                                        "privateEndpointNetworkPolicies": "Disabled",
+                                                        "privateEndpointNetworkPolicies": "str",
                                                         "privateEndpoints": [...],
-                                                        "privateLinkServiceNetworkPolicies": "Enabled",
+                                                        "privateLinkServiceNetworkPolicies": "str",
                                                         "provisioningState": "str",
                                                         "purpose": "str",
                                                         "resourceNavigationLinks": [
@@ -1907,9 +1917,9 @@ class TestNetworkManagementApplicationGatewayPrivateEndpointConnectionsOperation
                                             "name": "str",
                                             "natGateway": {"id": "str"},
                                             "networkSecurityGroup": ...,
-                                            "privateEndpointNetworkPolicies": "Disabled",
+                                            "privateEndpointNetworkPolicies": "str",
                                             "privateEndpoints": [...],
-                                            "privateLinkServiceNetworkPolicies": "Enabled",
+                                            "privateLinkServiceNetworkPolicies": "str",
                                             "provisioningState": "str",
                                             "purpose": "str",
                                             "resourceNavigationLinks": [
@@ -2281,9 +2291,9 @@ class TestNetworkManagementApplicationGatewayPrivateEndpointConnectionsOperation
                                                     "tags": {"str": "str"},
                                                     "type": "str",
                                                 },
-                                                "privateEndpointNetworkPolicies": "Disabled",
+                                                "privateEndpointNetworkPolicies": "str",
                                                 "privateEndpoints": [...],
-                                                "privateLinkServiceNetworkPolicies": "Enabled",
+                                                "privateLinkServiceNetworkPolicies": "str",
                                                 "provisioningState": "str",
                                                 "purpose": "str",
                                                 "resourceNavigationLinks": [
@@ -2609,9 +2619,9 @@ class TestNetworkManagementApplicationGatewayPrivateEndpointConnectionsOperation
                                                             "tags": {"str": "str"},
                                                             "type": "str",
                                                         },
-                                                        "privateEndpointNetworkPolicies": "Disabled",
+                                                        "privateEndpointNetworkPolicies": "str",
                                                         "privateEndpoints": [...],
-                                                        "privateLinkServiceNetworkPolicies": "Enabled",
+                                                        "privateLinkServiceNetworkPolicies": "str",
                                                         "provisioningState": "str",
                                                         "purpose": "str",
                                                         "resourceNavigationLinks": [
@@ -2994,9 +3004,9 @@ class TestNetworkManagementApplicationGatewayPrivateEndpointConnectionsOperation
                                                     "tags": {"str": "str"},
                                                     "type": "str",
                                                 },
-                                                "privateEndpointNetworkPolicies": "Disabled",
+                                                "privateEndpointNetworkPolicies": "str",
                                                 "privateEndpoints": [...],
-                                                "privateLinkServiceNetworkPolicies": "Enabled",
+                                                "privateLinkServiceNetworkPolicies": "str",
                                                 "provisioningState": "str",
                                                 "purpose": "str",
                                                 "resourceNavigationLinks": [
@@ -3361,9 +3371,9 @@ class TestNetworkManagementApplicationGatewayPrivateEndpointConnectionsOperation
                                                                 "tags": {"str": "str"},
                                                                 "type": "str",
                                                             },
-                                                            "privateEndpointNetworkPolicies": "Disabled",
+                                                            "privateEndpointNetworkPolicies": "str",
                                                             "privateEndpoints": [...],
-                                                            "privateLinkServiceNetworkPolicies": "Enabled",
+                                                            "privateLinkServiceNetworkPolicies": "str",
                                                             "provisioningState": "str",
                                                             "purpose": "str",
                                                             "resourceNavigationLinks": [
@@ -3746,9 +3756,9 @@ class TestNetworkManagementApplicationGatewayPrivateEndpointConnectionsOperation
                                                         "tags": {"str": "str"},
                                                         "type": "str",
                                                     },
-                                                    "privateEndpointNetworkPolicies": "Disabled",
+                                                    "privateEndpointNetworkPolicies": "str",
                                                     "privateEndpoints": [...],
-                                                    "privateLinkServiceNetworkPolicies": "Enabled",
+                                                    "privateLinkServiceNetworkPolicies": "str",
                                                     "provisioningState": "str",
                                                     "purpose": "str",
                                                     "resourceNavigationLinks": [
@@ -4166,9 +4176,9 @@ class TestNetworkManagementApplicationGatewayPrivateEndpointConnectionsOperation
                                                                 "tags": {"str": "str"},
                                                                 "type": "str",
                                                             },
-                                                            "privateEndpointNetworkPolicies": "Disabled",
+                                                            "privateEndpointNetworkPolicies": "str",
                                                             "privateEndpoints": [...],
-                                                            "privateLinkServiceNetworkPolicies": "Enabled",
+                                                            "privateLinkServiceNetworkPolicies": "str",
                                                             "provisioningState": "str",
                                                             "purpose": "str",
                                                             "resourceNavigationLinks": [
@@ -4550,9 +4560,9 @@ class TestNetworkManagementApplicationGatewayPrivateEndpointConnectionsOperation
                                                         "tags": {"str": "str"},
                                                         "type": "str",
                                                     },
-                                                    "privateEndpointNetworkPolicies": "Disabled",
+                                                    "privateEndpointNetworkPolicies": "str",
                                                     "privateEndpoints": [...],
-                                                    "privateLinkServiceNetworkPolicies": "Enabled",
+                                                    "privateLinkServiceNetworkPolicies": "str",
                                                     "provisioningState": "str",
                                                     "purpose": "str",
                                                     "resourceNavigationLinks": [
@@ -5652,9 +5662,9 @@ class TestNetworkManagementApplicationGatewayPrivateEndpointConnectionsOperation
                                 "tags": {"str": "str"},
                                 "type": "str",
                             },
-                            "privateEndpointNetworkPolicies": "Disabled",
+                            "privateEndpointNetworkPolicies": "str",
                             "privateEndpoints": [...],
-                            "privateLinkServiceNetworkPolicies": "Enabled",
+                            "privateLinkServiceNetworkPolicies": "str",
                             "provisioningState": "str",
                             "purpose": "str",
                             "resourceNavigationLinks": [
@@ -5766,25 +5776,15 @@ class TestNetworkManagementApplicationGatewayPrivateEndpointConnectionsOperation
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_application_gateway_private_endpoint_connections_get(self, resource_group):
-        response = await self.client.application_gateway_private_endpoint_connections.get(
-            resource_group_name=resource_group.name,
-            application_gateway_name="str",
-            connection_name="str",
-            api_version="2025-05-01",
-        )
+    async def test_application_gateway_private_endpoint_connections_begin_delete(self, resource_group):
+        response = await (
+            await self.client.application_gateway_private_endpoint_connections.begin_delete(
+                resource_group_name=resource_group.name,
+                application_gateway_name="str",
+                connection_name="str",
+                api_version="2025-05-01",
+            )
+        ).result()  # call '.result()' to poll until service return final result
 
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_application_gateway_private_endpoint_connections_list(self, resource_group):
-        response = self.client.application_gateway_private_endpoint_connections.list(
-            resource_group_name=resource_group.name,
-            application_gateway_name="str",
-            api_version="2025-05-01",
-        )
-        result = [r async for r in response]
         # please add some check logic here by yourself
         # ...

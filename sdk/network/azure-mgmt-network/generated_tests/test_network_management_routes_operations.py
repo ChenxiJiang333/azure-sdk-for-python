@@ -20,14 +20,13 @@ class TestNetworkManagementRoutesOperations(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_routes_begin_delete(self, resource_group):
-        response = self.client.routes.begin_delete(
+    def test_routes_list(self, resource_group):
+        response = self.client.routes.list(
             resource_group_name=resource_group.name,
             route_table_name="str",
-            route_name="str",
             api_version="2025-05-01",
-        ).result()  # call '.result()' to poll until service return final result
-
+        )
+        result = [r for r in response]
         # please add some check logic here by yourself
         # ...
 
@@ -70,12 +69,13 @@ class TestNetworkManagementRoutesOperations(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_routes_list(self, resource_group):
-        response = self.client.routes.list(
+    def test_routes_begin_delete(self, resource_group):
+        response = self.client.routes.begin_delete(
             resource_group_name=resource_group.name,
             route_table_name="str",
+            route_name="str",
             api_version="2025-05-01",
-        )
-        result = [r for r in response]
+        ).result()  # call '.result()' to poll until service return final result
+
         # please add some check logic here by yourself
         # ...

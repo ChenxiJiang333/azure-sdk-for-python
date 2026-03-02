@@ -28,7 +28,7 @@ from azure.mgmt.network import NetworkManagementClient
 def main():
     client = NetworkManagementClient(
         credential=DefaultAzureCredential(),
-        subscription_id="subId",
+        subscription_id="00000000-0000-0000-0000-000000000000",
     )
 
     response = client.network_security_perimeter_links.create_or_update(
@@ -37,7 +37,7 @@ def main():
         link_name="link1",
         parameters={
             "properties": {
-                "autoApprovedRemotePerimeterResourceId": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityPerimeters/nsp2",
+                "autoApprovedRemotePerimeterResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityPerimeters/nsp2",
                 "localInboundProfiles": ["*"],
                 "remoteInboundProfiles": ["*"],
             }
@@ -46,6 +46,6 @@ def main():
     print(response)
 
 
-# x-ms-original-file: specification/network/resource-manager/Microsoft.Network/stable/2025-05-01/examples/NspLinkPut.json
+# x-ms-original-file: specification/network/resource-manager/Microsoft.Network/Network/stable/2025-05-01/examples/NspLinkPut.json
 if __name__ == "__main__":
     main()

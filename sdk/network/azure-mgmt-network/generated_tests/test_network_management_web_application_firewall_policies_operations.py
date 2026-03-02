@@ -21,9 +21,8 @@ class TestNetworkManagementWebApplicationFirewallPoliciesOperations(AzureMgmtRec
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_web_application_firewall_policies_list(self, resource_group):
-        response = self.client.web_application_firewall_policies.list(
-            resource_group_name=resource_group.name,
+    def test_web_application_firewall_policies_list_all(self, resource_group):
+        response = self.client.web_application_firewall_policies.list_all(
             api_version="2025-05-01",
         )
         result = [r for r in response]
@@ -32,8 +31,9 @@ class TestNetworkManagementWebApplicationFirewallPoliciesOperations(AzureMgmtRec
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_web_application_firewall_policies_list_all(self, resource_group):
-        response = self.client.web_application_firewall_policies.list_all(
+    def test_web_application_firewall_policies_list(self, resource_group):
+        response = self.client.web_application_firewall_policies.list(
+            resource_group_name=resource_group.name,
             api_version="2025-05-01",
         )
         result = [r for r in response]
@@ -384,7 +384,7 @@ class TestNetworkManagementWebApplicationFirewallPoliciesOperations(AzureMgmtRec
                                                                             "type": "str",
                                                                         }
                                                                     ],
-                                                                    "ipVersionType": "IPv4",
+                                                                    "ipVersionType": "str",
                                                                     "location": "str",
                                                                     "manualPrivateLinkServiceConnections": [
                                                                         {
@@ -517,7 +517,7 @@ class TestNetworkManagementWebApplicationFirewallPoliciesOperations(AzureMgmtRec
                                                                                         "type": "str",
                                                                                     }
                                                                                 ],
-                                                                                "ipVersionType": "IPv4",
+                                                                                "ipVersionType": "str",
                                                                                 "location": "str",
                                                                                 "manualPrivateLinkServiceConnections": [
                                                                                     {
@@ -677,7 +677,7 @@ class TestNetworkManagementWebApplicationFirewallPoliciesOperations(AzureMgmtRec
                                                         "tags": {"str": "str"},
                                                         "type": "str",
                                                     },
-                                                    "privateEndpointNetworkPolicies": "Disabled",
+                                                    "privateEndpointNetworkPolicies": "str",
                                                     "privateEndpoints": [
                                                         {
                                                             "applicationSecurityGroups": [
@@ -709,7 +709,7 @@ class TestNetworkManagementWebApplicationFirewallPoliciesOperations(AzureMgmtRec
                                                                     "type": "str",
                                                                 }
                                                             ],
-                                                            "ipVersionType": "IPv4",
+                                                            "ipVersionType": "str",
                                                             "location": "str",
                                                             "manualPrivateLinkServiceConnections": [
                                                                 {
@@ -1056,7 +1056,7 @@ class TestNetworkManagementWebApplicationFirewallPoliciesOperations(AzureMgmtRec
                                                             "type": "str",
                                                         }
                                                     ],
-                                                    "privateLinkServiceNetworkPolicies": "Enabled",
+                                                    "privateLinkServiceNetworkPolicies": "str",
                                                     "provisioningState": "str",
                                                     "purpose": "str",
                                                     "resourceNavigationLinks": [
@@ -1443,7 +1443,7 @@ class TestNetworkManagementWebApplicationFirewallPoliciesOperations(AzureMgmtRec
                                                                     "type": "str",
                                                                 }
                                                             ],
-                                                            "ipVersionType": "IPv4",
+                                                            "ipVersionType": "str",
                                                             "location": "str",
                                                             "manualPrivateLinkServiceConnections": [
                                                                 {
@@ -1638,7 +1638,7 @@ class TestNetworkManagementWebApplicationFirewallPoliciesOperations(AzureMgmtRec
                                                                                 "type": "str",
                                                                             }
                                                                         ],
-                                                                        "ipVersionType": "IPv4",
+                                                                        "ipVersionType": "str",
                                                                         "location": "str",
                                                                         "manualPrivateLinkServiceConnections": [
                                                                             {
@@ -1865,7 +1865,7 @@ class TestNetworkManagementWebApplicationFirewallPoliciesOperations(AzureMgmtRec
                                                 "tags": {"str": "str"},
                                                 "type": "str",
                                             },
-                                            "privateEndpointNetworkPolicies": "Disabled",
+                                            "privateEndpointNetworkPolicies": "str",
                                             "privateEndpoints": [
                                                 {
                                                     "applicationSecurityGroups": [
@@ -1895,7 +1895,7 @@ class TestNetworkManagementWebApplicationFirewallPoliciesOperations(AzureMgmtRec
                                                             "type": "str",
                                                         }
                                                     ],
-                                                    "ipVersionType": "IPv4",
+                                                    "ipVersionType": "str",
                                                     "location": "str",
                                                     "manualPrivateLinkServiceConnections": [
                                                         {
@@ -2375,7 +2375,7 @@ class TestNetworkManagementWebApplicationFirewallPoliciesOperations(AzureMgmtRec
                                                     "type": "str",
                                                 }
                                             ],
-                                            "privateLinkServiceNetworkPolicies": "Enabled",
+                                            "privateLinkServiceNetworkPolicies": "str",
                                             "provisioningState": "str",
                                             "purpose": "str",
                                             "resourceNavigationLinks": [
@@ -2717,7 +2717,7 @@ class TestNetworkManagementWebApplicationFirewallPoliciesOperations(AzureMgmtRec
                                                                                         "type": "str",
                                                                                     }
                                                                                 ],
-                                                                                "ipVersionType": "IPv4",
+                                                                                "ipVersionType": "str",
                                                                                 "location": "str",
                                                                                 "manualPrivateLinkServiceConnections": [
                                                                                     {
@@ -2841,7 +2841,7 @@ class TestNetworkManagementWebApplicationFirewallPoliciesOperations(AzureMgmtRec
                                                                                                     "type": "str",
                                                                                                 }
                                                                                             ],
-                                                                                            "ipVersionType": "IPv4",
+                                                                                            "ipVersionType": "str",
                                                                                             "location": "str",
                                                                                             "manualPrivateLinkServiceConnections": [
                                                                                                 {
@@ -2972,7 +2972,7 @@ class TestNetworkManagementWebApplicationFirewallPoliciesOperations(AzureMgmtRec
                                                                     "tags": {"str": "str"},
                                                                     "type": "str",
                                                                 },
-                                                                "privateEndpointNetworkPolicies": "Disabled",
+                                                                "privateEndpointNetworkPolicies": "str",
                                                                 "privateEndpoints": [
                                                                     {
                                                                         "applicationSecurityGroups": [
@@ -3007,7 +3007,7 @@ class TestNetworkManagementWebApplicationFirewallPoliciesOperations(AzureMgmtRec
                                                                                 "type": "str",
                                                                             }
                                                                         ],
-                                                                        "ipVersionType": "IPv4",
+                                                                        "ipVersionType": "str",
                                                                         "location": "str",
                                                                         "manualPrivateLinkServiceConnections": [
                                                                             {
@@ -3329,7 +3329,7 @@ class TestNetworkManagementWebApplicationFirewallPoliciesOperations(AzureMgmtRec
                                                                         "type": "str",
                                                                     }
                                                                 ],
-                                                                "privateLinkServiceNetworkPolicies": "Enabled",
+                                                                "privateLinkServiceNetworkPolicies": "str",
                                                                 "provisioningState": "str",
                                                                 "purpose": "str",
                                                                 "resourceNavigationLinks": [
@@ -3723,7 +3723,7 @@ class TestNetworkManagementWebApplicationFirewallPoliciesOperations(AzureMgmtRec
                                                                                 "type": "str",
                                                                             }
                                                                         ],
-                                                                        "ipVersionType": "IPv4",
+                                                                        "ipVersionType": "str",
                                                                         "location": "str",
                                                                         "manualPrivateLinkServiceConnections": [
                                                                             {
@@ -3839,7 +3839,7 @@ class TestNetworkManagementWebApplicationFirewallPoliciesOperations(AzureMgmtRec
                                                                                             "type": "str",
                                                                                         }
                                                                                     ],
-                                                                                    "ipVersionType": "IPv4",
+                                                                                    "ipVersionType": "str",
                                                                                     "location": "str",
                                                                                     "manualPrivateLinkServiceConnections": [
                                                                                         {
@@ -3968,7 +3968,7 @@ class TestNetworkManagementWebApplicationFirewallPoliciesOperations(AzureMgmtRec
                                                             "tags": {"str": "str"},
                                                             "type": "str",
                                                         },
-                                                        "privateEndpointNetworkPolicies": "Disabled",
+                                                        "privateEndpointNetworkPolicies": "str",
                                                         "privateEndpoints": [
                                                             {
                                                                 "applicationSecurityGroups": [
@@ -4000,7 +4000,7 @@ class TestNetworkManagementWebApplicationFirewallPoliciesOperations(AzureMgmtRec
                                                                         "type": "str",
                                                                     }
                                                                 ],
-                                                                "ipVersionType": "IPv4",
+                                                                "ipVersionType": "str",
                                                                 "location": "str",
                                                                 "manualPrivateLinkServiceConnections": [
                                                                     {
@@ -4302,7 +4302,7 @@ class TestNetworkManagementWebApplicationFirewallPoliciesOperations(AzureMgmtRec
                                                                 "type": "str",
                                                             }
                                                         ],
-                                                        "privateLinkServiceNetworkPolicies": "Enabled",
+                                                        "privateLinkServiceNetworkPolicies": "str",
                                                         "provisioningState": "str",
                                                         "purpose": "str",
                                                         "resourceNavigationLinks": [
@@ -4623,7 +4623,7 @@ class TestNetworkManagementWebApplicationFirewallPoliciesOperations(AzureMgmtRec
                                             "type": "str",
                                         }
                                     ],
-                                    "ipVersionType": "IPv4",
+                                    "ipVersionType": "str",
                                     "location": "str",
                                     "manualPrivateLinkServiceConnections": [
                                         {
@@ -4989,9 +4989,9 @@ class TestNetworkManagementWebApplicationFirewallPoliciesOperations(AzureMgmtRec
                                                                     "tags": {"str": "str"},
                                                                     "type": "str",
                                                                 },
-                                                                "privateEndpointNetworkPolicies": "Disabled",
+                                                                "privateEndpointNetworkPolicies": "str",
                                                                 "privateEndpoints": [...],
-                                                                "privateLinkServiceNetworkPolicies": "Enabled",
+                                                                "privateLinkServiceNetworkPolicies": "str",
                                                                 "provisioningState": "str",
                                                                 "purpose": "str",
                                                                 "resourceNavigationLinks": [
@@ -5376,9 +5376,9 @@ class TestNetworkManagementWebApplicationFirewallPoliciesOperations(AzureMgmtRec
                                                             "tags": {"str": "str"},
                                                             "type": "str",
                                                         },
-                                                        "privateEndpointNetworkPolicies": "Disabled",
+                                                        "privateEndpointNetworkPolicies": "str",
                                                         "privateEndpoints": [...],
-                                                        "privateLinkServiceNetworkPolicies": "Enabled",
+                                                        "privateLinkServiceNetworkPolicies": "str",
                                                         "provisioningState": "str",
                                                         "purpose": "str",
                                                         "resourceNavigationLinks": [
@@ -5721,9 +5721,9 @@ class TestNetworkManagementWebApplicationFirewallPoliciesOperations(AzureMgmtRec
                                                                                 "tags": {"str": "str"},
                                                                                 "type": "str",
                                                                             },
-                                                                            "privateEndpointNetworkPolicies": "Disabled",
+                                                                            "privateEndpointNetworkPolicies": "str",
                                                                             "privateEndpoints": [...],
-                                                                            "privateLinkServiceNetworkPolicies": "Enabled",
+                                                                            "privateLinkServiceNetworkPolicies": "str",
                                                                             "provisioningState": "str",
                                                                             "purpose": "str",
                                                                             "resourceNavigationLinks": [
@@ -6127,9 +6127,9 @@ class TestNetworkManagementWebApplicationFirewallPoliciesOperations(AzureMgmtRec
                                                                         "tags": {"str": "str"},
                                                                         "type": "str",
                                                                     },
-                                                                    "privateEndpointNetworkPolicies": "Disabled",
+                                                                    "privateEndpointNetworkPolicies": "str",
                                                                     "privateEndpoints": [...],
-                                                                    "privateLinkServiceNetworkPolicies": "Enabled",
+                                                                    "privateLinkServiceNetworkPolicies": "str",
                                                                     "provisioningState": "str",
                                                                     "purpose": "str",
                                                                     "resourceNavigationLinks": [
@@ -6505,9 +6505,9 @@ class TestNetworkManagementWebApplicationFirewallPoliciesOperations(AzureMgmtRec
                                                         "name": "str",
                                                         "natGateway": {"id": "str"},
                                                         "networkSecurityGroup": ...,
-                                                        "privateEndpointNetworkPolicies": "Disabled",
+                                                        "privateEndpointNetworkPolicies": "str",
                                                         "privateEndpoints": [...],
-                                                        "privateLinkServiceNetworkPolicies": "Enabled",
+                                                        "privateLinkServiceNetworkPolicies": "str",
                                                         "provisioningState": "str",
                                                         "purpose": "str",
                                                         "resourceNavigationLinks": [
@@ -6888,9 +6888,9 @@ class TestNetworkManagementWebApplicationFirewallPoliciesOperations(AzureMgmtRec
                                                                 "tags": {"str": "str"},
                                                                 "type": "str",
                                                             },
-                                                            "privateEndpointNetworkPolicies": "Disabled",
+                                                            "privateEndpointNetworkPolicies": "str",
                                                             "privateEndpoints": [...],
-                                                            "privateLinkServiceNetworkPolicies": "Enabled",
+                                                            "privateLinkServiceNetworkPolicies": "str",
                                                             "provisioningState": "str",
                                                             "purpose": "str",
                                                             "resourceNavigationLinks": [
@@ -7219,9 +7219,9 @@ class TestNetworkManagementWebApplicationFirewallPoliciesOperations(AzureMgmtRec
                                                                         "tags": {"str": "str"},
                                                                         "type": "str",
                                                                     },
-                                                                    "privateEndpointNetworkPolicies": "Disabled",
+                                                                    "privateEndpointNetworkPolicies": "str",
                                                                     "privateEndpoints": [...],
-                                                                    "privateLinkServiceNetworkPolicies": "Enabled",
+                                                                    "privateLinkServiceNetworkPolicies": "str",
                                                                     "provisioningState": "str",
                                                                     "purpose": "str",
                                                                     "resourceNavigationLinks": [
@@ -7615,9 +7615,9 @@ class TestNetworkManagementWebApplicationFirewallPoliciesOperations(AzureMgmtRec
                                                                 "tags": {"str": "str"},
                                                                 "type": "str",
                                                             },
-                                                            "privateEndpointNetworkPolicies": "Disabled",
+                                                            "privateEndpointNetworkPolicies": "str",
                                                             "privateEndpoints": [...],
-                                                            "privateLinkServiceNetworkPolicies": "Enabled",
+                                                            "privateLinkServiceNetworkPolicies": "str",
                                                             "provisioningState": "str",
                                                             "purpose": "str",
                                                             "resourceNavigationLinks": [
@@ -7989,9 +7989,9 @@ class TestNetworkManagementWebApplicationFirewallPoliciesOperations(AzureMgmtRec
                                                                             "tags": {"str": "str"},
                                                                             "type": "str",
                                                                         },
-                                                                        "privateEndpointNetworkPolicies": "Disabled",
+                                                                        "privateEndpointNetworkPolicies": "str",
                                                                         "privateEndpoints": [...],
-                                                                        "privateLinkServiceNetworkPolicies": "Enabled",
+                                                                        "privateLinkServiceNetworkPolicies": "str",
                                                                         "provisioningState": "str",
                                                                         "purpose": "str",
                                                                         "resourceNavigationLinks": [
@@ -8387,9 +8387,9 @@ class TestNetworkManagementWebApplicationFirewallPoliciesOperations(AzureMgmtRec
                                                                     "tags": {"str": "str"},
                                                                     "type": "str",
                                                                 },
-                                                                "privateEndpointNetworkPolicies": "Disabled",
+                                                                "privateEndpointNetworkPolicies": "str",
                                                                 "privateEndpoints": [...],
-                                                                "privateLinkServiceNetworkPolicies": "Enabled",
+                                                                "privateLinkServiceNetworkPolicies": "str",
                                                                 "provisioningState": "str",
                                                                 "purpose": "str",
                                                                 "resourceNavigationLinks": [
@@ -8820,9 +8820,9 @@ class TestNetworkManagementWebApplicationFirewallPoliciesOperations(AzureMgmtRec
                                                                             "tags": {"str": "str"},
                                                                             "type": "str",
                                                                         },
-                                                                        "privateEndpointNetworkPolicies": "Disabled",
+                                                                        "privateEndpointNetworkPolicies": "str",
                                                                         "privateEndpoints": [...],
-                                                                        "privateLinkServiceNetworkPolicies": "Enabled",
+                                                                        "privateLinkServiceNetworkPolicies": "str",
                                                                         "provisioningState": "str",
                                                                         "purpose": "str",
                                                                         "resourceNavigationLinks": [
@@ -9217,9 +9217,9 @@ class TestNetworkManagementWebApplicationFirewallPoliciesOperations(AzureMgmtRec
                                                                     "tags": {"str": "str"},
                                                                     "type": "str",
                                                                 },
-                                                                "privateEndpointNetworkPolicies": "Disabled",
+                                                                "privateEndpointNetworkPolicies": "str",
                                                                 "privateEndpoints": [...],
-                                                                "privateLinkServiceNetworkPolicies": "Enabled",
+                                                                "privateLinkServiceNetworkPolicies": "str",
                                                                 "provisioningState": "str",
                                                                 "purpose": "str",
                                                                 "resourceNavigationLinks": [
@@ -10343,9 +10343,9 @@ class TestNetworkManagementWebApplicationFirewallPoliciesOperations(AzureMgmtRec
                                             "tags": {"str": "str"},
                                             "type": "str",
                                         },
-                                        "privateEndpointNetworkPolicies": "Disabled",
+                                        "privateEndpointNetworkPolicies": "str",
                                         "privateEndpoints": [...],
-                                        "privateLinkServiceNetworkPolicies": "Enabled",
+                                        "privateLinkServiceNetworkPolicies": "str",
                                         "provisioningState": "str",
                                         "purpose": "str",
                                         "resourceNavigationLinks": [

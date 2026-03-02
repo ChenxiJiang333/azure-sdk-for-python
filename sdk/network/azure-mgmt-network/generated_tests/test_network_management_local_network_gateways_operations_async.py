@@ -21,6 +21,29 @@ class TestNetworkManagementLocalNetworkGatewaysOperationsAsync(AzureMgmtRecorded
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
+    async def test_local_network_gateways_list(self, resource_group):
+        response = self.client.local_network_gateways.list(
+            resource_group_name=resource_group.name,
+            api_version="2025-05-01",
+        )
+        result = [r async for r in response]
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
+    async def test_local_network_gateways_get(self, resource_group):
+        response = await self.client.local_network_gateways.get(
+            resource_group_name=resource_group.name,
+            local_network_gateway_name="str",
+            api_version="2025-05-01",
+        )
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
     async def test_local_network_gateways_begin_create_or_update(self, resource_group):
         response = await (
             await self.client.local_network_gateways.begin_create_or_update(
@@ -66,10 +89,11 @@ class TestNetworkManagementLocalNetworkGatewaysOperationsAsync(AzureMgmtRecorded
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_local_network_gateways_get(self, resource_group):
-        response = await self.client.local_network_gateways.get(
+    async def test_local_network_gateways_update_tags(self, resource_group):
+        response = await self.client.local_network_gateways.update_tags(
             resource_group_name=resource_group.name,
             local_network_gateway_name="str",
+            parameters={"tags": {"str": "str"}},
             api_version="2025-05-01",
         )
 
@@ -87,29 +111,5 @@ class TestNetworkManagementLocalNetworkGatewaysOperationsAsync(AzureMgmtRecorded
             )
         ).result()  # call '.result()' to poll until service return final result
 
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_local_network_gateways_update_tags(self, resource_group):
-        response = await self.client.local_network_gateways.update_tags(
-            resource_group_name=resource_group.name,
-            local_network_gateway_name="str",
-            parameters={"tags": {"str": "str"}},
-            api_version="2025-05-01",
-        )
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_local_network_gateways_list(self, resource_group):
-        response = self.client.local_network_gateways.list(
-            resource_group_name=resource_group.name,
-            api_version="2025-05-01",
-        )
-        result = [r async for r in response]
         # please add some check logic here by yourself
         # ...

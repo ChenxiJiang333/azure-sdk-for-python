@@ -28,7 +28,7 @@ from azure.mgmt.network import NetworkManagementClient
 def main():
     client = NetworkManagementClient(
         credential=DefaultAzureCredential(),
-        subscription_id="subid",
+        subscription_id="00000000-0000-0000-0000-000000000000",
     )
 
     response = client.begin_generatevirtualwanvpnserverconfigurationvpnprofile(
@@ -36,12 +36,12 @@ def main():
         virtual_wan_name="wan1",
         vpn_client_params={
             "authenticationMethod": "EAPTLS",
-            "vpnServerConfigurationResourceId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnServerConfigurations/vpnconfig1",
+            "vpnServerConfigurationResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/vpnServerConfigurations/vpnconfig1",
         },
     ).result()
     print(response)
 
 
-# x-ms-original-file: specification/network/resource-manager/Microsoft.Network/stable/2025-05-01/examples/GenerateVirtualWanVpnServerConfigurationVpnProfile.json
+# x-ms-original-file: specification/network/resource-manager/Microsoft.Network/Network/stable/2025-05-01/examples/GenerateVirtualWanVpnServerConfigurationVpnProfile.json
 if __name__ == "__main__":
     main()

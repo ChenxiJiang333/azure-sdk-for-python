@@ -20,6 +20,33 @@ class TestNetworkManagementVpnLinkConnectionsOperations(AzureMgmtRecordedTestCas
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
+    def test_vpn_link_connections_list_by_vpn_connection(self, resource_group):
+        response = self.client.vpn_link_connections.list_by_vpn_connection(
+            resource_group_name=resource_group.name,
+            gateway_name="str",
+            connection_name="str",
+            api_version="2025-05-01",
+        )
+        result = [r for r in response]
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
+    def test_vpn_link_connections_begin_get_ike_sas(self, resource_group):
+        response = self.client.vpn_link_connections.begin_get_ike_sas(
+            resource_group_name=resource_group.name,
+            gateway_name="str",
+            connection_name="str",
+            link_connection_name="str",
+            api_version="2025-05-01",
+        ).result()  # call '.result()' to poll until service return final result
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
     def test_vpn_link_connections_begin_reset_connection(self, resource_group):
         response = self.client.vpn_link_connections.begin_reset_connection(
             resource_group_name=resource_group.name,
@@ -91,32 +118,5 @@ class TestNetworkManagementVpnLinkConnectionsOperations(AzureMgmtRecordedTestCas
             api_version="2025-05-01",
         )
 
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_vpn_link_connections_begin_get_ike_sas(self, resource_group):
-        response = self.client.vpn_link_connections.begin_get_ike_sas(
-            resource_group_name=resource_group.name,
-            gateway_name="str",
-            connection_name="str",
-            link_connection_name="str",
-            api_version="2025-05-01",
-        ).result()  # call '.result()' to poll until service return final result
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_vpn_link_connections_list_by_vpn_connection(self, resource_group):
-        response = self.client.vpn_link_connections.list_by_vpn_connection(
-            resource_group_name=resource_group.name,
-            gateway_name="str",
-            connection_name="str",
-            api_version="2025-05-01",
-        )
-        result = [r for r in response]
         # please add some check logic here by yourself
         # ...

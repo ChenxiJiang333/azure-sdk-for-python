@@ -21,6 +21,18 @@ class TestNetworkManagementVirtualNetworkGatewayNatRulesOperationsAsync(AzureMgm
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
+    async def test_virtual_network_gateway_nat_rules_list_by_virtual_network_gateway(self, resource_group):
+        response = self.client.virtual_network_gateway_nat_rules.list_by_virtual_network_gateway(
+            resource_group_name=resource_group.name,
+            virtual_network_gateway_name="str",
+            api_version="2025-05-01",
+        )
+        result = [r async for r in response]
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
     async def test_virtual_network_gateway_nat_rules_get(self, resource_group):
         response = await self.client.virtual_network_gateway_nat_rules.get(
             resource_group_name=resource_group.name,
@@ -70,17 +82,5 @@ class TestNetworkManagementVirtualNetworkGatewayNatRulesOperationsAsync(AzureMgm
             )
         ).result()  # call '.result()' to poll until service return final result
 
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_virtual_network_gateway_nat_rules_list_by_virtual_network_gateway(self, resource_group):
-        response = self.client.virtual_network_gateway_nat_rules.list_by_virtual_network_gateway(
-            resource_group_name=resource_group.name,
-            virtual_network_gateway_name="str",
-            api_version="2025-05-01",
-        )
-        result = [r async for r in response]
         # please add some check logic here by yourself
         # ...

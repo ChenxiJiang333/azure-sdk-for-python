@@ -20,21 +20,21 @@ class TestNetworkManagementWebCategoriesOperations(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
+    def test_web_categories_list_by_subscription(self, resource_group):
+        response = self.client.web_categories.list_by_subscription(
+            api_version="2025-05-01",
+        )
+        result = [r for r in response]
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
     def test_web_categories_get(self, resource_group):
         response = self.client.web_categories.get(
             name="str",
             api_version="2025-05-01",
         )
 
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_web_categories_list_by_subscription(self, resource_group):
-        response = self.client.web_categories.list_by_subscription(
-            api_version="2025-05-01",
-        )
-        result = [r for r in response]
         # please add some check logic here by yourself
         # ...

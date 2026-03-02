@@ -20,13 +20,22 @@ class TestNetworkManagementRouteFiltersOperations(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_route_filters_begin_delete(self, resource_group):
-        response = self.client.route_filters.begin_delete(
-            resource_group_name=resource_group.name,
-            route_filter_name="str",
+    def test_route_filters_list(self, resource_group):
+        response = self.client.route_filters.list(
             api_version="2025-05-01",
-        ).result()  # call '.result()' to poll until service return final result
+        )
+        result = [r for r in response]
+        # please add some check logic here by yourself
+        # ...
 
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
+    def test_route_filters_list_by_resource_group(self, resource_group):
+        response = self.client.route_filters.list_by_resource_group(
+            resource_group_name=resource_group.name,
+            api_version="2025-05-01",
+        )
+        result = [r for r in response]
         # please add some check logic here by yourself
         # ...
 
@@ -49,6 +58,7 @@ class TestNetworkManagementRouteFiltersOperations(AzureMgmtRecordedTestCase):
             resource_group_name=resource_group.name,
             route_filter_name="str",
             route_filter_parameters={
+                "location": "str",
                 "etag": "str",
                 "id": "str",
                 "ipv6Peerings": [
@@ -146,7 +156,6 @@ class TestNetworkManagementRouteFiltersOperations(AzureMgmtRecordedTestCase):
                         "vlanId": 0,
                     }
                 ],
-                "location": "str",
                 "name": "str",
                 "peerings": [
                     {
@@ -280,21 +289,12 @@ class TestNetworkManagementRouteFiltersOperations(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_route_filters_list_by_resource_group(self, resource_group):
-        response = self.client.route_filters.list_by_resource_group(
+    def test_route_filters_begin_delete(self, resource_group):
+        response = self.client.route_filters.begin_delete(
             resource_group_name=resource_group.name,
+            route_filter_name="str",
             api_version="2025-05-01",
-        )
-        result = [r for r in response]
-        # please add some check logic here by yourself
-        # ...
+        ).result()  # call '.result()' to poll until service return final result
 
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_route_filters_list(self, resource_group):
-        response = self.client.route_filters.list(
-            api_version="2025-05-01",
-        )
-        result = [r for r in response]
         # please add some check logic here by yourself
         # ...

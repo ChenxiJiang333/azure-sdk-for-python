@@ -22,6 +22,39 @@ class TestNetworkManagementDscpConfigurationOperationsAsync(AzureMgmtRecordedTes
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
+    async def test_dscp_configuration_list_all(self, resource_group):
+        response = self.client.dscp_configuration.list_all(
+            api_version="2025-05-01",
+        )
+        result = [r async for r in response]
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
+    async def test_dscp_configuration_list(self, resource_group):
+        response = self.client.dscp_configuration.list(
+            resource_group_name=resource_group.name,
+            api_version="2025-05-01",
+        )
+        result = [r async for r in response]
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
+    async def test_dscp_configuration_get(self, resource_group):
+        response = await self.client.dscp_configuration.get(
+            resource_group_name=resource_group.name,
+            dscp_configuration_name="str",
+            api_version="2025-05-01",
+        )
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
     async def test_dscp_configuration_begin_create_or_update(self, resource_group):
         response = await (
             await self.client.dscp_configuration.begin_create_or_update(
@@ -358,7 +391,7 @@ class TestNetworkManagementDscpConfigurationOperationsAsync(AzureMgmtRecordedTes
                                                     "tags": {"str": "str"},
                                                     "type": "str",
                                                 },
-                                                "privateEndpointNetworkPolicies": "Disabled",
+                                                "privateEndpointNetworkPolicies": "str",
                                                 "privateEndpoints": [
                                                     {
                                                         "applicationSecurityGroups": [
@@ -388,7 +421,7 @@ class TestNetworkManagementDscpConfigurationOperationsAsync(AzureMgmtRecordedTes
                                                                 "type": "str",
                                                             }
                                                         ],
-                                                        "ipVersionType": "IPv4",
+                                                        "ipVersionType": "str",
                                                         "location": "str",
                                                         "manualPrivateLinkServiceConnections": [
                                                             {
@@ -432,7 +465,7 @@ class TestNetworkManagementDscpConfigurationOperationsAsync(AzureMgmtRecordedTes
                                                         "type": "str",
                                                     }
                                                 ],
-                                                "privateLinkServiceNetworkPolicies": "Enabled",
+                                                "privateLinkServiceNetworkPolicies": "str",
                                                 "provisioningState": "str",
                                                 "purpose": "str",
                                                 "resourceNavigationLinks": [
@@ -814,7 +847,7 @@ class TestNetworkManagementDscpConfigurationOperationsAsync(AzureMgmtRecordedTes
                                             "tags": {"str": "str"},
                                             "type": "str",
                                         },
-                                        "privateEndpointNetworkPolicies": "Disabled",
+                                        "privateEndpointNetworkPolicies": "str",
                                         "privateEndpoints": [
                                             {
                                                 "applicationSecurityGroups": [
@@ -844,7 +877,7 @@ class TestNetworkManagementDscpConfigurationOperationsAsync(AzureMgmtRecordedTes
                                                         "type": "str",
                                                     }
                                                 ],
-                                                "ipVersionType": "IPv4",
+                                                "ipVersionType": "str",
                                                 "location": "str",
                                                 "manualPrivateLinkServiceConnections": [
                                                     {
@@ -888,7 +921,7 @@ class TestNetworkManagementDscpConfigurationOperationsAsync(AzureMgmtRecordedTes
                                                 "type": "str",
                                             }
                                         ],
-                                        "privateLinkServiceNetworkPolicies": "Enabled",
+                                        "privateLinkServiceNetworkPolicies": "str",
                                         "provisioningState": "str",
                                         "purpose": "str",
                                         "resourceNavigationLinks": [
@@ -1216,7 +1249,7 @@ class TestNetworkManagementDscpConfigurationOperationsAsync(AzureMgmtRecordedTes
                                                                 "tags": {"str": "str"},
                                                                 "type": "str",
                                                             },
-                                                            "privateEndpointNetworkPolicies": "Disabled",
+                                                            "privateEndpointNetworkPolicies": "str",
                                                             "privateEndpoints": [
                                                                 {
                                                                     "applicationSecurityGroups": [
@@ -1248,7 +1281,7 @@ class TestNetworkManagementDscpConfigurationOperationsAsync(AzureMgmtRecordedTes
                                                                             "type": "str",
                                                                         }
                                                                     ],
-                                                                    "ipVersionType": "IPv4",
+                                                                    "ipVersionType": "str",
                                                                     "location": "str",
                                                                     "manualPrivateLinkServiceConnections": [
                                                                         {
@@ -1292,7 +1325,7 @@ class TestNetworkManagementDscpConfigurationOperationsAsync(AzureMgmtRecordedTes
                                                                     "type": "str",
                                                                 }
                                                             ],
-                                                            "privateLinkServiceNetworkPolicies": "Enabled",
+                                                            "privateLinkServiceNetworkPolicies": "str",
                                                             "provisioningState": "str",
                                                             "purpose": "str",
                                                             "resourceNavigationLinks": [
@@ -1675,7 +1708,7 @@ class TestNetworkManagementDscpConfigurationOperationsAsync(AzureMgmtRecordedTes
                                                         "tags": {"str": "str"},
                                                         "type": "str",
                                                     },
-                                                    "privateEndpointNetworkPolicies": "Disabled",
+                                                    "privateEndpointNetworkPolicies": "str",
                                                     "privateEndpoints": [
                                                         {
                                                             "applicationSecurityGroups": [
@@ -1707,7 +1740,7 @@ class TestNetworkManagementDscpConfigurationOperationsAsync(AzureMgmtRecordedTes
                                                                     "type": "str",
                                                                 }
                                                             ],
-                                                            "ipVersionType": "IPv4",
+                                                            "ipVersionType": "str",
                                                             "location": "str",
                                                             "manualPrivateLinkServiceConnections": [
                                                                 {
@@ -1751,7 +1784,7 @@ class TestNetworkManagementDscpConfigurationOperationsAsync(AzureMgmtRecordedTes
                                                             "type": "str",
                                                         }
                                                     ],
-                                                    "privateLinkServiceNetworkPolicies": "Enabled",
+                                                    "privateLinkServiceNetworkPolicies": "str",
                                                     "provisioningState": "str",
                                                     "purpose": "str",
                                                     "resourceNavigationLinks": [
@@ -2125,7 +2158,7 @@ class TestNetworkManagementDscpConfigurationOperationsAsync(AzureMgmtRecordedTes
                                         "name": "str",
                                         "natGateway": {"id": "str"},
                                         "networkSecurityGroup": ...,
-                                        "privateEndpointNetworkPolicies": "Disabled",
+                                        "privateEndpointNetworkPolicies": "str",
                                         "privateEndpoints": [
                                             {
                                                 "applicationSecurityGroups": [
@@ -2155,7 +2188,7 @@ class TestNetworkManagementDscpConfigurationOperationsAsync(AzureMgmtRecordedTes
                                                         "type": "str",
                                                     }
                                                 ],
-                                                "ipVersionType": "IPv4",
+                                                "ipVersionType": "str",
                                                 "location": "str",
                                                 "manualPrivateLinkServiceConnections": [
                                                     {
@@ -2199,7 +2232,7 @@ class TestNetworkManagementDscpConfigurationOperationsAsync(AzureMgmtRecordedTes
                                                 "type": "str",
                                             }
                                         ],
-                                        "privateLinkServiceNetworkPolicies": "Enabled",
+                                        "privateLinkServiceNetworkPolicies": "str",
                                         "provisioningState": "str",
                                         "purpose": "str",
                                         "resourceNavigationLinks": [
@@ -2325,7 +2358,7 @@ class TestNetworkManagementDscpConfigurationOperationsAsync(AzureMgmtRecordedTes
                                         "type": "str",
                                     }
                                 ],
-                                "ipVersionType": "IPv4",
+                                "ipVersionType": "str",
                                 "location": "str",
                                 "manualPrivateLinkServiceConnections": [
                                     {
@@ -2613,9 +2646,9 @@ class TestNetworkManagementDscpConfigurationOperationsAsync(AzureMgmtRecordedTes
                                         "tags": {"str": "str"},
                                         "type": "str",
                                     },
-                                    "privateEndpointNetworkPolicies": "Disabled",
+                                    "privateEndpointNetworkPolicies": "str",
                                     "privateEndpoints": [...],
-                                    "privateLinkServiceNetworkPolicies": "Enabled",
+                                    "privateLinkServiceNetworkPolicies": "str",
                                     "provisioningState": "str",
                                     "purpose": "str",
                                     "resourceNavigationLinks": [
@@ -2983,7 +3016,7 @@ class TestNetworkManagementDscpConfigurationOperationsAsync(AzureMgmtRecordedTes
                                                 "tags": {"str": "str"},
                                                 "type": "str",
                                             },
-                                            "privateEndpointNetworkPolicies": "Disabled",
+                                            "privateEndpointNetworkPolicies": "str",
                                             "privateEndpoints": [
                                                 {
                                                     "applicationSecurityGroups": [
@@ -3013,7 +3046,7 @@ class TestNetworkManagementDscpConfigurationOperationsAsync(AzureMgmtRecordedTes
                                                             "type": "str",
                                                         }
                                                     ],
-                                                    "ipVersionType": "IPv4",
+                                                    "ipVersionType": "str",
                                                     "location": "str",
                                                     "manualPrivateLinkServiceConnections": [
                                                         {
@@ -3057,7 +3090,7 @@ class TestNetworkManagementDscpConfigurationOperationsAsync(AzureMgmtRecordedTes
                                                     "type": "str",
                                                 }
                                             ],
-                                            "privateLinkServiceNetworkPolicies": "Enabled",
+                                            "privateLinkServiceNetworkPolicies": "str",
                                             "provisioningState": "str",
                                             "purpose": "str",
                                             "resourceNavigationLinks": [
@@ -3380,7 +3413,7 @@ class TestNetworkManagementDscpConfigurationOperationsAsync(AzureMgmtRecordedTes
                                                         "tags": {"str": "str"},
                                                         "type": "str",
                                                     },
-                                                    "privateEndpointNetworkPolicies": "Disabled",
+                                                    "privateEndpointNetworkPolicies": "str",
                                                     "privateEndpoints": [
                                                         {
                                                             "applicationSecurityGroups": [
@@ -3412,7 +3445,7 @@ class TestNetworkManagementDscpConfigurationOperationsAsync(AzureMgmtRecordedTes
                                                                     "type": "str",
                                                                 }
                                                             ],
-                                                            "ipVersionType": "IPv4",
+                                                            "ipVersionType": "str",
                                                             "location": "str",
                                                             "manualPrivateLinkServiceConnections": [
                                                                 {
@@ -3456,7 +3489,7 @@ class TestNetworkManagementDscpConfigurationOperationsAsync(AzureMgmtRecordedTes
                                                             "type": "str",
                                                         }
                                                     ],
-                                                    "privateLinkServiceNetworkPolicies": "Enabled",
+                                                    "privateLinkServiceNetworkPolicies": "str",
                                                     "provisioningState": "str",
                                                     "purpose": "str",
                                                     "resourceNavigationLinks": [
@@ -3839,7 +3872,7 @@ class TestNetworkManagementDscpConfigurationOperationsAsync(AzureMgmtRecordedTes
                                                 "tags": {"str": "str"},
                                                 "type": "str",
                                             },
-                                            "privateEndpointNetworkPolicies": "Disabled",
+                                            "privateEndpointNetworkPolicies": "str",
                                             "privateEndpoints": [
                                                 {
                                                     "applicationSecurityGroups": [
@@ -3869,7 +3902,7 @@ class TestNetworkManagementDscpConfigurationOperationsAsync(AzureMgmtRecordedTes
                                                             "type": "str",
                                                         }
                                                     ],
-                                                    "ipVersionType": "IPv4",
+                                                    "ipVersionType": "str",
                                                     "location": "str",
                                                     "manualPrivateLinkServiceConnections": [
                                                         {
@@ -3913,7 +3946,7 @@ class TestNetworkManagementDscpConfigurationOperationsAsync(AzureMgmtRecordedTes
                                                     "type": "str",
                                                 }
                                             ],
-                                            "privateLinkServiceNetworkPolicies": "Enabled",
+                                            "privateLinkServiceNetworkPolicies": "str",
                                             "provisioningState": "str",
                                             "purpose": "str",
                                             "resourceNavigationLinks": [
@@ -4046,7 +4079,7 @@ class TestNetworkManagementDscpConfigurationOperationsAsync(AzureMgmtRecordedTes
                                                     "type": "str",
                                                 }
                                             ],
-                                            "ipVersionType": "IPv4",
+                                            "ipVersionType": "str",
                                             "location": "str",
                                             "manualPrivateLinkServiceConnections": [
                                                 {
@@ -4338,9 +4371,9 @@ class TestNetworkManagementDscpConfigurationOperationsAsync(AzureMgmtRecordedTes
                                                     "tags": {"str": "str"},
                                                     "type": "str",
                                                 },
-                                                "privateEndpointNetworkPolicies": "Disabled",
+                                                "privateEndpointNetworkPolicies": "str",
                                                 "privateEndpoints": [...],
-                                                "privateLinkServiceNetworkPolicies": "Enabled",
+                                                "privateLinkServiceNetworkPolicies": "str",
                                                 "provisioningState": "str",
                                                 "purpose": "str",
                                                 "resourceNavigationLinks": [
@@ -4691,7 +4724,7 @@ class TestNetworkManagementDscpConfigurationOperationsAsync(AzureMgmtRecordedTes
                                                             "tags": {"str": "str"},
                                                             "type": "str",
                                                         },
-                                                        "privateEndpointNetworkPolicies": "Disabled",
+                                                        "privateEndpointNetworkPolicies": "str",
                                                         "privateEndpoints": [
                                                             {
                                                                 "applicationSecurityGroups": [
@@ -4723,7 +4756,7 @@ class TestNetworkManagementDscpConfigurationOperationsAsync(AzureMgmtRecordedTes
                                                                         "type": "str",
                                                                     }
                                                                 ],
-                                                                "ipVersionType": "IPv4",
+                                                                "ipVersionType": "str",
                                                                 "location": "str",
                                                                 "manualPrivateLinkServiceConnections": [
                                                                     {
@@ -4767,7 +4800,7 @@ class TestNetworkManagementDscpConfigurationOperationsAsync(AzureMgmtRecordedTes
                                                                 "type": "str",
                                                             }
                                                         ],
-                                                        "privateLinkServiceNetworkPolicies": "Enabled",
+                                                        "privateLinkServiceNetworkPolicies": "str",
                                                         "provisioningState": "str",
                                                         "purpose": "str",
                                                         "resourceNavigationLinks": [
@@ -5150,7 +5183,7 @@ class TestNetworkManagementDscpConfigurationOperationsAsync(AzureMgmtRecordedTes
                                                     "tags": {"str": "str"},
                                                     "type": "str",
                                                 },
-                                                "privateEndpointNetworkPolicies": "Disabled",
+                                                "privateEndpointNetworkPolicies": "str",
                                                 "privateEndpoints": [
                                                     {
                                                         "applicationSecurityGroups": [
@@ -5180,7 +5213,7 @@ class TestNetworkManagementDscpConfigurationOperationsAsync(AzureMgmtRecordedTes
                                                                 "type": "str",
                                                             }
                                                         ],
-                                                        "ipVersionType": "IPv4",
+                                                        "ipVersionType": "str",
                                                         "location": "str",
                                                         "manualPrivateLinkServiceConnections": [
                                                             {
@@ -5224,7 +5257,7 @@ class TestNetworkManagementDscpConfigurationOperationsAsync(AzureMgmtRecordedTes
                                                         "type": "str",
                                                     }
                                                 ],
-                                                "privateLinkServiceNetworkPolicies": "Enabled",
+                                                "privateLinkServiceNetworkPolicies": "str",
                                                 "provisioningState": "str",
                                                 "purpose": "str",
                                                 "resourceNavigationLinks": [
@@ -5634,7 +5667,7 @@ class TestNetworkManagementDscpConfigurationOperationsAsync(AzureMgmtRecordedTes
                                                             "tags": {"str": "str"},
                                                             "type": "str",
                                                         },
-                                                        "privateEndpointNetworkPolicies": "Disabled",
+                                                        "privateEndpointNetworkPolicies": "str",
                                                         "privateEndpoints": [
                                                             {
                                                                 "applicationSecurityGroups": [
@@ -5666,7 +5699,7 @@ class TestNetworkManagementDscpConfigurationOperationsAsync(AzureMgmtRecordedTes
                                                                         "type": "str",
                                                                     }
                                                                 ],
-                                                                "ipVersionType": "IPv4",
+                                                                "ipVersionType": "str",
                                                                 "location": "str",
                                                                 "manualPrivateLinkServiceConnections": [
                                                                     {
@@ -5710,7 +5743,7 @@ class TestNetworkManagementDscpConfigurationOperationsAsync(AzureMgmtRecordedTes
                                                                 "type": "str",
                                                             }
                                                         ],
-                                                        "privateLinkServiceNetworkPolicies": "Enabled",
+                                                        "privateLinkServiceNetworkPolicies": "str",
                                                         "provisioningState": "str",
                                                         "purpose": "str",
                                                         "resourceNavigationLinks": [
@@ -6092,7 +6125,7 @@ class TestNetworkManagementDscpConfigurationOperationsAsync(AzureMgmtRecordedTes
                                                     "tags": {"str": "str"},
                                                     "type": "str",
                                                 },
-                                                "privateEndpointNetworkPolicies": "Disabled",
+                                                "privateEndpointNetworkPolicies": "str",
                                                 "privateEndpoints": [
                                                     {
                                                         "applicationSecurityGroups": [
@@ -6122,7 +6155,7 @@ class TestNetworkManagementDscpConfigurationOperationsAsync(AzureMgmtRecordedTes
                                                                 "type": "str",
                                                             }
                                                         ],
-                                                        "ipVersionType": "IPv4",
+                                                        "ipVersionType": "str",
                                                         "location": "str",
                                                         "manualPrivateLinkServiceConnections": [
                                                             {
@@ -6166,7 +6199,7 @@ class TestNetworkManagementDscpConfigurationOperationsAsync(AzureMgmtRecordedTes
                                                         "type": "str",
                                                     }
                                                 ],
-                                                "privateLinkServiceNetworkPolicies": "Enabled",
+                                                "privateLinkServiceNetworkPolicies": "str",
                                                 "provisioningState": "str",
                                                 "purpose": "str",
                                                 "resourceNavigationLinks": [
@@ -6324,38 +6357,5 @@ class TestNetworkManagementDscpConfigurationOperationsAsync(AzureMgmtRecordedTes
             )
         ).result()  # call '.result()' to poll until service return final result
 
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_dscp_configuration_get(self, resource_group):
-        response = await self.client.dscp_configuration.get(
-            resource_group_name=resource_group.name,
-            dscp_configuration_name="str",
-            api_version="2025-05-01",
-        )
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_dscp_configuration_list(self, resource_group):
-        response = self.client.dscp_configuration.list(
-            resource_group_name=resource_group.name,
-            api_version="2025-05-01",
-        )
-        result = [r async for r in response]
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_dscp_configuration_list_all(self, resource_group):
-        response = self.client.dscp_configuration.list_all(
-            api_version="2025-05-01",
-        )
-        result = [r async for r in response]
         # please add some check logic here by yourself
         # ...

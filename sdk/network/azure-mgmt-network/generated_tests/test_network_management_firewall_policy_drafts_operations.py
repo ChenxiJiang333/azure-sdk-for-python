@@ -20,6 +20,18 @@ class TestNetworkManagementFirewallPolicyDraftsOperations(AzureMgmtRecordedTestC
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
+    def test_firewall_policy_drafts_get(self, resource_group):
+        response = self.client.firewall_policy_drafts.get(
+            resource_group_name=resource_group.name,
+            firewall_policy_name="str",
+            api_version="2025-05-01",
+        )
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
     def test_firewall_policy_drafts_create_or_update(self, resource_group):
         response = self.client.firewall_policy_drafts.create_or_update(
             resource_group_name=resource_group.name,
@@ -83,18 +95,6 @@ class TestNetworkManagementFirewallPolicyDraftsOperations(AzureMgmtRecordedTestC
     @recorded_by_proxy
     def test_firewall_policy_drafts_delete(self, resource_group):
         response = self.client.firewall_policy_drafts.delete(
-            resource_group_name=resource_group.name,
-            firewall_policy_name="str",
-            api_version="2025-05-01",
-        )
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_firewall_policy_drafts_get(self, resource_group):
-        response = self.client.firewall_policy_drafts.get(
             resource_group_name=resource_group.name,
             firewall_policy_name="str",
             api_version="2025-05-01",

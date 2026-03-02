@@ -21,6 +21,42 @@ class TestNetworkManagementVirtualNetworkGatewaysOperationsAsync(AzureMgmtRecord
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
+    async def test_virtual_network_gateways_vpn_device_configuration_script(self, resource_group):
+        response = await self.client.virtual_network_gateways.vpn_device_configuration_script(
+            resource_group_name=resource_group.name,
+            virtual_network_gateway_connection_name="str",
+            parameters={"deviceFamily": "str", "firmwareVersion": "str", "vendor": "str"},
+            api_version="2025-05-01",
+        )
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
+    async def test_virtual_network_gateways_list(self, resource_group):
+        response = self.client.virtual_network_gateways.list(
+            resource_group_name=resource_group.name,
+            api_version="2025-05-01",
+        )
+        result = [r async for r in response]
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
+    async def test_virtual_network_gateways_get(self, resource_group):
+        response = await self.client.virtual_network_gateways.get(
+            resource_group_name=resource_group.name,
+            virtual_network_gateway_name="str",
+            api_version="2025-05-01",
+        )
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
     async def test_virtual_network_gateways_begin_create_or_update(self, resource_group):
         response = await (
             await self.client.virtual_network_gateways.begin_create_or_update(
@@ -185,12 +221,15 @@ class TestNetworkManagementVirtualNetworkGatewaysOperationsAsync(AzureMgmtRecord
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_virtual_network_gateways_get(self, resource_group):
-        response = await self.client.virtual_network_gateways.get(
-            resource_group_name=resource_group.name,
-            virtual_network_gateway_name="str",
-            api_version="2025-05-01",
-        )
+    async def test_virtual_network_gateways_begin_update_tags(self, resource_group):
+        response = await (
+            await self.client.virtual_network_gateways.begin_update_tags(
+                resource_group_name=resource_group.name,
+                virtual_network_gateway_name="str",
+                parameters={"tags": {"str": "str"}},
+                api_version="2025-05-01",
+            )
+        ).result()  # call '.result()' to poll until service return final result
 
         # please add some check logic here by yourself
         # ...
@@ -211,12 +250,11 @@ class TestNetworkManagementVirtualNetworkGatewaysOperationsAsync(AzureMgmtRecord
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_virtual_network_gateways_begin_update_tags(self, resource_group):
+    async def test_virtual_network_gateways_begin_invoke_abort_migration(self, resource_group):
         response = await (
-            await self.client.virtual_network_gateways.begin_update_tags(
+            await self.client.virtual_network_gateways.begin_invoke_abort_migration(
                 resource_group_name=resource_group.name,
                 virtual_network_gateway_name="str",
-                parameters={"tags": {"str": "str"}},
                 api_version="2025-05-01",
             )
         ).result()  # call '.result()' to poll until service return final result
@@ -226,12 +264,15 @@ class TestNetworkManagementVirtualNetworkGatewaysOperationsAsync(AzureMgmtRecord
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_virtual_network_gateways_list(self, resource_group):
-        response = self.client.virtual_network_gateways.list(
-            resource_group_name=resource_group.name,
-            api_version="2025-05-01",
-        )
-        result = [r async for r in response]
+    async def test_virtual_network_gateways_begin_invoke_commit_migration(self, resource_group):
+        response = await (
+            await self.client.virtual_network_gateways.begin_invoke_commit_migration(
+                resource_group_name=resource_group.name,
+                virtual_network_gateway_name="str",
+                api_version="2025-05-01",
+            )
+        ).result()  # call '.result()' to poll until service return final result
+
         # please add some check logic here by yourself
         # ...
 
@@ -249,11 +290,14 @@ class TestNetworkManagementVirtualNetworkGatewaysOperationsAsync(AzureMgmtRecord
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_virtual_network_gateways_begin_reset(self, resource_group):
+    async def test_virtual_network_gateways_begin_disconnect_virtual_network_gateway_vpn_connections(
+        self, resource_group
+    ):
         response = await (
-            await self.client.virtual_network_gateways.begin_reset(
+            await self.client.virtual_network_gateways.begin_disconnect_virtual_network_gateway_vpn_connections(
                 resource_group_name=resource_group.name,
                 virtual_network_gateway_name="str",
+                request={"vpnConnectionIds": ["str"]},
                 api_version="2025-05-01",
             )
         ).result()  # call '.result()' to poll until service return final result
@@ -263,9 +307,9 @@ class TestNetworkManagementVirtualNetworkGatewaysOperationsAsync(AzureMgmtRecord
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_virtual_network_gateways_begin_reset_vpn_client_shared_key(self, resource_group):
+    async def test_virtual_network_gateways_begin_invoke_execute_migration(self, resource_group):
         response = await (
-            await self.client.virtual_network_gateways.begin_reset_vpn_client_shared_key(
+            await self.client.virtual_network_gateways.begin_invoke_execute_migration(
                 resource_group_name=resource_group.name,
                 virtual_network_gateway_name="str",
                 api_version="2025-05-01",
@@ -317,72 +361,6 @@ class TestNetworkManagementVirtualNetworkGatewaysOperationsAsync(AzureMgmtRecord
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_virtual_network_gateways_begin_get_vpn_profile_package_url(self, resource_group):
-        response = await (
-            await self.client.virtual_network_gateways.begin_get_vpn_profile_package_url(
-                resource_group_name=resource_group.name,
-                virtual_network_gateway_name="str",
-                api_version="2025-05-01",
-            )
-        ).result()  # call '.result()' to poll until service return final result
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_virtual_network_gateways_begin_get_bgp_peer_status(self, resource_group):
-        response = await (
-            await self.client.virtual_network_gateways.begin_get_bgp_peer_status(
-                resource_group_name=resource_group.name,
-                virtual_network_gateway_name="str",
-                api_version="2025-05-01",
-            )
-        ).result()  # call '.result()' to poll until service return final result
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_virtual_network_gateways_supported_vpn_devices(self, resource_group):
-        response = await self.client.virtual_network_gateways.supported_vpn_devices(
-            resource_group_name=resource_group.name,
-            virtual_network_gateway_name="str",
-            api_version="2025-05-01",
-        )
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_virtual_network_gateways_list_radius_secrets(self, resource_group):
-        response = await self.client.virtual_network_gateways.list_radius_secrets(
-            resource_group_name=resource_group.name,
-            virtual_network_gateway_name="str",
-            api_version="2025-05-01",
-        )
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_virtual_network_gateways_begin_get_learned_routes(self, resource_group):
-        response = await (
-            await self.client.virtual_network_gateways.begin_get_learned_routes(
-                resource_group_name=resource_group.name,
-                virtual_network_gateway_name="str",
-                api_version="2025-05-01",
-            )
-        ).result()  # call '.result()' to poll until service return final result
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
     async def test_virtual_network_gateways_begin_get_advertised_routes(self, resource_group):
         response = await (
             await self.client.virtual_network_gateways.begin_get_advertised_routes(
@@ -398,105 +376,11 @@ class TestNetworkManagementVirtualNetworkGatewaysOperationsAsync(AzureMgmtRecord
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_virtual_network_gateways_begin_get_resiliency_information(self, resource_group):
+    async def test_virtual_network_gateways_begin_get_bgp_peer_status(self, resource_group):
         response = await (
-            await self.client.virtual_network_gateways.begin_get_resiliency_information(
+            await self.client.virtual_network_gateways.begin_get_bgp_peer_status(
                 resource_group_name=resource_group.name,
                 virtual_network_gateway_name="str",
-                api_version="2025-05-01",
-            )
-        ).result()  # call '.result()' to poll until service return final result
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_virtual_network_gateways_begin_get_routes_information(self, resource_group):
-        response = await (
-            await self.client.virtual_network_gateways.begin_get_routes_information(
-                resource_group_name=resource_group.name,
-                virtual_network_gateway_name="str",
-                api_version="2025-05-01",
-            )
-        ).result()  # call '.result()' to poll until service return final result
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_virtual_network_gateways_begin_set_vpnclient_ipsec_parameters(self, resource_group):
-        response = await (
-            await self.client.virtual_network_gateways.begin_set_vpnclient_ipsec_parameters(
-                resource_group_name=resource_group.name,
-                virtual_network_gateway_name="str",
-                vpnclient_ipsec_params={
-                    "dhGroup": "str",
-                    "ikeEncryption": "str",
-                    "ikeIntegrity": "str",
-                    "ipsecEncryption": "str",
-                    "ipsecIntegrity": "str",
-                    "pfsGroup": "str",
-                    "saDataSizeKilobytes": 0,
-                    "saLifeTimeSeconds": 0,
-                },
-                api_version="2025-05-01",
-            )
-        ).result()  # call '.result()' to poll until service return final result
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_virtual_network_gateways_begin_get_vpnclient_ipsec_parameters(self, resource_group):
-        response = await (
-            await self.client.virtual_network_gateways.begin_get_vpnclient_ipsec_parameters(
-                resource_group_name=resource_group.name,
-                virtual_network_gateway_name="str",
-                api_version="2025-05-01",
-            )
-        ).result()  # call '.result()' to poll until service return final result
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_virtual_network_gateways_vpn_device_configuration_script(self, resource_group):
-        response = await self.client.virtual_network_gateways.vpn_device_configuration_script(
-            resource_group_name=resource_group.name,
-            virtual_network_gateway_connection_name="str",
-            parameters={"deviceFamily": "str", "firmwareVersion": "str", "vendor": "str"},
-            api_version="2025-05-01",
-        )
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_virtual_network_gateways_begin_start_packet_capture(self, resource_group):
-        response = await (
-            await self.client.virtual_network_gateways.begin_start_packet_capture(
-                resource_group_name=resource_group.name,
-                virtual_network_gateway_name="str",
-                api_version="2025-05-01",
-            )
-        ).result()  # call '.result()' to poll until service return final result
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_virtual_network_gateways_begin_stop_packet_capture(self, resource_group):
-        response = await (
-            await self.client.virtual_network_gateways.begin_stop_packet_capture(
-                resource_group_name=resource_group.name,
-                virtual_network_gateway_name="str",
-                parameters={"sasUrl": "str"},
                 api_version="2025-05-01",
             )
         ).result()  # call '.result()' to poll until service return final result
@@ -538,12 +422,204 @@ class TestNetworkManagementVirtualNetworkGatewaysOperationsAsync(AzureMgmtRecord
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
+    async def test_virtual_network_gateways_begin_get_learned_routes(self, resource_group):
+        response = await (
+            await self.client.virtual_network_gateways.begin_get_learned_routes(
+                resource_group_name=resource_group.name,
+                virtual_network_gateway_name="str",
+                api_version="2025-05-01",
+            )
+        ).result()  # call '.result()' to poll until service return final result
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
+    async def test_virtual_network_gateways_begin_get_resiliency_information(self, resource_group):
+        response = await (
+            await self.client.virtual_network_gateways.begin_get_resiliency_information(
+                resource_group_name=resource_group.name,
+                virtual_network_gateway_name="str",
+                api_version="2025-05-01",
+            )
+        ).result()  # call '.result()' to poll until service return final result
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
+    async def test_virtual_network_gateways_begin_get_routes_information(self, resource_group):
+        response = await (
+            await self.client.virtual_network_gateways.begin_get_routes_information(
+                resource_group_name=resource_group.name,
+                virtual_network_gateway_name="str",
+                api_version="2025-05-01",
+            )
+        ).result()  # call '.result()' to poll until service return final result
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
+    async def test_virtual_network_gateways_begin_get_vpnclient_connection_health(self, resource_group):
+        response = await (
+            await self.client.virtual_network_gateways.begin_get_vpnclient_connection_health(
+                resource_group_name=resource_group.name,
+                virtual_network_gateway_name="str",
+                api_version="2025-05-01",
+            )
+        ).result()  # call '.result()' to poll until service return final result
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
+    async def test_virtual_network_gateways_begin_get_vpnclient_ipsec_parameters(self, resource_group):
+        response = await (
+            await self.client.virtual_network_gateways.begin_get_vpnclient_ipsec_parameters(
+                resource_group_name=resource_group.name,
+                virtual_network_gateway_name="str",
+                api_version="2025-05-01",
+            )
+        ).result()  # call '.result()' to poll until service return final result
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
+    async def test_virtual_network_gateways_begin_get_vpn_profile_package_url(self, resource_group):
+        response = await (
+            await self.client.virtual_network_gateways.begin_get_vpn_profile_package_url(
+                resource_group_name=resource_group.name,
+                virtual_network_gateway_name="str",
+                api_version="2025-05-01",
+            )
+        ).result()  # call '.result()' to poll until service return final result
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
+    async def test_virtual_network_gateways_list_radius_secrets(self, resource_group):
+        response = await self.client.virtual_network_gateways.list_radius_secrets(
+            resource_group_name=resource_group.name,
+            virtual_network_gateway_name="str",
+            api_version="2025-05-01",
+        )
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
+    async def test_virtual_network_gateways_begin_invoke_prepare_migration(self, resource_group):
+        response = await (
+            await self.client.virtual_network_gateways.begin_invoke_prepare_migration(
+                resource_group_name=resource_group.name,
+                virtual_network_gateway_name="str",
+                migration_params={"migrationType": "str", "resourceUrl": "str"},
+                api_version="2025-05-01",
+            )
+        ).result()  # call '.result()' to poll until service return final result
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
+    async def test_virtual_network_gateways_begin_reset(self, resource_group):
+        response = await (
+            await self.client.virtual_network_gateways.begin_reset(
+                resource_group_name=resource_group.name,
+                virtual_network_gateway_name="str",
+                api_version="2025-05-01",
+            )
+        ).result()  # call '.result()' to poll until service return final result
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
+    async def test_virtual_network_gateways_begin_reset_vpn_client_shared_key(self, resource_group):
+        response = await (
+            await self.client.virtual_network_gateways.begin_reset_vpn_client_shared_key(
+                resource_group_name=resource_group.name,
+                virtual_network_gateway_name="str",
+                api_version="2025-05-01",
+            )
+        ).result()  # call '.result()' to poll until service return final result
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
+    async def test_virtual_network_gateways_begin_set_vpnclient_ipsec_parameters(self, resource_group):
+        response = await (
+            await self.client.virtual_network_gateways.begin_set_vpnclient_ipsec_parameters(
+                resource_group_name=resource_group.name,
+                virtual_network_gateway_name="str",
+                vpnclient_ipsec_params={
+                    "dhGroup": "str",
+                    "ikeEncryption": "str",
+                    "ikeIntegrity": "str",
+                    "ipsecEncryption": "str",
+                    "ipsecIntegrity": "str",
+                    "pfsGroup": "str",
+                    "saDataSizeKilobytes": 0,
+                    "saLifeTimeSeconds": 0,
+                },
+                api_version="2025-05-01",
+            )
+        ).result()  # call '.result()' to poll until service return final result
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
+    async def test_virtual_network_gateways_begin_start_packet_capture(self, resource_group):
+        response = await (
+            await self.client.virtual_network_gateways.begin_start_packet_capture(
+                resource_group_name=resource_group.name,
+                virtual_network_gateway_name="str",
+                api_version="2025-05-01",
+            )
+        ).result()  # call '.result()' to poll until service return final result
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
     async def test_virtual_network_gateways_begin_start_express_route_site_failover_simulation(self, resource_group):
         response = await (
             await self.client.virtual_network_gateways.begin_start_express_route_site_failover_simulation(
                 resource_group_name=resource_group.name,
                 virtual_network_gateway_name="str",
                 peering_location="str",
+                api_version="2025-05-01",
+            )
+        ).result()  # call '.result()' to poll until service return final result
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
+    async def test_virtual_network_gateways_begin_stop_packet_capture(self, resource_group):
+        response = await (
+            await self.client.virtual_network_gateways.begin_stop_packet_capture(
+                resource_group_name=resource_group.name,
+                virtual_network_gateway_name="str",
+                parameters={"sasUrl": "str"},
                 api_version="2025-05-01",
             )
         ).result()  # call '.result()' to poll until service return final result
@@ -572,88 +648,12 @@ class TestNetworkManagementVirtualNetworkGatewaysOperationsAsync(AzureMgmtRecord
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_virtual_network_gateways_begin_get_vpnclient_connection_health(self, resource_group):
-        response = await (
-            await self.client.virtual_network_gateways.begin_get_vpnclient_connection_health(
-                resource_group_name=resource_group.name,
-                virtual_network_gateway_name="str",
-                api_version="2025-05-01",
-            )
-        ).result()  # call '.result()' to poll until service return final result
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_virtual_network_gateways_begin_disconnect_virtual_network_gateway_vpn_connections(
-        self, resource_group
-    ):
-        response = await (
-            await self.client.virtual_network_gateways.begin_disconnect_virtual_network_gateway_vpn_connections(
-                resource_group_name=resource_group.name,
-                virtual_network_gateway_name="str",
-                request={"vpnConnectionIds": ["str"]},
-                api_version="2025-05-01",
-            )
-        ).result()  # call '.result()' to poll until service return final result
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_virtual_network_gateways_begin_invoke_prepare_migration(self, resource_group):
-        response = await (
-            await self.client.virtual_network_gateways.begin_invoke_prepare_migration(
-                resource_group_name=resource_group.name,
-                virtual_network_gateway_name="str",
-                migration_params={"migrationType": "str", "resourceUrl": "str"},
-                api_version="2025-05-01",
-            )
-        ).result()  # call '.result()' to poll until service return final result
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_virtual_network_gateways_begin_invoke_execute_migration(self, resource_group):
-        response = await (
-            await self.client.virtual_network_gateways.begin_invoke_execute_migration(
-                resource_group_name=resource_group.name,
-                virtual_network_gateway_name="str",
-                api_version="2025-05-01",
-            )
-        ).result()  # call '.result()' to poll until service return final result
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_virtual_network_gateways_begin_invoke_commit_migration(self, resource_group):
-        response = await (
-            await self.client.virtual_network_gateways.begin_invoke_commit_migration(
-                resource_group_name=resource_group.name,
-                virtual_network_gateway_name="str",
-                api_version="2025-05-01",
-            )
-        ).result()  # call '.result()' to poll until service return final result
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_virtual_network_gateways_begin_invoke_abort_migration(self, resource_group):
-        response = await (
-            await self.client.virtual_network_gateways.begin_invoke_abort_migration(
-                resource_group_name=resource_group.name,
-                virtual_network_gateway_name="str",
-                api_version="2025-05-01",
-            )
-        ).result()  # call '.result()' to poll until service return final result
+    async def test_virtual_network_gateways_supported_vpn_devices(self, resource_group):
+        response = await self.client.virtual_network_gateways.supported_vpn_devices(
+            resource_group_name=resource_group.name,
+            virtual_network_gateway_name="str",
+            api_version="2025-05-01",
+        )
 
         # please add some check logic here by yourself
         # ...

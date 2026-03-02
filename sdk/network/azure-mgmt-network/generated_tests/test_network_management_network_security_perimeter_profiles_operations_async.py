@@ -21,6 +21,18 @@ class TestNetworkManagementNetworkSecurityPerimeterProfilesOperationsAsync(Azure
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
+    async def test_network_security_perimeter_profiles_list(self, resource_group):
+        response = self.client.network_security_perimeter_profiles.list(
+            resource_group_name=resource_group.name,
+            network_security_perimeter_name="str",
+            api_version="2025-05-01",
+        )
+        result = [r async for r in response]
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
     async def test_network_security_perimeter_profiles_get(self, resource_group):
         response = await self.client.network_security_perimeter_profiles.get(
             resource_group_name=resource_group.name,
@@ -70,17 +82,5 @@ class TestNetworkManagementNetworkSecurityPerimeterProfilesOperationsAsync(Azure
             api_version="2025-05-01",
         )
 
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_network_security_perimeter_profiles_list(self, resource_group):
-        response = self.client.network_security_perimeter_profiles.list(
-            resource_group_name=resource_group.name,
-            network_security_perimeter_name="str",
-            api_version="2025-05-01",
-        )
-        result = [r async for r in response]
         # please add some check logic here by yourself
         # ...

@@ -20,6 +20,18 @@ class TestNetworkManagementNetworkSecurityPerimeterLoggingConfigurationsOperatio
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
+    def test_network_security_perimeter_logging_configurations_list(self, resource_group):
+        response = self.client.network_security_perimeter_logging_configurations.list(
+            resource_group_name=resource_group.name,
+            network_security_perimeter_name="str",
+            api_version="2025-05-01",
+        )
+        result = [r for r in response]
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
     def test_network_security_perimeter_logging_configurations_get(self, resource_group):
         response = self.client.network_security_perimeter_logging_configurations.get(
             resource_group_name=resource_group.name,
@@ -69,17 +81,5 @@ class TestNetworkManagementNetworkSecurityPerimeterLoggingConfigurationsOperatio
             api_version="2025-05-01",
         )
 
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_network_security_perimeter_logging_configurations_list(self, resource_group):
-        response = self.client.network_security_perimeter_logging_configurations.list(
-            resource_group_name=resource_group.name,
-            network_security_perimeter_name="str",
-            api_version="2025-05-01",
-        )
-        result = [r for r in response]
         # please add some check logic here by yourself
         # ...

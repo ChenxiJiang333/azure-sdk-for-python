@@ -34,21 +34,6 @@ class TestNetworkManagementInboundNatRulesOperationsAsync(AzureMgmtRecordedTestC
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_inbound_nat_rules_begin_delete(self, resource_group):
-        response = await (
-            await self.client.inbound_nat_rules.begin_delete(
-                resource_group_name=resource_group.name,
-                load_balancer_name="str",
-                inbound_nat_rule_name="str",
-                api_version="2025-05-01",
-            )
-        ).result()  # call '.result()' to poll until service return final result
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
     async def test_inbound_nat_rules_get(self, resource_group):
         response = await self.client.inbound_nat_rules.get(
             resource_group_name=resource_group.name,
@@ -353,7 +338,7 @@ class TestNetworkManagementInboundNatRulesOperationsAsync(AzureMgmtRecordedTestC
                                                             "type": "str",
                                                         }
                                                     ],
-                                                    "ipVersionType": "IPv4",
+                                                    "ipVersionType": "str",
                                                     "location": "str",
                                                     "manualPrivateLinkServiceConnections": [
                                                         {
@@ -480,7 +465,7 @@ class TestNetworkManagementInboundNatRulesOperationsAsync(AzureMgmtRecordedTestC
                                                                         "type": "str",
                                                                     }
                                                                 ],
-                                                                "ipVersionType": "IPv4",
+                                                                "ipVersionType": "str",
                                                                 "location": "str",
                                                                 "manualPrivateLinkServiceConnections": [
                                                                     {
@@ -640,7 +625,7 @@ class TestNetworkManagementInboundNatRulesOperationsAsync(AzureMgmtRecordedTestC
                                         "tags": {"str": "str"},
                                         "type": "str",
                                     },
-                                    "privateEndpointNetworkPolicies": "Disabled",
+                                    "privateEndpointNetworkPolicies": "str",
                                     "privateEndpoints": [
                                         {
                                             "applicationSecurityGroups": [
@@ -670,7 +655,7 @@ class TestNetworkManagementInboundNatRulesOperationsAsync(AzureMgmtRecordedTestC
                                                     "type": "str",
                                                 }
                                             ],
-                                            "ipVersionType": "IPv4",
+                                            "ipVersionType": "str",
                                             "location": "str",
                                             "manualPrivateLinkServiceConnections": [
                                                 {
@@ -1002,7 +987,7 @@ class TestNetworkManagementInboundNatRulesOperationsAsync(AzureMgmtRecordedTestC
                                             "type": "str",
                                         }
                                     ],
-                                    "privateLinkServiceNetworkPolicies": "Enabled",
+                                    "privateLinkServiceNetworkPolicies": "str",
                                     "provisioningState": "str",
                                     "purpose": "str",
                                     "resourceNavigationLinks": [
@@ -1380,7 +1365,7 @@ class TestNetworkManagementInboundNatRulesOperationsAsync(AzureMgmtRecordedTestC
                                                     "type": "str",
                                                 }
                                             ],
-                                            "ipVersionType": "IPv4",
+                                            "ipVersionType": "str",
                                             "location": "str",
                                             "manualPrivateLinkServiceConnections": [
                                                 {
@@ -1567,7 +1552,7 @@ class TestNetworkManagementInboundNatRulesOperationsAsync(AzureMgmtRecordedTestC
                                                                 "type": "str",
                                                             }
                                                         ],
-                                                        "ipVersionType": "IPv4",
+                                                        "ipVersionType": "str",
                                                         "location": "str",
                                                         "manualPrivateLinkServiceConnections": [
                                                             {
@@ -1789,7 +1774,7 @@ class TestNetworkManagementInboundNatRulesOperationsAsync(AzureMgmtRecordedTestC
                                 "tags": {"str": "str"},
                                 "type": "str",
                             },
-                            "privateEndpointNetworkPolicies": "Disabled",
+                            "privateEndpointNetworkPolicies": "str",
                             "privateEndpoints": [
                                 {
                                     "applicationSecurityGroups": [
@@ -1819,7 +1804,7 @@ class TestNetworkManagementInboundNatRulesOperationsAsync(AzureMgmtRecordedTestC
                                             "type": "str",
                                         }
                                     ],
-                                    "ipVersionType": "IPv4",
+                                    "ipVersionType": "str",
                                     "location": "str",
                                     "manualPrivateLinkServiceConnections": [
                                         {
@@ -2275,7 +2260,7 @@ class TestNetworkManagementInboundNatRulesOperationsAsync(AzureMgmtRecordedTestC
                                     "type": "str",
                                 }
                             ],
-                            "privateLinkServiceNetworkPolicies": "Enabled",
+                            "privateLinkServiceNetworkPolicies": "str",
                             "provisioningState": "str",
                             "purpose": "str",
                             "resourceNavigationLinks": [
@@ -2599,7 +2584,7 @@ class TestNetworkManagementInboundNatRulesOperationsAsync(AzureMgmtRecordedTestC
                                                                         "type": "str",
                                                                     }
                                                                 ],
-                                                                "ipVersionType": "IPv4",
+                                                                "ipVersionType": "str",
                                                                 "location": "str",
                                                                 "manualPrivateLinkServiceConnections": [
                                                                     {
@@ -2709,7 +2694,7 @@ class TestNetworkManagementInboundNatRulesOperationsAsync(AzureMgmtRecordedTestC
                                                                                     "type": "str",
                                                                                 }
                                                                             ],
-                                                                            "ipVersionType": "IPv4",
+                                                                            "ipVersionType": "str",
                                                                             "location": "str",
                                                                             "manualPrivateLinkServiceConnections": [
                                                                                 {
@@ -2838,7 +2823,7 @@ class TestNetworkManagementInboundNatRulesOperationsAsync(AzureMgmtRecordedTestC
                                                     "tags": {"str": "str"},
                                                     "type": "str",
                                                 },
-                                                "privateEndpointNetworkPolicies": "Disabled",
+                                                "privateEndpointNetworkPolicies": "str",
                                                 "privateEndpoints": [
                                                     {
                                                         "applicationSecurityGroups": [
@@ -2868,7 +2853,7 @@ class TestNetworkManagementInboundNatRulesOperationsAsync(AzureMgmtRecordedTestC
                                                                 "type": "str",
                                                             }
                                                         ],
-                                                        "ipVersionType": "IPv4",
+                                                        "ipVersionType": "str",
                                                         "location": "str",
                                                         "manualPrivateLinkServiceConnections": [
                                                             {
@@ -3155,7 +3140,7 @@ class TestNetworkManagementInboundNatRulesOperationsAsync(AzureMgmtRecordedTestC
                                                         "type": "str",
                                                     }
                                                 ],
-                                                "privateLinkServiceNetworkPolicies": "Enabled",
+                                                "privateLinkServiceNetworkPolicies": "str",
                                                 "provisioningState": "str",
                                                 "purpose": "str",
                                                 "resourceNavigationLinks": [
@@ -3541,7 +3526,7 @@ class TestNetworkManagementInboundNatRulesOperationsAsync(AzureMgmtRecordedTestC
                                                                 "type": "str",
                                                             }
                                                         ],
-                                                        "ipVersionType": "IPv4",
+                                                        "ipVersionType": "str",
                                                         "location": "str",
                                                         "manualPrivateLinkServiceConnections": [
                                                             {
@@ -3648,7 +3633,7 @@ class TestNetworkManagementInboundNatRulesOperationsAsync(AzureMgmtRecordedTestC
                                                                             "type": "str",
                                                                         }
                                                                     ],
-                                                                    "ipVersionType": "IPv4",
+                                                                    "ipVersionType": "str",
                                                                     "location": "str",
                                                                     "manualPrivateLinkServiceConnections": [
                                                                         {
@@ -3777,7 +3762,7 @@ class TestNetworkManagementInboundNatRulesOperationsAsync(AzureMgmtRecordedTestC
                                             "tags": {"str": "str"},
                                             "type": "str",
                                         },
-                                        "privateEndpointNetworkPolicies": "Disabled",
+                                        "privateEndpointNetworkPolicies": "str",
                                         "privateEndpoints": [
                                             {
                                                 "applicationSecurityGroups": [
@@ -3807,7 +3792,7 @@ class TestNetworkManagementInboundNatRulesOperationsAsync(AzureMgmtRecordedTestC
                                                         "type": "str",
                                                     }
                                                 ],
-                                                "ipVersionType": "IPv4",
+                                                "ipVersionType": "str",
                                                 "location": "str",
                                                 "manualPrivateLinkServiceConnections": [
                                                     {
@@ -4091,7 +4076,7 @@ class TestNetworkManagementInboundNatRulesOperationsAsync(AzureMgmtRecordedTestC
                                                 "type": "str",
                                             }
                                         ],
-                                        "privateLinkServiceNetworkPolicies": "Enabled",
+                                        "privateLinkServiceNetworkPolicies": "str",
                                         "provisioningState": "str",
                                         "purpose": "str",
                                         "resourceNavigationLinks": [
@@ -4224,6 +4209,21 @@ class TestNetworkManagementInboundNatRulesOperationsAsync(AzureMgmtRecordedTestC
                     "provisioningState": "str",
                     "type": "str",
                 },
+                api_version="2025-05-01",
+            )
+        ).result()  # call '.result()' to poll until service return final result
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
+    async def test_inbound_nat_rules_begin_delete(self, resource_group):
+        response = await (
+            await self.client.inbound_nat_rules.begin_delete(
+                resource_group_name=resource_group.name,
+                load_balancer_name="str",
+                inbound_nat_rule_name="str",
                 api_version="2025-05-01",
             )
         ).result()  # call '.result()' to poll until service return final result

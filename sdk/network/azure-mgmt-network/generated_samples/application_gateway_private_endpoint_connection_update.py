@@ -28,7 +28,7 @@ from azure.mgmt.network import NetworkManagementClient
 def main():
     client = NetworkManagementClient(
         credential=DefaultAzureCredential(),
-        subscription_id="subid",
+        subscription_id="00000000-0000-0000-0000-000000000000",
     )
 
     response = client.application_gateway_private_endpoint_connections.begin_update(
@@ -39,7 +39,7 @@ def main():
             "name": "connection1",
             "properties": {
                 "privateEndpoint": {
-                    "id": "/subscriptions/subId2/resourceGroups/rg1/providers/Microsoft.Network/privateEndpoints/testPe"
+                    "id": "/subscriptions/11111111-1111-1111-1111-111111111111/resourceGroups/rg1/providers/Microsoft.Network/privateEndpoints/testPe"
                 },
                 "privateLinkServiceConnectionState": {
                     "description": "approved it for some reason.",
@@ -51,6 +51,6 @@ def main():
     print(response)
 
 
-# x-ms-original-file: specification/network/resource-manager/Microsoft.Network/stable/2025-05-01/examples/ApplicationGatewayPrivateEndpointConnectionUpdate.json
+# x-ms-original-file: specification/network/resource-manager/Microsoft.Network/Network/stable/2025-05-01/examples/ApplicationGatewayPrivateEndpointConnectionUpdate.json
 if __name__ == "__main__":
     main()

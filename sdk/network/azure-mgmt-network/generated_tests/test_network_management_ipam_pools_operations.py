@@ -32,6 +32,19 @@ class TestNetworkManagementIpamPoolsOperations(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
+    def test_ipam_pools_get(self, resource_group):
+        response = self.client.ipam_pools.get(
+            resource_group_name=resource_group.name,
+            network_manager_name="str",
+            pool_name="str",
+            api_version="2025-05-01",
+        )
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
     def test_ipam_pools_begin_create(self, resource_group):
         response = self.client.ipam_pools.begin_create(
             resource_group_name=resource_group.name,
@@ -71,19 +84,6 @@ class TestNetworkManagementIpamPoolsOperations(AzureMgmtRecordedTestCase):
     @recorded_by_proxy
     def test_ipam_pools_update(self, resource_group):
         response = self.client.ipam_pools.update(
-            resource_group_name=resource_group.name,
-            network_manager_name="str",
-            pool_name="str",
-            api_version="2025-05-01",
-        )
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_ipam_pools_get(self, resource_group):
-        response = self.client.ipam_pools.get(
             resource_group_name=resource_group.name,
             network_manager_name="str",
             pool_name="str",

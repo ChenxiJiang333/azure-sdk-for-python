@@ -38,13 +38,13 @@ def main():
         static_member_name="testStaticMember",
         parameters={
             "properties": {
-                "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroup/rg1/providers/Microsoft.Network/virtualnetworks/vnet1"
+                "resourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Network/virtualnetworks/vnet1"
             }
         },
     )
     print(response)
 
 
-# x-ms-original-file: specification/network/resource-manager/Microsoft.Network/stable/2025-05-01/examples/NetworkManagerStaticMemberPut.json
+# x-ms-original-file: specification/network/resource-manager/Microsoft.Network/Network/stable/2025-05-01/examples/NetworkManagerStaticMemberPut.json
 if __name__ == "__main__":
     main()

@@ -20,11 +20,22 @@ class TestNetworkManagementFirewallPolicyIdpsSignaturesOverridesOperations(Azure
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_firewall_policy_idps_signatures_overrides_patch(self, resource_group):
-        response = self.client.firewall_policy_idps_signatures_overrides.patch(
+    def test_firewall_policy_idps_signatures_overrides_list(self, resource_group):
+        response = self.client.firewall_policy_idps_signatures_overrides.list(
             resource_group_name=resource_group.name,
             firewall_policy_name="str",
-            parameters={"id": "str", "name": "str", "properties": {"signatures": {"str": "str"}}, "type": "str"},
+            api_version="2025-05-01",
+        )
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
+    def test_firewall_policy_idps_signatures_overrides_get(self, resource_group):
+        response = self.client.firewall_policy_idps_signatures_overrides.get(
+            resource_group_name=resource_group.name,
+            firewall_policy_name="str",
             api_version="2025-05-01",
         )
 
@@ -46,22 +57,11 @@ class TestNetworkManagementFirewallPolicyIdpsSignaturesOverridesOperations(Azure
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_firewall_policy_idps_signatures_overrides_get(self, resource_group):
-        response = self.client.firewall_policy_idps_signatures_overrides.get(
+    def test_firewall_policy_idps_signatures_overrides_patch(self, resource_group):
+        response = self.client.firewall_policy_idps_signatures_overrides.patch(
             resource_group_name=resource_group.name,
             firewall_policy_name="str",
-            api_version="2025-05-01",
-        )
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_firewall_policy_idps_signatures_overrides_list(self, resource_group):
-        response = self.client.firewall_policy_idps_signatures_overrides.list(
-            resource_group_name=resource_group.name,
-            firewall_policy_name="str",
+            parameters={"id": "str", "name": "str", "properties": {"signatures": {"str": "str"}}, "type": "str"},
             api_version="2025-05-01",
         )
 

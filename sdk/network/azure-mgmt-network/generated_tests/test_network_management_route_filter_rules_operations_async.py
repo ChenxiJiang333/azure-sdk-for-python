@@ -21,16 +21,13 @@ class TestNetworkManagementRouteFilterRulesOperationsAsync(AzureMgmtRecordedTest
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_route_filter_rules_begin_delete(self, resource_group):
-        response = await (
-            await self.client.route_filter_rules.begin_delete(
-                resource_group_name=resource_group.name,
-                route_filter_name="str",
-                rule_name="str",
-                api_version="2025-05-01",
-            )
-        ).result()  # call '.result()' to poll until service return final result
-
+    async def test_route_filter_rules_list_by_route_filter(self, resource_group):
+        response = self.client.route_filter_rules.list_by_route_filter(
+            resource_group_name=resource_group.name,
+            route_filter_name="str",
+            api_version="2025-05-01",
+        )
+        result = [r async for r in response]
         # please add some check logic here by yourself
         # ...
 
@@ -74,12 +71,15 @@ class TestNetworkManagementRouteFilterRulesOperationsAsync(AzureMgmtRecordedTest
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_route_filter_rules_list_by_route_filter(self, resource_group):
-        response = self.client.route_filter_rules.list_by_route_filter(
-            resource_group_name=resource_group.name,
-            route_filter_name="str",
-            api_version="2025-05-01",
-        )
-        result = [r async for r in response]
+    async def test_route_filter_rules_begin_delete(self, resource_group):
+        response = await (
+            await self.client.route_filter_rules.begin_delete(
+                resource_group_name=resource_group.name,
+                route_filter_name="str",
+                rule_name="str",
+                api_version="2025-05-01",
+            )
+        ).result()  # call '.result()' to poll until service return final result
+
         # please add some check logic here by yourself
         # ...
