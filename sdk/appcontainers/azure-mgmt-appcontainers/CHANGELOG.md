@@ -1,12 +1,6 @@
 ## tsp migration
 
-## 4.1.0b1 (2026-03-02)
-
-change log generation failed!!! You need to write it manually!!!
-
 ### Breaking Changes
-
-- Deleted or renamed client method `ContainerAppsAPIClient.job_execution`
 
 // shall not rename, same with https://github.com/ChenxiJiang333/azure-sdk-for-python/commit/a64c470cbb6e6a1b16dc3a2a7c63c9bc425ddaaf#diff-32befc5cf9c38bea3d08c6180129bbcc87c50aca1ae102baa0184a7357f6a349R6
 - Method `BaseContainer.__init__` removed default value `None` from its parameter `args`
@@ -19,9 +13,6 @@ change log generation failed!!! You need to write it manually!!!
 - Method `JobExecutionContainer.__init__` changed its parameter `args` from `keyword_only` to `var_positional`
 - Method `SessionContainer.__init__` removed default value `None` from its parameter `args`
 - Method `SessionContainer.__init__` changed its parameter `args` from `keyword_only` to `var_positional`
-- Deleted or renamed operation group `AvailableOperations`
-- Deleted or renamed model `RuntimeJavaAgent`
-- Deleted or renamed model `RuntimeJavaAgentLogging`
 
 // seems to be fake report, list_secrets method in swagger is defined as sync method as well: : https://github.com/ChenxiJiang333/azure-sdk-for-python/blob/f843ae1c7acdad8ff64786a494743b0960afe400/sdk/appcontainers/azure-mgmt-appcontainers/azure/mgmt/appcontainers/operations/_connected_environments_dapr_components_operations.py#L738
 - Method `ConnectedEnvironmentsDaprComponentsOperations.list_secrets` changed from `asynchronous` to `synchronous`
@@ -31,6 +22,7 @@ change log generation failed!!! You need to write it manually!!!
 - Method `DaprComponentsOperations.list_secrets` changed from `asynchronous` to `synchronous`
 - Method `JobsOperations.list_secrets` changed from `asynchronous` to `synchronous`
 - Method `ManagedEnvironmentsStoragesOperations.list` changed from `asynchronous` to `synchronous`
+
 - Model `AppResiliency` deleted or renamed its instance variable `timeout_policy`
 - Model `AppResiliency` deleted or renamed its instance variable `http_retry_policy`
 - Model `AppResiliency` deleted or renamed its instance variable `tcp_retry_policy`
@@ -219,7 +211,7 @@ change log generation failed!!! You need to write it manually!!!
 
 ### Other Changes
 
-- Deleted model `AppResiliencyCollection`/`AuthConfigCollection`/`AvailableWorkloadProfilesCollection`/`BuildCollection`/`BuilderCollection`/`CertificateCollection`/`ConnectedEnvironmentCollection`/`ConnectedEnvironmentStoragesCollection`/`ContainerAppCollection`/`ContainerAppsBuildCollection`/`ContainerAppsFunctionCollection`/`DaprComponentResiliencyPoliciesCollection`/`DaprComponentsCollection`/`DaprSecretsCollection`/`DaprSubscriptionsCollection`/`DotNetComponentsCollection`/`HttpRouteConfigCollection`/`JavaComponentsCollection`/`JobSecretsCollection`/`JobsCollection`/`LabelHistoryCollection`/`ListUsagesResult`/`MaintenanceConfigurationCollection`/`ManagedCertificateCollection`/`ManagedEnvironmentStoragesCollection`/`ManagedEnvironmentsCollection`/`PatchCollection`/`ReplicaCollection`/`RevisionCollection`/`SecretsCollection`/`SessionPoolCollection`/`SourceControlCollection`/`WorkflowEnvelopeCollection`/`WorkloadProfileStatesCollection` which actually were not used by SDK users
+- Deleted model `AvailableOperations`/`RuntimeJavaAgent`/`RuntimeJavaAgentLogging`/`AppResiliencyCollection`/`AuthConfigCollection`/`AvailableWorkloadProfilesCollection`/`BuildCollection`/`BuilderCollection`/`CertificateCollection`/`ConnectedEnvironmentCollection`/`ConnectedEnvironmentStoragesCollection`/`ContainerAppCollection`/`ContainerAppsBuildCollection`/`ContainerAppsFunctionCollection`/`DaprComponentResiliencyPoliciesCollection`/`DaprComponentsCollection`/`DaprSecretsCollection`/`DaprSubscriptionsCollection`/`DotNetComponentsCollection`/`HttpRouteConfigCollection`/`JavaComponentsCollection`/`JobSecretsCollection`/`JobsCollection`/`LabelHistoryCollection`/`ListUsagesResult`/`MaintenanceConfigurationCollection`/`ManagedCertificateCollection`/`ManagedEnvironmentStoragesCollection`/`ManagedEnvironmentsCollection`/`PatchCollection`/`ReplicaCollection`/`RevisionCollection`/`SecretsCollection`/`SessionPoolCollection`/`SourceControlCollection`/`WorkflowEnvelopeCollection`/`WorkloadProfileStatesCollection` which actually were not used by SDK users
 
 # Release History
 
