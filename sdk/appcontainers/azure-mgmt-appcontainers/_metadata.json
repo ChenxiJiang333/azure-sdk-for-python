@@ -3,7 +3,7 @@
   "apiVersions": {
     "Microsoft.App": "2025-10-02-preview"
   },
-  "commit": "4bfc655990e8d4a907bff060fba67183a43a862a",
+  "commit": "52ef3ed75ac10ad5e4b35b8ebf0dac4b8ad41392",
   "repository_url": "https://github.com/Azure/azure-rest-api-specs",
   "typespec_src": "specification/app/App.Management",
   "emitterVersion": "0.60.2"

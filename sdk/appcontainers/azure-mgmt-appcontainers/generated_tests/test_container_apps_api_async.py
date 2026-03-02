@@ -26,3 +26,15 @@ class TestContainerAppsAPIAsync(AzureMgmtRecordedTestCase):
 
         # please add some check logic here by yourself
         # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
+    async def test_job_execution(self, resource_group):
+        response = await self.client.job_execution(
+            resource_group_name=resource_group.name,
+            job_name="str",
+            job_execution_name="str",
+        )
+
+        # please add some check logic here by yourself
+        # ...

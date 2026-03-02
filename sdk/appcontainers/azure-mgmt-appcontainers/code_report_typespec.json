@@ -58,6 +58,32 @@
             "is_async": false,
             "overloads": []
           },
+          "job_execution": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "resource_group_name": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "job_name": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "job_execution_name": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
           "send_request": {
             "parameters": {
               "self": {
@@ -7957,32 +7983,6 @@
                 "param_type": "positional_or_keyword"
               },
               "detector_name": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              },
-              "kwargs": {
-                "default": null,
-                "param_type": "var_keyword"
-              }
-            },
-            "is_async": false,
-            "overloads": []
-          },
-          "job_execution": {
-            "parameters": {
-              "self": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              },
-              "resource_group_name": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              },
-              "job_name": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              },
-              "job_execution_name": {
                 "default": null,
                 "param_type": "positional_or_keyword"
               },
@@ -85512,6 +85512,32 @@
             "is_async": true,
             "overloads": []
           },
+          "job_execution": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "resource_group_name": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "job_name": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "job_execution_name": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": true,
+            "overloads": []
+          },
           "send_request": {
             "parameters": {
               "self": {
@@ -93408,32 +93434,6 @@
                 "param_type": "positional_or_keyword"
               },
               "detector_name": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              },
-              "kwargs": {
-                "default": null,
-                "param_type": "var_keyword"
-              }
-            },
-            "is_async": true,
-            "overloads": []
-          },
-          "job_execution": {
-            "parameters": {
-              "self": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              },
-              "resource_group_name": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              },
-              "job_name": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              },
-              "job_execution_name": {
                 "default": null,
                 "param_type": "positional_or_keyword"
               },

@@ -682,8 +682,6 @@
         "azure.mgmt.appcontainers.aio.operations.JobsOperations.begin_resume": "Microsoft.App.Jobs.resume",
         "azure.mgmt.appcontainers.operations.JobsOperations.begin_suspend": "Microsoft.App.Jobs.suspend",
         "azure.mgmt.appcontainers.aio.operations.JobsOperations.begin_suspend": "Microsoft.App.Jobs.suspend",
-        "azure.mgmt.appcontainers.operations.JobsOperations.job_execution": "Microsoft.App.Jobs.jobExecution",
-        "azure.mgmt.appcontainers.aio.operations.JobsOperations.job_execution": "Microsoft.App.Jobs.jobExecution",
         "azure.mgmt.appcontainers.operations.JobsOperations.begin_stop_execution": "Microsoft.App.Jobs.stopExecution",
         "azure.mgmt.appcontainers.aio.operations.JobsOperations.begin_stop_execution": "Microsoft.App.Jobs.stopExecution",
         "azure.mgmt.appcontainers.operations.JobsOperations.proxy_get": "Microsoft.App.Jobs.proxyGet",
@@ -771,6 +769,8 @@
         "azure.mgmt.appcontainers.operations.ManagedEnvironmentUsagesOperations.list": "Microsoft.App.ManagedEnvironmentUsagesOperationGroup.list",
         "azure.mgmt.appcontainers.aio.operations.ManagedEnvironmentUsagesOperations.list": "Microsoft.App.ManagedEnvironmentUsagesOperationGroup.list",
         "azure.mgmt.appcontainers.ContainerAppsAPIClient.get_custom_domain_verification_id": "Microsoft.App.getCustomDomainVerificationId",
-        "azure.mgmt.appcontainers.aio.ContainerAppsAPIClient.get_custom_domain_verification_id": "Microsoft.App.getCustomDomainVerificationId"
+        "azure.mgmt.appcontainers.aio.ContainerAppsAPIClient.get_custom_domain_verification_id": "Microsoft.App.getCustomDomainVerificationId",
+        "azure.mgmt.appcontainers.ContainerAppsAPIClient.job_execution": "Microsoft.App.Jobs.jobExecution",
+        "azure.mgmt.appcontainers.aio.ContainerAppsAPIClient.job_execution": "Microsoft.App.Jobs.jobExecution"
     }
 }

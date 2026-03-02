@@ -30,7 +30,7 @@ def main():
         subscription_id="SUBSCRIPTION_ID",
     )
 
-    response = client.jobs.job_execution(
+    response = client.job_execution(
         resource_group_name="rg",
         job_name="testcontainerAppsJob0",
         job_execution_name="jobExecution1",
