@@ -1,9 +1,5 @@
 ## tsp migration
 
-## 2.2.0b2 (2026-03-04)
-
-change log generation failed!!! You need to write it manually!!!
-
 ### Breaking Changes
 
 - Model `ApplicationResource` deleted or renamed its instance variable `type_version`
@@ -87,9 +83,6 @@ change log generation failed!!! You need to write it manually!!!
 - Model `ClusterUpdateParameters` deleted or renamed its instance variable `wave_upgrade_paused`
 - Model `ClusterUpdateParameters` deleted or renamed its instance variable `notifications`
 - Model `ClusterUpdateParameters` deleted or renamed its instance variable `enable_http_gateway_exclusive_auth_mode`
-- Model `ProxyResource` deleted or renamed its instance variable `location`
-- Model `ProxyResource` deleted or renamed its instance variable `tags`
-- Model `ProxyResource` deleted or renamed its instance variable `etag`
 - Model `Resource` deleted or renamed its instance variable `location`
 - Model `Resource` deleted or renamed its instance variable `tags`
 - Model `Resource` deleted or renamed its instance variable `etag`
