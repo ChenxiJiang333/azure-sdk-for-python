@@ -31,7 +31,7 @@ def main():
         subscription_id="SUBSCRIPTION_ID",
     )
 
-    response = client.virtual_wans.begin_generatevirtualwanvpnserverconfigurationvpnprofile(
+    response = client.begin_generatevirtualwanvpnserverconfigurationvpnprofile(
         resource_group_name="rg1",
         virtual_wan_name="wan1",
         vpn_client_params={

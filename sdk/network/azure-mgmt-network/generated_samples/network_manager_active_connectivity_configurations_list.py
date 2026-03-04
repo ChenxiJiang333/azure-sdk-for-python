@@ -30,7 +30,7 @@ def main():
         subscription_id="SUBSCRIPTION_ID",
     )
 
-    response = client.network_managers.list_active_connectivity_configurations(
+    response = client.list_active_connectivity_configurations(
         resource_group_name="myResourceGroup",
         network_manager_name="testNetworkManager",
         parameters={"regions": ["westus"], "skipToken": "fakeSkipTokenCode"},

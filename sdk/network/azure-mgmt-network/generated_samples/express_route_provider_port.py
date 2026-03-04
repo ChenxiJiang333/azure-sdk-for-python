@@ -30,7 +30,7 @@ def main():
         subscription_id="SUBSCRIPTION_ID",
     )
 
-    response = client.express_route_provider_ports.express_route_provider_port(
+    response = client.express_route_provider_port(
         providerport="abc",
     )
     print(response)

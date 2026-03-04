@@ -30,7 +30,7 @@ def main():
         subscription_id="SUBSCRIPTION_ID",
     )
 
-    response = client.virtual_wans.supported_security_providers(
+    response = client.supported_security_providers(
         resource_group_name="rg1",
         virtual_wan_name="wan1",
     )

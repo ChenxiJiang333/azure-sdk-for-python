@@ -30,7 +30,7 @@ def main():
         subscription_id="SUBSCRIPTION_ID",
     )
 
-    response = client.effective_configurations.list_network_manager_effective_connectivity_configurations(
+    response = client.list_network_manager_effective_connectivity_configurations(
         resource_group_name="myResourceGroup",
         virtual_network_name="testVirtualNetwork",
         parameters={"skipToken": "FakeSkipTokenCode"},

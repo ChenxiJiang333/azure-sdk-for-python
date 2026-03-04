@@ -30,7 +30,7 @@ def main():
         subscription_id="SUBSCRIPTION_ID",
     )
 
-    response = client.bastion_hosts.disconnect_active_sessions(
+    response = client.disconnect_active_sessions(
         resource_group_name="rg1",
         bastion_host_name="bastionhosttenant",
         session_ids={"sessionIds": ["session1", "session2", "session3"]},

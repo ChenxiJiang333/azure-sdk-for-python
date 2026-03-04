@@ -36,7 +36,8 @@ from .. import models as _models
 from .._configuration import NetworkManagementClientConfiguration
 from .._utils.model_base import SdkJSONEncoder, _deserialize, _failsafe_deserialize
 from .._utils.serialization import Deserializer, Serializer
-from .._utils.utils import prep_if_match, prep_if_none_match
+from .._utils.utils import ClientMixinABC, prep_if_match, prep_if_none_match
+from .._validation import api_version_validation
 
 T = TypeVar("T")
 ClsType = Optional[Callable[[PipelineResponse[HttpRequest, HttpResponse], T, dict[str, Any]], Any]]
@@ -1229,210 +1230,6 @@ def build_bastion_hosts_list_request(subscription_id: str, **kwargs: Any) -> Htt
     return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_bastion_hosts_put_bastion_shareable_link_request(  # pylint: disable=name-too-long
-    resource_group_name: str, bastion_host_name: str, subscription_id: str, **kwargs: Any
-) -> HttpRequest:
-    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
-    content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
-    accept = _headers.pop("Accept", "application/json")
-
-    # Construct URL
-    _url = "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/bastionHosts/{bastionHostName}/createShareableLinks"
-    path_format_arguments = {
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
-        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
-        "bastionHostName": _SERIALIZER.url("bastion_host_name", bastion_host_name, "str"),
-    }
-
-    _url: str = _url.format(**path_format_arguments)  # type: ignore
-
-    # Construct parameters
-    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
-
-    # Construct headers
-    if content_type is not None:
-        _headers["Content-Type"] = _SERIALIZER.header("content_type", content_type, "str")
-    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
-
-    return HttpRequest(method="POST", url=_url, params=_params, headers=_headers, **kwargs)
-
-
-def build_bastion_hosts_delete_bastion_shareable_link_request(  # pylint: disable=name-too-long
-    resource_group_name: str, bastion_host_name: str, subscription_id: str, **kwargs: Any
-) -> HttpRequest:
-    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
-    content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
-    # Construct URL
-    _url = "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/bastionHosts/{bastionHostName}/deleteShareableLinks"
-    path_format_arguments = {
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
-        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
-        "bastionHostName": _SERIALIZER.url("bastion_host_name", bastion_host_name, "str"),
-    }
-
-    _url: str = _url.format(**path_format_arguments)  # type: ignore
-
-    # Construct parameters
-    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
-
-    # Construct headers
-    if content_type is not None:
-        _headers["Content-Type"] = _SERIALIZER.header("content_type", content_type, "str")
-
-    return HttpRequest(method="POST", url=_url, params=_params, headers=_headers, **kwargs)
-
-
-def build_bastion_hosts_delete_bastion_shareable_link_by_token_request(  # pylint: disable=name-too-long
-    resource_group_name: str, bastion_host_name: str, subscription_id: str, **kwargs: Any
-) -> HttpRequest:
-    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
-    content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
-    # Construct URL
-    _url = "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/bastionHosts/{bastionHostName}/deleteShareableLinksByToken"
-    path_format_arguments = {
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
-        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
-        "bastionHostName": _SERIALIZER.url("bastion_host_name", bastion_host_name, "str"),
-    }
-
-    _url: str = _url.format(**path_format_arguments)  # type: ignore
-
-    # Construct parameters
-    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
-
-    # Construct headers
-    if content_type is not None:
-        _headers["Content-Type"] = _SERIALIZER.header("content_type", content_type, "str")
-
-    return HttpRequest(method="POST", url=_url, params=_params, headers=_headers, **kwargs)
-
-
-def build_bastion_hosts_get_bastion_shareable_link_request(  # pylint: disable=name-too-long
-    resource_group_name: str, bastion_host_name: str, subscription_id: str, **kwargs: Any
-) -> HttpRequest:
-    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
-    content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
-    accept = _headers.pop("Accept", "application/json")
-
-    # Construct URL
-    _url = "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/bastionHosts/{bastionHostName}/getShareableLinks"
-    path_format_arguments = {
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
-        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
-        "bastionHostName": _SERIALIZER.url("bastion_host_name", bastion_host_name, "str"),
-    }
-
-    _url: str = _url.format(**path_format_arguments)  # type: ignore
-
-    # Construct parameters
-    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
-
-    # Construct headers
-    if content_type is not None:
-        _headers["Content-Type"] = _SERIALIZER.header("content_type", content_type, "str")
-    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
-
-    return HttpRequest(method="POST", url=_url, params=_params, headers=_headers, **kwargs)
-
-
-def build_bastion_hosts_get_active_sessions_request(  # pylint: disable=name-too-long
-    resource_group_name: str, bastion_host_name: str, subscription_id: str, **kwargs: Any
-) -> HttpRequest:
-    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
-    accept = _headers.pop("Accept", "application/json")
-
-    # Construct URL
-    _url = "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/bastionHosts/{bastionHostName}/getActiveSessions"
-    path_format_arguments = {
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
-        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
-        "bastionHostName": _SERIALIZER.url("bastion_host_name", bastion_host_name, "str"),
-    }
-
-    _url: str = _url.format(**path_format_arguments)  # type: ignore
-
-    # Construct parameters
-    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
-
-    # Construct headers
-    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
-
-    return HttpRequest(method="POST", url=_url, params=_params, headers=_headers, **kwargs)
-
-
-def build_bastion_hosts_disconnect_active_sessions_request(  # pylint: disable=name-too-long
-    resource_group_name: str, bastion_host_name: str, subscription_id: str, **kwargs: Any
-) -> HttpRequest:
-    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
-    content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
-    accept = _headers.pop("Accept", "application/json")
-
-    # Construct URL
-    _url = "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/bastionHosts/{bastionHostName}/disconnectActiveSessions"
-    path_format_arguments = {
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
-        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
-        "bastionHostName": _SERIALIZER.url("bastion_host_name", bastion_host_name, "str"),
-    }
-
-    _url: str = _url.format(**path_format_arguments)  # type: ignore
-
-    # Construct parameters
-    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
-
-    # Construct headers
-    if content_type is not None:
-        _headers["Content-Type"] = _SERIALIZER.header("content_type", content_type, "str")
-    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
-
-    return HttpRequest(method="POST", url=_url, params=_params, headers=_headers, **kwargs)
-
-
-def build_express_route_provider_ports_express_route_provider_port_request(  # pylint: disable=name-too-long
-    providerport: str, subscription_id: str, **kwargs: Any
-) -> HttpRequest:
-    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
-    accept = _headers.pop("Accept", "application/json")
-
-    # Construct URL
-    _url = "/subscriptions/{subscriptionId}/providers/Microsoft.Network/expressRouteProviderPorts/{providerport}"
-    path_format_arguments = {
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
-        "providerport": _SERIALIZER.url("providerport", providerport, "str"),
-    }
-
-    _url: str = _url.format(**path_format_arguments)  # type: ignore
-
-    # Construct parameters
-    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
-
-    # Construct headers
-    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
-
-    return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
-
-
 def build_network_interfaces_get_cloud_service_network_interface_request(  # pylint: disable=name-too-long
     resource_group_name: str,
     cloud_service_name: str,
@@ -1824,6 +1621,90 @@ def build_network_interfaces_list_cloud_service_network_interfaces_request(  # p
 
     # Construct parameters
     _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
+
+    # Construct headers
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
+
+
+def build_network_interfaces_get_virtual_machine_scale_set_ip_configuration_request(  # pylint: disable=name-too-long
+    resource_group_name: str,
+    virtual_machine_scale_set_name: str,
+    virtualmachine_index: str,
+    network_interface_name: str,
+    ip_configuration_name: str,
+    subscription_id: str,
+    *,
+    expand: Optional[str] = None,
+    **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2018-10-01"))
+    accept = _headers.pop("Accept", "application/json")
+
+    # Construct URL
+    _url = "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/virtualMachines/{virtualmachineIndex}/networkInterfaces/{networkInterfaceName}/ipConfigurations/{ipConfigurationName}"
+    path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
+        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
+        "virtualMachineScaleSetName": _SERIALIZER.url(
+            "virtual_machine_scale_set_name", virtual_machine_scale_set_name, "str"
+        ),
+        "virtualmachineIndex": _SERIALIZER.url("virtualmachine_index", virtualmachine_index, "str"),
+        "networkInterfaceName": _SERIALIZER.url("network_interface_name", network_interface_name, "str"),
+        "ipConfigurationName": _SERIALIZER.url("ip_configuration_name", ip_configuration_name, "str"),
+    }
+
+    _url: str = _url.format(**path_format_arguments)  # type: ignore
+
+    # Construct parameters
+    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
+    if expand is not None:
+        _params["$expand"] = _SERIALIZER.query("expand", expand, "str")
+
+    # Construct headers
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
+
+
+def build_network_interfaces_list_virtual_machine_scale_set_ip_configurations_request(  # pylint: disable=name-too-long
+    resource_group_name: str,
+    virtual_machine_scale_set_name: str,
+    virtualmachine_index: str,
+    network_interface_name: str,
+    subscription_id: str,
+    *,
+    expand: Optional[str] = None,
+    **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2018-10-01"))
+    accept = _headers.pop("Accept", "application/json")
+
+    # Construct URL
+    _url = "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/virtualMachines/{virtualmachineIndex}/networkInterfaces/{networkInterfaceName}/ipConfigurations"
+    path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
+        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
+        "virtualMachineScaleSetName": _SERIALIZER.url(
+            "virtual_machine_scale_set_name", virtual_machine_scale_set_name, "str"
+        ),
+        "virtualmachineIndex": _SERIALIZER.url("virtualmachine_index", virtualmachine_index, "str"),
+        "networkInterfaceName": _SERIALIZER.url("network_interface_name", network_interface_name, "str"),
+    }
+
+    _url: str = _url.format(**path_format_arguments)  # type: ignore
+
+    # Construct parameters
+    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
+    if expand is not None:
+        _params["$expand"] = _SERIALIZER.query("expand", expand, "str")
 
     # Construct headers
     _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
@@ -4950,82 +4831,6 @@ def build_network_managers_list_by_subscription_request(  # pylint: disable=name
     _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
 
     return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
-
-
-def build_network_managers_list_active_connectivity_configurations_request(  # pylint: disable=name-too-long
-    resource_group_name: str,
-    network_manager_name: str,
-    subscription_id: str,
-    *,
-    top: Optional[int] = None,
-    **kwargs: Any
-) -> HttpRequest:
-    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
-    content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
-    accept = _headers.pop("Accept", "application/json")
-
-    # Construct URL
-    _url = "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/listActiveConnectivityConfigurations"
-    path_format_arguments = {
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
-        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
-        "networkManagerName": _SERIALIZER.url("network_manager_name", network_manager_name, "str"),
-    }
-
-    _url: str = _url.format(**path_format_arguments)  # type: ignore
-
-    # Construct parameters
-    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
-    if top is not None:
-        _params["$top"] = _SERIALIZER.query("top", top, "int")
-
-    # Construct headers
-    if content_type is not None:
-        _headers["Content-Type"] = _SERIALIZER.header("content_type", content_type, "str")
-    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
-
-    return HttpRequest(method="POST", url=_url, params=_params, headers=_headers, **kwargs)
-
-
-def build_network_managers_list_active_security_admin_rules_request(  # pylint: disable=name-too-long
-    resource_group_name: str,
-    network_manager_name: str,
-    subscription_id: str,
-    *,
-    top: Optional[int] = None,
-    **kwargs: Any
-) -> HttpRequest:
-    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
-    content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
-    accept = _headers.pop("Accept", "application/json")
-
-    # Construct URL
-    _url = "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/listActiveSecurityAdminRules"
-    path_format_arguments = {
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
-        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
-        "networkManagerName": _SERIALIZER.url("network_manager_name", network_manager_name, "str"),
-    }
-
-    _url: str = _url.format(**path_format_arguments)  # type: ignore
-
-    # Construct parameters
-    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
-    if top is not None:
-        _params["$top"] = _SERIALIZER.query("top", top, "int")
-
-    # Construct headers
-    if content_type is not None:
-        _headers["Content-Type"] = _SERIALIZER.header("content_type", content_type, "str")
-    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
-
-    return HttpRequest(method="POST", url=_url, params=_params, headers=_headers, **kwargs)
 
 
 def build_static_cidrs_get_request(
@@ -12372,82 +12177,6 @@ def build_virtual_networks_list_ddos_protection_status_request(  # pylint: disab
     return HttpRequest(method="POST", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_effective_configurations_list_network_manager_effective_connectivity_configurations_request(  # pylint: disable=name-too-long
-    resource_group_name: str,
-    virtual_network_name: str,
-    subscription_id: str,
-    *,
-    top: Optional[int] = None,
-    **kwargs: Any
-) -> HttpRequest:
-    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
-    content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
-    accept = _headers.pop("Accept", "application/json")
-
-    # Construct URL
-    _url = "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/listNetworkManagerEffectiveConnectivityConfigurations"
-    path_format_arguments = {
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
-        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
-        "virtualNetworkName": _SERIALIZER.url("virtual_network_name", virtual_network_name, "str"),
-    }
-
-    _url: str = _url.format(**path_format_arguments)  # type: ignore
-
-    # Construct parameters
-    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
-    if top is not None:
-        _params["$top"] = _SERIALIZER.query("top", top, "int")
-
-    # Construct headers
-    if content_type is not None:
-        _headers["Content-Type"] = _SERIALIZER.header("content_type", content_type, "str")
-    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
-
-    return HttpRequest(method="POST", url=_url, params=_params, headers=_headers, **kwargs)
-
-
-def build_effective_configurations_list_network_manager_effective_security_admin_rules_request(  # pylint: disable=name-too-long
-    resource_group_name: str,
-    virtual_network_name: str,
-    subscription_id: str,
-    *,
-    top: Optional[int] = None,
-    **kwargs: Any
-) -> HttpRequest:
-    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
-    content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
-    accept = _headers.pop("Accept", "application/json")
-
-    # Construct URL
-    _url = "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/listNetworkManagerEffectiveSecurityAdminRules"
-    path_format_arguments = {
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
-        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
-        "virtualNetworkName": _SERIALIZER.url("virtual_network_name", virtual_network_name, "str"),
-    }
-
-    _url: str = _url.format(**path_format_arguments)  # type: ignore
-
-    # Construct parameters
-    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
-    if top is not None:
-        _params["$top"] = _SERIALIZER.query("top", top, "int")
-
-    # Construct headers
-    if content_type is not None:
-        _headers["Content-Type"] = _SERIALIZER.header("content_type", content_type, "str")
-    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
-
-    return HttpRequest(method="POST", url=_url, params=_params, headers=_headers, **kwargs)
-
-
 def build_subnets_get_request(
     resource_group_name: str,
     virtual_network_name: str,
@@ -14837,228 +14566,6 @@ def build_virtual_router_peerings_list_request(  # pylint: disable=name-too-long
     return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_virtual_wans_supported_security_providers_request(  # pylint: disable=name-too-long
-    resource_group_name: str, virtual_wan_name: str, subscription_id: str, **kwargs: Any
-) -> HttpRequest:
-    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
-    accept = _headers.pop("Accept", "application/json")
-
-    # Construct URL
-    _url = "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualWans/{virtualWANName}/supportedSecurityProviders"
-    path_format_arguments = {
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
-        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
-        "virtualWANName": _SERIALIZER.url("virtual_wan_name", virtual_wan_name, "str"),
-    }
-
-    _url: str = _url.format(**path_format_arguments)  # type: ignore
-
-    # Construct parameters
-    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
-
-    # Construct headers
-    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
-
-    return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
-
-
-def build_virtual_wans_generatevirtualwanvpnserverconfigurationvpnprofile_request(  # pylint: disable=name-too-long
-    resource_group_name: str, virtual_wan_name: str, subscription_id: str, **kwargs: Any
-) -> HttpRequest:
-    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
-    content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
-    accept = _headers.pop("Accept", "application/json")
-
-    # Construct URL
-    _url = "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualWans/{virtualWANName}/generateVpnProfile"
-    path_format_arguments = {
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
-        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
-        "virtualWANName": _SERIALIZER.url("virtual_wan_name", virtual_wan_name, "str"),
-    }
-
-    _url: str = _url.format(**path_format_arguments)  # type: ignore
-
-    # Construct parameters
-    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
-
-    # Construct headers
-    if content_type is not None:
-        _headers["Content-Type"] = _SERIALIZER.header("content_type", content_type, "str")
-    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
-
-    return HttpRequest(method="POST", url=_url, params=_params, headers=_headers, **kwargs)
-
-
-def build_virtual_wans_get_request(
-    resource_group_name: str, virtual_wan_name: str, subscription_id: str, **kwargs: Any
-) -> HttpRequest:
-    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
-    accept = _headers.pop("Accept", "application/json")
-
-    # Construct URL
-    _url = "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualWans/{VirtualWANName}"
-    path_format_arguments = {
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
-        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
-        "VirtualWANName": _SERIALIZER.url("virtual_wan_name", virtual_wan_name, "str"),
-    }
-
-    _url: str = _url.format(**path_format_arguments)  # type: ignore
-
-    # Construct parameters
-    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
-
-    # Construct headers
-    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
-
-    return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
-
-
-def build_virtual_wans_create_or_update_request(  # pylint: disable=name-too-long
-    resource_group_name: str, virtual_wan_name: str, subscription_id: str, **kwargs: Any
-) -> HttpRequest:
-    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
-    content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
-    accept = _headers.pop("Accept", "application/json")
-
-    # Construct URL
-    _url = "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualWans/{VirtualWANName}"
-    path_format_arguments = {
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
-        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
-        "VirtualWANName": _SERIALIZER.url("virtual_wan_name", virtual_wan_name, "str"),
-    }
-
-    _url: str = _url.format(**path_format_arguments)  # type: ignore
-
-    # Construct parameters
-    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
-
-    # Construct headers
-    if content_type is not None:
-        _headers["Content-Type"] = _SERIALIZER.header("content_type", content_type, "str")
-    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
-
-    return HttpRequest(method="PUT", url=_url, params=_params, headers=_headers, **kwargs)
-
-
-def build_virtual_wans_update_tags_request(
-    resource_group_name: str, virtual_wan_name: str, subscription_id: str, **kwargs: Any
-) -> HttpRequest:
-    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
-    content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
-    accept = _headers.pop("Accept", "application/json")
-
-    # Construct URL
-    _url = "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualWans/{VirtualWANName}"
-    path_format_arguments = {
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
-        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
-        "VirtualWANName": _SERIALIZER.url("virtual_wan_name", virtual_wan_name, "str"),
-    }
-
-    _url: str = _url.format(**path_format_arguments)  # type: ignore
-
-    # Construct parameters
-    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
-
-    # Construct headers
-    if content_type is not None:
-        _headers["Content-Type"] = _SERIALIZER.header("content_type", content_type, "str")
-    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
-
-    return HttpRequest(method="PATCH", url=_url, params=_params, headers=_headers, **kwargs)
-
-
-def build_virtual_wans_delete_request(
-    resource_group_name: str, virtual_wan_name: str, subscription_id: str, **kwargs: Any
-) -> HttpRequest:
-    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
-    # Construct URL
-    _url = "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualWans/{VirtualWANName}"
-    path_format_arguments = {
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
-        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
-        "VirtualWANName": _SERIALIZER.url("virtual_wan_name", virtual_wan_name, "str"),
-    }
-
-    _url: str = _url.format(**path_format_arguments)  # type: ignore
-
-    # Construct parameters
-    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
-
-    return HttpRequest(method="DELETE", url=_url, params=_params, **kwargs)
-
-
-def build_virtual_wans_list_by_resource_group_request(  # pylint: disable=name-too-long
-    resource_group_name: str, subscription_id: str, **kwargs: Any
-) -> HttpRequest:
-    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
-    accept = _headers.pop("Accept", "application/json")
-
-    # Construct URL
-    _url = "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualWans"
-    path_format_arguments = {
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
-        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
-    }
-
-    _url: str = _url.format(**path_format_arguments)  # type: ignore
-
-    # Construct parameters
-    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
-
-    # Construct headers
-    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
-
-    return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
-
-
-def build_virtual_wans_list_request(subscription_id: str, **kwargs: Any) -> HttpRequest:
-    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
-    accept = _headers.pop("Accept", "application/json")
-
-    # Construct URL
-    _url = "/subscriptions/{subscriptionId}/providers/Microsoft.Network/virtualWans"
-    path_format_arguments = {
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
-    }
-
-    _url: str = _url.format(**path_format_arguments)  # type: ignore
-
-    # Construct parameters
-    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
-
-    # Construct headers
-    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
-
-    return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
-
-
 def build_vpn_sites_get_request(
     resource_group_name: str, vpn_site_name: str, subscription_id: str, **kwargs: Any
 ) -> HttpRequest:
@@ -16145,6 +15652,171 @@ def build_vpn_site_link_connections_get_request(  # pylint: disable=name-too-lon
     return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
 
 
+def build_p2_svpn_gateways_get_request(
+    resource_group_name: str, gateway_name: str, subscription_id: str, **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
+    accept = _headers.pop("Accept", "application/json")
+
+    # Construct URL
+    _url = "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/p2svpnGateways/{gatewayName}"
+    path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
+        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
+        "gatewayName": _SERIALIZER.url("gateway_name", gateway_name, "str"),
+    }
+
+    _url: str = _url.format(**path_format_arguments)  # type: ignore
+
+    # Construct parameters
+    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
+
+    # Construct headers
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
+
+
+def build_p2_svpn_gateways_create_or_update_request(  # pylint: disable=name-too-long
+    resource_group_name: str, gateway_name: str, subscription_id: str, **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
+    content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+    accept = _headers.pop("Accept", "application/json")
+
+    # Construct URL
+    _url = "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/p2svpnGateways/{gatewayName}"
+    path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
+        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
+        "gatewayName": _SERIALIZER.url("gateway_name", gateway_name, "str"),
+    }
+
+    _url: str = _url.format(**path_format_arguments)  # type: ignore
+
+    # Construct parameters
+    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
+
+    # Construct headers
+    if content_type is not None:
+        _headers["Content-Type"] = _SERIALIZER.header("content_type", content_type, "str")
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(method="PUT", url=_url, params=_params, headers=_headers, **kwargs)
+
+
+def build_p2_svpn_gateways_update_tags_request(  # pylint: disable=name-too-long
+    resource_group_name: str, gateway_name: str, subscription_id: str, **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
+    content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+    accept = _headers.pop("Accept", "application/json")
+
+    # Construct URL
+    _url = "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/p2svpnGateways/{gatewayName}"
+    path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
+        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
+        "gatewayName": _SERIALIZER.url("gateway_name", gateway_name, "str"),
+    }
+
+    _url: str = _url.format(**path_format_arguments)  # type: ignore
+
+    # Construct parameters
+    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
+
+    # Construct headers
+    if content_type is not None:
+        _headers["Content-Type"] = _SERIALIZER.header("content_type", content_type, "str")
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(method="PATCH", url=_url, params=_params, headers=_headers, **kwargs)
+
+
+def build_p2_svpn_gateways_delete_request(
+    resource_group_name: str, gateway_name: str, subscription_id: str, **kwargs: Any
+) -> HttpRequest:
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
+    # Construct URL
+    _url = "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/p2svpnGateways/{gatewayName}"
+    path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
+        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
+        "gatewayName": _SERIALIZER.url("gateway_name", gateway_name, "str"),
+    }
+
+    _url: str = _url.format(**path_format_arguments)  # type: ignore
+
+    # Construct parameters
+    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
+
+    return HttpRequest(method="DELETE", url=_url, params=_params, **kwargs)
+
+
+def build_p2_svpn_gateways_list_by_resource_group_request(  # pylint: disable=name-too-long
+    resource_group_name: str, subscription_id: str, **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
+    accept = _headers.pop("Accept", "application/json")
+
+    # Construct URL
+    _url = (
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/p2svpnGateways"
+    )
+    path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
+        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
+    }
+
+    _url: str = _url.format(**path_format_arguments)  # type: ignore
+
+    # Construct parameters
+    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
+
+    # Construct headers
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
+
+
+def build_p2_svpn_gateways_list_request(subscription_id: str, **kwargs: Any) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
+    accept = _headers.pop("Accept", "application/json")
+
+    # Construct URL
+    _url = "/subscriptions/{subscriptionId}/providers/Microsoft.Network/p2svpnGateways"
+    path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
+    }
+
+    _url: str = _url.format(**path_format_arguments)  # type: ignore
+
+    # Construct parameters
+    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
+
+    # Construct headers
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
+
+
 def build_p2_svpn_gateways_reset_request(
     resource_group_name: str, gateway_name: str, subscription_id: str, **kwargs: Any
 ) -> HttpRequest:
@@ -16169,6 +15841,124 @@ def build_p2_svpn_gateways_reset_request(
 
     # Construct headers
     _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(method="POST", url=_url, params=_params, headers=_headers, **kwargs)
+
+
+def build_p2_svpn_gateways_generate_vpn_profile_request(  # pylint: disable=name-too-long
+    resource_group_name: str, gateway_name: str, subscription_id: str, **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
+    content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+    accept = _headers.pop("Accept", "application/json")
+
+    # Construct URL
+    _url = "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/p2svpnGateways/{gatewayName}/generatevpnprofile"
+    path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
+        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
+        "gatewayName": _SERIALIZER.url("gateway_name", gateway_name, "str"),
+    }
+
+    _url: str = _url.format(**path_format_arguments)  # type: ignore
+
+    # Construct parameters
+    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
+
+    # Construct headers
+    if content_type is not None:
+        _headers["Content-Type"] = _SERIALIZER.header("content_type", content_type, "str")
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(method="POST", url=_url, params=_params, headers=_headers, **kwargs)
+
+
+def build_p2_svpn_gateways_get_p2_s_vpn_connection_health_request(  # pylint: disable=name-too-long
+    resource_group_name: str, gateway_name: str, subscription_id: str, **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
+    accept = _headers.pop("Accept", "application/json")
+
+    # Construct URL
+    _url = "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/p2svpnGateways/{gatewayName}/getP2sVpnConnectionHealth"
+    path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
+        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
+        "gatewayName": _SERIALIZER.url("gateway_name", gateway_name, "str"),
+    }
+
+    _url: str = _url.format(**path_format_arguments)  # type: ignore
+
+    # Construct parameters
+    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
+
+    # Construct headers
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(method="POST", url=_url, params=_params, headers=_headers, **kwargs)
+
+
+def build_p2_svpn_gateways_get_p2_s_vpn_connection_health_detailed_request(  # pylint: disable=name-too-long
+    resource_group_name: str, gateway_name: str, subscription_id: str, **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
+    content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+    accept = _headers.pop("Accept", "application/json")
+
+    # Construct URL
+    _url = "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/p2svpnGateways/{gatewayName}/getP2sVpnConnectionHealthDetailed"
+    path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
+        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
+        "gatewayName": _SERIALIZER.url("gateway_name", gateway_name, "str"),
+    }
+
+    _url: str = _url.format(**path_format_arguments)  # type: ignore
+
+    # Construct parameters
+    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
+
+    # Construct headers
+    if content_type is not None:
+        _headers["Content-Type"] = _SERIALIZER.header("content_type", content_type, "str")
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(method="POST", url=_url, params=_params, headers=_headers, **kwargs)
+
+
+def build_p2_svpn_gateways_disconnect_p2_s_vpn_connections_request(  # pylint: disable=name-too-long
+    resource_group_name: str, p2_s_vpn_gateway_name: str, subscription_id: str, **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
+    content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+    # Construct URL
+    _url = "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/p2svpnGateways/{p2sVpnGatewayName}/disconnectP2sVpnConnections"
+    path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
+        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
+        "p2sVpnGatewayName": _SERIALIZER.url("p2_s_vpn_gateway_name", p2_s_vpn_gateway_name, "str"),
+    }
+
+    _url: str = _url.format(**path_format_arguments)  # type: ignore
+
+    # Construct parameters
+    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
+
+    # Construct headers
+    if content_type is not None:
+        _headers["Content-Type"] = _SERIALIZER.header("content_type", content_type, "str")
 
     return HttpRequest(method="POST", url=_url, params=_params, headers=_headers, **kwargs)
 
@@ -16579,34 +16369,6 @@ def build_web_application_firewall_policies_list_all_request(  # pylint: disable
 
     # Construct parameters
     _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
-
-    # Construct headers
-    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
-
-    return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
-
-
-def build_check_dns_name_availability_check_dns_name_availability_request(  # pylint: disable=name-too-long
-    location: str, subscription_id: str, *, domain_name_label: str, **kwargs: Any
-) -> HttpRequest:
-    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
-    accept = _headers.pop("Accept", "application/json")
-
-    # Construct URL
-    _url = "/subscriptions/{subscriptionId}/providers/Microsoft.Network/locations/{location}/checkDnsNameAvailability"
-    path_format_arguments = {
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
-        "location": _SERIALIZER.url("location", location, "str"),
-    }
-
-    _url: str = _url.format(**path_format_arguments)  # type: ignore
-
-    # Construct parameters
-    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
-    _params["domainNameLabel"] = _SERIALIZER.query("domain_name_label", domain_name_label, "str")
 
     # Construct headers
     _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
@@ -20309,65 +20071,6 @@ def build_service_association_links_list_request(  # pylint: disable=name-too-lo
     return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_virtual_wans_supported_security_providers_request(  # pylint: disable=name-too-long
-    resource_group_name: str, virtual_wan_name: str, subscription_id: str, **kwargs: Any
-) -> HttpRequest:
-    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
-    accept = _headers.pop("Accept", "application/json")
-
-    # Construct URL
-    _url = "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualWans/{virtualWANName}/supportedSecurityProviders"
-    path_format_arguments = {
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
-        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
-        "virtualWANName": _SERIALIZER.url("virtual_wan_name", virtual_wan_name, "str"),
-    }
-
-    _url: str = _url.format(**path_format_arguments)  # type: ignore
-
-    # Construct parameters
-    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
-
-    # Construct headers
-    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
-
-    return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
-
-
-def build_virtual_wans_generatevirtualwanvpnserverconfigurationvpnprofile_request(  # pylint: disable=name-too-long
-    resource_group_name: str, virtual_wan_name: str, subscription_id: str, **kwargs: Any
-) -> HttpRequest:
-    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
-    content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
-    accept = _headers.pop("Accept", "application/json")
-
-    # Construct URL
-    _url = "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualWans/{virtualWANName}/generateVpnProfile"
-    path_format_arguments = {
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
-        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
-        "virtualWANName": _SERIALIZER.url("virtual_wan_name", virtual_wan_name, "str"),
-    }
-
-    _url: str = _url.format(**path_format_arguments)  # type: ignore
-
-    # Construct parameters
-    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
-
-    # Construct headers
-    if content_type is not None:
-        _headers["Content-Type"] = _SERIALIZER.header("content_type", content_type, "str")
-    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
-
-    return HttpRequest(method="POST", url=_url, params=_params, headers=_headers, **kwargs)
-
-
 def build_virtual_wans_get_request(
     resource_group_name: str, virtual_wan_name: str, subscription_id: str, **kwargs: Any
 ) -> HttpRequest:
@@ -20975,7 +20678,7 @@ def build_hub_virtual_network_connections_list_request(  # pylint: disable=name-
     return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_virtual_hub_route_table_v2s_get_request(  # pylint: disable=name-too-long
+def build_virtual_hub_route_table_v2_s_get_request(  # pylint: disable=name-too-long
     resource_group_name: str, virtual_hub_name: str, route_table_name: str, subscription_id: str, **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
@@ -21004,7 +20707,7 @@ def build_virtual_hub_route_table_v2s_get_request(  # pylint: disable=name-too-l
     return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_virtual_hub_route_table_v2s_create_or_update_request(  # pylint: disable=name-too-long
+def build_virtual_hub_route_table_v2_s_create_or_update_request(  # pylint: disable=name-too-long
     resource_group_name: str, virtual_hub_name: str, route_table_name: str, subscription_id: str, **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
@@ -21036,7 +20739,7 @@ def build_virtual_hub_route_table_v2s_create_or_update_request(  # pylint: disab
     return HttpRequest(method="PUT", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_virtual_hub_route_table_v2s_delete_request(  # pylint: disable=name-too-long
+def build_virtual_hub_route_table_v2_s_delete_request(  # pylint: disable=name-too-long
     resource_group_name: str, virtual_hub_name: str, route_table_name: str, subscription_id: str, **kwargs: Any
 ) -> HttpRequest:
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
@@ -21059,7 +20762,7 @@ def build_virtual_hub_route_table_v2s_delete_request(  # pylint: disable=name-to
     return HttpRequest(method="DELETE", url=_url, params=_params, **kwargs)
 
 
-def build_virtual_hub_route_table_v2s_list_request(  # pylint: disable=name-too-long
+def build_virtual_hub_route_table_v2_s_list_request(  # pylint: disable=name-too-long
     resource_group_name: str, virtual_hub_name: str, subscription_id: str, **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
@@ -21609,289 +21312,6 @@ def build_nat_rules_list_by_vpn_gateway_request(  # pylint: disable=name-too-lon
     _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
 
     return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
-
-
-def build_p2s_vpn_gateways_get_request(
-    resource_group_name: str, gateway_name: str, subscription_id: str, **kwargs: Any
-) -> HttpRequest:
-    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
-    accept = _headers.pop("Accept", "application/json")
-
-    # Construct URL
-    _url = "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/p2svpnGateways/{gatewayName}"
-    path_format_arguments = {
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
-        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
-        "gatewayName": _SERIALIZER.url("gateway_name", gateway_name, "str"),
-    }
-
-    _url: str = _url.format(**path_format_arguments)  # type: ignore
-
-    # Construct parameters
-    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
-
-    # Construct headers
-    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
-
-    return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
-
-
-def build_p2s_vpn_gateways_create_or_update_request(  # pylint: disable=name-too-long
-    resource_group_name: str, gateway_name: str, subscription_id: str, **kwargs: Any
-) -> HttpRequest:
-    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
-    content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
-    accept = _headers.pop("Accept", "application/json")
-
-    # Construct URL
-    _url = "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/p2svpnGateways/{gatewayName}"
-    path_format_arguments = {
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
-        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
-        "gatewayName": _SERIALIZER.url("gateway_name", gateway_name, "str"),
-    }
-
-    _url: str = _url.format(**path_format_arguments)  # type: ignore
-
-    # Construct parameters
-    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
-
-    # Construct headers
-    if content_type is not None:
-        _headers["Content-Type"] = _SERIALIZER.header("content_type", content_type, "str")
-    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
-
-    return HttpRequest(method="PUT", url=_url, params=_params, headers=_headers, **kwargs)
-
-
-def build_p2s_vpn_gateways_update_tags_request(  # pylint: disable=name-too-long
-    resource_group_name: str, gateway_name: str, subscription_id: str, **kwargs: Any
-) -> HttpRequest:
-    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
-    content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
-    accept = _headers.pop("Accept", "application/json")
-
-    # Construct URL
-    _url = "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/p2svpnGateways/{gatewayName}"
-    path_format_arguments = {
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
-        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
-        "gatewayName": _SERIALIZER.url("gateway_name", gateway_name, "str"),
-    }
-
-    _url: str = _url.format(**path_format_arguments)  # type: ignore
-
-    # Construct parameters
-    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
-
-    # Construct headers
-    if content_type is not None:
-        _headers["Content-Type"] = _SERIALIZER.header("content_type", content_type, "str")
-    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
-
-    return HttpRequest(method="PATCH", url=_url, params=_params, headers=_headers, **kwargs)
-
-
-def build_p2s_vpn_gateways_delete_request(
-    resource_group_name: str, gateway_name: str, subscription_id: str, **kwargs: Any
-) -> HttpRequest:
-    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
-    # Construct URL
-    _url = "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/p2svpnGateways/{gatewayName}"
-    path_format_arguments = {
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
-        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
-        "gatewayName": _SERIALIZER.url("gateway_name", gateway_name, "str"),
-    }
-
-    _url: str = _url.format(**path_format_arguments)  # type: ignore
-
-    # Construct parameters
-    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
-
-    return HttpRequest(method="DELETE", url=_url, params=_params, **kwargs)
-
-
-def build_p2s_vpn_gateways_list_by_resource_group_request(  # pylint: disable=name-too-long
-    resource_group_name: str, subscription_id: str, **kwargs: Any
-) -> HttpRequest:
-    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
-    accept = _headers.pop("Accept", "application/json")
-
-    # Construct URL
-    _url = (
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/p2svpnGateways"
-    )
-    path_format_arguments = {
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
-        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
-    }
-
-    _url: str = _url.format(**path_format_arguments)  # type: ignore
-
-    # Construct parameters
-    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
-
-    # Construct headers
-    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
-
-    return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
-
-
-def build_p2s_vpn_gateways_list_request(subscription_id: str, **kwargs: Any) -> HttpRequest:
-    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
-    accept = _headers.pop("Accept", "application/json")
-
-    # Construct URL
-    _url = "/subscriptions/{subscriptionId}/providers/Microsoft.Network/p2svpnGateways"
-    path_format_arguments = {
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
-    }
-
-    _url: str = _url.format(**path_format_arguments)  # type: ignore
-
-    # Construct parameters
-    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
-
-    # Construct headers
-    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
-
-    return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
-
-
-def build_p2s_vpn_gateways_generate_vpn_profile_request(  # pylint: disable=name-too-long
-    resource_group_name: str, gateway_name: str, subscription_id: str, **kwargs: Any
-) -> HttpRequest:
-    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
-    content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
-    accept = _headers.pop("Accept", "application/json")
-
-    # Construct URL
-    _url = "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/p2svpnGateways/{gatewayName}/generatevpnprofile"
-    path_format_arguments = {
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
-        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
-        "gatewayName": _SERIALIZER.url("gateway_name", gateway_name, "str"),
-    }
-
-    _url: str = _url.format(**path_format_arguments)  # type: ignore
-
-    # Construct parameters
-    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
-
-    # Construct headers
-    if content_type is not None:
-        _headers["Content-Type"] = _SERIALIZER.header("content_type", content_type, "str")
-    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
-
-    return HttpRequest(method="POST", url=_url, params=_params, headers=_headers, **kwargs)
-
-
-def build_p2s_vpn_gateways_get_p2_s_vpn_connection_health_request(  # pylint: disable=name-too-long
-    resource_group_name: str, gateway_name: str, subscription_id: str, **kwargs: Any
-) -> HttpRequest:
-    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
-    accept = _headers.pop("Accept", "application/json")
-
-    # Construct URL
-    _url = "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/p2svpnGateways/{gatewayName}/getP2sVpnConnectionHealth"
-    path_format_arguments = {
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
-        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
-        "gatewayName": _SERIALIZER.url("gateway_name", gateway_name, "str"),
-    }
-
-    _url: str = _url.format(**path_format_arguments)  # type: ignore
-
-    # Construct parameters
-    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
-
-    # Construct headers
-    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
-
-    return HttpRequest(method="POST", url=_url, params=_params, headers=_headers, **kwargs)
-
-
-def build_p2s_vpn_gateways_get_p2_s_vpn_connection_health_detailed_request(  # pylint: disable=name-too-long
-    resource_group_name: str, gateway_name: str, subscription_id: str, **kwargs: Any
-) -> HttpRequest:
-    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
-    content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
-    accept = _headers.pop("Accept", "application/json")
-
-    # Construct URL
-    _url = "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/p2svpnGateways/{gatewayName}/getP2sVpnConnectionHealthDetailed"
-    path_format_arguments = {
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
-        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
-        "gatewayName": _SERIALIZER.url("gateway_name", gateway_name, "str"),
-    }
-
-    _url: str = _url.format(**path_format_arguments)  # type: ignore
-
-    # Construct parameters
-    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
-
-    # Construct headers
-    if content_type is not None:
-        _headers["Content-Type"] = _SERIALIZER.header("content_type", content_type, "str")
-    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
-
-    return HttpRequest(method="POST", url=_url, params=_params, headers=_headers, **kwargs)
-
-
-def build_p2s_vpn_gateways_disconnect_p2_s_vpn_connections_request(  # pylint: disable=name-too-long
-    resource_group_name: str, p2_s_vpn_gateway_name: str, subscription_id: str, **kwargs: Any
-) -> HttpRequest:
-    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
-    content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
-    # Construct URL
-    _url = "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/p2svpnGateways/{p2sVpnGatewayName}/disconnectP2sVpnConnections"
-    path_format_arguments = {
-        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
-        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
-        "p2sVpnGatewayName": _SERIALIZER.url("p2_s_vpn_gateway_name", p2_s_vpn_gateway_name, "str"),
-    }
-
-    _url: str = _url.format(**path_format_arguments)  # type: ignore
-
-    # Construct parameters
-    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
-
-    # Construct headers
-    if content_type is not None:
-        _headers["Content-Type"] = _SERIALIZER.header("content_type", content_type, "str")
-
-    return HttpRequest(method="POST", url=_url, params=_params, headers=_headers, **kwargs)
 
 
 def build_express_route_connections_create_or_update_request(  # pylint: disable=name-too-long
@@ -22831,6 +22251,931 @@ def build_usages_list_request(location: str, subscription_id: str, **kwargs: Any
 
     # Construct parameters
     _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
+
+    # Construct headers
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
+
+
+def build_network_interfaces_get_cloud_service_network_interface_request(  # pylint: disable=name-too-long
+    resource_group_name: str,
+    cloud_service_name: str,
+    role_instance_name: str,
+    network_interface_name: str,
+    subscription_id: str,
+    *,
+    expand: Optional[str] = None,
+    **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
+    accept = _headers.pop("Accept", "application/json")
+
+    # Construct URL
+    _url = "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Compute/cloudServices/{cloudServiceName}/roleInstances/{roleInstanceName}/networkInterfaces/{networkInterfaceName}"
+    path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
+        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
+        "cloudServiceName": _SERIALIZER.url("cloud_service_name", cloud_service_name, "str"),
+        "roleInstanceName": _SERIALIZER.url("role_instance_name", role_instance_name, "str"),
+        "networkInterfaceName": _SERIALIZER.url("network_interface_name", network_interface_name, "str"),
+    }
+
+    _url: str = _url.format(**path_format_arguments)  # type: ignore
+
+    # Construct parameters
+    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
+    if expand is not None:
+        _params["$expand"] = _SERIALIZER.query("expand", expand, "str")
+
+    # Construct headers
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
+
+
+def build_network_interfaces_list_cloud_service_role_instance_network_interfaces_request(  # pylint: disable=name-too-long
+    resource_group_name: str, cloud_service_name: str, role_instance_name: str, subscription_id: str, **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
+    accept = _headers.pop("Accept", "application/json")
+
+    # Construct URL
+    _url = "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Compute/cloudServices/{cloudServiceName}/roleInstances/{roleInstanceName}/networkInterfaces"
+    path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
+        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
+        "cloudServiceName": _SERIALIZER.url("cloud_service_name", cloud_service_name, "str"),
+        "roleInstanceName": _SERIALIZER.url("role_instance_name", role_instance_name, "str"),
+    }
+
+    _url: str = _url.format(**path_format_arguments)  # type: ignore
+
+    # Construct parameters
+    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
+
+    # Construct headers
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
+
+
+def build_network_interfaces_get_virtual_machine_scale_set_network_interface_request(  # pylint: disable=name-too-long
+    resource_group_name: str,
+    virtual_machine_scale_set_name: str,
+    virtualmachine_index: str,
+    network_interface_name: str,
+    subscription_id: str,
+    *,
+    expand: Optional[str] = None,
+    **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2018-10-01"))
+    accept = _headers.pop("Accept", "application/json")
+
+    # Construct URL
+    _url = "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/virtualMachines/{virtualmachineIndex}/networkInterfaces/{networkInterfaceName}"
+    path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
+        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
+        "virtualMachineScaleSetName": _SERIALIZER.url(
+            "virtual_machine_scale_set_name", virtual_machine_scale_set_name, "str"
+        ),
+        "virtualmachineIndex": _SERIALIZER.url("virtualmachine_index", virtualmachine_index, "str"),
+        "networkInterfaceName": _SERIALIZER.url("network_interface_name", network_interface_name, "str"),
+    }
+
+    _url: str = _url.format(**path_format_arguments)  # type: ignore
+
+    # Construct parameters
+    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
+    if expand is not None:
+        _params["$expand"] = _SERIALIZER.query("expand", expand, "str")
+
+    # Construct headers
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
+
+
+def build_network_interfaces_list_virtual_machine_scale_set_vm_network_interfaces_request(  # pylint: disable=name-too-long
+    resource_group_name: str,
+    virtual_machine_scale_set_name: str,
+    virtualmachine_index: str,
+    subscription_id: str,
+    **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2018-10-01"))
+    accept = _headers.pop("Accept", "application/json")
+
+    # Construct URL
+    _url = "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualMachineScaleSets/{virtualMachineScaleSetName}/virtualMachines/{virtualmachineIndex}/networkInterfaces"
+    path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
+        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
+        "virtualMachineScaleSetName": _SERIALIZER.url(
+            "virtual_machine_scale_set_name", virtual_machine_scale_set_name, "str"
+        ),
+        "virtualmachineIndex": _SERIALIZER.url("virtualmachine_index", virtualmachine_index, "str"),
+    }
+
+    _url: str = _url.format(**path_format_arguments)  # type: ignore
+
+    # Construct parameters
+    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
+
+    # Construct headers
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
+
+
+def build_network_interfaces_get_request(
+    resource_group_name: str,
+    network_interface_name: str,
+    subscription_id: str,
+    *,
+    expand: Optional[str] = None,
+    **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
+    accept = _headers.pop("Accept", "application/json")
+
+    # Construct URL
+    _url = "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkInterfaces/{networkInterfaceName}"
+    path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
+        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
+        "networkInterfaceName": _SERIALIZER.url("network_interface_name", network_interface_name, "str"),
+    }
+
+    _url: str = _url.format(**path_format_arguments)  # type: ignore
+
+    # Construct parameters
+    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
+    if expand is not None:
+        _params["$expand"] = _SERIALIZER.query("expand", expand, "str")
+
+    # Construct headers
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
+
+
+def build_network_interfaces_create_or_update_request(  # pylint: disable=name-too-long
+    resource_group_name: str, network_interface_name: str, subscription_id: str, **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
+    content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+    accept = _headers.pop("Accept", "application/json")
+
+    # Construct URL
+    _url = "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkInterfaces/{networkInterfaceName}"
+    path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
+        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
+        "networkInterfaceName": _SERIALIZER.url("network_interface_name", network_interface_name, "str"),
+    }
+
+    _url: str = _url.format(**path_format_arguments)  # type: ignore
+
+    # Construct parameters
+    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
+
+    # Construct headers
+    if content_type is not None:
+        _headers["Content-Type"] = _SERIALIZER.header("content_type", content_type, "str")
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(method="PUT", url=_url, params=_params, headers=_headers, **kwargs)
+
+
+def build_network_interfaces_update_tags_request(  # pylint: disable=name-too-long
+    resource_group_name: str, network_interface_name: str, subscription_id: str, **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
+    content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+    accept = _headers.pop("Accept", "application/json")
+
+    # Construct URL
+    _url = "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkInterfaces/{networkInterfaceName}"
+    path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
+        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
+        "networkInterfaceName": _SERIALIZER.url("network_interface_name", network_interface_name, "str"),
+    }
+
+    _url: str = _url.format(**path_format_arguments)  # type: ignore
+
+    # Construct parameters
+    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
+
+    # Construct headers
+    if content_type is not None:
+        _headers["Content-Type"] = _SERIALIZER.header("content_type", content_type, "str")
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(method="PATCH", url=_url, params=_params, headers=_headers, **kwargs)
+
+
+def build_network_interfaces_delete_request(
+    resource_group_name: str, network_interface_name: str, subscription_id: str, **kwargs: Any
+) -> HttpRequest:
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
+    # Construct URL
+    _url = "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkInterfaces/{networkInterfaceName}"
+    path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
+        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
+        "networkInterfaceName": _SERIALIZER.url("network_interface_name", network_interface_name, "str"),
+    }
+
+    _url: str = _url.format(**path_format_arguments)  # type: ignore
+
+    # Construct parameters
+    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
+
+    return HttpRequest(method="DELETE", url=_url, params=_params, **kwargs)
+
+
+def build_network_interfaces_list_request(resource_group_name: str, subscription_id: str, **kwargs: Any) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
+    accept = _headers.pop("Accept", "application/json")
+
+    # Construct URL
+    _url = "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkInterfaces"
+    path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
+        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
+    }
+
+    _url: str = _url.format(**path_format_arguments)  # type: ignore
+
+    # Construct parameters
+    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
+
+    # Construct headers
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
+
+
+def build_network_interfaces_list_all_request(  # pylint: disable=name-too-long
+    subscription_id: str, **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
+    accept = _headers.pop("Accept", "application/json")
+
+    # Construct URL
+    _url = "/subscriptions/{subscriptionId}/providers/Microsoft.Network/networkInterfaces"
+    path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
+    }
+
+    _url: str = _url.format(**path_format_arguments)  # type: ignore
+
+    # Construct parameters
+    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
+
+    # Construct headers
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
+
+
+def build_network_interfaces_get_effective_route_table_request(  # pylint: disable=name-too-long
+    resource_group_name: str, network_interface_name: str, subscription_id: str, **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
+    accept = _headers.pop("Accept", "application/json")
+
+    # Construct URL
+    _url = "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkInterfaces/{networkInterfaceName}/effectiveRouteTable"
+    path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
+        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
+        "networkInterfaceName": _SERIALIZER.url("network_interface_name", network_interface_name, "str"),
+    }
+
+    _url: str = _url.format(**path_format_arguments)  # type: ignore
+
+    # Construct parameters
+    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
+
+    # Construct headers
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(method="POST", url=_url, params=_params, headers=_headers, **kwargs)
+
+
+def build_network_interfaces_list_effective_network_security_groups_request(  # pylint: disable=name-too-long
+    resource_group_name: str, network_interface_name: str, subscription_id: str, **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
+    accept = _headers.pop("Accept", "application/json")
+
+    # Construct URL
+    _url = "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkInterfaces/{networkInterfaceName}/effectiveNetworkSecurityGroups"
+    path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
+        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
+        "networkInterfaceName": _SERIALIZER.url("network_interface_name", network_interface_name, "str"),
+    }
+
+    _url: str = _url.format(**path_format_arguments)  # type: ignore
+
+    # Construct parameters
+    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
+
+    # Construct headers
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(method="POST", url=_url, params=_params, headers=_headers, **kwargs)
+
+
+def build_network_interfaces_list_cloud_service_network_interfaces_request(  # pylint: disable=name-too-long
+    resource_group_name: str, cloud_service_name: str, subscription_id: str, **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
+    accept = _headers.pop("Accept", "application/json")
+
+    # Construct URL
+    _url = "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Compute/cloudServices/{cloudServiceName}/networkInterfaces"
+    path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
+        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
+        "cloudServiceName": _SERIALIZER.url("cloud_service_name", cloud_service_name, "str"),
+    }
+
+    _url: str = _url.format(**path_format_arguments)  # type: ignore
+
+    # Construct parameters
+    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
+
+    # Construct headers
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
+
+
+def build_network_interfaces_get_virtual_machine_scale_set_ip_configuration_request(  # pylint: disable=name-too-long
+    resource_group_name: str,
+    virtual_machine_scale_set_name: str,
+    virtualmachine_index: str,
+    network_interface_name: str,
+    ip_configuration_name: str,
+    subscription_id: str,
+    *,
+    expand: Optional[str] = None,
+    **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2018-10-01"))
+    accept = _headers.pop("Accept", "application/json")
+
+    # Construct URL
+    _url = "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/virtualMachines/{virtualmachineIndex}/networkInterfaces/{networkInterfaceName}/ipConfigurations/{ipConfigurationName}"
+    path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
+        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
+        "virtualMachineScaleSetName": _SERIALIZER.url(
+            "virtual_machine_scale_set_name", virtual_machine_scale_set_name, "str"
+        ),
+        "virtualmachineIndex": _SERIALIZER.url("virtualmachine_index", virtualmachine_index, "str"),
+        "networkInterfaceName": _SERIALIZER.url("network_interface_name", network_interface_name, "str"),
+        "ipConfigurationName": _SERIALIZER.url("ip_configuration_name", ip_configuration_name, "str"),
+    }
+
+    _url: str = _url.format(**path_format_arguments)  # type: ignore
+
+    # Construct parameters
+    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
+    if expand is not None:
+        _params["$expand"] = _SERIALIZER.query("expand", expand, "str")
+
+    # Construct headers
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
+
+
+def build_network_interfaces_list_virtual_machine_scale_set_ip_configurations_request(  # pylint: disable=name-too-long
+    resource_group_name: str,
+    virtual_machine_scale_set_name: str,
+    virtualmachine_index: str,
+    network_interface_name: str,
+    subscription_id: str,
+    *,
+    expand: Optional[str] = None,
+    **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2018-10-01"))
+    accept = _headers.pop("Accept", "application/json")
+
+    # Construct URL
+    _url = "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.Compute/virtualMachineScaleSets/{virtualMachineScaleSetName}/virtualMachines/{virtualmachineIndex}/networkInterfaces/{networkInterfaceName}/ipConfigurations"
+    path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
+        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
+        "virtualMachineScaleSetName": _SERIALIZER.url(
+            "virtual_machine_scale_set_name", virtual_machine_scale_set_name, "str"
+        ),
+        "virtualmachineIndex": _SERIALIZER.url("virtualmachine_index", virtualmachine_index, "str"),
+        "networkInterfaceName": _SERIALIZER.url("network_interface_name", network_interface_name, "str"),
+    }
+
+    _url: str = _url.format(**path_format_arguments)  # type: ignore
+
+    # Construct parameters
+    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
+    if expand is not None:
+        _params["$expand"] = _SERIALIZER.query("expand", expand, "str")
+
+    # Construct headers
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
+
+
+def build_network_management_put_bastion_shareable_link_request(  # pylint: disable=name-too-long
+    resource_group_name: str, bastion_host_name: str, subscription_id: str, **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
+    content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+    accept = _headers.pop("Accept", "application/json")
+
+    # Construct URL
+    _url = "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/bastionHosts/{bastionHostName}/createShareableLinks"
+    path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
+        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
+        "bastionHostName": _SERIALIZER.url("bastion_host_name", bastion_host_name, "str"),
+    }
+
+    _url: str = _url.format(**path_format_arguments)  # type: ignore
+
+    # Construct parameters
+    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
+
+    # Construct headers
+    if content_type is not None:
+        _headers["Content-Type"] = _SERIALIZER.header("content_type", content_type, "str")
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(method="POST", url=_url, params=_params, headers=_headers, **kwargs)
+
+
+def build_network_management_delete_bastion_shareable_link_request(  # pylint: disable=name-too-long
+    resource_group_name: str, bastion_host_name: str, subscription_id: str, **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
+    content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+    # Construct URL
+    _url = "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/bastionHosts/{bastionHostName}/deleteShareableLinks"
+    path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
+        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
+        "bastionHostName": _SERIALIZER.url("bastion_host_name", bastion_host_name, "str"),
+    }
+
+    _url: str = _url.format(**path_format_arguments)  # type: ignore
+
+    # Construct parameters
+    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
+
+    # Construct headers
+    if content_type is not None:
+        _headers["Content-Type"] = _SERIALIZER.header("content_type", content_type, "str")
+
+    return HttpRequest(method="POST", url=_url, params=_params, headers=_headers, **kwargs)
+
+
+def build_network_management_delete_bastion_shareable_link_by_token_request(  # pylint: disable=name-too-long
+    resource_group_name: str, bastion_host_name: str, subscription_id: str, **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
+    content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+    # Construct URL
+    _url = "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/bastionHosts/{bastionHostName}/deleteShareableLinksByToken"
+    path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
+        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
+        "bastionHostName": _SERIALIZER.url("bastion_host_name", bastion_host_name, "str"),
+    }
+
+    _url: str = _url.format(**path_format_arguments)  # type: ignore
+
+    # Construct parameters
+    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
+
+    # Construct headers
+    if content_type is not None:
+        _headers["Content-Type"] = _SERIALIZER.header("content_type", content_type, "str")
+
+    return HttpRequest(method="POST", url=_url, params=_params, headers=_headers, **kwargs)
+
+
+def build_network_management_get_bastion_shareable_link_request(  # pylint: disable=name-too-long
+    resource_group_name: str, bastion_host_name: str, subscription_id: str, **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
+    content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+    accept = _headers.pop("Accept", "application/json")
+
+    # Construct URL
+    _url = "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/bastionHosts/{bastionHostName}/getShareableLinks"
+    path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
+        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
+        "bastionHostName": _SERIALIZER.url("bastion_host_name", bastion_host_name, "str"),
+    }
+
+    _url: str = _url.format(**path_format_arguments)  # type: ignore
+
+    # Construct parameters
+    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
+
+    # Construct headers
+    if content_type is not None:
+        _headers["Content-Type"] = _SERIALIZER.header("content_type", content_type, "str")
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(method="POST", url=_url, params=_params, headers=_headers, **kwargs)
+
+
+def build_network_management_get_active_sessions_request(  # pylint: disable=name-too-long
+    resource_group_name: str, bastion_host_name: str, subscription_id: str, **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
+    accept = _headers.pop("Accept", "application/json")
+
+    # Construct URL
+    _url = "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/bastionHosts/{bastionHostName}/getActiveSessions"
+    path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
+        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
+        "bastionHostName": _SERIALIZER.url("bastion_host_name", bastion_host_name, "str"),
+    }
+
+    _url: str = _url.format(**path_format_arguments)  # type: ignore
+
+    # Construct parameters
+    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
+
+    # Construct headers
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(method="POST", url=_url, params=_params, headers=_headers, **kwargs)
+
+
+def build_network_management_disconnect_active_sessions_request(  # pylint: disable=name-too-long
+    resource_group_name: str, bastion_host_name: str, subscription_id: str, **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
+    content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+    accept = _headers.pop("Accept", "application/json")
+
+    # Construct URL
+    _url = "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/bastionHosts/{bastionHostName}/disconnectActiveSessions"
+    path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
+        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
+        "bastionHostName": _SERIALIZER.url("bastion_host_name", bastion_host_name, "str"),
+    }
+
+    _url: str = _url.format(**path_format_arguments)  # type: ignore
+
+    # Construct parameters
+    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
+
+    # Construct headers
+    if content_type is not None:
+        _headers["Content-Type"] = _SERIALIZER.header("content_type", content_type, "str")
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(method="POST", url=_url, params=_params, headers=_headers, **kwargs)
+
+
+def build_network_management_express_route_provider_port_request(  # pylint: disable=name-too-long
+    providerport: str, subscription_id: str, **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
+    accept = _headers.pop("Accept", "application/json")
+
+    # Construct URL
+    _url = "/subscriptions/{subscriptionId}/providers/Microsoft.Network/expressRouteProviderPorts/{providerport}"
+    path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
+        "providerport": _SERIALIZER.url("providerport", providerport, "str"),
+    }
+
+    _url: str = _url.format(**path_format_arguments)  # type: ignore
+
+    # Construct parameters
+    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
+
+    # Construct headers
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
+
+
+def build_network_management_list_active_connectivity_configurations_request(  # pylint: disable=name-too-long
+    resource_group_name: str,
+    network_manager_name: str,
+    subscription_id: str,
+    *,
+    top: Optional[int] = None,
+    **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
+    content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+    accept = _headers.pop("Accept", "application/json")
+
+    # Construct URL
+    _url = "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/listActiveConnectivityConfigurations"
+    path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
+        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
+        "networkManagerName": _SERIALIZER.url("network_manager_name", network_manager_name, "str"),
+    }
+
+    _url: str = _url.format(**path_format_arguments)  # type: ignore
+
+    # Construct parameters
+    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
+    if top is not None:
+        _params["$top"] = _SERIALIZER.query("top", top, "int")
+
+    # Construct headers
+    if content_type is not None:
+        _headers["Content-Type"] = _SERIALIZER.header("content_type", content_type, "str")
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(method="POST", url=_url, params=_params, headers=_headers, **kwargs)
+
+
+def build_network_management_list_active_security_admin_rules_request(  # pylint: disable=name-too-long
+    resource_group_name: str,
+    network_manager_name: str,
+    subscription_id: str,
+    *,
+    top: Optional[int] = None,
+    **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
+    content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+    accept = _headers.pop("Accept", "application/json")
+
+    # Construct URL
+    _url = "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/listActiveSecurityAdminRules"
+    path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
+        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
+        "networkManagerName": _SERIALIZER.url("network_manager_name", network_manager_name, "str"),
+    }
+
+    _url: str = _url.format(**path_format_arguments)  # type: ignore
+
+    # Construct parameters
+    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
+    if top is not None:
+        _params["$top"] = _SERIALIZER.query("top", top, "int")
+
+    # Construct headers
+    if content_type is not None:
+        _headers["Content-Type"] = _SERIALIZER.header("content_type", content_type, "str")
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(method="POST", url=_url, params=_params, headers=_headers, **kwargs)
+
+
+def build_network_management_list_network_manager_effective_connectivity_configurations_request(  # pylint: disable=name-too-long
+    resource_group_name: str,
+    virtual_network_name: str,
+    subscription_id: str,
+    *,
+    top: Optional[int] = None,
+    **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
+    content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+    accept = _headers.pop("Accept", "application/json")
+
+    # Construct URL
+    _url = "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/listNetworkManagerEffectiveConnectivityConfigurations"
+    path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
+        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
+        "virtualNetworkName": _SERIALIZER.url("virtual_network_name", virtual_network_name, "str"),
+    }
+
+    _url: str = _url.format(**path_format_arguments)  # type: ignore
+
+    # Construct parameters
+    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
+    if top is not None:
+        _params["$top"] = _SERIALIZER.query("top", top, "int")
+
+    # Construct headers
+    if content_type is not None:
+        _headers["Content-Type"] = _SERIALIZER.header("content_type", content_type, "str")
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(method="POST", url=_url, params=_params, headers=_headers, **kwargs)
+
+
+def build_network_management_list_network_manager_effective_security_admin_rules_request(  # pylint: disable=name-too-long
+    resource_group_name: str,
+    virtual_network_name: str,
+    subscription_id: str,
+    *,
+    top: Optional[int] = None,
+    **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
+    content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+    accept = _headers.pop("Accept", "application/json")
+
+    # Construct URL
+    _url = "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/listNetworkManagerEffectiveSecurityAdminRules"
+    path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
+        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
+        "virtualNetworkName": _SERIALIZER.url("virtual_network_name", virtual_network_name, "str"),
+    }
+
+    _url: str = _url.format(**path_format_arguments)  # type: ignore
+
+    # Construct parameters
+    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
+    if top is not None:
+        _params["$top"] = _SERIALIZER.query("top", top, "int")
+
+    # Construct headers
+    if content_type is not None:
+        _headers["Content-Type"] = _SERIALIZER.header("content_type", content_type, "str")
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(method="POST", url=_url, params=_params, headers=_headers, **kwargs)
+
+
+def build_network_management_supported_security_providers_request(  # pylint: disable=name-too-long
+    resource_group_name: str, virtual_wan_name: str, subscription_id: str, **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
+    accept = _headers.pop("Accept", "application/json")
+
+    # Construct URL
+    _url = "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualWans/{virtualWANName}/supportedSecurityProviders"
+    path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
+        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
+        "virtualWANName": _SERIALIZER.url("virtual_wan_name", virtual_wan_name, "str"),
+    }
+
+    _url: str = _url.format(**path_format_arguments)  # type: ignore
+
+    # Construct parameters
+    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
+
+    # Construct headers
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
+
+
+def build_network_management_generatevirtualwanvpnserverconfigurationvpnprofile_request(  # pylint: disable=name-too-long
+    resource_group_name: str, virtual_wan_name: str, subscription_id: str, **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
+    content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+    accept = _headers.pop("Accept", "application/json")
+
+    # Construct URL
+    _url = "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualWans/{virtualWANName}/generateVpnProfile"
+    path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
+        "resourceGroupName": _SERIALIZER.url("resource_group_name", resource_group_name, "str"),
+        "virtualWANName": _SERIALIZER.url("virtual_wan_name", virtual_wan_name, "str"),
+    }
+
+    _url: str = _url.format(**path_format_arguments)  # type: ignore
+
+    # Construct parameters
+    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
+
+    # Construct headers
+    if content_type is not None:
+        _headers["Content-Type"] = _SERIALIZER.header("content_type", content_type, "str")
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(method="POST", url=_url, params=_params, headers=_headers, **kwargs)
+
+
+def build_network_management_check_dns_name_availability_request(  # pylint: disable=name-too-long
+    location: str, subscription_id: str, *, domain_name_label: str, **kwargs: Any
+) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
+    accept = _headers.pop("Accept", "application/json")
+
+    # Construct URL
+    _url = "/subscriptions/{subscriptionId}/providers/Microsoft.Network/locations/{location}/checkDnsNameAvailability"
+    path_format_arguments = {
+        "subscriptionId": _SERIALIZER.url("subscription_id", subscription_id, "str"),
+        "location": _SERIALIZER.url("location", location, "str"),
+    }
+
+    _url: str = _url.format(**path_format_arguments)  # type: ignore
+
+    # Construct parameters
+    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
+    _params["domainNameLabel"] = _SERIALIZER.query("domain_name_label", domain_name_label, "str")
 
     # Construct headers
     _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
@@ -28486,1442 +28831,6 @@ class BastionHostsOperations:
             return pipeline_response
 
         return ItemPaged(get_next, extract_data)
-
-    def _put_bastion_shareable_link_initial(
-        self,
-        resource_group_name: str,
-        bastion_host_name: str,
-        bsl_request: Union[_models.BastionShareableLinkListRequest, JSON, IO[bytes]],
-        **kwargs: Any
-    ) -> Iterator[bytes]:
-        error_map: MutableMapping = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
-        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
-        cls: ClsType[Iterator[bytes]] = kwargs.pop("cls", None)
-
-        content_type = content_type or "application/json"
-        _content = None
-        if isinstance(bsl_request, (IOBase, bytes)):
-            _content = bsl_request
-        else:
-            _content = json.dumps(bsl_request, cls=SdkJSONEncoder, exclude_readonly=True)  # type: ignore
-
-        _request = build_bastion_hosts_put_bastion_shareable_link_request(
-            resource_group_name=resource_group_name,
-            bastion_host_name=bastion_host_name,
-            subscription_id=self._config.subscription_id,
-            api_version=api_version,
-            content_type=content_type,
-            content=_content,
-            headers=_headers,
-            params=_params,
-        )
-        path_format_arguments = {
-            "endpoint": self._serialize.url("self._config.base_url", self._config.base_url, "str", skip_quote=True),
-        }
-        _request.url = self._client.format_url(_request.url, **path_format_arguments)
-
-        _stream = True
-        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            _request, stream=_stream, **kwargs
-        )
-
-        response = pipeline_response.http_response
-
-        if response.status_code not in [200, 202]:
-            try:
-                response.read()  # Load the body in memory and close the socket
-            except (StreamConsumedError, StreamClosedError):
-                pass
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = _failsafe_deserialize(
-                _models.CloudError,
-                response,
-            )
-            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
-
-        response_headers = {}
-        if response.status_code == 202:
-            response_headers["Location"] = self._deserialize("str", response.headers.get("Location"))
-            response_headers["Retry-After"] = self._deserialize("int", response.headers.get("Retry-After"))
-
-        deserialized = response.iter_bytes()
-
-        if cls:
-            return cls(pipeline_response, deserialized, response_headers)  # type: ignore
-
-        return deserialized  # type: ignore
-
-    @overload
-    def begin_put_bastion_shareable_link(
-        self,
-        resource_group_name: str,
-        bastion_host_name: str,
-        bsl_request: _models.BastionShareableLinkListRequest,
-        *,
-        content_type: str = "application/json",
-        **kwargs: Any
-    ) -> LROPoller[ItemPaged["_models.BastionShareableLink"]]:
-        """Creates a Bastion Shareable Links for all the VMs specified in the request.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param bastion_host_name: The name of the Bastion Host. Required.
-        :type bastion_host_name: str
-        :param bsl_request: Post request for Create/Delete/Get Bastion Shareable Link endpoints.
-         Required.
-        :type bsl_request: ~azure.mgmt.network.models.BastionShareableLinkListRequest
-        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
-         Default value is "application/json".
-        :paramtype content_type: str
-        :return: An instance of LROPoller that returns an iterator like instance of list of
-         BastionShareableLink
-        :rtype:
-         ~azure.core.polling.LROPoller[~azure.core.paging.ItemPaged[~azure.mgmt.network.models.BastionShareableLink]]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-
-    @overload
-    def begin_put_bastion_shareable_link(
-        self,
-        resource_group_name: str,
-        bastion_host_name: str,
-        bsl_request: JSON,
-        *,
-        content_type: str = "application/json",
-        **kwargs: Any
-    ) -> LROPoller[ItemPaged["_models.BastionShareableLink"]]:
-        """Creates a Bastion Shareable Links for all the VMs specified in the request.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param bastion_host_name: The name of the Bastion Host. Required.
-        :type bastion_host_name: str
-        :param bsl_request: Post request for Create/Delete/Get Bastion Shareable Link endpoints.
-         Required.
-        :type bsl_request: JSON
-        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
-         Default value is "application/json".
-        :paramtype content_type: str
-        :return: An instance of LROPoller that returns an iterator like instance of list of
-         BastionShareableLink
-        :rtype:
-         ~azure.core.polling.LROPoller[~azure.core.paging.ItemPaged[~azure.mgmt.network.models.BastionShareableLink]]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-
-    @overload
-    def begin_put_bastion_shareable_link(
-        self,
-        resource_group_name: str,
-        bastion_host_name: str,
-        bsl_request: IO[bytes],
-        *,
-        content_type: str = "application/json",
-        **kwargs: Any
-    ) -> LROPoller[ItemPaged["_models.BastionShareableLink"]]:
-        """Creates a Bastion Shareable Links for all the VMs specified in the request.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param bastion_host_name: The name of the Bastion Host. Required.
-        :type bastion_host_name: str
-        :param bsl_request: Post request for Create/Delete/Get Bastion Shareable Link endpoints.
-         Required.
-        :type bsl_request: IO[bytes]
-        :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
-         Default value is "application/json".
-        :paramtype content_type: str
-        :return: An instance of LROPoller that returns an iterator like instance of list of
-         BastionShareableLink
-        :rtype:
-         ~azure.core.polling.LROPoller[~azure.core.paging.ItemPaged[~azure.mgmt.network.models.BastionShareableLink]]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-
-    @distributed_trace
-    def begin_put_bastion_shareable_link(
-        self,
-        resource_group_name: str,
-        bastion_host_name: str,
-        bsl_request: Union[_models.BastionShareableLinkListRequest, JSON, IO[bytes]],
-        **kwargs: Any
-    ) -> LROPoller[ItemPaged["_models.BastionShareableLink"]]:
-        """Creates a Bastion Shareable Links for all the VMs specified in the request.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param bastion_host_name: The name of the Bastion Host. Required.
-        :type bastion_host_name: str
-        :param bsl_request: Post request for Create/Delete/Get Bastion Shareable Link endpoints. Is one
-         of the following types: BastionShareableLinkListRequest, JSON, IO[bytes] Required.
-        :type bsl_request: ~azure.mgmt.network.models.BastionShareableLinkListRequest or JSON or
-         IO[bytes]
-        :return: An instance of LROPoller that returns an iterator like instance of list of
-         BastionShareableLink
-        :rtype:
-         ~azure.core.polling.LROPoller[~azure.core.paging.ItemPaged[~azure.mgmt.network.models.BastionShareableLink]]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-
-        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
-        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
-        cls: ClsType[List[_models.BastionShareableLink]] = kwargs.pop("cls", None)
-
-        error_map: MutableMapping = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-        content_type = content_type or "application/json"
-        _content = None
-        if isinstance(bsl_request, (IOBase, bytes)):
-            _content = bsl_request
-        else:
-            _content = json.dumps(bsl_request, cls=SdkJSONEncoder, exclude_readonly=True)  # type: ignore
-
-        def prepare_request(next_link=None):
-            if not next_link:
-
-                _request = build_bastion_hosts_put_bastion_shareable_link_request(
-                    resource_group_name=resource_group_name,
-                    bastion_host_name=bastion_host_name,
-                    subscription_id=self._config.subscription_id,
-                    api_version=api_version,
-                    content_type=content_type,
-                    content=_content,
-                    headers=_headers,
-                    params=_params,
-                )
-                path_format_arguments = {
-                    "endpoint": self._serialize.url(
-                        "self._config.base_url", self._config.base_url, "str", skip_quote=True
-                    ),
-                }
-                _request.url = self._client.format_url(_request.url, **path_format_arguments)
-
-            else:
-                _request = HttpRequest("GET", next_link)
-                path_format_arguments = {
-                    "endpoint": self._serialize.url(
-                        "self._config.base_url", self._config.base_url, "str", skip_quote=True
-                    ),
-                }
-                _request.url = self._client.format_url(_request.url, **path_format_arguments)
-
-            return _request
-
-        def extract_data(pipeline_response):
-            deserialized = pipeline_response.http_response.json()
-            list_of_elem = _deserialize(List[_models.BastionShareableLink], deserialized.get("value", []))
-            if cls:
-                list_of_elem = cls(list_of_elem)  # type: ignore
-            return deserialized.get("nextLink") or None, iter(list_of_elem)
-
-        def get_next(next_link=None):
-            _request = prepare_request(next_link)
-
-            _stream = False
-            pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-                _request, stream=_stream, **kwargs
-            )
-            response = pipeline_response.http_response
-
-            if response.status_code not in [200]:
-                map_error(status_code=response.status_code, response=response, error_map=error_map)
-                error = _failsafe_deserialize(
-                    _models.CloudError,
-                    response,
-                )
-                raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
-
-            return pipeline_response
-
-        polling: Union[bool, PollingMethod] = kwargs.pop("polling", True)
-        lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
-        cont_token: Optional[str] = kwargs.pop("continuation_token", None)
-        if cont_token is None:
-            raw_result = self._put_bastion_shareable_link_initial(
-                resource_group_name=resource_group_name,
-                bastion_host_name=bastion_host_name,
-                bsl_request=bsl_request,
-                api_version=api_version,
-                content_type=content_type,
-                cls=lambda x, y, z: x,
-                headers=_headers,
-                params=_params,
-                **kwargs
-            )
-            raw_result.http_response.read()  # type: ignore
-        kwargs.pop("error_map", None)
-
-        def get_long_running_output(pipeline_response):
-            def internal_get_next(next_link=None):
-                if next_link is None:
-                    return pipeline_response
-                return get_next(next_link)
-
-            return ItemPaged(internal_get_next, extract_data)
-
-        path_format_arguments = {
-            "endpoint": self._serialize.url("self._config.base_url", self._config.base_url, "str", skip_quote=True),
-        }
-
-        if polling is True:
-            polling_method: PollingMethod = cast(
-                PollingMethod, ARMPolling(lro_delay, path_format_arguments=path_format_arguments, **kwargs)
-            )
-        elif polling is False:
-            polling_method = cast(PollingMethod, NoPolling())
-        else:
-            polling_method = polling
-        if cont_token:
-            return LROPoller[ItemPaged["_models.BastionShareableLink"]].from_continuation_token(
-                polling_method=polling_method,
-                continuation_token=cont_token,
-                client=self._client,
-                deserialization_callback=get_long_running_output,
-            )
-        return LROPoller[ItemPaged["_models.BastionShareableLink"]](
-            self._client, raw_result, get_long_running_output, polling_method  # type: ignore
-        )
-
-    def _delete_bastion_shareable_link_initial(
-        self,
-        resource_group_name: str,
-        bastion_host_name: str,
-        bsl_request: Union[_models.BastionShareableLinkListRequest, JSON, IO[bytes]],
-        **kwargs: Any
-    ) -> Iterator[bytes]:
-        error_map: MutableMapping = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
-        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
-        cls: ClsType[Iterator[bytes]] = kwargs.pop("cls", None)
-
-        content_type = content_type or "application/json"
-        _content = None
-        if isinstance(bsl_request, (IOBase, bytes)):
-            _content = bsl_request
-        else:
-            _content = json.dumps(bsl_request, cls=SdkJSONEncoder, exclude_readonly=True)  # type: ignore
-
-        _request = build_bastion_hosts_delete_bastion_shareable_link_request(
-            resource_group_name=resource_group_name,
-            bastion_host_name=bastion_host_name,
-            subscription_id=self._config.subscription_id,
-            api_version=api_version,
-            content_type=content_type,
-            content=_content,
-            headers=_headers,
-            params=_params,
-        )
-        path_format_arguments = {
-            "endpoint": self._serialize.url("self._config.base_url", self._config.base_url, "str", skip_quote=True),
-        }
-        _request.url = self._client.format_url(_request.url, **path_format_arguments)
-
-        _stream = True
-        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            _request, stream=_stream, **kwargs
-        )
-
-        response = pipeline_response.http_response
-
-        if response.status_code not in [200, 202]:
-            try:
-                response.read()  # Load the body in memory and close the socket
-            except (StreamConsumedError, StreamClosedError):
-                pass
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = _failsafe_deserialize(
-                _models.CloudError,
-                response,
-            )
-            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
-
-        response_headers = {}
-        if response.status_code == 202:
-            response_headers["Location"] = self._deserialize("str", response.headers.get("Location"))
-            response_headers["Retry-After"] = self._deserialize("int", response.headers.get("Retry-After"))
-
-        deserialized = response.iter_bytes()
-
-        if cls:
-            return cls(pipeline_response, deserialized, response_headers)  # type: ignore
-
-        return deserialized  # type: ignore
-
-    @overload
-    def begin_delete_bastion_shareable_link(
-        self,
-        resource_group_name: str,
-        bastion_host_name: str,
-        bsl_request: _models.BastionShareableLinkListRequest,
-        *,
-        content_type: str = "application/json",
-        **kwargs: Any
-    ) -> LROPoller[Any]:
-        """Deletes the Bastion Shareable Links for all the VMs specified in the request.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param bastion_host_name: The name of the Bastion Host. Required.
-        :type bastion_host_name: str
-        :param bsl_request: Post request for Create/Delete/Get Bastion Shareable Link endpoints.
-         Required.
-        :type bsl_request: ~azure.mgmt.network.models.BastionShareableLinkListRequest
-        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
-         Default value is "application/json".
-        :paramtype content_type: str
-        :return: An instance of LROPoller that returns any
-        :rtype: ~azure.core.polling.LROPoller[any]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-
-    @overload
-    def begin_delete_bastion_shareable_link(
-        self,
-        resource_group_name: str,
-        bastion_host_name: str,
-        bsl_request: JSON,
-        *,
-        content_type: str = "application/json",
-        **kwargs: Any
-    ) -> LROPoller[Any]:
-        """Deletes the Bastion Shareable Links for all the VMs specified in the request.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param bastion_host_name: The name of the Bastion Host. Required.
-        :type bastion_host_name: str
-        :param bsl_request: Post request for Create/Delete/Get Bastion Shareable Link endpoints.
-         Required.
-        :type bsl_request: JSON
-        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
-         Default value is "application/json".
-        :paramtype content_type: str
-        :return: An instance of LROPoller that returns any
-        :rtype: ~azure.core.polling.LROPoller[any]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-
-    @overload
-    def begin_delete_bastion_shareable_link(
-        self,
-        resource_group_name: str,
-        bastion_host_name: str,
-        bsl_request: IO[bytes],
-        *,
-        content_type: str = "application/json",
-        **kwargs: Any
-    ) -> LROPoller[Any]:
-        """Deletes the Bastion Shareable Links for all the VMs specified in the request.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param bastion_host_name: The name of the Bastion Host. Required.
-        :type bastion_host_name: str
-        :param bsl_request: Post request for Create/Delete/Get Bastion Shareable Link endpoints.
-         Required.
-        :type bsl_request: IO[bytes]
-        :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
-         Default value is "application/json".
-        :paramtype content_type: str
-        :return: An instance of LROPoller that returns any
-        :rtype: ~azure.core.polling.LROPoller[any]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-
-    @distributed_trace
-    def begin_delete_bastion_shareable_link(
-        self,
-        resource_group_name: str,
-        bastion_host_name: str,
-        bsl_request: Union[_models.BastionShareableLinkListRequest, JSON, IO[bytes]],
-        **kwargs: Any
-    ) -> LROPoller[Any]:
-        """Deletes the Bastion Shareable Links for all the VMs specified in the request.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param bastion_host_name: The name of the Bastion Host. Required.
-        :type bastion_host_name: str
-        :param bsl_request: Post request for Create/Delete/Get Bastion Shareable Link endpoints. Is one
-         of the following types: BastionShareableLinkListRequest, JSON, IO[bytes] Required.
-        :type bsl_request: ~azure.mgmt.network.models.BastionShareableLinkListRequest or JSON or
-         IO[bytes]
-        :return: An instance of LROPoller that returns any
-        :rtype: ~azure.core.polling.LROPoller[any]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
-        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
-        cls: ClsType[Any] = kwargs.pop("cls", None)
-        polling: Union[bool, PollingMethod] = kwargs.pop("polling", True)
-        lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
-        cont_token: Optional[str] = kwargs.pop("continuation_token", None)
-        if cont_token is None:
-            raw_result = self._delete_bastion_shareable_link_initial(
-                resource_group_name=resource_group_name,
-                bastion_host_name=bastion_host_name,
-                bsl_request=bsl_request,
-                api_version=api_version,
-                content_type=content_type,
-                cls=lambda x, y, z: x,
-                headers=_headers,
-                params=_params,
-                **kwargs
-            )
-            raw_result.http_response.read()  # type: ignore
-        kwargs.pop("error_map", None)
-
-        def get_long_running_output(pipeline_response):
-            response_headers = {}
-            response = pipeline_response.http_response
-            response_headers["Location"] = self._deserialize("str", response.headers.get("Location"))
-            response_headers["Retry-After"] = self._deserialize("int", response.headers.get("Retry-After"))
-
-            deserialized = _deserialize(Any, response.json())
-            if cls:
-                return cls(pipeline_response, deserialized, response_headers)  # type: ignore
-            return deserialized
-
-        path_format_arguments = {
-            "endpoint": self._serialize.url("self._config.base_url", self._config.base_url, "str", skip_quote=True),
-        }
-
-        if polling is True:
-            polling_method: PollingMethod = cast(
-                PollingMethod, ARMPolling(lro_delay, path_format_arguments=path_format_arguments, **kwargs)
-            )
-        elif polling is False:
-            polling_method = cast(PollingMethod, NoPolling())
-        else:
-            polling_method = polling
-        if cont_token:
-            return LROPoller[Any].from_continuation_token(
-                polling_method=polling_method,
-                continuation_token=cont_token,
-                client=self._client,
-                deserialization_callback=get_long_running_output,
-            )
-        return LROPoller[Any](self._client, raw_result, get_long_running_output, polling_method)  # type: ignore
-
-    def _delete_bastion_shareable_link_by_token_initial(  # pylint: disable=name-too-long
-        self,
-        resource_group_name: str,
-        bastion_host_name: str,
-        bsl_token_request: Union[_models.BastionShareableLinkTokenListRequest, JSON, IO[bytes]],
-        **kwargs: Any
-    ) -> Iterator[bytes]:
-        error_map: MutableMapping = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
-        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
-        cls: ClsType[Iterator[bytes]] = kwargs.pop("cls", None)
-
-        content_type = content_type or "application/json"
-        _content = None
-        if isinstance(bsl_token_request, (IOBase, bytes)):
-            _content = bsl_token_request
-        else:
-            _content = json.dumps(bsl_token_request, cls=SdkJSONEncoder, exclude_readonly=True)  # type: ignore
-
-        _request = build_bastion_hosts_delete_bastion_shareable_link_by_token_request(
-            resource_group_name=resource_group_name,
-            bastion_host_name=bastion_host_name,
-            subscription_id=self._config.subscription_id,
-            api_version=api_version,
-            content_type=content_type,
-            content=_content,
-            headers=_headers,
-            params=_params,
-        )
-        path_format_arguments = {
-            "endpoint": self._serialize.url("self._config.base_url", self._config.base_url, "str", skip_quote=True),
-        }
-        _request.url = self._client.format_url(_request.url, **path_format_arguments)
-
-        _stream = True
-        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            _request, stream=_stream, **kwargs
-        )
-
-        response = pipeline_response.http_response
-
-        if response.status_code not in [202]:
-            try:
-                response.read()  # Load the body in memory and close the socket
-            except (StreamConsumedError, StreamClosedError):
-                pass
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = _failsafe_deserialize(
-                _models.CloudError,
-                response,
-            )
-            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
-
-        response_headers = {}
-        response_headers["Location"] = self._deserialize("str", response.headers.get("Location"))
-        response_headers["Retry-After"] = self._deserialize("int", response.headers.get("Retry-After"))
-
-        deserialized = response.iter_bytes()
-
-        if cls:
-            return cls(pipeline_response, deserialized, response_headers)  # type: ignore
-
-        return deserialized  # type: ignore
-
-    @overload
-    def begin_delete_bastion_shareable_link_by_token(  # pylint: disable=name-too-long
-        self,
-        resource_group_name: str,
-        bastion_host_name: str,
-        bsl_token_request: _models.BastionShareableLinkTokenListRequest,
-        *,
-        content_type: str = "application/json",
-        **kwargs: Any
-    ) -> LROPoller[None]:
-        """Deletes the Bastion Shareable Links for all the tokens specified in the request.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param bastion_host_name: The name of the Bastion Host. Required.
-        :type bastion_host_name: str
-        :param bsl_token_request: Post request for Delete Bastion Shareable Link By Token endpoint.
-         Required.
-        :type bsl_token_request: ~azure.mgmt.network.models.BastionShareableLinkTokenListRequest
-        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
-         Default value is "application/json".
-        :paramtype content_type: str
-        :return: An instance of LROPoller that returns None
-        :rtype: ~azure.core.polling.LROPoller[None]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-
-    @overload
-    def begin_delete_bastion_shareable_link_by_token(  # pylint: disable=name-too-long
-        self,
-        resource_group_name: str,
-        bastion_host_name: str,
-        bsl_token_request: JSON,
-        *,
-        content_type: str = "application/json",
-        **kwargs: Any
-    ) -> LROPoller[None]:
-        """Deletes the Bastion Shareable Links for all the tokens specified in the request.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param bastion_host_name: The name of the Bastion Host. Required.
-        :type bastion_host_name: str
-        :param bsl_token_request: Post request for Delete Bastion Shareable Link By Token endpoint.
-         Required.
-        :type bsl_token_request: JSON
-        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
-         Default value is "application/json".
-        :paramtype content_type: str
-        :return: An instance of LROPoller that returns None
-        :rtype: ~azure.core.polling.LROPoller[None]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-
-    @overload
-    def begin_delete_bastion_shareable_link_by_token(  # pylint: disable=name-too-long
-        self,
-        resource_group_name: str,
-        bastion_host_name: str,
-        bsl_token_request: IO[bytes],
-        *,
-        content_type: str = "application/json",
-        **kwargs: Any
-    ) -> LROPoller[None]:
-        """Deletes the Bastion Shareable Links for all the tokens specified in the request.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param bastion_host_name: The name of the Bastion Host. Required.
-        :type bastion_host_name: str
-        :param bsl_token_request: Post request for Delete Bastion Shareable Link By Token endpoint.
-         Required.
-        :type bsl_token_request: IO[bytes]
-        :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
-         Default value is "application/json".
-        :paramtype content_type: str
-        :return: An instance of LROPoller that returns None
-        :rtype: ~azure.core.polling.LROPoller[None]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-
-    @distributed_trace
-    def begin_delete_bastion_shareable_link_by_token(  # pylint: disable=name-too-long
-        self,
-        resource_group_name: str,
-        bastion_host_name: str,
-        bsl_token_request: Union[_models.BastionShareableLinkTokenListRequest, JSON, IO[bytes]],
-        **kwargs: Any
-    ) -> LROPoller[None]:
-        """Deletes the Bastion Shareable Links for all the tokens specified in the request.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param bastion_host_name: The name of the Bastion Host. Required.
-        :type bastion_host_name: str
-        :param bsl_token_request: Post request for Delete Bastion Shareable Link By Token endpoint. Is
-         one of the following types: BastionShareableLinkTokenListRequest, JSON, IO[bytes] Required.
-        :type bsl_token_request: ~azure.mgmt.network.models.BastionShareableLinkTokenListRequest or
-         JSON or IO[bytes]
-        :return: An instance of LROPoller that returns None
-        :rtype: ~azure.core.polling.LROPoller[None]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
-        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
-        cls: ClsType[None] = kwargs.pop("cls", None)
-        polling: Union[bool, PollingMethod] = kwargs.pop("polling", True)
-        lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
-        cont_token: Optional[str] = kwargs.pop("continuation_token", None)
-        if cont_token is None:
-            raw_result = self._delete_bastion_shareable_link_by_token_initial(
-                resource_group_name=resource_group_name,
-                bastion_host_name=bastion_host_name,
-                bsl_token_request=bsl_token_request,
-                api_version=api_version,
-                content_type=content_type,
-                cls=lambda x, y, z: x,
-                headers=_headers,
-                params=_params,
-                **kwargs
-            )
-            raw_result.http_response.read()  # type: ignore
-        kwargs.pop("error_map", None)
-
-        def get_long_running_output(pipeline_response):  # pylint: disable=inconsistent-return-statements
-            if cls:
-                return cls(pipeline_response, None, {})  # type: ignore
-
-        path_format_arguments = {
-            "endpoint": self._serialize.url("self._config.base_url", self._config.base_url, "str", skip_quote=True),
-        }
-
-        if polling is True:
-            polling_method: PollingMethod = cast(
-                PollingMethod, ARMPolling(lro_delay, path_format_arguments=path_format_arguments, **kwargs)
-            )
-        elif polling is False:
-            polling_method = cast(PollingMethod, NoPolling())
-        else:
-            polling_method = polling
-        if cont_token:
-            return LROPoller[None].from_continuation_token(
-                polling_method=polling_method,
-                continuation_token=cont_token,
-                client=self._client,
-                deserialization_callback=get_long_running_output,
-            )
-        return LROPoller[None](self._client, raw_result, get_long_running_output, polling_method)  # type: ignore
-
-    @overload
-    def get_bastion_shareable_link(
-        self,
-        resource_group_name: str,
-        bastion_host_name: str,
-        bsl_request: _models.BastionShareableLinkListRequest,
-        *,
-        content_type: str = "application/json",
-        **kwargs: Any
-    ) -> ItemPaged["_models.BastionShareableLink"]:
-        """Return the Bastion Shareable Links for all the VMs specified in the request.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param bastion_host_name: The name of the Bastion Host. Required.
-        :type bastion_host_name: str
-        :param bsl_request: Post request for Create/Delete/Get Bastion Shareable Link endpoints.
-         Required.
-        :type bsl_request: ~azure.mgmt.network.models.BastionShareableLinkListRequest
-        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
-         Default value is "application/json".
-        :paramtype content_type: str
-        :return: An iterator like instance of BastionShareableLink
-        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.network.models.BastionShareableLink]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-
-    @overload
-    def get_bastion_shareable_link(
-        self,
-        resource_group_name: str,
-        bastion_host_name: str,
-        bsl_request: JSON,
-        *,
-        content_type: str = "application/json",
-        **kwargs: Any
-    ) -> ItemPaged["_models.BastionShareableLink"]:
-        """Return the Bastion Shareable Links for all the VMs specified in the request.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param bastion_host_name: The name of the Bastion Host. Required.
-        :type bastion_host_name: str
-        :param bsl_request: Post request for Create/Delete/Get Bastion Shareable Link endpoints.
-         Required.
-        :type bsl_request: JSON
-        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
-         Default value is "application/json".
-        :paramtype content_type: str
-        :return: An iterator like instance of BastionShareableLink
-        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.network.models.BastionShareableLink]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-
-    @overload
-    def get_bastion_shareable_link(
-        self,
-        resource_group_name: str,
-        bastion_host_name: str,
-        bsl_request: IO[bytes],
-        *,
-        content_type: str = "application/json",
-        **kwargs: Any
-    ) -> ItemPaged["_models.BastionShareableLink"]:
-        """Return the Bastion Shareable Links for all the VMs specified in the request.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param bastion_host_name: The name of the Bastion Host. Required.
-        :type bastion_host_name: str
-        :param bsl_request: Post request for Create/Delete/Get Bastion Shareable Link endpoints.
-         Required.
-        :type bsl_request: IO[bytes]
-        :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
-         Default value is "application/json".
-        :paramtype content_type: str
-        :return: An iterator like instance of BastionShareableLink
-        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.network.models.BastionShareableLink]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-
-    @distributed_trace
-    def get_bastion_shareable_link(
-        self,
-        resource_group_name: str,
-        bastion_host_name: str,
-        bsl_request: Union[_models.BastionShareableLinkListRequest, JSON, IO[bytes]],
-        **kwargs: Any
-    ) -> ItemPaged["_models.BastionShareableLink"]:
-        """Return the Bastion Shareable Links for all the VMs specified in the request.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param bastion_host_name: The name of the Bastion Host. Required.
-        :type bastion_host_name: str
-        :param bsl_request: Post request for Create/Delete/Get Bastion Shareable Link endpoints. Is one
-         of the following types: BastionShareableLinkListRequest, JSON, IO[bytes] Required.
-        :type bsl_request: ~azure.mgmt.network.models.BastionShareableLinkListRequest or JSON or
-         IO[bytes]
-        :return: An iterator like instance of BastionShareableLink
-        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.network.models.BastionShareableLink]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
-        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
-        cls: ClsType[List[_models.BastionShareableLink]] = kwargs.pop("cls", None)
-
-        error_map: MutableMapping = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-        content_type = content_type or "application/json"
-        _content = None
-        if isinstance(bsl_request, (IOBase, bytes)):
-            _content = bsl_request
-        else:
-            _content = json.dumps(bsl_request, cls=SdkJSONEncoder, exclude_readonly=True)  # type: ignore
-
-        def prepare_request(next_link=None):
-            if not next_link:
-
-                _request = build_bastion_hosts_get_bastion_shareable_link_request(
-                    resource_group_name=resource_group_name,
-                    bastion_host_name=bastion_host_name,
-                    subscription_id=self._config.subscription_id,
-                    api_version=api_version,
-                    content_type=content_type,
-                    content=_content,
-                    headers=_headers,
-                    params=_params,
-                )
-                path_format_arguments = {
-                    "endpoint": self._serialize.url(
-                        "self._config.base_url", self._config.base_url, "str", skip_quote=True
-                    ),
-                }
-                _request.url = self._client.format_url(_request.url, **path_format_arguments)
-
-            else:
-                _request = HttpRequest("GET", next_link)
-                path_format_arguments = {
-                    "endpoint": self._serialize.url(
-                        "self._config.base_url", self._config.base_url, "str", skip_quote=True
-                    ),
-                }
-                _request.url = self._client.format_url(_request.url, **path_format_arguments)
-
-            return _request
-
-        def extract_data(pipeline_response):
-            deserialized = pipeline_response.http_response.json()
-            list_of_elem = _deserialize(List[_models.BastionShareableLink], deserialized.get("value", []))
-            if cls:
-                list_of_elem = cls(list_of_elem)  # type: ignore
-            return deserialized.get("nextLink") or None, iter(list_of_elem)
-
-        def get_next(next_link=None):
-            _request = prepare_request(next_link)
-
-            _stream = False
-            pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-                _request, stream=_stream, **kwargs
-            )
-            response = pipeline_response.http_response
-
-            if response.status_code not in [200]:
-                map_error(status_code=response.status_code, response=response, error_map=error_map)
-                error = _failsafe_deserialize(
-                    _models.CloudError,
-                    response,
-                )
-                raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
-
-            return pipeline_response
-
-        return ItemPaged(get_next, extract_data)
-
-    def _get_active_sessions_initial(
-        self, resource_group_name: str, bastion_host_name: str, **kwargs: Any
-    ) -> Iterator[bytes]:
-        error_map: MutableMapping = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        _headers = kwargs.pop("headers", {}) or {}
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
-        cls: ClsType[Iterator[bytes]] = kwargs.pop("cls", None)
-
-        _request = build_bastion_hosts_get_active_sessions_request(
-            resource_group_name=resource_group_name,
-            bastion_host_name=bastion_host_name,
-            subscription_id=self._config.subscription_id,
-            api_version=api_version,
-            headers=_headers,
-            params=_params,
-        )
-        path_format_arguments = {
-            "endpoint": self._serialize.url("self._config.base_url", self._config.base_url, "str", skip_quote=True),
-        }
-        _request.url = self._client.format_url(_request.url, **path_format_arguments)
-
-        _stream = True
-        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            _request, stream=_stream, **kwargs
-        )
-
-        response = pipeline_response.http_response
-
-        if response.status_code not in [200, 202]:
-            try:
-                response.read()  # Load the body in memory and close the socket
-            except (StreamConsumedError, StreamClosedError):
-                pass
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = _failsafe_deserialize(
-                _models.CloudError,
-                response,
-            )
-            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
-
-        response_headers = {}
-        if response.status_code == 202:
-            response_headers["Location"] = self._deserialize("str", response.headers.get("Location"))
-            response_headers["Retry-After"] = self._deserialize("int", response.headers.get("Retry-After"))
-
-        deserialized = response.iter_bytes()
-
-        if cls:
-            return cls(pipeline_response, deserialized, response_headers)  # type: ignore
-
-        return deserialized  # type: ignore
-
-    @distributed_trace
-    def begin_get_active_sessions(
-        self, resource_group_name: str, bastion_host_name: str, **kwargs: Any
-    ) -> LROPoller[ItemPaged["_models.BastionActiveSession"]]:
-        """Returns the list of currently active sessions on the Bastion.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param bastion_host_name: The name of the Bastion Host. Required.
-        :type bastion_host_name: str
-        :return: An instance of LROPoller that returns an iterator like instance of list of
-         BastionActiveSession
-        :rtype:
-         ~azure.core.polling.LROPoller[~azure.core.paging.ItemPaged[~azure.mgmt.network.models.BastionActiveSession]]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-
-        _headers = kwargs.pop("headers", {}) or {}
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
-        cls: ClsType[List[_models.BastionActiveSession]] = kwargs.pop("cls", None)
-
-        error_map: MutableMapping = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        def prepare_request(next_link=None):
-            if not next_link:
-
-                _request = build_bastion_hosts_get_active_sessions_request(
-                    resource_group_name=resource_group_name,
-                    bastion_host_name=bastion_host_name,
-                    subscription_id=self._config.subscription_id,
-                    api_version=api_version,
-                    headers=_headers,
-                    params=_params,
-                )
-                path_format_arguments = {
-                    "endpoint": self._serialize.url(
-                        "self._config.base_url", self._config.base_url, "str", skip_quote=True
-                    ),
-                }
-                _request.url = self._client.format_url(_request.url, **path_format_arguments)
-
-            else:
-                _request = HttpRequest("GET", next_link)
-                path_format_arguments = {
-                    "endpoint": self._serialize.url(
-                        "self._config.base_url", self._config.base_url, "str", skip_quote=True
-                    ),
-                }
-                _request.url = self._client.format_url(_request.url, **path_format_arguments)
-
-            return _request
-
-        def extract_data(pipeline_response):
-            deserialized = pipeline_response.http_response.json()
-            list_of_elem = _deserialize(List[_models.BastionActiveSession], deserialized.get("value", []))
-            if cls:
-                list_of_elem = cls(list_of_elem)  # type: ignore
-            return deserialized.get("nextLink") or None, iter(list_of_elem)
-
-        def get_next(next_link=None):
-            _request = prepare_request(next_link)
-
-            _stream = False
-            pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-                _request, stream=_stream, **kwargs
-            )
-            response = pipeline_response.http_response
-
-            if response.status_code not in [200]:
-                map_error(status_code=response.status_code, response=response, error_map=error_map)
-                error = _failsafe_deserialize(
-                    _models.CloudError,
-                    response,
-                )
-                raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
-
-            return pipeline_response
-
-        polling: Union[bool, PollingMethod] = kwargs.pop("polling", True)
-        lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
-        cont_token: Optional[str] = kwargs.pop("continuation_token", None)
-        if cont_token is None:
-            raw_result = self._get_active_sessions_initial(
-                resource_group_name=resource_group_name,
-                bastion_host_name=bastion_host_name,
-                api_version=api_version,
-                cls=lambda x, y, z: x,
-                headers=_headers,
-                params=_params,
-                **kwargs
-            )
-            raw_result.http_response.read()  # type: ignore
-        kwargs.pop("error_map", None)
-
-        def get_long_running_output(pipeline_response):
-            def internal_get_next(next_link=None):
-                if next_link is None:
-                    return pipeline_response
-                return get_next(next_link)
-
-            return ItemPaged(internal_get_next, extract_data)
-
-        path_format_arguments = {
-            "endpoint": self._serialize.url("self._config.base_url", self._config.base_url, "str", skip_quote=True),
-        }
-
-        if polling is True:
-            polling_method: PollingMethod = cast(
-                PollingMethod, ARMPolling(lro_delay, path_format_arguments=path_format_arguments, **kwargs)
-            )
-        elif polling is False:
-            polling_method = cast(PollingMethod, NoPolling())
-        else:
-            polling_method = polling
-        if cont_token:
-            return LROPoller[ItemPaged["_models.BastionActiveSession"]].from_continuation_token(
-                polling_method=polling_method,
-                continuation_token=cont_token,
-                client=self._client,
-                deserialization_callback=get_long_running_output,
-            )
-        return LROPoller[ItemPaged["_models.BastionActiveSession"]](
-            self._client, raw_result, get_long_running_output, polling_method  # type: ignore
-        )
-
-    @overload
-    def disconnect_active_sessions(
-        self,
-        resource_group_name: str,
-        bastion_host_name: str,
-        session_ids: _models.SessionIds,
-        *,
-        content_type: str = "application/json",
-        **kwargs: Any
-    ) -> ItemPaged["_models.BastionSessionState"]:
-        """Returns the list of currently active sessions on the Bastion.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param bastion_host_name: The name of the Bastion Host. Required.
-        :type bastion_host_name: str
-        :param session_ids: The list of sessionids to disconnect. Required.
-        :type session_ids: ~azure.mgmt.network.models.SessionIds
-        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
-         Default value is "application/json".
-        :paramtype content_type: str
-        :return: An iterator like instance of BastionSessionState
-        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.network.models.BastionSessionState]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-
-    @overload
-    def disconnect_active_sessions(
-        self,
-        resource_group_name: str,
-        bastion_host_name: str,
-        session_ids: JSON,
-        *,
-        content_type: str = "application/json",
-        **kwargs: Any
-    ) -> ItemPaged["_models.BastionSessionState"]:
-        """Returns the list of currently active sessions on the Bastion.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param bastion_host_name: The name of the Bastion Host. Required.
-        :type bastion_host_name: str
-        :param session_ids: The list of sessionids to disconnect. Required.
-        :type session_ids: JSON
-        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
-         Default value is "application/json".
-        :paramtype content_type: str
-        :return: An iterator like instance of BastionSessionState
-        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.network.models.BastionSessionState]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-
-    @overload
-    def disconnect_active_sessions(
-        self,
-        resource_group_name: str,
-        bastion_host_name: str,
-        session_ids: IO[bytes],
-        *,
-        content_type: str = "application/json",
-        **kwargs: Any
-    ) -> ItemPaged["_models.BastionSessionState"]:
-        """Returns the list of currently active sessions on the Bastion.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param bastion_host_name: The name of the Bastion Host. Required.
-        :type bastion_host_name: str
-        :param session_ids: The list of sessionids to disconnect. Required.
-        :type session_ids: IO[bytes]
-        :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
-         Default value is "application/json".
-        :paramtype content_type: str
-        :return: An iterator like instance of BastionSessionState
-        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.network.models.BastionSessionState]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-
-    @distributed_trace
-    def disconnect_active_sessions(
-        self,
-        resource_group_name: str,
-        bastion_host_name: str,
-        session_ids: Union[_models.SessionIds, JSON, IO[bytes]],
-        **kwargs: Any
-    ) -> ItemPaged["_models.BastionSessionState"]:
-        """Returns the list of currently active sessions on the Bastion.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param bastion_host_name: The name of the Bastion Host. Required.
-        :type bastion_host_name: str
-        :param session_ids: The list of sessionids to disconnect. Is one of the following types:
-         SessionIds, JSON, IO[bytes] Required.
-        :type session_ids: ~azure.mgmt.network.models.SessionIds or JSON or IO[bytes]
-        :return: An iterator like instance of BastionSessionState
-        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.network.models.BastionSessionState]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
-        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
-        cls: ClsType[List[_models.BastionSessionState]] = kwargs.pop("cls", None)
-
-        error_map: MutableMapping = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-        content_type = content_type or "application/json"
-        _content = None
-        if isinstance(session_ids, (IOBase, bytes)):
-            _content = session_ids
-        else:
-            _content = json.dumps(session_ids, cls=SdkJSONEncoder, exclude_readonly=True)  # type: ignore
-
-        def prepare_request(next_link=None):
-            if not next_link:
-
-                _request = build_bastion_hosts_disconnect_active_sessions_request(
-                    resource_group_name=resource_group_name,
-                    bastion_host_name=bastion_host_name,
-                    subscription_id=self._config.subscription_id,
-                    api_version=api_version,
-                    content_type=content_type,
-                    content=_content,
-                    headers=_headers,
-                    params=_params,
-                )
-                path_format_arguments = {
-                    "endpoint": self._serialize.url(
-                        "self._config.base_url", self._config.base_url, "str", skip_quote=True
-                    ),
-                }
-                _request.url = self._client.format_url(_request.url, **path_format_arguments)
-
-            else:
-                _request = HttpRequest("GET", next_link)
-                path_format_arguments = {
-                    "endpoint": self._serialize.url(
-                        "self._config.base_url", self._config.base_url, "str", skip_quote=True
-                    ),
-                }
-                _request.url = self._client.format_url(_request.url, **path_format_arguments)
-
-            return _request
-
-        def extract_data(pipeline_response):
-            deserialized = pipeline_response.http_response.json()
-            list_of_elem = _deserialize(List[_models.BastionSessionState], deserialized.get("value", []))
-            if cls:
-                list_of_elem = cls(list_of_elem)  # type: ignore
-            return deserialized.get("nextLink") or None, iter(list_of_elem)
-
-        def get_next(next_link=None):
-            _request = prepare_request(next_link)
-
-            _stream = False
-            pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-                _request, stream=_stream, **kwargs
-            )
-            response = pipeline_response.http_response
-
-            if response.status_code not in [200]:
-                map_error(status_code=response.status_code, response=response, error_map=error_map)
-                error = _failsafe_deserialize(
-                    _models.CloudError,
-                    response,
-                )
-                raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
-
-            return pipeline_response
-
-        return ItemPaged(get_next, extract_data)
-
-
-class ExpressRouteProviderPortsOperations:
-    """
-    .. warning::
-        **DO NOT** instantiate this class directly.
-
-        Instead, you should access the following operations through
-        :class:`~azure.mgmt.network.NetworkManagementClient`'s
-        :attr:`express_route_provider_ports` attribute.
-    """
-
-    def __init__(self, *args, **kwargs) -> None:
-        input_args = list(args)
-        self._client: PipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: NetworkManagementClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
-        self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
-        self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
-
-    @distributed_trace
-    def express_route_provider_port(self, providerport: str, **kwargs: Any) -> _models.ExpressRouteProviderPort:
-        """Retrieves detail of a provider port.
-
-        :param providerport: The name of the provider port. Required.
-        :type providerport: str
-        :return: ExpressRouteProviderPort. The ExpressRouteProviderPort is compatible with
-         MutableMapping
-        :rtype: ~azure.mgmt.network.models.ExpressRouteProviderPort
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        error_map: MutableMapping = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        _headers = kwargs.pop("headers", {}) or {}
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
-        cls: ClsType[_models.ExpressRouteProviderPort] = kwargs.pop("cls", None)
-
-        _request = build_express_route_provider_ports_express_route_provider_port_request(
-            providerport=providerport,
-            subscription_id=self._config.subscription_id,
-            api_version=api_version,
-            headers=_headers,
-            params=_params,
-        )
-        path_format_arguments = {
-            "endpoint": self._serialize.url("self._config.base_url", self._config.base_url, "str", skip_quote=True),
-        }
-        _request.url = self._client.format_url(_request.url, **path_format_arguments)
-
-        _stream = kwargs.pop("stream", False)
-        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            _request, stream=_stream, **kwargs
-        )
-
-        response = pipeline_response.http_response
-
-        if response.status_code not in [200]:
-            if _stream:
-                try:
-                    response.read()  # Load the body in memory and close the socket
-                except (StreamConsumedError, StreamClosedError):
-                    pass
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = _failsafe_deserialize(
-                _models.CloudError,
-                response,
-            )
-            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
-
-        if _stream:
-            deserialized = response.iter_bytes()
-        else:
-            deserialized = _deserialize(_models.ExpressRouteProviderPort, response.json())
-
-        if cls:
-            return cls(pipeline_response, deserialized, {})  # type: ignore
-
-        return deserialized  # type: ignore
 
 
 class NetworkInterfacesOperations:
@@ -45063,412 +43972,6 @@ class NetworkManagersOperations:
             if cls:
                 list_of_elem = cls(list_of_elem)  # type: ignore
             return deserialized.get("nextLink") or None, iter(list_of_elem)
-
-        def get_next(next_link=None):
-            _request = prepare_request(next_link)
-
-            _stream = False
-            pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-                _request, stream=_stream, **kwargs
-            )
-            response = pipeline_response.http_response
-
-            if response.status_code not in [200]:
-                map_error(status_code=response.status_code, response=response, error_map=error_map)
-                error = _failsafe_deserialize(
-                    _models.CloudError,
-                    response,
-                )
-                raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
-
-            return pipeline_response
-
-        return ItemPaged(get_next, extract_data)
-
-    @overload
-    def list_active_connectivity_configurations(
-        self,
-        resource_group_name: str,
-        network_manager_name: str,
-        parameters: _models.ActiveConfigurationParameter,
-        *,
-        top: Optional[int] = None,
-        content_type: str = "application/json",
-        **kwargs: Any
-    ) -> ItemPaged["_models.ActiveConnectivityConfiguration"]:
-        """Lists active connectivity configurations in a network manager.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param network_manager_name: The name of the network manager. Required.
-        :type network_manager_name: str
-        :param parameters: Active Configuration Parameter. Required.
-        :type parameters: ~azure.mgmt.network.models.ActiveConfigurationParameter
-        :keyword top: An optional query parameter which specifies the maximum number of records to be
-         returned by the server. Default value is None.
-        :paramtype top: int
-        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
-         Default value is "application/json".
-        :paramtype content_type: str
-        :return: An iterator like instance of ActiveConnectivityConfiguration
-        :rtype:
-         ~azure.core.paging.ItemPaged[~azure.mgmt.network.models.ActiveConnectivityConfiguration]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-
-    @overload
-    def list_active_connectivity_configurations(
-        self,
-        resource_group_name: str,
-        network_manager_name: str,
-        parameters: JSON,
-        *,
-        top: Optional[int] = None,
-        content_type: str = "application/json",
-        **kwargs: Any
-    ) -> ItemPaged["_models.ActiveConnectivityConfiguration"]:
-        """Lists active connectivity configurations in a network manager.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param network_manager_name: The name of the network manager. Required.
-        :type network_manager_name: str
-        :param parameters: Active Configuration Parameter. Required.
-        :type parameters: JSON
-        :keyword top: An optional query parameter which specifies the maximum number of records to be
-         returned by the server. Default value is None.
-        :paramtype top: int
-        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
-         Default value is "application/json".
-        :paramtype content_type: str
-        :return: An iterator like instance of ActiveConnectivityConfiguration
-        :rtype:
-         ~azure.core.paging.ItemPaged[~azure.mgmt.network.models.ActiveConnectivityConfiguration]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-
-    @overload
-    def list_active_connectivity_configurations(
-        self,
-        resource_group_name: str,
-        network_manager_name: str,
-        parameters: IO[bytes],
-        *,
-        top: Optional[int] = None,
-        content_type: str = "application/json",
-        **kwargs: Any
-    ) -> ItemPaged["_models.ActiveConnectivityConfiguration"]:
-        """Lists active connectivity configurations in a network manager.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param network_manager_name: The name of the network manager. Required.
-        :type network_manager_name: str
-        :param parameters: Active Configuration Parameter. Required.
-        :type parameters: IO[bytes]
-        :keyword top: An optional query parameter which specifies the maximum number of records to be
-         returned by the server. Default value is None.
-        :paramtype top: int
-        :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
-         Default value is "application/json".
-        :paramtype content_type: str
-        :return: An iterator like instance of ActiveConnectivityConfiguration
-        :rtype:
-         ~azure.core.paging.ItemPaged[~azure.mgmt.network.models.ActiveConnectivityConfiguration]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-
-    @distributed_trace
-    def list_active_connectivity_configurations(
-        self,
-        resource_group_name: str,
-        network_manager_name: str,
-        parameters: Union[_models.ActiveConfigurationParameter, JSON, IO[bytes]],
-        *,
-        top: Optional[int] = None,
-        **kwargs: Any
-    ) -> ItemPaged["_models.ActiveConnectivityConfiguration"]:
-        """Lists active connectivity configurations in a network manager.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param network_manager_name: The name of the network manager. Required.
-        :type network_manager_name: str
-        :param parameters: Active Configuration Parameter. Is one of the following types:
-         ActiveConfigurationParameter, JSON, IO[bytes] Required.
-        :type parameters: ~azure.mgmt.network.models.ActiveConfigurationParameter or JSON or IO[bytes]
-        :keyword top: An optional query parameter which specifies the maximum number of records to be
-         returned by the server. Default value is None.
-        :paramtype top: int
-        :return: An iterator like instance of ActiveConnectivityConfiguration
-        :rtype:
-         ~azure.core.paging.ItemPaged[~azure.mgmt.network.models.ActiveConnectivityConfiguration]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
-        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
-        cls: ClsType[List[_models.ActiveConnectivityConfiguration]] = kwargs.pop("cls", None)
-
-        error_map: MutableMapping = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-        content_type = content_type or "application/json"
-        _content = None
-        if isinstance(parameters, (IOBase, bytes)):
-            _content = parameters
-        else:
-            _content = json.dumps(parameters, cls=SdkJSONEncoder, exclude_readonly=True)  # type: ignore
-
-        def prepare_request(next_link=None):
-            if not next_link:
-
-                _request = build_network_managers_list_active_connectivity_configurations_request(
-                    resource_group_name=resource_group_name,
-                    network_manager_name=network_manager_name,
-                    subscription_id=self._config.subscription_id,
-                    top=top,
-                    api_version=api_version,
-                    content_type=content_type,
-                    content=_content,
-                    headers=_headers,
-                    params=_params,
-                )
-                path_format_arguments = {
-                    "endpoint": self._serialize.url(
-                        "self._config.base_url", self._config.base_url, "str", skip_quote=True
-                    ),
-                }
-                _request.url = self._client.format_url(_request.url, **path_format_arguments)
-
-            else:
-                _request = HttpRequest("GET", next_link)
-                path_format_arguments = {
-                    "endpoint": self._serialize.url(
-                        "self._config.base_url", self._config.base_url, "str", skip_quote=True
-                    ),
-                }
-                _request.url = self._client.format_url(_request.url, **path_format_arguments)
-
-            return _request
-
-        def extract_data(pipeline_response):
-            deserialized = pipeline_response.http_response.json()
-            list_of_elem = _deserialize(List[_models.ActiveConnectivityConfiguration], deserialized.get("value", []))
-            if cls:
-                list_of_elem = cls(list_of_elem)  # type: ignore
-            return None, iter(list_of_elem)
-
-        def get_next(next_link=None):
-            _request = prepare_request(next_link)
-
-            _stream = False
-            pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-                _request, stream=_stream, **kwargs
-            )
-            response = pipeline_response.http_response
-
-            if response.status_code not in [200]:
-                map_error(status_code=response.status_code, response=response, error_map=error_map)
-                error = _failsafe_deserialize(
-                    _models.CloudError,
-                    response,
-                )
-                raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
-
-            return pipeline_response
-
-        return ItemPaged(get_next, extract_data)
-
-    @overload
-    def list_active_security_admin_rules(
-        self,
-        resource_group_name: str,
-        network_manager_name: str,
-        parameters: _models.ActiveConfigurationParameter,
-        *,
-        top: Optional[int] = None,
-        content_type: str = "application/json",
-        **kwargs: Any
-    ) -> ItemPaged["_models.ActiveBaseSecurityAdminRule"]:
-        """Lists active security admin rules in a network manager.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param network_manager_name: The name of the network manager. Required.
-        :type network_manager_name: str
-        :param parameters: Active Configuration Parameter. Required.
-        :type parameters: ~azure.mgmt.network.models.ActiveConfigurationParameter
-        :keyword top: An optional query parameter which specifies the maximum number of records to be
-         returned by the server. Default value is None.
-        :paramtype top: int
-        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
-         Default value is "application/json".
-        :paramtype content_type: str
-        :return: An iterator like instance of ActiveBaseSecurityAdminRule
-        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.network.models.ActiveBaseSecurityAdminRule]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-
-    @overload
-    def list_active_security_admin_rules(
-        self,
-        resource_group_name: str,
-        network_manager_name: str,
-        parameters: JSON,
-        *,
-        top: Optional[int] = None,
-        content_type: str = "application/json",
-        **kwargs: Any
-    ) -> ItemPaged["_models.ActiveBaseSecurityAdminRule"]:
-        """Lists active security admin rules in a network manager.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param network_manager_name: The name of the network manager. Required.
-        :type network_manager_name: str
-        :param parameters: Active Configuration Parameter. Required.
-        :type parameters: JSON
-        :keyword top: An optional query parameter which specifies the maximum number of records to be
-         returned by the server. Default value is None.
-        :paramtype top: int
-        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
-         Default value is "application/json".
-        :paramtype content_type: str
-        :return: An iterator like instance of ActiveBaseSecurityAdminRule
-        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.network.models.ActiveBaseSecurityAdminRule]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-
-    @overload
-    def list_active_security_admin_rules(
-        self,
-        resource_group_name: str,
-        network_manager_name: str,
-        parameters: IO[bytes],
-        *,
-        top: Optional[int] = None,
-        content_type: str = "application/json",
-        **kwargs: Any
-    ) -> ItemPaged["_models.ActiveBaseSecurityAdminRule"]:
-        """Lists active security admin rules in a network manager.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param network_manager_name: The name of the network manager. Required.
-        :type network_manager_name: str
-        :param parameters: Active Configuration Parameter. Required.
-        :type parameters: IO[bytes]
-        :keyword top: An optional query parameter which specifies the maximum number of records to be
-         returned by the server. Default value is None.
-        :paramtype top: int
-        :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
-         Default value is "application/json".
-        :paramtype content_type: str
-        :return: An iterator like instance of ActiveBaseSecurityAdminRule
-        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.network.models.ActiveBaseSecurityAdminRule]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-
-    @distributed_trace
-    def list_active_security_admin_rules(
-        self,
-        resource_group_name: str,
-        network_manager_name: str,
-        parameters: Union[_models.ActiveConfigurationParameter, JSON, IO[bytes]],
-        *,
-        top: Optional[int] = None,
-        **kwargs: Any
-    ) -> ItemPaged["_models.ActiveBaseSecurityAdminRule"]:
-        """Lists active security admin rules in a network manager.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param network_manager_name: The name of the network manager. Required.
-        :type network_manager_name: str
-        :param parameters: Active Configuration Parameter. Is one of the following types:
-         ActiveConfigurationParameter, JSON, IO[bytes] Required.
-        :type parameters: ~azure.mgmt.network.models.ActiveConfigurationParameter or JSON or IO[bytes]
-        :keyword top: An optional query parameter which specifies the maximum number of records to be
-         returned by the server. Default value is None.
-        :paramtype top: int
-        :return: An iterator like instance of ActiveBaseSecurityAdminRule
-        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.network.models.ActiveBaseSecurityAdminRule]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
-        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
-        cls: ClsType[List[_models.ActiveBaseSecurityAdminRule]] = kwargs.pop("cls", None)
-
-        error_map: MutableMapping = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-        content_type = content_type or "application/json"
-        _content = None
-        if isinstance(parameters, (IOBase, bytes)):
-            _content = parameters
-        else:
-            _content = json.dumps(parameters, cls=SdkJSONEncoder, exclude_readonly=True)  # type: ignore
-
-        def prepare_request(next_link=None):
-            if not next_link:
-
-                _request = build_network_managers_list_active_security_admin_rules_request(
-                    resource_group_name=resource_group_name,
-                    network_manager_name=network_manager_name,
-                    subscription_id=self._config.subscription_id,
-                    top=top,
-                    api_version=api_version,
-                    content_type=content_type,
-                    content=_content,
-                    headers=_headers,
-                    params=_params,
-                )
-                path_format_arguments = {
-                    "endpoint": self._serialize.url(
-                        "self._config.base_url", self._config.base_url, "str", skip_quote=True
-                    ),
-                }
-                _request.url = self._client.format_url(_request.url, **path_format_arguments)
-
-            else:
-                _request = HttpRequest("GET", next_link)
-                path_format_arguments = {
-                    "endpoint": self._serialize.url(
-                        "self._config.base_url", self._config.base_url, "str", skip_quote=True
-                    ),
-                }
-                _request.url = self._client.format_url(_request.url, **path_format_arguments)
-
-            return _request
-
-        def extract_data(pipeline_response):
-            deserialized = pipeline_response.http_response.json()
-            list_of_elem = _deserialize(List[_models.ActiveBaseSecurityAdminRule], deserialized.get("value", []))
-            if cls:
-                list_of_elem = cls(list_of_elem)  # type: ignore
-            return None, iter(list_of_elem)
 
         def get_next(next_link=None):
             _request = prepare_request(next_link)
@@ -78408,432 +76911,6 @@ class VirtualNetworksOperations:
         )
 
 
-class EffectiveConfigurationsOperations:
-    """
-    .. warning::
-        **DO NOT** instantiate this class directly.
-
-        Instead, you should access the following operations through
-        :class:`~azure.mgmt.network.NetworkManagementClient`'s
-        :attr:`effective_configurations` attribute.
-    """
-
-    def __init__(self, *args, **kwargs) -> None:
-        input_args = list(args)
-        self._client: PipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: NetworkManagementClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
-        self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
-        self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
-
-    @overload
-    def list_network_manager_effective_connectivity_configurations(  # pylint: disable=name-too-long
-        self,
-        resource_group_name: str,
-        virtual_network_name: str,
-        parameters: _models.QueryRequestOptions,
-        *,
-        top: Optional[int] = None,
-        content_type: str = "application/json",
-        **kwargs: Any
-    ) -> ItemPaged["_models.EffectiveConnectivityConfiguration"]:
-        """List all effective connectivity configurations applied on a virtual network.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param virtual_network_name: The name of the virtual network. Required.
-        :type virtual_network_name: str
-        :param parameters: Parameters supplied to list correct page. Required.
-        :type parameters: ~azure.mgmt.network.models.QueryRequestOptions
-        :keyword top: An optional query parameter which specifies the maximum number of records to be
-         returned by the server. Default value is None.
-        :paramtype top: int
-        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
-         Default value is "application/json".
-        :paramtype content_type: str
-        :return: An iterator like instance of EffectiveConnectivityConfiguration
-        :rtype:
-         ~azure.core.paging.ItemPaged[~azure.mgmt.network.models.EffectiveConnectivityConfiguration]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-
-    @overload
-    def list_network_manager_effective_connectivity_configurations(  # pylint: disable=name-too-long
-        self,
-        resource_group_name: str,
-        virtual_network_name: str,
-        parameters: JSON,
-        *,
-        top: Optional[int] = None,
-        content_type: str = "application/json",
-        **kwargs: Any
-    ) -> ItemPaged["_models.EffectiveConnectivityConfiguration"]:
-        """List all effective connectivity configurations applied on a virtual network.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param virtual_network_name: The name of the virtual network. Required.
-        :type virtual_network_name: str
-        :param parameters: Parameters supplied to list correct page. Required.
-        :type parameters: JSON
-        :keyword top: An optional query parameter which specifies the maximum number of records to be
-         returned by the server. Default value is None.
-        :paramtype top: int
-        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
-         Default value is "application/json".
-        :paramtype content_type: str
-        :return: An iterator like instance of EffectiveConnectivityConfiguration
-        :rtype:
-         ~azure.core.paging.ItemPaged[~azure.mgmt.network.models.EffectiveConnectivityConfiguration]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-
-    @overload
-    def list_network_manager_effective_connectivity_configurations(  # pylint: disable=name-too-long
-        self,
-        resource_group_name: str,
-        virtual_network_name: str,
-        parameters: IO[bytes],
-        *,
-        top: Optional[int] = None,
-        content_type: str = "application/json",
-        **kwargs: Any
-    ) -> ItemPaged["_models.EffectiveConnectivityConfiguration"]:
-        """List all effective connectivity configurations applied on a virtual network.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param virtual_network_name: The name of the virtual network. Required.
-        :type virtual_network_name: str
-        :param parameters: Parameters supplied to list correct page. Required.
-        :type parameters: IO[bytes]
-        :keyword top: An optional query parameter which specifies the maximum number of records to be
-         returned by the server. Default value is None.
-        :paramtype top: int
-        :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
-         Default value is "application/json".
-        :paramtype content_type: str
-        :return: An iterator like instance of EffectiveConnectivityConfiguration
-        :rtype:
-         ~azure.core.paging.ItemPaged[~azure.mgmt.network.models.EffectiveConnectivityConfiguration]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-
-    @distributed_trace
-    def list_network_manager_effective_connectivity_configurations(  # pylint: disable=name-too-long
-        self,
-        resource_group_name: str,
-        virtual_network_name: str,
-        parameters: Union[_models.QueryRequestOptions, JSON, IO[bytes]],
-        *,
-        top: Optional[int] = None,
-        **kwargs: Any
-    ) -> ItemPaged["_models.EffectiveConnectivityConfiguration"]:
-        """List all effective connectivity configurations applied on a virtual network.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param virtual_network_name: The name of the virtual network. Required.
-        :type virtual_network_name: str
-        :param parameters: Parameters supplied to list correct page. Is one of the following types:
-         QueryRequestOptions, JSON, IO[bytes] Required.
-        :type parameters: ~azure.mgmt.network.models.QueryRequestOptions or JSON or IO[bytes]
-        :keyword top: An optional query parameter which specifies the maximum number of records to be
-         returned by the server. Default value is None.
-        :paramtype top: int
-        :return: An iterator like instance of EffectiveConnectivityConfiguration
-        :rtype:
-         ~azure.core.paging.ItemPaged[~azure.mgmt.network.models.EffectiveConnectivityConfiguration]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
-        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
-        cls: ClsType[List[_models.EffectiveConnectivityConfiguration]] = kwargs.pop("cls", None)
-
-        error_map: MutableMapping = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-        content_type = content_type or "application/json"
-        _content = None
-        if isinstance(parameters, (IOBase, bytes)):
-            _content = parameters
-        else:
-            _content = json.dumps(parameters, cls=SdkJSONEncoder, exclude_readonly=True)  # type: ignore
-
-        def prepare_request(next_link=None):
-            if not next_link:
-
-                _request = (
-                    build_effective_configurations_list_network_manager_effective_connectivity_configurations_request(
-                        resource_group_name=resource_group_name,
-                        virtual_network_name=virtual_network_name,
-                        subscription_id=self._config.subscription_id,
-                        top=top,
-                        api_version=api_version,
-                        content_type=content_type,
-                        content=_content,
-                        headers=_headers,
-                        params=_params,
-                    )
-                )
-                path_format_arguments = {
-                    "endpoint": self._serialize.url(
-                        "self._config.base_url", self._config.base_url, "str", skip_quote=True
-                    ),
-                }
-                _request.url = self._client.format_url(_request.url, **path_format_arguments)
-
-            else:
-                _request = HttpRequest("GET", next_link)
-                path_format_arguments = {
-                    "endpoint": self._serialize.url(
-                        "self._config.base_url", self._config.base_url, "str", skip_quote=True
-                    ),
-                }
-                _request.url = self._client.format_url(_request.url, **path_format_arguments)
-
-            return _request
-
-        def extract_data(pipeline_response):
-            deserialized = pipeline_response.http_response.json()
-            list_of_elem = _deserialize(List[_models.EffectiveConnectivityConfiguration], deserialized.get("value", []))
-            if cls:
-                list_of_elem = cls(list_of_elem)  # type: ignore
-            return None, iter(list_of_elem)
-
-        def get_next(next_link=None):
-            _request = prepare_request(next_link)
-
-            _stream = False
-            pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-                _request, stream=_stream, **kwargs
-            )
-            response = pipeline_response.http_response
-
-            if response.status_code not in [200]:
-                map_error(status_code=response.status_code, response=response, error_map=error_map)
-                error = _failsafe_deserialize(
-                    _models.CloudError,
-                    response,
-                )
-                raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
-
-            return pipeline_response
-
-        return ItemPaged(get_next, extract_data)
-
-    @overload
-    def list_network_manager_effective_security_admin_rules(  # pylint: disable=name-too-long
-        self,
-        resource_group_name: str,
-        virtual_network_name: str,
-        parameters: _models.QueryRequestOptions,
-        *,
-        top: Optional[int] = None,
-        content_type: str = "application/json",
-        **kwargs: Any
-    ) -> ItemPaged["_models.EffectiveBaseSecurityAdminRule"]:
-        """List all effective security admin rules applied on a virtual network.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param virtual_network_name: The name of the virtual network. Required.
-        :type virtual_network_name: str
-        :param parameters: Parameters supplied to list correct page. Required.
-        :type parameters: ~azure.mgmt.network.models.QueryRequestOptions
-        :keyword top: An optional query parameter which specifies the maximum number of records to be
-         returned by the server. Default value is None.
-        :paramtype top: int
-        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
-         Default value is "application/json".
-        :paramtype content_type: str
-        :return: An iterator like instance of EffectiveBaseSecurityAdminRule
-        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.network.models.EffectiveBaseSecurityAdminRule]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-
-    @overload
-    def list_network_manager_effective_security_admin_rules(  # pylint: disable=name-too-long
-        self,
-        resource_group_name: str,
-        virtual_network_name: str,
-        parameters: JSON,
-        *,
-        top: Optional[int] = None,
-        content_type: str = "application/json",
-        **kwargs: Any
-    ) -> ItemPaged["_models.EffectiveBaseSecurityAdminRule"]:
-        """List all effective security admin rules applied on a virtual network.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param virtual_network_name: The name of the virtual network. Required.
-        :type virtual_network_name: str
-        :param parameters: Parameters supplied to list correct page. Required.
-        :type parameters: JSON
-        :keyword top: An optional query parameter which specifies the maximum number of records to be
-         returned by the server. Default value is None.
-        :paramtype top: int
-        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
-         Default value is "application/json".
-        :paramtype content_type: str
-        :return: An iterator like instance of EffectiveBaseSecurityAdminRule
-        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.network.models.EffectiveBaseSecurityAdminRule]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-
-    @overload
-    def list_network_manager_effective_security_admin_rules(  # pylint: disable=name-too-long
-        self,
-        resource_group_name: str,
-        virtual_network_name: str,
-        parameters: IO[bytes],
-        *,
-        top: Optional[int] = None,
-        content_type: str = "application/json",
-        **kwargs: Any
-    ) -> ItemPaged["_models.EffectiveBaseSecurityAdminRule"]:
-        """List all effective security admin rules applied on a virtual network.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param virtual_network_name: The name of the virtual network. Required.
-        :type virtual_network_name: str
-        :param parameters: Parameters supplied to list correct page. Required.
-        :type parameters: IO[bytes]
-        :keyword top: An optional query parameter which specifies the maximum number of records to be
-         returned by the server. Default value is None.
-        :paramtype top: int
-        :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
-         Default value is "application/json".
-        :paramtype content_type: str
-        :return: An iterator like instance of EffectiveBaseSecurityAdminRule
-        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.network.models.EffectiveBaseSecurityAdminRule]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-
-    @distributed_trace
-    def list_network_manager_effective_security_admin_rules(  # pylint: disable=name-too-long
-        self,
-        resource_group_name: str,
-        virtual_network_name: str,
-        parameters: Union[_models.QueryRequestOptions, JSON, IO[bytes]],
-        *,
-        top: Optional[int] = None,
-        **kwargs: Any
-    ) -> ItemPaged["_models.EffectiveBaseSecurityAdminRule"]:
-        """List all effective security admin rules applied on a virtual network.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param virtual_network_name: The name of the virtual network. Required.
-        :type virtual_network_name: str
-        :param parameters: Parameters supplied to list correct page. Is one of the following types:
-         QueryRequestOptions, JSON, IO[bytes] Required.
-        :type parameters: ~azure.mgmt.network.models.QueryRequestOptions or JSON or IO[bytes]
-        :keyword top: An optional query parameter which specifies the maximum number of records to be
-         returned by the server. Default value is None.
-        :paramtype top: int
-        :return: An iterator like instance of EffectiveBaseSecurityAdminRule
-        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.network.models.EffectiveBaseSecurityAdminRule]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
-        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
-        cls: ClsType[List[_models.EffectiveBaseSecurityAdminRule]] = kwargs.pop("cls", None)
-
-        error_map: MutableMapping = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-        content_type = content_type or "application/json"
-        _content = None
-        if isinstance(parameters, (IOBase, bytes)):
-            _content = parameters
-        else:
-            _content = json.dumps(parameters, cls=SdkJSONEncoder, exclude_readonly=True)  # type: ignore
-
-        def prepare_request(next_link=None):
-            if not next_link:
-
-                _request = build_effective_configurations_list_network_manager_effective_security_admin_rules_request(
-                    resource_group_name=resource_group_name,
-                    virtual_network_name=virtual_network_name,
-                    subscription_id=self._config.subscription_id,
-                    top=top,
-                    api_version=api_version,
-                    content_type=content_type,
-                    content=_content,
-                    headers=_headers,
-                    params=_params,
-                )
-                path_format_arguments = {
-                    "endpoint": self._serialize.url(
-                        "self._config.base_url", self._config.base_url, "str", skip_quote=True
-                    ),
-                }
-                _request.url = self._client.format_url(_request.url, **path_format_arguments)
-
-            else:
-                _request = HttpRequest("GET", next_link)
-                path_format_arguments = {
-                    "endpoint": self._serialize.url(
-                        "self._config.base_url", self._config.base_url, "str", skip_quote=True
-                    ),
-                }
-                _request.url = self._client.format_url(_request.url, **path_format_arguments)
-
-            return _request
-
-        def extract_data(pipeline_response):
-            deserialized = pipeline_response.http_response.json()
-            list_of_elem = _deserialize(List[_models.EffectiveBaseSecurityAdminRule], deserialized.get("value", []))
-            if cls:
-                list_of_elem = cls(list_of_elem)  # type: ignore
-            return None, iter(list_of_elem)
-
-        def get_next(next_link=None):
-            _request = prepare_request(next_link)
-
-            _stream = False
-            pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-                _request, stream=_stream, **kwargs
-            )
-            response = pipeline_response.http_response
-
-            if response.status_code not in [200]:
-                map_error(status_code=response.status_code, response=response, error_map=error_map)
-                error = _failsafe_deserialize(
-                    _models.CloudError,
-                    response,
-                )
-                raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
-
-            return pipeline_response
-
-        return ItemPaged(get_next, extract_data)
-
-
 class SubnetsOperations:
     """
     .. warning::
@@ -91433,346 +89510,6 @@ class VirtualRouterPeeringsOperations:
         return ItemPaged(get_next, extract_data)
 
 
-class VirtualWANSOperations:
-    """
-    .. warning::
-        **DO NOT** instantiate this class directly.
-
-        Instead, you should access the following operations through
-        :class:`~azure.mgmt.network.NetworkManagementClient`'s
-        :attr:`virtual_wans` attribute.
-    """
-
-    def __init__(self, *args, **kwargs) -> None:
-        input_args = list(args)
-        self._client: PipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: NetworkManagementClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
-        self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
-        self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
-
-    @distributed_trace
-    def supported_security_providers(
-        self, resource_group_name: str, virtual_wan_name: str, **kwargs: Any
-    ) -> _models.VirtualWanSecurityProviders:
-        """Gives the supported security providers for the virtual wan.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param virtual_wan_name: The name of the VirtualWAN. Required.
-        :type virtual_wan_name: str
-        :return: VirtualWanSecurityProviders. The VirtualWanSecurityProviders is compatible with
-         MutableMapping
-        :rtype: ~azure.mgmt.network.models.VirtualWanSecurityProviders
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        error_map: MutableMapping = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        _headers = kwargs.pop("headers", {}) or {}
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
-        cls: ClsType[_models.VirtualWanSecurityProviders] = kwargs.pop("cls", None)
-
-        _request = build_virtual_wans_supported_security_providers_request(
-            resource_group_name=resource_group_name,
-            virtual_wan_name=virtual_wan_name,
-            subscription_id=self._config.subscription_id,
-            api_version=api_version,
-            headers=_headers,
-            params=_params,
-        )
-        path_format_arguments = {
-            "endpoint": self._serialize.url("self._config.base_url", self._config.base_url, "str", skip_quote=True),
-        }
-        _request.url = self._client.format_url(_request.url, **path_format_arguments)
-
-        _stream = kwargs.pop("stream", False)
-        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            _request, stream=_stream, **kwargs
-        )
-
-        response = pipeline_response.http_response
-
-        if response.status_code not in [200]:
-            if _stream:
-                try:
-                    response.read()  # Load the body in memory and close the socket
-                except (StreamConsumedError, StreamClosedError):
-                    pass
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = _failsafe_deserialize(
-                _models.CloudError,
-                response,
-            )
-            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
-
-        if _stream:
-            deserialized = response.iter_bytes()
-        else:
-            deserialized = _deserialize(_models.VirtualWanSecurityProviders, response.json())
-
-        if cls:
-            return cls(pipeline_response, deserialized, {})  # type: ignore
-
-        return deserialized  # type: ignore
-
-    def _generatevirtualwanvpnserverconfigurationvpnprofile_initial(  # pylint: disable=name-too-long
-        self,
-        resource_group_name: str,
-        virtual_wan_name: str,
-        vpn_client_params: Union[_models.VirtualWanVpnProfileParameters, JSON, IO[bytes]],
-        **kwargs: Any
-    ) -> Iterator[bytes]:
-        error_map: MutableMapping = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
-        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
-        cls: ClsType[Iterator[bytes]] = kwargs.pop("cls", None)
-
-        content_type = content_type or "application/json"
-        _content = None
-        if isinstance(vpn_client_params, (IOBase, bytes)):
-            _content = vpn_client_params
-        else:
-            _content = json.dumps(vpn_client_params, cls=SdkJSONEncoder, exclude_readonly=True)  # type: ignore
-
-        _request = build_virtual_wans_generatevirtualwanvpnserverconfigurationvpnprofile_request(
-            resource_group_name=resource_group_name,
-            virtual_wan_name=virtual_wan_name,
-            subscription_id=self._config.subscription_id,
-            api_version=api_version,
-            content_type=content_type,
-            content=_content,
-            headers=_headers,
-            params=_params,
-        )
-        path_format_arguments = {
-            "endpoint": self._serialize.url("self._config.base_url", self._config.base_url, "str", skip_quote=True),
-        }
-        _request.url = self._client.format_url(_request.url, **path_format_arguments)
-
-        _stream = True
-        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            _request, stream=_stream, **kwargs
-        )
-
-        response = pipeline_response.http_response
-
-        if response.status_code not in [200, 202]:
-            try:
-                response.read()  # Load the body in memory and close the socket
-            except (StreamConsumedError, StreamClosedError):
-                pass
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = _failsafe_deserialize(
-                _models.CloudError,
-                response,
-            )
-            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
-
-        response_headers = {}
-        if response.status_code == 202:
-            response_headers["Location"] = self._deserialize("str", response.headers.get("Location"))
-            response_headers["Retry-After"] = self._deserialize("int", response.headers.get("Retry-After"))
-
-        deserialized = response.iter_bytes()
-
-        if cls:
-            return cls(pipeline_response, deserialized, response_headers)  # type: ignore
-
-        return deserialized  # type: ignore
-
-    @overload
-    def begin_generatevirtualwanvpnserverconfigurationvpnprofile(  # pylint: disable=name-too-long
-        self,
-        resource_group_name: str,
-        virtual_wan_name: str,
-        vpn_client_params: _models.VirtualWanVpnProfileParameters,
-        *,
-        content_type: str = "application/json",
-        **kwargs: Any
-    ) -> LROPoller[_models.VpnProfileResponse]:
-        """Generates a unique VPN profile for P2S clients for VirtualWan and associated
-        VpnServerConfiguration combination in the specified resource group.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param virtual_wan_name: The name of the VirtualWAN. Required.
-        :type virtual_wan_name: str
-        :param vpn_client_params: Parameters supplied to the generate VirtualWan VPN profile generation
-         operation. Required.
-        :type vpn_client_params: ~azure.mgmt.network.models.VirtualWanVpnProfileParameters
-        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
-         Default value is "application/json".
-        :paramtype content_type: str
-        :return: An instance of LROPoller that returns VpnProfileResponse. The VpnProfileResponse is
-         compatible with MutableMapping
-        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.network.models.VpnProfileResponse]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-
-    @overload
-    def begin_generatevirtualwanvpnserverconfigurationvpnprofile(  # pylint: disable=name-too-long
-        self,
-        resource_group_name: str,
-        virtual_wan_name: str,
-        vpn_client_params: JSON,
-        *,
-        content_type: str = "application/json",
-        **kwargs: Any
-    ) -> LROPoller[_models.VpnProfileResponse]:
-        """Generates a unique VPN profile for P2S clients for VirtualWan and associated
-        VpnServerConfiguration combination in the specified resource group.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param virtual_wan_name: The name of the VirtualWAN. Required.
-        :type virtual_wan_name: str
-        :param vpn_client_params: Parameters supplied to the generate VirtualWan VPN profile generation
-         operation. Required.
-        :type vpn_client_params: JSON
-        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
-         Default value is "application/json".
-        :paramtype content_type: str
-        :return: An instance of LROPoller that returns VpnProfileResponse. The VpnProfileResponse is
-         compatible with MutableMapping
-        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.network.models.VpnProfileResponse]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-
-    @overload
-    def begin_generatevirtualwanvpnserverconfigurationvpnprofile(  # pylint: disable=name-too-long
-        self,
-        resource_group_name: str,
-        virtual_wan_name: str,
-        vpn_client_params: IO[bytes],
-        *,
-        content_type: str = "application/json",
-        **kwargs: Any
-    ) -> LROPoller[_models.VpnProfileResponse]:
-        """Generates a unique VPN profile for P2S clients for VirtualWan and associated
-        VpnServerConfiguration combination in the specified resource group.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param virtual_wan_name: The name of the VirtualWAN. Required.
-        :type virtual_wan_name: str
-        :param vpn_client_params: Parameters supplied to the generate VirtualWan VPN profile generation
-         operation. Required.
-        :type vpn_client_params: IO[bytes]
-        :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
-         Default value is "application/json".
-        :paramtype content_type: str
-        :return: An instance of LROPoller that returns VpnProfileResponse. The VpnProfileResponse is
-         compatible with MutableMapping
-        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.network.models.VpnProfileResponse]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-
-    @distributed_trace
-    def begin_generatevirtualwanvpnserverconfigurationvpnprofile(  # pylint: disable=name-too-long
-        self,
-        resource_group_name: str,
-        virtual_wan_name: str,
-        vpn_client_params: Union[_models.VirtualWanVpnProfileParameters, JSON, IO[bytes]],
-        **kwargs: Any
-    ) -> LROPoller[_models.VpnProfileResponse]:
-        """Generates a unique VPN profile for P2S clients for VirtualWan and associated
-        VpnServerConfiguration combination in the specified resource group.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param virtual_wan_name: The name of the VirtualWAN. Required.
-        :type virtual_wan_name: str
-        :param vpn_client_params: Parameters supplied to the generate VirtualWan VPN profile generation
-         operation. Is one of the following types: VirtualWanVpnProfileParameters, JSON, IO[bytes]
-         Required.
-        :type vpn_client_params: ~azure.mgmt.network.models.VirtualWanVpnProfileParameters or JSON or
-         IO[bytes]
-        :return: An instance of LROPoller that returns VpnProfileResponse. The VpnProfileResponse is
-         compatible with MutableMapping
-        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.network.models.VpnProfileResponse]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
-        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
-        cls: ClsType[_models.VpnProfileResponse] = kwargs.pop("cls", None)
-        polling: Union[bool, PollingMethod] = kwargs.pop("polling", True)
-        lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
-        cont_token: Optional[str] = kwargs.pop("continuation_token", None)
-        if cont_token is None:
-            raw_result = self._generatevirtualwanvpnserverconfigurationvpnprofile_initial(
-                resource_group_name=resource_group_name,
-                virtual_wan_name=virtual_wan_name,
-                vpn_client_params=vpn_client_params,
-                api_version=api_version,
-                content_type=content_type,
-                cls=lambda x, y, z: x,
-                headers=_headers,
-                params=_params,
-                **kwargs
-            )
-            raw_result.http_response.read()  # type: ignore
-        kwargs.pop("error_map", None)
-
-        def get_long_running_output(pipeline_response):
-            response_headers = {}
-            response = pipeline_response.http_response
-            response_headers["Location"] = self._deserialize("str", response.headers.get("Location"))
-            response_headers["Retry-After"] = self._deserialize("int", response.headers.get("Retry-After"))
-
-            deserialized = _deserialize(_models.VpnProfileResponse, response.json())
-            if cls:
-                return cls(pipeline_response, deserialized, response_headers)  # type: ignore
-            return deserialized
-
-        path_format_arguments = {
-            "endpoint": self._serialize.url("self._config.base_url", self._config.base_url, "str", skip_quote=True),
-        }
-
-        if polling is True:
-            polling_method: PollingMethod = cast(
-                PollingMethod, ARMPolling(lro_delay, path_format_arguments=path_format_arguments, **kwargs)
-            )
-        elif polling is False:
-            polling_method = cast(PollingMethod, NoPolling())
-        else:
-            polling_method = polling
-        if cont_token:
-            return LROPoller[_models.VpnProfileResponse].from_continuation_token(
-                polling_method=polling_method,
-                continuation_token=cont_token,
-                client=self._client,
-                deserialization_callback=get_long_running_output,
-            )
-        return LROPoller[_models.VpnProfileResponse](
-            self._client, raw_result, get_long_running_output, polling_method  # type: ignore
-        )
-
-
 class VpnSitesOperations:
     """
     .. warning::
@@ -97507,6 +95244,835 @@ class P2SVpnGatewaysOperations:
         self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
+    @distributed_trace
+    def get(self, resource_group_name: str, gateway_name: str, **kwargs: Any) -> _models.P2SVpnGateway:
+        """Retrieves the details of a virtual wan p2s vpn gateway.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param gateway_name: The name of the gateway. Required.
+        :type gateway_name: str
+        :return: P2SVpnGateway. The P2SVpnGateway is compatible with MutableMapping
+        :rtype: ~azure.mgmt.network.models.P2SVpnGateway
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
+        cls: ClsType[_models.P2SVpnGateway] = kwargs.pop("cls", None)
+
+        _request = build_p2_svpn_gateways_get_request(
+            resource_group_name=resource_group_name,
+            gateway_name=gateway_name,
+            subscription_id=self._config.subscription_id,
+            api_version=api_version,
+            headers=_headers,
+            params=_params,
+        )
+        path_format_arguments = {
+            "endpoint": self._serialize.url("self._config.base_url", self._config.base_url, "str", skip_quote=True),
+        }
+        _request.url = self._client.format_url(_request.url, **path_format_arguments)
+
+        _stream = kwargs.pop("stream", False)
+        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                try:
+                    response.read()  # Load the body in memory and close the socket
+                except (StreamConsumedError, StreamClosedError):
+                    pass
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            error = _failsafe_deserialize(
+                _models.CloudError,
+                response,
+            )
+            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
+
+        if _stream:
+            deserialized = response.iter_bytes()
+        else:
+            deserialized = _deserialize(_models.P2SVpnGateway, response.json())
+
+        if cls:
+            return cls(pipeline_response, deserialized, {})  # type: ignore
+
+        return deserialized  # type: ignore
+
+    def _create_or_update_initial(
+        self,
+        resource_group_name: str,
+        gateway_name: str,
+        p2_s_vpn_gateway_parameters: Union[_models.P2SVpnGateway, JSON, IO[bytes]],
+        **kwargs: Any
+    ) -> Iterator[bytes]:
+        error_map: MutableMapping = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[Iterator[bytes]] = kwargs.pop("cls", None)
+
+        content_type = content_type or "application/json"
+        _content = None
+        if isinstance(p2_s_vpn_gateway_parameters, (IOBase, bytes)):
+            _content = p2_s_vpn_gateway_parameters
+        else:
+            _content = json.dumps(p2_s_vpn_gateway_parameters, cls=SdkJSONEncoder, exclude_readonly=True)  # type: ignore
+
+        _request = build_p2_svpn_gateways_create_or_update_request(
+            resource_group_name=resource_group_name,
+            gateway_name=gateway_name,
+            subscription_id=self._config.subscription_id,
+            api_version=api_version,
+            content_type=content_type,
+            content=_content,
+            headers=_headers,
+            params=_params,
+        )
+        path_format_arguments = {
+            "endpoint": self._serialize.url("self._config.base_url", self._config.base_url, "str", skip_quote=True),
+        }
+        _request.url = self._client.format_url(_request.url, **path_format_arguments)
+
+        _stream = True
+        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200, 201]:
+            try:
+                response.read()  # Load the body in memory and close the socket
+            except (StreamConsumedError, StreamClosedError):
+                pass
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            error = _failsafe_deserialize(
+                _models.CloudError,
+                response,
+            )
+            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
+
+        response_headers = {}
+        if response.status_code == 201:
+            response_headers["Azure-AsyncOperation"] = self._deserialize(
+                "str", response.headers.get("Azure-AsyncOperation")
+            )
+            response_headers["Retry-After"] = self._deserialize("int", response.headers.get("Retry-After"))
+
+        deserialized = response.iter_bytes()
+
+        if cls:
+            return cls(pipeline_response, deserialized, response_headers)  # type: ignore
+
+        return deserialized  # type: ignore
+
+    @overload
+    def begin_create_or_update(
+        self,
+        resource_group_name: str,
+        gateway_name: str,
+        p2_s_vpn_gateway_parameters: _models.P2SVpnGateway,
+        *,
+        content_type: str = "application/json",
+        **kwargs: Any
+    ) -> LROPoller[_models.P2SVpnGateway]:
+        """Creates a virtual wan p2s vpn gateway if it doesn't exist else updates the existing gateway.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param gateway_name: The name of the gateway. Required.
+        :type gateway_name: str
+        :param p2_s_vpn_gateway_parameters: Parameters supplied to create or Update a virtual wan p2s
+         vpn gateway. Required.
+        :type p2_s_vpn_gateway_parameters: ~azure.mgmt.network.models.P2SVpnGateway
+        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :return: An instance of LROPoller that returns P2SVpnGateway. The P2SVpnGateway is compatible
+         with MutableMapping
+        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.network.models.P2SVpnGateway]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+
+    @overload
+    def begin_create_or_update(
+        self,
+        resource_group_name: str,
+        gateway_name: str,
+        p2_s_vpn_gateway_parameters: JSON,
+        *,
+        content_type: str = "application/json",
+        **kwargs: Any
+    ) -> LROPoller[_models.P2SVpnGateway]:
+        """Creates a virtual wan p2s vpn gateway if it doesn't exist else updates the existing gateway.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param gateway_name: The name of the gateway. Required.
+        :type gateway_name: str
+        :param p2_s_vpn_gateway_parameters: Parameters supplied to create or Update a virtual wan p2s
+         vpn gateway. Required.
+        :type p2_s_vpn_gateway_parameters: JSON
+        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :return: An instance of LROPoller that returns P2SVpnGateway. The P2SVpnGateway is compatible
+         with MutableMapping
+        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.network.models.P2SVpnGateway]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+
+    @overload
+    def begin_create_or_update(
+        self,
+        resource_group_name: str,
+        gateway_name: str,
+        p2_s_vpn_gateway_parameters: IO[bytes],
+        *,
+        content_type: str = "application/json",
+        **kwargs: Any
+    ) -> LROPoller[_models.P2SVpnGateway]:
+        """Creates a virtual wan p2s vpn gateway if it doesn't exist else updates the existing gateway.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param gateway_name: The name of the gateway. Required.
+        :type gateway_name: str
+        :param p2_s_vpn_gateway_parameters: Parameters supplied to create or Update a virtual wan p2s
+         vpn gateway. Required.
+        :type p2_s_vpn_gateway_parameters: IO[bytes]
+        :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :return: An instance of LROPoller that returns P2SVpnGateway. The P2SVpnGateway is compatible
+         with MutableMapping
+        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.network.models.P2SVpnGateway]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+
+    @distributed_trace
+    def begin_create_or_update(
+        self,
+        resource_group_name: str,
+        gateway_name: str,
+        p2_s_vpn_gateway_parameters: Union[_models.P2SVpnGateway, JSON, IO[bytes]],
+        **kwargs: Any
+    ) -> LROPoller[_models.P2SVpnGateway]:
+        """Creates a virtual wan p2s vpn gateway if it doesn't exist else updates the existing gateway.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param gateway_name: The name of the gateway. Required.
+        :type gateway_name: str
+        :param p2_s_vpn_gateway_parameters: Parameters supplied to create or Update a virtual wan p2s
+         vpn gateway. Is one of the following types: P2SVpnGateway, JSON, IO[bytes] Required.
+        :type p2_s_vpn_gateway_parameters: ~azure.mgmt.network.models.P2SVpnGateway or JSON or
+         IO[bytes]
+        :return: An instance of LROPoller that returns P2SVpnGateway. The P2SVpnGateway is compatible
+         with MutableMapping
+        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.network.models.P2SVpnGateway]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[_models.P2SVpnGateway] = kwargs.pop("cls", None)
+        polling: Union[bool, PollingMethod] = kwargs.pop("polling", True)
+        lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
+        cont_token: Optional[str] = kwargs.pop("continuation_token", None)
+        if cont_token is None:
+            raw_result = self._create_or_update_initial(
+                resource_group_name=resource_group_name,
+                gateway_name=gateway_name,
+                p2_s_vpn_gateway_parameters=p2_s_vpn_gateway_parameters,
+                api_version=api_version,
+                content_type=content_type,
+                cls=lambda x, y, z: x,
+                headers=_headers,
+                params=_params,
+                **kwargs
+            )
+            raw_result.http_response.read()  # type: ignore
+        kwargs.pop("error_map", None)
+
+        def get_long_running_output(pipeline_response):
+            response = pipeline_response.http_response
+            deserialized = _deserialize(_models.P2SVpnGateway, response.json())
+            if cls:
+                return cls(pipeline_response, deserialized, {})  # type: ignore
+            return deserialized
+
+        path_format_arguments = {
+            "endpoint": self._serialize.url("self._config.base_url", self._config.base_url, "str", skip_quote=True),
+        }
+
+        if polling is True:
+            polling_method: PollingMethod = cast(
+                PollingMethod, ARMPolling(lro_delay, path_format_arguments=path_format_arguments, **kwargs)
+            )
+        elif polling is False:
+            polling_method = cast(PollingMethod, NoPolling())
+        else:
+            polling_method = polling
+        if cont_token:
+            return LROPoller[_models.P2SVpnGateway].from_continuation_token(
+                polling_method=polling_method,
+                continuation_token=cont_token,
+                client=self._client,
+                deserialization_callback=get_long_running_output,
+            )
+        return LROPoller[_models.P2SVpnGateway](
+            self._client, raw_result, get_long_running_output, polling_method  # type: ignore
+        )
+
+    def _update_tags_initial(
+        self,
+        resource_group_name: str,
+        gateway_name: str,
+        p2_s_vpn_gateway_parameters: Union[_models.TagsObject, JSON, IO[bytes]],
+        **kwargs: Any
+    ) -> Iterator[bytes]:
+        error_map: MutableMapping = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[Iterator[bytes]] = kwargs.pop("cls", None)
+
+        content_type = content_type or "application/json"
+        _content = None
+        if isinstance(p2_s_vpn_gateway_parameters, (IOBase, bytes)):
+            _content = p2_s_vpn_gateway_parameters
+        else:
+            _content = json.dumps(p2_s_vpn_gateway_parameters, cls=SdkJSONEncoder, exclude_readonly=True)  # type: ignore
+
+        _request = build_p2_svpn_gateways_update_tags_request(
+            resource_group_name=resource_group_name,
+            gateway_name=gateway_name,
+            subscription_id=self._config.subscription_id,
+            api_version=api_version,
+            content_type=content_type,
+            content=_content,
+            headers=_headers,
+            params=_params,
+        )
+        path_format_arguments = {
+            "endpoint": self._serialize.url("self._config.base_url", self._config.base_url, "str", skip_quote=True),
+        }
+        _request.url = self._client.format_url(_request.url, **path_format_arguments)
+
+        _stream = True
+        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200, 202]:
+            try:
+                response.read()  # Load the body in memory and close the socket
+            except (StreamConsumedError, StreamClosedError):
+                pass
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            error = _failsafe_deserialize(
+                _models.CloudError,
+                response,
+            )
+            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
+
+        response_headers = {}
+        if response.status_code == 202:
+            response_headers["Azure-AsyncOperation"] = self._deserialize(
+                "str", response.headers.get("Azure-AsyncOperation")
+            )
+            response_headers["Retry-After"] = self._deserialize("int", response.headers.get("Retry-After"))
+
+        deserialized = response.iter_bytes()
+
+        if cls:
+            return cls(pipeline_response, deserialized, response_headers)  # type: ignore
+
+        return deserialized  # type: ignore
+
+    @overload
+    def begin_update_tags(
+        self,
+        resource_group_name: str,
+        gateway_name: str,
+        p2_s_vpn_gateway_parameters: _models.TagsObject,
+        *,
+        content_type: str = "application/json",
+        **kwargs: Any
+    ) -> LROPoller[_models.P2SVpnGateway]:
+        """Updates virtual wan p2s vpn gateway tags.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param gateway_name: The name of the gateway. Required.
+        :type gateway_name: str
+        :param p2_s_vpn_gateway_parameters: Parameters supplied to update a virtual wan p2s vpn gateway
+         tags. Required.
+        :type p2_s_vpn_gateway_parameters: ~azure.mgmt.network.models.TagsObject
+        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :return: An instance of LROPoller that returns P2SVpnGateway. The P2SVpnGateway is compatible
+         with MutableMapping
+        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.network.models.P2SVpnGateway]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+
+    @overload
+    def begin_update_tags(
+        self,
+        resource_group_name: str,
+        gateway_name: str,
+        p2_s_vpn_gateway_parameters: JSON,
+        *,
+        content_type: str = "application/json",
+        **kwargs: Any
+    ) -> LROPoller[_models.P2SVpnGateway]:
+        """Updates virtual wan p2s vpn gateway tags.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param gateway_name: The name of the gateway. Required.
+        :type gateway_name: str
+        :param p2_s_vpn_gateway_parameters: Parameters supplied to update a virtual wan p2s vpn gateway
+         tags. Required.
+        :type p2_s_vpn_gateway_parameters: JSON
+        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :return: An instance of LROPoller that returns P2SVpnGateway. The P2SVpnGateway is compatible
+         with MutableMapping
+        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.network.models.P2SVpnGateway]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+
+    @overload
+    def begin_update_tags(
+        self,
+        resource_group_name: str,
+        gateway_name: str,
+        p2_s_vpn_gateway_parameters: IO[bytes],
+        *,
+        content_type: str = "application/json",
+        **kwargs: Any
+    ) -> LROPoller[_models.P2SVpnGateway]:
+        """Updates virtual wan p2s vpn gateway tags.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param gateway_name: The name of the gateway. Required.
+        :type gateway_name: str
+        :param p2_s_vpn_gateway_parameters: Parameters supplied to update a virtual wan p2s vpn gateway
+         tags. Required.
+        :type p2_s_vpn_gateway_parameters: IO[bytes]
+        :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :return: An instance of LROPoller that returns P2SVpnGateway. The P2SVpnGateway is compatible
+         with MutableMapping
+        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.network.models.P2SVpnGateway]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+
+    @distributed_trace
+    def begin_update_tags(
+        self,
+        resource_group_name: str,
+        gateway_name: str,
+        p2_s_vpn_gateway_parameters: Union[_models.TagsObject, JSON, IO[bytes]],
+        **kwargs: Any
+    ) -> LROPoller[_models.P2SVpnGateway]:
+        """Updates virtual wan p2s vpn gateway tags.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param gateway_name: The name of the gateway. Required.
+        :type gateway_name: str
+        :param p2_s_vpn_gateway_parameters: Parameters supplied to update a virtual wan p2s vpn gateway
+         tags. Is one of the following types: TagsObject, JSON, IO[bytes] Required.
+        :type p2_s_vpn_gateway_parameters: ~azure.mgmt.network.models.TagsObject or JSON or IO[bytes]
+        :return: An instance of LROPoller that returns P2SVpnGateway. The P2SVpnGateway is compatible
+         with MutableMapping
+        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.network.models.P2SVpnGateway]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[_models.P2SVpnGateway] = kwargs.pop("cls", None)
+        polling: Union[bool, PollingMethod] = kwargs.pop("polling", True)
+        lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
+        cont_token: Optional[str] = kwargs.pop("continuation_token", None)
+        if cont_token is None:
+            raw_result = self._update_tags_initial(
+                resource_group_name=resource_group_name,
+                gateway_name=gateway_name,
+                p2_s_vpn_gateway_parameters=p2_s_vpn_gateway_parameters,
+                api_version=api_version,
+                content_type=content_type,
+                cls=lambda x, y, z: x,
+                headers=_headers,
+                params=_params,
+                **kwargs
+            )
+            raw_result.http_response.read()  # type: ignore
+        kwargs.pop("error_map", None)
+
+        def get_long_running_output(pipeline_response):
+            response = pipeline_response.http_response
+            deserialized = _deserialize(_models.P2SVpnGateway, response.json())
+            if cls:
+                return cls(pipeline_response, deserialized, {})  # type: ignore
+            return deserialized
+
+        path_format_arguments = {
+            "endpoint": self._serialize.url("self._config.base_url", self._config.base_url, "str", skip_quote=True),
+        }
+
+        if polling is True:
+            polling_method: PollingMethod = cast(
+                PollingMethod, ARMPolling(lro_delay, path_format_arguments=path_format_arguments, **kwargs)
+            )
+        elif polling is False:
+            polling_method = cast(PollingMethod, NoPolling())
+        else:
+            polling_method = polling
+        if cont_token:
+            return LROPoller[_models.P2SVpnGateway].from_continuation_token(
+                polling_method=polling_method,
+                continuation_token=cont_token,
+                client=self._client,
+                deserialization_callback=get_long_running_output,
+            )
+        return LROPoller[_models.P2SVpnGateway](
+            self._client, raw_result, get_long_running_output, polling_method  # type: ignore
+        )
+
+    def _delete_initial(self, resource_group_name: str, gateway_name: str, **kwargs: Any) -> Iterator[bytes]:
+        error_map: MutableMapping = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
+        cls: ClsType[Iterator[bytes]] = kwargs.pop("cls", None)
+
+        _request = build_p2_svpn_gateways_delete_request(
+            resource_group_name=resource_group_name,
+            gateway_name=gateway_name,
+            subscription_id=self._config.subscription_id,
+            api_version=api_version,
+            headers=_headers,
+            params=_params,
+        )
+        path_format_arguments = {
+            "endpoint": self._serialize.url("self._config.base_url", self._config.base_url, "str", skip_quote=True),
+        }
+        _request.url = self._client.format_url(_request.url, **path_format_arguments)
+
+        _stream = True
+        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200, 202, 204]:
+            try:
+                response.read()  # Load the body in memory and close the socket
+            except (StreamConsumedError, StreamClosedError):
+                pass
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            error = _failsafe_deserialize(
+                _models.CloudError,
+                response,
+            )
+            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
+
+        response_headers = {}
+        if response.status_code == 202:
+            response_headers["Location"] = self._deserialize("str", response.headers.get("Location"))
+            response_headers["Retry-After"] = self._deserialize("int", response.headers.get("Retry-After"))
+
+        deserialized = response.iter_bytes()
+
+        if cls:
+            return cls(pipeline_response, deserialized, response_headers)  # type: ignore
+
+        return deserialized  # type: ignore
+
+    @distributed_trace
+    def begin_delete(self, resource_group_name: str, gateway_name: str, **kwargs: Any) -> LROPoller[None]:
+        """Deletes a virtual wan p2s vpn gateway.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param gateway_name: The name of the gateway. Required.
+        :type gateway_name: str
+        :return: An instance of LROPoller that returns None
+        :rtype: ~azure.core.polling.LROPoller[None]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
+        cls: ClsType[None] = kwargs.pop("cls", None)
+        polling: Union[bool, PollingMethod] = kwargs.pop("polling", True)
+        lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
+        cont_token: Optional[str] = kwargs.pop("continuation_token", None)
+        if cont_token is None:
+            raw_result = self._delete_initial(
+                resource_group_name=resource_group_name,
+                gateway_name=gateway_name,
+                api_version=api_version,
+                cls=lambda x, y, z: x,
+                headers=_headers,
+                params=_params,
+                **kwargs
+            )
+            raw_result.http_response.read()  # type: ignore
+        kwargs.pop("error_map", None)
+
+        def get_long_running_output(pipeline_response):  # pylint: disable=inconsistent-return-statements
+            if cls:
+                return cls(pipeline_response, None, {})  # type: ignore
+
+        path_format_arguments = {
+            "endpoint": self._serialize.url("self._config.base_url", self._config.base_url, "str", skip_quote=True),
+        }
+
+        if polling is True:
+            polling_method: PollingMethod = cast(
+                PollingMethod, ARMPolling(lro_delay, path_format_arguments=path_format_arguments, **kwargs)
+            )
+        elif polling is False:
+            polling_method = cast(PollingMethod, NoPolling())
+        else:
+            polling_method = polling
+        if cont_token:
+            return LROPoller[None].from_continuation_token(
+                polling_method=polling_method,
+                continuation_token=cont_token,
+                client=self._client,
+                deserialization_callback=get_long_running_output,
+            )
+        return LROPoller[None](self._client, raw_result, get_long_running_output, polling_method)  # type: ignore
+
+    @distributed_trace
+    def list_by_resource_group(self, resource_group_name: str, **kwargs: Any) -> ItemPaged["_models.P2SVpnGateway"]:
+        """Lists all the P2SVpnGateways in a resource group.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :return: An iterator like instance of P2SVpnGateway
+        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.network.models.P2SVpnGateway]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
+        cls: ClsType[List[_models.P2SVpnGateway]] = kwargs.pop("cls", None)
+
+        error_map: MutableMapping = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        def prepare_request(next_link=None):
+            if not next_link:
+
+                _request = build_p2_svpn_gateways_list_by_resource_group_request(
+                    resource_group_name=resource_group_name,
+                    subscription_id=self._config.subscription_id,
+                    api_version=api_version,
+                    headers=_headers,
+                    params=_params,
+                )
+                path_format_arguments = {
+                    "endpoint": self._serialize.url(
+                        "self._config.base_url", self._config.base_url, "str", skip_quote=True
+                    ),
+                }
+                _request.url = self._client.format_url(_request.url, **path_format_arguments)
+
+            else:
+                _request = HttpRequest("GET", next_link)
+                path_format_arguments = {
+                    "endpoint": self._serialize.url(
+                        "self._config.base_url", self._config.base_url, "str", skip_quote=True
+                    ),
+                }
+                _request.url = self._client.format_url(_request.url, **path_format_arguments)
+
+            return _request
+
+        def extract_data(pipeline_response):
+            deserialized = pipeline_response.http_response.json()
+            list_of_elem = _deserialize(List[_models.P2SVpnGateway], deserialized.get("value", []))
+            if cls:
+                list_of_elem = cls(list_of_elem)  # type: ignore
+            return deserialized.get("nextLink") or None, iter(list_of_elem)
+
+        def get_next(next_link=None):
+            _request = prepare_request(next_link)
+
+            _stream = False
+            pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
+                _request, stream=_stream, **kwargs
+            )
+            response = pipeline_response.http_response
+
+            if response.status_code not in [200]:
+                map_error(status_code=response.status_code, response=response, error_map=error_map)
+                error = _failsafe_deserialize(
+                    _models.CloudError,
+                    response,
+                )
+                raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
+
+            return pipeline_response
+
+        return ItemPaged(get_next, extract_data)
+
+    @distributed_trace
+    def list(self, **kwargs: Any) -> ItemPaged["_models.P2SVpnGateway"]:
+        """Lists all the P2SVpnGateways in a subscription.
+
+        :return: An iterator like instance of P2SVpnGateway
+        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.network.models.P2SVpnGateway]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
+        cls: ClsType[List[_models.P2SVpnGateway]] = kwargs.pop("cls", None)
+
+        error_map: MutableMapping = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        def prepare_request(next_link=None):
+            if not next_link:
+
+                _request = build_p2_svpn_gateways_list_request(
+                    subscription_id=self._config.subscription_id,
+                    api_version=api_version,
+                    headers=_headers,
+                    params=_params,
+                )
+                path_format_arguments = {
+                    "endpoint": self._serialize.url(
+                        "self._config.base_url", self._config.base_url, "str", skip_quote=True
+                    ),
+                }
+                _request.url = self._client.format_url(_request.url, **path_format_arguments)
+
+            else:
+                _request = HttpRequest("GET", next_link)
+                path_format_arguments = {
+                    "endpoint": self._serialize.url(
+                        "self._config.base_url", self._config.base_url, "str", skip_quote=True
+                    ),
+                }
+                _request.url = self._client.format_url(_request.url, **path_format_arguments)
+
+            return _request
+
+        def extract_data(pipeline_response):
+            deserialized = pipeline_response.http_response.json()
+            list_of_elem = _deserialize(List[_models.P2SVpnGateway], deserialized.get("value", []))
+            if cls:
+                list_of_elem = cls(list_of_elem)  # type: ignore
+            return deserialized.get("nextLink") or None, iter(list_of_elem)
+
+        def get_next(next_link=None):
+            _request = prepare_request(next_link)
+
+            _stream = False
+            pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
+                _request, stream=_stream, **kwargs
+            )
+            response = pipeline_response.http_response
+
+            if response.status_code not in [200]:
+                map_error(status_code=response.status_code, response=response, error_map=error_map)
+                error = _failsafe_deserialize(
+                    _models.CloudError,
+                    response,
+                )
+                raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
+
+            return pipeline_response
+
+        return ItemPaged(get_next, extract_data)
+
     def _reset_initial(self, resource_group_name: str, gateway_name: str, **kwargs: Any) -> Iterator[bytes]:
         error_map: MutableMapping = {
             401: ClientAuthenticationError,
@@ -97636,6 +96202,860 @@ class P2SVpnGatewaysOperations:
         return LROPoller[_models.P2SVpnGateway](
             self._client, raw_result, get_long_running_output, polling_method  # type: ignore
         )
+
+    def _generate_vpn_profile_initial(
+        self,
+        resource_group_name: str,
+        gateway_name: str,
+        parameters: Union[_models.P2SVpnProfileParameters, JSON, IO[bytes]],
+        **kwargs: Any
+    ) -> Iterator[bytes]:
+        error_map: MutableMapping = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[Iterator[bytes]] = kwargs.pop("cls", None)
+
+        content_type = content_type or "application/json"
+        _content = None
+        if isinstance(parameters, (IOBase, bytes)):
+            _content = parameters
+        else:
+            _content = json.dumps(parameters, cls=SdkJSONEncoder, exclude_readonly=True)  # type: ignore
+
+        _request = build_p2_svpn_gateways_generate_vpn_profile_request(
+            resource_group_name=resource_group_name,
+            gateway_name=gateway_name,
+            subscription_id=self._config.subscription_id,
+            api_version=api_version,
+            content_type=content_type,
+            content=_content,
+            headers=_headers,
+            params=_params,
+        )
+        path_format_arguments = {
+            "endpoint": self._serialize.url("self._config.base_url", self._config.base_url, "str", skip_quote=True),
+        }
+        _request.url = self._client.format_url(_request.url, **path_format_arguments)
+
+        _stream = True
+        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200, 202]:
+            try:
+                response.read()  # Load the body in memory and close the socket
+            except (StreamConsumedError, StreamClosedError):
+                pass
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            error = _failsafe_deserialize(
+                _models.CloudError,
+                response,
+            )
+            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
+
+        response_headers = {}
+        if response.status_code == 202:
+            response_headers["Location"] = self._deserialize("str", response.headers.get("Location"))
+            response_headers["Retry-After"] = self._deserialize("int", response.headers.get("Retry-After"))
+
+        deserialized = response.iter_bytes()
+
+        if cls:
+            return cls(pipeline_response, deserialized, response_headers)  # type: ignore
+
+        return deserialized  # type: ignore
+
+    @overload
+    def begin_generate_vpn_profile(
+        self,
+        resource_group_name: str,
+        gateway_name: str,
+        parameters: _models.P2SVpnProfileParameters,
+        *,
+        content_type: str = "application/json",
+        **kwargs: Any
+    ) -> LROPoller[_models.VpnProfileResponse]:
+        """Generates VPN profile for P2S client of the P2SVpnGateway in the specified resource group.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param gateway_name: The name of the gateway. Required.
+        :type gateway_name: str
+        :param parameters: Parameters supplied to the generate P2SVpnGateway VPN client package
+         operation. Required.
+        :type parameters: ~azure.mgmt.network.models.P2SVpnProfileParameters
+        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :return: An instance of LROPoller that returns VpnProfileResponse. The VpnProfileResponse is
+         compatible with MutableMapping
+        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.network.models.VpnProfileResponse]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+
+    @overload
+    def begin_generate_vpn_profile(
+        self,
+        resource_group_name: str,
+        gateway_name: str,
+        parameters: JSON,
+        *,
+        content_type: str = "application/json",
+        **kwargs: Any
+    ) -> LROPoller[_models.VpnProfileResponse]:
+        """Generates VPN profile for P2S client of the P2SVpnGateway in the specified resource group.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param gateway_name: The name of the gateway. Required.
+        :type gateway_name: str
+        :param parameters: Parameters supplied to the generate P2SVpnGateway VPN client package
+         operation. Required.
+        :type parameters: JSON
+        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :return: An instance of LROPoller that returns VpnProfileResponse. The VpnProfileResponse is
+         compatible with MutableMapping
+        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.network.models.VpnProfileResponse]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+
+    @overload
+    def begin_generate_vpn_profile(
+        self,
+        resource_group_name: str,
+        gateway_name: str,
+        parameters: IO[bytes],
+        *,
+        content_type: str = "application/json",
+        **kwargs: Any
+    ) -> LROPoller[_models.VpnProfileResponse]:
+        """Generates VPN profile for P2S client of the P2SVpnGateway in the specified resource group.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param gateway_name: The name of the gateway. Required.
+        :type gateway_name: str
+        :param parameters: Parameters supplied to the generate P2SVpnGateway VPN client package
+         operation. Required.
+        :type parameters: IO[bytes]
+        :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :return: An instance of LROPoller that returns VpnProfileResponse. The VpnProfileResponse is
+         compatible with MutableMapping
+        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.network.models.VpnProfileResponse]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+
+    @distributed_trace
+    def begin_generate_vpn_profile(
+        self,
+        resource_group_name: str,
+        gateway_name: str,
+        parameters: Union[_models.P2SVpnProfileParameters, JSON, IO[bytes]],
+        **kwargs: Any
+    ) -> LROPoller[_models.VpnProfileResponse]:
+        """Generates VPN profile for P2S client of the P2SVpnGateway in the specified resource group.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param gateway_name: The name of the gateway. Required.
+        :type gateway_name: str
+        :param parameters: Parameters supplied to the generate P2SVpnGateway VPN client package
+         operation. Is one of the following types: P2SVpnProfileParameters, JSON, IO[bytes] Required.
+        :type parameters: ~azure.mgmt.network.models.P2SVpnProfileParameters or JSON or IO[bytes]
+        :return: An instance of LROPoller that returns VpnProfileResponse. The VpnProfileResponse is
+         compatible with MutableMapping
+        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.network.models.VpnProfileResponse]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[_models.VpnProfileResponse] = kwargs.pop("cls", None)
+        polling: Union[bool, PollingMethod] = kwargs.pop("polling", True)
+        lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
+        cont_token: Optional[str] = kwargs.pop("continuation_token", None)
+        if cont_token is None:
+            raw_result = self._generate_vpn_profile_initial(
+                resource_group_name=resource_group_name,
+                gateway_name=gateway_name,
+                parameters=parameters,
+                api_version=api_version,
+                content_type=content_type,
+                cls=lambda x, y, z: x,
+                headers=_headers,
+                params=_params,
+                **kwargs
+            )
+            raw_result.http_response.read()  # type: ignore
+        kwargs.pop("error_map", None)
+
+        def get_long_running_output(pipeline_response):
+            response_headers = {}
+            response = pipeline_response.http_response
+            response_headers["Location"] = self._deserialize("str", response.headers.get("Location"))
+            response_headers["Retry-After"] = self._deserialize("int", response.headers.get("Retry-After"))
+
+            deserialized = _deserialize(_models.VpnProfileResponse, response.json())
+            if cls:
+                return cls(pipeline_response, deserialized, response_headers)  # type: ignore
+            return deserialized
+
+        path_format_arguments = {
+            "endpoint": self._serialize.url("self._config.base_url", self._config.base_url, "str", skip_quote=True),
+        }
+
+        if polling is True:
+            polling_method: PollingMethod = cast(
+                PollingMethod, ARMPolling(lro_delay, path_format_arguments=path_format_arguments, **kwargs)
+            )
+        elif polling is False:
+            polling_method = cast(PollingMethod, NoPolling())
+        else:
+            polling_method = polling
+        if cont_token:
+            return LROPoller[_models.VpnProfileResponse].from_continuation_token(
+                polling_method=polling_method,
+                continuation_token=cont_token,
+                client=self._client,
+                deserialization_callback=get_long_running_output,
+            )
+        return LROPoller[_models.VpnProfileResponse](
+            self._client, raw_result, get_long_running_output, polling_method  # type: ignore
+        )
+
+    def _get_p2_s_vpn_connection_health_initial(
+        self, resource_group_name: str, gateway_name: str, **kwargs: Any
+    ) -> Iterator[bytes]:
+        error_map: MutableMapping = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
+        cls: ClsType[Iterator[bytes]] = kwargs.pop("cls", None)
+
+        _request = build_p2_svpn_gateways_get_p2_s_vpn_connection_health_request(
+            resource_group_name=resource_group_name,
+            gateway_name=gateway_name,
+            subscription_id=self._config.subscription_id,
+            api_version=api_version,
+            headers=_headers,
+            params=_params,
+        )
+        path_format_arguments = {
+            "endpoint": self._serialize.url("self._config.base_url", self._config.base_url, "str", skip_quote=True),
+        }
+        _request.url = self._client.format_url(_request.url, **path_format_arguments)
+
+        _stream = True
+        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200, 202]:
+            try:
+                response.read()  # Load the body in memory and close the socket
+            except (StreamConsumedError, StreamClosedError):
+                pass
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            error = _failsafe_deserialize(
+                _models.CloudError,
+                response,
+            )
+            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
+
+        response_headers = {}
+        if response.status_code == 202:
+            response_headers["Location"] = self._deserialize("str", response.headers.get("Location"))
+            response_headers["Retry-After"] = self._deserialize("int", response.headers.get("Retry-After"))
+
+        deserialized = response.iter_bytes()
+
+        if cls:
+            return cls(pipeline_response, deserialized, response_headers)  # type: ignore
+
+        return deserialized  # type: ignore
+
+    @distributed_trace
+    def begin_get_p2_s_vpn_connection_health(
+        self, resource_group_name: str, gateway_name: str, **kwargs: Any
+    ) -> LROPoller[_models.P2SVpnGateway]:
+        """Gets the connection health of P2S clients of the virtual wan P2SVpnGateway in the specified
+        resource group.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param gateway_name: The name of the gateway. Required.
+        :type gateway_name: str
+        :return: An instance of LROPoller that returns P2SVpnGateway. The P2SVpnGateway is compatible
+         with MutableMapping
+        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.network.models.P2SVpnGateway]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
+        cls: ClsType[_models.P2SVpnGateway] = kwargs.pop("cls", None)
+        polling: Union[bool, PollingMethod] = kwargs.pop("polling", True)
+        lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
+        cont_token: Optional[str] = kwargs.pop("continuation_token", None)
+        if cont_token is None:
+            raw_result = self._get_p2_s_vpn_connection_health_initial(
+                resource_group_name=resource_group_name,
+                gateway_name=gateway_name,
+                api_version=api_version,
+                cls=lambda x, y, z: x,
+                headers=_headers,
+                params=_params,
+                **kwargs
+            )
+            raw_result.http_response.read()  # type: ignore
+        kwargs.pop("error_map", None)
+
+        def get_long_running_output(pipeline_response):
+            response_headers = {}
+            response = pipeline_response.http_response
+            response_headers["Location"] = self._deserialize("str", response.headers.get("Location"))
+            response_headers["Retry-After"] = self._deserialize("int", response.headers.get("Retry-After"))
+
+            deserialized = _deserialize(_models.P2SVpnGateway, response.json())
+            if cls:
+                return cls(pipeline_response, deserialized, response_headers)  # type: ignore
+            return deserialized
+
+        path_format_arguments = {
+            "endpoint": self._serialize.url("self._config.base_url", self._config.base_url, "str", skip_quote=True),
+        }
+
+        if polling is True:
+            polling_method: PollingMethod = cast(
+                PollingMethod, ARMPolling(lro_delay, path_format_arguments=path_format_arguments, **kwargs)
+            )
+        elif polling is False:
+            polling_method = cast(PollingMethod, NoPolling())
+        else:
+            polling_method = polling
+        if cont_token:
+            return LROPoller[_models.P2SVpnGateway].from_continuation_token(
+                polling_method=polling_method,
+                continuation_token=cont_token,
+                client=self._client,
+                deserialization_callback=get_long_running_output,
+            )
+        return LROPoller[_models.P2SVpnGateway](
+            self._client, raw_result, get_long_running_output, polling_method  # type: ignore
+        )
+
+    def _get_p2_s_vpn_connection_health_detailed_initial(  # pylint: disable=name-too-long
+        self,
+        resource_group_name: str,
+        gateway_name: str,
+        request: Union[_models.P2SVpnConnectionHealthRequest, JSON, IO[bytes]],
+        **kwargs: Any
+    ) -> Iterator[bytes]:
+        error_map: MutableMapping = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[Iterator[bytes]] = kwargs.pop("cls", None)
+
+        content_type = content_type or "application/json"
+        _content = None
+        if isinstance(request, (IOBase, bytes)):
+            _content = request
+        else:
+            _content = json.dumps(request, cls=SdkJSONEncoder, exclude_readonly=True)  # type: ignore
+
+        _request = build_p2_svpn_gateways_get_p2_s_vpn_connection_health_detailed_request(
+            resource_group_name=resource_group_name,
+            gateway_name=gateway_name,
+            subscription_id=self._config.subscription_id,
+            api_version=api_version,
+            content_type=content_type,
+            content=_content,
+            headers=_headers,
+            params=_params,
+        )
+        path_format_arguments = {
+            "endpoint": self._serialize.url("self._config.base_url", self._config.base_url, "str", skip_quote=True),
+        }
+        _request.url = self._client.format_url(_request.url, **path_format_arguments)
+
+        _stream = True
+        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200, 202]:
+            try:
+                response.read()  # Load the body in memory and close the socket
+            except (StreamConsumedError, StreamClosedError):
+                pass
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            error = _failsafe_deserialize(
+                _models.CloudError,
+                response,
+            )
+            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
+
+        response_headers = {}
+        if response.status_code == 202:
+            response_headers["Location"] = self._deserialize("str", response.headers.get("Location"))
+            response_headers["Retry-After"] = self._deserialize("int", response.headers.get("Retry-After"))
+
+        deserialized = response.iter_bytes()
+
+        if cls:
+            return cls(pipeline_response, deserialized, response_headers)  # type: ignore
+
+        return deserialized  # type: ignore
+
+    @overload
+    def begin_get_p2_s_vpn_connection_health_detailed(  # pylint: disable=name-too-long
+        self,
+        resource_group_name: str,
+        gateway_name: str,
+        request: _models.P2SVpnConnectionHealthRequest,
+        *,
+        content_type: str = "application/json",
+        **kwargs: Any
+    ) -> LROPoller[_models.P2SVpnConnectionHealth]:
+        """Gets the sas url to get the connection health detail of P2S clients of the virtual wan
+        P2SVpnGateway in the specified resource group.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param gateway_name: The name of the gateway. Required.
+        :type gateway_name: str
+        :param request: Request parameters supplied to get p2s vpn connections detailed health.
+         Required.
+        :type request: ~azure.mgmt.network.models.P2SVpnConnectionHealthRequest
+        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :return: An instance of LROPoller that returns P2SVpnConnectionHealth. The
+         P2SVpnConnectionHealth is compatible with MutableMapping
+        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.network.models.P2SVpnConnectionHealth]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+
+    @overload
+    def begin_get_p2_s_vpn_connection_health_detailed(  # pylint: disable=name-too-long
+        self,
+        resource_group_name: str,
+        gateway_name: str,
+        request: JSON,
+        *,
+        content_type: str = "application/json",
+        **kwargs: Any
+    ) -> LROPoller[_models.P2SVpnConnectionHealth]:
+        """Gets the sas url to get the connection health detail of P2S clients of the virtual wan
+        P2SVpnGateway in the specified resource group.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param gateway_name: The name of the gateway. Required.
+        :type gateway_name: str
+        :param request: Request parameters supplied to get p2s vpn connections detailed health.
+         Required.
+        :type request: JSON
+        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :return: An instance of LROPoller that returns P2SVpnConnectionHealth. The
+         P2SVpnConnectionHealth is compatible with MutableMapping
+        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.network.models.P2SVpnConnectionHealth]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+
+    @overload
+    def begin_get_p2_s_vpn_connection_health_detailed(  # pylint: disable=name-too-long
+        self,
+        resource_group_name: str,
+        gateway_name: str,
+        request: IO[bytes],
+        *,
+        content_type: str = "application/json",
+        **kwargs: Any
+    ) -> LROPoller[_models.P2SVpnConnectionHealth]:
+        """Gets the sas url to get the connection health detail of P2S clients of the virtual wan
+        P2SVpnGateway in the specified resource group.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param gateway_name: The name of the gateway. Required.
+        :type gateway_name: str
+        :param request: Request parameters supplied to get p2s vpn connections detailed health.
+         Required.
+        :type request: IO[bytes]
+        :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :return: An instance of LROPoller that returns P2SVpnConnectionHealth. The
+         P2SVpnConnectionHealth is compatible with MutableMapping
+        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.network.models.P2SVpnConnectionHealth]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+
+    @distributed_trace
+    def begin_get_p2_s_vpn_connection_health_detailed(  # pylint: disable=name-too-long
+        self,
+        resource_group_name: str,
+        gateway_name: str,
+        request: Union[_models.P2SVpnConnectionHealthRequest, JSON, IO[bytes]],
+        **kwargs: Any
+    ) -> LROPoller[_models.P2SVpnConnectionHealth]:
+        """Gets the sas url to get the connection health detail of P2S clients of the virtual wan
+        P2SVpnGateway in the specified resource group.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param gateway_name: The name of the gateway. Required.
+        :type gateway_name: str
+        :param request: Request parameters supplied to get p2s vpn connections detailed health. Is one
+         of the following types: P2SVpnConnectionHealthRequest, JSON, IO[bytes] Required.
+        :type request: ~azure.mgmt.network.models.P2SVpnConnectionHealthRequest or JSON or IO[bytes]
+        :return: An instance of LROPoller that returns P2SVpnConnectionHealth. The
+         P2SVpnConnectionHealth is compatible with MutableMapping
+        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.network.models.P2SVpnConnectionHealth]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[_models.P2SVpnConnectionHealth] = kwargs.pop("cls", None)
+        polling: Union[bool, PollingMethod] = kwargs.pop("polling", True)
+        lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
+        cont_token: Optional[str] = kwargs.pop("continuation_token", None)
+        if cont_token is None:
+            raw_result = self._get_p2_s_vpn_connection_health_detailed_initial(
+                resource_group_name=resource_group_name,
+                gateway_name=gateway_name,
+                request=request,
+                api_version=api_version,
+                content_type=content_type,
+                cls=lambda x, y, z: x,
+                headers=_headers,
+                params=_params,
+                **kwargs
+            )
+            raw_result.http_response.read()  # type: ignore
+        kwargs.pop("error_map", None)
+
+        def get_long_running_output(pipeline_response):
+            response_headers = {}
+            response = pipeline_response.http_response
+            response_headers["Location"] = self._deserialize("str", response.headers.get("Location"))
+            response_headers["Retry-After"] = self._deserialize("int", response.headers.get("Retry-After"))
+
+            deserialized = _deserialize(_models.P2SVpnConnectionHealth, response.json())
+            if cls:
+                return cls(pipeline_response, deserialized, response_headers)  # type: ignore
+            return deserialized
+
+        path_format_arguments = {
+            "endpoint": self._serialize.url("self._config.base_url", self._config.base_url, "str", skip_quote=True),
+        }
+
+        if polling is True:
+            polling_method: PollingMethod = cast(
+                PollingMethod, ARMPolling(lro_delay, path_format_arguments=path_format_arguments, **kwargs)
+            )
+        elif polling is False:
+            polling_method = cast(PollingMethod, NoPolling())
+        else:
+            polling_method = polling
+        if cont_token:
+            return LROPoller[_models.P2SVpnConnectionHealth].from_continuation_token(
+                polling_method=polling_method,
+                continuation_token=cont_token,
+                client=self._client,
+                deserialization_callback=get_long_running_output,
+            )
+        return LROPoller[_models.P2SVpnConnectionHealth](
+            self._client, raw_result, get_long_running_output, polling_method  # type: ignore
+        )
+
+    def _disconnect_p2_s_vpn_connections_initial(
+        self,
+        resource_group_name: str,
+        p2_s_vpn_gateway_name: str,
+        request: Union[_models.P2SVpnConnectionRequest, JSON, IO[bytes]],
+        **kwargs: Any
+    ) -> Iterator[bytes]:
+        error_map: MutableMapping = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[Iterator[bytes]] = kwargs.pop("cls", None)
+
+        content_type = content_type or "application/json"
+        _content = None
+        if isinstance(request, (IOBase, bytes)):
+            _content = request
+        else:
+            _content = json.dumps(request, cls=SdkJSONEncoder, exclude_readonly=True)  # type: ignore
+
+        _request = build_p2_svpn_gateways_disconnect_p2_s_vpn_connections_request(
+            resource_group_name=resource_group_name,
+            p2_s_vpn_gateway_name=p2_s_vpn_gateway_name,
+            subscription_id=self._config.subscription_id,
+            api_version=api_version,
+            content_type=content_type,
+            content=_content,
+            headers=_headers,
+            params=_params,
+        )
+        path_format_arguments = {
+            "endpoint": self._serialize.url("self._config.base_url", self._config.base_url, "str", skip_quote=True),
+        }
+        _request.url = self._client.format_url(_request.url, **path_format_arguments)
+
+        _stream = True
+        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200, 202]:
+            try:
+                response.read()  # Load the body in memory and close the socket
+            except (StreamConsumedError, StreamClosedError):
+                pass
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            error = _failsafe_deserialize(
+                _models.CloudError,
+                response,
+            )
+            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
+
+        response_headers = {}
+        if response.status_code == 202:
+            response_headers["Location"] = self._deserialize("str", response.headers.get("Location"))
+            response_headers["Retry-After"] = self._deserialize("int", response.headers.get("Retry-After"))
+
+        deserialized = response.iter_bytes()
+
+        if cls:
+            return cls(pipeline_response, deserialized, response_headers)  # type: ignore
+
+        return deserialized  # type: ignore
+
+    @overload
+    def begin_disconnect_p2_s_vpn_connections(
+        self,
+        resource_group_name: str,
+        p2_s_vpn_gateway_name: str,
+        request: _models.P2SVpnConnectionRequest,
+        *,
+        content_type: str = "application/json",
+        **kwargs: Any
+    ) -> LROPoller[None]:
+        """Disconnect P2S vpn connections of the virtual wan P2SVpnGateway in the specified resource
+        group.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param p2_s_vpn_gateway_name: The name of the P2S Vpn Gateway. Required.
+        :type p2_s_vpn_gateway_name: str
+        :param request: The parameters are supplied to disconnect p2s vpn connections. Required.
+        :type request: ~azure.mgmt.network.models.P2SVpnConnectionRequest
+        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :return: An instance of LROPoller that returns None
+        :rtype: ~azure.core.polling.LROPoller[None]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+
+    @overload
+    def begin_disconnect_p2_s_vpn_connections(
+        self,
+        resource_group_name: str,
+        p2_s_vpn_gateway_name: str,
+        request: JSON,
+        *,
+        content_type: str = "application/json",
+        **kwargs: Any
+    ) -> LROPoller[None]:
+        """Disconnect P2S vpn connections of the virtual wan P2SVpnGateway in the specified resource
+        group.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param p2_s_vpn_gateway_name: The name of the P2S Vpn Gateway. Required.
+        :type p2_s_vpn_gateway_name: str
+        :param request: The parameters are supplied to disconnect p2s vpn connections. Required.
+        :type request: JSON
+        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :return: An instance of LROPoller that returns None
+        :rtype: ~azure.core.polling.LROPoller[None]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+
+    @overload
+    def begin_disconnect_p2_s_vpn_connections(
+        self,
+        resource_group_name: str,
+        p2_s_vpn_gateway_name: str,
+        request: IO[bytes],
+        *,
+        content_type: str = "application/json",
+        **kwargs: Any
+    ) -> LROPoller[None]:
+        """Disconnect P2S vpn connections of the virtual wan P2SVpnGateway in the specified resource
+        group.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param p2_s_vpn_gateway_name: The name of the P2S Vpn Gateway. Required.
+        :type p2_s_vpn_gateway_name: str
+        :param request: The parameters are supplied to disconnect p2s vpn connections. Required.
+        :type request: IO[bytes]
+        :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :return: An instance of LROPoller that returns None
+        :rtype: ~azure.core.polling.LROPoller[None]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+
+    @distributed_trace
+    def begin_disconnect_p2_s_vpn_connections(
+        self,
+        resource_group_name: str,
+        p2_s_vpn_gateway_name: str,
+        request: Union[_models.P2SVpnConnectionRequest, JSON, IO[bytes]],
+        **kwargs: Any
+    ) -> LROPoller[None]:
+        """Disconnect P2S vpn connections of the virtual wan P2SVpnGateway in the specified resource
+        group.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param p2_s_vpn_gateway_name: The name of the P2S Vpn Gateway. Required.
+        :type p2_s_vpn_gateway_name: str
+        :param request: The parameters are supplied to disconnect p2s vpn connections. Is one of the
+         following types: P2SVpnConnectionRequest, JSON, IO[bytes] Required.
+        :type request: ~azure.mgmt.network.models.P2SVpnConnectionRequest or JSON or IO[bytes]
+        :return: An instance of LROPoller that returns None
+        :rtype: ~azure.core.polling.LROPoller[None]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[None] = kwargs.pop("cls", None)
+        polling: Union[bool, PollingMethod] = kwargs.pop("polling", True)
+        lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
+        cont_token: Optional[str] = kwargs.pop("continuation_token", None)
+        if cont_token is None:
+            raw_result = self._disconnect_p2_s_vpn_connections_initial(
+                resource_group_name=resource_group_name,
+                p2_s_vpn_gateway_name=p2_s_vpn_gateway_name,
+                request=request,
+                api_version=api_version,
+                content_type=content_type,
+                cls=lambda x, y, z: x,
+                headers=_headers,
+                params=_params,
+                **kwargs
+            )
+            raw_result.http_response.read()  # type: ignore
+        kwargs.pop("error_map", None)
+
+        def get_long_running_output(pipeline_response):  # pylint: disable=inconsistent-return-statements
+            if cls:
+                return cls(pipeline_response, None, {})  # type: ignore
+
+        path_format_arguments = {
+            "endpoint": self._serialize.url("self._config.base_url", self._config.base_url, "str", skip_quote=True),
+        }
+
+        if polling is True:
+            polling_method: PollingMethod = cast(
+                PollingMethod, ARMPolling(lro_delay, path_format_arguments=path_format_arguments, **kwargs)
+            )
+        elif polling is False:
+            polling_method = cast(PollingMethod, NoPolling())
+        else:
+            polling_method = polling
+        if cont_token:
+            return LROPoller[None].from_continuation_token(
+                polling_method=polling_method,
+                continuation_token=cont_token,
+                client=self._client,
+                deserialization_callback=get_long_running_output,
+            )
+        return LROPoller[None](self._client, raw_result, get_long_running_output, polling_method)  # type: ignore
 
 
 class ExpressRouteGatewaysOperations:
@@ -99594,97 +99014,6 @@ class WebApplicationFirewallPoliciesOperations:
             return pipeline_response
 
         return ItemPaged(get_next, extract_data)
-
-
-class CheckDnsNameAvailabilityOperations:
-    """
-    .. warning::
-        **DO NOT** instantiate this class directly.
-
-        Instead, you should access the following operations through
-        :class:`~azure.mgmt.network.NetworkManagementClient`'s
-        :attr:`check_dns_name_availability` attribute.
-    """
-
-    def __init__(self, *args, **kwargs) -> None:
-        input_args = list(args)
-        self._client: PipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: NetworkManagementClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
-        self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
-        self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
-
-    @distributed_trace
-    def check_dns_name_availability(
-        self, location: str, *, domain_name_label: str, **kwargs: Any
-    ) -> _models.DnsNameAvailabilityResult:
-        """Checks whether a domain name in the cloudapp.azure.com zone is available for use.
-
-        :param location: The location name. Required.
-        :type location: str
-        :keyword domain_name_label: The domain name to be verified. It must conform to the following
-         regular expression: ^[a-z][a-z0-9-]{1,61}[a-z0-9]$. Required.
-        :paramtype domain_name_label: str
-        :return: DnsNameAvailabilityResult. The DnsNameAvailabilityResult is compatible with
-         MutableMapping
-        :rtype: ~azure.mgmt.network.models.DnsNameAvailabilityResult
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        error_map: MutableMapping = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        _headers = kwargs.pop("headers", {}) or {}
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
-        cls: ClsType[_models.DnsNameAvailabilityResult] = kwargs.pop("cls", None)
-
-        _request = build_check_dns_name_availability_check_dns_name_availability_request(
-            location=location,
-            subscription_id=self._config.subscription_id,
-            domain_name_label=domain_name_label,
-            api_version=api_version,
-            headers=_headers,
-            params=_params,
-        )
-        path_format_arguments = {
-            "endpoint": self._serialize.url("self._config.base_url", self._config.base_url, "str", skip_quote=True),
-        }
-        _request.url = self._client.format_url(_request.url, **path_format_arguments)
-
-        _stream = kwargs.pop("stream", False)
-        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            _request, stream=_stream, **kwargs
-        )
-
-        response = pipeline_response.http_response
-
-        if response.status_code not in [200]:
-            if _stream:
-                try:
-                    response.read()  # Load the body in memory and close the socket
-                except (StreamConsumedError, StreamClosedError):
-                    pass
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = _failsafe_deserialize(
-                _models.CloudError,
-                response,
-            )
-            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
-
-        if _stream:
-            deserialized = response.iter_bytes()
-        else:
-            deserialized = _deserialize(_models.DnsNameAvailabilityResult, response.json())
-
-        if cls:
-            return cls(pipeline_response, deserialized, {})  # type: ignore
-
-        return deserialized  # type: ignore
 
 
 class VirtualNetworkAppliancesOperations:
@@ -117508,14 +116837,14 @@ class HubVirtualNetworkConnectionsOperations:
         return ItemPaged(get_next, extract_data)
 
 
-class VirtualHubRouteTableV2sOperations:
+class VirtualHubRouteTableV2SOperations:
     """
     .. warning::
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
         :class:`~azure.mgmt.network.NetworkManagementClient`'s
-        :attr:`virtual_hub_route_table_v2s` attribute.
+        :attr:`virtual_hub_route_table_v2_s` attribute.
     """
 
     def __init__(self, *args, **kwargs) -> None:
@@ -117556,7 +116885,7 @@ class VirtualHubRouteTableV2sOperations:
         api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
         cls: ClsType[_models.VirtualHubRouteTableV2] = kwargs.pop("cls", None)
 
-        _request = build_virtual_hub_route_table_v2s_get_request(
+        _request = build_virtual_hub_route_table_v2_s_get_request(
             resource_group_name=resource_group_name,
             virtual_hub_name=virtual_hub_name,
             route_table_name=route_table_name,
@@ -117630,7 +116959,7 @@ class VirtualHubRouteTableV2sOperations:
         else:
             _content = json.dumps(virtual_hub_route_table_v2_parameters, cls=SdkJSONEncoder, exclude_readonly=True)  # type: ignore
 
-        _request = build_virtual_hub_route_table_v2s_create_or_update_request(
+        _request = build_virtual_hub_route_table_v2_s_create_or_update_request(
             resource_group_name=resource_group_name,
             virtual_hub_name=virtual_hub_name,
             route_table_name=route_table_name,
@@ -117879,7 +117208,7 @@ class VirtualHubRouteTableV2sOperations:
         api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
         cls: ClsType[Iterator[bytes]] = kwargs.pop("cls", None)
 
-        _request = build_virtual_hub_route_table_v2s_delete_request(
+        _request = build_virtual_hub_route_table_v2_s_delete_request(
             resource_group_name=resource_group_name,
             virtual_hub_name=virtual_hub_name,
             route_table_name=route_table_name,
@@ -118020,7 +117349,7 @@ class VirtualHubRouteTableV2sOperations:
         def prepare_request(next_link=None):
             if not next_link:
 
-                _request = build_virtual_hub_route_table_v2s_list_request(
+                _request = build_virtual_hub_route_table_v2_s_list_request(
                     resource_group_name=resource_group_name,
                     virtual_hub_name=virtual_hub_name,
                     subscription_id=self._config.subscription_id,
@@ -120687,1707 +120016,6 @@ class NatRulesOperations:
             return pipeline_response
 
         return ItemPaged(get_next, extract_data)
-
-
-class P2sVpnGatewaysOperations:
-    """
-    .. warning::
-        **DO NOT** instantiate this class directly.
-
-        Instead, you should access the following operations through
-        :class:`~azure.mgmt.network.NetworkManagementClient`'s
-        :attr:`p2s_vpn_gateways` attribute.
-    """
-
-    def __init__(self, *args, **kwargs) -> None:
-        input_args = list(args)
-        self._client: PipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: NetworkManagementClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
-        self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
-        self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
-
-    @distributed_trace
-    def get(self, resource_group_name: str, gateway_name: str, **kwargs: Any) -> _models.P2SVpnGateway:
-        """Retrieves the details of a virtual wan p2s vpn gateway.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param gateway_name: The name of the gateway. Required.
-        :type gateway_name: str
-        :return: P2SVpnGateway. The P2SVpnGateway is compatible with MutableMapping
-        :rtype: ~azure.mgmt.network.models.P2SVpnGateway
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        error_map: MutableMapping = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        _headers = kwargs.pop("headers", {}) or {}
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
-        cls: ClsType[_models.P2SVpnGateway] = kwargs.pop("cls", None)
-
-        _request = build_p2s_vpn_gateways_get_request(
-            resource_group_name=resource_group_name,
-            gateway_name=gateway_name,
-            subscription_id=self._config.subscription_id,
-            api_version=api_version,
-            headers=_headers,
-            params=_params,
-        )
-        path_format_arguments = {
-            "endpoint": self._serialize.url("self._config.base_url", self._config.base_url, "str", skip_quote=True),
-        }
-        _request.url = self._client.format_url(_request.url, **path_format_arguments)
-
-        _stream = kwargs.pop("stream", False)
-        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            _request, stream=_stream, **kwargs
-        )
-
-        response = pipeline_response.http_response
-
-        if response.status_code not in [200]:
-            if _stream:
-                try:
-                    response.read()  # Load the body in memory and close the socket
-                except (StreamConsumedError, StreamClosedError):
-                    pass
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = _failsafe_deserialize(
-                _models.CloudError,
-                response,
-            )
-            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
-
-        if _stream:
-            deserialized = response.iter_bytes()
-        else:
-            deserialized = _deserialize(_models.P2SVpnGateway, response.json())
-
-        if cls:
-            return cls(pipeline_response, deserialized, {})  # type: ignore
-
-        return deserialized  # type: ignore
-
-    def _create_or_update_initial(
-        self,
-        resource_group_name: str,
-        gateway_name: str,
-        p2_s_vpn_gateway_parameters: Union[_models.P2SVpnGateway, JSON, IO[bytes]],
-        **kwargs: Any
-    ) -> Iterator[bytes]:
-        error_map: MutableMapping = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
-        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
-        cls: ClsType[Iterator[bytes]] = kwargs.pop("cls", None)
-
-        content_type = content_type or "application/json"
-        _content = None
-        if isinstance(p2_s_vpn_gateway_parameters, (IOBase, bytes)):
-            _content = p2_s_vpn_gateway_parameters
-        else:
-            _content = json.dumps(p2_s_vpn_gateway_parameters, cls=SdkJSONEncoder, exclude_readonly=True)  # type: ignore
-
-        _request = build_p2s_vpn_gateways_create_or_update_request(
-            resource_group_name=resource_group_name,
-            gateway_name=gateway_name,
-            subscription_id=self._config.subscription_id,
-            api_version=api_version,
-            content_type=content_type,
-            content=_content,
-            headers=_headers,
-            params=_params,
-        )
-        path_format_arguments = {
-            "endpoint": self._serialize.url("self._config.base_url", self._config.base_url, "str", skip_quote=True),
-        }
-        _request.url = self._client.format_url(_request.url, **path_format_arguments)
-
-        _stream = True
-        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            _request, stream=_stream, **kwargs
-        )
-
-        response = pipeline_response.http_response
-
-        if response.status_code not in [200, 201]:
-            try:
-                response.read()  # Load the body in memory and close the socket
-            except (StreamConsumedError, StreamClosedError):
-                pass
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = _failsafe_deserialize(
-                _models.CloudError,
-                response,
-            )
-            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
-
-        response_headers = {}
-        if response.status_code == 201:
-            response_headers["Azure-AsyncOperation"] = self._deserialize(
-                "str", response.headers.get("Azure-AsyncOperation")
-            )
-            response_headers["Retry-After"] = self._deserialize("int", response.headers.get("Retry-After"))
-
-        deserialized = response.iter_bytes()
-
-        if cls:
-            return cls(pipeline_response, deserialized, response_headers)  # type: ignore
-
-        return deserialized  # type: ignore
-
-    @overload
-    def begin_create_or_update(
-        self,
-        resource_group_name: str,
-        gateway_name: str,
-        p2_s_vpn_gateway_parameters: _models.P2SVpnGateway,
-        *,
-        content_type: str = "application/json",
-        **kwargs: Any
-    ) -> LROPoller[_models.P2SVpnGateway]:
-        """Creates a virtual wan p2s vpn gateway if it doesn't exist else updates the existing gateway.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param gateway_name: The name of the gateway. Required.
-        :type gateway_name: str
-        :param p2_s_vpn_gateway_parameters: Parameters supplied to create or Update a virtual wan p2s
-         vpn gateway. Required.
-        :type p2_s_vpn_gateway_parameters: ~azure.mgmt.network.models.P2SVpnGateway
-        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
-         Default value is "application/json".
-        :paramtype content_type: str
-        :return: An instance of LROPoller that returns P2SVpnGateway. The P2SVpnGateway is compatible
-         with MutableMapping
-        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.network.models.P2SVpnGateway]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-
-    @overload
-    def begin_create_or_update(
-        self,
-        resource_group_name: str,
-        gateway_name: str,
-        p2_s_vpn_gateway_parameters: JSON,
-        *,
-        content_type: str = "application/json",
-        **kwargs: Any
-    ) -> LROPoller[_models.P2SVpnGateway]:
-        """Creates a virtual wan p2s vpn gateway if it doesn't exist else updates the existing gateway.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param gateway_name: The name of the gateway. Required.
-        :type gateway_name: str
-        :param p2_s_vpn_gateway_parameters: Parameters supplied to create or Update a virtual wan p2s
-         vpn gateway. Required.
-        :type p2_s_vpn_gateway_parameters: JSON
-        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
-         Default value is "application/json".
-        :paramtype content_type: str
-        :return: An instance of LROPoller that returns P2SVpnGateway. The P2SVpnGateway is compatible
-         with MutableMapping
-        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.network.models.P2SVpnGateway]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-
-    @overload
-    def begin_create_or_update(
-        self,
-        resource_group_name: str,
-        gateway_name: str,
-        p2_s_vpn_gateway_parameters: IO[bytes],
-        *,
-        content_type: str = "application/json",
-        **kwargs: Any
-    ) -> LROPoller[_models.P2SVpnGateway]:
-        """Creates a virtual wan p2s vpn gateway if it doesn't exist else updates the existing gateway.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param gateway_name: The name of the gateway. Required.
-        :type gateway_name: str
-        :param p2_s_vpn_gateway_parameters: Parameters supplied to create or Update a virtual wan p2s
-         vpn gateway. Required.
-        :type p2_s_vpn_gateway_parameters: IO[bytes]
-        :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
-         Default value is "application/json".
-        :paramtype content_type: str
-        :return: An instance of LROPoller that returns P2SVpnGateway. The P2SVpnGateway is compatible
-         with MutableMapping
-        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.network.models.P2SVpnGateway]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-
-    @distributed_trace
-    def begin_create_or_update(
-        self,
-        resource_group_name: str,
-        gateway_name: str,
-        p2_s_vpn_gateway_parameters: Union[_models.P2SVpnGateway, JSON, IO[bytes]],
-        **kwargs: Any
-    ) -> LROPoller[_models.P2SVpnGateway]:
-        """Creates a virtual wan p2s vpn gateway if it doesn't exist else updates the existing gateway.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param gateway_name: The name of the gateway. Required.
-        :type gateway_name: str
-        :param p2_s_vpn_gateway_parameters: Parameters supplied to create or Update a virtual wan p2s
-         vpn gateway. Is one of the following types: P2SVpnGateway, JSON, IO[bytes] Required.
-        :type p2_s_vpn_gateway_parameters: ~azure.mgmt.network.models.P2SVpnGateway or JSON or
-         IO[bytes]
-        :return: An instance of LROPoller that returns P2SVpnGateway. The P2SVpnGateway is compatible
-         with MutableMapping
-        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.network.models.P2SVpnGateway]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
-        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
-        cls: ClsType[_models.P2SVpnGateway] = kwargs.pop("cls", None)
-        polling: Union[bool, PollingMethod] = kwargs.pop("polling", True)
-        lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
-        cont_token: Optional[str] = kwargs.pop("continuation_token", None)
-        if cont_token is None:
-            raw_result = self._create_or_update_initial(
-                resource_group_name=resource_group_name,
-                gateway_name=gateway_name,
-                p2_s_vpn_gateway_parameters=p2_s_vpn_gateway_parameters,
-                api_version=api_version,
-                content_type=content_type,
-                cls=lambda x, y, z: x,
-                headers=_headers,
-                params=_params,
-                **kwargs
-            )
-            raw_result.http_response.read()  # type: ignore
-        kwargs.pop("error_map", None)
-
-        def get_long_running_output(pipeline_response):
-            response = pipeline_response.http_response
-            deserialized = _deserialize(_models.P2SVpnGateway, response.json())
-            if cls:
-                return cls(pipeline_response, deserialized, {})  # type: ignore
-            return deserialized
-
-        path_format_arguments = {
-            "endpoint": self._serialize.url("self._config.base_url", self._config.base_url, "str", skip_quote=True),
-        }
-
-        if polling is True:
-            polling_method: PollingMethod = cast(
-                PollingMethod, ARMPolling(lro_delay, path_format_arguments=path_format_arguments, **kwargs)
-            )
-        elif polling is False:
-            polling_method = cast(PollingMethod, NoPolling())
-        else:
-            polling_method = polling
-        if cont_token:
-            return LROPoller[_models.P2SVpnGateway].from_continuation_token(
-                polling_method=polling_method,
-                continuation_token=cont_token,
-                client=self._client,
-                deserialization_callback=get_long_running_output,
-            )
-        return LROPoller[_models.P2SVpnGateway](
-            self._client, raw_result, get_long_running_output, polling_method  # type: ignore
-        )
-
-    def _update_tags_initial(
-        self,
-        resource_group_name: str,
-        gateway_name: str,
-        p2_s_vpn_gateway_parameters: Union[_models.TagsObject, JSON, IO[bytes]],
-        **kwargs: Any
-    ) -> Iterator[bytes]:
-        error_map: MutableMapping = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
-        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
-        cls: ClsType[Iterator[bytes]] = kwargs.pop("cls", None)
-
-        content_type = content_type or "application/json"
-        _content = None
-        if isinstance(p2_s_vpn_gateway_parameters, (IOBase, bytes)):
-            _content = p2_s_vpn_gateway_parameters
-        else:
-            _content = json.dumps(p2_s_vpn_gateway_parameters, cls=SdkJSONEncoder, exclude_readonly=True)  # type: ignore
-
-        _request = build_p2s_vpn_gateways_update_tags_request(
-            resource_group_name=resource_group_name,
-            gateway_name=gateway_name,
-            subscription_id=self._config.subscription_id,
-            api_version=api_version,
-            content_type=content_type,
-            content=_content,
-            headers=_headers,
-            params=_params,
-        )
-        path_format_arguments = {
-            "endpoint": self._serialize.url("self._config.base_url", self._config.base_url, "str", skip_quote=True),
-        }
-        _request.url = self._client.format_url(_request.url, **path_format_arguments)
-
-        _stream = True
-        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            _request, stream=_stream, **kwargs
-        )
-
-        response = pipeline_response.http_response
-
-        if response.status_code not in [200, 202]:
-            try:
-                response.read()  # Load the body in memory and close the socket
-            except (StreamConsumedError, StreamClosedError):
-                pass
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = _failsafe_deserialize(
-                _models.CloudError,
-                response,
-            )
-            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
-
-        response_headers = {}
-        if response.status_code == 202:
-            response_headers["Azure-AsyncOperation"] = self._deserialize(
-                "str", response.headers.get("Azure-AsyncOperation")
-            )
-            response_headers["Retry-After"] = self._deserialize("int", response.headers.get("Retry-After"))
-
-        deserialized = response.iter_bytes()
-
-        if cls:
-            return cls(pipeline_response, deserialized, response_headers)  # type: ignore
-
-        return deserialized  # type: ignore
-
-    @overload
-    def begin_update_tags(
-        self,
-        resource_group_name: str,
-        gateway_name: str,
-        p2_s_vpn_gateway_parameters: _models.TagsObject,
-        *,
-        content_type: str = "application/json",
-        **kwargs: Any
-    ) -> LROPoller[_models.P2SVpnGateway]:
-        """Updates virtual wan p2s vpn gateway tags.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param gateway_name: The name of the gateway. Required.
-        :type gateway_name: str
-        :param p2_s_vpn_gateway_parameters: Parameters supplied to update a virtual wan p2s vpn gateway
-         tags. Required.
-        :type p2_s_vpn_gateway_parameters: ~azure.mgmt.network.models.TagsObject
-        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
-         Default value is "application/json".
-        :paramtype content_type: str
-        :return: An instance of LROPoller that returns P2SVpnGateway. The P2SVpnGateway is compatible
-         with MutableMapping
-        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.network.models.P2SVpnGateway]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-
-    @overload
-    def begin_update_tags(
-        self,
-        resource_group_name: str,
-        gateway_name: str,
-        p2_s_vpn_gateway_parameters: JSON,
-        *,
-        content_type: str = "application/json",
-        **kwargs: Any
-    ) -> LROPoller[_models.P2SVpnGateway]:
-        """Updates virtual wan p2s vpn gateway tags.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param gateway_name: The name of the gateway. Required.
-        :type gateway_name: str
-        :param p2_s_vpn_gateway_parameters: Parameters supplied to update a virtual wan p2s vpn gateway
-         tags. Required.
-        :type p2_s_vpn_gateway_parameters: JSON
-        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
-         Default value is "application/json".
-        :paramtype content_type: str
-        :return: An instance of LROPoller that returns P2SVpnGateway. The P2SVpnGateway is compatible
-         with MutableMapping
-        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.network.models.P2SVpnGateway]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-
-    @overload
-    def begin_update_tags(
-        self,
-        resource_group_name: str,
-        gateway_name: str,
-        p2_s_vpn_gateway_parameters: IO[bytes],
-        *,
-        content_type: str = "application/json",
-        **kwargs: Any
-    ) -> LROPoller[_models.P2SVpnGateway]:
-        """Updates virtual wan p2s vpn gateway tags.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param gateway_name: The name of the gateway. Required.
-        :type gateway_name: str
-        :param p2_s_vpn_gateway_parameters: Parameters supplied to update a virtual wan p2s vpn gateway
-         tags. Required.
-        :type p2_s_vpn_gateway_parameters: IO[bytes]
-        :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
-         Default value is "application/json".
-        :paramtype content_type: str
-        :return: An instance of LROPoller that returns P2SVpnGateway. The P2SVpnGateway is compatible
-         with MutableMapping
-        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.network.models.P2SVpnGateway]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-
-    @distributed_trace
-    def begin_update_tags(
-        self,
-        resource_group_name: str,
-        gateway_name: str,
-        p2_s_vpn_gateway_parameters: Union[_models.TagsObject, JSON, IO[bytes]],
-        **kwargs: Any
-    ) -> LROPoller[_models.P2SVpnGateway]:
-        """Updates virtual wan p2s vpn gateway tags.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param gateway_name: The name of the gateway. Required.
-        :type gateway_name: str
-        :param p2_s_vpn_gateway_parameters: Parameters supplied to update a virtual wan p2s vpn gateway
-         tags. Is one of the following types: TagsObject, JSON, IO[bytes] Required.
-        :type p2_s_vpn_gateway_parameters: ~azure.mgmt.network.models.TagsObject or JSON or IO[bytes]
-        :return: An instance of LROPoller that returns P2SVpnGateway. The P2SVpnGateway is compatible
-         with MutableMapping
-        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.network.models.P2SVpnGateway]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
-        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
-        cls: ClsType[_models.P2SVpnGateway] = kwargs.pop("cls", None)
-        polling: Union[bool, PollingMethod] = kwargs.pop("polling", True)
-        lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
-        cont_token: Optional[str] = kwargs.pop("continuation_token", None)
-        if cont_token is None:
-            raw_result = self._update_tags_initial(
-                resource_group_name=resource_group_name,
-                gateway_name=gateway_name,
-                p2_s_vpn_gateway_parameters=p2_s_vpn_gateway_parameters,
-                api_version=api_version,
-                content_type=content_type,
-                cls=lambda x, y, z: x,
-                headers=_headers,
-                params=_params,
-                **kwargs
-            )
-            raw_result.http_response.read()  # type: ignore
-        kwargs.pop("error_map", None)
-
-        def get_long_running_output(pipeline_response):
-            response = pipeline_response.http_response
-            deserialized = _deserialize(_models.P2SVpnGateway, response.json())
-            if cls:
-                return cls(pipeline_response, deserialized, {})  # type: ignore
-            return deserialized
-
-        path_format_arguments = {
-            "endpoint": self._serialize.url("self._config.base_url", self._config.base_url, "str", skip_quote=True),
-        }
-
-        if polling is True:
-            polling_method: PollingMethod = cast(
-                PollingMethod, ARMPolling(lro_delay, path_format_arguments=path_format_arguments, **kwargs)
-            )
-        elif polling is False:
-            polling_method = cast(PollingMethod, NoPolling())
-        else:
-            polling_method = polling
-        if cont_token:
-            return LROPoller[_models.P2SVpnGateway].from_continuation_token(
-                polling_method=polling_method,
-                continuation_token=cont_token,
-                client=self._client,
-                deserialization_callback=get_long_running_output,
-            )
-        return LROPoller[_models.P2SVpnGateway](
-            self._client, raw_result, get_long_running_output, polling_method  # type: ignore
-        )
-
-    def _delete_initial(self, resource_group_name: str, gateway_name: str, **kwargs: Any) -> Iterator[bytes]:
-        error_map: MutableMapping = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        _headers = kwargs.pop("headers", {}) or {}
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
-        cls: ClsType[Iterator[bytes]] = kwargs.pop("cls", None)
-
-        _request = build_p2s_vpn_gateways_delete_request(
-            resource_group_name=resource_group_name,
-            gateway_name=gateway_name,
-            subscription_id=self._config.subscription_id,
-            api_version=api_version,
-            headers=_headers,
-            params=_params,
-        )
-        path_format_arguments = {
-            "endpoint": self._serialize.url("self._config.base_url", self._config.base_url, "str", skip_quote=True),
-        }
-        _request.url = self._client.format_url(_request.url, **path_format_arguments)
-
-        _stream = True
-        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            _request, stream=_stream, **kwargs
-        )
-
-        response = pipeline_response.http_response
-
-        if response.status_code not in [200, 202, 204]:
-            try:
-                response.read()  # Load the body in memory and close the socket
-            except (StreamConsumedError, StreamClosedError):
-                pass
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = _failsafe_deserialize(
-                _models.CloudError,
-                response,
-            )
-            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
-
-        response_headers = {}
-        if response.status_code == 202:
-            response_headers["Location"] = self._deserialize("str", response.headers.get("Location"))
-            response_headers["Retry-After"] = self._deserialize("int", response.headers.get("Retry-After"))
-
-        deserialized = response.iter_bytes()
-
-        if cls:
-            return cls(pipeline_response, deserialized, response_headers)  # type: ignore
-
-        return deserialized  # type: ignore
-
-    @distributed_trace
-    def begin_delete(self, resource_group_name: str, gateway_name: str, **kwargs: Any) -> LROPoller[None]:
-        """Deletes a virtual wan p2s vpn gateway.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param gateway_name: The name of the gateway. Required.
-        :type gateway_name: str
-        :return: An instance of LROPoller that returns None
-        :rtype: ~azure.core.polling.LROPoller[None]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        _headers = kwargs.pop("headers", {}) or {}
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
-        cls: ClsType[None] = kwargs.pop("cls", None)
-        polling: Union[bool, PollingMethod] = kwargs.pop("polling", True)
-        lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
-        cont_token: Optional[str] = kwargs.pop("continuation_token", None)
-        if cont_token is None:
-            raw_result = self._delete_initial(
-                resource_group_name=resource_group_name,
-                gateway_name=gateway_name,
-                api_version=api_version,
-                cls=lambda x, y, z: x,
-                headers=_headers,
-                params=_params,
-                **kwargs
-            )
-            raw_result.http_response.read()  # type: ignore
-        kwargs.pop("error_map", None)
-
-        def get_long_running_output(pipeline_response):  # pylint: disable=inconsistent-return-statements
-            if cls:
-                return cls(pipeline_response, None, {})  # type: ignore
-
-        path_format_arguments = {
-            "endpoint": self._serialize.url("self._config.base_url", self._config.base_url, "str", skip_quote=True),
-        }
-
-        if polling is True:
-            polling_method: PollingMethod = cast(
-                PollingMethod, ARMPolling(lro_delay, path_format_arguments=path_format_arguments, **kwargs)
-            )
-        elif polling is False:
-            polling_method = cast(PollingMethod, NoPolling())
-        else:
-            polling_method = polling
-        if cont_token:
-            return LROPoller[None].from_continuation_token(
-                polling_method=polling_method,
-                continuation_token=cont_token,
-                client=self._client,
-                deserialization_callback=get_long_running_output,
-            )
-        return LROPoller[None](self._client, raw_result, get_long_running_output, polling_method)  # type: ignore
-
-    @distributed_trace
-    def list_by_resource_group(self, resource_group_name: str, **kwargs: Any) -> ItemPaged["_models.P2SVpnGateway"]:
-        """Lists all the P2SVpnGateways in a resource group.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :return: An iterator like instance of P2SVpnGateway
-        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.network.models.P2SVpnGateway]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        _headers = kwargs.pop("headers", {}) or {}
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
-        cls: ClsType[List[_models.P2SVpnGateway]] = kwargs.pop("cls", None)
-
-        error_map: MutableMapping = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        def prepare_request(next_link=None):
-            if not next_link:
-
-                _request = build_p2s_vpn_gateways_list_by_resource_group_request(
-                    resource_group_name=resource_group_name,
-                    subscription_id=self._config.subscription_id,
-                    api_version=api_version,
-                    headers=_headers,
-                    params=_params,
-                )
-                path_format_arguments = {
-                    "endpoint": self._serialize.url(
-                        "self._config.base_url", self._config.base_url, "str", skip_quote=True
-                    ),
-                }
-                _request.url = self._client.format_url(_request.url, **path_format_arguments)
-
-            else:
-                _request = HttpRequest("GET", next_link)
-                path_format_arguments = {
-                    "endpoint": self._serialize.url(
-                        "self._config.base_url", self._config.base_url, "str", skip_quote=True
-                    ),
-                }
-                _request.url = self._client.format_url(_request.url, **path_format_arguments)
-
-            return _request
-
-        def extract_data(pipeline_response):
-            deserialized = pipeline_response.http_response.json()
-            list_of_elem = _deserialize(List[_models.P2SVpnGateway], deserialized.get("value", []))
-            if cls:
-                list_of_elem = cls(list_of_elem)  # type: ignore
-            return deserialized.get("nextLink") or None, iter(list_of_elem)
-
-        def get_next(next_link=None):
-            _request = prepare_request(next_link)
-
-            _stream = False
-            pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-                _request, stream=_stream, **kwargs
-            )
-            response = pipeline_response.http_response
-
-            if response.status_code not in [200]:
-                map_error(status_code=response.status_code, response=response, error_map=error_map)
-                error = _failsafe_deserialize(
-                    _models.CloudError,
-                    response,
-                )
-                raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
-
-            return pipeline_response
-
-        return ItemPaged(get_next, extract_data)
-
-    @distributed_trace
-    def list(self, **kwargs: Any) -> ItemPaged["_models.P2SVpnGateway"]:
-        """Lists all the P2SVpnGateways in a subscription.
-
-        :return: An iterator like instance of P2SVpnGateway
-        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.network.models.P2SVpnGateway]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        _headers = kwargs.pop("headers", {}) or {}
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
-        cls: ClsType[List[_models.P2SVpnGateway]] = kwargs.pop("cls", None)
-
-        error_map: MutableMapping = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        def prepare_request(next_link=None):
-            if not next_link:
-
-                _request = build_p2s_vpn_gateways_list_request(
-                    subscription_id=self._config.subscription_id,
-                    api_version=api_version,
-                    headers=_headers,
-                    params=_params,
-                )
-                path_format_arguments = {
-                    "endpoint": self._serialize.url(
-                        "self._config.base_url", self._config.base_url, "str", skip_quote=True
-                    ),
-                }
-                _request.url = self._client.format_url(_request.url, **path_format_arguments)
-
-            else:
-                _request = HttpRequest("GET", next_link)
-                path_format_arguments = {
-                    "endpoint": self._serialize.url(
-                        "self._config.base_url", self._config.base_url, "str", skip_quote=True
-                    ),
-                }
-                _request.url = self._client.format_url(_request.url, **path_format_arguments)
-
-            return _request
-
-        def extract_data(pipeline_response):
-            deserialized = pipeline_response.http_response.json()
-            list_of_elem = _deserialize(List[_models.P2SVpnGateway], deserialized.get("value", []))
-            if cls:
-                list_of_elem = cls(list_of_elem)  # type: ignore
-            return deserialized.get("nextLink") or None, iter(list_of_elem)
-
-        def get_next(next_link=None):
-            _request = prepare_request(next_link)
-
-            _stream = False
-            pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-                _request, stream=_stream, **kwargs
-            )
-            response = pipeline_response.http_response
-
-            if response.status_code not in [200]:
-                map_error(status_code=response.status_code, response=response, error_map=error_map)
-                error = _failsafe_deserialize(
-                    _models.CloudError,
-                    response,
-                )
-                raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
-
-            return pipeline_response
-
-        return ItemPaged(get_next, extract_data)
-
-    def _generate_vpn_profile_initial(
-        self,
-        resource_group_name: str,
-        gateway_name: str,
-        parameters: Union[_models.P2SVpnProfileParameters, JSON, IO[bytes]],
-        **kwargs: Any
-    ) -> Iterator[bytes]:
-        error_map: MutableMapping = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
-        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
-        cls: ClsType[Iterator[bytes]] = kwargs.pop("cls", None)
-
-        content_type = content_type or "application/json"
-        _content = None
-        if isinstance(parameters, (IOBase, bytes)):
-            _content = parameters
-        else:
-            _content = json.dumps(parameters, cls=SdkJSONEncoder, exclude_readonly=True)  # type: ignore
-
-        _request = build_p2s_vpn_gateways_generate_vpn_profile_request(
-            resource_group_name=resource_group_name,
-            gateway_name=gateway_name,
-            subscription_id=self._config.subscription_id,
-            api_version=api_version,
-            content_type=content_type,
-            content=_content,
-            headers=_headers,
-            params=_params,
-        )
-        path_format_arguments = {
-            "endpoint": self._serialize.url("self._config.base_url", self._config.base_url, "str", skip_quote=True),
-        }
-        _request.url = self._client.format_url(_request.url, **path_format_arguments)
-
-        _stream = True
-        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            _request, stream=_stream, **kwargs
-        )
-
-        response = pipeline_response.http_response
-
-        if response.status_code not in [200, 202]:
-            try:
-                response.read()  # Load the body in memory and close the socket
-            except (StreamConsumedError, StreamClosedError):
-                pass
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = _failsafe_deserialize(
-                _models.CloudError,
-                response,
-            )
-            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
-
-        response_headers = {}
-        if response.status_code == 202:
-            response_headers["Location"] = self._deserialize("str", response.headers.get("Location"))
-            response_headers["Retry-After"] = self._deserialize("int", response.headers.get("Retry-After"))
-
-        deserialized = response.iter_bytes()
-
-        if cls:
-            return cls(pipeline_response, deserialized, response_headers)  # type: ignore
-
-        return deserialized  # type: ignore
-
-    @overload
-    def begin_generate_vpn_profile(
-        self,
-        resource_group_name: str,
-        gateway_name: str,
-        parameters: _models.P2SVpnProfileParameters,
-        *,
-        content_type: str = "application/json",
-        **kwargs: Any
-    ) -> LROPoller[_models.VpnProfileResponse]:
-        """Generates VPN profile for P2S client of the P2SVpnGateway in the specified resource group.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param gateway_name: The name of the gateway. Required.
-        :type gateway_name: str
-        :param parameters: Parameters supplied to the generate P2SVpnGateway VPN client package
-         operation. Required.
-        :type parameters: ~azure.mgmt.network.models.P2SVpnProfileParameters
-        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
-         Default value is "application/json".
-        :paramtype content_type: str
-        :return: An instance of LROPoller that returns VpnProfileResponse. The VpnProfileResponse is
-         compatible with MutableMapping
-        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.network.models.VpnProfileResponse]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-
-    @overload
-    def begin_generate_vpn_profile(
-        self,
-        resource_group_name: str,
-        gateway_name: str,
-        parameters: JSON,
-        *,
-        content_type: str = "application/json",
-        **kwargs: Any
-    ) -> LROPoller[_models.VpnProfileResponse]:
-        """Generates VPN profile for P2S client of the P2SVpnGateway in the specified resource group.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param gateway_name: The name of the gateway. Required.
-        :type gateway_name: str
-        :param parameters: Parameters supplied to the generate P2SVpnGateway VPN client package
-         operation. Required.
-        :type parameters: JSON
-        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
-         Default value is "application/json".
-        :paramtype content_type: str
-        :return: An instance of LROPoller that returns VpnProfileResponse. The VpnProfileResponse is
-         compatible with MutableMapping
-        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.network.models.VpnProfileResponse]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-
-    @overload
-    def begin_generate_vpn_profile(
-        self,
-        resource_group_name: str,
-        gateway_name: str,
-        parameters: IO[bytes],
-        *,
-        content_type: str = "application/json",
-        **kwargs: Any
-    ) -> LROPoller[_models.VpnProfileResponse]:
-        """Generates VPN profile for P2S client of the P2SVpnGateway in the specified resource group.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param gateway_name: The name of the gateway. Required.
-        :type gateway_name: str
-        :param parameters: Parameters supplied to the generate P2SVpnGateway VPN client package
-         operation. Required.
-        :type parameters: IO[bytes]
-        :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
-         Default value is "application/json".
-        :paramtype content_type: str
-        :return: An instance of LROPoller that returns VpnProfileResponse. The VpnProfileResponse is
-         compatible with MutableMapping
-        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.network.models.VpnProfileResponse]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-
-    @distributed_trace
-    def begin_generate_vpn_profile(
-        self,
-        resource_group_name: str,
-        gateway_name: str,
-        parameters: Union[_models.P2SVpnProfileParameters, JSON, IO[bytes]],
-        **kwargs: Any
-    ) -> LROPoller[_models.VpnProfileResponse]:
-        """Generates VPN profile for P2S client of the P2SVpnGateway in the specified resource group.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param gateway_name: The name of the gateway. Required.
-        :type gateway_name: str
-        :param parameters: Parameters supplied to the generate P2SVpnGateway VPN client package
-         operation. Is one of the following types: P2SVpnProfileParameters, JSON, IO[bytes] Required.
-        :type parameters: ~azure.mgmt.network.models.P2SVpnProfileParameters or JSON or IO[bytes]
-        :return: An instance of LROPoller that returns VpnProfileResponse. The VpnProfileResponse is
-         compatible with MutableMapping
-        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.network.models.VpnProfileResponse]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
-        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
-        cls: ClsType[_models.VpnProfileResponse] = kwargs.pop("cls", None)
-        polling: Union[bool, PollingMethod] = kwargs.pop("polling", True)
-        lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
-        cont_token: Optional[str] = kwargs.pop("continuation_token", None)
-        if cont_token is None:
-            raw_result = self._generate_vpn_profile_initial(
-                resource_group_name=resource_group_name,
-                gateway_name=gateway_name,
-                parameters=parameters,
-                api_version=api_version,
-                content_type=content_type,
-                cls=lambda x, y, z: x,
-                headers=_headers,
-                params=_params,
-                **kwargs
-            )
-            raw_result.http_response.read()  # type: ignore
-        kwargs.pop("error_map", None)
-
-        def get_long_running_output(pipeline_response):
-            response_headers = {}
-            response = pipeline_response.http_response
-            response_headers["Location"] = self._deserialize("str", response.headers.get("Location"))
-            response_headers["Retry-After"] = self._deserialize("int", response.headers.get("Retry-After"))
-
-            deserialized = _deserialize(_models.VpnProfileResponse, response.json())
-            if cls:
-                return cls(pipeline_response, deserialized, response_headers)  # type: ignore
-            return deserialized
-
-        path_format_arguments = {
-            "endpoint": self._serialize.url("self._config.base_url", self._config.base_url, "str", skip_quote=True),
-        }
-
-        if polling is True:
-            polling_method: PollingMethod = cast(
-                PollingMethod, ARMPolling(lro_delay, path_format_arguments=path_format_arguments, **kwargs)
-            )
-        elif polling is False:
-            polling_method = cast(PollingMethod, NoPolling())
-        else:
-            polling_method = polling
-        if cont_token:
-            return LROPoller[_models.VpnProfileResponse].from_continuation_token(
-                polling_method=polling_method,
-                continuation_token=cont_token,
-                client=self._client,
-                deserialization_callback=get_long_running_output,
-            )
-        return LROPoller[_models.VpnProfileResponse](
-            self._client, raw_result, get_long_running_output, polling_method  # type: ignore
-        )
-
-    def _get_p2_s_vpn_connection_health_initial(
-        self, resource_group_name: str, gateway_name: str, **kwargs: Any
-    ) -> Iterator[bytes]:
-        error_map: MutableMapping = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        _headers = kwargs.pop("headers", {}) or {}
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
-        cls: ClsType[Iterator[bytes]] = kwargs.pop("cls", None)
-
-        _request = build_p2s_vpn_gateways_get_p2_s_vpn_connection_health_request(
-            resource_group_name=resource_group_name,
-            gateway_name=gateway_name,
-            subscription_id=self._config.subscription_id,
-            api_version=api_version,
-            headers=_headers,
-            params=_params,
-        )
-        path_format_arguments = {
-            "endpoint": self._serialize.url("self._config.base_url", self._config.base_url, "str", skip_quote=True),
-        }
-        _request.url = self._client.format_url(_request.url, **path_format_arguments)
-
-        _stream = True
-        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            _request, stream=_stream, **kwargs
-        )
-
-        response = pipeline_response.http_response
-
-        if response.status_code not in [200, 202]:
-            try:
-                response.read()  # Load the body in memory and close the socket
-            except (StreamConsumedError, StreamClosedError):
-                pass
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = _failsafe_deserialize(
-                _models.CloudError,
-                response,
-            )
-            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
-
-        response_headers = {}
-        if response.status_code == 202:
-            response_headers["Location"] = self._deserialize("str", response.headers.get("Location"))
-            response_headers["Retry-After"] = self._deserialize("int", response.headers.get("Retry-After"))
-
-        deserialized = response.iter_bytes()
-
-        if cls:
-            return cls(pipeline_response, deserialized, response_headers)  # type: ignore
-
-        return deserialized  # type: ignore
-
-    @distributed_trace
-    def begin_get_p2_s_vpn_connection_health(
-        self, resource_group_name: str, gateway_name: str, **kwargs: Any
-    ) -> LROPoller[_models.P2SVpnGateway]:
-        """Gets the connection health of P2S clients of the virtual wan P2SVpnGateway in the specified
-        resource group.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param gateway_name: The name of the gateway. Required.
-        :type gateway_name: str
-        :return: An instance of LROPoller that returns P2SVpnGateway. The P2SVpnGateway is compatible
-         with MutableMapping
-        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.network.models.P2SVpnGateway]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        _headers = kwargs.pop("headers", {}) or {}
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
-        cls: ClsType[_models.P2SVpnGateway] = kwargs.pop("cls", None)
-        polling: Union[bool, PollingMethod] = kwargs.pop("polling", True)
-        lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
-        cont_token: Optional[str] = kwargs.pop("continuation_token", None)
-        if cont_token is None:
-            raw_result = self._get_p2_s_vpn_connection_health_initial(
-                resource_group_name=resource_group_name,
-                gateway_name=gateway_name,
-                api_version=api_version,
-                cls=lambda x, y, z: x,
-                headers=_headers,
-                params=_params,
-                **kwargs
-            )
-            raw_result.http_response.read()  # type: ignore
-        kwargs.pop("error_map", None)
-
-        def get_long_running_output(pipeline_response):
-            response_headers = {}
-            response = pipeline_response.http_response
-            response_headers["Location"] = self._deserialize("str", response.headers.get("Location"))
-            response_headers["Retry-After"] = self._deserialize("int", response.headers.get("Retry-After"))
-
-            deserialized = _deserialize(_models.P2SVpnGateway, response.json())
-            if cls:
-                return cls(pipeline_response, deserialized, response_headers)  # type: ignore
-            return deserialized
-
-        path_format_arguments = {
-            "endpoint": self._serialize.url("self._config.base_url", self._config.base_url, "str", skip_quote=True),
-        }
-
-        if polling is True:
-            polling_method: PollingMethod = cast(
-                PollingMethod, ARMPolling(lro_delay, path_format_arguments=path_format_arguments, **kwargs)
-            )
-        elif polling is False:
-            polling_method = cast(PollingMethod, NoPolling())
-        else:
-            polling_method = polling
-        if cont_token:
-            return LROPoller[_models.P2SVpnGateway].from_continuation_token(
-                polling_method=polling_method,
-                continuation_token=cont_token,
-                client=self._client,
-                deserialization_callback=get_long_running_output,
-            )
-        return LROPoller[_models.P2SVpnGateway](
-            self._client, raw_result, get_long_running_output, polling_method  # type: ignore
-        )
-
-    def _get_p2_s_vpn_connection_health_detailed_initial(  # pylint: disable=name-too-long
-        self,
-        resource_group_name: str,
-        gateway_name: str,
-        request: Union[_models.P2SVpnConnectionHealthRequest, JSON, IO[bytes]],
-        **kwargs: Any
-    ) -> Iterator[bytes]:
-        error_map: MutableMapping = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
-        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
-        cls: ClsType[Iterator[bytes]] = kwargs.pop("cls", None)
-
-        content_type = content_type or "application/json"
-        _content = None
-        if isinstance(request, (IOBase, bytes)):
-            _content = request
-        else:
-            _content = json.dumps(request, cls=SdkJSONEncoder, exclude_readonly=True)  # type: ignore
-
-        _request = build_p2s_vpn_gateways_get_p2_s_vpn_connection_health_detailed_request(
-            resource_group_name=resource_group_name,
-            gateway_name=gateway_name,
-            subscription_id=self._config.subscription_id,
-            api_version=api_version,
-            content_type=content_type,
-            content=_content,
-            headers=_headers,
-            params=_params,
-        )
-        path_format_arguments = {
-            "endpoint": self._serialize.url("self._config.base_url", self._config.base_url, "str", skip_quote=True),
-        }
-        _request.url = self._client.format_url(_request.url, **path_format_arguments)
-
-        _stream = True
-        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            _request, stream=_stream, **kwargs
-        )
-
-        response = pipeline_response.http_response
-
-        if response.status_code not in [200, 202]:
-            try:
-                response.read()  # Load the body in memory and close the socket
-            except (StreamConsumedError, StreamClosedError):
-                pass
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = _failsafe_deserialize(
-                _models.CloudError,
-                response,
-            )
-            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
-
-        response_headers = {}
-        if response.status_code == 202:
-            response_headers["Location"] = self._deserialize("str", response.headers.get("Location"))
-            response_headers["Retry-After"] = self._deserialize("int", response.headers.get("Retry-After"))
-
-        deserialized = response.iter_bytes()
-
-        if cls:
-            return cls(pipeline_response, deserialized, response_headers)  # type: ignore
-
-        return deserialized  # type: ignore
-
-    @overload
-    def begin_get_p2_s_vpn_connection_health_detailed(  # pylint: disable=name-too-long
-        self,
-        resource_group_name: str,
-        gateway_name: str,
-        request: _models.P2SVpnConnectionHealthRequest,
-        *,
-        content_type: str = "application/json",
-        **kwargs: Any
-    ) -> LROPoller[_models.P2SVpnConnectionHealth]:
-        """Gets the sas url to get the connection health detail of P2S clients of the virtual wan
-        P2SVpnGateway in the specified resource group.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param gateway_name: The name of the gateway. Required.
-        :type gateway_name: str
-        :param request: Request parameters supplied to get p2s vpn connections detailed health.
-         Required.
-        :type request: ~azure.mgmt.network.models.P2SVpnConnectionHealthRequest
-        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
-         Default value is "application/json".
-        :paramtype content_type: str
-        :return: An instance of LROPoller that returns P2SVpnConnectionHealth. The
-         P2SVpnConnectionHealth is compatible with MutableMapping
-        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.network.models.P2SVpnConnectionHealth]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-
-    @overload
-    def begin_get_p2_s_vpn_connection_health_detailed(  # pylint: disable=name-too-long
-        self,
-        resource_group_name: str,
-        gateway_name: str,
-        request: JSON,
-        *,
-        content_type: str = "application/json",
-        **kwargs: Any
-    ) -> LROPoller[_models.P2SVpnConnectionHealth]:
-        """Gets the sas url to get the connection health detail of P2S clients of the virtual wan
-        P2SVpnGateway in the specified resource group.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param gateway_name: The name of the gateway. Required.
-        :type gateway_name: str
-        :param request: Request parameters supplied to get p2s vpn connections detailed health.
-         Required.
-        :type request: JSON
-        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
-         Default value is "application/json".
-        :paramtype content_type: str
-        :return: An instance of LROPoller that returns P2SVpnConnectionHealth. The
-         P2SVpnConnectionHealth is compatible with MutableMapping
-        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.network.models.P2SVpnConnectionHealth]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-
-    @overload
-    def begin_get_p2_s_vpn_connection_health_detailed(  # pylint: disable=name-too-long
-        self,
-        resource_group_name: str,
-        gateway_name: str,
-        request: IO[bytes],
-        *,
-        content_type: str = "application/json",
-        **kwargs: Any
-    ) -> LROPoller[_models.P2SVpnConnectionHealth]:
-        """Gets the sas url to get the connection health detail of P2S clients of the virtual wan
-        P2SVpnGateway in the specified resource group.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param gateway_name: The name of the gateway. Required.
-        :type gateway_name: str
-        :param request: Request parameters supplied to get p2s vpn connections detailed health.
-         Required.
-        :type request: IO[bytes]
-        :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
-         Default value is "application/json".
-        :paramtype content_type: str
-        :return: An instance of LROPoller that returns P2SVpnConnectionHealth. The
-         P2SVpnConnectionHealth is compatible with MutableMapping
-        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.network.models.P2SVpnConnectionHealth]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-
-    @distributed_trace
-    def begin_get_p2_s_vpn_connection_health_detailed(  # pylint: disable=name-too-long
-        self,
-        resource_group_name: str,
-        gateway_name: str,
-        request: Union[_models.P2SVpnConnectionHealthRequest, JSON, IO[bytes]],
-        **kwargs: Any
-    ) -> LROPoller[_models.P2SVpnConnectionHealth]:
-        """Gets the sas url to get the connection health detail of P2S clients of the virtual wan
-        P2SVpnGateway in the specified resource group.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param gateway_name: The name of the gateway. Required.
-        :type gateway_name: str
-        :param request: Request parameters supplied to get p2s vpn connections detailed health. Is one
-         of the following types: P2SVpnConnectionHealthRequest, JSON, IO[bytes] Required.
-        :type request: ~azure.mgmt.network.models.P2SVpnConnectionHealthRequest or JSON or IO[bytes]
-        :return: An instance of LROPoller that returns P2SVpnConnectionHealth. The
-         P2SVpnConnectionHealth is compatible with MutableMapping
-        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.network.models.P2SVpnConnectionHealth]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
-        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
-        cls: ClsType[_models.P2SVpnConnectionHealth] = kwargs.pop("cls", None)
-        polling: Union[bool, PollingMethod] = kwargs.pop("polling", True)
-        lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
-        cont_token: Optional[str] = kwargs.pop("continuation_token", None)
-        if cont_token is None:
-            raw_result = self._get_p2_s_vpn_connection_health_detailed_initial(
-                resource_group_name=resource_group_name,
-                gateway_name=gateway_name,
-                request=request,
-                api_version=api_version,
-                content_type=content_type,
-                cls=lambda x, y, z: x,
-                headers=_headers,
-                params=_params,
-                **kwargs
-            )
-            raw_result.http_response.read()  # type: ignore
-        kwargs.pop("error_map", None)
-
-        def get_long_running_output(pipeline_response):
-            response_headers = {}
-            response = pipeline_response.http_response
-            response_headers["Location"] = self._deserialize("str", response.headers.get("Location"))
-            response_headers["Retry-After"] = self._deserialize("int", response.headers.get("Retry-After"))
-
-            deserialized = _deserialize(_models.P2SVpnConnectionHealth, response.json())
-            if cls:
-                return cls(pipeline_response, deserialized, response_headers)  # type: ignore
-            return deserialized
-
-        path_format_arguments = {
-            "endpoint": self._serialize.url("self._config.base_url", self._config.base_url, "str", skip_quote=True),
-        }
-
-        if polling is True:
-            polling_method: PollingMethod = cast(
-                PollingMethod, ARMPolling(lro_delay, path_format_arguments=path_format_arguments, **kwargs)
-            )
-        elif polling is False:
-            polling_method = cast(PollingMethod, NoPolling())
-        else:
-            polling_method = polling
-        if cont_token:
-            return LROPoller[_models.P2SVpnConnectionHealth].from_continuation_token(
-                polling_method=polling_method,
-                continuation_token=cont_token,
-                client=self._client,
-                deserialization_callback=get_long_running_output,
-            )
-        return LROPoller[_models.P2SVpnConnectionHealth](
-            self._client, raw_result, get_long_running_output, polling_method  # type: ignore
-        )
-
-    def _disconnect_p2_s_vpn_connections_initial(
-        self,
-        resource_group_name: str,
-        p2_s_vpn_gateway_name: str,
-        request: Union[_models.P2SVpnConnectionRequest, JSON, IO[bytes]],
-        **kwargs: Any
-    ) -> Iterator[bytes]:
-        error_map: MutableMapping = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
-        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
-        cls: ClsType[Iterator[bytes]] = kwargs.pop("cls", None)
-
-        content_type = content_type or "application/json"
-        _content = None
-        if isinstance(request, (IOBase, bytes)):
-            _content = request
-        else:
-            _content = json.dumps(request, cls=SdkJSONEncoder, exclude_readonly=True)  # type: ignore
-
-        _request = build_p2s_vpn_gateways_disconnect_p2_s_vpn_connections_request(
-            resource_group_name=resource_group_name,
-            p2_s_vpn_gateway_name=p2_s_vpn_gateway_name,
-            subscription_id=self._config.subscription_id,
-            api_version=api_version,
-            content_type=content_type,
-            content=_content,
-            headers=_headers,
-            params=_params,
-        )
-        path_format_arguments = {
-            "endpoint": self._serialize.url("self._config.base_url", self._config.base_url, "str", skip_quote=True),
-        }
-        _request.url = self._client.format_url(_request.url, **path_format_arguments)
-
-        _stream = True
-        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
-            _request, stream=_stream, **kwargs
-        )
-
-        response = pipeline_response.http_response
-
-        if response.status_code not in [200, 202]:
-            try:
-                response.read()  # Load the body in memory and close the socket
-            except (StreamConsumedError, StreamClosedError):
-                pass
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = _failsafe_deserialize(
-                _models.CloudError,
-                response,
-            )
-            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
-
-        response_headers = {}
-        if response.status_code == 202:
-            response_headers["Location"] = self._deserialize("str", response.headers.get("Location"))
-            response_headers["Retry-After"] = self._deserialize("int", response.headers.get("Retry-After"))
-
-        deserialized = response.iter_bytes()
-
-        if cls:
-            return cls(pipeline_response, deserialized, response_headers)  # type: ignore
-
-        return deserialized  # type: ignore
-
-    @overload
-    def begin_disconnect_p2_s_vpn_connections(
-        self,
-        resource_group_name: str,
-        p2_s_vpn_gateway_name: str,
-        request: _models.P2SVpnConnectionRequest,
-        *,
-        content_type: str = "application/json",
-        **kwargs: Any
-    ) -> LROPoller[None]:
-        """Disconnect P2S vpn connections of the virtual wan P2SVpnGateway in the specified resource
-        group.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param p2_s_vpn_gateway_name: The name of the P2S Vpn Gateway. Required.
-        :type p2_s_vpn_gateway_name: str
-        :param request: The parameters are supplied to disconnect p2s vpn connections. Required.
-        :type request: ~azure.mgmt.network.models.P2SVpnConnectionRequest
-        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
-         Default value is "application/json".
-        :paramtype content_type: str
-        :return: An instance of LROPoller that returns None
-        :rtype: ~azure.core.polling.LROPoller[None]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-
-    @overload
-    def begin_disconnect_p2_s_vpn_connections(
-        self,
-        resource_group_name: str,
-        p2_s_vpn_gateway_name: str,
-        request: JSON,
-        *,
-        content_type: str = "application/json",
-        **kwargs: Any
-    ) -> LROPoller[None]:
-        """Disconnect P2S vpn connections of the virtual wan P2SVpnGateway in the specified resource
-        group.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param p2_s_vpn_gateway_name: The name of the P2S Vpn Gateway. Required.
-        :type p2_s_vpn_gateway_name: str
-        :param request: The parameters are supplied to disconnect p2s vpn connections. Required.
-        :type request: JSON
-        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
-         Default value is "application/json".
-        :paramtype content_type: str
-        :return: An instance of LROPoller that returns None
-        :rtype: ~azure.core.polling.LROPoller[None]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-
-    @overload
-    def begin_disconnect_p2_s_vpn_connections(
-        self,
-        resource_group_name: str,
-        p2_s_vpn_gateway_name: str,
-        request: IO[bytes],
-        *,
-        content_type: str = "application/json",
-        **kwargs: Any
-    ) -> LROPoller[None]:
-        """Disconnect P2S vpn connections of the virtual wan P2SVpnGateway in the specified resource
-        group.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param p2_s_vpn_gateway_name: The name of the P2S Vpn Gateway. Required.
-        :type p2_s_vpn_gateway_name: str
-        :param request: The parameters are supplied to disconnect p2s vpn connections. Required.
-        :type request: IO[bytes]
-        :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
-         Default value is "application/json".
-        :paramtype content_type: str
-        :return: An instance of LROPoller that returns None
-        :rtype: ~azure.core.polling.LROPoller[None]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-
-    @distributed_trace
-    def begin_disconnect_p2_s_vpn_connections(
-        self,
-        resource_group_name: str,
-        p2_s_vpn_gateway_name: str,
-        request: Union[_models.P2SVpnConnectionRequest, JSON, IO[bytes]],
-        **kwargs: Any
-    ) -> LROPoller[None]:
-        """Disconnect P2S vpn connections of the virtual wan P2SVpnGateway in the specified resource
-        group.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param p2_s_vpn_gateway_name: The name of the P2S Vpn Gateway. Required.
-        :type p2_s_vpn_gateway_name: str
-        :param request: The parameters are supplied to disconnect p2s vpn connections. Is one of the
-         following types: P2SVpnConnectionRequest, JSON, IO[bytes] Required.
-        :type request: ~azure.mgmt.network.models.P2SVpnConnectionRequest or JSON or IO[bytes]
-        :return: An instance of LROPoller that returns None
-        :rtype: ~azure.core.polling.LROPoller[None]
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
-
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
-        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
-        cls: ClsType[None] = kwargs.pop("cls", None)
-        polling: Union[bool, PollingMethod] = kwargs.pop("polling", True)
-        lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
-        cont_token: Optional[str] = kwargs.pop("continuation_token", None)
-        if cont_token is None:
-            raw_result = self._disconnect_p2_s_vpn_connections_initial(
-                resource_group_name=resource_group_name,
-                p2_s_vpn_gateway_name=p2_s_vpn_gateway_name,
-                request=request,
-                api_version=api_version,
-                content_type=content_type,
-                cls=lambda x, y, z: x,
-                headers=_headers,
-                params=_params,
-                **kwargs
-            )
-            raw_result.http_response.read()  # type: ignore
-        kwargs.pop("error_map", None)
-
-        def get_long_running_output(pipeline_response):  # pylint: disable=inconsistent-return-statements
-            if cls:
-                return cls(pipeline_response, None, {})  # type: ignore
-
-        path_format_arguments = {
-            "endpoint": self._serialize.url("self._config.base_url", self._config.base_url, "str", skip_quote=True),
-        }
-
-        if polling is True:
-            polling_method: PollingMethod = cast(
-                PollingMethod, ARMPolling(lro_delay, path_format_arguments=path_format_arguments, **kwargs)
-            )
-        elif polling is False:
-            polling_method = cast(PollingMethod, NoPolling())
-        else:
-            polling_method = polling
-        if cont_token:
-            return LROPoller[None].from_continuation_token(
-                polling_method=polling_method,
-                continuation_token=cont_token,
-                client=self._client,
-                deserialization_callback=get_long_running_output,
-            )
-        return LROPoller[None](self._client, raw_result, get_long_running_output, polling_method)  # type: ignore
 
 
 class ExpressRouteConnectionsOperations:
@@ -126461,3 +124089,3052 @@ class UsagesOperations:
             return pipeline_response
 
         return ItemPaged(get_next, extract_data)
+
+
+class NetworkInterfacesOperations:
+    """
+    .. warning::
+        **DO NOT** instantiate this class directly.
+
+        Instead, you should access the following operations through
+        :class:`~azure.mgmt.network.NetworkManagementClient`'s
+        :attr:`network_interfaces` attribute.
+    """
+
+    def __init__(self, *args, **kwargs) -> None:
+        input_args = list(args)
+        self._client: PipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
+        self._config: NetworkManagementClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
+        self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
+
+    @distributed_trace
+    def get_virtual_machine_scale_set_ip_configuration(  # pylint: disable=name-too-long
+        self,
+        resource_group_name: str,
+        virtual_machine_scale_set_name: str,
+        virtualmachine_index: str,
+        network_interface_name: str,
+        ip_configuration_name: str,
+        *,
+        expand: Optional[str] = None,
+        **kwargs: Any
+    ) -> _models.VmssNetworkInterfaceIPConfiguration:
+        """Get the specified network interface ip configuration in a virtual machine scale set.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param virtual_machine_scale_set_name: Required.
+        :type virtual_machine_scale_set_name: str
+        :param virtualmachine_index: Required.
+        :type virtualmachine_index: str
+        :param network_interface_name: Required.
+        :type network_interface_name: str
+        :param ip_configuration_name: Required.
+        :type ip_configuration_name: str
+        :keyword expand: Expands referenced resources. Default value is None.
+        :paramtype expand: str
+        :return: VmssNetworkInterfaceIPConfiguration. The VmssNetworkInterfaceIPConfiguration is
+         compatible with MutableMapping
+        :rtype: ~azure.mgmt.network.models.VmssNetworkInterfaceIPConfiguration
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2018-10-01"))
+        cls: ClsType[_models.VmssNetworkInterfaceIPConfiguration] = kwargs.pop("cls", None)
+
+        _request = build_network_interfaces_get_virtual_machine_scale_set_ip_configuration_request(
+            resource_group_name=resource_group_name,
+            virtual_machine_scale_set_name=virtual_machine_scale_set_name,
+            virtualmachine_index=virtualmachine_index,
+            network_interface_name=network_interface_name,
+            ip_configuration_name=ip_configuration_name,
+            subscription_id=self._config.subscription_id,
+            expand=expand,
+            api_version=api_version,
+            headers=_headers,
+            params=_params,
+        )
+        path_format_arguments = {
+            "endpoint": self._serialize.url("self._config.base_url", self._config.base_url, "str", skip_quote=True),
+        }
+        _request.url = self._client.format_url(_request.url, **path_format_arguments)
+
+        _stream = kwargs.pop("stream", False)
+        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                try:
+                    response.read()  # Load the body in memory and close the socket
+                except (StreamConsumedError, StreamClosedError):
+                    pass
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            error = _failsafe_deserialize(
+                _models.VmssCloudError,
+                response,
+            )
+            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
+
+        if _stream:
+            deserialized = response.iter_bytes()
+        else:
+            deserialized = _deserialize(_models.VmssNetworkInterfaceIPConfiguration, response.json())
+
+        if cls:
+            return cls(pipeline_response, deserialized, {})  # type: ignore
+
+        return deserialized  # type: ignore
+
+    @distributed_trace
+    def list_virtual_machine_scale_set_ip_configurations(  # pylint: disable=name-too-long
+        self,
+        resource_group_name: str,
+        virtual_machine_scale_set_name: str,
+        virtualmachine_index: str,
+        network_interface_name: str,
+        *,
+        expand: Optional[str] = None,
+        **kwargs: Any
+    ) -> ItemPaged["_models.VmssNetworkInterfaceIPConfiguration"]:
+        """Get the specified network interface ip configuration in a virtual machine scale set.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param virtual_machine_scale_set_name: Required.
+        :type virtual_machine_scale_set_name: str
+        :param virtualmachine_index: Required.
+        :type virtualmachine_index: str
+        :param network_interface_name: Required.
+        :type network_interface_name: str
+        :keyword expand: Expands referenced resources. Default value is None.
+        :paramtype expand: str
+        :return: An iterator like instance of VmssNetworkInterfaceIPConfiguration
+        :rtype:
+         ~azure.core.paging.ItemPaged[~azure.mgmt.network.models.VmssNetworkInterfaceIPConfiguration]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2018-10-01"))
+        cls: ClsType[List[_models.VmssNetworkInterfaceIPConfiguration]] = kwargs.pop("cls", None)
+
+        error_map: MutableMapping = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        def prepare_request(next_link=None):
+            if not next_link:
+
+                _request = build_network_interfaces_list_virtual_machine_scale_set_ip_configurations_request(
+                    resource_group_name=resource_group_name,
+                    virtual_machine_scale_set_name=virtual_machine_scale_set_name,
+                    virtualmachine_index=virtualmachine_index,
+                    network_interface_name=network_interface_name,
+                    subscription_id=self._config.subscription_id,
+                    expand=expand,
+                    api_version=api_version,
+                    headers=_headers,
+                    params=_params,
+                )
+                path_format_arguments = {
+                    "endpoint": self._serialize.url(
+                        "self._config.base_url", self._config.base_url, "str", skip_quote=True
+                    ),
+                }
+                _request.url = self._client.format_url(_request.url, **path_format_arguments)
+
+            else:
+                _request = HttpRequest("GET", next_link)
+                path_format_arguments = {
+                    "endpoint": self._serialize.url(
+                        "self._config.base_url", self._config.base_url, "str", skip_quote=True
+                    ),
+                }
+                _request.url = self._client.format_url(_request.url, **path_format_arguments)
+
+            return _request
+
+        def extract_data(pipeline_response):
+            deserialized = pipeline_response.http_response.json()
+            list_of_elem = _deserialize(
+                List[_models.VmssNetworkInterfaceIPConfiguration], deserialized.get("value", [])
+            )
+            if cls:
+                list_of_elem = cls(list_of_elem)  # type: ignore
+            return deserialized.get("nextLink") or None, iter(list_of_elem)
+
+        def get_next(next_link=None):
+            _request = prepare_request(next_link)
+
+            _stream = False
+            pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
+                _request, stream=_stream, **kwargs
+            )
+            response = pipeline_response.http_response
+
+            if response.status_code not in [200]:
+                map_error(status_code=response.status_code, response=response, error_map=error_map)
+                error = _failsafe_deserialize(
+                    _models.VmssCloudError,
+                    response,
+                )
+                raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
+
+            return pipeline_response
+
+        return ItemPaged(get_next, extract_data)
+
+
+class _NetworkManagementClientOperationsMixin(
+    ClientMixinABC[PipelineClient[HttpRequest, HttpResponse], NetworkManagementClientConfiguration]
+):
+
+    @api_version_validation(
+        method_added_on="2025-05-01",
+        params_added_on={
+            "2025-05-01": [
+                "api_version",
+                "subscription_id",
+                "resource_group_name",
+                "bastion_host_name",
+                "content_type",
+                "accept",
+            ]
+        },
+        api_versions_list=["2025-05-01"],
+    )
+    def _put_bastion_shareable_link_initial(
+        self,
+        resource_group_name: str,
+        bastion_host_name: str,
+        bsl_request: Union[_models.BastionShareableLinkListRequest, JSON, IO[bytes]],
+        **kwargs: Any
+    ) -> Iterator[bytes]:
+        error_map: MutableMapping = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[Iterator[bytes]] = kwargs.pop("cls", None)
+
+        content_type = content_type or "application/json"
+        _content = None
+        if isinstance(bsl_request, (IOBase, bytes)):
+            _content = bsl_request
+        else:
+            _content = json.dumps(bsl_request, cls=SdkJSONEncoder, exclude_readonly=True)  # type: ignore
+
+        _request = build_network_management_put_bastion_shareable_link_request(
+            resource_group_name=resource_group_name,
+            bastion_host_name=bastion_host_name,
+            subscription_id=self._config.subscription_id,
+            api_version=api_version,
+            content_type=content_type,
+            content=_content,
+            headers=_headers,
+            params=_params,
+        )
+        path_format_arguments = {
+            "endpoint": self._serialize.url("self._config.base_url", self._config.base_url, "str", skip_quote=True),
+        }
+        _request.url = self._client.format_url(_request.url, **path_format_arguments)
+
+        _stream = True
+        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200, 202]:
+            try:
+                response.read()  # Load the body in memory and close the socket
+            except (StreamConsumedError, StreamClosedError):
+                pass
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            error = _failsafe_deserialize(
+                _models.CloudError,
+                response,
+            )
+            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
+
+        response_headers = {}
+        if response.status_code == 202:
+            response_headers["Location"] = self._deserialize("str", response.headers.get("Location"))
+            response_headers["Retry-After"] = self._deserialize("int", response.headers.get("Retry-After"))
+
+        deserialized = response.iter_bytes()
+
+        if cls:
+            return cls(pipeline_response, deserialized, response_headers)  # type: ignore
+
+        return deserialized  # type: ignore
+
+    @overload
+    def begin_put_bastion_shareable_link(
+        self,
+        resource_group_name: str,
+        bastion_host_name: str,
+        bsl_request: _models.BastionShareableLinkListRequest,
+        *,
+        content_type: str = "application/json",
+        **kwargs: Any
+    ) -> LROPoller[ItemPaged["_models.BastionShareableLink"]]:
+        """Creates a Bastion Shareable Links for all the VMs specified in the request.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param bastion_host_name: The name of the Bastion Host. Required.
+        :type bastion_host_name: str
+        :param bsl_request: Post request for Create/Delete/Get Bastion Shareable Link endpoints.
+         Required.
+        :type bsl_request: ~azure.mgmt.network.models.BastionShareableLinkListRequest
+        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :return: An instance of LROPoller that returns an iterator like instance of list of
+         BastionShareableLink
+        :rtype:
+         ~azure.core.polling.LROPoller[~azure.core.paging.ItemPaged[~azure.mgmt.network.models.BastionShareableLink]]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+
+    @overload
+    def begin_put_bastion_shareable_link(
+        self,
+        resource_group_name: str,
+        bastion_host_name: str,
+        bsl_request: JSON,
+        *,
+        content_type: str = "application/json",
+        **kwargs: Any
+    ) -> LROPoller[ItemPaged["_models.BastionShareableLink"]]:
+        """Creates a Bastion Shareable Links for all the VMs specified in the request.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param bastion_host_name: The name of the Bastion Host. Required.
+        :type bastion_host_name: str
+        :param bsl_request: Post request for Create/Delete/Get Bastion Shareable Link endpoints.
+         Required.
+        :type bsl_request: JSON
+        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :return: An instance of LROPoller that returns an iterator like instance of list of
+         BastionShareableLink
+        :rtype:
+         ~azure.core.polling.LROPoller[~azure.core.paging.ItemPaged[~azure.mgmt.network.models.BastionShareableLink]]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+
+    @overload
+    def begin_put_bastion_shareable_link(
+        self,
+        resource_group_name: str,
+        bastion_host_name: str,
+        bsl_request: IO[bytes],
+        *,
+        content_type: str = "application/json",
+        **kwargs: Any
+    ) -> LROPoller[ItemPaged["_models.BastionShareableLink"]]:
+        """Creates a Bastion Shareable Links for all the VMs specified in the request.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param bastion_host_name: The name of the Bastion Host. Required.
+        :type bastion_host_name: str
+        :param bsl_request: Post request for Create/Delete/Get Bastion Shareable Link endpoints.
+         Required.
+        :type bsl_request: IO[bytes]
+        :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :return: An instance of LROPoller that returns an iterator like instance of list of
+         BastionShareableLink
+        :rtype:
+         ~azure.core.polling.LROPoller[~azure.core.paging.ItemPaged[~azure.mgmt.network.models.BastionShareableLink]]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+
+    @distributed_trace
+    @api_version_validation(
+        method_added_on="2025-05-01",
+        params_added_on={
+            "2025-05-01": [
+                "api_version",
+                "subscription_id",
+                "resource_group_name",
+                "bastion_host_name",
+                "content_type",
+                "accept",
+            ]
+        },
+        api_versions_list=["2025-05-01"],
+    )
+    def begin_put_bastion_shareable_link(
+        self,
+        resource_group_name: str,
+        bastion_host_name: str,
+        bsl_request: Union[_models.BastionShareableLinkListRequest, JSON, IO[bytes]],
+        **kwargs: Any
+    ) -> LROPoller[ItemPaged["_models.BastionShareableLink"]]:
+        """Creates a Bastion Shareable Links for all the VMs specified in the request.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param bastion_host_name: The name of the Bastion Host. Required.
+        :type bastion_host_name: str
+        :param bsl_request: Post request for Create/Delete/Get Bastion Shareable Link endpoints. Is one
+         of the following types: BastionShareableLinkListRequest, JSON, IO[bytes] Required.
+        :type bsl_request: ~azure.mgmt.network.models.BastionShareableLinkListRequest or JSON or
+         IO[bytes]
+        :return: An instance of LROPoller that returns an iterator like instance of list of
+         BastionShareableLink
+        :rtype:
+         ~azure.core.polling.LROPoller[~azure.core.paging.ItemPaged[~azure.mgmt.network.models.BastionShareableLink]]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+
+        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[List[_models.BastionShareableLink]] = kwargs.pop("cls", None)
+
+        error_map: MutableMapping = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+        content_type = content_type or "application/json"
+        _content = None
+        if isinstance(bsl_request, (IOBase, bytes)):
+            _content = bsl_request
+        else:
+            _content = json.dumps(bsl_request, cls=SdkJSONEncoder, exclude_readonly=True)  # type: ignore
+
+        def prepare_request(next_link=None):
+            if not next_link:
+
+                _request = build_network_management_put_bastion_shareable_link_request(
+                    resource_group_name=resource_group_name,
+                    bastion_host_name=bastion_host_name,
+                    subscription_id=self._config.subscription_id,
+                    api_version=api_version,
+                    content_type=content_type,
+                    content=_content,
+                    headers=_headers,
+                    params=_params,
+                )
+                path_format_arguments = {
+                    "endpoint": self._serialize.url(
+                        "self._config.base_url", self._config.base_url, "str", skip_quote=True
+                    ),
+                }
+                _request.url = self._client.format_url(_request.url, **path_format_arguments)
+
+            else:
+                _request = HttpRequest("GET", next_link)
+                path_format_arguments = {
+                    "endpoint": self._serialize.url(
+                        "self._config.base_url", self._config.base_url, "str", skip_quote=True
+                    ),
+                }
+                _request.url = self._client.format_url(_request.url, **path_format_arguments)
+
+            return _request
+
+        def extract_data(pipeline_response):
+            deserialized = pipeline_response.http_response.json()
+            list_of_elem = _deserialize(List[_models.BastionShareableLink], deserialized.get("value", []))
+            if cls:
+                list_of_elem = cls(list_of_elem)  # type: ignore
+            return deserialized.get("nextLink") or None, iter(list_of_elem)
+
+        def get_next(next_link=None):
+            _request = prepare_request(next_link)
+
+            _stream = False
+            pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
+                _request, stream=_stream, **kwargs
+            )
+            response = pipeline_response.http_response
+
+            if response.status_code not in [200]:
+                map_error(status_code=response.status_code, response=response, error_map=error_map)
+                error = _failsafe_deserialize(
+                    _models.CloudError,
+                    response,
+                )
+                raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
+
+            return pipeline_response
+
+        polling: Union[bool, PollingMethod] = kwargs.pop("polling", True)
+        lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
+        cont_token: Optional[str] = kwargs.pop("continuation_token", None)
+        if cont_token is None:
+            raw_result = self._put_bastion_shareable_link_initial(
+                resource_group_name=resource_group_name,
+                bastion_host_name=bastion_host_name,
+                bsl_request=bsl_request,
+                api_version=api_version,
+                content_type=content_type,
+                cls=lambda x, y, z: x,
+                headers=_headers,
+                params=_params,
+                **kwargs
+            )
+            raw_result.http_response.read()  # type: ignore
+        kwargs.pop("error_map", None)
+
+        def get_long_running_output(pipeline_response):
+            def internal_get_next(next_link=None):
+                if next_link is None:
+                    return pipeline_response
+                return get_next(next_link)
+
+            return ItemPaged(internal_get_next, extract_data)
+
+        path_format_arguments = {
+            "endpoint": self._serialize.url("self._config.base_url", self._config.base_url, "str", skip_quote=True),
+        }
+
+        if polling is True:
+            polling_method: PollingMethod = cast(
+                PollingMethod, ARMPolling(lro_delay, path_format_arguments=path_format_arguments, **kwargs)
+            )
+        elif polling is False:
+            polling_method = cast(PollingMethod, NoPolling())
+        else:
+            polling_method = polling
+        if cont_token:
+            return LROPoller[ItemPaged["_models.BastionShareableLink"]].from_continuation_token(
+                polling_method=polling_method,
+                continuation_token=cont_token,
+                client=self._client,
+                deserialization_callback=get_long_running_output,
+            )
+        return LROPoller[ItemPaged["_models.BastionShareableLink"]](
+            self._client, raw_result, get_long_running_output, polling_method  # type: ignore
+        )
+
+    @api_version_validation(
+        method_added_on="2025-05-01",
+        params_added_on={
+            "2025-05-01": ["api_version", "subscription_id", "resource_group_name", "bastion_host_name", "content_type"]
+        },
+        api_versions_list=["2025-05-01"],
+    )
+    def _delete_bastion_shareable_link_initial(
+        self,
+        resource_group_name: str,
+        bastion_host_name: str,
+        bsl_request: Union[_models.BastionShareableLinkListRequest, JSON, IO[bytes]],
+        **kwargs: Any
+    ) -> Iterator[bytes]:
+        error_map: MutableMapping = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[Iterator[bytes]] = kwargs.pop("cls", None)
+
+        content_type = content_type or "application/json"
+        _content = None
+        if isinstance(bsl_request, (IOBase, bytes)):
+            _content = bsl_request
+        else:
+            _content = json.dumps(bsl_request, cls=SdkJSONEncoder, exclude_readonly=True)  # type: ignore
+
+        _request = build_network_management_delete_bastion_shareable_link_request(
+            resource_group_name=resource_group_name,
+            bastion_host_name=bastion_host_name,
+            subscription_id=self._config.subscription_id,
+            api_version=api_version,
+            content_type=content_type,
+            content=_content,
+            headers=_headers,
+            params=_params,
+        )
+        path_format_arguments = {
+            "endpoint": self._serialize.url("self._config.base_url", self._config.base_url, "str", skip_quote=True),
+        }
+        _request.url = self._client.format_url(_request.url, **path_format_arguments)
+
+        _stream = True
+        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200, 202]:
+            try:
+                response.read()  # Load the body in memory and close the socket
+            except (StreamConsumedError, StreamClosedError):
+                pass
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            error = _failsafe_deserialize(
+                _models.CloudError,
+                response,
+            )
+            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
+
+        response_headers = {}
+        if response.status_code == 202:
+            response_headers["Location"] = self._deserialize("str", response.headers.get("Location"))
+            response_headers["Retry-After"] = self._deserialize("int", response.headers.get("Retry-After"))
+
+        deserialized = response.iter_bytes()
+
+        if cls:
+            return cls(pipeline_response, deserialized, response_headers)  # type: ignore
+
+        return deserialized  # type: ignore
+
+    @overload
+    def begin_delete_bastion_shareable_link(
+        self,
+        resource_group_name: str,
+        bastion_host_name: str,
+        bsl_request: _models.BastionShareableLinkListRequest,
+        *,
+        content_type: str = "application/json",
+        **kwargs: Any
+    ) -> LROPoller[Any]:
+        """Deletes the Bastion Shareable Links for all the VMs specified in the request.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param bastion_host_name: The name of the Bastion Host. Required.
+        :type bastion_host_name: str
+        :param bsl_request: Post request for Create/Delete/Get Bastion Shareable Link endpoints.
+         Required.
+        :type bsl_request: ~azure.mgmt.network.models.BastionShareableLinkListRequest
+        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :return: An instance of LROPoller that returns any
+        :rtype: ~azure.core.polling.LROPoller[any]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+
+    @overload
+    def begin_delete_bastion_shareable_link(
+        self,
+        resource_group_name: str,
+        bastion_host_name: str,
+        bsl_request: JSON,
+        *,
+        content_type: str = "application/json",
+        **kwargs: Any
+    ) -> LROPoller[Any]:
+        """Deletes the Bastion Shareable Links for all the VMs specified in the request.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param bastion_host_name: The name of the Bastion Host. Required.
+        :type bastion_host_name: str
+        :param bsl_request: Post request for Create/Delete/Get Bastion Shareable Link endpoints.
+         Required.
+        :type bsl_request: JSON
+        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :return: An instance of LROPoller that returns any
+        :rtype: ~azure.core.polling.LROPoller[any]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+
+    @overload
+    def begin_delete_bastion_shareable_link(
+        self,
+        resource_group_name: str,
+        bastion_host_name: str,
+        bsl_request: IO[bytes],
+        *,
+        content_type: str = "application/json",
+        **kwargs: Any
+    ) -> LROPoller[Any]:
+        """Deletes the Bastion Shareable Links for all the VMs specified in the request.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param bastion_host_name: The name of the Bastion Host. Required.
+        :type bastion_host_name: str
+        :param bsl_request: Post request for Create/Delete/Get Bastion Shareable Link endpoints.
+         Required.
+        :type bsl_request: IO[bytes]
+        :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :return: An instance of LROPoller that returns any
+        :rtype: ~azure.core.polling.LROPoller[any]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+
+    @distributed_trace
+    @api_version_validation(
+        method_added_on="2025-05-01",
+        params_added_on={
+            "2025-05-01": ["api_version", "subscription_id", "resource_group_name", "bastion_host_name", "content_type"]
+        },
+        api_versions_list=["2025-05-01"],
+    )
+    def begin_delete_bastion_shareable_link(
+        self,
+        resource_group_name: str,
+        bastion_host_name: str,
+        bsl_request: Union[_models.BastionShareableLinkListRequest, JSON, IO[bytes]],
+        **kwargs: Any
+    ) -> LROPoller[Any]:
+        """Deletes the Bastion Shareable Links for all the VMs specified in the request.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param bastion_host_name: The name of the Bastion Host. Required.
+        :type bastion_host_name: str
+        :param bsl_request: Post request for Create/Delete/Get Bastion Shareable Link endpoints. Is one
+         of the following types: BastionShareableLinkListRequest, JSON, IO[bytes] Required.
+        :type bsl_request: ~azure.mgmt.network.models.BastionShareableLinkListRequest or JSON or
+         IO[bytes]
+        :return: An instance of LROPoller that returns any
+        :rtype: ~azure.core.polling.LROPoller[any]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[Any] = kwargs.pop("cls", None)
+        polling: Union[bool, PollingMethod] = kwargs.pop("polling", True)
+        lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
+        cont_token: Optional[str] = kwargs.pop("continuation_token", None)
+        if cont_token is None:
+            raw_result = self._delete_bastion_shareable_link_initial(
+                resource_group_name=resource_group_name,
+                bastion_host_name=bastion_host_name,
+                bsl_request=bsl_request,
+                api_version=api_version,
+                content_type=content_type,
+                cls=lambda x, y, z: x,
+                headers=_headers,
+                params=_params,
+                **kwargs
+            )
+            raw_result.http_response.read()  # type: ignore
+        kwargs.pop("error_map", None)
+
+        def get_long_running_output(pipeline_response):
+            response_headers = {}
+            response = pipeline_response.http_response
+            response_headers["Location"] = self._deserialize("str", response.headers.get("Location"))
+            response_headers["Retry-After"] = self._deserialize("int", response.headers.get("Retry-After"))
+
+            deserialized = _deserialize(Any, response.json())
+            if cls:
+                return cls(pipeline_response, deserialized, response_headers)  # type: ignore
+            return deserialized
+
+        path_format_arguments = {
+            "endpoint": self._serialize.url("self._config.base_url", self._config.base_url, "str", skip_quote=True),
+        }
+
+        if polling is True:
+            polling_method: PollingMethod = cast(
+                PollingMethod, ARMPolling(lro_delay, path_format_arguments=path_format_arguments, **kwargs)
+            )
+        elif polling is False:
+            polling_method = cast(PollingMethod, NoPolling())
+        else:
+            polling_method = polling
+        if cont_token:
+            return LROPoller[Any].from_continuation_token(
+                polling_method=polling_method,
+                continuation_token=cont_token,
+                client=self._client,
+                deserialization_callback=get_long_running_output,
+            )
+        return LROPoller[Any](self._client, raw_result, get_long_running_output, polling_method)  # type: ignore
+
+    @api_version_validation(
+        method_added_on="2025-05-01",
+        params_added_on={
+            "2025-05-01": ["api_version", "subscription_id", "resource_group_name", "bastion_host_name", "content_type"]
+        },
+        api_versions_list=["2025-05-01"],
+    )
+    def _delete_bastion_shareable_link_by_token_initial(  # pylint: disable=name-too-long
+        self,
+        resource_group_name: str,
+        bastion_host_name: str,
+        bsl_token_request: Union[_models.BastionShareableLinkTokenListRequest, JSON, IO[bytes]],
+        **kwargs: Any
+    ) -> Iterator[bytes]:
+        error_map: MutableMapping = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[Iterator[bytes]] = kwargs.pop("cls", None)
+
+        content_type = content_type or "application/json"
+        _content = None
+        if isinstance(bsl_token_request, (IOBase, bytes)):
+            _content = bsl_token_request
+        else:
+            _content = json.dumps(bsl_token_request, cls=SdkJSONEncoder, exclude_readonly=True)  # type: ignore
+
+        _request = build_network_management_delete_bastion_shareable_link_by_token_request(
+            resource_group_name=resource_group_name,
+            bastion_host_name=bastion_host_name,
+            subscription_id=self._config.subscription_id,
+            api_version=api_version,
+            content_type=content_type,
+            content=_content,
+            headers=_headers,
+            params=_params,
+        )
+        path_format_arguments = {
+            "endpoint": self._serialize.url("self._config.base_url", self._config.base_url, "str", skip_quote=True),
+        }
+        _request.url = self._client.format_url(_request.url, **path_format_arguments)
+
+        _stream = True
+        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [202]:
+            try:
+                response.read()  # Load the body in memory and close the socket
+            except (StreamConsumedError, StreamClosedError):
+                pass
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            error = _failsafe_deserialize(
+                _models.CloudError,
+                response,
+            )
+            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
+
+        response_headers = {}
+        response_headers["Location"] = self._deserialize("str", response.headers.get("Location"))
+        response_headers["Retry-After"] = self._deserialize("int", response.headers.get("Retry-After"))
+
+        deserialized = response.iter_bytes()
+
+        if cls:
+            return cls(pipeline_response, deserialized, response_headers)  # type: ignore
+
+        return deserialized  # type: ignore
+
+    @overload
+    def begin_delete_bastion_shareable_link_by_token(  # pylint: disable=name-too-long
+        self,
+        resource_group_name: str,
+        bastion_host_name: str,
+        bsl_token_request: _models.BastionShareableLinkTokenListRequest,
+        *,
+        content_type: str = "application/json",
+        **kwargs: Any
+    ) -> LROPoller[None]:
+        """Deletes the Bastion Shareable Links for all the tokens specified in the request.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param bastion_host_name: The name of the Bastion Host. Required.
+        :type bastion_host_name: str
+        :param bsl_token_request: Post request for Delete Bastion Shareable Link By Token endpoint.
+         Required.
+        :type bsl_token_request: ~azure.mgmt.network.models.BastionShareableLinkTokenListRequest
+        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :return: An instance of LROPoller that returns None
+        :rtype: ~azure.core.polling.LROPoller[None]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+
+    @overload
+    def begin_delete_bastion_shareable_link_by_token(  # pylint: disable=name-too-long
+        self,
+        resource_group_name: str,
+        bastion_host_name: str,
+        bsl_token_request: JSON,
+        *,
+        content_type: str = "application/json",
+        **kwargs: Any
+    ) -> LROPoller[None]:
+        """Deletes the Bastion Shareable Links for all the tokens specified in the request.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param bastion_host_name: The name of the Bastion Host. Required.
+        :type bastion_host_name: str
+        :param bsl_token_request: Post request for Delete Bastion Shareable Link By Token endpoint.
+         Required.
+        :type bsl_token_request: JSON
+        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :return: An instance of LROPoller that returns None
+        :rtype: ~azure.core.polling.LROPoller[None]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+
+    @overload
+    def begin_delete_bastion_shareable_link_by_token(  # pylint: disable=name-too-long
+        self,
+        resource_group_name: str,
+        bastion_host_name: str,
+        bsl_token_request: IO[bytes],
+        *,
+        content_type: str = "application/json",
+        **kwargs: Any
+    ) -> LROPoller[None]:
+        """Deletes the Bastion Shareable Links for all the tokens specified in the request.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param bastion_host_name: The name of the Bastion Host. Required.
+        :type bastion_host_name: str
+        :param bsl_token_request: Post request for Delete Bastion Shareable Link By Token endpoint.
+         Required.
+        :type bsl_token_request: IO[bytes]
+        :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :return: An instance of LROPoller that returns None
+        :rtype: ~azure.core.polling.LROPoller[None]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+
+    @distributed_trace
+    @api_version_validation(
+        method_added_on="2025-05-01",
+        params_added_on={
+            "2025-05-01": ["api_version", "subscription_id", "resource_group_name", "bastion_host_name", "content_type"]
+        },
+        api_versions_list=["2025-05-01"],
+    )
+    def begin_delete_bastion_shareable_link_by_token(  # pylint: disable=name-too-long
+        self,
+        resource_group_name: str,
+        bastion_host_name: str,
+        bsl_token_request: Union[_models.BastionShareableLinkTokenListRequest, JSON, IO[bytes]],
+        **kwargs: Any
+    ) -> LROPoller[None]:
+        """Deletes the Bastion Shareable Links for all the tokens specified in the request.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param bastion_host_name: The name of the Bastion Host. Required.
+        :type bastion_host_name: str
+        :param bsl_token_request: Post request for Delete Bastion Shareable Link By Token endpoint. Is
+         one of the following types: BastionShareableLinkTokenListRequest, JSON, IO[bytes] Required.
+        :type bsl_token_request: ~azure.mgmt.network.models.BastionShareableLinkTokenListRequest or
+         JSON or IO[bytes]
+        :return: An instance of LROPoller that returns None
+        :rtype: ~azure.core.polling.LROPoller[None]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[None] = kwargs.pop("cls", None)
+        polling: Union[bool, PollingMethod] = kwargs.pop("polling", True)
+        lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
+        cont_token: Optional[str] = kwargs.pop("continuation_token", None)
+        if cont_token is None:
+            raw_result = self._delete_bastion_shareable_link_by_token_initial(
+                resource_group_name=resource_group_name,
+                bastion_host_name=bastion_host_name,
+                bsl_token_request=bsl_token_request,
+                api_version=api_version,
+                content_type=content_type,
+                cls=lambda x, y, z: x,
+                headers=_headers,
+                params=_params,
+                **kwargs
+            )
+            raw_result.http_response.read()  # type: ignore
+        kwargs.pop("error_map", None)
+
+        def get_long_running_output(pipeline_response):  # pylint: disable=inconsistent-return-statements
+            if cls:
+                return cls(pipeline_response, None, {})  # type: ignore
+
+        path_format_arguments = {
+            "endpoint": self._serialize.url("self._config.base_url", self._config.base_url, "str", skip_quote=True),
+        }
+
+        if polling is True:
+            polling_method: PollingMethod = cast(
+                PollingMethod, ARMPolling(lro_delay, path_format_arguments=path_format_arguments, **kwargs)
+            )
+        elif polling is False:
+            polling_method = cast(PollingMethod, NoPolling())
+        else:
+            polling_method = polling
+        if cont_token:
+            return LROPoller[None].from_continuation_token(
+                polling_method=polling_method,
+                continuation_token=cont_token,
+                client=self._client,
+                deserialization_callback=get_long_running_output,
+            )
+        return LROPoller[None](self._client, raw_result, get_long_running_output, polling_method)  # type: ignore
+
+    @overload
+    def get_bastion_shareable_link(
+        self,
+        resource_group_name: str,
+        bastion_host_name: str,
+        bsl_request: _models.BastionShareableLinkListRequest,
+        *,
+        content_type: str = "application/json",
+        **kwargs: Any
+    ) -> ItemPaged["_models.BastionShareableLink"]:
+        """Return the Bastion Shareable Links for all the VMs specified in the request.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param bastion_host_name: The name of the Bastion Host. Required.
+        :type bastion_host_name: str
+        :param bsl_request: Post request for Create/Delete/Get Bastion Shareable Link endpoints.
+         Required.
+        :type bsl_request: ~azure.mgmt.network.models.BastionShareableLinkListRequest
+        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :return: An iterator like instance of BastionShareableLink
+        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.network.models.BastionShareableLink]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+
+    @overload
+    def get_bastion_shareable_link(
+        self,
+        resource_group_name: str,
+        bastion_host_name: str,
+        bsl_request: JSON,
+        *,
+        content_type: str = "application/json",
+        **kwargs: Any
+    ) -> ItemPaged["_models.BastionShareableLink"]:
+        """Return the Bastion Shareable Links for all the VMs specified in the request.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param bastion_host_name: The name of the Bastion Host. Required.
+        :type bastion_host_name: str
+        :param bsl_request: Post request for Create/Delete/Get Bastion Shareable Link endpoints.
+         Required.
+        :type bsl_request: JSON
+        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :return: An iterator like instance of BastionShareableLink
+        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.network.models.BastionShareableLink]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+
+    @overload
+    def get_bastion_shareable_link(
+        self,
+        resource_group_name: str,
+        bastion_host_name: str,
+        bsl_request: IO[bytes],
+        *,
+        content_type: str = "application/json",
+        **kwargs: Any
+    ) -> ItemPaged["_models.BastionShareableLink"]:
+        """Return the Bastion Shareable Links for all the VMs specified in the request.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param bastion_host_name: The name of the Bastion Host. Required.
+        :type bastion_host_name: str
+        :param bsl_request: Post request for Create/Delete/Get Bastion Shareable Link endpoints.
+         Required.
+        :type bsl_request: IO[bytes]
+        :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :return: An iterator like instance of BastionShareableLink
+        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.network.models.BastionShareableLink]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+
+    @distributed_trace
+    @api_version_validation(
+        method_added_on="2025-05-01",
+        params_added_on={
+            "2025-05-01": [
+                "api_version",
+                "subscription_id",
+                "resource_group_name",
+                "bastion_host_name",
+                "content_type",
+                "accept",
+            ]
+        },
+        api_versions_list=["2025-05-01"],
+    )
+    def get_bastion_shareable_link(
+        self,
+        resource_group_name: str,
+        bastion_host_name: str,
+        bsl_request: Union[_models.BastionShareableLinkListRequest, JSON, IO[bytes]],
+        **kwargs: Any
+    ) -> ItemPaged["_models.BastionShareableLink"]:
+        """Return the Bastion Shareable Links for all the VMs specified in the request.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param bastion_host_name: The name of the Bastion Host. Required.
+        :type bastion_host_name: str
+        :param bsl_request: Post request for Create/Delete/Get Bastion Shareable Link endpoints. Is one
+         of the following types: BastionShareableLinkListRequest, JSON, IO[bytes] Required.
+        :type bsl_request: ~azure.mgmt.network.models.BastionShareableLinkListRequest or JSON or
+         IO[bytes]
+        :return: An iterator like instance of BastionShareableLink
+        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.network.models.BastionShareableLink]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[List[_models.BastionShareableLink]] = kwargs.pop("cls", None)
+
+        error_map: MutableMapping = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+        content_type = content_type or "application/json"
+        _content = None
+        if isinstance(bsl_request, (IOBase, bytes)):
+            _content = bsl_request
+        else:
+            _content = json.dumps(bsl_request, cls=SdkJSONEncoder, exclude_readonly=True)  # type: ignore
+
+        def prepare_request(next_link=None):
+            if not next_link:
+
+                _request = build_network_management_get_bastion_shareable_link_request(
+                    resource_group_name=resource_group_name,
+                    bastion_host_name=bastion_host_name,
+                    subscription_id=self._config.subscription_id,
+                    api_version=api_version,
+                    content_type=content_type,
+                    content=_content,
+                    headers=_headers,
+                    params=_params,
+                )
+                path_format_arguments = {
+                    "endpoint": self._serialize.url(
+                        "self._config.base_url", self._config.base_url, "str", skip_quote=True
+                    ),
+                }
+                _request.url = self._client.format_url(_request.url, **path_format_arguments)
+
+            else:
+                _request = HttpRequest("GET", next_link)
+                path_format_arguments = {
+                    "endpoint": self._serialize.url(
+                        "self._config.base_url", self._config.base_url, "str", skip_quote=True
+                    ),
+                }
+                _request.url = self._client.format_url(_request.url, **path_format_arguments)
+
+            return _request
+
+        def extract_data(pipeline_response):
+            deserialized = pipeline_response.http_response.json()
+            list_of_elem = _deserialize(List[_models.BastionShareableLink], deserialized.get("value", []))
+            if cls:
+                list_of_elem = cls(list_of_elem)  # type: ignore
+            return deserialized.get("nextLink") or None, iter(list_of_elem)
+
+        def get_next(next_link=None):
+            _request = prepare_request(next_link)
+
+            _stream = False
+            pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
+                _request, stream=_stream, **kwargs
+            )
+            response = pipeline_response.http_response
+
+            if response.status_code not in [200]:
+                map_error(status_code=response.status_code, response=response, error_map=error_map)
+                error = _failsafe_deserialize(
+                    _models.CloudError,
+                    response,
+                )
+                raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
+
+            return pipeline_response
+
+        return ItemPaged(get_next, extract_data)
+
+    @api_version_validation(
+        method_added_on="2025-05-01",
+        params_added_on={
+            "2025-05-01": ["api_version", "subscription_id", "resource_group_name", "bastion_host_name", "accept"]
+        },
+        api_versions_list=["2025-05-01"],
+    )
+    def _get_active_sessions_initial(
+        self, resource_group_name: str, bastion_host_name: str, **kwargs: Any
+    ) -> Iterator[bytes]:
+        error_map: MutableMapping = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
+        cls: ClsType[Iterator[bytes]] = kwargs.pop("cls", None)
+
+        _request = build_network_management_get_active_sessions_request(
+            resource_group_name=resource_group_name,
+            bastion_host_name=bastion_host_name,
+            subscription_id=self._config.subscription_id,
+            api_version=api_version,
+            headers=_headers,
+            params=_params,
+        )
+        path_format_arguments = {
+            "endpoint": self._serialize.url("self._config.base_url", self._config.base_url, "str", skip_quote=True),
+        }
+        _request.url = self._client.format_url(_request.url, **path_format_arguments)
+
+        _stream = True
+        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200, 202]:
+            try:
+                response.read()  # Load the body in memory and close the socket
+            except (StreamConsumedError, StreamClosedError):
+                pass
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            error = _failsafe_deserialize(
+                _models.CloudError,
+                response,
+            )
+            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
+
+        response_headers = {}
+        if response.status_code == 202:
+            response_headers["Location"] = self._deserialize("str", response.headers.get("Location"))
+            response_headers["Retry-After"] = self._deserialize("int", response.headers.get("Retry-After"))
+
+        deserialized = response.iter_bytes()
+
+        if cls:
+            return cls(pipeline_response, deserialized, response_headers)  # type: ignore
+
+        return deserialized  # type: ignore
+
+    @distributed_trace
+    @api_version_validation(
+        method_added_on="2025-05-01",
+        params_added_on={
+            "2025-05-01": ["api_version", "subscription_id", "resource_group_name", "bastion_host_name", "accept"]
+        },
+        api_versions_list=["2025-05-01"],
+    )
+    def begin_get_active_sessions(
+        self, resource_group_name: str, bastion_host_name: str, **kwargs: Any
+    ) -> LROPoller[ItemPaged["_models.BastionActiveSession"]]:
+        """Returns the list of currently active sessions on the Bastion.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param bastion_host_name: The name of the Bastion Host. Required.
+        :type bastion_host_name: str
+        :return: An instance of LROPoller that returns an iterator like instance of list of
+         BastionActiveSession
+        :rtype:
+         ~azure.core.polling.LROPoller[~azure.core.paging.ItemPaged[~azure.mgmt.network.models.BastionActiveSession]]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
+        cls: ClsType[List[_models.BastionActiveSession]] = kwargs.pop("cls", None)
+
+        error_map: MutableMapping = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        def prepare_request(next_link=None):
+            if not next_link:
+
+                _request = build_network_management_get_active_sessions_request(
+                    resource_group_name=resource_group_name,
+                    bastion_host_name=bastion_host_name,
+                    subscription_id=self._config.subscription_id,
+                    api_version=api_version,
+                    headers=_headers,
+                    params=_params,
+                )
+                path_format_arguments = {
+                    "endpoint": self._serialize.url(
+                        "self._config.base_url", self._config.base_url, "str", skip_quote=True
+                    ),
+                }
+                _request.url = self._client.format_url(_request.url, **path_format_arguments)
+
+            else:
+                _request = HttpRequest("GET", next_link)
+                path_format_arguments = {
+                    "endpoint": self._serialize.url(
+                        "self._config.base_url", self._config.base_url, "str", skip_quote=True
+                    ),
+                }
+                _request.url = self._client.format_url(_request.url, **path_format_arguments)
+
+            return _request
+
+        def extract_data(pipeline_response):
+            deserialized = pipeline_response.http_response.json()
+            list_of_elem = _deserialize(List[_models.BastionActiveSession], deserialized.get("value", []))
+            if cls:
+                list_of_elem = cls(list_of_elem)  # type: ignore
+            return deserialized.get("nextLink") or None, iter(list_of_elem)
+
+        def get_next(next_link=None):
+            _request = prepare_request(next_link)
+
+            _stream = False
+            pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
+                _request, stream=_stream, **kwargs
+            )
+            response = pipeline_response.http_response
+
+            if response.status_code not in [200]:
+                map_error(status_code=response.status_code, response=response, error_map=error_map)
+                error = _failsafe_deserialize(
+                    _models.CloudError,
+                    response,
+                )
+                raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
+
+            return pipeline_response
+
+        polling: Union[bool, PollingMethod] = kwargs.pop("polling", True)
+        lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
+        cont_token: Optional[str] = kwargs.pop("continuation_token", None)
+        if cont_token is None:
+            raw_result = self._get_active_sessions_initial(
+                resource_group_name=resource_group_name,
+                bastion_host_name=bastion_host_name,
+                api_version=api_version,
+                cls=lambda x, y, z: x,
+                headers=_headers,
+                params=_params,
+                **kwargs
+            )
+            raw_result.http_response.read()  # type: ignore
+        kwargs.pop("error_map", None)
+
+        def get_long_running_output(pipeline_response):
+            def internal_get_next(next_link=None):
+                if next_link is None:
+                    return pipeline_response
+                return get_next(next_link)
+
+            return ItemPaged(internal_get_next, extract_data)
+
+        path_format_arguments = {
+            "endpoint": self._serialize.url("self._config.base_url", self._config.base_url, "str", skip_quote=True),
+        }
+
+        if polling is True:
+            polling_method: PollingMethod = cast(
+                PollingMethod, ARMPolling(lro_delay, path_format_arguments=path_format_arguments, **kwargs)
+            )
+        elif polling is False:
+            polling_method = cast(PollingMethod, NoPolling())
+        else:
+            polling_method = polling
+        if cont_token:
+            return LROPoller[ItemPaged["_models.BastionActiveSession"]].from_continuation_token(
+                polling_method=polling_method,
+                continuation_token=cont_token,
+                client=self._client,
+                deserialization_callback=get_long_running_output,
+            )
+        return LROPoller[ItemPaged["_models.BastionActiveSession"]](
+            self._client, raw_result, get_long_running_output, polling_method  # type: ignore
+        )
+
+    @overload
+    def disconnect_active_sessions(
+        self,
+        resource_group_name: str,
+        bastion_host_name: str,
+        session_ids: _models.SessionIds,
+        *,
+        content_type: str = "application/json",
+        **kwargs: Any
+    ) -> ItemPaged["_models.BastionSessionState"]:
+        """Returns the list of currently active sessions on the Bastion.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param bastion_host_name: The name of the Bastion Host. Required.
+        :type bastion_host_name: str
+        :param session_ids: The list of sessionids to disconnect. Required.
+        :type session_ids: ~azure.mgmt.network.models.SessionIds
+        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :return: An iterator like instance of BastionSessionState
+        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.network.models.BastionSessionState]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+
+    @overload
+    def disconnect_active_sessions(
+        self,
+        resource_group_name: str,
+        bastion_host_name: str,
+        session_ids: JSON,
+        *,
+        content_type: str = "application/json",
+        **kwargs: Any
+    ) -> ItemPaged["_models.BastionSessionState"]:
+        """Returns the list of currently active sessions on the Bastion.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param bastion_host_name: The name of the Bastion Host. Required.
+        :type bastion_host_name: str
+        :param session_ids: The list of sessionids to disconnect. Required.
+        :type session_ids: JSON
+        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :return: An iterator like instance of BastionSessionState
+        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.network.models.BastionSessionState]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+
+    @overload
+    def disconnect_active_sessions(
+        self,
+        resource_group_name: str,
+        bastion_host_name: str,
+        session_ids: IO[bytes],
+        *,
+        content_type: str = "application/json",
+        **kwargs: Any
+    ) -> ItemPaged["_models.BastionSessionState"]:
+        """Returns the list of currently active sessions on the Bastion.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param bastion_host_name: The name of the Bastion Host. Required.
+        :type bastion_host_name: str
+        :param session_ids: The list of sessionids to disconnect. Required.
+        :type session_ids: IO[bytes]
+        :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :return: An iterator like instance of BastionSessionState
+        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.network.models.BastionSessionState]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+
+    @distributed_trace
+    @api_version_validation(
+        method_added_on="2025-05-01",
+        params_added_on={
+            "2025-05-01": [
+                "api_version",
+                "subscription_id",
+                "resource_group_name",
+                "bastion_host_name",
+                "content_type",
+                "accept",
+            ]
+        },
+        api_versions_list=["2025-05-01"],
+    )
+    def disconnect_active_sessions(
+        self,
+        resource_group_name: str,
+        bastion_host_name: str,
+        session_ids: Union[_models.SessionIds, JSON, IO[bytes]],
+        **kwargs: Any
+    ) -> ItemPaged["_models.BastionSessionState"]:
+        """Returns the list of currently active sessions on the Bastion.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param bastion_host_name: The name of the Bastion Host. Required.
+        :type bastion_host_name: str
+        :param session_ids: The list of sessionids to disconnect. Is one of the following types:
+         SessionIds, JSON, IO[bytes] Required.
+        :type session_ids: ~azure.mgmt.network.models.SessionIds or JSON or IO[bytes]
+        :return: An iterator like instance of BastionSessionState
+        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.network.models.BastionSessionState]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[List[_models.BastionSessionState]] = kwargs.pop("cls", None)
+
+        error_map: MutableMapping = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+        content_type = content_type or "application/json"
+        _content = None
+        if isinstance(session_ids, (IOBase, bytes)):
+            _content = session_ids
+        else:
+            _content = json.dumps(session_ids, cls=SdkJSONEncoder, exclude_readonly=True)  # type: ignore
+
+        def prepare_request(next_link=None):
+            if not next_link:
+
+                _request = build_network_management_disconnect_active_sessions_request(
+                    resource_group_name=resource_group_name,
+                    bastion_host_name=bastion_host_name,
+                    subscription_id=self._config.subscription_id,
+                    api_version=api_version,
+                    content_type=content_type,
+                    content=_content,
+                    headers=_headers,
+                    params=_params,
+                )
+                path_format_arguments = {
+                    "endpoint": self._serialize.url(
+                        "self._config.base_url", self._config.base_url, "str", skip_quote=True
+                    ),
+                }
+                _request.url = self._client.format_url(_request.url, **path_format_arguments)
+
+            else:
+                _request = HttpRequest("GET", next_link)
+                path_format_arguments = {
+                    "endpoint": self._serialize.url(
+                        "self._config.base_url", self._config.base_url, "str", skip_quote=True
+                    ),
+                }
+                _request.url = self._client.format_url(_request.url, **path_format_arguments)
+
+            return _request
+
+        def extract_data(pipeline_response):
+            deserialized = pipeline_response.http_response.json()
+            list_of_elem = _deserialize(List[_models.BastionSessionState], deserialized.get("value", []))
+            if cls:
+                list_of_elem = cls(list_of_elem)  # type: ignore
+            return deserialized.get("nextLink") or None, iter(list_of_elem)
+
+        def get_next(next_link=None):
+            _request = prepare_request(next_link)
+
+            _stream = False
+            pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
+                _request, stream=_stream, **kwargs
+            )
+            response = pipeline_response.http_response
+
+            if response.status_code not in [200]:
+                map_error(status_code=response.status_code, response=response, error_map=error_map)
+                error = _failsafe_deserialize(
+                    _models.CloudError,
+                    response,
+                )
+                raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
+
+            return pipeline_response
+
+        return ItemPaged(get_next, extract_data)
+
+    @distributed_trace
+    @api_version_validation(
+        method_added_on="2025-05-01",
+        params_added_on={"2025-05-01": ["api_version", "subscription_id", "providerport", "accept"]},
+        api_versions_list=["2025-05-01"],
+    )
+    def express_route_provider_port(self, providerport: str, **kwargs: Any) -> _models.ExpressRouteProviderPort:
+        """Retrieves detail of a provider port.
+
+        :param providerport: The name of the provider port. Required.
+        :type providerport: str
+        :return: ExpressRouteProviderPort. The ExpressRouteProviderPort is compatible with
+         MutableMapping
+        :rtype: ~azure.mgmt.network.models.ExpressRouteProviderPort
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
+        cls: ClsType[_models.ExpressRouteProviderPort] = kwargs.pop("cls", None)
+
+        _request = build_network_management_express_route_provider_port_request(
+            providerport=providerport,
+            subscription_id=self._config.subscription_id,
+            api_version=api_version,
+            headers=_headers,
+            params=_params,
+        )
+        path_format_arguments = {
+            "endpoint": self._serialize.url("self._config.base_url", self._config.base_url, "str", skip_quote=True),
+        }
+        _request.url = self._client.format_url(_request.url, **path_format_arguments)
+
+        _stream = kwargs.pop("stream", False)
+        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                try:
+                    response.read()  # Load the body in memory and close the socket
+                except (StreamConsumedError, StreamClosedError):
+                    pass
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            error = _failsafe_deserialize(
+                _models.CloudError,
+                response,
+            )
+            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
+
+        if _stream:
+            deserialized = response.iter_bytes()
+        else:
+            deserialized = _deserialize(_models.ExpressRouteProviderPort, response.json())
+
+        if cls:
+            return cls(pipeline_response, deserialized, {})  # type: ignore
+
+        return deserialized  # type: ignore
+
+    @overload
+    def list_active_connectivity_configurations(
+        self,
+        resource_group_name: str,
+        network_manager_name: str,
+        parameters: _models.ActiveConfigurationParameter,
+        *,
+        top: Optional[int] = None,
+        content_type: str = "application/json",
+        **kwargs: Any
+    ) -> ItemPaged["_models.ActiveConnectivityConfiguration"]:
+        """Lists active connectivity configurations in a network manager.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param network_manager_name: The name of the network manager. Required.
+        :type network_manager_name: str
+        :param parameters: Active Configuration Parameter. Required.
+        :type parameters: ~azure.mgmt.network.models.ActiveConfigurationParameter
+        :keyword top: An optional query parameter which specifies the maximum number of records to be
+         returned by the server. Default value is None.
+        :paramtype top: int
+        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :return: An iterator like instance of ActiveConnectivityConfiguration
+        :rtype:
+         ~azure.core.paging.ItemPaged[~azure.mgmt.network.models.ActiveConnectivityConfiguration]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+
+    @overload
+    def list_active_connectivity_configurations(
+        self,
+        resource_group_name: str,
+        network_manager_name: str,
+        parameters: JSON,
+        *,
+        top: Optional[int] = None,
+        content_type: str = "application/json",
+        **kwargs: Any
+    ) -> ItemPaged["_models.ActiveConnectivityConfiguration"]:
+        """Lists active connectivity configurations in a network manager.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param network_manager_name: The name of the network manager. Required.
+        :type network_manager_name: str
+        :param parameters: Active Configuration Parameter. Required.
+        :type parameters: JSON
+        :keyword top: An optional query parameter which specifies the maximum number of records to be
+         returned by the server. Default value is None.
+        :paramtype top: int
+        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :return: An iterator like instance of ActiveConnectivityConfiguration
+        :rtype:
+         ~azure.core.paging.ItemPaged[~azure.mgmt.network.models.ActiveConnectivityConfiguration]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+
+    @overload
+    def list_active_connectivity_configurations(
+        self,
+        resource_group_name: str,
+        network_manager_name: str,
+        parameters: IO[bytes],
+        *,
+        top: Optional[int] = None,
+        content_type: str = "application/json",
+        **kwargs: Any
+    ) -> ItemPaged["_models.ActiveConnectivityConfiguration"]:
+        """Lists active connectivity configurations in a network manager.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param network_manager_name: The name of the network manager. Required.
+        :type network_manager_name: str
+        :param parameters: Active Configuration Parameter. Required.
+        :type parameters: IO[bytes]
+        :keyword top: An optional query parameter which specifies the maximum number of records to be
+         returned by the server. Default value is None.
+        :paramtype top: int
+        :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :return: An iterator like instance of ActiveConnectivityConfiguration
+        :rtype:
+         ~azure.core.paging.ItemPaged[~azure.mgmt.network.models.ActiveConnectivityConfiguration]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+
+    @distributed_trace
+    @api_version_validation(
+        method_added_on="2025-05-01",
+        params_added_on={
+            "2025-05-01": [
+                "api_version",
+                "subscription_id",
+                "resource_group_name",
+                "network_manager_name",
+                "top",
+                "content_type",
+                "accept",
+            ]
+        },
+        api_versions_list=["2025-05-01"],
+    )
+    def list_active_connectivity_configurations(
+        self,
+        resource_group_name: str,
+        network_manager_name: str,
+        parameters: Union[_models.ActiveConfigurationParameter, JSON, IO[bytes]],
+        *,
+        top: Optional[int] = None,
+        **kwargs: Any
+    ) -> ItemPaged["_models.ActiveConnectivityConfiguration"]:
+        """Lists active connectivity configurations in a network manager.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param network_manager_name: The name of the network manager. Required.
+        :type network_manager_name: str
+        :param parameters: Active Configuration Parameter. Is one of the following types:
+         ActiveConfigurationParameter, JSON, IO[bytes] Required.
+        :type parameters: ~azure.mgmt.network.models.ActiveConfigurationParameter or JSON or IO[bytes]
+        :keyword top: An optional query parameter which specifies the maximum number of records to be
+         returned by the server. Default value is None.
+        :paramtype top: int
+        :return: An iterator like instance of ActiveConnectivityConfiguration
+        :rtype:
+         ~azure.core.paging.ItemPaged[~azure.mgmt.network.models.ActiveConnectivityConfiguration]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[List[_models.ActiveConnectivityConfiguration]] = kwargs.pop("cls", None)
+
+        error_map: MutableMapping = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+        content_type = content_type or "application/json"
+        _content = None
+        if isinstance(parameters, (IOBase, bytes)):
+            _content = parameters
+        else:
+            _content = json.dumps(parameters, cls=SdkJSONEncoder, exclude_readonly=True)  # type: ignore
+
+        def prepare_request(next_link=None):
+            if not next_link:
+
+                _request = build_network_management_list_active_connectivity_configurations_request(
+                    resource_group_name=resource_group_name,
+                    network_manager_name=network_manager_name,
+                    subscription_id=self._config.subscription_id,
+                    top=top,
+                    api_version=api_version,
+                    content_type=content_type,
+                    content=_content,
+                    headers=_headers,
+                    params=_params,
+                )
+                path_format_arguments = {
+                    "endpoint": self._serialize.url(
+                        "self._config.base_url", self._config.base_url, "str", skip_quote=True
+                    ),
+                }
+                _request.url = self._client.format_url(_request.url, **path_format_arguments)
+
+            else:
+                _request = HttpRequest("GET", next_link)
+                path_format_arguments = {
+                    "endpoint": self._serialize.url(
+                        "self._config.base_url", self._config.base_url, "str", skip_quote=True
+                    ),
+                }
+                _request.url = self._client.format_url(_request.url, **path_format_arguments)
+
+            return _request
+
+        def extract_data(pipeline_response):
+            deserialized = pipeline_response.http_response.json()
+            list_of_elem = _deserialize(List[_models.ActiveConnectivityConfiguration], deserialized.get("value", []))
+            if cls:
+                list_of_elem = cls(list_of_elem)  # type: ignore
+            return None, iter(list_of_elem)
+
+        def get_next(next_link=None):
+            _request = prepare_request(next_link)
+
+            _stream = False
+            pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
+                _request, stream=_stream, **kwargs
+            )
+            response = pipeline_response.http_response
+
+            if response.status_code not in [200]:
+                map_error(status_code=response.status_code, response=response, error_map=error_map)
+                error = _failsafe_deserialize(
+                    _models.CloudError,
+                    response,
+                )
+                raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
+
+            return pipeline_response
+
+        return ItemPaged(get_next, extract_data)
+
+    @overload
+    def list_active_security_admin_rules(
+        self,
+        resource_group_name: str,
+        network_manager_name: str,
+        parameters: _models.ActiveConfigurationParameter,
+        *,
+        top: Optional[int] = None,
+        content_type: str = "application/json",
+        **kwargs: Any
+    ) -> ItemPaged["_models.ActiveBaseSecurityAdminRule"]:
+        """Lists active security admin rules in a network manager.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param network_manager_name: The name of the network manager. Required.
+        :type network_manager_name: str
+        :param parameters: Active Configuration Parameter. Required.
+        :type parameters: ~azure.mgmt.network.models.ActiveConfigurationParameter
+        :keyword top: An optional query parameter which specifies the maximum number of records to be
+         returned by the server. Default value is None.
+        :paramtype top: int
+        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :return: An iterator like instance of ActiveBaseSecurityAdminRule
+        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.network.models.ActiveBaseSecurityAdminRule]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+
+    @overload
+    def list_active_security_admin_rules(
+        self,
+        resource_group_name: str,
+        network_manager_name: str,
+        parameters: JSON,
+        *,
+        top: Optional[int] = None,
+        content_type: str = "application/json",
+        **kwargs: Any
+    ) -> ItemPaged["_models.ActiveBaseSecurityAdminRule"]:
+        """Lists active security admin rules in a network manager.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param network_manager_name: The name of the network manager. Required.
+        :type network_manager_name: str
+        :param parameters: Active Configuration Parameter. Required.
+        :type parameters: JSON
+        :keyword top: An optional query parameter which specifies the maximum number of records to be
+         returned by the server. Default value is None.
+        :paramtype top: int
+        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :return: An iterator like instance of ActiveBaseSecurityAdminRule
+        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.network.models.ActiveBaseSecurityAdminRule]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+
+    @overload
+    def list_active_security_admin_rules(
+        self,
+        resource_group_name: str,
+        network_manager_name: str,
+        parameters: IO[bytes],
+        *,
+        top: Optional[int] = None,
+        content_type: str = "application/json",
+        **kwargs: Any
+    ) -> ItemPaged["_models.ActiveBaseSecurityAdminRule"]:
+        """Lists active security admin rules in a network manager.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param network_manager_name: The name of the network manager. Required.
+        :type network_manager_name: str
+        :param parameters: Active Configuration Parameter. Required.
+        :type parameters: IO[bytes]
+        :keyword top: An optional query parameter which specifies the maximum number of records to be
+         returned by the server. Default value is None.
+        :paramtype top: int
+        :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :return: An iterator like instance of ActiveBaseSecurityAdminRule
+        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.network.models.ActiveBaseSecurityAdminRule]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+
+    @distributed_trace
+    @api_version_validation(
+        method_added_on="2025-05-01",
+        params_added_on={
+            "2025-05-01": [
+                "api_version",
+                "subscription_id",
+                "resource_group_name",
+                "network_manager_name",
+                "top",
+                "content_type",
+                "accept",
+            ]
+        },
+        api_versions_list=["2025-05-01"],
+    )
+    def list_active_security_admin_rules(
+        self,
+        resource_group_name: str,
+        network_manager_name: str,
+        parameters: Union[_models.ActiveConfigurationParameter, JSON, IO[bytes]],
+        *,
+        top: Optional[int] = None,
+        **kwargs: Any
+    ) -> ItemPaged["_models.ActiveBaseSecurityAdminRule"]:
+        """Lists active security admin rules in a network manager.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param network_manager_name: The name of the network manager. Required.
+        :type network_manager_name: str
+        :param parameters: Active Configuration Parameter. Is one of the following types:
+         ActiveConfigurationParameter, JSON, IO[bytes] Required.
+        :type parameters: ~azure.mgmt.network.models.ActiveConfigurationParameter or JSON or IO[bytes]
+        :keyword top: An optional query parameter which specifies the maximum number of records to be
+         returned by the server. Default value is None.
+        :paramtype top: int
+        :return: An iterator like instance of ActiveBaseSecurityAdminRule
+        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.network.models.ActiveBaseSecurityAdminRule]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[List[_models.ActiveBaseSecurityAdminRule]] = kwargs.pop("cls", None)
+
+        error_map: MutableMapping = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+        content_type = content_type or "application/json"
+        _content = None
+        if isinstance(parameters, (IOBase, bytes)):
+            _content = parameters
+        else:
+            _content = json.dumps(parameters, cls=SdkJSONEncoder, exclude_readonly=True)  # type: ignore
+
+        def prepare_request(next_link=None):
+            if not next_link:
+
+                _request = build_network_management_list_active_security_admin_rules_request(
+                    resource_group_name=resource_group_name,
+                    network_manager_name=network_manager_name,
+                    subscription_id=self._config.subscription_id,
+                    top=top,
+                    api_version=api_version,
+                    content_type=content_type,
+                    content=_content,
+                    headers=_headers,
+                    params=_params,
+                )
+                path_format_arguments = {
+                    "endpoint": self._serialize.url(
+                        "self._config.base_url", self._config.base_url, "str", skip_quote=True
+                    ),
+                }
+                _request.url = self._client.format_url(_request.url, **path_format_arguments)
+
+            else:
+                _request = HttpRequest("GET", next_link)
+                path_format_arguments = {
+                    "endpoint": self._serialize.url(
+                        "self._config.base_url", self._config.base_url, "str", skip_quote=True
+                    ),
+                }
+                _request.url = self._client.format_url(_request.url, **path_format_arguments)
+
+            return _request
+
+        def extract_data(pipeline_response):
+            deserialized = pipeline_response.http_response.json()
+            list_of_elem = _deserialize(List[_models.ActiveBaseSecurityAdminRule], deserialized.get("value", []))
+            if cls:
+                list_of_elem = cls(list_of_elem)  # type: ignore
+            return None, iter(list_of_elem)
+
+        def get_next(next_link=None):
+            _request = prepare_request(next_link)
+
+            _stream = False
+            pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
+                _request, stream=_stream, **kwargs
+            )
+            response = pipeline_response.http_response
+
+            if response.status_code not in [200]:
+                map_error(status_code=response.status_code, response=response, error_map=error_map)
+                error = _failsafe_deserialize(
+                    _models.CloudError,
+                    response,
+                )
+                raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
+
+            return pipeline_response
+
+        return ItemPaged(get_next, extract_data)
+
+    @overload
+    def list_network_manager_effective_connectivity_configurations(  # pylint: disable=name-too-long
+        self,
+        resource_group_name: str,
+        virtual_network_name: str,
+        parameters: _models.QueryRequestOptions,
+        *,
+        top: Optional[int] = None,
+        content_type: str = "application/json",
+        **kwargs: Any
+    ) -> ItemPaged["_models.EffectiveConnectivityConfiguration"]:
+        """List all effective connectivity configurations applied on a virtual network.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param virtual_network_name: The name of the virtual network. Required.
+        :type virtual_network_name: str
+        :param parameters: Parameters supplied to list correct page. Required.
+        :type parameters: ~azure.mgmt.network.models.QueryRequestOptions
+        :keyword top: An optional query parameter which specifies the maximum number of records to be
+         returned by the server. Default value is None.
+        :paramtype top: int
+        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :return: An iterator like instance of EffectiveConnectivityConfiguration
+        :rtype:
+         ~azure.core.paging.ItemPaged[~azure.mgmt.network.models.EffectiveConnectivityConfiguration]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+
+    @overload
+    def list_network_manager_effective_connectivity_configurations(  # pylint: disable=name-too-long
+        self,
+        resource_group_name: str,
+        virtual_network_name: str,
+        parameters: JSON,
+        *,
+        top: Optional[int] = None,
+        content_type: str = "application/json",
+        **kwargs: Any
+    ) -> ItemPaged["_models.EffectiveConnectivityConfiguration"]:
+        """List all effective connectivity configurations applied on a virtual network.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param virtual_network_name: The name of the virtual network. Required.
+        :type virtual_network_name: str
+        :param parameters: Parameters supplied to list correct page. Required.
+        :type parameters: JSON
+        :keyword top: An optional query parameter which specifies the maximum number of records to be
+         returned by the server. Default value is None.
+        :paramtype top: int
+        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :return: An iterator like instance of EffectiveConnectivityConfiguration
+        :rtype:
+         ~azure.core.paging.ItemPaged[~azure.mgmt.network.models.EffectiveConnectivityConfiguration]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+
+    @overload
+    def list_network_manager_effective_connectivity_configurations(  # pylint: disable=name-too-long
+        self,
+        resource_group_name: str,
+        virtual_network_name: str,
+        parameters: IO[bytes],
+        *,
+        top: Optional[int] = None,
+        content_type: str = "application/json",
+        **kwargs: Any
+    ) -> ItemPaged["_models.EffectiveConnectivityConfiguration"]:
+        """List all effective connectivity configurations applied on a virtual network.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param virtual_network_name: The name of the virtual network. Required.
+        :type virtual_network_name: str
+        :param parameters: Parameters supplied to list correct page. Required.
+        :type parameters: IO[bytes]
+        :keyword top: An optional query parameter which specifies the maximum number of records to be
+         returned by the server. Default value is None.
+        :paramtype top: int
+        :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :return: An iterator like instance of EffectiveConnectivityConfiguration
+        :rtype:
+         ~azure.core.paging.ItemPaged[~azure.mgmt.network.models.EffectiveConnectivityConfiguration]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+
+    @distributed_trace
+    @api_version_validation(
+        method_added_on="2025-05-01",
+        params_added_on={
+            "2025-05-01": [
+                "api_version",
+                "subscription_id",
+                "resource_group_name",
+                "virtual_network_name",
+                "top",
+                "content_type",
+                "accept",
+            ]
+        },
+        api_versions_list=["2025-05-01"],
+    )
+    def list_network_manager_effective_connectivity_configurations(  # pylint: disable=name-too-long
+        self,
+        resource_group_name: str,
+        virtual_network_name: str,
+        parameters: Union[_models.QueryRequestOptions, JSON, IO[bytes]],
+        *,
+        top: Optional[int] = None,
+        **kwargs: Any
+    ) -> ItemPaged["_models.EffectiveConnectivityConfiguration"]:
+        """List all effective connectivity configurations applied on a virtual network.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param virtual_network_name: The name of the virtual network. Required.
+        :type virtual_network_name: str
+        :param parameters: Parameters supplied to list correct page. Is one of the following types:
+         QueryRequestOptions, JSON, IO[bytes] Required.
+        :type parameters: ~azure.mgmt.network.models.QueryRequestOptions or JSON or IO[bytes]
+        :keyword top: An optional query parameter which specifies the maximum number of records to be
+         returned by the server. Default value is None.
+        :paramtype top: int
+        :return: An iterator like instance of EffectiveConnectivityConfiguration
+        :rtype:
+         ~azure.core.paging.ItemPaged[~azure.mgmt.network.models.EffectiveConnectivityConfiguration]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[List[_models.EffectiveConnectivityConfiguration]] = kwargs.pop("cls", None)
+
+        error_map: MutableMapping = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+        content_type = content_type or "application/json"
+        _content = None
+        if isinstance(parameters, (IOBase, bytes)):
+            _content = parameters
+        else:
+            _content = json.dumps(parameters, cls=SdkJSONEncoder, exclude_readonly=True)  # type: ignore
+
+        def prepare_request(next_link=None):
+            if not next_link:
+
+                _request = build_network_management_list_network_manager_effective_connectivity_configurations_request(
+                    resource_group_name=resource_group_name,
+                    virtual_network_name=virtual_network_name,
+                    subscription_id=self._config.subscription_id,
+                    top=top,
+                    api_version=api_version,
+                    content_type=content_type,
+                    content=_content,
+                    headers=_headers,
+                    params=_params,
+                )
+                path_format_arguments = {
+                    "endpoint": self._serialize.url(
+                        "self._config.base_url", self._config.base_url, "str", skip_quote=True
+                    ),
+                }
+                _request.url = self._client.format_url(_request.url, **path_format_arguments)
+
+            else:
+                _request = HttpRequest("GET", next_link)
+                path_format_arguments = {
+                    "endpoint": self._serialize.url(
+                        "self._config.base_url", self._config.base_url, "str", skip_quote=True
+                    ),
+                }
+                _request.url = self._client.format_url(_request.url, **path_format_arguments)
+
+            return _request
+
+        def extract_data(pipeline_response):
+            deserialized = pipeline_response.http_response.json()
+            list_of_elem = _deserialize(List[_models.EffectiveConnectivityConfiguration], deserialized.get("value", []))
+            if cls:
+                list_of_elem = cls(list_of_elem)  # type: ignore
+            return None, iter(list_of_elem)
+
+        def get_next(next_link=None):
+            _request = prepare_request(next_link)
+
+            _stream = False
+            pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
+                _request, stream=_stream, **kwargs
+            )
+            response = pipeline_response.http_response
+
+            if response.status_code not in [200]:
+                map_error(status_code=response.status_code, response=response, error_map=error_map)
+                error = _failsafe_deserialize(
+                    _models.CloudError,
+                    response,
+                )
+                raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
+
+            return pipeline_response
+
+        return ItemPaged(get_next, extract_data)
+
+    @overload
+    def list_network_manager_effective_security_admin_rules(  # pylint: disable=name-too-long
+        self,
+        resource_group_name: str,
+        virtual_network_name: str,
+        parameters: _models.QueryRequestOptions,
+        *,
+        top: Optional[int] = None,
+        content_type: str = "application/json",
+        **kwargs: Any
+    ) -> ItemPaged["_models.EffectiveBaseSecurityAdminRule"]:
+        """List all effective security admin rules applied on a virtual network.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param virtual_network_name: The name of the virtual network. Required.
+        :type virtual_network_name: str
+        :param parameters: Parameters supplied to list correct page. Required.
+        :type parameters: ~azure.mgmt.network.models.QueryRequestOptions
+        :keyword top: An optional query parameter which specifies the maximum number of records to be
+         returned by the server. Default value is None.
+        :paramtype top: int
+        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :return: An iterator like instance of EffectiveBaseSecurityAdminRule
+        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.network.models.EffectiveBaseSecurityAdminRule]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+
+    @overload
+    def list_network_manager_effective_security_admin_rules(  # pylint: disable=name-too-long
+        self,
+        resource_group_name: str,
+        virtual_network_name: str,
+        parameters: JSON,
+        *,
+        top: Optional[int] = None,
+        content_type: str = "application/json",
+        **kwargs: Any
+    ) -> ItemPaged["_models.EffectiveBaseSecurityAdminRule"]:
+        """List all effective security admin rules applied on a virtual network.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param virtual_network_name: The name of the virtual network. Required.
+        :type virtual_network_name: str
+        :param parameters: Parameters supplied to list correct page. Required.
+        :type parameters: JSON
+        :keyword top: An optional query parameter which specifies the maximum number of records to be
+         returned by the server. Default value is None.
+        :paramtype top: int
+        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :return: An iterator like instance of EffectiveBaseSecurityAdminRule
+        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.network.models.EffectiveBaseSecurityAdminRule]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+
+    @overload
+    def list_network_manager_effective_security_admin_rules(  # pylint: disable=name-too-long
+        self,
+        resource_group_name: str,
+        virtual_network_name: str,
+        parameters: IO[bytes],
+        *,
+        top: Optional[int] = None,
+        content_type: str = "application/json",
+        **kwargs: Any
+    ) -> ItemPaged["_models.EffectiveBaseSecurityAdminRule"]:
+        """List all effective security admin rules applied on a virtual network.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param virtual_network_name: The name of the virtual network. Required.
+        :type virtual_network_name: str
+        :param parameters: Parameters supplied to list correct page. Required.
+        :type parameters: IO[bytes]
+        :keyword top: An optional query parameter which specifies the maximum number of records to be
+         returned by the server. Default value is None.
+        :paramtype top: int
+        :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :return: An iterator like instance of EffectiveBaseSecurityAdminRule
+        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.network.models.EffectiveBaseSecurityAdminRule]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+
+    @distributed_trace
+    @api_version_validation(
+        method_added_on="2025-05-01",
+        params_added_on={
+            "2025-05-01": [
+                "api_version",
+                "subscription_id",
+                "resource_group_name",
+                "virtual_network_name",
+                "top",
+                "content_type",
+                "accept",
+            ]
+        },
+        api_versions_list=["2025-05-01"],
+    )
+    def list_network_manager_effective_security_admin_rules(  # pylint: disable=name-too-long
+        self,
+        resource_group_name: str,
+        virtual_network_name: str,
+        parameters: Union[_models.QueryRequestOptions, JSON, IO[bytes]],
+        *,
+        top: Optional[int] = None,
+        **kwargs: Any
+    ) -> ItemPaged["_models.EffectiveBaseSecurityAdminRule"]:
+        """List all effective security admin rules applied on a virtual network.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param virtual_network_name: The name of the virtual network. Required.
+        :type virtual_network_name: str
+        :param parameters: Parameters supplied to list correct page. Is one of the following types:
+         QueryRequestOptions, JSON, IO[bytes] Required.
+        :type parameters: ~azure.mgmt.network.models.QueryRequestOptions or JSON or IO[bytes]
+        :keyword top: An optional query parameter which specifies the maximum number of records to be
+         returned by the server. Default value is None.
+        :paramtype top: int
+        :return: An iterator like instance of EffectiveBaseSecurityAdminRule
+        :rtype: ~azure.core.paging.ItemPaged[~azure.mgmt.network.models.EffectiveBaseSecurityAdminRule]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[List[_models.EffectiveBaseSecurityAdminRule]] = kwargs.pop("cls", None)
+
+        error_map: MutableMapping = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+        content_type = content_type or "application/json"
+        _content = None
+        if isinstance(parameters, (IOBase, bytes)):
+            _content = parameters
+        else:
+            _content = json.dumps(parameters, cls=SdkJSONEncoder, exclude_readonly=True)  # type: ignore
+
+        def prepare_request(next_link=None):
+            if not next_link:
+
+                _request = build_network_management_list_network_manager_effective_security_admin_rules_request(
+                    resource_group_name=resource_group_name,
+                    virtual_network_name=virtual_network_name,
+                    subscription_id=self._config.subscription_id,
+                    top=top,
+                    api_version=api_version,
+                    content_type=content_type,
+                    content=_content,
+                    headers=_headers,
+                    params=_params,
+                )
+                path_format_arguments = {
+                    "endpoint": self._serialize.url(
+                        "self._config.base_url", self._config.base_url, "str", skip_quote=True
+                    ),
+                }
+                _request.url = self._client.format_url(_request.url, **path_format_arguments)
+
+            else:
+                _request = HttpRequest("GET", next_link)
+                path_format_arguments = {
+                    "endpoint": self._serialize.url(
+                        "self._config.base_url", self._config.base_url, "str", skip_quote=True
+                    ),
+                }
+                _request.url = self._client.format_url(_request.url, **path_format_arguments)
+
+            return _request
+
+        def extract_data(pipeline_response):
+            deserialized = pipeline_response.http_response.json()
+            list_of_elem = _deserialize(List[_models.EffectiveBaseSecurityAdminRule], deserialized.get("value", []))
+            if cls:
+                list_of_elem = cls(list_of_elem)  # type: ignore
+            return None, iter(list_of_elem)
+
+        def get_next(next_link=None):
+            _request = prepare_request(next_link)
+
+            _stream = False
+            pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
+                _request, stream=_stream, **kwargs
+            )
+            response = pipeline_response.http_response
+
+            if response.status_code not in [200]:
+                map_error(status_code=response.status_code, response=response, error_map=error_map)
+                error = _failsafe_deserialize(
+                    _models.CloudError,
+                    response,
+                )
+                raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
+
+            return pipeline_response
+
+        return ItemPaged(get_next, extract_data)
+
+    @distributed_trace
+    @api_version_validation(
+        method_added_on="2025-05-01",
+        params_added_on={
+            "2025-05-01": ["api_version", "subscription_id", "resource_group_name", "virtual_wan_name", "accept"]
+        },
+        api_versions_list=["2025-05-01"],
+    )
+    def supported_security_providers(
+        self, resource_group_name: str, virtual_wan_name: str, **kwargs: Any
+    ) -> _models.VirtualWanSecurityProviders:
+        """Gives the supported security providers for the virtual wan.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param virtual_wan_name: The name of the VirtualWAN. Required.
+        :type virtual_wan_name: str
+        :return: VirtualWanSecurityProviders. The VirtualWanSecurityProviders is compatible with
+         MutableMapping
+        :rtype: ~azure.mgmt.network.models.VirtualWanSecurityProviders
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
+        cls: ClsType[_models.VirtualWanSecurityProviders] = kwargs.pop("cls", None)
+
+        _request = build_network_management_supported_security_providers_request(
+            resource_group_name=resource_group_name,
+            virtual_wan_name=virtual_wan_name,
+            subscription_id=self._config.subscription_id,
+            api_version=api_version,
+            headers=_headers,
+            params=_params,
+        )
+        path_format_arguments = {
+            "endpoint": self._serialize.url("self._config.base_url", self._config.base_url, "str", skip_quote=True),
+        }
+        _request.url = self._client.format_url(_request.url, **path_format_arguments)
+
+        _stream = kwargs.pop("stream", False)
+        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                try:
+                    response.read()  # Load the body in memory and close the socket
+                except (StreamConsumedError, StreamClosedError):
+                    pass
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            error = _failsafe_deserialize(
+                _models.CloudError,
+                response,
+            )
+            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
+
+        if _stream:
+            deserialized = response.iter_bytes()
+        else:
+            deserialized = _deserialize(_models.VirtualWanSecurityProviders, response.json())
+
+        if cls:
+            return cls(pipeline_response, deserialized, {})  # type: ignore
+
+        return deserialized  # type: ignore
+
+    @api_version_validation(
+        method_added_on="2025-05-01",
+        params_added_on={
+            "2025-05-01": [
+                "api_version",
+                "subscription_id",
+                "resource_group_name",
+                "virtual_wan_name",
+                "content_type",
+                "accept",
+            ]
+        },
+        api_versions_list=["2025-05-01"],
+    )
+    def _generatevirtualwanvpnserverconfigurationvpnprofile_initial(  # pylint: disable=name-too-long
+        self,
+        resource_group_name: str,
+        virtual_wan_name: str,
+        vpn_client_params: Union[_models.VirtualWanVpnProfileParameters, JSON, IO[bytes]],
+        **kwargs: Any
+    ) -> Iterator[bytes]:
+        error_map: MutableMapping = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[Iterator[bytes]] = kwargs.pop("cls", None)
+
+        content_type = content_type or "application/json"
+        _content = None
+        if isinstance(vpn_client_params, (IOBase, bytes)):
+            _content = vpn_client_params
+        else:
+            _content = json.dumps(vpn_client_params, cls=SdkJSONEncoder, exclude_readonly=True)  # type: ignore
+
+        _request = build_network_management_generatevirtualwanvpnserverconfigurationvpnprofile_request(
+            resource_group_name=resource_group_name,
+            virtual_wan_name=virtual_wan_name,
+            subscription_id=self._config.subscription_id,
+            api_version=api_version,
+            content_type=content_type,
+            content=_content,
+            headers=_headers,
+            params=_params,
+        )
+        path_format_arguments = {
+            "endpoint": self._serialize.url("self._config.base_url", self._config.base_url, "str", skip_quote=True),
+        }
+        _request.url = self._client.format_url(_request.url, **path_format_arguments)
+
+        _stream = True
+        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200, 202]:
+            try:
+                response.read()  # Load the body in memory and close the socket
+            except (StreamConsumedError, StreamClosedError):
+                pass
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            error = _failsafe_deserialize(
+                _models.CloudError,
+                response,
+            )
+            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
+
+        response_headers = {}
+        if response.status_code == 202:
+            response_headers["Location"] = self._deserialize("str", response.headers.get("Location"))
+            response_headers["Retry-After"] = self._deserialize("int", response.headers.get("Retry-After"))
+
+        deserialized = response.iter_bytes()
+
+        if cls:
+            return cls(pipeline_response, deserialized, response_headers)  # type: ignore
+
+        return deserialized  # type: ignore
+
+    @overload
+    def begin_generatevirtualwanvpnserverconfigurationvpnprofile(  # pylint: disable=name-too-long
+        self,
+        resource_group_name: str,
+        virtual_wan_name: str,
+        vpn_client_params: _models.VirtualWanVpnProfileParameters,
+        *,
+        content_type: str = "application/json",
+        **kwargs: Any
+    ) -> LROPoller[_models.VpnProfileResponse]:
+        """Generates a unique VPN profile for P2S clients for VirtualWan and associated
+        VpnServerConfiguration combination in the specified resource group.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param virtual_wan_name: The name of the VirtualWAN. Required.
+        :type virtual_wan_name: str
+        :param vpn_client_params: Parameters supplied to the generate VirtualWan VPN profile generation
+         operation. Required.
+        :type vpn_client_params: ~azure.mgmt.network.models.VirtualWanVpnProfileParameters
+        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :return: An instance of LROPoller that returns VpnProfileResponse. The VpnProfileResponse is
+         compatible with MutableMapping
+        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.network.models.VpnProfileResponse]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+
+    @overload
+    def begin_generatevirtualwanvpnserverconfigurationvpnprofile(  # pylint: disable=name-too-long
+        self,
+        resource_group_name: str,
+        virtual_wan_name: str,
+        vpn_client_params: JSON,
+        *,
+        content_type: str = "application/json",
+        **kwargs: Any
+    ) -> LROPoller[_models.VpnProfileResponse]:
+        """Generates a unique VPN profile for P2S clients for VirtualWan and associated
+        VpnServerConfiguration combination in the specified resource group.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param virtual_wan_name: The name of the VirtualWAN. Required.
+        :type virtual_wan_name: str
+        :param vpn_client_params: Parameters supplied to the generate VirtualWan VPN profile generation
+         operation. Required.
+        :type vpn_client_params: JSON
+        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :return: An instance of LROPoller that returns VpnProfileResponse. The VpnProfileResponse is
+         compatible with MutableMapping
+        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.network.models.VpnProfileResponse]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+
+    @overload
+    def begin_generatevirtualwanvpnserverconfigurationvpnprofile(  # pylint: disable=name-too-long
+        self,
+        resource_group_name: str,
+        virtual_wan_name: str,
+        vpn_client_params: IO[bytes],
+        *,
+        content_type: str = "application/json",
+        **kwargs: Any
+    ) -> LROPoller[_models.VpnProfileResponse]:
+        """Generates a unique VPN profile for P2S clients for VirtualWan and associated
+        VpnServerConfiguration combination in the specified resource group.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param virtual_wan_name: The name of the VirtualWAN. Required.
+        :type virtual_wan_name: str
+        :param vpn_client_params: Parameters supplied to the generate VirtualWan VPN profile generation
+         operation. Required.
+        :type vpn_client_params: IO[bytes]
+        :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :return: An instance of LROPoller that returns VpnProfileResponse. The VpnProfileResponse is
+         compatible with MutableMapping
+        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.network.models.VpnProfileResponse]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+
+    @distributed_trace
+    @api_version_validation(
+        method_added_on="2025-05-01",
+        params_added_on={
+            "2025-05-01": [
+                "api_version",
+                "subscription_id",
+                "resource_group_name",
+                "virtual_wan_name",
+                "content_type",
+                "accept",
+            ]
+        },
+        api_versions_list=["2025-05-01"],
+    )
+    def begin_generatevirtualwanvpnserverconfigurationvpnprofile(  # pylint: disable=name-too-long
+        self,
+        resource_group_name: str,
+        virtual_wan_name: str,
+        vpn_client_params: Union[_models.VirtualWanVpnProfileParameters, JSON, IO[bytes]],
+        **kwargs: Any
+    ) -> LROPoller[_models.VpnProfileResponse]:
+        """Generates a unique VPN profile for P2S clients for VirtualWan and associated
+        VpnServerConfiguration combination in the specified resource group.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param virtual_wan_name: The name of the VirtualWAN. Required.
+        :type virtual_wan_name: str
+        :param vpn_client_params: Parameters supplied to the generate VirtualWan VPN profile generation
+         operation. Is one of the following types: VirtualWanVpnProfileParameters, JSON, IO[bytes]
+         Required.
+        :type vpn_client_params: ~azure.mgmt.network.models.VirtualWanVpnProfileParameters or JSON or
+         IO[bytes]
+        :return: An instance of LROPoller that returns VpnProfileResponse. The VpnProfileResponse is
+         compatible with MutableMapping
+        :rtype: ~azure.core.polling.LROPoller[~azure.mgmt.network.models.VpnProfileResponse]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[_models.VpnProfileResponse] = kwargs.pop("cls", None)
+        polling: Union[bool, PollingMethod] = kwargs.pop("polling", True)
+        lro_delay = kwargs.pop("polling_interval", self._config.polling_interval)
+        cont_token: Optional[str] = kwargs.pop("continuation_token", None)
+        if cont_token is None:
+            raw_result = self._generatevirtualwanvpnserverconfigurationvpnprofile_initial(
+                resource_group_name=resource_group_name,
+                virtual_wan_name=virtual_wan_name,
+                vpn_client_params=vpn_client_params,
+                api_version=api_version,
+                content_type=content_type,
+                cls=lambda x, y, z: x,
+                headers=_headers,
+                params=_params,
+                **kwargs
+            )
+            raw_result.http_response.read()  # type: ignore
+        kwargs.pop("error_map", None)
+
+        def get_long_running_output(pipeline_response):
+            response_headers = {}
+            response = pipeline_response.http_response
+            response_headers["Location"] = self._deserialize("str", response.headers.get("Location"))
+            response_headers["Retry-After"] = self._deserialize("int", response.headers.get("Retry-After"))
+
+            deserialized = _deserialize(_models.VpnProfileResponse, response.json())
+            if cls:
+                return cls(pipeline_response, deserialized, response_headers)  # type: ignore
+            return deserialized
+
+        path_format_arguments = {
+            "endpoint": self._serialize.url("self._config.base_url", self._config.base_url, "str", skip_quote=True),
+        }
+
+        if polling is True:
+            polling_method: PollingMethod = cast(
+                PollingMethod, ARMPolling(lro_delay, path_format_arguments=path_format_arguments, **kwargs)
+            )
+        elif polling is False:
+            polling_method = cast(PollingMethod, NoPolling())
+        else:
+            polling_method = polling
+        if cont_token:
+            return LROPoller[_models.VpnProfileResponse].from_continuation_token(
+                polling_method=polling_method,
+                continuation_token=cont_token,
+                client=self._client,
+                deserialization_callback=get_long_running_output,
+            )
+        return LROPoller[_models.VpnProfileResponse](
+            self._client, raw_result, get_long_running_output, polling_method  # type: ignore
+        )
+
+    @distributed_trace
+    @api_version_validation(
+        method_added_on="2025-05-01",
+        params_added_on={"2025-05-01": ["api_version", "subscription_id", "location", "domain_name_label", "accept"]},
+        api_versions_list=["2025-05-01"],
+    )
+    def check_dns_name_availability(
+        self, location: str, *, domain_name_label: str, **kwargs: Any
+    ) -> _models.DnsNameAvailabilityResult:
+        """Checks whether a domain name in the cloudapp.azure.com zone is available for use.
+
+        :param location: The location name. Required.
+        :type location: str
+        :keyword domain_name_label: The domain name to be verified. It must conform to the following
+         regular expression: ^[a-z][a-z0-9-]{1,61}[a-z0-9]$. Required.
+        :paramtype domain_name_label: str
+        :return: DnsNameAvailabilityResult. The DnsNameAvailabilityResult is compatible with
+         MutableMapping
+        :rtype: ~azure.mgmt.network.models.DnsNameAvailabilityResult
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = kwargs.pop("headers", {}) or {}
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2025-05-01"))
+        cls: ClsType[_models.DnsNameAvailabilityResult] = kwargs.pop("cls", None)
+
+        _request = build_network_management_check_dns_name_availability_request(
+            location=location,
+            subscription_id=self._config.subscription_id,
+            domain_name_label=domain_name_label,
+            api_version=api_version,
+            headers=_headers,
+            params=_params,
+        )
+        path_format_arguments = {
+            "endpoint": self._serialize.url("self._config.base_url", self._config.base_url, "str", skip_quote=True),
+        }
+        _request.url = self._client.format_url(_request.url, **path_format_arguments)
+
+        _stream = kwargs.pop("stream", False)
+        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                try:
+                    response.read()  # Load the body in memory and close the socket
+                except (StreamConsumedError, StreamClosedError):
+                    pass
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            error = _failsafe_deserialize(
+                _models.CloudError,
+                response,
+            )
+            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
+
+        if _stream:
+            deserialized = response.iter_bytes()
+        else:
+            deserialized = _deserialize(_models.DnsNameAvailabilityResult, response.json())
+
+        if cls:
+            return cls(pipeline_response, deserialized, {})  # type: ignore
+
+        return deserialized  # type: ignore

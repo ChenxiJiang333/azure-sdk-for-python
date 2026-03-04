@@ -38,7 +38,6 @@ from .operations import (
     AzureFirewallsOperations,
     BastionHostsOperations,
     BgpServiceCommunitiesOperations,
-    CheckDnsNameAvailabilityOperations,
     ConfigurationPolicyGroupsOperations,
     ConnectionMonitorsOperations,
     ConnectivityConfigurationsOperations,
@@ -47,7 +46,6 @@ from .operations import (
     DdosProtectionPlansOperations,
     DefaultSecurityRulesOperations,
     DscpConfigurationOperations,
-    EffectiveConfigurationsOperations,
     ExpressRouteCircuitAuthorizationsOperations,
     ExpressRouteCircuitConnectionsOperations,
     ExpressRouteCircuitPeeringsOperations,
@@ -61,7 +59,6 @@ from .operations import (
     ExpressRoutePortsLocationsOperations,
     ExpressRoutePortsOperations,
     ExpressRouteProviderPortsLocationOperations,
-    ExpressRouteProviderPortsOperations,
     ExpressRouteServiceProvidersOperations,
     FirewallPoliciesOperations,
     FirewallPolicyDeploymentsOperations,
@@ -116,7 +113,6 @@ from .operations import (
     NetworkWatchersOperations,
     Operations,
     P2SVpnGatewaysOperations,
-    P2sVpnGatewaysOperations,
     PacketCapturesOperations,
     PeerExpressRouteCircuitConnectionsOperations,
     PrivateDnsZoneGroupsOperations,
@@ -160,7 +156,7 @@ from .operations import (
     VirtualHubBgpConnectionOperations,
     VirtualHubBgpConnectionsOperations,
     VirtualHubIpConfigurationOperations,
-    VirtualHubRouteTableV2sOperations,
+    VirtualHubRouteTableV2SOperations,
     VirtualHubsOperations,
     VirtualNetworkAppliancesOperations,
     VirtualNetworkGatewayConnectionsOperations,
@@ -171,7 +167,6 @@ from .operations import (
     VirtualNetworksOperations,
     VirtualRouterPeeringsOperations,
     VirtualRoutersOperations,
-    VirtualWANSOperations,
     VirtualWansOperations,
     VpnConnectionsOperations,
     VpnGatewaysOperations,
@@ -184,6 +179,7 @@ from .operations import (
     VpnSitesOperations,
     WebApplicationFirewallPoliciesOperations,
     WebCategoriesOperations,
+    _NetworkManagementClientOperationsMixin,
     configurationPolicyGroupsOperations,
 )
 
@@ -192,7 +188,9 @@ if TYPE_CHECKING:
     from azure.core.credentials_async import AsyncTokenCredential
 
 
-class NetworkManagementClient:  # pylint: disable=client-accepts-api-version-keyword,too-many-instance-attributes
+class NetworkManagementClient(
+    _NetworkManagementClientOperationsMixin
+):  # pylint: disable=client-accepts-api-version-keyword,too-many-instance-attributes
     """NetworkManagementClient.
 
     :ivar operations: Operations operations
@@ -210,9 +208,6 @@ class NetworkManagementClient:  # pylint: disable=client-accepts-api-version-key
     :vartype azure_firewalls: azure.mgmt.network.aio.operations.AzureFirewallsOperations
     :ivar bastion_hosts: BastionHostsOperations operations
     :vartype bastion_hosts: azure.mgmt.network.aio.operations.BastionHostsOperations
-    :ivar express_route_provider_ports: ExpressRouteProviderPortsOperations operations
-    :vartype express_route_provider_ports:
-     azure.mgmt.network.aio.operations.ExpressRouteProviderPortsOperations
     :ivar network_interfaces: NetworkInterfacesOperations operations
     :vartype network_interfaces: azure.mgmt.network.aio.operations.NetworkInterfacesOperations
     :ivar public_ip_addresses: PublicIPAddressesOperations operations
@@ -385,9 +380,6 @@ class NetworkManagementClient:  # pylint: disable=client-accepts-api-version-key
      azure.mgmt.network.aio.operations.ServiceEndpointPolicyDefinitionsOperations
     :ivar virtual_networks: VirtualNetworksOperations operations
     :vartype virtual_networks: azure.mgmt.network.aio.operations.VirtualNetworksOperations
-    :ivar effective_configurations: EffectiveConfigurationsOperations operations
-    :vartype effective_configurations:
-     azure.mgmt.network.aio.operations.EffectiveConfigurationsOperations
     :ivar subnets: SubnetsOperations operations
     :vartype subnets: azure.mgmt.network.aio.operations.SubnetsOperations
     :ivar virtual_network_peerings: VirtualNetworkPeeringsOperations operations
@@ -413,8 +405,6 @@ class NetworkManagementClient:  # pylint: disable=client-accepts-api-version-key
     :ivar virtual_router_peerings: VirtualRouterPeeringsOperations operations
     :vartype virtual_router_peerings:
      azure.mgmt.network.aio.operations.VirtualRouterPeeringsOperations
-    :ivar virtual_wans: VirtualWANSOperations operations
-    :vartype virtual_wans: azure.mgmt.network.aio.operations.VirtualWANSOperations
     :ivar vpn_sites: VpnSitesOperations operations
     :vartype vpn_sites: azure.mgmt.network.aio.operations.VpnSitesOperations
     :ivar vpn_site_links: VpnSiteLinksOperations operations
@@ -441,9 +431,6 @@ class NetworkManagementClient:  # pylint: disable=client-accepts-api-version-key
     :ivar web_application_firewall_policies: WebApplicationFirewallPoliciesOperations operations
     :vartype web_application_firewall_policies:
      azure.mgmt.network.aio.operations.WebApplicationFirewallPoliciesOperations
-    :ivar check_dns_name_availability: CheckDnsNameAvailabilityOperations operations
-    :vartype check_dns_name_availability:
-     azure.mgmt.network.aio.operations.CheckDnsNameAvailabilityOperations
     :ivar virtual_network_appliances: VirtualNetworkAppliancesOperations operations
     :vartype virtual_network_appliances:
      azure.mgmt.network.aio.operations.VirtualNetworkAppliancesOperations
@@ -583,17 +570,15 @@ class NetworkManagementClient:  # pylint: disable=client-accepts-api-version-key
     :ivar hub_virtual_network_connections: HubVirtualNetworkConnectionsOperations operations
     :vartype hub_virtual_network_connections:
      azure.mgmt.network.aio.operations.HubVirtualNetworkConnectionsOperations
-    :ivar virtual_hub_route_table_v2s: VirtualHubRouteTableV2sOperations operations
-    :vartype virtual_hub_route_table_v2s:
-     azure.mgmt.network.aio.operations.VirtualHubRouteTableV2sOperations
+    :ivar virtual_hub_route_table_v2_s: VirtualHubRouteTableV2SOperations operations
+    :vartype virtual_hub_route_table_v2_s:
+     azure.mgmt.network.aio.operations.VirtualHubRouteTableV2SOperations
     :ivar vpn_connections: VpnConnectionsOperations operations
     :vartype vpn_connections: azure.mgmt.network.aio.operations.VpnConnectionsOperations
     :ivar vpn_link_connections: VpnLinkConnectionsOperations operations
     :vartype vpn_link_connections: azure.mgmt.network.aio.operations.VpnLinkConnectionsOperations
     :ivar nat_rules: NatRulesOperations operations
     :vartype nat_rules: azure.mgmt.network.aio.operations.NatRulesOperations
-    :ivar p2s_vpn_gateways: P2sVpnGatewaysOperations operations
-    :vartype p2s_vpn_gateways: azure.mgmt.network.aio.operations.P2sVpnGatewaysOperations
     :ivar express_route_connections: ExpressRouteConnectionsOperations operations
     :vartype express_route_connections:
      azure.mgmt.network.aio.operations.ExpressRouteConnectionsOperations
@@ -652,6 +637,8 @@ class NetworkManagementClient:  # pylint: disable=client-accepts-api-version-key
      azure.mgmt.network.aio.operations.ServiceTagInformationOperations
     :ivar usages: UsagesOperations operations
     :vartype usages: azure.mgmt.network.aio.operations.UsagesOperations
+    :ivar network_interfaces: NetworkInterfacesOperations operations
+    :vartype network_interfaces: azure.mgmt.network.aio.operations.NetworkInterfacesOperations
     :param credential: Credential used to authenticate requests to the service. Required.
     :type credential: ~azure.core.credentials_async.AsyncTokenCredential
     :param subscription_id: The ID of the target subscription. The value must be an UUID. Required.
@@ -726,9 +713,6 @@ class NetworkManagementClient:  # pylint: disable=client-accepts-api-version-key
         )
         self.azure_firewalls = AzureFirewallsOperations(self._client, self._config, self._serialize, self._deserialize)
         self.bastion_hosts = BastionHostsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.express_route_provider_ports = ExpressRouteProviderPortsOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
         self.network_interfaces = NetworkInterfacesOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
@@ -893,9 +877,6 @@ class NetworkManagementClient:  # pylint: disable=client-accepts-api-version-key
         self.virtual_networks = VirtualNetworksOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
-        self.effective_configurations = EffectiveConfigurationsOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
         self.subnets = SubnetsOperations(self._client, self._config, self._serialize, self._deserialize)
         self.virtual_network_peerings = VirtualNetworkPeeringsOperations(
             self._client, self._config, self._serialize, self._deserialize
@@ -919,7 +900,6 @@ class NetworkManagementClient:  # pylint: disable=client-accepts-api-version-key
         self.virtual_router_peerings = VirtualRouterPeeringsOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
-        self.virtual_wans = VirtualWANSOperations(self._client, self._config, self._serialize, self._deserialize)
         self.vpn_sites = VpnSitesOperations(self._client, self._config, self._serialize, self._deserialize)
         self.vpn_site_links = VpnSiteLinksOperations(self._client, self._config, self._serialize, self._deserialize)
         self.vpn_server_configurations = VpnServerConfigurationsOperations(
@@ -937,9 +917,6 @@ class NetworkManagementClient:  # pylint: disable=client-accepts-api-version-key
         )
         self.hub_route_tables = HubRouteTablesOperations(self._client, self._config, self._serialize, self._deserialize)
         self.web_application_firewall_policies = WebApplicationFirewallPoliciesOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
-        self.check_dns_name_availability = CheckDnsNameAvailabilityOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
         self.virtual_network_appliances = VirtualNetworkAppliancesOperations(
@@ -1074,7 +1051,7 @@ class NetworkManagementClient:  # pylint: disable=client-accepts-api-version-key
         self.hub_virtual_network_connections = HubVirtualNetworkConnectionsOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
-        self.virtual_hub_route_table_v2s = VirtualHubRouteTableV2sOperations(
+        self.virtual_hub_route_table_v2_s = VirtualHubRouteTableV2SOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
         self.vpn_connections = VpnConnectionsOperations(self._client, self._config, self._serialize, self._deserialize)
@@ -1082,7 +1059,6 @@ class NetworkManagementClient:  # pylint: disable=client-accepts-api-version-key
             self._client, self._config, self._serialize, self._deserialize
         )
         self.nat_rules = NatRulesOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.p2s_vpn_gateways = P2sVpnGatewaysOperations(self._client, self._config, self._serialize, self._deserialize)
         self.express_route_connections = ExpressRouteConnectionsOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
@@ -1136,6 +1112,9 @@ class NetworkManagementClient:  # pylint: disable=client-accepts-api-version-key
             self._client, self._config, self._serialize, self._deserialize
         )
         self.usages = UsagesOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.network_interfaces = NetworkInterfacesOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
 
     def send_request(
         self, request: HttpRequest, *, stream: bool = False, **kwargs: Any

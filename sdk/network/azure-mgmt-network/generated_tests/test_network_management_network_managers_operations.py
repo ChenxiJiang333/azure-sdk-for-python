@@ -116,29 +116,3 @@ class TestNetworkManagementNetworkManagersOperations(AzureMgmtRecordedTestCase):
         result = [r for r in response]
         # please add some check logic here by yourself
         # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_network_managers_list_active_connectivity_configurations(self, resource_group):
-        response = self.client.network_managers.list_active_connectivity_configurations(
-            resource_group_name=resource_group.name,
-            network_manager_name="str",
-            parameters={"regions": ["str"], "skipToken": "str"},
-            api_version="2025-05-01",
-        )
-        result = [r for r in response]
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_network_managers_list_active_security_admin_rules(self, resource_group):
-        response = self.client.network_managers.list_active_security_admin_rules(
-            resource_group_name=resource_group.name,
-            network_manager_name="str",
-            parameters={"regions": ["str"], "skipToken": "str"},
-            api_version="2025-05-01",
-        )
-        result = [r for r in response]
-        # please add some check logic here by yourself
-        # ...

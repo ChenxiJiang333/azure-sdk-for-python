@@ -31,7 +31,7 @@ def main():
         subscription_id="SUBSCRIPTION_ID",
     )
 
-    response = client.bastion_hosts.begin_delete_bastion_shareable_link(
+    response = client.begin_delete_bastion_shareable_link(
         resource_group_name="rg1",
         bastion_host_name="bastionhosttenant",
         bsl_request={

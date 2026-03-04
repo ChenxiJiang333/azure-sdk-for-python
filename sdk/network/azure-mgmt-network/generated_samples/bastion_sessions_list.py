@@ -30,7 +30,7 @@ def main():
         subscription_id="SUBSCRIPTION_ID",
     )
 
-    response = client.bastion_hosts.begin_get_active_sessions(
+    response = client.begin_get_active_sessions(
         resource_group_name="rg1",
         bastion_host_name="bastionhosttenant",
     ).result()

@@ -18,7 +18,6 @@ from ._operations import ApplicationGatewayPrivateEndpointConnectionsOperations 
 from ._operations import ApplicationSecurityGroupsOperations  # type: ignore
 from ._operations import AzureFirewallsOperations  # type: ignore
 from ._operations import BastionHostsOperations  # type: ignore
-from ._operations import ExpressRouteProviderPortsOperations  # type: ignore
 from ._operations import NetworkInterfacesOperations  # type: ignore
 from ._operations import PublicIPAddressesOperations  # type: ignore
 from ._operations import DdosCustomPoliciesOperations  # type: ignore
@@ -83,7 +82,6 @@ from ._operations import SecurityPartnerProvidersOperations  # type: ignore
 from ._operations import ServiceEndpointPoliciesOperations  # type: ignore
 from ._operations import ServiceEndpointPolicyDefinitionsOperations  # type: ignore
 from ._operations import VirtualNetworksOperations  # type: ignore
-from ._operations import EffectiveConfigurationsOperations  # type: ignore
 from ._operations import SubnetsOperations  # type: ignore
 from ._operations import VirtualNetworkPeeringsOperations  # type: ignore
 from ._operations import VirtualNetworkGatewaysOperations  # type: ignore
@@ -93,7 +91,6 @@ from ._operations import VirtualNetworkGatewayNatRulesOperations  # type: ignore
 from ._operations import VirtualNetworkTapsOperations  # type: ignore
 from ._operations import VirtualRoutersOperations  # type: ignore
 from ._operations import VirtualRouterPeeringsOperations  # type: ignore
-from ._operations import VirtualWANSOperations  # type: ignore
 from ._operations import VpnSitesOperations  # type: ignore
 from ._operations import VpnSiteLinksOperations  # type: ignore
 from ._operations import VpnServerConfigurationsOperations  # type: ignore
@@ -105,7 +102,6 @@ from ._operations import P2SVpnGatewaysOperations  # type: ignore
 from ._operations import ExpressRouteGatewaysOperations  # type: ignore
 from ._operations import HubRouteTablesOperations  # type: ignore
 from ._operations import WebApplicationFirewallPoliciesOperations  # type: ignore
-from ._operations import CheckDnsNameAvailabilityOperations  # type: ignore
 from ._operations import VirtualNetworkAppliancesOperations  # type: ignore
 from ._operations import ServiceGatewaysOperations  # type: ignore
 from ._operations import ApplicationGatewayPrivateLinkResourcesOperations  # type: ignore
@@ -152,11 +148,10 @@ from ._operations import VpnServerConfigurationsAssociatedWithVirtualWanOperatio
 from ._operations import ConfigurationPolicyGroupsOperations  # type: ignore
 from ._operations import configurationPolicyGroupsOperations  # type: ignore
 from ._operations import HubVirtualNetworkConnectionsOperations  # type: ignore
-from ._operations import VirtualHubRouteTableV2sOperations  # type: ignore
+from ._operations import VirtualHubRouteTableV2SOperations  # type: ignore
 from ._operations import VpnConnectionsOperations  # type: ignore
 from ._operations import VpnLinkConnectionsOperations  # type: ignore
 from ._operations import NatRulesOperations  # type: ignore
-from ._operations import P2sVpnGatewaysOperations  # type: ignore
 from ._operations import ExpressRouteConnectionsOperations  # type: ignore
 from ._operations import VirtualHubBgpConnectionOperations  # type: ignore
 from ._operations import VirtualHubBgpConnectionsOperations  # type: ignore
@@ -176,6 +171,8 @@ from ._operations import BgpServiceCommunitiesOperations  # type: ignore
 from ._operations import ServiceTagsOperations  # type: ignore
 from ._operations import ServiceTagInformationOperations  # type: ignore
 from ._operations import UsagesOperations  # type: ignore
+from ._operations import NetworkInterfacesOperations  # type: ignore
+from ._operations import _NetworkManagementClientOperationsMixin  # type: ignore # pylint: disable=unused-import
 
 from ._patch import __all__ as _patch_all
 from ._patch import *
@@ -188,7 +185,6 @@ __all__ = [
     "ApplicationSecurityGroupsOperations",
     "AzureFirewallsOperations",
     "BastionHostsOperations",
-    "ExpressRouteProviderPortsOperations",
     "NetworkInterfacesOperations",
     "PublicIPAddressesOperations",
     "DdosCustomPoliciesOperations",
@@ -253,7 +249,6 @@ __all__ = [
     "ServiceEndpointPoliciesOperations",
     "ServiceEndpointPolicyDefinitionsOperations",
     "VirtualNetworksOperations",
-    "EffectiveConfigurationsOperations",
     "SubnetsOperations",
     "VirtualNetworkPeeringsOperations",
     "VirtualNetworkGatewaysOperations",
@@ -263,7 +258,6 @@ __all__ = [
     "VirtualNetworkTapsOperations",
     "VirtualRoutersOperations",
     "VirtualRouterPeeringsOperations",
-    "VirtualWANSOperations",
     "VpnSitesOperations",
     "VpnSiteLinksOperations",
     "VpnServerConfigurationsOperations",
@@ -275,7 +269,6 @@ __all__ = [
     "ExpressRouteGatewaysOperations",
     "HubRouteTablesOperations",
     "WebApplicationFirewallPoliciesOperations",
-    "CheckDnsNameAvailabilityOperations",
     "VirtualNetworkAppliancesOperations",
     "ServiceGatewaysOperations",
     "ApplicationGatewayPrivateLinkResourcesOperations",
@@ -322,11 +315,10 @@ __all__ = [
     "ConfigurationPolicyGroupsOperations",
     "configurationPolicyGroupsOperations",
     "HubVirtualNetworkConnectionsOperations",
-    "VirtualHubRouteTableV2sOperations",
+    "VirtualHubRouteTableV2SOperations",
     "VpnConnectionsOperations",
     "VpnLinkConnectionsOperations",
     "NatRulesOperations",
-    "P2sVpnGatewaysOperations",
     "ExpressRouteConnectionsOperations",
     "VirtualHubBgpConnectionOperations",
     "VirtualHubBgpConnectionsOperations",
@@ -346,6 +338,7 @@ __all__ = [
     "ServiceTagsOperations",
     "ServiceTagInformationOperations",
     "UsagesOperations",
+    "NetworkInterfacesOperations",
 ]
 __all__.extend([p for p in _patch_all if p not in __all__])  # pyright: ignore
 _patch_sdk()

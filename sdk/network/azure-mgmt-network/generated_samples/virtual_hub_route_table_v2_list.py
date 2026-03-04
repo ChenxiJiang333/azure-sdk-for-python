@@ -30,7 +30,7 @@ def main():
         subscription_id="SUBSCRIPTION_ID",
     )
 
-    response = client.virtual_hub_route_table_v2s.list(
+    response = client.virtual_hub_route_table_v2_s.list(
         resource_group_name="rg1",
         virtual_hub_name="virtualHub1",
     )

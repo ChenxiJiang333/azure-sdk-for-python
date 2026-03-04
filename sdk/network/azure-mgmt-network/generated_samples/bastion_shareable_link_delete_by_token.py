@@ -30,7 +30,7 @@ def main():
         subscription_id="SUBSCRIPTION_ID",
     )
 
-    client.bastion_hosts.begin_delete_bastion_shareable_link_by_token(
+    client.begin_delete_bastion_shareable_link_by_token(
         resource_group_name="rg1",
         bastion_host_name="bastionhosttenant",
         bsl_token_request={"tokens": ["abcd1234-efgh-hijk-5678-abcdefgh1234", "dcba4321-hgfe-kjih-8765-hgfedcba4321"]},

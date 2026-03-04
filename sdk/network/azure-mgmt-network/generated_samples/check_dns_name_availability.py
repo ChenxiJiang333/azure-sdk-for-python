@@ -30,7 +30,7 @@ def main():
         subscription_id="SUBSCRIPTION_ID",
     )
 
-    response = client.check_dns_name_availability.check_dns_name_availability(
+    response = client.check_dns_name_availability(
         location="westus",
         domain_name_label="testdns",
     )
