@@ -1,5 +1,9 @@
 ## tsp migration
 
+## 2.2.0b2 (2026-03-04)
+
+change log generation failed!!! You need to write it manually!!!
+
 ### Breaking Changes
 
 - Model `ApplicationResource` deleted or renamed its instance variable `type_version`
