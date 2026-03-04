@@ -1,5 +1,9 @@
 ## tsp migration
 
+## 30.3.0 (2026-03-04)
+
+change log generation failed!!! You need to write it manually!!!
+
 ### Breaking Changes
 
 - Deleted or renamed client operation group `NetworkManagementClient.virtual_hub_route_table_v2_s`

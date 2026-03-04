@@ -171,7 +171,6 @@ from ._operations import BgpServiceCommunitiesOperations  # type: ignore
 from ._operations import ServiceTagsOperations  # type: ignore
 from ._operations import ServiceTagInformationOperations  # type: ignore
 from ._operations import UsagesOperations  # type: ignore
-from ._operations import NetworkInterfacesOperations  # type: ignore
 from ._operations import _NetworkManagementClientOperationsMixin  # type: ignore # pylint: disable=unused-import
 
 from ._patch import __all__ as _patch_all
@@ -338,7 +337,6 @@ __all__ = [
     "ServiceTagsOperations",
     "ServiceTagInformationOperations",
     "UsagesOperations",
-    "NetworkInterfacesOperations",
 ]
 __all__.extend([p for p in _patch_all if p not in __all__])  # pyright: ignore
 _patch_sdk()

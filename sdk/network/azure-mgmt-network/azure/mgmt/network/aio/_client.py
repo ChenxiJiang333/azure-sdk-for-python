@@ -637,8 +637,6 @@ class NetworkManagementClient(
      azure.mgmt.network.aio.operations.ServiceTagInformationOperations
     :ivar usages: UsagesOperations operations
     :vartype usages: azure.mgmt.network.aio.operations.UsagesOperations
-    :ivar network_interfaces: NetworkInterfacesOperations operations
-    :vartype network_interfaces: azure.mgmt.network.aio.operations.NetworkInterfacesOperations
     :param credential: Credential used to authenticate requests to the service. Required.
     :type credential: ~azure.core.credentials_async.AsyncTokenCredential
     :param subscription_id: The ID of the target subscription. The value must be an UUID. Required.
@@ -1112,9 +1110,6 @@ class NetworkManagementClient(
             self._client, self._config, self._serialize, self._deserialize
         )
         self.usages = UsagesOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.network_interfaces = NetworkInterfacesOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
 
     def send_request(
         self, request: HttpRequest, *, stream: bool = False, **kwargs: Any
