@@ -1,22 +1,8 @@
 ## tsp migration
 
-## 30.3.0 (2026-03-05)
-
-change log generation failed!!! You need to write it manually!!!
-
 ### Breaking Changes
 
 // will push tsp changes after [tsp definitions](https://github.com/Azure/azure-rest-api-specs/pull/40226#discussion_r2877262040) fixed to unblock python generation.
-- Method `IpamPoolsOperations.list` parameter `skip` changed default value from `int` to `none`
-- Method `IpamPoolsOperations.list` parameter `top` changed default value from `int` to `none`
-- Method `ReachabilityAnalysisIntentsOperations.list` parameter `skip` changed default value from `int` to `none`
-- Method `ReachabilityAnalysisIntentsOperations.list` parameter `top` changed default value from `int` to `none`
-- Method `ReachabilityAnalysisRunsOperations.list` parameter `skip` changed default value from `int` to `none`
-- Method `ReachabilityAnalysisRunsOperations.list` parameter `top` changed default value from `int` to `none`
-- Method `StaticCidrsOperations.list` parameter `skip` changed default value from `int` to `none`
-- Method `StaticCidrsOperations.list` parameter `top` changed default value from `int` to `none`
-- Method `VerifierWorkspacesOperations.list` parameter `skip` changed default value from `int` to `none`
-- Method `VerifierWorkspacesOperations.list` parameter `top` changed default value from `int` to `none`
 
 // in [swagger](https://github.com/mcgallan/azure-rest-api-specs/blob/Convert-Network-2025-05/specification/network/resource-manager/Microsoft.Network/Network/stable/2025-05-01/virtualNetwork.json#L13612), parameter `singleton_resource` is defined as required, but somehow in SDK generated from swagger it is not present.
 - Method `VipSwapOperations.begin_create` inserted a `positional_or_keyword` parameter `singleton_resource`
