@@ -1,93 +1,12 @@
 ## tsp migration
 
-## 30.3.0 (2026-03-04)
+## 30.3.0 (2026-03-05)
 
 change log generation failed!!! You need to write it manually!!!
 
 ### Breaking Changes
 
-- Deleted or renamed client operation group `NetworkManagementClient.virtual_hub_route_table_v2_s`
-- Deleted or renamed model `VirtualHubRouteTableV2SOperations`
-- Deleted or renamed client method `NetworkManagementClient.begin_delete_bastion_shareable_link`
-- Deleted or renamed client method `NetworkManagementClient.begin_delete_bastion_shareable_link_by_token`
-- Deleted or renamed client method `NetworkManagementClient.begin_generatevirtualwanvpnserverconfigurationvpnprofile`
-- Deleted or renamed client method `NetworkManagementClient.begin_get_active_sessions`
-- Deleted or renamed client method `NetworkManagementClient.begin_put_bastion_shareable_link`
-- Deleted or renamed client method `NetworkManagementClient.check_dns_name_availability`
-- Deleted or renamed client method `NetworkManagementClient.disconnect_active_sessions`
-- Deleted or renamed client method `NetworkManagementClient.express_route_provider_port`
-- Deleted or renamed client method `NetworkManagementClient.get_bastion_shareable_link`
-- Deleted or renamed client method `NetworkManagementClient.list_active_connectivity_configurations`
-- Deleted or renamed client method `NetworkManagementClient.list_active_security_admin_rules`
-- Deleted or renamed client method `NetworkManagementClient.list_network_manager_effective_connectivity_configurations`
-- Deleted or renamed client method `NetworkManagementClient.list_network_manager_effective_security_admin_rules`
-- Deleted or renamed client method `NetworkManagementClient.supported_security_providers`
-- Deleted or renamed enum value `ApplicationGatewaySslCipherSuite.TLS_DHE_DSS_WITH3_DES_EDE_CBC_SHA`
-- Deleted or renamed enum value `ApplicationGatewaySslCipherSuite.TLS_DHE_DSS_WITH_AES128_CBC_SHA`
-- Deleted or renamed enum value `ApplicationGatewaySslCipherSuite.TLS_DHE_DSS_WITH_AES128_CBC_SHA256`
-- Deleted or renamed enum value `ApplicationGatewaySslCipherSuite.TLS_DHE_DSS_WITH_AES256_CBC_SHA`
-- Deleted or renamed enum value `ApplicationGatewaySslCipherSuite.TLS_DHE_DSS_WITH_AES256_CBC_SHA256`
-- Deleted or renamed enum value `ApplicationGatewaySslCipherSuite.TLS_DHE_RSA_WITH_AES128_CBC_SHA`
-- Deleted or renamed enum value `ApplicationGatewaySslCipherSuite.TLS_DHE_RSA_WITH_AES128_GCM_SHA256`
-- Deleted or renamed enum value `ApplicationGatewaySslCipherSuite.TLS_DHE_RSA_WITH_AES256_CBC_SHA`
-- Deleted or renamed enum value `ApplicationGatewaySslCipherSuite.TLS_DHE_RSA_WITH_AES256_GCM_SHA384`
-- Deleted or renamed enum value `ApplicationGatewaySslCipherSuite.TLS_ECDHE_ECDSA_WITH_AES128_CBC_SHA`
-- Deleted or renamed enum value `ApplicationGatewaySslCipherSuite.TLS_ECDHE_ECDSA_WITH_AES128_CBC_SHA256`
-- Deleted or renamed enum value `ApplicationGatewaySslCipherSuite.TLS_ECDHE_ECDSA_WITH_AES128_GCM_SHA256`
-- Deleted or renamed enum value `ApplicationGatewaySslCipherSuite.TLS_ECDHE_ECDSA_WITH_AES256_CBC_SHA`
-- Deleted or renamed enum value `ApplicationGatewaySslCipherSuite.TLS_ECDHE_ECDSA_WITH_AES256_CBC_SHA384`
-- Deleted or renamed enum value `ApplicationGatewaySslCipherSuite.TLS_ECDHE_ECDSA_WITH_AES256_GCM_SHA384`
-- Deleted or renamed enum value `ApplicationGatewaySslCipherSuite.TLS_ECDHE_RSA_WITH_AES128_CBC_SHA`
-- Deleted or renamed enum value `ApplicationGatewaySslCipherSuite.TLS_ECDHE_RSA_WITH_AES128_CBC_SHA256`
-- Deleted or renamed enum value `ApplicationGatewaySslCipherSuite.TLS_ECDHE_RSA_WITH_AES128_GCM_SHA256`
-- Deleted or renamed enum value `ApplicationGatewaySslCipherSuite.TLS_ECDHE_RSA_WITH_AES256_CBC_SHA`
-- Deleted or renamed enum value `ApplicationGatewaySslCipherSuite.TLS_ECDHE_RSA_WITH_AES256_CBC_SHA384`
-- Deleted or renamed enum value `ApplicationGatewaySslCipherSuite.TLS_ECDHE_RSA_WITH_AES256_GCM_SHA384`
-- Deleted or renamed enum value `ApplicationGatewaySslCipherSuite.TLS_RSA_WITH3_DES_EDE_CBC_SHA`
-- Deleted or renamed enum value `ApplicationGatewaySslCipherSuite.TLS_RSA_WITH_AES128_CBC_SHA`
-- Deleted or renamed enum value `ApplicationGatewaySslCipherSuite.TLS_RSA_WITH_AES128_CBC_SHA256`
-- Deleted or renamed enum value `ApplicationGatewaySslCipherSuite.TLS_RSA_WITH_AES128_GCM_SHA256`
-- Deleted or renamed enum value `ApplicationGatewaySslCipherSuite.TLS_RSA_WITH_AES256_CBC_SHA`
-- Deleted or renamed enum value `ApplicationGatewaySslCipherSuite.TLS_RSA_WITH_AES256_CBC_SHA256`
-- Deleted or renamed enum value `ApplicationGatewaySslCipherSuite.TLS_RSA_WITH_AES256_GCM_SHA384`
-- Deleted or renamed enum value `FirewallPolicyIDPSSignatureDirection.FIVE`
-- Deleted or renamed enum value `FirewallPolicyIDPSSignatureDirection.FOUR`
-- Deleted or renamed enum value `FirewallPolicyIDPSSignatureDirection.ONE`
-- Deleted or renamed enum value `FirewallPolicyIDPSSignatureDirection.THREE`
-- Deleted or renamed enum value `FirewallPolicyIDPSSignatureDirection.TWO`
-- Deleted or renamed enum value `FirewallPolicyIDPSSignatureDirection.ZERO`
-- Deleted or renamed enum value `FirewallPolicyIDPSSignatureDirection.fromhex`
-- Deleted or renamed enum value `FirewallPolicyIDPSSignatureDirection.hex`
-- Deleted or renamed enum value `FirewallPolicyIDPSSignatureMode.ONE`
-- Deleted or renamed enum value `FirewallPolicyIDPSSignatureMode.TWO`
-- Deleted or renamed enum value `FirewallPolicyIDPSSignatureMode.ZERO`
-- Deleted or renamed enum value `FirewallPolicyIDPSSignatureMode.fromhex`
-- Deleted or renamed enum value `FirewallPolicyIDPSSignatureMode.hex`
-- Deleted or renamed enum value `FirewallPolicyIDPSSignatureSeverity.ONE`
-- Deleted or renamed enum value `FirewallPolicyIDPSSignatureSeverity.THREE`
-- Deleted or renamed enum value `FirewallPolicyIDPSSignatureSeverity.TWO`
-- Deleted or renamed enum value `FirewallPolicyIDPSSignatureSeverity.fromhex`
-- Deleted or renamed enum value `FirewallPolicyIDPSSignatureSeverity.hex`
-- Deleted or renamed enum value `Geo.GLOBAL`
-- Deleted or renamed enum value `LoadBalancerSkuTier.GLOBAL`
-- Deleted or renamed enum value `NextStep.CONTINUE`
-- Deleted or renamed enum value `PublicIPAddressSkuTier.GLOBAL`
-- Deleted or renamed enum value `PublicIPPrefixSkuTier.GLOBAL`
-- Deleted or renamed method `ConfigurationPolicyGroupsOperations.list_by_vpn_server_configuration`
-- Deleted or renamed method `NetworkInterfacesOperations.get_virtual_machine_scale_set_ip_configuration`
-- Deleted or renamed method `NetworkInterfacesOperations.list_virtual_machine_scale_set_ip_configurations`
-- Deleted or renamed method `NetworkInterfacesOperations.list_virtual_machine_scale_set_network_interfaces`
-- Deleted or renamed method `P2SVpnGatewaysOperations.begin_create_or_update`
-- Deleted or renamed method `P2SVpnGatewaysOperations.begin_delete`
-- Deleted or renamed method `P2SVpnGatewaysOperations.begin_disconnect_p2_s_vpn_connections`
-- Deleted or renamed method `P2SVpnGatewaysOperations.begin_generate_vpn_profile`
-- Deleted or renamed method `P2SVpnGatewaysOperations.begin_get_p2_s_vpn_connection_health`
-- Deleted or renamed method `P2SVpnGatewaysOperations.begin_get_p2_s_vpn_connection_health_detailed`
-- Deleted or renamed method `P2SVpnGatewaysOperations.begin_update_tags`
-- Deleted or renamed method `P2SVpnGatewaysOperations.get`
-- Deleted or renamed method `P2SVpnGatewaysOperations.list`
-- Deleted or renamed method `P2SVpnGatewaysOperations.list_by_resource_group`
-- Deleted or renamed method `PublicIPAddressesOperations.list_virtual_machine_scale_set_public_ip_addresses`
+// will push tsp changes after [tsp definitions](https://github.com/Azure/azure-rest-api-specs/pull/40226#discussion_r2877262040) fixed to unblock python generation.
 - Method `IpamPoolsOperations.list` parameter `skip` changed default value from `int` to `none`
 - Method `IpamPoolsOperations.list` parameter `top` changed default value from `int` to `none`
 - Method `ReachabilityAnalysisIntentsOperations.list` parameter `skip` changed default value from `int` to `none`
@@ -99,9 +18,32 @@ change log generation failed!!! You need to write it manually!!!
 - Method `VerifierWorkspacesOperations.list` parameter `skip` changed default value from `int` to `none`
 - Method `VerifierWorkspacesOperations.list` parameter `top` changed default value from `int` to `none`
 
-// in [swagger](https://github.com/mcgallan/azure-rest-api-specs/blob/Convert-Network-2025-05/specification/network/resource-manager/Microsoft.Network/Network/stable/2025-05-01/virtualNetwork.json#L13612), parameter `singleton_resource` is defined as required, but somehow in old SDK it is not present.
+// in [swagger](https://github.com/mcgallan/azure-rest-api-specs/blob/Convert-Network-2025-05/specification/network/resource-manager/Microsoft.Network/Network/stable/2025-05-01/virtualNetwork.json#L13612), parameter `singleton_resource` is defined as required, but somehow in SDK generated from swagger it is not present.
 - Method `VipSwapOperations.begin_create` inserted a `positional_or_keyword` parameter `singleton_resource`
 - Method `VipSwapOperations.get` inserted a `positional_or_keyword` parameter `singleton_resource`
+
+// failed to mitigate, enum value type changed from float to int in migration.
+- Deleted or renamed enum value `FirewallPolicyIDPSSignatureDirection.fromhex`
+- Deleted or renamed enum value `FirewallPolicyIDPSSignatureDirection.hex`
+- Deleted or renamed enum value `FirewallPolicyIDPSSignatureMode.fromhex`
+- Deleted or renamed enum value `FirewallPolicyIDPSSignatureMode.hex`
+- Deleted or renamed enum value `FirewallPolicyIDPSSignatureSeverity.fromhex`
+- Deleted or renamed enum value `FirewallPolicyIDPSSignatureSeverity.hex`
+
+// failed to mitigate, might because the property name `GLOBAL`and `CONTINUE` are illegal. Now the property names are shown as like GLOBALEnum.
+- Deleted or renamed enum value `Geo.GLOBAL`
+- Deleted or renamed enum value `LoadBalancerSkuTier.GLOBAL`
+- Deleted or renamed enum value `NextStep.CONTINUE`
+- Deleted or renamed enum value `PublicIPAddressSkuTier.GLOBAL`
+- Deleted or renamed enum value `PublicIPPrefixSkuTier.GLOBAL`
+
+// failed to mitigate for it will cause duplication failures between namespace Network and Compute.
+- Deleted or renamed method `NetworkInterfacesOperations.get_virtual_machine_scale_set_ip_configuration`
+- Deleted or renamed method `NetworkInterfacesOperations.list_virtual_machine_scale_set_ip_configurations`
+- Deleted or renamed method `NetworkInterfacesOperations.list_virtual_machine_scale_set_network_interfaces`
+- Deleted or renamed method `PublicIPAddressesOperations.list_virtual_machine_scale_set_public_ip_addresses`
+
+// seems to be fake report.
 - Client `NetworkManagementClient` deleted or renamed instance variable `url`
 - Method `ExpressRouteConnectionsOperations.list` changed from `asynchronous` to `synchronous`
 - Method `ExpressRouteGatewaysOperations.list_by_resource_group` changed from `asynchronous` to `synchronous`

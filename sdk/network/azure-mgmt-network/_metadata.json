@@ -3,7 +3,7 @@
     "Microsoft.Compute": "2018-10-01",
     "Microsoft.Network": "2025-05-01"
   },
-  "commit": "0f0190b865beb75bc679ca1426a5d5592a874fde",
+  "commit": "a60b4603d71d07e475d4e107bb4c199841b309ee",
   "repository_url": "https://github.com/Azure/azure-rest-api-specs",
   "typespec_src": "specification/network/resource-manager/Microsoft.Network",
   "emitterVersion": "0.60.2"

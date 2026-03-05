@@ -14557,11 +14557,11 @@
                 "param_type": "keyword_only"
               },
               "skip": {
-                "default": "none",
+                "default": "int",
                 "param_type": "keyword_only"
               },
               "top": {
-                "default": "none",
+                "default": "int",
                 "param_type": "keyword_only"
               },
               "sort_key": {
@@ -28313,11 +28313,11 @@
                 "param_type": "keyword_only"
               },
               "skip": {
-                "default": "none",
+                "default": "int",
                 "param_type": "keyword_only"
               },
               "top": {
-                "default": "none",
+                "default": "int",
                 "param_type": "keyword_only"
               },
               "sort_key": {
@@ -28601,11 +28601,11 @@
                 "param_type": "keyword_only"
               },
               "skip": {
-                "default": "none",
+                "default": "int",
                 "param_type": "keyword_only"
               },
               "top": {
-                "default": "none",
+                "default": "int",
                 "param_type": "keyword_only"
               },
               "sort_key": {
@@ -34424,11 +34424,11 @@
                 "param_type": "keyword_only"
               },
               "skip": {
-                "default": "none",
+                "default": "int",
                 "param_type": "keyword_only"
               },
               "top": {
-                "default": "none",
+                "default": "int",
                 "param_type": "keyword_only"
               },
               "sort_key": {
@@ -35747,11 +35747,11 @@
                 "param_type": "keyword_only"
               },
               "skip": {
-                "default": "none",
+                "default": "int",
                 "param_type": "keyword_only"
               },
               "top": {
-                "default": "none",
+                "default": "int",
                 "param_type": "keyword_only"
               },
               "sort_key": {
@@ -299863,11 +299863,11 @@
                 "param_type": "keyword_only"
               },
               "skip": {
-                "default": "none",
+                "default": "int",
                 "param_type": "keyword_only"
               },
               "top": {
-                "default": "none",
+                "default": "int",
                 "param_type": "keyword_only"
               },
               "sort_key": {
@@ -313619,11 +313619,11 @@
                 "param_type": "keyword_only"
               },
               "skip": {
-                "default": "none",
+                "default": "int",
                 "param_type": "keyword_only"
               },
               "top": {
-                "default": "none",
+                "default": "int",
                 "param_type": "keyword_only"
               },
               "sort_key": {
@@ -313907,11 +313907,11 @@
                 "param_type": "keyword_only"
               },
               "skip": {
-                "default": "none",
+                "default": "int",
                 "param_type": "keyword_only"
               },
               "top": {
-                "default": "none",
+                "default": "int",
                 "param_type": "keyword_only"
               },
               "sort_key": {
@@ -319730,11 +319730,11 @@
                 "param_type": "keyword_only"
               },
               "skip": {
-                "default": "none",
+                "default": "int",
                 "param_type": "keyword_only"
               },
               "top": {
-                "default": "none",
+                "default": "int",
                 "param_type": "keyword_only"
               },
               "sort_key": {
@@ -321053,11 +321053,11 @@
                 "param_type": "keyword_only"
               },
               "skip": {
-                "default": "none",
+                "default": "int",
                 "param_type": "keyword_only"
               },
               "top": {
-                "default": "none",
+                "default": "int",
                 "param_type": "keyword_only"
               },
               "sort_key": {

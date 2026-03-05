@@ -4463,8 +4463,8 @@ def build_ipam_pools_list_request(
     subscription_id: str,
     *,
     skip_token: Optional[str] = None,
-    skip: Optional[int] = None,
-    top: Optional[int] = None,
+    skip: int = 0,
+    top: int = 50,
     sort_key: Optional[str] = None,
     sort_value: Optional[str] = None,
     **kwargs: Any
@@ -4858,8 +4858,8 @@ def build_static_cidrs_list_request(
     subscription_id: str,
     *,
     skip_token: Optional[str] = None,
-    skip: Optional[int] = None,
-    top: Optional[int] = None,
+    skip: int = 0,
+    top: int = 50,
     sort_key: Optional[str] = None,
     sort_value: Optional[str] = None,
     **kwargs: Any
@@ -8592,8 +8592,8 @@ def build_reachability_analysis_intents_list_request(  # pylint: disable=name-to
     subscription_id: str,
     *,
     skip_token: Optional[str] = None,
-    skip: Optional[int] = None,
-    top: Optional[int] = None,
+    skip: int = 0,
+    top: int = 50,
     sort_key: Optional[str] = None,
     sort_value: Optional[str] = None,
     **kwargs: Any
@@ -8798,8 +8798,8 @@ def build_verifier_workspaces_list_request(
     subscription_id: str,
     *,
     skip_token: Optional[str] = None,
-    skip: Optional[int] = None,
-    top: Optional[int] = None,
+    skip: int = 0,
+    top: int = 50,
     sort_key: Optional[str] = None,
     sort_value: Optional[str] = None,
     **kwargs: Any
@@ -8954,8 +8954,8 @@ def build_reachability_analysis_runs_list_request(  # pylint: disable=name-too-l
     subscription_id: str,
     *,
     skip_token: Optional[str] = None,
-    skip: Optional[int] = None,
-    top: Optional[int] = None,
+    skip: int = 0,
+    top: int = 50,
     sort_key: Optional[str] = None,
     sort_value: Optional[str] = None,
     **kwargs: Any
@@ -42417,8 +42417,8 @@ class IpamPoolsOperations:
         network_manager_name: str,
         *,
         skip_token: Optional[str] = None,
-        skip: Optional[int] = None,
-        top: Optional[int] = None,
+        skip: int = 0,
+        top: int = 50,
         sort_key: Optional[str] = None,
         sort_value: Optional[str] = None,
         **kwargs: Any
@@ -42434,9 +42434,9 @@ class IpamPoolsOperations:
         :type network_manager_name: str
         :keyword skip_token: Optional skip token. Default value is None.
         :paramtype skip_token: str
-        :keyword skip: Optional num entries to skip. Default value is None.
+        :keyword skip: Optional num entries to skip. Default value is 0.
         :paramtype skip: int
-        :keyword top: Optional num entries to show. Default value is None.
+        :keyword top: Optional num entries to show. Default value is 50.
         :paramtype top: int
         :keyword sort_key: Optional key by which to sort. Default value is None.
         :paramtype sort_key: str
@@ -43874,8 +43874,8 @@ class StaticCidrsOperations:
         pool_name: str,
         *,
         skip_token: Optional[str] = None,
-        skip: Optional[int] = None,
-        top: Optional[int] = None,
+        skip: int = 0,
+        top: int = 50,
         sort_key: Optional[str] = None,
         sort_value: Optional[str] = None,
         **kwargs: Any
@@ -43893,9 +43893,9 @@ class StaticCidrsOperations:
         :type pool_name: str
         :keyword skip_token: Optional skip token. Default value is None.
         :paramtype skip_token: str
-        :keyword skip: Optional num entries to skip. Default value is None.
+        :keyword skip: Optional num entries to skip. Default value is 0.
         :paramtype skip: int
-        :keyword top: Optional num entries to show. Default value is None.
+        :keyword top: Optional num entries to show. Default value is 50.
         :paramtype top: int
         :keyword sort_key: Optional key by which to sort. Default value is None.
         :paramtype sort_key: str
@@ -59321,8 +59321,8 @@ class ReachabilityAnalysisIntentsOperations:
         workspace_name: str,
         *,
         skip_token: Optional[str] = None,
-        skip: Optional[int] = None,
-        top: Optional[int] = None,
+        skip: int = 0,
+        top: int = 50,
         sort_key: Optional[str] = None,
         sort_value: Optional[str] = None,
         **kwargs: Any
@@ -59340,9 +59340,9 @@ class ReachabilityAnalysisIntentsOperations:
         :type workspace_name: str
         :keyword skip_token: Optional skip token. Default value is None.
         :paramtype skip_token: str
-        :keyword skip: Optional num entries to skip. Default value is None.
+        :keyword skip: Optional num entries to skip. Default value is 0.
         :paramtype skip: int
-        :keyword top: Optional num entries to show. Default value is None.
+        :keyword top: Optional num entries to show. Default value is 50.
         :paramtype top: int
         :keyword sort_key: Optional key by which to sort. Default value is None.
         :paramtype sort_key: str
@@ -60148,8 +60148,8 @@ class VerifierWorkspacesOperations:
         network_manager_name: str,
         *,
         skip_token: Optional[str] = None,
-        skip: Optional[int] = None,
-        top: Optional[int] = None,
+        skip: int = 0,
+        top: int = 50,
         sort_key: Optional[str] = None,
         sort_value: Optional[str] = None,
         **kwargs: Any
@@ -60165,9 +60165,9 @@ class VerifierWorkspacesOperations:
         :type network_manager_name: str
         :keyword skip_token: Optional skip token. Default value is None.
         :paramtype skip_token: str
-        :keyword skip: Optional num entries to skip. Default value is None.
+        :keyword skip: Optional num entries to skip. Default value is 0.
         :paramtype skip: int
-        :keyword top: Optional num entries to show. Default value is None.
+        :keyword top: Optional num entries to show. Default value is 50.
         :paramtype top: int
         :keyword sort_key: Optional key by which to sort. Default value is None.
         :paramtype sort_key: str
@@ -60710,8 +60710,8 @@ class ReachabilityAnalysisRunsOperations:
         workspace_name: str,
         *,
         skip_token: Optional[str] = None,
-        skip: Optional[int] = None,
-        top: Optional[int] = None,
+        skip: int = 0,
+        top: int = 50,
         sort_key: Optional[str] = None,
         sort_value: Optional[str] = None,
         **kwargs: Any
@@ -60729,9 +60729,9 @@ class ReachabilityAnalysisRunsOperations:
         :type workspace_name: str
         :keyword skip_token: Optional skip token. Default value is None.
         :paramtype skip_token: str
-        :keyword skip: Optional num entries to skip. Default value is None.
+        :keyword skip: Optional num entries to skip. Default value is 0.
         :paramtype skip: int
-        :keyword top: Optional num entries to show. Default value is None.
+        :keyword top: Optional num entries to show. Default value is 50.
         :paramtype top: int
         :keyword sort_key: Optional key by which to sort. Default value is None.
         :paramtype sort_key: str
