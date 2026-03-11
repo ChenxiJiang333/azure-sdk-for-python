@@ -25,6 +25,7 @@ class TestKustoManagementOperationsResultsLocationOperations(AzureMgmtRecordedTe
             location="str",
             operation_id="str",
             api_version="2024-04-13",
+            operation_result_response_type="Location",
         )
 
         # please add some check logic here by yourself

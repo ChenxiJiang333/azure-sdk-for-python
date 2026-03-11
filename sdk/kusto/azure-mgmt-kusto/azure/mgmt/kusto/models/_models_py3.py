@@ -1,4 +1,4 @@
-# pylint: disable=too-many-lines
+# pylint: disable=line-too-long,useless-suppression,too-many-lines
 # coding=utf-8
 # --------------------------------------------------------------------------
 # Copyright (c) Microsoft Corporation. All rights reserved.
@@ -7,20 +7,15 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 
+from collections.abc import MutableMapping
 import datetime
-import sys
-from typing import Any, Dict, List, Optional, TYPE_CHECKING, Union
+from typing import Any, Optional, TYPE_CHECKING, Union
 
-from .. import _serialization
-
-if sys.version_info >= (3, 9):
-    from collections.abc import MutableMapping
-else:
-    from typing import MutableMapping  # type: ignore
+from .._utils import serialization as _serialization
 
 if TYPE_CHECKING:
     from .. import models as _models
-JSON = MutableMapping[str, Any]  # pylint: disable=unsubscriptable-object
+JSON = MutableMapping[str, Any]
 
 
 class AcceptedAudiences(_serialization.Model):
@@ -49,33 +44,39 @@ class Resource(_serialization.Model):
     Variables are only populated by the server, and will be ignored when sending a request.
 
     :ivar id: Fully qualified resource ID for the resource. Ex -
-     /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}.  # pylint: disable=line-too-long
+     /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}.
     :vartype id: str
     :ivar name: The name of the resource.
     :vartype name: str
     :ivar type: The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or
      "Microsoft.Storage/storageAccounts".
     :vartype type: str
+    :ivar system_data: Azure Resource Manager metadata containing createdBy and modifiedBy
+     information.
+    :vartype system_data: ~azure.mgmt.kusto.models.SystemData
     """
 
     _validation = {
         "id": {"readonly": True},
         "name": {"readonly": True},
         "type": {"readonly": True},
+        "system_data": {"readonly": True},
     }
 
     _attribute_map = {
         "id": {"key": "id", "type": "str"},
         "name": {"key": "name", "type": "str"},
         "type": {"key": "type", "type": "str"},
+        "system_data": {"key": "systemData", "type": "SystemData"},
     }
 
     def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
-        self.id = None
-        self.name = None
-        self.type = None
+        self.id: Optional[str] = None
+        self.name: Optional[str] = None
+        self.type: Optional[str] = None
+        self.system_data: Optional["_models.SystemData"] = None
 
 
 class ProxyResource(Resource):
@@ -85,13 +86,16 @@ class ProxyResource(Resource):
     Variables are only populated by the server, and will be ignored when sending a request.
 
     :ivar id: Fully qualified resource ID for the resource. Ex -
-     /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}.  # pylint: disable=line-too-long
+     /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}.
     :vartype id: str
     :ivar name: The name of the resource.
     :vartype name: str
     :ivar type: The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or
      "Microsoft.Storage/storageAccounts".
     :vartype type: str
+    :ivar system_data: Azure Resource Manager metadata containing createdBy and modifiedBy
+     information.
+    :vartype system_data: ~azure.mgmt.kusto.models.SystemData
     """
 
 
@@ -101,13 +105,16 @@ class AttachedDatabaseConfiguration(ProxyResource):
     Variables are only populated by the server, and will be ignored when sending a request.
 
     :ivar id: Fully qualified resource ID for the resource. Ex -
-     /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}.  # pylint: disable=line-too-long
+     /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}.
     :vartype id: str
     :ivar name: The name of the resource.
     :vartype name: str
     :ivar type: The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or
      "Microsoft.Storage/storageAccounts".
     :vartype type: str
+    :ivar system_data: Azure Resource Manager metadata containing createdBy and modifiedBy
+     information.
+    :vartype system_data: ~azure.mgmt.kusto.models.SystemData
     :ivar location: Resource location.
     :vartype location: str
     :ivar provisioning_state: The provisioned state of the resource. Known values are: "Running",
@@ -141,6 +148,7 @@ class AttachedDatabaseConfiguration(ProxyResource):
         "id": {"readonly": True},
         "name": {"readonly": True},
         "type": {"readonly": True},
+        "system_data": {"readonly": True},
         "provisioning_state": {"readonly": True},
         "attached_database_names": {"readonly": True},
     }
@@ -149,6 +157,7 @@ class AttachedDatabaseConfiguration(ProxyResource):
         "id": {"key": "id", "type": "str"},
         "name": {"key": "name", "type": "str"},
         "type": {"key": "type", "type": "str"},
+        "system_data": {"key": "systemData", "type": "SystemData"},
         "location": {"key": "location", "type": "str"},
         "provisioning_state": {"key": "properties.provisioningState", "type": "str"},
         "database_name": {"key": "properties.databaseName", "type": "str"},
@@ -200,10 +209,10 @@ class AttachedDatabaseConfiguration(ProxyResource):
         """
         super().__init__(**kwargs)
         self.location = location
-        self.provisioning_state = None
+        self.provisioning_state: Optional[Union[str, "_models.ProvisioningState"]] = None
         self.database_name = database_name
         self.cluster_resource_id = cluster_resource_id
-        self.attached_database_names = None
+        self.attached_database_names: Optional[list[str]] = None
         self.default_principals_modification_kind = default_principals_modification_kind
         self.table_level_sharing_properties = table_level_sharing_properties
         self.database_name_override = database_name_override
@@ -215,19 +224,31 @@ class AttachedDatabaseConfigurationListResult(_serialization.Model):
 
     :ivar value: The list of attached database configurations.
     :vartype value: list[~azure.mgmt.kusto.models.AttachedDatabaseConfiguration]
+    :ivar next_link: Link to the next page of results.
+    :vartype next_link: str
     """
 
     _attribute_map = {
         "value": {"key": "value", "type": "[AttachedDatabaseConfiguration]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(self, *, value: Optional[List["_models.AttachedDatabaseConfiguration"]] = None, **kwargs: Any) -> None:
+    def __init__(
+        self,
+        *,
+        value: Optional[list["_models.AttachedDatabaseConfiguration"]] = None,
+        next_link: Optional[str] = None,
+        **kwargs: Any
+    ) -> None:
         """
         :keyword value: The list of attached database configurations.
         :paramtype value: list[~azure.mgmt.kusto.models.AttachedDatabaseConfiguration]
+        :keyword next_link: Link to the next page of results.
+        :paramtype next_link: str
         """
         super().__init__(**kwargs)
         self.value = value
+        self.next_link = next_link
 
 
 class AttachedDatabaseConfigurationsCheckNameRequest(_serialization.Model):  # pylint: disable=name-too-long
@@ -445,25 +466,28 @@ class AzureSku(_serialization.Model):
 class CalloutPoliciesList(_serialization.Model):
     """A list of the service's callout policy objects.
 
-    :ivar value: A list of the service's callout policies.
+    All required parameters must be populated in order to send to server.
+
+    :ivar value: The CalloutPolicy items on this page. Required.
     :vartype value: list[~azure.mgmt.kusto.models.CalloutPolicy]
-    :ivar next_link: The URL to get the next set of callout policies list results if there are any.
+    :ivar next_link: The link to the next page of items.
     :vartype next_link: str
     """
+
+    _validation = {
+        "value": {"required": True},
+    }
 
     _attribute_map = {
         "value": {"key": "value", "type": "[CalloutPolicy]"},
         "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(
-        self, *, value: Optional[List["_models.CalloutPolicy"]] = None, next_link: Optional[str] = None, **kwargs: Any
-    ) -> None:
+    def __init__(self, *, value: list["_models.CalloutPolicy"], next_link: Optional[str] = None, **kwargs: Any) -> None:
         """
-        :keyword value: A list of the service's callout policies.
+        :keyword value: The CalloutPolicy items on this page. Required.
         :paramtype value: list[~azure.mgmt.kusto.models.CalloutPolicy]
-        :keyword next_link: The URL to get the next set of callout policies list results if there are
-         any.
+        :keyword next_link: The link to the next page of items.
         :paramtype next_link: str
         """
         super().__init__(**kwargs)
@@ -526,7 +550,7 @@ class CalloutPolicy(_serialization.Model):
         self.callout_uri_regex = callout_uri_regex
         self.callout_type = callout_type
         self.outbound_access = outbound_access
-        self.callout_id = None
+        self.callout_id: Optional[str] = None
 
 
 class CalloutPolicyToRemove(_serialization.Model):
@@ -645,13 +669,16 @@ class TrackedResource(Resource):
     All required parameters must be populated in order to send to server.
 
     :ivar id: Fully qualified resource ID for the resource. Ex -
-     /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}.  # pylint: disable=line-too-long
+     /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}.
     :vartype id: str
     :ivar name: The name of the resource.
     :vartype name: str
     :ivar type: The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or
      "Microsoft.Storage/storageAccounts".
     :vartype type: str
+    :ivar system_data: Azure Resource Manager metadata containing createdBy and modifiedBy
+     information.
+    :vartype system_data: ~azure.mgmt.kusto.models.SystemData
     :ivar tags: Resource tags.
     :vartype tags: dict[str, str]
     :ivar location: The geo-location where the resource lives. Required.
@@ -662,6 +689,7 @@ class TrackedResource(Resource):
         "id": {"readonly": True},
         "name": {"readonly": True},
         "type": {"readonly": True},
+        "system_data": {"readonly": True},
         "location": {"required": True},
     }
 
@@ -669,11 +697,12 @@ class TrackedResource(Resource):
         "id": {"key": "id", "type": "str"},
         "name": {"key": "name", "type": "str"},
         "type": {"key": "type", "type": "str"},
+        "system_data": {"key": "systemData", "type": "SystemData"},
         "tags": {"key": "tags", "type": "{str}"},
         "location": {"key": "location", "type": "str"},
     }
 
-    def __init__(self, *, location: str, tags: Optional[Dict[str, str]] = None, **kwargs: Any) -> None:
+    def __init__(self, *, location: str, tags: Optional[dict[str, str]] = None, **kwargs: Any) -> None:
         """
         :keyword tags: Resource tags.
         :paramtype tags: dict[str, str]
@@ -693,26 +722,30 @@ class Cluster(TrackedResource):
     All required parameters must be populated in order to send to server.
 
     :ivar id: Fully qualified resource ID for the resource. Ex -
-     /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}.  # pylint: disable=line-too-long
+     /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}.
     :vartype id: str
     :ivar name: The name of the resource.
     :vartype name: str
     :ivar type: The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or
      "Microsoft.Storage/storageAccounts".
     :vartype type: str
+    :ivar system_data: Azure Resource Manager metadata containing createdBy and modifiedBy
+     information.
+    :vartype system_data: ~azure.mgmt.kusto.models.SystemData
     :ivar tags: Resource tags.
     :vartype tags: dict[str, str]
     :ivar location: The geo-location where the resource lives. Required.
     :vartype location: str
     :ivar sku: The SKU of the cluster. Required.
     :vartype sku: ~azure.mgmt.kusto.models.AzureSku
-    :ivar system_data: Metadata pertaining to creation and last modification of the resource.
-    :vartype system_data: ~azure.mgmt.kusto.models.SystemData
-    :ivar zones: The availability zones of the cluster.
+    :ivar zones: The availability zones.
     :vartype zones: list[str]
     :ivar identity: The identity of the cluster, if configured.
     :vartype identity: ~azure.mgmt.kusto.models.Identity
-    :ivar etag: A unique read-only string that changes whenever the resource is updated.
+    :ivar etag: "If etag is provided in the response body, it may also be provided as a header per
+     the normal etag convention.  Entity tags are used for comparing two or more entities from the
+     same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match
+     (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields.").
     :vartype etag: str
     :ivar state: The state of the resource. Known values are: "Creating", "Unavailable", "Running",
      "Deleting", "Deleted", "Stopping", "Stopped", "Starting", "Updating", and "Migrated".
@@ -789,9 +822,9 @@ class Cluster(TrackedResource):
         "id": {"readonly": True},
         "name": {"readonly": True},
         "type": {"readonly": True},
+        "system_data": {"readonly": True},
         "location": {"required": True},
         "sku": {"required": True},
-        "system_data": {"readonly": True},
         "etag": {"readonly": True},
         "state": {"readonly": True},
         "provisioning_state": {"readonly": True},
@@ -807,10 +840,10 @@ class Cluster(TrackedResource):
         "id": {"key": "id", "type": "str"},
         "name": {"key": "name", "type": "str"},
         "type": {"key": "type", "type": "str"},
+        "system_data": {"key": "systemData", "type": "SystemData"},
         "tags": {"key": "tags", "type": "{str}"},
         "location": {"key": "location", "type": "str"},
         "sku": {"key": "sku", "type": "AzureSku"},
-        "system_data": {"key": "systemData", "type": "SystemData"},
         "zones": {"key": "zones", "type": "[str]"},
         "identity": {"key": "identity", "type": "Identity"},
         "etag": {"key": "etag", "type": "str"},
@@ -857,10 +890,10 @@ class Cluster(TrackedResource):
         *,
         location: str,
         sku: "_models.AzureSku",
-        tags: Optional[Dict[str, str]] = None,
-        zones: Optional[List[str]] = None,
+        tags: Optional[dict[str, str]] = None,
+        zones: Optional[list[str]] = None,
         identity: Optional["_models.Identity"] = None,
-        trusted_external_tenants: Optional[List["_models.TrustedExternalTenant"]] = None,
+        trusted_external_tenants: Optional[list["_models.TrustedExternalTenant"]] = None,
         optimized_autoscale: Optional["_models.OptimizedAutoscale"] = None,
         enable_disk_encryption: bool = False,
         enable_streaming_ingest: bool = False,
@@ -870,13 +903,13 @@ class Cluster(TrackedResource):
         language_extensions: Optional["_models.LanguageExtensionsList"] = None,
         enable_double_encryption: bool = False,
         public_network_access: Union[str, "_models.PublicNetworkAccess"] = "Enabled",
-        allowed_ip_range_list: Optional[List[str]] = None,
+        allowed_ip_range_list: Optional[list[str]] = None,
         engine_type: Union[str, "_models.EngineType"] = "V3",
-        accepted_audiences: Optional[List["_models.AcceptedAudiences"]] = None,
+        accepted_audiences: Optional[list["_models.AcceptedAudiences"]] = None,
         enable_auto_stop: bool = True,
         restrict_outbound_network_access: Union[str, "_models.ClusterNetworkAccessFlag"] = "Disabled",
-        allowed_fqdn_list: Optional[List[str]] = None,
-        callout_policies: Optional[List["_models.CalloutPolicy"]] = None,
+        allowed_fqdn_list: Optional[list[str]] = None,
+        callout_policies: Optional[list["_models.CalloutPolicy"]] = None,
         public_ip_type: Union[str, "_models.PublicIPType"] = "IPv4",
         virtual_cluster_graduation_properties: Optional[str] = None,
         **kwargs: Any
@@ -888,7 +921,7 @@ class Cluster(TrackedResource):
         :paramtype location: str
         :keyword sku: The SKU of the cluster. Required.
         :paramtype sku: ~azure.mgmt.kusto.models.AzureSku
-        :keyword zones: The availability zones of the cluster.
+        :keyword zones: The availability zones.
         :paramtype zones: list[str]
         :keyword identity: The identity of the cluster, if configured.
         :paramtype identity: ~azure.mgmt.kusto.models.Identity
@@ -945,15 +978,14 @@ class Cluster(TrackedResource):
         """
         super().__init__(tags=tags, location=location, **kwargs)
         self.sku = sku
-        self.system_data = None
         self.zones = zones
         self.identity = identity
-        self.etag = None
-        self.state = None
-        self.provisioning_state = None
-        self.uri = None
-        self.data_ingestion_uri = None
-        self.state_reason = None
+        self.etag: Optional[str] = None
+        self.state: Optional[Union[str, "_models.State"]] = None
+        self.provisioning_state: Optional[Union[str, "_models.ProvisioningState"]] = None
+        self.uri: Optional[str] = None
+        self.data_ingestion_uri: Optional[str] = None
+        self.state_reason: Optional[str] = None
         self.trusted_external_tenants = trusted_external_tenants
         self.optimized_autoscale = optimized_autoscale
         self.enable_disk_encryption = enable_disk_encryption
@@ -973,9 +1005,9 @@ class Cluster(TrackedResource):
         self.callout_policies = callout_policies
         self.public_ip_type = public_ip_type
         self.virtual_cluster_graduation_properties = virtual_cluster_graduation_properties
-        self.private_endpoint_connections = None
-        self.migration_cluster = None
-        self.zone_status = None
+        self.private_endpoint_connections: Optional[list["_models.PrivateEndpointConnection"]] = None
+        self.migration_cluster: Optional["_models.MigrationClusterProperties"] = None
+        self.zone_status: Optional[Union[str, "_models.ZoneStatus"]] = None
 
 
 class ClusterCheckNameRequest(_serialization.Model):
@@ -1018,19 +1050,27 @@ class ClusterListResult(_serialization.Model):
 
     :ivar value: The list of Kusto clusters.
     :vartype value: list[~azure.mgmt.kusto.models.Cluster]
+    :ivar next_link: Link to the next page of results.
+    :vartype next_link: str
     """
 
     _attribute_map = {
         "value": {"key": "value", "type": "[Cluster]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(self, *, value: Optional[List["_models.Cluster"]] = None, **kwargs: Any) -> None:
+    def __init__(
+        self, *, value: Optional[list["_models.Cluster"]] = None, next_link: Optional[str] = None, **kwargs: Any
+    ) -> None:
         """
         :keyword value: The list of Kusto clusters.
         :paramtype value: list[~azure.mgmt.kusto.models.Cluster]
+        :keyword next_link: Link to the next page of results.
+        :paramtype next_link: str
         """
         super().__init__(**kwargs)
         self.value = value
+        self.next_link = next_link
 
 
 class ClusterMigrateRequest(_serialization.Model):
@@ -1065,13 +1105,16 @@ class ClusterPrincipalAssignment(ProxyResource):
     Variables are only populated by the server, and will be ignored when sending a request.
 
     :ivar id: Fully qualified resource ID for the resource. Ex -
-     /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}.  # pylint: disable=line-too-long
+     /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}.
     :vartype id: str
     :ivar name: The name of the resource.
     :vartype name: str
     :ivar type: The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or
      "Microsoft.Storage/storageAccounts".
     :vartype type: str
+    :ivar system_data: Azure Resource Manager metadata containing createdBy and modifiedBy
+     information.
+    :vartype system_data: ~azure.mgmt.kusto.models.SystemData
     :ivar principal_id: The principal ID assigned to the cluster principal. It can be a user email,
      application ID, or security group name.
     :vartype principal_id: str
@@ -1097,6 +1140,7 @@ class ClusterPrincipalAssignment(ProxyResource):
         "id": {"readonly": True},
         "name": {"readonly": True},
         "type": {"readonly": True},
+        "system_data": {"readonly": True},
         "tenant_name": {"readonly": True},
         "principal_name": {"readonly": True},
         "provisioning_state": {"readonly": True},
@@ -1107,6 +1151,7 @@ class ClusterPrincipalAssignment(ProxyResource):
         "id": {"key": "id", "type": "str"},
         "name": {"key": "name", "type": "str"},
         "type": {"key": "type", "type": "str"},
+        "system_data": {"key": "systemData", "type": "SystemData"},
         "principal_id": {"key": "properties.principalId", "type": "str"},
         "role": {"key": "properties.role", "type": "str"},
         "tenant_id": {"key": "properties.tenantId", "type": "str"},
@@ -1143,10 +1188,10 @@ class ClusterPrincipalAssignment(ProxyResource):
         self.role = role
         self.tenant_id = tenant_id
         self.principal_type = principal_type
-        self.tenant_name = None
-        self.principal_name = None
-        self.provisioning_state = None
-        self.aad_object_id = None
+        self.tenant_name: Optional[str] = None
+        self.principal_name: Optional[str] = None
+        self.provisioning_state: Optional[Union[str, "_models.ProvisioningState"]] = None
+        self.aad_object_id: Optional[str] = None
 
 
 class ClusterPrincipalAssignmentCheckNameRequest(_serialization.Model):  # pylint: disable=name-too-long
@@ -1189,19 +1234,31 @@ class ClusterPrincipalAssignmentListResult(_serialization.Model):
 
     :ivar value: The list of Kusto cluster principal assignments.
     :vartype value: list[~azure.mgmt.kusto.models.ClusterPrincipalAssignment]
+    :ivar next_link: Link to the next page of results.
+    :vartype next_link: str
     """
 
     _attribute_map = {
         "value": {"key": "value", "type": "[ClusterPrincipalAssignment]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(self, *, value: Optional[List["_models.ClusterPrincipalAssignment"]] = None, **kwargs: Any) -> None:
+    def __init__(
+        self,
+        *,
+        value: Optional[list["_models.ClusterPrincipalAssignment"]] = None,
+        next_link: Optional[str] = None,
+        **kwargs: Any
+    ) -> None:
         """
         :keyword value: The list of Kusto cluster principal assignments.
         :paramtype value: list[~azure.mgmt.kusto.models.ClusterPrincipalAssignment]
+        :keyword next_link: Link to the next page of results.
+        :paramtype next_link: str
         """
         super().__init__(**kwargs)
         self.value = value
+        self.next_link = next_link
 
 
 class ClusterUpdate(Resource):
@@ -1210,13 +1267,16 @@ class ClusterUpdate(Resource):
     Variables are only populated by the server, and will be ignored when sending a request.
 
     :ivar id: Fully qualified resource ID for the resource. Ex -
-     /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}.  # pylint: disable=line-too-long
+     /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}.
     :vartype id: str
     :ivar name: The name of the resource.
     :vartype name: str
     :ivar type: The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or
      "Microsoft.Storage/storageAccounts".
     :vartype type: str
+    :ivar system_data: Azure Resource Manager metadata containing createdBy and modifiedBy
+     information.
+    :vartype system_data: ~azure.mgmt.kusto.models.SystemData
     :ivar tags: Resource tags.
     :vartype tags: dict[str, str]
     :ivar location: Resource location.
@@ -1302,6 +1362,7 @@ class ClusterUpdate(Resource):
         "id": {"readonly": True},
         "name": {"readonly": True},
         "type": {"readonly": True},
+        "system_data": {"readonly": True},
         "state": {"readonly": True},
         "provisioning_state": {"readonly": True},
         "uri": {"readonly": True},
@@ -1316,6 +1377,7 @@ class ClusterUpdate(Resource):
         "id": {"key": "id", "type": "str"},
         "name": {"key": "name", "type": "str"},
         "type": {"key": "type", "type": "str"},
+        "system_data": {"key": "systemData", "type": "SystemData"},
         "tags": {"key": "tags", "type": "{str}"},
         "location": {"key": "location", "type": "str"},
         "sku": {"key": "sku", "type": "AzureSku"},
@@ -1362,12 +1424,12 @@ class ClusterUpdate(Resource):
     def __init__(  # pylint: disable=too-many-locals
         self,
         *,
-        tags: Optional[Dict[str, str]] = None,
+        tags: Optional[dict[str, str]] = None,
         location: Optional[str] = None,
         sku: Optional["_models.AzureSku"] = None,
-        zones: Optional[List[str]] = None,
+        zones: Optional[list[str]] = None,
         identity: Optional["_models.Identity"] = None,
-        trusted_external_tenants: Optional[List["_models.TrustedExternalTenant"]] = None,
+        trusted_external_tenants: Optional[list["_models.TrustedExternalTenant"]] = None,
         optimized_autoscale: Optional["_models.OptimizedAutoscale"] = None,
         enable_disk_encryption: bool = False,
         enable_streaming_ingest: bool = False,
@@ -1377,13 +1439,13 @@ class ClusterUpdate(Resource):
         language_extensions: Optional["_models.LanguageExtensionsList"] = None,
         enable_double_encryption: bool = False,
         public_network_access: Union[str, "_models.PublicNetworkAccess"] = "Enabled",
-        allowed_ip_range_list: Optional[List[str]] = None,
+        allowed_ip_range_list: Optional[list[str]] = None,
         engine_type: Union[str, "_models.EngineType"] = "V3",
-        accepted_audiences: Optional[List["_models.AcceptedAudiences"]] = None,
+        accepted_audiences: Optional[list["_models.AcceptedAudiences"]] = None,
         enable_auto_stop: bool = True,
         restrict_outbound_network_access: Union[str, "_models.ClusterNetworkAccessFlag"] = "Disabled",
-        allowed_fqdn_list: Optional[List[str]] = None,
-        callout_policies: Optional[List["_models.CalloutPolicy"]] = None,
+        allowed_fqdn_list: Optional[list[str]] = None,
+        callout_policies: Optional[list["_models.CalloutPolicy"]] = None,
         public_ip_type: Union[str, "_models.PublicIPType"] = "IPv4",
         virtual_cluster_graduation_properties: Optional[str] = None,
         **kwargs: Any
@@ -1456,11 +1518,11 @@ class ClusterUpdate(Resource):
         self.sku = sku
         self.zones = zones
         self.identity = identity
-        self.state = None
-        self.provisioning_state = None
-        self.uri = None
-        self.data_ingestion_uri = None
-        self.state_reason = None
+        self.state: Optional[Union[str, "_models.State"]] = None
+        self.provisioning_state: Optional[Union[str, "_models.ProvisioningState"]] = None
+        self.uri: Optional[str] = None
+        self.data_ingestion_uri: Optional[str] = None
+        self.state_reason: Optional[str] = None
         self.trusted_external_tenants = trusted_external_tenants
         self.optimized_autoscale = optimized_autoscale
         self.enable_disk_encryption = enable_disk_encryption
@@ -1480,9 +1542,9 @@ class ClusterUpdate(Resource):
         self.callout_policies = callout_policies
         self.public_ip_type = public_ip_type
         self.virtual_cluster_graduation_properties = virtual_cluster_graduation_properties
-        self.private_endpoint_connections = None
-        self.migration_cluster = None
-        self.zone_status = None
+        self.private_endpoint_connections: Optional[list["_models.PrivateEndpointConnection"]] = None
+        self.migration_cluster: Optional["_models.MigrationClusterProperties"] = None
+        self.zone_status: Optional[Union[str, "_models.ZoneStatus"]] = None
 
 
 class ComponentsSgqdofSchemasIdentityPropertiesUserassignedidentitiesAdditionalproperties(
@@ -1511,8 +1573,8 @@ class ComponentsSgqdofSchemasIdentityPropertiesUserassignedidentitiesAdditionalp
     def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
-        self.principal_id = None
-        self.client_id = None
+        self.principal_id: Optional[str] = None
+        self.client_id: Optional[str] = None
 
 
 class DataConnection(ProxyResource):
@@ -1526,13 +1588,16 @@ class DataConnection(ProxyResource):
     All required parameters must be populated in order to send to server.
 
     :ivar id: Fully qualified resource ID for the resource. Ex -
-     /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}.  # pylint: disable=line-too-long
+     /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}.
     :vartype id: str
     :ivar name: The name of the resource.
     :vartype name: str
     :ivar type: The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or
      "Microsoft.Storage/storageAccounts".
     :vartype type: str
+    :ivar system_data: Azure Resource Manager metadata containing createdBy and modifiedBy
+     information.
+    :vartype system_data: ~azure.mgmt.kusto.models.SystemData
     :ivar location: Resource location.
     :vartype location: str
     :ivar kind: Kind of the endpoint for the data connection. Required. Known values are:
@@ -1544,6 +1609,7 @@ class DataConnection(ProxyResource):
         "id": {"readonly": True},
         "name": {"readonly": True},
         "type": {"readonly": True},
+        "system_data": {"readonly": True},
         "kind": {"required": True},
     }
 
@@ -1551,6 +1617,7 @@ class DataConnection(ProxyResource):
         "id": {"key": "id", "type": "str"},
         "name": {"key": "name", "type": "str"},
         "type": {"key": "type", "type": "str"},
+        "system_data": {"key": "systemData", "type": "SystemData"},
         "location": {"key": "location", "type": "str"},
         "kind": {"key": "kind", "type": "str"},
     }
@@ -1582,13 +1649,16 @@ class CosmosDbDataConnection(DataConnection):
     All required parameters must be populated in order to send to server.
 
     :ivar id: Fully qualified resource ID for the resource. Ex -
-     /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}.  # pylint: disable=line-too-long
+     /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}.
     :vartype id: str
     :ivar name: The name of the resource.
     :vartype name: str
     :ivar type: The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or
      "Microsoft.Storage/storageAccounts".
     :vartype type: str
+    :ivar system_data: Azure Resource Manager metadata containing createdBy and modifiedBy
+     information.
+    :vartype system_data: ~azure.mgmt.kusto.models.SystemData
     :ivar location: Resource location.
     :vartype location: str
     :ivar kind: Kind of the endpoint for the data connection. Required. Known values are:
@@ -1624,6 +1694,7 @@ class CosmosDbDataConnection(DataConnection):
         "id": {"readonly": True},
         "name": {"readonly": True},
         "type": {"readonly": True},
+        "system_data": {"readonly": True},
         "kind": {"required": True},
         "managed_identity_object_id": {"readonly": True},
         "provisioning_state": {"readonly": True},
@@ -1633,6 +1704,7 @@ class CosmosDbDataConnection(DataConnection):
         "id": {"key": "id", "type": "str"},
         "name": {"key": "name", "type": "str"},
         "type": {"key": "type", "type": "str"},
+        "system_data": {"key": "systemData", "type": "SystemData"},
         "location": {"key": "location", "type": "str"},
         "kind": {"key": "kind", "type": "str"},
         "table_name": {"key": "properties.tableName", "type": "str"},
@@ -1687,12 +1759,12 @@ class CosmosDbDataConnection(DataConnection):
         self.table_name = table_name
         self.mapping_rule_name = mapping_rule_name
         self.managed_identity_resource_id = managed_identity_resource_id
-        self.managed_identity_object_id = None
+        self.managed_identity_object_id: Optional[str] = None
         self.cosmos_db_account_resource_id = cosmos_db_account_resource_id
         self.cosmos_db_database = cosmos_db_database
         self.cosmos_db_container = cosmos_db_container
         self.retrieval_start_date = retrieval_start_date
-        self.provisioning_state = None
+        self.provisioning_state: Optional[Union[str, "_models.ProvisioningState"]] = None
 
 
 class Database(ProxyResource):
@@ -1706,13 +1778,16 @@ class Database(ProxyResource):
     All required parameters must be populated in order to send to server.
 
     :ivar id: Fully qualified resource ID for the resource. Ex -
-     /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}.  # pylint: disable=line-too-long
+     /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}.
     :vartype id: str
     :ivar name: The name of the resource.
     :vartype name: str
     :ivar type: The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or
      "Microsoft.Storage/storageAccounts".
     :vartype type: str
+    :ivar system_data: Azure Resource Manager metadata containing createdBy and modifiedBy
+     information.
+    :vartype system_data: ~azure.mgmt.kusto.models.SystemData
     :ivar location: Resource location.
     :vartype location: str
     :ivar kind: Kind of the database. Required. Known values are: "ReadWrite" and
@@ -1724,6 +1799,7 @@ class Database(ProxyResource):
         "id": {"readonly": True},
         "name": {"readonly": True},
         "type": {"readonly": True},
+        "system_data": {"readonly": True},
         "kind": {"required": True},
     }
 
@@ -1731,6 +1807,7 @@ class Database(ProxyResource):
         "id": {"key": "id", "type": "str"},
         "name": {"key": "name", "type": "str"},
         "type": {"key": "type", "type": "str"},
+        "system_data": {"key": "systemData", "type": "SystemData"},
         "location": {"key": "location", "type": "str"},
         "kind": {"key": "kind", "type": "str"},
     }
@@ -1808,31 +1885,35 @@ class DatabaseInviteFollowerResult(_serialization.Model):
 
 
 class DatabaseListResult(_serialization.Model):
-    """The list Kusto databases operation response.
+    """The response of a Database list operation.
 
-    :ivar next_link: Link to the next page of results.
-    :vartype next_link: str
-    :ivar value: The list of Kusto databases.
+    All required parameters must be populated in order to send to server.
+
+    :ivar value: The Database items on this page. Required.
     :vartype value: list[~azure.mgmt.kusto.models.Database]
+    :ivar next_link: The link to the next page of items.
+    :vartype next_link: str
     """
 
-    _attribute_map = {
-        "next_link": {"key": "nextLink", "type": "str"},
-        "value": {"key": "value", "type": "[Database]"},
+    _validation = {
+        "value": {"required": True},
     }
 
-    def __init__(
-        self, *, next_link: Optional[str] = None, value: Optional[List["_models.Database"]] = None, **kwargs: Any
-    ) -> None:
+    _attribute_map = {
+        "value": {"key": "value", "type": "[Database]"},
+        "next_link": {"key": "nextLink", "type": "str"},
+    }
+
+    def __init__(self, *, value: list["_models.Database"], next_link: Optional[str] = None, **kwargs: Any) -> None:
         """
-        :keyword next_link: Link to the next page of results.
-        :paramtype next_link: str
-        :keyword value: The list of Kusto databases.
+        :keyword value: The Database items on this page. Required.
         :paramtype value: list[~azure.mgmt.kusto.models.Database]
+        :keyword next_link: The link to the next page of items.
+        :paramtype next_link: str
         """
         super().__init__(**kwargs)
-        self.next_link = next_link
         self.value = value
+        self.next_link = next_link
 
 
 class DatabasePrincipal(_serialization.Model):
@@ -1909,7 +1990,7 @@ class DatabasePrincipal(_serialization.Model):
         self.fqn = fqn
         self.email = email
         self.app_id = app_id
-        self.tenant_name = None
+        self.tenant_name: Optional[str] = None
 
 
 class DatabasePrincipalAssignment(ProxyResource):
@@ -1918,13 +1999,16 @@ class DatabasePrincipalAssignment(ProxyResource):
     Variables are only populated by the server, and will be ignored when sending a request.
 
     :ivar id: Fully qualified resource ID for the resource. Ex -
-     /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}.  # pylint: disable=line-too-long
+     /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}.
     :vartype id: str
     :ivar name: The name of the resource.
     :vartype name: str
     :ivar type: The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or
      "Microsoft.Storage/storageAccounts".
     :vartype type: str
+    :ivar system_data: Azure Resource Manager metadata containing createdBy and modifiedBy
+     information.
+    :vartype system_data: ~azure.mgmt.kusto.models.SystemData
     :ivar principal_id: The principal ID assigned to the database principal. It can be a user
      email, application ID, or security group name.
     :vartype principal_id: str
@@ -1950,6 +2034,7 @@ class DatabasePrincipalAssignment(ProxyResource):
         "id": {"readonly": True},
         "name": {"readonly": True},
         "type": {"readonly": True},
+        "system_data": {"readonly": True},
         "tenant_name": {"readonly": True},
         "principal_name": {"readonly": True},
         "provisioning_state": {"readonly": True},
@@ -1960,6 +2045,7 @@ class DatabasePrincipalAssignment(ProxyResource):
         "id": {"key": "id", "type": "str"},
         "name": {"key": "name", "type": "str"},
         "type": {"key": "type", "type": "str"},
+        "system_data": {"key": "systemData", "type": "SystemData"},
         "principal_id": {"key": "properties.principalId", "type": "str"},
         "role": {"key": "properties.role", "type": "str"},
         "tenant_id": {"key": "properties.tenantId", "type": "str"},
@@ -1996,10 +2082,10 @@ class DatabasePrincipalAssignment(ProxyResource):
         self.role = role
         self.tenant_id = tenant_id
         self.principal_type = principal_type
-        self.tenant_name = None
-        self.principal_name = None
-        self.provisioning_state = None
-        self.aad_object_id = None
+        self.tenant_name: Optional[str] = None
+        self.principal_name: Optional[str] = None
+        self.provisioning_state: Optional[Union[str, "_models.ProvisioningState"]] = None
+        self.aad_object_id: Optional[str] = None
 
 
 class DatabasePrincipalAssignmentCheckNameRequest(_serialization.Model):  # pylint: disable=name-too-long
@@ -2042,19 +2128,31 @@ class DatabasePrincipalAssignmentListResult(_serialization.Model):
 
     :ivar value: The list of Kusto database principal assignments.
     :vartype value: list[~azure.mgmt.kusto.models.DatabasePrincipalAssignment]
+    :ivar next_link: Link to the next page of results.
+    :vartype next_link: str
     """
 
     _attribute_map = {
         "value": {"key": "value", "type": "[DatabasePrincipalAssignment]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(self, *, value: Optional[List["_models.DatabasePrincipalAssignment"]] = None, **kwargs: Any) -> None:
+    def __init__(
+        self,
+        *,
+        value: Optional[list["_models.DatabasePrincipalAssignment"]] = None,
+        next_link: Optional[str] = None,
+        **kwargs: Any
+    ) -> None:
         """
         :keyword value: The list of Kusto database principal assignments.
         :paramtype value: list[~azure.mgmt.kusto.models.DatabasePrincipalAssignment]
+        :keyword next_link: Link to the next page of results.
+        :paramtype next_link: str
         """
         super().__init__(**kwargs)
         self.value = value
+        self.next_link = next_link
 
 
 class DatabasePrincipalListRequest(_serialization.Model):
@@ -2068,7 +2166,7 @@ class DatabasePrincipalListRequest(_serialization.Model):
         "value": {"key": "value", "type": "[DatabasePrincipal]"},
     }
 
-    def __init__(self, *, value: Optional[List["_models.DatabasePrincipal"]] = None, **kwargs: Any) -> None:
+    def __init__(self, *, value: Optional[list["_models.DatabasePrincipal"]] = None, **kwargs: Any) -> None:
         """
         :keyword value: The list of Kusto database principals.
         :paramtype value: list[~azure.mgmt.kusto.models.DatabasePrincipal]
@@ -2082,19 +2180,31 @@ class DatabasePrincipalListResult(_serialization.Model):
 
     :ivar value: The list of Kusto database principals.
     :vartype value: list[~azure.mgmt.kusto.models.DatabasePrincipal]
+    :ivar next_link: Link to the next page of results.
+    :vartype next_link: str
     """
 
     _attribute_map = {
         "value": {"key": "value", "type": "[DatabasePrincipal]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(self, *, value: Optional[List["_models.DatabasePrincipal"]] = None, **kwargs: Any) -> None:
+    def __init__(
+        self,
+        *,
+        value: Optional[list["_models.DatabasePrincipal"]] = None,
+        next_link: Optional[str] = None,
+        **kwargs: Any
+    ) -> None:
         """
         :keyword value: The list of Kusto database principals.
         :paramtype value: list[~azure.mgmt.kusto.models.DatabasePrincipal]
+        :keyword next_link: Link to the next page of results.
+        :paramtype next_link: str
         """
         super().__init__(**kwargs)
         self.value = value
+        self.next_link = next_link
 
 
 class DatabaseStatistics(_serialization.Model):
@@ -2157,19 +2267,27 @@ class DataConnectionListResult(_serialization.Model):
 
     :ivar value: The list of Kusto data connections.
     :vartype value: list[~azure.mgmt.kusto.models.DataConnection]
+    :ivar next_link: Link to the next page of results.
+    :vartype next_link: str
     """
 
     _attribute_map = {
         "value": {"key": "value", "type": "[DataConnection]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(self, *, value: Optional[List["_models.DataConnection"]] = None, **kwargs: Any) -> None:
+    def __init__(
+        self, *, value: Optional[list["_models.DataConnection"]] = None, next_link: Optional[str] = None, **kwargs: Any
+    ) -> None:
         """
         :keyword value: The list of Kusto data connections.
         :paramtype value: list[~azure.mgmt.kusto.models.DataConnection]
+        :keyword next_link: Link to the next page of results.
+        :paramtype next_link: str
         """
         super().__init__(**kwargs)
         self.value = value
+        self.next_link = next_link
 
 
 class DataConnectionValidation(_serialization.Model):
@@ -2216,7 +2334,7 @@ class DataConnectionValidationListResult(_serialization.Model):
     }
 
     def __init__(
-        self, *, value: Optional[List["_models.DataConnectionValidationResult"]] = None, **kwargs: Any
+        self, *, value: Optional[list["_models.DataConnectionValidationResult"]] = None, **kwargs: Any
     ) -> None:
         """
         :keyword value: The list of Kusto data connection validation errors.
@@ -2257,7 +2375,7 @@ class DiagnoseVirtualNetworkResult(_serialization.Model):
         "findings": {"key": "findings", "type": "[str]"},
     }
 
-    def __init__(self, *, findings: Optional[List[str]] = None, **kwargs: Any) -> None:
+    def __init__(self, *, findings: Optional[list[str]] = None, **kwargs: Any) -> None:
         """
         :keyword findings: The list of network connectivity diagnostic finding.
         :paramtype findings: list[str]
@@ -2284,7 +2402,7 @@ class EndpointDependency(_serialization.Model):
         self,
         *,
         domain_name: Optional[str] = None,
-        endpoint_details: Optional[List["_models.EndpointDetail"]] = None,
+        endpoint_details: Optional[list["_models.EndpointDetail"]] = None,
         **kwargs: Any
     ) -> None:
         """
@@ -2348,8 +2466,8 @@ class ErrorAdditionalInfo(_serialization.Model):
     def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
-        self.type = None
-        self.info = None
+        self.type: Optional[str] = None
+        self.info: Optional[JSON] = None
 
 
 class ErrorDetail(_serialization.Model):
@@ -2388,11 +2506,11 @@ class ErrorDetail(_serialization.Model):
     def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
-        self.code = None
-        self.message = None
-        self.target = None
-        self.details = None
-        self.additional_info = None
+        self.code: Optional[str] = None
+        self.message: Optional[str] = None
+        self.target: Optional[str] = None
+        self.details: Optional[list["_models.ErrorDetail"]] = None
+        self.additional_info: Optional[list["_models.ErrorAdditionalInfo"]] = None
 
 
 class ErrorResponse(_serialization.Model):
@@ -2424,13 +2542,16 @@ class EventGridDataConnection(DataConnection):
     All required parameters must be populated in order to send to server.
 
     :ivar id: Fully qualified resource ID for the resource. Ex -
-     /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}.  # pylint: disable=line-too-long
+     /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}.
     :vartype id: str
     :ivar name: The name of the resource.
     :vartype name: str
     :ivar type: The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or
      "Microsoft.Storage/storageAccounts".
     :vartype type: str
+    :ivar system_data: Azure Resource Manager metadata containing createdBy and modifiedBy
+     information.
+    :vartype system_data: ~azure.mgmt.kusto.models.SystemData
     :ivar location: Resource location.
     :vartype location: str
     :ivar kind: Kind of the endpoint for the data connection. Required. Known values are:
@@ -2480,6 +2601,7 @@ class EventGridDataConnection(DataConnection):
         "id": {"readonly": True},
         "name": {"readonly": True},
         "type": {"readonly": True},
+        "system_data": {"readonly": True},
         "kind": {"required": True},
         "managed_identity_object_id": {"readonly": True},
         "provisioning_state": {"readonly": True},
@@ -2489,6 +2611,7 @@ class EventGridDataConnection(DataConnection):
         "id": {"key": "id", "type": "str"},
         "name": {"key": "name", "type": "str"},
         "type": {"key": "type", "type": "str"},
+        "system_data": {"key": "systemData", "type": "SystemData"},
         "location": {"key": "location", "type": "str"},
         "kind": {"key": "kind", "type": "str"},
         "storage_account_resource_id": {"key": "properties.storageAccountResourceId", "type": "str"},
@@ -2573,9 +2696,9 @@ class EventGridDataConnection(DataConnection):
         self.ignore_first_record = ignore_first_record
         self.blob_storage_event_type = blob_storage_event_type
         self.managed_identity_resource_id = managed_identity_resource_id
-        self.managed_identity_object_id = None
+        self.managed_identity_object_id: Optional[str] = None
         self.database_routing = database_routing
-        self.provisioning_state = None
+        self.provisioning_state: Optional[Union[str, "_models.ProvisioningState"]] = None
 
 
 class EventHubDataConnection(DataConnection):
@@ -2586,13 +2709,16 @@ class EventHubDataConnection(DataConnection):
     All required parameters must be populated in order to send to server.
 
     :ivar id: Fully qualified resource ID for the resource. Ex -
-     /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}.  # pylint: disable=line-too-long
+     /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}.
     :vartype id: str
     :ivar name: The name of the resource.
     :vartype name: str
     :ivar type: The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or
      "Microsoft.Storage/storageAccounts".
     :vartype type: str
+    :ivar system_data: Azure Resource Manager metadata containing createdBy and modifiedBy
+     information.
+    :vartype system_data: ~azure.mgmt.kusto.models.SystemData
     :ivar location: Resource location.
     :vartype location: str
     :ivar kind: Kind of the endpoint for the data connection. Required. Known values are:
@@ -2615,8 +2741,7 @@ class EventHubDataConnection(DataConnection):
     :vartype data_format: str or ~azure.mgmt.kusto.models.EventHubDataFormat
     :ivar event_system_properties: System properties of the event hub.
     :vartype event_system_properties: list[str]
-    :ivar compression: The event hub messages compression type. Known values are: "None" and
-     "GZip".
+    :ivar compression: The compression type. Known values are: "None" and "GZip".
     :vartype compression: str or ~azure.mgmt.kusto.models.Compression
     :ivar provisioning_state: The provisioned state of the resource. Known values are: "Running",
      "Creating", "Deleting", "Succeeded", "Failed", "Moving", and "Canceled".
@@ -2640,6 +2765,7 @@ class EventHubDataConnection(DataConnection):
         "id": {"readonly": True},
         "name": {"readonly": True},
         "type": {"readonly": True},
+        "system_data": {"readonly": True},
         "kind": {"required": True},
         "provisioning_state": {"readonly": True},
         "managed_identity_object_id": {"readonly": True},
@@ -2649,6 +2775,7 @@ class EventHubDataConnection(DataConnection):
         "id": {"key": "id", "type": "str"},
         "name": {"key": "name", "type": "str"},
         "type": {"key": "type", "type": "str"},
+        "system_data": {"key": "systemData", "type": "SystemData"},
         "location": {"key": "location", "type": "str"},
         "kind": {"key": "kind", "type": "str"},
         "event_hub_resource_id": {"key": "properties.eventHubResourceId", "type": "str"},
@@ -2674,7 +2801,7 @@ class EventHubDataConnection(DataConnection):
         table_name: Optional[str] = None,
         mapping_rule_name: Optional[str] = None,
         data_format: Optional[Union[str, "_models.EventHubDataFormat"]] = None,
-        event_system_properties: Optional[List[str]] = None,
+        event_system_properties: Optional[list[str]] = None,
         compression: Union[str, "_models.Compression"] = "None",
         managed_identity_resource_id: Optional[str] = None,
         database_routing: Optional[Union[str, "_models.DatabaseRouting"]] = None,
@@ -2701,8 +2828,7 @@ class EventHubDataConnection(DataConnection):
         :paramtype data_format: str or ~azure.mgmt.kusto.models.EventHubDataFormat
         :keyword event_system_properties: System properties of the event hub.
         :paramtype event_system_properties: list[str]
-        :keyword compression: The event hub messages compression type. Known values are: "None" and
-         "GZip".
+        :keyword compression: The compression type. Known values are: "None" and "GZip".
         :paramtype compression: str or ~azure.mgmt.kusto.models.Compression
         :keyword managed_identity_resource_id: The resource ID of a managed identity (system or user
          assigned) to be used to authenticate with event hub.
@@ -2725,9 +2851,9 @@ class EventHubDataConnection(DataConnection):
         self.data_format = data_format
         self.event_system_properties = event_system_properties
         self.compression = compression
-        self.provisioning_state = None
+        self.provisioning_state: Optional[Union[str, "_models.ProvisioningState"]] = None
         self.managed_identity_resource_id = managed_identity_resource_id
-        self.managed_identity_object_id = None
+        self.managed_identity_object_id: Optional[str] = None
         self.database_routing = database_routing
         self.retrieval_start_date = retrieval_start_date
 
@@ -2783,9 +2909,9 @@ class FollowerDatabaseDefinition(_serialization.Model):
         super().__init__(**kwargs)
         self.cluster_resource_id = cluster_resource_id
         self.attached_database_configuration_name = attached_database_configuration_name
-        self.database_name = None
-        self.table_level_sharing_properties = None
-        self.database_share_origin = None
+        self.database_name: Optional[str] = None
+        self.table_level_sharing_properties: Optional["_models.TableLevelSharingProperties"] = None
+        self.database_share_origin: Optional[Union[str, "_models.DatabaseShareOrigin"]] = None
 
 
 class FollowerDatabaseDefinitionGet(_serialization.Model):
@@ -2844,9 +2970,9 @@ class FollowerDatabaseDefinitionGet(_serialization.Model):
         super().__init__(**kwargs)
         self.cluster_resource_id = cluster_resource_id
         self.attached_database_configuration_name = attached_database_configuration_name
-        self.database_name = None
-        self.table_level_sharing_properties = None
-        self.database_share_origin = None
+        self.database_name: Optional[str] = None
+        self.table_level_sharing_properties: Optional["_models.TableLevelSharingProperties"] = None
+        self.database_share_origin: Optional[Union[str, "_models.DatabaseShareOrigin"]] = None
 
 
 class FollowerDatabaseListResult(_serialization.Model):
@@ -2854,30 +2980,47 @@ class FollowerDatabaseListResult(_serialization.Model):
 
     :ivar value: The list of follower database result.
     :vartype value: list[~azure.mgmt.kusto.models.FollowerDatabaseDefinition]
+    :ivar next_link: Link to the next page of results.
+    :vartype next_link: str
     """
 
     _attribute_map = {
         "value": {"key": "value", "type": "[FollowerDatabaseDefinition]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(self, *, value: Optional[List["_models.FollowerDatabaseDefinition"]] = None, **kwargs: Any) -> None:
+    def __init__(
+        self,
+        *,
+        value: Optional[list["_models.FollowerDatabaseDefinition"]] = None,
+        next_link: Optional[str] = None,
+        **kwargs: Any
+    ) -> None:
         """
         :keyword value: The list of follower database result.
         :paramtype value: list[~azure.mgmt.kusto.models.FollowerDatabaseDefinition]
+        :keyword next_link: Link to the next page of results.
+        :paramtype next_link: str
         """
         super().__init__(**kwargs)
         self.value = value
+        self.next_link = next_link
 
 
 class FollowerDatabaseListResultGet(_serialization.Model):
     """The list Kusto database principals operation response.
 
-    :ivar value: The list of follower database result.
+    All required parameters must be populated in order to send to server.
+
+    :ivar value: The FollowerDatabaseDefinitionGet items on this page. Required.
     :vartype value: list[~azure.mgmt.kusto.models.FollowerDatabaseDefinitionGet]
-    :ivar next_link: The URL to get the next set of follower databases list results if there are
-     any.
+    :ivar next_link: The link to the next page of items.
     :vartype next_link: str
     """
+
+    _validation = {
+        "value": {"required": True},
+    }
 
     _attribute_map = {
         "value": {"key": "value", "type": "[FollowerDatabaseDefinitionGet]"},
@@ -2885,17 +3028,12 @@ class FollowerDatabaseListResultGet(_serialization.Model):
     }
 
     def __init__(
-        self,
-        *,
-        value: Optional[List["_models.FollowerDatabaseDefinitionGet"]] = None,
-        next_link: Optional[str] = None,
-        **kwargs: Any
+        self, *, value: list["_models.FollowerDatabaseDefinitionGet"], next_link: Optional[str] = None, **kwargs: Any
     ) -> None:
         """
-        :keyword value: The list of follower database result.
+        :keyword value: The FollowerDatabaseDefinitionGet items on this page. Required.
         :paramtype value: list[~azure.mgmt.kusto.models.FollowerDatabaseDefinitionGet]
-        :keyword next_link: The URL to get the next set of follower databases list results if there are
-         any.
+        :keyword next_link: The link to the next page of items.
         :paramtype next_link: str
         """
         super().__init__(**kwargs)
@@ -2921,7 +3059,7 @@ class Identity(_serialization.Model):
     :vartype type: str or ~azure.mgmt.kusto.models.IdentityType
     :ivar user_assigned_identities: The list of user identities associated with the Kusto cluster.
      The user identity dictionary key references will be ARM resource ids in the form:
-     '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.  # pylint: disable=line-too-long
+     '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.
     :vartype user_assigned_identities: dict[str,
      ~azure.mgmt.kusto.models.ComponentsSgqdofSchemasIdentityPropertiesUserassignedidentitiesAdditionalproperties]
     """
@@ -2947,7 +3085,7 @@ class Identity(_serialization.Model):
         *,
         type: Union[str, "_models.IdentityType"],
         user_assigned_identities: Optional[
-            Dict[str, "_models.ComponentsSgqdofSchemasIdentityPropertiesUserassignedidentitiesAdditionalproperties"]
+            dict[str, "_models.ComponentsSgqdofSchemasIdentityPropertiesUserassignedidentitiesAdditionalproperties"]
         ] = None,
         **kwargs: Any
     ) -> None:
@@ -2959,13 +3097,13 @@ class Identity(_serialization.Model):
         :paramtype type: str or ~azure.mgmt.kusto.models.IdentityType
         :keyword user_assigned_identities: The list of user identities associated with the Kusto
          cluster. The user identity dictionary key references will be ARM resource ids in the form:
-         '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.  # pylint: disable=line-too-long
+         '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.
         :paramtype user_assigned_identities: dict[str,
          ~azure.mgmt.kusto.models.ComponentsSgqdofSchemasIdentityPropertiesUserassignedidentitiesAdditionalproperties]
         """
         super().__init__(**kwargs)
-        self.principal_id = None
-        self.tenant_id = None
+        self.principal_id: Optional[str] = None
+        self.tenant_id: Optional[str] = None
         self.type = type
         self.user_assigned_identities = user_assigned_identities
 
@@ -2978,13 +3116,16 @@ class IotHubDataConnection(DataConnection):
     All required parameters must be populated in order to send to server.
 
     :ivar id: Fully qualified resource ID for the resource. Ex -
-     /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}.  # pylint: disable=line-too-long
+     /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}.
     :vartype id: str
     :ivar name: The name of the resource.
     :vartype name: str
     :ivar type: The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or
      "Microsoft.Storage/storageAccounts".
     :vartype type: str
+    :ivar system_data: Azure Resource Manager metadata containing createdBy and modifiedBy
+     information.
+    :vartype system_data: ~azure.mgmt.kusto.models.SystemData
     :ivar location: Resource location.
     :vartype location: str
     :ivar kind: Kind of the endpoint for the data connection. Required. Known values are:
@@ -3026,6 +3167,7 @@ class IotHubDataConnection(DataConnection):
         "id": {"readonly": True},
         "name": {"readonly": True},
         "type": {"readonly": True},
+        "system_data": {"readonly": True},
         "kind": {"required": True},
         "provisioning_state": {"readonly": True},
     }
@@ -3034,6 +3176,7 @@ class IotHubDataConnection(DataConnection):
         "id": {"key": "id", "type": "str"},
         "name": {"key": "name", "type": "str"},
         "type": {"key": "type", "type": "str"},
+        "system_data": {"key": "systemData", "type": "SystemData"},
         "location": {"key": "location", "type": "str"},
         "kind": {"key": "kind", "type": "str"},
         "iot_hub_resource_id": {"key": "properties.iotHubResourceId", "type": "str"},
@@ -3057,7 +3200,7 @@ class IotHubDataConnection(DataConnection):
         table_name: Optional[str] = None,
         mapping_rule_name: Optional[str] = None,
         data_format: Optional[Union[str, "_models.IotHubDataFormat"]] = None,
-        event_system_properties: Optional[List[str]] = None,
+        event_system_properties: Optional[list[str]] = None,
         shared_access_policy_name: Optional[str] = None,
         database_routing: Optional[Union[str, "_models.DatabaseRouting"]] = None,
         retrieval_start_date: Optional[datetime.datetime] = None,
@@ -3105,7 +3248,7 @@ class IotHubDataConnection(DataConnection):
         self.shared_access_policy_name = shared_access_policy_name
         self.database_routing = database_routing
         self.retrieval_start_date = retrieval_start_date
-        self.provisioning_state = None
+        self.provisioning_state: Optional[Union[str, "_models.ProvisioningState"]] = None
 
 
 class KeyVaultProperties(_serialization.Model):
@@ -3165,7 +3308,9 @@ class LanguageExtension(_serialization.Model):
      "Python3_11_7_DL".
     :vartype language_extension_image_name: str or
      ~azure.mgmt.kusto.models.LanguageExtensionImageName
-    :ivar language_extension_custom_image_name: The language extension custom image name.
+    :ivar language_extension_custom_image_name: The sandbox custom image name that should be
+     enabled as the active language extension. Sandbox custom image is a cluster sub resource. When
+     this property is set, LanguageExtensionImageName should be set to 'PythonCustomImage'.
     :vartype language_extension_custom_image_name: str
     """
 
@@ -3192,7 +3337,9 @@ class LanguageExtension(_serialization.Model):
          "Python3_11_7_DL".
         :paramtype language_extension_image_name: str or
          ~azure.mgmt.kusto.models.LanguageExtensionImageName
-        :keyword language_extension_custom_image_name: The language extension custom image name.
+        :keyword language_extension_custom_image_name: The sandbox custom image name that should be
+         enabled as the active language extension. Sandbox custom image is a cluster sub resource. When
+         this property is set, LanguageExtensionImageName should be set to 'PythonCustomImage'.
         :paramtype language_extension_custom_image_name: str
         """
         super().__init__(**kwargs)
@@ -3206,19 +3353,31 @@ class LanguageExtensionsList(_serialization.Model):
 
     :ivar value: The list of language extensions.
     :vartype value: list[~azure.mgmt.kusto.models.LanguageExtension]
+    :ivar next_link: Link to the next page of results.
+    :vartype next_link: str
     """
 
     _attribute_map = {
         "value": {"key": "value", "type": "[LanguageExtension]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(self, *, value: Optional[List["_models.LanguageExtension"]] = None, **kwargs: Any) -> None:
+    def __init__(
+        self,
+        *,
+        value: Optional[list["_models.LanguageExtension"]] = None,
+        next_link: Optional[str] = None,
+        **kwargs: Any
+    ) -> None:
         """
         :keyword value: The list of language extensions.
         :paramtype value: list[~azure.mgmt.kusto.models.LanguageExtension]
+        :keyword next_link: Link to the next page of results.
+        :paramtype next_link: str
         """
         super().__init__(**kwargs)
         self.value = value
+        self.next_link = next_link
 
 
 class ListResourceSkusResult(_serialization.Model):
@@ -3226,19 +3385,31 @@ class ListResourceSkusResult(_serialization.Model):
 
     :ivar value: The collection of available SKUs for an existing resource.
     :vartype value: list[~azure.mgmt.kusto.models.AzureResourceSku]
+    :ivar next_link: Link to the next page of results.
+    :vartype next_link: str
     """
 
     _attribute_map = {
         "value": {"key": "value", "type": "[AzureResourceSku]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(self, *, value: Optional[List["_models.AzureResourceSku"]] = None, **kwargs: Any) -> None:
+    def __init__(
+        self,
+        *,
+        value: Optional[list["_models.AzureResourceSku"]] = None,
+        next_link: Optional[str] = None,
+        **kwargs: Any
+    ) -> None:
         """
         :keyword value: The collection of available SKUs for an existing resource.
         :paramtype value: list[~azure.mgmt.kusto.models.AzureResourceSku]
+        :keyword next_link: Link to the next page of results.
+        :paramtype next_link: str
         """
         super().__init__(**kwargs)
         self.value = value
+        self.next_link = next_link
 
 
 class ManagedPrivateEndpoint(ProxyResource):
@@ -3247,14 +3418,15 @@ class ManagedPrivateEndpoint(ProxyResource):
     Variables are only populated by the server, and will be ignored when sending a request.
 
     :ivar id: Fully qualified resource ID for the resource. Ex -
-     /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}.  # pylint: disable=line-too-long
+     /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}.
     :vartype id: str
     :ivar name: The name of the resource.
     :vartype name: str
     :ivar type: The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or
      "Microsoft.Storage/storageAccounts".
     :vartype type: str
-    :ivar system_data: Metadata pertaining to creation and last modification of the resource.
+    :ivar system_data: Azure Resource Manager metadata containing createdBy and modifiedBy
+     information.
     :vartype system_data: ~azure.mgmt.kusto.models.SystemData
     :ivar private_link_resource_id: The ARM resource ID of the resource for which the managed
      private endpoint is created.
@@ -3313,12 +3485,11 @@ class ManagedPrivateEndpoint(ProxyResource):
         :paramtype request_message: str
         """
         super().__init__(**kwargs)
-        self.system_data = None
         self.private_link_resource_id = private_link_resource_id
         self.private_link_resource_region = private_link_resource_region
         self.group_id = group_id
         self.request_message = request_message
-        self.provisioning_state = None
+        self.provisioning_state: Optional[Union[str, "_models.ProvisioningState"]] = None
 
 
 class ManagedPrivateEndpointListResult(_serialization.Model):
@@ -3326,19 +3497,31 @@ class ManagedPrivateEndpointListResult(_serialization.Model):
 
     :ivar value: The list of managed private endpoints.
     :vartype value: list[~azure.mgmt.kusto.models.ManagedPrivateEndpoint]
+    :ivar next_link: Link to the next page of results.
+    :vartype next_link: str
     """
 
     _attribute_map = {
         "value": {"key": "value", "type": "[ManagedPrivateEndpoint]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(self, *, value: Optional[List["_models.ManagedPrivateEndpoint"]] = None, **kwargs: Any) -> None:
+    def __init__(
+        self,
+        *,
+        value: Optional[list["_models.ManagedPrivateEndpoint"]] = None,
+        next_link: Optional[str] = None,
+        **kwargs: Any
+    ) -> None:
         """
         :keyword value: The list of managed private endpoints.
         :paramtype value: list[~azure.mgmt.kusto.models.ManagedPrivateEndpoint]
+        :keyword next_link: Link to the next page of results.
+        :paramtype next_link: str
         """
         super().__init__(**kwargs)
         self.value = value
+        self.next_link = next_link
 
 
 class ManagedPrivateEndpointsCheckNameRequest(_serialization.Model):
@@ -3410,10 +3593,10 @@ class MigrationClusterProperties(_serialization.Model):
     def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
-        self.id = None
-        self.uri = None
-        self.data_ingestion_uri = None
-        self.role = None
+        self.id: Optional[str] = None
+        self.uri: Optional[str] = None
+        self.data_ingestion_uri: Optional[str] = None
+        self.role: Optional[Union[str, "_models.MigrationClusterRole"]] = None
 
 
 class Operation(_serialization.Model):
@@ -3426,7 +3609,7 @@ class Operation(_serialization.Model):
     :ivar origin: The intended executor of the operation.
     :vartype origin: str
     :ivar properties: Properties of the operation.
-    :vartype properties: JSON
+    :vartype properties: any
     """
 
     _attribute_map = {
@@ -3442,7 +3625,7 @@ class Operation(_serialization.Model):
         name: Optional[str] = None,
         display: Optional["_models.OperationDisplay"] = None,
         origin: Optional[str] = None,
-        properties: Optional[JSON] = None,
+        properties: Optional[Any] = None,
         **kwargs: Any
     ) -> None:
         """
@@ -3453,7 +3636,7 @@ class Operation(_serialization.Model):
         :keyword origin: The intended executor of the operation.
         :paramtype origin: str
         :keyword properties: Properties of the operation.
-        :paramtype properties: JSON
+        :paramtype properties: any
         """
         super().__init__(**kwargs)
         self.name = name
@@ -3514,7 +3697,7 @@ class OperationListResult(_serialization.Model):
 
     :ivar value: The list of operations supported by the resource provider.
     :vartype value: list[~azure.mgmt.kusto.models.Operation]
-    :ivar next_link: The URL to get the next set of operation list results if there are any.
+    :ivar next_link: Link to the next page of results.
     :vartype next_link: str
     """
 
@@ -3524,12 +3707,12 @@ class OperationListResult(_serialization.Model):
     }
 
     def __init__(
-        self, *, value: Optional[List["_models.Operation"]] = None, next_link: Optional[str] = None, **kwargs: Any
+        self, *, value: Optional[list["_models.Operation"]] = None, next_link: Optional[str] = None, **kwargs: Any
     ) -> None:
         """
         :keyword value: The list of operations supported by the resource provider.
         :paramtype value: list[~azure.mgmt.kusto.models.Operation]
-        :keyword next_link: The URL to get the next set of operation list results if there are any.
+        :keyword next_link: Link to the next page of results.
         :paramtype next_link: str
         """
         super().__init__(**kwargs)
@@ -3619,16 +3802,16 @@ class OperationResult(_serialization.Model):
         :paramtype operation_state: str
         """
         super().__init__(**kwargs)
-        self.id = None
-        self.name = None
-        self.status = None
+        self.id: Optional[str] = None
+        self.name: Optional[str] = None
+        self.status: Optional[Union[str, "_models.Status"]] = None
         self.start_time = start_time
         self.end_time = end_time
         self.percent_complete = percent_complete
         self.code = code
         self.message = message
         self.operation_kind = operation_kind
-        self.provisioning_state = None
+        self.provisioning_state: Optional[Union[str, "_models.ProvisioningState"]] = None
         self.operation_state = operation_state
 
 
@@ -3688,13 +3871,16 @@ class OutboundNetworkDependenciesEndpoint(ProxyResource):
     Variables are only populated by the server, and will be ignored when sending a request.
 
     :ivar id: Fully qualified resource ID for the resource. Ex -
-     /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}.  # pylint: disable=line-too-long
+     /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}.
     :vartype id: str
     :ivar name: The name of the resource.
     :vartype name: str
     :ivar type: The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or
      "Microsoft.Storage/storageAccounts".
     :vartype type: str
+    :ivar system_data: Azure Resource Manager metadata containing createdBy and modifiedBy
+     information.
+    :vartype system_data: ~azure.mgmt.kusto.models.SystemData
     :ivar etag: A unique read-only string that changes whenever the resource is updated.
     :vartype etag: str
     :ivar category: The type of service accessed by the Kusto Service Environment, e.g., Azure
@@ -3711,6 +3897,7 @@ class OutboundNetworkDependenciesEndpoint(ProxyResource):
         "id": {"readonly": True},
         "name": {"readonly": True},
         "type": {"readonly": True},
+        "system_data": {"readonly": True},
         "etag": {"readonly": True},
         "provisioning_state": {"readonly": True},
     }
@@ -3719,6 +3906,7 @@ class OutboundNetworkDependenciesEndpoint(ProxyResource):
         "id": {"key": "id", "type": "str"},
         "name": {"key": "name", "type": "str"},
         "type": {"key": "type", "type": "str"},
+        "system_data": {"key": "systemData", "type": "SystemData"},
         "etag": {"key": "etag", "type": "str"},
         "category": {"key": "properties.category", "type": "str"},
         "endpoints": {"key": "properties.endpoints", "type": "[EndpointDependency]"},
@@ -3729,7 +3917,7 @@ class OutboundNetworkDependenciesEndpoint(ProxyResource):
         self,
         *,
         category: Optional[str] = None,
-        endpoints: Optional[List["_models.EndpointDependency"]] = None,
+        endpoints: Optional[list["_models.EndpointDependency"]] = None,
         **kwargs: Any
     ) -> None:
         """
@@ -3740,28 +3928,25 @@ class OutboundNetworkDependenciesEndpoint(ProxyResource):
         :paramtype endpoints: list[~azure.mgmt.kusto.models.EndpointDependency]
         """
         super().__init__(**kwargs)
-        self.etag = None
+        self.etag: Optional[str] = None
         self.category = category
         self.endpoints = endpoints
-        self.provisioning_state = None
+        self.provisioning_state: Optional[Union[str, "_models.ProvisioningState"]] = None
 
 
 class OutboundNetworkDependenciesEndpointListResult(_serialization.Model):  # pylint: disable=name-too-long
-    """Collection of Outbound Environment Endpoints.
-
-    Variables are only populated by the server, and will be ignored when sending a request.
+    """The response of a OutboundNetworkDependenciesEndpoint list operation.
 
     All required parameters must be populated in order to send to server.
 
-    :ivar value: Collection of resources. Required.
+    :ivar value: The OutboundNetworkDependenciesEndpoint items on this page. Required.
     :vartype value: list[~azure.mgmt.kusto.models.OutboundNetworkDependenciesEndpoint]
-    :ivar next_link: Link to next page of resources.
+    :ivar next_link: The link to the next page of items.
     :vartype next_link: str
     """
 
     _validation = {
         "value": {"required": True},
-        "next_link": {"readonly": True},
     }
 
     _attribute_map = {
@@ -3769,14 +3954,22 @@ class OutboundNetworkDependenciesEndpointListResult(_serialization.Model):  # py
         "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(self, *, value: List["_models.OutboundNetworkDependenciesEndpoint"], **kwargs: Any) -> None:
+    def __init__(
+        self,
+        *,
+        value: list["_models.OutboundNetworkDependenciesEndpoint"],
+        next_link: Optional[str] = None,
+        **kwargs: Any
+    ) -> None:
         """
-        :keyword value: Collection of resources. Required.
+        :keyword value: The OutboundNetworkDependenciesEndpoint items on this page. Required.
         :paramtype value: list[~azure.mgmt.kusto.models.OutboundNetworkDependenciesEndpoint]
+        :keyword next_link: The link to the next page of items.
+        :paramtype next_link: str
         """
         super().__init__(**kwargs)
         self.value = value
-        self.next_link = None
+        self.next_link = next_link
 
 
 class PrivateEndpointConnection(ProxyResource):
@@ -3785,14 +3978,15 @@ class PrivateEndpointConnection(ProxyResource):
     Variables are only populated by the server, and will be ignored when sending a request.
 
     :ivar id: Fully qualified resource ID for the resource. Ex -
-     /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}.  # pylint: disable=line-too-long
+     /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}.
     :vartype id: str
     :ivar name: The name of the resource.
     :vartype name: str
     :ivar type: The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or
      "Microsoft.Storage/storageAccounts".
     :vartype type: str
-    :ivar system_data: Metadata pertaining to creation and last modification of the resource.
+    :ivar system_data: Azure Resource Manager metadata containing createdBy and modifiedBy
+     information.
     :vartype system_data: ~azure.mgmt.kusto.models.SystemData
     :ivar private_endpoint: Private endpoint which the connection belongs to.
     :vartype private_endpoint: ~azure.mgmt.kusto.models.PrivateEndpointProperty
@@ -3843,11 +4037,10 @@ class PrivateEndpointConnection(ProxyResource):
          ~azure.mgmt.kusto.models.PrivateLinkServiceConnectionStateProperty
         """
         super().__init__(**kwargs)
-        self.system_data = None
-        self.private_endpoint = None
+        self.private_endpoint: Optional["_models.PrivateEndpointProperty"] = None
         self.private_link_service_connection_state = private_link_service_connection_state
-        self.group_id = None
-        self.provisioning_state = None
+        self.group_id: Optional[str] = None
+        self.provisioning_state: Optional[str] = None
 
 
 class PrivateEndpointConnectionListResult(_serialization.Model):
@@ -3855,19 +4048,31 @@ class PrivateEndpointConnectionListResult(_serialization.Model):
 
     :ivar value: Array of private endpoint connections.
     :vartype value: list[~azure.mgmt.kusto.models.PrivateEndpointConnection]
+    :ivar next_link: Link to the next page of results.
+    :vartype next_link: str
     """
 
     _attribute_map = {
         "value": {"key": "value", "type": "[PrivateEndpointConnection]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(self, *, value: Optional[List["_models.PrivateEndpointConnection"]] = None, **kwargs: Any) -> None:
+    def __init__(
+        self,
+        *,
+        value: Optional[list["_models.PrivateEndpointConnection"]] = None,
+        next_link: Optional[str] = None,
+        **kwargs: Any
+    ) -> None:
         """
         :keyword value: Array of private endpoint connections.
         :paramtype value: list[~azure.mgmt.kusto.models.PrivateEndpointConnection]
+        :keyword next_link: Link to the next page of results.
+        :paramtype next_link: str
         """
         super().__init__(**kwargs)
         self.value = value
+        self.next_link = next_link
 
 
 class PrivateEndpointProperty(_serialization.Model):
@@ -3890,23 +4095,24 @@ class PrivateEndpointProperty(_serialization.Model):
     def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
-        self.id = None
+        self.id: Optional[str] = None
 
 
-class PrivateLinkResource(Resource):
+class PrivateLinkResource(ProxyResource):
     """A private link resource.
 
     Variables are only populated by the server, and will be ignored when sending a request.
 
     :ivar id: Fully qualified resource ID for the resource. Ex -
-     /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}.  # pylint: disable=line-too-long
+     /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}.
     :vartype id: str
     :ivar name: The name of the resource.
     :vartype name: str
     :ivar type: The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or
      "Microsoft.Storage/storageAccounts".
     :vartype type: str
-    :ivar system_data: Metadata pertaining to creation and last modification of the resource.
+    :ivar system_data: Azure Resource Manager metadata containing createdBy and modifiedBy
+     information.
     :vartype system_data: ~azure.mgmt.kusto.models.SystemData
     :ivar group_id: The private link resource group id.
     :vartype group_id: str
@@ -3939,10 +4145,9 @@ class PrivateLinkResource(Resource):
     def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
-        self.system_data = None
-        self.group_id = None
-        self.required_members = None
-        self.required_zone_names = None
+        self.group_id: Optional[str] = None
+        self.required_members: Optional[list[str]] = None
+        self.required_zone_names: Optional[list[str]] = None
 
 
 class PrivateLinkResourceListResult(_serialization.Model):
@@ -3950,19 +4155,31 @@ class PrivateLinkResourceListResult(_serialization.Model):
 
     :ivar value: Array of private link resources.
     :vartype value: list[~azure.mgmt.kusto.models.PrivateLinkResource]
+    :ivar next_link: Link to the next page of results.
+    :vartype next_link: str
     """
 
     _attribute_map = {
         "value": {"key": "value", "type": "[PrivateLinkResource]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(self, *, value: Optional[List["_models.PrivateLinkResource"]] = None, **kwargs: Any) -> None:
+    def __init__(
+        self,
+        *,
+        value: Optional[list["_models.PrivateLinkResource"]] = None,
+        next_link: Optional[str] = None,
+        **kwargs: Any
+    ) -> None:
         """
         :keyword value: Array of private link resources.
         :paramtype value: list[~azure.mgmt.kusto.models.PrivateLinkResource]
+        :keyword next_link: Link to the next page of results.
+        :paramtype next_link: str
         """
         super().__init__(**kwargs)
         self.value = value
+        self.next_link = next_link
 
 
 class PrivateLinkServiceConnectionStateProperty(_serialization.Model):  # pylint: disable=name-too-long
@@ -3999,7 +4216,7 @@ class PrivateLinkServiceConnectionStateProperty(_serialization.Model):  # pylint
         super().__init__(**kwargs)
         self.status = status
         self.description = description
-        self.actions_required = None
+        self.actions_required: Optional[str] = None
 
 
 class ReadOnlyFollowingDatabase(Database):
@@ -4010,13 +4227,16 @@ class ReadOnlyFollowingDatabase(Database):
     All required parameters must be populated in order to send to server.
 
     :ivar id: Fully qualified resource ID for the resource. Ex -
-     /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}.  # pylint: disable=line-too-long
+     /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}.
     :vartype id: str
     :ivar name: The name of the resource.
     :vartype name: str
     :ivar type: The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or
      "Microsoft.Storage/storageAccounts".
     :vartype type: str
+    :ivar system_data: Azure Resource Manager metadata containing createdBy and modifiedBy
+     information.
+    :vartype system_data: ~azure.mgmt.kusto.models.SystemData
     :ivar location: Resource location.
     :vartype location: str
     :ivar kind: Kind of the database. Required. Known values are: "ReadWrite" and
@@ -4058,6 +4278,7 @@ class ReadOnlyFollowingDatabase(Database):
         "id": {"readonly": True},
         "name": {"readonly": True},
         "type": {"readonly": True},
+        "system_data": {"readonly": True},
         "kind": {"required": True},
         "provisioning_state": {"readonly": True},
         "soft_delete_period": {"readonly": True},
@@ -4075,6 +4296,7 @@ class ReadOnlyFollowingDatabase(Database):
         "id": {"key": "id", "type": "str"},
         "name": {"key": "name", "type": "str"},
         "type": {"key": "type", "type": "str"},
+        "system_data": {"key": "systemData", "type": "SystemData"},
         "location": {"key": "location", "type": "str"},
         "kind": {"key": "kind", "type": "str"},
         "provisioning_state": {"key": "properties.provisioningState", "type": "str"},
@@ -4105,17 +4327,17 @@ class ReadOnlyFollowingDatabase(Database):
         """
         super().__init__(location=location, **kwargs)
         self.kind: str = "ReadOnlyFollowing"
-        self.provisioning_state = None
-        self.soft_delete_period = None
+        self.provisioning_state: Optional[Union[str, "_models.ProvisioningState"]] = None
+        self.soft_delete_period: Optional[datetime.timedelta] = None
         self.hot_cache_period = hot_cache_period
-        self.statistics = None
-        self.leader_cluster_resource_id = None
-        self.attached_database_configuration_name = None
-        self.principals_modification_kind = None
-        self.table_level_sharing_properties = None
-        self.original_database_name = None
-        self.database_share_origin = None
-        self.suspension_details = None
+        self.statistics: Optional["_models.DatabaseStatistics"] = None
+        self.leader_cluster_resource_id: Optional[str] = None
+        self.attached_database_configuration_name: Optional[str] = None
+        self.principals_modification_kind: Optional[Union[str, "_models.PrincipalsModificationKind"]] = None
+        self.table_level_sharing_properties: Optional["_models.TableLevelSharingProperties"] = None
+        self.original_database_name: Optional[str] = None
+        self.database_share_origin: Optional[Union[str, "_models.DatabaseShareOrigin"]] = None
+        self.suspension_details: Optional["_models.SuspensionDetails"] = None
 
 
 class ReadWriteDatabase(Database):
@@ -4126,13 +4348,16 @@ class ReadWriteDatabase(Database):
     All required parameters must be populated in order to send to server.
 
     :ivar id: Fully qualified resource ID for the resource. Ex -
-     /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}.  # pylint: disable=line-too-long
+     /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}.
     :vartype id: str
     :ivar name: The name of the resource.
     :vartype name: str
     :ivar type: The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or
      "Microsoft.Storage/storageAccounts".
     :vartype type: str
+    :ivar system_data: Azure Resource Manager metadata containing createdBy and modifiedBy
+     information.
+    :vartype system_data: ~azure.mgmt.kusto.models.SystemData
     :ivar location: Resource location.
     :vartype location: str
     :ivar kind: Kind of the database. Required. Known values are: "ReadWrite" and
@@ -4161,6 +4386,7 @@ class ReadWriteDatabase(Database):
         "id": {"readonly": True},
         "name": {"readonly": True},
         "type": {"readonly": True},
+        "system_data": {"readonly": True},
         "kind": {"required": True},
         "provisioning_state": {"readonly": True},
         "statistics": {"readonly": True},
@@ -4172,6 +4398,7 @@ class ReadWriteDatabase(Database):
         "id": {"key": "id", "type": "str"},
         "name": {"key": "name", "type": "str"},
         "type": {"key": "type", "type": "str"},
+        "system_data": {"key": "systemData", "type": "SystemData"},
         "location": {"key": "location", "type": "str"},
         "kind": {"key": "kind", "type": "str"},
         "provisioning_state": {"key": "properties.provisioningState", "type": "str"},
@@ -4206,13 +4433,13 @@ class ReadWriteDatabase(Database):
         """
         super().__init__(location=location, **kwargs)
         self.kind: str = "ReadWrite"
-        self.provisioning_state = None
+        self.provisioning_state: Optional[Union[str, "_models.ProvisioningState"]] = None
         self.soft_delete_period = soft_delete_period
         self.hot_cache_period = hot_cache_period
-        self.statistics = None
-        self.is_followed = None
+        self.statistics: Optional["_models.DatabaseStatistics"] = None
+        self.is_followed: Optional[bool] = None
         self.key_vault_properties = key_vault_properties
-        self.suspension_details = None
+        self.suspension_details: Optional["_models.SuspensionDetails"] = None
 
 
 class ResourceSkuCapabilities(_serialization.Model):
@@ -4239,8 +4466,8 @@ class ResourceSkuCapabilities(_serialization.Model):
     def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
-        self.name = None
-        self.value = None
+        self.name: Optional[str] = None
+        self.value: Optional[str] = None
 
 
 class ResourceSkuZoneDetails(_serialization.Model):
@@ -4268,8 +4495,8 @@ class ResourceSkuZoneDetails(_serialization.Model):
     def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
-        self.name = None
-        self.capabilities = None
+        self.name: Optional[list[str]] = None
+        self.capabilities: Optional[list["_models.ResourceSkuCapabilities"]] = None
 
 
 class SandboxCustomImage(ProxyResource):
@@ -4278,13 +4505,16 @@ class SandboxCustomImage(ProxyResource):
     Variables are only populated by the server, and will be ignored when sending a request.
 
     :ivar id: Fully qualified resource ID for the resource. Ex -
-     /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}.  # pylint: disable=line-too-long
+     /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}.
     :vartype id: str
     :ivar name: The name of the resource.
     :vartype name: str
     :ivar type: The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or
      "Microsoft.Storage/storageAccounts".
     :vartype type: str
+    :ivar system_data: Azure Resource Manager metadata containing createdBy and modifiedBy
+     information.
+    :vartype system_data: ~azure.mgmt.kusto.models.SystemData
     :ivar language: The language name, for example Python. "Python"
     :vartype language: str or ~azure.mgmt.kusto.models.Language
     :ivar language_version: The version of the language. Either this property or baseImageName
@@ -4305,6 +4535,7 @@ class SandboxCustomImage(ProxyResource):
         "id": {"readonly": True},
         "name": {"readonly": True},
         "type": {"readonly": True},
+        "system_data": {"readonly": True},
         "provisioning_state": {"readonly": True},
     }
 
@@ -4312,6 +4543,7 @@ class SandboxCustomImage(ProxyResource):
         "id": {"key": "id", "type": "str"},
         "name": {"key": "name", "type": "str"},
         "type": {"key": "type", "type": "str"},
+        "system_data": {"key": "systemData", "type": "SystemData"},
         "language": {"key": "properties.language", "type": "str"},
         "language_version": {"key": "properties.languageVersion", "type": "str"},
         "base_image_name": {"key": "properties.baseImageName", "type": "str"},
@@ -4346,7 +4578,7 @@ class SandboxCustomImage(ProxyResource):
         self.language_version = language_version
         self.base_image_name = base_image_name
         self.requirements_file_content = requirements_file_content
-        self.provisioning_state = None
+        self.provisioning_state: Optional[Union[str, "_models.ProvisioningState"]] = None
 
 
 class SandboxCustomImagesCheckNameRequest(_serialization.Model):
@@ -4387,33 +4619,35 @@ class SandboxCustomImagesCheckNameRequest(_serialization.Model):
 class SandboxCustomImagesListResult(_serialization.Model):
     """The list Kusto sandbox custom images operation response.
 
-    :ivar next_link: Link to the next page of results.
-    :vartype next_link: str
-    :ivar value: The list of Kusto sandbox custom images.
+    All required parameters must be populated in order to send to server.
+
+    :ivar value: The SandboxCustomImage items on this page. Required.
     :vartype value: list[~azure.mgmt.kusto.models.SandboxCustomImage]
+    :ivar next_link: The link to the next page of items.
+    :vartype next_link: str
     """
 
+    _validation = {
+        "value": {"required": True},
+    }
+
     _attribute_map = {
-        "next_link": {"key": "nextLink", "type": "str"},
         "value": {"key": "value", "type": "[SandboxCustomImage]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
     def __init__(
-        self,
-        *,
-        next_link: Optional[str] = None,
-        value: Optional[List["_models.SandboxCustomImage"]] = None,
-        **kwargs: Any
+        self, *, value: list["_models.SandboxCustomImage"], next_link: Optional[str] = None, **kwargs: Any
     ) -> None:
         """
-        :keyword next_link: Link to the next page of results.
-        :paramtype next_link: str
-        :keyword value: The list of Kusto sandbox custom images.
+        :keyword value: The SandboxCustomImage items on this page. Required.
         :paramtype value: list[~azure.mgmt.kusto.models.SandboxCustomImage]
+        :keyword next_link: The link to the next page of items.
+        :paramtype next_link: str
         """
         super().__init__(**kwargs)
-        self.next_link = next_link
         self.value = value
+        self.next_link = next_link
 
 
 class Script(ProxyResource):
@@ -4422,14 +4656,15 @@ class Script(ProxyResource):
     Variables are only populated by the server, and will be ignored when sending a request.
 
     :ivar id: Fully qualified resource ID for the resource. Ex -
-     /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}.  # pylint: disable=line-too-long
+     /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}.
     :vartype id: str
     :ivar name: The name of the resource.
     :vartype name: str
     :ivar type: The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or
      "Microsoft.Storage/storageAccounts".
     :vartype type: str
-    :ivar system_data: Metadata pertaining to creation and last modification of the resource.
+    :ivar system_data: Azure Resource Manager metadata containing createdBy and modifiedBy
+     information.
     :vartype system_data: ~azure.mgmt.kusto.models.SystemData
     :ivar script_url: The url to the KQL script blob file. Must not be used together with
      scriptContent property.
@@ -4519,13 +4754,12 @@ class Script(ProxyResource):
          ~azure.mgmt.kusto.models.PrincipalPermissionsAction
         """
         super().__init__(**kwargs)
-        self.system_data = None
         self.script_url = script_url
         self.script_url_sas_token = script_url_sas_token
         self.script_content = script_content
         self.force_update_tag = force_update_tag
         self.continue_on_errors = continue_on_errors
-        self.provisioning_state = None
+        self.provisioning_state: Optional[Union[str, "_models.ProvisioningState"]] = None
         self.script_level = script_level
         self.principal_permissions_action = principal_permissions_action
 
@@ -4570,19 +4804,27 @@ class ScriptListResult(_serialization.Model):
 
     :ivar value: The list of Kusto scripts.
     :vartype value: list[~azure.mgmt.kusto.models.Script]
+    :ivar next_link: Link to the next page of results.
+    :vartype next_link: str
     """
 
     _attribute_map = {
         "value": {"key": "value", "type": "[Script]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(self, *, value: Optional[List["_models.Script"]] = None, **kwargs: Any) -> None:
+    def __init__(
+        self, *, value: Optional[list["_models.Script"]] = None, next_link: Optional[str] = None, **kwargs: Any
+    ) -> None:
         """
         :keyword value: The list of Kusto scripts.
         :paramtype value: list[~azure.mgmt.kusto.models.Script]
+        :keyword next_link: Link to the next page of results.
+        :paramtype next_link: str
         """
         super().__init__(**kwargs)
         self.value = value
+        self.next_link = next_link
 
 
 class SkuDescription(_serialization.Model):
@@ -4601,7 +4843,7 @@ class SkuDescription(_serialization.Model):
     :ivar location_info: Locations and zones.
     :vartype location_info: list[~azure.mgmt.kusto.models.SkuLocationInfoItem]
     :ivar restrictions: The restrictions because of which SKU cannot be used.
-    :vartype restrictions: list[JSON]
+    :vartype restrictions: list[any]
     """
 
     _validation = {
@@ -4625,12 +4867,12 @@ class SkuDescription(_serialization.Model):
     def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
-        self.resource_type = None
-        self.name = None
-        self.tier = None
-        self.locations = None
-        self.location_info = None
-        self.restrictions = None
+        self.resource_type: Optional[str] = None
+        self.name: Optional[str] = None
+        self.tier: Optional[str] = None
+        self.locations: Optional[list[str]] = None
+        self.location_info: Optional[list["_models.SkuLocationInfoItem"]] = None
+        self.restrictions: Optional[list[Any]] = None
 
 
 class SkuDescriptionList(_serialization.Model):
@@ -4640,6 +4882,8 @@ class SkuDescriptionList(_serialization.Model):
 
     :ivar value: SKU descriptions.
     :vartype value: list[~azure.mgmt.kusto.models.SkuDescription]
+    :ivar next_link: Link to the next page of results.
+    :vartype next_link: str
     """
 
     _validation = {
@@ -4648,12 +4892,17 @@ class SkuDescriptionList(_serialization.Model):
 
     _attribute_map = {
         "value": {"key": "value", "type": "[SkuDescription]"},
+        "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(self, **kwargs: Any) -> None:
-        """ """
+    def __init__(self, *, next_link: Optional[str] = None, **kwargs: Any) -> None:
+        """
+        :keyword next_link: Link to the next page of results.
+        :paramtype next_link: str
+        """
         super().__init__(**kwargs)
-        self.value = None
+        self.value: Optional[list["_models.SkuDescription"]] = None
+        self.next_link = next_link
 
 
 class SkuLocationInfoItem(_serialization.Model):
@@ -4683,8 +4932,8 @@ class SkuLocationInfoItem(_serialization.Model):
         self,
         *,
         location: str,
-        zones: Optional[List[str]] = None,
-        zone_details: Optional[List["_models.ResourceSkuZoneDetails"]] = None,
+        zones: Optional[list[str]] = None,
+        zone_details: Optional[list["_models.ResourceSkuZoneDetails"]] = None,
         **kwargs: Any
     ) -> None:
         """
@@ -4824,14 +5073,14 @@ class TableLevelSharingProperties(_serialization.Model):
     def __init__(
         self,
         *,
-        tables_to_include: Optional[List[str]] = None,
-        tables_to_exclude: Optional[List[str]] = None,
-        external_tables_to_include: Optional[List[str]] = None,
-        external_tables_to_exclude: Optional[List[str]] = None,
-        materialized_views_to_include: Optional[List[str]] = None,
-        materialized_views_to_exclude: Optional[List[str]] = None,
-        functions_to_include: Optional[List[str]] = None,
-        functions_to_exclude: Optional[List[str]] = None,
+        tables_to_include: Optional[list[str]] = None,
+        tables_to_exclude: Optional[list[str]] = None,
+        external_tables_to_include: Optional[list[str]] = None,
+        external_tables_to_exclude: Optional[list[str]] = None,
+        materialized_views_to_include: Optional[list[str]] = None,
+        materialized_views_to_exclude: Optional[list[str]] = None,
+        functions_to_include: Optional[list[str]] = None,
+        functions_to_exclude: Optional[list[str]] = None,
         **kwargs: Any
     ) -> None:
         """

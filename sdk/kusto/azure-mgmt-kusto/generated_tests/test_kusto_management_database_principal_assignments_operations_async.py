@@ -38,6 +38,19 @@ class TestKustoManagementDatabasePrincipalAssignmentsOperationsAsync(AzureMgmtRe
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
+    async def test_database_principal_assignments_list(self, resource_group):
+        response = self.client.database_principal_assignments.list(
+            resource_group_name=resource_group.name,
+            cluster_name="str",
+            database_name="str",
+            api_version="2024-04-13",
+        )
+        result = [r async for r in response]
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
     async def test_database_principal_assignments_get(self, resource_group):
         response = await self.client.database_principal_assignments.get(
             resource_group_name=resource_group.name,
@@ -68,6 +81,14 @@ class TestKustoManagementDatabasePrincipalAssignmentsOperationsAsync(AzureMgmtRe
                     "principalType": "str",
                     "provisioningState": "str",
                     "role": "str",
+                    "systemData": {
+                        "createdAt": "2020-02-20 00:00:00",
+                        "createdBy": "str",
+                        "createdByType": "str",
+                        "lastModifiedAt": "2020-02-20 00:00:00",
+                        "lastModifiedBy": "str",
+                        "lastModifiedByType": "str",
+                    },
                     "tenantId": "str",
                     "tenantName": "str",
                     "type": "str",
@@ -92,18 +113,5 @@ class TestKustoManagementDatabasePrincipalAssignmentsOperationsAsync(AzureMgmtRe
             )
         ).result()  # call '.result()' to poll until service return final result
 
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_database_principal_assignments_list(self, resource_group):
-        response = self.client.database_principal_assignments.list(
-            resource_group_name=resource_group.name,
-            cluster_name="str",
-            database_name="str",
-            api_version="2024-04-13",
-        )
-        result = [r async for r in response]
         # please add some check logic here by yourself
         # ...

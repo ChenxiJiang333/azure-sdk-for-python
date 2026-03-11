@@ -20,14 +20,15 @@ class TestKustoManagementDataConnectionsOperations(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_data_connections_list_by_database(self, resource_group):
-        response = self.client.data_connections.list_by_database(
+    def test_data_connections_check_name_availability(self, resource_group):
+        response = self.client.data_connections.check_name_availability(
             resource_group_name=resource_group.name,
             cluster_name="str",
             database_name="str",
+            data_connection_name={"name": "str", "type": "Microsoft.Kusto/clusters/databases/dataConnections"},
             api_version="2024-04-13",
         )
-        result = [r for r in response]
+
         # please add some check logic here by yourself
         # ...
 
@@ -47,15 +48,14 @@ class TestKustoManagementDataConnectionsOperations(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_data_connections_check_name_availability(self, resource_group):
-        response = self.client.data_connections.check_name_availability(
+    def test_data_connections_list_by_database(self, resource_group):
+        response = self.client.data_connections.list_by_database(
             resource_group_name=resource_group.name,
             cluster_name="str",
             database_name="str",
-            data_connection_name={"name": "str", "type": "Microsoft.Kusto/clusters/databases/dataConnections"},
             api_version="2024-04-13",
         )
-
+        result = [r for r in response]
         # please add some check logic here by yourself
         # ...
 
@@ -94,6 +94,14 @@ class TestKustoManagementDataConnectionsOperations(AzureMgmtRecordedTestCase):
                 "name": "str",
                 "provisioningState": "str",
                 "retrievalStartDate": "2020-02-20 00:00:00",
+                "systemData": {
+                    "createdAt": "2020-02-20 00:00:00",
+                    "createdBy": "str",
+                    "createdByType": "str",
+                    "lastModifiedAt": "2020-02-20 00:00:00",
+                    "lastModifiedBy": "str",
+                    "lastModifiedByType": "str",
+                },
                 "tableName": "str",
                 "type": "str",
             },
@@ -124,6 +132,14 @@ class TestKustoManagementDataConnectionsOperations(AzureMgmtRecordedTestCase):
                 "name": "str",
                 "provisioningState": "str",
                 "retrievalStartDate": "2020-02-20 00:00:00",
+                "systemData": {
+                    "createdAt": "2020-02-20 00:00:00",
+                    "createdBy": "str",
+                    "createdByType": "str",
+                    "lastModifiedAt": "2020-02-20 00:00:00",
+                    "lastModifiedBy": "str",
+                    "lastModifiedByType": "str",
+                },
                 "tableName": "str",
                 "type": "str",
             },

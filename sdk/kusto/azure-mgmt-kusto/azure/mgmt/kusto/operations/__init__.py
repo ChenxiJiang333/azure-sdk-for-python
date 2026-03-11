@@ -12,21 +12,21 @@ from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from ._patch import *  # pylint: disable=unused-wildcard-import
 
+from ._operations import Operations  # type: ignore
 from ._clusters_operations import ClustersOperations  # type: ignore
-from ._cluster_principal_assignments_operations import ClusterPrincipalAssignmentsOperations  # type: ignore
+from ._operations_results_operations import OperationsResultsOperations  # type: ignore
 from ._skus_operations import SkusOperations  # type: ignore
-from ._databases_operations import DatabasesOperations  # type: ignore
 from ._attached_database_configurations_operations import AttachedDatabaseConfigurationsOperations  # type: ignore
-from ._managed_private_endpoints_operations import ManagedPrivateEndpointsOperations  # type: ignore
-from ._database_operations import DatabaseOperations  # type: ignore
+from ._databases_operations import DatabasesOperations  # type: ignore
+from ._cluster_principal_assignments_operations import ClusterPrincipalAssignmentsOperations  # type: ignore
+from ._data_connections_operations import DataConnectionsOperations  # type: ignore
 from ._database_principal_assignments_operations import DatabasePrincipalAssignmentsOperations  # type: ignore
+from ._database_operations import DatabaseOperations  # type: ignore
 from ._scripts_operations import ScriptsOperations  # type: ignore
-from ._sandbox_custom_images_operations import SandboxCustomImagesOperations  # type: ignore
+from ._managed_private_endpoints_operations import ManagedPrivateEndpointsOperations  # type: ignore
 from ._private_endpoint_connections_operations import PrivateEndpointConnectionsOperations  # type: ignore
 from ._private_link_resources_operations import PrivateLinkResourcesOperations  # type: ignore
-from ._data_connections_operations import DataConnectionsOperations  # type: ignore
-from ._operations import Operations  # type: ignore
-from ._operations_results_operations import OperationsResultsOperations  # type: ignore
+from ._sandbox_custom_images_operations import SandboxCustomImagesOperations  # type: ignore
 from ._operations_results_location_operations import OperationsResultsLocationOperations  # type: ignore
 
 from ._patch import __all__ as _patch_all
@@ -34,21 +34,21 @@ from ._patch import *
 from ._patch import patch_sdk as _patch_sdk
 
 __all__ = [
+    "Operations",
     "ClustersOperations",
-    "ClusterPrincipalAssignmentsOperations",
+    "OperationsResultsOperations",
     "SkusOperations",
-    "DatabasesOperations",
     "AttachedDatabaseConfigurationsOperations",
-    "ManagedPrivateEndpointsOperations",
-    "DatabaseOperations",
+    "DatabasesOperations",
+    "ClusterPrincipalAssignmentsOperations",
+    "DataConnectionsOperations",
     "DatabasePrincipalAssignmentsOperations",
+    "DatabaseOperations",
     "ScriptsOperations",
-    "SandboxCustomImagesOperations",
+    "ManagedPrivateEndpointsOperations",
     "PrivateEndpointConnectionsOperations",
     "PrivateLinkResourcesOperations",
-    "DataConnectionsOperations",
-    "Operations",
-    "OperationsResultsOperations",
+    "SandboxCustomImagesOperations",
     "OperationsResultsLocationOperations",
 ]
 __all__.extend([p for p in _patch_all if p not in __all__])  # pyright: ignore

@@ -21,19 +21,6 @@ class TestKustoManagementManagedPrivateEndpointsOperationsAsync(AzureMgmtRecorde
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_managed_private_endpoints_check_name_availability(self, resource_group):
-        response = await self.client.managed_private_endpoints.check_name_availability(
-            resource_group_name=resource_group.name,
-            cluster_name="str",
-            resource_name={"name": "str", "type": "Microsoft.Kusto/clusters/managedPrivateEndpoints"},
-            api_version="2024-04-13",
-        )
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
     async def test_managed_private_endpoints_list(self, resource_group):
         response = self.client.managed_private_endpoints.list(
             resource_group_name=resource_group.name,
@@ -134,6 +121,19 @@ class TestKustoManagementManagedPrivateEndpointsOperationsAsync(AzureMgmtRecorde
                 api_version="2024-04-13",
             )
         ).result()  # call '.result()' to poll until service return final result
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
+    async def test_managed_private_endpoints_check_name_availability(self, resource_group):
+        response = await self.client.managed_private_endpoints.check_name_availability(
+            resource_group_name=resource_group.name,
+            cluster_name="str",
+            resource_name={"name": "str", "type": "Microsoft.Kusto/clusters/managedPrivateEndpoints"},
+            api_version="2024-04-13",
+        )
 
         # please add some check logic here by yourself
         # ...

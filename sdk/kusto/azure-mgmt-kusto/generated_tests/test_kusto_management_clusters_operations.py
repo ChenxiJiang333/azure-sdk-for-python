@@ -20,6 +20,49 @@ class TestKustoManagementClustersOperations(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
+    def test_clusters_list(self, resource_group):
+        response = self.client.clusters.list(
+            api_version="2024-04-13",
+        )
+        result = [r for r in response]
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
+    def test_clusters_check_name_availability(self, resource_group):
+        response = self.client.clusters.check_name_availability(
+            location="str",
+            cluster_name={"name": "str", "type": "Microsoft.Kusto/clusters"},
+            api_version="2024-04-13",
+        )
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
+    def test_clusters_list_skus(self, resource_group):
+        response = self.client.clusters.list_skus(
+            api_version="2024-04-13",
+        )
+        result = [r for r in response]
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
+    def test_clusters_list_by_resource_group(self, resource_group):
+        response = self.client.clusters.list_by_resource_group(
+            resource_group_name=resource_group.name,
+            api_version="2024-04-13",
+        )
+        result = [r for r in response]
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
     def test_clusters_get(self, resource_group):
         response = self.client.clusters.get(
             resource_group_name=resource_group.name,
@@ -67,13 +110,14 @@ class TestKustoManagementClustersOperations(AzureMgmtRecordedTestCase):
                     "userIdentity": "str",
                 },
                 "languageExtensions": {
+                    "nextLink": "str",
                     "value": [
                         {
                             "languageExtensionCustomImageName": "str",
                             "languageExtensionImageName": "str",
                             "languageExtensionName": "str",
                         }
-                    ]
+                    ],
                 },
                 "migrationCluster": {"dataIngestionUri": "str", "id": "str", "role": "str", "uri": "str"},
                 "name": "str",
@@ -169,13 +213,14 @@ class TestKustoManagementClustersOperations(AzureMgmtRecordedTestCase):
                     "userIdentity": "str",
                 },
                 "languageExtensions": {
+                    "nextLink": "str",
                     "value": [
                         {
                             "languageExtensionCustomImageName": "str",
                             "languageExtensionImageName": "str",
                             "languageExtensionName": "str",
                         }
-                    ]
+                    ],
                 },
                 "location": "str",
                 "migrationCluster": {"dataIngestionUri": "str", "id": "str", "role": "str", "uri": "str"},
@@ -211,6 +256,14 @@ class TestKustoManagementClustersOperations(AzureMgmtRecordedTestCase):
                 "sku": {"name": "str", "tier": "str", "capacity": 0},
                 "state": "str",
                 "stateReason": "str",
+                "systemData": {
+                    "createdAt": "2020-02-20 00:00:00",
+                    "createdBy": "str",
+                    "createdByType": "str",
+                    "lastModifiedAt": "2020-02-20 00:00:00",
+                    "lastModifiedBy": "str",
+                    "lastModifiedByType": "str",
+                },
                 "tags": {"str": "str"},
                 "trustedExternalTenants": [{"value": "str"}],
                 "type": "str",
@@ -245,10 +298,16 @@ class TestKustoManagementClustersOperations(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_clusters_begin_stop(self, resource_group):
-        response = self.client.clusters.begin_stop(
+    def test_clusters_begin_add_callout_policies(self, resource_group):
+        response = self.client.clusters.begin_add_callout_policies(
             resource_group_name=resource_group.name,
             cluster_name="str",
+            callout_policies={
+                "value": [
+                    {"calloutId": "str", "calloutType": "str", "calloutUriRegex": "str", "outboundAccess": "str"}
+                ],
+                "nextLink": "str",
+            },
             api_version="2024-04-13",
         ).result()  # call '.result()' to poll until service return final result
 
@@ -257,50 +316,23 @@ class TestKustoManagementClustersOperations(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_clusters_begin_start(self, resource_group):
-        response = self.client.clusters.begin_start(
+    def test_clusters_begin_add_language_extensions(self, resource_group):
+        response = self.client.clusters.begin_add_language_extensions(
             resource_group_name=resource_group.name,
             cluster_name="str",
+            language_extensions_to_add={
+                "nextLink": "str",
+                "value": [
+                    {
+                        "languageExtensionCustomImageName": "str",
+                        "languageExtensionImageName": "str",
+                        "languageExtensionName": "str",
+                    }
+                ],
+            },
             api_version="2024-04-13",
         ).result()  # call '.result()' to poll until service return final result
 
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_clusters_begin_migrate(self, resource_group):
-        response = self.client.clusters.begin_migrate(
-            resource_group_name=resource_group.name,
-            cluster_name="str",
-            cluster_migrate_request={"clusterResourceId": "str"},
-            api_version="2024-04-13",
-        ).result()  # call '.result()' to poll until service return final result
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_clusters_list_follower_databases_get(self, resource_group):
-        response = self.client.clusters.list_follower_databases_get(
-            resource_group_name=resource_group.name,
-            cluster_name="str",
-            api_version="2024-04-13",
-        )
-        result = [r for r in response]
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_clusters_list_follower_databases(self, resource_group):
-        response = self.client.clusters.list_follower_databases(
-            resource_group_name=resource_group.name,
-            cluster_name="str",
-            api_version="2024-04-13",
-        )
-        result = [r for r in response]
         # please add some check logic here by yourself
         # ...
 
@@ -346,106 +378,32 @@ class TestKustoManagementClustersOperations(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_clusters_list_by_resource_group(self, resource_group):
-        response = self.client.clusters.list_by_resource_group(
-            resource_group_name=resource_group.name,
-            api_version="2024-04-13",
-        )
-        result = [r for r in response]
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_clusters_list(self, resource_group):
-        response = self.client.clusters.list(
-            api_version="2024-04-13",
-        )
-        result = [r for r in response]
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_clusters_list_skus(self, resource_group):
-        response = self.client.clusters.list_skus(
-            api_version="2024-04-13",
-        )
-        result = [r for r in response]
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_clusters_check_name_availability(self, resource_group):
-        response = self.client.clusters.check_name_availability(
-            location="str",
-            cluster_name={"name": "str", "type": "Microsoft.Kusto/clusters"},
-            api_version="2024-04-13",
-        )
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_clusters_list_skus_by_resource(self, resource_group):
-        response = self.client.clusters.list_skus_by_resource(
-            resource_group_name=resource_group.name,
-            cluster_name="str",
-            api_version="2024-04-13",
-        )
-        result = [r for r in response]
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_clusters_list_outbound_network_dependencies_endpoints(self, resource_group):
-        response = self.client.clusters.list_outbound_network_dependencies_endpoints(
-            resource_group_name=resource_group.name,
-            cluster_name="str",
-            api_version="2024-04-13",
-        )
-        result = [r for r in response]
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_clusters_begin_add_callout_policies(self, resource_group):
-        response = self.client.clusters.begin_add_callout_policies(
-            resource_group_name=resource_group.name,
-            cluster_name="str",
-            callout_policies={
-                "nextLink": "str",
-                "value": [
-                    {"calloutId": "str", "calloutType": "str", "calloutUriRegex": "str", "outboundAccess": "str"}
-                ],
-            },
-            api_version="2024-04-13",
-        ).result()  # call '.result()' to poll until service return final result
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_clusters_begin_remove_callout_policy(self, resource_group):
-        response = self.client.clusters.begin_remove_callout_policy(
-            resource_group_name=resource_group.name,
-            cluster_name="str",
-            callout_policy={"calloutId": "str"},
-            api_version="2024-04-13",
-        ).result()  # call '.result()' to poll until service return final result
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
     def test_clusters_list_callout_policies(self, resource_group):
         response = self.client.clusters.list_callout_policies(
+            resource_group_name=resource_group.name,
+            cluster_name="str",
+            api_version="2024-04-13",
+        )
+        result = [r for r in response]
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
+    def test_clusters_list_follower_databases_get(self, resource_group):
+        response = self.client.clusters.list_follower_databases_get(
+            resource_group_name=resource_group.name,
+            cluster_name="str",
+            api_version="2024-04-13",
+        )
+        result = [r for r in response]
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
+    def test_clusters_list_follower_databases(self, resource_group):
+        response = self.client.clusters.list_follower_databases(
             resource_group_name=resource_group.name,
             cluster_name="str",
             api_version="2024-04-13",
@@ -468,19 +426,36 @@ class TestKustoManagementClustersOperations(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_clusters_begin_add_language_extensions(self, resource_group):
-        response = self.client.clusters.begin_add_language_extensions(
+    def test_clusters_begin_migrate(self, resource_group):
+        response = self.client.clusters.begin_migrate(
             resource_group_name=resource_group.name,
             cluster_name="str",
-            language_extensions_to_add={
-                "value": [
-                    {
-                        "languageExtensionCustomImageName": "str",
-                        "languageExtensionImageName": "str",
-                        "languageExtensionName": "str",
-                    }
-                ]
-            },
+            cluster_migrate_request={"clusterResourceId": "str"},
+            api_version="2024-04-13",
+        ).result()  # call '.result()' to poll until service return final result
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
+    def test_clusters_list_outbound_network_dependencies_endpoints(self, resource_group):
+        response = self.client.clusters.list_outbound_network_dependencies_endpoints(
+            resource_group_name=resource_group.name,
+            cluster_name="str",
+            api_version="2024-04-13",
+        )
+        result = [r for r in response]
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
+    def test_clusters_begin_remove_callout_policy(self, resource_group):
+        response = self.client.clusters.begin_remove_callout_policy(
+            resource_group_name=resource_group.name,
+            cluster_name="str",
+            callout_policy={"calloutId": "str"},
             api_version="2024-04-13",
         ).result()  # call '.result()' to poll until service return final result
 
@@ -494,14 +469,51 @@ class TestKustoManagementClustersOperations(AzureMgmtRecordedTestCase):
             resource_group_name=resource_group.name,
             cluster_name="str",
             language_extensions_to_remove={
+                "nextLink": "str",
                 "value": [
                     {
                         "languageExtensionCustomImageName": "str",
                         "languageExtensionImageName": "str",
                         "languageExtensionName": "str",
                     }
-                ]
+                ],
             },
+            api_version="2024-04-13",
+        ).result()  # call '.result()' to poll until service return final result
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
+    def test_clusters_list_skus_by_resource(self, resource_group):
+        response = self.client.clusters.list_skus_by_resource(
+            resource_group_name=resource_group.name,
+            cluster_name="str",
+            api_version="2024-04-13",
+        )
+        result = [r for r in response]
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
+    def test_clusters_begin_start(self, resource_group):
+        response = self.client.clusters.begin_start(
+            resource_group_name=resource_group.name,
+            cluster_name="str",
+            api_version="2024-04-13",
+        ).result()  # call '.result()' to poll until service return final result
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
+    def test_clusters_begin_stop(self, resource_group):
+        response = self.client.clusters.begin_stop(
+            resource_group_name=resource_group.name,
+            cluster_name="str",
             api_version="2024-04-13",
         ).result()  # call '.result()' to poll until service return final result
 

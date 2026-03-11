@@ -78,6 +78,14 @@ class TestKustoManagementDatabasesOperations(AzureMgmtRecordedTestCase):
                 "softDeletePeriod": "1 day, 0:00:00",
                 "statistics": {"size": 0.0},
                 "suspensionDetails": {"suspensionStartDate": "2020-02-20 00:00:00"},
+                "systemData": {
+                    "createdAt": "2020-02-20 00:00:00",
+                    "createdBy": "str",
+                    "createdByType": "str",
+                    "lastModifiedAt": "2020-02-20 00:00:00",
+                    "lastModifiedBy": "str",
+                    "lastModifiedByType": "str",
+                },
                 "tableLevelSharingProperties": {
                     "externalTablesToExclude": ["str"],
                     "externalTablesToInclude": ["str"],
@@ -118,6 +126,14 @@ class TestKustoManagementDatabasesOperations(AzureMgmtRecordedTestCase):
                 "softDeletePeriod": "1 day, 0:00:00",
                 "statistics": {"size": 0.0},
                 "suspensionDetails": {"suspensionStartDate": "2020-02-20 00:00:00"},
+                "systemData": {
+                    "createdAt": "2020-02-20 00:00:00",
+                    "createdBy": "str",
+                    "createdByType": "str",
+                    "lastModifiedAt": "2020-02-20 00:00:00",
+                    "lastModifiedBy": "str",
+                    "lastModifiedByType": "str",
+                },
                 "tableLevelSharingProperties": {
                     "externalTablesToExclude": ["str"],
                     "externalTablesToInclude": ["str"],
@@ -151,19 +167,6 @@ class TestKustoManagementDatabasesOperations(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_databases_list_principals(self, resource_group):
-        response = self.client.databases.list_principals(
-            resource_group_name=resource_group.name,
-            cluster_name="str",
-            database_name="str",
-            api_version="2024-04-13",
-        )
-        result = [r for r in response]
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
     def test_databases_add_principals(self, resource_group):
         response = self.client.databases.add_principals(
             resource_group_name=resource_group.name,
@@ -185,6 +188,19 @@ class TestKustoManagementDatabasesOperations(AzureMgmtRecordedTestCase):
             api_version="2024-04-13",
         )
 
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
+    def test_databases_list_principals(self, resource_group):
+        response = self.client.databases.list_principals(
+            resource_group_name=resource_group.name,
+            cluster_name="str",
+            database_name="str",
+            api_version="2024-04-13",
+        )
+        result = [r for r in response]
         # please add some check logic here by yourself
         # ...
 

@@ -76,6 +76,14 @@ class TestKustoManagementAttachedDatabaseConfigurationsOperationsAsync(AzureMgmt
                     "location": "str",
                     "name": "str",
                     "provisioningState": "str",
+                    "systemData": {
+                        "createdAt": "2020-02-20 00:00:00",
+                        "createdBy": "str",
+                        "createdByType": "str",
+                        "lastModifiedAt": "2020-02-20 00:00:00",
+                        "lastModifiedBy": "str",
+                        "lastModifiedByType": "str",
+                    },
                     "tableLevelSharingProperties": {
                         "externalTablesToExclude": ["str"],
                         "externalTablesToInclude": ["str"],

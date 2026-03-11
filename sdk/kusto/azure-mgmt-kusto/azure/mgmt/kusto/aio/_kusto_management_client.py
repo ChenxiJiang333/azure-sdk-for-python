@@ -7,16 +7,18 @@
 # --------------------------------------------------------------------------
 
 from copy import deepcopy
-from typing import Any, Awaitable, TYPE_CHECKING
+from typing import Any, Awaitable, Optional, TYPE_CHECKING, cast
 from typing_extensions import Self
 
 from azure.core.pipeline import policies
 from azure.core.rest import AsyncHttpResponse, HttpRequest
+from azure.core.settings import settings
 from azure.mgmt.core import AsyncARMPipelineClient
 from azure.mgmt.core.policies import AsyncARMAutoResourceProviderRegistrationPolicy
+from azure.mgmt.core.tools import get_arm_endpoints
 
 from .. import models as _models
-from .._serialization import Deserializer, Serializer
+from .._utils.serialization import Deserializer, Serializer
 from ._configuration import KustoManagementClientConfiguration
 from .operations import (
     AttachedDatabaseConfigurationsOperations,
@@ -38,6 +40,7 @@ from .operations import (
 )
 
 if TYPE_CHECKING:
+    from azure.core import AzureClouds
     from azure.core.credentials_async import AsyncTokenCredential
 
 
@@ -46,41 +49,41 @@ class KustoManagementClient:  # pylint: disable=too-many-instance-attributes
     Kusto services to manage your clusters and databases. The API enables you to create, update,
     and delete clusters and databases.
 
+    :ivar operations: Operations operations
+    :vartype operations: azure.mgmt.kusto.aio.operations.Operations
     :ivar clusters: ClustersOperations operations
     :vartype clusters: azure.mgmt.kusto.aio.operations.ClustersOperations
-    :ivar cluster_principal_assignments: ClusterPrincipalAssignmentsOperations operations
-    :vartype cluster_principal_assignments:
-     azure.mgmt.kusto.aio.operations.ClusterPrincipalAssignmentsOperations
+    :ivar operations_results: OperationsResultsOperations operations
+    :vartype operations_results: azure.mgmt.kusto.aio.operations.OperationsResultsOperations
     :ivar skus: SkusOperations operations
     :vartype skus: azure.mgmt.kusto.aio.operations.SkusOperations
-    :ivar databases: DatabasesOperations operations
-    :vartype databases: azure.mgmt.kusto.aio.operations.DatabasesOperations
     :ivar attached_database_configurations: AttachedDatabaseConfigurationsOperations operations
     :vartype attached_database_configurations:
      azure.mgmt.kusto.aio.operations.AttachedDatabaseConfigurationsOperations
-    :ivar managed_private_endpoints: ManagedPrivateEndpointsOperations operations
-    :vartype managed_private_endpoints:
-     azure.mgmt.kusto.aio.operations.ManagedPrivateEndpointsOperations
-    :ivar database: DatabaseOperations operations
-    :vartype database: azure.mgmt.kusto.aio.operations.DatabaseOperations
+    :ivar databases: DatabasesOperations operations
+    :vartype databases: azure.mgmt.kusto.aio.operations.DatabasesOperations
+    :ivar cluster_principal_assignments: ClusterPrincipalAssignmentsOperations operations
+    :vartype cluster_principal_assignments:
+     azure.mgmt.kusto.aio.operations.ClusterPrincipalAssignmentsOperations
+    :ivar data_connections: DataConnectionsOperations operations
+    :vartype data_connections: azure.mgmt.kusto.aio.operations.DataConnectionsOperations
     :ivar database_principal_assignments: DatabasePrincipalAssignmentsOperations operations
     :vartype database_principal_assignments:
      azure.mgmt.kusto.aio.operations.DatabasePrincipalAssignmentsOperations
+    :ivar database: DatabaseOperations operations
+    :vartype database: azure.mgmt.kusto.aio.operations.DatabaseOperations
     :ivar scripts: ScriptsOperations operations
     :vartype scripts: azure.mgmt.kusto.aio.operations.ScriptsOperations
-    :ivar sandbox_custom_images: SandboxCustomImagesOperations operations
-    :vartype sandbox_custom_images: azure.mgmt.kusto.aio.operations.SandboxCustomImagesOperations
+    :ivar managed_private_endpoints: ManagedPrivateEndpointsOperations operations
+    :vartype managed_private_endpoints:
+     azure.mgmt.kusto.aio.operations.ManagedPrivateEndpointsOperations
     :ivar private_endpoint_connections: PrivateEndpointConnectionsOperations operations
     :vartype private_endpoint_connections:
      azure.mgmt.kusto.aio.operations.PrivateEndpointConnectionsOperations
     :ivar private_link_resources: PrivateLinkResourcesOperations operations
     :vartype private_link_resources: azure.mgmt.kusto.aio.operations.PrivateLinkResourcesOperations
-    :ivar data_connections: DataConnectionsOperations operations
-    :vartype data_connections: azure.mgmt.kusto.aio.operations.DataConnectionsOperations
-    :ivar operations: Operations operations
-    :vartype operations: azure.mgmt.kusto.aio.operations.Operations
-    :ivar operations_results: OperationsResultsOperations operations
-    :vartype operations_results: azure.mgmt.kusto.aio.operations.OperationsResultsOperations
+    :ivar sandbox_custom_images: SandboxCustomImagesOperations operations
+    :vartype sandbox_custom_images: azure.mgmt.kusto.aio.operations.SandboxCustomImagesOperations
     :ivar operations_results_location: OperationsResultsLocationOperations operations
     :vartype operations_results_location:
      azure.mgmt.kusto.aio.operations.OperationsResultsLocationOperations
@@ -88,8 +91,11 @@ class KustoManagementClient:  # pylint: disable=too-many-instance-attributes
     :type credential: ~azure.core.credentials_async.AsyncTokenCredential
     :param subscription_id: The ID of the target subscription. Required.
     :type subscription_id: str
-    :param base_url: Service URL. Default value is "https://management.azure.com".
+    :param base_url: Service URL. Default value is None.
     :type base_url: str
+    :keyword cloud_setting: The cloud setting for which to get the ARM endpoint. Default value is
+     None.
+    :paramtype cloud_setting: ~azure.core.AzureClouds
     :keyword api_version: Api Version. Default value is "2024-04-13". Note that overriding this
      default value may result in unsupported behavior.
     :paramtype api_version: str
@@ -101,12 +107,24 @@ class KustoManagementClient:  # pylint: disable=too-many-instance-attributes
         self,
         credential: "AsyncTokenCredential",
         subscription_id: str,
-        base_url: str = "https://management.azure.com",
+        base_url: Optional[str] = None,
+        *,
+        cloud_setting: Optional["AzureClouds"] = None,
         **kwargs: Any
     ) -> None:
+        _cloud = cloud_setting or settings.current.azure_cloud  # type: ignore
+        _endpoints = get_arm_endpoints(_cloud)
+        if not base_url:
+            base_url = _endpoints["resource_manager"]
+        credential_scopes = kwargs.pop("credential_scopes", _endpoints["credential_scopes"])
         self._config = KustoManagementClientConfiguration(
-            credential=credential, subscription_id=subscription_id, **kwargs
+            credential=credential,
+            subscription_id=subscription_id,
+            cloud_setting=cloud_setting,
+            credential_scopes=credential_scopes,
+            **kwargs
         )
+
         _policies = kwargs.pop("policies", None)
         if _policies is None:
             _policies = [
@@ -125,30 +143,36 @@ class KustoManagementClient:  # pylint: disable=too-many-instance-attributes
                 policies.SensitiveHeaderCleanupPolicy(**kwargs) if self._config.redirect_policy else None,
                 self._config.http_logging_policy,
             ]
-        self._client: AsyncARMPipelineClient = AsyncARMPipelineClient(base_url=base_url, policies=_policies, **kwargs)
+        self._client: AsyncARMPipelineClient = AsyncARMPipelineClient(
+            base_url=cast(str, base_url), policies=_policies, **kwargs
+        )
 
         client_models = {k: v for k, v in _models.__dict__.items() if isinstance(v, type)}
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
         self._serialize.client_side_validation = False
+        self.operations = Operations(self._client, self._config, self._serialize, self._deserialize)
         self.clusters = ClustersOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.cluster_principal_assignments = ClusterPrincipalAssignmentsOperations(
+        self.operations_results = OperationsResultsOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
         self.skus = SkusOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.databases = DatabasesOperations(self._client, self._config, self._serialize, self._deserialize)
         self.attached_database_configurations = AttachedDatabaseConfigurationsOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
-        self.managed_private_endpoints = ManagedPrivateEndpointsOperations(
+        self.databases = DatabasesOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.cluster_principal_assignments = ClusterPrincipalAssignmentsOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
-        self.database = DatabaseOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.data_connections = DataConnectionsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
         self.database_principal_assignments = DatabasePrincipalAssignmentsOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
+        self.database = DatabaseOperations(self._client, self._config, self._serialize, self._deserialize)
         self.scripts = ScriptsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.sandbox_custom_images = SandboxCustomImagesOperations(
+        self.managed_private_endpoints = ManagedPrivateEndpointsOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
         self.private_endpoint_connections = PrivateEndpointConnectionsOperations(
@@ -157,11 +181,7 @@ class KustoManagementClient:  # pylint: disable=too-many-instance-attributes
         self.private_link_resources = PrivateLinkResourcesOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
-        self.data_connections = DataConnectionsOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
-        self.operations = Operations(self._client, self._config, self._serialize, self._deserialize)
-        self.operations_results = OperationsResultsOperations(
+        self.sandbox_custom_images = SandboxCustomImagesOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
         self.operations_results_location = OperationsResultsLocationOperations(
