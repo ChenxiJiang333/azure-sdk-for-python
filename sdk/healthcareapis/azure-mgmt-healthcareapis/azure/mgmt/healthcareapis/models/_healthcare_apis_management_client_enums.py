@@ -14,6 +14,7 @@ class ActionType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Enum. Indicates the action type. "Internal" refers to actions that are for internal only APIs."""
 
     INTERNAL = "Internal"
+    """Internal"""
 
 
 class CreatedByType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
@@ -29,50 +30,71 @@ class FhirResourceVersionPolicy(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Controls how resources are versioned on the FHIR service."""
 
     NO_VERSION = "no-version"
+    """no-version"""
     VERSIONED = "versioned"
+    """versioned"""
     VERSIONED_UPDATE = "versioned-update"
+    """versioned-update"""
 
 
 class FhirServiceKind(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The kind of the service."""
 
     FHIR_STU3 = "fhir-Stu3"
+    """fhir-Stu3"""
     FHIR_R4 = "fhir-R4"
+    """fhir-R4"""
 
 
 class IotIdentityResolutionType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The type of IoT identity resolution to use with the destination."""
 
     CREATE = "Create"
+    """Create"""
     LOOKUP = "Lookup"
+    """Lookup"""
 
 
 class Kind(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The kind of the service."""
 
     FHIR = "fhir"
+    """fhir"""
     FHIR_STU3 = "fhir-Stu3"
+    """fhir-Stu3"""
     FHIR_R4 = "fhir-R4"
+    """fhir-R4"""
 
 
 class ManagedServiceIdentityType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """Type of identity being specified, currently SystemAssigned and None are allowed."""
+    """Type of managed service identity (where both SystemAssigned and UserAssigned types are
+    allowed).
+    """
 
-    SYSTEM_ASSIGNED = "SystemAssigned"
     NONE = "None"
+    SYSTEM_ASSIGNED = "SystemAssigned"
+    USER_ASSIGNED = "UserAssigned"
+    SYSTEM_ASSIGNED_USER_ASSIGNED = "SystemAssigned,UserAssigned"
 
 
 class OperationResultStatus(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The status of the operation being performed."""
 
     CANCELED = "Canceled"
+    """Canceled"""
     SUCCEEDED = "Succeeded"
+    """Succeeded"""
     FAILED = "Failed"
+    """Failed"""
     REQUESTED = "Requested"
+    """Requested"""
     RUNNING = "Running"
+    """Running"""
 
 
-class PrivateEndpointConnectionProvisioningState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+class PrivateEndpointConnectionProvisioningState(  # pylint: disable=name-too-long
+    str, Enum, metaclass=CaseInsensitiveEnumMeta
+):
     """The current provisioning state."""
 
     SUCCEEDED = "Succeeded"
@@ -93,18 +115,31 @@ class ProvisioningState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The provisioning state."""
 
     DELETING = "Deleting"
+    """Deleting"""
     SUCCEEDED = "Succeeded"
+    """Succeeded"""
     CREATING = "Creating"
+    """Creating"""
     ACCEPTED = "Accepted"
+    """Accepted"""
     VERIFYING = "Verifying"
+    """Verifying"""
     UPDATING = "Updating"
+    """Updating"""
     FAILED = "Failed"
+    """Failed"""
     CANCELED = "Canceled"
+    """Canceled"""
     DEPROVISIONED = "Deprovisioned"
+    """Deprovisioned"""
     MOVING = "Moving"
+    """Moving"""
     SUSPENDED = "Suspended"
+    """Suspended"""
     WARNED = "Warned"
+    """Warned"""
     SYSTEM_MAINTENANCE = "SystemMaintenance"
+    """SystemMaintenance"""
 
 
 class PublicNetworkAccess(str, Enum, metaclass=CaseInsensitiveEnumMeta):
@@ -113,34 +148,46 @@ class PublicNetworkAccess(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """
 
     ENABLED = "Enabled"
+    """Enabled"""
     DISABLED = "Disabled"
+    """Disabled"""
 
 
 class ServiceEventState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Indicates the current status of event support for the resource."""
 
     DISABLED = "Disabled"
+    """Disabled"""
     ENABLED = "Enabled"
+    """Enabled"""
     UPDATING = "Updating"
+    """Updating"""
 
 
 class ServiceManagedIdentityType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Type of identity being specified, currently SystemAssigned and None are allowed."""
 
     NONE = "None"
+    """None"""
     SYSTEM_ASSIGNED = "SystemAssigned"
+    """SystemAssigned"""
     USER_ASSIGNED = "UserAssigned"
+    """UserAssigned"""
     SYSTEM_ASSIGNED_USER_ASSIGNED = "SystemAssigned,UserAssigned"
+    """SystemAssigned,UserAssigned"""
 
 
 class ServiceNameUnavailabilityReason(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The reason for unavailability."""
 
     INVALID = "Invalid"
+    """Invalid"""
     ALREADY_EXISTS = "AlreadyExists"
+    """AlreadyExists"""
 
 
 class SmartDataActions(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The Data Actions that can be enabled for a Smart Identity Provider Application."""
 
     READ = "Read"
+    """Read"""

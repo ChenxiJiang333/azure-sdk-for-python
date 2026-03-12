@@ -1,3 +1,4 @@
+# pylint: disable=line-too-long,useless-suppression
 # coding=utf-8
 # --------------------------------------------------------------------------
 # Copyright (c) Microsoft Corporation. All rights reserved.
@@ -32,11 +33,11 @@ def main():
 
     client.dicom_services.begin_delete(
         resource_group_name="testRG",
-        dicom_service_name="blue",
         workspace_name="workspace1",
+        dicom_service_name="blue",
     ).result()
 
 
-# x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/stable/2024-03-31/examples/dicomservices/DicomServices_Delete.json
+# x-ms-original-file: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/HealthcareApis/preview/2025-04-01-preview/examples/dicomservices/DicomServices_Delete.json
 if __name__ == "__main__":
     main()
