@@ -188,7 +188,7 @@ class BillingManagementTenantState(str, Enum, metaclass=CaseInsensitiveEnumMeta)
 class BillingPlan(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Represents the billing plan in ISO 8601 format. Required only for monthly purchases."""
 
-    P1M = "P1M"
+    P1_M = "P1M"
     """P1M"""
 
 
@@ -1078,11 +1078,11 @@ class SavingsPlanPurchasesPolicy(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 class SavingsPlanTerm(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Represents the Savings plan term in ISO 8601 format."""
 
-    P1Y = "P1Y"
+    P1_Y = "P1Y"
     """P1Y"""
-    P3Y = "P3Y"
+    P3_Y = "P3Y"
     """P3Y"""
-    P5Y = "P5Y"
+    P5_Y = "P5Y"
     """P5Y"""
 
 

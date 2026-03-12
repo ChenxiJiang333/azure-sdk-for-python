@@ -1,6 +1,6 @@
 {
   "apiVersion": "2024-04-01",
-  "commit": "aa90b6b11faa7d32e6a4342905ca7313806599ae",
+  "commit": "ed27a0b12feeb17cc1d34f72e6404f13a218f123",
   "repository_url": "https://github.com/Azure/azure-rest-api-specs",
   "typespec_src": "specification/billing/Billing.Management",
   "emitterVersion": "0.60.2"

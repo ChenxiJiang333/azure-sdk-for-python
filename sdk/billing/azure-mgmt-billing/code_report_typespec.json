@@ -538,7 +538,7 @@
                 "param_type": "positional_or_keyword"
               },
               "include_revoked": {
-                "default": "none",
+                "default": "bool",
                 "param_type": "keyword_only"
               },
               "filter": {
@@ -928,23 +928,23 @@
                 "param_type": "positional_or_keyword"
               },
               "include_all": {
-                "default": "none",
+                "default": "bool",
                 "param_type": "keyword_only"
               },
               "include_all_without_billing_profiles": {
-                "default": "none",
+                "default": "bool",
                 "param_type": "keyword_only"
               },
               "include_deleted": {
-                "default": "none",
+                "default": "bool",
                 "param_type": "keyword_only"
               },
               "include_pending_agreement": {
-                "default": "none",
+                "default": "bool",
                 "param_type": "keyword_only"
               },
               "include_resellee": {
-                "default": "none",
+                "default": "bool",
                 "param_type": "keyword_only"
               },
               "legal_owner_tid": {
@@ -2226,7 +2226,7 @@
                 "param_type": "positional_or_keyword"
               },
               "include_deleted": {
-                "default": "none",
+                "default": "bool",
                 "param_type": "keyword_only"
               },
               "filter": {
@@ -2314,11 +2314,11 @@
                 "param_type": "positional_or_keyword"
               },
               "include_billing_country": {
-                "default": "none",
+                "default": "bool",
                 "param_type": "keyword_only"
               },
               "include_transition_status": {
-                "default": "none",
+                "default": "bool",
                 "param_type": "keyword_only"
               },
               "kwargs": {
@@ -3712,7 +3712,7 @@
                 "param_type": "positional_or_keyword"
               },
               "resolve_scope_display_names": {
-                "default": "none",
+                "default": "bool",
                 "param_type": "keyword_only"
               },
               "filter": {
@@ -3742,7 +3742,7 @@
                 "param_type": "positional_or_keyword"
               },
               "resolve_scope_display_names": {
-                "default": "none",
+                "default": "bool",
                 "param_type": "keyword_only"
               },
               "filter": {
@@ -3810,7 +3810,7 @@
                 "param_type": "positional_or_keyword"
               },
               "resolve_scope_display_names": {
-                "default": "none",
+                "default": "bool",
                 "param_type": "keyword_only"
               },
               "filter": {
@@ -4826,7 +4826,7 @@
                 "param_type": "positional_or_keyword"
               },
               "include_deleted": {
-                "default": "none",
+                "default": "bool",
                 "param_type": "keyword_only"
               },
               "filter": {
@@ -5574,15 +5574,15 @@
                 "param_type": "positional_or_keyword"
               },
               "include_deleted": {
-                "default": "none",
+                "default": "bool",
                 "param_type": "keyword_only"
               },
               "include_tenant_subscriptions": {
-                "default": "none",
+                "default": "bool",
                 "param_type": "keyword_only"
               },
               "include_failed": {
-                "default": "none",
+                "default": "bool",
                 "param_type": "keyword_only"
               },
               "expand": {
@@ -5636,7 +5636,7 @@
                 "param_type": "positional_or_keyword"
               },
               "include_deleted": {
-                "default": "none",
+                "default": "bool",
                 "param_type": "keyword_only"
               },
               "expand": {
@@ -5694,7 +5694,7 @@
                 "param_type": "positional_or_keyword"
               },
               "include_deleted": {
-                "default": "none",
+                "default": "bool",
                 "param_type": "keyword_only"
               },
               "expand": {
@@ -5748,7 +5748,7 @@
                 "param_type": "positional_or_keyword"
               },
               "include_deleted": {
-                "default": "none",
+                "default": "bool",
                 "param_type": "keyword_only"
               },
               "expand": {
@@ -5852,7 +5852,7 @@
                 "param_type": "positional_or_keyword"
               },
               "include_deleted": {
-                "default": "none",
+                "default": "bool",
                 "param_type": "keyword_only"
               },
               "expand": {
@@ -6653,7 +6653,7 @@
                 "param_type": "positional_or_keyword"
               },
               "include_deleted": {
-                "default": "none",
+                "default": "bool",
                 "param_type": "keyword_only"
               },
               "filter": {
@@ -17072,7 +17072,7 @@
         "type": "Enum",
         "methods": {},
         "properties": {
-          "P1M": "P1M",
+          "P1_M": "P1_M",
           "capitalize": "capitalize",
           "casefold": "casefold",
           "center": "center",
@@ -56287,9 +56287,9 @@
         "type": "Enum",
         "methods": {},
         "properties": {
-          "P1Y": "P1Y",
-          "P3Y": "P3Y",
-          "P5Y": "P5Y",
+          "P1_Y": "P1_Y",
+          "P3_Y": "P3_Y",
+          "P5_Y": "P5_Y",
           "capitalize": "capitalize",
           "casefold": "casefold",
           "center": "center",
@@ -65005,7 +65005,7 @@
                 "param_type": "positional_or_keyword"
               },
               "include_revoked": {
-                "default": "none",
+                "default": "bool",
                 "param_type": "keyword_only"
               },
               "filter": {
@@ -65395,23 +65395,23 @@
                 "param_type": "positional_or_keyword"
               },
               "include_all": {
-                "default": "none",
+                "default": "bool",
                 "param_type": "keyword_only"
               },
               "include_all_without_billing_profiles": {
-                "default": "none",
+                "default": "bool",
                 "param_type": "keyword_only"
               },
               "include_deleted": {
-                "default": "none",
+                "default": "bool",
                 "param_type": "keyword_only"
               },
               "include_pending_agreement": {
-                "default": "none",
+                "default": "bool",
                 "param_type": "keyword_only"
               },
               "include_resellee": {
-                "default": "none",
+                "default": "bool",
                 "param_type": "keyword_only"
               },
               "legal_owner_tid": {
@@ -66693,7 +66693,7 @@
                 "param_type": "positional_or_keyword"
               },
               "include_deleted": {
-                "default": "none",
+                "default": "bool",
                 "param_type": "keyword_only"
               },
               "filter": {
@@ -66781,11 +66781,11 @@
                 "param_type": "positional_or_keyword"
               },
               "include_billing_country": {
-                "default": "none",
+                "default": "bool",
                 "param_type": "keyword_only"
               },
               "include_transition_status": {
-                "default": "none",
+                "default": "bool",
                 "param_type": "keyword_only"
               },
               "kwargs": {
@@ -68179,7 +68179,7 @@
                 "param_type": "positional_or_keyword"
               },
               "resolve_scope_display_names": {
-                "default": "none",
+                "default": "bool",
                 "param_type": "keyword_only"
               },
               "filter": {
@@ -68209,7 +68209,7 @@
                 "param_type": "positional_or_keyword"
               },
               "resolve_scope_display_names": {
-                "default": "none",
+                "default": "bool",
                 "param_type": "keyword_only"
               },
               "filter": {
@@ -68277,7 +68277,7 @@
                 "param_type": "positional_or_keyword"
               },
               "resolve_scope_display_names": {
-                "default": "none",
+                "default": "bool",
                 "param_type": "keyword_only"
               },
               "filter": {
@@ -69293,7 +69293,7 @@
                 "param_type": "positional_or_keyword"
               },
               "include_deleted": {
-                "default": "none",
+                "default": "bool",
                 "param_type": "keyword_only"
               },
               "filter": {
@@ -70041,15 +70041,15 @@
                 "param_type": "positional_or_keyword"
               },
               "include_deleted": {
-                "default": "none",
+                "default": "bool",
                 "param_type": "keyword_only"
               },
               "include_tenant_subscriptions": {
-                "default": "none",
+                "default": "bool",
                 "param_type": "keyword_only"
               },
               "include_failed": {
-                "default": "none",
+                "default": "bool",
                 "param_type": "keyword_only"
               },
               "expand": {
@@ -70103,7 +70103,7 @@
                 "param_type": "positional_or_keyword"
               },
               "include_deleted": {
-                "default": "none",
+                "default": "bool",
                 "param_type": "keyword_only"
               },
               "expand": {
@@ -70161,7 +70161,7 @@
                 "param_type": "positional_or_keyword"
               },
               "include_deleted": {
-                "default": "none",
+                "default": "bool",
                 "param_type": "keyword_only"
               },
               "expand": {
@@ -70215,7 +70215,7 @@
                 "param_type": "positional_or_keyword"
               },
               "include_deleted": {
-                "default": "none",
+                "default": "bool",
                 "param_type": "keyword_only"
               },
               "expand": {
@@ -70319,7 +70319,7 @@
                 "param_type": "positional_or_keyword"
               },
               "include_deleted": {
-                "default": "none",
+                "default": "bool",
                 "param_type": "keyword_only"
               },
               "expand": {
@@ -71120,7 +71120,7 @@
                 "param_type": "positional_or_keyword"
               },
               "include_deleted": {
-                "default": "none",
+                "default": "bool",
                 "param_type": "keyword_only"
               },
               "filter": {

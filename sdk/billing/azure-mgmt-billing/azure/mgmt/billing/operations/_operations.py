@@ -529,11 +529,7 @@ def build_billing_role_assignments_create_by_billing_account_request(  # pylint:
 
 
 def build_billing_role_assignments_resolve_by_billing_account_request(  # pylint: disable=name-too-long
-    billing_account_name: str,
-    *,
-    resolve_scope_display_names: Optional[bool] = None,
-    filter: Optional[str] = None,
-    **kwargs: Any
+    billing_account_name: str, *, resolve_scope_display_names: bool = False, filter: Optional[str] = None, **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
@@ -598,7 +594,7 @@ def build_billing_role_assignments_resolve_by_billing_profile_request(  # pylint
     billing_account_name: str,
     billing_profile_name: str,
     *,
-    resolve_scope_display_names: Optional[bool] = None,
+    resolve_scope_display_names: bool = False,
     filter: Optional[str] = None,
     **kwargs: Any
 ) -> HttpRequest:
@@ -1298,7 +1294,7 @@ def build_billing_role_assignments_resolve_by_invoice_section_request(  # pylint
     billing_profile_name: str,
     invoice_section_name: str,
     *,
-    resolve_scope_display_names: Optional[bool] = None,
+    resolve_scope_display_names: bool = False,
     filter: Optional[str] = None,
     **kwargs: Any
 ) -> HttpRequest:
@@ -1973,11 +1969,11 @@ def build_billing_accounts_update_request(billing_account_name: str, **kwargs: A
 
 def build_billing_accounts_list_request(
     *,
-    include_all: Optional[bool] = None,
-    include_all_without_billing_profiles: Optional[bool] = None,
-    include_deleted: Optional[bool] = None,
-    include_pending_agreement: Optional[bool] = None,
-    include_resellee: Optional[bool] = None,
+    include_all: bool = False,
+    include_all_without_billing_profiles: bool = False,
+    include_deleted: bool = False,
+    include_pending_agreement: bool = False,
+    include_resellee: bool = False,
     legal_owner_tid: Optional[str] = None,
     legal_owner_oid: Optional[str] = None,
     filter: Optional[str] = None,
@@ -2254,7 +2250,7 @@ def build_associated_tenants_delete_request(
 def build_associated_tenants_list_by_billing_account_request(  # pylint: disable=name-too-long
     billing_account_name: str,
     *,
-    include_revoked: Optional[bool] = None,
+    include_revoked: bool = False,
     filter: Optional[str] = None,
     order_by: Optional[str] = None,
     top: Optional[int] = None,
@@ -2737,7 +2733,7 @@ def build_billing_profiles_delete_request(
 def build_billing_profiles_list_by_billing_account_request(  # pylint: disable=name-too-long
     billing_account_name: str,
     *,
-    include_deleted: Optional[bool] = None,
+    include_deleted: bool = False,
     filter: Optional[str] = None,
     order_by: Optional[str] = None,
     top: Optional[int] = None,
@@ -2849,7 +2845,7 @@ def build_billing_subscriptions_list_by_billing_profile_request(  # pylint: disa
     billing_account_name: str,
     billing_profile_name: str,
     *,
-    include_deleted: Optional[bool] = None,
+    include_deleted: bool = False,
     expand: Optional[str] = None,
     filter: Optional[str] = None,
     order_by: Optional[str] = None,
@@ -2982,9 +2978,9 @@ def build_billing_subscriptions_delete_request(  # pylint: disable=name-too-long
 def build_billing_subscriptions_list_by_billing_account_request(  # pylint: disable=name-too-long
     billing_account_name: str,
     *,
-    include_deleted: Optional[bool] = None,
-    include_tenant_subscriptions: Optional[bool] = None,
-    include_failed: Optional[bool] = None,
+    include_deleted: bool = False,
+    include_tenant_subscriptions: bool = False,
+    include_failed: bool = False,
     expand: Optional[str] = None,
     filter: Optional[str] = None,
     order_by: Optional[str] = None,
@@ -3191,7 +3187,7 @@ def build_billing_subscriptions_list_by_customer_request(  # pylint: disable=nam
     billing_profile_name: str,
     customer_name: str,
     *,
-    include_deleted: Optional[bool] = None,
+    include_deleted: bool = False,
     expand: Optional[str] = None,
     filter: Optional[str] = None,
     order_by: Optional[str] = None,
@@ -3246,7 +3242,7 @@ def build_billing_subscriptions_list_by_customer_at_billing_account_request(  # 
     billing_account_name: str,
     customer_name: str,
     *,
-    include_deleted: Optional[bool] = None,
+    include_deleted: bool = False,
     expand: Optional[str] = None,
     filter: Optional[str] = None,
     order_by: Optional[str] = None,
@@ -3349,7 +3345,7 @@ def build_billing_subscriptions_list_by_invoice_section_request(  # pylint: disa
     billing_profile_name: str,
     invoice_section_name: str,
     *,
-    include_deleted: Optional[bool] = None,
+    include_deleted: bool = False,
     expand: Optional[str] = None,
     filter: Optional[str] = None,
     order_by: Optional[str] = None,
@@ -4118,7 +4114,7 @@ def build_invoice_sections_list_by_billing_profile_request(  # pylint: disable=n
     billing_account_name: str,
     billing_profile_name: str,
     *,
-    include_deleted: Optional[bool] = None,
+    include_deleted: bool = False,
     filter: Optional[str] = None,
     order_by: Optional[str] = None,
     top: Optional[int] = None,
@@ -5618,8 +5614,8 @@ def build_savings_plans_validate_update_by_billing_account_request(  # pylint: d
 def build_billing_property_get_request(
     subscription_id: str,
     *,
-    include_billing_country: Optional[bool] = None,
-    include_transition_status: Optional[bool] = None,
+    include_billing_country: bool = False,
+    include_transition_status: bool = False,
     **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
@@ -6142,7 +6138,7 @@ def build_billing_subscriptions_aliases_create_or_update_request(  # pylint: dis
 def build_billing_subscriptions_aliases_list_by_billing_account_request(  # pylint: disable=name-too-long
     billing_account_name: str,
     *,
-    include_deleted: Optional[bool] = None,
+    include_deleted: bool = False,
     filter: Optional[str] = None,
     order_by: Optional[str] = None,
     top: Optional[int] = None,
@@ -7902,7 +7898,7 @@ class BillingRoleAssignmentsOperations:  # pylint: disable=too-many-public-metho
         self,
         billing_account_name: str,
         *,
-        resolve_scope_display_names: Optional[bool] = None,
+        resolve_scope_display_names: bool = False,
         filter: Optional[str] = None,
         **kwargs: Any
     ) -> Iterator[bytes]:
@@ -7968,7 +7964,7 @@ class BillingRoleAssignmentsOperations:  # pylint: disable=too-many-public-metho
         self,
         billing_account_name: str,
         *,
-        resolve_scope_display_names: Optional[bool] = None,
+        resolve_scope_display_names: bool = False,
         filter: Optional[str] = None,
         **kwargs: Any
     ) -> LROPoller[_models.BillingRoleAssignmentListResult]:
@@ -7979,7 +7975,7 @@ class BillingRoleAssignmentsOperations:  # pylint: disable=too-many-public-metho
         :param billing_account_name: The ID that uniquely identifies a billing account. Required.
         :type billing_account_name: str
         :keyword resolve_scope_display_names: Resolves the scope display name for each of the role
-         assignments. Default value is None.
+         assignments. Default value is False.
         :paramtype resolve_scope_display_names: bool
         :keyword filter: The filter query option allows clients to filter a collection of resources
          that are addressed by a request URL. Default value is None.
@@ -8286,7 +8282,7 @@ class BillingRoleAssignmentsOperations:  # pylint: disable=too-many-public-metho
         billing_account_name: str,
         billing_profile_name: str,
         *,
-        resolve_scope_display_names: Optional[bool] = None,
+        resolve_scope_display_names: bool = False,
         filter: Optional[str] = None,
         **kwargs: Any
     ) -> Iterator[bytes]:
@@ -8354,7 +8350,7 @@ class BillingRoleAssignmentsOperations:  # pylint: disable=too-many-public-metho
         billing_account_name: str,
         billing_profile_name: str,
         *,
-        resolve_scope_display_names: Optional[bool] = None,
+        resolve_scope_display_names: bool = False,
         filter: Optional[str] = None,
         **kwargs: Any
     ) -> LROPoller[_models.BillingRoleAssignmentListResult]:
@@ -8367,7 +8363,7 @@ class BillingRoleAssignmentsOperations:  # pylint: disable=too-many-public-metho
         :param billing_profile_name: The ID that uniquely identifies a billing profile. Required.
         :type billing_profile_name: str
         :keyword resolve_scope_display_names: Resolves the scope display name for each of the role
-         assignments. Default value is None.
+         assignments. Default value is False.
         :paramtype resolve_scope_display_names: bool
         :keyword filter: The filter query option allows clients to filter a collection of resources
          that are addressed by a request URL. Default value is None.
@@ -11084,7 +11080,7 @@ class BillingRoleAssignmentsOperations:  # pylint: disable=too-many-public-metho
         billing_profile_name: str,
         invoice_section_name: str,
         *,
-        resolve_scope_display_names: Optional[bool] = None,
+        resolve_scope_display_names: bool = False,
         filter: Optional[str] = None,
         **kwargs: Any
     ) -> Iterator[bytes]:
@@ -11154,7 +11150,7 @@ class BillingRoleAssignmentsOperations:  # pylint: disable=too-many-public-metho
         billing_profile_name: str,
         invoice_section_name: str,
         *,
-        resolve_scope_display_names: Optional[bool] = None,
+        resolve_scope_display_names: bool = False,
         filter: Optional[str] = None,
         **kwargs: Any
     ) -> LROPoller[_models.BillingRoleAssignmentListResult]:
@@ -11169,7 +11165,7 @@ class BillingRoleAssignmentsOperations:  # pylint: disable=too-many-public-metho
         :param invoice_section_name: The ID that uniquely identifies an invoice section. Required.
         :type invoice_section_name: str
         :keyword resolve_scope_display_names: Resolves the scope display name for each of the role
-         assignments. Default value is None.
+         assignments. Default value is False.
         :paramtype resolve_scope_display_names: bool
         :keyword filter: The filter query option allows clients to filter a collection of resources
          that are addressed by a request URL. Default value is None.
@@ -13774,11 +13770,11 @@ class BillingAccountsOperations:
     def list(  # pylint: disable=too-many-locals
         self,
         *,
-        include_all: Optional[bool] = None,
-        include_all_without_billing_profiles: Optional[bool] = None,
-        include_deleted: Optional[bool] = None,
-        include_pending_agreement: Optional[bool] = None,
-        include_resellee: Optional[bool] = None,
+        include_all: bool = False,
+        include_all_without_billing_profiles: bool = False,
+        include_deleted: bool = False,
+        include_pending_agreement: bool = False,
+        include_resellee: bool = False,
         legal_owner_tid: Optional[str] = None,
         legal_owner_oid: Optional[str] = None,
         filter: Optional[str] = None,
@@ -13792,20 +13788,20 @@ class BillingAccountsOperations:
 
         :keyword include_all: When true, results will include Billing Accounts that the user does not
          have a direct role assignment on if the user has one of the following AAD roles: Global
-         Administrator, Global Reader, Billing Administrator. Default value is None.
+         Administrator, Global Reader, Billing Administrator. Default value is False.
         :paramtype include_all: bool
         :keyword include_all_without_billing_profiles: When true, results will include Billing Accounts
          that are not fully created if the user has one of the following AAD roles: Global
-         Administrator, Global Reader, Billing Administrator. Default value is None.
+         Administrator, Global Reader, Billing Administrator. Default value is False.
         :paramtype include_all_without_billing_profiles: bool
         :keyword include_deleted: When true, results will include any billing accounts in a deleted
-         state. Default value is None.
+         state. Default value is False.
         :paramtype include_deleted: bool
         :keyword include_pending_agreement: Includes billing accounts with agreement pending signature
-         that the user has access to. Default value is None.
+         that the user has access to. Default value is False.
         :paramtype include_pending_agreement: bool
         :keyword include_resellee: Includes the customer's billing account of Microsoft Partner
-         Agreement that the user has access to. Default value is None.
+         Agreement that the user has access to. Default value is False.
         :paramtype include_resellee: bool
         :keyword legal_owner_tid: Must be combined with legalOwnerOID, results will only include
          Billing Accounts for whom is legally responsible for the Billing Accounts. Optional. Default
@@ -15034,7 +15030,7 @@ class AssociatedTenantsOperations:
         self,
         billing_account_name: str,
         *,
-        include_revoked: Optional[bool] = None,
+        include_revoked: bool = False,
         filter: Optional[str] = None,
         order_by: Optional[str] = None,
         top: Optional[int] = None,
@@ -15049,7 +15045,8 @@ class AssociatedTenantsOperations:
 
         :param billing_account_name: The ID that uniquely identifies a billing account. Required.
         :type billing_account_name: str
-        :keyword include_revoked: Can be used to get revoked associated tenants. Default value is None.
+        :keyword include_revoked: Can be used to get revoked associated tenants. Default value is
+         False.
         :paramtype include_revoked: bool
         :keyword filter: The filter query option allows clients to filter a collection of resources
          that are addressed by a request URL. Default value is None.
@@ -16965,7 +16962,7 @@ class BillingProfilesOperations:
         self,
         billing_account_name: str,
         *,
-        include_deleted: Optional[bool] = None,
+        include_deleted: bool = False,
         filter: Optional[str] = None,
         order_by: Optional[str] = None,
         top: Optional[int] = None,
@@ -16979,7 +16976,7 @@ class BillingProfilesOperations:
 
         :param billing_account_name: The ID that uniquely identifies a billing account. Required.
         :type billing_account_name: str
-        :keyword include_deleted: Can be used to get deleted billing profiles. Default value is None.
+        :keyword include_deleted: Can be used to get deleted billing profiles. Default value is False.
         :paramtype include_deleted: bool
         :keyword filter: The filter query option allows clients to filter a collection of resources
          that are addressed by a request URL. Default value is None.
@@ -17268,7 +17265,7 @@ class BillingSubscriptionsOperations:  # pylint: disable=too-many-public-methods
         billing_account_name: str,
         billing_profile_name: str,
         *,
-        include_deleted: Optional[bool] = None,
+        include_deleted: bool = False,
         expand: Optional[str] = None,
         filter: Optional[str] = None,
         order_by: Optional[str] = None,
@@ -17287,7 +17284,7 @@ class BillingSubscriptionsOperations:  # pylint: disable=too-many-public-methods
         :param billing_profile_name: The ID that uniquely identifies a billing profile. Required.
         :type billing_profile_name: str
         :keyword include_deleted: Can be used to get deleted billing subscriptions. Default value is
-         None.
+         False.
         :paramtype include_deleted: bool
         :keyword expand: Can be used to expand ``Reseller``, ``ConsumptionCostCenter``,
          ``LastMonthCharges`` and ``MonthToDateCharges``. Default value is None.
@@ -17826,9 +17823,9 @@ class BillingSubscriptionsOperations:  # pylint: disable=too-many-public-methods
         self,
         billing_account_name: str,
         *,
-        include_deleted: Optional[bool] = None,
-        include_tenant_subscriptions: Optional[bool] = None,
-        include_failed: Optional[bool] = None,
+        include_deleted: bool = False,
+        include_tenant_subscriptions: bool = False,
+        include_failed: bool = False,
         expand: Optional[str] = None,
         filter: Optional[str] = None,
         order_by: Optional[str] = None,
@@ -17843,14 +17840,14 @@ class BillingSubscriptionsOperations:  # pylint: disable=too-many-public-methods
         :param billing_account_name: The ID that uniquely identifies a billing account. Required.
         :type billing_account_name: str
         :keyword include_deleted: Can be used to get deleted billing subscriptions. Default value is
-         None.
+         False.
         :paramtype include_deleted: bool
         :keyword include_tenant_subscriptions: Can be used to get tenant-owned billing subscriptions.
          This field is only applies to Microsoft Online Services Program billing accounts. Default value
-         is None.
+         is False.
         :paramtype include_tenant_subscriptions: bool
         :keyword include_failed: Can be used to get failed billing subscriptions. Default value is
-         None.
+         False.
         :paramtype include_failed: bool
         :keyword expand: Can be used to expand ``Reseller``, ``ConsumptionCostCenter``,
          ``LastMonthCharges`` and ``MonthToDateCharges``. Default value is None.
@@ -19086,7 +19083,7 @@ class BillingSubscriptionsOperations:  # pylint: disable=too-many-public-methods
         billing_profile_name: str,
         customer_name: str,
         *,
-        include_deleted: Optional[bool] = None,
+        include_deleted: bool = False,
         expand: Optional[str] = None,
         filter: Optional[str] = None,
         order_by: Optional[str] = None,
@@ -19106,7 +19103,7 @@ class BillingSubscriptionsOperations:  # pylint: disable=too-many-public-methods
         :param customer_name: The ID that uniquely identifies a customer. Required.
         :type customer_name: str
         :keyword include_deleted: Can be used to get deleted billing subscriptions. Default value is
-         None.
+         False.
         :paramtype include_deleted: bool
         :keyword expand: Can be used to expand ``Reseller``, ``ConsumptionCostCenter``,
          ``LastMonthCharges`` and ``MonthToDateCharges``. Default value is None.
@@ -19229,7 +19226,7 @@ class BillingSubscriptionsOperations:  # pylint: disable=too-many-public-methods
         billing_account_name: str,
         customer_name: str,
         *,
-        include_deleted: Optional[bool] = None,
+        include_deleted: bool = False,
         expand: Optional[str] = None,
         filter: Optional[str] = None,
         order_by: Optional[str] = None,
@@ -19247,7 +19244,7 @@ class BillingSubscriptionsOperations:  # pylint: disable=too-many-public-methods
         :param customer_name: The ID that uniquely identifies a customer. Required.
         :type customer_name: str
         :keyword include_deleted: Can be used to get deleted billing subscriptions. Default value is
-         None.
+         False.
         :paramtype include_deleted: bool
         :keyword expand: Can be used to expand ``Reseller``, ``ConsumptionCostCenter``,
          ``LastMonthCharges`` and ``MonthToDateCharges``. Default value is None.
@@ -19500,7 +19497,7 @@ class BillingSubscriptionsOperations:  # pylint: disable=too-many-public-methods
         billing_profile_name: str,
         invoice_section_name: str,
         *,
-        include_deleted: Optional[bool] = None,
+        include_deleted: bool = False,
         expand: Optional[str] = None,
         filter: Optional[str] = None,
         order_by: Optional[str] = None,
@@ -19520,7 +19517,7 @@ class BillingSubscriptionsOperations:  # pylint: disable=too-many-public-methods
         :param invoice_section_name: The ID that uniquely identifies an invoice section. Required.
         :type invoice_section_name: str
         :keyword include_deleted: Can be used to get deleted billing subscriptions. Default value is
-         None.
+         False.
         :paramtype include_deleted: bool
         :keyword expand: Can be used to expand ``Reseller``, ``ConsumptionCostCenter``,
          ``LastMonthCharges`` and ``MonthToDateCharges``. Default value is None.
@@ -22432,7 +22429,7 @@ class InvoiceSectionsOperations:
         billing_account_name: str,
         billing_profile_name: str,
         *,
-        include_deleted: Optional[bool] = None,
+        include_deleted: bool = False,
         filter: Optional[str] = None,
         order_by: Optional[str] = None,
         top: Optional[int] = None,
@@ -22448,7 +22445,7 @@ class InvoiceSectionsOperations:
         :type billing_account_name: str
         :param billing_profile_name: The ID that uniquely identifies a billing profile. Required.
         :type billing_profile_name: str
-        :keyword include_deleted: Can be used to get deleted invoice sections. Default value is None.
+        :keyword include_deleted: Can be used to get deleted invoice sections. Default value is False.
         :paramtype include_deleted: bool
         :keyword filter: The filter query option allows clients to filter a collection of resources
          that are addressed by a request URL. Default value is None.
@@ -28175,20 +28172,16 @@ class BillingPropertyOperations:
 
     @distributed_trace
     def get(
-        self,
-        *,
-        include_billing_country: Optional[bool] = None,
-        include_transition_status: Optional[bool] = None,
-        **kwargs: Any
+        self, *, include_billing_country: bool = False, include_transition_status: bool = False, **kwargs: Any
     ) -> _models.BillingProperty:
         """Gets the billing properties for a subscription.
 
         :keyword include_billing_country: A flag that specifies whether or not to include billing
-         country. Default value is None.
+         country. Default value is False.
         :paramtype include_billing_country: bool
         :keyword include_transition_status: A flag that specifies whether or not to include transition
          status for billing accounts with agreement type Microsoft Customer Agreement. Default value is
-         None.
+         False.
         :paramtype include_transition_status: bool
         :return: BillingProperty. The BillingProperty is compatible with MutableMapping
         :rtype: ~azure.mgmt.billing.models.BillingProperty
@@ -29958,7 +29951,7 @@ class BillingSubscriptionsAliasesOperations:
         self,
         billing_account_name: str,
         *,
-        include_deleted: Optional[bool] = None,
+        include_deleted: bool = False,
         filter: Optional[str] = None,
         order_by: Optional[str] = None,
         top: Optional[int] = None,
@@ -29973,7 +29966,7 @@ class BillingSubscriptionsAliasesOperations:
         :param billing_account_name: The ID that uniquely identifies a billing account. Required.
         :type billing_account_name: str
         :keyword include_deleted: Can be used to get deleted billing subscriptions. Default value is
-         None.
+         False.
         :paramtype include_deleted: bool
         :keyword filter: The filter query option allows clients to filter a collection of resources
          that are addressed by a request URL. Default value is None.
