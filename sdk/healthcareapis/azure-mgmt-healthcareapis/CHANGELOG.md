@@ -1,5 +1,37 @@
 # Release History
 
+## 3.0.0b1 (2026-03-12)
+
+### Features Added
+
+  - Model PrivateEndpointConnection has a new parameter system_data
+  - Model PrivateEndpointConnectionDescription has a new parameter properties
+  - Model PrivateEndpointConnectionListResultDescription has a new parameter next_link
+  - Model PrivateLinkResourceDescription has a new parameter properties
+  - Model PrivateLinkResourceListResultDescription has a new parameter next_link
+  - Model Resource has a new parameter system_data
+  - Model ServiceManagedIdentity has a new parameter principal_id
+  - Model ServiceManagedIdentity has a new parameter tenant_id
+  - Model ServiceManagedIdentity has a new parameter user_assigned_identities
+  - Model StorageConfiguration has a new parameter storage_indexing_configuration
+
+### Breaking Changes
+
+  - Model PrivateEndpointConnectionDescription no longer has parameter private_endpoint
+  - Model PrivateEndpointConnectionDescription no longer has parameter private_link_service_connection_state
+  - Model PrivateEndpointConnectionDescription no longer has parameter provisioning_state
+  - Model PrivateLinkResourceDescription no longer has parameter group_id
+  - Model PrivateLinkResourceDescription no longer has parameter required_members
+  - Model PrivateLinkResourceDescription no longer has parameter required_zone_names
+  - Model ServiceManagedIdentity has a new required parameter type
+  - Model ServiceManagedIdentity no longer has parameter identity
+  - Parameter value of model DicomServiceCollection is now required
+  - Parameter value of model FhirServiceCollection is now required
+  - Parameter value of model IotConnectorCollection is now required
+  - Parameter value of model IotFhirDestinationCollection is now required
+  - Parameter value of model ServicesDescriptionListResult is now required
+  - Parameter value of model WorkspaceList is now required
+
 ## 2.2.0b1 (2026-03-12)
 
 change log generation failed!!! You need to write it manually!!!
