@@ -20,7 +20,19 @@ class TestBillingManagementEnrollmentAccountsOperations(AzureMgmtRecordedTestCas
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_get_by_department(self, resource_group):
+    def test_enrollment_accounts_list_by_department(self, resource_group):
+        response = self.client.enrollment_accounts.list_by_department(
+            billing_account_name="str",
+            department_name="str",
+            api_version="2024-04-01",
+        )
+        result = [r for r in response]
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
+    def test_enrollment_accounts_get_by_department(self, resource_group):
         response = self.client.enrollment_accounts.get_by_department(
             billing_account_name="str",
             department_name="str",
@@ -33,10 +45,9 @@ class TestBillingManagementEnrollmentAccountsOperations(AzureMgmtRecordedTestCas
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_list_by_department(self, resource_group):
-        response = self.client.enrollment_accounts.list_by_department(
+    def test_enrollment_accounts_list_by_billing_account(self, resource_group):
+        response = self.client.enrollment_accounts.list_by_billing_account(
             billing_account_name="str",
-            department_name="str",
             api_version="2024-04-01",
         )
         result = [r for r in response]
@@ -45,23 +56,12 @@ class TestBillingManagementEnrollmentAccountsOperations(AzureMgmtRecordedTestCas
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_get(self, resource_group):
+    def test_enrollment_accounts_get(self, resource_group):
         response = self.client.enrollment_accounts.get(
             billing_account_name="str",
             enrollment_account_name="str",
             api_version="2024-04-01",
         )
 
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_list_by_billing_account(self, resource_group):
-        response = self.client.enrollment_accounts.list_by_billing_account(
-            billing_account_name="str",
-            api_version="2024-04-01",
-        )
-        result = [r for r in response]
         # please add some check logic here by yourself
         # ...

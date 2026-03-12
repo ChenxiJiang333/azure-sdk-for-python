@@ -20,7 +20,7 @@ class TestBillingManagementInvoicesOperations(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_list_by_billing_profile(self, resource_group):
+    def test_invoices_list_by_billing_profile(self, resource_group):
         response = self.client.invoices.list_by_billing_profile(
             billing_account_name="str",
             billing_profile_name="str",
@@ -32,7 +32,7 @@ class TestBillingManagementInvoicesOperations(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_begin_download_documents_by_billing_account(self, resource_group):
+    def test_invoices_begin_download_documents_by_billing_account(self, resource_group):
         response = self.client.invoices.begin_download_documents_by_billing_account(
             billing_account_name="str",
             parameters=[{"documentName": "str", "invoiceName": "str"}],
@@ -44,43 +44,18 @@ class TestBillingManagementInvoicesOperations(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_begin_amend(self, resource_group):
-        response = self.client.invoices.begin_amend(
+    def test_invoices_list_by_billing_account(self, resource_group):
+        response = self.client.invoices.list_by_billing_account(
             billing_account_name="str",
-            invoice_name="str",
             api_version="2024-04-01",
-        ).result()  # call '.result()' to poll until service return final result
-
+        )
+        result = [r for r in response]
         # please add some check logic here by yourself
         # ...
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_begin_download_by_billing_account(self, resource_group):
-        response = self.client.invoices.begin_download_by_billing_account(
-            billing_account_name="str",
-            invoice_name="str",
-            api_version="2024-04-01",
-        ).result()  # call '.result()' to poll until service return final result
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_begin_download_summary_by_billing_account(self, resource_group):
-        response = self.client.invoices.begin_download_summary_by_billing_account(
-            billing_account_name="str",
-            invoice_name="str",
-            api_version="2024-04-01",
-        ).result()  # call '.result()' to poll until service return final result
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_get_by_billing_account(self, resource_group):
+    def test_invoices_get_by_billing_account(self, resource_group):
         response = self.client.invoices.get_by_billing_account(
             billing_account_name="str",
             invoice_name="str",
@@ -92,19 +67,45 @@ class TestBillingManagementInvoicesOperations(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_list_by_billing_account(self, resource_group):
-        response = self.client.invoices.list_by_billing_account(
+    def test_invoices_begin_amend(self, resource_group):
+        response = self.client.invoices.begin_amend(
             billing_account_name="str",
+            invoice_name="str",
             api_version="2024-04-01",
-        )
-        result = [r for r in response]
+        ).result()  # call '.result()' to poll until service return final result
+
         # please add some check logic here by yourself
         # ...
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_begin_download_documents_by_billing_subscription(self, resource_group):
+    def test_invoices_begin_download_by_billing_account(self, resource_group):
+        response = self.client.invoices.begin_download_by_billing_account(
+            billing_account_name="str",
+            invoice_name="str",
+            api_version="2024-04-01",
+        ).result()  # call '.result()' to poll until service return final result
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
+    def test_invoices_begin_download_summary_by_billing_account(self, resource_group):
+        response = self.client.invoices.begin_download_summary_by_billing_account(
+            billing_account_name="str",
+            invoice_name="str",
+            api_version="2024-04-01",
+        ).result()  # call '.result()' to poll until service return final result
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
+    def test_invoices_begin_download_documents_by_billing_subscription(self, resource_group):
         response = self.client.invoices.begin_download_documents_by_billing_subscription(
+            subscription_id="str",
             parameters=[{"documentName": "str", "invoiceName": "str"}],
             api_version="2024-04-01",
         ).result()  # call '.result()' to poll until service return final result
@@ -114,8 +115,32 @@ class TestBillingManagementInvoicesOperations(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_begin_download_by_billing_subscription(self, resource_group):
+    def test_invoices_list_by_billing_subscription(self, resource_group):
+        response = self.client.invoices.list_by_billing_subscription(
+            subscription_id="str",
+            api_version="2024-04-01",
+        )
+        result = [r for r in response]
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
+    def test_invoices_get_by_billing_subscription(self, resource_group):
+        response = self.client.invoices.get_by_billing_subscription(
+            subscription_id="str",
+            invoice_name="str",
+            api_version="2024-04-01",
+        )
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy
+    def test_invoices_begin_download_by_billing_subscription(self, resource_group):
         response = self.client.invoices.begin_download_by_billing_subscription(
+            subscription_id="str",
             invoice_name="str",
             api_version="2024-04-01",
         ).result()  # call '.result()' to poll until service return final result
@@ -125,28 +150,7 @@ class TestBillingManagementInvoicesOperations(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_get_by_billing_subscription(self, resource_group):
-        response = self.client.invoices.get_by_billing_subscription(
-            invoice_name="str",
-            api_version="2024-04-01",
-        )
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_list_by_billing_subscription(self, resource_group):
-        response = self.client.invoices.list_by_billing_subscription(
-            api_version="2024-04-01",
-        )
-        result = [r for r in response]
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_get(self, resource_group):
+    def test_invoices_get(self, resource_group):
         response = self.client.invoices.get(
             invoice_name="str",
             api_version="2024-04-01",

@@ -1,3 +1,4 @@
+# pylint: disable=line-too-long,useless-suppression
 # coding=utf-8
 # --------------------------------------------------------------------------
 # Copyright (c) Microsoft Corporation. All rights reserved.
@@ -31,11 +32,12 @@ def main():
     )
 
     response = client.invoices.get_by_billing_subscription(
+        subscription_id="11111111-1111-1111-1111-111111111111",
         invoice_name="E123456789",
     )
     print(response)
 
 
-# x-ms-original-file: specification/billing/resource-manager/Microsoft.Billing/stable/2024-04-01/examples/invoicesGetByBillingSubscription.json
+# x-ms-original-file: specification/billing/resource-manager/Microsoft.Billing/Billing/stable/2024-04-01/examples/invoicesGetByBillingSubscription.json
 if __name__ == "__main__":
     main()

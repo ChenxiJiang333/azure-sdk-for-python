@@ -21,7 +21,19 @@ class TestBillingManagementBillingRoleDefinitionOperationsAsync(AzureMgmtRecorde
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_get_by_billing_profile(self, resource_group):
+    async def test_billing_role_definition_list_by_billing_profile(self, resource_group):
+        response = self.client.billing_role_definition.list_by_billing_profile(
+            billing_account_name="str",
+            billing_profile_name="str",
+            api_version="2024-04-01",
+        )
+        result = [r async for r in response]
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
+    async def test_billing_role_definition_get_by_billing_profile(self, resource_group):
         response = await self.client.billing_role_definition.get_by_billing_profile(
             billing_account_name="str",
             billing_profile_name="str",
@@ -34,10 +46,11 @@ class TestBillingManagementBillingRoleDefinitionOperationsAsync(AzureMgmtRecorde
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_list_by_billing_profile(self, resource_group):
-        response = self.client.billing_role_definition.list_by_billing_profile(
+    async def test_billing_role_definition_list_by_customer(self, resource_group):
+        response = self.client.billing_role_definition.list_by_customer(
             billing_account_name="str",
             billing_profile_name="str",
+            customer_name="str",
             api_version="2024-04-01",
         )
         result = [r async for r in response]
@@ -46,7 +59,7 @@ class TestBillingManagementBillingRoleDefinitionOperationsAsync(AzureMgmtRecorde
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_get_by_customer(self, resource_group):
+    async def test_billing_role_definition_get_by_customer(self, resource_group):
         response = await self.client.billing_role_definition.get_by_customer(
             billing_account_name="str",
             billing_profile_name="str",
@@ -60,11 +73,11 @@ class TestBillingManagementBillingRoleDefinitionOperationsAsync(AzureMgmtRecorde
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_list_by_customer(self, resource_group):
-        response = self.client.billing_role_definition.list_by_customer(
+    async def test_billing_role_definition_list_by_invoice_section(self, resource_group):
+        response = self.client.billing_role_definition.list_by_invoice_section(
             billing_account_name="str",
             billing_profile_name="str",
-            customer_name="str",
+            invoice_section_name="str",
             api_version="2024-04-01",
         )
         result = [r async for r in response]
@@ -73,7 +86,7 @@ class TestBillingManagementBillingRoleDefinitionOperationsAsync(AzureMgmtRecorde
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_get_by_invoice_section(self, resource_group):
+    async def test_billing_role_definition_get_by_invoice_section(self, resource_group):
         response = await self.client.billing_role_definition.get_by_invoice_section(
             billing_account_name="str",
             billing_profile_name="str",
@@ -87,11 +100,9 @@ class TestBillingManagementBillingRoleDefinitionOperationsAsync(AzureMgmtRecorde
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_list_by_invoice_section(self, resource_group):
-        response = self.client.billing_role_definition.list_by_invoice_section(
+    async def test_billing_role_definition_list_by_billing_account(self, resource_group):
+        response = self.client.billing_role_definition.list_by_billing_account(
             billing_account_name="str",
-            billing_profile_name="str",
-            invoice_section_name="str",
             api_version="2024-04-01",
         )
         result = [r async for r in response]
@@ -100,7 +111,7 @@ class TestBillingManagementBillingRoleDefinitionOperationsAsync(AzureMgmtRecorde
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_get_by_billing_account(self, resource_group):
+    async def test_billing_role_definition_get_by_billing_account(self, resource_group):
         response = await self.client.billing_role_definition.get_by_billing_account(
             billing_account_name="str",
             role_definition_name="str",
@@ -112,9 +123,10 @@ class TestBillingManagementBillingRoleDefinitionOperationsAsync(AzureMgmtRecorde
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_list_by_billing_account(self, resource_group):
-        response = self.client.billing_role_definition.list_by_billing_account(
+    async def test_billing_role_definition_list_by_department(self, resource_group):
+        response = self.client.billing_role_definition.list_by_department(
             billing_account_name="str",
+            department_name="str",
             api_version="2024-04-01",
         )
         result = [r async for r in response]
@@ -123,7 +135,7 @@ class TestBillingManagementBillingRoleDefinitionOperationsAsync(AzureMgmtRecorde
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_get_by_department(self, resource_group):
+    async def test_billing_role_definition_get_by_department(self, resource_group):
         response = await self.client.billing_role_definition.get_by_department(
             billing_account_name="str",
             department_name="str",
@@ -136,10 +148,10 @@ class TestBillingManagementBillingRoleDefinitionOperationsAsync(AzureMgmtRecorde
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_list_by_department(self, resource_group):
-        response = self.client.billing_role_definition.list_by_department(
+    async def test_billing_role_definition_list_by_enrollment_account(self, resource_group):
+        response = self.client.billing_role_definition.list_by_enrollment_account(
             billing_account_name="str",
-            department_name="str",
+            enrollment_account_name="str",
             api_version="2024-04-01",
         )
         result = [r async for r in response]
@@ -148,7 +160,7 @@ class TestBillingManagementBillingRoleDefinitionOperationsAsync(AzureMgmtRecorde
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_get_by_enrollment_account(self, resource_group):
+    async def test_billing_role_definition_get_by_enrollment_account(self, resource_group):
         response = await self.client.billing_role_definition.get_by_enrollment_account(
             billing_account_name="str",
             enrollment_account_name="str",
@@ -156,17 +168,5 @@ class TestBillingManagementBillingRoleDefinitionOperationsAsync(AzureMgmtRecorde
             api_version="2024-04-01",
         )
 
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_list_by_enrollment_account(self, resource_group):
-        response = self.client.billing_role_definition.list_by_enrollment_account(
-            billing_account_name="str",
-            enrollment_account_name="str",
-            api_version="2024-04-01",
-        )
-        result = [r async for r in response]
         # please add some check logic here by yourself
         # ...

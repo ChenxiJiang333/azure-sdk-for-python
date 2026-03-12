@@ -21,7 +21,7 @@ class TestBillingManagementProductsOperationsAsync(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_list_by_invoice_section(self, resource_group):
+    async def test_products_list_by_invoice_section(self, resource_group):
         response = self.client.products.list_by_invoice_section(
             billing_account_name="str",
             billing_profile_name="str",
@@ -34,7 +34,7 @@ class TestBillingManagementProductsOperationsAsync(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_list_by_billing_profile(self, resource_group):
+    async def test_products_list_by_billing_profile(self, resource_group):
         response = self.client.products.list_by_billing_profile(
             billing_account_name="str",
             billing_profile_name="str",
@@ -46,7 +46,7 @@ class TestBillingManagementProductsOperationsAsync(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_list_by_customer(self, resource_group):
+    async def test_products_list_by_customer(self, resource_group):
         response = self.client.products.list_by_customer(
             billing_account_name="str",
             customer_name="str",
@@ -58,35 +58,18 @@ class TestBillingManagementProductsOperationsAsync(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_begin_move(self, resource_group):
-        response = await (
-            await self.client.products.begin_move(
-                billing_account_name="str",
-                product_name="str",
-                parameters={"destinationInvoiceSectionId": "str"},
-                api_version="2024-04-01",
-            )
-        ).result()  # call '.result()' to poll until service return final result
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_validate_move_eligibility(self, resource_group):
-        response = await self.client.products.validate_move_eligibility(
+    async def test_products_list_by_billing_account(self, resource_group):
+        response = self.client.products.list_by_billing_account(
             billing_account_name="str",
-            product_name="str",
-            parameters={"destinationInvoiceSectionId": "str"},
             api_version="2024-04-01",
         )
-
+        result = [r async for r in response]
         # please add some check logic here by yourself
         # ...
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_get(self, resource_group):
+    async def test_products_get(self, resource_group):
         response = await self.client.products.get(
             billing_account_name="str",
             product_name="str",
@@ -98,7 +81,7 @@ class TestBillingManagementProductsOperationsAsync(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_update(self, resource_group):
+    async def test_products_update(self, resource_group):
         response = await self.client.products.update(
             billing_account_name="str",
             product_name="str",
@@ -148,11 +131,28 @@ class TestBillingManagementProductsOperationsAsync(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_list_by_billing_account(self, resource_group):
-        response = self.client.products.list_by_billing_account(
+    async def test_products_begin_move(self, resource_group):
+        response = await (
+            await self.client.products.begin_move(
+                billing_account_name="str",
+                product_name="str",
+                parameters={"destinationInvoiceSectionId": "str"},
+                api_version="2024-04-01",
+            )
+        ).result()  # call '.result()' to poll until service return final result
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
+    async def test_products_validate_move_eligibility(self, resource_group):
+        response = await self.client.products.validate_move_eligibility(
             billing_account_name="str",
+            product_name="str",
+            parameters={"destinationInvoiceSectionId": "str"},
             api_version="2024-04-01",
         )
-        result = [r async for r in response]
+
         # please add some check logic here by yourself
         # ...

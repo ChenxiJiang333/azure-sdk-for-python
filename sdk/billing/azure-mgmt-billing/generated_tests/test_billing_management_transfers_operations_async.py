@@ -21,7 +21,20 @@ class TestBillingManagementTransfersOperationsAsync(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_get(self, resource_group):
+    async def test_transfers_list(self, resource_group):
+        response = self.client.transfers.list(
+            billing_account_name="str",
+            billing_profile_name="str",
+            invoice_section_name="str",
+            api_version="2024-04-01",
+        )
+        result = [r async for r in response]
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
+    async def test_transfers_get(self, resource_group):
         response = await self.client.transfers.get(
             billing_account_name="str",
             billing_profile_name="str",
@@ -35,7 +48,7 @@ class TestBillingManagementTransfersOperationsAsync(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_initiate(self, resource_group):
+    async def test_transfers_initiate(self, resource_group):
         response = await self.client.transfers.initiate(
             billing_account_name="str",
             billing_profile_name="str",
@@ -50,7 +63,7 @@ class TestBillingManagementTransfersOperationsAsync(AzureMgmtRecordedTestCase):
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_cancel(self, resource_group):
+    async def test_transfers_cancel(self, resource_group):
         response = await self.client.transfers.cancel(
             billing_account_name="str",
             billing_profile_name="str",
@@ -59,18 +72,5 @@ class TestBillingManagementTransfersOperationsAsync(AzureMgmtRecordedTestCase):
             api_version="2024-04-01",
         )
 
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_list(self, resource_group):
-        response = self.client.transfers.list(
-            billing_account_name="str",
-            billing_profile_name="str",
-            invoice_section_name="str",
-            api_version="2024-04-01",
-        )
-        result = [r async for r in response]
         # please add some check logic here by yourself
         # ...

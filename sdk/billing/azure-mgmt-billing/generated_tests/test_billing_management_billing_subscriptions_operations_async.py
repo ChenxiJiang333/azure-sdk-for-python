@@ -21,7 +21,19 @@ class TestBillingManagementBillingSubscriptionsOperationsAsync(AzureMgmtRecorded
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_get_by_billing_profile(self, resource_group):
+    async def test_billing_subscriptions_list_by_billing_profile(self, resource_group):
+        response = self.client.billing_subscriptions.list_by_billing_profile(
+            billing_account_name="str",
+            billing_profile_name="str",
+            api_version="2024-04-01",
+        )
+        result = [r async for r in response]
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
+    async def test_billing_subscriptions_get_by_billing_profile(self, resource_group):
         response = await self.client.billing_subscriptions.get_by_billing_profile(
             billing_account_name="str",
             billing_profile_name="str",
@@ -34,19 +46,7 @@ class TestBillingManagementBillingSubscriptionsOperationsAsync(AzureMgmtRecorded
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_list_by_billing_profile(self, resource_group):
-        response = self.client.billing_subscriptions.list_by_billing_profile(
-            billing_account_name="str",
-            billing_profile_name="str",
-            api_version="2024-04-01",
-        )
-        result = [r async for r in response]
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_list_by_customer(self, resource_group):
+    async def test_billing_subscriptions_list_by_customer(self, resource_group):
         response = self.client.billing_subscriptions.list_by_customer(
             billing_account_name="str",
             billing_profile_name="str",
@@ -59,7 +59,7 @@ class TestBillingManagementBillingSubscriptionsOperationsAsync(AzureMgmtRecorded
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_list_by_invoice_section(self, resource_group):
+    async def test_billing_subscriptions_list_by_invoice_section(self, resource_group):
         response = self.client.billing_subscriptions.list_by_invoice_section(
             billing_account_name="str",
             billing_profile_name="str",
@@ -72,100 +72,18 @@ class TestBillingManagementBillingSubscriptionsOperationsAsync(AzureMgmtRecorded
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_begin_cancel(self, resource_group):
-        response = await (
-            await self.client.billing_subscriptions.begin_cancel(
-                billing_account_name="str",
-                billing_subscription_name="str",
-                parameters={"cancellationReason": "str", "customerId": "str"},
-                api_version="2024-04-01",
-            )
-        ).result()  # call '.result()' to poll until service return final result
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_begin_merge(self, resource_group):
-        response = await (
-            await self.client.billing_subscriptions.begin_merge(
-                billing_account_name="str",
-                billing_subscription_name="str",
-                parameters={"quantity": 0, "targetBillingSubscriptionName": "str"},
-                api_version="2024-04-01",
-            )
-        ).result()  # call '.result()' to poll until service return final result
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_begin_move(self, resource_group):
-        response = await (
-            await self.client.billing_subscriptions.begin_move(
-                billing_account_name="str",
-                billing_subscription_name="str",
-                parameters={"destinationEnrollmentAccountId": "str", "destinationInvoiceSectionId": "str"},
-                api_version="2024-04-01",
-            )
-        ).result()  # call '.result()' to poll until service return final result
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_begin_split(self, resource_group):
-        response = await (
-            await self.client.billing_subscriptions.begin_split(
-                billing_account_name="str",
-                billing_subscription_name="str",
-                parameters={
-                    "billingFrequency": "str",
-                    "quantity": 0,
-                    "targetProductTypeId": "str",
-                    "targetSkuId": "str",
-                    "termDuration": "str",
-                },
-                api_version="2024-04-01",
-            )
-        ).result()  # call '.result()' to poll until service return final result
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_validate_move_eligibility(self, resource_group):
-        response = await self.client.billing_subscriptions.validate_move_eligibility(
+    async def test_billing_subscriptions_list_by_billing_account(self, resource_group):
+        response = self.client.billing_subscriptions.list_by_billing_account(
             billing_account_name="str",
-            billing_subscription_name="str",
-            parameters={"destinationEnrollmentAccountId": "str", "destinationInvoiceSectionId": "str"},
             api_version="2024-04-01",
         )
-
+        result = [r async for r in response]
         # please add some check logic here by yourself
         # ...
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_begin_delete(self, resource_group):
-        response = await (
-            await self.client.billing_subscriptions.begin_delete(
-                billing_account_name="str",
-                billing_subscription_name="str",
-                api_version="2024-04-01",
-            )
-        ).result()  # call '.result()' to poll until service return final result
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_get(self, resource_group):
+    async def test_billing_subscriptions_get(self, resource_group):
         response = await self.client.billing_subscriptions.get(
             billing_account_name="str",
             billing_subscription_name="str",
@@ -177,7 +95,7 @@ class TestBillingManagementBillingSubscriptionsOperationsAsync(AzureMgmtRecorded
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_begin_update(self, resource_group):
+    async def test_billing_subscriptions_begin_update(self, resource_group):
         response = await (
             await self.client.billing_subscriptions.begin_update(
                 billing_account_name="str",
@@ -258,18 +176,100 @@ class TestBillingManagementBillingSubscriptionsOperationsAsync(AzureMgmtRecorded
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_list_by_billing_account(self, resource_group):
-        response = self.client.billing_subscriptions.list_by_billing_account(
-            billing_account_name="str",
-            api_version="2024-04-01",
-        )
-        result = [r async for r in response]
+    async def test_billing_subscriptions_begin_delete(self, resource_group):
+        response = await (
+            await self.client.billing_subscriptions.begin_delete(
+                billing_account_name="str",
+                billing_subscription_name="str",
+                api_version="2024-04-01",
+            )
+        ).result()  # call '.result()' to poll until service return final result
+
         # please add some check logic here by yourself
         # ...
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_list_by_customer_at_billing_account(self, resource_group):
+    async def test_billing_subscriptions_begin_cancel(self, resource_group):
+        response = await (
+            await self.client.billing_subscriptions.begin_cancel(
+                billing_account_name="str",
+                billing_subscription_name="str",
+                parameters={"cancellationReason": "str", "customerId": "str"},
+                api_version="2024-04-01",
+            )
+        ).result()  # call '.result()' to poll until service return final result
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
+    async def test_billing_subscriptions_begin_merge(self, resource_group):
+        response = await (
+            await self.client.billing_subscriptions.begin_merge(
+                billing_account_name="str",
+                billing_subscription_name="str",
+                parameters={"quantity": 0, "targetBillingSubscriptionName": "str"},
+                api_version="2024-04-01",
+            )
+        ).result()  # call '.result()' to poll until service return final result
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
+    async def test_billing_subscriptions_begin_move(self, resource_group):
+        response = await (
+            await self.client.billing_subscriptions.begin_move(
+                billing_account_name="str",
+                billing_subscription_name="str",
+                parameters={"destinationEnrollmentAccountId": "str", "destinationInvoiceSectionId": "str"},
+                api_version="2024-04-01",
+            )
+        ).result()  # call '.result()' to poll until service return final result
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
+    async def test_billing_subscriptions_begin_split(self, resource_group):
+        response = await (
+            await self.client.billing_subscriptions.begin_split(
+                billing_account_name="str",
+                billing_subscription_name="str",
+                parameters={
+                    "billingFrequency": "str",
+                    "quantity": 0,
+                    "targetProductTypeId": "str",
+                    "targetSkuId": "str",
+                    "termDuration": "str",
+                },
+                api_version="2024-04-01",
+            )
+        ).result()  # call '.result()' to poll until service return final result
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
+    async def test_billing_subscriptions_validate_move_eligibility(self, resource_group):
+        response = await self.client.billing_subscriptions.validate_move_eligibility(
+            billing_account_name="str",
+            billing_subscription_name="str",
+            parameters={"destinationEnrollmentAccountId": "str", "destinationInvoiceSectionId": "str"},
+            api_version="2024-04-01",
+        )
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
+    async def test_billing_subscriptions_list_by_customer_at_billing_account(self, resource_group):
         response = self.client.billing_subscriptions.list_by_customer_at_billing_account(
             billing_account_name="str",
             customer_name="str",
@@ -281,7 +281,7 @@ class TestBillingManagementBillingSubscriptionsOperationsAsync(AzureMgmtRecorded
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_list_by_enrollment_account(self, resource_group):
+    async def test_billing_subscriptions_list_by_enrollment_account(self, resource_group):
         response = self.client.billing_subscriptions.list_by_enrollment_account(
             billing_account_name="str",
             enrollment_account_name="str",

@@ -7,16 +7,18 @@
 # --------------------------------------------------------------------------
 
 from copy import deepcopy
-from typing import Any, Awaitable, TYPE_CHECKING
+from typing import Any, Awaitable, Optional, TYPE_CHECKING, cast
 from typing_extensions import Self
 
 from azure.core.pipeline import policies
 from azure.core.rest import AsyncHttpResponse, HttpRequest
+from azure.core.settings import settings
 from azure.mgmt.core import AsyncARMPipelineClient
 from azure.mgmt.core.policies import AsyncARMAutoResourceProviderRegistrationPolicy
+from azure.mgmt.core.tools import get_arm_endpoints
 
 from .. import models as _models
-from .._serialization import Deserializer, Serializer
+from .._utils.serialization import Deserializer, Serializer
 from ._configuration import BillingManagementClientConfiguration
 from .operations import (
     AddressOperations,
@@ -52,29 +54,25 @@ from .operations import (
 )
 
 if TYPE_CHECKING:
-    # pylint: disable=unused-import,ungrouped-imports
+    from azure.core import AzureClouds
     from azure.core.credentials_async import AsyncTokenCredential
 
 
-class BillingManagementClient:  # pylint: disable=client-accepts-api-version-keyword,too-many-instance-attributes
+class BillingManagementClient:  # pylint: disable=too-many-instance-attributes
     """Billing Client.
 
+    :ivar billing_accounts: BillingAccountsOperations operations
+    :vartype billing_accounts: azure.mgmt.billing.aio.operations.BillingAccountsOperations
     :ivar agreements: AgreementsOperations operations
     :vartype agreements: azure.mgmt.billing.aio.operations.AgreementsOperations
     :ivar associated_tenants: AssociatedTenantsOperations operations
     :vartype associated_tenants: azure.mgmt.billing.aio.operations.AssociatedTenantsOperations
     :ivar available_balances: AvailableBalancesOperations operations
     :vartype available_balances: azure.mgmt.billing.aio.operations.AvailableBalancesOperations
-    :ivar billing_accounts: BillingAccountsOperations operations
-    :vartype billing_accounts: azure.mgmt.billing.aio.operations.BillingAccountsOperations
-    :ivar address: AddressOperations operations
-    :vartype address: azure.mgmt.billing.aio.operations.AddressOperations
     :ivar billing_permissions: BillingPermissionsOperations operations
     :vartype billing_permissions: azure.mgmt.billing.aio.operations.BillingPermissionsOperations
     :ivar billing_profiles: BillingProfilesOperations operations
     :vartype billing_profiles: azure.mgmt.billing.aio.operations.BillingProfilesOperations
-    :ivar billing_property: BillingPropertyOperations operations
-    :vartype billing_property: azure.mgmt.billing.aio.operations.BillingPropertyOperations
     :ivar billing_requests: BillingRequestsOperations operations
     :vartype billing_requests: azure.mgmt.billing.aio.operations.BillingRequestsOperations
     :ivar billing_role_assignments: BillingRoleAssignmentsOperations operations
@@ -83,52 +81,59 @@ class BillingManagementClient:  # pylint: disable=client-accepts-api-version-key
     :ivar billing_role_definition: BillingRoleDefinitionOperations operations
     :vartype billing_role_definition:
      azure.mgmt.billing.aio.operations.BillingRoleDefinitionOperations
-    :ivar savings_plan_orders: SavingsPlanOrdersOperations operations
-    :vartype savings_plan_orders: azure.mgmt.billing.aio.operations.SavingsPlanOrdersOperations
-    :ivar savings_plans: SavingsPlansOperations operations
-    :vartype savings_plans: azure.mgmt.billing.aio.operations.SavingsPlansOperations
     :ivar billing_subscriptions: BillingSubscriptionsOperations operations
     :vartype billing_subscriptions:
      azure.mgmt.billing.aio.operations.BillingSubscriptionsOperations
+    :ivar customers: CustomersOperations operations
+    :vartype customers: azure.mgmt.billing.aio.operations.CustomersOperations
+    :ivar policies: PoliciesOperations operations
+    :vartype policies: azure.mgmt.billing.aio.operations.PoliciesOperations
+    :ivar transactions: TransactionsOperations operations
+    :vartype transactions: azure.mgmt.billing.aio.operations.TransactionsOperations
+    :ivar partner_transfers: PartnerTransfersOperations operations
+    :vartype partner_transfers: azure.mgmt.billing.aio.operations.PartnerTransfersOperations
+    :ivar invoice_sections: InvoiceSectionsOperations operations
+    :vartype invoice_sections: azure.mgmt.billing.aio.operations.InvoiceSectionsOperations
+    :ivar products: ProductsOperations operations
+    :vartype products: azure.mgmt.billing.aio.operations.ProductsOperations
+    :ivar transfers: TransfersOperations operations
+    :vartype transfers: azure.mgmt.billing.aio.operations.TransfersOperations
+    :ivar invoices: InvoicesOperations operations
+    :vartype invoices: azure.mgmt.billing.aio.operations.InvoicesOperations
+    :ivar payment_methods: PaymentMethodsOperations operations
+    :vartype payment_methods: azure.mgmt.billing.aio.operations.PaymentMethodsOperations
+    :ivar reservations: ReservationsOperations operations
+    :vartype reservations: azure.mgmt.billing.aio.operations.ReservationsOperations
     :ivar billing_subscriptions_aliases: BillingSubscriptionsAliasesOperations operations
     :vartype billing_subscriptions_aliases:
      azure.mgmt.billing.aio.operations.BillingSubscriptionsAliasesOperations
-    :ivar customers: CustomersOperations operations
-    :vartype customers: azure.mgmt.billing.aio.operations.CustomersOperations
     :ivar departments: DepartmentsOperations operations
     :vartype departments: azure.mgmt.billing.aio.operations.DepartmentsOperations
     :ivar enrollment_accounts: EnrollmentAccountsOperations operations
     :vartype enrollment_accounts: azure.mgmt.billing.aio.operations.EnrollmentAccountsOperations
-    :ivar invoices: InvoicesOperations operations
-    :vartype invoices: azure.mgmt.billing.aio.operations.InvoicesOperations
-    :ivar invoice_sections: InvoiceSectionsOperations operations
-    :vartype invoice_sections: azure.mgmt.billing.aio.operations.InvoiceSectionsOperations
-    :ivar operations: Operations operations
-    :vartype operations: azure.mgmt.billing.aio.operations.Operations
-    :ivar payment_methods: PaymentMethodsOperations operations
-    :vartype payment_methods: azure.mgmt.billing.aio.operations.PaymentMethodsOperations
-    :ivar policies: PoliciesOperations operations
-    :vartype policies: azure.mgmt.billing.aio.operations.PoliciesOperations
-    :ivar products: ProductsOperations operations
-    :vartype products: azure.mgmt.billing.aio.operations.ProductsOperations
-    :ivar reservations: ReservationsOperations operations
-    :vartype reservations: azure.mgmt.billing.aio.operations.ReservationsOperations
     :ivar reservation_orders: ReservationOrdersOperations operations
     :vartype reservation_orders: azure.mgmt.billing.aio.operations.ReservationOrdersOperations
-    :ivar transactions: TransactionsOperations operations
-    :vartype transactions: azure.mgmt.billing.aio.operations.TransactionsOperations
-    :ivar transfers: TransfersOperations operations
-    :vartype transfers: azure.mgmt.billing.aio.operations.TransfersOperations
-    :ivar partner_transfers: PartnerTransfersOperations operations
-    :vartype partner_transfers: azure.mgmt.billing.aio.operations.PartnerTransfersOperations
+    :ivar savings_plan_orders: SavingsPlanOrdersOperations operations
+    :vartype savings_plan_orders: azure.mgmt.billing.aio.operations.SavingsPlanOrdersOperations
+    :ivar savings_plans: SavingsPlansOperations operations
+    :vartype savings_plans: azure.mgmt.billing.aio.operations.SavingsPlansOperations
+    :ivar operations: Operations operations
+    :vartype operations: azure.mgmt.billing.aio.operations.Operations
     :ivar recipient_transfers: RecipientTransfersOperations operations
     :vartype recipient_transfers: azure.mgmt.billing.aio.operations.RecipientTransfersOperations
+    :ivar address: AddressOperations operations
+    :vartype address: azure.mgmt.billing.aio.operations.AddressOperations
+    :ivar billing_property: BillingPropertyOperations operations
+    :vartype billing_property: azure.mgmt.billing.aio.operations.BillingPropertyOperations
     :param credential: Credential needed for the client to connect to Azure. Required.
     :type credential: ~azure.core.credentials_async.AsyncTokenCredential
-    :param subscription_id: The ID that uniquely identifies a billing subscription. Required.
+    :param subscription_id: The ID of the target subscription. The value must be an UUID. Required.
     :type subscription_id: str
-    :param base_url: Service URL. Default value is "https://management.azure.com".
+    :param base_url: Service URL. Default value is None.
     :type base_url: str
+    :keyword cloud_setting: The cloud setting for which to get the ARM endpoint. Default value is
+     None.
+    :paramtype cloud_setting: ~azure.core.AzureClouds
     :keyword api_version: Api Version. Default value is "2024-04-01". Note that overriding this
      default value may result in unsupported behavior.
     :paramtype api_version: str
@@ -140,12 +145,24 @@ class BillingManagementClient:  # pylint: disable=client-accepts-api-version-key
         self,
         credential: "AsyncTokenCredential",
         subscription_id: str,
-        base_url: str = "https://management.azure.com",
+        base_url: Optional[str] = None,
+        *,
+        cloud_setting: Optional["AzureClouds"] = None,
         **kwargs: Any
     ) -> None:
+        _cloud = cloud_setting or settings.current.azure_cloud  # type: ignore
+        _endpoints = get_arm_endpoints(_cloud)
+        if not base_url:
+            base_url = _endpoints["resource_manager"]
+        credential_scopes = kwargs.pop("credential_scopes", _endpoints["credential_scopes"])
         self._config = BillingManagementClientConfiguration(
-            credential=credential, subscription_id=subscription_id, **kwargs
+            credential=credential,
+            subscription_id=subscription_id,
+            cloud_setting=cloud_setting,
+            credential_scopes=credential_scopes,
+            **kwargs
         )
+
         _policies = kwargs.pop("policies", None)
         if _policies is None:
             _policies = [
@@ -164,12 +181,17 @@ class BillingManagementClient:  # pylint: disable=client-accepts-api-version-key
                 policies.SensitiveHeaderCleanupPolicy(**kwargs) if self._config.redirect_policy else None,
                 self._config.http_logging_policy,
             ]
-        self._client: AsyncARMPipelineClient = AsyncARMPipelineClient(base_url=base_url, policies=_policies, **kwargs)
+        self._client: AsyncARMPipelineClient = AsyncARMPipelineClient(
+            base_url=cast(str, base_url), policies=_policies, **kwargs
+        )
 
         client_models = {k: v for k, v in _models.__dict__.items() if isinstance(v, type)}
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
         self._serialize.client_side_validation = False
+        self.billing_accounts = BillingAccountsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
         self.agreements = AgreementsOperations(self._client, self._config, self._serialize, self._deserialize)
         self.associated_tenants = AssociatedTenantsOperations(
             self._client, self._config, self._serialize, self._deserialize
@@ -177,17 +199,10 @@ class BillingManagementClient:  # pylint: disable=client-accepts-api-version-key
         self.available_balances = AvailableBalancesOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
-        self.billing_accounts = BillingAccountsOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
-        self.address = AddressOperations(self._client, self._config, self._serialize, self._deserialize)
         self.billing_permissions = BillingPermissionsOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
         self.billing_profiles = BillingProfilesOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
-        self.billing_property = BillingPropertyOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
         self.billing_requests = BillingRequestsOperations(
@@ -199,39 +214,43 @@ class BillingManagementClient:  # pylint: disable=client-accepts-api-version-key
         self.billing_role_definition = BillingRoleDefinitionOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
-        self.savings_plan_orders = SavingsPlanOrdersOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
-        self.savings_plans = SavingsPlansOperations(self._client, self._config, self._serialize, self._deserialize)
         self.billing_subscriptions = BillingSubscriptionsOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
+        self.customers = CustomersOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.policies = PoliciesOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.transactions = TransactionsOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.partner_transfers = PartnerTransfersOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.invoice_sections = InvoiceSectionsOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.products = ProductsOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.transfers = TransfersOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.invoices = InvoicesOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.payment_methods = PaymentMethodsOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.reservations = ReservationsOperations(self._client, self._config, self._serialize, self._deserialize)
         self.billing_subscriptions_aliases = BillingSubscriptionsAliasesOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
-        self.customers = CustomersOperations(self._client, self._config, self._serialize, self._deserialize)
         self.departments = DepartmentsOperations(self._client, self._config, self._serialize, self._deserialize)
         self.enrollment_accounts = EnrollmentAccountsOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
-        self.invoices = InvoicesOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.invoice_sections = InvoiceSectionsOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
-        self.operations = Operations(self._client, self._config, self._serialize, self._deserialize)
-        self.payment_methods = PaymentMethodsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.policies = PoliciesOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.products = ProductsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.reservations = ReservationsOperations(self._client, self._config, self._serialize, self._deserialize)
         self.reservation_orders = ReservationOrdersOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
-        self.transactions = TransactionsOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.transfers = TransfersOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.partner_transfers = PartnerTransfersOperations(
+        self.savings_plan_orders = SavingsPlanOrdersOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
+        self.savings_plans = SavingsPlansOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.operations = Operations(self._client, self._config, self._serialize, self._deserialize)
         self.recipient_transfers = RecipientTransfersOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.address = AddressOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.billing_property = BillingPropertyOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
 

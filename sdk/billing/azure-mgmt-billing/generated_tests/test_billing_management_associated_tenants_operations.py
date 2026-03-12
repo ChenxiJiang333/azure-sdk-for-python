@@ -20,19 +20,18 @@ class TestBillingManagementAssociatedTenantsOperations(AzureMgmtRecordedTestCase
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_begin_delete(self, resource_group):
-        response = self.client.associated_tenants.begin_delete(
+    def test_associated_tenants_list_by_billing_account(self, resource_group):
+        response = self.client.associated_tenants.list_by_billing_account(
             billing_account_name="str",
-            associated_tenant_name="str",
             api_version="2024-04-01",
-        ).result()  # call '.result()' to poll until service return final result
-
+        )
+        result = [r for r in response]
         # please add some check logic here by yourself
         # ...
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_get(self, resource_group):
+    def test_associated_tenants_get(self, resource_group):
         response = self.client.associated_tenants.get(
             billing_account_name="str",
             associated_tenant_name="str",
@@ -44,7 +43,7 @@ class TestBillingManagementAssociatedTenantsOperations(AzureMgmtRecordedTestCase
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_begin_create_or_update(self, resource_group):
+    def test_associated_tenants_begin_create_or_update(self, resource_group):
         response = self.client.associated_tenants.begin_create_or_update(
             billing_account_name="str",
             associated_tenant_name="str",
@@ -78,11 +77,12 @@ class TestBillingManagementAssociatedTenantsOperations(AzureMgmtRecordedTestCase
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_list_by_billing_account(self, resource_group):
-        response = self.client.associated_tenants.list_by_billing_account(
+    def test_associated_tenants_begin_delete(self, resource_group):
+        response = self.client.associated_tenants.begin_delete(
             billing_account_name="str",
+            associated_tenant_name="str",
             api_version="2024-04-01",
-        )
-        result = [r for r in response]
+        ).result()  # call '.result()' to poll until service return final result
+
         # please add some check logic here by yourself
         # ...

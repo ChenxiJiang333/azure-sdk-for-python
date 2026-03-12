@@ -21,23 +21,23 @@ class TestBillingManagementReservationOrdersOperationsAsync(AzureMgmtRecordedTes
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_get_by_billing_account(self, resource_group):
+    async def test_reservation_orders_list_by_billing_account(self, resource_group):
+        response = self.client.reservation_orders.list_by_billing_account(
+            billing_account_name="str",
+            api_version="2024-04-01",
+        )
+        result = [r async for r in response]
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
+    async def test_reservation_orders_get_by_billing_account(self, resource_group):
         response = await self.client.reservation_orders.get_by_billing_account(
             billing_account_name="str",
             reservation_order_id="str",
             api_version="2024-04-01",
         )
 
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_list_by_billing_account(self, resource_group):
-        response = self.client.reservation_orders.list_by_billing_account(
-            billing_account_name="str",
-            api_version="2024-04-01",
-        )
-        result = [r async for r in response]
         # please add some check logic here by yourself
         # ...

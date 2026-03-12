@@ -1,3 +1,4 @@
+# pylint: disable=line-too-long,useless-suppression
 # coding=utf-8
 # --------------------------------------------------------------------------
 # Copyright (c) Microsoft Corporation. All rights reserved.
@@ -31,6 +32,7 @@ def main():
     )
 
     response = client.invoices.begin_download_documents_by_billing_subscription(
+        subscription_id="00000000-0000-0000-0000-000000000000",
         parameters=[
             {"documentName": "12345678", "invoiceName": "E123456789"},
             {"documentName": "12345678", "invoiceName": "E987654321"},
@@ -39,6 +41,6 @@ def main():
     print(response)
 
 
-# x-ms-original-file: specification/billing/resource-manager/Microsoft.Billing/stable/2024-04-01/examples/invoicesDownloadDocumentsByBillingSubscription.json
+# x-ms-original-file: specification/billing/resource-manager/Microsoft.Billing/Billing/stable/2024-04-01/examples/invoicesDownloadDocumentsByBillingSubscription.json
 if __name__ == "__main__":
     main()
