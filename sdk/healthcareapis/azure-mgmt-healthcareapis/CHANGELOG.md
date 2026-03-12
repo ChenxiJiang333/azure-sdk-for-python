@@ -1,8 +1,25 @@
+## tsp migration
+
+### Breaking Changes
+
+- Deleted or renamed model `ServiceManagedIdentity
+- Deleted or renamed model `PrivateEndpointConnectionListResultDescription
+- Deleted or renamed model `ListOperations
+- Deleted or renamed enum value `ManagedServiceIdentityType.SYSTEM_ASSIGNED_USER_ASSIGNED
+- Deleted or renamed enum value `ManagedServiceIdentityType.USER_ASSIGNED
+
+- Model `DicomService` moved instance variables `provisioning_state`, `authentication_configuration`, `cors_configuration`, `service_url`, `private_endpoint_connections`, `public_network_access`, `event_state`, `encryption`, `storage_configuration` and `enable_data_partitions` under property `properties
+- Model `FhirService` moved instance variables `provisioning_state`, `acr_configuration`, `authentication_configuration`, `cors_configuration`, `export_configuration`, `private_endpoint_connections`, `public_network_access`, `event_state`, `resource_version_policy_configuration`, `import_configuration`, `implementation_guides_configuration` and `encryption` under property `properties
+- Model `IotConnector` moved instance variables `provisioning_state`, `ingestion_endpoint_configuration` and `device_mapping` under property `properties
+- Model `IotFhirDestination` moved instance variables `provisioning_state`, `resource_identity_resolution_type`, `fhir_service_resource_id` and `fhir_mapping` under property `properties
+- Model `PrivateEndpointConnection` moved instance variables `private_endpoint`, `private_link_service_connection_state` and `provisioning_state` under property `properties
+- Model `ServicesPatchDescription` moved instance variable `public_network_access
+
+### Other Changes
+
+- Deleted model `DicomServiceCollection`/`FhirServiceCollection`/`IotConnectorCollection`/`IotFhirDestinationCollection`/`WorkspaceList` which actually were not used by SDK users
+
 # Release History
-
-## 2.2.0b1 (2026-03-12)
-
-change log generation failed!!! You need to write it manually!!!
 
 ## 3.0.0b1 (2026-03-12)
 
@@ -35,10 +52,6 @@ change log generation failed!!! You need to write it manually!!!
   - Parameter value of model IotFhirDestinationCollection is now required
   - Parameter value of model ServicesDescriptionListResult is now required
   - Parameter value of model WorkspaceList is now required
-
-## 2.2.0b1 (2026-03-12)
-
-change log generation failed!!! You need to write it manually!!!
 
 ## 2.1.0 (2024-04-22)
 
@@ -142,10 +155,10 @@ This version uses a next-generation code generator that introduces important bre
   - `azure.common.credentials` or `msrestazure.azure_active_directory` instances are no longer supported, use the `azure-identity` classes instead: https://pypi.org/project/azure-identity/
   - `credentials` parameter has been renamed `credential`
 
-- The `config` attribute no longer exists on a client, configuration should be passed as kwarg. Example: `MyClient(credential, subscription_id, enable_logging=True)`. For a complete set of
+- The `config` attribute no longer exists on a client, configuration should be passed as kwarg. Example: `MyClient(credential, subscription_id, enable_logging=True) For a complete set of
   supported options, see the [parameters accept in init documentation of azure-core](https://github.com/Azure/azure-sdk-for-python/blob/main/sdk/core/azure-core/CLIENT_LIBRARY_DEVELOPER.md#available-policies)
 - You can't import a `version` module anymore, use `__version__` instead
-- Operations that used to return a `msrest.polling.LROPoller` now returns a `azure.core.polling.LROPoller` and are prefixed with `begin_`.
+- Operations that used to return a `msrest.polling.LROPoller` now returns a `azure.core.polling.LROPoller` and are prefixed with `begin_
 - Exceptions tree have been simplified and most exceptions are now `azure.core.exceptions.HttpResponseError` (`CloudError` has been removed).
 - Most of the operation kwarg have changed. Some of the most noticeable:
 
@@ -155,7 +168,7 @@ This version uses a next-generation code generator that introduces important bre
 
 **General new features**
 
-- Type annotations support using `typing`. SDKs are mypy ready.
+- Type annotations support using `typing SDKs are mypy ready.
 - This client has now stable and official support for async. Check the `aio` namespace of your package to find the async client.
 - This client now support natively tracing library like OpenCensus or OpenTelemetry. See this [tracing quickstart](https://github.com/Azure/azure-sdk-for-python/tree/main/sdk/core/azure-core-tracing-opentelemetry) for an overview.
 
