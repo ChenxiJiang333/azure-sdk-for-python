@@ -1,12 +1,6 @@
 ## tsp migration
 
-## 7.1.0 (2026-03-12)
-
-change log generation failed!!! You need to write it manually!!!
-
 ### Breaking Changes
-
-- Method `BillingRoleAssignmentsOperations.begin_resolve_by_customer` parameter `resolve_scope_display_names` changed default value from `bool` to `none`
 
 - Method `RecipientTransfersOperations.validate` changed from `asynchronous` to `synchronous`
 - Model `AcceptTransferRequest` deleted or renamed its instance variable `product_details`
