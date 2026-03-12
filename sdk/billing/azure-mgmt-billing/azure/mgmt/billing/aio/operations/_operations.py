@@ -4705,7 +4705,7 @@ class BillingRoleAssignmentsOperations:  # pylint: disable=too-many-public-metho
         billing_profile_name: str,
         customer_name: str,
         *,
-        resolve_scope_display_names: Optional[bool] = None,
+        resolve_scope_display_names: bool = False,
         filter: Optional[str] = None,
         **kwargs: Any
     ) -> AsyncIterator[bytes]:
@@ -4775,7 +4775,7 @@ class BillingRoleAssignmentsOperations:  # pylint: disable=too-many-public-metho
         billing_profile_name: str,
         customer_name: str,
         *,
-        resolve_scope_display_names: Optional[bool] = None,
+        resolve_scope_display_names: bool = False,
         filter: Optional[str] = None,
         **kwargs: Any
     ) -> AsyncLROPoller[_models.BillingRoleAssignmentListResult]:
@@ -4790,7 +4790,7 @@ class BillingRoleAssignmentsOperations:  # pylint: disable=too-many-public-metho
         :param customer_name: The ID that uniquely identifies a customer. Required.
         :type customer_name: str
         :keyword resolve_scope_display_names: Resolves the scope display name for each of the role
-         assignments. Default value is None.
+         assignments. Default value is False.
         :paramtype resolve_scope_display_names: bool
         :keyword filter: The filter query option allows clients to filter a collection of resources
          that are addressed by a request URL. Default value is None.

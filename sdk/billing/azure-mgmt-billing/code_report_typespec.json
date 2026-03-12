@@ -3776,7 +3776,7 @@
                 "param_type": "positional_or_keyword"
               },
               "resolve_scope_display_names": {
-                "default": "none",
+                "default": "bool",
                 "param_type": "keyword_only"
               },
               "filter": {
@@ -68243,7 +68243,7 @@
                 "param_type": "positional_or_keyword"
               },
               "resolve_scope_display_names": {
-                "default": "none",
+                "default": "bool",
                 "param_type": "keyword_only"
               },
               "filter": {

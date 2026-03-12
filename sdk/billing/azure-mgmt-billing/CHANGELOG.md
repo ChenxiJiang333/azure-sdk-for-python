@@ -1,39 +1,14 @@
 ## tsp migration
 
+## 7.1.0 (2026-03-12)
+
+change log generation failed!!! You need to write it manually!!!
+
 ### Breaking Changes
 
-- Deleted or renamed enum value `BillingPlan.P1_M`
-- Deleted or renamed enum value `SavingsPlanTerm.P1_Y`
-- Deleted or renamed enum value `SavingsPlanTerm.P3_Y`
-- Deleted or renamed enum value `SavingsPlanTerm.P5_Y`
-- Method `AssociatedTenantsOperations.list_by_billing_account` parameter `include_revoked` changed default value from `bool` to `none`
-- Method `AgreementsOperations.list_by_billing_account` changed its parameter `expand` from `positional_or_keyword` to `keyword_only`
-- Method `BillingAccountsOperations.list` parameter `include_all` changed default value from `bool` to `none`
-- Method `BillingAccountsOperations.list` parameter `include_all_without_billing_profiles` changed default value from `bool` to `none`
-- Method `BillingAccountsOperations.list` parameter `include_deleted` changed default value from `bool` to `none`
-- Method `BillingAccountsOperations.list` parameter `include_pending_agreement` changed default value from `bool` to `none`
-- Method `BillingAccountsOperations.list` parameter `include_resellee` changed default value from `bool` to `none`
-- Method `BillingPropertyOperations.get` parameter `include_billing_country` changed default value from `bool` to `none`
-- Method `BillingPropertyOperations.get` parameter `include_transition_status` changed default value from `bool` to `none`
-- Method `BillingProfilesOperations.list_by_billing_account` parameter `include_deleted` changed default value from `bool` to `none`
-- Method `BillingRoleAssignmentsOperations.begin_resolve_by_billing_account` parameter `resolve_scope_display_names` changed default value from `bool` to `none`
-- Method `BillingRoleAssignmentsOperations.begin_resolve_by_billing_profile` parameter `resolve_scope_display_names` changed default value from `bool` to `none`
-- Method `BillingRoleAssignmentsOperations.begin_resolve_by_invoice_section` parameter `resolve_scope_display_names` changed default value from `bool` to `none`
-- Method `BillingSubscriptionsAliasesOperations.list_by_billing_account` parameter `include_deleted` changed default value from `bool` to `none`
-- Method `BillingSubscriptionsOperations.list_by_billing_account` parameter `include_deleted` changed default value from `bool` to `none`
-- Method `BillingSubscriptionsOperations.list_by_billing_account` parameter `include_tenant_subscriptions` changed default value from `bool` to `none`
-- Method `BillingSubscriptionsOperations.list_by_billing_account` parameter `include_failed` changed default value from `bool` to `none`
-- Method `BillingSubscriptionsOperations.list_by_billing_profile` parameter `include_deleted` changed default value from `bool` to `none`
-- Method `BillingSubscriptionsOperations.list_by_customer` parameter `include_deleted` changed default value from `bool` to `none`
-- Method `BillingSubscriptionsOperations.list_by_customer_at_billing_account` parameter `include_deleted` changed default value from `bool` to `none`
-- Method `BillingSubscriptionsOperations.list_by_invoice_section` parameter `include_deleted` changed default value from `bool` to `none`
-- Method `InvoiceSectionsOperations.list_by_billing_profile` parameter `include_deleted` changed default value from `bool` to `none`
+- Method `BillingRoleAssignmentsOperations.begin_resolve_by_customer` parameter `resolve_scope_display_names` changed default value from `bool` to `none`
 
 - Method `RecipientTransfersOperations.validate` changed from `asynchronous` to `synchronous`
-
-### Other Changes
-
-- Deleted model `ReservationList`/`ReservationOrderList`/`SavingsPlanModelList`/`SavingsPlanOrderModelList`/`ValidateTransferListResponse` which actually were not used by SDK users
 - Model `AcceptTransferRequest` deleted or renamed its instance variable `product_details`
 - Model `BillingSubscription` deleted or renamed its instance variable `auto_renew`
 - Model `BillingSubscription` deleted or renamed its instance variable `beneficiary_tenant_id`
@@ -524,11 +499,11 @@
 - Method `TransactionsOperations.list_by_invoice_section` changed its parameter `count` from `positional_or_keyword` to `keyword_only`
 - Method `TransactionsOperations.list_by_invoice_section` changed its parameter `search` from `positional_or_keyword` to `keyword_only`
 
+### Other Changes
+
+- Deleted model `ReservationList`/`ReservationOrderList`/`SavingsPlanModelList`/`SavingsPlanOrderModelList`/`ValidateTransferListResponse` which actually were not used by SDK users
+
 # Release History
-
-## 7.1.0 (2026-03-12)
-
-change log generation failed!!! You need to write it manually!!!
 
 ## 7.0.0 (2024-09-04)
 
