@@ -17,6 +17,21 @@ if TYPE_CHECKING:
     from .. import models as _models
 
 
+class ArmUserAssignedIdentity(_Model):
+    """User assigned identity properties.
+
+    :ivar principal_id: The principal ID of the assigned identity.
+    :vartype principal_id: str
+    :ivar client_id: The client ID of the assigned identity.
+    :vartype client_id: str
+    """
+
+    principal_id: Optional[str] = rest_field(name="principalId", visibility=["read"])
+    """The principal ID of the assigned identity."""
+    client_id: Optional[str] = rest_field(name="clientId", visibility=["read"])
+    """The client ID of the assigned identity."""
+
+
 class CheckNameAvailabilityParameters(_Model):
     """Input values.
 
@@ -245,12 +260,12 @@ class DicomServicePatchResource(_Model):
     :vartype tags: dict[str, str]
     :ivar identity: Setting indicating whether the service has a managed identity associated with
      it.
-    :vartype identity: ~azure.mgmt.healthcareapis.models.ServiceManagedIdentityIdentity
+    :vartype identity: ~azure.mgmt.healthcareapis.models.ServiceManagedIdentity
     """
 
     tags: Optional[dict[str, str]] = rest_field(visibility=["read", "create", "update"])
     """Resource tags."""
-    identity: Optional["_models.ServiceManagedIdentityIdentity"] = rest_field(
+    identity: Optional["_models.ServiceManagedIdentity"] = rest_field(
         visibility=["read", "create", "update", "delete", "query"]
     )
     """Setting indicating whether the service has a managed identity associated with it."""
@@ -260,7 +275,7 @@ class DicomServicePatchResource(_Model):
         self,
         *,
         tags: Optional[dict[str, str]] = None,
-        identity: Optional["_models.ServiceManagedIdentityIdentity"] = None,
+        identity: Optional["_models.ServiceManagedIdentity"] = None,
     ) -> None: ...
 
     @overload
@@ -827,12 +842,12 @@ class FhirServicePatchResource(_Model):
     :vartype tags: dict[str, str]
     :ivar identity: Setting indicating whether the service has a managed identity associated with
      it.
-    :vartype identity: ~azure.mgmt.healthcareapis.models.ServiceManagedIdentityIdentity
+    :vartype identity: ~azure.mgmt.healthcareapis.models.ServiceManagedIdentity
     """
 
     tags: Optional[dict[str, str]] = rest_field(visibility=["read", "create", "update"])
     """Resource tags."""
-    identity: Optional["_models.ServiceManagedIdentityIdentity"] = rest_field(
+    identity: Optional["_models.ServiceManagedIdentity"] = rest_field(
         visibility=["read", "create", "update", "delete", "query"]
     )
     """Setting indicating whether the service has a managed identity associated with it."""
@@ -842,7 +857,7 @@ class FhirServicePatchResource(_Model):
         self,
         *,
         tags: Optional[dict[str, str]] = None,
-        identity: Optional["_models.ServiceManagedIdentityIdentity"] = None,
+        identity: Optional["_models.ServiceManagedIdentity"] = None,
     ) -> None: ...
 
     @overload
@@ -1091,12 +1106,12 @@ class IotConnectorPatchResource(_Model):
     :vartype tags: dict[str, str]
     :ivar identity: Setting indicating whether the service has a managed identity associated with
      it.
-    :vartype identity: ~azure.mgmt.healthcareapis.models.ServiceManagedIdentityIdentity
+    :vartype identity: ~azure.mgmt.healthcareapis.models.ServiceManagedIdentity
     """
 
     tags: Optional[dict[str, str]] = rest_field(visibility=["read", "create", "update"])
     """Resource tags."""
-    identity: Optional["_models.ServiceManagedIdentityIdentity"] = rest_field(
+    identity: Optional["_models.ServiceManagedIdentity"] = rest_field(
         visibility=["read", "create", "update", "delete", "query"]
     )
     """Setting indicating whether the service has a managed identity associated with it."""
@@ -1106,7 +1121,7 @@ class IotConnectorPatchResource(_Model):
         self,
         *,
         tags: Optional[dict[str, str]] = None,
-        identity: Optional["_models.ServiceManagedIdentityIdentity"] = None,
+        identity: Optional["_models.ServiceManagedIdentity"] = None,
     ) -> None: ...
 
     @overload
@@ -1457,7 +1472,7 @@ class ManagedServiceIdentity(_Model):
     :vartype type: str or ~azure.mgmt.healthcareapis.models.ManagedServiceIdentityType
     :ivar user_assigned_identities: The identities assigned to this resource by the user.
     :vartype user_assigned_identities: dict[str,
-     ~azure.mgmt.healthcareapis.models.UserAssignedIdentity]
+     ~azure.mgmt.healthcareapis.models.ArmUserAssignedIdentity]
     """
 
     principal_id: Optional[str] = rest_field(name="principalId", visibility=["read"])
@@ -1471,7 +1486,7 @@ class ManagedServiceIdentity(_Model):
     )
     """The type of managed identity assigned to this resource. Required. Known values are: \"None\",
      \"SystemAssigned\", \"UserAssigned\", and \"SystemAssigned,UserAssigned\"."""
-    user_assigned_identities: Optional[dict[str, "_models.UserAssignedIdentity"]] = rest_field(
+    user_assigned_identities: Optional[dict[str, "_models.ArmUserAssignedIdentity"]] = rest_field(
         name="userAssignedIdentities", visibility=["read", "create", "update", "delete", "query"]
     )
     """The identities assigned to this resource by the user."""
@@ -1481,7 +1496,7 @@ class ManagedServiceIdentity(_Model):
         self,
         *,
         type: Union[str, "_models.ManagedServiceIdentityType"],
-        user_assigned_identities: Optional[dict[str, "_models.UserAssignedIdentity"]] = None,
+        user_assigned_identities: Optional[dict[str, "_models.ArmUserAssignedIdentity"]] = None,
     ) -> None: ...
 
     @overload
@@ -2477,7 +2492,7 @@ class ServiceImportConfigurationInfo(_Model):
         super().__init__(*args, **kwargs)
 
 
-class ServiceManagedIdentityIdentity(_Model):
+class ServiceManagedIdentity(_Model):
     """Setting indicating whether the service has a managed identity associated with it.
 
     :ivar type: Type of identity being specified, currently SystemAssigned and None are allowed.
@@ -2495,7 +2510,7 @@ class ServiceManagedIdentityIdentity(_Model):
      '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}.
      The dictionary values can be empty objects ({}) in requests.
     :vartype user_assigned_identities: dict[str,
-     ~azure.mgmt.healthcareapis.models.UserAssignedIdentityAutoGenerated]
+     ~azure.mgmt.healthcareapis.models.UserAssignedIdentity]
     """
 
     type: Union[str, "_models.ServiceManagedIdentityType"] = rest_field(
@@ -2510,7 +2525,7 @@ class ServiceManagedIdentityIdentity(_Model):
     tenant_id: Optional[str] = rest_field(name="tenantId", visibility=["read"])
     """The tenant ID of the system assigned identity. This property will only be provided for a system
      assigned identity."""
-    user_assigned_identities: Optional[dict[str, "_models.UserAssignedIdentityAutoGenerated"]] = rest_field(
+    user_assigned_identities: Optional[dict[str, "_models.UserAssignedIdentity"]] = rest_field(
         name="userAssignedIdentities", visibility=["read", "create", "update", "delete", "query"]
     )
     """The set of user assigned identities associated with the resource. The userAssignedIdentities
@@ -2523,7 +2538,7 @@ class ServiceManagedIdentityIdentity(_Model):
         self,
         *,
         type: Union[str, "_models.ServiceManagedIdentityType"],
-        user_assigned_identities: Optional[dict[str, "_models.UserAssignedIdentityAutoGenerated"]] = None,
+        user_assigned_identities: Optional[dict[str, "_models.UserAssignedIdentity"]] = None,
     ) -> None: ...
 
     @overload
@@ -2960,14 +2975,14 @@ class ServicesResourceIdentity(_Model):
     :vartype tenant_id: str
     :ivar type: Type of identity being specified, currently SystemAssigned and None are allowed.
      Known values are: "SystemAssigned" and "None".
-    :vartype type: str or ~azure.mgmt.healthcareapis.models.ManagedServiceIdentityType
+    :vartype type: str or ~azure.mgmt.healthcareapis.models.ManagedServiceIdentityTypeAutoGenerated
     """
 
     principal_id: Optional[str] = rest_field(name="principalId", visibility=["read"])
     """The principal ID of the resource identity."""
     tenant_id: Optional[str] = rest_field(name="tenantId", visibility=["read"])
     """The tenant ID of the resource."""
-    type: Optional[Union[str, "_models.ManagedServiceIdentityType"]] = rest_field(
+    type: Optional[Union[str, "_models.ManagedServiceIdentityTypeAutoGenerated"]] = rest_field(
         visibility=["read", "create", "update", "delete", "query"]
     )
     """Type of identity being specified, currently SystemAssigned and None are allowed. Known values
@@ -2977,7 +2992,7 @@ class ServicesResourceIdentity(_Model):
     def __init__(
         self,
         *,
-        type: Optional[Union[str, "_models.ManagedServiceIdentityType"]] = None,
+        type: Optional[Union[str, "_models.ManagedServiceIdentityTypeAutoGenerated"]] = None,
     ) -> None: ...
 
     @overload
@@ -3215,21 +3230,6 @@ class SystemData(_Model):
 
 
 class UserAssignedIdentity(_Model):
-    """User assigned identity properties.
-
-    :ivar principal_id: The principal ID of the assigned identity.
-    :vartype principal_id: str
-    :ivar client_id: The client ID of the assigned identity.
-    :vartype client_id: str
-    """
-
-    principal_id: Optional[str] = rest_field(name="principalId", visibility=["read"])
-    """The principal ID of the assigned identity."""
-    client_id: Optional[str] = rest_field(name="clientId", visibility=["read"])
-    """The client ID of the assigned identity."""
-
-
-class UserAssignedIdentityAutoGenerated(_Model):
     """User assigned identity properties.
 
     :ivar principal_id: The principal ID of the assigned identity.

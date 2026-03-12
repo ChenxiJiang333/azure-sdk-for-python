@@ -1,5 +1,9 @@
 ## tsp migration
 
+## 2.2.0b1 (2026-03-12)
+
+change log generation failed!!! You need to write it manually!!!
+
 ### Breaking Changes
 
 - Deleted or renamed model `ServiceManagedIdentity
