@@ -1,5 +1,35 @@
 # Release History
 
+## 3.2.0b2 (2026-03-16)
+
+### Features Added
+
+  - Added operation SubscriptionsOperations.accept_target_directory
+  - Added operation SubscriptionsOperations.delete_target_directory
+  - Added operation SubscriptionsOperations.get_target_directory
+  - Added operation SubscriptionsOperations.list_target_directory
+  - Added operation SubscriptionsOperations.put_target_directory
+  - Added operation SubscriptionsOperations.target_directory_status
+  - Added operation group SubscriptionOperationOperations
+  - Model ErrorResponse has a new parameter error
+  - Model Operation has a new parameter action_type
+  - Model Operation has a new parameter origin
+
+### Breaking Changes
+
+  - Model ErrorResponse no longer has parameter code
+  - Model ErrorResponse no longer has parameter message
+  - Operation SubscriptionOperations.begin_accept_ownership has a new required parameter requestbody_body
+  - Operation SubscriptionOperations.begin_accept_ownership no longer has parameter body
+  - Operation SubscriptionOperations.cancel no longer has parameter subscription_id
+  - Operation SubscriptionOperations.enable no longer has parameter subscription_id
+  - Operation SubscriptionOperations.rename no longer has parameter subscription_id
+  - Parameter value of model GetTenantPolicyListResponse is now required
+  - Removed operation SubscriptionsOperations.get
+  - Removed operation SubscriptionsOperations.list
+  - Removed operation SubscriptionsOperations.list_locations
+  - Removed operation group TenantsOperations
+
 ## 3.2.0b1 (2022-12-27)
 
 ### Features Added

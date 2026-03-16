@@ -1,3 +1,4 @@
+# pylint: disable=line-too-long,useless-suppression
 # coding=utf-8
 # --------------------------------------------------------------------------
 # Copyright (c) Microsoft Corporation. All rights reserved.
@@ -7,6 +8,7 @@
 # --------------------------------------------------------------------------
 
 from azure.identity import DefaultAzureCredential
+
 from azure.mgmt.subscription import SubscriptionClient
 
 """
@@ -26,10 +28,11 @@ from azure.mgmt.subscription import SubscriptionClient
 def main():
     client = SubscriptionClient(
         credential=DefaultAzureCredential(),
+        subscription_id="SUBSCRIPTION_ID",
     )
 
     response = client.alias.begin_create(
-        alias_name="aliasForNewSub",
+        alias_name="dummyalias",
         body={
             "properties": {
                 "additionalProperties": {
@@ -48,6 +51,6 @@ def main():
     print(response)
 
 
-# x-ms-original-file: specification/subscription/resource-manager/Microsoft.Subscription/stable/2021-10-01/examples/createAlias.json
+# x-ms-original-file: specification/subscription/resource-manager/Microsoft.Subscription/Subscription/preview/2025-11-01-preview/examples/createAlias.json
 if __name__ == "__main__":
     main()

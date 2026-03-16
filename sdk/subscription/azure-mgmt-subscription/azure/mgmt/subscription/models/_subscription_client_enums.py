@@ -14,8 +14,30 @@ class AcceptOwnership(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The accept ownership state of the resource."""
 
     PENDING = "Pending"
+    """Pending"""
     COMPLETED = "Completed"
+    """Completed"""
     EXPIRED = "Expired"
+    """Expired"""
+
+
+class ActionType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Enum. Indicates the action type. "Internal" refers to actions that are for internal only APIs."""
+
+    INTERNAL = "Internal"
+
+
+class ChangeDirectoryOperationStatus(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Status of the subscription transfer operation."""
+
+    INITIALIZED = "Initialized"
+    """The subscription transfer request has been created and is waiting for acceptance by the
+    destination tenant."""
+    IN_PROGRESS = "InProgress"
+    """The subscription transfer request has been accepted by the destination tenant and the transfer
+    is in progress."""
+    COMPLETED = "Completed"
+    """The subscription transfer has been completed and is now owned by the destination tenant."""
 
 
 class CreatedByType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
@@ -27,42 +49,42 @@ class CreatedByType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     KEY = "Key"
 
 
+class Origin(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """The intended executor of the operation; as in Resource Based Access Control (RBAC) and audit
+    logs UX. Default value is "user,system".
+    """
+
+    USER = "user"
+    SYSTEM = "system"
+    USER_SYSTEM = "user,system"
+
+
 class Provisioning(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The provisioning state of the resource."""
 
     PENDING = "Pending"
+    """Pending"""
     ACCEPTED = "Accepted"
+    """Accepted"""
     SUCCEEDED = "Succeeded"
+    """Succeeded"""
 
 
 class ProvisioningState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The provisioning state of the resource."""
 
     ACCEPTED = "Accepted"
+    """Accepted"""
     SUCCEEDED = "Succeeded"
+    """Succeeded"""
     FAILED = "Failed"
-
-
-class SpendingLimit(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """The subscription spending limit."""
-
-    ON = "On"
-    OFF = "Off"
-    CURRENT_PERIOD_OFF = "CurrentPeriodOff"
-
-
-class SubscriptionState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """The subscription state. Possible values are Enabled, Warned, PastDue, Disabled, and Deleted."""
-
-    ENABLED = "Enabled"
-    WARNED = "Warned"
-    PAST_DUE = "PastDue"
-    DISABLED = "Disabled"
-    DELETED = "Deleted"
+    """Failed"""
 
 
 class Workload(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The workload type of the subscription. It can be either Production or DevTest."""
 
     PRODUCTION = "Production"
+    """Production"""
     DEV_TEST = "DevTest"
+    """DevTest"""

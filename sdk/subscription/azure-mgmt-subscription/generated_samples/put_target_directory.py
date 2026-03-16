@@ -1,3 +1,4 @@
+# pylint: disable=line-too-long,useless-suppression
 # coding=utf-8
 # --------------------------------------------------------------------------
 # Copyright (c) Microsoft Corporation. All rights reserved.
@@ -7,6 +8,7 @@
 # --------------------------------------------------------------------------
 
 from azure.identity import DefaultAzureCredential
+
 from azure.mgmt.subscription import SubscriptionClient
 
 """
@@ -14,7 +16,7 @@ from azure.mgmt.subscription import SubscriptionClient
     pip install azure-identity
     pip install azure-mgmt-subscription
 # USAGE
-    python list_tenants.py
+    python put_target_directory.py
 
     Before run the sample, please set the values of the client ID, tenant ID and client secret
     of the AAD application as environment variables: AZURE_CLIENT_ID, AZURE_TENANT_ID,
@@ -26,13 +28,20 @@ from azure.mgmt.subscription import SubscriptionClient
 def main():
     client = SubscriptionClient(
         credential=DefaultAzureCredential(),
+        subscription_id="ecce7b25-862b-44a2-9e21-a1baa50618eb",
     )
 
-    response = client.tenants.list()
-    for item in response:
-        print(item)
+    response = client.subscriptions.put_target_directory(
+        body={
+            "properties": {
+                "destinationOwnerId": "abhaypratap@live.com",
+                "destinationTenantId": "111a82eb-4c7b-48bb-962b-49363c510130",
+            }
+        },
+    )
+    print(response)
 
 
-# x-ms-original-file: specification/subscription/resource-manager/Microsoft.Subscription/stable/2016-06-01/examples/listTenants.json
+# x-ms-original-file: specification/subscription/resource-manager/Microsoft.Subscription/Subscription/preview/2025-11-01-preview/examples/putTargetDirectory.json
 if __name__ == "__main__":
     main()

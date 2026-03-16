@@ -1,3 +1,4 @@
+# pylint: disable=line-too-long,useless-suppression
 # coding=utf-8
 # --------------------------------------------------------------------------
 # Copyright (c) Microsoft Corporation. All rights reserved.
@@ -7,6 +8,7 @@
 # --------------------------------------------------------------------------
 
 from azure.identity import DefaultAzureCredential
+
 from azure.mgmt.subscription import SubscriptionClient
 
 """
@@ -14,7 +16,7 @@ from azure.mgmt.subscription import SubscriptionClient
     pip install azure-identity
     pip install azure-mgmt-subscription
 # USAGE
-    python accept_subscription_ownership.py
+    python delete_target_directory.py
 
     Before run the sample, please set the values of the client ID, tenant ID and client secret
     of the AAD application as environment variables: AZURE_CLIENT_ID, AZURE_TENANT_ID,
@@ -26,21 +28,12 @@ from azure.mgmt.subscription import SubscriptionClient
 def main():
     client = SubscriptionClient(
         credential=DefaultAzureCredential(),
+        subscription_id="ebe4f8fd-d8b3-4867-bcf4-b2407edd196d",
     )
 
-    response = client.subscription.begin_accept_ownership(
-        subscription_id="291bba3f-e0a5-47bc-a099-3bdcb2a50a05",
-        body={
-            "properties": {
-                "displayName": "Test Subscription",
-                "managementGroupId": None,
-                "tags": {"tag1": "Messi", "tag2": "Ronaldo", "tag3": "Lebron"},
-            }
-        },
-    ).result()
-    print(response)
+    client.subscriptions.delete_target_directory()
 
 
-# x-ms-original-file: specification/subscription/resource-manager/Microsoft.Subscription/stable/2021-10-01/examples/acceptSubscriptionOwnership.json
+# x-ms-original-file: specification/subscription/resource-manager/Microsoft.Subscription/Subscription/preview/2025-11-01-preview/examples/deleteTargetDirectory.json
 if __name__ == "__main__":
     main()
