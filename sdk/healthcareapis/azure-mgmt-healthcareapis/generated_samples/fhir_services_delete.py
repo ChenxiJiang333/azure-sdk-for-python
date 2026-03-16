@@ -30,10 +30,10 @@ def main():
         subscription_id="SUBSCRIPTION_ID",
     )
 
-    client.fhir_services.begin_delete(
+    client.fhir_service_operation_group.begin_delete(
         resource_group_name="testRG",
-        workspace_name="workspace1",
         fhir_service_name="fhirservice1",
+        workspace_name="workspace1",
     ).result()
 
 

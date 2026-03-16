@@ -14,59 +14,25 @@ AZURE_LOCATION = "eastus"
 
 
 @pytest.mark.skip("you may need to update the auto-generated test case before run it")
-class TestHealthcareApisManagementIotConnectorsOperations(AzureMgmtRecordedTestCase):
+class TestHealthcareApisManagementIotConnectorOperationGroupOperations(AzureMgmtRecordedTestCase):
     def setup_method(self, method):
         self.client = self.create_mgmt_client(HealthcareApisManagementClient)
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_iot_connectors_get(self, resource_group):
-        response = self.client.iot_connectors.get(
+    def test_iot_connector_operation_group_begin_update(self, resource_group):
+        response = self.client.iot_connector_operation_group.begin_update(
             resource_group_name=resource_group.name,
-            workspace_name="str",
             iot_connector_name="str",
-        )
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_iot_connectors_begin_create_or_update(self, resource_group):
-        response = self.client.iot_connectors.begin_create_or_update(
-            resource_group_name=resource_group.name,
             workspace_name="str",
-            iot_connector_name="str",
-            iot_connector={
-                "etag": "str",
-                "id": "str",
+            iot_connector_patch_resource={
                 "identity": {
                     "type": "str",
                     "principalId": "str",
                     "tenantId": "str",
                     "userAssignedIdentities": {"str": {"clientId": "str", "principalId": "str"}},
                 },
-                "location": "str",
-                "name": "str",
-                "properties": {
-                    "deviceMapping": {"content": {}},
-                    "ingestionEndpointConfiguration": {
-                        "consumerGroup": "str",
-                        "eventHubName": "str",
-                        "fullyQualifiedEventHubNamespace": "str",
-                    },
-                    "provisioningState": "str",
-                },
-                "systemData": {
-                    "createdAt": "2020-02-20 00:00:00",
-                    "createdBy": "str",
-                    "createdByType": "str",
-                    "lastModifiedAt": "2020-02-20 00:00:00",
-                    "lastModifiedBy": "str",
-                    "lastModifiedByType": "str",
-                },
                 "tags": {"str": "str"},
-                "type": "str",
             },
         ).result()  # call '.result()' to poll until service return final result
 
@@ -75,11 +41,12 @@ class TestHealthcareApisManagementIotConnectorsOperations(AzureMgmtRecordedTestC
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_iot_connectors_list_by_workspace(self, resource_group):
-        response = self.client.iot_connectors.list_by_workspace(
+    def test_iot_connector_operation_group_begin_delete(self, resource_group):
+        response = self.client.iot_connector_operation_group.begin_delete(
             resource_group_name=resource_group.name,
+            iot_connector_name="str",
             workspace_name="str",
-        )
-        result = [r for r in response]
+        ).result()  # call '.result()' to poll until service return final result
+
         # please add some check logic here by yourself
         # ...

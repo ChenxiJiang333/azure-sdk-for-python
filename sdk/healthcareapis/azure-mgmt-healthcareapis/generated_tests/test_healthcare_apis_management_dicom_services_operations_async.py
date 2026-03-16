@@ -114,43 +114,6 @@ class TestHealthcareApisManagementDicomServicesOperationsAsync(AzureMgmtRecorded
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_dicom_services_begin_update(self, resource_group):
-        response = await (
-            await self.client.dicom_services.begin_update(
-                resource_group_name=resource_group.name,
-                workspace_name="str",
-                dicom_service_name="str",
-                dicomservice_patch_resource={
-                    "identity": {
-                        "type": "str",
-                        "principalId": "str",
-                        "tenantId": "str",
-                        "userAssignedIdentities": {"str": {"clientId": "str", "principalId": "str"}},
-                    },
-                    "tags": {"str": "str"},
-                },
-            )
-        ).result()  # call '.result()' to poll until service return final result
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_dicom_services_begin_delete(self, resource_group):
-        response = await (
-            await self.client.dicom_services.begin_delete(
-                resource_group_name=resource_group.name,
-                workspace_name="str",
-                dicom_service_name="str",
-            )
-        ).result()  # call '.result()' to poll until service return final result
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
     async def test_dicom_services_list_by_workspace(self, resource_group):
         response = self.client.dicom_services.list_by_workspace(
             resource_group_name=resource_group.name,

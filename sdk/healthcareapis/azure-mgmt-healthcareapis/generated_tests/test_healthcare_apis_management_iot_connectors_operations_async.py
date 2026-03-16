@@ -78,43 +78,6 @@ class TestHealthcareApisManagementIotConnectorsOperationsAsync(AzureMgmtRecorded
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_iot_connectors_begin_update(self, resource_group):
-        response = await (
-            await self.client.iot_connectors.begin_update(
-                resource_group_name=resource_group.name,
-                workspace_name="str",
-                iot_connector_name="str",
-                iot_connector_patch_resource={
-                    "identity": {
-                        "type": "str",
-                        "principalId": "str",
-                        "tenantId": "str",
-                        "userAssignedIdentities": {"str": {"clientId": "str", "principalId": "str"}},
-                    },
-                    "tags": {"str": "str"},
-                },
-            )
-        ).result()  # call '.result()' to poll until service return final result
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
-    async def test_iot_connectors_begin_delete(self, resource_group):
-        response = await (
-            await self.client.iot_connectors.begin_delete(
-                resource_group_name=resource_group.name,
-                workspace_name="str",
-                iot_connector_name="str",
-            )
-        ).result()  # call '.result()' to poll until service return final result
-
-        # please add some check logic here by yourself
-        # ...
-
-    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy_async
     async def test_iot_connectors_list_by_workspace(self, resource_group):
         response = self.client.iot_connectors.list_by_workspace(
             resource_group_name=resource_group.name,

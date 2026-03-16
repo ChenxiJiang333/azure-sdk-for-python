@@ -30,10 +30,10 @@ def main():
         subscription_id="SUBSCRIPTION_ID",
     )
 
-    response = client.iot_connectors.begin_update(
+    response = client.iot_connector_operation_group.begin_update(
         resource_group_name="testRG",
-        workspace_name="workspace1",
         iot_connector_name="blue",
+        workspace_name="workspace1",
         iot_connector_patch_resource={
             "identity": {"type": "SystemAssigned"},
             "tags": {"additionalProp1": "string", "additionalProp2": "string", "additionalProp3": "string"},

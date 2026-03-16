@@ -30,10 +30,10 @@ def main():
         subscription_id="SUBSCRIPTION_ID",
     )
 
-    response = client.fhir_services.begin_update(
+    response = client.fhir_service_operation_group.begin_update(
         resource_group_name="testRG",
-        workspace_name="workspace1",
         fhir_service_name="fhirservice1",
+        workspace_name="workspace1",
         fhirservice_patch_resource={"tags": {"tagKey": "tagValue"}},
     ).result()
     print(response)

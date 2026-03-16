@@ -17,8 +17,11 @@ from ._operations import WorkspacePrivateEndpointConnectionsOperations  # type: 
 from ._operations import WorkspacePrivateLinkResourcesOperations  # type: ignore
 from ._operations import WorkspacesOperations  # type: ignore
 from ._operations import DicomServicesOperations  # type: ignore
+from ._operations import DicomServiceOperationGroupOperations  # type: ignore
 from ._operations import IotConnectorsOperations  # type: ignore
+from ._operations import IotConnectorOperationGroupOperations  # type: ignore
 from ._operations import FhirServicesOperations  # type: ignore
+from ._operations import FhirServiceOperationGroupOperations  # type: ignore
 from ._operations import ServicesOperations  # type: ignore
 from ._operations import PrivateEndpointConnectionsOperations  # type: ignore
 from ._operations import PrivateLinkResourcesOperations  # type: ignore
@@ -36,8 +39,11 @@ __all__ = [
     "WorkspacePrivateLinkResourcesOperations",
     "WorkspacesOperations",
     "DicomServicesOperations",
+    "DicomServiceOperationGroupOperations",
     "IotConnectorsOperations",
+    "IotConnectorOperationGroupOperations",
     "FhirServicesOperations",
+    "FhirServiceOperationGroupOperations",
     "ServicesOperations",
     "PrivateEndpointConnectionsOperations",
     "PrivateLinkResourcesOperations",

@@ -30,10 +30,10 @@ def main():
         subscription_id="SUBSCRIPTION_ID",
     )
 
-    client.iot_connectors.begin_delete(
+    client.iot_connector_operation_group.begin_delete(
         resource_group_name="testRG",
-        workspace_name="workspace1",
         iot_connector_name="blue",
+        workspace_name="workspace1",
     ).result()
 
 

@@ -20,10 +20,13 @@ from azure.mgmt.core.tools import get_arm_endpoints
 from .._utils.serialization import Deserializer, Serializer
 from ._configuration import HealthcareApisManagementClientConfiguration
 from .operations import (
+    DicomServiceOperationGroupOperations,
     DicomServicesOperations,
     FhirDestinationsOperations,
+    FhirServiceOperationGroupOperations,
     FhirServicesOperations,
     IotConnectorFhirDestinationOperations,
+    IotConnectorOperationGroupOperations,
     IotConnectorsOperations,
     OperationResultsOperations,
     Operations,
@@ -56,10 +59,19 @@ class HealthcareApisManagementClient:  # pylint: disable=too-many-instance-attri
     :vartype workspaces: azure.mgmt.healthcareapis.aio.operations.WorkspacesOperations
     :ivar dicom_services: DicomServicesOperations operations
     :vartype dicom_services: azure.mgmt.healthcareapis.aio.operations.DicomServicesOperations
+    :ivar dicom_service_operation_group: DicomServiceOperationGroupOperations operations
+    :vartype dicom_service_operation_group:
+     azure.mgmt.healthcareapis.aio.operations.DicomServiceOperationGroupOperations
     :ivar iot_connectors: IotConnectorsOperations operations
     :vartype iot_connectors: azure.mgmt.healthcareapis.aio.operations.IotConnectorsOperations
+    :ivar iot_connector_operation_group: IotConnectorOperationGroupOperations operations
+    :vartype iot_connector_operation_group:
+     azure.mgmt.healthcareapis.aio.operations.IotConnectorOperationGroupOperations
     :ivar fhir_services: FhirServicesOperations operations
     :vartype fhir_services: azure.mgmt.healthcareapis.aio.operations.FhirServicesOperations
+    :ivar fhir_service_operation_group: FhirServiceOperationGroupOperations operations
+    :vartype fhir_service_operation_group:
+     azure.mgmt.healthcareapis.aio.operations.FhirServiceOperationGroupOperations
     :ivar services: ServicesOperations operations
     :vartype services: azure.mgmt.healthcareapis.aio.operations.ServicesOperations
     :ivar private_endpoint_connections: PrivateEndpointConnectionsOperations operations
@@ -150,8 +162,17 @@ class HealthcareApisManagementClient:  # pylint: disable=too-many-instance-attri
         )
         self.workspaces = WorkspacesOperations(self._client, self._config, self._serialize, self._deserialize)
         self.dicom_services = DicomServicesOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.dicom_service_operation_group = DicomServiceOperationGroupOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
         self.iot_connectors = IotConnectorsOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.iot_connector_operation_group = IotConnectorOperationGroupOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
         self.fhir_services = FhirServicesOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.fhir_service_operation_group = FhirServiceOperationGroupOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
         self.services = ServicesOperations(self._client, self._config, self._serialize, self._deserialize)
         self.private_endpoint_connections = PrivateEndpointConnectionsOperations(
             self._client, self._config, self._serialize, self._deserialize

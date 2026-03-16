@@ -30,10 +30,10 @@ def main():
         subscription_id="SUBSCRIPTION_ID",
     )
 
-    response = client.dicom_services.begin_update(
+    response = client.dicom_service_operation_group.begin_update(
         resource_group_name="testRG",
-        workspace_name="workspace1",
         dicom_service_name="blue",
+        workspace_name="workspace1",
         dicomservice_patch_resource={"tags": {"tagKey": "tagValue"}},
     ).result()
     print(response)

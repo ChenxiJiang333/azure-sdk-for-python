@@ -30,10 +30,10 @@ def main():
         subscription_id="SUBSCRIPTION_ID",
     )
 
-    client.dicom_services.begin_delete(
+    client.dicom_service_operation_group.begin_delete(
         resource_group_name="testRG",
-        workspace_name="workspace1",
         dicom_service_name="blue",
+        workspace_name="workspace1",
     ).result()
 
 

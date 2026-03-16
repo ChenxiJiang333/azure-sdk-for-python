@@ -1,5 +1,9 @@
 ## tsp migration
 
+## 2.2.0b1 (2026-03-16)
+
+change log generation failed!!! You need to write it manually!!!
+
 ### Breaking Changes
 
 - Model `DicomService` moved instance variables `provisioning_state`, `authentication_configuration`, `cors_configuration`, `service_url`, `private_endpoint_connections`, `public_network_access`, `event_state`, `encryption`, `storage_configuration` and `enable_data_partitions` under property `properties`
