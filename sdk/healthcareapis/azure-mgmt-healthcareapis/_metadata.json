@@ -1,14 +1,7 @@
 {
   "apiVersion": "2025-04-01-preview",
-  "commit": "60b463d2682d79be8a55a72a5826175f7851311f",
+  "commit": "82733331c5e3e3101499b91281630a940b5a8e12",
   "repository_url": "https://github.com/Azure/azure-rest-api-specs",
   "typespec_src": "specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/HealthcareApis",
-  "emitterVersion": "0.60.2",
-  "autorest": "3.10.2",
-  "use": [
-    "@autorest/python@6.48.0",
-    "@autorest/modelerfour@4.27.0"
-  ],
-  "autorest_command": "autorest specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/HealthcareApis/readme.md --generate-sample=True --generate-test=True --include-x-ms-examples-original-file=True --package-mode=azure-mgmt --python --python-sdks-folder=/home/v-chenjiang/spec/azure-sdk-for-python/sdk --use=@autorest/python@6.48.0 --use=@autorest/modelerfour@4.27.0 --version=3.10.2 --version-tolerant=False",
-  "readme": "specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/HealthcareApis/readme.md"
+  "emitterVersion": "0.60.2"
 }

@@ -2,9 +2,7 @@
 
 ## 2.2.0b1 (2026-03-17)
 
-### Features Added
-
-  - Model StorageConfiguration has a new parameter storage_indexing_configuration
+change log generation failed!!! You need to write it manually!!!
 
 ## 3.0.0b1 (2026-03-12)
 
