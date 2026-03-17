@@ -1,8 +1,40 @@
-# Release History
+## tsp migration
 
-## 2.4.0 (2026-03-17)
+### Breaking Changes
 
-change log generation failed!!! You need to write it manually!!!
+- Deleted or renamed model `AzureReservationAPI`
+- Model `AppliedReservations` deleted or renamed its instance variable `reservation_order_ids`
+- Model `MergeRequest` deleted or renamed its instance variable `sources`
+- Model `Patch` moved instance variable `applied_scope_type`, `applied_scopes`, `applied_scope_properties`, `instance_flexibility`, `name`, `renew`, `renew_properties` and `review_date_time` under property `properties`
+- Model `PurchaseRequest` moved instance variable `reserved_resource_type`, `billing_scope_id`, `term`, `billing_plan`, `quantity`, `display_name`, `applied_scope_type`, `applied_scopes`, `applied_scope_properties`, `renew`, `reserved_resource_properties` and `review_date_time` under property `properties`
+- Model `QuotaRequestDetails` moved instance variable `provisioning_state`, `message`, `request_submit_time` and `value` under property `properties`
+- Model `ReservationOrderResponse` moved instance variable `display_name`, `request_date_time`, `created_date_time`, `expiry_date`, `expiry_date_time`, `benefit_start_time`, `original_quantity`, `term`, `provisioning_state`, `billing_plan`, `plan_information`, `reservations` and `review_date_time` under property `properties`
+- Model `SavingsPlanPurchaseRequest` moved instance variable `display_name`, `billing_scope_id`, `term`, `billing_plan`, `applied_scope_type`, `applied_scope_properties` and `commitment` under property `properties`
+- Model `SkuRestriction` deleted or renamed its instance variable `values`
+- Model `SplitRequest` moved instance variable `quantities` and `reservation_id` under property `properties`
+- Deleted or renamed model `CreateGenericQuotaRequestParameters`
+- Deleted or renamed model `CurrentQuotaLimit`
+- Deleted or renamed model `DisplayProvisioningState`
+- Deleted or renamed model `Location`
+- Deleted or renamed model `OperationList`
+- Deleted or renamed model `QuotaLimits`
+- Deleted or renamed model `QuotaLimitsResponse`
+- Deleted or renamed model `QuotaRequestOneResourceSubmitResponse`
+- Deleted or renamed model `QuotaRequestSubmitResponse`
+- Deleted or renamed model `QuotaRequestSubmitResponse201`
+- Deleted or renamed model `RefundResponse`
+- Deleted or renamed model `UserFriendlyAppliedScopeType`
+- Deleted or renamed model `UserFriendlyRenewState`
+- Method `QuotaRequestStatusOperations.list` changed its parameter `skiptoken` from `positional_or_keyword` to `keyword_only`
+- Method `ReservationOperations.get` changed its parameter `expand` from `positional_or_keyword` to `keyword_only`
+- Method `ReservationOperations.list_all` changed its parameter `orderby`/`refresh_summary`/`skiptoken`/`selected_state`/`take` from `positional_or_keyword` to `keyword_only`
+- Method `ReservationOrderOperations.get` changed its parameter `expand` from `positional_or_keyword` to `keyword_only`
+
+### Other Changes
+
+- Deleted model `CatalogsResult`/`QuotaRequestDetailsList`/`ReservationList`/`ReservationOrderList` which actually were not used by SDK users
+
+ # Release History
 
 ## 3.0.0 (2026-03-17)
 
