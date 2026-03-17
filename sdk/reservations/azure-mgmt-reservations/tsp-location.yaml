@@ -1,0 +1,4 @@
+directory: specification/reservations/resource-manager/Microsoft.Capacity/Reservations
+commit: 8d0e095e84efde8feb93d8b7a060899396152625
+repo: Azure/azure-rest-api-specs
+additionalDirectories: 
