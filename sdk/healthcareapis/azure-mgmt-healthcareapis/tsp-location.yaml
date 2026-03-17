@@ -1,4 +1,0 @@
-directory: specification/healthcareapis/resource-manager/Microsoft.HealthcareApis/HealthcareApis
-commit: e9754e4476051ebc395e1e9d77fd7af5302e2c9a
-repo: Azure/azure-rest-api-specs
-additionalDirectories: 

@@ -1,23 +1,10 @@
 ## tsp migration
 
-## 2.2.0b1 (2026-03-16)
+## 2.2.0b1 (2026-03-17)
 
-change log generation failed!!! You need to write it manually!!!
+### Features Added
 
-### Breaking Changes
-
-- Model `DicomService` moved instance variables `provisioning_state`, `authentication_configuration`, `cors_configuration`, `service_url`, `private_endpoint_connections`, `public_network_access`, `event_state`, `encryption`, `storage_configuration` and `enable_data_partitions` under property `properties`
-- Model `FhirService` moved instance variables `provisioning_state`, `acr_configuration`, `authentication_configuration`, `cors_configuration`, `export_configuration`, `private_endpoint_connections`, `public_network_access`, `event_state`, `resource_version_policy_configuration`, `import_configuration`, `implementation_guides_configuration` and `encryption` under property `properties`
-- Model `IotConnector` moved instance variables `provisioning_state`, `ingestion_endpoint_configuration` and `device_mapping` under property `properties`
-- Model `IotFhirDestination` moved instance variables `provisioning_state`, `resource_identity_resolution_type`, `fhir_service_resource_id` and `fhir_mapping` under property `properties`
-- Model `PrivateEndpointConnection` moved instance variables `private_endpoint`, `private_link_service_connection_state` and `provisioning_state` under property `properties`
-- Model `ServicesPatchDescription` moved instance variable `public_network_access`
-
-### Other Changes
-
-- Deleted model `DicomServiceCollection`/`FhirServiceCollection`/`IotConnectorCollection`/`IotFhirDestinationCollection`/`WorkspaceList`/`PrivateEndpointConnectionListResultDescription`/`ListOperations` which actually were not used by SDK users
-
-# Release History
+  - Model StorageConfiguration has a new parameter storage_indexing_configuration
 
 ## 3.0.0b1 (2026-03-12)
 
