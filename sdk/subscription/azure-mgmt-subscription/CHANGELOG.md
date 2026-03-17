@@ -4,23 +4,6 @@
 
 change log generation failed!!! You need to write it manually!!!
 
-### Breaking Changes
-
-- Method `SubscriptionClient.__init__` deleted or renamed its parameter `subscription_id` of kind `positional_or_keyword`
-- Method `SubscriptionOperations.cancel` inserted a `positional_or_keyword` parameter `subscription_id`
-- Method `SubscriptionOperations.enable` inserted a `positional_or_keyword` parameter `subscription_id`
-- Method `SubscriptionOperations.rename` inserted a `positional_or_keyword` parameter `subscription_id`
-- Method `SubscriptionsOperations.delete_target_directory` inserted a `positional_or_keyword` parameter `subscription_id`
-- Method `SubscriptionsOperations.get_target_directory` inserted a `positional_or_keyword` parameter `subscription_id`
-- Method `SubscriptionsOperations.list_target_directory` inserted a `positional_or_keyword` parameter `subscription_id`
-- Method `SubscriptionsOperations.put_target_directory` inserted a `positional_or_keyword` parameter `subscription_id`
-
-### Other Changes
-
-  - Deleted model `GetTenantPolicyListResponse` which actually were not used by SDK users
-
-# Release History
-
 ## 3.2.0b1 (2022-12-27)
 
 ### Features Added
