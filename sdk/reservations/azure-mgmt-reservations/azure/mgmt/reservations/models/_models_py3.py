@@ -1,5 +1,5 @@
+# pylint: disable=line-too-long,useless-suppression,too-many-lines
 # coding=utf-8
-# pylint: disable=too-many-lines
 # --------------------------------------------------------------------------
 # Copyright (c) Microsoft Corporation. All rights reserved.
 # Licensed under the MIT License. See License.txt in the project root for license information.
@@ -7,25 +7,15 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 
+from collections.abc import MutableMapping
 import datetime
-import sys
-from typing import Any, Dict, List, Optional, TYPE_CHECKING, Union
+from typing import Any, Literal, Optional, TYPE_CHECKING, Union
 
-from .. import _serialization
-
-if sys.version_info >= (3, 9):
-    from collections.abc import MutableMapping
-else:
-    from typing import MutableMapping  # type: ignore  # pylint: disable=ungrouped-imports
-if sys.version_info >= (3, 8):
-    from typing import Literal  # pylint: disable=no-name-in-module, ungrouped-imports
-else:
-    from typing_extensions import Literal  # type: ignore  # pylint: disable=ungrouped-imports
+from .._utils import serialization as _serialization
 
 if TYPE_CHECKING:
-    # pylint: disable=unused-import,ungrouped-imports
     from .. import models as _models
-JSON = MutableMapping[str, Any]  # pylint: disable=unsubscriptable-object
+JSON = MutableMapping[str, Any]
 
 
 class AppliedReservationList(_serialization.Model):
@@ -42,7 +32,7 @@ class AppliedReservationList(_serialization.Model):
         "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(self, *, value: Optional[List[str]] = None, next_link: Optional[str] = None, **kwargs: Any) -> None:
+    def __init__(self, *, value: Optional[list[str]] = None, next_link: Optional[str] = None, **kwargs: Any) -> None:
         """
         :keyword value:
         :paramtype value: list[str]
@@ -90,9 +80,9 @@ class AppliedReservations(_serialization.Model):
         :paramtype reservation_order_ids: ~azure.mgmt.reservations.models.AppliedReservationList
         """
         super().__init__(**kwargs)
-        self.id = None
-        self.name = None
-        self.type = None
+        self.id: Optional[str] = None
+        self.name: Optional[str] = None
+        self.type: Optional[str] = None
         self.reservation_order_ids = reservation_order_ids
 
 
@@ -205,7 +195,7 @@ class AvailableScopeRequestProperties(_serialization.Model):
         "scopes": {"key": "scopes", "type": "[str]"},
     }
 
-    def __init__(self, *, scopes: Optional[List[str]] = None, **kwargs: Any) -> None:
+    def __init__(self, *, scopes: Optional[list[str]] = None, **kwargs: Any) -> None:
         """
         :keyword scopes:
         :paramtype scopes: list[str]
@@ -364,9 +354,9 @@ class CalculateExchangeRequestProperties(_serialization.Model):
     def __init__(
         self,
         *,
-        reservations_to_purchase: Optional[List["_models.PurchaseRequest"]] = None,
-        savings_plans_to_purchase: Optional[List["_models.SavingsPlanPurchaseRequest"]] = None,
-        reservations_to_exchange: Optional[List["_models.ReservationToReturn"]] = None,
+        reservations_to_purchase: Optional[list["_models.PurchaseRequest"]] = None,
+        savings_plans_to_purchase: Optional[list["_models.SavingsPlanPurchaseRequest"]] = None,
+        reservations_to_exchange: Optional[list["_models.ReservationToReturn"]] = None,
         **kwargs: Any
     ) -> None:
         """
@@ -434,9 +424,9 @@ class CalculateExchangeResponseProperties(_serialization.Model):
         net_payable: Optional["_models.Price"] = None,
         refunds_total: Optional["_models.Price"] = None,
         purchases_total: Optional["_models.Price"] = None,
-        reservations_to_purchase: Optional[List["_models.ReservationToPurchaseCalculateExchange"]] = None,
-        savings_plans_to_purchase: Optional[List["_models.SavingsPlanToPurchaseCalculateExchange"]] = None,
-        reservations_to_exchange: Optional[List["_models.ReservationToExchange"]] = None,
+        reservations_to_purchase: Optional[list["_models.ReservationToPurchaseCalculateExchange"]] = None,
+        savings_plans_to_purchase: Optional[list["_models.SavingsPlanToPurchaseCalculateExchange"]] = None,
+        reservations_to_exchange: Optional[list["_models.ReservationToExchange"]] = None,
         policy_result: Optional["_models.ExchangePolicyErrors"] = None,
         **kwargs: Any
     ) -> None:
@@ -494,7 +484,7 @@ class CalculatePriceResponse(_serialization.Model):
         self.properties = properties
 
 
-class CalculatePriceResponseProperties(_serialization.Model):  # pylint: disable=too-many-instance-attributes
+class CalculatePriceResponseProperties(_serialization.Model):
     """Properties for calculate price response.
 
     :ivar billing_currency_total: Currency and amount that customer will be charged in customer's
@@ -560,7 +550,7 @@ class CalculatePriceResponseProperties(_serialization.Model):  # pylint: disable
         sku_title: Optional[str] = None,
         sku_description: Optional[str] = None,
         pricing_currency_total: Optional["_models.CalculatePriceResponsePropertiesPricingCurrencyTotal"] = None,
-        payment_schedule: Optional[List["_models.PaymentDetail"]] = None,
+        payment_schedule: Optional[list["_models.PaymentDetail"]] = None,
         **kwargs: Any
     ) -> None:
         """
@@ -607,7 +597,7 @@ class CalculatePriceResponseProperties(_serialization.Model):  # pylint: disable
         self.payment_schedule = payment_schedule
 
 
-class CalculatePriceResponsePropertiesBillingCurrencyTotal(_serialization.Model):
+class CalculatePriceResponsePropertiesBillingCurrencyTotal(_serialization.Model):  # pylint: disable=name-too-long
     """Currency and amount that customer will be charged in customer's local currency. Tax is not
     included.
 
@@ -636,7 +626,7 @@ class CalculatePriceResponsePropertiesBillingCurrencyTotal(_serialization.Model)
         self.amount = amount
 
 
-class CalculatePriceResponsePropertiesPricingCurrencyTotal(_serialization.Model):
+class CalculatePriceResponsePropertiesPricingCurrencyTotal(_serialization.Model):  # pylint: disable=name-too-long
     """Amount that Microsoft uses for record. Used during refund for calculating refund limit. Tax is
     not included.
 
@@ -763,7 +753,7 @@ class CalculateRefundResponse(_serialization.Model):
         self.properties = properties
 
 
-class Catalog(_serialization.Model):  # pylint: disable=too-many-instance-attributes
+class Catalog(_serialization.Model):
     """Product details of a type of resource.
 
     Variables are only populated by the server, and will be ignored when sending a request.
@@ -823,7 +813,7 @@ class Catalog(_serialization.Model):  # pylint: disable=too-many-instance-attrib
     def __init__(
         self,
         *,
-        billing_plans: Optional[Dict[str, List[Union[str, "_models.ReservationBillingPlan"]]]] = None,
+        billing_plans: Optional[dict[str, list[Union[str, "_models.ReservationBillingPlan"]]]] = None,
         **kwargs: Any
     ) -> None:
         """
@@ -832,17 +822,17 @@ class Catalog(_serialization.Model):  # pylint: disable=too-many-instance-attrib
          ~azure.mgmt.reservations.models.ReservationBillingPlan]]
         """
         super().__init__(**kwargs)
-        self.resource_type = None
-        self.name = None
+        self.resource_type: Optional[str] = None
+        self.name: Optional[str] = None
         self.billing_plans = billing_plans
-        self.terms = None
-        self.locations = None
-        self.sku_properties = None
-        self.msrp = None
-        self.restrictions = None
-        self.tier = None
-        self.size = None
-        self.capabilities = None
+        self.terms: Optional[list[Union[str, "_models.ReservationTerm"]]] = None
+        self.locations: Optional[list[str]] = None
+        self.sku_properties: Optional[list["_models.SkuProperty"]] = None
+        self.msrp: Optional["_models.CatalogMsrp"] = None
+        self.restrictions: Optional[list["_models.SkuRestriction"]] = None
+        self.tier: Optional[str] = None
+        self.size: Optional[str] = None
+        self.capabilities: Optional[list["_models.SkuCapability"]] = None
 
 
 class CatalogMsrp(_serialization.Model):
@@ -914,8 +904,8 @@ class CatalogsResult(_serialization.Model):
         :paramtype total_items: int
         """
         super().__init__(**kwargs)
-        self.value = None
-        self.next_link = None
+        self.value: Optional[list["_models.Catalog"]] = None
+        self.next_link: Optional[str] = None
         self.total_items = total_items
 
 
@@ -957,7 +947,7 @@ class ChangeDirectoryResponse(_serialization.Model):
         self,
         *,
         reservation_order: Optional["_models.ChangeDirectoryResult"] = None,
-        reservations: Optional[List["_models.ChangeDirectoryResult"]] = None,
+        reservations: Optional[list["_models.ChangeDirectoryResult"]] = None,
         **kwargs: Any
     ) -> None:
         """
@@ -1097,7 +1087,7 @@ class CreateGenericQuotaRequestParameters(_serialization.Model):
         "value": {"key": "value", "type": "[CurrentQuotaLimitBase]"},
     }
 
-    def __init__(self, *, value: Optional[List["_models.CurrentQuotaLimitBase"]] = None, **kwargs: Any) -> None:
+    def __init__(self, *, value: Optional[list["_models.CurrentQuotaLimitBase"]] = None, **kwargs: Any) -> None:
         """
         :keyword value: Quota change requests.
         :paramtype value: list[~azure.mgmt.reservations.models.CurrentQuotaLimitBase]
@@ -1149,11 +1139,11 @@ class CurrentQuotaLimit(_serialization.Model):
         :paramtype properties: ~azure.mgmt.reservations.models.QuotaProperties
         """
         super().__init__(**kwargs)
-        self.provisioning_state = None
-        self.message = None
-        self.id = None
-        self.name = None
-        self.type = None
+        self.provisioning_state: Optional[Union[str, "_models.QuotaRequestState"]] = None
+        self.message: Optional[str] = None
+        self.id: Optional[str] = None
+        self.name: Optional[str] = None
+        self.type: Optional[str] = None
         self.properties = properties
 
 
@@ -1191,9 +1181,9 @@ class CurrentQuotaLimitBase(_serialization.Model):
         :paramtype properties: ~azure.mgmt.reservations.models.QuotaProperties
         """
         super().__init__(**kwargs)
-        self.id = None
-        self.name = None
-        self.type = None
+        self.id: Optional[str] = None
+        self.name: Optional[str] = None
+        self.type: Optional[str] = None
         self.properties = properties
 
 
@@ -1245,9 +1235,9 @@ class ErrorDetails(_serialization.Model):
     def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
-        self.code = None
-        self.message = None
-        self.target = None
+        self.code: Optional[str] = None
+        self.message: Optional[str] = None
+        self.target: Optional[str] = None
 
 
 class ErrorResponse(_serialization.Model):
@@ -1385,7 +1375,7 @@ class ExchangePolicyErrors(_serialization.Model):
         "policy_errors": {"key": "policyErrors", "type": "[ExchangePolicyError]"},
     }
 
-    def __init__(self, *, policy_errors: Optional[List["_models.ExchangePolicyError"]] = None, **kwargs: Any) -> None:
+    def __init__(self, *, policy_errors: Optional[list["_models.ExchangePolicyError"]] = None, **kwargs: Any) -> None:
         """
         :keyword policy_errors: Exchange Policy errors.
         :paramtype policy_errors: list[~azure.mgmt.reservations.models.ExchangePolicyError]
@@ -1476,9 +1466,9 @@ class ExchangeResponseProperties(_serialization.Model):
         net_payable: Optional["_models.Price"] = None,
         refunds_total: Optional["_models.Price"] = None,
         purchases_total: Optional["_models.Price"] = None,
-        reservations_to_purchase: Optional[List["_models.ReservationToPurchaseExchange"]] = None,
-        savings_plans_to_purchase: Optional[List["_models.SavingsPlanToPurchaseExchange"]] = None,
-        reservations_to_exchange: Optional[List["_models.ReservationToReturnForExchange"]] = None,
+        reservations_to_purchase: Optional[list["_models.ReservationToPurchaseExchange"]] = None,
+        savings_plans_to_purchase: Optional[list["_models.SavingsPlanToPurchaseExchange"]] = None,
+        reservations_to_exchange: Optional[list["_models.ReservationToReturnForExchange"]] = None,
         policy_result: Optional["_models.ExchangePolicyErrors"] = None,
         **kwargs: Any
     ) -> None:
@@ -1632,7 +1622,7 @@ class MergeRequest(_serialization.Model):
         "sources": {"key": "properties.sources", "type": "[str]"},
     }
 
-    def __init__(self, *, sources: Optional[List[str]] = None, **kwargs: Any) -> None:
+    def __init__(self, *, sources: Optional[list[str]] = None, **kwargs: Any) -> None:
         """
         :keyword sources: Format of the resource id should be
          /providers/Microsoft.Capacity/reservationOrders/{reservationOrderId}/reservations/{reservationId}.
@@ -1705,7 +1695,7 @@ class OperationList(_serialization.Model):
     def __init__(
         self,
         *,
-        value: Optional[List["_models.OperationResponse"]] = None,
+        value: Optional[list["_models.OperationResponse"]] = None,
         next_link: Optional[str] = None,
         **kwargs: Any
     ) -> None:
@@ -1850,7 +1840,7 @@ class Patch(_serialization.Model):
         self,
         *,
         applied_scope_type: Optional[Union[str, "_models.AppliedScopeType"]] = None,
-        applied_scopes: Optional[List[str]] = None,
+        applied_scopes: Optional[list[str]] = None,
         applied_scope_properties: Optional["_models.AppliedScopeProperties"] = None,
         instance_flexibility: Optional[Union[str, "_models.InstanceFlexibility"]] = None,
         name: Optional[str] = None,
@@ -2023,10 +2013,10 @@ class Resource(_serialization.Model):
     def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
-        self.id = None
-        self.name = None
-        self.type = None
-        self.system_data = None
+        self.id: Optional[str] = None
+        self.name: Optional[str] = None
+        self.type: Optional[str] = None
+        self.system_data: Optional["_models.SystemData"] = None
 
 
 class ProxyResource(Resource):
@@ -2048,34 +2038,17 @@ class ProxyResource(Resource):
     :vartype system_data: ~azure.mgmt.reservations.models.SystemData
     """
 
-    _validation = {
-        "id": {"readonly": True},
-        "name": {"readonly": True},
-        "type": {"readonly": True},
-        "system_data": {"readonly": True},
-    }
 
-    _attribute_map = {
-        "id": {"key": "id", "type": "str"},
-        "name": {"key": "name", "type": "str"},
-        "type": {"key": "type", "type": "str"},
-        "system_data": {"key": "systemData", "type": "SystemData"},
-    }
-
-    def __init__(self, **kwargs: Any) -> None:
-        """ """
-        super().__init__(**kwargs)
-
-
-class PurchaseRequest(_serialization.Model):  # pylint: disable=too-many-instance-attributes
+class PurchaseRequest(_serialization.Model):
     """The request for reservation purchase.
 
     :ivar sku: The name of sku.
     :vartype sku: ~azure.mgmt.reservations.models.SkuName
     :ivar location: The Azure region where the reserved resource lives.
     :vartype location: str
-    :ivar reserved_resource_type: The type of the resource that is being reserved. Known values
-     are: "VirtualMachines", "SqlDatabases", "SuseLinux", "CosmosDb", "RedHat", "SqlDataWarehouse",
+    :ivar reserved_resource_type: The type of the resource that is being reserved. In addition to
+     below types we have also added the following: OpenAIPTU, MDC, Sentinel. Known values are:
+     "VirtualMachines", "SqlDatabases", "SuseLinux", "CosmosDb", "RedHat", "SqlDataWarehouse",
      "VMwareCloudSimple", "RedHatOsa", "Databricks", "AppService", "ManagedDisk", "BlockBlob",
      "RedisCache", "AzureDataExplorer", "MySql", "MariaDb", "PostgreSql", "DedicatedHost",
      "SapHana", "SqlAzureHybridBenefit", "AVS", "DataFactory", "NetAppStorage", "AzureFiles",
@@ -2147,7 +2120,7 @@ class PurchaseRequest(_serialization.Model):  # pylint: disable=too-many-instanc
         quantity: Optional[int] = None,
         display_name: Optional[str] = None,
         applied_scope_type: Optional[Union[str, "_models.AppliedScopeType"]] = None,
-        applied_scopes: Optional[List[str]] = None,
+        applied_scopes: Optional[list[str]] = None,
         applied_scope_properties: Optional["_models.AppliedScopeProperties"] = None,
         renew: bool = False,
         reserved_resource_properties: Optional["_models.PurchaseRequestPropertiesReservedResourceProperties"] = None,
@@ -2159,8 +2132,9 @@ class PurchaseRequest(_serialization.Model):  # pylint: disable=too-many-instanc
         :paramtype sku: ~azure.mgmt.reservations.models.SkuName
         :keyword location: The Azure region where the reserved resource lives.
         :paramtype location: str
-        :keyword reserved_resource_type: The type of the resource that is being reserved. Known values
-         are: "VirtualMachines", "SqlDatabases", "SuseLinux", "CosmosDb", "RedHat", "SqlDataWarehouse",
+        :keyword reserved_resource_type: The type of the resource that is being reserved. In addition
+         to below types we have also added the following: OpenAIPTU, MDC, Sentinel. Known values are:
+         "VirtualMachines", "SqlDatabases", "SuseLinux", "CosmosDb", "RedHat", "SqlDataWarehouse",
          "VMwareCloudSimple", "RedHatOsa", "Databricks", "AppService", "ManagedDisk", "BlockBlob",
          "RedisCache", "AzureDataExplorer", "MySql", "MariaDb", "PostgreSql", "DedicatedHost",
          "SapHana", "SqlAzureHybridBenefit", "AVS", "DataFactory", "NetAppStorage", "AzureFiles",
@@ -2216,7 +2190,7 @@ class PurchaseRequest(_serialization.Model):  # pylint: disable=too-many-instanc
         self.review_date_time = review_date_time
 
 
-class PurchaseRequestPropertiesReservedResourceProperties(_serialization.Model):
+class PurchaseRequestPropertiesReservedResourceProperties(_serialization.Model):  # pylint: disable=name-too-long
     """Properties specific to each reserved resource type. Not required if not applicable.
 
     :ivar instance_flexibility: Turning this on will apply the reservation discount to other VMs in
@@ -2260,7 +2234,7 @@ class QuotaLimits(_serialization.Model):
     def __init__(
         self,
         *,
-        value: Optional[List["_models.CurrentQuotaLimitBase"]] = None,
+        value: Optional[list["_models.CurrentQuotaLimitBase"]] = None,
         next_link: Optional[str] = None,
         **kwargs: Any
     ) -> None:
@@ -2294,7 +2268,7 @@ class QuotaLimitsResponse(_serialization.Model):
     def __init__(
         self,
         *,
-        value: Optional[List["_models.CurrentQuotaLimit"]] = None,
+        value: Optional[list["_models.CurrentQuotaLimit"]] = None,
         next_link: Optional[str] = None,
         **kwargs: Any
     ) -> None:
@@ -2378,11 +2352,11 @@ class QuotaProperties(_serialization.Model):
         """
         super().__init__(**kwargs)
         self.limit = limit
-        self.current_value = None
+        self.current_value: Optional[int] = None
         self.unit = unit
         self.name = name
         self.resource_type = resource_type
-        self.quota_period = None
+        self.quota_period: Optional[str] = None
         self.properties = properties
 
 
@@ -2431,7 +2405,7 @@ class QuotaRequestDetails(_serialization.Model):
         self,
         *,
         provisioning_state: Optional[Union[str, "_models.QuotaRequestState"]] = None,
-        value: Optional[List["_models.SubRequest"]] = None,
+        value: Optional[list["_models.SubRequest"]] = None,
         **kwargs: Any
     ) -> None:
         """
@@ -2442,12 +2416,12 @@ class QuotaRequestDetails(_serialization.Model):
         :paramtype value: list[~azure.mgmt.reservations.models.SubRequest]
         """
         super().__init__(**kwargs)
-        self.id = None
-        self.name = None
-        self.type = None
+        self.id: Optional[str] = None
+        self.name: Optional[str] = None
+        self.type: Optional[str] = None
         self.provisioning_state = provisioning_state
-        self.message = None
-        self.request_submit_time = None
+        self.message: Optional[str] = None
+        self.request_submit_time: Optional[datetime.datetime] = None
         self.value = value
 
 
@@ -2469,7 +2443,7 @@ class QuotaRequestDetailsList(_serialization.Model):
     def __init__(
         self,
         *,
-        value: Optional[List["_models.QuotaRequestDetails"]] = None,
+        value: Optional[list["_models.QuotaRequestDetails"]] = None,
         next_link: Optional[str] = None,
         **kwargs: Any
     ) -> None:
@@ -2545,15 +2519,15 @@ class QuotaRequestOneResourceSubmitResponse(_serialization.Model):
         :paramtype properties: ~azure.mgmt.reservations.models.QuotaProperties
         """
         super().__init__(**kwargs)
-        self.id = None
-        self.name = None
-        self.type = None
-        self.provisioning_state = None
-        self.message = None
-        self.request_submit_time = None
-        self.id_properties_id = None
-        self.name_properties_name = None
-        self.type_properties_type = None
+        self.id: Optional[str] = None
+        self.name: Optional[str] = None
+        self.type: Optional[str] = None
+        self.provisioning_state: Optional[Union[str, "_models.QuotaRequestState"]] = None
+        self.message: Optional[str] = None
+        self.request_submit_time: Optional[datetime.datetime] = None
+        self.id_properties_id: Optional[str] = None
+        self.name_properties_name: Optional[str] = None
+        self.type_properties_type: Optional[str] = None
         self.properties = properties
 
 
@@ -2590,7 +2564,7 @@ class QuotaRequestProperties(_serialization.Model):
         self,
         *,
         provisioning_state: Optional[Union[str, "_models.QuotaRequestState"]] = None,
-        value: Optional[List["_models.SubRequest"]] = None,
+        value: Optional[list["_models.SubRequest"]] = None,
         **kwargs: Any
     ) -> None:
         """
@@ -2602,8 +2576,8 @@ class QuotaRequestProperties(_serialization.Model):
         """
         super().__init__(**kwargs)
         self.provisioning_state = provisioning_state
-        self.message = None
-        self.request_submit_time = None
+        self.message: Optional[str] = None
+        self.request_submit_time: Optional[datetime.datetime] = None
         self.value = value
 
 
@@ -2641,10 +2615,10 @@ class QuotaRequestSubmitResponse(_serialization.Model):
         :paramtype properties: ~azure.mgmt.reservations.models.QuotaRequestProperties
         """
         super().__init__(**kwargs)
-        self.id = None
-        self.name = None
+        self.id: Optional[str] = None
+        self.name: Optional[str] = None
         self.properties = properties
-        self.type = None
+        self.type: Optional[str] = None
 
 
 class QuotaRequestSubmitResponse201(_serialization.Model):
@@ -2684,11 +2658,11 @@ class QuotaRequestSubmitResponse201(_serialization.Model):
     def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
-        self.id = None
-        self.name = None
-        self.type = None
-        self.provisioning_state = None
-        self.message = None
+        self.id: Optional[str] = None
+        self.name: Optional[str] = None
+        self.type: Optional[str] = None
+        self.provisioning_state: Optional[Union[str, "_models.QuotaRequestState"]] = None
+        self.message: Optional[str] = None
 
 
 class RefundBillingInformation(_serialization.Model):
@@ -2876,7 +2850,7 @@ class RefundPolicyResultProperty(_serialization.Model):
         *,
         consumed_refunds_total: Optional["_models.Price"] = None,
         max_refund_limit: Optional["_models.Price"] = None,
-        policy_errors: Optional[List["_models.RefundPolicyError"]] = None,
+        policy_errors: Optional[list["_models.RefundPolicyError"]] = None,
         **kwargs: Any
     ) -> None:
         """
@@ -3110,7 +3084,7 @@ class RenewPropertiesResponse(_serialization.Model):
         self.billing_currency_total = billing_currency_total
 
 
-class RenewPropertiesResponseBillingCurrencyTotal(_serialization.Model):
+class RenewPropertiesResponseBillingCurrencyTotal(_serialization.Model):  # pylint: disable=name-too-long
     """Currency and amount that customer will be charged in customer's local currency for renewal
     purchase. Tax is not included.
 
@@ -3139,7 +3113,7 @@ class RenewPropertiesResponseBillingCurrencyTotal(_serialization.Model):
         self.amount = amount
 
 
-class RenewPropertiesResponsePricingCurrencyTotal(_serialization.Model):
+class RenewPropertiesResponsePricingCurrencyTotal(_serialization.Model):  # pylint: disable=name-too-long
     """Amount that Microsoft uses for record. Used during refund for calculating refund limit. Tax is
     not included. This is locked price 30 days before expiry.
 
@@ -3169,7 +3143,7 @@ class RenewPropertiesResponsePricingCurrencyTotal(_serialization.Model):
 
 
 class ReservationList(_serialization.Model):
-    """List of ``Reservation``\ s.
+    """List of ``Reservation``\\ s.
 
     :ivar value:
     :vartype value: list[~azure.mgmt.reservations.models.ReservationResponse]
@@ -3185,7 +3159,7 @@ class ReservationList(_serialization.Model):
     def __init__(
         self,
         *,
-        value: Optional[List["_models.ReservationResponse"]] = None,
+        value: Optional[list["_models.ReservationResponse"]] = None,
         next_link: Optional[str] = None,
         **kwargs: Any
     ) -> None:
@@ -3219,7 +3193,7 @@ class ReservationMergeProperties(_serialization.Model):
     }
 
     def __init__(
-        self, *, merge_destination: Optional[str] = None, merge_sources: Optional[List[str]] = None, **kwargs: Any
+        self, *, merge_destination: Optional[str] = None, merge_sources: Optional[list[str]] = None, **kwargs: Any
     ) -> None:
         """
         :keyword merge_destination: Reservation resource id Created due to the merge. Format of the
@@ -3263,7 +3237,7 @@ class ReservationOrderBillingPlanInformation(_serialization.Model):
         pricing_currency_total: Optional["_models.Price"] = None,
         start_date: Optional[datetime.date] = None,
         next_payment_due_date: Optional[datetime.date] = None,
-        transactions: Optional[List["_models.PaymentDetail"]] = None,
+        transactions: Optional[list["_models.PaymentDetail"]] = None,
         **kwargs: Any
     ) -> None:
         """
@@ -3285,7 +3259,7 @@ class ReservationOrderBillingPlanInformation(_serialization.Model):
 
 
 class ReservationOrderList(_serialization.Model):
-    """List of ``ReservationOrder``\ s.
+    """List of ``ReservationOrder``\\ s.
 
     :ivar value:
     :vartype value: list[~azure.mgmt.reservations.models.ReservationOrderResponse]
@@ -3301,7 +3275,7 @@ class ReservationOrderList(_serialization.Model):
     def __init__(
         self,
         *,
-        value: Optional[List["_models.ReservationOrderResponse"]] = None,
+        value: Optional[list["_models.ReservationOrderResponse"]] = None,
         next_link: Optional[str] = None,
         **kwargs: Any
     ) -> None:
@@ -3316,7 +3290,7 @@ class ReservationOrderList(_serialization.Model):
         self.next_link = next_link
 
 
-class ReservationOrderResponse(_serialization.Model):  # pylint: disable=too-many-instance-attributes
+class ReservationOrderResponse(_serialization.Model):
     """Details of a reservation order being returned.
 
     Variables are only populated by the server, and will be ignored when sending a request.
@@ -3408,7 +3382,7 @@ class ReservationOrderResponse(_serialization.Model):  # pylint: disable=too-man
         provisioning_state: Optional[Union[str, "_models.ProvisioningState"]] = None,
         billing_plan: Optional[Union[str, "_models.ReservationBillingPlan"]] = None,
         plan_information: Optional["_models.ReservationOrderBillingPlanInformation"] = None,
-        reservations: Optional[List["_models.ReservationResponse"]] = None,
+        reservations: Optional[list["_models.ReservationResponse"]] = None,
         review_date_time: Optional[datetime.datetime] = None,
         **kwargs: Any
     ) -> None:
@@ -3451,10 +3425,10 @@ class ReservationOrderResponse(_serialization.Model):  # pylint: disable=too-man
         """
         super().__init__(**kwargs)
         self.etag = etag
-        self.id = None
-        self.name = None
-        self.type = None
-        self.system_data = None
+        self.id: Optional[str] = None
+        self.name: Optional[str] = None
+        self.type: Optional[str] = None
+        self.system_data: Optional["_models.SystemData"] = None
         self.display_name = display_name
         self.request_date_time = request_date_time
         self.created_date_time = created_date_time
@@ -3577,8 +3551,8 @@ class ReservationsListResult(_serialization.Model):
         :paramtype summary: ~azure.mgmt.reservations.models.ReservationSummary
         """
         super().__init__(**kwargs)
-        self.value = None
-        self.next_link = None
+        self.value: Optional[list["_models.ReservationResponse"]] = None
+        self.next_link: Optional[str] = None
         self.summary = summary
 
 
@@ -3601,7 +3575,7 @@ class ReservationSplitProperties(_serialization.Model):
     }
 
     def __init__(
-        self, *, split_destinations: Optional[List[str]] = None, split_source: Optional[str] = None, **kwargs: Any
+        self, *, split_destinations: Optional[list[str]] = None, split_source: Optional[str] = None, **kwargs: Any
     ) -> None:
         """
         :keyword split_destinations: List of destination resource id that are created due to split.
@@ -3618,7 +3592,7 @@ class ReservationSplitProperties(_serialization.Model):
         self.split_source = split_source
 
 
-class ReservationsProperties(_serialization.Model):  # pylint: disable=too-many-instance-attributes
+class ReservationsProperties(_serialization.Model):
     """The properties of the reservations.
 
     Variables are only populated by the server, and will be ignored when sending a request.
@@ -3772,7 +3746,7 @@ class ReservationsProperties(_serialization.Model):  # pylint: disable=too-many-
         reserved_resource_type: Optional[Union[str, "_models.ReservedResourceType"]] = None,
         instance_flexibility: Optional[Union[str, "_models.InstanceFlexibility"]] = None,
         display_name: Optional[str] = None,
-        applied_scopes: Optional[List[str]] = None,
+        applied_scopes: Optional[list[str]] = None,
         applied_scope_type: Optional[Union[str, "_models.AppliedScopeType"]] = None,
         archived: Optional[bool] = None,
         capabilities: Optional[str] = None,
@@ -3894,15 +3868,15 @@ class ReservationsProperties(_serialization.Model):  # pylint: disable=too-many-
         self.provisioning_state = provisioning_state
         self.effective_date_time = effective_date_time
         self.benefit_start_time = benefit_start_time
-        self.last_updated_date_time = None
+        self.last_updated_date_time: Optional[datetime.datetime] = None
         self.expiry_date = expiry_date
         self.expiry_date_time = expiry_date_time
         self.review_date_time = review_date_time
         self.sku_description = sku_description
         self.extended_status_info = extended_status_info
         self.billing_plan = billing_plan
-        self.display_provisioning_state = None
-        self.provisioning_sub_state = None
+        self.display_provisioning_state: Optional[str] = None
+        self.provisioning_sub_state: Optional[str] = None
         self.purchase_date = purchase_date
         self.purchase_date_time = purchase_date_time
         self.split_properties = split_properties
@@ -3915,9 +3889,9 @@ class ReservationsProperties(_serialization.Model):  # pylint: disable=too-many-
         self.renew_destination = renew_destination
         self.renew_properties = renew_properties
         self.term = term
-        self.user_friendly_applied_scope_type = None
-        self.user_friendly_renew_state = None
-        self.utilization = None
+        self.user_friendly_applied_scope_type: Optional[str] = None
+        self.user_friendly_renew_state: Optional[str] = None
+        self.utilization: Optional["_models.ReservationsPropertiesUtilization"] = None
 
 
 class ReservationsPropertiesUtilization(_serialization.Model):
@@ -3941,14 +3915,14 @@ class ReservationsPropertiesUtilization(_serialization.Model):
     }
 
     def __init__(
-        self, *, aggregates: Optional[List["_models.ReservationUtilizationAggregates"]] = None, **kwargs: Any
+        self, *, aggregates: Optional[list["_models.ReservationUtilizationAggregates"]] = None, **kwargs: Any
     ) -> None:
         """
         :keyword aggregates: The array of aggregates of a reservation's utilization.
         :paramtype aggregates: list[~azure.mgmt.reservations.models.ReservationUtilizationAggregates]
         """
         super().__init__(**kwargs)
-        self.trend = None
+        self.trend: Optional[str] = None
         self.aggregates = aggregates
 
 
@@ -4004,15 +3978,15 @@ class ReservationSummary(_serialization.Model):
     def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
-        self.succeeded_count = None
-        self.failed_count = None
-        self.expiring_count = None
-        self.expired_count = None
-        self.pending_count = None
-        self.cancelled_count = None
-        self.processing_count = None
-        self.warning_count = None
-        self.no_benefit_count = None
+        self.succeeded_count: Optional[float] = None
+        self.failed_count: Optional[float] = None
+        self.expiring_count: Optional[float] = None
+        self.expired_count: Optional[float] = None
+        self.pending_count: Optional[float] = None
+        self.cancelled_count: Optional[float] = None
+        self.processing_count: Optional[float] = None
+        self.warning_count: Optional[float] = None
+        self.no_benefit_count: Optional[float] = None
 
 
 class ReservationSwapProperties(_serialization.Model):
@@ -4303,10 +4277,10 @@ class ReservationUtilizationAggregates(_serialization.Model):
     def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
-        self.grain = None
-        self.grain_unit = None
-        self.value = None
-        self.value_unit = None
+        self.grain: Optional[float] = None
+        self.grain_unit: Optional[str] = None
+        self.value: Optional[float] = None
+        self.value_unit: Optional[str] = None
 
 
 class ResourceName(_serialization.Model):
@@ -4336,7 +4310,7 @@ class ResourceName(_serialization.Model):
         """
         super().__init__(**kwargs)
         self.value = value
-        self.localized_value = None
+        self.localized_value: Optional[str] = None
 
 
 class SavingsPlanPurchaseRequest(_serialization.Model):
@@ -4574,7 +4548,7 @@ class ServiceError(_serialization.Model):
         super().__init__(**kwargs)
         self.code = code
         self.message = message
-        self.details = None
+        self.details: Optional[list["_models.ServiceErrorDetail"]] = None
 
 
 class ServiceErrorDetail(_serialization.Model):
@@ -4601,8 +4575,8 @@ class ServiceErrorDetail(_serialization.Model):
     def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
-        self.code = None
-        self.message = None
+        self.code: Optional[str] = None
+        self.message: Optional[str] = None
 
 
 class SkuCapability(_serialization.Model):
@@ -4699,7 +4673,7 @@ class SkuRestriction(_serialization.Model):
         self,
         *,
         type: Optional[str] = None,
-        values: Optional[List[str]] = None,
+        values: Optional[list[str]] = None,
         reason_code: Optional[str] = None,
         **kwargs: Any
     ) -> None:
@@ -4735,7 +4709,7 @@ class SplitRequest(_serialization.Model):
     }
 
     def __init__(
-        self, *, quantities: Optional[List[int]] = None, reservation_id: Optional[str] = None, **kwargs: Any
+        self, *, quantities: Optional[list[int]] = None, reservation_id: Optional[str] = None, **kwargs: Any
     ) -> None:
         """
         :keyword quantities: List of the quantities in the new reservations to create.
@@ -4809,13 +4783,13 @@ class SubRequest(_serialization.Model):
         :paramtype provisioning_state: str or ~azure.mgmt.reservations.models.QuotaRequestState
         """
         super().__init__(**kwargs)
-        self.limit = None
+        self.limit: Optional[int] = None
         self.name = name
-        self.resource_type = None
+        self.resource_type: Optional[str] = None
         self.unit = unit
         self.provisioning_state = provisioning_state
-        self.message = None
-        self.sub_request_id = None
+        self.message: Optional[str] = None
+        self.sub_request_id: Optional[str] = None
 
 
 class SubscriptionScopeProperties(_serialization.Model):
@@ -4829,7 +4803,7 @@ class SubscriptionScopeProperties(_serialization.Model):
         "scopes": {"key": "scopes", "type": "[ScopeProperties]"},
     }
 
-    def __init__(self, *, scopes: Optional[List["_models.ScopeProperties"]] = None, **kwargs: Any) -> None:
+    def __init__(self, *, scopes: Optional[list["_models.ScopeProperties"]] = None, **kwargs: Any) -> None:
         """
         :keyword scopes:
         :paramtype scopes: list[~azure.mgmt.reservations.models.ScopeProperties]

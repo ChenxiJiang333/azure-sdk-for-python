@@ -1,5 +1,11 @@
 # Release History
 
+## 3.0.0 (2026-03-17)
+
+### Breaking Changes
+
+  - Removed operation group AzureReservationAPIOperationsMixin
+
 ## 2.3.0 (2023-03-20)
 
 ### Features Added
