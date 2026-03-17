@@ -1,5 +1,9 @@
 ## tsp migration
 
+## 3.2.0b2 (2026-03-17)
+
+change log generation failed!!! You need to write it manually!!!
+
 ### Breaking Changes
 
 - Method `SubscriptionClient.__init__` deleted or renamed its parameter `subscription_id` of kind `positional_or_keyword`
