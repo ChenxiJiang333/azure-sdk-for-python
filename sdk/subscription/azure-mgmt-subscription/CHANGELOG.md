@@ -1,8 +1,8 @@
-## tsp migration
+# tsp migration
 
-## 3.2.0b2 (2026-03-17)
+no breaking change
 
-change log generation failed!!! You need to write it manually!!!
+# Release History
 
 ## 3.2.0b1 (2022-12-27)
 
