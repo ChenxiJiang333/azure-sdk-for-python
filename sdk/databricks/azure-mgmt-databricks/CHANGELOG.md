@@ -1,5 +1,9 @@
 # Release History
 
+## 2.1.0 (2026-03-18)
+
+change log generation failed!!! You need to write it manually!!!
+
 ## 3.0.0 (2026-03-18)
 
 ### Features Added
