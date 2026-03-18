@@ -1,8 +1,18 @@
+## tsp migration
+
+### Breaking Changes
+
+- Model `OpenShiftCluster` moved instance variable `provisioning_state`, `cluster_profile`, `console_profile`, `service_principal_profile`, `platform_workload_identity_profile`, `network_profile`, `master_profile`, `worker_profiles`, `worker_profiles_status`, `apiserver_profile` and `ingress_profiles` under property `properties`
+- Model `OpenShiftClusterUpdate` moved instance variable `provisioning_state`, `cluster_profile`, `console_profile`, `service_principal_profile`, `platform_workload_identity_profile`, `network_profile`, `master_profile`, `worker_profiles`, `worker_profiles_status`, `apiserver_profile` and `ingress_profiles` under property `properties`
+- Model `OpenShiftVersion` deleted or renamed its instance variable `version`
+- Model `PlatformWorkloadIdentityRoleSet` moved instance variable `open_shift_version` and `platform_workload_identity_roles` under property `properties`
+- Deleted or renamed model `Display`
+
+### Other Changes
+
+- Deleted model `OpenShiftClusterList`/`OpenShiftVersionList`/`OperationList`/`PlatformWorkloadIdentityRoleSetList` which actually were not used by SDK users
+
 # Release History
-
-## 3.1.0 (2026-03-18)
-
-change log generation failed!!! You need to write it manually!!!
 
 ## 3.0.0 (2026-02-06)
 
@@ -35,16 +45,12 @@ change log generation failed!!! You need to write it manually!!!
   - Deleted or renamed client operation group `AzureRedHatOpenShiftClient.sync_sets`
   - Model `OpenShiftClusterUpdate` deleted or renamed its instance variable `system_data`
   - Deleted or renamed model `MachinePool`
-  - Deleted or renamed model `MachinePoolList`
   - Deleted or renamed model `MachinePoolUpdate`
   - Deleted or renamed model `Secret`
-  - Deleted or renamed model `SecretList`
   - Deleted or renamed model `SecretUpdate`
   - Deleted or renamed model `SyncIdentityProvider`
-  - Deleted or renamed model `SyncIdentityProviderList`
   - Deleted or renamed model `SyncIdentityProviderUpdate`
   - Deleted or renamed model `SyncSet`
-  - Deleted or renamed model `SyncSetList`
   - Deleted or renamed model `SyncSetUpdate`
   - Deleted or renamed operation group `MachinePoolsOperations`
   - Deleted or renamed operation group `SecretsOperations`
