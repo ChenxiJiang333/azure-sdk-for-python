@@ -2,7 +2,7 @@
 
 ## 3.1.0 (2026-03-18)
 
-tool can't generate changelog for this release, please update manually.
+change log generation failed!!! You need to write it manually!!!
 
 ## 3.0.0 (2026-02-06)
 
