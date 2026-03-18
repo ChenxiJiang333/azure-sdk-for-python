@@ -30,7 +30,7 @@ def main():
         subscription_id="SUBSCRIPTION_ID",
     )
 
-    client.v_net_peering.begin_delete(
+    client.vnet_peering.begin_delete(
         resource_group_name="subramantest",
         workspace_name="adbworkspace",
         peering_name="vNetPeeringTest",

@@ -25,8 +25,8 @@ from .operations import (
     OutboundNetworkDependenciesEndpointsOperations,
     PrivateEndpointConnectionsOperations,
     PrivateLinkResourcesOperations,
+    VNetPeeringOperations,
     WorkspacesOperations,
-    vNetPeeringOperations,
 )
 
 if TYPE_CHECKING:
@@ -53,8 +53,8 @@ class AzureDatabricksManagementClient:  # pylint: disable=too-many-instance-attr
     :ivar private_link_resources: PrivateLinkResourcesOperations operations
     :vartype private_link_resources:
      azure.mgmt.databricks.operations.PrivateLinkResourcesOperations
-    :ivar v_net_peering: vNetPeeringOperations operations
-    :vartype v_net_peering: azure.mgmt.databricks.operations.vNetPeeringOperations
+    :ivar vnet_peering: VNetPeeringOperations operations
+    :vartype vnet_peering: azure.mgmt.databricks.operations.VNetPeeringOperations
     :param credential: Credential used to authenticate requests to the service. Required.
     :type credential: ~azure.core.credentials.TokenCredential
     :param subscription_id: The ID of the target subscription. The value must be an UUID. Required.
@@ -133,7 +133,7 @@ class AzureDatabricksManagementClient:  # pylint: disable=too-many-instance-attr
         self.private_link_resources = PrivateLinkResourcesOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
-        self.v_net_peering = vNetPeeringOperations(self._client, self._config, self._serialize, self._deserialize)
+        self.vnet_peering = VNetPeeringOperations(self._client, self._config, self._serialize, self._deserialize)
 
     def send_request(self, request: HttpRequest, *, stream: bool = False, **kwargs: Any) -> HttpResponse:
         """Runs the network request through the client's chained policies.

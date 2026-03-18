@@ -30,7 +30,7 @@ def main():
         subscription_id="SUBSCRIPTION_ID",
     )
 
-    response = client.v_net_peering.list_by_workspace(
+    response = client.vnet_peering.list_by_workspace(
         resource_group_name="subramantest",
         workspace_name="adbworkspace",
     )

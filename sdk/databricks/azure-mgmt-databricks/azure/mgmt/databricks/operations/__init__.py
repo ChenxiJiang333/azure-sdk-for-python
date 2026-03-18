@@ -18,7 +18,7 @@ from ._operations import PrivateEndpointConnectionsOperations  # type: ignore
 from ._operations import AccessConnectorsOperations  # type: ignore
 from ._operations import OutboundNetworkDependenciesEndpointsOperations  # type: ignore
 from ._operations import PrivateLinkResourcesOperations  # type: ignore
-from ._operations import vNetPeeringOperations  # type: ignore
+from ._operations import VNetPeeringOperations  # type: ignore
 
 from ._patch import __all__ as _patch_all
 from ._patch import *
@@ -31,7 +31,7 @@ __all__ = [
     "AccessConnectorsOperations",
     "OutboundNetworkDependenciesEndpointsOperations",
     "PrivateLinkResourcesOperations",
-    "vNetPeeringOperations",
+    "VNetPeeringOperations",
 ]
 __all__.extend([p for p in _patch_all if p not in __all__])  # pyright: ignore
 _patch_sdk()

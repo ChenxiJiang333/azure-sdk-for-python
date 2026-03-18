@@ -156,12 +156,7 @@ def build_workspaces_update_request(
 
 
 def build_workspaces_delete_request(
-    resource_group_name: str,
-    workspace_name: str,
-    subscription_id: str,
-    *,
-    force_deletion: Optional[bool] = None,
-    **kwargs: Any
+    resource_group_name: str, workspace_name: str, subscription_id: str, *, force_deletion: bool = False, **kwargs: Any
 ) -> HttpRequest:
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
@@ -619,7 +614,7 @@ def build_private_link_resources_list_request(  # pylint: disable=name-too-long
     return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_v_net_peering_get_request(
+def build_vnet_peering_get_request(
     resource_group_name: str, workspace_name: str, peering_name: str, subscription_id: str, **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
@@ -648,7 +643,7 @@ def build_v_net_peering_get_request(
     return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_v_net_peering_create_or_update_request(  # pylint: disable=name-too-long
+def build_vnet_peering_create_or_update_request(  # pylint: disable=name-too-long
     resource_group_name: str, workspace_name: str, peering_name: str, subscription_id: str, **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
@@ -680,7 +675,7 @@ def build_v_net_peering_create_or_update_request(  # pylint: disable=name-too-lo
     return HttpRequest(method="PUT", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_v_net_peering_delete_request(
+def build_vnet_peering_delete_request(
     resource_group_name: str, workspace_name: str, peering_name: str, subscription_id: str, **kwargs: Any
 ) -> HttpRequest:
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
@@ -703,7 +698,7 @@ def build_v_net_peering_delete_request(
     return HttpRequest(method="DELETE", url=_url, params=_params, **kwargs)
 
 
-def build_v_net_peering_list_by_workspace_request(  # pylint: disable=name-too-long
+def build_vnet_peering_list_by_workspace_request(  # pylint: disable=name-too-long
     resource_group_name: str, workspace_name: str, subscription_id: str, **kwargs: Any
 ) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
@@ -1392,7 +1387,7 @@ class WorkspacesOperations:
         )
 
     def _delete_initial(
-        self, resource_group_name: str, workspace_name: str, *, force_deletion: Optional[bool] = None, **kwargs: Any
+        self, resource_group_name: str, workspace_name: str, *, force_deletion: bool = False, **kwargs: Any
     ) -> Iterator[bytes]:
         error_map: MutableMapping = {
             401: ClientAuthenticationError,
@@ -1454,7 +1449,7 @@ class WorkspacesOperations:
 
     @distributed_trace
     def begin_delete(
-        self, resource_group_name: str, workspace_name: str, *, force_deletion: Optional[bool] = None, **kwargs: Any
+        self, resource_group_name: str, workspace_name: str, *, force_deletion: bool = False, **kwargs: Any
     ) -> LROPoller[None]:
         """Deletes the workspace.
 
@@ -1464,7 +1459,7 @@ class WorkspacesOperations:
         :param workspace_name: The name of the workspace. Required.
         :type workspace_name: str
         :keyword force_deletion: Optional parameter to retain default unity catalog data. By default
-         the data will retained if Uc is enabled on the workspace. Default value is None.
+         the data will retained if Uc is enabled on the workspace. Default value is False.
         :paramtype force_deletion: bool
         :return: An instance of LROPoller that returns None
         :rtype: ~azure.core.polling.LROPoller[None]
@@ -3416,14 +3411,14 @@ class PrivateLinkResourcesOperations:
         return ItemPaged(get_next, extract_data)
 
 
-class vNetPeeringOperations:
+class VNetPeeringOperations:
     """
     .. warning::
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
         :class:`~azure.mgmt.databricks.AzureDatabricksManagementClient`'s
-        :attr:`v_net_peering` attribute.
+        :attr:`vnet_peering` attribute.
     """
 
     def __init__(self, *args, **kwargs) -> None:
@@ -3466,7 +3461,7 @@ class vNetPeeringOperations:
 
         cls: ClsType[Optional[_models.VirtualNetworkPeering]] = kwargs.pop("cls", None)
 
-        _request = build_v_net_peering_get_request(
+        _request = build_vnet_peering_get_request(
             resource_group_name=resource_group_name,
             workspace_name=workspace_name,
             peering_name=peering_name,
@@ -3541,7 +3536,7 @@ class vNetPeeringOperations:
         else:
             _content = json.dumps(virtual_network_peering_parameters, cls=SdkJSONEncoder, exclude_readonly=True)  # type: ignore
 
-        _request = build_v_net_peering_create_or_update_request(
+        _request = build_vnet_peering_create_or_update_request(
             resource_group_name=resource_group_name,
             workspace_name=workspace_name,
             peering_name=peering_name,
@@ -3780,7 +3775,7 @@ class vNetPeeringOperations:
 
         cls: ClsType[Iterator[bytes]] = kwargs.pop("cls", None)
 
-        _request = build_v_net_peering_delete_request(
+        _request = build_vnet_peering_delete_request(
             resource_group_name=resource_group_name,
             workspace_name=workspace_name,
             peering_name=peering_name,
@@ -3918,7 +3913,7 @@ class vNetPeeringOperations:
         def prepare_request(next_link=None):
             if not next_link:
 
-                _request = build_v_net_peering_list_by_workspace_request(
+                _request = build_vnet_peering_list_by_workspace_request(
                     resource_group_name=resource_group_name,
                     workspace_name=workspace_name,
                     subscription_id=self._config.subscription_id,

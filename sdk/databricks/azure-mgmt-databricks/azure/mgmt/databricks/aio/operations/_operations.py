@@ -51,10 +51,10 @@ from ...operations._operations import (
     build_private_endpoint_connections_list_request,
     build_private_link_resources_get_request,
     build_private_link_resources_list_request,
-    build_v_net_peering_create_or_update_request,
-    build_v_net_peering_delete_request,
-    build_v_net_peering_get_request,
-    build_v_net_peering_list_by_workspace_request,
+    build_vnet_peering_create_or_update_request,
+    build_vnet_peering_delete_request,
+    build_vnet_peering_get_request,
+    build_vnet_peering_list_by_workspace_request,
     build_workspaces_create_or_update_request,
     build_workspaces_delete_request,
     build_workspaces_get_request,
@@ -731,7 +731,7 @@ class WorkspacesOperations:
         )
 
     async def _delete_initial(
-        self, resource_group_name: str, workspace_name: str, *, force_deletion: Optional[bool] = None, **kwargs: Any
+        self, resource_group_name: str, workspace_name: str, *, force_deletion: bool = False, **kwargs: Any
     ) -> AsyncIterator[bytes]:
         error_map: MutableMapping = {
             401: ClientAuthenticationError,
@@ -793,7 +793,7 @@ class WorkspacesOperations:
 
     @distributed_trace_async
     async def begin_delete(
-        self, resource_group_name: str, workspace_name: str, *, force_deletion: Optional[bool] = None, **kwargs: Any
+        self, resource_group_name: str, workspace_name: str, *, force_deletion: bool = False, **kwargs: Any
     ) -> AsyncLROPoller[None]:
         """Deletes the workspace.
 
@@ -803,7 +803,7 @@ class WorkspacesOperations:
         :param workspace_name: The name of the workspace. Required.
         :type workspace_name: str
         :keyword force_deletion: Optional parameter to retain default unity catalog data. By default
-         the data will retained if Uc is enabled on the workspace. Default value is None.
+         the data will retained if Uc is enabled on the workspace. Default value is False.
         :paramtype force_deletion: bool
         :return: An instance of AsyncLROPoller that returns None
         :rtype: ~azure.core.polling.AsyncLROPoller[None]
@@ -2765,14 +2765,14 @@ class PrivateLinkResourcesOperations:
         return AsyncItemPaged(get_next, extract_data)
 
 
-class vNetPeeringOperations:
+class VNetPeeringOperations:
     """
     .. warning::
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
         :class:`~azure.mgmt.databricks.aio.AzureDatabricksManagementClient`'s
-        :attr:`v_net_peering` attribute.
+        :attr:`vnet_peering` attribute.
     """
 
     def __init__(self, *args, **kwargs) -> None:
@@ -2815,7 +2815,7 @@ class vNetPeeringOperations:
 
         cls: ClsType[Optional[_models.VirtualNetworkPeering]] = kwargs.pop("cls", None)
 
-        _request = build_v_net_peering_get_request(
+        _request = build_vnet_peering_get_request(
             resource_group_name=resource_group_name,
             workspace_name=workspace_name,
             peering_name=peering_name,
@@ -2890,7 +2890,7 @@ class vNetPeeringOperations:
         else:
             _content = json.dumps(virtual_network_peering_parameters, cls=SdkJSONEncoder, exclude_readonly=True)  # type: ignore
 
-        _request = build_v_net_peering_create_or_update_request(
+        _request = build_vnet_peering_create_or_update_request(
             resource_group_name=resource_group_name,
             workspace_name=workspace_name,
             peering_name=peering_name,
@@ -3129,7 +3129,7 @@ class vNetPeeringOperations:
 
         cls: ClsType[AsyncIterator[bytes]] = kwargs.pop("cls", None)
 
-        _request = build_v_net_peering_delete_request(
+        _request = build_vnet_peering_delete_request(
             resource_group_name=resource_group_name,
             workspace_name=workspace_name,
             peering_name=peering_name,
@@ -3268,7 +3268,7 @@ class vNetPeeringOperations:
         def prepare_request(next_link=None):
             if not next_link:
 
-                _request = build_v_net_peering_list_by_workspace_request(
+                _request = build_vnet_peering_list_by_workspace_request(
                     resource_group_name=resource_group_name,
                     workspace_name=workspace_name,
                     subscription_id=self._config.subscription_id,

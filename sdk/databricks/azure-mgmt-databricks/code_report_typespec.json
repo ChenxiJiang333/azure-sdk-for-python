@@ -89,8 +89,8 @@
           "private_link_resources": {
             "attr_type": "PrivateLinkResourcesOperations"
           },
-          "v_net_peering": {
-            "attr_type": "vNetPeeringOperations"
+          "vnet_peering": {
+            "attr_type": "VNetPeeringOperations"
           }
         }
       }
@@ -832,351 +832,7 @@
         },
         "properties": {}
       },
-      "WorkspacesOperations": {
-        "type": null,
-        "methods": {
-          "__init__": {
-            "parameters": {
-              "self": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              },
-              "args": {
-                "default": null,
-                "param_type": "var_positional"
-              },
-              "kwargs": {
-                "default": null,
-                "param_type": "var_keyword"
-              }
-            },
-            "is_async": false,
-            "overloads": []
-          },
-          "begin_create_or_update": {
-            "parameters": {
-              "self": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              },
-              "resource_group_name": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              },
-              "workspace_name": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              },
-              "parameters": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              },
-              "kwargs": {
-                "default": null,
-                "param_type": "var_keyword"
-              }
-            },
-            "is_async": false,
-            "overloads": [
-              {
-                "parameters": {
-                  "self": {
-                    "type": null,
-                    "default": null,
-                    "param_type": "positional_or_keyword"
-                  },
-                  "resource_group_name": {
-                    "type": "str",
-                    "default": null,
-                    "param_type": "positional_or_keyword"
-                  },
-                  "workspace_name": {
-                    "type": "str",
-                    "default": null,
-                    "param_type": "positional_or_keyword"
-                  },
-                  "parameters": {
-                    "type": "Workspace",
-                    "default": null,
-                    "param_type": "positional_or_keyword"
-                  },
-                  "content_type": {
-                    "type": "str",
-                    "default": "application/json",
-                    "param_type": "keyword_only"
-                  }
-                },
-                "is_async": false,
-                "return_type": null
-              },
-              {
-                "parameters": {
-                  "self": {
-                    "type": null,
-                    "default": null,
-                    "param_type": "positional_or_keyword"
-                  },
-                  "resource_group_name": {
-                    "type": "str",
-                    "default": null,
-                    "param_type": "positional_or_keyword"
-                  },
-                  "workspace_name": {
-                    "type": "str",
-                    "default": null,
-                    "param_type": "positional_or_keyword"
-                  },
-                  "parameters": {
-                    "type": "JSON",
-                    "default": null,
-                    "param_type": "positional_or_keyword"
-                  },
-                  "content_type": {
-                    "type": "str",
-                    "default": "application/json",
-                    "param_type": "keyword_only"
-                  }
-                },
-                "is_async": false,
-                "return_type": null
-              },
-              {
-                "parameters": {
-                  "self": {
-                    "type": null,
-                    "default": null,
-                    "param_type": "positional_or_keyword"
-                  },
-                  "resource_group_name": {
-                    "type": "str",
-                    "default": null,
-                    "param_type": "positional_or_keyword"
-                  },
-                  "workspace_name": {
-                    "type": "str",
-                    "default": null,
-                    "param_type": "positional_or_keyword"
-                  },
-                  "parameters": {
-                    "type": "IO[bytes]",
-                    "default": null,
-                    "param_type": "positional_or_keyword"
-                  },
-                  "content_type": {
-                    "type": "str",
-                    "default": "application/json",
-                    "param_type": "keyword_only"
-                  }
-                },
-                "is_async": false,
-                "return_type": null
-              }
-            ]
-          },
-          "begin_delete": {
-            "parameters": {
-              "self": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              },
-              "resource_group_name": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              },
-              "workspace_name": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              },
-              "force_deletion": {
-                "default": "none",
-                "param_type": "keyword_only"
-              },
-              "kwargs": {
-                "default": null,
-                "param_type": "var_keyword"
-              }
-            },
-            "is_async": false,
-            "overloads": []
-          },
-          "begin_update": {
-            "parameters": {
-              "self": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              },
-              "resource_group_name": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              },
-              "workspace_name": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              },
-              "parameters": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              },
-              "kwargs": {
-                "default": null,
-                "param_type": "var_keyword"
-              }
-            },
-            "is_async": false,
-            "overloads": [
-              {
-                "parameters": {
-                  "self": {
-                    "type": null,
-                    "default": null,
-                    "param_type": "positional_or_keyword"
-                  },
-                  "resource_group_name": {
-                    "type": "str",
-                    "default": null,
-                    "param_type": "positional_or_keyword"
-                  },
-                  "workspace_name": {
-                    "type": "str",
-                    "default": null,
-                    "param_type": "positional_or_keyword"
-                  },
-                  "parameters": {
-                    "type": "WorkspaceUpdate",
-                    "default": null,
-                    "param_type": "positional_or_keyword"
-                  },
-                  "content_type": {
-                    "type": "str",
-                    "default": "application/json",
-                    "param_type": "keyword_only"
-                  }
-                },
-                "is_async": false,
-                "return_type": null
-              },
-              {
-                "parameters": {
-                  "self": {
-                    "type": null,
-                    "default": null,
-                    "param_type": "positional_or_keyword"
-                  },
-                  "resource_group_name": {
-                    "type": "str",
-                    "default": null,
-                    "param_type": "positional_or_keyword"
-                  },
-                  "workspace_name": {
-                    "type": "str",
-                    "default": null,
-                    "param_type": "positional_or_keyword"
-                  },
-                  "parameters": {
-                    "type": "JSON",
-                    "default": null,
-                    "param_type": "positional_or_keyword"
-                  },
-                  "content_type": {
-                    "type": "str",
-                    "default": "application/json",
-                    "param_type": "keyword_only"
-                  }
-                },
-                "is_async": false,
-                "return_type": null
-              },
-              {
-                "parameters": {
-                  "self": {
-                    "type": null,
-                    "default": null,
-                    "param_type": "positional_or_keyword"
-                  },
-                  "resource_group_name": {
-                    "type": "str",
-                    "default": null,
-                    "param_type": "positional_or_keyword"
-                  },
-                  "workspace_name": {
-                    "type": "str",
-                    "default": null,
-                    "param_type": "positional_or_keyword"
-                  },
-                  "parameters": {
-                    "type": "IO[bytes]",
-                    "default": null,
-                    "param_type": "positional_or_keyword"
-                  },
-                  "content_type": {
-                    "type": "str",
-                    "default": "application/json",
-                    "param_type": "keyword_only"
-                  }
-                },
-                "is_async": false,
-                "return_type": null
-              }
-            ]
-          },
-          "get": {
-            "parameters": {
-              "self": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              },
-              "resource_group_name": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              },
-              "workspace_name": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              },
-              "kwargs": {
-                "default": null,
-                "param_type": "var_keyword"
-              }
-            },
-            "is_async": false,
-            "overloads": []
-          },
-          "list_by_resource_group": {
-            "parameters": {
-              "self": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              },
-              "resource_group_name": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              },
-              "kwargs": {
-                "default": null,
-                "param_type": "var_keyword"
-              }
-            },
-            "is_async": false,
-            "overloads": []
-          },
-          "list_by_subscription": {
-            "parameters": {
-              "self": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              },
-              "kwargs": {
-                "default": null,
-                "param_type": "var_keyword"
-              }
-            },
-            "is_async": false,
-            "overloads": []
-          }
-        },
-        "properties": {}
-      },
-      "vNetPeeringOperations": {
+      "VNetPeeringOperations": {
         "type": null,
         "methods": {
           "__init__": {
@@ -1399,6 +1055,350 @@
                 "param_type": "positional_or_keyword"
               },
               "workspace_name": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          }
+        },
+        "properties": {}
+      },
+      "WorkspacesOperations": {
+        "type": null,
+        "methods": {
+          "__init__": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "args": {
+                "default": null,
+                "param_type": "var_positional"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "begin_create_or_update": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "resource_group_name": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "workspace_name": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "parameters": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": [
+              {
+                "parameters": {
+                  "self": {
+                    "type": null,
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "resource_group_name": {
+                    "type": "str",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "workspace_name": {
+                    "type": "str",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "parameters": {
+                    "type": "Workspace",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "content_type": {
+                    "type": "str",
+                    "default": "application/json",
+                    "param_type": "keyword_only"
+                  }
+                },
+                "is_async": false,
+                "return_type": null
+              },
+              {
+                "parameters": {
+                  "self": {
+                    "type": null,
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "resource_group_name": {
+                    "type": "str",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "workspace_name": {
+                    "type": "str",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "parameters": {
+                    "type": "JSON",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "content_type": {
+                    "type": "str",
+                    "default": "application/json",
+                    "param_type": "keyword_only"
+                  }
+                },
+                "is_async": false,
+                "return_type": null
+              },
+              {
+                "parameters": {
+                  "self": {
+                    "type": null,
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "resource_group_name": {
+                    "type": "str",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "workspace_name": {
+                    "type": "str",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "parameters": {
+                    "type": "IO[bytes]",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "content_type": {
+                    "type": "str",
+                    "default": "application/json",
+                    "param_type": "keyword_only"
+                  }
+                },
+                "is_async": false,
+                "return_type": null
+              }
+            ]
+          },
+          "begin_delete": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "resource_group_name": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "workspace_name": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "force_deletion": {
+                "default": "bool",
+                "param_type": "keyword_only"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "begin_update": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "resource_group_name": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "workspace_name": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "parameters": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": [
+              {
+                "parameters": {
+                  "self": {
+                    "type": null,
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "resource_group_name": {
+                    "type": "str",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "workspace_name": {
+                    "type": "str",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "parameters": {
+                    "type": "WorkspaceUpdate",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "content_type": {
+                    "type": "str",
+                    "default": "application/json",
+                    "param_type": "keyword_only"
+                  }
+                },
+                "is_async": false,
+                "return_type": null
+              },
+              {
+                "parameters": {
+                  "self": {
+                    "type": null,
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "resource_group_name": {
+                    "type": "str",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "workspace_name": {
+                    "type": "str",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "parameters": {
+                    "type": "JSON",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "content_type": {
+                    "type": "str",
+                    "default": "application/json",
+                    "param_type": "keyword_only"
+                  }
+                },
+                "is_async": false,
+                "return_type": null
+              },
+              {
+                "parameters": {
+                  "self": {
+                    "type": null,
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "resource_group_name": {
+                    "type": "str",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "workspace_name": {
+                    "type": "str",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "parameters": {
+                    "type": "IO[bytes]",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "content_type": {
+                    "type": "str",
+                    "default": "application/json",
+                    "param_type": "keyword_only"
+                  }
+                },
+                "is_async": false,
+                "return_type": null
+              }
+            ]
+          },
+          "get": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "resource_group_name": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "workspace_name": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "list_by_resource_group": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "resource_group_name": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "list_by_subscription": {
+            "parameters": {
+              "self": {
                 "default": null,
                 "param_type": "positional_or_keyword"
               },
@@ -14104,8 +14104,8 @@
           "private_link_resources": {
             "attr_type": "PrivateLinkResourcesOperations"
           },
-          "v_net_peering": {
-            "attr_type": "vNetPeeringOperations"
+          "vnet_peering": {
+            "attr_type": "VNetPeeringOperations"
           }
         }
       }
@@ -14847,351 +14847,7 @@
         },
         "properties": {}
       },
-      "WorkspacesOperations": {
-        "type": null,
-        "methods": {
-          "__init__": {
-            "parameters": {
-              "self": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              },
-              "args": {
-                "default": null,
-                "param_type": "var_positional"
-              },
-              "kwargs": {
-                "default": null,
-                "param_type": "var_keyword"
-              }
-            },
-            "is_async": false,
-            "overloads": []
-          },
-          "begin_create_or_update": {
-            "parameters": {
-              "self": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              },
-              "resource_group_name": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              },
-              "workspace_name": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              },
-              "parameters": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              },
-              "kwargs": {
-                "default": null,
-                "param_type": "var_keyword"
-              }
-            },
-            "is_async": true,
-            "overloads": [
-              {
-                "parameters": {
-                  "self": {
-                    "type": null,
-                    "default": null,
-                    "param_type": "positional_or_keyword"
-                  },
-                  "resource_group_name": {
-                    "type": "str",
-                    "default": null,
-                    "param_type": "positional_or_keyword"
-                  },
-                  "workspace_name": {
-                    "type": "str",
-                    "default": null,
-                    "param_type": "positional_or_keyword"
-                  },
-                  "parameters": {
-                    "type": "Workspace",
-                    "default": null,
-                    "param_type": "positional_or_keyword"
-                  },
-                  "content_type": {
-                    "type": "str",
-                    "default": "application/json",
-                    "param_type": "keyword_only"
-                  }
-                },
-                "is_async": true,
-                "return_type": null
-              },
-              {
-                "parameters": {
-                  "self": {
-                    "type": null,
-                    "default": null,
-                    "param_type": "positional_or_keyword"
-                  },
-                  "resource_group_name": {
-                    "type": "str",
-                    "default": null,
-                    "param_type": "positional_or_keyword"
-                  },
-                  "workspace_name": {
-                    "type": "str",
-                    "default": null,
-                    "param_type": "positional_or_keyword"
-                  },
-                  "parameters": {
-                    "type": "JSON",
-                    "default": null,
-                    "param_type": "positional_or_keyword"
-                  },
-                  "content_type": {
-                    "type": "str",
-                    "default": "application/json",
-                    "param_type": "keyword_only"
-                  }
-                },
-                "is_async": true,
-                "return_type": null
-              },
-              {
-                "parameters": {
-                  "self": {
-                    "type": null,
-                    "default": null,
-                    "param_type": "positional_or_keyword"
-                  },
-                  "resource_group_name": {
-                    "type": "str",
-                    "default": null,
-                    "param_type": "positional_or_keyword"
-                  },
-                  "workspace_name": {
-                    "type": "str",
-                    "default": null,
-                    "param_type": "positional_or_keyword"
-                  },
-                  "parameters": {
-                    "type": "IO[bytes]",
-                    "default": null,
-                    "param_type": "positional_or_keyword"
-                  },
-                  "content_type": {
-                    "type": "str",
-                    "default": "application/json",
-                    "param_type": "keyword_only"
-                  }
-                },
-                "is_async": true,
-                "return_type": null
-              }
-            ]
-          },
-          "begin_delete": {
-            "parameters": {
-              "self": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              },
-              "resource_group_name": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              },
-              "workspace_name": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              },
-              "force_deletion": {
-                "default": "none",
-                "param_type": "keyword_only"
-              },
-              "kwargs": {
-                "default": null,
-                "param_type": "var_keyword"
-              }
-            },
-            "is_async": true,
-            "overloads": []
-          },
-          "begin_update": {
-            "parameters": {
-              "self": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              },
-              "resource_group_name": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              },
-              "workspace_name": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              },
-              "parameters": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              },
-              "kwargs": {
-                "default": null,
-                "param_type": "var_keyword"
-              }
-            },
-            "is_async": true,
-            "overloads": [
-              {
-                "parameters": {
-                  "self": {
-                    "type": null,
-                    "default": null,
-                    "param_type": "positional_or_keyword"
-                  },
-                  "resource_group_name": {
-                    "type": "str",
-                    "default": null,
-                    "param_type": "positional_or_keyword"
-                  },
-                  "workspace_name": {
-                    "type": "str",
-                    "default": null,
-                    "param_type": "positional_or_keyword"
-                  },
-                  "parameters": {
-                    "type": "WorkspaceUpdate",
-                    "default": null,
-                    "param_type": "positional_or_keyword"
-                  },
-                  "content_type": {
-                    "type": "str",
-                    "default": "application/json",
-                    "param_type": "keyword_only"
-                  }
-                },
-                "is_async": true,
-                "return_type": null
-              },
-              {
-                "parameters": {
-                  "self": {
-                    "type": null,
-                    "default": null,
-                    "param_type": "positional_or_keyword"
-                  },
-                  "resource_group_name": {
-                    "type": "str",
-                    "default": null,
-                    "param_type": "positional_or_keyword"
-                  },
-                  "workspace_name": {
-                    "type": "str",
-                    "default": null,
-                    "param_type": "positional_or_keyword"
-                  },
-                  "parameters": {
-                    "type": "JSON",
-                    "default": null,
-                    "param_type": "positional_or_keyword"
-                  },
-                  "content_type": {
-                    "type": "str",
-                    "default": "application/json",
-                    "param_type": "keyword_only"
-                  }
-                },
-                "is_async": true,
-                "return_type": null
-              },
-              {
-                "parameters": {
-                  "self": {
-                    "type": null,
-                    "default": null,
-                    "param_type": "positional_or_keyword"
-                  },
-                  "resource_group_name": {
-                    "type": "str",
-                    "default": null,
-                    "param_type": "positional_or_keyword"
-                  },
-                  "workspace_name": {
-                    "type": "str",
-                    "default": null,
-                    "param_type": "positional_or_keyword"
-                  },
-                  "parameters": {
-                    "type": "IO[bytes]",
-                    "default": null,
-                    "param_type": "positional_or_keyword"
-                  },
-                  "content_type": {
-                    "type": "str",
-                    "default": "application/json",
-                    "param_type": "keyword_only"
-                  }
-                },
-                "is_async": true,
-                "return_type": null
-              }
-            ]
-          },
-          "get": {
-            "parameters": {
-              "self": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              },
-              "resource_group_name": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              },
-              "workspace_name": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              },
-              "kwargs": {
-                "default": null,
-                "param_type": "var_keyword"
-              }
-            },
-            "is_async": true,
-            "overloads": []
-          },
-          "list_by_resource_group": {
-            "parameters": {
-              "self": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              },
-              "resource_group_name": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              },
-              "kwargs": {
-                "default": null,
-                "param_type": "var_keyword"
-              }
-            },
-            "is_async": false,
-            "overloads": []
-          },
-          "list_by_subscription": {
-            "parameters": {
-              "self": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              },
-              "kwargs": {
-                "default": null,
-                "param_type": "var_keyword"
-              }
-            },
-            "is_async": false,
-            "overloads": []
-          }
-        },
-        "properties": {}
-      },
-      "vNetPeeringOperations": {
+      "VNetPeeringOperations": {
         "type": null,
         "methods": {
           "__init__": {
@@ -15414,6 +15070,350 @@
                 "param_type": "positional_or_keyword"
               },
               "workspace_name": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          }
+        },
+        "properties": {}
+      },
+      "WorkspacesOperations": {
+        "type": null,
+        "methods": {
+          "__init__": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "args": {
+                "default": null,
+                "param_type": "var_positional"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "begin_create_or_update": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "resource_group_name": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "workspace_name": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "parameters": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": true,
+            "overloads": [
+              {
+                "parameters": {
+                  "self": {
+                    "type": null,
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "resource_group_name": {
+                    "type": "str",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "workspace_name": {
+                    "type": "str",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "parameters": {
+                    "type": "Workspace",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "content_type": {
+                    "type": "str",
+                    "default": "application/json",
+                    "param_type": "keyword_only"
+                  }
+                },
+                "is_async": true,
+                "return_type": null
+              },
+              {
+                "parameters": {
+                  "self": {
+                    "type": null,
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "resource_group_name": {
+                    "type": "str",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "workspace_name": {
+                    "type": "str",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "parameters": {
+                    "type": "JSON",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "content_type": {
+                    "type": "str",
+                    "default": "application/json",
+                    "param_type": "keyword_only"
+                  }
+                },
+                "is_async": true,
+                "return_type": null
+              },
+              {
+                "parameters": {
+                  "self": {
+                    "type": null,
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "resource_group_name": {
+                    "type": "str",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "workspace_name": {
+                    "type": "str",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "parameters": {
+                    "type": "IO[bytes]",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "content_type": {
+                    "type": "str",
+                    "default": "application/json",
+                    "param_type": "keyword_only"
+                  }
+                },
+                "is_async": true,
+                "return_type": null
+              }
+            ]
+          },
+          "begin_delete": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "resource_group_name": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "workspace_name": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "force_deletion": {
+                "default": "bool",
+                "param_type": "keyword_only"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": true,
+            "overloads": []
+          },
+          "begin_update": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "resource_group_name": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "workspace_name": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "parameters": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": true,
+            "overloads": [
+              {
+                "parameters": {
+                  "self": {
+                    "type": null,
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "resource_group_name": {
+                    "type": "str",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "workspace_name": {
+                    "type": "str",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "parameters": {
+                    "type": "WorkspaceUpdate",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "content_type": {
+                    "type": "str",
+                    "default": "application/json",
+                    "param_type": "keyword_only"
+                  }
+                },
+                "is_async": true,
+                "return_type": null
+              },
+              {
+                "parameters": {
+                  "self": {
+                    "type": null,
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "resource_group_name": {
+                    "type": "str",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "workspace_name": {
+                    "type": "str",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "parameters": {
+                    "type": "JSON",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "content_type": {
+                    "type": "str",
+                    "default": "application/json",
+                    "param_type": "keyword_only"
+                  }
+                },
+                "is_async": true,
+                "return_type": null
+              },
+              {
+                "parameters": {
+                  "self": {
+                    "type": null,
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "resource_group_name": {
+                    "type": "str",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "workspace_name": {
+                    "type": "str",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "parameters": {
+                    "type": "IO[bytes]",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "content_type": {
+                    "type": "str",
+                    "default": "application/json",
+                    "param_type": "keyword_only"
+                  }
+                },
+                "is_async": true,
+                "return_type": null
+              }
+            ]
+          },
+          "get": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "resource_group_name": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "workspace_name": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": true,
+            "overloads": []
+          },
+          "list_by_resource_group": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "resource_group_name": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "list_by_subscription": {
+            "parameters": {
+              "self": {
                 "default": null,
                 "param_type": "positional_or_keyword"
               },

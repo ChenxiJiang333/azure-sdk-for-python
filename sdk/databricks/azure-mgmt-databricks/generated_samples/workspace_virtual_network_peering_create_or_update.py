@@ -31,7 +31,7 @@ def main():
         subscription_id="SUBSCRIPTION_ID",
     )
 
-    response = client.v_net_peering.begin_create_or_update(
+    response = client.vnet_peering.begin_create_or_update(
         resource_group_name="subramantest",
         workspace_name="adbworkspace",
         peering_name="vNetPeeringTest",

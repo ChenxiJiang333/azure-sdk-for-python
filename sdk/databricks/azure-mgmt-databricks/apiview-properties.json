@@ -114,13 +114,13 @@
         "azure.mgmt.databricks.aio.operations.PrivateLinkResourcesOperations.get": "Microsoft.Databricks.GroupIdInformations.get",
         "azure.mgmt.databricks.operations.PrivateLinkResourcesOperations.list": "Microsoft.Databricks.GroupIdInformations.list",
         "azure.mgmt.databricks.aio.operations.PrivateLinkResourcesOperations.list": "Microsoft.Databricks.GroupIdInformations.list",
-        "azure.mgmt.databricks.operations.vNetPeeringOperations.get": "Microsoft.Databricks.VirtualNetworkPeerings.get",
-        "azure.mgmt.databricks.aio.operations.vNetPeeringOperations.get": "Microsoft.Databricks.VirtualNetworkPeerings.get",
-        "azure.mgmt.databricks.operations.vNetPeeringOperations.begin_create_or_update": "Microsoft.Databricks.VirtualNetworkPeerings.createOrUpdate",
-        "azure.mgmt.databricks.aio.operations.vNetPeeringOperations.begin_create_or_update": "Microsoft.Databricks.VirtualNetworkPeerings.createOrUpdate",
-        "azure.mgmt.databricks.operations.vNetPeeringOperations.begin_delete": "Microsoft.Databricks.VirtualNetworkPeerings.delete",
-        "azure.mgmt.databricks.aio.operations.vNetPeeringOperations.begin_delete": "Microsoft.Databricks.VirtualNetworkPeerings.delete",
-        "azure.mgmt.databricks.operations.vNetPeeringOperations.list_by_workspace": "Microsoft.Databricks.VirtualNetworkPeerings.listByWorkspace",
-        "azure.mgmt.databricks.aio.operations.vNetPeeringOperations.list_by_workspace": "Microsoft.Databricks.VirtualNetworkPeerings.listByWorkspace"
+        "azure.mgmt.databricks.operations.VNetPeeringOperations.get": "Microsoft.Databricks.VirtualNetworkPeerings.get",
+        "azure.mgmt.databricks.aio.operations.VNetPeeringOperations.get": "Microsoft.Databricks.VirtualNetworkPeerings.get",
+        "azure.mgmt.databricks.operations.VNetPeeringOperations.begin_create_or_update": "Microsoft.Databricks.VirtualNetworkPeerings.createOrUpdate",
+        "azure.mgmt.databricks.aio.operations.VNetPeeringOperations.begin_create_or_update": "Microsoft.Databricks.VirtualNetworkPeerings.createOrUpdate",
+        "azure.mgmt.databricks.operations.VNetPeeringOperations.begin_delete": "Microsoft.Databricks.VirtualNetworkPeerings.delete",
+        "azure.mgmt.databricks.aio.operations.VNetPeeringOperations.begin_delete": "Microsoft.Databricks.VirtualNetworkPeerings.delete",
+        "azure.mgmt.databricks.operations.VNetPeeringOperations.list_by_workspace": "Microsoft.Databricks.VirtualNetworkPeerings.listByWorkspace",
+        "azure.mgmt.databricks.aio.operations.VNetPeeringOperations.list_by_workspace": "Microsoft.Databricks.VirtualNetworkPeerings.listByWorkspace"
     }
 }

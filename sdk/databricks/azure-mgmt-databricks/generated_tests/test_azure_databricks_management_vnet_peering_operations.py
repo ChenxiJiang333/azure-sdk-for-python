@@ -14,14 +14,14 @@ AZURE_LOCATION = "eastus"
 
 
 @pytest.mark.skip("you may need to update the auto-generated test case before run it")
-class TestAzureDatabricksManagementvNetPeeringOperations(AzureMgmtRecordedTestCase):
+class TestAzureDatabricksManagementVNetPeeringOperations(AzureMgmtRecordedTestCase):
     def setup_method(self, method):
         self.client = self.create_mgmt_client(AzureDatabricksManagementClient)
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_v_net_peering_get(self, resource_group):
-        response = self.client.v_net_peering.get(
+    def test_vnet_peering_get(self, resource_group):
+        response = self.client.vnet_peering.get(
             resource_group_name=resource_group.name,
             workspace_name="str",
             peering_name="str",
@@ -32,8 +32,8 @@ class TestAzureDatabricksManagementvNetPeeringOperations(AzureMgmtRecordedTestCa
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_v_net_peering_begin_create_or_update(self, resource_group):
-        response = self.client.v_net_peering.begin_create_or_update(
+    def test_vnet_peering_begin_create_or_update(self, resource_group):
+        response = self.client.vnet_peering.begin_create_or_update(
             resource_group_name=resource_group.name,
             workspace_name="str",
             peering_name="str",
@@ -69,8 +69,8 @@ class TestAzureDatabricksManagementvNetPeeringOperations(AzureMgmtRecordedTestCa
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_v_net_peering_begin_delete(self, resource_group):
-        response = self.client.v_net_peering.begin_delete(
+    def test_vnet_peering_begin_delete(self, resource_group):
+        response = self.client.vnet_peering.begin_delete(
             resource_group_name=resource_group.name,
             workspace_name="str",
             peering_name="str",
@@ -81,8 +81,8 @@ class TestAzureDatabricksManagementvNetPeeringOperations(AzureMgmtRecordedTestCa
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_v_net_peering_list_by_workspace(self, resource_group):
-        response = self.client.v_net_peering.list_by_workspace(
+    def test_vnet_peering_list_by_workspace(self, resource_group):
+        response = self.client.vnet_peering.list_by_workspace(
             resource_group_name=resource_group.name,
             workspace_name="str",
         )
