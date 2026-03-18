@@ -1,8 +1,16 @@
+## tsp migration
+
+### Breaking Changes
+
+- Model `VirtualNetworkPeering` moved instance variable `allow_virtual_network_access`, `allow_forwarded_traffic`, `allow_gateway_transit`, `use_remote_gateways`, `databricks_virtual_network`, `databricks_address_space`, `remote_virtual_network`, `remote_address_space`, `peering_state` and `provisioning_state` under property `properties`
+- Model `Workspace` moved instance variable `compute_mode`, `managed_resource_group_id`, `parameters`, `provisioning_state`, `ui_definition_uri`, `authorizations`, `created_by`, `updated_by`, `created_date_time`, `workspace_id`, `workspace_url`, `storage_account_identity`, `managed_disk_identity`, `disk_encryption_set_id`, `encryption`, `enhanced_security_compliance`, `private_endpoint_connections`, `public_network_access`, `required_nsg_rules`, `default_catalog`, `is_uc_enabled`, `access_connector` and `default_storage_firewall` under property `properties`
+- Method `WorkspacesOperations.begin_delete` changed its parameter `force_deletion` from `positional_or_keyword` to `keyword_only`
+
+### Other Changes
+
+- Deleted model `PrivateEndpointConnectionsList`/`PrivateLinkResourcesList`/`VirtualNetworkPeeringList` which actually were not used by SDK users
+
 # Release History
-
-## 2.1.0 (2026-03-18)
-
-change log generation failed!!! You need to write it manually!!!
 
 ## 3.0.0 (2026-03-18)
 
