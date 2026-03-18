@@ -1,5 +1,5 @@
+# pylint: disable=line-too-long,useless-suppression,too-many-lines
 # coding=utf-8
-# pylint: disable=too-many-lines
 # --------------------------------------------------------------------------
 # Copyright (c) Microsoft Corporation. All rights reserved.
 # Licensed under the MIT License. See License.txt in the project root for license information.
@@ -7,21 +7,15 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 
+from collections.abc import MutableMapping
 import datetime
-import sys
-from typing import Any, Dict, List, Optional, TYPE_CHECKING, Union
+from typing import Any, Optional, TYPE_CHECKING, Union
 
-from .. import _serialization
-
-if sys.version_info >= (3, 9):
-    from collections.abc import MutableMapping
-else:
-    from typing import MutableMapping  # type: ignore  # pylint: disable=ungrouped-imports
+from .._utils import serialization as _serialization
 
 if TYPE_CHECKING:
-    # pylint: disable=unused-import,ungrouped-imports
     from .. import models as _models
-JSON = MutableMapping[str, Any]  # pylint: disable=unsubscriptable-object
+JSON = MutableMapping[str, Any]
 
 
 class Resource(_serialization.Model):
@@ -54,9 +48,9 @@ class Resource(_serialization.Model):
     def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
-        self.id = None
-        self.name = None
-        self.type = None
+        self.id: Optional[str] = None
+        self.name: Optional[str] = None
+        self.type: Optional[str] = None
 
 
 class TrackedResource(Resource):
@@ -64,7 +58,7 @@ class TrackedResource(Resource):
 
     Variables are only populated by the server, and will be ignored when sending a request.
 
-    All required parameters must be populated in order to send to Azure.
+    All required parameters must be populated in order to send to server.
 
     :ivar id: Fully qualified resource Id for the resource. Ex -
      /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}.
@@ -95,7 +89,7 @@ class TrackedResource(Resource):
         "location": {"key": "location", "type": "str"},
     }
 
-    def __init__(self, *, location: str, tags: Optional[Dict[str, str]] = None, **kwargs: Any) -> None:
+    def __init__(self, *, location: str, tags: Optional[dict[str, str]] = None, **kwargs: Any) -> None:
         """
         :keyword tags: Resource tags.
         :paramtype tags: dict[str, str]
@@ -108,11 +102,11 @@ class TrackedResource(Resource):
 
 
 class AccessConnector(TrackedResource):
-    """Information about azure databricks accessConnector.
+    """Information about Azure Databricks Access Connector.
 
     Variables are only populated by the server, and will be ignored when sending a request.
 
-    All required parameters must be populated in order to send to Azure.
+    All required parameters must be populated in order to send to server.
 
     :ivar id: Fully qualified resource Id for the resource. Ex -
      /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}.
@@ -130,7 +124,7 @@ class AccessConnector(TrackedResource):
     :vartype identity: ~azure.mgmt.databricks.models.ManagedServiceIdentity
     :ivar system_data: The system metadata relating to this resource.
     :vartype system_data: ~azure.mgmt.databricks.models.SystemData
-    :ivar properties: Azure Databricks accessConnector properties.
+    :ivar properties: Azure Databricks Access Connector properties.
     :vartype properties: ~azure.mgmt.databricks.models.AccessConnectorProperties
     """
 
@@ -157,7 +151,7 @@ class AccessConnector(TrackedResource):
         self,
         *,
         location: str,
-        tags: Optional[Dict[str, str]] = None,
+        tags: Optional[dict[str, str]] = None,
         identity: Optional["_models.ManagedServiceIdentity"] = None,
         properties: Optional["_models.AccessConnectorProperties"] = None,
         **kwargs: Any
@@ -169,19 +163,19 @@ class AccessConnector(TrackedResource):
         :paramtype location: str
         :keyword identity: Managed service identity (system assigned and/or user assigned identities).
         :paramtype identity: ~azure.mgmt.databricks.models.ManagedServiceIdentity
-        :keyword properties: Azure Databricks accessConnector properties.
+        :keyword properties: Azure Databricks Access Connector properties.
         :paramtype properties: ~azure.mgmt.databricks.models.AccessConnectorProperties
         """
         super().__init__(tags=tags, location=location, **kwargs)
         self.identity = identity
-        self.system_data = None
+        self.system_data: Optional["_models.SystemData"] = None
         self.properties = properties
 
 
 class AccessConnectorListResult(_serialization.Model):
-    """List of azure databricks accessConnector.
+    """List of Azure Databricks Access Connector.
 
-    :ivar value: The array of azure databricks accessConnector.
+    :ivar value: The array of Azure Databricks Access Connector.
     :vartype value: list[~azure.mgmt.databricks.models.AccessConnector]
     :ivar next_link: The URL to use for getting the next set of results.
     :vartype next_link: str
@@ -193,10 +187,10 @@ class AccessConnectorListResult(_serialization.Model):
     }
 
     def __init__(
-        self, *, value: Optional[List["_models.AccessConnector"]] = None, next_link: Optional[str] = None, **kwargs: Any
+        self, *, value: Optional[list["_models.AccessConnector"]] = None, next_link: Optional[str] = None, **kwargs: Any
     ) -> None:
         """
-        :keyword value: The array of azure databricks accessConnector.
+        :keyword value: The array of Azure Databricks Access Connector.
         :paramtype value: list[~azure.mgmt.databricks.models.AccessConnector]
         :keyword next_link: The URL to use for getting the next set of results.
         :paramtype next_link: str
@@ -211,28 +205,33 @@ class AccessConnectorProperties(_serialization.Model):
 
     Variables are only populated by the server, and will be ignored when sending a request.
 
-    :ivar provisioning_state: Provisioning status of the accessConnector. Known values are:
+    :ivar provisioning_state: Provisioning status of the Access Connector. Known values are:
      "Accepted", "Running", "Ready", "Creating", "Created", "Deleting", "Deleted", "Canceled",
      "Failed", "Succeeded", and "Updating".
     :vartype provisioning_state: str or ~azure.mgmt.databricks.models.ProvisioningState
+    :ivar refered_by: List of workspaces referring this Access Connector.
+    :vartype refered_by: list[str]
     """
 
     _validation = {
         "provisioning_state": {"readonly": True},
+        "refered_by": {"readonly": True},
     }
 
     _attribute_map = {
         "provisioning_state": {"key": "provisioningState", "type": "str"},
+        "refered_by": {"key": "referedBy", "type": "[str]"},
     }
 
     def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
-        self.provisioning_state = None
+        self.provisioning_state: Optional[Union[str, "_models.ProvisioningState"]] = None
+        self.refered_by: Optional[list[str]] = None
 
 
 class AccessConnectorUpdate(_serialization.Model):
-    """An update to an azure databricks accessConnector.
+    """An update to an Azure Databricks Access Connector.
 
     :ivar tags: Resource tags.
     :vartype tags: dict[str, str]
@@ -248,7 +247,7 @@ class AccessConnectorUpdate(_serialization.Model):
     def __init__(
         self,
         *,
-        tags: Optional[Dict[str, str]] = None,
+        tags: Optional[dict[str, str]] = None,
         identity: Optional["_models.ManagedServiceIdentity"] = None,
         **kwargs: Any
     ) -> None:
@@ -276,7 +275,7 @@ class AddressSpace(_serialization.Model):
         "address_prefixes": {"key": "addressPrefixes", "type": "[str]"},
     }
 
-    def __init__(self, *, address_prefixes: Optional[List[str]] = None, **kwargs: Any) -> None:
+    def __init__(self, *, address_prefixes: Optional[list[str]] = None, **kwargs: Any) -> None:
         """
         :keyword address_prefixes: A list of address blocks reserved for this virtual network in CIDR
          notation.
@@ -284,6 +283,60 @@ class AddressSpace(_serialization.Model):
         """
         super().__init__(**kwargs)
         self.address_prefixes = address_prefixes
+
+
+class AutomaticClusterUpdateDefinition(_serialization.Model):
+    """Status of automated cluster updates feature.
+
+    :ivar value: Known values are: "Enabled" and "Disabled".
+    :vartype value: str or ~azure.mgmt.databricks.models.AutomaticClusterUpdateValue
+    """
+
+    _attribute_map = {
+        "value": {"key": "value", "type": "str"},
+    }
+
+    def __init__(
+        self, *, value: Optional[Union[str, "_models.AutomaticClusterUpdateValue"]] = None, **kwargs: Any
+    ) -> None:
+        """
+        :keyword value: Known values are: "Enabled" and "Disabled".
+        :paramtype value: str or ~azure.mgmt.databricks.models.AutomaticClusterUpdateValue
+        """
+        super().__init__(**kwargs)
+        self.value = value
+
+
+class ComplianceSecurityProfileDefinition(_serialization.Model):
+    """Status of Compliance Security Profile feature.
+
+    :ivar compliance_standards: Compliance standards associated with the workspace.
+    :vartype compliance_standards: list[str]
+    :ivar value: Known values are: "Enabled" and "Disabled".
+    :vartype value: str or ~azure.mgmt.databricks.models.ComplianceSecurityProfileValue
+    """
+
+    _attribute_map = {
+        "compliance_standards": {"key": "complianceStandards", "type": "[str]"},
+        "value": {"key": "value", "type": "str"},
+    }
+
+    def __init__(
+        self,
+        *,
+        compliance_standards: Optional[list[str]] = None,
+        value: Optional[Union[str, "_models.ComplianceSecurityProfileValue"]] = None,
+        **kwargs: Any
+    ) -> None:
+        """
+        :keyword compliance_standards: Compliance standards associated with the workspace.
+        :paramtype compliance_standards: list[str]
+        :keyword value: Known values are: "Enabled" and "Disabled".
+        :paramtype value: str or ~azure.mgmt.databricks.models.ComplianceSecurityProfileValue
+        """
+        super().__init__(**kwargs)
+        self.compliance_standards = compliance_standards
+        self.value = value
 
 
 class CreatedBy(_serialization.Model):
@@ -315,9 +368,48 @@ class CreatedBy(_serialization.Model):
     def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
-        self.oid = None
-        self.puid = None
-        self.application_id = None
+        self.oid: Optional[str] = None
+        self.puid: Optional[str] = None
+        self.application_id: Optional[str] = None
+
+
+class DefaultCatalogProperties(_serialization.Model):
+    """These properties lets user specify default catalog properties during workspace creation. Not
+    allowed in Serverless ComputeMode workspace.
+
+    :ivar initial_type: Defines the initial type of the default catalog. Possible values
+     (case-insensitive):  HiveMetastore, UnityCatalog. Known values are: "HiveMetastore" and
+     "UnityCatalog".
+    :vartype initial_type: str or ~azure.mgmt.databricks.models.InitialType
+    :ivar initial_name: Specifies the initial Name of default catalog. If not specified, the name
+     of the workspace will be used.
+    :vartype initial_name: str
+    """
+
+    _attribute_map = {
+        "initial_type": {"key": "initialType", "type": "str"},
+        "initial_name": {"key": "initialName", "type": "str"},
+    }
+
+    def __init__(
+        self,
+        *,
+        initial_type: Union[str, "_models.InitialType"] = "HiveMetastore",
+        initial_name: Optional[str] = None,
+        **kwargs: Any
+    ) -> None:
+        """
+        :keyword initial_type: Defines the initial type of the default catalog. Possible values
+         (case-insensitive):  HiveMetastore, UnityCatalog. Known values are: "HiveMetastore" and
+         "UnityCatalog".
+        :paramtype initial_type: str or ~azure.mgmt.databricks.models.InitialType
+        :keyword initial_name: Specifies the initial Name of default catalog. If not specified, the
+         name of the workspace will be used.
+        :paramtype initial_name: str
+        """
+        super().__init__(**kwargs)
+        self.initial_type = initial_type
+        self.initial_name = initial_name
 
 
 class Encryption(_serialization.Model):
@@ -371,9 +463,11 @@ class Encryption(_serialization.Model):
 class EncryptionEntitiesDefinition(_serialization.Model):
     """Encryption entities for databricks workspace resource.
 
-    :ivar managed_services: Encryption properties for the databricks managed services.
+    :ivar managed_services: Encryption properties for the databricks managed services. Supported in
+     both Serverless and Hybrid ComputeMode.
     :vartype managed_services: ~azure.mgmt.databricks.models.EncryptionV2
-    :ivar managed_disk: Encryption properties for the databricks managed disks.
+    :ivar managed_disk: Encryption properties for the databricks managed disks. Not allowed in
+     Serverless ComputeMode workspace.
     :vartype managed_disk: ~azure.mgmt.databricks.models.ManagedDiskEncryption
     """
 
@@ -390,9 +484,11 @@ class EncryptionEntitiesDefinition(_serialization.Model):
         **kwargs: Any
     ) -> None:
         """
-        :keyword managed_services: Encryption properties for the databricks managed services.
+        :keyword managed_services: Encryption properties for the databricks managed services. Supported
+         in both Serverless and Hybrid ComputeMode.
         :paramtype managed_services: ~azure.mgmt.databricks.models.EncryptionV2
-        :keyword managed_disk: Encryption properties for the databricks managed disks.
+        :keyword managed_disk: Encryption properties for the databricks managed disks. Not allowed in
+         Serverless ComputeMode workspace.
         :paramtype managed_disk: ~azure.mgmt.databricks.models.ManagedDiskEncryption
         """
         super().__init__(**kwargs)
@@ -403,7 +499,7 @@ class EncryptionEntitiesDefinition(_serialization.Model):
 class EncryptionV2(_serialization.Model):
     """The object that contains details of encryption used on the workspace.
 
-    All required parameters must be populated in order to send to Azure.
+    All required parameters must be populated in order to send to server.
 
     :ivar key_source: The encryption keySource (provider). Possible values (case-insensitive):
      Microsoft.Keyvault. Required. "Microsoft.Keyvault"
@@ -443,7 +539,7 @@ class EncryptionV2(_serialization.Model):
 class EncryptionV2KeyVaultProperties(_serialization.Model):
     """Key Vault input properties for encryption.
 
-    All required parameters must be populated in order to send to Azure.
+    All required parameters must be populated in order to send to server.
 
     :ivar key_vault_uri: The Uri of KeyVault. Required.
     :vartype key_vault_uri: str
@@ -498,7 +594,7 @@ class EndpointDependency(_serialization.Model):
         self,
         *,
         domain_name: Optional[str] = None,
-        endpoint_details: Optional[List["_models.EndpointDetail"]] = None,
+        endpoint_details: Optional[list["_models.EndpointDetail"]] = None,
         **kwargs: Any
     ) -> None:
         """
@@ -562,10 +658,83 @@ class EndpointDetail(_serialization.Model):
         self.is_accessible = is_accessible
 
 
+class EnhancedSecurityComplianceDefinition(_serialization.Model):
+    """Status of settings related to the Enhanced Security and Compliance Add-On.
+
+    :ivar automatic_cluster_update: Status of automated cluster updates feature.
+    :vartype automatic_cluster_update:
+     ~azure.mgmt.databricks.models.AutomaticClusterUpdateDefinition
+    :ivar compliance_security_profile: Status of Compliance Security Profile feature.
+    :vartype compliance_security_profile:
+     ~azure.mgmt.databricks.models.ComplianceSecurityProfileDefinition
+    :ivar enhanced_security_monitoring: Status of Enhanced Security Monitoring feature.
+    :vartype enhanced_security_monitoring:
+     ~azure.mgmt.databricks.models.EnhancedSecurityMonitoringDefinition
+    """
+
+    _attribute_map = {
+        "automatic_cluster_update": {"key": "automaticClusterUpdate", "type": "AutomaticClusterUpdateDefinition"},
+        "compliance_security_profile": {
+            "key": "complianceSecurityProfile",
+            "type": "ComplianceSecurityProfileDefinition",
+        },
+        "enhanced_security_monitoring": {
+            "key": "enhancedSecurityMonitoring",
+            "type": "EnhancedSecurityMonitoringDefinition",
+        },
+    }
+
+    def __init__(
+        self,
+        *,
+        automatic_cluster_update: Optional["_models.AutomaticClusterUpdateDefinition"] = None,
+        compliance_security_profile: Optional["_models.ComplianceSecurityProfileDefinition"] = None,
+        enhanced_security_monitoring: Optional["_models.EnhancedSecurityMonitoringDefinition"] = None,
+        **kwargs: Any
+    ) -> None:
+        """
+        :keyword automatic_cluster_update: Status of automated cluster updates feature.
+        :paramtype automatic_cluster_update:
+         ~azure.mgmt.databricks.models.AutomaticClusterUpdateDefinition
+        :keyword compliance_security_profile: Status of Compliance Security Profile feature.
+        :paramtype compliance_security_profile:
+         ~azure.mgmt.databricks.models.ComplianceSecurityProfileDefinition
+        :keyword enhanced_security_monitoring: Status of Enhanced Security Monitoring feature.
+        :paramtype enhanced_security_monitoring:
+         ~azure.mgmt.databricks.models.EnhancedSecurityMonitoringDefinition
+        """
+        super().__init__(**kwargs)
+        self.automatic_cluster_update = automatic_cluster_update
+        self.compliance_security_profile = compliance_security_profile
+        self.enhanced_security_monitoring = enhanced_security_monitoring
+
+
+class EnhancedSecurityMonitoringDefinition(_serialization.Model):
+    """Status of Enhanced Security Monitoring feature.
+
+    :ivar value: Known values are: "Enabled" and "Disabled".
+    :vartype value: str or ~azure.mgmt.databricks.models.EnhancedSecurityMonitoringValue
+    """
+
+    _attribute_map = {
+        "value": {"key": "value", "type": "str"},
+    }
+
+    def __init__(
+        self, *, value: Optional[Union[str, "_models.EnhancedSecurityMonitoringValue"]] = None, **kwargs: Any
+    ) -> None:
+        """
+        :keyword value: Known values are: "Enabled" and "Disabled".
+        :paramtype value: str or ~azure.mgmt.databricks.models.EnhancedSecurityMonitoringValue
+        """
+        super().__init__(**kwargs)
+        self.value = value
+
+
 class ErrorDetail(_serialization.Model):
     """Error details.
 
-    All required parameters must be populated in order to send to Azure.
+    All required parameters must be populated in order to send to server.
 
     :ivar code: The error's code. Required.
     :vartype code: str
@@ -604,7 +773,7 @@ class ErrorDetail(_serialization.Model):
 class ErrorInfo(_serialization.Model):
     """The code and message for an error.
 
-    All required parameters must be populated in order to send to Azure.
+    All required parameters must be populated in order to send to server.
 
     :ivar code: A machine readable error code. Required.
     :vartype code: str
@@ -633,7 +802,7 @@ class ErrorInfo(_serialization.Model):
         *,
         code: str,
         message: str,
-        details: Optional[List["_models.ErrorDetail"]] = None,
+        details: Optional[list["_models.ErrorDetail"]] = None,
         innererror: Optional[str] = None,
         **kwargs: Any
     ) -> None:
@@ -657,7 +826,7 @@ class ErrorInfo(_serialization.Model):
 class ErrorResponse(_serialization.Model):
     """Contains details when the response code indicates an error.
 
-    All required parameters must be populated in order to send to Azure.
+    All required parameters must be populated in order to send to server.
 
     :ivar error: The error details. Required.
     :vartype error: ~azure.mgmt.databricks.models.ErrorInfo
@@ -685,7 +854,7 @@ class GroupIdInformation(Resource):
 
     Variables are only populated by the server, and will be ignored when sending a request.
 
-    All required parameters must be populated in order to send to Azure.
+    All required parameters must be populated in order to send to server.
 
     :ivar id: Fully qualified resource Id for the resource. Ex -
      /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}.
@@ -743,8 +912,8 @@ class GroupIdInformationProperties(_serialization.Model):
         self,
         *,
         group_id: Optional[str] = None,
-        required_members: Optional[List[str]] = None,
-        required_zone_names: Optional[List[str]] = None,
+        required_members: Optional[list[str]] = None,
+        required_zone_names: Optional[list[str]] = None,
         **kwargs: Any
     ) -> None:
         """
@@ -764,10 +933,11 @@ class GroupIdInformationProperties(_serialization.Model):
 class ManagedDiskEncryption(_serialization.Model):
     """The object that contains details of encryption used on the workspace.
 
-    All required parameters must be populated in order to send to Azure.
+    All required parameters must be populated in order to send to server.
 
     :ivar key_source: The encryption keySource (provider). Possible values (case-insensitive):
-     Microsoft.Keyvault. Required. "Microsoft.Keyvault"
+     Microsoft.Keyvault. Not allowed in Serverless ComputeMode workspace. Required.
+     "Microsoft.Keyvault"
     :vartype key_source: str or ~azure.mgmt.databricks.models.EncryptionKeySource
     :ivar key_vault_properties: Key Vault input properties for encryption. Required.
     :vartype key_vault_properties:
@@ -798,7 +968,8 @@ class ManagedDiskEncryption(_serialization.Model):
     ) -> None:
         """
         :keyword key_source: The encryption keySource (provider). Possible values (case-insensitive):
-         Microsoft.Keyvault. Required. "Microsoft.Keyvault"
+         Microsoft.Keyvault. Not allowed in Serverless ComputeMode workspace. Required.
+         "Microsoft.Keyvault"
         :paramtype key_source: str or ~azure.mgmt.databricks.models.EncryptionKeySource
         :keyword key_vault_properties: Key Vault input properties for encryption. Required.
         :paramtype key_vault_properties:
@@ -816,7 +987,7 @@ class ManagedDiskEncryption(_serialization.Model):
 class ManagedDiskEncryptionKeyVaultProperties(_serialization.Model):
     """Key Vault input properties for encryption.
 
-    All required parameters must be populated in order to send to Azure.
+    All required parameters must be populated in order to send to server.
 
     :ivar key_vault_uri: The URI of KeyVault. Required.
     :vartype key_vault_uri: str
@@ -882,9 +1053,9 @@ class ManagedIdentityConfiguration(_serialization.Model):
     def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
-        self.principal_id = None
-        self.tenant_id = None
-        self.type = None
+        self.principal_id: Optional[str] = None
+        self.tenant_id: Optional[str] = None
+        self.type: Optional[str] = None
 
 
 class ManagedServiceIdentity(_serialization.Model):
@@ -892,7 +1063,7 @@ class ManagedServiceIdentity(_serialization.Model):
 
     Variables are only populated by the server, and will be ignored when sending a request.
 
-    All required parameters must be populated in order to send to Azure.
+    All required parameters must be populated in order to send to server.
 
     :ivar principal_id: The service principal ID of the system assigned identity. This property
      will only be provided for a system assigned identity.
@@ -929,7 +1100,7 @@ class ManagedServiceIdentity(_serialization.Model):
         self,
         *,
         type: Union[str, "_models.ManagedServiceIdentityType"],
-        user_assigned_identities: Optional[Dict[str, "_models.UserAssignedIdentity"]] = None,
+        user_assigned_identities: Optional[dict[str, "_models.UserAssignedIdentity"]] = None,
         **kwargs: Any
     ) -> None:
         """
@@ -945,8 +1116,8 @@ class ManagedServiceIdentity(_serialization.Model):
          ~azure.mgmt.databricks.models.UserAssignedIdentity]
         """
         super().__init__(**kwargs)
-        self.principal_id = None
-        self.tenant_id = None
+        self.principal_id: Optional[str] = None
+        self.tenant_id: Optional[str] = None
         self.type = type
         self.user_assigned_identities = user_assigned_identities
 
@@ -1042,7 +1213,7 @@ class OperationListResult(_serialization.Model):
     }
 
     def __init__(
-        self, *, value: Optional[List["_models.Operation"]] = None, next_link: Optional[str] = None, **kwargs: Any
+        self, *, value: Optional[list["_models.Operation"]] = None, next_link: Optional[str] = None, **kwargs: Any
     ) -> None:
         """
         :keyword value: List of Resource Provider operations supported by the Resource Provider
@@ -1075,7 +1246,7 @@ class OutboundEnvironmentEndpoint(_serialization.Model):
         self,
         *,
         category: Optional[str] = None,
-        endpoints: Optional[List["_models.EndpointDependency"]] = None,
+        endpoints: Optional[list["_models.EndpointDependency"]] = None,
         **kwargs: Any
     ) -> None:
         """
@@ -1110,7 +1281,7 @@ class PrivateEndpoint(_serialization.Model):
     def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
-        self.id = None
+        self.id: Optional[str] = None
 
 
 class PrivateEndpointConnection(_serialization.Model):
@@ -1118,7 +1289,7 @@ class PrivateEndpointConnection(_serialization.Model):
 
     Variables are only populated by the server, and will be ignored when sending a request.
 
-    All required parameters must be populated in order to send to Azure.
+    All required parameters must be populated in order to send to server.
 
     :ivar id: The resource identifier.
     :vartype id: str
@@ -1150,9 +1321,9 @@ class PrivateEndpointConnection(_serialization.Model):
         :paramtype properties: ~azure.mgmt.databricks.models.PrivateEndpointConnectionProperties
         """
         super().__init__(**kwargs)
-        self.id = None
-        self.name = None
-        self.type = None
+        self.id: Optional[str] = None
+        self.name: Optional[str] = None
+        self.type: Optional[str] = None
         self.properties = properties
 
 
@@ -1161,7 +1332,7 @@ class PrivateEndpointConnectionProperties(_serialization.Model):
 
     Variables are only populated by the server, and will be ignored when sending a request.
 
-    All required parameters must be populated in order to send to Azure.
+    All required parameters must be populated in order to send to server.
 
     :ivar private_endpoint: Private endpoint.
     :vartype private_endpoint: ~azure.mgmt.databricks.models.PrivateEndpoint
@@ -1196,7 +1367,7 @@ class PrivateEndpointConnectionProperties(_serialization.Model):
         *,
         private_link_service_connection_state: "_models.PrivateLinkServiceConnectionState",
         private_endpoint: Optional["_models.PrivateEndpoint"] = None,
-        group_ids: Optional[List[str]] = None,
+        group_ids: Optional[list[str]] = None,
         **kwargs: Any
     ) -> None:
         """
@@ -1212,7 +1383,7 @@ class PrivateEndpointConnectionProperties(_serialization.Model):
         self.private_endpoint = private_endpoint
         self.group_ids = group_ids
         self.private_link_service_connection_state = private_link_service_connection_state
-        self.provisioning_state = None
+        self.provisioning_state: Optional[Union[str, "_models.PrivateEndpointConnectionProvisioningState"]] = None
 
 
 class PrivateEndpointConnectionsList(_serialization.Model):
@@ -1232,7 +1403,7 @@ class PrivateEndpointConnectionsList(_serialization.Model):
     def __init__(
         self,
         *,
-        value: Optional[List["_models.PrivateEndpointConnection"]] = None,
+        value: Optional[list["_models.PrivateEndpointConnection"]] = None,
         next_link: Optional[str] = None,
         **kwargs: Any
     ) -> None:
@@ -1264,7 +1435,7 @@ class PrivateLinkResourcesList(_serialization.Model):
     def __init__(
         self,
         *,
-        value: Optional[List["_models.GroupIdInformation"]] = None,
+        value: Optional[list["_models.GroupIdInformation"]] = None,
         next_link: Optional[str] = None,
         **kwargs: Any
     ) -> None:
@@ -1282,7 +1453,7 @@ class PrivateLinkResourcesList(_serialization.Model):
 class PrivateLinkServiceConnectionState(_serialization.Model):
     """The current state of a private endpoint connection.
 
-    All required parameters must be populated in order to send to Azure.
+    All required parameters must be populated in order to send to server.
 
     :ivar status: The status of a private endpoint connection. Required. Known values are:
      "Pending", "Approved", "Rejected", and "Disconnected".
@@ -1329,7 +1500,7 @@ class PrivateLinkServiceConnectionState(_serialization.Model):
 class Sku(_serialization.Model):
     """SKU for the resource.
 
-    All required parameters must be populated in order to send to Azure.
+    All required parameters must be populated in order to send to server.
 
     :ivar name: The SKU name. Required.
     :vartype name: str
@@ -1446,16 +1617,16 @@ class UserAssignedIdentity(_serialization.Model):
     def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
-        self.principal_id = None
-        self.client_id = None
+        self.principal_id: Optional[str] = None
+        self.client_id: Optional[str] = None
 
 
-class VirtualNetworkPeering(_serialization.Model):  # pylint: disable=too-many-instance-attributes
+class VirtualNetworkPeering(_serialization.Model):
     """Peerings in a VirtualNetwork resource.
 
     Variables are only populated by the server, and will be ignored when sending a request.
 
-    All required parameters must be populated in order to send to Azure.
+    All required parameters must be populated in order to send to server.
 
     :ivar name: Name of the virtual network peering resource.
     :vartype name: str
@@ -1579,9 +1750,9 @@ class VirtualNetworkPeering(_serialization.Model):  # pylint: disable=too-many-i
         :paramtype remote_address_space: ~azure.mgmt.databricks.models.AddressSpace
         """
         super().__init__(**kwargs)
-        self.name = None
-        self.id = None
-        self.type = None
+        self.name: Optional[str] = None
+        self.id: Optional[str] = None
+        self.type: Optional[str] = None
         self.allow_virtual_network_access = allow_virtual_network_access
         self.allow_forwarded_traffic = allow_forwarded_traffic
         self.allow_gateway_transit = allow_gateway_transit
@@ -1590,8 +1761,8 @@ class VirtualNetworkPeering(_serialization.Model):  # pylint: disable=too-many-i
         self.databricks_address_space = databricks_address_space
         self.remote_virtual_network = remote_virtual_network
         self.remote_address_space = remote_address_space
-        self.peering_state = None
-        self.provisioning_state = None
+        self.peering_state: Optional[Union[str, "_models.PeeringState"]] = None
+        self.provisioning_state: Optional[Union[str, "_models.PeeringProvisioningState"]] = None
 
 
 class VirtualNetworkPeeringList(_serialization.Model):
@@ -1612,7 +1783,7 @@ class VirtualNetworkPeeringList(_serialization.Model):
     def __init__(
         self,
         *,
-        value: Optional[List["_models.VirtualNetworkPeering"]] = None,
+        value: Optional[list["_models.VirtualNetworkPeering"]] = None,
         next_link: Optional[str] = None,
         **kwargs: Any
     ) -> None:
@@ -1628,7 +1799,9 @@ class VirtualNetworkPeeringList(_serialization.Model):
         self.next_link = next_link
 
 
-class VirtualNetworkPeeringPropertiesFormatDatabricksVirtualNetwork(_serialization.Model):
+class VirtualNetworkPeeringPropertiesFormatDatabricksVirtualNetwork(
+    _serialization.Model
+):  # pylint: disable=name-too-long
     """The remote virtual network should be in the same region. See here to learn more
     (https://docs.microsoft.com/en-us/azure/databricks/administration-guide/cloud-configurations/azure/vnet-peering).
 
@@ -1649,7 +1822,7 @@ class VirtualNetworkPeeringPropertiesFormatDatabricksVirtualNetwork(_serializati
         self.id = id
 
 
-class VirtualNetworkPeeringPropertiesFormatRemoteVirtualNetwork(_serialization.Model):
+class VirtualNetworkPeeringPropertiesFormatRemoteVirtualNetwork(_serialization.Model):  # pylint: disable=name-too-long
     """The remote virtual network should be in the same region. See here to learn more
     (https://docs.microsoft.com/en-us/azure/databricks/administration-guide/cloud-configurations/azure/vnet-peering).
 
@@ -1670,12 +1843,12 @@ class VirtualNetworkPeeringPropertiesFormatRemoteVirtualNetwork(_serialization.M
         self.id = id
 
 
-class Workspace(TrackedResource):  # pylint: disable=too-many-instance-attributes
+class Workspace(TrackedResource):
     """Information about workspace.
 
     Variables are only populated by the server, and will be ignored when sending a request.
 
-    All required parameters must be populated in order to send to Azure.
+    All required parameters must be populated in order to send to server.
 
     :ivar id: Fully qualified resource Id for the resource. Ex -
      /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}.
@@ -1693,7 +1866,11 @@ class Workspace(TrackedResource):  # pylint: disable=too-many-instance-attribute
     :vartype sku: ~azure.mgmt.databricks.models.Sku
     :ivar system_data: The system metadata relating to this resource.
     :vartype system_data: ~azure.mgmt.databricks.models.SystemData
-    :ivar managed_resource_group_id: The managed resource group Id. Required.
+    :ivar compute_mode: The workspace compute mode. Required on create, cannot be changed. Possible
+     values include: 'Serverless', 'Hybrid'. Required. Known values are: "Serverless" and "Hybrid".
+    :vartype compute_mode: str or ~azure.mgmt.databricks.models.ComputeMode
+    :ivar managed_resource_group_id: The managed resource group Id. Required in Hybrid ComputeMode
+     workspace. Not allowed in Serverless ComputeMode workspace.
     :vartype managed_resource_group_id: str
     :ivar parameters: The workspace's custom parameters.
     :vartype parameters: ~azure.mgmt.databricks.models.WorkspaceCustomParameters
@@ -1719,26 +1896,49 @@ class Workspace(TrackedResource):  # pylint: disable=too-many-instance-attribute
     :ivar workspace_url: The workspace URL which is of the format
      'adb-{workspaceId}.{random}.azuredatabricks.net'.
     :vartype workspace_url: str
-    :ivar storage_account_identity: The details of Managed Identity of Storage Account.
+    :ivar storage_account_identity: The details of Managed Identity of Storage Account. Only
+     returned in Hybrid ComputeMode workspace.
     :vartype storage_account_identity: ~azure.mgmt.databricks.models.ManagedIdentityConfiguration
     :ivar managed_disk_identity: The details of Managed Identity of Disk Encryption Set used for
-     Managed Disk Encryption.
+     Managed Disk Encryption. Only returned in Hybrid ComputeMode workspace.
     :vartype managed_disk_identity: ~azure.mgmt.databricks.models.ManagedIdentityConfiguration
-    :ivar disk_encryption_set_id: The resource Id of the managed disk encryption set.
+    :ivar disk_encryption_set_id: The resource Id of the managed disk encryption set. Not allowed
+     in Serverless ComputeMode workspace.
     :vartype disk_encryption_set_id: str
-    :ivar encryption: Encryption properties for databricks workspace.
+    :ivar encryption: Encryption properties for databricks workspace. Supported in both Serverless
+     and Hybrid ComputeMode workspace.
     :vartype encryption: ~azure.mgmt.databricks.models.WorkspacePropertiesEncryption
+    :ivar enhanced_security_compliance: Contains settings related to the Enhanced Security and
+     Compliance Add-On. Supported in both Serverless and Hybrid ComputeMode workspace.
+    :vartype enhanced_security_compliance:
+     ~azure.mgmt.databricks.models.EnhancedSecurityComplianceDefinition
     :ivar private_endpoint_connections: Private endpoint connections created on the workspace.
+     Supported in both Serverless and Hybrid ComputeMode workspace.
     :vartype private_endpoint_connections:
      list[~azure.mgmt.databricks.models.PrivateEndpointConnection]
     :ivar public_network_access: The network access type for accessing workspace. Set value to
-     disabled to access workspace only via private link. Known values are: "Enabled" and "Disabled".
+     disabled to access workspace only via private link. Used to configure front-end only private
+     link for Serverless ComputeMode workspace. Known values are: "Enabled" and "Disabled".
     :vartype public_network_access: str or ~azure.mgmt.databricks.models.PublicNetworkAccess
     :ivar required_nsg_rules: Gets or sets a value indicating whether data plane (clusters) to
      control plane communication happen over private endpoint. Supported values are 'AllRules' and
-     'NoAzureDatabricksRules'. 'NoAzureServiceRules' value is for internal use only. Known values
-     are: "AllRules", "NoAzureDatabricksRules", and "NoAzureServiceRules".
+     'NoAzureDatabricksRules'. 'NoAzureServiceRules' value is for internal use only. Not allowed in
+     Serverless ComputeMode workspace. Known values are: "AllRules", "NoAzureDatabricksRules", and
+     "NoAzureServiceRules".
     :vartype required_nsg_rules: str or ~azure.mgmt.databricks.models.RequiredNsgRules
+    :ivar default_catalog: Properties for Default Catalog configuration during workspace creation.
+     Not allowed in Serverless ComputeMode workspace.
+    :vartype default_catalog: ~azure.mgmt.databricks.models.DefaultCatalogProperties
+    :ivar is_uc_enabled: Indicates whether unity catalog enabled for the workspace or not. Set as
+     true in Serverless ComputeMode workspace.
+    :vartype is_uc_enabled: bool
+    :ivar access_connector: Access Connector Resource that is going to be associated with
+     Databricks Workspace. Not allowed in Serverless ComputeMode workspace.
+    :vartype access_connector: ~azure.mgmt.databricks.models.WorkspacePropertiesAccessConnector
+    :ivar default_storage_firewall: Gets or Sets Default Storage Firewall configuration
+     information. Not allowed in Serverless ComputeMode workspace. Known values are: "Disabled" and
+     "Enabled".
+    :vartype default_storage_firewall: str or ~azure.mgmt.databricks.models.DefaultStorageFirewall
     """
 
     _validation = {
@@ -1747,13 +1947,14 @@ class Workspace(TrackedResource):  # pylint: disable=too-many-instance-attribute
         "type": {"readonly": True},
         "location": {"required": True},
         "system_data": {"readonly": True},
-        "managed_resource_group_id": {"required": True},
+        "compute_mode": {"required": True},
         "provisioning_state": {"readonly": True},
         "created_date_time": {"readonly": True},
         "workspace_id": {"readonly": True},
         "workspace_url": {"readonly": True},
         "disk_encryption_set_id": {"readonly": True},
         "private_endpoint_connections": {"readonly": True},
+        "is_uc_enabled": {"readonly": True},
     }
 
     _attribute_map = {
@@ -1764,6 +1965,7 @@ class Workspace(TrackedResource):  # pylint: disable=too-many-instance-attribute
         "location": {"key": "location", "type": "str"},
         "sku": {"key": "sku", "type": "Sku"},
         "system_data": {"key": "systemData", "type": "SystemData"},
+        "compute_mode": {"key": "properties.computeMode", "type": "str"},
         "managed_resource_group_id": {"key": "properties.managedResourceGroupId", "type": "str"},
         "parameters": {"key": "properties.parameters", "type": "WorkspaceCustomParameters"},
         "provisioning_state": {"key": "properties.provisioningState", "type": "str"},
@@ -1781,31 +1983,44 @@ class Workspace(TrackedResource):  # pylint: disable=too-many-instance-attribute
         "managed_disk_identity": {"key": "properties.managedDiskIdentity", "type": "ManagedIdentityConfiguration"},
         "disk_encryption_set_id": {"key": "properties.diskEncryptionSetId", "type": "str"},
         "encryption": {"key": "properties.encryption", "type": "WorkspacePropertiesEncryption"},
+        "enhanced_security_compliance": {
+            "key": "properties.enhancedSecurityCompliance",
+            "type": "EnhancedSecurityComplianceDefinition",
+        },
         "private_endpoint_connections": {
             "key": "properties.privateEndpointConnections",
             "type": "[PrivateEndpointConnection]",
         },
         "public_network_access": {"key": "properties.publicNetworkAccess", "type": "str"},
         "required_nsg_rules": {"key": "properties.requiredNsgRules", "type": "str"},
+        "default_catalog": {"key": "properties.defaultCatalog", "type": "DefaultCatalogProperties"},
+        "is_uc_enabled": {"key": "properties.isUcEnabled", "type": "bool"},
+        "access_connector": {"key": "properties.accessConnector", "type": "WorkspacePropertiesAccessConnector"},
+        "default_storage_firewall": {"key": "properties.defaultStorageFirewall", "type": "str"},
     }
 
     def __init__(  # pylint: disable=too-many-locals
         self,
         *,
         location: str,
-        managed_resource_group_id: str,
-        tags: Optional[Dict[str, str]] = None,
+        compute_mode: Union[str, "_models.ComputeMode"],
+        tags: Optional[dict[str, str]] = None,
         sku: Optional["_models.Sku"] = None,
+        managed_resource_group_id: Optional[str] = None,
         parameters: Optional["_models.WorkspaceCustomParameters"] = None,
         ui_definition_uri: Optional[str] = None,
-        authorizations: Optional[List["_models.WorkspaceProviderAuthorization"]] = None,
+        authorizations: Optional[list["_models.WorkspaceProviderAuthorization"]] = None,
         created_by: Optional["_models.CreatedBy"] = None,
         updated_by: Optional["_models.CreatedBy"] = None,
         storage_account_identity: Optional["_models.ManagedIdentityConfiguration"] = None,
         managed_disk_identity: Optional["_models.ManagedIdentityConfiguration"] = None,
         encryption: Optional["_models.WorkspacePropertiesEncryption"] = None,
+        enhanced_security_compliance: Optional["_models.EnhancedSecurityComplianceDefinition"] = None,
         public_network_access: Optional[Union[str, "_models.PublicNetworkAccess"]] = None,
         required_nsg_rules: Optional[Union[str, "_models.RequiredNsgRules"]] = None,
+        default_catalog: Optional["_models.DefaultCatalogProperties"] = None,
+        access_connector: Optional["_models.WorkspacePropertiesAccessConnector"] = None,
+        default_storage_firewall: Optional[Union[str, "_models.DefaultStorageFirewall"]] = None,
         **kwargs: Any
     ) -> None:
         """
@@ -1815,7 +2030,12 @@ class Workspace(TrackedResource):  # pylint: disable=too-many-instance-attribute
         :paramtype location: str
         :keyword sku: The SKU of the resource.
         :paramtype sku: ~azure.mgmt.databricks.models.Sku
-        :keyword managed_resource_group_id: The managed resource group Id. Required.
+        :keyword compute_mode: The workspace compute mode. Required on create, cannot be changed.
+         Possible values include: 'Serverless', 'Hybrid'. Required. Known values are: "Serverless" and
+         "Hybrid".
+        :paramtype compute_mode: str or ~azure.mgmt.databricks.models.ComputeMode
+        :keyword managed_resource_group_id: The managed resource group Id. Required in Hybrid
+         ComputeMode workspace. Not allowed in Serverless ComputeMode workspace.
         :paramtype managed_resource_group_id: str
         :keyword parameters: The workspace's custom parameters.
         :paramtype parameters: ~azure.mgmt.databricks.models.WorkspaceCustomParameters
@@ -1829,50 +2049,73 @@ class Workspace(TrackedResource):  # pylint: disable=too-many-instance-attribute
         :keyword updated_by: Indicates the Object ID, PUID and Application ID of entity that last
          updated the workspace.
         :paramtype updated_by: ~azure.mgmt.databricks.models.CreatedBy
-        :keyword storage_account_identity: The details of Managed Identity of Storage Account.
+        :keyword storage_account_identity: The details of Managed Identity of Storage Account. Only
+         returned in Hybrid ComputeMode workspace.
         :paramtype storage_account_identity: ~azure.mgmt.databricks.models.ManagedIdentityConfiguration
         :keyword managed_disk_identity: The details of Managed Identity of Disk Encryption Set used for
-         Managed Disk Encryption.
+         Managed Disk Encryption. Only returned in Hybrid ComputeMode workspace.
         :paramtype managed_disk_identity: ~azure.mgmt.databricks.models.ManagedIdentityConfiguration
-        :keyword encryption: Encryption properties for databricks workspace.
+        :keyword encryption: Encryption properties for databricks workspace. Supported in both
+         Serverless and Hybrid ComputeMode workspace.
         :paramtype encryption: ~azure.mgmt.databricks.models.WorkspacePropertiesEncryption
+        :keyword enhanced_security_compliance: Contains settings related to the Enhanced Security and
+         Compliance Add-On. Supported in both Serverless and Hybrid ComputeMode workspace.
+        :paramtype enhanced_security_compliance:
+         ~azure.mgmt.databricks.models.EnhancedSecurityComplianceDefinition
         :keyword public_network_access: The network access type for accessing workspace. Set value to
-         disabled to access workspace only via private link. Known values are: "Enabled" and "Disabled".
+         disabled to access workspace only via private link. Used to configure front-end only private
+         link for Serverless ComputeMode workspace. Known values are: "Enabled" and "Disabled".
         :paramtype public_network_access: str or ~azure.mgmt.databricks.models.PublicNetworkAccess
         :keyword required_nsg_rules: Gets or sets a value indicating whether data plane (clusters) to
          control plane communication happen over private endpoint. Supported values are 'AllRules' and
-         'NoAzureDatabricksRules'. 'NoAzureServiceRules' value is for internal use only. Known values
-         are: "AllRules", "NoAzureDatabricksRules", and "NoAzureServiceRules".
+         'NoAzureDatabricksRules'. 'NoAzureServiceRules' value is for internal use only. Not allowed in
+         Serverless ComputeMode workspace. Known values are: "AllRules", "NoAzureDatabricksRules", and
+         "NoAzureServiceRules".
         :paramtype required_nsg_rules: str or ~azure.mgmt.databricks.models.RequiredNsgRules
+        :keyword default_catalog: Properties for Default Catalog configuration during workspace
+         creation. Not allowed in Serverless ComputeMode workspace.
+        :paramtype default_catalog: ~azure.mgmt.databricks.models.DefaultCatalogProperties
+        :keyword access_connector: Access Connector Resource that is going to be associated with
+         Databricks Workspace. Not allowed in Serverless ComputeMode workspace.
+        :paramtype access_connector: ~azure.mgmt.databricks.models.WorkspacePropertiesAccessConnector
+        :keyword default_storage_firewall: Gets or Sets Default Storage Firewall configuration
+         information. Not allowed in Serverless ComputeMode workspace. Known values are: "Disabled" and
+         "Enabled".
+        :paramtype default_storage_firewall: str or
+         ~azure.mgmt.databricks.models.DefaultStorageFirewall
         """
         super().__init__(tags=tags, location=location, **kwargs)
         self.sku = sku
-        self.system_data = None
+        self.system_data: Optional["_models.SystemData"] = None
+        self.compute_mode = compute_mode
         self.managed_resource_group_id = managed_resource_group_id
         self.parameters = parameters
-        self.provisioning_state = None
+        self.provisioning_state: Optional[Union[str, "_models.ProvisioningState"]] = None
         self.ui_definition_uri = ui_definition_uri
         self.authorizations = authorizations
         self.created_by = created_by
         self.updated_by = updated_by
-        self.created_date_time = None
-        self.workspace_id = None
-        self.workspace_url = None
+        self.created_date_time: Optional[datetime.datetime] = None
+        self.workspace_id: Optional[str] = None
+        self.workspace_url: Optional[str] = None
         self.storage_account_identity = storage_account_identity
         self.managed_disk_identity = managed_disk_identity
-        self.disk_encryption_set_id = None
+        self.disk_encryption_set_id: Optional[str] = None
         self.encryption = encryption
-        self.private_endpoint_connections = None
+        self.enhanced_security_compliance = enhanced_security_compliance
+        self.private_endpoint_connections: Optional[list["_models.PrivateEndpointConnection"]] = None
         self.public_network_access = public_network_access
         self.required_nsg_rules = required_nsg_rules
+        self.default_catalog = default_catalog
+        self.is_uc_enabled: Optional[bool] = None
+        self.access_connector = access_connector
+        self.default_storage_firewall = default_storage_firewall
 
 
 class WorkspaceCustomBooleanParameter(_serialization.Model):
     """The value which should be used for this field.
 
-    Variables are only populated by the server, and will be ignored when sending a request.
-
-    All required parameters must be populated in order to send to Azure.
+    All required parameters must be populated in order to send to server.
 
     :ivar type: The type of variable that this is. Known values are: "Bool", "Object", and
      "String".
@@ -1882,7 +2125,6 @@ class WorkspaceCustomBooleanParameter(_serialization.Model):
     """
 
     _validation = {
-        "type": {"readonly": True},
         "value": {"required": True},
     }
 
@@ -1891,22 +2133,25 @@ class WorkspaceCustomBooleanParameter(_serialization.Model):
         "value": {"key": "value", "type": "bool"},
     }
 
-    def __init__(self, *, value: bool, **kwargs: Any) -> None:
+    def __init__(
+        self, *, value: bool, type: Optional[Union[str, "_models.CustomParameterType"]] = None, **kwargs: Any
+    ) -> None:
         """
+        :keyword type: The type of variable that this is. Known values are: "Bool", "Object", and
+         "String".
+        :paramtype type: str or ~azure.mgmt.databricks.models.CustomParameterType
         :keyword value: The value which should be used for this field. Required.
         :paramtype value: bool
         """
         super().__init__(**kwargs)
-        self.type = None
+        self.type = type
         self.value = value
 
 
 class WorkspaceCustomObjectParameter(_serialization.Model):
     """The value which should be used for this field.
 
-    Variables are only populated by the server, and will be ignored when sending a request.
-
-    All required parameters must be populated in order to send to Azure.
+    All required parameters must be populated in order to send to server.
 
     :ivar type: The type of variable that this is. Known values are: "Bool", "Object", and
      "String".
@@ -1916,7 +2161,6 @@ class WorkspaceCustomObjectParameter(_serialization.Model):
     """
 
     _validation = {
-        "type": {"readonly": True},
         "value": {"required": True},
     }
 
@@ -1925,69 +2169,79 @@ class WorkspaceCustomObjectParameter(_serialization.Model):
         "value": {"key": "value", "type": "object"},
     }
 
-    def __init__(self, *, value: JSON, **kwargs: Any) -> None:
+    def __init__(
+        self, *, value: JSON, type: Optional[Union[str, "_models.CustomParameterType"]] = None, **kwargs: Any
+    ) -> None:
         """
+        :keyword type: The type of variable that this is. Known values are: "Bool", "Object", and
+         "String".
+        :paramtype type: str or ~azure.mgmt.databricks.models.CustomParameterType
         :keyword value: The value which should be used for this field. Required.
         :paramtype value: JSON
         """
         super().__init__(**kwargs)
-        self.type = None
+        self.type = type
         self.value = value
 
 
-class WorkspaceCustomParameters(_serialization.Model):  # pylint: disable=too-many-instance-attributes
-    """Custom Parameters used for Cluster Creation.
+class WorkspaceCustomParameters(_serialization.Model):
+    """Custom Parameters used for Workspace Creation. Not allowed in Serverless ComputeMode workspace.
 
     Variables are only populated by the server, and will be ignored when sending a request.
 
     :ivar aml_workspace_id: The ID of a Azure Machine Learning workspace to link with Databricks
-     workspace.
+     workspace. Not allowed in Serverless ComputeMode workspace.
     :vartype aml_workspace_id: ~azure.mgmt.databricks.models.WorkspaceCustomStringParameter
     :ivar custom_virtual_network_id: The ID of a Virtual Network where this Databricks Cluster
-     should be created.
+     should be created. Not allowed in Serverless ComputeMode workspace.
     :vartype custom_virtual_network_id:
      ~azure.mgmt.databricks.models.WorkspaceCustomStringParameter
-    :ivar custom_public_subnet_name: The name of a Public Subnet within the Virtual Network.
+    :ivar custom_public_subnet_name: The name of a Public Subnet within the Virtual Network. Not
+     allowed in Serverless ComputeMode workspace.
     :vartype custom_public_subnet_name:
      ~azure.mgmt.databricks.models.WorkspaceCustomStringParameter
     :ivar custom_private_subnet_name: The name of the Private Subnet within the Virtual Network.
+     Not allowed in Serverless ComputeMode workspace.
     :vartype custom_private_subnet_name:
      ~azure.mgmt.databricks.models.WorkspaceCustomStringParameter
-    :ivar enable_no_public_ip: Should the Public IP be Disabled?.
-    :vartype enable_no_public_ip: ~azure.mgmt.databricks.models.WorkspaceCustomBooleanParameter
+    :ivar enable_no_public_ip: Boolean indicating whether the public IP should be disabled. Default
+     value is true. Not allowed in Serverless ComputeMode workspace.
+    :vartype enable_no_public_ip: ~azure.mgmt.databricks.models.WorkspaceNoPublicIPBooleanParameter
     :ivar load_balancer_backend_pool_name: Name of the outbound Load Balancer Backend Pool for
-     Secure Cluster Connectivity (No Public IP).
+     Secure Cluster Connectivity (No Public IP). Not allowed in Serverless ComputeMode workspace.
     :vartype load_balancer_backend_pool_name:
      ~azure.mgmt.databricks.models.WorkspaceCustomStringParameter
     :ivar load_balancer_id: Resource URI of Outbound Load balancer for Secure Cluster Connectivity
-     (No Public IP) workspace.
+     (No Public IP) workspace. Not allowed in Serverless ComputeMode workspace.
     :vartype load_balancer_id: ~azure.mgmt.databricks.models.WorkspaceCustomStringParameter
     :ivar nat_gateway_name: Name of the NAT gateway for Secure Cluster Connectivity (No Public IP)
-     workspace subnets.
+     workspace subnets. Not allowed in Serverless ComputeMode workspace.
     :vartype nat_gateway_name: ~azure.mgmt.databricks.models.WorkspaceCustomStringParameter
-    :ivar public_ip_name: Name of the Public IP for No Public IP workspace with managed vNet.
+    :ivar public_ip_name: Name of the Public IP for No Public IP workspace with managed vNet. Not
+     allowed in Serverless ComputeMode workspace.
     :vartype public_ip_name: ~azure.mgmt.databricks.models.WorkspaceCustomStringParameter
     :ivar prepare_encryption: Prepare the workspace for encryption. Enables the Managed Identity
-     for managed storage account.
+     for managed storage account. Not allowed in Serverless ComputeMode workspace.
     :vartype prepare_encryption: ~azure.mgmt.databricks.models.WorkspaceCustomBooleanParameter
     :ivar encryption: Contains the encryption details for Customer-Managed Key (CMK) enabled
-     workspace.
+     workspace.Not allowed in Serverless ComputeMode workspace.
     :vartype encryption: ~azure.mgmt.databricks.models.WorkspaceEncryptionParameter
     :ivar require_infrastructure_encryption: A boolean indicating whether or not the DBFS root file
      system will be enabled with secondary layer of encryption with platform managed keys for data
-     at rest.
+     at rest. Not allowed in Serverless ComputeMode workspace.
     :vartype require_infrastructure_encryption:
      ~azure.mgmt.databricks.models.WorkspaceCustomBooleanParameter
-    :ivar storage_account_name: Default DBFS storage account name.
+    :ivar storage_account_name: Default DBFS storage account name. Not allowed in Serverless
+     ComputeMode workspace.
     :vartype storage_account_name: ~azure.mgmt.databricks.models.WorkspaceCustomStringParameter
     :ivar storage_account_sku_name: Storage account SKU name, ex: Standard_GRS, Standard_LRS. Refer
-     https://aka.ms/storageskus for valid inputs.
+     https://aka.ms/storageskus for valid inputs. Not allowed in Serverless ComputeMode workspace.
     :vartype storage_account_sku_name: ~azure.mgmt.databricks.models.WorkspaceCustomStringParameter
     :ivar vnet_address_prefix: Address prefix for Managed virtual network. Default value for this
-     input is 10.139.
+     input is 10.139. Not allowed in Serverless ComputeMode workspace.
     :vartype vnet_address_prefix: ~azure.mgmt.databricks.models.WorkspaceCustomStringParameter
     :ivar resource_tags: Tags applied to resources under Managed resource group. These can be
-     updated by updating tags at workspace level.
+     updated by updating tags at workspace level. Not allowed in Serverless ComputeMode workspace.
     :vartype resource_tags: ~azure.mgmt.databricks.models.WorkspaceCustomObjectParameter
     """
 
@@ -2000,7 +2254,7 @@ class WorkspaceCustomParameters(_serialization.Model):  # pylint: disable=too-ma
         "custom_virtual_network_id": {"key": "customVirtualNetworkId", "type": "WorkspaceCustomStringParameter"},
         "custom_public_subnet_name": {"key": "customPublicSubnetName", "type": "WorkspaceCustomStringParameter"},
         "custom_private_subnet_name": {"key": "customPrivateSubnetName", "type": "WorkspaceCustomStringParameter"},
-        "enable_no_public_ip": {"key": "enableNoPublicIp", "type": "WorkspaceCustomBooleanParameter"},
+        "enable_no_public_ip": {"key": "enableNoPublicIp", "type": "WorkspaceNoPublicIPBooleanParameter"},
         "load_balancer_backend_pool_name": {
             "key": "loadBalancerBackendPoolName",
             "type": "WorkspaceCustomStringParameter",
@@ -2027,7 +2281,7 @@ class WorkspaceCustomParameters(_serialization.Model):  # pylint: disable=too-ma
         custom_virtual_network_id: Optional["_models.WorkspaceCustomStringParameter"] = None,
         custom_public_subnet_name: Optional["_models.WorkspaceCustomStringParameter"] = None,
         custom_private_subnet_name: Optional["_models.WorkspaceCustomStringParameter"] = None,
-        enable_no_public_ip: Optional["_models.WorkspaceCustomBooleanParameter"] = None,
+        enable_no_public_ip: Optional["_models.WorkspaceNoPublicIPBooleanParameter"] = None,
         load_balancer_backend_pool_name: Optional["_models.WorkspaceCustomStringParameter"] = None,
         load_balancer_id: Optional["_models.WorkspaceCustomStringParameter"] = None,
         nat_gateway_name: Optional["_models.WorkspaceCustomStringParameter"] = None,
@@ -2042,51 +2296,58 @@ class WorkspaceCustomParameters(_serialization.Model):  # pylint: disable=too-ma
     ) -> None:
         """
         :keyword aml_workspace_id: The ID of a Azure Machine Learning workspace to link with Databricks
-         workspace.
+         workspace. Not allowed in Serverless ComputeMode workspace.
         :paramtype aml_workspace_id: ~azure.mgmt.databricks.models.WorkspaceCustomStringParameter
         :keyword custom_virtual_network_id: The ID of a Virtual Network where this Databricks Cluster
-         should be created.
+         should be created. Not allowed in Serverless ComputeMode workspace.
         :paramtype custom_virtual_network_id:
          ~azure.mgmt.databricks.models.WorkspaceCustomStringParameter
-        :keyword custom_public_subnet_name: The name of a Public Subnet within the Virtual Network.
+        :keyword custom_public_subnet_name: The name of a Public Subnet within the Virtual Network. Not
+         allowed in Serverless ComputeMode workspace.
         :paramtype custom_public_subnet_name:
          ~azure.mgmt.databricks.models.WorkspaceCustomStringParameter
         :keyword custom_private_subnet_name: The name of the Private Subnet within the Virtual Network.
+         Not allowed in Serverless ComputeMode workspace.
         :paramtype custom_private_subnet_name:
          ~azure.mgmt.databricks.models.WorkspaceCustomStringParameter
-        :keyword enable_no_public_ip: Should the Public IP be Disabled?.
-        :paramtype enable_no_public_ip: ~azure.mgmt.databricks.models.WorkspaceCustomBooleanParameter
+        :keyword enable_no_public_ip: Boolean indicating whether the public IP should be disabled.
+         Default value is true. Not allowed in Serverless ComputeMode workspace.
+        :paramtype enable_no_public_ip:
+         ~azure.mgmt.databricks.models.WorkspaceNoPublicIPBooleanParameter
         :keyword load_balancer_backend_pool_name: Name of the outbound Load Balancer Backend Pool for
-         Secure Cluster Connectivity (No Public IP).
+         Secure Cluster Connectivity (No Public IP). Not allowed in Serverless ComputeMode workspace.
         :paramtype load_balancer_backend_pool_name:
          ~azure.mgmt.databricks.models.WorkspaceCustomStringParameter
         :keyword load_balancer_id: Resource URI of Outbound Load balancer for Secure Cluster
-         Connectivity (No Public IP) workspace.
+         Connectivity (No Public IP) workspace. Not allowed in Serverless ComputeMode workspace.
         :paramtype load_balancer_id: ~azure.mgmt.databricks.models.WorkspaceCustomStringParameter
         :keyword nat_gateway_name: Name of the NAT gateway for Secure Cluster Connectivity (No Public
-         IP) workspace subnets.
+         IP) workspace subnets. Not allowed in Serverless ComputeMode workspace.
         :paramtype nat_gateway_name: ~azure.mgmt.databricks.models.WorkspaceCustomStringParameter
         :keyword public_ip_name: Name of the Public IP for No Public IP workspace with managed vNet.
+         Not allowed in Serverless ComputeMode workspace.
         :paramtype public_ip_name: ~azure.mgmt.databricks.models.WorkspaceCustomStringParameter
         :keyword prepare_encryption: Prepare the workspace for encryption. Enables the Managed Identity
-         for managed storage account.
+         for managed storage account. Not allowed in Serverless ComputeMode workspace.
         :paramtype prepare_encryption: ~azure.mgmt.databricks.models.WorkspaceCustomBooleanParameter
         :keyword encryption: Contains the encryption details for Customer-Managed Key (CMK) enabled
-         workspace.
+         workspace.Not allowed in Serverless ComputeMode workspace.
         :paramtype encryption: ~azure.mgmt.databricks.models.WorkspaceEncryptionParameter
         :keyword require_infrastructure_encryption: A boolean indicating whether or not the DBFS root
          file system will be enabled with secondary layer of encryption with platform managed keys for
-         data at rest.
+         data at rest. Not allowed in Serverless ComputeMode workspace.
         :paramtype require_infrastructure_encryption:
          ~azure.mgmt.databricks.models.WorkspaceCustomBooleanParameter
-        :keyword storage_account_name: Default DBFS storage account name.
+        :keyword storage_account_name: Default DBFS storage account name. Not allowed in Serverless
+         ComputeMode workspace.
         :paramtype storage_account_name: ~azure.mgmt.databricks.models.WorkspaceCustomStringParameter
         :keyword storage_account_sku_name: Storage account SKU name, ex: Standard_GRS, Standard_LRS.
-         Refer https://aka.ms/storageskus for valid inputs.
+         Refer https://aka.ms/storageskus for valid inputs. Not allowed in Serverless ComputeMode
+         workspace.
         :paramtype storage_account_sku_name:
          ~azure.mgmt.databricks.models.WorkspaceCustomStringParameter
         :keyword vnet_address_prefix: Address prefix for Managed virtual network. Default value for
-         this input is 10.139.
+         this input is 10.139. Not allowed in Serverless ComputeMode workspace.
         :paramtype vnet_address_prefix: ~azure.mgmt.databricks.models.WorkspaceCustomStringParameter
         """
         super().__init__(**kwargs)
@@ -2105,15 +2366,13 @@ class WorkspaceCustomParameters(_serialization.Model):  # pylint: disable=too-ma
         self.storage_account_name = storage_account_name
         self.storage_account_sku_name = storage_account_sku_name
         self.vnet_address_prefix = vnet_address_prefix
-        self.resource_tags = None
+        self.resource_tags: Optional["_models.WorkspaceCustomObjectParameter"] = None
 
 
 class WorkspaceCustomStringParameter(_serialization.Model):
     """The Value.
 
-    Variables are only populated by the server, and will be ignored when sending a request.
-
-    All required parameters must be populated in order to send to Azure.
+    All required parameters must be populated in order to send to server.
 
     :ivar type: The type of variable that this is. Known values are: "Bool", "Object", and
      "String".
@@ -2123,7 +2382,6 @@ class WorkspaceCustomStringParameter(_serialization.Model):
     """
 
     _validation = {
-        "type": {"readonly": True},
         "value": {"required": True},
     }
 
@@ -2132,20 +2390,23 @@ class WorkspaceCustomStringParameter(_serialization.Model):
         "value": {"key": "value", "type": "str"},
     }
 
-    def __init__(self, *, value: str, **kwargs: Any) -> None:
+    def __init__(
+        self, *, value: str, type: Optional[Union[str, "_models.CustomParameterType"]] = None, **kwargs: Any
+    ) -> None:
         """
+        :keyword type: The type of variable that this is. Known values are: "Bool", "Object", and
+         "String".
+        :paramtype type: str or ~azure.mgmt.databricks.models.CustomParameterType
         :keyword value: The value which should be used for this field. Required.
         :paramtype value: str
         """
         super().__init__(**kwargs)
-        self.type = None
+        self.type = type
         self.value = value
 
 
 class WorkspaceEncryptionParameter(_serialization.Model):
     """The object that contains details of encryption used on the workspace.
-
-    Variables are only populated by the server, and will be ignored when sending a request.
 
     :ivar type: The type of variable that this is. Known values are: "Bool", "Object", and
      "String".
@@ -2154,22 +2415,27 @@ class WorkspaceEncryptionParameter(_serialization.Model):
     :vartype value: ~azure.mgmt.databricks.models.Encryption
     """
 
-    _validation = {
-        "type": {"readonly": True},
-    }
-
     _attribute_map = {
         "type": {"key": "type", "type": "str"},
         "value": {"key": "value", "type": "Encryption"},
     }
 
-    def __init__(self, *, value: Optional["_models.Encryption"] = None, **kwargs: Any) -> None:
+    def __init__(
+        self,
+        *,
+        type: Optional[Union[str, "_models.CustomParameterType"]] = None,
+        value: Optional["_models.Encryption"] = None,
+        **kwargs: Any
+    ) -> None:
         """
+        :keyword type: The type of variable that this is. Known values are: "Bool", "Object", and
+         "String".
+        :paramtype type: str or ~azure.mgmt.databricks.models.CustomParameterType
         :keyword value: The value which should be used for this field.
         :paramtype value: ~azure.mgmt.databricks.models.Encryption
         """
         super().__init__(**kwargs)
-        self.type = None
+        self.type = type
         self.value = value
 
 
@@ -2188,7 +2454,7 @@ class WorkspaceListResult(_serialization.Model):
     }
 
     def __init__(
-        self, *, value: Optional[List["_models.Workspace"]] = None, next_link: Optional[str] = None, **kwargs: Any
+        self, *, value: Optional[list["_models.Workspace"]] = None, next_link: Optional[str] = None, **kwargs: Any
     ) -> None:
         """
         :keyword value: The array of workspaces.
@@ -2201,10 +2467,100 @@ class WorkspaceListResult(_serialization.Model):
         self.next_link = next_link
 
 
-class WorkspacePropertiesEncryption(_serialization.Model):
-    """Encryption properties for databricks workspace.
+class WorkspaceNoPublicIPBooleanParameter(_serialization.Model):
+    """The value which should be used for this field.
 
-    All required parameters must be populated in order to send to Azure.
+    All required parameters must be populated in order to send to server.
+
+    :ivar type: The type of variable that this is. Known values are: "Bool", "Object", and
+     "String".
+    :vartype type: str or ~azure.mgmt.databricks.models.CustomParameterType
+    :ivar value: The value which should be used for this field. Required.
+    :vartype value: bool
+    """
+
+    _validation = {
+        "value": {"required": True},
+    }
+
+    _attribute_map = {
+        "type": {"key": "type", "type": "str"},
+        "value": {"key": "value", "type": "bool"},
+    }
+
+    def __init__(
+        self, *, value: bool, type: Optional[Union[str, "_models.CustomParameterType"]] = None, **kwargs: Any
+    ) -> None:
+        """
+        :keyword type: The type of variable that this is. Known values are: "Bool", "Object", and
+         "String".
+        :paramtype type: str or ~azure.mgmt.databricks.models.CustomParameterType
+        :keyword value: The value which should be used for this field. Required.
+        :paramtype value: bool
+        """
+        super().__init__(**kwargs)
+        self.type = type
+        self.value = value
+
+
+class WorkspacePropertiesAccessConnector(_serialization.Model):
+    """Access Connector Resource that is going to be associated with Databricks Workspace. Not allowed
+    in Serverless ComputeMode workspace.
+
+    All required parameters must be populated in order to send to server.
+
+    :ivar id: The resource ID of Azure Databricks Access Connector Resource. Required.
+    :vartype id: str
+    :ivar identity_type: The identity type of the Access Connector Resource. Required. Known values
+     are: "SystemAssigned" and "UserAssigned".
+    :vartype identity_type: str or ~azure.mgmt.databricks.models.IdentityType
+    :ivar user_assigned_identity_id: The resource ID of the User Assigned Identity associated with
+     the Access Connector Resource. This is required for type 'UserAssigned' and not valid for type
+     'SystemAssigned'.
+    :vartype user_assigned_identity_id: str
+    """
+
+    _validation = {
+        "id": {"required": True},
+        "identity_type": {"required": True},
+    }
+
+    _attribute_map = {
+        "id": {"key": "id", "type": "str"},
+        "identity_type": {"key": "identityType", "type": "str"},
+        "user_assigned_identity_id": {"key": "userAssignedIdentityId", "type": "str"},
+    }
+
+    def __init__(
+        self,
+        *,
+        id: str,  # pylint: disable=redefined-builtin
+        identity_type: Union[str, "_models.IdentityType"],
+        user_assigned_identity_id: Optional[str] = None,
+        **kwargs: Any
+    ) -> None:
+        """
+        :keyword id: The resource ID of Azure Databricks Access Connector Resource. Required.
+        :paramtype id: str
+        :keyword identity_type: The identity type of the Access Connector Resource. Required. Known
+         values are: "SystemAssigned" and "UserAssigned".
+        :paramtype identity_type: str or ~azure.mgmt.databricks.models.IdentityType
+        :keyword user_assigned_identity_id: The resource ID of the User Assigned Identity associated
+         with the Access Connector Resource. This is required for type 'UserAssigned' and not valid for
+         type 'SystemAssigned'.
+        :paramtype user_assigned_identity_id: str
+        """
+        super().__init__(**kwargs)
+        self.id = id
+        self.identity_type = identity_type
+        self.user_assigned_identity_id = user_assigned_identity_id
+
+
+class WorkspacePropertiesEncryption(_serialization.Model):
+    """Encryption properties for databricks workspace. Supported in both Serverless and Hybrid
+    ComputeMode workspace.
+
+    All required parameters must be populated in order to send to server.
 
     :ivar entities: Encryption entities definition for the workspace. Required.
     :vartype entities: ~azure.mgmt.databricks.models.EncryptionEntitiesDefinition
@@ -2230,7 +2586,7 @@ class WorkspacePropertiesEncryption(_serialization.Model):
 class WorkspaceProviderAuthorization(_serialization.Model):
     """The workspace provider authorization.
 
-    All required parameters must be populated in order to send to Azure.
+    All required parameters must be populated in order to send to server.
 
     :ivar principal_id: The provider's principal identifier. This is the identity that the provider
      will use to call ARM to manage the workspace resources. Required.
@@ -2277,7 +2633,7 @@ class WorkspaceUpdate(_serialization.Model):
         "tags": {"key": "tags", "type": "{str}"},
     }
 
-    def __init__(self, *, tags: Optional[Dict[str, str]] = None, **kwargs: Any) -> None:
+    def __init__(self, *, tags: Optional[dict[str, str]] = None, **kwargs: Any) -> None:
         """
         :keyword tags: Resource tags.
         :paramtype tags: dict[str, str]

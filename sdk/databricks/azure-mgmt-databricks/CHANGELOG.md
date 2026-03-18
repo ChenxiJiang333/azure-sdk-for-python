@@ -1,5 +1,21 @@
 # Release History
 
+## 3.0.0 (2026-03-18)
+
+### Features Added
+
+  - Model AccessConnectorProperties has a new parameter refered_by
+  - Model Workspace has a new parameter access_connector
+  - Model Workspace has a new parameter default_catalog
+  - Model Workspace has a new parameter default_storage_firewall
+  - Model Workspace has a new parameter enhanced_security_compliance
+  - Model Workspace has a new parameter is_uc_enabled
+  - Operation WorkspacesOperations.begin_delete has a new optional parameter force_deletion
+
+### Breaking Changes
+
+  - Model Workspace has a new required parameter compute_mode
+
 ## 2.0.0 (2023-06-29)
 
 ### Features Added

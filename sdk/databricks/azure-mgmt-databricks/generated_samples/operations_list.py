@@ -1,3 +1,4 @@
+# pylint: disable=line-too-long,useless-suppression
 # coding=utf-8
 # --------------------------------------------------------------------------
 # Copyright (c) Microsoft Corporation. All rights reserved.
@@ -7,6 +8,7 @@
 # --------------------------------------------------------------------------
 
 from azure.identity import DefaultAzureCredential
+
 from azure.mgmt.databricks import AzureDatabricksManagementClient
 
 """
@@ -34,6 +36,6 @@ def main():
         print(item)
 
 
-# x-ms-original-file: specification/databricks/resource-manager/Microsoft.Databricks/stable/2023-02-01/examples/OperationsList.json
+# x-ms-original-file: specification/databricks/resource-manager/Microsoft.Databricks/Databricks/stable/2026-01-01/examples/OperationsList.json
 if __name__ == "__main__":
     main()

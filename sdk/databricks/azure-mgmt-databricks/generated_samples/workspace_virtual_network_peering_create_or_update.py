@@ -1,3 +1,4 @@
+# pylint: disable=line-too-long,useless-suppression
 # coding=utf-8
 # --------------------------------------------------------------------------
 # Copyright (c) Microsoft Corporation. All rights reserved.
@@ -7,6 +8,7 @@
 # --------------------------------------------------------------------------
 
 from azure.identity import DefaultAzureCredential
+
 from azure.mgmt.databricks import AzureDatabricksManagementClient
 
 """
@@ -26,28 +28,32 @@ from azure.mgmt.databricks import AzureDatabricksManagementClient
 def main():
     client = AzureDatabricksManagementClient(
         credential=DefaultAzureCredential(),
-        subscription_id="subid",
+        subscription_id="0140911e-1040-48da-8bc9-b99fb3dd88a6/",
     )
 
     response = client.vnet_peering.begin_create_or_update(
-        resource_group_name="rg",
-        workspace_name="myWorkspace",
+        resource_group_name="subramantest",
+        workspace_name="adbworkspace",
         peering_name="vNetPeeringTest",
         virtual_network_peering_parameters={
-            "properties": {
-                "allowForwardedTraffic": False,
-                "allowGatewayTransit": False,
-                "allowVirtualNetworkAccess": True,
-                "remoteVirtualNetwork": {
-                    "id": "/subscriptions/0140911e-1040-48da-8bc9-b99fb3dd88a6/resourceGroups/subramantest/providers/Microsoft.Network/virtualNetworks/subramanvnet"
-                },
-                "useRemoteGateways": False,
-            }
+            "remoteVirtualNetwork": {"id": "str"},
+            "allowForwardedTraffic": bool,
+            "allowGatewayTransit": bool,
+            "allowVirtualNetworkAccess": bool,
+            "databricksAddressSpace": {"addressPrefixes": ["str"]},
+            "databricksVirtualNetwork": {"id": "str"},
+            "id": "str",
+            "name": "str",
+            "peeringState": "str",
+            "provisioningState": "str",
+            "remoteAddressSpace": {"addressPrefixes": ["str"]},
+            "type": "str",
+            "useRemoteGateways": bool,
         },
     ).result()
     print(response)
 
 
-# x-ms-original-file: specification/databricks/resource-manager/Microsoft.Databricks/stable/2023-02-01/examples/WorkspaceVirtualNetworkPeeringCreateOrUpdate.json
+# x-ms-original-file: specification/databricks/resource-manager/Microsoft.Databricks/Databricks/stable/2026-01-01/examples/WorkspaceVirtualNetworkPeeringCreateOrUpdate.json
 if __name__ == "__main__":
     main()

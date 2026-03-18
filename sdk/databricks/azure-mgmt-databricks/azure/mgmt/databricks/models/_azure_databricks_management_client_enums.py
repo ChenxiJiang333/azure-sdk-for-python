@@ -10,6 +10,29 @@ from enum import Enum
 from azure.core import CaseInsensitiveEnumMeta
 
 
+class AutomaticClusterUpdateValue(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """AutomaticClusterUpdateValue."""
+
+    ENABLED = "Enabled"
+    DISABLED = "Disabled"
+
+
+class ComplianceSecurityProfileValue(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """ComplianceSecurityProfileValue."""
+
+    ENABLED = "Enabled"
+    DISABLED = "Disabled"
+
+
+class ComputeMode(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """The workspace compute mode. Required on create, cannot be changed. Possible values include:
+    'Serverless', 'Hybrid'.
+    """
+
+    SERVERLESS = "Serverless"
+    HYBRID = "Hybrid"
+
+
 class CreatedByType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The type of identity that created the resource."""
 
@@ -20,17 +43,49 @@ class CreatedByType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 
 
 class CustomParameterType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
-    """Provisioning status of the workspace."""
+    """The workspace's custom parameters."""
 
     BOOL = "Bool"
     OBJECT = "Object"
     STRING = "String"
 
 
+class DefaultStorageFirewall(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Gets or Sets Default Storage Firewall configuration information. Not allowed in Serverless
+    ComputeMode workspace.
+    """
+
+    DISABLED = "Disabled"
+    ENABLED = "Enabled"
+
+
 class EncryptionKeySource(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The encryption keySource (provider). Possible values (case-insensitive):  Microsoft.Keyvault."""
 
     MICROSOFT_KEYVAULT = "Microsoft.Keyvault"
+
+
+class EnhancedSecurityMonitoringValue(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """EnhancedSecurityMonitoringValue."""
+
+    ENABLED = "Enabled"
+    DISABLED = "Disabled"
+
+
+class IdentityType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """The identity type of the Access Connector Resource."""
+
+    SYSTEM_ASSIGNED = "SystemAssigned"
+    USER_ASSIGNED = "UserAssigned"
+
+
+class InitialType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+    """Defines the initial type of the default catalog. Possible values (case-insensitive):
+    HiveMetastore, UnityCatalog.
+    """
+
+    HIVE_METASTORE = "HiveMetastore"
+    UNITY_CATALOG = "UnityCatalog"
 
 
 class KeySource(str, Enum, metaclass=CaseInsensitiveEnumMeta):
@@ -70,7 +125,9 @@ class PeeringState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     DISCONNECTED = "Disconnected"
 
 
-class PrivateEndpointConnectionProvisioningState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
+class PrivateEndpointConnectionProvisioningState(  # pylint: disable=name-too-long
+    str, Enum, metaclass=CaseInsensitiveEnumMeta
+):
     """The current provisioning state."""
 
     SUCCEEDED = "Succeeded"
@@ -107,7 +164,8 @@ class ProvisioningState(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 
 class PublicNetworkAccess(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """The network access type for accessing workspace. Set value to disabled to access workspace only
-    via private link.
+    via private link. Used to configure front-end only private link for Serverless ComputeMode
+    workspace.
     """
 
     ENABLED = "Enabled"
@@ -117,7 +175,8 @@ class PublicNetworkAccess(str, Enum, metaclass=CaseInsensitiveEnumMeta):
 class RequiredNsgRules(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Gets or sets a value indicating whether data plane (clusters) to control plane communication
     happen over private endpoint. Supported values are 'AllRules' and 'NoAzureDatabricksRules'.
-    'NoAzureServiceRules' value is for internal use only.
+    'NoAzureServiceRules' value is for internal use only. Not allowed in Serverless ComputeMode
+    workspace.
     """
 
     ALL_RULES = "AllRules"
