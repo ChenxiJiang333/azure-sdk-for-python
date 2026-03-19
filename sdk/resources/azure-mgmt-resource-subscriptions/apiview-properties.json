@@ -42,7 +42,7 @@
         "azure.mgmt.resource.subscriptions.aio.operations.SubscriptionsOperations.check_zone_peers": "Microsoft.Resources.Subscriptions.checkZonePeers",
         "azure.mgmt.resource.subscriptions.operations.TenantsOperations.list": "Microsoft.Resources.Tenants.list",
         "azure.mgmt.resource.subscriptions.aio.operations.TenantsOperations.list": "Microsoft.Resources.Tenants.list",
-        "azure.mgmt.resource.subscriptions.ResourcesClient.check_resource_name": "Microsoft.Resources.checkResourceName",
-        "azure.mgmt.resource.subscriptions.aio.ResourcesClient.check_resource_name": "Microsoft.Resources.checkResourceName"
+        "azure.mgmt.resource.subscriptions.SubscriptionClient.check_resource_name": "Microsoft.Resources.checkResourceName",
+        "azure.mgmt.resource.subscriptions.aio.SubscriptionClient.check_resource_name": "Microsoft.Resources.checkResourceName"
     }
 }

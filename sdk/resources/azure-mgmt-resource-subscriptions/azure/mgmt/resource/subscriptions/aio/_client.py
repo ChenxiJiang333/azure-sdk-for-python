@@ -18,16 +18,16 @@ from azure.mgmt.core.policies import AsyncARMAutoResourceProviderRegistrationPol
 from azure.mgmt.core.tools import get_arm_endpoints
 
 from .._utils.serialization import Deserializer, Serializer
-from ._configuration import ResourcesClientConfiguration
-from .operations import Operations, SubscriptionsOperations, TenantsOperations, _ResourcesClientOperationsMixin
+from ._configuration import SubscriptionClientConfiguration
+from .operations import Operations, SubscriptionsOperations, TenantsOperations, _SubscriptionClientOperationsMixin
 
 if TYPE_CHECKING:
     from azure.core import AzureClouds
     from azure.core.credentials_async import AsyncTokenCredential
 
 
-class ResourcesClient(_ResourcesClientOperationsMixin):
-    """ResourcesClient.
+class SubscriptionClient(_SubscriptionClientOperationsMixin):
+    """SubscriptionClient.
 
     :ivar operations: Operations operations
     :vartype operations: azure.mgmt.resource.subscriptions.aio.operations.Operations
@@ -63,7 +63,7 @@ class ResourcesClient(_ResourcesClientOperationsMixin):
         if not base_url:
             base_url = _endpoints["resource_manager"]
         credential_scopes = kwargs.pop("credential_scopes", _endpoints["credential_scopes"])
-        self._config = ResourcesClientConfiguration(
+        self._config = SubscriptionClientConfiguration(
             credential=credential,
             base_url=cast(str, base_url),
             cloud_setting=cloud_setting,

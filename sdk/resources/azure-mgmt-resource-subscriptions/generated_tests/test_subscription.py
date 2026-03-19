@@ -6,7 +6,7 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 import pytest
-from azure.mgmt.resource.subscriptions import ResourcesClient
+from azure.mgmt.resource.subscriptions import SubscriptionClient
 
 from devtools_testutils import AzureMgmtRecordedTestCase, RandomNameResourceGroupPreparer, recorded_by_proxy
 
@@ -14,14 +14,14 @@ AZURE_LOCATION = "eastus"
 
 
 @pytest.mark.skip("you may need to update the auto-generated test case before run it")
-class TestResourcesTenantsOperations(AzureMgmtRecordedTestCase):
+class TestSubscription(AzureMgmtRecordedTestCase):
     def setup_method(self, method):
-        self.client = self.create_mgmt_client(ResourcesClient)
+        self.client = self.create_mgmt_client(SubscriptionClient)
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_tenants_list(self, resource_group):
-        response = self.client.tenants.list()
-        result = [r for r in response]
+    def test_check_resource_name(self, resource_group):
+        response = self.client.check_resource_name()
+
         # please add some check logic here by yourself
         # ...

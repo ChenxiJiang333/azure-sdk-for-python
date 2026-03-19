@@ -31,7 +31,7 @@ from azure.core.utils import case_insensitive_dict
 from azure.mgmt.core.exceptions import ARMErrorFormat
 
 from .. import models as _models
-from .._configuration import ResourcesClientConfiguration
+from .._configuration import SubscriptionClientConfiguration
 from .._utils.model_base import SdkJSONEncoder, _deserialize, _failsafe_deserialize
 from .._utils.serialization import Deserializer, Serializer
 from .._utils.utils import ClientMixinABC
@@ -185,7 +185,7 @@ def build_tenants_list_request(**kwargs: Any) -> HttpRequest:
     return HttpRequest(method="GET", url=_url, params=_params, headers=_headers, **kwargs)
 
 
-def build_resources_check_resource_name_request(**kwargs: Any) -> HttpRequest:  # pylint: disable=name-too-long
+def build_subscription_check_resource_name_request(**kwargs: Any) -> HttpRequest:  # pylint: disable=name-too-long
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
@@ -213,14 +213,14 @@ class Operations:
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.resource.subscriptions.ResourcesClient`'s
+        :class:`~azure.mgmt.resource.subscriptions.SubscriptionClient`'s
         :attr:`operations` attribute.
     """
 
     def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client: PipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: ResourcesClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._config: SubscriptionClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
         self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
@@ -317,14 +317,14 @@ class SubscriptionsOperations:
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.resource.subscriptions.ResourcesClient`'s
+        :class:`~azure.mgmt.resource.subscriptions.SubscriptionClient`'s
         :attr:`subscriptions` attribute.
     """
 
     def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client: PipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: ResourcesClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._config: SubscriptionClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
         self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
@@ -722,14 +722,14 @@ class TenantsOperations:
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.resource.subscriptions.ResourcesClient`'s
+        :class:`~azure.mgmt.resource.subscriptions.SubscriptionClient`'s
         :attr:`tenants` attribute.
     """
 
     def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client: PipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: ResourcesClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._config: SubscriptionClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
         self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
@@ -821,8 +821,8 @@ class TenantsOperations:
         return ItemPaged(get_next, extract_data)
 
 
-class _ResourcesClientOperationsMixin(
-    ClientMixinABC[PipelineClient[HttpRequest, HttpResponse], ResourcesClientConfiguration]
+class _SubscriptionClientOperationsMixin(
+    ClientMixinABC[PipelineClient[HttpRequest, HttpResponse], SubscriptionClientConfiguration]
 ):
 
     @overload
@@ -932,7 +932,7 @@ class _ResourcesClientOperationsMixin(
             else:
                 _content = None
 
-        _request = build_resources_check_resource_name_request(
+        _request = build_subscription_check_resource_name_request(
             content_type=content_type,
             api_version=self._config.api_version,
             content=_content,

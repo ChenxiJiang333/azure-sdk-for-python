@@ -15,7 +15,7 @@ if TYPE_CHECKING:
 from ._operations import Operations  # type: ignore
 from ._operations import SubscriptionsOperations  # type: ignore
 from ._operations import TenantsOperations  # type: ignore
-from ._operations import _ResourcesClientOperationsMixin  # type: ignore # pylint: disable=unused-import
+from ._operations import _SubscriptionClientOperationsMixin  # type: ignore # pylint: disable=unused-import
 
 from ._patch import __all__ as _patch_all
 from ._patch import *

@@ -1,7 +1,7 @@
 {
   "azure.mgmt.resource.subscriptions": {
     "class_nodes": {
-      "ResourcesClient": {
+      "SubscriptionClient": {
         "type": null,
         "methods": {
           "__init__": {
@@ -4836,7 +4836,7 @@
   },
   "azure.mgmt.resource.subscriptions.aio": {
     "class_nodes": {
-      "ResourcesClient": {
+      "SubscriptionClient": {
         "type": null,
         "methods": {
           "__init__": {

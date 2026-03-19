@@ -8,7 +8,7 @@
 
 from azure.identity import DefaultAzureCredential
 
-from azure.mgmt.resource.subscriptions import ResourcesClient
+from azure.mgmt.resource.subscriptions import SubscriptionClient
 
 """
 # PREREQUISITES
@@ -25,7 +25,7 @@ from azure.mgmt.resource.subscriptions import ResourcesClient
 
 
 def main():
-    client = ResourcesClient(
+    client = SubscriptionClient(
         credential=DefaultAzureCredential(),
     )
 
