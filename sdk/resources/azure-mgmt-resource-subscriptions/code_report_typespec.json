@@ -1,0 +1,5261 @@
+{
+  "azure.mgmt.resource.subscriptions": {
+    "class_nodes": {
+      "ResourcesClient": {
+        "type": null,
+        "methods": {
+          "__init__": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "credential": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "base_url": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              },
+              "cloud_setting": {
+                "default": "none",
+                "param_type": "keyword_only"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "check_resource_name": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "resource_name_definition": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": [
+              {
+                "parameters": {
+                  "self": {
+                    "type": null,
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "resource_name_definition": {
+                    "type": "Optional[ResourceName]",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "content_type": {
+                    "type": "str",
+                    "default": "application/json",
+                    "param_type": "keyword_only"
+                  }
+                },
+                "is_async": false,
+                "return_type": null
+              },
+              {
+                "parameters": {
+                  "self": {
+                    "type": null,
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "resource_name_definition": {
+                    "type": "Optional[JSON]",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "content_type": {
+                    "type": "str",
+                    "default": "application/json",
+                    "param_type": "keyword_only"
+                  }
+                },
+                "is_async": false,
+                "return_type": null
+              },
+              {
+                "parameters": {
+                  "self": {
+                    "type": null,
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "resource_name_definition": {
+                    "type": "Optional[IO[bytes]]",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "content_type": {
+                    "type": "str",
+                    "default": "application/json",
+                    "param_type": "keyword_only"
+                  }
+                },
+                "is_async": false,
+                "return_type": null
+              }
+            ]
+          },
+          "close": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "send_request": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "request": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "stream": {
+                "default": "bool",
+                "param_type": "keyword_only"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          }
+        },
+        "properties": {
+          "client_side_validation": {
+            "attr_type": false
+          },
+          "operations": {
+            "attr_type": "Operations"
+          },
+          "subscriptions": {
+            "attr_type": "SubscriptionsOperations"
+          },
+          "tenants": {
+            "attr_type": "TenantsOperations"
+          }
+        }
+      }
+    },
+    "function_nodes": {}
+  },
+  "azure.mgmt.resource.subscriptions.operations": {
+    "class_nodes": {
+      "Operations": {
+        "type": null,
+        "methods": {
+          "__init__": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "args": {
+                "default": null,
+                "param_type": "var_positional"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "list": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          }
+        },
+        "properties": {}
+      },
+      "SubscriptionsOperations": {
+        "type": null,
+        "methods": {
+          "__init__": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "args": {
+                "default": null,
+                "param_type": "var_positional"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "check_zone_peers": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "subscription_id": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "parameters": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": [
+              {
+                "parameters": {
+                  "self": {
+                    "type": null,
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "subscription_id": {
+                    "type": "str",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "parameters": {
+                    "type": "CheckZonePeersRequest",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "content_type": {
+                    "type": "str",
+                    "default": "application/json",
+                    "param_type": "keyword_only"
+                  }
+                },
+                "is_async": false,
+                "return_type": null
+              },
+              {
+                "parameters": {
+                  "self": {
+                    "type": null,
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "subscription_id": {
+                    "type": "str",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "parameters": {
+                    "type": "JSON",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "content_type": {
+                    "type": "str",
+                    "default": "application/json",
+                    "param_type": "keyword_only"
+                  }
+                },
+                "is_async": false,
+                "return_type": null
+              },
+              {
+                "parameters": {
+                  "self": {
+                    "type": null,
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "subscription_id": {
+                    "type": "str",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "parameters": {
+                    "type": "IO[bytes]",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "content_type": {
+                    "type": "str",
+                    "default": "application/json",
+                    "param_type": "keyword_only"
+                  }
+                },
+                "is_async": false,
+                "return_type": null
+              }
+            ]
+          },
+          "get": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "subscription_id": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "list": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "list_locations": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "subscription_id": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "include_extended_locations": {
+                "default": "none",
+                "param_type": "keyword_only"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          }
+        },
+        "properties": {}
+      },
+      "TenantsOperations": {
+        "type": null,
+        "methods": {
+          "__init__": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "args": {
+                "default": null,
+                "param_type": "var_positional"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "list": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          }
+        },
+        "properties": {}
+      }
+    },
+    "function_nodes": {}
+  },
+  "azure.mgmt.resource.subscriptions.models": {
+    "class_nodes": {
+      "ActionType": {
+        "type": "Enum",
+        "methods": {},
+        "properties": {
+          "INTERNAL": "INTERNAL",
+          "capitalize": "capitalize",
+          "casefold": "casefold",
+          "center": "center",
+          "count": "count",
+          "encode": "encode",
+          "endswith": "endswith",
+          "expandtabs": "expandtabs",
+          "find": "find",
+          "format": "format",
+          "format_map": "format_map",
+          "index": "index",
+          "isalnum": "isalnum",
+          "isalpha": "isalpha",
+          "isascii": "isascii",
+          "isdecimal": "isdecimal",
+          "isdigit": "isdigit",
+          "isidentifier": "isidentifier",
+          "islower": "islower",
+          "isnumeric": "isnumeric",
+          "isprintable": "isprintable",
+          "isspace": "isspace",
+          "istitle": "istitle",
+          "isupper": "isupper",
+          "join": "join",
+          "ljust": "ljust",
+          "lower": "lower",
+          "lstrip": "lstrip",
+          "maketrans": "maketrans",
+          "partition": "partition",
+          "removeprefix": "removeprefix",
+          "removesuffix": "removesuffix",
+          "replace": "replace",
+          "rfind": "rfind",
+          "rindex": "rindex",
+          "rjust": "rjust",
+          "rpartition": "rpartition",
+          "rsplit": "rsplit",
+          "rstrip": "rstrip",
+          "split": "split",
+          "splitlines": "splitlines",
+          "startswith": "startswith",
+          "strip": "strip",
+          "swapcase": "swapcase",
+          "title": "title",
+          "translate": "translate",
+          "upper": "upper",
+          "zfill": "zfill"
+        }
+      },
+      "AvailabilityZoneMappings": {
+        "type": null,
+        "methods": {
+          "__init__": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "args": {
+                "default": null,
+                "param_type": "var_positional"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "as_dict": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "exclude_readonly": {
+                "default": "bool",
+                "param_type": "keyword_only"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "clear": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "copy": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "get": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "key": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "default": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "items": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "keys": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "pop": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "key": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "default": {
+                "default": "object",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "popitem": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "setdefault": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "key": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "default": {
+                "default": "object",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "update": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "args": {
+                "default": null,
+                "param_type": "var_positional"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "values": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          }
+        },
+        "properties": {
+          "logical_zone": "Optional",
+          "physical_zone": "Optional"
+        }
+      },
+      "AvailabilityZonePeers": {
+        "type": null,
+        "methods": {
+          "__init__": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "args": {
+                "default": null,
+                "param_type": "var_positional"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": [
+              {
+                "parameters": {
+                  "self": {
+                    "type": null,
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "peers": {
+                    "type": "Optional[list[_models.Peers]]",
+                    "default": null,
+                    "param_type": "keyword_only"
+                  }
+                },
+                "is_async": false,
+                "return_type": null
+              },
+              {
+                "parameters": {
+                  "self": {
+                    "type": null,
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "mapping": {
+                    "type": "Mapping[str, Any]",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  }
+                },
+                "is_async": false,
+                "return_type": null
+              }
+            ]
+          },
+          "as_dict": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "exclude_readonly": {
+                "default": "bool",
+                "param_type": "keyword_only"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "clear": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "copy": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "get": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "key": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "default": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "items": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "keys": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "pop": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "key": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "default": {
+                "default": "object",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "popitem": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "setdefault": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "key": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "default": {
+                "default": "object",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "update": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "args": {
+                "default": null,
+                "param_type": "var_positional"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "values": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          }
+        },
+        "properties": {
+          "availability_zone": "Optional",
+          "peers": "Optional"
+        }
+      },
+      "CheckResourceNameResult": {
+        "type": null,
+        "methods": {
+          "__init__": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "args": {
+                "default": null,
+                "param_type": "var_positional"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": [
+              {
+                "parameters": {
+                  "self": {
+                    "type": null,
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "name": {
+                    "type": "Optional[str]",
+                    "default": null,
+                    "param_type": "keyword_only"
+                  },
+                  "type": {
+                    "type": "Optional[str]",
+                    "default": null,
+                    "param_type": "keyword_only"
+                  },
+                  "status": {
+                    "type": "Optional[Union[str, _models.ResourceNameStatus]]",
+                    "default": null,
+                    "param_type": "keyword_only"
+                  }
+                },
+                "is_async": false,
+                "return_type": null
+              },
+              {
+                "parameters": {
+                  "self": {
+                    "type": null,
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "mapping": {
+                    "type": "Mapping[str, Any]",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  }
+                },
+                "is_async": false,
+                "return_type": null
+              }
+            ]
+          },
+          "as_dict": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "exclude_readonly": {
+                "default": "bool",
+                "param_type": "keyword_only"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "clear": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "copy": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "get": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "key": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "default": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "items": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "keys": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "pop": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "key": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "default": {
+                "default": "object",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "popitem": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "setdefault": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "key": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "default": {
+                "default": "object",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "update": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "args": {
+                "default": null,
+                "param_type": "var_positional"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "values": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          }
+        },
+        "properties": {
+          "name": "Optional",
+          "type": "Optional",
+          "status": "Optional"
+        }
+      },
+      "CheckZonePeersRequest": {
+        "type": null,
+        "methods": {
+          "__init__": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "args": {
+                "default": null,
+                "param_type": "var_positional"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": [
+              {
+                "parameters": {
+                  "self": {
+                    "type": null,
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "location": {
+                    "type": "Optional[str]",
+                    "default": null,
+                    "param_type": "keyword_only"
+                  },
+                  "subscription_ids": {
+                    "type": "Optional[list[str]]",
+                    "default": null,
+                    "param_type": "keyword_only"
+                  }
+                },
+                "is_async": false,
+                "return_type": null
+              },
+              {
+                "parameters": {
+                  "self": {
+                    "type": null,
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "mapping": {
+                    "type": "Mapping[str, Any]",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  }
+                },
+                "is_async": false,
+                "return_type": null
+              }
+            ]
+          },
+          "as_dict": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "exclude_readonly": {
+                "default": "bool",
+                "param_type": "keyword_only"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "clear": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "copy": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "get": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "key": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "default": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "items": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "keys": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "pop": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "key": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "default": {
+                "default": "object",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "popitem": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "setdefault": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "key": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "default": {
+                "default": "object",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "update": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "args": {
+                "default": null,
+                "param_type": "var_positional"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "values": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          }
+        },
+        "properties": {
+          "location": "Optional",
+          "subscription_ids": "Optional"
+        }
+      },
+      "CheckZonePeersResult": {
+        "type": null,
+        "methods": {
+          "__init__": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "args": {
+                "default": null,
+                "param_type": "var_positional"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": [
+              {
+                "parameters": {
+                  "self": {
+                    "type": null,
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "location": {
+                    "type": "Optional[str]",
+                    "default": null,
+                    "param_type": "keyword_only"
+                  },
+                  "availability_zone_peers": {
+                    "type": "Optional[list[_models.AvailabilityZonePeers]]",
+                    "default": null,
+                    "param_type": "keyword_only"
+                  }
+                },
+                "is_async": false,
+                "return_type": null
+              },
+              {
+                "parameters": {
+                  "self": {
+                    "type": null,
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "mapping": {
+                    "type": "Mapping[str, Any]",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  }
+                },
+                "is_async": false,
+                "return_type": null
+              }
+            ]
+          },
+          "as_dict": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "exclude_readonly": {
+                "default": "bool",
+                "param_type": "keyword_only"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "clear": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "copy": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "get": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "key": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "default": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "items": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "keys": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "pop": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "key": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "default": {
+                "default": "object",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "popitem": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "setdefault": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "key": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "default": {
+                "default": "object",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "update": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "args": {
+                "default": null,
+                "param_type": "var_positional"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "values": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          }
+        },
+        "properties": {
+          "subscription_id": "Optional",
+          "location": "Optional",
+          "availability_zone_peers": "Optional"
+        }
+      },
+      "CloudError": {
+        "type": null,
+        "methods": {
+          "__init__": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "args": {
+                "default": null,
+                "param_type": "var_positional"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": [
+              {
+                "parameters": {
+                  "self": {
+                    "type": null,
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "error": {
+                    "type": "Optional[_models.ErrorResponse]",
+                    "default": null,
+                    "param_type": "keyword_only"
+                  }
+                },
+                "is_async": false,
+                "return_type": null
+              },
+              {
+                "parameters": {
+                  "self": {
+                    "type": null,
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "mapping": {
+                    "type": "Mapping[str, Any]",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  }
+                },
+                "is_async": false,
+                "return_type": null
+              }
+            ]
+          },
+          "as_dict": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "exclude_readonly": {
+                "default": "bool",
+                "param_type": "keyword_only"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "clear": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "copy": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "get": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "key": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "default": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "items": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "keys": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "pop": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "key": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "default": {
+                "default": "object",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "popitem": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "setdefault": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "key": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "default": {
+                "default": "object",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "update": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "args": {
+                "default": null,
+                "param_type": "var_positional"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "values": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          }
+        },
+        "properties": {
+          "error": "Optional"
+        }
+      },
+      "ErrorAdditionalInfo": {
+        "type": null,
+        "methods": {
+          "__init__": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "args": {
+                "default": null,
+                "param_type": "var_positional"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "as_dict": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "exclude_readonly": {
+                "default": "bool",
+                "param_type": "keyword_only"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "clear": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "copy": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "get": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "key": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "default": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "items": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "keys": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "pop": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "key": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "default": {
+                "default": "object",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "popitem": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "setdefault": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "key": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "default": {
+                "default": "object",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "update": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "args": {
+                "default": null,
+                "param_type": "var_positional"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "values": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          }
+        },
+        "properties": {
+          "type": "Optional",
+          "info": "Optional"
+        }
+      },
+      "ErrorDetail": {
+        "type": null,
+        "methods": {
+          "__init__": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "args": {
+                "default": null,
+                "param_type": "var_positional"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "as_dict": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "exclude_readonly": {
+                "default": "bool",
+                "param_type": "keyword_only"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "clear": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "copy": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "get": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "key": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "default": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "items": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "keys": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "pop": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "key": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "default": {
+                "default": "object",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "popitem": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "setdefault": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "key": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "default": {
+                "default": "object",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "update": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "args": {
+                "default": null,
+                "param_type": "var_positional"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "values": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          }
+        },
+        "properties": {
+          "code": "Optional",
+          "message": "Optional",
+          "target": "Optional",
+          "details": "Optional",
+          "additional_info": "Optional"
+        }
+      },
+      "ErrorResponse": {
+        "type": null,
+        "methods": {
+          "__init__": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "args": {
+                "default": null,
+                "param_type": "var_positional"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": [
+              {
+                "parameters": {
+                  "self": {
+                    "type": null,
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "error": {
+                    "type": "Optional[_models.ErrorDetail]",
+                    "default": null,
+                    "param_type": "keyword_only"
+                  }
+                },
+                "is_async": false,
+                "return_type": null
+              },
+              {
+                "parameters": {
+                  "self": {
+                    "type": null,
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "mapping": {
+                    "type": "Mapping[str, Any]",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  }
+                },
+                "is_async": false,
+                "return_type": null
+              }
+            ]
+          },
+          "as_dict": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "exclude_readonly": {
+                "default": "bool",
+                "param_type": "keyword_only"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "clear": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "copy": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "get": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "key": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "default": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "items": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "keys": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "pop": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "key": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "default": {
+                "default": "object",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "popitem": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "setdefault": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "key": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "default": {
+                "default": "object",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "update": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "args": {
+                "default": null,
+                "param_type": "var_positional"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "values": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          }
+        },
+        "properties": {
+          "error": "Optional"
+        }
+      },
+      "Location": {
+        "type": null,
+        "methods": {
+          "__init__": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "args": {
+                "default": null,
+                "param_type": "var_positional"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": [
+              {
+                "parameters": {
+                  "self": {
+                    "type": null,
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "metadata": {
+                    "type": "Optional[_models.LocationMetadata]",
+                    "default": null,
+                    "param_type": "keyword_only"
+                  },
+                  "availability_zone_mappings": {
+                    "type": "Optional[list[_models.AvailabilityZoneMappings]]",
+                    "default": null,
+                    "param_type": "keyword_only"
+                  }
+                },
+                "is_async": false,
+                "return_type": null
+              },
+              {
+                "parameters": {
+                  "self": {
+                    "type": null,
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "mapping": {
+                    "type": "Mapping[str, Any]",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  }
+                },
+                "is_async": false,
+                "return_type": null
+              }
+            ]
+          },
+          "as_dict": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "exclude_readonly": {
+                "default": "bool",
+                "param_type": "keyword_only"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "clear": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "copy": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "get": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "key": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "default": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "items": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "keys": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "pop": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "key": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "default": {
+                "default": "object",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "popitem": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "setdefault": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "key": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "default": {
+                "default": "object",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "update": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "args": {
+                "default": null,
+                "param_type": "var_positional"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "values": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          }
+        },
+        "properties": {
+          "id": "Optional",
+          "subscription_id": "Optional",
+          "name": "Optional",
+          "type": "Optional",
+          "display_name": "Optional",
+          "regional_display_name": "Optional",
+          "metadata": "Optional",
+          "availability_zone_mappings": "Optional"
+        }
+      },
+      "LocationMetadata": {
+        "type": null,
+        "methods": {
+          "__init__": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "args": {
+                "default": null,
+                "param_type": "var_positional"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": [
+              {
+                "parameters": {
+                  "self": {
+                    "type": null,
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "paired_region": {
+                    "type": "Optional[list[_models.PairedRegion]]",
+                    "default": null,
+                    "param_type": "keyword_only"
+                  }
+                },
+                "is_async": false,
+                "return_type": null
+              },
+              {
+                "parameters": {
+                  "self": {
+                    "type": null,
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "mapping": {
+                    "type": "Mapping[str, Any]",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  }
+                },
+                "is_async": false,
+                "return_type": null
+              }
+            ]
+          },
+          "as_dict": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "exclude_readonly": {
+                "default": "bool",
+                "param_type": "keyword_only"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "clear": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "copy": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "get": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "key": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "default": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "items": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "keys": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "pop": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "key": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "default": {
+                "default": "object",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "popitem": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "setdefault": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "key": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "default": {
+                "default": "object",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "update": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "args": {
+                "default": null,
+                "param_type": "var_positional"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "values": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          }
+        },
+        "properties": {
+          "region_type": "Optional",
+          "region_category": "Optional",
+          "geography": "Optional",
+          "geography_group": "Optional",
+          "longitude": "Optional",
+          "latitude": "Optional",
+          "physical_location": "Optional",
+          "paired_region": "Optional",
+          "home_location": "Optional"
+        }
+      },
+      "LocationType": {
+        "type": "Enum",
+        "methods": {},
+        "properties": {
+          "EDGE_ZONE": "EDGE_ZONE",
+          "REGION": "REGION",
+          "capitalize": "capitalize",
+          "casefold": "casefold",
+          "center": "center",
+          "count": "count",
+          "encode": "encode",
+          "endswith": "endswith",
+          "expandtabs": "expandtabs",
+          "find": "find",
+          "format": "format",
+          "format_map": "format_map",
+          "index": "index",
+          "isalnum": "isalnum",
+          "isalpha": "isalpha",
+          "isascii": "isascii",
+          "isdecimal": "isdecimal",
+          "isdigit": "isdigit",
+          "isidentifier": "isidentifier",
+          "islower": "islower",
+          "isnumeric": "isnumeric",
+          "isprintable": "isprintable",
+          "isspace": "isspace",
+          "istitle": "istitle",
+          "isupper": "isupper",
+          "join": "join",
+          "ljust": "ljust",
+          "lower": "lower",
+          "lstrip": "lstrip",
+          "maketrans": "maketrans",
+          "partition": "partition",
+          "removeprefix": "removeprefix",
+          "removesuffix": "removesuffix",
+          "replace": "replace",
+          "rfind": "rfind",
+          "rindex": "rindex",
+          "rjust": "rjust",
+          "rpartition": "rpartition",
+          "rsplit": "rsplit",
+          "rstrip": "rstrip",
+          "split": "split",
+          "splitlines": "splitlines",
+          "startswith": "startswith",
+          "strip": "strip",
+          "swapcase": "swapcase",
+          "title": "title",
+          "translate": "translate",
+          "upper": "upper",
+          "zfill": "zfill"
+        }
+      },
+      "ManagedByTenant": {
+        "type": null,
+        "methods": {
+          "__init__": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "args": {
+                "default": null,
+                "param_type": "var_positional"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "as_dict": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "exclude_readonly": {
+                "default": "bool",
+                "param_type": "keyword_only"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "clear": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "copy": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "get": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "key": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "default": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "items": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "keys": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "pop": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "key": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "default": {
+                "default": "object",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "popitem": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "setdefault": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "key": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "default": {
+                "default": "object",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "update": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "args": {
+                "default": null,
+                "param_type": "var_positional"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "values": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          }
+        },
+        "properties": {
+          "tenant_id": "Optional"
+        }
+      },
+      "Operation": {
+        "type": null,
+        "methods": {
+          "__init__": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "args": {
+                "default": null,
+                "param_type": "var_positional"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": [
+              {
+                "parameters": {
+                  "self": {
+                    "type": null,
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "display": {
+                    "type": "Optional[_models.OperationDisplay]",
+                    "default": null,
+                    "param_type": "keyword_only"
+                  }
+                },
+                "is_async": false,
+                "return_type": null
+              },
+              {
+                "parameters": {
+                  "self": {
+                    "type": null,
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "mapping": {
+                    "type": "Mapping[str, Any]",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  }
+                },
+                "is_async": false,
+                "return_type": null
+              }
+            ]
+          },
+          "as_dict": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "exclude_readonly": {
+                "default": "bool",
+                "param_type": "keyword_only"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "clear": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "copy": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "get": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "key": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "default": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "items": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "keys": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "pop": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "key": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "default": {
+                "default": "object",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "popitem": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "setdefault": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "key": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "default": {
+                "default": "object",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "update": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "args": {
+                "default": null,
+                "param_type": "var_positional"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "values": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          }
+        },
+        "properties": {
+          "name": "Optional",
+          "is_data_action": "Optional",
+          "display": "Optional",
+          "origin": "Optional",
+          "action_type": "Optional"
+        }
+      },
+      "OperationDisplay": {
+        "type": null,
+        "methods": {
+          "__init__": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "args": {
+                "default": null,
+                "param_type": "var_positional"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "as_dict": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "exclude_readonly": {
+                "default": "bool",
+                "param_type": "keyword_only"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "clear": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "copy": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "get": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "key": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "default": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "items": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "keys": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "pop": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "key": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "default": {
+                "default": "object",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "popitem": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "setdefault": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "key": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "default": {
+                "default": "object",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "update": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "args": {
+                "default": null,
+                "param_type": "var_positional"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "values": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          }
+        },
+        "properties": {
+          "provider": "Optional",
+          "resource": "Optional",
+          "operation": "Optional",
+          "description": "Optional"
+        }
+      },
+      "Origin": {
+        "type": "Enum",
+        "methods": {},
+        "properties": {
+          "SYSTEM": "SYSTEM",
+          "USER": "USER",
+          "USER_SYSTEM": "USER_SYSTEM",
+          "capitalize": "capitalize",
+          "casefold": "casefold",
+          "center": "center",
+          "count": "count",
+          "encode": "encode",
+          "endswith": "endswith",
+          "expandtabs": "expandtabs",
+          "find": "find",
+          "format": "format",
+          "format_map": "format_map",
+          "index": "index",
+          "isalnum": "isalnum",
+          "isalpha": "isalpha",
+          "isascii": "isascii",
+          "isdecimal": "isdecimal",
+          "isdigit": "isdigit",
+          "isidentifier": "isidentifier",
+          "islower": "islower",
+          "isnumeric": "isnumeric",
+          "isprintable": "isprintable",
+          "isspace": "isspace",
+          "istitle": "istitle",
+          "isupper": "isupper",
+          "join": "join",
+          "ljust": "ljust",
+          "lower": "lower",
+          "lstrip": "lstrip",
+          "maketrans": "maketrans",
+          "partition": "partition",
+          "removeprefix": "removeprefix",
+          "removesuffix": "removesuffix",
+          "replace": "replace",
+          "rfind": "rfind",
+          "rindex": "rindex",
+          "rjust": "rjust",
+          "rpartition": "rpartition",
+          "rsplit": "rsplit",
+          "rstrip": "rstrip",
+          "split": "split",
+          "splitlines": "splitlines",
+          "startswith": "startswith",
+          "strip": "strip",
+          "swapcase": "swapcase",
+          "title": "title",
+          "translate": "translate",
+          "upper": "upper",
+          "zfill": "zfill"
+        }
+      },
+      "PairedRegion": {
+        "type": null,
+        "methods": {
+          "__init__": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "args": {
+                "default": null,
+                "param_type": "var_positional"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "as_dict": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "exclude_readonly": {
+                "default": "bool",
+                "param_type": "keyword_only"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "clear": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "copy": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "get": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "key": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "default": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "items": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "keys": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "pop": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "key": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "default": {
+                "default": "object",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "popitem": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "setdefault": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "key": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "default": {
+                "default": "object",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "update": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "args": {
+                "default": null,
+                "param_type": "var_positional"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "values": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          }
+        },
+        "properties": {
+          "name": "Optional",
+          "id": "Optional",
+          "subscription_id": "Optional"
+        }
+      },
+      "Peers": {
+        "type": null,
+        "methods": {
+          "__init__": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "args": {
+                "default": null,
+                "param_type": "var_positional"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "as_dict": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "exclude_readonly": {
+                "default": "bool",
+                "param_type": "keyword_only"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "clear": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "copy": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "get": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "key": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "default": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "items": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "keys": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "pop": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "key": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "default": {
+                "default": "object",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "popitem": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "setdefault": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "key": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "default": {
+                "default": "object",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "update": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "args": {
+                "default": null,
+                "param_type": "var_positional"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "values": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          }
+        },
+        "properties": {
+          "subscription_id": "Optional",
+          "availability_zone": "Optional"
+        }
+      },
+      "RegionCategory": {
+        "type": "Enum",
+        "methods": {},
+        "properties": {
+          "EXTENDED": "EXTENDED",
+          "OTHER": "OTHER",
+          "RECOMMENDED": "RECOMMENDED",
+          "capitalize": "capitalize",
+          "casefold": "casefold",
+          "center": "center",
+          "count": "count",
+          "encode": "encode",
+          "endswith": "endswith",
+          "expandtabs": "expandtabs",
+          "find": "find",
+          "format": "format",
+          "format_map": "format_map",
+          "index": "index",
+          "isalnum": "isalnum",
+          "isalpha": "isalpha",
+          "isascii": "isascii",
+          "isdecimal": "isdecimal",
+          "isdigit": "isdigit",
+          "isidentifier": "isidentifier",
+          "islower": "islower",
+          "isnumeric": "isnumeric",
+          "isprintable": "isprintable",
+          "isspace": "isspace",
+          "istitle": "istitle",
+          "isupper": "isupper",
+          "join": "join",
+          "ljust": "ljust",
+          "lower": "lower",
+          "lstrip": "lstrip",
+          "maketrans": "maketrans",
+          "partition": "partition",
+          "removeprefix": "removeprefix",
+          "removesuffix": "removesuffix",
+          "replace": "replace",
+          "rfind": "rfind",
+          "rindex": "rindex",
+          "rjust": "rjust",
+          "rpartition": "rpartition",
+          "rsplit": "rsplit",
+          "rstrip": "rstrip",
+          "split": "split",
+          "splitlines": "splitlines",
+          "startswith": "startswith",
+          "strip": "strip",
+          "swapcase": "swapcase",
+          "title": "title",
+          "translate": "translate",
+          "upper": "upper",
+          "zfill": "zfill"
+        }
+      },
+      "RegionType": {
+        "type": "Enum",
+        "methods": {},
+        "properties": {
+          "LOGICAL": "LOGICAL",
+          "PHYSICAL": "PHYSICAL",
+          "capitalize": "capitalize",
+          "casefold": "casefold",
+          "center": "center",
+          "count": "count",
+          "encode": "encode",
+          "endswith": "endswith",
+          "expandtabs": "expandtabs",
+          "find": "find",
+          "format": "format",
+          "format_map": "format_map",
+          "index": "index",
+          "isalnum": "isalnum",
+          "isalpha": "isalpha",
+          "isascii": "isascii",
+          "isdecimal": "isdecimal",
+          "isdigit": "isdigit",
+          "isidentifier": "isidentifier",
+          "islower": "islower",
+          "isnumeric": "isnumeric",
+          "isprintable": "isprintable",
+          "isspace": "isspace",
+          "istitle": "istitle",
+          "isupper": "isupper",
+          "join": "join",
+          "ljust": "ljust",
+          "lower": "lower",
+          "lstrip": "lstrip",
+          "maketrans": "maketrans",
+          "partition": "partition",
+          "removeprefix": "removeprefix",
+          "removesuffix": "removesuffix",
+          "replace": "replace",
+          "rfind": "rfind",
+          "rindex": "rindex",
+          "rjust": "rjust",
+          "rpartition": "rpartition",
+          "rsplit": "rsplit",
+          "rstrip": "rstrip",
+          "split": "split",
+          "splitlines": "splitlines",
+          "startswith": "startswith",
+          "strip": "strip",
+          "swapcase": "swapcase",
+          "title": "title",
+          "translate": "translate",
+          "upper": "upper",
+          "zfill": "zfill"
+        }
+      },
+      "ResourceName": {
+        "type": null,
+        "methods": {
+          "__init__": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "args": {
+                "default": null,
+                "param_type": "var_positional"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": [
+              {
+                "parameters": {
+                  "self": {
+                    "type": null,
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "name": {
+                    "type": "str",
+                    "default": null,
+                    "param_type": "keyword_only"
+                  },
+                  "type": {
+                    "type": "str",
+                    "default": null,
+                    "param_type": "keyword_only"
+                  }
+                },
+                "is_async": false,
+                "return_type": null
+              },
+              {
+                "parameters": {
+                  "self": {
+                    "type": null,
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "mapping": {
+                    "type": "Mapping[str, Any]",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  }
+                },
+                "is_async": false,
+                "return_type": null
+              }
+            ]
+          },
+          "as_dict": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "exclude_readonly": {
+                "default": "bool",
+                "param_type": "keyword_only"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "clear": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "copy": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "get": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "key": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "default": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "items": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "keys": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "pop": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "key": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "default": {
+                "default": "object",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "popitem": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "setdefault": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "key": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "default": {
+                "default": "object",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "update": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "args": {
+                "default": null,
+                "param_type": "var_positional"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "values": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          }
+        },
+        "properties": {
+          "name": null,
+          "type": null
+        }
+      },
+      "ResourceNameStatus": {
+        "type": "Enum",
+        "methods": {},
+        "properties": {
+          "ALLOWED": "ALLOWED",
+          "RESERVED": "RESERVED",
+          "capitalize": "capitalize",
+          "casefold": "casefold",
+          "center": "center",
+          "count": "count",
+          "encode": "encode",
+          "endswith": "endswith",
+          "expandtabs": "expandtabs",
+          "find": "find",
+          "format": "format",
+          "format_map": "format_map",
+          "index": "index",
+          "isalnum": "isalnum",
+          "isalpha": "isalpha",
+          "isascii": "isascii",
+          "isdecimal": "isdecimal",
+          "isdigit": "isdigit",
+          "isidentifier": "isidentifier",
+          "islower": "islower",
+          "isnumeric": "isnumeric",
+          "isprintable": "isprintable",
+          "isspace": "isspace",
+          "istitle": "istitle",
+          "isupper": "isupper",
+          "join": "join",
+          "ljust": "ljust",
+          "lower": "lower",
+          "lstrip": "lstrip",
+          "maketrans": "maketrans",
+          "partition": "partition",
+          "removeprefix": "removeprefix",
+          "removesuffix": "removesuffix",
+          "replace": "replace",
+          "rfind": "rfind",
+          "rindex": "rindex",
+          "rjust": "rjust",
+          "rpartition": "rpartition",
+          "rsplit": "rsplit",
+          "rstrip": "rstrip",
+          "split": "split",
+          "splitlines": "splitlines",
+          "startswith": "startswith",
+          "strip": "strip",
+          "swapcase": "swapcase",
+          "title": "title",
+          "translate": "translate",
+          "upper": "upper",
+          "zfill": "zfill"
+        }
+      },
+      "SpendingLimit": {
+        "type": "Enum",
+        "methods": {},
+        "properties": {
+          "CURRENT_PERIOD_OFF": "CURRENT_PERIOD_OFF",
+          "OFF": "OFF",
+          "ON": "ON",
+          "capitalize": "capitalize",
+          "casefold": "casefold",
+          "center": "center",
+          "count": "count",
+          "encode": "encode",
+          "endswith": "endswith",
+          "expandtabs": "expandtabs",
+          "find": "find",
+          "format": "format",
+          "format_map": "format_map",
+          "index": "index",
+          "isalnum": "isalnum",
+          "isalpha": "isalpha",
+          "isascii": "isascii",
+          "isdecimal": "isdecimal",
+          "isdigit": "isdigit",
+          "isidentifier": "isidentifier",
+          "islower": "islower",
+          "isnumeric": "isnumeric",
+          "isprintable": "isprintable",
+          "isspace": "isspace",
+          "istitle": "istitle",
+          "isupper": "isupper",
+          "join": "join",
+          "ljust": "ljust",
+          "lower": "lower",
+          "lstrip": "lstrip",
+          "maketrans": "maketrans",
+          "partition": "partition",
+          "removeprefix": "removeprefix",
+          "removesuffix": "removesuffix",
+          "replace": "replace",
+          "rfind": "rfind",
+          "rindex": "rindex",
+          "rjust": "rjust",
+          "rpartition": "rpartition",
+          "rsplit": "rsplit",
+          "rstrip": "rstrip",
+          "split": "split",
+          "splitlines": "splitlines",
+          "startswith": "startswith",
+          "strip": "strip",
+          "swapcase": "swapcase",
+          "title": "title",
+          "translate": "translate",
+          "upper": "upper",
+          "zfill": "zfill"
+        }
+      },
+      "Subscription": {
+        "type": null,
+        "methods": {
+          "__init__": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "args": {
+                "default": null,
+                "param_type": "var_positional"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": [
+              {
+                "parameters": {
+                  "self": {
+                    "type": null,
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "subscription_policies": {
+                    "type": "Optional[_models.SubscriptionPolicies]",
+                    "default": null,
+                    "param_type": "keyword_only"
+                  },
+                  "authorization_source": {
+                    "type": "Optional[str]",
+                    "default": null,
+                    "param_type": "keyword_only"
+                  },
+                  "managed_by_tenants": {
+                    "type": "Optional[list[_models.ManagedByTenant]]",
+                    "default": null,
+                    "param_type": "keyword_only"
+                  },
+                  "tags": {
+                    "type": "Optional[dict[str, str]]",
+                    "default": null,
+                    "param_type": "keyword_only"
+                  }
+                },
+                "is_async": false,
+                "return_type": null
+              },
+              {
+                "parameters": {
+                  "self": {
+                    "type": null,
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "mapping": {
+                    "type": "Mapping[str, Any]",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  }
+                },
+                "is_async": false,
+                "return_type": null
+              }
+            ]
+          },
+          "as_dict": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "exclude_readonly": {
+                "default": "bool",
+                "param_type": "keyword_only"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "clear": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "copy": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "get": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "key": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "default": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "items": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "keys": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "pop": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "key": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "default": {
+                "default": "object",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "popitem": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "setdefault": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "key": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "default": {
+                "default": "object",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "update": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "args": {
+                "default": null,
+                "param_type": "var_positional"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "values": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          }
+        },
+        "properties": {
+          "id": "Optional",
+          "subscription_id": "Optional",
+          "display_name": "Optional",
+          "tenant_id": "Optional",
+          "state": "Optional",
+          "subscription_policies": "Optional",
+          "authorization_source": "Optional",
+          "managed_by_tenants": "Optional",
+          "tags": "Optional"
+        }
+      },
+      "SubscriptionPolicies": {
+        "type": null,
+        "methods": {
+          "__init__": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "args": {
+                "default": null,
+                "param_type": "var_positional"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "as_dict": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "exclude_readonly": {
+                "default": "bool",
+                "param_type": "keyword_only"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "clear": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "copy": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "get": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "key": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "default": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "items": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "keys": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "pop": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "key": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "default": {
+                "default": "object",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "popitem": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "setdefault": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "key": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "default": {
+                "default": "object",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "update": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "args": {
+                "default": null,
+                "param_type": "var_positional"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "values": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          }
+        },
+        "properties": {
+          "location_placement_id": "Optional",
+          "quota_id": "Optional",
+          "spending_limit": "Optional"
+        }
+      },
+      "SubscriptionState": {
+        "type": "Enum",
+        "methods": {},
+        "properties": {
+          "DELETED": "DELETED",
+          "DISABLED": "DISABLED",
+          "ENABLED": "ENABLED",
+          "PAST_DUE": "PAST_DUE",
+          "WARNED": "WARNED",
+          "capitalize": "capitalize",
+          "casefold": "casefold",
+          "center": "center",
+          "count": "count",
+          "encode": "encode",
+          "endswith": "endswith",
+          "expandtabs": "expandtabs",
+          "find": "find",
+          "format": "format",
+          "format_map": "format_map",
+          "index": "index",
+          "isalnum": "isalnum",
+          "isalpha": "isalpha",
+          "isascii": "isascii",
+          "isdecimal": "isdecimal",
+          "isdigit": "isdigit",
+          "isidentifier": "isidentifier",
+          "islower": "islower",
+          "isnumeric": "isnumeric",
+          "isprintable": "isprintable",
+          "isspace": "isspace",
+          "istitle": "istitle",
+          "isupper": "isupper",
+          "join": "join",
+          "ljust": "ljust",
+          "lower": "lower",
+          "lstrip": "lstrip",
+          "maketrans": "maketrans",
+          "partition": "partition",
+          "removeprefix": "removeprefix",
+          "removesuffix": "removesuffix",
+          "replace": "replace",
+          "rfind": "rfind",
+          "rindex": "rindex",
+          "rjust": "rjust",
+          "rpartition": "rpartition",
+          "rsplit": "rsplit",
+          "rstrip": "rstrip",
+          "split": "split",
+          "splitlines": "splitlines",
+          "startswith": "startswith",
+          "strip": "strip",
+          "swapcase": "swapcase",
+          "title": "title",
+          "translate": "translate",
+          "upper": "upper",
+          "zfill": "zfill"
+        }
+      },
+      "TenantCategory": {
+        "type": "Enum",
+        "methods": {},
+        "properties": {
+          "HOME": "HOME",
+          "MANAGED_BY": "MANAGED_BY",
+          "PROJECTED_BY": "PROJECTED_BY",
+          "capitalize": "capitalize",
+          "casefold": "casefold",
+          "center": "center",
+          "count": "count",
+          "encode": "encode",
+          "endswith": "endswith",
+          "expandtabs": "expandtabs",
+          "find": "find",
+          "format": "format",
+          "format_map": "format_map",
+          "index": "index",
+          "isalnum": "isalnum",
+          "isalpha": "isalpha",
+          "isascii": "isascii",
+          "isdecimal": "isdecimal",
+          "isdigit": "isdigit",
+          "isidentifier": "isidentifier",
+          "islower": "islower",
+          "isnumeric": "isnumeric",
+          "isprintable": "isprintable",
+          "isspace": "isspace",
+          "istitle": "istitle",
+          "isupper": "isupper",
+          "join": "join",
+          "ljust": "ljust",
+          "lower": "lower",
+          "lstrip": "lstrip",
+          "maketrans": "maketrans",
+          "partition": "partition",
+          "removeprefix": "removeprefix",
+          "removesuffix": "removesuffix",
+          "replace": "replace",
+          "rfind": "rfind",
+          "rindex": "rindex",
+          "rjust": "rjust",
+          "rpartition": "rpartition",
+          "rsplit": "rsplit",
+          "rstrip": "rstrip",
+          "split": "split",
+          "splitlines": "splitlines",
+          "startswith": "startswith",
+          "strip": "strip",
+          "swapcase": "swapcase",
+          "title": "title",
+          "translate": "translate",
+          "upper": "upper",
+          "zfill": "zfill"
+        }
+      },
+      "TenantIdDescription": {
+        "type": null,
+        "methods": {
+          "__init__": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "args": {
+                "default": null,
+                "param_type": "var_positional"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "as_dict": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "exclude_readonly": {
+                "default": "bool",
+                "param_type": "keyword_only"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "clear": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "copy": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "get": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "key": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "default": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "items": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "keys": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "pop": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "key": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "default": {
+                "default": "object",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "popitem": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "setdefault": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "key": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "default": {
+                "default": "object",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "update": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "args": {
+                "default": null,
+                "param_type": "var_positional"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "values": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          }
+        },
+        "properties": {
+          "id": "Optional",
+          "tenant_id": "Optional",
+          "tenant_category": "Optional",
+          "country": "Optional",
+          "country_code": "Optional",
+          "display_name": "Optional",
+          "domains": "Optional",
+          "default_domain": "Optional",
+          "tenant_type": "Optional",
+          "tenant_branding_logo_url": "Optional"
+        }
+      }
+    },
+    "function_nodes": {}
+  },
+  "azure.mgmt.resource.subscriptions.aio": {
+    "class_nodes": {
+      "ResourcesClient": {
+        "type": null,
+        "methods": {
+          "__init__": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "credential": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "base_url": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              },
+              "cloud_setting": {
+                "default": "none",
+                "param_type": "keyword_only"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "check_resource_name": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "resource_name_definition": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": true,
+            "overloads": [
+              {
+                "parameters": {
+                  "self": {
+                    "type": null,
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "resource_name_definition": {
+                    "type": "Optional[ResourceName]",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "content_type": {
+                    "type": "str",
+                    "default": "application/json",
+                    "param_type": "keyword_only"
+                  }
+                },
+                "is_async": true,
+                "return_type": null
+              },
+              {
+                "parameters": {
+                  "self": {
+                    "type": null,
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "resource_name_definition": {
+                    "type": "Optional[JSON]",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "content_type": {
+                    "type": "str",
+                    "default": "application/json",
+                    "param_type": "keyword_only"
+                  }
+                },
+                "is_async": true,
+                "return_type": null
+              },
+              {
+                "parameters": {
+                  "self": {
+                    "type": null,
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "resource_name_definition": {
+                    "type": "Optional[IO[bytes]]",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "content_type": {
+                    "type": "str",
+                    "default": "application/json",
+                    "param_type": "keyword_only"
+                  }
+                },
+                "is_async": true,
+                "return_type": null
+              }
+            ]
+          },
+          "close": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": true,
+            "overloads": []
+          },
+          "send_request": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "request": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "stream": {
+                "default": "bool",
+                "param_type": "keyword_only"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          }
+        },
+        "properties": {
+          "client_side_validation": {
+            "attr_type": false
+          },
+          "operations": {
+            "attr_type": "Operations"
+          },
+          "subscriptions": {
+            "attr_type": "SubscriptionsOperations"
+          },
+          "tenants": {
+            "attr_type": "TenantsOperations"
+          }
+        }
+      }
+    },
+    "function_nodes": {}
+  },
+  "azure.mgmt.resource.subscriptions.aio.operations": {
+    "class_nodes": {
+      "Operations": {
+        "type": null,
+        "methods": {
+          "__init__": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "args": {
+                "default": null,
+                "param_type": "var_positional"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "list": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          }
+        },
+        "properties": {}
+      },
+      "SubscriptionsOperations": {
+        "type": null,
+        "methods": {
+          "__init__": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "args": {
+                "default": null,
+                "param_type": "var_positional"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "check_zone_peers": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "subscription_id": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "parameters": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": true,
+            "overloads": [
+              {
+                "parameters": {
+                  "self": {
+                    "type": null,
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "subscription_id": {
+                    "type": "str",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "parameters": {
+                    "type": "CheckZonePeersRequest",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "content_type": {
+                    "type": "str",
+                    "default": "application/json",
+                    "param_type": "keyword_only"
+                  }
+                },
+                "is_async": true,
+                "return_type": null
+              },
+              {
+                "parameters": {
+                  "self": {
+                    "type": null,
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "subscription_id": {
+                    "type": "str",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "parameters": {
+                    "type": "JSON",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "content_type": {
+                    "type": "str",
+                    "default": "application/json",
+                    "param_type": "keyword_only"
+                  }
+                },
+                "is_async": true,
+                "return_type": null
+              },
+              {
+                "parameters": {
+                  "self": {
+                    "type": null,
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "subscription_id": {
+                    "type": "str",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "parameters": {
+                    "type": "IO[bytes]",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "content_type": {
+                    "type": "str",
+                    "default": "application/json",
+                    "param_type": "keyword_only"
+                  }
+                },
+                "is_async": true,
+                "return_type": null
+              }
+            ]
+          },
+          "get": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "subscription_id": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": true,
+            "overloads": []
+          },
+          "list": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "list_locations": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "subscription_id": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "include_extended_locations": {
+                "default": "none",
+                "param_type": "keyword_only"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          }
+        },
+        "properties": {}
+      },
+      "TenantsOperations": {
+        "type": null,
+        "methods": {
+          "__init__": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "args": {
+                "default": null,
+                "param_type": "var_positional"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "list": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          }
+        },
+        "properties": {}
+      }
+    },
+    "function_nodes": {}
+  }
+}
