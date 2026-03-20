@@ -425,10 +425,7 @@ def build_library_report(target_module: str) -> Dict:
     for module_name, val in modules.items():
         module_name = resolve_module_name(module_name, target_module)
         public_api[module_name] = {"class_nodes": {}, "function_nodes": {}}
-        try:
-            module = importlib.import_module(module_name)
-        except SyntaxError:
-            continue
+        module = importlib.import_module(module_name)
         importables = [importable for importable in dir(module)]
         for importable in importables:
             if not importable.startswith("_"):

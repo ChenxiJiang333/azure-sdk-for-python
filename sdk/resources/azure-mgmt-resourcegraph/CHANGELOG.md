@@ -2,19 +2,12 @@
 
 ### Breaking Changes
 
-- Deleted or renamed client operation group `ResourceGraphClient.query`
-- Method `ResourceGraphClient.__init__` inserted a `positional_or_keyword` parameter `subscription_id`
+- Model `GraphQueryResource` moved instance variable `time_modified`, `description`, `query` and `result_kind` under property `properties`
+- Model `GraphQueryUpdateParameters` moved instance variable `description` and `query` under property `properties`
+- Model `Resource` moved instance variable `location`, `etag` and `tags` under its hybrid dictionary structure
 - Deleted or renamed model `Column`
 - Deleted or renamed model `ColumnDataType`
-- Deleted or renamed model `HistoryContext`
-- Deleted or renamed model `QueryGenerationRequest`
-- Deleted or renamed model `QueryGenerationResponse`
-- Deleted or renamed model `Role`
-- Deleted or renamed model `StatusCategory`
-- Deleted or renamed model `StatusResponse`
 - Deleted or renamed model `Table`
-- Deleted or renamed model `Versions`
-- Deleted or renamed model `QueryOperations`
 
 # Release History
 
