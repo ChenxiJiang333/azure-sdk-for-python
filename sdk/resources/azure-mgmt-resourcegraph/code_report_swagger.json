@@ -14,6 +14,10 @@
                 "default": null,
                 "param_type": "positional_or_keyword"
               },
+              "subscription_id": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
               "base_url": {
                 "default": "none",
                 "param_type": "positional_or_keyword"
@@ -289,11 +293,11 @@
           "client_side_validation": {
             "attr_type": false
           },
-          "query": {
-            "attr_type": "QueryOperations"
-          },
           "operations": {
             "attr_type": "Operations"
+          },
+          "graph_query": {
+            "attr_type": "GraphQueryOperations"
           }
         }
       }
@@ -302,6 +306,284 @@
   },
   "azure.mgmt.resourcegraph.operations": {
     "class_nodes": {
+      "GraphQueryOperations": {
+        "type": null,
+        "methods": {
+          "__init__": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "args": {
+                "default": null,
+                "param_type": "var_positional"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "create_or_update": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "resource_group_name": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "resource_name": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "properties": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": [
+              {
+                "parameters": {
+                  "self": {
+                    "type": null,
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "resource_group_name": {
+                    "type": "str",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "resource_name": {
+                    "type": "str",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "properties": {
+                    "type": "GraphQueryResource",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "content_type": {
+                    "type": "str",
+                    "default": "application/json",
+                    "param_type": "keyword_only"
+                  }
+                },
+                "is_async": false,
+                "return_type": null
+              },
+              {
+                "parameters": {
+                  "self": {
+                    "type": null,
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "resource_group_name": {
+                    "type": "str",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "resource_name": {
+                    "type": "str",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "properties": {
+                    "type": "IO[bytes]",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "content_type": {
+                    "type": "str",
+                    "default": "application/json",
+                    "param_type": "keyword_only"
+                  }
+                },
+                "is_async": false,
+                "return_type": null
+              }
+            ]
+          },
+          "delete": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "resource_group_name": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "resource_name": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "get": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "resource_group_name": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "resource_name": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "list": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "resource_group_name": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "list_by_subscription": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "update": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "resource_group_name": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "resource_name": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "body": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": [
+              {
+                "parameters": {
+                  "self": {
+                    "type": null,
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "resource_group_name": {
+                    "type": "str",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "resource_name": {
+                    "type": "str",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "body": {
+                    "type": "GraphQueryUpdateParameters",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "content_type": {
+                    "type": "str",
+                    "default": "application/json",
+                    "param_type": "keyword_only"
+                  }
+                },
+                "is_async": false,
+                "return_type": null
+              },
+              {
+                "parameters": {
+                  "self": {
+                    "type": null,
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "resource_group_name": {
+                    "type": "str",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "resource_name": {
+                    "type": "str",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "body": {
+                    "type": "IO[bytes]",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "content_type": {
+                    "type": "str",
+                    "default": "application/json",
+                    "param_type": "keyword_only"
+                  }
+                },
+                "is_async": false,
+                "return_type": null
+              }
+            ]
+          }
+        },
+        "properties": {}
+      },
       "Operations": {
         "type": null,
         "methods": {
@@ -336,91 +618,6 @@
             },
             "is_async": false,
             "overloads": []
-          }
-        },
-        "properties": {}
-      },
-      "QueryOperations": {
-        "type": null,
-        "methods": {
-          "__init__": {
-            "parameters": {
-              "self": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              },
-              "args": {
-                "default": null,
-                "param_type": "var_positional"
-              },
-              "kwargs": {
-                "default": null,
-                "param_type": "var_keyword"
-              }
-            },
-            "is_async": false,
-            "overloads": []
-          },
-          "generate_query": {
-            "parameters": {
-              "self": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              },
-              "body": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              },
-              "kwargs": {
-                "default": null,
-                "param_type": "var_keyword"
-              }
-            },
-            "is_async": false,
-            "overloads": [
-              {
-                "parameters": {
-                  "self": {
-                    "type": null,
-                    "default": null,
-                    "param_type": "positional_or_keyword"
-                  },
-                  "body": {
-                    "type": "QueryGenerationRequest",
-                    "default": null,
-                    "param_type": "positional_or_keyword"
-                  },
-                  "content_type": {
-                    "type": "str",
-                    "default": "application/json",
-                    "param_type": "keyword_only"
-                  }
-                },
-                "is_async": false,
-                "return_type": null
-              },
-              {
-                "parameters": {
-                  "self": {
-                    "type": null,
-                    "default": null,
-                    "param_type": "positional_or_keyword"
-                  },
-                  "body": {
-                    "type": "IO[bytes]",
-                    "default": null,
-                    "param_type": "positional_or_keyword"
-                  },
-                  "content_type": {
-                    "type": "str",
-                    "default": "application/json",
-                    "param_type": "keyword_only"
-                  }
-                },
-                "is_async": false,
-                "return_type": null
-              }
-            ]
           }
         },
         "properties": {}
@@ -728,6 +925,63 @@
           "NUMBER": "NUMBER",
           "OBJECT": "OBJECT",
           "STRING": "STRING",
+          "capitalize": "capitalize",
+          "casefold": "casefold",
+          "center": "center",
+          "count": "count",
+          "encode": "encode",
+          "endswith": "endswith",
+          "expandtabs": "expandtabs",
+          "find": "find",
+          "format": "format",
+          "format_map": "format_map",
+          "index": "index",
+          "isalnum": "isalnum",
+          "isalpha": "isalpha",
+          "isascii": "isascii",
+          "isdecimal": "isdecimal",
+          "isdigit": "isdigit",
+          "isidentifier": "isidentifier",
+          "islower": "islower",
+          "isnumeric": "isnumeric",
+          "isprintable": "isprintable",
+          "isspace": "isspace",
+          "istitle": "istitle",
+          "isupper": "isupper",
+          "join": "join",
+          "ljust": "ljust",
+          "lower": "lower",
+          "lstrip": "lstrip",
+          "maketrans": "maketrans",
+          "partition": "partition",
+          "removeprefix": "removeprefix",
+          "removesuffix": "removesuffix",
+          "replace": "replace",
+          "rfind": "rfind",
+          "rindex": "rindex",
+          "rjust": "rjust",
+          "rpartition": "rpartition",
+          "rsplit": "rsplit",
+          "rstrip": "rstrip",
+          "split": "split",
+          "splitlines": "splitlines",
+          "startswith": "startswith",
+          "strip": "strip",
+          "swapcase": "swapcase",
+          "title": "title",
+          "translate": "translate",
+          "upper": "upper",
+          "zfill": "zfill"
+        }
+      },
+      "CreatedByType": {
+        "type": "Enum",
+        "methods": {},
+        "properties": {
+          "APPLICATION": "APPLICATION",
+          "KEY": "KEY",
+          "MANAGED_IDENTITY": "MANAGED_IDENTITY",
+          "USER": "USER",
           "capitalize": "capitalize",
           "casefold": "casefold",
           "center": "center",
@@ -1145,6 +1399,133 @@
           },
           "message": {
             "attr_type": "message"
+          }
+        }
+      },
+      "ErrorFieldContract": {
+        "type": null,
+        "methods": {
+          "__init__": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "code": {
+                "default": "none",
+                "param_type": "keyword_only"
+              },
+              "message": {
+                "default": "none",
+                "param_type": "keyword_only"
+              },
+              "target": {
+                "default": "none",
+                "param_type": "keyword_only"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "as_dict": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "keep_readonly": {
+                "default": "bool",
+                "param_type": "positional_or_keyword"
+              },
+              "key_transformer": {
+                "default": "attribute_transformer",
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "deserialize": {
+            "parameters": {
+              "data": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "content_type": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "enable_additional_properties_sending": {
+            "parameters": {},
+            "is_async": false,
+            "overloads": []
+          },
+          "from_dict": {
+            "parameters": {
+              "data": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "key_extractors": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              },
+              "content_type": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "is_xml_model": {
+            "parameters": {},
+            "is_async": false,
+            "overloads": []
+          },
+          "serialize": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "keep_readonly": {
+                "default": "bool",
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          }
+        },
+        "properties": {
+          "code": {
+            "attr_type": "code"
+          },
+          "message": {
+            "attr_type": "message"
+          },
+          "target": {
+            "attr_type": "target"
+          },
+          "additional_properties": {
+            "attr_type": null
           }
         }
       },
@@ -1946,7 +2327,7 @@
           "zfill": "zfill"
         }
       },
-      "HistoryContext": {
+      "GraphQueryError": {
         "type": null,
         "methods": {
           "__init__": {
@@ -1955,12 +2336,8 @@
                 "default": null,
                 "param_type": "positional_or_keyword"
               },
-              "content": {
-                "default": null,
-                "param_type": "keyword_only"
-              },
-              "role": {
-                "default": null,
+              "error": {
+                "default": "none",
                 "param_type": "keyword_only"
               },
               "kwargs": {
@@ -2055,11 +2432,544 @@
           }
         },
         "properties": {
-          "content": {
-            "attr_type": "content"
+          "error": {
+            "attr_type": "error"
           },
-          "role": {
-            "attr_type": "role"
+          "additional_properties": {
+            "attr_type": null
+          }
+        }
+      },
+      "GraphQueryErrorError": {
+        "type": null,
+        "methods": {
+          "__init__": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "code": {
+                "default": "none",
+                "param_type": "keyword_only"
+              },
+              "message": {
+                "default": "none",
+                "param_type": "keyword_only"
+              },
+              "details": {
+                "default": "none",
+                "param_type": "keyword_only"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "as_dict": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "keep_readonly": {
+                "default": "bool",
+                "param_type": "positional_or_keyword"
+              },
+              "key_transformer": {
+                "default": "attribute_transformer",
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "deserialize": {
+            "parameters": {
+              "data": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "content_type": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "enable_additional_properties_sending": {
+            "parameters": {},
+            "is_async": false,
+            "overloads": []
+          },
+          "from_dict": {
+            "parameters": {
+              "data": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "key_extractors": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              },
+              "content_type": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "is_xml_model": {
+            "parameters": {},
+            "is_async": false,
+            "overloads": []
+          },
+          "serialize": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "keep_readonly": {
+                "default": "bool",
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          }
+        },
+        "properties": {
+          "code": {
+            "attr_type": "code"
+          },
+          "message": {
+            "attr_type": "message"
+          },
+          "details": {
+            "attr_type": "details"
+          },
+          "additional_properties": {
+            "attr_type": null
+          }
+        }
+      },
+      "GraphQueryListResult": {
+        "type": null,
+        "methods": {
+          "__init__": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "next_link": {
+                "default": "none",
+                "param_type": "keyword_only"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "as_dict": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "keep_readonly": {
+                "default": "bool",
+                "param_type": "positional_or_keyword"
+              },
+              "key_transformer": {
+                "default": "attribute_transformer",
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "deserialize": {
+            "parameters": {
+              "data": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "content_type": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "enable_additional_properties_sending": {
+            "parameters": {},
+            "is_async": false,
+            "overloads": []
+          },
+          "from_dict": {
+            "parameters": {
+              "data": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "key_extractors": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              },
+              "content_type": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "is_xml_model": {
+            "parameters": {},
+            "is_async": false,
+            "overloads": []
+          },
+          "serialize": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "keep_readonly": {
+                "default": "bool",
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          }
+        },
+        "properties": {
+          "next_link": {
+            "attr_type": "next_link"
+          },
+          "value": {
+            "attr_type": null
+          },
+          "additional_properties": {
+            "attr_type": null
+          }
+        }
+      },
+      "GraphQueryResource": {
+        "type": null,
+        "methods": {
+          "__init__": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "location": {
+                "default": "none",
+                "param_type": "keyword_only"
+              },
+              "etag": {
+                "default": "none",
+                "param_type": "keyword_only"
+              },
+              "tags": {
+                "default": "none",
+                "param_type": "keyword_only"
+              },
+              "description": {
+                "default": "none",
+                "param_type": "keyword_only"
+              },
+              "query": {
+                "default": "none",
+                "param_type": "keyword_only"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "as_dict": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "keep_readonly": {
+                "default": "bool",
+                "param_type": "positional_or_keyword"
+              },
+              "key_transformer": {
+                "default": "attribute_transformer",
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "deserialize": {
+            "parameters": {
+              "data": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "content_type": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "enable_additional_properties_sending": {
+            "parameters": {},
+            "is_async": false,
+            "overloads": []
+          },
+          "from_dict": {
+            "parameters": {
+              "data": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "key_extractors": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              },
+              "content_type": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "is_xml_model": {
+            "parameters": {},
+            "is_async": false,
+            "overloads": []
+          },
+          "serialize": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "keep_readonly": {
+                "default": "bool",
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          }
+        },
+        "properties": {
+          "system_data": {
+            "attr_type": null
+          },
+          "time_modified": {
+            "attr_type": null
+          },
+          "description": {
+            "attr_type": "description"
+          },
+          "query": {
+            "attr_type": "query"
+          },
+          "result_kind": {
+            "attr_type": null
+          },
+          "id": {
+            "attr_type": null
+          },
+          "name": {
+            "attr_type": null
+          },
+          "location": {
+            "attr_type": "location"
+          },
+          "type": {
+            "attr_type": null
+          },
+          "etag": {
+            "attr_type": "etag"
+          },
+          "tags": {
+            "attr_type": "tags"
+          },
+          "additional_properties": {
+            "attr_type": null
+          }
+        }
+      },
+      "GraphQueryUpdateParameters": {
+        "type": null,
+        "methods": {
+          "__init__": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "tags": {
+                "default": "none",
+                "param_type": "keyword_only"
+              },
+              "etag": {
+                "default": "none",
+                "param_type": "keyword_only"
+              },
+              "description": {
+                "default": "none",
+                "param_type": "keyword_only"
+              },
+              "query": {
+                "default": "none",
+                "param_type": "keyword_only"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "as_dict": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "keep_readonly": {
+                "default": "bool",
+                "param_type": "positional_or_keyword"
+              },
+              "key_transformer": {
+                "default": "attribute_transformer",
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "deserialize": {
+            "parameters": {
+              "data": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "content_type": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "enable_additional_properties_sending": {
+            "parameters": {},
+            "is_async": false,
+            "overloads": []
+          },
+          "from_dict": {
+            "parameters": {
+              "data": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "key_extractors": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              },
+              "content_type": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "is_xml_model": {
+            "parameters": {},
+            "is_async": false,
+            "overloads": []
+          },
+          "serialize": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "keep_readonly": {
+                "default": "bool",
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          }
+        },
+        "properties": {
+          "tags": {
+            "attr_type": "tags"
+          },
+          "etag": {
+            "attr_type": "etag"
+          },
+          "description": {
+            "attr_type": "description"
+          },
+          "query": {
+            "attr_type": "query"
           },
           "additional_properties": {
             "attr_type": null
@@ -2496,246 +3406,6 @@
           "zfill": "zfill"
         }
       },
-      "QueryGenerationRequest": {
-        "type": null,
-        "methods": {
-          "__init__": {
-            "parameters": {
-              "self": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              },
-              "prompt": {
-                "default": null,
-                "param_type": "keyword_only"
-              },
-              "history": {
-                "default": "none",
-                "param_type": "keyword_only"
-              },
-              "kwargs": {
-                "default": null,
-                "param_type": "var_keyword"
-              }
-            },
-            "is_async": false,
-            "overloads": []
-          },
-          "as_dict": {
-            "parameters": {
-              "self": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              },
-              "keep_readonly": {
-                "default": "bool",
-                "param_type": "positional_or_keyword"
-              },
-              "key_transformer": {
-                "default": "attribute_transformer",
-                "param_type": "positional_or_keyword"
-              },
-              "kwargs": {
-                "default": null,
-                "param_type": "var_keyword"
-              }
-            },
-            "is_async": false,
-            "overloads": []
-          },
-          "deserialize": {
-            "parameters": {
-              "data": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              },
-              "content_type": {
-                "default": "none",
-                "param_type": "positional_or_keyword"
-              }
-            },
-            "is_async": false,
-            "overloads": []
-          },
-          "enable_additional_properties_sending": {
-            "parameters": {},
-            "is_async": false,
-            "overloads": []
-          },
-          "from_dict": {
-            "parameters": {
-              "data": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              },
-              "key_extractors": {
-                "default": "none",
-                "param_type": "positional_or_keyword"
-              },
-              "content_type": {
-                "default": "none",
-                "param_type": "positional_or_keyword"
-              }
-            },
-            "is_async": false,
-            "overloads": []
-          },
-          "is_xml_model": {
-            "parameters": {},
-            "is_async": false,
-            "overloads": []
-          },
-          "serialize": {
-            "parameters": {
-              "self": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              },
-              "keep_readonly": {
-                "default": "bool",
-                "param_type": "positional_or_keyword"
-              },
-              "kwargs": {
-                "default": null,
-                "param_type": "var_keyword"
-              }
-            },
-            "is_async": false,
-            "overloads": []
-          }
-        },
-        "properties": {
-          "history": {
-            "attr_type": "history"
-          },
-          "prompt": {
-            "attr_type": "prompt"
-          },
-          "additional_properties": {
-            "attr_type": null
-          }
-        }
-      },
-      "QueryGenerationResponse": {
-        "type": null,
-        "methods": {
-          "__init__": {
-            "parameters": {
-              "self": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              },
-              "query": {
-                "default": null,
-                "param_type": "keyword_only"
-              },
-              "status": {
-                "default": null,
-                "param_type": "keyword_only"
-              },
-              "kwargs": {
-                "default": null,
-                "param_type": "var_keyword"
-              }
-            },
-            "is_async": false,
-            "overloads": []
-          },
-          "as_dict": {
-            "parameters": {
-              "self": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              },
-              "keep_readonly": {
-                "default": "bool",
-                "param_type": "positional_or_keyword"
-              },
-              "key_transformer": {
-                "default": "attribute_transformer",
-                "param_type": "positional_or_keyword"
-              },
-              "kwargs": {
-                "default": null,
-                "param_type": "var_keyword"
-              }
-            },
-            "is_async": false,
-            "overloads": []
-          },
-          "deserialize": {
-            "parameters": {
-              "data": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              },
-              "content_type": {
-                "default": "none",
-                "param_type": "positional_or_keyword"
-              }
-            },
-            "is_async": false,
-            "overloads": []
-          },
-          "enable_additional_properties_sending": {
-            "parameters": {},
-            "is_async": false,
-            "overloads": []
-          },
-          "from_dict": {
-            "parameters": {
-              "data": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              },
-              "key_extractors": {
-                "default": "none",
-                "param_type": "positional_or_keyword"
-              },
-              "content_type": {
-                "default": "none",
-                "param_type": "positional_or_keyword"
-              }
-            },
-            "is_async": false,
-            "overloads": []
-          },
-          "is_xml_model": {
-            "parameters": {},
-            "is_async": false,
-            "overloads": []
-          },
-          "serialize": {
-            "parameters": {
-              "self": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              },
-              "keep_readonly": {
-                "default": "bool",
-                "param_type": "positional_or_keyword"
-              },
-              "kwargs": {
-                "default": null,
-                "param_type": "var_keyword"
-              }
-            },
-            "is_async": false,
-            "overloads": []
-          }
-        },
-        "properties": {
-          "query": {
-            "attr_type": "query"
-          },
-          "status": {
-            "attr_type": "status"
-          },
-          "additional_properties": {
-            "attr_type": null
-          }
-        }
-      },
       "QueryRequest": {
         "type": null,
         "methods": {
@@ -3167,6 +3837,142 @@
           },
           "facets": {
             "attr_type": "facets"
+          },
+          "additional_properties": {
+            "attr_type": null
+          }
+        }
+      },
+      "Resource": {
+        "type": null,
+        "methods": {
+          "__init__": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "location": {
+                "default": "none",
+                "param_type": "keyword_only"
+              },
+              "etag": {
+                "default": "none",
+                "param_type": "keyword_only"
+              },
+              "tags": {
+                "default": "none",
+                "param_type": "keyword_only"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "as_dict": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "keep_readonly": {
+                "default": "bool",
+                "param_type": "positional_or_keyword"
+              },
+              "key_transformer": {
+                "default": "attribute_transformer",
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "deserialize": {
+            "parameters": {
+              "data": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "content_type": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "enable_additional_properties_sending": {
+            "parameters": {},
+            "is_async": false,
+            "overloads": []
+          },
+          "from_dict": {
+            "parameters": {
+              "data": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "key_extractors": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              },
+              "content_type": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "is_xml_model": {
+            "parameters": {},
+            "is_async": false,
+            "overloads": []
+          },
+          "serialize": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "keep_readonly": {
+                "default": "bool",
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          }
+        },
+        "properties": {
+          "id": {
+            "attr_type": null
+          },
+          "name": {
+            "attr_type": null
+          },
+          "location": {
+            "attr_type": "location"
+          },
+          "type": {
+            "attr_type": null
+          },
+          "etag": {
+            "attr_type": "etag"
+          },
+          "tags": {
+            "attr_type": "tags"
           },
           "additional_properties": {
             "attr_type": null
@@ -4695,6 +5501,60 @@
           "zfill": "zfill"
         }
       },
+      "ResultKind": {
+        "type": "Enum",
+        "methods": {},
+        "properties": {
+          "BASIC": "BASIC",
+          "capitalize": "capitalize",
+          "casefold": "casefold",
+          "center": "center",
+          "count": "count",
+          "encode": "encode",
+          "endswith": "endswith",
+          "expandtabs": "expandtabs",
+          "find": "find",
+          "format": "format",
+          "format_map": "format_map",
+          "index": "index",
+          "isalnum": "isalnum",
+          "isalpha": "isalpha",
+          "isascii": "isascii",
+          "isdecimal": "isdecimal",
+          "isdigit": "isdigit",
+          "isidentifier": "isidentifier",
+          "islower": "islower",
+          "isnumeric": "isnumeric",
+          "isprintable": "isprintable",
+          "isspace": "isspace",
+          "istitle": "istitle",
+          "isupper": "isupper",
+          "join": "join",
+          "ljust": "ljust",
+          "lower": "lower",
+          "lstrip": "lstrip",
+          "maketrans": "maketrans",
+          "partition": "partition",
+          "removeprefix": "removeprefix",
+          "removesuffix": "removesuffix",
+          "replace": "replace",
+          "rfind": "rfind",
+          "rindex": "rindex",
+          "rjust": "rjust",
+          "rpartition": "rpartition",
+          "rsplit": "rsplit",
+          "rstrip": "rstrip",
+          "split": "split",
+          "splitlines": "splitlines",
+          "startswith": "startswith",
+          "strip": "strip",
+          "swapcase": "swapcase",
+          "title": "title",
+          "translate": "translate",
+          "upper": "upper",
+          "zfill": "zfill"
+        }
+      },
       "ResultTruncated": {
         "type": "Enum",
         "methods": {},
@@ -4750,118 +5610,7 @@
           "zfill": "zfill"
         }
       },
-      "Role": {
-        "type": "Enum",
-        "methods": {},
-        "properties": {
-          "ASSISTANT": "ASSISTANT",
-          "SYSTEM": "SYSTEM",
-          "USER": "USER",
-          "capitalize": "capitalize",
-          "casefold": "casefold",
-          "center": "center",
-          "count": "count",
-          "encode": "encode",
-          "endswith": "endswith",
-          "expandtabs": "expandtabs",
-          "find": "find",
-          "format": "format",
-          "format_map": "format_map",
-          "index": "index",
-          "isalnum": "isalnum",
-          "isalpha": "isalpha",
-          "isascii": "isascii",
-          "isdecimal": "isdecimal",
-          "isdigit": "isdigit",
-          "isidentifier": "isidentifier",
-          "islower": "islower",
-          "isnumeric": "isnumeric",
-          "isprintable": "isprintable",
-          "isspace": "isspace",
-          "istitle": "istitle",
-          "isupper": "isupper",
-          "join": "join",
-          "ljust": "ljust",
-          "lower": "lower",
-          "lstrip": "lstrip",
-          "maketrans": "maketrans",
-          "partition": "partition",
-          "removeprefix": "removeprefix",
-          "removesuffix": "removesuffix",
-          "replace": "replace",
-          "rfind": "rfind",
-          "rindex": "rindex",
-          "rjust": "rjust",
-          "rpartition": "rpartition",
-          "rsplit": "rsplit",
-          "rstrip": "rstrip",
-          "split": "split",
-          "splitlines": "splitlines",
-          "startswith": "startswith",
-          "strip": "strip",
-          "swapcase": "swapcase",
-          "title": "title",
-          "translate": "translate",
-          "upper": "upper",
-          "zfill": "zfill"
-        }
-      },
-      "StatusCategory": {
-        "type": "Enum",
-        "methods": {},
-        "properties": {
-          "FAILED": "FAILED",
-          "SUCCEEDED": "SUCCEEDED",
-          "capitalize": "capitalize",
-          "casefold": "casefold",
-          "center": "center",
-          "count": "count",
-          "encode": "encode",
-          "endswith": "endswith",
-          "expandtabs": "expandtabs",
-          "find": "find",
-          "format": "format",
-          "format_map": "format_map",
-          "index": "index",
-          "isalnum": "isalnum",
-          "isalpha": "isalpha",
-          "isascii": "isascii",
-          "isdecimal": "isdecimal",
-          "isdigit": "isdigit",
-          "isidentifier": "isidentifier",
-          "islower": "islower",
-          "isnumeric": "isnumeric",
-          "isprintable": "isprintable",
-          "isspace": "isspace",
-          "istitle": "istitle",
-          "isupper": "isupper",
-          "join": "join",
-          "ljust": "ljust",
-          "lower": "lower",
-          "lstrip": "lstrip",
-          "maketrans": "maketrans",
-          "partition": "partition",
-          "removeprefix": "removeprefix",
-          "removesuffix": "removesuffix",
-          "replace": "replace",
-          "rfind": "rfind",
-          "rindex": "rindex",
-          "rjust": "rjust",
-          "rpartition": "rpartition",
-          "rsplit": "rsplit",
-          "rstrip": "rstrip",
-          "split": "split",
-          "splitlines": "splitlines",
-          "startswith": "startswith",
-          "strip": "strip",
-          "swapcase": "swapcase",
-          "title": "title",
-          "translate": "translate",
-          "upper": "upper",
-          "zfill": "zfill"
-        }
-      },
-      "StatusResponse": {
+      "SystemData": {
         "type": null,
         "methods": {
           "__init__": {
@@ -4870,12 +5619,28 @@
                 "default": null,
                 "param_type": "positional_or_keyword"
               },
-              "category": {
-                "default": null,
+              "created_by": {
+                "default": "none",
                 "param_type": "keyword_only"
               },
-              "message": {
-                "default": null,
+              "created_by_type": {
+                "default": "none",
+                "param_type": "keyword_only"
+              },
+              "created_at": {
+                "default": "none",
+                "param_type": "keyword_only"
+              },
+              "last_modified_by": {
+                "default": "none",
+                "param_type": "keyword_only"
+              },
+              "last_modified_by_type": {
+                "default": "none",
+                "param_type": "keyword_only"
+              },
+              "last_modified_at": {
+                "default": "none",
                 "param_type": "keyword_only"
               },
               "kwargs": {
@@ -4970,11 +5735,23 @@
           }
         },
         "properties": {
-          "category": {
-            "attr_type": "category"
+          "created_by": {
+            "attr_type": "created_by"
           },
-          "message": {
-            "attr_type": "message"
+          "created_by_type": {
+            "attr_type": "created_by_type"
+          },
+          "created_at": {
+            "attr_type": "created_at"
+          },
+          "last_modified_by": {
+            "attr_type": "last_modified_by"
+          },
+          "last_modified_by_type": {
+            "attr_type": "last_modified_by_type"
+          },
+          "last_modified_at": {
+            "attr_type": "last_modified_at"
           },
           "additional_properties": {
             "attr_type": null
@@ -5100,70 +5877,634 @@
             "attr_type": null
           }
         }
-      },
-      "Versions": {
-        "type": "Enum",
-        "methods": {},
-        "properties": {
-          "V2023_09_01_PREVIEW": "V2023_09_01_PREVIEW",
-          "capitalize": "capitalize",
-          "casefold": "casefold",
-          "center": "center",
-          "count": "count",
-          "encode": "encode",
-          "endswith": "endswith",
-          "expandtabs": "expandtabs",
-          "find": "find",
-          "format": "format",
-          "format_map": "format_map",
-          "index": "index",
-          "isalnum": "isalnum",
-          "isalpha": "isalpha",
-          "isascii": "isascii",
-          "isdecimal": "isdecimal",
-          "isdigit": "isdigit",
-          "isidentifier": "isidentifier",
-          "islower": "islower",
-          "isnumeric": "isnumeric",
-          "isprintable": "isprintable",
-          "isspace": "isspace",
-          "istitle": "istitle",
-          "isupper": "isupper",
-          "join": "join",
-          "ljust": "ljust",
-          "lower": "lower",
-          "lstrip": "lstrip",
-          "maketrans": "maketrans",
-          "partition": "partition",
-          "removeprefix": "removeprefix",
-          "removesuffix": "removesuffix",
-          "replace": "replace",
-          "rfind": "rfind",
-          "rindex": "rindex",
-          "rjust": "rjust",
-          "rpartition": "rpartition",
-          "rsplit": "rsplit",
-          "rstrip": "rstrip",
-          "split": "split",
-          "splitlines": "splitlines",
-          "startswith": "startswith",
-          "strip": "strip",
-          "swapcase": "swapcase",
-          "title": "title",
-          "translate": "translate",
-          "upper": "upper",
-          "zfill": "zfill"
-        }
       }
     },
     "function_nodes": {}
   },
   "azure.mgmt.resourcegraph.aio": {
-    "class_nodes": {},
+    "class_nodes": {
+      "ResourceGraphClient": {
+        "type": null,
+        "methods": {
+          "__init__": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "credential": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "subscription_id": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "base_url": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              },
+              "cloud_setting": {
+                "default": "none",
+                "param_type": "keyword_only"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "close": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": true,
+            "overloads": []
+          },
+          "resource_change_details": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "parameters": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": true,
+            "overloads": [
+              {
+                "parameters": {
+                  "self": {
+                    "type": null,
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "parameters": {
+                    "type": "ResourceChangeDetailsRequestParameters",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "content_type": {
+                    "type": "str",
+                    "default": "application/json",
+                    "param_type": "keyword_only"
+                  }
+                },
+                "is_async": true,
+                "return_type": null
+              },
+              {
+                "parameters": {
+                  "self": {
+                    "type": null,
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "parameters": {
+                    "type": "IO[bytes]",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "content_type": {
+                    "type": "str",
+                    "default": "application/json",
+                    "param_type": "keyword_only"
+                  }
+                },
+                "is_async": true,
+                "return_type": null
+              }
+            ]
+          },
+          "resource_changes": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "parameters": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": true,
+            "overloads": [
+              {
+                "parameters": {
+                  "self": {
+                    "type": null,
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "parameters": {
+                    "type": "ResourceChangesRequestParameters",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "content_type": {
+                    "type": "str",
+                    "default": "application/json",
+                    "param_type": "keyword_only"
+                  }
+                },
+                "is_async": true,
+                "return_type": null
+              },
+              {
+                "parameters": {
+                  "self": {
+                    "type": null,
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "parameters": {
+                    "type": "IO[bytes]",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "content_type": {
+                    "type": "str",
+                    "default": "application/json",
+                    "param_type": "keyword_only"
+                  }
+                },
+                "is_async": true,
+                "return_type": null
+              }
+            ]
+          },
+          "resources": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "query": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": true,
+            "overloads": [
+              {
+                "parameters": {
+                  "self": {
+                    "type": null,
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "query": {
+                    "type": "QueryRequest",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "content_type": {
+                    "type": "str",
+                    "default": "application/json",
+                    "param_type": "keyword_only"
+                  }
+                },
+                "is_async": true,
+                "return_type": null
+              },
+              {
+                "parameters": {
+                  "self": {
+                    "type": null,
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "query": {
+                    "type": "IO[bytes]",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "content_type": {
+                    "type": "str",
+                    "default": "application/json",
+                    "param_type": "keyword_only"
+                  }
+                },
+                "is_async": true,
+                "return_type": null
+              }
+            ]
+          },
+          "resources_history": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "request": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": true,
+            "overloads": [
+              {
+                "parameters": {
+                  "self": {
+                    "type": null,
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "request": {
+                    "type": "ResourcesHistoryRequest",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "content_type": {
+                    "type": "str",
+                    "default": "application/json",
+                    "param_type": "keyword_only"
+                  }
+                },
+                "is_async": true,
+                "return_type": null
+              },
+              {
+                "parameters": {
+                  "self": {
+                    "type": null,
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "request": {
+                    "type": "IO[bytes]",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "content_type": {
+                    "type": "str",
+                    "default": "application/json",
+                    "param_type": "keyword_only"
+                  }
+                },
+                "is_async": true,
+                "return_type": null
+              }
+            ]
+          }
+        },
+        "properties": {
+          "client_side_validation": {
+            "attr_type": false
+          },
+          "operations": {
+            "attr_type": "Operations"
+          },
+          "graph_query": {
+            "attr_type": "GraphQueryOperations"
+          }
+        }
+      }
+    },
     "function_nodes": {}
   },
   "azure.mgmt.resourcegraph.aio.operations": {
-    "class_nodes": {},
+    "class_nodes": {
+      "GraphQueryOperations": {
+        "type": null,
+        "methods": {
+          "__init__": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "args": {
+                "default": null,
+                "param_type": "var_positional"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "create_or_update": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "resource_group_name": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "resource_name": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "properties": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": true,
+            "overloads": [
+              {
+                "parameters": {
+                  "self": {
+                    "type": null,
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "resource_group_name": {
+                    "type": "str",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "resource_name": {
+                    "type": "str",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "properties": {
+                    "type": "GraphQueryResource",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "content_type": {
+                    "type": "str",
+                    "default": "application/json",
+                    "param_type": "keyword_only"
+                  }
+                },
+                "is_async": true,
+                "return_type": null
+              },
+              {
+                "parameters": {
+                  "self": {
+                    "type": null,
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "resource_group_name": {
+                    "type": "str",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "resource_name": {
+                    "type": "str",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "properties": {
+                    "type": "IO[bytes]",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "content_type": {
+                    "type": "str",
+                    "default": "application/json",
+                    "param_type": "keyword_only"
+                  }
+                },
+                "is_async": true,
+                "return_type": null
+              }
+            ]
+          },
+          "delete": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "resource_group_name": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "resource_name": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": true,
+            "overloads": []
+          },
+          "get": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "resource_group_name": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "resource_name": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": true,
+            "overloads": []
+          },
+          "list": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "resource_group_name": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "list_by_subscription": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "update": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "resource_group_name": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "resource_name": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "body": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": true,
+            "overloads": [
+              {
+                "parameters": {
+                  "self": {
+                    "type": null,
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "resource_group_name": {
+                    "type": "str",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "resource_name": {
+                    "type": "str",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "body": {
+                    "type": "GraphQueryUpdateParameters",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "content_type": {
+                    "type": "str",
+                    "default": "application/json",
+                    "param_type": "keyword_only"
+                  }
+                },
+                "is_async": true,
+                "return_type": null
+              },
+              {
+                "parameters": {
+                  "self": {
+                    "type": null,
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "resource_group_name": {
+                    "type": "str",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "resource_name": {
+                    "type": "str",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "body": {
+                    "type": "IO[bytes]",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "content_type": {
+                    "type": "str",
+                    "default": "application/json",
+                    "param_type": "keyword_only"
+                  }
+                },
+                "is_async": true,
+                "return_type": null
+              }
+            ]
+          }
+        },
+        "properties": {}
+      },
+      "Operations": {
+        "type": null,
+        "methods": {
+          "__init__": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "args": {
+                "default": null,
+                "param_type": "var_positional"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "list": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          }
+        },
+        "properties": {}
+      }
+    },
     "function_nodes": {}
   }
 }
