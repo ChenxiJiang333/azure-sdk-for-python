@@ -5,9 +5,10 @@
 - Model `GraphQueryResource` moved instance variable `time_modified`, `description`, `query` and `result_kind` under property `properties`
 - Model `GraphQueryUpdateParameters` moved instance variable `description` and `query` under property `properties`
 - Model `Resource` moved instance variable `location`, `etag` and `tags` under its hybrid dictionary structure
-- Deleted or renamed model `Column`
-- Deleted or renamed model `ColumnDataType`
-- Deleted or renamed model `Table`
+
+### Other Changes
+
+- Deleted model `Column`/`ColumnDataType`/`Table` which actually were not used by SDK users
 
 # Release History
 
