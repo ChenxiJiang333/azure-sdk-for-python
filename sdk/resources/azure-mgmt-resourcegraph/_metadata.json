@@ -1,11 +1,12 @@
 {
-  "commit": "6909edd82d4f8ef90a6ab2c46a2200a16048df08",
+  "apiVersions": {
+    "GraphQueryApi": "2024-04-01",
+    "ResourceChanges": "2020-09-01-preview",
+    "ResourceGraphApi": "2024-04-01",
+    "ResourceHistory": "2021-06-01-preview"
+  },
+  "commit": "f51308f022f8a3a164262a3e1409cabd038ab194",
   "repository_url": "https://github.com/Azure/azure-rest-api-specs",
-  "autorest": "3.10.2",
-  "use": [
-    "@autorest/python@6.50.0",
-    "@autorest/modelerfour@4.27.0"
-  ],
-  "autorest_command": "autorest specification/resourcegraph/resource-manager/Microsoft.ResourceGraph/ResourceGraph/readme.md --generate-sample=True --generate-test=True --include-x-ms-examples-original-file=True --package-mode=azure-mgmt --python --python-sdks-folder=/home/v-chenjiang/spec2/azure-sdk-for-python/sdk --use=@autorest/python@6.50.0 --use=@autorest/modelerfour@4.27.0 --version=3.10.2 --version-tolerant=False",
-  "readme": "specification/resourcegraph/resource-manager/Microsoft.ResourceGraph/ResourceGraph/readme.md"
+  "typespec_src": "specification/resourcegraph/resource-manager/Microsoft.ResourceGraph/ResourceGraph",
+  "emitterVersion": "0.61.0"
 }

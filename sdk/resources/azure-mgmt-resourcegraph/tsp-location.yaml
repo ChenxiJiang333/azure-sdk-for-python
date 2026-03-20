@@ -1,0 +1,4 @@
+directory: specification/resourcegraph/resource-manager/Microsoft.ResourceGraph/ResourceGraph
+commit: f51308f022f8a3a164262a3e1409cabd038ab194
+repo: Azure/azure-rest-api-specs
+additionalDirectories: 
