@@ -20,20 +20,20 @@ from azure.mgmt.core.tools import get_arm_endpoints
 from . import models as _models
 from ._configuration import ResourceGraphClientConfiguration
 from ._utils.serialization import Deserializer, Serializer
-from .operations import GraphQueryOperations, Operations, _ResourceGraphClientOperationsMixin
+from .operations import Operations, QueryOperations, _ResourceGraphClientOperationsMixin
 
 if TYPE_CHECKING:
     from azure.core import AzureClouds
     from azure.core.credentials import TokenCredential
 
 
-class ResourceGraphClient(_ResourceGraphClientOperationsMixin):
+class ResourceGraphClient(_ResourceGraphClientOperationsMixin):  # pylint: disable=client-accepts-api-version-keyword
     """Azure Resource Graph API Reference.
 
+    :ivar query: QueryOperations operations
+    :vartype query: azure.mgmt.resourcegraph.operations.QueryOperations
     :ivar operations: Operations operations
     :vartype operations: azure.mgmt.resourcegraph.operations.Operations
-    :ivar graph_query: GraphQueryOperations operations
-    :vartype graph_query: azure.mgmt.resourcegraph.operations.GraphQueryOperations
     :param credential: Credential needed for the client to connect to Azure. Required.
     :type credential: ~azure.core.credentials.TokenCredential
     :param base_url: Service URL. Default value is None.
@@ -41,9 +41,6 @@ class ResourceGraphClient(_ResourceGraphClientOperationsMixin):
     :keyword cloud_setting: The cloud setting for which to get the ARM endpoint. Default value is
      None.
     :paramtype cloud_setting: ~azure.core.AzureClouds
-    :keyword api_version: Api Version. Default value is "2021-03-01". Note that overriding this
-     default value may result in unsupported behavior.
-    :paramtype api_version: str
     """
 
     def __init__(
@@ -87,8 +84,8 @@ class ResourceGraphClient(_ResourceGraphClientOperationsMixin):
         self._serialize = Serializer(client_models)
         self._deserialize = Deserializer(client_models)
         self._serialize.client_side_validation = False
+        self.query = QueryOperations(self._client, self._config, self._serialize, self._deserialize)
         self.operations = Operations(self._client, self._config, self._serialize, self._deserialize)
-        self.graph_query = GraphQueryOperations(self._client, self._config, self._serialize, self._deserialize)
 
     def _send_request(self, request: HttpRequest, *, stream: bool = False, **kwargs: Any) -> HttpResponse:
         """Runs the network request through the client's chained policies.

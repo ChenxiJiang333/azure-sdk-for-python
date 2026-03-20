@@ -16,7 +16,7 @@ from azure.mgmt.resourcegraph import ResourceGraphClient
     pip install azure-identity
     pip install azure-mgmt-resourcegraph
 # USAGE
-    python graph_query_update.py
+    python resource_changes_next_page.py
 
     Before run the sample, please set the values of the client ID, tenant ID and client secret
     of the AAD application as environment variables: AZURE_CLIENT_ID, AZURE_TENANT_ID,
@@ -30,22 +30,19 @@ def main():
         credential=DefaultAzureCredential(),
     )
 
-    response = client.graph_query.update(
-        subscription_id="024e2271-06fa-46b6-9079-f1ed3c7b070e",
-        resource_group_name="my-resource-group",
-        resource_name="MyDockerVMs",
-        body={
-            "etag": "b0809832-ca62-4133-8f13-0c46580f9db1",
-            "properties": {
-                "description": "Modified description",
-                "query": "where isnotnull(tags['Prod']) and properties.extensions[0].Name == 'docker'",
-            },
-            "tags": None,
+    response = client.resource_changes(
+        parameters={
+            "$skipToken": "ew0KICAiJGlkIjogIjEiLA0KICAiRW5kVGltZSI6ICJcL0RhdGUoMTU1MDc0NT",
+            "$top": 2,
+            "interval": {"end": "2018-10-31T12:09:03.141Z", "start": "2018-10-30T12:09:03.141Z"},
+            "resourceIds": [
+                "/subscriptions/4d962866-1e3f-47f2-bd18-450c08f914c1/resourceGroups/MyResourceGroup/providers/Microsoft.Storage/storageAccounts/mystorageaccount"
+            ],
         },
     )
     print(response)
 
 
-# x-ms-original-file: specification/resourcegraph/resource-manager/Microsoft.ResourceGraph/stable/2021-03-01/examples/GraphQueryUpdate.json
+# x-ms-original-file: specification/resourcegraph/resource-manager/Microsoft.ResourceGraph/ResourceGraph/preview/2020-09-01-preview/examples/ResourceChangesNextPage.json
 if __name__ == "__main__":
     main()

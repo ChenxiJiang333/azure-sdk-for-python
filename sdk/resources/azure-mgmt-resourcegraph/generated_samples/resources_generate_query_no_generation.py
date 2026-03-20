@@ -16,7 +16,7 @@ from azure.mgmt.resourcegraph import ResourceGraphClient
     pip install azure-identity
     pip install azure-mgmt-resourcegraph
 # USAGE
-    python graph_query_get.py
+    python resources_generate_query_no_generation.py
 
     Before run the sample, please set the values of the client ID, tenant ID and client secret
     of the AAD application as environment variables: AZURE_CLIENT_ID, AZURE_TENANT_ID,
@@ -30,14 +30,12 @@ def main():
         credential=DefaultAzureCredential(),
     )
 
-    response = client.graph_query.get(
-        subscription_id="024e2271-06fa-46b6-9079-f1ed3c7b070e",
-        resource_group_name="my-resource-group",
-        resource_name="MyDockerVMs",
+    response = client.query.generate_query(
+        body={"prompt": "What is the weather today?"},
     )
     print(response)
 
 
-# x-ms-original-file: specification/resourcegraph/resource-manager/Microsoft.ResourceGraph/stable/2021-03-01/examples/GraphQueryGet.json
+# x-ms-original-file: specification/resourcegraph/resource-manager/Microsoft.ResourceGraph/ResourceGraph/preview/2023-09-01-preview/examples/ResourcesGenerateQueryNoGeneration.json
 if __name__ == "__main__":
     main()

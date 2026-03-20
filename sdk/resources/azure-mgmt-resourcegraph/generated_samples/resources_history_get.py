@@ -16,7 +16,7 @@ from azure.mgmt.resourcegraph import ResourceGraphClient
     pip install azure-identity
     pip install azure-mgmt-resourcegraph
 # USAGE
-    python resources_mg_basic_query.py
+    python resources_history_get.py
 
     Before run the sample, please set the values of the client ID, tenant ID and client secret
     of the AAD application as environment variables: AZURE_CLIENT_ID, AZURE_TENANT_ID,
@@ -30,15 +30,16 @@ def main():
         credential=DefaultAzureCredential(),
     )
 
-    response = client.resources(
-        query={
-            "managementGroups": ["e927f598-c1d4-4f72-8541-95d83a6a4ac8", "ProductionMG"],
-            "query": "Resources | project id, name, type, location, tags | limit 3",
+    response = client.resources_history(
+        request={
+            "options": {"interval": {"end": "2020-11-12T01:25:00.0000000Z", "start": "2020-11-12T01:00:00.0000000Z"}},
+            "query": "where name =~ 'cpu-utilization' | project id, name, properties",
+            "subscriptions": ["a7f33fdb-e646-4f15-89aa-3a360210861e"],
         },
     )
     print(response)
 
 
-# x-ms-original-file: specification/resourcegraph/resource-manager/Microsoft.ResourceGraph/ResourceGraph/preview/2023-09-01-preview/examples/ResourcesMgBasicQuery.json
+# x-ms-original-file: specification/resourcegraph/resource-manager/Microsoft.ResourceGraph/ResourceGraph/preview/2021-06-01-preview/examples/ResourcesHistoryGet.json
 if __name__ == "__main__":
     main()

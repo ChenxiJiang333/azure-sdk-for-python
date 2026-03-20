@@ -1,0 +1,5169 @@
+{
+  "azure.mgmt.resourcegraph": {
+    "class_nodes": {
+      "ResourceGraphClient": {
+        "type": null,
+        "methods": {
+          "__init__": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "credential": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "base_url": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              },
+              "cloud_setting": {
+                "default": "none",
+                "param_type": "keyword_only"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "close": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "resource_change_details": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "parameters": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": [
+              {
+                "parameters": {
+                  "self": {
+                    "type": null,
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "parameters": {
+                    "type": "ResourceChangeDetailsRequestParameters",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "content_type": {
+                    "type": "str",
+                    "default": "application/json",
+                    "param_type": "keyword_only"
+                  }
+                },
+                "is_async": false,
+                "return_type": null
+              },
+              {
+                "parameters": {
+                  "self": {
+                    "type": null,
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "parameters": {
+                    "type": "IO[bytes]",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "content_type": {
+                    "type": "str",
+                    "default": "application/json",
+                    "param_type": "keyword_only"
+                  }
+                },
+                "is_async": false,
+                "return_type": null
+              }
+            ]
+          },
+          "resource_changes": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "parameters": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": [
+              {
+                "parameters": {
+                  "self": {
+                    "type": null,
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "parameters": {
+                    "type": "ResourceChangesRequestParameters",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "content_type": {
+                    "type": "str",
+                    "default": "application/json",
+                    "param_type": "keyword_only"
+                  }
+                },
+                "is_async": false,
+                "return_type": null
+              },
+              {
+                "parameters": {
+                  "self": {
+                    "type": null,
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "parameters": {
+                    "type": "IO[bytes]",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "content_type": {
+                    "type": "str",
+                    "default": "application/json",
+                    "param_type": "keyword_only"
+                  }
+                },
+                "is_async": false,
+                "return_type": null
+              }
+            ]
+          },
+          "resources": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "query": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": [
+              {
+                "parameters": {
+                  "self": {
+                    "type": null,
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "query": {
+                    "type": "QueryRequest",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "content_type": {
+                    "type": "str",
+                    "default": "application/json",
+                    "param_type": "keyword_only"
+                  }
+                },
+                "is_async": false,
+                "return_type": null
+              },
+              {
+                "parameters": {
+                  "self": {
+                    "type": null,
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "query": {
+                    "type": "IO[bytes]",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "content_type": {
+                    "type": "str",
+                    "default": "application/json",
+                    "param_type": "keyword_only"
+                  }
+                },
+                "is_async": false,
+                "return_type": null
+              }
+            ]
+          },
+          "resources_history": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "request": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": [
+              {
+                "parameters": {
+                  "self": {
+                    "type": null,
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "request": {
+                    "type": "ResourcesHistoryRequest",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "content_type": {
+                    "type": "str",
+                    "default": "application/json",
+                    "param_type": "keyword_only"
+                  }
+                },
+                "is_async": false,
+                "return_type": null
+              },
+              {
+                "parameters": {
+                  "self": {
+                    "type": null,
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "request": {
+                    "type": "IO[bytes]",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "content_type": {
+                    "type": "str",
+                    "default": "application/json",
+                    "param_type": "keyword_only"
+                  }
+                },
+                "is_async": false,
+                "return_type": null
+              }
+            ]
+          }
+        },
+        "properties": {
+          "client_side_validation": {
+            "attr_type": false
+          },
+          "query": {
+            "attr_type": "QueryOperations"
+          },
+          "operations": {
+            "attr_type": "Operations"
+          }
+        }
+      }
+    },
+    "function_nodes": {}
+  },
+  "azure.mgmt.resourcegraph.operations": {
+    "class_nodes": {
+      "Operations": {
+        "type": null,
+        "methods": {
+          "__init__": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "args": {
+                "default": null,
+                "param_type": "var_positional"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "list": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          }
+        },
+        "properties": {}
+      },
+      "QueryOperations": {
+        "type": null,
+        "methods": {
+          "__init__": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "args": {
+                "default": null,
+                "param_type": "var_positional"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "generate_query": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "body": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": [
+              {
+                "parameters": {
+                  "self": {
+                    "type": null,
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "body": {
+                    "type": "QueryGenerationRequest",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "content_type": {
+                    "type": "str",
+                    "default": "application/json",
+                    "param_type": "keyword_only"
+                  }
+                },
+                "is_async": false,
+                "return_type": null
+              },
+              {
+                "parameters": {
+                  "self": {
+                    "type": null,
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "body": {
+                    "type": "IO[bytes]",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "content_type": {
+                    "type": "str",
+                    "default": "application/json",
+                    "param_type": "keyword_only"
+                  }
+                },
+                "is_async": false,
+                "return_type": null
+              }
+            ]
+          }
+        },
+        "properties": {}
+      }
+    },
+    "function_nodes": {}
+  },
+  "azure.mgmt.resourcegraph.models": {
+    "class_nodes": {
+      "AuthorizationScopeFilter": {
+        "type": "Enum",
+        "methods": {},
+        "properties": {
+          "AT_SCOPE_ABOVE_AND_BELOW": "AT_SCOPE_ABOVE_AND_BELOW",
+          "AT_SCOPE_AND_ABOVE": "AT_SCOPE_AND_ABOVE",
+          "AT_SCOPE_AND_BELOW": "AT_SCOPE_AND_BELOW",
+          "AT_SCOPE_EXACT": "AT_SCOPE_EXACT",
+          "capitalize": "capitalize",
+          "casefold": "casefold",
+          "center": "center",
+          "count": "count",
+          "encode": "encode",
+          "endswith": "endswith",
+          "expandtabs": "expandtabs",
+          "find": "find",
+          "format": "format",
+          "format_map": "format_map",
+          "index": "index",
+          "isalnum": "isalnum",
+          "isalpha": "isalpha",
+          "isascii": "isascii",
+          "isdecimal": "isdecimal",
+          "isdigit": "isdigit",
+          "isidentifier": "isidentifier",
+          "islower": "islower",
+          "isnumeric": "isnumeric",
+          "isprintable": "isprintable",
+          "isspace": "isspace",
+          "istitle": "istitle",
+          "isupper": "isupper",
+          "join": "join",
+          "ljust": "ljust",
+          "lower": "lower",
+          "lstrip": "lstrip",
+          "maketrans": "maketrans",
+          "partition": "partition",
+          "removeprefix": "removeprefix",
+          "removesuffix": "removesuffix",
+          "replace": "replace",
+          "rfind": "rfind",
+          "rindex": "rindex",
+          "rjust": "rjust",
+          "rpartition": "rpartition",
+          "rsplit": "rsplit",
+          "rstrip": "rstrip",
+          "split": "split",
+          "splitlines": "splitlines",
+          "startswith": "startswith",
+          "strip": "strip",
+          "swapcase": "swapcase",
+          "title": "title",
+          "translate": "translate",
+          "upper": "upper",
+          "zfill": "zfill"
+        }
+      },
+      "ChangeCategory": {
+        "type": "Enum",
+        "methods": {},
+        "properties": {
+          "SYSTEM": "SYSTEM",
+          "USER": "USER",
+          "capitalize": "capitalize",
+          "casefold": "casefold",
+          "center": "center",
+          "count": "count",
+          "encode": "encode",
+          "endswith": "endswith",
+          "expandtabs": "expandtabs",
+          "find": "find",
+          "format": "format",
+          "format_map": "format_map",
+          "index": "index",
+          "isalnum": "isalnum",
+          "isalpha": "isalpha",
+          "isascii": "isascii",
+          "isdecimal": "isdecimal",
+          "isdigit": "isdigit",
+          "isidentifier": "isidentifier",
+          "islower": "islower",
+          "isnumeric": "isnumeric",
+          "isprintable": "isprintable",
+          "isspace": "isspace",
+          "istitle": "istitle",
+          "isupper": "isupper",
+          "join": "join",
+          "ljust": "ljust",
+          "lower": "lower",
+          "lstrip": "lstrip",
+          "maketrans": "maketrans",
+          "partition": "partition",
+          "removeprefix": "removeprefix",
+          "removesuffix": "removesuffix",
+          "replace": "replace",
+          "rfind": "rfind",
+          "rindex": "rindex",
+          "rjust": "rjust",
+          "rpartition": "rpartition",
+          "rsplit": "rsplit",
+          "rstrip": "rstrip",
+          "split": "split",
+          "splitlines": "splitlines",
+          "startswith": "startswith",
+          "strip": "strip",
+          "swapcase": "swapcase",
+          "title": "title",
+          "translate": "translate",
+          "upper": "upper",
+          "zfill": "zfill"
+        }
+      },
+      "ChangeType": {
+        "type": "Enum",
+        "methods": {},
+        "properties": {
+          "CREATE": "CREATE",
+          "DELETE": "DELETE",
+          "UPDATE": "UPDATE",
+          "capitalize": "capitalize",
+          "casefold": "casefold",
+          "center": "center",
+          "count": "count",
+          "encode": "encode",
+          "endswith": "endswith",
+          "expandtabs": "expandtabs",
+          "find": "find",
+          "format": "format",
+          "format_map": "format_map",
+          "index": "index",
+          "isalnum": "isalnum",
+          "isalpha": "isalpha",
+          "isascii": "isascii",
+          "isdecimal": "isdecimal",
+          "isdigit": "isdigit",
+          "isidentifier": "isidentifier",
+          "islower": "islower",
+          "isnumeric": "isnumeric",
+          "isprintable": "isprintable",
+          "isspace": "isspace",
+          "istitle": "istitle",
+          "isupper": "isupper",
+          "join": "join",
+          "ljust": "ljust",
+          "lower": "lower",
+          "lstrip": "lstrip",
+          "maketrans": "maketrans",
+          "partition": "partition",
+          "removeprefix": "removeprefix",
+          "removesuffix": "removesuffix",
+          "replace": "replace",
+          "rfind": "rfind",
+          "rindex": "rindex",
+          "rjust": "rjust",
+          "rpartition": "rpartition",
+          "rsplit": "rsplit",
+          "rstrip": "rstrip",
+          "split": "split",
+          "splitlines": "splitlines",
+          "startswith": "startswith",
+          "strip": "strip",
+          "swapcase": "swapcase",
+          "title": "title",
+          "translate": "translate",
+          "upper": "upper",
+          "zfill": "zfill"
+        }
+      },
+      "Column": {
+        "type": null,
+        "methods": {
+          "__init__": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "name": {
+                "default": null,
+                "param_type": "keyword_only"
+              },
+              "type": {
+                "default": null,
+                "param_type": "keyword_only"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "as_dict": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "keep_readonly": {
+                "default": "bool",
+                "param_type": "positional_or_keyword"
+              },
+              "key_transformer": {
+                "default": "attribute_transformer",
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "deserialize": {
+            "parameters": {
+              "data": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "content_type": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "enable_additional_properties_sending": {
+            "parameters": {},
+            "is_async": false,
+            "overloads": []
+          },
+          "from_dict": {
+            "parameters": {
+              "data": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "key_extractors": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              },
+              "content_type": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "is_xml_model": {
+            "parameters": {},
+            "is_async": false,
+            "overloads": []
+          },
+          "serialize": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "keep_readonly": {
+                "default": "bool",
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          }
+        },
+        "properties": {
+          "name": {
+            "attr_type": "name"
+          },
+          "type": {
+            "attr_type": "type"
+          },
+          "additional_properties": {
+            "attr_type": null
+          }
+        }
+      },
+      "ColumnDataType": {
+        "type": "Enum",
+        "methods": {},
+        "properties": {
+          "BOOLEAN": "BOOLEAN",
+          "DATETIME": "DATETIME",
+          "INTEGER": "INTEGER",
+          "NUMBER": "NUMBER",
+          "OBJECT": "OBJECT",
+          "STRING": "STRING",
+          "capitalize": "capitalize",
+          "casefold": "casefold",
+          "center": "center",
+          "count": "count",
+          "encode": "encode",
+          "endswith": "endswith",
+          "expandtabs": "expandtabs",
+          "find": "find",
+          "format": "format",
+          "format_map": "format_map",
+          "index": "index",
+          "isalnum": "isalnum",
+          "isalpha": "isalpha",
+          "isascii": "isascii",
+          "isdecimal": "isdecimal",
+          "isdigit": "isdigit",
+          "isidentifier": "isidentifier",
+          "islower": "islower",
+          "isnumeric": "isnumeric",
+          "isprintable": "isprintable",
+          "isspace": "isspace",
+          "istitle": "istitle",
+          "isupper": "isupper",
+          "join": "join",
+          "ljust": "ljust",
+          "lower": "lower",
+          "lstrip": "lstrip",
+          "maketrans": "maketrans",
+          "partition": "partition",
+          "removeprefix": "removeprefix",
+          "removesuffix": "removesuffix",
+          "replace": "replace",
+          "rfind": "rfind",
+          "rindex": "rindex",
+          "rjust": "rjust",
+          "rpartition": "rpartition",
+          "rsplit": "rsplit",
+          "rstrip": "rstrip",
+          "split": "split",
+          "splitlines": "splitlines",
+          "startswith": "startswith",
+          "strip": "strip",
+          "swapcase": "swapcase",
+          "title": "title",
+          "translate": "translate",
+          "upper": "upper",
+          "zfill": "zfill"
+        }
+      },
+      "DateTimeInterval": {
+        "type": null,
+        "methods": {
+          "__init__": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "start": {
+                "default": null,
+                "param_type": "keyword_only"
+              },
+              "end": {
+                "default": null,
+                "param_type": "keyword_only"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "as_dict": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "keep_readonly": {
+                "default": "bool",
+                "param_type": "positional_or_keyword"
+              },
+              "key_transformer": {
+                "default": "attribute_transformer",
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "deserialize": {
+            "parameters": {
+              "data": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "content_type": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "enable_additional_properties_sending": {
+            "parameters": {},
+            "is_async": false,
+            "overloads": []
+          },
+          "from_dict": {
+            "parameters": {
+              "data": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "key_extractors": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              },
+              "content_type": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "is_xml_model": {
+            "parameters": {},
+            "is_async": false,
+            "overloads": []
+          },
+          "serialize": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "keep_readonly": {
+                "default": "bool",
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          }
+        },
+        "properties": {
+          "start": {
+            "attr_type": "start"
+          },
+          "end": {
+            "attr_type": "end"
+          },
+          "additional_properties": {
+            "attr_type": null
+          }
+        }
+      },
+      "Error": {
+        "type": null,
+        "methods": {
+          "__init__": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "code": {
+                "default": null,
+                "param_type": "keyword_only"
+              },
+              "message": {
+                "default": null,
+                "param_type": "keyword_only"
+              },
+              "details": {
+                "default": "none",
+                "param_type": "keyword_only"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "as_dict": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "keep_readonly": {
+                "default": "bool",
+                "param_type": "positional_or_keyword"
+              },
+              "key_transformer": {
+                "default": "attribute_transformer",
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "deserialize": {
+            "parameters": {
+              "data": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "content_type": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "enable_additional_properties_sending": {
+            "parameters": {},
+            "is_async": false,
+            "overloads": []
+          },
+          "from_dict": {
+            "parameters": {
+              "data": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "key_extractors": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              },
+              "content_type": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "is_xml_model": {
+            "parameters": {},
+            "is_async": false,
+            "overloads": []
+          },
+          "serialize": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "keep_readonly": {
+                "default": "bool",
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          }
+        },
+        "properties": {
+          "code": {
+            "attr_type": "code"
+          },
+          "message": {
+            "attr_type": "message"
+          },
+          "details": {
+            "attr_type": "details"
+          },
+          "additional_properties": {
+            "attr_type": null
+          }
+        }
+      },
+      "ErrorDetails": {
+        "type": null,
+        "methods": {
+          "__init__": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "code": {
+                "default": null,
+                "param_type": "keyword_only"
+              },
+              "message": {
+                "default": null,
+                "param_type": "keyword_only"
+              },
+              "additional_properties": {
+                "default": "none",
+                "param_type": "keyword_only"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "as_dict": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "keep_readonly": {
+                "default": "bool",
+                "param_type": "positional_or_keyword"
+              },
+              "key_transformer": {
+                "default": "attribute_transformer",
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "deserialize": {
+            "parameters": {
+              "data": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "content_type": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "enable_additional_properties_sending": {
+            "parameters": {},
+            "is_async": false,
+            "overloads": []
+          },
+          "from_dict": {
+            "parameters": {
+              "data": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "key_extractors": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              },
+              "content_type": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "is_xml_model": {
+            "parameters": {},
+            "is_async": false,
+            "overloads": []
+          },
+          "serialize": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "keep_readonly": {
+                "default": "bool",
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          }
+        },
+        "properties": {
+          "additional_properties": {
+            "attr_type": null
+          },
+          "code": {
+            "attr_type": "code"
+          },
+          "message": {
+            "attr_type": "message"
+          }
+        }
+      },
+      "ErrorResponse": {
+        "type": null,
+        "methods": {
+          "__init__": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "error": {
+                "default": null,
+                "param_type": "keyword_only"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "as_dict": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "keep_readonly": {
+                "default": "bool",
+                "param_type": "positional_or_keyword"
+              },
+              "key_transformer": {
+                "default": "attribute_transformer",
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "deserialize": {
+            "parameters": {
+              "data": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "content_type": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "enable_additional_properties_sending": {
+            "parameters": {},
+            "is_async": false,
+            "overloads": []
+          },
+          "from_dict": {
+            "parameters": {
+              "data": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "key_extractors": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              },
+              "content_type": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "is_xml_model": {
+            "parameters": {},
+            "is_async": false,
+            "overloads": []
+          },
+          "serialize": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "keep_readonly": {
+                "default": "bool",
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          }
+        },
+        "properties": {
+          "error": {
+            "attr_type": "error"
+          },
+          "additional_properties": {
+            "attr_type": null
+          }
+        }
+      },
+      "Facet": {
+        "type": null,
+        "methods": {
+          "__init__": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "expression": {
+                "default": null,
+                "param_type": "keyword_only"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "as_dict": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "keep_readonly": {
+                "default": "bool",
+                "param_type": "positional_or_keyword"
+              },
+              "key_transformer": {
+                "default": "attribute_transformer",
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "deserialize": {
+            "parameters": {
+              "data": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "content_type": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "enable_additional_properties_sending": {
+            "parameters": {},
+            "is_async": false,
+            "overloads": []
+          },
+          "from_dict": {
+            "parameters": {
+              "data": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "key_extractors": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              },
+              "content_type": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "is_xml_model": {
+            "parameters": {},
+            "is_async": false,
+            "overloads": []
+          },
+          "serialize": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "keep_readonly": {
+                "default": "bool",
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          }
+        },
+        "properties": {
+          "expression": {
+            "attr_type": "expression"
+          },
+          "result_type": {
+            "attr_type": null
+          },
+          "additional_properties": {
+            "attr_type": null
+          }
+        }
+      },
+      "FacetError": {
+        "type": null,
+        "methods": {
+          "__init__": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "expression": {
+                "default": null,
+                "param_type": "keyword_only"
+              },
+              "errors": {
+                "default": null,
+                "param_type": "keyword_only"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "as_dict": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "keep_readonly": {
+                "default": "bool",
+                "param_type": "positional_or_keyword"
+              },
+              "key_transformer": {
+                "default": "attribute_transformer",
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "deserialize": {
+            "parameters": {
+              "data": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "content_type": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "enable_additional_properties_sending": {
+            "parameters": {},
+            "is_async": false,
+            "overloads": []
+          },
+          "from_dict": {
+            "parameters": {
+              "data": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "key_extractors": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              },
+              "content_type": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "is_xml_model": {
+            "parameters": {},
+            "is_async": false,
+            "overloads": []
+          },
+          "serialize": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "keep_readonly": {
+                "default": "bool",
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          }
+        },
+        "properties": {
+          "result_type": {
+            "attr_type": null
+          },
+          "errors": {
+            "attr_type": "errors"
+          },
+          "expression": {
+            "attr_type": "expression"
+          },
+          "additional_properties": {
+            "attr_type": null
+          }
+        }
+      },
+      "FacetRequest": {
+        "type": null,
+        "methods": {
+          "__init__": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "expression": {
+                "default": null,
+                "param_type": "keyword_only"
+              },
+              "options": {
+                "default": "none",
+                "param_type": "keyword_only"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "as_dict": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "keep_readonly": {
+                "default": "bool",
+                "param_type": "positional_or_keyword"
+              },
+              "key_transformer": {
+                "default": "attribute_transformer",
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "deserialize": {
+            "parameters": {
+              "data": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "content_type": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "enable_additional_properties_sending": {
+            "parameters": {},
+            "is_async": false,
+            "overloads": []
+          },
+          "from_dict": {
+            "parameters": {
+              "data": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "key_extractors": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              },
+              "content_type": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "is_xml_model": {
+            "parameters": {},
+            "is_async": false,
+            "overloads": []
+          },
+          "serialize": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "keep_readonly": {
+                "default": "bool",
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          }
+        },
+        "properties": {
+          "expression": {
+            "attr_type": "expression"
+          },
+          "options": {
+            "attr_type": "options"
+          },
+          "additional_properties": {
+            "attr_type": null
+          }
+        }
+      },
+      "FacetRequestOptions": {
+        "type": null,
+        "methods": {
+          "__init__": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "sort_by": {
+                "default": "none",
+                "param_type": "keyword_only"
+              },
+              "sort_order": {
+                "default": "str",
+                "param_type": "keyword_only"
+              },
+              "filter": {
+                "default": "none",
+                "param_type": "keyword_only"
+              },
+              "top": {
+                "default": "none",
+                "param_type": "keyword_only"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "as_dict": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "keep_readonly": {
+                "default": "bool",
+                "param_type": "positional_or_keyword"
+              },
+              "key_transformer": {
+                "default": "attribute_transformer",
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "deserialize": {
+            "parameters": {
+              "data": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "content_type": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "enable_additional_properties_sending": {
+            "parameters": {},
+            "is_async": false,
+            "overloads": []
+          },
+          "from_dict": {
+            "parameters": {
+              "data": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "key_extractors": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              },
+              "content_type": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "is_xml_model": {
+            "parameters": {},
+            "is_async": false,
+            "overloads": []
+          },
+          "serialize": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "keep_readonly": {
+                "default": "bool",
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          }
+        },
+        "properties": {
+          "sort_by": {
+            "attr_type": "sort_by"
+          },
+          "sort_order": {
+            "attr_type": "sort_order"
+          },
+          "filter": {
+            "attr_type": "filter"
+          },
+          "top": {
+            "attr_type": "top"
+          },
+          "additional_properties": {
+            "attr_type": null
+          }
+        }
+      },
+      "FacetResult": {
+        "type": null,
+        "methods": {
+          "__init__": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "expression": {
+                "default": null,
+                "param_type": "keyword_only"
+              },
+              "total_records": {
+                "default": null,
+                "param_type": "keyword_only"
+              },
+              "count": {
+                "default": null,
+                "param_type": "keyword_only"
+              },
+              "data": {
+                "default": null,
+                "param_type": "keyword_only"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "as_dict": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "keep_readonly": {
+                "default": "bool",
+                "param_type": "positional_or_keyword"
+              },
+              "key_transformer": {
+                "default": "attribute_transformer",
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "deserialize": {
+            "parameters": {
+              "data": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "content_type": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "enable_additional_properties_sending": {
+            "parameters": {},
+            "is_async": false,
+            "overloads": []
+          },
+          "from_dict": {
+            "parameters": {
+              "data": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "key_extractors": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              },
+              "content_type": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "is_xml_model": {
+            "parameters": {},
+            "is_async": false,
+            "overloads": []
+          },
+          "serialize": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "keep_readonly": {
+                "default": "bool",
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          }
+        },
+        "properties": {
+          "result_type": {
+            "attr_type": null
+          },
+          "total_records": {
+            "attr_type": "total_records"
+          },
+          "count": {
+            "attr_type": "count"
+          },
+          "data": {
+            "attr_type": "data"
+          },
+          "expression": {
+            "attr_type": "expression"
+          },
+          "additional_properties": {
+            "attr_type": null
+          }
+        }
+      },
+      "FacetSortOrder": {
+        "type": "Enum",
+        "methods": {},
+        "properties": {
+          "ASC": "ASC",
+          "DESC": "DESC",
+          "capitalize": "capitalize",
+          "casefold": "casefold",
+          "center": "center",
+          "count": "count",
+          "encode": "encode",
+          "endswith": "endswith",
+          "expandtabs": "expandtabs",
+          "find": "find",
+          "format": "format",
+          "format_map": "format_map",
+          "index": "index",
+          "isalnum": "isalnum",
+          "isalpha": "isalpha",
+          "isascii": "isascii",
+          "isdecimal": "isdecimal",
+          "isdigit": "isdigit",
+          "isidentifier": "isidentifier",
+          "islower": "islower",
+          "isnumeric": "isnumeric",
+          "isprintable": "isprintable",
+          "isspace": "isspace",
+          "istitle": "istitle",
+          "isupper": "isupper",
+          "join": "join",
+          "ljust": "ljust",
+          "lower": "lower",
+          "lstrip": "lstrip",
+          "maketrans": "maketrans",
+          "partition": "partition",
+          "removeprefix": "removeprefix",
+          "removesuffix": "removesuffix",
+          "replace": "replace",
+          "rfind": "rfind",
+          "rindex": "rindex",
+          "rjust": "rjust",
+          "rpartition": "rpartition",
+          "rsplit": "rsplit",
+          "rstrip": "rstrip",
+          "split": "split",
+          "splitlines": "splitlines",
+          "startswith": "startswith",
+          "strip": "strip",
+          "swapcase": "swapcase",
+          "title": "title",
+          "translate": "translate",
+          "upper": "upper",
+          "zfill": "zfill"
+        }
+      },
+      "HistoryContext": {
+        "type": null,
+        "methods": {
+          "__init__": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "content": {
+                "default": null,
+                "param_type": "keyword_only"
+              },
+              "role": {
+                "default": null,
+                "param_type": "keyword_only"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "as_dict": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "keep_readonly": {
+                "default": "bool",
+                "param_type": "positional_or_keyword"
+              },
+              "key_transformer": {
+                "default": "attribute_transformer",
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "deserialize": {
+            "parameters": {
+              "data": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "content_type": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "enable_additional_properties_sending": {
+            "parameters": {},
+            "is_async": false,
+            "overloads": []
+          },
+          "from_dict": {
+            "parameters": {
+              "data": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "key_extractors": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              },
+              "content_type": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "is_xml_model": {
+            "parameters": {},
+            "is_async": false,
+            "overloads": []
+          },
+          "serialize": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "keep_readonly": {
+                "default": "bool",
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          }
+        },
+        "properties": {
+          "content": {
+            "attr_type": "content"
+          },
+          "role": {
+            "attr_type": "role"
+          },
+          "additional_properties": {
+            "attr_type": null
+          }
+        }
+      },
+      "Operation": {
+        "type": null,
+        "methods": {
+          "__init__": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "name": {
+                "default": "none",
+                "param_type": "keyword_only"
+              },
+              "display": {
+                "default": "none",
+                "param_type": "keyword_only"
+              },
+              "origin": {
+                "default": "none",
+                "param_type": "keyword_only"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "as_dict": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "keep_readonly": {
+                "default": "bool",
+                "param_type": "positional_or_keyword"
+              },
+              "key_transformer": {
+                "default": "attribute_transformer",
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "deserialize": {
+            "parameters": {
+              "data": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "content_type": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "enable_additional_properties_sending": {
+            "parameters": {},
+            "is_async": false,
+            "overloads": []
+          },
+          "from_dict": {
+            "parameters": {
+              "data": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "key_extractors": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              },
+              "content_type": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "is_xml_model": {
+            "parameters": {},
+            "is_async": false,
+            "overloads": []
+          },
+          "serialize": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "keep_readonly": {
+                "default": "bool",
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          }
+        },
+        "properties": {
+          "name": {
+            "attr_type": "name"
+          },
+          "display": {
+            "attr_type": "display"
+          },
+          "origin": {
+            "attr_type": "origin"
+          },
+          "additional_properties": {
+            "attr_type": null
+          }
+        }
+      },
+      "OperationDisplay": {
+        "type": null,
+        "methods": {
+          "__init__": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "provider": {
+                "default": "none",
+                "param_type": "keyword_only"
+              },
+              "resource": {
+                "default": "none",
+                "param_type": "keyword_only"
+              },
+              "operation": {
+                "default": "none",
+                "param_type": "keyword_only"
+              },
+              "description": {
+                "default": "none",
+                "param_type": "keyword_only"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "as_dict": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "keep_readonly": {
+                "default": "bool",
+                "param_type": "positional_or_keyword"
+              },
+              "key_transformer": {
+                "default": "attribute_transformer",
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "deserialize": {
+            "parameters": {
+              "data": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "content_type": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "enable_additional_properties_sending": {
+            "parameters": {},
+            "is_async": false,
+            "overloads": []
+          },
+          "from_dict": {
+            "parameters": {
+              "data": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "key_extractors": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              },
+              "content_type": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "is_xml_model": {
+            "parameters": {},
+            "is_async": false,
+            "overloads": []
+          },
+          "serialize": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "keep_readonly": {
+                "default": "bool",
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          }
+        },
+        "properties": {
+          "provider": {
+            "attr_type": "provider"
+          },
+          "resource": {
+            "attr_type": "resource"
+          },
+          "operation": {
+            "attr_type": "operation"
+          },
+          "description": {
+            "attr_type": "description"
+          },
+          "additional_properties": {
+            "attr_type": null
+          }
+        }
+      },
+      "OperationListResult": {
+        "type": null,
+        "methods": {
+          "__init__": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "value": {
+                "default": "none",
+                "param_type": "keyword_only"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "as_dict": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "keep_readonly": {
+                "default": "bool",
+                "param_type": "positional_or_keyword"
+              },
+              "key_transformer": {
+                "default": "attribute_transformer",
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "deserialize": {
+            "parameters": {
+              "data": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "content_type": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "enable_additional_properties_sending": {
+            "parameters": {},
+            "is_async": false,
+            "overloads": []
+          },
+          "from_dict": {
+            "parameters": {
+              "data": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "key_extractors": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              },
+              "content_type": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "is_xml_model": {
+            "parameters": {},
+            "is_async": false,
+            "overloads": []
+          },
+          "serialize": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "keep_readonly": {
+                "default": "bool",
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          }
+        },
+        "properties": {
+          "value": {
+            "attr_type": "value"
+          },
+          "additional_properties": {
+            "attr_type": null
+          }
+        }
+      },
+      "PropertyChangeType": {
+        "type": "Enum",
+        "methods": {},
+        "properties": {
+          "INSERT": "INSERT",
+          "REMOVE": "REMOVE",
+          "UPDATE": "UPDATE",
+          "capitalize": "capitalize",
+          "casefold": "casefold",
+          "center": "center",
+          "count": "count",
+          "encode": "encode",
+          "endswith": "endswith",
+          "expandtabs": "expandtabs",
+          "find": "find",
+          "format": "format",
+          "format_map": "format_map",
+          "index": "index",
+          "isalnum": "isalnum",
+          "isalpha": "isalpha",
+          "isascii": "isascii",
+          "isdecimal": "isdecimal",
+          "isdigit": "isdigit",
+          "isidentifier": "isidentifier",
+          "islower": "islower",
+          "isnumeric": "isnumeric",
+          "isprintable": "isprintable",
+          "isspace": "isspace",
+          "istitle": "istitle",
+          "isupper": "isupper",
+          "join": "join",
+          "ljust": "ljust",
+          "lower": "lower",
+          "lstrip": "lstrip",
+          "maketrans": "maketrans",
+          "partition": "partition",
+          "removeprefix": "removeprefix",
+          "removesuffix": "removesuffix",
+          "replace": "replace",
+          "rfind": "rfind",
+          "rindex": "rindex",
+          "rjust": "rjust",
+          "rpartition": "rpartition",
+          "rsplit": "rsplit",
+          "rstrip": "rstrip",
+          "split": "split",
+          "splitlines": "splitlines",
+          "startswith": "startswith",
+          "strip": "strip",
+          "swapcase": "swapcase",
+          "title": "title",
+          "translate": "translate",
+          "upper": "upper",
+          "zfill": "zfill"
+        }
+      },
+      "QueryGenerationRequest": {
+        "type": null,
+        "methods": {
+          "__init__": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "prompt": {
+                "default": null,
+                "param_type": "keyword_only"
+              },
+              "history": {
+                "default": "none",
+                "param_type": "keyword_only"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "as_dict": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "keep_readonly": {
+                "default": "bool",
+                "param_type": "positional_or_keyword"
+              },
+              "key_transformer": {
+                "default": "attribute_transformer",
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "deserialize": {
+            "parameters": {
+              "data": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "content_type": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "enable_additional_properties_sending": {
+            "parameters": {},
+            "is_async": false,
+            "overloads": []
+          },
+          "from_dict": {
+            "parameters": {
+              "data": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "key_extractors": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              },
+              "content_type": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "is_xml_model": {
+            "parameters": {},
+            "is_async": false,
+            "overloads": []
+          },
+          "serialize": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "keep_readonly": {
+                "default": "bool",
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          }
+        },
+        "properties": {
+          "history": {
+            "attr_type": "history"
+          },
+          "prompt": {
+            "attr_type": "prompt"
+          },
+          "additional_properties": {
+            "attr_type": null
+          }
+        }
+      },
+      "QueryGenerationResponse": {
+        "type": null,
+        "methods": {
+          "__init__": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "query": {
+                "default": null,
+                "param_type": "keyword_only"
+              },
+              "status": {
+                "default": null,
+                "param_type": "keyword_only"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "as_dict": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "keep_readonly": {
+                "default": "bool",
+                "param_type": "positional_or_keyword"
+              },
+              "key_transformer": {
+                "default": "attribute_transformer",
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "deserialize": {
+            "parameters": {
+              "data": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "content_type": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "enable_additional_properties_sending": {
+            "parameters": {},
+            "is_async": false,
+            "overloads": []
+          },
+          "from_dict": {
+            "parameters": {
+              "data": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "key_extractors": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              },
+              "content_type": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "is_xml_model": {
+            "parameters": {},
+            "is_async": false,
+            "overloads": []
+          },
+          "serialize": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "keep_readonly": {
+                "default": "bool",
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          }
+        },
+        "properties": {
+          "query": {
+            "attr_type": "query"
+          },
+          "status": {
+            "attr_type": "status"
+          },
+          "additional_properties": {
+            "attr_type": null
+          }
+        }
+      },
+      "QueryRequest": {
+        "type": null,
+        "methods": {
+          "__init__": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "query": {
+                "default": null,
+                "param_type": "keyword_only"
+              },
+              "subscriptions": {
+                "default": "none",
+                "param_type": "keyword_only"
+              },
+              "management_groups": {
+                "default": "none",
+                "param_type": "keyword_only"
+              },
+              "options": {
+                "default": "none",
+                "param_type": "keyword_only"
+              },
+              "facets": {
+                "default": "none",
+                "param_type": "keyword_only"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "as_dict": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "keep_readonly": {
+                "default": "bool",
+                "param_type": "positional_or_keyword"
+              },
+              "key_transformer": {
+                "default": "attribute_transformer",
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "deserialize": {
+            "parameters": {
+              "data": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "content_type": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "enable_additional_properties_sending": {
+            "parameters": {},
+            "is_async": false,
+            "overloads": []
+          },
+          "from_dict": {
+            "parameters": {
+              "data": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "key_extractors": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              },
+              "content_type": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "is_xml_model": {
+            "parameters": {},
+            "is_async": false,
+            "overloads": []
+          },
+          "serialize": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "keep_readonly": {
+                "default": "bool",
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          }
+        },
+        "properties": {
+          "subscriptions": {
+            "attr_type": "subscriptions"
+          },
+          "management_groups": {
+            "attr_type": "management_groups"
+          },
+          "query": {
+            "attr_type": "query"
+          },
+          "options": {
+            "attr_type": "options"
+          },
+          "facets": {
+            "attr_type": "facets"
+          },
+          "additional_properties": {
+            "attr_type": null
+          }
+        }
+      },
+      "QueryRequestOptions": {
+        "type": null,
+        "methods": {
+          "__init__": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "skip_token": {
+                "default": "none",
+                "param_type": "keyword_only"
+              },
+              "top": {
+                "default": "none",
+                "param_type": "keyword_only"
+              },
+              "skip": {
+                "default": "none",
+                "param_type": "keyword_only"
+              },
+              "result_format": {
+                "default": "none",
+                "param_type": "keyword_only"
+              },
+              "allow_partial_scopes": {
+                "default": "bool",
+                "param_type": "keyword_only"
+              },
+              "authorization_scope_filter": {
+                "default": "str",
+                "param_type": "keyword_only"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "as_dict": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "keep_readonly": {
+                "default": "bool",
+                "param_type": "positional_or_keyword"
+              },
+              "key_transformer": {
+                "default": "attribute_transformer",
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "deserialize": {
+            "parameters": {
+              "data": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "content_type": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "enable_additional_properties_sending": {
+            "parameters": {},
+            "is_async": false,
+            "overloads": []
+          },
+          "from_dict": {
+            "parameters": {
+              "data": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "key_extractors": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              },
+              "content_type": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "is_xml_model": {
+            "parameters": {},
+            "is_async": false,
+            "overloads": []
+          },
+          "serialize": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "keep_readonly": {
+                "default": "bool",
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          }
+        },
+        "properties": {
+          "skip_token": {
+            "attr_type": "skip_token"
+          },
+          "top": {
+            "attr_type": "top"
+          },
+          "skip": {
+            "attr_type": "skip"
+          },
+          "result_format": {
+            "attr_type": "result_format"
+          },
+          "allow_partial_scopes": {
+            "attr_type": "allow_partial_scopes"
+          },
+          "authorization_scope_filter": {
+            "attr_type": "authorization_scope_filter"
+          },
+          "additional_properties": {
+            "attr_type": null
+          }
+        }
+      },
+      "QueryResponse": {
+        "type": null,
+        "methods": {
+          "__init__": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "total_records": {
+                "default": null,
+                "param_type": "keyword_only"
+              },
+              "count": {
+                "default": null,
+                "param_type": "keyword_only"
+              },
+              "result_truncated": {
+                "default": null,
+                "param_type": "keyword_only"
+              },
+              "data": {
+                "default": null,
+                "param_type": "keyword_only"
+              },
+              "skip_token": {
+                "default": "none",
+                "param_type": "keyword_only"
+              },
+              "facets": {
+                "default": "none",
+                "param_type": "keyword_only"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "as_dict": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "keep_readonly": {
+                "default": "bool",
+                "param_type": "positional_or_keyword"
+              },
+              "key_transformer": {
+                "default": "attribute_transformer",
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "deserialize": {
+            "parameters": {
+              "data": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "content_type": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "enable_additional_properties_sending": {
+            "parameters": {},
+            "is_async": false,
+            "overloads": []
+          },
+          "from_dict": {
+            "parameters": {
+              "data": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "key_extractors": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              },
+              "content_type": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "is_xml_model": {
+            "parameters": {},
+            "is_async": false,
+            "overloads": []
+          },
+          "serialize": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "keep_readonly": {
+                "default": "bool",
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          }
+        },
+        "properties": {
+          "total_records": {
+            "attr_type": "total_records"
+          },
+          "count": {
+            "attr_type": "count"
+          },
+          "result_truncated": {
+            "attr_type": "result_truncated"
+          },
+          "skip_token": {
+            "attr_type": "skip_token"
+          },
+          "data": {
+            "attr_type": "data"
+          },
+          "facets": {
+            "attr_type": "facets"
+          },
+          "additional_properties": {
+            "attr_type": null
+          }
+        }
+      },
+      "ResourceChangeData": {
+        "type": null,
+        "methods": {
+          "__init__": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "change_id": {
+                "default": null,
+                "param_type": "keyword_only"
+              },
+              "before_snapshot": {
+                "default": null,
+                "param_type": "keyword_only"
+              },
+              "after_snapshot": {
+                "default": null,
+                "param_type": "keyword_only"
+              },
+              "resource_id": {
+                "default": "none",
+                "param_type": "keyword_only"
+              },
+              "change_type": {
+                "default": "none",
+                "param_type": "keyword_only"
+              },
+              "property_changes": {
+                "default": "none",
+                "param_type": "keyword_only"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "as_dict": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "keep_readonly": {
+                "default": "bool",
+                "param_type": "positional_or_keyword"
+              },
+              "key_transformer": {
+                "default": "attribute_transformer",
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "deserialize": {
+            "parameters": {
+              "data": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "content_type": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "enable_additional_properties_sending": {
+            "parameters": {},
+            "is_async": false,
+            "overloads": []
+          },
+          "from_dict": {
+            "parameters": {
+              "data": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "key_extractors": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              },
+              "content_type": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "is_xml_model": {
+            "parameters": {},
+            "is_async": false,
+            "overloads": []
+          },
+          "serialize": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "keep_readonly": {
+                "default": "bool",
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          }
+        },
+        "properties": {
+          "resource_id": {
+            "attr_type": "resource_id"
+          },
+          "change_id": {
+            "attr_type": "change_id"
+          },
+          "before_snapshot": {
+            "attr_type": "before_snapshot"
+          },
+          "after_snapshot": {
+            "attr_type": "after_snapshot"
+          },
+          "change_type": {
+            "attr_type": "change_type"
+          },
+          "property_changes": {
+            "attr_type": "property_changes"
+          },
+          "additional_properties": {
+            "attr_type": null
+          }
+        }
+      },
+      "ResourceChangeDataAfterSnapshot": {
+        "type": null,
+        "methods": {
+          "__init__": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "timestamp": {
+                "default": null,
+                "param_type": "keyword_only"
+              },
+              "snapshot_id": {
+                "default": "none",
+                "param_type": "keyword_only"
+              },
+              "content": {
+                "default": "none",
+                "param_type": "keyword_only"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "as_dict": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "keep_readonly": {
+                "default": "bool",
+                "param_type": "positional_or_keyword"
+              },
+              "key_transformer": {
+                "default": "attribute_transformer",
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "deserialize": {
+            "parameters": {
+              "data": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "content_type": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "enable_additional_properties_sending": {
+            "parameters": {},
+            "is_async": false,
+            "overloads": []
+          },
+          "from_dict": {
+            "parameters": {
+              "data": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "key_extractors": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              },
+              "content_type": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "is_xml_model": {
+            "parameters": {},
+            "is_async": false,
+            "overloads": []
+          },
+          "serialize": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "keep_readonly": {
+                "default": "bool",
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          }
+        },
+        "properties": {
+          "snapshot_id": {
+            "attr_type": "snapshot_id"
+          },
+          "timestamp": {
+            "attr_type": "timestamp"
+          },
+          "content": {
+            "attr_type": "content"
+          },
+          "additional_properties": {
+            "attr_type": null
+          }
+        }
+      },
+      "ResourceChangeDataBeforeSnapshot": {
+        "type": null,
+        "methods": {
+          "__init__": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "timestamp": {
+                "default": null,
+                "param_type": "keyword_only"
+              },
+              "snapshot_id": {
+                "default": "none",
+                "param_type": "keyword_only"
+              },
+              "content": {
+                "default": "none",
+                "param_type": "keyword_only"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "as_dict": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "keep_readonly": {
+                "default": "bool",
+                "param_type": "positional_or_keyword"
+              },
+              "key_transformer": {
+                "default": "attribute_transformer",
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "deserialize": {
+            "parameters": {
+              "data": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "content_type": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "enable_additional_properties_sending": {
+            "parameters": {},
+            "is_async": false,
+            "overloads": []
+          },
+          "from_dict": {
+            "parameters": {
+              "data": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "key_extractors": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              },
+              "content_type": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "is_xml_model": {
+            "parameters": {},
+            "is_async": false,
+            "overloads": []
+          },
+          "serialize": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "keep_readonly": {
+                "default": "bool",
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          }
+        },
+        "properties": {
+          "snapshot_id": {
+            "attr_type": "snapshot_id"
+          },
+          "timestamp": {
+            "attr_type": "timestamp"
+          },
+          "content": {
+            "attr_type": "content"
+          },
+          "additional_properties": {
+            "attr_type": null
+          }
+        }
+      },
+      "ResourceChangeDetailsRequestParameters": {
+        "type": null,
+        "methods": {
+          "__init__": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "resource_ids": {
+                "default": null,
+                "param_type": "keyword_only"
+              },
+              "change_ids": {
+                "default": null,
+                "param_type": "keyword_only"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "as_dict": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "keep_readonly": {
+                "default": "bool",
+                "param_type": "positional_or_keyword"
+              },
+              "key_transformer": {
+                "default": "attribute_transformer",
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "deserialize": {
+            "parameters": {
+              "data": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "content_type": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "enable_additional_properties_sending": {
+            "parameters": {},
+            "is_async": false,
+            "overloads": []
+          },
+          "from_dict": {
+            "parameters": {
+              "data": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "key_extractors": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              },
+              "content_type": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "is_xml_model": {
+            "parameters": {},
+            "is_async": false,
+            "overloads": []
+          },
+          "serialize": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "keep_readonly": {
+                "default": "bool",
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          }
+        },
+        "properties": {
+          "resource_ids": {
+            "attr_type": "resource_ids"
+          },
+          "change_ids": {
+            "attr_type": "change_ids"
+          },
+          "additional_properties": {
+            "attr_type": null
+          }
+        }
+      },
+      "ResourceChangeList": {
+        "type": null,
+        "methods": {
+          "__init__": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "changes": {
+                "default": "none",
+                "param_type": "keyword_only"
+              },
+              "skip_token": {
+                "default": "none",
+                "param_type": "keyword_only"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "as_dict": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "keep_readonly": {
+                "default": "bool",
+                "param_type": "positional_or_keyword"
+              },
+              "key_transformer": {
+                "default": "attribute_transformer",
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "deserialize": {
+            "parameters": {
+              "data": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "content_type": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "enable_additional_properties_sending": {
+            "parameters": {},
+            "is_async": false,
+            "overloads": []
+          },
+          "from_dict": {
+            "parameters": {
+              "data": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "key_extractors": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              },
+              "content_type": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "is_xml_model": {
+            "parameters": {},
+            "is_async": false,
+            "overloads": []
+          },
+          "serialize": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "keep_readonly": {
+                "default": "bool",
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          }
+        },
+        "properties": {
+          "changes": {
+            "attr_type": "changes"
+          },
+          "skip_token": {
+            "attr_type": "skip_token"
+          },
+          "additional_properties": {
+            "attr_type": null
+          }
+        }
+      },
+      "ResourceChangesRequestParameters": {
+        "type": null,
+        "methods": {
+          "__init__": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "interval": {
+                "default": null,
+                "param_type": "keyword_only"
+              },
+              "resource_ids": {
+                "default": "none",
+                "param_type": "keyword_only"
+              },
+              "subscription_id": {
+                "default": "none",
+                "param_type": "keyword_only"
+              },
+              "skip_token": {
+                "default": "none",
+                "param_type": "keyword_only"
+              },
+              "top": {
+                "default": "none",
+                "param_type": "keyword_only"
+              },
+              "table": {
+                "default": "none",
+                "param_type": "keyword_only"
+              },
+              "fetch_property_changes": {
+                "default": "none",
+                "param_type": "keyword_only"
+              },
+              "fetch_snapshots": {
+                "default": "none",
+                "param_type": "keyword_only"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "as_dict": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "keep_readonly": {
+                "default": "bool",
+                "param_type": "positional_or_keyword"
+              },
+              "key_transformer": {
+                "default": "attribute_transformer",
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "deserialize": {
+            "parameters": {
+              "data": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "content_type": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "enable_additional_properties_sending": {
+            "parameters": {},
+            "is_async": false,
+            "overloads": []
+          },
+          "from_dict": {
+            "parameters": {
+              "data": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "key_extractors": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              },
+              "content_type": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "is_xml_model": {
+            "parameters": {},
+            "is_async": false,
+            "overloads": []
+          },
+          "serialize": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "keep_readonly": {
+                "default": "bool",
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          }
+        },
+        "properties": {
+          "resource_ids": {
+            "attr_type": "resource_ids"
+          },
+          "subscription_id": {
+            "attr_type": "subscription_id"
+          },
+          "interval": {
+            "attr_type": "interval"
+          },
+          "skip_token": {
+            "attr_type": "skip_token"
+          },
+          "top": {
+            "attr_type": "top"
+          },
+          "table": {
+            "attr_type": "table"
+          },
+          "fetch_property_changes": {
+            "attr_type": "fetch_property_changes"
+          },
+          "fetch_snapshots": {
+            "attr_type": "fetch_snapshots"
+          },
+          "additional_properties": {
+            "attr_type": null
+          }
+        }
+      },
+      "ResourceChangesRequestParametersInterval": {
+        "type": null,
+        "methods": {
+          "__init__": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "start": {
+                "default": null,
+                "param_type": "keyword_only"
+              },
+              "end": {
+                "default": null,
+                "param_type": "keyword_only"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "as_dict": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "keep_readonly": {
+                "default": "bool",
+                "param_type": "positional_or_keyword"
+              },
+              "key_transformer": {
+                "default": "attribute_transformer",
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "deserialize": {
+            "parameters": {
+              "data": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "content_type": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "enable_additional_properties_sending": {
+            "parameters": {},
+            "is_async": false,
+            "overloads": []
+          },
+          "from_dict": {
+            "parameters": {
+              "data": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "key_extractors": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              },
+              "content_type": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "is_xml_model": {
+            "parameters": {},
+            "is_async": false,
+            "overloads": []
+          },
+          "serialize": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "keep_readonly": {
+                "default": "bool",
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          }
+        },
+        "properties": {
+          "start": {
+            "attr_type": "start"
+          },
+          "end": {
+            "attr_type": "end"
+          },
+          "additional_properties": {
+            "attr_type": null
+          }
+        }
+      },
+      "ResourcePropertyChange": {
+        "type": null,
+        "methods": {
+          "__init__": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "property_name": {
+                "default": null,
+                "param_type": "keyword_only"
+              },
+              "change_category": {
+                "default": null,
+                "param_type": "keyword_only"
+              },
+              "property_change_type": {
+                "default": null,
+                "param_type": "keyword_only"
+              },
+              "before_value": {
+                "default": "none",
+                "param_type": "keyword_only"
+              },
+              "after_value": {
+                "default": "none",
+                "param_type": "keyword_only"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "as_dict": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "keep_readonly": {
+                "default": "bool",
+                "param_type": "positional_or_keyword"
+              },
+              "key_transformer": {
+                "default": "attribute_transformer",
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "deserialize": {
+            "parameters": {
+              "data": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "content_type": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "enable_additional_properties_sending": {
+            "parameters": {},
+            "is_async": false,
+            "overloads": []
+          },
+          "from_dict": {
+            "parameters": {
+              "data": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "key_extractors": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              },
+              "content_type": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "is_xml_model": {
+            "parameters": {},
+            "is_async": false,
+            "overloads": []
+          },
+          "serialize": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "keep_readonly": {
+                "default": "bool",
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          }
+        },
+        "properties": {
+          "property_name": {
+            "attr_type": "property_name"
+          },
+          "before_value": {
+            "attr_type": "before_value"
+          },
+          "after_value": {
+            "attr_type": "after_value"
+          },
+          "change_category": {
+            "attr_type": "change_category"
+          },
+          "property_change_type": {
+            "attr_type": "property_change_type"
+          },
+          "additional_properties": {
+            "attr_type": null
+          }
+        }
+      },
+      "ResourceSnapshotData": {
+        "type": null,
+        "methods": {
+          "__init__": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "timestamp": {
+                "default": null,
+                "param_type": "keyword_only"
+              },
+              "snapshot_id": {
+                "default": "none",
+                "param_type": "keyword_only"
+              },
+              "content": {
+                "default": "none",
+                "param_type": "keyword_only"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "as_dict": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "keep_readonly": {
+                "default": "bool",
+                "param_type": "positional_or_keyword"
+              },
+              "key_transformer": {
+                "default": "attribute_transformer",
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "deserialize": {
+            "parameters": {
+              "data": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "content_type": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "enable_additional_properties_sending": {
+            "parameters": {},
+            "is_async": false,
+            "overloads": []
+          },
+          "from_dict": {
+            "parameters": {
+              "data": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "key_extractors": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              },
+              "content_type": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "is_xml_model": {
+            "parameters": {},
+            "is_async": false,
+            "overloads": []
+          },
+          "serialize": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "keep_readonly": {
+                "default": "bool",
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          }
+        },
+        "properties": {
+          "snapshot_id": {
+            "attr_type": "snapshot_id"
+          },
+          "timestamp": {
+            "attr_type": "timestamp"
+          },
+          "content": {
+            "attr_type": "content"
+          },
+          "additional_properties": {
+            "attr_type": null
+          }
+        }
+      },
+      "ResourcesHistoryRequest": {
+        "type": null,
+        "methods": {
+          "__init__": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "subscriptions": {
+                "default": "none",
+                "param_type": "keyword_only"
+              },
+              "query": {
+                "default": "none",
+                "param_type": "keyword_only"
+              },
+              "options": {
+                "default": "none",
+                "param_type": "keyword_only"
+              },
+              "management_groups": {
+                "default": "none",
+                "param_type": "keyword_only"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "as_dict": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "keep_readonly": {
+                "default": "bool",
+                "param_type": "positional_or_keyword"
+              },
+              "key_transformer": {
+                "default": "attribute_transformer",
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "deserialize": {
+            "parameters": {
+              "data": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "content_type": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "enable_additional_properties_sending": {
+            "parameters": {},
+            "is_async": false,
+            "overloads": []
+          },
+          "from_dict": {
+            "parameters": {
+              "data": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "key_extractors": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              },
+              "content_type": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "is_xml_model": {
+            "parameters": {},
+            "is_async": false,
+            "overloads": []
+          },
+          "serialize": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "keep_readonly": {
+                "default": "bool",
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          }
+        },
+        "properties": {
+          "subscriptions": {
+            "attr_type": "subscriptions"
+          },
+          "query": {
+            "attr_type": "query"
+          },
+          "options": {
+            "attr_type": "options"
+          },
+          "management_groups": {
+            "attr_type": "management_groups"
+          },
+          "additional_properties": {
+            "attr_type": null
+          }
+        }
+      },
+      "ResourcesHistoryRequestOptions": {
+        "type": null,
+        "methods": {
+          "__init__": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "interval": {
+                "default": "none",
+                "param_type": "keyword_only"
+              },
+              "top": {
+                "default": "none",
+                "param_type": "keyword_only"
+              },
+              "skip": {
+                "default": "none",
+                "param_type": "keyword_only"
+              },
+              "skip_token": {
+                "default": "none",
+                "param_type": "keyword_only"
+              },
+              "result_format": {
+                "default": "none",
+                "param_type": "keyword_only"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "as_dict": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "keep_readonly": {
+                "default": "bool",
+                "param_type": "positional_or_keyword"
+              },
+              "key_transformer": {
+                "default": "attribute_transformer",
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "deserialize": {
+            "parameters": {
+              "data": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "content_type": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "enable_additional_properties_sending": {
+            "parameters": {},
+            "is_async": false,
+            "overloads": []
+          },
+          "from_dict": {
+            "parameters": {
+              "data": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "key_extractors": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              },
+              "content_type": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "is_xml_model": {
+            "parameters": {},
+            "is_async": false,
+            "overloads": []
+          },
+          "serialize": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "keep_readonly": {
+                "default": "bool",
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          }
+        },
+        "properties": {
+          "interval": {
+            "attr_type": "interval"
+          },
+          "top": {
+            "attr_type": "top"
+          },
+          "skip": {
+            "attr_type": "skip"
+          },
+          "skip_token": {
+            "attr_type": "skip_token"
+          },
+          "result_format": {
+            "attr_type": "result_format"
+          },
+          "additional_properties": {
+            "attr_type": null
+          }
+        }
+      },
+      "ResultFormat": {
+        "type": "Enum",
+        "methods": {},
+        "properties": {
+          "OBJECT_ARRAY": "OBJECT_ARRAY",
+          "TABLE": "TABLE",
+          "capitalize": "capitalize",
+          "casefold": "casefold",
+          "center": "center",
+          "count": "count",
+          "encode": "encode",
+          "endswith": "endswith",
+          "expandtabs": "expandtabs",
+          "find": "find",
+          "format": "format",
+          "format_map": "format_map",
+          "index": "index",
+          "isalnum": "isalnum",
+          "isalpha": "isalpha",
+          "isascii": "isascii",
+          "isdecimal": "isdecimal",
+          "isdigit": "isdigit",
+          "isidentifier": "isidentifier",
+          "islower": "islower",
+          "isnumeric": "isnumeric",
+          "isprintable": "isprintable",
+          "isspace": "isspace",
+          "istitle": "istitle",
+          "isupper": "isupper",
+          "join": "join",
+          "ljust": "ljust",
+          "lower": "lower",
+          "lstrip": "lstrip",
+          "maketrans": "maketrans",
+          "partition": "partition",
+          "removeprefix": "removeprefix",
+          "removesuffix": "removesuffix",
+          "replace": "replace",
+          "rfind": "rfind",
+          "rindex": "rindex",
+          "rjust": "rjust",
+          "rpartition": "rpartition",
+          "rsplit": "rsplit",
+          "rstrip": "rstrip",
+          "split": "split",
+          "splitlines": "splitlines",
+          "startswith": "startswith",
+          "strip": "strip",
+          "swapcase": "swapcase",
+          "title": "title",
+          "translate": "translate",
+          "upper": "upper",
+          "zfill": "zfill"
+        }
+      },
+      "ResultTruncated": {
+        "type": "Enum",
+        "methods": {},
+        "properties": {
+          "FALSE": "FALSE",
+          "TRUE": "TRUE",
+          "capitalize": "capitalize",
+          "casefold": "casefold",
+          "center": "center",
+          "count": "count",
+          "encode": "encode",
+          "endswith": "endswith",
+          "expandtabs": "expandtabs",
+          "find": "find",
+          "format": "format",
+          "format_map": "format_map",
+          "index": "index",
+          "isalnum": "isalnum",
+          "isalpha": "isalpha",
+          "isascii": "isascii",
+          "isdecimal": "isdecimal",
+          "isdigit": "isdigit",
+          "isidentifier": "isidentifier",
+          "islower": "islower",
+          "isnumeric": "isnumeric",
+          "isprintable": "isprintable",
+          "isspace": "isspace",
+          "istitle": "istitle",
+          "isupper": "isupper",
+          "join": "join",
+          "ljust": "ljust",
+          "lower": "lower",
+          "lstrip": "lstrip",
+          "maketrans": "maketrans",
+          "partition": "partition",
+          "removeprefix": "removeprefix",
+          "removesuffix": "removesuffix",
+          "replace": "replace",
+          "rfind": "rfind",
+          "rindex": "rindex",
+          "rjust": "rjust",
+          "rpartition": "rpartition",
+          "rsplit": "rsplit",
+          "rstrip": "rstrip",
+          "split": "split",
+          "splitlines": "splitlines",
+          "startswith": "startswith",
+          "strip": "strip",
+          "swapcase": "swapcase",
+          "title": "title",
+          "translate": "translate",
+          "upper": "upper",
+          "zfill": "zfill"
+        }
+      },
+      "Role": {
+        "type": "Enum",
+        "methods": {},
+        "properties": {
+          "ASSISTANT": "ASSISTANT",
+          "SYSTEM": "SYSTEM",
+          "USER": "USER",
+          "capitalize": "capitalize",
+          "casefold": "casefold",
+          "center": "center",
+          "count": "count",
+          "encode": "encode",
+          "endswith": "endswith",
+          "expandtabs": "expandtabs",
+          "find": "find",
+          "format": "format",
+          "format_map": "format_map",
+          "index": "index",
+          "isalnum": "isalnum",
+          "isalpha": "isalpha",
+          "isascii": "isascii",
+          "isdecimal": "isdecimal",
+          "isdigit": "isdigit",
+          "isidentifier": "isidentifier",
+          "islower": "islower",
+          "isnumeric": "isnumeric",
+          "isprintable": "isprintable",
+          "isspace": "isspace",
+          "istitle": "istitle",
+          "isupper": "isupper",
+          "join": "join",
+          "ljust": "ljust",
+          "lower": "lower",
+          "lstrip": "lstrip",
+          "maketrans": "maketrans",
+          "partition": "partition",
+          "removeprefix": "removeprefix",
+          "removesuffix": "removesuffix",
+          "replace": "replace",
+          "rfind": "rfind",
+          "rindex": "rindex",
+          "rjust": "rjust",
+          "rpartition": "rpartition",
+          "rsplit": "rsplit",
+          "rstrip": "rstrip",
+          "split": "split",
+          "splitlines": "splitlines",
+          "startswith": "startswith",
+          "strip": "strip",
+          "swapcase": "swapcase",
+          "title": "title",
+          "translate": "translate",
+          "upper": "upper",
+          "zfill": "zfill"
+        }
+      },
+      "StatusCategory": {
+        "type": "Enum",
+        "methods": {},
+        "properties": {
+          "FAILED": "FAILED",
+          "SUCCEEDED": "SUCCEEDED",
+          "capitalize": "capitalize",
+          "casefold": "casefold",
+          "center": "center",
+          "count": "count",
+          "encode": "encode",
+          "endswith": "endswith",
+          "expandtabs": "expandtabs",
+          "find": "find",
+          "format": "format",
+          "format_map": "format_map",
+          "index": "index",
+          "isalnum": "isalnum",
+          "isalpha": "isalpha",
+          "isascii": "isascii",
+          "isdecimal": "isdecimal",
+          "isdigit": "isdigit",
+          "isidentifier": "isidentifier",
+          "islower": "islower",
+          "isnumeric": "isnumeric",
+          "isprintable": "isprintable",
+          "isspace": "isspace",
+          "istitle": "istitle",
+          "isupper": "isupper",
+          "join": "join",
+          "ljust": "ljust",
+          "lower": "lower",
+          "lstrip": "lstrip",
+          "maketrans": "maketrans",
+          "partition": "partition",
+          "removeprefix": "removeprefix",
+          "removesuffix": "removesuffix",
+          "replace": "replace",
+          "rfind": "rfind",
+          "rindex": "rindex",
+          "rjust": "rjust",
+          "rpartition": "rpartition",
+          "rsplit": "rsplit",
+          "rstrip": "rstrip",
+          "split": "split",
+          "splitlines": "splitlines",
+          "startswith": "startswith",
+          "strip": "strip",
+          "swapcase": "swapcase",
+          "title": "title",
+          "translate": "translate",
+          "upper": "upper",
+          "zfill": "zfill"
+        }
+      },
+      "StatusResponse": {
+        "type": null,
+        "methods": {
+          "__init__": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "category": {
+                "default": null,
+                "param_type": "keyword_only"
+              },
+              "message": {
+                "default": null,
+                "param_type": "keyword_only"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "as_dict": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "keep_readonly": {
+                "default": "bool",
+                "param_type": "positional_or_keyword"
+              },
+              "key_transformer": {
+                "default": "attribute_transformer",
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "deserialize": {
+            "parameters": {
+              "data": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "content_type": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "enable_additional_properties_sending": {
+            "parameters": {},
+            "is_async": false,
+            "overloads": []
+          },
+          "from_dict": {
+            "parameters": {
+              "data": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "key_extractors": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              },
+              "content_type": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "is_xml_model": {
+            "parameters": {},
+            "is_async": false,
+            "overloads": []
+          },
+          "serialize": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "keep_readonly": {
+                "default": "bool",
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          }
+        },
+        "properties": {
+          "category": {
+            "attr_type": "category"
+          },
+          "message": {
+            "attr_type": "message"
+          },
+          "additional_properties": {
+            "attr_type": null
+          }
+        }
+      },
+      "Table": {
+        "type": null,
+        "methods": {
+          "__init__": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "columns": {
+                "default": null,
+                "param_type": "keyword_only"
+              },
+              "rows": {
+                "default": null,
+                "param_type": "keyword_only"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "as_dict": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "keep_readonly": {
+                "default": "bool",
+                "param_type": "positional_or_keyword"
+              },
+              "key_transformer": {
+                "default": "attribute_transformer",
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "deserialize": {
+            "parameters": {
+              "data": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "content_type": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "enable_additional_properties_sending": {
+            "parameters": {},
+            "is_async": false,
+            "overloads": []
+          },
+          "from_dict": {
+            "parameters": {
+              "data": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "key_extractors": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              },
+              "content_type": {
+                "default": "none",
+                "param_type": "positional_or_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "is_xml_model": {
+            "parameters": {},
+            "is_async": false,
+            "overloads": []
+          },
+          "serialize": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "keep_readonly": {
+                "default": "bool",
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          }
+        },
+        "properties": {
+          "columns": {
+            "attr_type": "columns"
+          },
+          "rows": {
+            "attr_type": "rows"
+          },
+          "additional_properties": {
+            "attr_type": null
+          }
+        }
+      },
+      "Versions": {
+        "type": "Enum",
+        "methods": {},
+        "properties": {
+          "V2023_09_01_PREVIEW": "V2023_09_01_PREVIEW",
+          "capitalize": "capitalize",
+          "casefold": "casefold",
+          "center": "center",
+          "count": "count",
+          "encode": "encode",
+          "endswith": "endswith",
+          "expandtabs": "expandtabs",
+          "find": "find",
+          "format": "format",
+          "format_map": "format_map",
+          "index": "index",
+          "isalnum": "isalnum",
+          "isalpha": "isalpha",
+          "isascii": "isascii",
+          "isdecimal": "isdecimal",
+          "isdigit": "isdigit",
+          "isidentifier": "isidentifier",
+          "islower": "islower",
+          "isnumeric": "isnumeric",
+          "isprintable": "isprintable",
+          "isspace": "isspace",
+          "istitle": "istitle",
+          "isupper": "isupper",
+          "join": "join",
+          "ljust": "ljust",
+          "lower": "lower",
+          "lstrip": "lstrip",
+          "maketrans": "maketrans",
+          "partition": "partition",
+          "removeprefix": "removeprefix",
+          "removesuffix": "removesuffix",
+          "replace": "replace",
+          "rfind": "rfind",
+          "rindex": "rindex",
+          "rjust": "rjust",
+          "rpartition": "rpartition",
+          "rsplit": "rsplit",
+          "rstrip": "rstrip",
+          "split": "split",
+          "splitlines": "splitlines",
+          "startswith": "startswith",
+          "strip": "strip",
+          "swapcase": "swapcase",
+          "title": "title",
+          "translate": "translate",
+          "upper": "upper",
+          "zfill": "zfill"
+        }
+      }
+    },
+    "function_nodes": {}
+  },
+  "azure.mgmt.resourcegraph.aio": {
+    "class_nodes": {},
+    "function_nodes": {}
+  },
+  "azure.mgmt.resourcegraph.aio.operations": {
+    "class_nodes": {},
+    "function_nodes": {}
+  }
+}

@@ -34,11 +34,65 @@ class TestResourceGraphAsync(AzureMgmtRecordedTestCase):
                     "$skipToken": "str",
                     "$top": 0,
                     "allowPartialScopes": False,
-                    "resultFormat": "objectArray",
+                    "authorizationScopeFilter": "AtScopeAndBelow",
+                    "resultFormat": "str",
                 },
                 "subscriptions": ["str"],
             },
-            api_version="2021-03-01",
+            api_version="2023-09-01-preview",
+        )
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
+    async def test_resources_history(self, resource_group):
+        response = await self.client.resources_history(
+            request={
+                "managementGroups": ["str"],
+                "options": {
+                    "$skip": 0,
+                    "$skipToken": "str",
+                    "$top": 0,
+                    "interval": {"end": "2020-02-20 00:00:00", "start": "2020-02-20 00:00:00"},
+                    "resultFormat": "str",
+                },
+                "query": "str",
+                "subscriptions": ["str"],
+            },
+            api_version="2021-06-01-preview",
+        )
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
+    async def test_resource_changes(self, resource_group):
+        response = await self.client.resource_changes(
+            parameters={
+                "interval": {"end": "2020-02-20 00:00:00", "start": "2020-02-20 00:00:00"},
+                "$skipToken": "str",
+                "$top": 0,
+                "fetchPropertyChanges": bool,
+                "fetchSnapshots": bool,
+                "resourceIds": ["str"],
+                "subscriptionId": "str",
+                "table": "str",
+            },
+            api_version="2020-09-01-preview",
+        )
+
+        # please add some check logic here by yourself
+        # ...
+
+    @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
+    @recorded_by_proxy_async
+    async def test_resource_change_details(self, resource_group):
+        response = await self.client.resource_change_details(
+            parameters={"changeIds": ["str"], "resourceIds": ["str"]},
+            api_version="2020-09-01-preview",
         )
 
         # please add some check logic here by yourself

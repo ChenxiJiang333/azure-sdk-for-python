@@ -16,7 +16,7 @@ from azure.mgmt.resourcegraph import ResourceGraphClient
     pip install azure-identity
     pip install azure-mgmt-resourcegraph
 # USAGE
-    python graph_query_list.py
+    python resources_generate_query.py
 
     Before run the sample, please set the values of the client ID, tenant ID and client secret
     of the AAD application as environment variables: AZURE_CLIENT_ID, AZURE_TENANT_ID,
@@ -30,13 +30,12 @@ def main():
         credential=DefaultAzureCredential(),
     )
 
-    response = client.graph_query.list_by_subscription(
-        subscription_id="024e2271-06fa-46b6-9079-f1ed3c7b070e",
+    response = client.query.generate_query(
+        body={"prompt": "I want to see my virtual machines"},
     )
-    for item in response:
-        print(item)
+    print(response)
 
 
-# x-ms-original-file: specification/resourcegraph/resource-manager/Microsoft.ResourceGraph/stable/2021-03-01/examples/GraphQueryList.json
+# x-ms-original-file: specification/resourcegraph/resource-manager/Microsoft.ResourceGraph/ResourceGraph/preview/2023-09-01-preview/examples/ResourcesGenerateQuery.json
 if __name__ == "__main__":
     main()

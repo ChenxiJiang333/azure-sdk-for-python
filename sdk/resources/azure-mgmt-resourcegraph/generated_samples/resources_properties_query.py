@@ -39,6 +39,6 @@ def main():
     print(response)
 
 
-# x-ms-original-file: specification/resourcegraph/resource-manager/Microsoft.ResourceGraph/stable/2021-03-01/examples/ResourcesPropertiesQuery.json
+# x-ms-original-file: specification/resourcegraph/resource-manager/Microsoft.ResourceGraph/ResourceGraph/preview/2023-09-01-preview/examples/ResourcesPropertiesQuery.json
 if __name__ == "__main__":
     main()

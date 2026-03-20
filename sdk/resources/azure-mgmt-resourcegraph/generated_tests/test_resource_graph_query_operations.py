@@ -14,16 +14,17 @@ AZURE_LOCATION = "eastus"
 
 
 @pytest.mark.skip("you may need to update the auto-generated test case before run it")
-class TestResourceGraphOperations(AzureMgmtRecordedTestCase):
+class TestResourceGraphQueryOperations(AzureMgmtRecordedTestCase):
     def setup_method(self, method):
         self.client = self.create_mgmt_client(ResourceGraphClient)
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy
-    def test_operations_list(self, resource_group):
-        response = self.client.operations.list(
+    def test_query_generate_query(self, resource_group):
+        response = self.client.query.generate_query(
+            body={"prompt": "str", "history": [{"content": "str", "role": "str"}]},
             api_version="2023-09-01-preview",
         )
-        result = [r for r in response]
+
         # please add some check logic here by yourself
         # ...

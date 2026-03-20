@@ -41,12 +41,78 @@ def build_resources_request(**kwargs: Any) -> HttpRequest:
     _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
     _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2021-03-01"))
+    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2023-09-01-preview"))
     content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
     accept = _headers.pop("Accept", "application/json")
 
     # Construct URL
     _url = kwargs.pop("template_url", "/providers/Microsoft.ResourceGraph/resources")
+
+    # Construct parameters
+    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
+
+    # Construct headers
+    if content_type is not None:
+        _headers["Content-Type"] = _SERIALIZER.header("content_type", content_type, "str")
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(method="POST", url=_url, params=_params, headers=_headers, **kwargs)
+
+
+def build_resources_history_request(**kwargs: Any) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2021-06-01-preview"))
+    content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+    accept = _headers.pop("Accept", "application/json")
+
+    # Construct URL
+    _url = kwargs.pop("template_url", "/providers/Microsoft.ResourceGraph/resourcesHistory")
+
+    # Construct parameters
+    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
+
+    # Construct headers
+    if content_type is not None:
+        _headers["Content-Type"] = _SERIALIZER.header("content_type", content_type, "str")
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(method="POST", url=_url, params=_params, headers=_headers, **kwargs)
+
+
+def build_resource_changes_request(**kwargs: Any) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2020-09-01-preview"))
+    content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+    accept = _headers.pop("Accept", "application/json")
+
+    # Construct URL
+    _url = kwargs.pop("template_url", "/providers/Microsoft.ResourceGraph/resourceChanges")
+
+    # Construct parameters
+    _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
+
+    # Construct headers
+    if content_type is not None:
+        _headers["Content-Type"] = _SERIALIZER.header("content_type", content_type, "str")
+    _headers["Accept"] = _SERIALIZER.header("accept", accept, "str")
+
+    return HttpRequest(method="POST", url=_url, params=_params, headers=_headers, **kwargs)
+
+
+def build_resource_change_details_request(**kwargs: Any) -> HttpRequest:
+    _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+    _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+    api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2020-09-01-preview"))
+    content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+    accept = _headers.pop("Accept", "application/json")
+
+    # Construct URL
+    _url = kwargs.pop("template_url", "/providers/Microsoft.ResourceGraph/resourceChangeDetails")
 
     # Construct parameters
     _params["api-version"] = _SERIALIZER.query("api_version", api_version, "str")
@@ -126,7 +192,7 @@ class _ResourceGraphClientOperationsMixin(
         _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
         _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
 
-        api_version: str = kwargs.pop("api_version", _params.pop("api-version", self._config.api_version))
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2023-09-01-preview"))
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
         cls: ClsType[_models.QueryResponse] = kwargs.pop("cls", None)
 
@@ -164,6 +230,316 @@ class _ResourceGraphClientOperationsMixin(
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
         deserialized = self._deserialize("QueryResponse", pipeline_response.http_response)
+
+        if cls:
+            return cls(pipeline_response, deserialized, {})  # type: ignore
+
+        return deserialized  # type: ignore
+
+    @overload
+    def resources_history(
+        self, request: _models.ResourcesHistoryRequest, *, content_type: str = "application/json", **kwargs: Any
+    ) -> dict[str, Any]:
+        """List all snapshots of a resource for a given time interval.
+
+        :param request: Request specifying the query and its options. Required.
+        :type request: ~azure.mgmt.resourcegraph.models.ResourcesHistoryRequest
+        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :return: dict mapping str to any or the result of cls(response)
+        :rtype: dict[str, any]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+
+    @overload
+    def resources_history(
+        self, request: IO[bytes], *, content_type: str = "application/json", **kwargs: Any
+    ) -> dict[str, Any]:
+        """List all snapshots of a resource for a given time interval.
+
+        :param request: Request specifying the query and its options. Required.
+        :type request: IO[bytes]
+        :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :return: dict mapping str to any or the result of cls(response)
+        :rtype: dict[str, any]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+
+    @distributed_trace
+    def resources_history(
+        self, request: Union[_models.ResourcesHistoryRequest, IO[bytes]], **kwargs: Any
+    ) -> dict[str, Any]:
+        """List all snapshots of a resource for a given time interval.
+
+        :param request: Request specifying the query and its options. Is either a
+         ResourcesHistoryRequest type or a IO[bytes] type. Required.
+        :type request: ~azure.mgmt.resourcegraph.models.ResourcesHistoryRequest or IO[bytes]
+        :return: dict mapping str to any or the result of cls(response)
+        :rtype: dict[str, any]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2021-06-01-preview"))
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[dict[str, Any]] = kwargs.pop("cls", None)
+
+        content_type = content_type or "application/json"
+        _json = None
+        _content = None
+        if isinstance(request, (IOBase, bytes)):
+            _content = request
+        else:
+            _json = self._serialize.body(request, "ResourcesHistoryRequest")
+
+        _request = build_resources_history_request(
+            api_version=api_version,
+            content_type=content_type,
+            json=_json,
+            content=_content,
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            error = self._deserialize.failsafe_deserialize(
+                _models.ErrorResponse,
+                pipeline_response,
+            )
+            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
+
+        deserialized = self._deserialize("{object}", pipeline_response.http_response)
+
+        if cls:
+            return cls(pipeline_response, deserialized, {})  # type: ignore
+
+        return deserialized  # type: ignore
+
+    @overload
+    def resource_changes(
+        self,
+        parameters: _models.ResourceChangesRequestParameters,
+        *,
+        content_type: str = "application/json",
+        **kwargs: Any
+    ) -> _models.ResourceChangeList:
+        """List changes to a resource for a given time interval.
+
+        :param parameters: the parameters for this request for changes. Required.
+        :type parameters: ~azure.mgmt.resourcegraph.models.ResourceChangesRequestParameters
+        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :return: ResourceChangeList or the result of cls(response)
+        :rtype: ~azure.mgmt.resourcegraph.models.ResourceChangeList
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+
+    @overload
+    def resource_changes(
+        self, parameters: IO[bytes], *, content_type: str = "application/json", **kwargs: Any
+    ) -> _models.ResourceChangeList:
+        """List changes to a resource for a given time interval.
+
+        :param parameters: the parameters for this request for changes. Required.
+        :type parameters: IO[bytes]
+        :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :return: ResourceChangeList or the result of cls(response)
+        :rtype: ~azure.mgmt.resourcegraph.models.ResourceChangeList
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+
+    @distributed_trace
+    def resource_changes(
+        self, parameters: Union[_models.ResourceChangesRequestParameters, IO[bytes]], **kwargs: Any
+    ) -> _models.ResourceChangeList:
+        """List changes to a resource for a given time interval.
+
+        :param parameters: the parameters for this request for changes. Is either a
+         ResourceChangesRequestParameters type or a IO[bytes] type. Required.
+        :type parameters: ~azure.mgmt.resourcegraph.models.ResourceChangesRequestParameters or
+         IO[bytes]
+        :return: ResourceChangeList or the result of cls(response)
+        :rtype: ~azure.mgmt.resourcegraph.models.ResourceChangeList
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2020-09-01-preview"))
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[_models.ResourceChangeList] = kwargs.pop("cls", None)
+
+        content_type = content_type or "application/json"
+        _json = None
+        _content = None
+        if isinstance(parameters, (IOBase, bytes)):
+            _content = parameters
+        else:
+            _json = self._serialize.body(parameters, "ResourceChangesRequestParameters")
+
+        _request = build_resource_changes_request(
+            api_version=api_version,
+            content_type=content_type,
+            json=_json,
+            content=_content,
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            error = self._deserialize.failsafe_deserialize(
+                _models.ErrorResponse,
+                pipeline_response,
+            )
+            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
+
+        deserialized = self._deserialize("ResourceChangeList", pipeline_response.http_response)
+
+        if cls:
+            return cls(pipeline_response, deserialized, {})  # type: ignore
+
+        return deserialized  # type: ignore
+
+    @overload
+    def resource_change_details(
+        self,
+        parameters: _models.ResourceChangeDetailsRequestParameters,
+        *,
+        content_type: str = "application/json",
+        **kwargs: Any
+    ) -> List[_models.ResourceChangeData]:
+        """Get resource change details.
+
+        :param parameters: The parameters for this request for resource change details. Required.
+        :type parameters: ~azure.mgmt.resourcegraph.models.ResourceChangeDetailsRequestParameters
+        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :return: list of ResourceChangeData or the result of cls(response)
+        :rtype: list[~azure.mgmt.resourcegraph.models.ResourceChangeData]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+
+    @overload
+    def resource_change_details(
+        self, parameters: IO[bytes], *, content_type: str = "application/json", **kwargs: Any
+    ) -> List[_models.ResourceChangeData]:
+        """Get resource change details.
+
+        :param parameters: The parameters for this request for resource change details. Required.
+        :type parameters: IO[bytes]
+        :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :return: list of ResourceChangeData or the result of cls(response)
+        :rtype: list[~azure.mgmt.resourcegraph.models.ResourceChangeData]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+
+    @distributed_trace
+    def resource_change_details(
+        self, parameters: Union[_models.ResourceChangeDetailsRequestParameters, IO[bytes]], **kwargs: Any
+    ) -> List[_models.ResourceChangeData]:
+        """Get resource change details.
+
+        :param parameters: The parameters for this request for resource change details. Is either a
+         ResourceChangeDetailsRequestParameters type or a IO[bytes] type. Required.
+        :type parameters: ~azure.mgmt.resourcegraph.models.ResourceChangeDetailsRequestParameters or
+         IO[bytes]
+        :return: list of ResourceChangeData or the result of cls(response)
+        :rtype: list[~azure.mgmt.resourcegraph.models.ResourceChangeData]
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+        _params = case_insensitive_dict(kwargs.pop("params", {}) or {})
+
+        api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2020-09-01-preview"))
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[List[_models.ResourceChangeData]] = kwargs.pop("cls", None)
+
+        content_type = content_type or "application/json"
+        _json = None
+        _content = None
+        if isinstance(parameters, (IOBase, bytes)):
+            _content = parameters
+        else:
+            _json = self._serialize.body(parameters, "ResourceChangeDetailsRequestParameters")
+
+        _request = build_resource_change_details_request(
+            api_version=api_version,
+            content_type=content_type,
+            json=_json,
+            content=_content,
+            headers=_headers,
+            params=_params,
+        )
+        _request.url = self._client.format_url(_request.url)
+
+        _stream = False
+        pipeline_response: PipelineResponse = self._client._pipeline.run(  # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            error = self._deserialize.failsafe_deserialize(
+                _models.ErrorResponse,
+                pipeline_response,
+            )
+            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
+
+        deserialized = self._deserialize("[ResourceChangeData]", pipeline_response.http_response)
 
         if cls:
             return cls(pipeline_response, deserialized, {})  # type: ignore
