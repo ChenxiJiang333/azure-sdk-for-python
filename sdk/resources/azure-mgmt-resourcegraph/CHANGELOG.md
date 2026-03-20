@@ -1,8 +1,22 @@
+## tsp migration
+
+### Breaking Changes
+
+- Deleted or renamed client operation group `ResourceGraphClient.query`
+- Method `ResourceGraphClient.__init__` inserted a `positional_or_keyword` parameter `subscription_id`
+- Deleted or renamed model `Column`
+- Deleted or renamed model `ColumnDataType`
+- Deleted or renamed model `HistoryContext`
+- Deleted or renamed model `QueryGenerationRequest`
+- Deleted or renamed model `QueryGenerationResponse`
+- Deleted or renamed model `Role`
+- Deleted or renamed model `StatusCategory`
+- Deleted or renamed model `StatusResponse`
+- Deleted or renamed model `Table`
+- Deleted or renamed model `Versions`
+- Deleted or renamed model `QueryOperations`
+
 # Release History
-
-## 8.1.0b4 (2026-03-20)
-
-change log generation failed!!! You need to write it manually!!!
 
 ## 8.0.1 (2025-11-24)
 
