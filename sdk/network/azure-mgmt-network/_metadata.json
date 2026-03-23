@@ -3,15 +3,8 @@
     "Microsoft.Compute": "2018-10-01",
     "Microsoft.Network": "2025-05-01"
   },
-  "commit": "9259fc183f207a60ad2e199b4eb684acec449513",
+  "commit": "75d03e0446a5ce57320e38d6f141ce5ea2fdd230",
   "repository_url": "https://github.com/Azure/azure-rest-api-specs",
-  "typespec_src": "specification/network/resource-manager/Microsoft.Network",
-  "emitterVersion": "0.60.2",
-  "autorest": "3.10.2",
-  "use": [
-    "@autorest/python@6.48.0",
-    "@autorest/modelerfour@4.27.0"
-  ],
-  "autorest_command": "autorest specification/network/resource-manager/Microsoft.Network/Network/readme.md --generate-sample=True --generate-test=True --include-x-ms-examples-original-file=True --package-mode=azure-mgmt --python --python-sdks-folder=/home/v-chenjiang/spec2/azure-sdk-for-python/sdk --use=@autorest/python@6.48.0 --use=@autorest/modelerfour@4.27.0 --version=3.10.2 --version-tolerant=False",
-  "readme": "specification/network/resource-manager/Microsoft.Network/Network/readme.md"
+  "typespec_src": "specification/network/resource-manager/Microsoft.Network/Network",
+  "emitterVersion": "0.60.2"
 }
