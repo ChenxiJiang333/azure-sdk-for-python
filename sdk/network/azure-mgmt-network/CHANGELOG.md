@@ -1,5 +1,9 @@
 ## tsp migration
 
+## 30.3.0 (2026-03-23)
+
+tool can't generate changelog for this release, please update manually.
+
 ### Breaking Changes
 
 // will push tsp changes after [tsp definitions](https://github.com/Azure/azure-rest-api-specs/pull/40226#discussion_r2877262040) fixed to unblock python generation.
