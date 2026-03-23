@@ -36,6 +36,7 @@ from azure.mgmt.core.polling.async_arm_polling import AsyncARMPolling
 from ... import models as _models
 from ..._utils.model_base import SdkJSONEncoder, _deserialize, _failsafe_deserialize
 from ..._utils.serialization import Deserializer, Serializer
+from ..._utils.utils import ClientMixinABC
 from ...operations._operations import (
     build_activity_get_request,
     build_activity_list_by_module_request,
@@ -48,6 +49,7 @@ from ...operations._operations import (
     build_automation_account_list_deleted_runbooks_request,
     build_automation_account_list_request,
     build_automation_account_update_request,
+    build_automation_convert_graph_runbook_content_request,
     build_certificate_create_or_update_request,
     build_certificate_delete_request,
     build_certificate_get_request,
@@ -142,7 +144,6 @@ from ...operations._operations import (
     build_python3_package_get_request,
     build_python3_package_list_by_automation_account_request,
     build_python3_package_update_request,
-    build_resource_providers_convert_graph_runbook_content_request,
     build_runbook_create_or_update_request,
     build_runbook_delete_request,
     build_runbook_draft_get_content_request,
@@ -6786,193 +6787,6 @@ class ObjectDataTypesOperations:
             return pipeline_response
 
         return AsyncItemPaged(get_next, extract_data)
-
-
-class ResourceProvidersOperations:
-    """
-    .. warning::
-        **DO NOT** instantiate this class directly.
-
-        Instead, you should access the following operations through
-        :class:`~azure.mgmt.automation.aio.AutomationClient`'s
-        :attr:`resource_providers` attribute.
-    """
-
-    def __init__(self, *args, **kwargs) -> None:
-        input_args = list(args)
-        self._client: AsyncPipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: AutomationClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
-        self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
-        self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
-
-    @overload
-    async def convert_graph_runbook_content(
-        self,
-        resource_group_name: str,
-        automation_account_name: str,
-        parameters: _models.GraphicalRunbookContent,
-        *,
-        content_type: str = "application/json",
-        **kwargs: Any
-    ) -> _models.GraphicalRunbookContent:
-        """Post operation to serialize or deserialize GraphRunbookContent.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param automation_account_name: The name of the automation account. Required.
-        :type automation_account_name: str
-        :param parameters: Input data describing the graphical runbook. Required.
-        :type parameters: ~azure.mgmt.automation.models.GraphicalRunbookContent
-        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
-         Default value is "application/json".
-        :paramtype content_type: str
-        :return: GraphicalRunbookContent. The GraphicalRunbookContent is compatible with MutableMapping
-        :rtype: ~azure.mgmt.automation.models.GraphicalRunbookContent
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-
-    @overload
-    async def convert_graph_runbook_content(
-        self,
-        resource_group_name: str,
-        automation_account_name: str,
-        parameters: JSON,
-        *,
-        content_type: str = "application/json",
-        **kwargs: Any
-    ) -> _models.GraphicalRunbookContent:
-        """Post operation to serialize or deserialize GraphRunbookContent.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param automation_account_name: The name of the automation account. Required.
-        :type automation_account_name: str
-        :param parameters: Input data describing the graphical runbook. Required.
-        :type parameters: JSON
-        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
-         Default value is "application/json".
-        :paramtype content_type: str
-        :return: GraphicalRunbookContent. The GraphicalRunbookContent is compatible with MutableMapping
-        :rtype: ~azure.mgmt.automation.models.GraphicalRunbookContent
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-
-    @overload
-    async def convert_graph_runbook_content(
-        self,
-        resource_group_name: str,
-        automation_account_name: str,
-        parameters: IO[bytes],
-        *,
-        content_type: str = "application/json",
-        **kwargs: Any
-    ) -> _models.GraphicalRunbookContent:
-        """Post operation to serialize or deserialize GraphRunbookContent.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param automation_account_name: The name of the automation account. Required.
-        :type automation_account_name: str
-        :param parameters: Input data describing the graphical runbook. Required.
-        :type parameters: IO[bytes]
-        :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
-         Default value is "application/json".
-        :paramtype content_type: str
-        :return: GraphicalRunbookContent. The GraphicalRunbookContent is compatible with MutableMapping
-        :rtype: ~azure.mgmt.automation.models.GraphicalRunbookContent
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-
-    @distributed_trace_async
-    async def convert_graph_runbook_content(
-        self,
-        resource_group_name: str,
-        automation_account_name: str,
-        parameters: Union[_models.GraphicalRunbookContent, JSON, IO[bytes]],
-        **kwargs: Any
-    ) -> _models.GraphicalRunbookContent:
-        """Post operation to serialize or deserialize GraphRunbookContent.
-
-        :param resource_group_name: The name of the resource group. The name is case insensitive.
-         Required.
-        :type resource_group_name: str
-        :param automation_account_name: The name of the automation account. Required.
-        :type automation_account_name: str
-        :param parameters: Input data describing the graphical runbook. Is one of the following types:
-         GraphicalRunbookContent, JSON, IO[bytes] Required.
-        :type parameters: ~azure.mgmt.automation.models.GraphicalRunbookContent or JSON or IO[bytes]
-        :return: GraphicalRunbookContent. The GraphicalRunbookContent is compatible with MutableMapping
-        :rtype: ~azure.mgmt.automation.models.GraphicalRunbookContent
-        :raises ~azure.core.exceptions.HttpResponseError:
-        """
-        error_map: MutableMapping = {
-            401: ClientAuthenticationError,
-            404: ResourceNotFoundError,
-            409: ResourceExistsError,
-            304: ResourceNotModifiedError,
-        }
-        error_map.update(kwargs.pop("error_map", {}) or {})
-
-        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
-        _params = kwargs.pop("params", {}) or {}
-
-        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
-        cls: ClsType[_models.GraphicalRunbookContent] = kwargs.pop("cls", None)
-
-        content_type = content_type or "application/json"
-        _content = None
-        if isinstance(parameters, (IOBase, bytes)):
-            _content = parameters
-        else:
-            _content = json.dumps(parameters, cls=SdkJSONEncoder, exclude_readonly=True)  # type: ignore
-
-        _request = build_resource_providers_convert_graph_runbook_content_request(
-            resource_group_name=resource_group_name,
-            automation_account_name=automation_account_name,
-            subscription_id=self._config.subscription_id,
-            content_type=content_type,
-            api_version=self._config.api_version,
-            content=_content,
-            headers=_headers,
-            params=_params,
-        )
-        path_format_arguments = {
-            "endpoint": self._serialize.url("self._config.base_url", self._config.base_url, "str", skip_quote=True),
-        }
-        _request.url = self._client.format_url(_request.url, **path_format_arguments)
-
-        _stream = kwargs.pop("stream", False)
-        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # pylint: disable=protected-access
-            _request, stream=_stream, **kwargs
-        )
-
-        response = pipeline_response.http_response
-
-        if response.status_code not in [200]:
-            if _stream:
-                try:
-                    await response.read()  # Load the body in memory and close the socket
-                except (StreamConsumedError, StreamClosedError):
-                    pass
-            map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = _failsafe_deserialize(
-                _models.ErrorResponse,
-                response,
-            )
-            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
-
-        if _stream:
-            deserialized = response.iter_bytes()
-        else:
-            deserialized = _deserialize(_models.GraphicalRunbookContent, response.json())
-
-        if cls:
-            return cls(pipeline_response, deserialized, {})  # type: ignore
-
-        return deserialized  # type: ignore
 
 
 class SoftwareUpdateConfigurationMachineRunsOperations:  # pylint: disable=name-too-long
@@ -16117,7 +15931,7 @@ class RunbookDraftOperations:
         resource_group_name: str,
         automation_account_name: str,
         runbook_name: str,
-        runbook_content: bytes,
+        runbook_content: _models.File,
         **kwargs: Any
     ) -> AsyncIterator[bytes]:
         error_map: MutableMapping = {
@@ -16195,7 +16009,7 @@ class RunbookDraftOperations:
         resource_group_name: str,
         automation_account_name: str,
         runbook_name: str,
-        runbook_content: bytes,
+        runbook_content: _models.File,
         **kwargs: Any
     ) -> AsyncLROPoller[None]:
         """Replaces the runbook draft content.
@@ -16208,7 +16022,7 @@ class RunbookDraftOperations:
         :param runbook_name: The runbook name. Required.
         :type runbook_name: str
         :param runbook_content: The runbook draft content. Required.
-        :type runbook_content: bytes
+        :type runbook_content: ~azure.mgmt.automation.models.File
         :return: An instance of AsyncLROPoller that returns None
         :rtype: ~azure.core.polling.AsyncLROPoller[None]
         :raises ~azure.core.exceptions.HttpResponseError:
@@ -20380,6 +20194,180 @@ class DeletedAutomationAccountsOperations:
             deserialized = response.iter_bytes()
         else:
             deserialized = _deserialize(_models.DeletedAutomationAccountListResult, response.json())
+
+        if cls:
+            return cls(pipeline_response, deserialized, {})  # type: ignore
+
+        return deserialized  # type: ignore
+
+
+class _AutomationClientOperationsMixin(
+    ClientMixinABC[AsyncPipelineClient[HttpRequest, AsyncHttpResponse], AutomationClientConfiguration]
+):
+
+    @overload
+    async def convert_graph_runbook_content(
+        self,
+        resource_group_name: str,
+        automation_account_name: str,
+        parameters: _models.GraphicalRunbookContent,
+        *,
+        content_type: str = "application/json",
+        **kwargs: Any
+    ) -> _models.GraphicalRunbookContent:
+        """Post operation to serialize or deserialize GraphRunbookContent.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param automation_account_name: The name of the automation account. Required.
+        :type automation_account_name: str
+        :param parameters: Input data describing the graphical runbook. Required.
+        :type parameters: ~azure.mgmt.automation.models.GraphicalRunbookContent
+        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :return: GraphicalRunbookContent. The GraphicalRunbookContent is compatible with MutableMapping
+        :rtype: ~azure.mgmt.automation.models.GraphicalRunbookContent
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+
+    @overload
+    async def convert_graph_runbook_content(
+        self,
+        resource_group_name: str,
+        automation_account_name: str,
+        parameters: JSON,
+        *,
+        content_type: str = "application/json",
+        **kwargs: Any
+    ) -> _models.GraphicalRunbookContent:
+        """Post operation to serialize or deserialize GraphRunbookContent.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param automation_account_name: The name of the automation account. Required.
+        :type automation_account_name: str
+        :param parameters: Input data describing the graphical runbook. Required.
+        :type parameters: JSON
+        :keyword content_type: Body Parameter content-type. Content type parameter for JSON body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :return: GraphicalRunbookContent. The GraphicalRunbookContent is compatible with MutableMapping
+        :rtype: ~azure.mgmt.automation.models.GraphicalRunbookContent
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+
+    @overload
+    async def convert_graph_runbook_content(
+        self,
+        resource_group_name: str,
+        automation_account_name: str,
+        parameters: IO[bytes],
+        *,
+        content_type: str = "application/json",
+        **kwargs: Any
+    ) -> _models.GraphicalRunbookContent:
+        """Post operation to serialize or deserialize GraphRunbookContent.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param automation_account_name: The name of the automation account. Required.
+        :type automation_account_name: str
+        :param parameters: Input data describing the graphical runbook. Required.
+        :type parameters: IO[bytes]
+        :keyword content_type: Body Parameter content-type. Content type parameter for binary body.
+         Default value is "application/json".
+        :paramtype content_type: str
+        :return: GraphicalRunbookContent. The GraphicalRunbookContent is compatible with MutableMapping
+        :rtype: ~azure.mgmt.automation.models.GraphicalRunbookContent
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+
+    @distributed_trace_async
+    async def convert_graph_runbook_content(
+        self,
+        resource_group_name: str,
+        automation_account_name: str,
+        parameters: Union[_models.GraphicalRunbookContent, JSON, IO[bytes]],
+        **kwargs: Any
+    ) -> _models.GraphicalRunbookContent:
+        """Post operation to serialize or deserialize GraphRunbookContent.
+
+        :param resource_group_name: The name of the resource group. The name is case insensitive.
+         Required.
+        :type resource_group_name: str
+        :param automation_account_name: The name of the automation account. Required.
+        :type automation_account_name: str
+        :param parameters: Input data describing the graphical runbook. Is one of the following types:
+         GraphicalRunbookContent, JSON, IO[bytes] Required.
+        :type parameters: ~azure.mgmt.automation.models.GraphicalRunbookContent or JSON or IO[bytes]
+        :return: GraphicalRunbookContent. The GraphicalRunbookContent is compatible with MutableMapping
+        :rtype: ~azure.mgmt.automation.models.GraphicalRunbookContent
+        :raises ~azure.core.exceptions.HttpResponseError:
+        """
+        error_map: MutableMapping = {
+            401: ClientAuthenticationError,
+            404: ResourceNotFoundError,
+            409: ResourceExistsError,
+            304: ResourceNotModifiedError,
+        }
+        error_map.update(kwargs.pop("error_map", {}) or {})
+
+        _headers = case_insensitive_dict(kwargs.pop("headers", {}) or {})
+        _params = kwargs.pop("params", {}) or {}
+
+        content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        cls: ClsType[_models.GraphicalRunbookContent] = kwargs.pop("cls", None)
+
+        content_type = content_type or "application/json"
+        _content = None
+        if isinstance(parameters, (IOBase, bytes)):
+            _content = parameters
+        else:
+            _content = json.dumps(parameters, cls=SdkJSONEncoder, exclude_readonly=True)  # type: ignore
+
+        _request = build_automation_convert_graph_runbook_content_request(
+            resource_group_name=resource_group_name,
+            automation_account_name=automation_account_name,
+            subscription_id=self._config.subscription_id,
+            content_type=content_type,
+            api_version=self._config.api_version,
+            content=_content,
+            headers=_headers,
+            params=_params,
+        )
+        path_format_arguments = {
+            "endpoint": self._serialize.url("self._config.base_url", self._config.base_url, "str", skip_quote=True),
+        }
+        _request.url = self._client.format_url(_request.url, **path_format_arguments)
+
+        _stream = kwargs.pop("stream", False)
+        pipeline_response: PipelineResponse = await self._client._pipeline.run(  # type: ignore # pylint: disable=protected-access
+            _request, stream=_stream, **kwargs
+        )
+
+        response = pipeline_response.http_response
+
+        if response.status_code not in [200]:
+            if _stream:
+                try:
+                    await response.read()  # Load the body in memory and close the socket
+                except (StreamConsumedError, StreamClosedError):
+                    pass
+            map_error(status_code=response.status_code, response=response, error_map=error_map)
+            error = _failsafe_deserialize(
+                _models.ErrorResponse,
+                response,
+            )
+            raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
+
+        if _stream:
+            deserialized = response.iter_bytes()
+        else:
+            deserialized = _deserialize(_models.GraphicalRunbookContent, response.json())
 
         if cls:
             return cls(pipeline_response, deserialized, {})  # type: ignore

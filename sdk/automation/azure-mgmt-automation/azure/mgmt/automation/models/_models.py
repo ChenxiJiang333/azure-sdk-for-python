@@ -4230,6 +4230,46 @@ class FieldDefinition(_Model):
         super().__init__(*args, **kwargs)
 
 
+class File(_Model):
+    """A file in an HTTP request, response, or multipart payload.
+
+    :ivar content_type: The allowed media (MIME) types of the file contents.
+    :vartype content_type: str
+    :ivar filename: The name of the file, if any.
+    :vartype filename: str
+    :ivar contents: The contents of the file. Required.
+    :vartype contents: bytes
+    """
+
+    content_type: Optional[str] = rest_field(
+        name="contentType", visibility=["read", "create", "update", "delete", "query"]
+    )
+    """The allowed media (MIME) types of the file contents."""
+    filename: Optional[str] = rest_field(visibility=["read", "create", "update", "delete", "query"])
+    """The name of the file, if any."""
+    contents: bytes = rest_field(visibility=["read", "create", "update", "delete", "query"], format="base64")
+    """The contents of the file. Required."""
+
+    @overload
+    def __init__(
+        self,
+        *,
+        contents: bytes,
+        content_type: Optional[str] = None,
+        filename: Optional[str] = None,
+    ) -> None: ...
+
+    @overload
+    def __init__(self, mapping: Mapping[str, Any]) -> None:
+        """
+        :param mapping: raw JSON to initialize the model.
+        :type mapping: Mapping[str, Any]
+        """
+
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
+        super().__init__(*args, **kwargs)
+
+
 class GraphicalRunbookContent(_Model):
     """Graphical Runbook Content.
 

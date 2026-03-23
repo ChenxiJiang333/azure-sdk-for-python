@@ -49,7 +49,6 @@ from .operations import (
     PrivateLinkResourcesOperations,
     Python2PackageOperations,
     Python3PackageOperations,
-    ResourceProvidersOperations,
     RunbookDraftOperations,
     RunbookOperations,
     RuntimeEnvironmentsOperations,
@@ -67,6 +66,7 @@ from .operations import (
     VariableOperations,
     WatcherOperations,
     WebhookOperations,
+    _AutomationClientOperationsMixin,
 )
 
 if TYPE_CHECKING:
@@ -74,7 +74,7 @@ if TYPE_CHECKING:
     from azure.core.credentials import TokenCredential
 
 
-class AutomationClient:  # pylint: disable=too-many-instance-attributes
+class AutomationClient(_AutomationClientOperationsMixin):  # pylint: disable=too-many-instance-attributes
     """Automation Client.
 
     :ivar operations: Operations operations
@@ -117,8 +117,6 @@ class AutomationClient:  # pylint: disable=too-many-instance-attributes
     :vartype linked_workspace: azure.mgmt.automation.operations.LinkedWorkspaceOperations
     :ivar object_data_types: ObjectDataTypesOperations operations
     :vartype object_data_types: azure.mgmt.automation.operations.ObjectDataTypesOperations
-    :ivar resource_providers: ResourceProvidersOperations operations
-    :vartype resource_providers: azure.mgmt.automation.operations.ResourceProvidersOperations
     :ivar software_update_configuration_machine_runs:
      SoftwareUpdateConfigurationMachineRunsOperations operations
     :vartype software_update_configuration_machine_runs:
@@ -283,9 +281,6 @@ class AutomationClient:  # pylint: disable=too-many-instance-attributes
             self._client, self._config, self._serialize, self._deserialize
         )
         self.object_data_types = ObjectDataTypesOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
-        self.resource_providers = ResourceProvidersOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
         self.software_update_configuration_machine_runs = SoftwareUpdateConfigurationMachineRunsOperations(

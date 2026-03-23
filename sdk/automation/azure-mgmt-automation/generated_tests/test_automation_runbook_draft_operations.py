@@ -37,7 +37,7 @@ class TestAutomationRunbookDraftOperations(AzureMgmtRecordedTestCase):
             resource_group_name=resource_group.name,
             automation_account_name="str",
             runbook_name="str",
-            runbook_content=bytes("bytes", encoding="utf-8"),
+            runbook_content={"contents": bytes("bytes", encoding="utf-8"), "contentType": "str", "filename": "str"},
             content_type="str",
         ).result()  # call '.result()' to poll until service return final result
 

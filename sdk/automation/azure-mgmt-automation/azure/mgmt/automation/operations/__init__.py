@@ -29,7 +29,6 @@ from ._operations import KeysOperations  # type: ignore
 from ._operations import JobOperations  # type: ignore
 from ._operations import LinkedWorkspaceOperations  # type: ignore
 from ._operations import ObjectDataTypesOperations  # type: ignore
-from ._operations import ResourceProvidersOperations  # type: ignore
 from ._operations import SoftwareUpdateConfigurationMachineRunsOperations  # type: ignore
 from ._operations import SoftwareUpdateConfigurationRunsOperations  # type: ignore
 from ._operations import WebhookOperations  # type: ignore
@@ -59,6 +58,7 @@ from ._operations import SourceControlSyncJobStreamsOperations  # type: ignore
 from ._operations import VariableOperations  # type: ignore
 from ._operations import WatcherOperations  # type: ignore
 from ._operations import DeletedAutomationAccountsOperations  # type: ignore
+from ._operations import _AutomationClientOperationsMixin  # type: ignore # pylint: disable=unused-import
 
 from ._patch import __all__ as _patch_all
 from ._patch import *
@@ -82,7 +82,6 @@ __all__ = [
     "JobOperations",
     "LinkedWorkspaceOperations",
     "ObjectDataTypesOperations",
-    "ResourceProvidersOperations",
     "SoftwareUpdateConfigurationMachineRunsOperations",
     "SoftwareUpdateConfigurationRunsOperations",
     "WebhookOperations",
