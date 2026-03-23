@@ -15,14 +15,14 @@ AZURE_LOCATION = "eastus"
 
 
 @pytest.mark.skip("you may need to update the auto-generated test case before run it")
-class TestAutomationAutomationAccountsOperationsAsync(AzureMgmtRecordedTestCase):
+class TestAutomationResourceProvidersOperationsAsync(AzureMgmtRecordedTestCase):
     def setup_method(self, method):
         self.client = self.create_mgmt_client(AutomationClient, is_async=True)
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
     @recorded_by_proxy_async
-    async def test_automation_accounts_convert_graph_runbook_content(self, resource_group):
-        response = await self.client.automation_accounts.convert_graph_runbook_content(
+    async def test_resource_providers_convert_graph_runbook_content(self, resource_group):
+        response = await self.client.resource_providers.convert_graph_runbook_content(
             resource_group_name=resource_group.name,
             automation_account_name="str",
             parameters={

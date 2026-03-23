@@ -238,7 +238,6 @@
         "azure.mgmt.automation.models.TagOperators": "Microsoft.Automation.TagOperators",
         "azure.mgmt.automation.models.ScheduleFrequency": "Microsoft.Automation.ScheduleFrequency",
         "azure.mgmt.automation.models.ScheduleDay": "Microsoft.Automation.ScheduleDay",
-        "azure.mgmt.automation.models.GraphRunbookType": "Microsoft.Automation.GraphRunbookType",
         "azure.mgmt.automation.models.WorkerType": "Microsoft.Automation.WorkerType",
         "azure.mgmt.automation.models.ModuleProvisioningState": "Microsoft.Automation.ModuleProvisioningState",
         "azure.mgmt.automation.models.SkuNameEnum": "Microsoft.Automation.SkuNameEnum",
@@ -251,6 +250,7 @@
         "azure.mgmt.automation.models.AutomationKeyPermissions": "Microsoft.Automation.AutomationKeyPermissions",
         "azure.mgmt.automation.models.JobStatus": "Microsoft.Automation.JobStatus",
         "azure.mgmt.automation.models.JobProvisioningState": "Microsoft.Automation.JobProvisioningState",
+        "azure.mgmt.automation.models.GraphRunbookType": "Microsoft.Automation.GraphRunbookType",
         "azure.mgmt.automation.models.ContentSourceType": "Microsoft.Automation.ContentSourceType",
         "azure.mgmt.automation.models.DscConfigurationState": "Microsoft.Automation.DscConfigurationState",
         "azure.mgmt.automation.models.GroupTypeEnum": "Microsoft.Automation.GroupTypeEnum",
@@ -274,8 +274,6 @@
         "azure.mgmt.automation.aio.operations.SoftwareUpdateConfigurationsOperations.delete": "Microsoft.Automation.SoftwareUpdateConfigurations.delete",
         "azure.mgmt.automation.operations.SoftwareUpdateConfigurationsOperations.list": "Microsoft.Automation.AutomationAccounts.softwareUpdateConfigurationsList",
         "azure.mgmt.automation.aio.operations.SoftwareUpdateConfigurationsOperations.list": "Microsoft.Automation.AutomationAccounts.softwareUpdateConfigurationsList",
-        "azure.mgmt.automation.operations.AutomationAccountsOperations.convert_graph_runbook_content": "Microsoft.Automation.AutomationAccounts.convertGraphRunbookContent",
-        "azure.mgmt.automation.aio.operations.AutomationAccountsOperations.convert_graph_runbook_content": "Microsoft.Automation.AutomationAccounts.convertGraphRunbookContent",
         "azure.mgmt.automation.operations.HybridRunbookWorkersOperations.get": "Microsoft.Automation.HybridRunbookWorkers.get",
         "azure.mgmt.automation.aio.operations.HybridRunbookWorkersOperations.get": "Microsoft.Automation.HybridRunbookWorkers.get",
         "azure.mgmt.automation.operations.HybridRunbookWorkersOperations.create": "Microsoft.Automation.HybridRunbookWorkers.create",
@@ -376,6 +374,8 @@
         "azure.mgmt.automation.aio.operations.ObjectDataTypesOperations.list_fields_by_type": "Microsoft.Automation.AutomationAccounts.listFieldsByType",
         "azure.mgmt.automation.operations.ObjectDataTypesOperations.list_fields_by_module_and_type": "Microsoft.Automation.Modules.listFieldsByModuleAndType",
         "azure.mgmt.automation.aio.operations.ObjectDataTypesOperations.list_fields_by_module_and_type": "Microsoft.Automation.Modules.listFieldsByModuleAndType",
+        "azure.mgmt.automation.operations.ResourceProvidersOperations.convert_graph_runbook_content": "Microsoft.Automation.AutomationAccounts.convertGraphRunbookContent",
+        "azure.mgmt.automation.aio.operations.ResourceProvidersOperations.convert_graph_runbook_content": "Microsoft.Automation.AutomationAccounts.convertGraphRunbookContent",
         "azure.mgmt.automation.operations.SoftwareUpdateConfigurationMachineRunsOperations.get_by_id": "Microsoft.Automation.AutomationAccounts.getById",
         "azure.mgmt.automation.aio.operations.SoftwareUpdateConfigurationMachineRunsOperations.get_by_id": "Microsoft.Automation.AutomationAccounts.getById",
         "azure.mgmt.automation.operations.SoftwareUpdateConfigurationMachineRunsOperations.list": "Microsoft.Automation.AutomationAccounts.softwareUpdateConfigurationMachineRunsList",
@@ -606,7 +606,7 @@
         "azure.mgmt.automation.aio.operations.WatcherOperations.start": "Microsoft.Automation.Watchers.start",
         "azure.mgmt.automation.operations.WatcherOperations.stop": "Microsoft.Automation.Watchers.stop",
         "azure.mgmt.automation.aio.operations.WatcherOperations.stop": "Microsoft.Automation.Watchers.stop",
-        "azure.mgmt.automation.operations.deletedAutomationAccountsOperations.list_by_subscription": "Microsoft.Automation.deletedAutomationAccountsOperationGroup.listBySubscription",
-        "azure.mgmt.automation.aio.operations.deletedAutomationAccountsOperations.list_by_subscription": "Microsoft.Automation.deletedAutomationAccountsOperationGroup.listBySubscription"
+        "azure.mgmt.automation.operations.DeletedAutomationAccountsOperations.list_by_subscription": "Microsoft.Automation.deletedAutomationAccountsOperationGroup.listBySubscription",
+        "azure.mgmt.automation.aio.operations.DeletedAutomationAccountsOperations.list_by_subscription": "Microsoft.Automation.deletedAutomationAccountsOperationGroup.listBySubscription"
     }
 }

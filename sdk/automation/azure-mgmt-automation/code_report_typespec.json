@@ -77,9 +77,6 @@
           "software_update_configurations": {
             "attr_type": "SoftwareUpdateConfigurationsOperations"
           },
-          "automation_accounts": {
-            "attr_type": "AutomationAccountsOperations"
-          },
           "hybrid_runbook_workers": {
             "attr_type": "HybridRunbookWorkersOperations"
           },
@@ -124,6 +121,9 @@
           },
           "object_data_types": {
             "attr_type": "ObjectDataTypesOperations"
+          },
+          "resource_providers": {
+            "attr_type": "ResourceProvidersOperations"
           },
           "software_update_configuration_machine_runs": {
             "attr_type": "SoftwareUpdateConfigurationMachineRunsOperations"
@@ -210,7 +210,7 @@
             "attr_type": "WatcherOperations"
           },
           "deleted_automation_accounts": {
-            "attr_type": "deletedAutomationAccountsOperations"
+            "attr_type": "DeletedAutomationAccountsOperations"
           }
         }
       }
@@ -748,150 +748,6 @@
                   },
                   "parameters": {
                     "type": "AutomationAccountUpdateParameters",
-                    "default": null,
-                    "param_type": "positional_or_keyword"
-                  },
-                  "content_type": {
-                    "type": "str",
-                    "default": "application/json",
-                    "param_type": "keyword_only"
-                  }
-                },
-                "is_async": false,
-                "return_type": null
-              },
-              {
-                "parameters": {
-                  "self": {
-                    "type": null,
-                    "default": null,
-                    "param_type": "positional_or_keyword"
-                  },
-                  "resource_group_name": {
-                    "type": "str",
-                    "default": null,
-                    "param_type": "positional_or_keyword"
-                  },
-                  "automation_account_name": {
-                    "type": "str",
-                    "default": null,
-                    "param_type": "positional_or_keyword"
-                  },
-                  "parameters": {
-                    "type": "JSON",
-                    "default": null,
-                    "param_type": "positional_or_keyword"
-                  },
-                  "content_type": {
-                    "type": "str",
-                    "default": "application/json",
-                    "param_type": "keyword_only"
-                  }
-                },
-                "is_async": false,
-                "return_type": null
-              },
-              {
-                "parameters": {
-                  "self": {
-                    "type": null,
-                    "default": null,
-                    "param_type": "positional_or_keyword"
-                  },
-                  "resource_group_name": {
-                    "type": "str",
-                    "default": null,
-                    "param_type": "positional_or_keyword"
-                  },
-                  "automation_account_name": {
-                    "type": "str",
-                    "default": null,
-                    "param_type": "positional_or_keyword"
-                  },
-                  "parameters": {
-                    "type": "IO[bytes]",
-                    "default": null,
-                    "param_type": "positional_or_keyword"
-                  },
-                  "content_type": {
-                    "type": "str",
-                    "default": "application/json",
-                    "param_type": "keyword_only"
-                  }
-                },
-                "is_async": false,
-                "return_type": null
-              }
-            ]
-          }
-        },
-        "properties": {}
-      },
-      "AutomationAccountsOperations": {
-        "type": null,
-        "methods": {
-          "__init__": {
-            "parameters": {
-              "self": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              },
-              "args": {
-                "default": null,
-                "param_type": "var_positional"
-              },
-              "kwargs": {
-                "default": null,
-                "param_type": "var_keyword"
-              }
-            },
-            "is_async": false,
-            "overloads": []
-          },
-          "convert_graph_runbook_content": {
-            "parameters": {
-              "self": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              },
-              "resource_group_name": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              },
-              "automation_account_name": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              },
-              "parameters": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              },
-              "kwargs": {
-                "default": null,
-                "param_type": "var_keyword"
-              }
-            },
-            "is_async": false,
-            "overloads": [
-              {
-                "parameters": {
-                  "self": {
-                    "type": null,
-                    "default": null,
-                    "param_type": "positional_or_keyword"
-                  },
-                  "resource_group_name": {
-                    "type": "str",
-                    "default": null,
-                    "param_type": "positional_or_keyword"
-                  },
-                  "automation_account_name": {
-                    "type": "str",
-                    "default": null,
-                    "param_type": "positional_or_keyword"
-                  },
-                  "parameters": {
-                    "type": "GraphicalRunbookContent",
                     "default": null,
                     "param_type": "positional_or_keyword"
                   },
@@ -2332,6 +2188,44 @@
                 "return_type": null
               }
             ]
+          }
+        },
+        "properties": {}
+      },
+      "DeletedAutomationAccountsOperations": {
+        "type": null,
+        "methods": {
+          "__init__": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "args": {
+                "default": null,
+                "param_type": "var_positional"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "list_by_subscription": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
           }
         },
         "properties": {}
@@ -7218,6 +7112,150 @@
         },
         "properties": {}
       },
+      "ResourceProvidersOperations": {
+        "type": null,
+        "methods": {
+          "__init__": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "args": {
+                "default": null,
+                "param_type": "var_positional"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "convert_graph_runbook_content": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "resource_group_name": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "automation_account_name": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "parameters": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": [
+              {
+                "parameters": {
+                  "self": {
+                    "type": null,
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "resource_group_name": {
+                    "type": "str",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "automation_account_name": {
+                    "type": "str",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "parameters": {
+                    "type": "GraphicalRunbookContent",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "content_type": {
+                    "type": "str",
+                    "default": "application/json",
+                    "param_type": "keyword_only"
+                  }
+                },
+                "is_async": false,
+                "return_type": null
+              },
+              {
+                "parameters": {
+                  "self": {
+                    "type": null,
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "resource_group_name": {
+                    "type": "str",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "automation_account_name": {
+                    "type": "str",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "parameters": {
+                    "type": "JSON",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "content_type": {
+                    "type": "str",
+                    "default": "application/json",
+                    "param_type": "keyword_only"
+                  }
+                },
+                "is_async": false,
+                "return_type": null
+              },
+              {
+                "parameters": {
+                  "self": {
+                    "type": null,
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "resource_group_name": {
+                    "type": "str",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "automation_account_name": {
+                    "type": "str",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "parameters": {
+                    "type": "IO[bytes]",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "content_type": {
+                    "type": "str",
+                    "default": "application/json",
+                    "param_type": "keyword_only"
+                  }
+                },
+                "is_async": false,
+                "return_type": null
+              }
+            ]
+          }
+        },
+        "properties": {}
+      },
       "RunbookDraftOperations": {
         "type": null,
         "methods": {
@@ -11353,44 +11391,6 @@
                 "return_type": null
               }
             ]
-          }
-        },
-        "properties": {}
-      },
-      "deletedAutomationAccountsOperations": {
-        "type": null,
-        "methods": {
-          "__init__": {
-            "parameters": {
-              "self": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              },
-              "args": {
-                "default": null,
-                "param_type": "var_positional"
-              },
-              "kwargs": {
-                "default": null,
-                "param_type": "var_keyword"
-              }
-            },
-            "is_async": false,
-            "overloads": []
-          },
-          "list_by_subscription": {
-            "parameters": {
-              "self": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              },
-              "kwargs": {
-                "default": null,
-                "param_type": "var_keyword"
-              }
-            },
-            "is_async": false,
-            "overloads": []
           }
         },
         "properties": {}
@@ -63630,9 +63630,6 @@
           "software_update_configurations": {
             "attr_type": "SoftwareUpdateConfigurationsOperations"
           },
-          "automation_accounts": {
-            "attr_type": "AutomationAccountsOperations"
-          },
           "hybrid_runbook_workers": {
             "attr_type": "HybridRunbookWorkersOperations"
           },
@@ -63677,6 +63674,9 @@
           },
           "object_data_types": {
             "attr_type": "ObjectDataTypesOperations"
+          },
+          "resource_providers": {
+            "attr_type": "ResourceProvidersOperations"
           },
           "software_update_configuration_machine_runs": {
             "attr_type": "SoftwareUpdateConfigurationMachineRunsOperations"
@@ -63763,7 +63763,7 @@
             "attr_type": "WatcherOperations"
           },
           "deleted_automation_accounts": {
-            "attr_type": "deletedAutomationAccountsOperations"
+            "attr_type": "DeletedAutomationAccountsOperations"
           }
         }
       }
@@ -64301,150 +64301,6 @@
                   },
                   "parameters": {
                     "type": "AutomationAccountUpdateParameters",
-                    "default": null,
-                    "param_type": "positional_or_keyword"
-                  },
-                  "content_type": {
-                    "type": "str",
-                    "default": "application/json",
-                    "param_type": "keyword_only"
-                  }
-                },
-                "is_async": true,
-                "return_type": null
-              },
-              {
-                "parameters": {
-                  "self": {
-                    "type": null,
-                    "default": null,
-                    "param_type": "positional_or_keyword"
-                  },
-                  "resource_group_name": {
-                    "type": "str",
-                    "default": null,
-                    "param_type": "positional_or_keyword"
-                  },
-                  "automation_account_name": {
-                    "type": "str",
-                    "default": null,
-                    "param_type": "positional_or_keyword"
-                  },
-                  "parameters": {
-                    "type": "JSON",
-                    "default": null,
-                    "param_type": "positional_or_keyword"
-                  },
-                  "content_type": {
-                    "type": "str",
-                    "default": "application/json",
-                    "param_type": "keyword_only"
-                  }
-                },
-                "is_async": true,
-                "return_type": null
-              },
-              {
-                "parameters": {
-                  "self": {
-                    "type": null,
-                    "default": null,
-                    "param_type": "positional_or_keyword"
-                  },
-                  "resource_group_name": {
-                    "type": "str",
-                    "default": null,
-                    "param_type": "positional_or_keyword"
-                  },
-                  "automation_account_name": {
-                    "type": "str",
-                    "default": null,
-                    "param_type": "positional_or_keyword"
-                  },
-                  "parameters": {
-                    "type": "IO[bytes]",
-                    "default": null,
-                    "param_type": "positional_or_keyword"
-                  },
-                  "content_type": {
-                    "type": "str",
-                    "default": "application/json",
-                    "param_type": "keyword_only"
-                  }
-                },
-                "is_async": true,
-                "return_type": null
-              }
-            ]
-          }
-        },
-        "properties": {}
-      },
-      "AutomationAccountsOperations": {
-        "type": null,
-        "methods": {
-          "__init__": {
-            "parameters": {
-              "self": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              },
-              "args": {
-                "default": null,
-                "param_type": "var_positional"
-              },
-              "kwargs": {
-                "default": null,
-                "param_type": "var_keyword"
-              }
-            },
-            "is_async": false,
-            "overloads": []
-          },
-          "convert_graph_runbook_content": {
-            "parameters": {
-              "self": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              },
-              "resource_group_name": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              },
-              "automation_account_name": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              },
-              "parameters": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              },
-              "kwargs": {
-                "default": null,
-                "param_type": "var_keyword"
-              }
-            },
-            "is_async": true,
-            "overloads": [
-              {
-                "parameters": {
-                  "self": {
-                    "type": null,
-                    "default": null,
-                    "param_type": "positional_or_keyword"
-                  },
-                  "resource_group_name": {
-                    "type": "str",
-                    "default": null,
-                    "param_type": "positional_or_keyword"
-                  },
-                  "automation_account_name": {
-                    "type": "str",
-                    "default": null,
-                    "param_type": "positional_or_keyword"
-                  },
-                  "parameters": {
-                    "type": "GraphicalRunbookContent",
                     "default": null,
                     "param_type": "positional_or_keyword"
                   },
@@ -65885,6 +65741,44 @@
                 "return_type": null
               }
             ]
+          }
+        },
+        "properties": {}
+      },
+      "DeletedAutomationAccountsOperations": {
+        "type": null,
+        "methods": {
+          "__init__": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "args": {
+                "default": null,
+                "param_type": "var_positional"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "list_by_subscription": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": true,
+            "overloads": []
           }
         },
         "properties": {}
@@ -70771,6 +70665,150 @@
         },
         "properties": {}
       },
+      "ResourceProvidersOperations": {
+        "type": null,
+        "methods": {
+          "__init__": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "args": {
+                "default": null,
+                "param_type": "var_positional"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": false,
+            "overloads": []
+          },
+          "convert_graph_runbook_content": {
+            "parameters": {
+              "self": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "resource_group_name": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "automation_account_name": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "parameters": {
+                "default": null,
+                "param_type": "positional_or_keyword"
+              },
+              "kwargs": {
+                "default": null,
+                "param_type": "var_keyword"
+              }
+            },
+            "is_async": true,
+            "overloads": [
+              {
+                "parameters": {
+                  "self": {
+                    "type": null,
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "resource_group_name": {
+                    "type": "str",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "automation_account_name": {
+                    "type": "str",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "parameters": {
+                    "type": "GraphicalRunbookContent",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "content_type": {
+                    "type": "str",
+                    "default": "application/json",
+                    "param_type": "keyword_only"
+                  }
+                },
+                "is_async": true,
+                "return_type": null
+              },
+              {
+                "parameters": {
+                  "self": {
+                    "type": null,
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "resource_group_name": {
+                    "type": "str",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "automation_account_name": {
+                    "type": "str",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "parameters": {
+                    "type": "JSON",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "content_type": {
+                    "type": "str",
+                    "default": "application/json",
+                    "param_type": "keyword_only"
+                  }
+                },
+                "is_async": true,
+                "return_type": null
+              },
+              {
+                "parameters": {
+                  "self": {
+                    "type": null,
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "resource_group_name": {
+                    "type": "str",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "automation_account_name": {
+                    "type": "str",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "parameters": {
+                    "type": "IO[bytes]",
+                    "default": null,
+                    "param_type": "positional_or_keyword"
+                  },
+                  "content_type": {
+                    "type": "str",
+                    "default": "application/json",
+                    "param_type": "keyword_only"
+                  }
+                },
+                "is_async": true,
+                "return_type": null
+              }
+            ]
+          }
+        },
+        "properties": {}
+      },
       "RunbookDraftOperations": {
         "type": null,
         "methods": {
@@ -74906,44 +74944,6 @@
                 "return_type": null
               }
             ]
-          }
-        },
-        "properties": {}
-      },
-      "deletedAutomationAccountsOperations": {
-        "type": null,
-        "methods": {
-          "__init__": {
-            "parameters": {
-              "self": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              },
-              "args": {
-                "default": null,
-                "param_type": "var_positional"
-              },
-              "kwargs": {
-                "default": null,
-                "param_type": "var_keyword"
-              }
-            },
-            "is_async": false,
-            "overloads": []
-          },
-          "list_by_subscription": {
-            "parameters": {
-              "self": {
-                "default": null,
-                "param_type": "positional_or_keyword"
-              },
-              "kwargs": {
-                "default": null,
-                "param_type": "var_keyword"
-              }
-            },
-            "is_async": true,
-            "overloads": []
           }
         },
         "properties": {}

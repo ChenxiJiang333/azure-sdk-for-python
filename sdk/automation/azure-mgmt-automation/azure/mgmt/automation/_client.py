@@ -23,11 +23,11 @@ from .operations import (
     ActivityOperations,
     AgentRegistrationInformationOperations,
     AutomationAccountOperations,
-    AutomationAccountsOperations,
     CertificateOperations,
     ConnectionOperations,
     ConnectionTypeOperations,
     CredentialOperations,
+    DeletedAutomationAccountsOperations,
     DscConfigurationOperations,
     DscNodeConfigurationOperations,
     DscNodeOperations,
@@ -49,6 +49,7 @@ from .operations import (
     PrivateLinkResourcesOperations,
     Python2PackageOperations,
     Python3PackageOperations,
+    ResourceProvidersOperations,
     RunbookDraftOperations,
     RunbookOperations,
     RuntimeEnvironmentsOperations,
@@ -66,7 +67,6 @@ from .operations import (
     VariableOperations,
     WatcherOperations,
     WebhookOperations,
-    deletedAutomationAccountsOperations,
 )
 
 if TYPE_CHECKING:
@@ -82,8 +82,6 @@ class AutomationClient:  # pylint: disable=too-many-instance-attributes
     :ivar software_update_configurations: SoftwareUpdateConfigurationsOperations operations
     :vartype software_update_configurations:
      azure.mgmt.automation.operations.SoftwareUpdateConfigurationsOperations
-    :ivar automation_accounts: AutomationAccountsOperations operations
-    :vartype automation_accounts: azure.mgmt.automation.operations.AutomationAccountsOperations
     :ivar hybrid_runbook_workers: HybridRunbookWorkersOperations operations
     :vartype hybrid_runbook_workers:
      azure.mgmt.automation.operations.HybridRunbookWorkersOperations
@@ -119,6 +117,8 @@ class AutomationClient:  # pylint: disable=too-many-instance-attributes
     :vartype linked_workspace: azure.mgmt.automation.operations.LinkedWorkspaceOperations
     :ivar object_data_types: ObjectDataTypesOperations operations
     :vartype object_data_types: azure.mgmt.automation.operations.ObjectDataTypesOperations
+    :ivar resource_providers: ResourceProvidersOperations operations
+    :vartype resource_providers: azure.mgmt.automation.operations.ResourceProvidersOperations
     :ivar software_update_configuration_machine_runs:
      SoftwareUpdateConfigurationMachineRunsOperations operations
     :vartype software_update_configuration_machine_runs:
@@ -182,9 +182,9 @@ class AutomationClient:  # pylint: disable=too-many-instance-attributes
     :vartype variable: azure.mgmt.automation.operations.VariableOperations
     :ivar watcher: WatcherOperations operations
     :vartype watcher: azure.mgmt.automation.operations.WatcherOperations
-    :ivar deleted_automation_accounts: deletedAutomationAccountsOperations operations
+    :ivar deleted_automation_accounts: DeletedAutomationAccountsOperations operations
     :vartype deleted_automation_accounts:
-     azure.mgmt.automation.operations.deletedAutomationAccountsOperations
+     azure.mgmt.automation.operations.DeletedAutomationAccountsOperations
     :param credential: Credential used to authenticate requests to the service. Required.
     :type credential: ~azure.core.credentials.TokenCredential
     :param subscription_id: The ID of the target subscription. The value must be an UUID. Required.
@@ -252,9 +252,6 @@ class AutomationClient:  # pylint: disable=too-many-instance-attributes
         self.software_update_configurations = SoftwareUpdateConfigurationsOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
-        self.automation_accounts = AutomationAccountsOperations(
-            self._client, self._config, self._serialize, self._deserialize
-        )
         self.hybrid_runbook_workers = HybridRunbookWorkersOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
@@ -286,6 +283,9 @@ class AutomationClient:  # pylint: disable=too-many-instance-attributes
             self._client, self._config, self._serialize, self._deserialize
         )
         self.object_data_types = ObjectDataTypesOperations(
+            self._client, self._config, self._serialize, self._deserialize
+        )
+        self.resource_providers = ResourceProvidersOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
         self.software_update_configuration_machine_runs = SoftwareUpdateConfigurationMachineRunsOperations(
@@ -330,7 +330,7 @@ class AutomationClient:  # pylint: disable=too-many-instance-attributes
         )
         self.variable = VariableOperations(self._client, self._config, self._serialize, self._deserialize)
         self.watcher = WatcherOperations(self._client, self._config, self._serialize, self._deserialize)
-        self.deleted_automation_accounts = deletedAutomationAccountsOperations(
+        self.deleted_automation_accounts = DeletedAutomationAccountsOperations(
             self._client, self._config, self._serialize, self._deserialize
         )
 

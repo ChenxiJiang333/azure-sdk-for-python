@@ -31,7 +31,7 @@ def main():
         subscription_id="SUBSCRIPTION_ID",
     )
 
-    response = client.automation_accounts.convert_graph_runbook_content(
+    response = client.resource_providers.convert_graph_runbook_content(
         resource_group_name="rg",
         automation_account_name="MyAutomationAccount",
         parameters={

@@ -1,5 +1,9 @@
 ## tsp migration
 
+## 1.1.0 (2026-03-23)
+
+change log generation failed!!! You need to write it manually!!!
+
 ### Breaking Changes
 
 - Deleted or renamed client method `AutomationClient.convert_graph_runbook_content`
@@ -424,10 +428,6 @@
 - Deleted or renamed model `DeletedAutomationAccountsOperations`
 
 # Release History
-
-## 1.1.0 (2026-03-23)
-
-change log generation failed!!! You need to write it manually!!!
 
 ## 1.1.0b4 (2024-11-05)
 
