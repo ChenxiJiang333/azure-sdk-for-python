@@ -1,6 +1,6 @@
 # Release History
 
-## 3.5.0 (2026-03-11)
+## 3.5.0 (2026-03-24)
 
 change log generation failed!!! You need to write it manually!!!
 
