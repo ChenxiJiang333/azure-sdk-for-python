@@ -18,6 +18,37 @@ if TYPE_CHECKING:
     from .. import models as _models
 
 
+class CalloutPoliciesList(_Model):
+    """A list of the service's callout policy objects.
+
+    All required parameters must be populated in order to send to server.
+
+    :ivar value: The CalloutPolicy items on this page. Required.
+    :vartype value: list[~azure.mgmt.kusto.models.CalloutPolicy]
+    :ivar next_link: The link to the next page of items.
+    :vartype next_link: str
+    """
+
+    _validation = {
+        "value": {"required": True},
+    }
+
+    _attribute_map = {
+        "value": {"key": "value", "type": "[CalloutPolicy]"},
+        "next_link": {"key": "nextLink", "type": "str"},
+    }
+
+    def __init__(self, *, value: list["_models.CalloutPolicy"], next_link: Optional[str] = None, **kwargs: Any) -> None:
+        """
+        :keyword value: The CalloutPolicy items on this page. Required.
+        :paramtype value: list[~azure.mgmt.kusto.models.CalloutPolicy]
+        :keyword next_link: The link to the next page of items.
+        :paramtype next_link: str
+        """
+        super().__init__(**kwargs)
+        self.value = value
+        self.next_link = next_link
+
 class AcceptedAudiences(_Model):
     """Represents an accepted audience trusted by the cluster.
 
