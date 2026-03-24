@@ -39,7 +39,7 @@ from ...operations._operations import (
     build_data_boundaries_put_request,
     build_operations_list_request,
 )
-from .._configuration import ResourcesClientConfiguration
+from .._configuration import DataBoundaryMgmtClientConfiguration
 
 T = TypeVar("T")
 ClsType = Optional[Callable[[PipelineResponse[HttpRequest, AsyncHttpResponse], T, dict[str, Any]], Any]]
@@ -53,14 +53,14 @@ class Operations:
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.resource.databoundaries.aio.ResourcesClient`'s
+        :class:`~azure.mgmt.resource.databoundaries.aio.DataBoundaryMgmtClient`'s
         :attr:`operations` attribute.
     """
 
     def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client: AsyncPipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: ResourcesClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._config: DataBoundaryMgmtClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
         self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
@@ -158,14 +158,14 @@ class DataBoundariesOperations:
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.resource.databoundaries.aio.ResourcesClient`'s
+        :class:`~azure.mgmt.resource.databoundaries.aio.DataBoundaryMgmtClient`'s
         :attr:`data_boundaries` attribute.
     """
 
     def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client: AsyncPipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: ResourcesClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._config: DataBoundaryMgmtClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
         self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 

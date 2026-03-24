@@ -17,7 +17,7 @@ from azure.mgmt.core import ARMPipelineClient
 from azure.mgmt.core.policies import ARMAutoResourceProviderRegistrationPolicy
 from azure.mgmt.core.tools import get_arm_endpoints
 
-from ._configuration import ResourcesClientConfiguration
+from ._configuration import DataBoundaryMgmtClientConfiguration
 from ._utils.serialization import Deserializer, Serializer
 from .operations import DataBoundariesOperations, Operations
 
@@ -26,7 +26,7 @@ if TYPE_CHECKING:
     from azure.core.credentials import TokenCredential
 
 
-class ResourcesClient:
+class DataBoundaryMgmtClient:
     """Provides APIs for data boundary operations.
 
     :ivar operations: Operations operations
@@ -60,7 +60,7 @@ class ResourcesClient:
         if not base_url:
             base_url = _endpoints["resource_manager"]
         credential_scopes = kwargs.pop("credential_scopes", _endpoints["credential_scopes"])
-        self._config = ResourcesClientConfiguration(
+        self._config = DataBoundaryMgmtClientConfiguration(
             credential=credential,
             base_url=cast(str, base_url),
             cloud_setting=cloud_setting,

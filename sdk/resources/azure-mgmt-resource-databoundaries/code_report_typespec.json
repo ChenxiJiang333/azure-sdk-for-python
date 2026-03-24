@@ -1,7 +1,7 @@
 {
   "azure.mgmt.resource.databoundaries": {
     "class_nodes": {
-      "ResourcesClient": {
+      "DataBoundaryMgmtClient": {
         "type": null,
         "methods": {
           "__init__": {
@@ -2568,7 +2568,7 @@
   },
   "azure.mgmt.resource.databoundaries.aio": {
     "class_nodes": {
-      "ResourcesClient": {
+      "DataBoundaryMgmtClient": {
         "type": null,
         "methods": {
           "__init__": {

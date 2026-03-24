@@ -6,22 +6,23 @@
 # Changes may cause incorrect behavior and will be lost if the code is regenerated.
 # --------------------------------------------------------------------------
 import pytest
-from azure.mgmt.resource.databoundaries import ResourcesClient
+from azure.mgmt.resource.databoundaries.aio import DataBoundaryMgmtClient
 
-from devtools_testutils import AzureMgmtRecordedTestCase, RandomNameResourceGroupPreparer, recorded_by_proxy
+from devtools_testutils import AzureMgmtRecordedTestCase, RandomNameResourceGroupPreparer
+from devtools_testutils.aio import recorded_by_proxy_async
 
 AZURE_LOCATION = "eastus"
 
 
 @pytest.mark.skip("you may need to update the auto-generated test case before run it")
-class TestResourcesDataBoundariesOperations(AzureMgmtRecordedTestCase):
+class TestDataBoundaryMgmtDataBoundariesOperationsAsync(AzureMgmtRecordedTestCase):
     def setup_method(self, method):
-        self.client = self.create_mgmt_client(ResourcesClient)
+        self.client = self.create_mgmt_client(DataBoundaryMgmtClient, is_async=True)
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_data_boundaries_get_scope(self, resource_group):
-        response = self.client.data_boundaries.get_scope(
+    @recorded_by_proxy_async
+    async def test_data_boundaries_get_scope(self, resource_group):
+        response = await self.client.data_boundaries.get_scope(
             scope="str",
             default="str",
         )
@@ -30,9 +31,9 @@ class TestResourcesDataBoundariesOperations(AzureMgmtRecordedTestCase):
         # ...
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_data_boundaries_get_tenant(self, resource_group):
-        response = self.client.data_boundaries.get_tenant(
+    @recorded_by_proxy_async
+    async def test_data_boundaries_get_tenant(self, resource_group):
+        response = await self.client.data_boundaries.get_tenant(
             default="str",
         )
 
@@ -40,9 +41,9 @@ class TestResourcesDataBoundariesOperations(AzureMgmtRecordedTestCase):
         # ...
 
     @RandomNameResourceGroupPreparer(location=AZURE_LOCATION)
-    @recorded_by_proxy
-    def test_data_boundaries_put(self, resource_group):
-        response = self.client.data_boundaries.put(
+    @recorded_by_proxy_async
+    async def test_data_boundaries_put(self, resource_group):
+        response = await self.client.data_boundaries.put(
             default="str",
             data_boundary_definition={
                 "id": "str",
