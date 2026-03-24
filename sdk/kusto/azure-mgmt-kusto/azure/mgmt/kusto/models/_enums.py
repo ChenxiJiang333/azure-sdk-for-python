@@ -374,7 +374,7 @@ class EventGridDataFormat(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """ORC"""
     APACHEAVRO = "APACHEAVRO"
     """APACHEAVRO"""
-    W3CLOGFILE = "W3CLOGFILE"
+    W3_CLOGFILE = "W3CLOGFILE"
     """W3CLOGFILE"""
     AZMONSTREAM = "AZMONSTREAM"
     """AZMONSTREAM"""
@@ -413,7 +413,7 @@ class EventHubDataFormat(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """ORC"""
     APACHEAVRO = "APACHEAVRO"
     """APACHEAVRO"""
-    W3CLOGFILE = "W3CLOGFILE"
+    W3_CLOGFILE = "W3CLOGFILE"
     """W3CLOGFILE"""
     AZMONSTREAM = "AZMONSTREAM"
     """AZMONSTREAM"""
@@ -468,7 +468,7 @@ class IotHubDataFormat(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """ORC"""
     APACHEAVRO = "APACHEAVRO"
     """APACHEAVRO"""
-    W3CLOGFILE = "W3CLOGFILE"
+    W3_CLOGFILE = "W3CLOGFILE"
     """W3CLOGFILE"""
 
 

@@ -2,12 +2,6 @@
 
 ### Breaking Changes
 
-- Deleted or renamed model `FollowerDatabaseListResultGet`
-- Deleted or renamed enum value `IotHubDataFormat.W3_CLOGFILE`
-- Deleted or renamed enum value `EventHubDataFormat.W3_CLOGFILE`
-- Deleted or renamed enum value `EventGridDataFormat.W3_CLOGFILE`
-- Deleted or renamed method `OperationsResultsLocationOperations.get`
-
 - Method `ClustersOperations.list_language_extensions` changed from `synchronous` to `asynchronous`
 - Model `AttachedDatabaseConfiguration` deleted or renamed its instance variable `provisioning_state`
 - Model `AttachedDatabaseConfiguration` deleted or renamed its instance variable `database_name`
@@ -188,16 +182,17 @@
 - Model `Script` deleted or renamed its instance variable `provisioning_state`
 - Model `Script` deleted or renamed its instance variable `script_level`
 - Model `Script` deleted or renamed its instance variable `principal_permissions_action`
-- Deleted or renamed model `ListResourceSkusResult`
-- Deleted or renamed model `SkuDescriptionList`
 - Method `ClustersOperations.begin_create_or_update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
 - Method `ClustersOperations.begin_create_or_update` deleted or renamed its parameter `if_none_match` of kind `positional_or_keyword`
 - Method `ClustersOperations.begin_update` deleted or renamed its parameter `if_match` of kind `positional_or_keyword`
 - Method `DatabasesOperations.begin_create_or_update` changed its parameter `caller_role` from `positional_or_keyword` to `keyword_only`
 - Method `DatabasesOperations.begin_update` changed its parameter `caller_role` from `positional_or_keyword` to `keyword_only`
 - Method `DatabasesOperations.list_by_cluster` changed its parameter `skiptoken` from `positional_or_keyword` to `keyword_only`
+- Renamed method `OperationsResultsLocationOperations.get` to `begin_get`
 
-- Method `ClustersOperations.begin_create_or_update` re-ordered its parameters from `['self', 'resource_group_name', 'cluster_name', 'parameters', 'if_match', 'if_none_match', 'kwargs']` to `['self', 'resource_group_name', 'cluster_name', 'parameters', 'etag', 'match_condition', 'kwargs']`
+### Other Changes
+
+  - Deleted model `FollowerDatabaseListResultGet`/`ListResourceSkusResult`/`SkuDescriptionList` which actually were not used by SDK users
 
 # Release History
 

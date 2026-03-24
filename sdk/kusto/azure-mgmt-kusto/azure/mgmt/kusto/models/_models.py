@@ -17,7 +17,6 @@ from ._enums import DataConnectionKind, Kind
 if TYPE_CHECKING:
     from .. import models as _models
 
-
 class CalloutPoliciesList(_Model):
     """A list of the service's callout policy objects.
 
