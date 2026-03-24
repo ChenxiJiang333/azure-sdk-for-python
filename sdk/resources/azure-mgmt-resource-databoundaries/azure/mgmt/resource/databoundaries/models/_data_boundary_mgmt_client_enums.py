@@ -25,7 +25,6 @@ class DataBoundary(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     NOT_DEFINED = "NotDefined"
     GLOBAL = "Global"
     EU = "EU"
-    GLOBAL_ENUM = "Global"
 
 
 class DefaultName(str, Enum, metaclass=CaseInsensitiveEnumMeta):

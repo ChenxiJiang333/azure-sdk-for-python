@@ -129,7 +129,7 @@ class DataBoundaryProperties(_serialization.Model):
     Variables are only populated by the server, and will be ignored when sending a request.
 
     :ivar data_boundary: The data boundary definition. Known values are: "NotDefined", "Global",
-     "EU", and "Global".
+     and "EU".
     :vartype data_boundary: str or ~azure.mgmt.resource.databoundaries.models.DataBoundary
     :ivar provisioning_state: Denotes the state of provisioning. Known values are: "Accepted",
      "Running", "Creating", "Canceled", "Failed", "Succeeded", and "Updating".
@@ -149,7 +149,7 @@ class DataBoundaryProperties(_serialization.Model):
     def __init__(self, *, data_boundary: Optional[Union[str, "_models.DataBoundary"]] = None, **kwargs: Any) -> None:
         """
         :keyword data_boundary: The data boundary definition. Known values are: "NotDefined", "Global",
-         "EU", and "Global".
+         and "EU".
         :paramtype data_boundary: str or ~azure.mgmt.resource.databoundaries.models.DataBoundary
         """
         super().__init__(**kwargs)
