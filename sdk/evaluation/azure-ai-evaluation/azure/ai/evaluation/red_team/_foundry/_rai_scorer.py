@@ -13,7 +13,11 @@ from pyrit.models import Score, UnvalidatedScore, MessagePiece, Message
 from pyrit.score import ScorerPromptValidator
 from pyrit.score.true_false.true_false_scorer import TrueFalseScorer
 
-from azure.ai.evaluation._common.rai_service import evaluate_with_rai_service_sync
+from azure.ai.evaluation._common.rai_service import (
+    evaluate_with_rai_service_sync,
+    _SYNC_TO_LEGACY_METRIC_NAMES,
+    _LEGACY_TO_SYNC_METRIC_NAMES,
+)
 from .._attack_objective_generator import RiskCategory
 from .._utils.metric_mapping import (
     get_metric_from_risk_category,
@@ -42,6 +46,7 @@ class RAIServiceScorer(TrueFalseScorer):
         risk_category: RiskCategory,
         logger: Optional[logging.Logger] = None,
         dataset_config: Optional[Any] = None,
+        use_legacy_endpoint: bool = False,
     ) -> None:
         """Initialize the RAI Service scorer.
 
@@ -56,6 +61,8 @@ class RAIServiceScorer(TrueFalseScorer):
         :type logger: Optional[logging.Logger]
         :param dataset_config: Optional DatasetConfiguration for context lookup
         :type dataset_config: Optional[Any]
+        :param use_legacy_endpoint: Whether to use the legacy evaluation endpoint. Defaults to False.
+        :type use_legacy_endpoint: bool
         """
         # Initialize with a default validator for text scoring
         super().__init__(validator=ScorerPromptValidator(supported_data_types=["text"]))
@@ -64,6 +71,7 @@ class RAIServiceScorer(TrueFalseScorer):
         self.risk_category = risk_category
         self.logger = logger or logging.getLogger(__name__)
         self.dataset_config = dataset_config
+        self._use_legacy_endpoint = use_legacy_endpoint
         self._context_lookup: Dict[str, Dict[str, Any]] = {}
 
         # Build context lookup from dataset config if provided
@@ -160,18 +168,26 @@ class RAIServiceScorer(TrueFalseScorer):
         metric_name = get_metric_from_risk_category(self.risk_category)
         annotation_task = get_annotation_task_from_risk_category(self.risk_category)
 
-        # The Sync API requires "hate_unfairness" instead of "hate_fairness"
-        if metric_name == "hate_fairness":
-            metric_name = "hate_unfairness"
+        # Build set of acceptable metric names for result matching.
+        # The API may return results under either the canonical name (e.g., hate_unfairness)
+        # or a legacy alias (e.g., hate_fairness). Matching against both ensures we find
+        # the result regardless of which endpoint or API version was used.
+
+        metric_name_str = metric_name.value if hasattr(metric_name, "value") else metric_name
+        metric_aliases = {metric_name_str}
+        if metric_name_str in _SYNC_TO_LEGACY_METRIC_NAMES:
+            metric_aliases.add(_SYNC_TO_LEGACY_METRIC_NAMES[metric_name_str])
+        if metric_name_str in _LEGACY_TO_SYNC_METRIC_NAMES:
+            metric_aliases.add(_LEGACY_TO_SYNC_METRIC_NAMES[metric_name_str])
 
         try:
-            # Call RAI service using sync_evals endpoint (matches legacy path behavior)
             eval_result = await evaluate_with_rai_service_sync(
                 eval_input,
                 metric_name=metric_name,
                 project_scope=self.azure_ai_project,
                 credential=self.credential,
                 annotation_task=annotation_task,
+                use_legacy_endpoint=self._use_legacy_endpoint,
             )
 
             self.logger.debug(f"RAI evaluation result: {eval_result}")
@@ -183,13 +199,15 @@ class RAIServiceScorer(TrueFalseScorer):
             result_label = ""
             passed = None
 
+            matched_result_dict = None
+
             if hasattr(eval_result, "results") or (isinstance(eval_result, dict) and "results" in eval_result):
                 results = eval_result.results if hasattr(eval_result, "results") else eval_result.get("results", [])
                 results = results or []
 
                 for result_item in results:
                     result_dict = result_item if isinstance(result_item, dict) else result_item.__dict__
-                    if result_dict.get("name") == metric_name or result_dict.get("metric") == metric_name:
+                    if result_dict.get("name") in metric_aliases or result_dict.get("metric") in metric_aliases:
                         raw_score = result_dict.get("score")
                         if raw_score is None:
                             raw_score = 0
@@ -197,7 +215,21 @@ class RAIServiceScorer(TrueFalseScorer):
                         threshold = result_dict.get("threshold")
                         passed = result_dict.get("passed")
                         result_label = result_dict.get("label") or ""
+                        matched_result_dict = result_dict
                         break
+
+            # Check for evaluation service errors (e.g. ServiceInvocationException).
+            # These return score=0.0 and passed=False but with properties.outcome="error",
+            # meaning the evaluation didn't actually run.  Raising here lets the existing
+            # except block re-raise so PyRIT marks the score as UNDETERMINED.
+            if matched_result_dict is not None:
+                result_properties = matched_result_dict.get("properties", {})
+                if isinstance(result_properties, dict) and result_properties.get("outcome") == "error":
+                    error_detail = result_properties.get("error", "Unknown evaluation error")
+                    raise RuntimeError(
+                        f"RAI evaluation service returned an error for {metric_name}: {error_detail}. "
+                        f"Score will be treated as undetermined."
+                    )
 
             if raw_score is None:
                 self.logger.warning(f"No matching result found for metric '{metric_name}' in evaluation response.")
