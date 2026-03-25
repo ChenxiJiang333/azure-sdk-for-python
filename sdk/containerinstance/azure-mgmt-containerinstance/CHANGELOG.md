@@ -1,5 +1,28 @@
 # Release History
 
+## 10.2.0 (2026-03-25)
+
+### Features Added
+
+  - Added operation group CGProfileOperations
+  - Added operation group CGProfilesOperations
+  - Added operation group NGroupsOperations
+  - Model AzureFileVolume has a new parameter storage_account_key_reference
+  - Model Container has a new parameter config_map
+  - Model ContainerGroup has a new parameter container_group_profile
+  - Model ContainerGroup has a new parameter identity_acls
+  - Model ContainerGroup has a new parameter is_created_from_standby_pool
+  - Model ContainerGroup has a new parameter secret_references
+  - Model ContainerGroup has a new parameter standby_pool_profile
+  - Model ContainerGroupProperties has a new parameter container_group_profile
+  - Model ContainerGroupProperties has a new parameter identity_acls
+  - Model ContainerGroupProperties has a new parameter is_created_from_standby_pool
+  - Model ContainerGroupProperties has a new parameter secret_references
+  - Model ContainerGroupProperties has a new parameter standby_pool_profile
+  - Model EnvironmentVariable has a new parameter secure_value_reference
+  - Model ImageRegistryCredential has a new parameter password_reference
+  - Model Volume has a new parameter secret_reference
+
 ## 10.2.0b1 (2024-10-21)
 
 ### Features Added
