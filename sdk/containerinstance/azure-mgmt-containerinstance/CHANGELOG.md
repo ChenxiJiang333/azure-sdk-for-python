@@ -1,8 +1,109 @@
+## tsp migration
+
+### Breaking Changes
+
+- Model `Container` deleted or renamed its instance variable `image`
+- Model `Container` deleted or renamed its instance variable `command`
+- Model `Container` deleted or renamed its instance variable `ports`
+- Model `Container` deleted or renamed its instance variable `environment_variables`
+- Model `Container` deleted or renamed its instance variable `instance_view`
+- Model `Container` deleted or renamed its instance variable `resources`
+- Model `Container` deleted or renamed its instance variable `volume_mounts`
+- Model `Container` deleted or renamed its instance variable `liveness_probe`
+- Model `Container` deleted or renamed its instance variable `readiness_probe`
+- Model `Container` deleted or renamed its instance variable `security_context`
+- Model `Container` deleted or renamed its instance variable `config_map`
+- Model `ContainerGroup` deleted or renamed its instance variable `provisioning_state`
+- Model `ContainerGroup` deleted or renamed its instance variable `secret_references`
+- Model `ContainerGroup` deleted or renamed its instance variable `containers`
+- Model `ContainerGroup` deleted or renamed its instance variable `image_registry_credentials`
+- Model `ContainerGroup` deleted or renamed its instance variable `restart_policy`
+- Model `ContainerGroup` deleted or renamed its instance variable `ip_address`
+- Model `ContainerGroup` deleted or renamed its instance variable `os_type`
+- Model `ContainerGroup` deleted or renamed its instance variable `volumes`
+- Model `ContainerGroup` deleted or renamed its instance variable `instance_view`
+- Model `ContainerGroup` deleted or renamed its instance variable `diagnostics`
+- Model `ContainerGroup` deleted or renamed its instance variable `subnet_ids`
+- Model `ContainerGroup` deleted or renamed its instance variable `dns_config`
+- Model `ContainerGroup` deleted or renamed its instance variable `sku`
+- Model `ContainerGroup` deleted or renamed its instance variable `encryption_properties`
+- Model `ContainerGroup` deleted or renamed its instance variable `init_containers`
+- Model `ContainerGroup` deleted or renamed its instance variable `extensions`
+- Model `ContainerGroup` deleted or renamed its instance variable `confidential_compute_properties`
+- Model `ContainerGroup` deleted or renamed its instance variable `priority`
+- Model `ContainerGroup` deleted or renamed its instance variable `identity_acls`
+- Model `ContainerGroup` deleted or renamed its instance variable `container_group_profile`
+- Model `ContainerGroup` deleted or renamed its instance variable `standby_pool_profile`
+- Model `ContainerGroup` deleted or renamed its instance variable `is_created_from_standby_pool`
+- Model `ContainerGroupProfile` deleted or renamed its instance variable `sku`
+- Model `ContainerGroupProfile` deleted or renamed its instance variable `encryption_properties`
+- Model `ContainerGroupProfile` deleted or renamed its instance variable `containers`
+- Model `ContainerGroupProfile` deleted or renamed its instance variable `init_containers`
+- Model `ContainerGroupProfile` deleted or renamed its instance variable `extensions`
+- Model `ContainerGroupProfile` deleted or renamed its instance variable `image_registry_credentials`
+- Model `ContainerGroupProfile` deleted or renamed its instance variable `restart_policy`
+- Model `ContainerGroupProfile` deleted or renamed its instance variable `shutdown_grace_period`
+- Model `ContainerGroupProfile` deleted or renamed its instance variable `ip_address`
+- Model `ContainerGroupProfile` deleted or renamed its instance variable `time_to_live`
+- Model `ContainerGroupProfile` deleted or renamed its instance variable `os_type`
+- Model `ContainerGroupProfile` deleted or renamed its instance variable `volumes`
+- Model `ContainerGroupProfile` deleted or renamed its instance variable `diagnostics`
+- Model `ContainerGroupProfile` deleted or renamed its instance variable `priority`
+- Model `ContainerGroupProfile` deleted or renamed its instance variable `confidential_compute_properties`
+- Model `ContainerGroupProfile` deleted or renamed its instance variable `security_context`
+- Model `ContainerGroupProfile` deleted or renamed its instance variable `revision`
+- Model `ContainerGroupProfile` deleted or renamed its instance variable `registered_revisions`
+- Model `ContainerGroupProfile` deleted or renamed its instance variable `use_krypton`
+- Model `DeploymentExtensionSpec` deleted or renamed its instance variable `extension_type`
+- Model `DeploymentExtensionSpec` deleted or renamed its instance variable `version`
+- Model `DeploymentExtensionSpec` deleted or renamed its instance variable `settings`
+- Model `DeploymentExtensionSpec` deleted or renamed its instance variable `protected_settings`
+- Model `InitContainerDefinition` deleted or renamed its instance variable `image`
+- Model `InitContainerDefinition` deleted or renamed its instance variable `command`
+- Model `InitContainerDefinition` deleted or renamed its instance variable `environment_variables`
+- Model `InitContainerDefinition` deleted or renamed its instance variable `instance_view`
+- Model `InitContainerDefinition` deleted or renamed its instance variable `volume_mounts`
+- Model `InitContainerDefinition` deleted or renamed its instance variable `security_context`
+- Model `ListResultContainerGroup` deleted or renamed its instance variable `provisioning_state`
+- Model `ListResultContainerGroup` deleted or renamed its instance variable `secret_references`
+- Model `ListResultContainerGroup` deleted or renamed its instance variable `containers`
+- Model `ListResultContainerGroup` deleted or renamed its instance variable `image_registry_credentials`
+- Model `ListResultContainerGroup` deleted or renamed its instance variable `restart_policy`
+- Model `ListResultContainerGroup` deleted or renamed its instance variable `ip_address`
+- Model `ListResultContainerGroup` deleted or renamed its instance variable `os_type`
+- Model `ListResultContainerGroup` deleted or renamed its instance variable `volumes`
+- Model `ListResultContainerGroup` deleted or renamed its instance variable `diagnostics`
+- Model `ListResultContainerGroup` deleted or renamed its instance variable `subnet_ids`
+- Model `ListResultContainerGroup` deleted or renamed its instance variable `dns_config`
+- Model `ListResultContainerGroup` deleted or renamed its instance variable `sku`
+- Model `ListResultContainerGroup` deleted or renamed its instance variable `encryption_properties`
+- Model `ListResultContainerGroup` deleted or renamed its instance variable `init_containers`
+- Model `ListResultContainerGroup` deleted or renamed its instance variable `extensions`
+- Model `ListResultContainerGroup` deleted or renamed its instance variable `confidential_compute_properties`
+- Model `ListResultContainerGroup` deleted or renamed its instance variable `priority`
+- Model `ListResultContainerGroup` deleted or renamed its instance variable `identity_acls`
+- Model `ListResultContainerGroup` deleted or renamed its instance variable `container_group_profile`
+- Model `ListResultContainerGroup` deleted or renamed its instance variable `standby_pool_profile`
+- Model `ListResultContainerGroup` deleted or renamed its instance variable `is_created_from_standby_pool`
+- Model `NGroup` deleted or renamed its instance variable `elastic_profile`
+- Model `NGroup` deleted or renamed its instance variable `placement_profile`
+- Model `NGroup` deleted or renamed its instance variable `container_group_profiles`
+- Model `NGroup` deleted or renamed its instance variable `provisioning_state`
+- Model `NGroup` deleted or renamed its instance variable `update_profile`
+- Model `NGroupPatch` deleted or renamed its instance variable `elastic_profile`
+- Model `NGroupPatch` deleted or renamed its instance variable `placement_profile`
+- Model `NGroupPatch` deleted or renamed its instance variable `container_group_profiles`
+- Model `NGroupPatch` deleted or renamed its instance variable `provisioning_state`
+- Model `NGroupPatch` deleted or renamed its instance variable `update_profile`
+- Method `ContainersOperations.list_logs` changed its parameter `tail` from `positional_or_keyword` to `keyword_only`
+- Method `ContainersOperations.list_logs` changed its parameter `timestamps` from `positional_or_keyword` to `keyword_only`
+- Deleted or renamed model `ContainerGroupProperties`
+- Deleted or renamed model `ContainerGroupPropertiesInstanceView`
+- Deleted or renamed model `ListResultContainerGroupProperties`
+- Deleted or renamed model `NGroupSkus`
+- Deleted or renamed model `NGroupsSkusList`
+
 # Release History
-
-## 10.2.0b2 (2026-03-25)
-
-change log generation failed!!! You need to write it manually!!!
 
 ## 10.2.0 (2026-03-25)
 
