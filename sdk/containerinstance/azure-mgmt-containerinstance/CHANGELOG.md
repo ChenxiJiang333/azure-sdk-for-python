@@ -1,5 +1,9 @@
 # Release History
 
+## 10.2.0b2 (2026-03-25)
+
+change log generation failed!!! You need to write it manually!!!
+
 ## 10.2.0 (2026-03-25)
 
 ### Features Added
