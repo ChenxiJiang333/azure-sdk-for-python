@@ -1,5 +1,5 @@
 {
-  "commit": "1e266b907c29660101d5c8293af2abb073413794",
+  "commit": "133283cda86864a94532b1b67b01ae24a7f7f0aa",
   "repository_url": "https://github.com/Azure/azure-rest-api-specs",
   "autorest": "3.10.2",
   "use": [
@@ -7,5 +7,7 @@
     "@autorest/modelerfour@4.27.0"
   ],
   "autorest_command": "autorest specification/applicationinsights/resource-manager/Microsoft.Insights/ApplicationInsights/readme.md --generate-sample=True --generate-test=True --include-x-ms-examples-original-file=True --package-mode=azure-mgmt --python --python-sdks-folder=/home/v-chenjiang/spec/azure-sdk-for-python/sdk --use=@autorest/python@6.50.0 --use=@autorest/modelerfour@4.27.0 --version=3.10.2 --version-tolerant=False",
-  "readme": "specification/applicationinsights/resource-manager/Microsoft.Insights/ApplicationInsights/readme.md"
+  "readme": "specification/applicationinsights/resource-manager/Microsoft.Insights/ApplicationInsights/readme.md",
+  "typespec_src": "specification/applicationinsights/resource-manager/Microsoft.Insights/ApplicationInsights",
+  "emitterVersion": "0.61.1"
 }
