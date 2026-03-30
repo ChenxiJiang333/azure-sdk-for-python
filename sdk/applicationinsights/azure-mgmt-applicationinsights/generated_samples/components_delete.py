@@ -37,6 +37,6 @@ def main():
     )
 
 
-# x-ms-original-file: specification/applicationinsights/resource-manager/Microsoft.Insights/stable/2020-02-02/examples/ComponentsDelete.json
+# x-ms-original-file: specification/applicationinsights/resource-manager/Microsoft.Insights/ApplicationInsights/stable/2020-02-02/examples/ComponentsDelete.json
 if __name__ == "__main__":
     main()

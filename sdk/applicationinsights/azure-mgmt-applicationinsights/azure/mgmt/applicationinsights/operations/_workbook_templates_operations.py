@@ -8,7 +8,7 @@
 # --------------------------------------------------------------------------
 from collections.abc import MutableMapping
 from io import IOBase
-from typing import Any, Callable, Dict, IO, Optional, TypeVar, Union, overload
+from typing import Any, Callable, IO, Optional, TypeVar, Union, overload
 
 from azure.core import PipelineClient
 from azure.core.exceptions import (
@@ -31,7 +31,8 @@ from .._configuration import ApplicationInsightsManagementClientConfiguration
 from .._utils.serialization import Deserializer, Serializer
 
 T = TypeVar("T")
-ClsType = Optional[Callable[[PipelineResponse[HttpRequest, HttpResponse], T, Dict[str, Any]], Any]]
+ClsType = Optional[Callable[[PipelineResponse[HttpRequest, HttpResponse], T, dict[str, Any]], Any]]
+List = list
 
 _SERIALIZER = Serializer()
 _SERIALIZER.client_side_validation = False
@@ -285,7 +286,10 @@ class WorkbookTemplatesOperations:
 
             if response.status_code not in [200]:
                 map_error(status_code=response.status_code, response=response, error_map=error_map)
-                error = self._deserialize.failsafe_deserialize(_models.WorkbookTemplateError, pipeline_response)
+                error = self._deserialize.failsafe_deserialize(
+                    _models.WorkbookTemplateError,
+                    pipeline_response,
+                )
                 raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
             return pipeline_response
@@ -338,7 +342,10 @@ class WorkbookTemplatesOperations:
 
         if response.status_code not in [200]:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = self._deserialize.failsafe_deserialize(_models.WorkbookTemplateError, pipeline_response)
+            error = self._deserialize.failsafe_deserialize(
+                _models.WorkbookTemplateError,
+                pipeline_response,
+            )
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
         deserialized = self._deserialize("WorkbookTemplate", pipeline_response.http_response)
@@ -396,7 +403,10 @@ class WorkbookTemplatesOperations:
 
         if response.status_code not in [200, 204]:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = self._deserialize.failsafe_deserialize(_models.WorkbookTemplateError, pipeline_response)
+            error = self._deserialize.failsafe_deserialize(
+                _models.WorkbookTemplateError,
+                pipeline_response,
+            )
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
         if cls:
@@ -526,7 +536,10 @@ class WorkbookTemplatesOperations:
 
         if response.status_code not in [200, 201]:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = self._deserialize.failsafe_deserialize(_models.WorkbookTemplateError, pipeline_response)
+            error = self._deserialize.failsafe_deserialize(
+                _models.WorkbookTemplateError,
+                pipeline_response,
+            )
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
         deserialized = self._deserialize("WorkbookTemplate", pipeline_response.http_response)
@@ -632,9 +645,10 @@ class WorkbookTemplatesOperations:
 
         api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2020-11-20"))
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        content_type = content_type if workbook_template_update_parameters else None
         cls: ClsType[_models.WorkbookTemplate] = kwargs.pop("cls", None)
 
-        content_type = content_type or "application/json"
+        content_type = content_type or "application/json" if workbook_template_update_parameters else None
         _json = None
         _content = None
         if isinstance(workbook_template_update_parameters, (IOBase, bytes)):
@@ -667,7 +681,10 @@ class WorkbookTemplatesOperations:
 
         if response.status_code not in [200]:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = self._deserialize.failsafe_deserialize(_models.WorkbookTemplateError, pipeline_response)
+            error = self._deserialize.failsafe_deserialize(
+                _models.WorkbookTemplateError,
+                pipeline_response,
+            )
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
         deserialized = self._deserialize("WorkbookTemplate", pipeline_response.http_response)

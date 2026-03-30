@@ -38,6 +38,6 @@ def main():
     print(response)
 
 
-# x-ms-original-file: specification/applicationinsights/resource-manager/Microsoft.Insights/stable/2020-02-02/examples/ComponentsGet.json
+# x-ms-original-file: specification/applicationinsights/resource-manager/Microsoft.Insights/ApplicationInsights/stable/2020-02-02/examples/ComponentsGet.json
 if __name__ == "__main__":
     main()

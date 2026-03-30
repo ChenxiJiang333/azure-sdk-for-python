@@ -7,7 +7,7 @@
 # --------------------------------------------------------------------------
 from collections.abc import MutableMapping
 from io import IOBase
-from typing import Any, Callable, Dict, IO, Optional, TypeVar, Union, overload
+from typing import Any, Callable, IO, Optional, TypeVar, Union, overload
 
 from azure.core import AsyncPipelineClient
 from azure.core.async_paging import AsyncItemPaged, AsyncList
@@ -41,7 +41,8 @@ from ...operations._components_operations import (
 from .._configuration import ApplicationInsightsManagementClientConfiguration
 
 T = TypeVar("T")
-ClsType = Optional[Callable[[PipelineResponse[HttpRequest, AsyncHttpResponse], T, Dict[str, Any]], Any]]
+ClsType = Optional[Callable[[PipelineResponse[HttpRequest, AsyncHttpResponse], T, dict[str, Any]], Any]]
+List = list
 
 
 class ComponentsOperations:
@@ -124,7 +125,10 @@ class ComponentsOperations:
 
             if response.status_code not in [200]:
                 map_error(status_code=response.status_code, response=response, error_map=error_map)
-                error = self._deserialize.failsafe_deserialize(_models.ErrorResponseComponents, pipeline_response)
+                error = self._deserialize.failsafe_deserialize(
+                    _models.ErrorResponseComponents,
+                    pipeline_response,
+                )
                 raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
             return pipeline_response
@@ -196,7 +200,10 @@ class ComponentsOperations:
 
             if response.status_code not in [200]:
                 map_error(status_code=response.status_code, response=response, error_map=error_map)
-                error = self._deserialize.failsafe_deserialize(_models.ErrorResponseComponents, pipeline_response)
+                error = self._deserialize.failsafe_deserialize(
+                    _models.ErrorResponseComponents,
+                    pipeline_response,
+                )
                 raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
             return pipeline_response
@@ -249,7 +256,10 @@ class ComponentsOperations:
 
         if response.status_code not in [200, 204]:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = self._deserialize.failsafe_deserialize(_models.ErrorResponseComponents, pipeline_response)
+            error = self._deserialize.failsafe_deserialize(
+                _models.ErrorResponseComponents,
+                pipeline_response,
+            )
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
         if cls:
@@ -303,7 +313,10 @@ class ComponentsOperations:
 
         if response.status_code not in [200]:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = self._deserialize.failsafe_deserialize(_models.ErrorResponseComponents, pipeline_response)
+            error = self._deserialize.failsafe_deserialize(
+                _models.ErrorResponseComponents,
+                pipeline_response,
+            )
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
         deserialized = self._deserialize("ApplicationInsightsComponent", pipeline_response.http_response)
@@ -441,7 +454,10 @@ class ComponentsOperations:
 
         if response.status_code not in [200]:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = self._deserialize.failsafe_deserialize(_models.ErrorResponseComponents, pipeline_response)
+            error = self._deserialize.failsafe_deserialize(
+                _models.ErrorResponseComponents,
+                pipeline_response,
+            )
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
         deserialized = self._deserialize("ApplicationInsightsComponent", pipeline_response.http_response)
@@ -572,7 +588,10 @@ class ComponentsOperations:
 
         if response.status_code not in [200]:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = self._deserialize.failsafe_deserialize(_models.ErrorResponseComponents, pipeline_response)
+            error = self._deserialize.failsafe_deserialize(
+                _models.ErrorResponseComponents,
+                pipeline_response,
+            )
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
         deserialized = self._deserialize("ApplicationInsightsComponent", pipeline_response.http_response)
@@ -735,7 +754,10 @@ class ComponentsOperations:
 
         if response.status_code not in [202]:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = self._deserialize.failsafe_deserialize(_models.ErrorResponseComponents, pipeline_response)
+            error = self._deserialize.failsafe_deserialize(
+                _models.ErrorResponseComponents,
+                pipeline_response,
+            )
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
         deserialized = self._deserialize("ComponentPurgeResponse", pipeline_response.http_response)
@@ -797,7 +819,10 @@ class ComponentsOperations:
 
         if response.status_code not in [200]:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = self._deserialize.failsafe_deserialize(_models.ErrorResponseComponents, pipeline_response)
+            error = self._deserialize.failsafe_deserialize(
+                _models.ErrorResponseComponents,
+                pipeline_response,
+            )
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
         deserialized = self._deserialize("ComponentPurgeStatusResponse", pipeline_response.http_response)

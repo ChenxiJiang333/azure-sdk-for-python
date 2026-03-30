@@ -38,6 +38,6 @@ def main():
     print(response)
 
 
-# x-ms-original-file: specification/applicationinsights/resource-manager/Microsoft.Insights/stable/2020-11-20/examples/WorkbookTemplateGet.json
+# x-ms-original-file: specification/applicationinsights/resource-manager/Microsoft.Insights/ApplicationInsights/stable/2020-11-20/examples/WorkbookTemplateGet.json
 if __name__ == "__main__":
     main()

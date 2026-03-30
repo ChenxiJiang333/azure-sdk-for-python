@@ -38,6 +38,6 @@ def main():
     print(response)
 
 
-# x-ms-original-file: specification/applicationinsights/resource-manager/Microsoft.Insights/stable/2023-06-01/examples/WorkbookManagedGet.json
+# x-ms-original-file: specification/applicationinsights/resource-manager/Microsoft.Insights/ApplicationInsights/stable/2023-06-01/examples/WorkbookManagedGet.json
 if __name__ == "__main__":
     main()

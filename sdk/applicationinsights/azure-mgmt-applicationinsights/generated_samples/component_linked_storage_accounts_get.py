@@ -39,6 +39,6 @@ def main():
     print(response)
 
 
-# x-ms-original-file: specification/applicationinsights/resource-manager/Microsoft.Insights/preview/2020-03-01-preview/examples/ComponentLinkedStorageAccountsGet.json
+# x-ms-original-file: specification/applicationinsights/resource-manager/Microsoft.Insights/ApplicationInsights/preview/2020-03-01-preview/examples/ComponentLinkedStorageAccountsGet.json
 if __name__ == "__main__":
     main()

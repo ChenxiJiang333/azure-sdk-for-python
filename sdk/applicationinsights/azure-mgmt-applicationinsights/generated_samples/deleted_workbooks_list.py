@@ -36,6 +36,6 @@ def main():
         print(item)
 
 
-# x-ms-original-file: specification/applicationinsights/resource-manager/Microsoft.Insights/preview/2024-02-01-preview/examples/DeletedWorkbooksList.json
+# x-ms-original-file: specification/applicationinsights/resource-manager/Microsoft.Insights/ApplicationInsights/preview/2024-02-01-preview/examples/DeletedWorkbooksList.json
 if __name__ == "__main__":
     main()

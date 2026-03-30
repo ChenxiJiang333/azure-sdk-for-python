@@ -49,6 +49,6 @@ def main():
     print(response)
 
 
-# x-ms-original-file: specification/applicationinsights/resource-manager/Microsoft.Insights/stable/2023-06-01/examples/WorkbookAdd.json
+# x-ms-original-file: specification/applicationinsights/resource-manager/Microsoft.Insights/ApplicationInsights/stable/2023-06-01/examples/WorkbookAdd.json
 if __name__ == "__main__":
     main()

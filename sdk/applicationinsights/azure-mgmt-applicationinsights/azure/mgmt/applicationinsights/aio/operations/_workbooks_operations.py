@@ -7,7 +7,7 @@
 # --------------------------------------------------------------------------
 from collections.abc import MutableMapping
 from io import IOBase
-from typing import Any, Callable, Dict, IO, List, Optional, TypeVar, Union, overload
+from typing import Any, Callable, IO, Optional, TypeVar, Union, overload
 
 from azure.core import AsyncPipelineClient
 from azure.core.async_paging import AsyncItemPaged, AsyncList
@@ -41,7 +41,8 @@ from ...operations._workbooks_operations import (
 from .._configuration import ApplicationInsightsManagementClientConfiguration
 
 T = TypeVar("T")
-ClsType = Optional[Callable[[PipelineResponse[HttpRequest, AsyncHttpResponse], T, Dict[str, Any]], Any]]
+ClsType = Optional[Callable[[PipelineResponse[HttpRequest, AsyncHttpResponse], T, dict[str, Any]], Any]]
+List = list
 
 
 class WorkbooksOperations:
@@ -141,7 +142,10 @@ class WorkbooksOperations:
 
             if response.status_code not in [200]:
                 map_error(status_code=response.status_code, response=response, error_map=error_map)
-                error = self._deserialize.failsafe_deserialize(_models.WorkbookError, pipeline_response)
+                error = self._deserialize.failsafe_deserialize(
+                    _models.WorkbookError,
+                    pipeline_response,
+                )
                 raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
             return pipeline_response
@@ -234,7 +238,10 @@ class WorkbooksOperations:
 
             if response.status_code not in [200]:
                 map_error(status_code=response.status_code, response=response, error_map=error_map)
-                error = self._deserialize.failsafe_deserialize(_models.WorkbookError, pipeline_response)
+                error = self._deserialize.failsafe_deserialize(
+                    _models.WorkbookError,
+                    pipeline_response,
+                )
                 raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
             return pipeline_response
@@ -294,7 +301,10 @@ class WorkbooksOperations:
 
         if response.status_code not in [200]:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = self._deserialize.failsafe_deserialize(_models.WorkbookError, pipeline_response)
+            error = self._deserialize.failsafe_deserialize(
+                _models.WorkbookError,
+                pipeline_response,
+            )
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
         deserialized = self._deserialize("Workbook", pipeline_response.http_response)
@@ -350,7 +360,10 @@ class WorkbooksOperations:
 
         if response.status_code not in [200, 204]:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = self._deserialize.failsafe_deserialize(_models.WorkbookError, pipeline_response)
+            error = self._deserialize.failsafe_deserialize(
+                _models.WorkbookError,
+                pipeline_response,
+            )
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
         if cls:
@@ -492,7 +505,10 @@ class WorkbooksOperations:
 
         if response.status_code not in [200, 201]:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = self._deserialize.failsafe_deserialize(_models.WorkbookError, pipeline_response)
+            error = self._deserialize.failsafe_deserialize(
+                _models.WorkbookError,
+                pipeline_response,
+            )
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
         deserialized = self._deserialize("Workbook", pipeline_response.http_response)
@@ -607,9 +623,10 @@ class WorkbooksOperations:
 
         api_version: str = kwargs.pop("api_version", _params.pop("api-version", "2023-06-01"))
         content_type: Optional[str] = kwargs.pop("content_type", _headers.pop("Content-Type", None))
+        content_type = content_type if workbook_update_parameters else None
         cls: ClsType[_models.Workbook] = kwargs.pop("cls", None)
 
-        content_type = content_type or "application/json"
+        content_type = content_type or "application/json" if workbook_update_parameters else None
         _json = None
         _content = None
         if isinstance(workbook_update_parameters, (IOBase, bytes)):
@@ -643,7 +660,10 @@ class WorkbooksOperations:
 
         if response.status_code not in [200, 201]:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = self._deserialize.failsafe_deserialize(_models.WorkbookError, pipeline_response)
+            error = self._deserialize.failsafe_deserialize(
+                _models.WorkbookError,
+                pipeline_response,
+            )
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
         deserialized = self._deserialize("Workbook", pipeline_response.http_response)
@@ -720,7 +740,10 @@ class WorkbooksOperations:
 
             if response.status_code not in [200]:
                 map_error(status_code=response.status_code, response=response, error_map=error_map)
-                error = self._deserialize.failsafe_deserialize(_models.WorkbookError, pipeline_response)
+                error = self._deserialize.failsafe_deserialize(
+                    _models.WorkbookError,
+                    pipeline_response,
+                )
                 raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
             return pipeline_response
@@ -778,7 +801,10 @@ class WorkbooksOperations:
 
         if response.status_code not in [200]:
             map_error(status_code=response.status_code, response=response, error_map=error_map)
-            error = self._deserialize.failsafe_deserialize(_models.WorkbookError, pipeline_response)
+            error = self._deserialize.failsafe_deserialize(
+                _models.WorkbookError,
+                pipeline_response,
+            )
             raise HttpResponseError(response=response, model=error, error_format=ARMErrorFormat)
 
         deserialized = self._deserialize("Workbook", pipeline_response.http_response)

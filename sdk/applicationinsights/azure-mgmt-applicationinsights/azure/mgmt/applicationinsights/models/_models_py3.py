@@ -9,7 +9,7 @@
 
 from collections.abc import MutableMapping
 import datetime
-from typing import Any, Dict, List, Optional, TYPE_CHECKING, Union
+from typing import Any, Optional, TYPE_CHECKING, Union
 
 from .._utils import serialization as _serialization
 
@@ -137,7 +137,7 @@ class AnnotationsListResult(_serialization.Model):
     def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
-        self.value: Optional[List["_models.Annotation"]] = None
+        self.value: Optional[list["_models.Annotation"]] = None
 
 
 class APIKeyRequest(_serialization.Model):
@@ -161,8 +161,8 @@ class APIKeyRequest(_serialization.Model):
         self,
         *,
         name: Optional[str] = None,
-        linked_read_properties: Optional[List[str]] = None,
-        linked_write_properties: Optional[List[str]] = None,
+        linked_read_properties: Optional[list[str]] = None,
+        linked_write_properties: Optional[list[str]] = None,
         **kwargs: Any
     ) -> None:
         """
@@ -213,7 +213,7 @@ class ComponentsResource(_serialization.Model):
         "tags": {"key": "tags", "type": "{str}"},
     }
 
-    def __init__(self, *, location: str, tags: Optional[Dict[str, str]] = None, **kwargs: Any) -> None:
+    def __init__(self, *, location: str, tags: Optional[dict[str, str]] = None, **kwargs: Any) -> None:
         """
         :keyword location: Resource location. Required.
         :paramtype location: str
@@ -387,7 +387,7 @@ class ApplicationInsightsComponent(ComponentsResource):
         *,
         location: str,
         kind: str,
-        tags: Optional[Dict[str, str]] = None,
+        tags: Optional[dict[str, str]] = None,
         etag: Optional[str] = None,
         application_type: Union[str, "_models.ApplicationType"] = "web",
         flow_type: Union[str, "_models.FlowType"] = "Bluefield",
@@ -481,7 +481,7 @@ class ApplicationInsightsComponent(ComponentsResource):
         self.immediate_purge_data_on30_days = immediate_purge_data_on30_days
         self.workspace_resource_id = workspace_resource_id
         self.la_migration_date: Optional[datetime.datetime] = None
-        self.private_link_scoped_resources: Optional[List["_models.PrivateLinkScopedResource"]] = None
+        self.private_link_scoped_resources: Optional[list["_models.PrivateLinkScopedResource"]] = None
         self.public_network_access_for_ingestion = public_network_access_for_ingestion
         self.public_network_access_for_query = public_network_access_for_query
         self.ingestion_mode = ingestion_mode
@@ -641,8 +641,8 @@ class ApplicationInsightsComponentAPIKey(_serialization.Model):
         *,
         created_date: Optional[str] = None,
         name: Optional[str] = None,
-        linked_read_properties: Optional[List[str]] = None,
-        linked_write_properties: Optional[List[str]] = None,
+        linked_read_properties: Optional[list[str]] = None,
+        linked_write_properties: Optional[list[str]] = None,
         **kwargs: Any
     ) -> None:
         """
@@ -681,7 +681,7 @@ class ApplicationInsightsComponentAPIKeyListResult(_serialization.Model):  # pyl
         "value": {"key": "value", "type": "[ApplicationInsightsComponentAPIKey]"},
     }
 
-    def __init__(self, *, value: List["_models.ApplicationInsightsComponentAPIKey"], **kwargs: Any) -> None:
+    def __init__(self, *, value: list["_models.ApplicationInsightsComponentAPIKey"], **kwargs: Any) -> None:
         """
         :keyword value: List of API Key definitions. Required.
         :paramtype value:
@@ -712,7 +712,7 @@ class ApplicationInsightsComponentAvailableFeatures(_serialization.Model):  # py
     def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
-        self.result: Optional[List["_models.ApplicationInsightsComponentFeature"]] = None
+        self.result: Optional[list["_models.ApplicationInsightsComponentFeature"]] = None
 
 
 class ApplicationInsightsComponentBillingFeatures(_serialization.Model):  # pylint: disable=name-too-long
@@ -735,7 +735,7 @@ class ApplicationInsightsComponentBillingFeatures(_serialization.Model):  # pyli
         self,
         *,
         data_volume_cap: Optional["_models.ApplicationInsightsComponentDataVolumeCap"] = None,
-        current_billing_features: Optional[List[str]] = None,
+        current_billing_features: Optional[list[str]] = None,
         **kwargs: Any
     ) -> None:
         """
@@ -1095,7 +1095,7 @@ class ApplicationInsightsComponentFavorite(_serialization.Model):
         version: Optional[str] = None,
         favorite_type: Optional[Union[str, "_models.FavoriteType"]] = None,
         source_type: Optional[str] = None,
-        tags: Optional[List[str]] = None,
+        tags: Optional[list[str]] = None,
         category: Optional[str] = None,
         is_generated_from_template: Optional[bool] = None,
         **kwargs: Any
@@ -1196,7 +1196,7 @@ class ApplicationInsightsComponentFeature(_serialization.Model):
         self.meter_rate_frequency: Optional[str] = None
         self.resouce_id: Optional[str] = None
         self.is_hidden: Optional[bool] = None
-        self.capabilities: Optional[List["_models.ApplicationInsightsComponentFeatureCapability"]] = None
+        self.capabilities: Optional[list["_models.ApplicationInsightsComponentFeatureCapability"]] = None
         self.title: Optional[str] = None
         self.is_main_feature: Optional[bool] = None
         self.supported_addon_features: Optional[str] = None
@@ -1370,7 +1370,7 @@ class ApplicationInsightsComponentListResult(_serialization.Model):
     }
 
     def __init__(
-        self, *, value: List["_models.ApplicationInsightsComponent"], next_link: Optional[str] = None, **kwargs: Any
+        self, *, value: list["_models.ApplicationInsightsComponent"], next_link: Optional[str] = None, **kwargs: Any
     ) -> None:
         """
         :keyword value: List of Application Insights component definitions. Required.
@@ -1424,7 +1424,7 @@ class ApplicationInsightsComponentProactiveDetectionConfiguration(
         name: Optional[str] = None,
         enabled: Optional[bool] = None,
         send_emails_to_subscription_owners: Optional[bool] = None,
-        custom_emails: Optional[List[str]] = None,
+        custom_emails: Optional[list[str]] = None,
         last_updated_time: Optional[str] = None,
         rule_definitions: Optional[
             "_models.ApplicationInsightsComponentProactiveDetectionConfigurationRuleDefinitions"
@@ -1617,7 +1617,7 @@ class ApplicationInsightsWebTestLocationsListResult(_serialization.Model):  # py
         "value": {"key": "value", "type": "[ApplicationInsightsComponentWebTestLocation]"},
     }
 
-    def __init__(self, *, value: List["_models.ApplicationInsightsComponentWebTestLocation"], **kwargs: Any) -> None:
+    def __init__(self, *, value: list["_models.ApplicationInsightsComponentWebTestLocation"], **kwargs: Any) -> None:
         """
         :keyword value: List of web test locations. Required.
         :paramtype value:
@@ -1760,7 +1760,7 @@ class ComponentPurgeBody(_serialization.Model):
         "filters": {"key": "filters", "type": "[ComponentPurgeBodyFilters]"},
     }
 
-    def __init__(self, *, table: str, filters: List["_models.ComponentPurgeBodyFilters"], **kwargs: Any) -> None:
+    def __init__(self, *, table: str, filters: list["_models.ComponentPurgeBodyFilters"], **kwargs: Any) -> None:
         """
         :keyword table: Table from which to purge data. Required.
         :paramtype table: str
@@ -1966,7 +1966,7 @@ class TrackedResourceAutoGenerated(ResourceAutoGenerated):
         "location": {"key": "location", "type": "str"},
     }
 
-    def __init__(self, *, location: str, tags: Optional[Dict[str, str]] = None, **kwargs: Any) -> None:
+    def __init__(self, *, location: str, tags: Optional[dict[str, str]] = None, **kwargs: Any) -> None:
         """
         :keyword tags: Resource tags.
         :paramtype tags: dict[str, str]
@@ -2029,7 +2029,7 @@ class DeletedWorkbookResource(TrackedResourceAutoGenerated):
         self,
         *,
         location: str,
-        tags: Optional[Dict[str, str]] = None,
+        tags: Optional[dict[str, str]] = None,
         kind: Optional[Union[str, "_models.WorkbookSharedTypeKind"]] = None,
         etag: Optional[str] = None,
         **kwargs: Any
@@ -2139,14 +2139,14 @@ class DeletedWorkbook(DeletedWorkbookResource):
         self,
         *,
         location: str,
-        tags: Optional[Dict[str, str]] = None,
+        tags: Optional[dict[str, str]] = None,
         kind: Optional[Union[str, "_models.WorkbookSharedTypeKind"]] = None,
         etag: Optional[str] = None,
         display_name: Optional[str] = None,
         serialized_data: Optional[str] = None,
         version: Optional[str] = None,
         category: Optional[str] = None,
-        tags_properties_tags: Optional[List[str]] = None,
+        tags_properties_tags: Optional[list[str]] = None,
         source_id: Optional[str] = None,
         storage_uri: Optional[str] = None,
         description: Optional[str] = None,
@@ -2268,7 +2268,7 @@ class DeletedWorkbookInnerErrorTrace(_serialization.Model):
     def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
-        self.trace: Optional[List[str]] = None
+        self.trace: Optional[list[str]] = None
 
 
 class DeletedWorkbooksListResult(_serialization.Model):
@@ -2297,7 +2297,7 @@ class DeletedWorkbooksListResult(_serialization.Model):
         :paramtype next_link: str
         """
         super().__init__(**kwargs)
-        self.value: Optional[List["_models.DeletedWorkbook"]] = None
+        self.value: Optional[list["_models.DeletedWorkbook"]] = None
         self.next_link = next_link
 
 
@@ -2358,7 +2358,7 @@ class ErrorResponse(_serialization.Model):
         *,
         code: Optional[str] = None,
         message: Optional[str] = None,
-        details: Optional[List["_models.ErrorFieldContract"]] = None,
+        details: Optional[list["_models.ErrorFieldContract"]] = None,
         **kwargs: Any
     ) -> None:
         """
@@ -2598,7 +2598,7 @@ class ManagedServiceIdentity(_serialization.Model):
         self,
         *,
         type: Union[str, "_models.ManagedServiceIdentityType"],
-        user_assigned_identities: Optional[Dict[str, "_models.UserAssignedIdentity"]] = None,
+        user_assigned_identities: Optional[dict[str, "_models.UserAssignedIdentity"]] = None,
         **kwargs: Any
     ) -> None:
         """
@@ -2749,7 +2749,7 @@ class OperationListResult(_serialization.Model):
     }
 
     def __init__(
-        self, *, value: Optional[List["_models.Operation"]] = None, next_link: Optional[str] = None, **kwargs: Any
+        self, *, value: Optional[list["_models.Operation"]] = None, next_link: Optional[str] = None, **kwargs: Any
     ) -> None:
         """
         :keyword value: List of Workbook operations supported by the Microsoft.Insights resource
@@ -2831,7 +2831,7 @@ class OperationsListResult(_serialization.Model):
     }
 
     def __init__(
-        self, *, value: Optional[List["_models.OperationLive"]] = None, next_link: Optional[str] = None, **kwargs: Any
+        self, *, value: Optional[list["_models.OperationLive"]] = None, next_link: Optional[str] = None, **kwargs: Any
     ) -> None:
         """
         :keyword value: A collection of operations.
@@ -2946,7 +2946,7 @@ class TagsResource(_serialization.Model):
         "tags": {"key": "tags", "type": "{str}"},
     }
 
-    def __init__(self, *, tags: Optional[Dict[str, str]] = None, **kwargs: Any) -> None:
+    def __init__(self, *, tags: Optional[dict[str, str]] = None, **kwargs: Any) -> None:
         """
         :keyword tags: Resource tags.
         :paramtype tags: dict[str, str]
@@ -2992,7 +2992,7 @@ class TrackedResource(Resource):
         "location": {"key": "location", "type": "str"},
     }
 
-    def __init__(self, *, location: str, tags: Optional[Dict[str, str]] = None, **kwargs: Any) -> None:
+    def __init__(self, *, location: str, tags: Optional[dict[str, str]] = None, **kwargs: Any) -> None:
         """
         :keyword tags: Resource tags.
         :paramtype tags: dict[str, str]
@@ -3066,7 +3066,7 @@ class WebtestsResource(_serialization.Model):
         "tags": {"key": "tags", "type": "{str}"},
     }
 
-    def __init__(self, *, location: str, tags: Optional[Dict[str, str]] = None, **kwargs: Any) -> None:
+    def __init__(self, *, location: str, tags: Optional[dict[str, str]] = None, **kwargs: Any) -> None:
         """
         :keyword location: Resource location. Required.
         :paramtype location: str
@@ -3169,7 +3169,7 @@ class WebTest(WebtestsResource):
         self,
         *,
         location: str,
-        tags: Optional[Dict[str, str]] = None,
+        tags: Optional[dict[str, str]] = None,
         kind: Optional[Union[str, "_models.WebTestKind"]] = None,
         synthetic_monitor_id: Optional[str] = None,
         web_test_name: Optional[str] = None,
@@ -3179,7 +3179,7 @@ class WebTest(WebtestsResource):
         timeout: int = 30,
         web_test_kind: Optional[Union[str, "_models.WebTestKind"]] = None,
         retry_enabled: Optional[bool] = None,
-        locations: Optional[List["_models.WebTestGeolocation"]] = None,
+        locations: Optional[list["_models.WebTestGeolocation"]] = None,
         configuration: Optional["_models.WebTestPropertiesConfiguration"] = None,
         request: Optional["_models.WebTestPropertiesRequest"] = None,
         validation_rules: Optional["_models.WebTestPropertiesValidationRules"] = None,
@@ -3282,7 +3282,7 @@ class WebTestListResult(_serialization.Model):
         "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(self, *, value: List["_models.WebTest"], next_link: Optional[str] = None, **kwargs: Any) -> None:
+    def __init__(self, *, value: list["_models.WebTest"], next_link: Optional[str] = None, **kwargs: Any) -> None:
         """
         :keyword value: Set of Application Insights WebTest definitions. Required.
         :paramtype value: list[~azure.mgmt.applicationinsights.models.WebTest]
@@ -3345,7 +3345,7 @@ class WebTestPropertiesRequest(_serialization.Model):
         self,
         *,
         request_url: Optional[str] = None,
-        headers: Optional[List["_models.HeaderField"]] = None,
+        headers: Optional[list["_models.HeaderField"]] = None,
         http_verb: Optional[str] = None,
         request_body: Optional[str] = None,
         parse_dependent_requests: Optional[bool] = None,
@@ -3526,7 +3526,7 @@ class WorkbookResource(TrackedResource):
         self,
         *,
         location: str,
-        tags: Optional[Dict[str, str]] = None,
+        tags: Optional[dict[str, str]] = None,
         identity: Optional["_models.WorkbookResourceIdentity"] = None,
         kind: Optional[Union[str, "_models.WorkbookSharedTypeKind"]] = None,
         etag: Optional[str] = None,
@@ -3642,7 +3642,7 @@ class Workbook(WorkbookResource):
         self,
         *,
         location: str,
-        tags: Optional[Dict[str, str]] = None,
+        tags: Optional[dict[str, str]] = None,
         identity: Optional["_models.WorkbookResourceIdentity"] = None,
         kind: Optional[Union[str, "_models.WorkbookSharedTypeKind"]] = None,
         etag: Optional[str] = None,
@@ -3650,7 +3650,7 @@ class Workbook(WorkbookResource):
         serialized_data: Optional[str] = None,
         version: Optional[str] = None,
         category: Optional[str] = None,
-        tags_properties_tags: Optional[List[str]] = None,
+        tags_properties_tags: Optional[list[str]] = None,
         source_id: Optional[str] = None,
         storage_uri: Optional[str] = None,
         description: Optional[str] = None,
@@ -3775,7 +3775,7 @@ class WorkbookInnerErrorTrace(_serialization.Model):
     def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
-        self.trace: Optional[List[str]] = None
+        self.trace: Optional[list[str]] = None
 
 
 class WorkbookResourceIdentity(ManagedServiceIdentity):
@@ -3830,7 +3830,7 @@ class WorkbooksListResult(_serialization.Model):
         :paramtype next_link: str
         """
         super().__init__(**kwargs)
-        self.value: Optional[List["_models.Workbook"]] = None
+        self.value: Optional[list["_models.Workbook"]] = None
         self.next_link = next_link
 
 
@@ -3868,7 +3868,7 @@ class WorkbookTemplateResource(_serialization.Model):
         "tags": {"key": "tags", "type": "{str}"},
     }
 
-    def __init__(self, *, location: str, tags: Optional[Dict[str, str]] = None, **kwargs: Any) -> None:
+    def __init__(self, *, location: str, tags: Optional[dict[str, str]] = None, **kwargs: Any) -> None:
         """
         :keyword location: Resource location. Required.
         :paramtype location: str
@@ -3939,12 +3939,12 @@ class WorkbookTemplate(WorkbookTemplateResource):
         self,
         *,
         location: str,
-        tags: Optional[Dict[str, str]] = None,
+        tags: Optional[dict[str, str]] = None,
         priority: Optional[int] = None,
         author: Optional[str] = None,
         template_data: Optional[JSON] = None,
-        galleries: Optional[List["_models.WorkbookTemplateGallery"]] = None,
-        localized: Optional[Dict[str, List["_models.WorkbookTemplateLocalizedGallery"]]] = None,
+        galleries: Optional[list["_models.WorkbookTemplateGallery"]] = None,
+        localized: Optional[dict[str, list["_models.WorkbookTemplateLocalizedGallery"]]] = None,
         **kwargs: Any
     ) -> None:
         """
@@ -4018,7 +4018,7 @@ class WorkbookTemplateErrorBody(_serialization.Model):
         *,
         code: Optional[str] = None,
         message: Optional[str] = None,
-        details: Optional[List["_models.WorkbookTemplateErrorFieldContract"]] = None,
+        details: Optional[list["_models.WorkbookTemplateErrorFieldContract"]] = None,
         **kwargs: Any
     ) -> None:
         """
@@ -4142,7 +4142,7 @@ class WorkbookTemplateLocalizedGallery(_serialization.Model):
         self,
         *,
         template_data: Optional[JSON] = None,
-        galleries: Optional[List["_models.WorkbookTemplateGallery"]] = None,
+        galleries: Optional[list["_models.WorkbookTemplateGallery"]] = None,
         **kwargs: Any
     ) -> None:
         """
@@ -4167,7 +4167,7 @@ class WorkbookTemplatesListResult(_serialization.Model):
         "value": {"key": "value", "type": "[WorkbookTemplate]"},
     }
 
-    def __init__(self, *, value: Optional[List["_models.WorkbookTemplate"]] = None, **kwargs: Any) -> None:
+    def __init__(self, *, value: Optional[list["_models.WorkbookTemplate"]] = None, **kwargs: Any) -> None:
         """
         :keyword value: An array of workbook templates.
         :paramtype value: list[~azure.mgmt.applicationinsights.models.WorkbookTemplate]
@@ -4208,12 +4208,12 @@ class WorkbookTemplateUpdateParameters(_serialization.Model):
     def __init__(
         self,
         *,
-        tags: Optional[Dict[str, str]] = None,
+        tags: Optional[dict[str, str]] = None,
         priority: Optional[int] = None,
         author: Optional[str] = None,
         template_data: Optional[JSON] = None,
-        galleries: Optional[List["_models.WorkbookTemplateGallery"]] = None,
-        localized: Optional[Dict[str, List["_models.WorkbookTemplateLocalizedGallery"]]] = None,
+        galleries: Optional[list["_models.WorkbookTemplateGallery"]] = None,
+        localized: Optional[dict[str, list["_models.WorkbookTemplateLocalizedGallery"]]] = None,
         **kwargs: Any
     ) -> None:
         """
@@ -4280,11 +4280,11 @@ class WorkbookUpdateParameters(_serialization.Model):
         self,
         *,
         kind: Optional[Union[str, "_models.WorkbookUpdateSharedTypeKind"]] = None,
-        tags: Optional[Dict[str, str]] = None,
+        tags: Optional[dict[str, str]] = None,
         display_name: Optional[str] = None,
         serialized_data: Optional[str] = None,
         category: Optional[str] = None,
-        tags_properties_tags: Optional[List[str]] = None,
+        tags_properties_tags: Optional[list[str]] = None,
         description: Optional[str] = None,
         revision: Optional[str] = None,
         **kwargs: Any
@@ -4432,7 +4432,7 @@ class WorkItemConfigurationsListResult(_serialization.Model):
     def __init__(self, **kwargs: Any) -> None:
         """ """
         super().__init__(**kwargs)
-        self.value: Optional[List["_models.WorkItemConfiguration"]] = None
+        self.value: Optional[list["_models.WorkItemConfiguration"]] = None
 
 
 class WorkItemCreateConfiguration(_serialization.Model):
@@ -4461,7 +4461,7 @@ class WorkItemCreateConfiguration(_serialization.Model):
         connector_id: Optional[str] = None,
         connector_data_configuration: Optional[str] = None,
         validate_only: Optional[bool] = None,
-        work_item_properties: Optional[Dict[str, str]] = None,
+        work_item_properties: Optional[dict[str, str]] = None,
         **kwargs: Any
     ) -> None:
         """

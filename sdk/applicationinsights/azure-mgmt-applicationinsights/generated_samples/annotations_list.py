@@ -41,6 +41,6 @@ def main():
         print(item)
 
 
-# x-ms-original-file: specification/applicationinsights/resource-manager/Microsoft.Insights/stable/2015-05-01/examples/AnnotationsList.json
+# x-ms-original-file: specification/applicationinsights/resource-manager/Microsoft.Insights/ApplicationInsights/stable/2015-05-01/examples/AnnotationsList.json
 if __name__ == "__main__":
     main()

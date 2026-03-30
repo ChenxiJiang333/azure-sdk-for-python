@@ -39,6 +39,6 @@ def main():
         print(item)
 
 
-# x-ms-original-file: specification/applicationinsights/resource-manager/Microsoft.Insights/stable/2022-06-15/examples/WebTestListByComponent.json
+# x-ms-original-file: specification/applicationinsights/resource-manager/Microsoft.Insights/ApplicationInsights/stable/2022-06-15/examples/WebTestListByComponent.json
 if __name__ == "__main__":
     main()
