@@ -93,7 +93,7 @@ from ...operations._operations import (
     build_deployments_what_if_at_tenant_scope_request,
     build_deployments_what_if_request,
 )
-from .._configuration import ResourcesClientConfiguration
+from .._configuration import DeploymentsMgmtClientConfiguration
 
 JSON = MutableMapping[str, Any]
 T = TypeVar("T")
@@ -107,14 +107,14 @@ class DeploymentsOperations:  # pylint: disable=too-many-public-methods
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.resource.deployments.aio.ResourcesClient`'s
+        :class:`~azure.mgmt.resource.deployments.aio.DeploymentsMgmtClient`'s
         :attr:`deployments` attribute.
     """
 
     def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client: AsyncPipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: ResourcesClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._config: DeploymentsMgmtClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
         self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 
@@ -5746,14 +5746,14 @@ class DeploymentOperationsOperations:
         **DO NOT** instantiate this class directly.
 
         Instead, you should access the following operations through
-        :class:`~azure.mgmt.resource.deployments.aio.ResourcesClient`'s
+        :class:`~azure.mgmt.resource.deployments.aio.DeploymentsMgmtClient`'s
         :attr:`deployment_operations` attribute.
     """
 
     def __init__(self, *args, **kwargs) -> None:
         input_args = list(args)
         self._client: AsyncPipelineClient = input_args.pop(0) if input_args else kwargs.pop("client")
-        self._config: ResourcesClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
+        self._config: DeploymentsMgmtClientConfiguration = input_args.pop(0) if input_args else kwargs.pop("config")
         self._serialize: Serializer = input_args.pop(0) if input_args else kwargs.pop("serializer")
         self._deserialize: Deserializer = input_args.pop(0) if input_args else kwargs.pop("deserializer")
 

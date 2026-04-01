@@ -18,7 +18,7 @@ from azure.mgmt.core.policies import AsyncARMAutoResourceProviderRegistrationPol
 from azure.mgmt.core.tools import get_arm_endpoints
 
 from .._utils.serialization import Deserializer, Serializer
-from ._configuration import ResourcesClientConfiguration
+from ._configuration import DeploymentsMgmtClientConfiguration
 from .operations import DeploymentOperationsOperations, DeploymentsOperations
 
 if TYPE_CHECKING:
@@ -26,7 +26,7 @@ if TYPE_CHECKING:
     from azure.core.credentials_async import AsyncTokenCredential
 
 
-class ResourcesClient:
+class DeploymentsMgmtClient:
     """Provides operations for working with deployments.
 
     :ivar deployments: DeploymentsOperations operations
@@ -66,7 +66,7 @@ class ResourcesClient:
         if not base_url:
             base_url = _endpoints["resource_manager"]
         credential_scopes = kwargs.pop("credential_scopes", _endpoints["credential_scopes"])
-        self._config = ResourcesClientConfiguration(
+        self._config = DeploymentsMgmtClientConfiguration(
             credential=credential,
             subscription_id=subscription_id,
             base_url=cast(str, base_url),

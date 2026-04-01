@@ -1,7 +1,7 @@
 {
   "azure.mgmt.resource.deployments": {
     "class_nodes": {
-      "ResourcesClient": {
+      "DeploymentsMgmtClient": {
         "type": null,
         "methods": {
           "__init__": {
@@ -15305,7 +15305,7 @@
   },
   "azure.mgmt.resource.deployments.aio": {
     "class_nodes": {
-      "ResourcesClient": {
+      "DeploymentsMgmtClient": {
         "type": null,
         "methods": {
           "__init__": {

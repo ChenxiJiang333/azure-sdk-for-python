@@ -9,7 +9,7 @@
 
 from azure.identity import DefaultAzureCredential
 
-from azure.mgmt.resource.deployments import ResourcesClient
+from azure.mgmt.resource.deployments import DeploymentsMgmtClient
 
 """
 # PREREQUISITES
@@ -26,7 +26,7 @@ from azure.mgmt.resource.deployments import ResourcesClient
 
 
 def main():
-    client = ResourcesClient(
+    client = DeploymentsMgmtClient(
         credential=DefaultAzureCredential(),
         subscription_id="SUBSCRIPTION_ID",
     )
