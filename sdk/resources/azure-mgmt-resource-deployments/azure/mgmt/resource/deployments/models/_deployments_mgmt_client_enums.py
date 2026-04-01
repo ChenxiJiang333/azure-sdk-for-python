@@ -131,8 +131,6 @@ class ExtensionConfigPropertyType(str, Enum, metaclass=CaseInsensitiveEnumMeta):
     """Property type representing a secure string value."""
     SECURE_OBJECT = "SecureObject"
     """Property type representing a secure object value."""
-    INT_ENUM = "Int"
-    """Property type representing an integer value."""
 
 
 class Level(str, Enum, metaclass=CaseInsensitiveEnumMeta):

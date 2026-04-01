@@ -8,7 +8,8 @@
 # --------------------------------------------------------------------------
 
 from collections.abc import MutableMapping
-from typing import Any, Dict, List, Optional, TYPE_CHECKING, Union
+import datetime
+from typing import Any, Optional, TYPE_CHECKING, Union
 
 from .._utils import serialization as _serialization
 
@@ -54,7 +55,7 @@ class Alias(_serialization.Model):
         self,
         *,
         name: Optional[str] = None,
-        paths: Optional[List["_models.AliasPath"]] = None,
+        paths: Optional[list["_models.AliasPath"]] = None,
         type: Optional[Union[str, "_models.AliasType"]] = None,
         default_path: Optional[str] = None,
         default_pattern: Optional["_models.AliasPattern"] = None,
@@ -113,7 +114,7 @@ class AliasPath(_serialization.Model):
         self,
         *,
         path: Optional[str] = None,
-        api_versions: Optional[List[str]] = None,
+        api_versions: Optional[list[str]] = None,
         pattern: Optional["_models.AliasPattern"] = None,
         **kwargs: Any
     ) -> None:
@@ -321,7 +322,7 @@ class Dependency(_serialization.Model):
     def __init__(
         self,
         *,
-        depends_on: Optional[List["_models.BasicDependency"]] = None,
+        depends_on: Optional[list["_models.BasicDependency"]] = None,
         id: Optional[str] = None,  # pylint: disable=redefined-builtin
         resource_type: Optional[str] = None,
         resource_name: Optional[str] = None,
@@ -375,7 +376,7 @@ class Deployment(_serialization.Model):
         *,
         properties: "_models.DeploymentProperties",
         location: Optional[str] = None,
-        tags: Optional[Dict[str, str]] = None,
+        tags: Optional[dict[str, str]] = None,
         identity: Optional["_models.DeploymentIdentity"] = None,
         **kwargs: Any
     ) -> None:
@@ -439,7 +440,7 @@ class DeploymentDiagnosticsDefinition(_serialization.Model):
         self.code: Optional[str] = None
         self.message: Optional[str] = None
         self.target: Optional[str] = None
-        self.additional_info: Optional[List["_models.ErrorAdditionalInfo"]] = None
+        self.additional_info: Optional[list["_models.ErrorAdditionalInfo"]] = None
 
 
 class DeploymentExportResult(_serialization.Model):
@@ -501,7 +502,7 @@ class DeploymentExtended(_serialization.Model):
         *,
         location: Optional[str] = None,
         properties: Optional["_models.DeploymentPropertiesExtended"] = None,
-        tags: Optional[Dict[str, str]] = None,
+        tags: Optional[dict[str, str]] = None,
         **kwargs: Any
     ) -> None:
         """
@@ -547,7 +548,7 @@ class DeploymentExtensionConfigItem(_serialization.Model):
     Variables are only populated by the server, and will be ignored when sending a request.
 
     :ivar type: The value type of the extension config property. Known values are: "String", "Int",
-     "Bool", "Array", "Object", "SecureString", "SecureObject", and "Int".
+     "Bool", "Array", "Object", "SecureString", and "SecureObject".
     :vartype type: str or ~azure.mgmt.resource.deployments.models.ExtensionConfigPropertyType
     :ivar value: The value of the extension config property.
     :vartype value: any
@@ -630,7 +631,7 @@ class DeploymentExtensionDefinition(_serialization.Model):
         self.name: Optional[str] = None
         self.version: Optional[str] = None
         self.config_id: Optional[str] = None
-        self.config: Optional[Dict[str, "_models.DeploymentExtensionConfigItem"]] = None
+        self.config: Optional[dict[str, "_models.DeploymentExtensionConfigItem"]] = None
 
 
 class DeploymentExternalInput(_serialization.Model):
@@ -717,7 +718,7 @@ class DeploymentIdentity(_serialization.Model):
         self,
         *,
         type: Union[str, "_models.DeploymentIdentityType"],
-        user_assigned_identities: Optional[Dict[str, "_models.UserAssignedIdentity"]] = None,
+        user_assigned_identities: Optional[dict[str, "_models.UserAssignedIdentity"]] = None,
         **kwargs: Any
     ) -> None:
         """
@@ -753,7 +754,7 @@ class DeploymentListResult(_serialization.Model):
         "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(self, *, value: Optional[List["_models.DeploymentExtended"]] = None, **kwargs: Any) -> None:
+    def __init__(self, *, value: Optional[list["_models.DeploymentExtended"]] = None, **kwargs: Any) -> None:
         """
         :keyword value: An array of deployments.
         :paramtype value: list[~azure.mgmt.resource.deployments.models.DeploymentExtended]
@@ -891,7 +892,7 @@ class DeploymentOperationsListResult(_serialization.Model):
         "next_link": {"key": "nextLink", "type": "str"},
     }
 
-    def __init__(self, *, value: Optional[List["_models.DeploymentOperation"]] = None, **kwargs: Any) -> None:
+    def __init__(self, *, value: Optional[list["_models.DeploymentOperation"]] = None, **kwargs: Any) -> None:
         """
         :keyword value: An array of deployment operations.
         :paramtype value: list[~azure.mgmt.resource.deployments.models.DeploymentOperation]
@@ -1023,11 +1024,11 @@ class DeploymentProperties(_serialization.Model):
         mode: Union[str, "_models.DeploymentMode"],
         template: Optional[JSON] = None,
         template_link: Optional["_models.TemplateLink"] = None,
-        parameters: Optional[Dict[str, "_models.DeploymentParameter"]] = None,
-        external_inputs: Optional[Dict[str, "_models.DeploymentExternalInput"]] = None,
-        external_input_definitions: Optional[Dict[str, "_models.DeploymentExternalInputDefinition"]] = None,
+        parameters: Optional[dict[str, "_models.DeploymentParameter"]] = None,
+        external_inputs: Optional[dict[str, "_models.DeploymentExternalInput"]] = None,
+        external_input_definitions: Optional[dict[str, "_models.DeploymentExternalInputDefinition"]] = None,
         parameters_link: Optional["_models.ParametersLink"] = None,
-        extension_configs: Optional[Dict[str, Dict[str, "_models.DeploymentExtensionConfigItem"]]] = None,
+        extension_configs: Optional[dict[str, dict[str, "_models.DeploymentExtensionConfigItem"]]] = None,
         debug_setting: Optional["_models.DebugSetting"] = None,
         on_error_deployment: Optional["_models.OnErrorDeployment"] = None,
         expression_evaluation_options: Optional["_models.ExpressionEvaluationOptions"] = None,
@@ -1211,20 +1212,20 @@ class DeploymentPropertiesExtended(_serialization.Model):
         self.timestamp: Optional[datetime.datetime] = None
         self.duration: Optional[str] = None
         self.outputs: Optional[JSON] = None
-        self.providers: Optional[List["_models.Provider"]] = None
-        self.dependencies: Optional[List["_models.Dependency"]] = None
+        self.providers: Optional[list["_models.Provider"]] = None
+        self.dependencies: Optional[list["_models.Dependency"]] = None
         self.template_link: Optional["_models.TemplateLink"] = None
         self.parameters: Optional[JSON] = None
         self.parameters_link: Optional["_models.ParametersLink"] = None
-        self.extensions: Optional[List["_models.DeploymentExtensionDefinition"]] = None
+        self.extensions: Optional[list["_models.DeploymentExtensionDefinition"]] = None
         self.mode: Optional[Union[str, "_models.DeploymentMode"]] = None
         self.debug_setting: Optional["_models.DebugSetting"] = None
         self.on_error_deployment: Optional["_models.OnErrorDeploymentExtended"] = None
         self.template_hash: Optional[str] = None
-        self.output_resources: Optional[List["_models.ResourceReference"]] = None
-        self.validated_resources: Optional[List["_models.ResourceReference"]] = None
+        self.output_resources: Optional[list["_models.ResourceReference"]] = None
+        self.validated_resources: Optional[list["_models.ResourceReference"]] = None
         self.error: Optional["_models.ErrorResponse"] = None
-        self.diagnostics: Optional[List["_models.DeploymentDiagnosticsDefinition"]] = None
+        self.diagnostics: Optional[list["_models.DeploymentDiagnosticsDefinition"]] = None
         self.validation_level = validation_level
 
 
@@ -1393,11 +1394,11 @@ class DeploymentWhatIfProperties(DeploymentProperties):
         mode: Union[str, "_models.DeploymentMode"],
         template: Optional[JSON] = None,
         template_link: Optional["_models.TemplateLink"] = None,
-        parameters: Optional[Dict[str, "_models.DeploymentParameter"]] = None,
-        external_inputs: Optional[Dict[str, "_models.DeploymentExternalInput"]] = None,
-        external_input_definitions: Optional[Dict[str, "_models.DeploymentExternalInputDefinition"]] = None,
+        parameters: Optional[dict[str, "_models.DeploymentParameter"]] = None,
+        external_inputs: Optional[dict[str, "_models.DeploymentExternalInput"]] = None,
+        external_input_definitions: Optional[dict[str, "_models.DeploymentExternalInputDefinition"]] = None,
         parameters_link: Optional["_models.ParametersLink"] = None,
-        extension_configs: Optional[Dict[str, Dict[str, "_models.DeploymentExtensionConfigItem"]]] = None,
+        extension_configs: Optional[dict[str, dict[str, "_models.DeploymentExtensionConfigItem"]]] = None,
         debug_setting: Optional["_models.DebugSetting"] = None,
         on_error_deployment: Optional["_models.OnErrorDeployment"] = None,
         expression_evaluation_options: Optional["_models.ExpressionEvaluationOptions"] = None,
@@ -1567,8 +1568,8 @@ class ErrorResponse(_serialization.Model):
         self.code: Optional[str] = None
         self.message: Optional[str] = None
         self.target: Optional[str] = None
-        self.details: Optional[List["_models.ErrorResponse"]] = None
-        self.additional_info: Optional[List["_models.ErrorAdditionalInfo"]] = None
+        self.details: Optional[list["_models.ErrorResponse"]] = None
+        self.additional_info: Optional[list["_models.ErrorAdditionalInfo"]] = None
 
 
 class ExpressionEvaluationOptions(_serialization.Model):
@@ -1857,7 +1858,7 @@ class Provider(_serialization.Model):
         self.namespace = namespace
         self.registration_state: Optional[str] = None
         self.registration_policy: Optional[str] = None
-        self.resource_types: Optional[List["_models.ProviderResourceType"]] = None
+        self.resource_types: Optional[list["_models.ProviderResourceType"]] = None
         self.provider_authorization_consent_state = provider_authorization_consent_state
 
 
@@ -1883,7 +1884,7 @@ class ProviderExtendedLocation(_serialization.Model):
         *,
         location: Optional[str] = None,
         type: Optional[str] = None,
-        extended_locations: Optional[List[str]] = None,
+        extended_locations: Optional[list[str]] = None,
         **kwargs: Any
     ) -> None:
         """
@@ -1950,13 +1951,13 @@ class ProviderResourceType(_serialization.Model):
         self,
         *,
         resource_type: Optional[str] = None,
-        locations: Optional[List[str]] = None,
-        location_mappings: Optional[List["_models.ProviderExtendedLocation"]] = None,
-        aliases: Optional[List["_models.Alias"]] = None,
-        api_versions: Optional[List[str]] = None,
-        zone_mappings: Optional[List["_models.ZoneMapping"]] = None,
+        locations: Optional[list[str]] = None,
+        location_mappings: Optional[list["_models.ProviderExtendedLocation"]] = None,
+        aliases: Optional[list["_models.Alias"]] = None,
+        api_versions: Optional[list[str]] = None,
+        zone_mappings: Optional[list["_models.ZoneMapping"]] = None,
         capabilities: Optional[str] = None,
-        properties: Optional[Dict[str, str]] = None,
+        properties: Optional[dict[str, str]] = None,
         **kwargs: Any
     ) -> None:
         """
@@ -1986,7 +1987,7 @@ class ProviderResourceType(_serialization.Model):
         self.api_versions = api_versions
         self.default_api_version: Optional[str] = None
         self.zone_mappings = zone_mappings
-        self.api_profiles: Optional[List["_models.ApiProfile"]] = None
+        self.api_profiles: Optional[list["_models.ApiProfile"]] = None
         self.capabilities = capabilities
         self.properties = properties
 
@@ -2116,7 +2117,7 @@ class ScopedDeployment(_serialization.Model):
         *,
         location: str,
         properties: "_models.DeploymentProperties",
-        tags: Optional[Dict[str, str]] = None,
+        tags: Optional[dict[str, str]] = None,
         **kwargs: Any
     ) -> None:
         """
@@ -2461,7 +2462,7 @@ class WhatIfChange(_serialization.Model):
         unsupported_reason: Optional[str] = None,
         before: Optional[JSON] = None,
         after: Optional[JSON] = None,
-        delta: Optional[List["_models.WhatIfPropertyChange"]] = None,
+        delta: Optional[list["_models.WhatIfPropertyChange"]] = None,
         **kwargs: Any
     ) -> None:
         """
@@ -2538,8 +2539,8 @@ class WhatIfOperationResult(_serialization.Model):
         *,
         status: Optional[str] = None,
         error: Optional["_models.ErrorResponse"] = None,
-        changes: Optional[List["_models.WhatIfChange"]] = None,
-        potential_changes: Optional[List["_models.WhatIfChange"]] = None,
+        changes: Optional[list["_models.WhatIfChange"]] = None,
+        potential_changes: Optional[list["_models.WhatIfChange"]] = None,
         **kwargs: Any
     ) -> None:
         """
@@ -2557,7 +2558,7 @@ class WhatIfOperationResult(_serialization.Model):
         self.error = error
         self.changes = changes
         self.potential_changes = potential_changes
-        self.diagnostics: Optional[List["_models.DeploymentDiagnosticsDefinition"]] = None
+        self.diagnostics: Optional[list["_models.DeploymentDiagnosticsDefinition"]] = None
 
 
 class WhatIfPropertyChange(_serialization.Model):
@@ -2599,7 +2600,7 @@ class WhatIfPropertyChange(_serialization.Model):
         property_change_type: Union[str, "_models.PropertyChangeType"],
         before: Optional[JSON] = None,
         after: Optional[JSON] = None,
-        children: Optional[List["_models.WhatIfPropertyChange"]] = None,
+        children: Optional[list["_models.WhatIfPropertyChange"]] = None,
         **kwargs: Any
     ) -> None:
         """
@@ -2638,7 +2639,7 @@ class ZoneMapping(_serialization.Model):
         "zones": {"key": "zones", "type": "[str]"},
     }
 
-    def __init__(self, *, location: Optional[str] = None, zones: Optional[List[str]] = None, **kwargs: Any) -> None:
+    def __init__(self, *, location: Optional[str] = None, zones: Optional[list[str]] = None, **kwargs: Any) -> None:
         """
         :keyword location: The location of the zone mapping.
         :paramtype location: str
