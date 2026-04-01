@@ -1,5 +1,9 @@
 ## tsp migration
 
+## 1.0.0b2 (2026-04-01)
+
+change log generation failed!!! You need to write it manually!!!
+
 ### Breaking Changes
 
 - started
@@ -15,10 +19,6 @@
 - Deleted or renamed model `SubResource`
 
 # Release History
-
-## 1.0.0b2 (2026-04-01)
-
-change log generation failed!!! You need to write it manually!!!
 
 ## 1.0.0 (2026-04-01)
 
