@@ -1,3 +1,19 @@
+## tsp migration
+
+### Breaking Changes
+
+- started
+- finished with status 'done'
+- started
+- finished with status 'done'
+- Deleted or renamed client `DeploymentsMgmtClient`
+- Model `WhatIfOperationResult` deleted or renamed its instance variable `changes`
+- Model `WhatIfOperationResult` deleted or renamed its instance variable `potential_changes`
+- Model `WhatIfOperationResult` deleted or renamed its instance variable `diagnostics`
+- Deleted or renamed model `DeploymentExtendedFilter`
+- Deleted or renamed model `ResourceProviderOperationDisplayProperties`
+- Deleted or renamed model `SubResource`
+
 # Release History
 
 ## 1.0.0b2 (2026-04-01)
