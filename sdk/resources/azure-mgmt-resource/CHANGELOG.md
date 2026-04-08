@@ -1,3 +1,35 @@
+## tsp migration
+
+### Breaking Changes
+
+- Model `Resource` deleted or renamed its instance variable `location`
+- Model `Resource` deleted or renamed its instance variable `extended_location`
+- Model `Resource` deleted or renamed its instance variable `tags`
+- Model `TagDetails` renamed its instance variable `values` to `values_property`
+- Deleted or renamed model `GenericResourceFilter`
+- Deleted or renamed model `ResourceGroupFilter`
+- Deleted or renamed model `ResourceProviderOperationDisplayProperties`
+- Deleted or renamed model `SubResource`
+- Method `ProviderResourceTypesOperations.list` changed its parameter `expand` from `positional_or_keyword` to `keyword_only`
+- Method `ProvidersOperations.get` changed its parameter `expand` from `positional_or_keyword` to `keyword_only`
+- Method `ProvidersOperations.get_at_tenant_scope` changed its parameter `expand` from `positional_or_keyword` to `keyword_only`
+- Method `ProvidersOperations.list` changed its parameter `expand` from `positional_or_keyword` to `keyword_only`
+- Method `ProvidersOperations.list_at_tenant_scope` changed its parameter `expand` from `positional_or_keyword` to `keyword_only`
+- Method `ResourceGroupsOperations.begin_delete` changed its parameter `force_deletion_types` from `positional_or_keyword` to `keyword_only`
+- Method `ResourcesOperations.begin_create_or_update` deleted or renamed its parameter `api_version` of kind `positional_or_keyword`
+- Method `ResourcesOperations.begin_create_or_update_by_id` deleted or renamed its parameter `api_version` of kind `positional_or_keyword`
+- Method `ResourcesOperations.begin_delete` deleted or renamed its parameter `api_version` of kind `positional_or_keyword`
+- Method `ResourcesOperations.begin_delete_by_id` deleted or renamed its parameter `api_version` of kind `positional_or_keyword`
+- Method `ResourcesOperations.begin_update` deleted or renamed its parameter `api_version` of kind `positional_or_keyword`
+- Method `ResourcesOperations.begin_update_by_id` deleted or renamed its parameter `api_version` of kind `positional_or_keyword`
+- Method `ResourcesOperations.check_existence` deleted or renamed its parameter `api_version` of kind `positional_or_keyword`
+- Method `ResourcesOperations.check_existence_by_id` deleted or renamed its parameter `api_version` of kind `positional_or_keyword`
+- Method `ResourcesOperations.get` deleted or renamed its parameter `api_version` of kind `positional_or_keyword`
+- Method `ResourcesOperations.get_by_id` deleted or renamed its parameter `api_version` of kind `positional_or_keyword`
+- Method `ResourcesOperations.list` changed its parameter `expand` from `positional_or_keyword` to `keyword_only`
+- Method `ResourcesOperations.list_by_resource_group` changed its parameter `expand` from `positional_or_keyword` to `keyword_only`
+- Deleted or renamed module `['azure.mgmt.resource', 'azure.mgmt.resource.deploymentscripts', 'azure.mgmt.resource.deploymentscripts.aio', 'azure.mgmt.resource.deploymentscripts.aio.operations', 'azure.mgmt.resource.deploymentscripts.models', 'azure.mgmt.resource.deploymentscripts.operations', 'azure.mgmt.resource.deploymentstacks', 'azure.mgmt.resource.deploymentstacks.aio', 'azure.mgmt.resource.deploymentstacks.aio.operations', 'azure.mgmt.resource.deploymentstacks.models', 'azure.mgmt.resource.deploymentstacks.operations', 'azure.mgmt.resource.templatespecs', 'azure.mgmt.resource.templatespecs.aio', 'azure.mgmt.resource.templatespecs.aio.operations', 'azure.mgmt.resource.templatespecs.models', 'azure.mgmt.resource.templatespecs.operations']`
+
 # Release History
 
 ## 26.0.0 (2026-04-08)
