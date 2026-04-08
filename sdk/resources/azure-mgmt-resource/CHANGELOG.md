@@ -1,5 +1,40 @@
 # Release History
 
+## 26.0.0 (2026-04-08)
+
+### Features Added
+
+  - Added operation group ApplicationDefinitionsOperations
+  - Added operation group ApplicationsOperations
+  - Added operation group AuthorizationOperationsOperations
+  - Added operation group ChangesOperations
+  - Added operation group DataBoundariesOperations
+  - Added operation group DataPolicyManifestsOperations
+  - Added operation group FeaturesOperations
+  - Added operation group JitRequestsOperations
+  - Added operation group ManagementLocksOperations
+  - Added operation group PolicyAssignmentsOperations
+  - Added operation group PolicyDefinitionVersionsOperations
+  - Added operation group PolicyDefinitionsOperations
+  - Added operation group PolicyExemptionsOperations
+  - Added operation group PolicySetDefinitionVersionsOperations
+  - Added operation group PolicySetDefinitionsOperations
+  - Added operation group PrivateLinkAssociationOperations
+  - Added operation group ResourceLinksOperations
+  - Added operation group ResourceManagementPrivateLinkOperations
+  - Added operation group SubscriptionFeatureRegistrationsOperations
+  - Added operation group SubscriptionsOperations
+  - Added operation group TenantsOperations
+  - Added operation group VariableValuesOperations
+  - Added operation group VariablesOperations
+  - Model Operation has a new parameter action_type
+  - Model Operation has a new parameter is_data_action
+  - Model Operation has a new parameter origin
+
+### Breaking Changes
+
+  - Client name is changed from `ResourceManagementClient` to `SubscriptionClient`
+
 ## 25.0.0 (2026-02-04)
 
 ### Breaking Changes
